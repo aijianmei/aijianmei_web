@@ -1,3 +1,0 @@
-<?php
-//000000000000a:3:{i:1;a:1:{i:0;a:4:{s:18:"user_gorup_link_id";s:1:"1";s:13:"user_group_id";s:1:"1";s:16:"user_group_title";s:9:"管理员";s:3:"uid";s:1:"1";}}i:2;a:1:{i:0;a:4:{s:18:"user_gorup_link_id";s:1:"2";s:13:"user_group_id";s:1:"2";s:16:"user_group_title";s:6:"教练";s:3:"uid";s:1:"2";}}i:4;a:1:{i:0;a:4:{s:18:"user_gorup_link_id";s:1:"3";s:13:"user_group_id";s:1:"3";s:16:"user_group_title";s:6:"教练";s:3:"uid";s:1:"4";}}}
-?>
