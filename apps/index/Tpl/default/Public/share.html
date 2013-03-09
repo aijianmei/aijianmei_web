@@ -4,7 +4,7 @@
   var param = {
     url:location.href,
     type:'3',
-    count:'', /**是否显示分享数，1显示(可选)*/
+    count:'1', /**是否显示分享数，1显示(可选)*/
     appkey:'3622140445', /**您申请的应用appkey,显示分享来源(可选)*/
     title:'', /**分享的文字内容(可选，默认为所在页面的title)*/
     pic:'', /**分享图片的路径(可选)*/
@@ -16,14 +16,14 @@
   for( var p in param ){
     temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
   }
-  document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>')
+  document.write('<iframe id="sinaShare" onload="sinaShare()" allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>')
 })()
 </script>
 <script type="text/javascript">
 (function(){
 var p = {
 url:location.href,
-showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
 desc:'',/*默认分享理由(可选)*/
 summary:'',/*分享摘要(可选)*/
 title:'',/*分享标题(可选)*/
