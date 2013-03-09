@@ -1,0 +1,9 @@
+<?php
+class AppendAction extends Action {
+	public function index()
+	{
+		$this->assign('cssFile', 'nutri');
+		$this->display();
+	}
+}
+?>

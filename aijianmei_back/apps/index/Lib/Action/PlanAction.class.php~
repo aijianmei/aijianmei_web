@@ -1,0 +1,53 @@
+<?php
+class PlanAction extends Action {
+	public function index() 
+	{
+		$this->assign('cssFile', 'plan');
+		$list1 = array(
+			'1' => '文章1',
+			'2' => '文章2',
+			'3' => '文章3',
+			'4' => '文章4',
+		);
+
+		$list2 = array(
+			'1' => '文章1',
+			'2' => '文章2',
+			'3' => '文章3',
+			'4' => '文章4',
+		);
+
+		$list3 = array(
+			'1' => '文章1',
+			'2' => '文章2',
+			'3' => '文章3',
+			'4' => '文章4',
+		);
+
+		$list4 = array(
+			'1' => '文章1',
+			'2' => '文章2',
+			'3' => '文章3',
+			'4' => '文章4',
+		);
+
+		$this->assign('list1', $list1);
+		$this->assign('list2', $list2);
+		$this->assign('list3', $list3);
+		$this->assign('list4', $list4);
+		$this->display();
+	}
+
+	public function coach()
+	{
+		$this->assign('cssFile', 'plan');
+		$this->display();
+	}
+
+	public function gym()
+	{
+		$this->display();
+	}
+
+}
+?>

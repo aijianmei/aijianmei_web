@@ -1,0 +1,45 @@
+<?php
+class IndexAction extends Action {
+	public function index() 
+	{
+		$this->setTitle('index');
+		$this->assign('uid',1);
+		$this->assign('cssFile','index');
+		$this->display();
+	}
+
+	public function app()
+	{
+		$this->display();
+	}
+
+	public function articleDetail()
+	{
+		$id = (int) $_GET['id'];
+		$this->assign('cssFile', 'article');
+		$this->display('detail');
+	}
+
+	public function videoList()
+	{
+		$this->assign('cssFile', 'video');
+		$this->display('vlist');
+	}
+
+	public function videoDetail()
+	{
+		$this->display('vdetail');
+	}
+
+	public function coach()
+	{
+		$this->assign('cssFile', 'teach');
+		$this->display();
+	}
+
+	public function info()
+	{
+		$type = (int) $_GET['type'];
+	}
+}
+?>

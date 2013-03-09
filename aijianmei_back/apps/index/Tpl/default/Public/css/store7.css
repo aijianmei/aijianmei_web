@@ -1,0 +1,348 @@
+﻿.wrapper{
+	background:#EDEDED;
+	padding-bottom:100px;
+}
+	#header{
+		background:#fff;
+		box-shadow:0 0 8px #ccc;
+	}
+	.content{
+		width:915px;
+		margin:0 auto;
+	}
+
+
+/*导航*/
+.cart_step{
+	height: 50px;
+	background: white;
+	margin: 40px 0 10px 0;
+	padding-left:10px;
+	box-shadow: 0 0 5px #ccc;
+}
+	.steps{
+		width:150px;
+		height:26px;
+		float:left;
+		background:#F1F1F1;
+		margin-right:3px;
+		margin-top:12px;
+		line-height:26px;
+		text-align:center;
+	}
+	.curr{
+		background:#FFE6BD;
+	}
+/*内容*/
+.check{
+	background: white;
+	box-shadow: 0 0 5px #ccc;
+	padding:10px 0;
+}
+	/*填写*/
+	.order_form{
+		border: 3px solid #A9CEEC;
+		border-radius: 5px;
+		margin:0 10px;
+	}
+		/*填写核对订单*/
+		.write{
+			height: 30px;
+			line-height: 30px;
+			background: #A9CEEC;
+			padding-left: 20px;		
+		}
+		/*收货人信息*/
+		.consignee{
+			margin: 30px;
+			background: #EFF6F9;
+			border-top: 2px solid #A9CEEC;
+			border-bottom: 1px solid #A9CEEC;
+			margin-bottom:10px;
+		}
+			.consignee form{
+				padding:10px;
+			}
+				.consignee .contain{
+					padding:10px 0 0 20px;
+				}
+					.contain .row{
+						height:30px;
+						line-height:30px;
+						font-size:12px;
+					}
+						.mark{
+							color:red;
+							font-weight:bold;
+						}
+						.row input{
+							height:18px;
+							border:1px inset #B8D2DC;
+						}
+					.close,.review,.common{
+						color:#015BA0;
+						font-size:12px;
+						font-weight:normal;
+						cursor:pointer;
+					}
+					.contain .name{
+						margin-left:-10px;
+					}
+					.reserve .storage{
+						width:82px;
+						height:32px;
+						border:0;
+						color:white;
+						font-size:20px;
+						font-weight:bold;
+						background:url(../images/reserve.png) no-repeat;
+					}
+		
+		
+		/*支付及配送方式*/
+		.means{
+			height:145px;
+			border-bottom:2px solid #A9CEEC;
+			margin:0 30px;
+		}
+			.per{
+				height:30px;
+				line-height:30px;
+				padding-left:30px;
+				font-size:12px;
+			}
+		
+		/*发票信息*/
+		.receipt{
+			margin:10px 30px;
+			border-bottom:2px solid #A9CEEC;
+		}
+		/*商品清单*/
+		.goods_list{
+			height:120px;
+			margin:0 30px;
+			border-bottom:2px solid #A9CEEC;
+		}
+			.g_table{
+				width:829px;
+				margin:10px 0;
+				border: 1px solid #CCC;
+				border-collapse: collapse;
+			}
+				.thead{
+					height: 35px;
+					line-height: 35px;
+					border-bottom: 1px solid #CCC;	
+					background: #FFF5D7;
+				}
+					.goods_t{
+					
+					}
+				.tdetail{
+					height: 45px;
+					line-height: 45px;
+					background: #FFFEDD;
+					text-align:center;
+				}
+					.number{
+						
+					}
+				
+		/*结算信息*/
+		.clearing{
+			margin:10px 30px;
+			border-bottom:2px solid #A9CEEC;
+		}
+			.bill{
+				margin: 10px 0;
+				background: #FFF5D7;
+				border-top: 3px solid #EACDA0;
+			}
+				.tot{
+					height: 45px;
+					line-height: 45px;
+					margin: 0 30px;
+					border-bottom: 1px dashed #EACDA0;
+				}
+				.rental{
+					height: 65px;
+					line-height: 65px;
+					text-align: right;
+					margin: 0 30px;		
+					font-size:20px;
+					font-weight:bold;
+				}
+					.rental strong{
+						color:red;
+						
+					}
+			.sm{
+				text-align: right;
+				margin-bottom: 10px;				
+			}
+				.submit{
+					width:140px;
+					height:42px;
+					border:0;
+					color:white;
+					font-size:20px;
+					font-weight:bold;
+					background:url(../images/submit.png) no-repeat center;
+					cursor:pointer;
+				}
+
+/*核对订单*/
+.rewrite{
+	margin:10px 30px;
+	border-top:0;
+	border-bottom:2px solid #A9CEEC;
+	background:none;
+}
+	.rewirte form{
+		padding-left:0;
+	}
+	
+/*选择支付方式*/
+.re_check{
+	border: 1px solid #ccc;
+}	
+	.check_top{
+		height:130px;
+		background:#F5FEF6;
+		position:relative;
+	}
+		.prompt{
+			height:50px;
+			color:#009900;
+			font-size:22px;
+			font-weight:bold;
+			margin-left:30px;
+			padding:20px 0 0 70px;
+			background:url(../images/ok.png) no-repeat left;
+		}
+			.under_prompt{
+				position:absolute;
+				top:60px;
+			}
+			.under1{
+				left:110px;
+			}
+			.under2{
+				left:270px;
+			}
+			.under3{
+				left:345px;
+			}
+	.order_tip{
+		height:72px;
+		line-height:72px;
+		padding-left:20px;
+		font-weight:bold;
+	}
+	.choose_bank{
+		border:1px solid #ECD38B;
+		background:#FEFEED;
+		margin:10px 20px;
+	}
+		.cards{
+			height:30px;
+			line-height:30px;
+			background:#fff;
+			border-bottom:1px solid #ECD38B;
+		}
+			.cards .choose_card{
+				height:30px;
+				padding:0 4px;
+				border-right:1px solid #ecd38c;
+				background:white;
+				cursor:pointer;
+			}
+			.cards .current_choice{
+				height:31px;
+				background: #FEFEED;
+				margin-left:-4px;
+			}
+			.cards .first{
+				margin-left:0;
+			}
+		.online_pay{
+			height:30px;
+			line-height:30px;
+			padding:30px 0 0 20px;
+		}
+		.choice_t{
+			padding:20px 0 0 20px;
+		}
+			
+		.clear{
+			clear:both;
+			
+		}
+		.choose_area{
+			display:none;
+		}
+		.current_way{
+			display:block;
+		}
+		.ways{
+			float:left;
+			width:170px;
+			height:42px;
+			margin: 5px 20px;
+		}
+		.chosen_mean{
+			width:240px;
+			position:relative;
+		}
+			.chosen_mean a{
+				position:absolute;
+				top:15px;
+				right:20px;
+			}
+			.ways .radio{
+				height:42px;
+				line-height:42px;
+				cursor:pointer;
+			}
+			.ways label{
+				cursor:pointer;
+			}
+		.confirm{
+			margin:20px;
+		}
+	.reminder{
+		padding:0 0 20px 20px;
+	}
+		.question{
+			height:25px;
+			line-height:25px;
+			padding-left:10px;
+		}
+		.answer{
+			height:25px;
+			line-height:25px;
+			padding:0 0 5px 20px;
+		}
+		
+	.other_opt{
+		background: #F5FEF6;
+		height:35px;
+		line-height:35px;
+		padding-left:20px;
+	}
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

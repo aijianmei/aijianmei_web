@@ -1,0 +1,76 @@
+				<div id="footer">
+					<div class="f_list">
+						<h4>发现爱健美</h4>
+						<ul id="app">	
+							<li><a href="store.html">爱健美商店</a></li>
+							<li><a href="training.html">锻炼</a></li>
+							<li><a href="plan.html">健身计划</a></li>
+							<li><a href="nutri.html">营养</a></li>
+							<li><a href="add.html">补充</a></li>
+							<li><a href="pal.html">交友互动</a></li>
+						</ul>
+					</div>
+					<div class="f_list">
+						<h4>获取帮助</h4>
+						<ul id="article">						
+							<li><a href="help.html">新手指南</a></li>
+							<li><a href="direct.html">社区指导原则</a></li>
+							<li><a href="feedback.html">意见反馈</a></li>
+						</ul>
+					</div>
+					<div class="f_list">
+						<h4>关于我们</h4>
+						<ul id="video">						
+							<li><a href="about_us.html">关于爱健美</a></li>
+							<li><a href="contact.html">联系我们</a></li>
+							<li><a href="join.html">加入爱健美</a></li>
+							<li><a href="ad.html">广告投放与品牌推广</a></li>
+							<li><a href="privacy.html">隐私政策</a></li>
+						</ul>
+					</div>
+					<div class="f_list">
+						<h4>更多</h4>
+						<ul id="teach">					
+							<li><a href="app.html">下载IOS客户端</a></li>
+							<li><a href="app.html">下载Android客户端</a></li>
+							<li><a href="links.html">友情链接</a></li>
+						</ul>
+					</div>
+					<div class="f_list login" >
+						<h4>关注我们</h4>
+						<ul id="about">
+							<li class="sina"><a href="http://weibo.com/aijianmei?topnav=1&wvr=5" target="_blank">新浪微博</a></li>
+							<li class="tencent"><a href="http://t.qq.com/aijianmeiweibo" target="_blank">腾讯微博</a></li>
+							<li class="netease"><a href="http://t.163.com/aijianmei" target="_blank">网易微博</a></li>
+							<li class="public"><a href="#" target="_blank">公共主页</a></li>
+							<li class="qZone"><a href="http://user.qzone.qq.com/2816973844/main#home" target="_blank">QQ空间</a></li>
+							<li class="douban"><a href="#" target="_blank">豆瓣</a></li>
+						</ul>		
+					</div>
+				</div><!--Footer End-->
+				<div id="lower_footer">
+					<span>广州加伦信息科技有限公司- 粤ICP备12085654号</span>
+					<a href="intro.html">www.aijianmei.com</a>
+				</div>
+			</div>
+			<script type="text/javascript">
+			var USER = {
+					'id' : <php>echo $uid ? $uid : '0'</php>,
+					'name' : '',
+			}
+			</script>
+			<script type="text/javascript" src="../Public/js/jquery.js"></script>
+			<script type="text/javascript" src="../Public/js/public.js"></script>
+			<script type="text/javascript" src="../Public/js/{$cssFile}.js"></script>
+			<script type="text/javascript">
+			function comments(comment, aid, act) {
+				if(!USER.id) {alert('请登录'); return false;}
+				var action = 'add'+act+'Comment';
+				$.post('/index.php?app=index&mod=Index&act='+action, {'comment':comment, 'aid':aid}, function(msg) {
+					//ui.success('success');
+					location.reload();
+				})
+			}
+			</script>
+		</body>
+	</html>

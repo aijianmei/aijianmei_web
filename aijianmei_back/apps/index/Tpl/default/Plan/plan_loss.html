@@ -1,0 +1,27 @@
+﻿<include file="../Public/header" />
+<include file="../Public/banner" />
+	<!--Banner End -->
+	<div class="clearfix">
+		<div class="sider">
+			<ul class="bar" id="sort">
+				<li class="plan">计划</li>
+				<li class="sub_plan"><a href="{:U('index/Plan/plan_loss', array('sex'=>'m'))}">男性</a></li>
+				<li class="sub_plan"><a href="{:U('index/Plan/plan_loss', array('sex'=>'f'))}">女性</a></li>
+			</ul>
+		</div>
+	
+		<div class="content chos">
+			<h3>3个简单步骤，找到你的减肥计划</h3><hr />
+			<div class="loss_step">
+				<div class="tips">
+					<p class="tips_h">Find - A - Plan</p>
+					<p class="tips_c">选择选择选择选择选择选择选择选择选择选择选择选择选择选择选择选择选择选择选择选择选择选择</p>
+				</div>
+				<div class="wizard">
+					<a href="{:U('index/Plan/plan_loss', array('sex'=>'m'))}" class="m_l"><span class="txt">男 性</span></a>
+					<a href="{:U('index/Plan/plan_loss', array('sex'=>'f'))}" class="f_l"><span class="txt">女 性</span></a>
+				</div>
+			</div><!--End step-->
+		</div><!--End content-->
+	</div>
+			<include file="../Public/footer" />
