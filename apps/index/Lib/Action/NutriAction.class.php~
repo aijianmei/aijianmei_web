@@ -1,9 +1,0 @@
-<?php
-class NutriAction extends Action {
-	public function index()
-	{
-		$this->assign('cssFile', 'training');
-		$this->display();
-	}
-}
-?>
