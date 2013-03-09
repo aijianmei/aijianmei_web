@@ -1,0 +1,186 @@
+<include file="../Public/header" />
+<include file="../Public/banner" />
+
+<div class="content">
+					<div class="sidebar">
+						<div class="sort">
+							<span class="sort1" id="show"><a href="/index.php?app=index&mod=Train&act=articleList">文章</a></span>
+							<span class="sort2"><a href="/index.php?app=index&mod=Train&act=videoList">视频</a></span>
+							
+						</div>
+						<ul class="bar current" id="sort1">							
+							<php>foreach($categories as $c) {</php>
+							<li class="list">{$c['name']}</li>
+							<php>foreach($c['children'] as $child) {</php>
+							<li class="list"><a href="/index.php?app=index&mod=Train&act=articleList&id={$child['id']}">{$child['name']}</a></li>
+							<php>}</php>
+							<php>}</php>
+							
+						</ul>
+						<ul class="bar" id="sort2">
+							<li class="list">全部</li>
+							<li class="list"><a href="">颈部分</a></li>
+							<li class="list"><a href="">肩膀</a></li>
+							<li class="list"><a href="">陷阱</a></li>
+							<li class="list"><a href="">二头肌</a></li>
+							<li class="list"><a href="">前臂</a></li>
+							<li class="list"><a href="">胸部</a></li>
+							<li class="list"><a href="">腹部</a></li>
+							<li class="list"><a href="">四头肌</a></li>
+							<li class="list"><a href="">肱三头</a></li>
+							<li class="list"><a href="">背阔肌</a></li>
+							<li class="list"><a href="">中菱角</a></li>
+							<li class="list"><a href="">臂大肌</a></li>
+							<li class="list"><a href="">臂中肌</a></li>
+							<li class="list"><a href="">股二头肌</a></li>
+							<li class="list"><a href="">腓肠肌</a></li>
+						</ul>					
+					</div>
+				<div class="video">
+						<div class="all">
+							<h3 class="tit">全部</h3>
+							<ul class="all_ul">
+								<li class="select">
+									<span class="opt">范围：</span>
+									<a class="pre">不限</a>
+									<a>今日</a>
+									<a>本周</a>
+									<a>本月</a>
+								</li>
+								<li class="select">
+									<span class="opt">排序：</span>
+									<a class="pre">最新发布</a>
+									<a>最多播放</a>
+									<a>最多评论</a>
+									<a>最多收藏</a>
+								</li>
+							</ul>
+						</div>
+						<div class="each clearfix">
+						<php>foreach($articles as $a) {</php>
+							<div class="arts">
+								<img src="../Public/images/art1.png" class="pic"/>
+									<dl class="info">
+										<dt class="art_title"><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></dt>
+										<dd class="art_content">{$a['content']|htmlspecialchars_decode|getShort=###, 100|formatComment} 
+											<a class="read_all" href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">【查看全文】</a>
+										</dd>
+										<dd>
+										阅读：<span class="count">0</span>
+										分享：<span class="count">0</span>
+										收藏：<span class="count">0</span>
+										</dd>
+									</dl>							
+							</div>
+							<php>}</php>
+							<!-- <div class="arts">
+								<img src="images/art1.png" class="pic"/>
+									<dl class="info">
+										<dt class="art_title">适合瘦身的食物</dt>
+										<dd class="art_content">内容内容内容内容内容内容内容内容... 
+											<a class="read_all" href="">【查看全文】</a>
+										</dd>
+										<dd>
+										阅读：<span class="count">0</span>
+										分享：<span class="count">0</span>
+										收藏：<span class="count">0</span>
+										</dd>
+									</dl>							
+							</div>
+							<div class="arts">
+								<img src="images/art1.png" class="pic"/>
+									<dl class="info">
+										<dt class="art_title">适合瘦身的食物</dt>
+										<dd class="art_content">内容内容内容内容内容内容内容内容... 
+											<a class="read_all" href="">【查看全文】</a>
+										</dd>
+										<dd>
+										阅读：<span class="count">0</span>
+										分享：<span class="count">0</span>
+										收藏：<span class="count">0</span>
+										</dd>
+									</dl>							
+							</div>
+							<div class="arts">
+								<img src="images/art1.png" class="pic"/>
+									<dl class="info">
+										<dt class="art_title">适合瘦身的食物</dt>
+										<dd class="art_content">内容内容内容内容内容内容内容内容... 
+											<a class="read_all" href="">【查看全文】</a>
+										</dd>
+										<dd>
+										阅读：<span class="count">0</span>
+										分享：<span class="count">0</span>
+										收藏：<span class="count">0</span>
+										</dd>
+									</dl>							
+							</div>
+							<div class="arts">
+								<img src="images/art1.png" class="pic"/>
+									<dl class="info">
+										<dt class="art_title">适合瘦身的食物</dt>
+										<dd class="art_content">内容内容内容内容内容内容内容内容... 
+											<a class="read_all" href="">【查看全文】</a>
+										</dd>
+										<dd>
+										阅读：<span class="count">0</span>
+										分享：<span class="count">0</span>
+										收藏：<span class="count">0</span>
+										</dd>
+									</dl>							
+							</div>
+							<div class="arts">
+								<img src="images/art1.png" class="pic"/>
+									<dl class="info">
+										<dt class="art_title">适合瘦身的食物</dt>
+										<dd class="art_content">内容内容内容内容内容内容内容内容... 
+											<a class="read_all" href="">【查看全文】</a>
+										</dd>
+										<dd>
+										阅读：<span class="count">0</span>
+										分享：<span class="count">0</span>
+										收藏：<span class="count">0</span>
+										</dd>
+									</dl>							
+							</div>
+							<div class="arts">
+								<img src="images/art1.png" class="pic"/>
+									<dl class="info">
+										<dt class="art_title">适合瘦身的食物</dt>
+										<dd class="art_content">内容内容内容内容内容内容内容内容... 
+											<a class="read_all" href="">【查看全文】</a>
+										</dd>
+										<dd>
+										阅读：<span class="count">0</span>
+										分享：<span class="count">0</span>
+										收藏：<span class="count">0</span>
+										</dd>
+									</dl>							
+							</div>
+							<div class="arts">
+								<img src="images/art1.png" class="pic"/>
+									<dl class="info">
+										<dt class="art_title">适合瘦身的食物</dt>
+										<dd class="art_content">内容内容内容内容内容内容内容内容... 
+											<a class="read_all" href="">【查看全文】</a>
+										</dd>
+										<dd>
+										阅读：<span class="count">0</span>
+										分享：<span class="count">0</span>
+										收藏：<span class="count">0</span>
+										</dd>
+									</dl>							
+							</div> -->
+						</div>
+						<div class="page">
+							<button class="prev"><a href="">上一页</a></button>
+							<a href="" class="record">1</a>
+							<a href="" class="record">2</a>
+							<a href="" class="record">3</a>
+							<button class="next"><a href="">下一页</a></button>
+						</div>
+					</div>
+
+			</div>
+			</div>
+<include file="../Public/footer" />

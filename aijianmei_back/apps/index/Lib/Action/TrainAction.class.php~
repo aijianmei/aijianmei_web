@@ -1,0 +1,8 @@
+<?php
+class TrainAction extends Action {
+	public function index()
+	{
+		$this->display();
+	}
+}
+?>

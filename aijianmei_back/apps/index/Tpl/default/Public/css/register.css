@@ -1,0 +1,299 @@
+a{cursor:pointer;}
+a:hover{
+	color:#656565;
+}
+/***********************content开始*************************/
+#content{
+	height:880px;
+	margin-top: 70px;
+}
+	/********leftsidebar开始*********/	
+	.leftsidebar{
+		width: 735px;
+		float: left;
+		padding-right: 31px;
+		font-size: 18px;
+		font-weight: 700;
+		border-right: 1px solid #CCC;
+		color: #656565;
+	}
+			.choice_register{
+				height: 96px;
+				padding-left: 95px;
+				background: url(../images/register/21.png);
+			}
+			.choice_register .method{
+				position:relative;
+				display: inline-block;
+				width: 168px;
+				margin-right: 14px;
+				padding-left: 80px;
+				font-size: 22px;
+				font-weight: 800;
+				border-top-left-radius: 6px;
+				border-top-right-radius: 6px;
+			}
+			#content .choice_me_1{
+				height: 96px;
+				line-height: 96px;
+				background: url(../images/register/result.png) 0px 0px no-repeat;
+			}
+			#content .choice_me_2{
+				height: 96px;
+				line-height: 96px;
+				background: url(../images/register/result.png) 0px -575px no-repeat;
+			}
+			.choice_register .email{
+				float: left;
+				height: 68px;
+				line-height: 68px;
+				background: url(../images/register/23.jpg);
+			}
+			.choice_register .telephone{
+				height: 68px;
+				line-height: 68px;
+				background: url(../images/register/result.png) 0px -107px no-repeat;
+			}
+
+			.formest{
+				margin-top: 70px;
+			}
+			.formest_1{
+				display:none;
+				margin-top: 70px;
+			}
+			.formest .box,.formest_1 .box{
+				clear:both;
+				margin:20px 0;
+				height:44px;
+			}
+				.box .items{
+					display: inline-block;
+					float: left;
+					width: 134px;
+					height: 44px;
+					margin-right: 6px;
+					line-height: 44px;
+					text-align: right;
+					font-size: 18px;
+					color:black;
+				}
+						.show_state{
+							position: relative;
+							top: 8px;
+							left: -6px;
+							font-size: 20px;
+							color: red;
+						}
+						.text{
+							width: 318px;
+							height: 22px;
+							line-height: 22px;
+							padding:10px 0 10px 20px;
+							font-size: 16px;
+							font-weight: 700;
+							border: 1px solid #CCC;
+						}
+				.prompt_box_1,.prompt1_box_1{
+					position: relative;
+					top: -30px;
+					left: 496px;
+					font-size: 13px;
+					color:gray;
+				}
+				.prompt_box_1 span,.prompt1_box_1 span{
+					color:red;
+					font-size: 13px;
+				}
+				.prompt_box_2,.prompt1_box_2{
+					position: relative;
+					top: -55px;
+					left: 496px;
+				}
+				.prompt_box_2 p,.prompt1_box_2 p{
+					line-height: 24px;
+					font-size: 13px;
+					color:gray;
+				}
+				.error_form{
+					display:block;
+					margin-top:25px;
+					color:red;
+					font-size: 13px;
+				}
+				.rank{
+					display:block;
+					margin-top:25px;
+					color:#DB7200;
+					font-size: 13px;
+				}
+				.w_s{
+					display: block;
+				}
+				.prompt_box_3,.prompt1_box_3{
+					position: relative;
+					top: -30px;
+					left: 496px;
+					font-size:13px;
+					color:gray;
+				}
+				.prompt_box_4,.prompt1_box_4{
+					position: relative;
+					top: -30px;
+					left: 496px;
+					font-size:13px;
+					color:gray;
+				}
+					.box_5 .sex_box{
+						height: 45px;
+						line-height: 45px;
+						margin-left: 10px;
+					}
+					.box_5 .sex_box .sex_1{
+						margin-right: 15px;
+					} 
+			.formest .box_6,.formest_1 .box_6{
+				margin-left: 140px;
+			}
+				.box_6 .province_box_1{
+					float:left;
+				}
+				.box_6 .province_box_2{
+					margin-left:150px;
+				}
+					    .choice_province{
+					    	height: 28px;
+							width: 120px;
+							font-size: 18px;
+							padding-left: 7px;
+							font-weight: 700;
+						}
+							.hover{
+								background:#0069DB;
+								color:white;
+							}
+				.box_7{
+					height: 73px;
+				}
+				.box_7 .prompt_box_7{
+					position: relative;
+					top: -62px;
+					left: 490px;
+					width: 190px;
+					padding: 12px;
+					font-size: 15px;
+					border: 1px solid #CCC;
+					color: gray;
+					border-radius: 6px;
+				}
+				.box_8 .proven_box{
+					float: left;
+					width: 85px;
+				}
+				.prompt_box_8 .proven_pic{
+					display: inline-block;
+					float:left;
+					width: 138px;
+					height: 40px;
+					margin: 0 20px 0 10px;
+					background: url(../images/register/result.png) 0px -314px no-repeat;
+				}
+				.prompt_box_8 .forchange{
+					display: inline-block;
+					height: 40px;
+					line-height: 40px;
+					margin: 0 20px 0 10px;
+					color: #0069DB;
+				}
+			.formest .box_9,.formest_1 .box_9{
+				margin-left: 140px;
+			}
+				.box_9 .linktoprotect{
+					color:red;
+				}
+				.box_10{
+					margin-left: 140px;
+					margin-bottom: 10px;
+				}
+				.box_10 .submit_1{
+					display: inline-block;
+					background:gray;
+					border-radius: 6px;
+					cursor: default
+				}
+				.box_10 .submit_2{
+					display: inline-block;
+					background:#61A200;
+					border-radius: 6px;
+					cursor:pointer;
+				}			
+				.open,.open_1{
+					display: inline-block;
+					width: 195px;
+					height: 58px;
+					line-height: 58px;
+					padding: 5px;
+					text-align: center;
+					font-size: 35px;
+					font-weight: 800;
+					color: white;
+					border-radius: 6px;
+				}
+	/********rightsidebar开始*********/
+		.rightsidebar{
+			margin-left: 792px;
+			font-size: 17px;
+			font-weight: 700;
+			color: #656565;
+		}
+		.rightsidebar .A_login{
+			border-bottom: 1px solid #CCC;
+		}
+		.rightsidebar .A_login .loginbutton{
+			display: inline-block;
+			width: 67px;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			margin: 15px 0px;
+			font-size: 16px;
+			color:white;
+			background:#61A200;
+			border-radius: 4px;
+		}
+						.user_part .user{
+							display: block;
+							height: 57px;
+							line-height: 57px;
+							font-size: 20px;
+							border-bottom: 1px solid #CCC;
+							color: #00A3FF;
+						}
+		.rightsidebar .cooperate_target{
+			padding-top: 15px;
+			border-bottom: 1px solid #CCC;
+		}
+		.rightsidebar .cooperate_target .websibe{
+			margin: 30px 0;
+		}
+					.cooperate_target .cooperate{
+					  	display:inline-block;
+						width:24px;
+						height:22px;	
+						background: url(../images/register/result.png) no-repeat;
+					}
+		.rightsidebar .web_1{background-position: 0px -371px;}
+		.rightsidebar .web_2{background-position: 0px -404px;}
+		.rightsidebar .web_3{background-position: 0px -439px;}
+		.rightsidebar .web_4{background-position: 0px -473px;}
+		.rightsidebar .web_5{background-position: 0px -507px;}
+		.rightsidebar .web_6{background-position: 0px -541px;}
+					.A_intro .intro_topic{
+					  	margin-top: 15px;
+						font-size: 22px;
+						color: #535252;
+					}
+					.A_intro .intro_conduct{
+					  	margin: 15px 0;
+						color: #7C7C7C;
+					}

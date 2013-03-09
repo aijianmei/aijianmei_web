@@ -1,0 +1,31 @@
+<div class="total_info clearfix">
+						<div class="cover"></div>
+						<div class="info0 clearfix">
+							<div class="rank">
+								<div class="rank_info">
+									<span class="js_rank"></span>
+									<p class="person"><span class="daren">高级达人 </span> 积分： <span class="score">{$data['user']['credit']['score']}</span></p>
+									<p class="person">兴趣： <span class="intr"> 健身 </span><span class="intr"> 健美 </span> </p>
+								</div>
+							</div>
+							<div class="user_info">
+								<div class="style_info">
+									<span class="name">{$data['user']['uname']}</span>
+									<span class="grade_icon"></span>
+									<a href="http://www.aijianmei.com">http://www.aijianmei.com</a>
+								</div>
+								<p class="sign">aijianmei</p>
+								<div class="fans">
+									<ul>
+										<li class="fan_info"><span class="gz_amount">{$data['user']['following']}</span>关注</li>
+										<li class="fan_info"><span class="fs_amount">{$data['user']['follower']}</span>粉丝</li>
+										<li class="fan_info"><span class="wb_amount">{$data['user']['miniNum']}</span>微博</li>
+									</ul>
+								</div>
+								<a href="{:U('home/User/myinfo')}"><button class="edit">编辑个人资料</button></a>
+							</div>
+						</div>
+						<div class="face_info">
+							<img src="images/pal/ad1.jpg" alt="" class="face" />
+						</div>
+					</div>

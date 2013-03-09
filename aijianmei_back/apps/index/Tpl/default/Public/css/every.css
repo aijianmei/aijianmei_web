@@ -1,0 +1,278 @@
+a:hover{
+	cursor:pointer;
+}
+/*#content开始---------------------------*/
+	#content{
+		margin-top: 12px;
+	}
+	/*左边导航栏left_sub*/
+	.left_sub{
+		float:left;
+		width:135px;
+		margin:0 10px 0 25px;
+	}
+	.title_1{
+		margin-right: 30px;
+		padding-bottom: 6px;
+		font-size: 16px;
+		border-bottom: 1px solid #CCC;
+	}
+	.all{
+		font-size: 14px;
+		color:#525252;
+		font-weight: 600;
+	}
+	.each_video{
+		margin-right: 30px;
+		padding-left: 11px;
+		line-height: 32px;
+		font-size: 13px;
+		border-bottom: 1px solid #CCC;
+	}
+	/*右边内容content------------------*/
+	.content{
+		float: left;
+		width: 785px;
+	}
+		/*模块共同部分*/
+		.module_1{
+			margin-bottom: 10px;
+			border: 1px solid #CCC;
+		}
+		.show_time{
+			height: 22px;
+			line-height: 22px;
+			padding-left: 20px;
+			border-bottom: 1px solid #CCC;
+			background: #DDD;			
+		}
+		.package{
+			margin:10px;			
+		}
+		.part_1{
+			position:relative;
+			float: left;
+			width: 440px;
+			border-right: 1px solid #CCC;
+		}
+		.part_1 span{
+
+			display: inline-block;
+			height: 28px;
+			line-height: 28px;			
+		}
+		.nowaday{
+			margin:10px 0;
+		}
+		.show_pic{
+
+		}
+		.show_pic a{
+			display: block;
+			margin: 10px 0;
+		}
+		.video{
+
+		}
+		.video_list{
+
+		}
+		.video_list li{
+			float:left;
+			margin-right: 8px;
+		}
+		.video_list img{
+			display:block
+		}
+		.video_commit{
+			margin-left: 20px;
+		}
+		.checking{
+			position:absolute;
+			top:30px;
+			right:40px;
+			display: block;
+			width: 51px;
+			height: 24px;
+			line-height: 24px;
+			text-align: center;
+			font-weight: 700;
+			font-size: 12px;
+			color: white;
+			background: url(../images/wm3.png) 0px -297px no-repeat;
+		}
+		.part_2{
+			float: left;
+			width: 300px;
+			margin-left: 10px;
+		}
+		.expand_1{
+			height: 27px;
+			line-height: 27px;
+			padding-bottom: 5px;
+			margin-bottom: 5px;
+			border-bottom: 1px solid #CCC;
+		}
+		.expand_1 a,.expand_2 a{
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			margin:0 3px -3px 3px;
+			background: url(../images/wm3.png) no-repeat;
+		}
+		.praise{
+			display: inline-block;
+			height: 27px;
+			line-height: 27px;
+			margin-left: 27px;
+		}
+		.relay{
+			font-weight: 600;
+			color: #006FD5;
+		}
+		.expand_1 .sprite_1{
+			background-position: 0px 0px;
+		}
+		.expand_1 .sprite_2{
+			background-position: 0px -26px;						
+		}
+		.expand_1 .sprite_3{
+			background-position: 0px -52px;						
+		}
+		.expand_1 .sprite_4{
+			background-position: 0px -78px;						
+		}
+		.expand_1 .sprite_5{
+			background-position: 0px -104px;						
+		}
+		.expand_1 .sprite_6{
+			background-position: 0px -104px;						
+		}
+		.expand_2{
+
+		}
+		.read_time{
+			position:relative;
+			float:right;
+			height:27px;
+			line-height: 27px;
+		}
+		.expand_2 .sprite_8{
+			background-position: 0 -261px;
+			width: 50px;
+			height: 27px;
+			margin-bottom: -8px;
+		}
+		.expand_2 .sprite_9{
+			background-position: 0 -186px;
+			width: 50px;
+			height: 27px;
+			margin-bottom: -8px;
+		}
+		/*expand_3  all------------*/
+		.expand_3{
+			width:300px;
+		}
+			/*check_comment---*/
+			.check_comment{
+				height: 32px;
+				margin: 20px 0 6px 0;
+				border-top: 4px solid #D1D1D1;
+				background: whiteSmoke;
+			}
+			.comment_1,.comment_2{
+				display: inline-block;
+				line-height: 32px;
+				font-weight: 600;
+				padding: 0 20px;
+				margin-top: -4px;
+				color:#656565;
+			}
+			.comment_3{
+				border-top: 4px solid #007AFF;
+				background: #DAF3FF;
+
+			}
+			/*cm_bottom---*/
+			.target{
+				margin-top: 15px;
+				border-bottom: 1px solid #CCC;
+			}
+			.target_pic{
+
+				float:left;
+				margin-right: 10px;
+			}
+			.care{
+				display:block;
+			}
+			.target_ct{
+				float:left;
+				width:240px;
+			}
+			.name{
+				display: block;
+				margin:8px 0;
+			}
+			.bottom_ms{
+				font-size: 13px;
+				padding: 8px 0;
+			}
+			.to{
+				float:right;
+			}
+			.check_more{
+				float: right;
+				display: block;
+				width: 84px;
+				height: 24px;
+				line-height: 24px;
+				margin: 10px 0;
+				text-align: center;
+				font-weight: 700;
+				font-size: 12px;
+				color: white;
+				background: url(../images/wm3.png) 0px -334px no-repeat;
+			}
+			/*expand_3  end------------*/
+
+		/*border_comment------*/
+			.border_comment{
+
+				width: 300px;
+				height:150px;
+				margin-bottom: 10px;
+			}		
+			.word_num{
+				float: right;
+			}
+			.textarea{
+				margin: 7px 0;
+				border: 1px solid #CCC;
+			}
+			.comment_inp{
+				width: 280px;
+				height: 70px;
+				padding: 7px 7px;
+				border: 0px;
+				overflow: hidden;
+				overflow-y: auto;
+				word-break: break-all;
+				word-wrap: break-word;
+				outline: none;
+				line-height: 21px;
+				resize:none;
+			}
+			.comment{
+				display: block;
+				float:right;
+				width:80px;
+				height: 30px;
+
+				line-height: 30px;
+				text-align: center;
+				color: white;
+				font-weight: 600;
+				background: url(../images/wm3.png) 0 -223px no-repeat;					
+			
+			}

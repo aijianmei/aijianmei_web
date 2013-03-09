@@ -1,0 +1,258 @@
+﻿.content_all{padding:0;}
+/*导航*/
+.cart_step{
+	height:26px;
+	margin-left:13px;
+}
+	.steps{
+		width:150px;
+		height:26px;
+		float:left;
+		background:#F1F1F1;
+		margin-right:3px;
+		line-height:26px;
+		text-align:center;
+	}
+	.curr{
+		background:#FFE6BD;
+	}
+/*我的购物车*/
+.my_cart{
+	margin:13px 0 3px 13px;
+}
+/*购物车*/
+.cart_inner{
+	width:950px;
+	margin:0 auto;
+	border:1px solid #DDD;
+}
+	/*表头*/
+	.cart_h{
+		height:35px;
+		background-color:#F3F3F3;
+		
+	}
+		.col{
+			width:98px;
+			float:left;
+			line-height:35px;
+			border-right:1px solid #fff;
+			text-align:center;
+		}
+		.product{
+			width:355px;
+		}
+		.opt{
+			border:0;
+		}
+	/*商品*/
+	.cart_body{
+		height:78px;
+		background-color:#FFFDEE;
+		border-bottom:1px solid #F3F3F3;
+	}
+		.p_col{
+			float:left;
+			width:98px;
+			text-align:center;
+			line-height:78px;
+		}
+		/*选中*/
+		.p_check{
+			width:50px;
+			padding-left:13px;
+		}
+		/*单品*/
+		.p_product{
+			width:387px;
+			line-height:25px;
+		}
+			.p_chosen{
+				display:block;
+				padding-top:16px;
+				text-align:left;
+				color:#00538D;
+			}
+			.p_chosen:hover{
+				color:#00538D;
+				text-decoration:underline;
+			}
+				.p_pic{
+					float:left;
+					width:50px;
+					height:50px;
+				}
+				.p_name{
+					padding-left:60px;
+					display:block;
+				}
+			.minus,.add{
+				display:inline-block;
+				width:20px;
+				height:13px;
+				line-height:13px;
+			}
+			.minus{
+				background:url(../images/sd6_06.png) no-repeat left;
+				padding-left:11px;
+			}
+			.add{
+				background:url(../images/sd6_07.png) no-repeat right;
+				padding-right:11px;
+			}
+			.Pamount{
+				width:20px;
+				text-align:center;
+			}
+		/*删除*/	
+		.p_del{
+			color:#00538D;
+		}
+		.p_del:hover{
+			text-decoration:underline;
+		}
+	/*删除选中商品*/
+	.cart_bar {
+		height:56px;
+		border-bottom:1px solid #F3F3F3;
+	}
+		.del{
+			display:block;
+			float:left;
+			width:130px;
+			line-height:56px;
+			color: #00538D;
+			margin-left:15px;
+		}
+		.del:hover{
+			text-decoration:underline;
+			color:#00538D;
+		}
+			.spec_m{
+				color:#FE9A24;
+				font-size:18px;
+				font-weight:bold;
+			}
+		.p_total,.amount{
+			float:right;
+		}
+		.p_total{
+			width:200px;
+		}
+		.amount{
+			width:70px;
+			padding-top:5px;
+		}
+			.p_total p{
+				line-height:26px;
+			}
+			.p_total span{
+				float:right;
+				margin-right:5px;
+			}
+	/*总计*/
+	.cart_total{
+		height:35px;
+		background-color:#F3F3F3;
+		text-align:right;
+	}
+		.total{
+			font-size:22px;
+			font-weight:bold;
+			color:red;
+			margin-right:5px;
+		}
+	/*去付款*/
+	.pay{
+		float:right;
+		width:150px;
+		height:30px;
+		background:url(../images/sd6_09.png) no-repeat;
+		margin:30px 13px 10px 0;
+	}
+		.pay a{
+			display:block;
+			line-height:30px;
+			color:#fff;
+			font-size:23px;
+			font-weight:bold;
+		}
+/*推荐*/
+.recd{
+	width:950px;
+	margin:0 auto;
+}
+	.re_h{
+		display: inline-block;
+		width: 280px;
+		height: 30px;
+		line-height: 30px;
+		border: 1px solid #CCC;
+		border-bottom:1px solid #fff;
+		text-align: center;
+		margin-bottom:-1px;
+	}
+		.re_h h3{
+			font-size:14px;
+		}
+	
+	.re_list{
+		height:256px;
+		border:1px solid #ccc;
+		position:relative;
+	}
+		.re_ul{
+			width:870px;
+			height:250px;
+			margin:0 auto;
+		}
+			.re_production{
+				width:130px;
+				height:220px;
+				float:left;
+				margin:10px 0 0 12px;
+			}
+				.recd_pro{
+					display:block;
+				}
+				.recd_pro:hover{
+					text-decoration:underline;
+					color: #00538D;
+				}
+					.re_pic{
+						width:130px;
+						height:150px;
+					}
+					.re_name{
+						color: #00538D;
+						font-weight:bold;
+						display:block;
+						text-align:center;
+					}
+					.re_price{
+						color:red;
+						font-weight:bold;
+						display:block;
+						text-align:center;
+					}
+					#add{
+						width:130px;
+						height:20px;
+						line-height:20px;
+						background:url(../images/sd6_16.png) no-repeat center;
+						cursor:pointer;
+					}
+	.prev,.next{
+		width:40px;
+		height:250px;
+		position:absolute;
+		opacity:0.5;
+	}
+	.prev{
+		background:url(../images/turn_left.png) no-repeat center;
+	}
+	.next{
+		right:0;
+		top:0;
+		background:url(../images/turn_right.png) no-repeat center;
+	}

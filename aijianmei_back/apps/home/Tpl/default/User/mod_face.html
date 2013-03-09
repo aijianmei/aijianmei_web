@@ -1,0 +1,134 @@
+﻿<include file="../Public/header" />
+<script type="text/javascript" src="/public/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.form.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="/public/js/tbox/box.js"></script>
+<script type="text/javascript" src="/public/js/common.js"></script>
+<script src="../Public/js/slides.min.jquery.js"></script>
+<script src="/public/js/weibo.js" type="text/javascript"></script>
+<script src="../Public/js/webcam.js" type="text/javascript"></script>
+<script type="text/javascript">
+webcam.set_api_url('action.php');
+webcam.set_quality(90);
+webcam.set_shutter_sound(true);
+var result = webcam.get_html(320,240,160,120);
+webcam.set_hook('onComplete', 'completeHandler');
+function take_snapshot() {
+	document.getElementById('result').innerHTML = 'uploading';
+	webcam.snap();
+	
+}
+function completeHandler(msg) {
+	if (msg.match(/(http\:\/\/\S+)/)) { 
+        var image_url = RegExp.$1; 
+        document.getElementById('results').innerHTML =  
+                    '<h4>Upload Successful!</h4>' +  
+                    '<img src="' + image_url + '">'; 
+        webcam.reset(); 
+    } 
+    else alert("PHP Error: " + msg);
+}
+</script>
+				<div class="sub_nav">
+					<ul class="wb_nav clearfix">
+						<li class="wb_nav_list"><a href="{:U('home/User/index')}">首页</a></li>
+						<li class="wb_nav_list"><a href="{:U('home/User/personal')}">个人主页</a></li>
+					</ul>
+				</div>
+				<div class="content clearfix">
+					<include file="../Public/pheader" />
+					<!--End total info-->
+					<div class="main_info">
+						<div class="main_nav">
+							<ul class="main_header clearfix">
+								<li class="main_p"><a href="{:U('home/User/personal')}">我的主页</a></li>
+								<li class="main_p"><a href="{:U('home/User/myinfo')}">个人资料</a></li>
+								<li class="main_p"><a href="{:U('home/User/album')}">相册</a></li>
+							</ul>
+						</div>
+						<div class="main_content clearfix">
+							<div class="set_info mod_set">
+								<h4 class="set_title">帐号设置</h4>
+								<ul>
+									<li class="set"><a href="{:U('home/User/myinfo')}">个人资料</a></li>
+									<li class="set current"><a href="{:U('home/User/modFace')}">修改头像</a></li>
+									<li class="set"><a href="{:U('home/User/bind')}">绑定帐号</a></li>
+									<li class="set"><a href="{:U('home/User/address')}">收货地址</a></li>
+								</ul>
+							</div>
+							<div class="base_info">
+								<h4 class="b_title">修改头像</h4>
+								<div class="mod_content">
+									<div class="upload_way">
+										<button class="local">本地照片</button>
+										<div id="cam"><button class="take" onclick="take_snapshot()">拍照上传</button></div>
+										<p class="b_tip">仅支持JPG、GIF、PNG，且文件小于5M</p>
+									</div>
+									<div id="result"></div>
+									<div class="upload">
+										<div>
+											<input type="checkbox"  id="che"/>
+											<label for="che">上传原始图片，在头像相册中显示</label>
+										</div>
+										<div class="image clearfix">
+											<div>
+												<a href="" class="mod_select"></a>
+											</div>
+											<div class="mod_show clearfix">
+												<div><span class="note">您上传的头像会自动生成三种尺寸，请注意中小尺寸的头像是否清晰</span></div>
+												<div class="large">
+													<img src="images/pal/ad2.jpg" alt="" class="l_img"/>
+													<p>大尺寸头像，180×180像素</p>
+												</div>
+												<div class="auto">
+													<div class="mid">
+														<img src="images/pal/ad2.jpg" alt="" class="m_img"/>
+														<p>中尺寸头像<br />50×50像素<br />（自动生成）</p>
+													</div>
+													<div class="small">
+														<img src="images/pal/ad2.jpg" alt="" class="s_img"/>
+														<p>小尺寸头像<br />30×30像素<br />（自动生成）</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><!--End base info-->
+						</div>
+					</div><!-- End main info-->
+				</div>
+				<include file="../Public/footer" />
+				<!--Footer End-->
+				<div id="lower_footer">
+					<span>广州加伦信息科技有限公司- 粤ICP备12085654号</span>
+					<a href="intro.html">www.aijianmei.com</a>
+				</div>
+			<script type="text/javascript" src="../Public/js/public.js"></script>
+			<script type="text/javascript" src="../Public/js/jquery-ui.js"></script>
+			<script type="text/javascript" src="../Public/js/index.js"></script>
+			<script type="text/javascript">
+				$(function(){
+					$(".close_ad").click(function(){
+						$(this).parent().hide("slow");
+					});
+
+					$(".sync_qzone,.sync_sina,.sync_tencent").click(function(){
+							var y = parseFloat( $(this).css("background-position-y"));
+							sync = $(this).attr("sync")
+							console.log(sync);
+							if(!sync){
+								y -= 26;
+								$(this).attr("sync") = "true";
+							}
+							else{
+								y += 26;
+								$(this).attr("sync") = false;
+							}
+							
+							$(this).css("background-position-y",y);
+					})
+				})
+			</script>
+		</body>
+	</html>

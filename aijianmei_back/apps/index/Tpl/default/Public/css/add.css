@@ -1,0 +1,264 @@
+﻿.clearfix {
+
+	}
+	.clearfix:before {
+	display: table; content: ""
+	}
+	.clearfix:after {
+	display: table; content: ""
+	}
+	.clearfix:after {
+	clear: both
+	}
+	a{cursor:pointer;}
+	.triangle{
+		border-color:#BCBCBC #fff #fff #fff;
+	}
+.wrapper{
+	background: white;
+}
+/***********************content开始*************************/
+
+#content{
+	margin-top: 10px;
+}
+/*add一级页面部分开始*/
+	.all{
+		font-size: 14px;
+		color:#525252;
+		font-weight: 600;
+	}
+	.each_video{
+		margin-right: 30px;
+		padding-left: 11px;
+		line-height: 32px;
+		font-size: 13px;
+		border-bottom: 1px solid #CCC;
+	}
+#content .right_training{
+	float:left;
+	width:703px;
+}
+
+	.tr_top{
+		margin: 7px 20px;
+		border: 1px solid #CCC;
+		border-radius: 8px;
+	}
+	.expend{
+		float: right;
+		width: 50px;
+		height: 20px;
+		line-height: 20px;
+		margin: 15px;
+		text-align: center;
+		color: black;
+		border: 1px solid #CCC;
+		background: lightGrey;
+	}
+	.supple_pic{
+		float: left;
+		margin-left: 10px;
+		margin-right: 20px;
+	}
+	.detail{
+		display: inline-block;
+		margin: 22px 0 10px 0;
+		font-size: 20px;
+		color: #003096;
+	}
+	.purchase{
+		display:inline-block;
+		width: 81px;
+		height:31px;
+		line-height: 31px;
+		margin-top: 20px;
+		text-align: center;
+		color: white;
+		background: url(../images/10.png) no-repeat;
+
+	}
+	.classify{
+		float: left;
+		width: 222px;
+		margin: 18px 18px;
+	}
+	.classify .best{
+		border: 1px solid #ccc;
+	}
+	.classify .lay_cf{
+		display: block;
+	}
+	.classify p{
+		margin-top: -3px;
+		line-height: 22px;
+		text-align: center;
+		background: #E0E0E0;
+	}
+	.classify .price{
+		color: red;
+		background: #949494;
+	}
+	.now{
+		margin-top:20px;
+	}
+	.article{
+		float: left;
+		width: 314px;
+		height: 64px;
+		margin: 5px 35px;
+		padding: 7px 0px;
+		border: 2px solid #CCC;
+	}
+	.article .article_pic{
+		float: left;
+		margin-right:10px;
+	}
+	.article img{
+		border-radius: 8px;
+	}
+		.article_content{
+			float: left;
+			width: 185px;
+		}
+		.article_content .title_3{
+			line-height: 18px;
+			font-size: 13px;
+			font-weight: 600;
+			color: #2C5AD1;
+		}
+		.article_content p{
+			font-size: 12px;
+		}
+/*add一级页面部分结束*/
+
+
+
+/*子页面新增视频内容*/
+		.content{
+			width: 700px;
+		}
+		.content .ct{
+			padding: 14px 8px 20px 8px;
+			background:#E6E6E6;
+			border-radius: 8px 8px 0px 0px;
+		}
+		.content .none{
+			display:none;
+		}
+		.content .video{
+			display: block;
+			float: left;
+			height: 422px;
+		}
+		.content .list{
+			float: right;
+			width: 322px;			
+		}
+		.content .each{
+			height: 136px;
+			margin: 2px 0px;
+			border: 1px solid #CCC;
+		}
+				.each .each_pic{
+					display: block;
+					width: 138px;
+					height: 103px;					
+				}
+		.content .tab_mune{
+			width:703px;
+			height:49px;
+		}
+			.tab_mune .tab{
+				float: left;
+				width: 173px;
+				height: 47px;
+				border: 1px solid #D8D8D8;
+				background: url(../images/store_4/sd3_06.jpg) repeat-x;
+			}
+			.tab_mune .add{
+				height:48px;
+				border-top: none;
+				background: #E6E6E6;			
+			}
+
+/*part_2-------------------------------------------*/
+	.part_2{
+	margin-bottom: 20px;
+	}
+	.block_1,.block_2{
+
+	}
+		.title_3{
+			padding: 5px 0;
+			margin: 10px 0;
+			border-bottom: 1px solid #CCC;
+			color: black;
+		}
+		.nubble{
+			float: left;
+			margin: 5px 20px;
+		}
+		.defferent{
+			margin-right:0px;
+		}
+		.nubble p{
+			font-size: 16px;
+			color: #0C84BD;			
+		}
+			.rt_picture{
+
+			}
+/****** mode_2--------------------------------- *****/
+		.mode_2{
+			padding: 4px 0;
+			border:1px solid #ccc;
+			border-top: 3px solid #C6DAE5; 
+		}
+			.s_nav_left{
+
+			}
+			.s_nav_left li{
+				float: left;
+				margin: 0 4px;
+				padding: 2px 4px;
+				border: 1px solid #ddd;
+			}
+				.current_click{
+					color:white;
+					background:#FF0000;
+				}
+			.s_nav_right{
+
+			}
+			.s_nav_right li{
+				float: right;
+				margin: 0 4px;
+				padding: 2px;				
+			}
+				.strong{
+					font-weight:600;
+					color:#ff0000;
+				}
+/****** mode_3 ------------------------------*****/
+		.mode_3{
+
+		}
+			.ar_block{
+				margin: 20px auto;
+				padding: 20px 0 20px 10px;
+				width: 600px;
+				background: #f3f3f3;
+
+			}
+			.ar_block span{
+				display: inline-block;
+				margin: 4px 20px 4px 0;
+			}
+			.ar_block p{
+				margin-right: 50px;
+			}
+
+
+
+	
