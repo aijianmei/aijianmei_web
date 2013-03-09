@@ -14,8 +14,9 @@
 						<span class="prompt">{$article['author']}</span>
 						<span>{$article['source']}</span>			
 						<span>我要分享</span>
+						<include file="../Public/share" />
 						<!-- JiaThis Button BEGIN -->
-						<div class="jiathis_style">
+						<!-- <div class="jiathis_style">
 							<a class="jiathis_button_qzone"></a>
 							<a class="jiathis_button_tsina"></a>
 							<a class="jiathis_button_tqq"></a>
@@ -23,7 +24,7 @@
 							<a class="jiathis_button_kaixin001"></a>
 							<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 						</div>
-						<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1359878070244822" charset="utf-8"></script>
+						<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1359878070244822" charset="utf-8"></script> -->
 						<!-- JiaThis Button END -->
 						<!-- <a class="sprite_1"></a>
 						<a class="sprite_2"></a>
@@ -33,16 +34,22 @@
 						<a class="sprite_6"></a> -->
 						
 					</div>
-					<div class="video clearfix">
+					<!--<div class="video clearfix">
 						<a><img src="../Public/images/article/4.png" alt="no" class="video_pic" /></a>
 						<div class="detail">
 						<p>{$article['brief']}</p>
-							<!-- <p>教你如何能“吃”去脂肪</p>
+							 <p>教你如何能“吃”去脂肪</p>
 							<p>食用以下事物，可有效地抑制因摄取</p>
-							<p>脂肪较多而引起的多种病症</p> -->
+							<p>脂肪较多而引起的多种病症</p> 
 						</div>
+					</div>-->
+					<div class="food_pic">
+						<!--<a href="store_5.html"><img src="../Public/images/article/" alt="no" border="0" /></a>
+						<p class="food_ms">图片</p>-->
 					</div>
+					 <div class="article">
 					{$article['content']|htmlspecialchars_decode}
+					</div>
 					<!-- <div class="food_pic">
 						<a href="store_5.html"><img src="../Public/images/article/5.png" alt="no" border="0" /></a>
 						<p class="food_ms">对瘦身有帮助的食物</p>
@@ -87,11 +94,12 @@
 								<p>页面1</p>	
 							</div>
 						</span>
-						<a class="sprite_8" aid="{$artilcle['id']}"><span class="praise">{$article['like']}</span></a>
-						<a class="sprite_9" aid="{$artilcle['id']}"><span class="praise">{$article['unlike']}</span></a>
+						<a class="sprite_8" aid="{$article['id']}" href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'like'))}"><span class="praise">{$article['like']}</span></a>
+						<a class="sprite_9" aid="{$article['id']}" href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'unlike'))}"><span class="praise">{$article['unlike']}</span></a>
 						<span class="relay">转发到</span>
+						<include file="../Public/share" />
 						<!-- JiaThis Button BEGIN -->
-						<div class="jiathis_style">
+						<!-- <div class="jiathis_style">
 							<a class="jiathis_button_qzone"></a>
 							<a class="jiathis_button_tsina"></a>
 							<a class="jiathis_button_tqq"></a>
@@ -99,7 +107,7 @@
 							<a class="jiathis_button_kaixin001"></a>
 							<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 						</div>
-						<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1359878070244822" charset="utf-8"></script>
+						<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1359878070244822" charset="utf-8"></script> -->
 						<!-- JiaThis Button END -->
 						<!-- <a class="sprite_1"></a>
 						<a class="sprite_2"></a>
@@ -113,8 +121,12 @@
 					</div>
 					<div class="border_comment">
 						<span class="word_num">0/300</span>
+						<php>if(getMid()){</php>
+						<php>echo getUserName(getMid())</php>
+						<php>}else {</php>
 						<span>登录</span>|
 						<span>注册</span>
+						<php>}</php>
 						
 						<div class="textarea"><textarea class="comment_inp" name="comment" id="comment">有什么感想，来说说吧</textarea></div>
 						<a class="comment" href="javascript:void(0);" onclick="comments(comment.value, {$article['id']}, 'Article')" aid="{$article['id']}">发表评论</a>
@@ -228,16 +240,49 @@
 				</div>
 			</div>
 			<div class="content_right">
-				<a href="store_5.html"><img src="../Public/images/article/1.png" alt="no" border="0" /></a>
-				<h4 class="title_4">精华推荐</h4>
-					<div class="recommend">
-						<a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
-						<p class="intro">新闻百科：为什么大陆同胞赴美不用、、、</p>
+				<div>
+					<div class="sider_m">
+						<h4 class="sider_t">关于作者</h4>
+						<div>
+							<div class="author_info">
+								<a href="">
+									<img class="author_face" src="../Public/images/pal/zp_03.jpg" alt="" />
+									<span class="author_nick">爱健美</span>
+								</a>
+								<p class="author_label">关注互联网创业</p>
+							</div>
+							<div class="author_wb">
+								<button class="aut_wb"><span class="sina_icon">关注</span></button>
+								<a href="" class="aut_nick">@爱健美</a>
+							</div>
+							<div class="author_other">
+								<h4>作者的其他文章</h4>
+								<ul>
+									<li class="aut_other_arts"><a href="">作者的其他文章</a></li>
+									<li class="aut_other_arts"><a href="">作者的其他文章</a></li>
+									<li class="aut_other_arts"><a href="">作者的其他文章</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
-					<div class="recommend">
-						<a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
-						<p class="intro">新闻百科：为什么大陆同胞赴美不用、、、</p>
+					<div class="sider_m">
+						<h4 class="sider_t">推荐商品</h4>
+						<a href="{$promote['link']}"><img class="recommend_prod" src="{$promote['image']}" alt="no" border="0" /></a>
 					</div>
+					<div class="sider_m">
+						<h4 class="sider_t">精华推荐</h4>
+						<php>foreach($promote_article as $p) {</php>
+						<div class="recommend">							
+							<a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
+							<p class="intro">{$p['title']}</p>
+						</div>
+						<php>}</php>
+						<!-- <div class="recommend">
+							<a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
+							<p class="intro">新闻百科：为什么大陆同胞赴美不用、、、</p>
+						</div> -->
+					</div>
+				</div>
 			</div>
 		</div>
 <include file="../Public/footer" />

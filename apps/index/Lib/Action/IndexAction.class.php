@@ -2,6 +2,60 @@
 class IndexAction extends Action {
 	public function index() 
 	{
+		if (!empty($_GET['token'])) {
+			require_once $_SERVER['DOCUMENT_ROOT'].'/Denglu.php';
+			$api = new Denglu('44031dena3J8cuBsQeX40lcpjSsPM3', '85015440v4NfCVj6aTNfZAg0idQv03', 'utf-8');
+			
+			try {
+				
+				$userInfo = $api->getUserInfoByToken($_GET['token']);
+				//print_r($userInfo);
+				
+				$logId = M('others')->field('uid')->where(array('mediaID'=>$userInfo['mediaID'], 'mediaUserID'=>$userInfo['mediaUserID'], 'personID'=>$userInfo['personID']))->find();
+				//print_r($logId);
+				if($logId) {
+					service('Passport')->loginLocal($logId['uid']);
+				}else {
+					$data['email'] = $userInfo['email'];
+					$data['password'] = '';
+					$data['uname'] = $userInfo['screenName'];
+					//$data['province'] = $userInfo['province'];
+					//$data['city']  = $userInfo['city'];
+					$data['sex']   = $userInfo['gender'];
+					$data['location'] = $userInfo['location'];
+					$data['is_active'] = 1;
+					$data['ctime'] = time();
+					
+					//print_r($data);
+					
+					$uid = M('user')->add($data);				
+					service('Passport')->loginLocal($uid);					
+					
+					$other['uid'] = $uid;
+					$other['mediaID'] = $userInfo['mediaID'];
+					$other['friendsCount'] = $userInfo['friendsCount'];
+					$other['favouritesCount'] = $userInfo['favouritesCount'];
+					$other['profileImageUrl'] = $userInfo['profileImageUrl'];
+					$other['mediaUserID'] = $userInfo['mediaUserID'];
+					$other['url']  = $userInfo['url'];
+					$other['homepage'] = $userInfo['homepage'];
+					$other['description'] = $userInfo['description'];
+					$other['domain'] = $userInfo['domain'];
+					$other['followersCount'] = $userInfo['followersCount'];
+					$other['statusesCount']  = $userInfo['statusesCount'];
+					$other['personID'] = $userInfo['personID'];
+					
+					M('others')->add($other);
+				}
+				
+				
+				//redirect(U('index/Index/index'));
+			}catch (DengluException $e) {
+				echo $e->geterrorDescription();
+			}
+		}
+		
+		
 		$this->setTitle('index');
 		$this->assign('uid',$this->mid);
 		$this->assign('cssFile','index');
@@ -20,6 +74,40 @@ class IndexAction extends Action {
 
 	public function articleDetail()
 	{	
+		$o = $_GET['o'];
+		if($o=='like') {
+			if($this->mid) {
+				$is_vote = M('article_vote')->where(array('uid'=>$this->mid, 'article_id'=>$_GET['id']))->find();
+				if(!empty($is_vote)) {
+					echo '<script type="text/javascript">alert("已经投票");</script>';
+				}else {
+					$like = M('article')->field('like')->where(array('id'=>$_GET['id']))->find();
+					$data['id'] = $_GET['id'];
+					$data['like'] = $like['like'];
+					M('article')->save($data);
+					M('article_vote')->add(array('uid'=>$this->mid, 'article'=>$_GET['id']));
+				}				
+			}else {
+				echo '<script type="text/javascript">alert("请登录")</script>';
+			}
+		}
+		
+		if($o=='unlike') {
+			if($this->mid) {
+				$is_vote = M('article_vote')->where(array('uid'=>$this->mid, 'article_id'=>$_GET['id']))->find();
+				if(!empty($is_vote)) {
+					echo '<script type="text/javascript">alert("已经投票");</script>';
+				}else {
+					$unlike = M('article')->field('unlike')->where(array('id'=>$_GET['id']))->find();
+					$data['id'] = $_GET['id'];
+					$data['unlike'] = $unlike['unlike'];
+					M('article')->save($data);
+					M('article_vote')->add(array('uid'=>$this->mid, 'article'=>$_GET['id']));
+				}
+			}else {
+				echo '<script type="text/javascript">alert("请登录")</script>';
+			}
+		}
 		global $ts;
 			
 		$id = (int) $_GET['id'];
@@ -27,12 +115,20 @@ class IndexAction extends Action {
 		$article = M('article')->where($map)->find();
 		$this->assign('article', $article); 
 		
+		
 		$articleComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->findAll();
 		foreach($articleComments as $ac) {
 			$comments[$ac['id']]['content'] = $ac;
 			$comments[$ac['id']]['user'] = getUserInfo($ac['uid']);			
 			$comments[$ac['id']]['children'] = M('comments')->where(array('topParent'=>$ac['id'], 'parent_type'=>'3'))->order('`create_time` asc')->findAll();
 		}
+		
+		$promote = M('promote')->find();
+		$this->assign('promote', $promote);
+		
+		$promoteArticle = M('article')->where(array('is_promote'=>1))->findAll();
+		
+		$this->assign('promote_article', $promoteArticle);
 		
 		$this->assign('comments', $comments);
 		$this->assign('cssFile', 'article');
@@ -181,6 +277,11 @@ class IndexAction extends Action {
 		$this->assign('comments', $comments);
 		$this->assign('cssFile', 'article');
 		$this->display();
+	}
+	
+	public function selectRegister()
+	{
+		$this->display('select_register');
 	}
 	
 	public function register()
@@ -362,8 +463,8 @@ class IndexAction extends Action {
 		// 验证码
 		$verify_option = $this->_isVerifyOn('register');
 		if ($verify_option && (md5(strtoupper($_POST['verify'])) != $_SESSION['verify'])){
-			$this->error(L('error_security_code'));
-			exit;
+			//$this->error(L('error_security_code'));
+			//exit;
 		}
 		
 		// 参数合法性检查
@@ -401,6 +502,11 @@ class IndexAction extends Action {
 		$uid = M('user')->add($data);
 		$data['uid'] = $uid;
 		M('coach')->add($data);
+		
+		$group['user_group_id'] = '2';
+		$group['user_group_title'] = '教练';
+		$group['uid'] = $uid;
+		M('user_group_link')->add($group);
 		service('Passport')->loginLocal($uid);
 		
 		redirect(U('index/Index/index'));
@@ -412,8 +518,8 @@ class IndexAction extends Action {
 		// 验证码
 		$verify_option = $this->_isVerifyOn('register');
 		if ($verify_option && (md5(strtoupper($_POST['verify'])) != $_SESSION['verify'])){
-			$this->error(L('error_security_code'));
-			exit;
+			//$this->error(L('error_security_code'));
+			//exit;
 		}
 		
 		// 参数合法性检查
@@ -441,11 +547,14 @@ class IndexAction extends Action {
 		$data['email']  = $_POST['email'];
 		$data['password'] = md5($_POST['password']);
 		$data['uname'] = $_POST['nickname'];
+		$data['location'] = $_POST['address'];
 		
 		$uid = M('user')->add($data);
+		$gym['uid'] = $uid;
+		M('gym')->add($gym);
 		
 		$group['user_group_id'] = '3';
-		$group['user_group_title'] = '教练';
+		$group['user_group_title'] = '健身房';
 		$group['uid'] = $uid;
 		M('user_group_link')->add($group);
 		service('Passport')->loginLocal($uid);

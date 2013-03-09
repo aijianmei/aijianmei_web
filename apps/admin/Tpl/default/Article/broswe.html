@@ -31,6 +31,7 @@
         <td>{$vo.create_time|date="Y-m-d H:i",###}</td>
         <td>{$vo.category}</td>
         <td>
+        	<a href="{:U('admin/Article/broswe', array('id'=>$vo['id'], 'o'=>'promote'))}"><eq name="vo.is_promote" value="0">推荐</eq><eq name="vo.is_promote" value="1">已推荐</eq></a>
 			<a href="{:U('admin/Article/edit',array('id'=>$vo['id']))}">编辑</a>
 			<a href="javascript:void(0);" onclick="deleteAd('{$vo.id}')">删除</a>
 		</td>

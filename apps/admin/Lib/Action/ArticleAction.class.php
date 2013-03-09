@@ -97,6 +97,14 @@ class ArticleAction extends AdministratorAction {
 	
 	public function broswe()
 	{	
+		$o = $_GET['o'];
+		if($o=='promote') {
+			$is_promote = M('article')->field('is_promote')->where(array('id'=>$_GET['id']))->find();
+			$data['id'] = $_GET['id'];
+			$data['is_promote'] = $is_promote['is_promote']==0 ? 1 : 0;			
+
+			M('')->query('update ai_article set is_promote='.$data['is_promote'].' where id='.$data['id']);
+		}
 		$articles = D('Article')->getArticles();
 		$this->assign('article', $articles);
 		$this->display();
@@ -288,6 +296,45 @@ class ArticleAction extends AdministratorAction {
 	public function doDeleteDaily()
 	{
 		$this->delete('daily');
+	}
+	
+	public function addPromote()
+	{
+		$id = $_GET['id'];
+		if($id) {
+			$promote = M('promote')->where(array('id'=>$id))->find();
+			$this->assign('promote', $promote);
+			$this->assign('type', 'edit');
+		}
+		
+		if ($_POST['link'] != '') {
+			if($_FILES['image']['name'] != '') {
+				@move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/uploads/'.$_FILES['image']['name']);
+				$data['image'] = $_FILES['image']['name'];
+			}
+			$data['link'] = $_POST['link'];
+			
+			M('promote')->add($data);
+		}
+		
+		$this->display();
+	}
+	
+	public function promote()
+	{
+		$promotion = M('promote')->findAll();
+		$this->assign('promotion', $promotion);
+		$this->display();
+	}
+	
+	public function addMuscle()
+	{
+		$this->display();
+	}
+	
+	public function muscle()
+	{
+		$this->display();
 	}
 	
 	protected function getCategories()

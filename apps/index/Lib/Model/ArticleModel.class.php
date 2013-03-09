@@ -64,5 +64,21 @@ class ArticleModel extends Model {
 		
 		return $info;
 	}
+	
+	public function getGym()
+	{
+		$sql = "select * from ai_user u,ai_gym g where g.uid=u.uid";
+		$result = M('')->query($sql);
+		
+		return $result;
+	}
+	
+	public function getCoach()
+	{
+		$sql = "select * from ai_user u,ai_coach c where c.uid=u.uid";
+		$result = M('')->query($sql);
+		
+		return $result;
+	}
 }
 ?>

@@ -37,12 +37,16 @@ class PlanAction extends Action {
 
 	public function coach()
 	{
+		$coach = D('Article')->getCoach();
+		$this->assign('coach', $coach);
 		$this->assign('cssFile', 'plan');
 		$this->display();
 	}
 
 	public function gym()
 	{
+		$gym = D('Article')->getGym();
+		$this->assign('gym', $gym);
 		$this->assign('cssFile', 'plan');
 		$this->display();
 	}

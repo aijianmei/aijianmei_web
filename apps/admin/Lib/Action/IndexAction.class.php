@@ -136,6 +136,14 @@ class IndexAction extends AdministratorAction {
     			'添加'    => U('admin/Article/addDaily'),
     			'管理'    => U('admin/Article/daily'),	
     		),
+    		'推荐商品'     => array(
+    			'添加'    => U('admin/Article/addPromote'),
+    			'管理'    => U('admin/Article/promote'),	
+    		),
+    		'肌肉增加视频' => array(
+    			'添加'    => U('admin/Article/addMuscle'),
+    			'管理'    => U('admin/Article/muscle'),	
+    		),
     	);
 
 
