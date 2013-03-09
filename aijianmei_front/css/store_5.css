@@ -1,0 +1,689 @@
+/*.clearfix:after{
+	content:"";
+	clear:both;
+	display:block;
+	height:0;
+	visibility:hidden;
+	line-height:0;
+}
+.clearfix{
+	zoom:1;
+} 
+.logo{
+	margin-right:12px;
+}
+.body{
+	position:fixed;
+	width:980px;
+}
+.sheet{
+	position:fixed;
+	width:980px;
+}
+a{
+	cursor:pointer;
+}
+body{
+	font:14px Tahoma Arial,Helvetica,sans-serif;
+	color:#656565;
+	width:980px;
+	margin:0 auto;
+}
+	/*header*/
+	#header{
+		width:980px;
+	}
+	/*content*/
+	#content{
+	}
+		.content_all{
+			padding: 25px 0 0 15px;
+			font-size: 13px;
+		}
+
+		.content_all .title_1{
+			display: inline;
+			margin: 0 60px 15px 0;
+			font-size: 26px;
+			color: #0079CA;
+		}
+		.content_all .goal{
+			font-size: 16px;
+			font-weight: 600;
+			color: #0D79AC;
+		}
+		.content_all .goal_part{
+			font-size: 16px;
+			font-weight: 600;
+		}
+
+	/*store_ct*/
+			.store_ct{
+				margin-right:13px;
+				border-top: 1px solid #ccc;
+			}
+			.title_2{
+				margin: 12px 0;
+				font-size: 16px;
+				color: #1F1F1F;
+			}
+	/*web_expend_1*/
+			.web_expend_1{
+				height: 60px;
+				line-height: 60px;
+				margin-bottom: 40px;
+			}
+				.web_expend_1 .prompt{
+					font-size: 26px;
+					font-weight: 700;
+
+					}
+				.web_expend_1 .share_to{
+					display: inline-block;
+					margin-left:100px;
+				}
+				.web_expend_1 a,.web_expend_2 a{
+
+					display: inline-block;
+					width: 16px;
+					height: 16px;
+					margin:0 3px -3px 3px;
+					background: url(../images/wm2.png) no-repeat;
+
+				}
+				.web_expend_1 .sprite_1,.web_expend_2 .sprite_1{
+					background-position: 0px 0px;
+					}
+				.web_expend_1 .sprite_2,.web_expend_2 .sprite_2{
+					background-position: 0px -26px;						
+					}
+				.web_expend_1 .sprite_3,.web_expend_2 .sprite_3{
+					background-position: 0px -52px;						
+					}
+				.web_expend_1 .sprite_4,.web_expend_2 .sprite_4{
+					background-position: 0px -78px;						
+					}
+				.web_expend_1 .sprite_5,.web_expend_2 .sprite_5{
+					background-position: 0px -104px;						
+					}
+				.web_expend_1 .sprite_6,.web_expend_2 .sprite_6{
+					background-position: 0px -104px;						
+					}
+
+				.web_expend_1 .time{
+					display:inline-block;
+					border-left: 0px;
+					width:136px;
+				}
+		/*store_top*/
+				.store_top{
+				}
+				.food_pic{
+					float:left;
+					margin:0 25px;
+					width:442px;
+				}
+				.show_food{
+					display: block;
+					height:284px;
+					margin-bottom: 8px;
+					padding: 3px;
+					border: 1px solid #CCC;
+				}
+				.expend_pic{
+
+				}
+				.all_pic{
+					float:left;
+				}
+				.more_pic{
+					float: left;
+					margin: 0 6px;
+					border: 2px solid #CCC;
+				}
+				.border_color{
+					border-color: red;
+				}
+				.food_dt{
+					float: left;
+					width: 356px;
+					padding-left: 8px;
+				}
+				.company{
+					margin-right: 10px;
+					font-size: 14px;
+					color: red;
+				}
+				.current_price{
+					display: inline-block;
+					font-size: 20px;
+					color: red;
+				}
+				.sale{
+					color:red;
+				}
+				.before_price{
+					margin-left: 13px;
+				}
+				.convenient{
+					margin: 10px 0;
+					padding: 10px 0;
+					border-bottom: 1px solid #EBEBEB;
+				}
+				.save{
+					float: left;
+					width: 60px;
+					margin-right: 3px;
+					text-align: center;
+					font-size: 12px;
+					background: white;
+				}
+				.rise{
+					float: left;
+					width: 120px;
+					height: 30px;
+					line-height: 30px;
+					margin-right: 3px;
+					text-align: center;
+					font-size: 12px;
+					color:red;
+				}
+				.sprite_12{
+
+				}
+				.part_grade{
+					display: block;
+					font-weight: 700;
+					margin-bottom: 10px;
+				}
+				.store_grade{
+
+				}
+				.grade{
+					display: inline-block;
+					width: 75px;
+					height: 13px;
+					background: url(../images/wm2.png) 0px -297px no-repeat;
+				}
+				.comment_per{
+
+				}
+				.part_stork{
+					display: block;
+				}
+				.stork{
+
+				}
+				.address{
+					display: inline-block;
+					width: 51px;
+					height: 24px;
+					line-height: 24px;
+					padding-left: 6px;
+					background: url(../images/wm2.png) 0px -321px no-repeat;
+				}
+				.new_num{
+					font-weight: 800
+				}
+				.pd_intro{
+					margin:20px 0;
+					font-size: 13px;
+					font-weight: 600;
+				}
+				.pd_num{
+
+				}
+				.buy{
+					display: inline-block;
+					width: 82px;
+					height: 31px;
+					line-height: 31px;
+					margin: 20px 0;
+					text-align: center;
+					color: white;
+					background: url(../images/12.png) no-repeat;
+				}
+				.bicycle{
+					display: inline-block;
+					width: 82px;
+					height: 31px;
+					line-height: 31px;
+					margin: 20px 20px;
+					text-align: center;
+					color: white;
+					background: url(../images/sd5_16.png) no-repeat;
+				}
+				.buy:hover,.bicycle:hover{
+					color:white;
+				}
+		/*store_middle*/
+				.store_middle{
+					margin:20px 10px 0 10px;
+				}
+					.md_nav{
+						margin-bottom: 39px;
+					}
+						.lay_nav{
+							height:27px;
+							border-bottom:1px solid #0085FF;
+							background: url(../sd5_12.jpg) repeat-x;
+						}
+						.lay_nav li{
+							float:left;
+						}
+					.md_nav .underline{
+						border: 1px solid #0085FF;
+						border-bottom: 1px solid white;
+						height: 26px;
+						background: white;
+					}
+						.lay_nav a{
+							display: block;
+							width: 80px;
+							height: 25px;
+							line-height: 25px;
+							text-align: center;
+							font-weight: 600;
+							border: 1px solid #DADADA;					
+						}
+				.store_middle .show_left{
+					display:block;
+				}
+					.md_left{
+						display:none;
+						float: left;
+						width: 730px;
+					}
+						.produce_introduce{
+							margin: 0px auto;
+							width: 672px;
+						}
+						.other_intro{
+							margin-bottom: 50px;
+						}
+							.title_7{
+								margin-top: 10px;
+								color: #A80000;
+							}
+							.title_7 span{
+							font-size: 14px;
+							color: #CCC;
+							}
+								.hr{
+									display: inline-block;
+									float: right;
+									height: 0px;
+									width:66%;
+									margin-top: 14px;
+									border: 1px dashed #ccc;
+								}
+							.other_1{
+								float: left;
+								width: 393px;
+								height: 368px;
+								margin-top: 29px;
+								background: #CCC;
+
+							}
+							.other_2{
+								float:right;
+								width:;
+							}
+							.title_8{
+								margin-top: 30px;
+								font-size: 28px;
+								color: #EC7404;
+							}
+							.subhead{
+								margin-bottom: 33px;
+								font-size: 24px;
+								color: black;
+							}
+					.md_right{
+						float: left;
+						width: 198px;
+						border: 1px solid #CCC;
+					}
+						.ad_title{
+							line-height: 30px;
+							padding-left: 8px;
+							background: #ECECEC;
+							border-bottom: 1px solid #CCC;
+						}
+						.advert{
+							position:relative;
+							text-align: center;
+							padding-top: 20px;
+							border-bottom: 1px solid #CCC;
+						}
+						.advert span{
+							font-weight: 600;
+							color:red;
+						}
+							.ba_color{
+								position: absolute;
+								top: 0px;
+								left:0px;
+								display: none;
+								width: 198px;
+								height: 100%;
+								background: black;
+								opacity: 0.3;
+								filter:alpha(opacity=30);
+								background: #ccc\9\0;
+								*background:transparent;					
+							}
+/*五六级商店页面底部共同部分 */
+				.store_bottom{
+					margin: 20px 0px 0 16px;
+				}
+				.bottom_part_left{
+					float:left;
+					width:611px;
+				}
+				.web_expend_2{
+					position:relative;
+					margin:20px 0;
+					height: 27px;
+					line-height: 27px;
+				}
+				.web_expend_2 .sprite_8{
+					background-position: 0 -261px;
+					width: 50px;
+					height: 27px;
+					margin-bottom: -8px;
+				}
+				.web_expend_2 .sprite_9{
+					background-position: 0 -186px;
+					width: 50px;
+					height: 27px;
+					margin-bottom: -8px;
+				}
+
+				.web_expend_2 .praise{
+					display: inline-block;
+					height: 27px;
+					line-height: 27px;
+					margin-left: 27px;
+				}
+				.web_expend_2 .relay{
+					margin-left: 26px;
+					font-weight: 600;
+					color: #006FD5;
+				}
+				.web_expend_2 .collect{
+					width: 30px;
+					height:27px;
+					line-height: 27px;
+					background: none;
+				}
+				.web_expend_2 .read_time{
+					position:absolute;
+					right:0px;
+					height:27px;
+					line-height: 27px;
+				}
+				.web_expend_2 .triangle{
+					background:none;
+					padding:0;
+					overflow:hidden;
+					width:0;
+					height:0;
+					font-size:0;
+					line-height:0;
+					border-color:#BCBCBC #F0F2EF #F0F2EF #F0F2EF;
+					border-style:solid;
+					border-width:5px;
+					margin-top:-2px;
+						}
+				.border_comment{
+					width: 611px;
+					height:150px;
+					margin-bottom: 10px;
+				}
+				.border_comment .word_num{
+					float: right;
+				}
+				.border_comment .textarea{
+					margin: 7px 0;
+					border: 1px solid #CCC;
+				}
+				.border_comment .comment_inp{
+					width: 595px;
+					height: 70px;
+					padding: 7px 7px;
+					border: 0px;
+					overflow: hidden;
+					overflow-y: auto;
+					word-break: break-all;
+					word-wrap: break-word;
+					outline: none;
+					line-height: 21px;
+					resize:none;
+				}
+				.border_comment .comment{
+					display: block;
+					float:right;
+					width:80px;
+					height: 30px;
+
+					line-height: 30px;
+					text-align: center;
+					color: white;
+					font-weight: 600;
+					background: url(../images/wm2.png) 0 -223px no-repeat;					
+			
+				}
+				.check_comment{
+					height: 32px;
+					border-top: 4px solid #D1D1D1;
+					background: whiteSmoke;
+				}
+				.check_comment .comment_1,.check_comment .comment_2{
+					display: inline-block;
+					line-height: 32px;
+					font-weight: 600;
+					padding: 0 20px;
+					margin-top: -4px;
+					color:#656565;
+				}
+				.check_comment .comment_3{
+					border-top: 4px solid #007AFF;
+					background: #DAF3FF;
+
+				}
+				.cm_content{
+					margin:20px 0;
+				}
+				.tab_1{
+					display:none;
+				}
+				.cm_content .cm_top{
+					height: 25px;
+				} 
+					.cm_top .page_1{
+						display: inline-block;
+						float: right;
+					}
+						.page_1 .choice_page{
+							display: inline-block;
+							padding: 4px;
+							color: white;
+							background: #CCC;
+							
+						}
+						.lay_page{
+							display:inline-block;
+						}
+						.page_1 a{
+							display: inline-block;
+							width: 15px;
+							height: 15px;
+							margin: 0 5px;
+							text-align: center;
+						}
+						.page_1 .pre_page{
+							width: 41px;
+							padding: 4px;
+							margin: 0;
+							color:#ccc;
+							border: 1px solid #CCC;
+							cursor:default;
+						}
+						.page_1 .next_page{
+							width: 41px;
+							padding: 4px;
+							margin: 0;
+							border: 1px solid #CCC;
+						}
+				.cm_content .cm_bottom{
+
+				}
+					.cm_bottom .title_5{
+						margin: 16px 0;
+						padding: 8px;
+						font-size: 15px;
+						background: #E9E9E9;
+					}
+					.cm_bottom .target{
+						margin-top: 15px;
+						border-bottom: 1px solid #CCC;
+					}
+						.target .target_pic{
+
+							float:left;
+							margin-right: 10px;
+						}
+						.target .care{
+							display:block;
+						}
+						.cm_left{
+							float: left;
+							width: 574px;
+						}
+						.target .name{
+							display: block;
+							padding: 10px 0;
+						}
+						.target .bottom_ms{
+							padding:10px 0;
+						}
+						.target .to{
+							float:right;
+							display:inline;
+						}
+				.relation{
+					margin-bottom: 100px;
+				} 
+				.relation .title_6{
+					border-bottom: 1px solid #DFDFDF;
+				}
+					.title_6 .add_relation{
+						display: inline-block;
+						height: 27px;
+						line-height: 27px;
+						margin-bottom: -1px;
+						font-size: 15px;
+						border-bottom: 1px solid #5AB0FF;						
+					}
+				.relation p{
+					line-height: 27px;
+					font-size: 18px;					
+				}
+		.bottom_part_right{
+			float:right;
+			min-height: 100%;
+			width:300px;
+			margin-right: 10px;
+		}
+		.bottom_part_right .title_4{
+			margin : 10px 0;
+		}
+		.bottom_part_right .recommend{
+			height:70px;
+		}	
+			.recommend img{
+				float:left;
+				margin-right: 10px;
+			}
+			.recommend .intro{
+
+			}
+/*五六级商店页面底部共同部分结束 */
+	/*放大镜*/
+	/*.small{
+		width:160px;  
+	    height:160px;  
+	    position:absolute;  
+	    top:0px;  
+	    left:0px;  
+	    background:#CFF;  
+	    opacity:0.75; 
+	    filter:alpha(opacity=75); 
+	    display:none;
+		}
+	.enlarge{
+		width: 400px;
+		height: 293px;
+		overflow: hidden;
+		position: relative;
+		z-index: 100;
+		left: 454px;
+		top:-290px;
+		display: none;
+		background: white;
+		border: 1px solid #CCC;
+	}
+	.enlarge img{
+		position: absolute;
+	}*/
+.jqzoom{
+border:1px solid #ccc;
+float:left;
+position:relative;
+margin-bottom: 10px;
+padding:3px;
+cursor:pointer;
+}
+
+.jqzoom img{
+float:left;
+width:434px;
+height:284px;
+}
+
+
+div.zoomdiv {
+z-index                 : 100;
+position                : absolute;
+top:0px;
+left:0px;
+width                   : 200px;
+height                  : 200px;
+background: #ffffff;
+border:1px solid #CCCCCC;
+display:none;
+text-align: center;
+overflow: hidden;
+
+
+}
+
+div.jqZoomPup {
+z-index                 : 10;
+visibility              : hidden;
+position                : absolute;
+top:0px;
+left:0px;
+width                   : 50px;
+height                  : 50px;
+border: 1px solid #aaa;
+background: #ffffff url(../images/zoom.gif) 50% top  no-repeat;;
+opacity: 0.5;
+-moz-opacity: 0.5;
+-khtml-opacity: 0.5;
+filter: alpha(Opacity=50);
+}
+	
+	/*footer*/
+

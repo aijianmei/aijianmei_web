@@ -1,0 +1,140 @@
+
+#header a{outline: 0px;s}
+
+/***********************content开始*************************/
+#content{
+	margin-bottom:130px;
+	background: url(../images/border.png) no-repeat;
+}
+#content #banner{
+			float:left;
+			width:594px;/*** 滚动图片宽度设置 *****/
+			height:637px;
+			overflow:hidden;
+			position:relative;
+			margin:0px;
+		}
+#content #banner ul{
+			height:617px;
+			position:absolute;
+		}
+#content #banner ul li{
+			float:left;
+			width:594px;/*** 滚动图片宽度设置 *****/
+			height:617px;/**** 滚动图片高度设置 *****/
+			overflow:hidden;
+			position:relative;
+			text-align: center;
+		}
+#content #banner .btn{
+			position:absolute;
+			width:594px;
+			height:10px;
+			padding:5px 10px;
+			right:0;
+			bottom:0;
+			text-align:center;
+		}
+#content #banner .preNext{
+			top:220px;
+		}
+#content #banner ul li div{
+			position:absolute;
+			overflow:hidden;
+}
+		#content #banner .btn span{
+			display:inline-block;
+			_display:inline;
+			_zoom:1;
+			width:10px;
+			height:10px;
+			_font-size:0;
+			margin-left:5px;
+			cursor:pointer;
+			background:#fff;
+		}
+
+		#content #banner .preNext{
+			width:200px;
+			height:270px;
+			position:absolute;
+			top:178px;
+			cursor:pointer;
+			z-index:1000;
+		}
+		#content #banner .pre{
+			left:20px;
+			background:url(../images/turn_left.png) no-repeat;
+		}
+		#content #banner .next{
+			right:20px;
+			background:url(../images/turn_right.png) no-repeat right top;
+		}	
+	.content_top{height:760px;}
+		.returnbutton{
+			display:inline-block;
+			width: 80px;
+			height: 37px;
+			margin:26px 0 27px 34px;
+			border:0px;
+			cursor:pointer;
+			background: url(../images/app/10.jpg) no-repeat;}
+
+		.app_client .client_pic{float: left;}
+			.right_part{
+				float:left;
+				width:386px;
+			}
+			.right_part .a_moblie{font-size: 36px;
+					color: #727070;}
+			.right_part .client_classify{margin-top: 70px;}
+				.client_classify .choice{display: inline-block;
+					width: 280px;
+					height: 80px;
+					margin-bottom: 14px;
+					background: url(../images/app/result.png);}
+				.client_classify .android{}
+				.client_classify .iphone{background-position: 0px -87px;}
+				.client_classify .ipad{background-position: 0px -176px;}
+			.right_part .share{color:#727171;}
+			.right_part .share .sharewithfriend{margin: 15px 0;}
+				.share_to_target li{float:left;}
+				.share_to_target .bytarget{display: inline-block;
+					width: 80px;
+					height: 21px;
+					line-height: 21px;
+					margin: 0 20px 10px 0;
+					font-size: 18px;
+					font-weight: 700;
+					padding-left: 40px;
+					background: url(../images/app/APP_18.jpg) no-repeat;
+					}		
+	.content_bottom{margin: 0 2px;}
+	.content_bottom .moblie_classify{float: left;
+					width: 212px;
+					margin: 0 16px;}
+		.moblie_classify .classify{border-left: solid 2px #D23D25;
+					padding-left: 10px;
+					padding-bottom: 0;
+					margin-bottom: 10px;
+					font-size: 16px;
+					font-weight: 700;
+					color:#727272;
+					}
+		.moblie_classify .moblie_article{height: 60px;
+					font-size: 13px;
+					font-weight: 700;
+					color: #8A8989;
+					}
+/***********************footer开始*************************/
+#fonter{
+	clear:both;
+	text-align: center;
+	padding: 30px 0px 15px 0;
+	background: url(../images/border.png) no-repeat;}
+	#fonter .company_intro{margin:0px;
+					font-size: 17px;
+					font-weight: 700;
+					color: #979797;}
+	#fonter .linktomain{font-size: 17px;
+					color: #979797;}

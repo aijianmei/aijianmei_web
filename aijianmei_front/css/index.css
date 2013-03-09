@@ -1,0 +1,133 @@
+﻿body{
+	width:auto;
+}
+
+/******* Banner *******/
+		#banner{
+			width:960px;
+			height:470px;
+			overflow:hidden;
+			position:relative;
+		}
+		#banner ul{
+			height:470px;
+			position:absolute;
+		}
+		#banner ul li{
+			float:left;
+			width:960px;
+			height:453px;
+			overflow:hidden;
+			position:relative;
+			text-align: center;
+		}
+
+		#banner ul li div{
+			position:absolute;
+			overflow:hidden;
+		}
+
+		#banner .btn{
+			position:absolute;
+			width:960px;
+			height:10px;
+			padding:5px 10px;
+			right:0;
+			bottom:0;
+			text-align:center;
+		}
+		#banner .btn span{
+			display:inline-block;
+			_display:inline;
+			_zoom:1;
+			width:10px;
+			height:10px;
+			_font-size:0;
+			margin-left:5px;
+			cursor:pointer;
+			background:#fff;
+		}
+
+		#banner .preNext{
+			width:200px;
+			height:270px;
+			position:absolute;
+			top:178px;
+			cursor:pointer;
+			z-index:1000;
+		}
+		#banner .pre{
+			left:20px;
+			background:url(../images/turn_left.png) no-repeat;
+		}
+		#banner .next{
+			right:20px;
+			background:url(../images/turn_right.png) no-repeat right top;
+		}	
+			
+
+	
+/******** Content *********/
+	#content{
+		margin-bottom: 60px;
+		background: url(../images/border.png) no-repeat center top;
+	}
+	#content img{
+		display: block;
+		height:165px;
+		width:221px;
+		border-radius:10px;
+	}	
+	.part{
+		margin:0px 25px;
+	}
+	.classify{
+		float: left;
+		width: 221px;
+		margin-right: 15px;
+	}
+	.classify span{
+		display: block;
+		line-height: 45px;
+		font-size: 22px;
+		text-align: center;
+	}
+	.part .spe{
+		margin-right: 0px;
+	}
+		
+
+
+		/*每日锻炼*/
+		#content h1{
+			clear:both;
+			padding: 20px 0 0 20px;
+		}
+		.hr{
+			display: inline-block;
+			float: right;
+			height:0px;
+			width:86%;
+			margin-top: 14px;
+			border: 1px solid #70BDFA;
+			*margin-top: -14px;/*for ie8*/
+		}
+		.expend{
+			clear:both;
+			font-size: 18px;
+		}
+		.expend li{
+
+		}
+		.expend li a{
+
+		}
+
+
+
+
+
+	
+	
+	
+	

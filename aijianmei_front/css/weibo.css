@@ -1,0 +1,866 @@
+﻿/*个人资料*/
+.total_info{
+	position:relative;
+}
+	.cover{
+		height:130px;
+		background:#D8E5EC;
+	}
+	.info0{
+			height:130px;
+			width:760px;
+			border-top:1px solid #ccc;
+			margin-top:10px;
+			float:right;
+		}
+		.rank{
+			width:190px;
+			float:right;
+		}
+			.rank_info{
+				margin:10px;
+			}
+				.js_rank{
+					display:block;
+					width:105px;
+					height:30px;
+					background:url(../images/pal/weibo.png) no-repeat 0 -225px;
+				}
+				.person{
+					line-height:22px;
+				}
+					.person span{
+						color:#007BB6;
+					}
+		.user_info{
+			float:right;
+			width:566px;
+			padding-top:10px;
+			border-right: 1px solid #CCC;
+		}
+				.style_info .name{
+					font-size:16px;
+				}
+			.sign{
+				color:#808080;
+				line-height:30px;
+			}
+			.fans{
+				float: right;
+				background: #F2F1F1;
+				margin: -50px 10px 0 0;
+				width: 187px;
+				height: 53px;
+				box-shadow: 1px 1px 1px #ccc;
+			}
+				.fans .fan_info{
+					float: left;
+					width: 60px;
+					height: 54px;
+					text-align: center;
+					font-size: 18px;
+					padding: 5px 0;
+				}
+					.gz_amount,.fs_amount,.wb_amount{
+						display:block;
+					}
+			.edit{
+				margin-top: 30px;
+				background: #F2F2F2;
+				width: 100px;
+				height: 23px;
+				line-height: 23px;
+				border: 1px solid #CCC;
+				cursor: pointer;
+				border-radius: 2px;
+			}
+	.face_info{
+		width:182px;
+		position:absolute;
+		top:60px;
+		left:20px;
+	}
+		.face{
+			width:182px;
+			height:182px;
+			box-shadow: 1px 1px 4px #ccc;
+		}
+/*main info*/
+	.main_nav{
+		height: 50px;
+		background: #CEE5F0;
+	}	
+		.main_header{
+			padding-left:80px;
+		}
+		.main_p{
+			float: left;
+			padding: 0 40px;
+			border-right: 1px solid #BEBEBE;
+			height: 50px;
+			line-height: 50px;
+			font-size: 20px;
+		}
+			.main_p a{
+				display:block;
+			}
+	.main_content{
+		border: 1px solid #CEE5F0;
+		margin: 10px;
+	}
+		.set_info{
+			width:155px;
+			height:400px;
+			background:#E6F7F9;
+			float:left;
+		}
+			.set_title{
+				padding:35px 0 10px 10px;
+			}
+			.set{
+				height:30px;
+				line-height:30px;
+				padding-left:20px;
+				background:url(../images/pal/boder.jpg) repeat-x bottom;
+			}
+			.current{
+				background:#78C5EC;
+			}
+				.set a{
+					color:#2675A9;
+					display:block;
+				}
+				.current a{
+					color:#fff;
+					display:block;
+				}
+		.base_info{
+			float:left;
+			width:800px;
+		}
+			.base_info .note{
+				color:#2675A9;
+				font-size:13px;
+			}
+			.base_info .star{
+				color:red;
+				font-weight:bold;
+			}
+			.b_title{
+				margin:30px 30px 0 30px;
+				border-bottom:1px solid #ccc;
+				padding:10px;
+				
+			}
+			.b_tip{
+				margin-left:30px;
+				font-size:13px;
+				color:#c3c3c0;
+				padding-top:5px;
+			}
+			.form{
+				width:500px;
+				margin:0 auto;
+				padding-bottom:30px;
+			}
+				.line{
+					line-height:30px;
+					padding-top:10px;
+				}
+					.line .tr{
+						font-weight:bold;
+					}
+					.enter{
+						width:220px;
+						height:25px;
+						border:1px solid #ccc;
+					}
+						#true_name{
+							width:196px;
+						}
+
+
+/*绑定帐号*/
+.bind{
+	width:400px;
+	margin:0 auto;
+	height:60px;
+	line-height:60px;
+	font-size:20px;
+}
+	.bk{
+		display:inline-block;
+		width:100px;
+		text-align:left;
+	}
+	.bind .sina_name{
+		font-size:18px;
+		
+	}
+	.bind button{
+		height:30px;
+		line-height:30px;
+		color:white;
+		font-size:18px;
+		font-weight:bold;
+		cursor:pointer;
+	}
+	.bs{
+		width:200px;
+		background:url(../images/pal/weibo.png) no-repeat 0 -105px;
+	}
+	.bdb,.br{
+		width:102px;
+		background:url(../images/pal/weibo.png) no-repeat 0 -185px;
+	}
+	.bqz,.bt{
+		width:130px;
+		background:url(../images/pal/weibo.png) no-repeat 0 -145px;
+	}
+
+
+/*收货地址*/	
+.re_contain{
+	width:580px;
+	margin:0 auto;
+}
+	#re_d_place{
+		resize:none;
+		width:300px;
+		height:60px;
+		vertical-align: top;
+	}
+	.save{
+		width:83px;
+		height:39px;
+		background:url(../images/pal/weibo.png) no-repeat 0 -262px;
+		color: white;
+		font-size: 16px;
+		font-weight: bold;
+		cursor: pointer;
+	}
+	
+/*修改头像*/	
+.mod_set{
+	height:470px;
+}
+.mod_content{
+	margin-left:40px;
+}	
+	.upload_way{
+		margin-top:10px;
+	}
+		.upload_way .b_tip{
+			margin:0;
+		}
+		.local,.take{
+			width:119px;
+			height:27px;
+			margin-right:5px;
+			font-size:16px;
+			cursor:pointer;
+			background:url(../images/pal/weibo.png) no-repeat 0 0;
+		}
+			.image{
+				margin:10px 0;
+			}
+				.mod_select{
+					width:300px;
+					height:300px;
+					float:left;
+					margin-right:20px;
+					background:url(../images/pal/mf.jpg) no-repeat;
+				}
+				.mod_show{
+					float: left;
+					width: 315px;
+					margin-left:10px;
+					padding-left:30px;
+					border-left:1px solid #ccc;
+				}
+					.large{
+						float:left;
+						padding-top:20px;
+						font-size:13px;
+						text-align:center;
+					}
+						.l_img{
+							width:180px;
+							height:180px;
+							border:.2px solid #ccc;
+						}
+					.auto{
+						float:right;
+						width:100px;
+						font-size:13px;
+						text-align:center;
+					}
+						.mid{
+							padding:20px 0;
+						}
+							.m_img{
+								width:50px;
+								height:50px;
+								border:.2px solid #ccc;
+							}
+						.small{
+						
+						}
+							.s_img{
+								width:30px;
+								height:30px;
+								border:.2px solid #ccc;
+							}
+
+/*我的评论*/
+.com_content{
+	width: 600px;
+	margin: 0 auto;
+	background: #FAFAFA;
+}	
+	.feed_comment{
+		border-bottom:1px solid #ccc;
+		margin:0 20px;
+		padding-top:5px;
+	}
+		.comment_list{
+			border-top:0;
+		}
+			.com_face{
+				float:left;
+			}
+			.com_comment{
+				padding: 0 0 15px 60px;
+			}
+				.com_detail{
+					height:20px;
+					line-height:20px;
+					font-size:13px;
+				}
+				/*私信*/
+				.letter{
+					padding-bottom:10px;
+				}
+					.usercard,.feed_text{
+						color:#0078B6;
+					}
+					.feed_from,.reply{
+						color:#9BBCC8;
+					}
+					.func{
+						float:right;
+					}
+	
+	
+/*我的粉丝*/
+.fans_area{
+	margin:20px;
+}
+	/*left*/
+	.my_fans,.person{
+		width:550px;
+		float:left;
+	}
+		/*粉丝/关注*/
+		.fans_tabs{
+			height:30px;
+			padding:1px 0;
+			border-bottom:1px solid #ccc;
+		}
+			.gz,.fs{
+				line-height:30px;
+				padding:0 20px;
+				border-radius:4px 4px 0 0;
+				border-bottom:1px solid #ccc;
+				cursor:pointer;
+			}
+			.fans_tabs .c_tab{
+				height:32px;
+				border:1px solid #ccc;
+				border-bottom:0;
+				background:#fff;
+			}
+		/*分组*/
+			.f_sort{
+				height:20px;
+				line-height:20px;
+				float:left;
+				margin:18px 3px 3px 3px;
+				padding:0 5px;
+				border-radius:2px;
+				cursor:pointer;
+			}
+			.fans_sort .c_sort{
+				background:#999;
+				color:white;
+			}
+			.fans_sort .all{
+				float: left;
+				display: inline-block;
+				margin: 18px 5px 3px  5px;
+				color: black;
+				font-weight: bold;
+			}
+			.create{
+				float: right;
+				margin-top: 10px;
+				width: 60px;
+				height: 26px;	
+				background:url(../images/pal/weibo.png) no-repeat 0 -69px;
+				cursor:pointer;
+			}
+		/*粉丝列表*/
+		.fans_list{
+			background:#FAFAFA;
+		}
+			.fan{
+				width:250px;
+				height:75px;
+				border:1px solid #ccc;
+				float:left;
+				margin:10px;
+				_margin-left:5px;
+			}
+				.fan_info{
+					padding:10px;
+				}
+					.fan_face{
+						float:left;
+					}
+					.fan_detail{
+						float:left;
+						padding-left:10px;
+						font-size:13px;
+					}
+						.remarks{
+							line-height:25px;
+							color:#3583C8;
+							cursor:pointer;
+						}
+						.divide{
+							color:#8DD4FD;
+							cursor:pointer;
+						}
+						.fan_detail .triangle{
+							border-color: #8DD4FD #FAFAFA #FAFAFA #FAFAFA;
+						}
+						.order{
+							float: right;
+							width: 64px;
+							height: 22px;
+							margin-top: 30px;
+							background: url(../images/pal/weibo.png) no-repeat 0 -37px;
+							color: white;
+							font-weight:bold;
+							cursor:pointer;
+						}
+		/*分页*/
+		.catalog{
+			margin:20px 0;
+			text-align:right;
+		}
+			.prev_page,.next_page{
+				width: 50px;
+				height: 20px;
+				border: 1px solid #999;
+				cursor: pointer;
+			}
+			.prev_page:hover,.next_page:hover{
+				background: #98CCFE;
+				color:white;
+			}
+			.catalog .pages{
+				display:inline-block;
+				width:20px;
+				height:20px;
+				margin-left:5px;
+				text-align:center;
+				line-height:20px;
+				border:1px solid #ccc;
+				cursor:pointer;
+			}
+			.catalog .current_page{
+				background: #98CCFE;
+			}
+	/*right*/	
+	.other_fans{
+		width:360px;
+		float:right;
+	}
+		.other_top{
+			background: #F7F7F7;
+			padding: 10px 20px;
+		}
+			.my_face{
+				float:left;
+			}
+			.other_header{
+				padding-left:50px;
+			}
+				.other_header .tit{
+					line-height:25px;
+					font-weight:bold;
+				}
+	
+		.others{
+			position: relative;
+			border-top: 1px solid #CCC;
+			margin: 20px;
+		}
+			.others_title{
+				position: absolute;
+				top: -10px;
+				background: #FAFAFA;
+				padding-right: 5px;			
+			}
+			.others .re_more{
+				position: absolute;
+				right: 0;
+				top: -10px;
+				background: #FAFAFA;
+				padding-left: 5px;	
+				font-size:13px;
+				color:#0079B7;
+			}
+			.o_fans{
+				padding:20px 10px 10px 10px;
+				width: 60px;
+				float: left;				
+			}
+				.other_face{
+				
+				}
+					.other_name{
+						width: 40px;
+						overflow-x: hidden;
+						display: inline-block;					
+					}
+	
+		.scanning{
+			background: white;
+			border: 1px solid #E0E0E0;
+			margin: 10px;
+		}
+			.scan{
+				float:left;
+				margin:5px 15px;
+			}
+	
+	
+	
+/*个人主页*/
+.grade{
+	border-bottom:1px solid #ccc;
+}	
+.search_adv{
+	top:24px;
+}
+.wb_feed_list{
+	border-bottom: 1px solid #E6E6E6;
+	padding: 20px 0;
+}
+.wb_expand_text{
+	background: #F7F7F7;
+	border: 1px solid #CCC;
+	padding: 15px;
+}
+.func1{
+	padding:0 20px;
+}
+.func2{
+	height:160px;
+}
+/*查看通知，预约*/
+
+.inform_list{
+	height: 60px;
+	padding: 10px 0 10px 60px;
+	margin: 0 10px;
+	border-bottom: 1px solid #E6E6E6;
+	background:url(../images/pal/yy_01.jpg) no-repeat left;
+}
+.inform_list p{
+	margin-top:20px;
+}
+.order_info{
+	color:#2675A9;
+}
+
+
+	
+/*相册*/	
+.albumlist{
+	float:left;
+	width:152px;
+	margin:20px;
+}
+.album_detail{
+	padding:5px;
+}
+.icon_acount{
+	color:#888;
+	font-size:13px;
+	display:inline-block;
+	margin-right:5px;
+}
+.total_img{
+	margin-left:35px;
+}
+.upload{
+	height: 40px;
+	background: #F1F1F1;
+	margin: 20px;
+}
+.upload .totaled{
+	float:left;
+	margin:10px;
+}
+.upload .upload_button{
+	width:67px;
+	height:22px;
+	margin:10px;
+	color:white;
+	font-weight:bold;
+	background:url(../images/pal/uploadBtn.jpg);
+	cursor:pointer;
+}
+
+/*相册列表*/
+.my_album{
+width: 670px;
+float: left;	
+}
+.album_menu{
+	margin:15px;
+
+}
+.clock{
+	width:17px;
+	background:url(../images/pal/albumList.png) no-repeat 0px 0px;
+	cursor:pointer;
+}
+.repost,.like{
+	float:right;
+	width:80px;
+	height:19px;
+	color:#555;
+	cursor:pointer;
+}
+.repost{
+	background:url(../images/pal/albumList.png) no-repeat 0px -25px;
+}
+.like{
+	background:url(../images/pal/albumList.png) no-repeat 0px -50px;
+}
+
+.picture_list{
+	float:left;
+	margin:15px;
+	height:255px;
+}
+.picture_list img{
+	width:190px;
+	height:190px;
+}
+.picture_detail{
+	color:#97ABBE;
+	margin:0 15px 10px 0;
+	float:left;
+	font-size:13px;
+}
+.transmit_icon,.comment_icon,.like_icon{
+	display:inline-block;
+	width:15px;
+	height:12px;
+}
+.transmit_icon{	
+	background:url(../images/pal/icon.png) no-repeat 0 0;
+}
+.comment_icon{
+	background:url(../images/pal/icon.png) no-repeat 0 -22px;
+}
+.like_icon{
+	background:url(../images/pal/icon.png) no-repeat 0 -44px;
+}
+.comment_pic{
+	margin:30px 20px;
+}
+.comment_pic #enter{
+	border-top: 1px solid #CCC;
+	border-radius: 4px;
+	width:620px;
+}
+.sync_wb{
+	margin:10px 0;
+}
+.submit_comment{
+	width:50px;
+	height:30px;
+	float:right;
+	background:url(../images/pal/albumList.png) no-repeat 0px -75px;
+	cursor:pointer;
+}
+.sider{
+margin:15px;
+float: right;
+width:256px;
+}
+.album_user{
+border-bottom: 1px solid #E6E6E6;
+padding-bottom: 17px;
+}
+.album_user_face{
+	width:80px;
+	height:80px;
+	float:left;
+}
+.album_user_detail{
+	margin-left:90px;
+}
+.album_user_detail span{
+	display:block;
+}
+.user_pictures{
+float: left;
+width: 50px;
+height: 50px;
+border-right: 1px dashed #CCC;
+text-align: center;
+margin-top: 16px;
+line-height: 25px;
+}
+.user_pictures .amount{
+	color:#5BCDFC;
+}
+.current_albumlist{
+	margin:15px 0;
+}
+.sider h4{
+	padding-bottom:10px;
+}
+.current_albumlist .all,.wb_expand_pic .all{
+	float:right;
+	color: #97ABBE;
+}
+.current_pictures{
+border: 1px solid #CCC;
+text-align: center;
+padding: 10px 0;
+}
+.current_pictures img{
+	width:230px;
+	height:230px;
+}
+.other_albumlist .more{
+	float:right;
+	color:#007BB6;
+}
+.other_picture{
+	margin:15px 0;
+}
+.other_picture p{
+	margin-left:100px;
+	line-height:28px;
+}
+.other_picture img{
+	width:90px;
+	height:90px;
+	float:left;
+	
+}
+
+/*上传照片*/
+.upload_title{
+	margin:15px;
+}
+.sa{
+	float: left;
+	margin: 3px 15px;
+}
+.select_alum{
+	margin:15px;
+}
+.creat_album{
+	margin: 0 20px;
+	width: 70px;
+	height: 25px;
+	border: 1px solid #E2E2E2;
+	color: #888;
+	background: #F9F9F9;
+	cursor: pointer;
+}
+.main_sel{
+height: 575px;
+border: 1px solid #CCC;
+margin: 20px
+}
+.open_file{
+	width:77px;
+	height:25px;
+	margin: 20px;
+	background:url(../images/pal/01.jpg);
+	color:white;
+	cursor:pointer;
+}
+.picture_area{
+background: white;
+height: 509px;
+position: relative;
+}
+.picture_area .open_file{
+position: absolute;
+left: 350px;
+top: 160px;
+width: 189px;
+height: 35px;
+background:url(../images/pal/02.jpg);
+}
+
+
+/*单张相片*/
+.big_picture_wrap{
+	margin:15px 0;
+}
+.big_picture_wrap p{
+	padding:15px;
+}
+.big_picture{
+	text-align:center;
+}
+.big_picture img{
+	width:650px;
+	height:650px;
+}
+.wb_expand_pic{
+	margin-top:20px;
+}
+.wb_pic_list{
+	width:80px;
+	height:80px;
+	float:left;
+	margin:2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	

@@ -1,0 +1,87 @@
+
+/***********************content开始*************************/
+#content{
+	margin: 20px 60px;
+}
+#content .left_sub{
+	float:left;
+	width:157px;
+}
+	.left_sub .title_1{
+		margin-right: 30px;
+		padding-bottom: 6px;
+		font-size: 16px;
+		border-bottom: 1px solid #CCC;
+	}
+	.left_sub .all{
+		font-size: 14px;
+		color:#525252;
+		font-weight: 600;
+	}
+	.left_sub .each_video{
+		margin-right: 30px;
+		padding-left: 11px;
+		line-height: 32px;
+		font-size: 13px;
+		border-bottom: 1px solid #CCC;
+	}
+#content .right_training{
+	float:right;
+	width:680px;
+	font-weight: 600;
+}
+	.right_training .hr{
+		display: inline-block;
+		float: right;
+		height:0px;
+		width: 77%;
+		margin-top: 14px;
+		border: 1px solid #70BDFA;
+		*margin-top: -14px;//for ie8
+		
+	}
+	.right_training .title_2{
+				margin-bottom: 20px;
+				font-size: 20px;
+	}
+					.text{
+line-height: 24px;
+margin-right: 20px;
+					}
+					.detail{
+margin: 30px 0;
+					}
+					.teach_pic{
+float: left;
+margin-right: 20px;
+					}
+					.pt_right{
+float: left;
+width: 380px;
+margin-top: 4px;
+					}
+					.pt_right ul{
+line-height: 25px;
+margin-left: 20px;
+list-style: square;						
+					}
+					.teacher{
+font-size: 20px;
+
+color: #0074C2;
+					}
+					.more_ct{
+display: block;
+width: 82px;
+height: 31px;
+line-height: 31px;
+text-align: center;
+color: white;
+background: url(../images/jl_02.png) no-repeat;
+					}
+					.more:hover{
+						color:white;
+					}
+
+
+	
