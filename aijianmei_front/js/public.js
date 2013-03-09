@@ -116,10 +116,7 @@ $(function(){
 	})
 		
 					
-})
-
-
-
+});
 //js for border
 			var addevent = function(element,type,handle){
 				if(element.addEventListener){
