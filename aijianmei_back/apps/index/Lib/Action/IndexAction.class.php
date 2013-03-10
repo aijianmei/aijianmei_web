@@ -269,6 +269,14 @@ class IndexAction extends Action {
 	public function daily()
 	{
 		$id = intval($_GET['id']);
+		$o = $_GET['o'];
+		if($o=='like_comment') {
+			$comment_id = $_GET['comment_id'];
+			$data['id'] = $_GET['comment_id'];
+			
+			M('')->query('UPDATE `ai_comments` SET `like`=`like`+1 where `id`='.$comment_id);
+		}
+		
 		$daily = M('daily')->where(array('id'=>$id))->find();
 		$videos = M('daily_video')->where(array('daily_id'=>$id))->findAll();
 		
@@ -277,6 +285,7 @@ class IndexAction extends Action {
 				$videos[$k]['img'] = D('Article')->getVideoImgById($v['id']);
 			}
 		}
+		
 		$commentsCount = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->count();
 		$pager = api('Pager');
 		$pager->setCounts($commentsCount);
