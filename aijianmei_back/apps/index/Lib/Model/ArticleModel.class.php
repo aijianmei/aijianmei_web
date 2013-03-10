@@ -34,7 +34,7 @@ class ArticleModel extends Model {
 	
 	public function getNutriArticles($order)
 	{
-		$sql = "select * from ai_article a,ai_article_category c where c.channel=3 and a.category_id=c.id";
+		$sql = "select a.* from ai_article a,ai_article_category c where c.channel=3 and a.category_id=c.id order by $order desc";
 		$result = M('')->query($sql);
 		
 		return $result;

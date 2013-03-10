@@ -86,9 +86,9 @@
 						<ul>
 						<php>foreach($hotArticles as $a) {</php>
 							<li class="article">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
+								<a href="{:U('index/Index/articleDetail',array('id'=>$a['id']))}" class="article_pic"><img src="{$a['img']}" alt="no" /></a>
 								<div class="article_content">
-									<a href="article.html" class="title_3">{$a['title']}</a>
+									<a href="{:U('index/Index/articleDetail',array('id'=>$a['id']))}" class="title_3">{$a['title']}</a>
 									<p>{$a['brief']}</p>
 								</div>
 							</li>
@@ -169,9 +169,9 @@
 						<ul>
 						<php>foreach($lastArticles as $a) {</php>
 							<li class="article">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
+								<a href="{:U('index/Index/articleDetail',array('id'=>$a['id']))}" class="article_pic"><img src="{$a['img']}" alt="no" /></a>
 								<div class="article_content">
-									<a href="article.html" class="title_3">{$a['title']}</a>
+									<a href="{:U('index/Index/articleDetail',array('id'=>$a['id']))}" class="title_3">{$a['title']}</a>
 									<p>{$a['brief']}</p>
 								</div>
 							</li>
