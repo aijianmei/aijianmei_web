@@ -698,3 +698,48 @@ button{
 			opacity:0.9;
 			filter:alpha(opacity=90);
 		}
+/*添加检测内容是否存在提示,屏蔽按钮，显示产品即将推出*/
+	.fade_in{
+		position: fixed;
+		left: 0px;
+		right: 0px;
+		top: 0px;
+		bottom: 0px;
+		z-index: 1000;
+		opacity: 0;
+		filter: alpha(opacity=0);
+		background: #000;
+		filter:alpha(opacity=80)\9; /* IE6、IE7、IE8支持 */
+	}
+	.modal{
+		position: fixed;
+		left: 50%;
+		top: -100px;
+		z-index: 1001;
+		width: 850px;
+		height: 100px;
+		margin-left: -425px;
+		background: white;
+		border-radius: 6px;
+	}
+	.modal_header{
+		border-bottom: 1px solid #eee;
+	}
+	.modal_header .closed{
+		float: right;
+		margin: 6px 14px 0 0;
+		font-size: 30px;
+		font-weight: 700;
+	}
+	.modal_header h3{
+		line-height: 30px;
+		padding: 10px 16px;
+		font-size: 19px;
+		color: black;
+	}
+	.modal_body{
+		text-align: left;
+		max-height: 800px;
+		padding: 15px;
+		overflow-y: auto;
+	}
