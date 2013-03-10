@@ -277,7 +277,16 @@ class IndexAction extends Action {
 				$videos[$k]['img'] = D('Article')->getVideoImgById($v['id']);
 			}
 		}
-		$comments = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->findAll();
+		$commentsCount = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->count();
+		$pager = api('Pager');
+		$pager->setCounts($commentsCount);
+		$pager->setList(10);
+		$pager->makePage();
+		$from = ($pager->pg-1) * $pager->countlist;
+		$pagerArray = (array)$pager;
+		$this->assign('pager', $pagerArray);
+		
+		$comments = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->limit("$from,$pager->countlist")->findAll();
 		foreach($comments as $k=>$c) {
 			$comments[$k] = $c;
 			$comments[$k]['userInfo'] = getUserInfo($c['uid']);
