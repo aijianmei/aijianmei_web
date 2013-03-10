@@ -165,8 +165,8 @@
 				<div class="mode_2 clearfix">
 					<ul class="s_nav_left">
 						<li>排序</li>
-						<li class="current_click"><a href="">时间</a></li>
-						<li><a href="">人气</a></li>
+						<li class="current_click"><a href="{:U('index/Append/articleList', array('id'=>$_GET['id'],'order'=>'create_time'))}">时间</a></li>
+						<li><a href="{:U('index/Append/articleList', array('id'=>$_GET['id'],'order'=>'click'))}">人气</a></li>
 						<li>阅读器</li>
 					</ul>
 					<ul class="s_nav_right">

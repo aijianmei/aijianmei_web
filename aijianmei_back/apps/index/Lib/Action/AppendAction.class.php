@@ -19,6 +19,7 @@ class AppendAction extends Action {
 	
 	public function articleList()
 	{
+		$order = isset($_GET['order']) ? t($_GET['order']) : '';
 		$id = intval($_GET['id']);
 		$cate = M('article_category')->where(array('channel'=>'4'))->findAll();
 		foreach($cate as $c) {
@@ -27,7 +28,7 @@ class AppendAction extends Action {
 			$cate_id[] = $c['id'];
 		}
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
-		$articles = M('article')->where(array('category_id'=>$id))->findAll();
+		$articles = M('article')->where(array('category_id'=>$id))->order("$order desc")->findAll();
 		$this->assign('articles', $articles);
 		$this->assign('categories', $realCate);
 		$this->assign('cssFile', 'add');
