@@ -91,11 +91,11 @@
 					<div class="lay_top clearfix">
 						<h1 class="public_title">最佳十篇文章</h1>
 						<ul>
-						<php>foreach($articles as $a) {</php>
+						<php>foreach($hotArticles as $a) {</php>
 							<li class="article">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
+								<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="article_pic"><img src="/public/images/article/{$a['img']}" alt="no" /></a>
 								<div class="article_content">
-									<a href="article.html" class="title_3">{$a['title']}</a>
+									<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="title_3">{$a['title']}</a>
 									<p>{$a['content']|htmlspecialchars_decode|getShort=###,20|formatComment}</p>
 								</div>
 							</li>
@@ -174,11 +174,11 @@
 					<div class="lay_top clearfix">
 						<h1 class="public_title">最近补充品文章</h1>
 						<ul>
-						<php>foreach($articles as $a) {</php>
+						<php>foreach($lastArticles as $a) {</php>
 							<li class="article">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
+								<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="article_pic"><img src="/public/images/article/{$a['img']}" alt="no" /></a>
 								<div class="article_content">
-									<a href="article.html" class="title_3">{$a['title']}</a>
+									<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="title_3">{$a['title']}</a>
 									<p>{$a['content']|htmlspecialchars_decode|getShort=###,20|formatComment}</p>
 								</div>
 							</li>
@@ -258,10 +258,12 @@
 						<h1 class="public_title">目录</h1>
 						<h2 class="title_4">全部</h2>
 						<ul class="re_nav">
+						<php>foreach($cate as $c){</php>
 							<li>
-								<a href="training_1.html">补充基础知识</a>
+								<a href="training_1.html">{$c['name']}</a>
 							</li>
-							<li>
+						<php>}</php>
+							<!-- <li>
 								<a>肌肉大厦</a>
 							</li>
 							<li>
@@ -272,7 +274,7 @@
 							</li>
 							<li>
 								<a>菜谱成分</a>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 					<span class="corner_bottom"></span>

@@ -11,6 +11,12 @@ class AppendAction extends Action {
 		$map['category_id'] = array('in', implode(',', $cate_id));
 		$articles = M('article')->where($map)->findAll();
 		//print_r($articles);
+		$hotArticles = D('Article')->getAppendArticles('click');
+		$this->assign('hotArticles', $hotArticles);
+		
+		$lastArticles = D('Article')->getAppendArticles('create_time');
+		$this->assign('lastArticles', $lastArticles);
+		$this->assign('cate', $cate);
 		$this->assign('articles', $articles);
 		$this->assign('categories', $realCate);
 		$this->assign('cssFile', 'add');
