@@ -116,7 +116,18 @@ class IndexAction extends Action {
 		$this->assign('article', $article); 
 		
 		
-		$articleComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->findAll();
+		$commentCounts = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->count();
+		
+		$pager = api('Pager');
+		$pager->setCounts($commentCounts);
+		$pager->setList(10);
+		$pager->makePage();
+		$from = ($pager->pg -1) * $pager->countlist;		
+		$pagerArray = (array)$pager;
+		$this->assign('pager', $pagerArray);
+		//print_r($pagerArray);
+		
+		$articleComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->limit("$from,$pager->countlist")->findAll();
 		foreach($articleComments as $ac) {
 			$comments[$ac['id']]['content'] = $ac;
 			$comments[$ac['id']]['user'] = getUserInfo($ac['uid']);			
