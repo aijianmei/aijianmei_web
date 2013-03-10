@@ -6,9 +6,7 @@
 				<span class="corner_left"></span>
 				<div class="lay_sider">
 					<div class="subsider">
-						<span class="border_line"></span>
 						<h1 class="video_all">营养</h1>
-						<span class="border_line"></span>
 						<ul>
 							<php>foreach($categories as $c) {</php>
 							<php>if($c['name']) {</php>
@@ -86,14 +84,16 @@
 					<div class="lay_top clearfix">
 						<h1 class="public_title">最佳十篇文章</h1>
 						<ul>
+						<php>foreach($hotArticles as $a) {</php>
 							<li class="article">
 								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
 								<div class="article_content">
-									<a href="article.html" class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
+									<a href="article.html" class="title_3">{$a['title']}</a>
+									<p>{$a['brief']}</p>
 								</div>
 							</li>
-							<li class="article">
+						<php>}</php>
+							<!-- <li class="article">
 								<a href="article.html" class="article_pic"><img src="../Public/images/add/06.jpg" alt="no" /></a>
 								<div class="article_content">
 									<a href="article.html" class="title_3">5 healthy lunch ideas</a>
@@ -155,7 +155,7 @@
 									<a class="title_3">5 healthy lunch ideas</a>
 									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
 								</div>
-							</li>
+							</li> -->
 						</ul>
 						<a class="expend">更多</a>
 					</div>
@@ -167,14 +167,16 @@
 					<div class="lay_top clearfix">
 						<h1 class="public_title">最近补充品文章</h1>
 						<ul>
+						<php>foreach($lastArticles as $a) {</php>
 							<li class="article">
 								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
 								<div class="article_content">
-									<a href="article.html" class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
+									<a href="article.html" class="title_3">{$a['title']}</a>
+									<p>{$a['brief']}</p>
 								</div>
 							</li>
-							<li class="article">
+						<php>}</php>
+							<!-- <li class="article">
 								<a href="article.html" class="article_pic"><img src="../Public/images/add/06.jpg" alt="no" /></a>
 								<div class="article_content">
 									<a class="title_3">5 healthy lunch ideas</a>
@@ -236,7 +238,7 @@
 									<a class="title_3">5 healthy lunch ideas</a>
 									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
 								</div>
-							</li>
+							</li> -->
 						</ul>
 						<a class="expend">更多</a>
 					</div>
@@ -249,15 +251,17 @@
 						<h1 class="public_title">增加内容分类</h1>
 						<h2 class="title_4">全部</h2>
 						<ul class="re_nav">
+						<php>foreach($cate as $c){</php>
 							<li>
-								<a>营养基础知识</a>
+								<a>{$c['name']}</a>
 							</li>
-							<li>
+						<php>}</php>
+							<!-- <li>
 								<a>减肥营养</a>
 							</li>
 							<li>
 								<a>肌肉增益营养</a>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 					<span class="corner_bottom"></span>

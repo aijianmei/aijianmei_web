@@ -7,8 +7,17 @@ class NutriAction extends Action {
 			if($c['parent'] == NULL) $realCate[$c['id']] = $c;
 			else $realCate[$c['parent']]['children'][] = $c;
 		}
+		$order = 'click';
+		$hotArticles = D('Article')->getNutriArticles($order);
+		$this->assign('hotArticles', $hotArticles);
+		//print_r($hotArticles);
+		
+		$lastArticles = D('Article')->getNutriArticles('create_time');
+		$this->assign('lastArticles', $lastArticles);
+		//print_r($lastArticles);
 		//print_r($realCate);
 		$this->assign('categories', $realCate);
+		$this->assign('cate', $cate);
 		$this->assign('cssFile', 'nutri');
 		$this->display();
 	}

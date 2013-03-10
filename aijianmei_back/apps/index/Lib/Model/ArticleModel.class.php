@@ -32,6 +32,14 @@ class ArticleModel extends Model {
 		return $daily;
 	}
 	
+	public function getNutriArticles($order)
+	{
+		$sql = "select * from ai_article a,ai_article_category c where c.channel=3 and a.category_id=c.id";
+		$result = M('')->query($sql);
+		
+		return $result;
+	}
+	
 	protected function getDailyComments($id)
 	{
 		$sql = "select * from ai_comments where parent_type='4' and parent_id=".$id;
