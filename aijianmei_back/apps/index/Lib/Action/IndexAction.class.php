@@ -134,6 +134,14 @@ class IndexAction extends Action {
 			$comments[$ac['id']]['children'] = M('comments')->where(array('topParent'=>$ac['id'], 'parent_type'=>'3'))->order('`create_time` asc')->findAll();
 		}
 		
+		$hotComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->order('`like` desc')->limit("$from,$pager->countlist")->findAll();
+		foreach($hotComments as $ac) {
+			$hotArticlecomments[$ac['id']]['content'] = $ac;
+			$hotArticlecomments[$ac['id']]['user'] = getUserInfo($ac['uid']);
+			$hotArticlecomments[$ac['id']]['children'] = M('comments')->where(array('topParent'=>$ac['id'], 'parent_type'=>'3'))->order('`create_time` asc')->findAll();
+		}
+		$this->assign('hotComments', $hotArticlecomments);
+		
 		$promote = M('promote')->find();
 		$this->assign('promote', $promote);
 		
