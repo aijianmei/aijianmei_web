@@ -1,4 +1,4 @@
-.clearfix {
+/*.clearfix {
 
 	}
 	.clearfix:before {
@@ -18,12 +18,12 @@
 	background: white;
 }
 /***********************content开始*************************/
-#content{
+/*#content{
 	margin: 20px 0px;
 }
 
 /**********右边主要内容部分**********/
-		.right_sider{
+/*		.right_sider{
 			float:left;
 			width:790px;
 		}
@@ -38,7 +38,7 @@
 			width:783px;
 			margin-bottom: 5px;
 			background: #e6f0f7;
-		}
+		}*/
 		.content{
 			margin:10px;
 		}
@@ -159,16 +159,7 @@
 	margin: 0 10px 0 25px;
 	background: #D7DBDD;
 }
-.lay_sider{
-	width: 128px;
-	margin-bottom: 5px;
-	border: 1px solid #91BFE0;
-	background: #0176bc;
-}
-.subsider{
-	margin-bottom: 8px;	
-	background:white;
-}
+
 .corner_left{
 	display: inline-block;
 	position: absolute;
@@ -353,16 +344,7 @@
 				background: black;
 			}
 
-/*试改横条样式*/
-			.public_title{
-				margin-left:0px;
-				padding-left: 20px;
-				font-size: 26px;
-				line-height: 33px;
-				height: 33px;
-				color: white;
-				background: url(../images/bk_30.jpg) repeat-x;
-			}
+
 	
 
 

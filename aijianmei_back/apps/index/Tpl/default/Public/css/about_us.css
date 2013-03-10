@@ -1,6 +1,6 @@
 ﻿
-.wrapper{margin:0 auto;width:980px;background:none;}
-.triangle{border-color:#BCBCBC #FAF9F7 #FAF9F7 #FAF9F7;}
+.wrapper{margin:0 auto;width:980px;background:none;box-shadow:0 0 0 0;}
+.triangle{border-color:#BCBCBC #F2F2F2 #F2F2F2 #F2F2F2;}
 .content{
 	background-color: white;
 	box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
@@ -110,12 +110,7 @@
 		color:white;
 		font-size:16px;
 		
-	}
-
-	
-	
-	
-	
+	}	
 #footer{
 	background:#fff;
 	margin-top:20px;

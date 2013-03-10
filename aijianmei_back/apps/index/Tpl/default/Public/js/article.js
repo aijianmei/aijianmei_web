@@ -1,4 +1,3 @@
-
 $(function(){
 	//页面选择
 	$(".lay_page a").click(function(){
@@ -66,13 +65,7 @@ $(function(){
 	$(".sprite_8").add(".sprite_9").click(function(){
 		var time = parseInt($(this).children().text());
 		time++;
-		$(this).children().html(time);
-		
-		var action = $(this).className == 'sprite_8' ? 'addArticleLikeCount' : 'addArticleUnlikeCount';
-		var id = $(this).attr('aid');
-		$.post('http://www.aijianmei.com/index.php?app=index&mod=Index&act='+action, {'id':id, 'count':time}, function(msg) {
-			ui.success('投票成功');
-		})		
+		$(this).children().html(time)
 	})
 
 	//页面下拉列表
@@ -97,7 +90,6 @@ $(function(){
 var today = function(){
 	var time = document.getElementsByClassName("time")[0],
 		date = new Date();
-	if(!time) return false;
 		time.innerHTML = [date.getFullYear(),'-',date.getMonth(),'-',date.getDate(),"&nbsp;&nbsp;",date.toLocaleTimeString()].join("");
 }
 setInterval('today()',1000);

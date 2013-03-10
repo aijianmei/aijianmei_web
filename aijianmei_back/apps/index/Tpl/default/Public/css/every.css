@@ -1,33 +1,7 @@
-a:hover{
-	cursor:pointer;
-}
+
 /*#content开始---------------------------*/
 	#content{
 		margin-top: 12px;
-	}
-	/*左边导航栏left_sub*/
-	.left_sub{
-		float:left;
-		width:135px;
-		margin:0 10px 0 25px;
-	}
-	.title_1{
-		margin-right: 30px;
-		padding-bottom: 6px;
-		font-size: 16px;
-		border-bottom: 1px solid #CCC;
-	}
-	.all{
-		font-size: 14px;
-		color:#525252;
-		font-weight: 600;
-	}
-	.each_video{
-		margin-right: 30px;
-		padding-left: 11px;
-		line-height: 32px;
-		font-size: 13px;
-		border-bottom: 1px solid #CCC;
 	}
 	/*右边内容content------------------*/
 	.content{
@@ -194,6 +168,50 @@ a:hover{
 
 			}
 			/*cm_bottom---*/
+/* scr_con style */
+.scr_con {
+	position: relative;
+	height: 230px;
+	width: 310px;
+	overflow: hidden;}
+#dv_scroll{
+	position:absolute;
+	height:230px;
+	overflow:hidden;
+	width:300px;}
+#dv_scroll .Scroller-Container{
+	width:100%;
+}
+#dv_scroll_bar {
+	position: absolute;
+	right: 0px;
+	width: 7px;
+	height: 230px;}
+#dv_scroll_bar .Scrollbar-Track{
+	position: absolute;
+	left: 0;
+	width: 7px;
+	height: 230px;}
+#dv_scroll_bar .Scrollbar-Handle{
+	transition:all 1s;
+	-webkit-transition:all 1s;
+	-ms-transition:all 1s;
+	-o-transition:all 1s;
+	position:absolute;
+	top:0;
+	width:7px;
+	height:28px;
+	overflow:hidden;
+	background-color:gray;
+	border-radius:5px;
+	cursor:pointer;
+	opacity: 0;
+	filter:alpha(opacity=0);
+}
+#dv_scroll_text {
+	position:absolute;
+}
+/* scr_con style */
 			.target{
 				margin-top: 15px;
 				border-bottom: 1px solid #CCC;
