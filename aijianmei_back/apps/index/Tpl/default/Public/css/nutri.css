@@ -1,32 +1,15 @@
-	.triangle{
-		border-color:#BCBCBC #fff #fff #fff;
-	}
-.wrapper{
-	background: white;
-}
+
 /***********************content开始*************************/
 
 /*nutri一级页面部分*/
 #content{
 	margin-top: 10px;
 }
-	.title_1{
-		margin-right: 30px;
-		padding-bottom: 6px;
-		font-size: 16px;
-		border-bottom: 1px solid #CCC;
-	}
+
 	.all{
 		font-size: 14px;
 		color:#525252;
 		font-weight: 600;
-	}
-	.each_video{
-		margin-right: 30px;
-		padding-left: 11px;
-		line-height: 32px;
-		font-size: 13px;
-		border-bottom: 1px solid #CCC;
 	}
 
 	.tr_top{

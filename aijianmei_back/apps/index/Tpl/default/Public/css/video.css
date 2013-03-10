@@ -1,26 +1,16 @@
-.wrapper{
-	background:#fff;
-	margin:0 auto;
-	width:980px;
-}
-	.wrapper .triangle{
-		border-color:#BCBCBC #FFF #FFF #FFF;
-	}
+
 .content{
 	height:800px;
 	margin:10px 20px;
 }
 /******* ²à±ßÀ¸ *********/
 	.sidebar{
-		width:165px;
-		float:left;
+			margin:0;
 	}
 	/****** ÊÓÆµ/ÎÄÕÂ ********/
 		.sort{
 			height:30px;
-			border-bottom:1px solid #ccc;
 			line-height:30px;
-			padding:0 0 8px 20px;
 		}
 			.sort1,.sort2{
 				display:inline-block;
@@ -44,7 +34,6 @@
 		}
 		.list{
 			height: 30px;
-			border-bottom: 1px solid #E5E5E5;
 			line-height: 30px;
 			padding-left: 20px;
 		}

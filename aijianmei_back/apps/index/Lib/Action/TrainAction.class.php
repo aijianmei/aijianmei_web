@@ -11,7 +11,7 @@ class TrainAction extends Action {
 			$cate_id[] = $c['id'];
 		}
 		
-		$articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->findAll();
+		$articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
 		$this->assign('articles', $articles);
 		$this->assign('categories', $parent);
 		$this->display();
@@ -21,6 +21,7 @@ class TrainAction extends Action {
 	{
 		$id = intval($_GET['id']);
 		$this->assign('cssFile', 'video');
+		$this->assign('cssFile', 'training');
 		$cate = M('article_category')->where(array('channel'=>'2', 'type'=>'1'))->findAll();
 		
 		foreach($cate as $c) {

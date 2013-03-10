@@ -5,6 +5,9 @@
 .triangle{
 	border-color:#BCBCBC #FAFAFA #FAFAFA #FAFAFA;
 }
+.func_comment_list{
+	padding:0 20px;
+}
 .content a:hover{
 	color:#0078B6;
 	text-decoration:underline;
@@ -29,9 +32,7 @@
 					color:white;
 				}
 	/*content*/
-	.content{
-		background:#fff;
-	}
+
 	
 		.left{
 			float: left;
@@ -40,13 +41,19 @@
 		}
 			/*分组*/
 			.grouping,.scaning,.recommand{
-				padding:15px 0 0 15px;
+				background:white;
+				border:1px solid #e0e0e0;
+				border-radius:2px;
+				margin:5px;
 			}
 				.left_sort{
-					padding:5px 0;
+					background: url(../images/pal/sider_t.jpg);
+					height: 30px;
+					line-height: 30px;
+					padding-left: 5px;
 				}
-				.classsify{
-				
+				.classify{
+					padding-left:10px;
 				}
 					.group{
 						margin:8px 0;
@@ -98,8 +105,9 @@
 					margin-bottom: 10px;
 				}
 					.command_ad_pic{
-						width: 150px;
-						height: 86px;					
+						width: 126px;
+						height: 86px;
+						margin-left:6px;
 					}
 					.command_ad_word{
 						display:block;
@@ -109,7 +117,6 @@
 		.right{
 			float: right;
 			width: 230px;
-			border-left: 1px solid #CCC;	
 		}
 			/*用户*/
 			.user{
@@ -168,7 +175,10 @@
 					
 			/*最活跃的会员*/
 			.member{
-				margin:10px 0 0 20px;
+				margin:10px 5px 0 20px;
+				background: white;
+				border: 1px solid #E0E0E0;
+				text-align: center;
 			}
 				.member h4{
 					padding-bottom:10px;
@@ -185,7 +195,6 @@
 							height: 65px;					
 						}
 					.member_name{
-						width:65px;
 						overflow:hidden;
 						text-align:center;
 					}
@@ -201,13 +210,13 @@
 							height: 35px;						
 						}
 					.new_member_name{
-						width:35px;
 						overflow:hidden;
 						text-align:center;
 					}
 			/*推荐会员*/
 			.recommend_info{
 				margin-bottom:10px;
+				padding-left:10px;
 			}
 				.about_recommend{
 					float: left;
@@ -457,7 +466,6 @@
 							.function{
 								float: right;
 								margin-left: 10px;
-								border-left: 1px solid;
 								padding-left: 5px;
 								position:relative;
 							}

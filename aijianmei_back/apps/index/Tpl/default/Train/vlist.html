@@ -2,10 +2,12 @@
 <include file="../Public/banner" />
 
 <div class="content">
-					<div class="sidebar">
+					<div class="sider_all sidebar">
 						<div class="sort">
-							<span class="sort1" id="show"><a href="/index.php?app=index&mod=Train&act=videoList">视频</a></span>
+							<span class="border_line"></span>
 							<span class="sort2"><a href="/index.php?app=index&mod=Train&act=articleList">文章</a></span>
+							<span class="sort1" id="show"><a href="/index.php?app=index&mod=Train&act=videoList">视频</a></span>
+							<span class="border_line"></span>
 						</div>
 						<ul class="bar current" id="sort1">
 							<li class="list">全部</li>
@@ -14,22 +16,23 @@
 							<php>foreach($c['children'] as $child) {</php>
 							<li class="list"><a href="/index.php?app=index&mod=Train&act=videoList&id={$child['id']}">{$child['name']}</a></li>
 							<php>}}</php>
-							<!-- <li class="list"><a href="">肩膀</a></li>
-							<li class="list"><a href="">陷阱</a></li>
-							<li class="list"><a href="">二头肌</a></li>
-							<li class="list"><a href="">前臂</a></li>
-							<li class="list"><a href="">胸部</a></li>
-							<li class="list"><a href="">腹部</a></li>
-							<li class="list"><a href="">四头肌</a></li>
-							<li class="list"><a href="">肱三头</a></li>
-							<li class="list"><a href="">背阔肌</a></li>
-							<li class="list"><a href="">中菱角</a></li>
-							<li class="list"><a href="">臂大肌</a></li>
-							<li class="list"><a href="">臂中肌</a></li>
-							<li class="list"><a href="">股二头肌</a></li>
-							<li class="list"><a href="">腓肠肌</a></li> -->
+							<li class="each_video"><a href="">陷阱</a></li>
+							<li class="each_video"><a href="">肩膀</a></li>
+							<li class="each_video"><a href="">二头肌</a></li>
+							<li class="each_video"><a href="">前臂</a></li>
+							<li class="each_video"><a href="">胸部</a></li>
+							<li class="each_video"><a href="">腹部</a></li>
+							<li class="each_video"><a href="">四头肌</a></li>
+							<li class="each_video"><a href="">肱三头</a></li>
+							<li class="each_video"><a href="">背阔肌</a></li>
+							<li class="each_video"><a href="">中菱角</a></li>
+							<li class="each_video"><a href="">臂大肌</a></li>
+							<li class="each_video"><a href="">臂中肌</a></li>
+							<li class="each_video"><a href="">股二头肌</a></li>
+							<li class="each_video"><a href="">腓肠肌</a></li>
 						</ul>
-						<ul class="bar" id="sort2">
+							<!--
+						<ul class="bar current" id="sort1">
 							<li class="list">文章</li>
 							<li class="list"><a href="">文章1</a></li>
 							<li class="list"><a href="">文章1</a></li>
@@ -46,7 +49,8 @@
 							<li class="list"><a href="">文章1</a></li>
 							<li class="list"><a href="">文章1</a></li>
 							<li class="list"><a href="">文章1</a></li>
-						</ul>						
+						</ul>-->
+						<span class="border_line"></span>						
 					</div>
 				<div class="video">
 						<div class="all">
