@@ -110,7 +110,7 @@
 			width:86%;
 			margin-top: 14px;
 			border: 1px solid #70BDFA;
-			*margin-top: -14px;//for ie8
+			*margin-top: -14px;/*for ie8*/
 		}
 		.expend{
 			clear:both;

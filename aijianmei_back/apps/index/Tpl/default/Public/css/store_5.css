@@ -1,4 +1,4 @@
-.clearfix:after{
+/*.clearfix:after{
 	content:"";
 	clear:both;
 	display:block;
@@ -32,7 +32,6 @@ body{
 	/*header*/
 	#header{
 		width:980px;
-		background: white;
 	}
 	/*content*/
 	#content{
@@ -40,7 +39,6 @@ body{
 		.content_all{
 			padding: 25px 0 0 15px;
 			font-size: 13px;
-			background: white;
 		}
 
 		.content_all .title_1{
@@ -377,7 +375,7 @@ body{
 							}
 /*五六级商店页面底部共同部分 */
 				.store_bottom{
-					
+					margin: 20px 0px 0 16px;
 				}
 				.bottom_part_left{
 					float:left;
@@ -597,7 +595,6 @@ body{
 			min-height: 100%;
 			width:300px;
 			margin-right: 10px;
-			background: white;
 		}
 		.bottom_part_right .title_4{
 			margin : 10px 0;
