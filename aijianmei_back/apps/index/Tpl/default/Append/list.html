@@ -163,8 +163,8 @@
 				<div class="mode_2 clearfix">
 					<ul class="s_nav_left">
 						<li>排序</li>
-						<li class="current_click">时间</li>
-						<li>人气</li>
+						<li class="current_click"><a href="">时间</a></li>
+						<li><a href="">人气</a></li>
 						<li>阅读器</li>
 					</ul>
 					<ul class="s_nav_right">
@@ -178,7 +178,7 @@
 				<php>foreach($articles as $a) {</php>
 					<div class="ar_block">
 						<h2><a href="article.html">{$a['title']}</a></h2>
-						<span>作者：{$a['author']}</span><span>日期：{$a['create_time']}</span><span>点击：{$a['click']}</span>
+						<span>作者：{$a['author']}</span><span>日期：<php>echo date('Y-m-d H:i:s',$a['create_time'])</php></span><span>点击：{$a['click']}</span>
 						<p>{$a['brief']}</p>
 					</div>
 				<php>}</php>
