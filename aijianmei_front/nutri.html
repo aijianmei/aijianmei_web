@@ -90,7 +90,7 @@
 					<li><a href="training.html">锻炼</a></li>
 					<li class="now_position"><a href="nutri.html">营养</a></li>
 					<li><a href="add.html">补充</a></li>
-					<li><a href="activity.html">论坛</a></li>
+					<li class="forum"><a href="activity.html">论坛</a></li>
 					<li><a href="pal.html">交友互动</a></li>
 				</ul>
 				<span class="position">爱健美/首页</span>
@@ -447,7 +447,8 @@
 			newdom : new getdom,
 			init : function(obj){
 				var Obj = fade.newdom.getElementsByClass(obj)[0] || document.getElementsByTagName(obj)[0] || document.getElementById(obj);
-				Obj.onclick = function(){
+				Obj.onclick = function(event){
+					event.preventDefault();
 					fade.handlecontent();
 					fade.changestyle('1')
 					var closed = fade.newdom.getElementsByClass('closed')[0];
@@ -506,7 +507,8 @@
 				
 			}
 		};
-		fade.init('wrapper')
+		fade.init('store');
+		fade.init('forum')
 	</script>
 </body>
 </html>
