@@ -170,10 +170,13 @@
 						<li>阅读器</li>
 					</ul>
 					<ul class="s_nav_right">
-						<li>下一页</li>
-						<li>上一页</li>
-						<li>1/17</li>
-						<li class="strong">共600篇文章</li>									
+						<!-- <li>下一页</li>
+						<li>上一页</li> -->
+						{$pager['backstr']}
+						{$pager['thestr']}
+						{$pager['nextstr']}
+						<li>{$pager['pg']}/{$pager['page']}</li>
+						<li class="strong">共{$pager['countall']}篇文章</li>									
 					</ul>
 				</div>
 				<div class="mode_3">
