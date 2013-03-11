@@ -90,7 +90,7 @@ class IndexAction extends Action {
 					M('article_vote')->add(array('uid'=>$this->mid, 'article'=>$_GET['id']));
 				}				
 			}else {
-				echo '<script type="text/javascript">alert("请登录")</script>';
+				//echo '<script type="text/javascript">alert("请登录")</script>';
 			}
 		}elseif($o=='unlike') {
 			if($this->mid) {
@@ -106,7 +106,7 @@ class IndexAction extends Action {
 					M('article_vote')->add(array('uid'=>$this->mid, 'article'=>$_GET['id']));
 				}
 			}else {
-				echo '<script type="text/javascript">alert("请登录")</script>';
+				//echo '<script type="text/javascript">alert("请登录")</script>';
 			}
 		}
 		global $ts;
