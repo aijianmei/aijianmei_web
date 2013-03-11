@@ -3,15 +3,12 @@
 }
 
 	.sider{
-		width:140px;
-		float:left;
 		margin:40px 20px;
 	}
 	/********** 全部 ***********/
 
 		.sub_plan,.plan{
 			height: 30px;
-			border-bottom: 1px solid #E5E5E5;
 			line-height: 30px;
 			padding-left: 20px;
 		}
@@ -32,10 +29,6 @@
 	.content h3{
 		margin:10px;
 		display:inline-block;
-	}
-	
-	.train{
-	
 	}
 		.train .sort{
 			float: left;
@@ -59,8 +52,7 @@
 				padding:2px;
 				font-size:13px;
 			}
-	.step{
-	
+	.step{	
 		width:725px;
 		margin:20px auto;
 	}
@@ -93,8 +85,7 @@
 					font-size:16px;
 					width:220px;
 					margin:0 auto;
-				}
-				
+				}				
 			.steps_wrap{
 				width:480px;
 				display:inline-block;
@@ -103,8 +94,7 @@
 					float:left;
 					margin-right:1px;
 					width:30px;
-					height:256px;
-					
+					height:256px;					
 				}
 					.steps_ul .opt{
 						display:inline-block;
@@ -115,7 +105,7 @@
 						height:256px;
 						background:url(../images/plan/list.png) no-repeat center;
 					}
-					
+				
 				.steps_list2 .options,.steps_list3 .options{
 					display:none;
 				}	

@@ -11,6 +11,12 @@ class AppendAction extends Action {
 		$map['category_id'] = array('in', implode(',', $cate_id));
 		$articles = M('article')->where($map)->findAll();
 		//print_r($articles);
+		$hotArticles = D('Article')->getAppendArticles('click');
+		$this->assign('hotArticles', $hotArticles);
+		
+		$lastArticles = D('Article')->getAppendArticles('create_time');
+		$this->assign('lastArticles', $lastArticles);
+		$this->assign('cate', $cate);
 		$this->assign('articles', $articles);
 		$this->assign('categories', $realCate);
 		$this->assign('cssFile', 'add');
@@ -19,6 +25,7 @@ class AppendAction extends Action {
 	
 	public function articleList()
 	{
+		$order = isset($_GET['order']) ? t($_GET['order']) : 'create_time';
 		$id = intval($_GET['id']);
 		$cate = M('article_category')->where(array('channel'=>'4'))->findAll();
 		foreach($cate as $c) {
@@ -27,7 +34,17 @@ class AppendAction extends Action {
 			$cate_id[] = $c['id'];
 		}
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
-		$articles = M('article')->where(array('category_id'=>$id))->findAll();
+		$articleCount = M('article')->where(array('category_id'=>$id))->count();
+		$pager = api('Pager');
+		$pager->setCounts($articleCount);
+		$pager->setList(10);
+		$pager->makePage();
+		$pageArray = (array)$pager;
+		$this->assign('pager', $pageArray);
+		$from = ($pager->pg-1) * $pager->countlist;
+		
+		$articles = M('article')->where(array('category_id'=>$id))->order("$order desc")->limit("$from,$pager->countlist")->findAll();
+		
 		$this->assign('articles', $articles);
 		$this->assign('categories', $realCate);
 		$this->assign('cssFile', 'add');

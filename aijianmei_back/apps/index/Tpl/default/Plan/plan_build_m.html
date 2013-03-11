@@ -2,14 +2,18 @@
 <include file="../Public/banner" />
 	<!--Banner End -->
 	<div class="clearfix">
-		<div class="sider">
+		<div class="sider_all sider">
 			<ul class="bar" id="sort">
-				<li class="plan">计划</li>
-				<li class="sub_plan age_c"><a>男性</a></li>
-				<li class="sub_plan"><a href="">青少年</a></li>
-				<li class="sub_plan"><a href="">20-39</a></li>
-				<li class="sub_plan"><a href="">40+</a></li>
-				<li class="sub_plan age_c"><a href="plan_loss_f.html">女性</a></li>
+				<span class="border_line"></span>
+				<h3 class="plan">计划</h3>
+				<span class="border_line"></span>
+				<li class="each_video age_c"><a>男性</a></li>
+				<li class="each_video"><a href="">青少年</a></li>
+				<li class="each_video"><a href="">20-39</a></li>
+				<li class="each_video"><a href="">40+</a></li>
+				<span class="border_line"></span>
+				<li class="each_video age_c"><a href="{:U('index/Plan/plan_build', array('sex'=>'f'))}">女性</a></li>
+				<span class="border_line"></span>
 			</ul>
 		</div>
 	

@@ -116,12 +116,31 @@ class IndexAction extends Action {
 		$this->assign('article', $article); 
 		
 		
-		$articleComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->findAll();
+		$commentCounts = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->count();
+		
+		$pager = api('Pager');
+		$pager->setCounts($commentCounts);
+		$pager->setList(10);
+		$pager->makePage();
+		$from = ($pager->pg -1) * $pager->countlist;		
+		$pagerArray = (array)$pager;
+		$this->assign('pager', $pagerArray);
+		//print_r($pagerArray);
+		
+		$articleComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->limit("$from,$pager->countlist")->findAll();
 		foreach($articleComments as $ac) {
 			$comments[$ac['id']]['content'] = $ac;
 			$comments[$ac['id']]['user'] = getUserInfo($ac['uid']);			
 			$comments[$ac['id']]['children'] = M('comments')->where(array('topParent'=>$ac['id'], 'parent_type'=>'3'))->order('`create_time` asc')->findAll();
 		}
+		
+		$hotComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->order('`like` desc')->limit("$from,$pager->countlist")->findAll();
+		foreach($hotComments as $ac) {
+			$hotArticlecomments[$ac['id']]['content'] = $ac;
+			$hotArticlecomments[$ac['id']]['user'] = getUserInfo($ac['uid']);
+			$hotArticlecomments[$ac['id']]['children'] = M('comments')->where(array('topParent'=>$ac['id'], 'parent_type'=>'3'))->order('`create_time` asc')->findAll();
+		}
+		$this->assign('hotComments', $hotArticlecomments);
 		
 		$promote = M('promote')->find();
 		$this->assign('promote', $promote);
@@ -258,6 +277,14 @@ class IndexAction extends Action {
 	public function daily()
 	{
 		$id = intval($_GET['id']);
+		$o = $_GET['o'];
+		if($o=='like_comment') {
+			$comment_id = $_GET['comment_id'];
+			$data['id'] = $_GET['comment_id'];
+			
+			M('')->query('UPDATE `ai_comments` SET `like`=`like`+1 where `id`='.$comment_id);
+		}
+		
 		$daily = M('daily')->where(array('id'=>$id))->find();
 		$videos = M('daily_video')->where(array('daily_id'=>$id))->findAll();
 		
@@ -266,7 +293,17 @@ class IndexAction extends Action {
 				$videos[$k]['img'] = D('Article')->getVideoImgById($v['id']);
 			}
 		}
-		$comments = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->findAll();
+		
+		$commentsCount = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->count();
+		$pager = api('Pager');
+		$pager->setCounts($commentsCount);
+		$pager->setList(10);
+		$pager->makePage();
+		$from = ($pager->pg-1) * $pager->countlist;
+		$pagerArray = (array)$pager;
+		$this->assign('pager', $pagerArray);
+		
+		$comments = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->limit("$from,$pager->countlist")->findAll();
 		foreach($comments as $k=>$c) {
 			$comments[$k] = $c;
 			$comments[$k]['userInfo'] = getUserInfo($c['uid']);

@@ -6,7 +6,9 @@
 				<span class="corner_left"></span>
 				<div class="lay_sider">
 					<div class="subsider">
-						<h1 class="video_all">补充</h1>
+						<span class="border_line"></span>
+						<h3 class="video_all">补充</h3>
+						<span class="border_line"></span>
 						<ul>
 							<php>foreach($categories as $c) {</php>
 							<php>if($c['name']) {</php>
@@ -32,7 +34,7 @@
 						</ul>
 					</div>
 				</div>
-				<span class="corner_bottom"></span>
+				<span class="border_line"></span>
 			</div>
 
 			<div class="right_sider">
@@ -43,37 +45,37 @@
 						<h1 class="public_title">肌肉增加视频</h1>
 						<div class="content clearfix">
 							<div class="ct clearfix">
-								<a class="video"><img src="images/add/sd3_01.jpg" alt="no" /></a>
+								<a class="video"><img src="../Public/images/add/sd3_01.jpg" alt="no" /></a>
 								<ul class="list">
 									<li class="each">
 										<a class="each_pic">
-											<img src="images/add/sd3_02.jpg" alt="" />
+											<img src="../Public/images/add/sd3_02.jpg" alt="" />
 										</a>
 									</li>
 									<li class="each">
 										<a class="each_pic">
-											<img src="images/add/sd3_03.jpg" alt="" />
+											<img src="../Public/images/add/sd3_03.jpg" alt="" />
 										</a>
 									</li>
 									<li class="each">
 										<a class="each_pic">
-											<img src="images/add/sd3_04.jpg" alt="" />
+											<img src="../Public/images/add/sd3_04.jpg" alt="" />
 										</a>
 									</li>
 								</ul>
 							</div>
 							<div class="ct none clearfix">
-								<a class="video"><img src="images/add/sd3_02.jpg" alt="no"
+								<a class="video"><img src="../Public/images/add/sd3_02.jpg" alt="no"
 								width="346px" height="422px" /></a>
 								<p>yellow</p>
 							</div>
 							<div class="ct none clearfix">
-								<a class="video"><img src="images/add/sd3_03.jpg" alt="no"
+								<a class="video"><img src="../Public/images/add/sd3_03.jpg" alt="no"
 								width="346px" height="422px"  /></a>
 								<p>green</p>
 							</div>
 							<div class="ct none clearfix">
-								<a class="video"><img src="images/add/sd3_04.jpg" alt="no"
+								<a class="video"><img src="../Public/images/add/sd3_04.jpg" alt="no"
 								width="346px" height="422px"  /></a>
 								<p>red</p>
 							</div>
@@ -100,23 +102,23 @@
 							<ul>
 							<php>foreach($articles as $a) {</php>
 								<li class="nubble">
-									<a href="article.html"><img src="images/add/111.jpg" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
 									<p>{$a['title']}</p>
 									
 								</li>
 							<php>}</php>
 								<!-- <li class="nubble">
-									<a href="article.html"><img src="images/add/112.png" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/add/112.png" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
 								</li>
 								<li class="nubble">
-									<a href="article.html"><img src="images/add/113.jpg" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/add/113.jpg" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
 								</li>
 								<li class="nubble defferent">
-									<a href="article.html"><img src="images/add/114.jpg" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/add/114.jpg" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
 								</li> -->
@@ -134,23 +136,23 @@
 							<ul>
 							<php>foreach($articles as $a) {</php>
 								<li class="nubble">
-									<a href="article.html"><img src="images/add/111.jpg" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
 									<p>{$a['title']}</p>
 									
 								</li>
 							<php>}</php>
 								<!-- <li class="nubble">
-									<a href="article.html"><img src="images/add/112.png" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/add/112.png" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
 								</li>
 								<li class="nubble">
-									<a href="article.html"><img src="images/add/113.jpg" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/add/113.jpg" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
 								</li>
 								<li class="nubble defferent">
-									<a href="article.html"><img src="images/add/114.jpg" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/add/114.jpg" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
 								</li> -->
@@ -163,22 +165,25 @@
 				<div class="mode_2 clearfix">
 					<ul class="s_nav_left">
 						<li>排序</li>
-						<li class="current_click">时间</li>
-						<li>人气</li>
+						<li class="current_click"><a href="{:U('index/Append/articleList', array('id'=>$_GET['id'],'order'=>'create_time'))}">时间</a></li>
+						<li><a href="{:U('index/Append/articleList', array('id'=>$_GET['id'],'order'=>'click'))}">人气</a></li>
 						<li>阅读器</li>
 					</ul>
 					<ul class="s_nav_right">
-						<li>下一页</li>
-						<li>上一页</li>
-						<li>1/17</li>
-						<li class="strong">共600篇文章</li>									
+						<!-- <li>下一页</li>
+						<li>上一页</li> -->
+						{$pager['backstr']}
+						{$pager['thestr']}
+						{$pager['nextstr']}
+						<li>{$pager['pg']}/{$pager['page']}</li>
+						<li class="strong">共{$pager['countall']}篇文章</li>									
 					</ul>
 				</div>
 				<div class="mode_3">
 				<php>foreach($articles as $a) {</php>
 					<div class="ar_block">
 						<h2><a href="article.html">{$a['title']}</a></h2>
-						<span>作者：{$a['author']}</span><span>日期：{$a['create_time']}</span><span>点击：{$a['click']}</span>
+						<span>作者：{$a['author']}</span><span>日期：<php>echo date('Y-m-d H:i:s',$a['create_time'])</php></span><span>点击：{$a['click']}</span>
 						<p>{$a['brief']}</p>
 					</div>
 				<php>}</php>

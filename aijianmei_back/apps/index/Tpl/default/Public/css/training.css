@@ -1,4 +1,4 @@
-/***********************content开始*************************/
+﻿/***********************content开始*************************/
 	/*#banner切换图片独立部分*/
 	#banner{
 		padding-top: 10px;
@@ -7,32 +7,6 @@
 	/*#banner结束*/	
 	#content{
 		padding-top: 15px;
-	}
-	/*左边导航栏*/	
-	.left_sub{
-		float:left;
-		width:157px;
-	}
-	.title_1{
-		margin-right: 30px;
-		padding-bottom: 6px;
-		font-size: 16px;
-		border-bottom: 1px solid #CCC;
-	}
-	.all{
-		font-size: 16px;
-		color:black;
-		font-weight: 600;
-	}
-	.each_video{
-		margin-left: 11px;
-		line-height: 32px;
-		font-size: 13px;
-		border-bottom: 1px solid #CCC;
-	}
-	.right_training{
-		float:left;
-		width:703px;
 	}
 	/*左边导航栏结束*/		
 	.training{
@@ -64,6 +38,7 @@
 			.tr_classify{
 				float: left;
 				width: 165px;
+				
 				margin:0 9px 5px 0;
 				border:3px solid transparent;
 			}
@@ -349,7 +324,6 @@ margin-bottom: 20px;
 /******* 视频 *************/		
 	.video{
 		display:inline-block;
-		width:570px;
 		margin-left:15px;
 	}
 	.all .all_ul{
@@ -383,15 +357,15 @@ margin-bottom: 20px;
 		}
 		/***** 视频列表 ****/
 		.video .vdos{
-			width:100px;
+			width:140px;
 			display:inline-block;
 			margin:20px 10px 5px 0;
 			
 		}
 			.video .vdos .pic{
 				border-radius:4px;
-				width:100px;
-				height:65px;
+				width:130px;
+				height:90px;
 				background:#ccc;
 			}
 				.vdos .pic a{
@@ -482,6 +456,7 @@ margin-bottom: 20px;
 		.prev,.next{
 			width:60px;
 			height:20px;
+			background: #CCC;
 		}
 		.record{
 			display:inline-block;

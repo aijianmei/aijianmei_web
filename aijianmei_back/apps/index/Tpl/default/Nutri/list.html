@@ -6,7 +6,9 @@
 				<span class="corner_left"></span>
 				<div class="lay_sider">
 					<div class="subsider">
-						<h1 class="video_all">补充</h1>
+						<span class="border_line"></span>
+						<h3 class="video_all">补充</h3>
+						<span class="border_line"></span>
 						<ul>
 							<php>foreach($categories as $c) {</php>
 							<php>if($c['name']) {</php>
@@ -29,7 +31,7 @@
 						</ul>
 					</div>
 				</div>
-				<span class="corner_bottom"></span>
+				<span class="border_line"></span>
 			</div>
 			
 			<div class="right_sider">
@@ -121,7 +123,7 @@
 					<div class="ar_block">
 						<h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
 						<span>作者：{$a['author']}</span><span>日期：{$a['create_time']}</span><span>点击：{$a['click']}</span>
-						<p>{$a['content']|htmlspecialchars_decode|getShort=###, 20|formatComment}</p>
+						<!--<p>{$a['content']|htmlspecialchars_decode|getShort=###, 20|formatComment}</p>-->
 					</div>
 				<php>}</php>
 					<!-- <div class="ar_block">

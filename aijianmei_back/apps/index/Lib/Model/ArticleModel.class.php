@@ -32,6 +32,22 @@ class ArticleModel extends Model {
 		return $daily;
 	}
 	
+	public function getNutriArticles($order)
+	{
+		$sql = "select a.* from ai_article a,ai_article_category c where c.channel=3 and a.category_id=c.id order by $order desc limit 0,10";
+		$result = M('')->query($sql);
+		
+		return $result;
+	}
+	
+	public function getAppendArticles($order)
+	{
+		$sql = "select a.* from ai_article a,ai_article_category c where c.channel=4 and a.category_id=c.id order by $order desc limit 0,10";
+		$result = M('')->query($sql);
+	
+		return $result;
+	}
+	
 	protected function getDailyComments($id)
 	{
 		$sql = "select * from ai_comments where parent_type='4' and parent_id=".$id;
