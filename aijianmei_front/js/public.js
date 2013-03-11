@@ -73,10 +73,10 @@ $(function(){
 		});
 	});
 	
-	$(".ai_account input").focus(function(){
+	$(".text_input input").focus(function(){
 		$(this).siblings().hide();			
 	});
-	$(".ai_account input").blur(function(){
+	$(".text_input input").blur(function(){
 		if(!($(this).val())){
 			$(this).siblings("label").show();
 		}

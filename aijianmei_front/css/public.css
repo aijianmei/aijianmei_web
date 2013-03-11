@@ -101,6 +101,29 @@ button{
 			color:red;
 			display:none;
 		}
+		/*验证码*/
+		.checkCode{
+			padding: 0 0 10px 20px;
+			height: 25px;
+			position: relative;
+		}
+		.checkBox{
+			width: 50px;
+			height: 20px;
+			border: 1px inset #ccc;
+		}
+		.checkImg{
+			position: absolute;
+			left: 148px;
+			width: 60px;
+			height: 22px;
+			background: #ccc;
+		}
+		.checkChange{
+			position: absolute;
+			left: 210px;
+			top: 5px;
+		}
 	/****** 登陆按钮 *********/
 		.submit_btn{
 			width:80px;
@@ -114,7 +137,8 @@ button{
 	/******* 忘记密码 **********/
 		.forget{
 			float:right;
-			margin-right:120px;
+			margin-right:75px;
+			margin-top: 10px;
 		}
 	.other_account{
 		float:right;
