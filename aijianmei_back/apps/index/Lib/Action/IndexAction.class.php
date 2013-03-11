@@ -81,31 +81,32 @@ class IndexAction extends Action {
 				if(!empty($is_vote)) {
 					echo '<script type="text/javascript">alert("已经投票");</script>';
 				}else {
-					$like = M('article')->field('like')->where(array('id'=>$_GET['id']))->find();
+					/* $like = M('article')->field('like')->where(array('id'=>$_GET['id']))->find();
 					$data['id'] = $_GET['id'];
 					$data['like'] = $like['like'];
 					M('article')->save($data);
+					 */
+					M('')->query('update ai_article set `like`=`like`+1 where id='.$_GET['id']);
 					M('article_vote')->add(array('uid'=>$this->mid, 'article'=>$_GET['id']));
 				}				
 			}else {
-				echo '<script type="text/javascript">alert("请登录")</script>';
+				//echo '<script type="text/javascript">alert("请登录")</script>';
 			}
-		}
-		
-		if($o=='unlike') {
+		}elseif($o=='unlike') {
 			if($this->mid) {
 				$is_vote = M('article_vote')->where(array('uid'=>$this->mid, 'article_id'=>$_GET['id']))->find();
 				if(!empty($is_vote)) {
 					echo '<script type="text/javascript">alert("已经投票");</script>';
 				}else {
-					$unlike = M('article')->field('unlike')->where(array('id'=>$_GET['id']))->find();
+					/* $unlike = M('article')->field('unlike')->where(array('id'=>$_GET['id']))->find();
 					$data['id'] = $_GET['id'];
 					$data['unlike'] = $unlike['unlike'];
-					M('article')->save($data);
+					M('article')->save($data); */
+					M('')->query('update ai_article set `unlike`=`unlike`+1  where id='.$_GET['id']);
 					M('article_vote')->add(array('uid'=>$this->mid, 'article'=>$_GET['id']));
 				}
 			}else {
-				echo '<script type="text/javascript">alert("请登录")</script>';
+				//echo '<script type="text/javascript">alert("请登录")</script>';
 			}
 		}
 		global $ts;
