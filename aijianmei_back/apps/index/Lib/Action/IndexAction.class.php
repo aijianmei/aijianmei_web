@@ -76,7 +76,7 @@ class IndexAction extends Action {
 	{	
 		$o = $_GET['o'];
 		if($o=='like') {
-			if($this->mid) {
+			if($this->mid) {				
 				$is_vote = M('article_vote')->where(array('uid'=>$this->mid, 'article_id'=>$_GET['id']))->find();
 				if(!empty($is_vote)) {
 					echo '<script type="text/javascript">alert("已经投票");</script>';
@@ -87,7 +87,9 @@ class IndexAction extends Action {
 					M('article')->save($data);
 					 */
 					M('')->query('update ai_article set `like`=`like`+1 where id='.$_GET['id']);
-					M('article_vote')->add(array('uid'=>$this->mid, 'article'=>$_GET['id']));
+					$data['uid'] = $this->mid;
+					$data['article_id'] = $_GET['id'];
+					M('')->query('insert into ai_article_vote (`uid`,`article_id`) values ("'.$this->mid.'","'.$_GET['id'].'"');
 				}				
 			}else {
 				//echo '<script type="text/javascript">alert("请登录")</script>';
@@ -103,7 +105,7 @@ class IndexAction extends Action {
 					$data['unlike'] = $unlike['unlike'];
 					M('article')->save($data); */
 					M('')->query('update ai_article set `unlike`=`unlike`+1  where id='.$_GET['id']);
-					M('article_vote')->add(array('uid'=>$this->mid, 'article'=>$_GET['id']));
+					M('article_vote')->add(array('uid'=>$this->mid, 'article_id'=>$_GET['id']));
 				}
 			}else {
 				//echo '<script type="text/javascript">alert("请登录")</script>';
