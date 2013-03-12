@@ -40,6 +40,12 @@
 				line-height: 26px;
 				border-bottom: 1px solid #E0E0E0;
 			}
+				.web_expend_1 .for_sprite_7{
+					float: right;
+					border: 0px;
+					font-size: 14px;
+					font-weight: 700;
+				}
 				.web_expend_1 .prompt{
 					padding-left: 0px;
 					border-left: none;
@@ -47,6 +53,11 @@
 					font-weight: 700;
 					color: #0079CA;
 					}
+			.essay_ct .web_expend_1 .share_to{
+				border-left: 0px;
+				margin-left: 20px;
+				font-size: 18px;
+			}
 				.web_expend_1 span{
 					padding: 0 7px;
 					border-left: 1px solid #CCC;

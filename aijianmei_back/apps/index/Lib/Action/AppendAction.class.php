@@ -13,6 +13,7 @@ class AppendAction extends Action {
 		//print_r($articles);
 		$hotArticles = D('Article')->getAppendArticles('click');
 		$this->assign('hotArticles', $hotArticles);
+		foreach($hotArticles as $a) echo $a['title'];//$a['title']=substr($a['title'],0,10)."...";
 		
 		$lastArticles = D('Article')->getAppendArticles('create_time');
 		$this->assign('lastArticles', $lastArticles);
