@@ -341,24 +341,6 @@
 							line-height: 27px;
 							margin-left: 27px;
 						}
-				.relation{
-					margin-bottom: 100px;
-				} 
-				.relation .title_6{
-					border-bottom: 1px solid #DFDFDF;
-				}
-					.title_6 .add_relation{
-						display: inline-block;
-						height: 27px;
-						line-height: 27px;
-						margin-bottom: -1px;
-						font-size: 15px;
-						border-bottom: 1px solid #5AB0FF;						
-					}
-				.relation p{
-					line-height: 27px;
-					font-size: 18px;					
-				}
 		/*右边广告部分*/
 		.content_right{
 			float:right;
