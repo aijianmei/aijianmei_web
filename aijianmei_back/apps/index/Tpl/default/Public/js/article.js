@@ -65,7 +65,7 @@ $(function(){
 	$(".sprite_8").add(".sprite_9").click(function(){
 		var time = parseInt($(this).children().text());
 		time++;
-		$(this).children().html(time)
+		//$(this).children().html(time)
 	})
 
 	//页面下拉列表

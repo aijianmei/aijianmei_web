@@ -100,8 +100,8 @@
 								<p>页面1</p>	
 							</div> -->
 						</span>
-						<a class="sprite_8" aid="{$article['id']}" href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'like'))}"><span class="praise">{$article['like']}</span></a>
-						<a class="sprite_9" aid="{$article['id']}" href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'unlike'))}"><span class="praise">{$article['unlike']}</span></a>
+						<a class="sprite_8" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$article['like']}</span></a>
+						<a class="sprite_9" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$article['unlike']}</span></a>
 						<span class="relay">转发到</span>
 						<include file="../Public/share" />
 						<!-- JiaThis Button BEGIN -->
