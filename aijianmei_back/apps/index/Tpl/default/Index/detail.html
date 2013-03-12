@@ -11,9 +11,11 @@
 					<h2 class="title_2">{$article['title']}</h2>
 					<div class="web_expend_1">
 						<a class="sprite_7">1343</a>
+						<span class="for_sprite_7">评论数</span>
 						<span class="prompt">{$article['author']}</span>
 						<span>{$article['source']}</span>			
 						<span>我要分享</span>
+
 						
 						<include file="../Public/share" />
 						<script type="text/javascript">
@@ -123,6 +125,7 @@
 						
 						
 					</div>
+					<wb:like appkey="5Q8YPj"></wb:like>
 					<div class="border_comment">
 						<span class="word_num">0/300</span>
 						<php>if(getMid()){</php>
@@ -132,15 +135,15 @@
 						<span>注册</span>
 						<php>}</php>
 						
-						<div class="textarea"><textarea class="comment_inp" name="comment" id="comment">有什么感想，来说说吧</textarea></div>
-						<a class="comment" href="javascript:void(0);" onclick="comments(comment.value, {$article['id']}, 'Article')" aid="{$article['id']}">发表评论</a>
+						<div class="textarea"><textarea class="comment_inp" name="comment" >有什么感想，来说说吧</textarea></div>
+						<a class="comment" id="not_login">发表评论</a>
 					</div>
 					<div class="check_comment">
 						<a class="comment_1">全部评论(0)</a>
 						<a class="comment_2 comment_3">精选评论</a>
 					</div>
 					<div class="cm_content tab_2">
-						<div class="cm_top">
+						<div class="page">
 							<span class="page_1">
 								<span class="lay_page">
 									<!-- <a class="choice_page">1</a>
