@@ -263,7 +263,10 @@
 						display: inline-block;
 						float: right;
 					}
-
+					.cm_top .concrete_page{
+						display:inline-block;
+						line-height: 25px;
+					}
 						.page_1 .choice_page{
 							display: inline-block;
 							padding: 4px;
