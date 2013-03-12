@@ -360,7 +360,7 @@ $(function(){
 				}
 			};
 			fade.init('store');
-			fade.init('forum')
+			fade.init('forum');
 //视频列表 切换分类
 $("li.select>a").click(function(){
 	$(this).addClass("pre").siblings().removeClass("pre");

@@ -27,13 +27,13 @@
 					<div class="right_part">
 						<h1 class="a_moblie" title="爱健美移动客户端">爱健美移动客户端</h1>
 						<ul class="client_classify">
-							<li>
-								<a class="choice android"></a>
+							<li class="android">
+								<a class="choice"></a>
 							</li>
-							<li>
+							<li class="">
 								<a class="choice iphone"></a>
 							</li>
-							<li>
+							<li class="">
 								<a class="choice ipad"></a>
 							</li>
 						</ul>
@@ -86,5 +86,110 @@
 				</ul>
 			</div>
 		</div>
-		<div id="fonter">
-			<p class="compa
+	</div>
+	<script type="text/javascript">
+		var getdom = function(){
+				this.$ = function(id){
+					return document.getElementById(id);
+				}
+
+				this.getElementsByClass = function(searchClass,node,tag) {
+			        var classElements = new Array();
+			        if ( node == null )
+			                node = document;
+			        if ( tag == null )
+			                tag = '*';
+			        var els = node.getElementsByTagName(tag);
+			        var elsLen = els.length;
+			        var pattern = new RegExp("(^|\\s)"+searchClass+"(\\s|$)");
+			        for (i = 0, j = 0; i < elsLen; i++) {
+			                if ( pattern.test(els[i].className) ) {
+			                        classElements[j] = els[i];
+			                        j++;
+			                }
+			        }
+			        return classElements;
+			    }
+			    this.GetCurrentStyle = function(obj, prop){
+				    if (obj.currentStyle){ //IE
+				        return obj.currentStyle[prop];
+				    }
+				    else if (window.getComputedStyle){ //非IE
+				        propprop = prop.replace (/([A-Z])/g, "-$1");
+				        propprop = prop.toLowerCase ();
+				        return document.defaultView.getComputedStyle(obj,null)[propprop];
+				    }
+				    return null;
+				}
+			}
+	//对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
+			var fade = {
+				newdom : new getdom,
+				init : function(obj){
+					var Obj = fade.newdom.getElementsByClass(obj)[0] || document.getElementsByTagName(obj)[0] || document.getElementById(obj);
+					Obj.onclick = function(event){
+						event.preventDefault();
+						fade.handlecontent();
+						fade.changestyle('1');
+						this.style.background = '';
+						var closed = fade.newdom.getElementsByClass('closed')[0];
+						closed.onclick = function(){
+							var fade_in = fade.newdom.getElementsByClass('fade_in')[0];
+							fade.changestyle('0');
+							fade_in.removeAttribute('class')
+						}
+					}
+				},
+				handlecontent : function(){
+					var body = document.getElementsByTagName('body')[0],
+						div_1 = document.createElement('div'),
+						div_2 = document.createElement('div');
+					div_1.className = 'fade_in';
+					div_2.className = 'modal';
+					div_2.innerHTML = '<div class="modal_header"><a class="closed">×</a><h3>我们正在检测中</h3></div><p class="modal_body">即将推出，敬请期待...</p>';
+					body.appendChild(div_1);
+					body.appendChild(div_2);
+				},
+				changestyle : function(T){
+					var fade_in = fade.newdom.getElementsByClass('fade_in')[0],
+						modal = fade.newdom.getElementsByClass('modal')[0];
+					if(T == '1'){
+						var i = 0,
+							top = fade.newdom.GetCurrentStyle(modal,'top');
+						var round = function(){
+							setTimeout(function(){
+								i = i + 0.05;
+								fade_in.style.opacity = i;
+								top = parseFloat(top) + 20;
+								modal.style.top = top + 'px';
+								if(top < 200){
+									round()
+								}
+							},1);
+						}
+						round()
+					}
+					else{
+						var i = 0.75,
+							top = fade.newdom.GetCurrentStyle(modal,'top');
+						var round = function(){
+							setTimeout(function(){
+								i = i - 0.05;
+								fade_in.style.opacity = i;
+								top = parseFloat(top) - 20;
+								modal.style.top = top + 'px';
+								if(top > -120){
+									round()
+								}
+							},10);
+						}
+						round()
+					}	
+				}
+			};
+	fade.init('android');
+	fade.init('iphone');
+	fade.init('ipad');
+	</script>
+</body>
+</html>
