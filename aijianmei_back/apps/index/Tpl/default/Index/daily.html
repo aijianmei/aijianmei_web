@@ -73,8 +73,8 @@
 								<p>页面1</p>	
 							</div> -->
 						</span>
-						<a class="sprite_8"><span class="praise">100</span></a>
-						<a class="sprite_9"><span class="praise">100</span></a>
+						<a class="sprite_8" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$daily['like']}</span></a>
+						<a class="sprite_9" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$daily['unlike']}</span></a>
 						<span class="relay">转发到</span>
 						<include file="../Public/share" />
 						<!-- JiaThis Button BEGIN -->

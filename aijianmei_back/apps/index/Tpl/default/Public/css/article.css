@@ -8,7 +8,6 @@
 			padding: 25px 0 0 15px;
 			font-size: 13px;
 		}
-
 		.content_left .title_1{
 			display: inline;
 			margin-right:60px;
@@ -102,6 +101,7 @@
 					height: 80px;
 					padding-left: 5px;
 					background: #E6E6E6;
+					background: #E6E6E6;
 				}
 				.video .detail p{
 					line-height: 24px;
@@ -139,6 +139,7 @@
 					height: 27px;
 					margin-bottom: -8px;
 				}
+
 				.web_expend_2 .sprite_9{
 					background-position: 0 -186px;
 					width: 50px;
@@ -310,10 +311,24 @@
 							padding: 10px 0;
 						}
 						.target .bottom_ms{
-							padding:10px 0;
+							padding:14px 0;
 						}
 						.target .to{
 							float:right;
+						}
+						.to .sprite_8{
+							display: inline-block;
+							background: url(../images/wm3.png) no-repeat;
+							background-position: 0 -263px;
+							width: 53px;
+							height: 25px;
+							margin-bottom: -4px;
+						}
+						.to .praise{
+							display: inline-block;
+							height: 27px;
+							line-height: 27px;
+							margin-left: 27px;
 						}
 				.relation{
 					margin-bottom: 100px;

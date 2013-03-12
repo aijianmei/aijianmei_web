@@ -320,7 +320,16 @@ margin-bottom: 20px;
 				font-weight:bold;
 			}
 		
-		
+		.tab_btn{
+			margin: 0 5px;
+			width: 50px;
+			height: 20px;
+			background: none;
+			color: #656565;
+		}
+		.curr_tit{
+			background:lightblue;
+		}
 /******* 视频 *************/		
 	.video{
 		display:inline-block;
