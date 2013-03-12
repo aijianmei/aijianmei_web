@@ -330,11 +330,11 @@ $(function(){
 							top = fade.newdom.GetCurrentStyle(modal,'top');
 						var round = function(){
 							setTimeout(function(){
-								i = i + 0.1;
+								i = i + 0.05;
 								fade_in.style.opacity = i;
 								top = parseFloat(top) + 20;
 								modal.style.top = top + 'px';
-								if(top < 40){
+								if(top < 200){
 									round()
 								}
 							},1);
@@ -342,15 +342,15 @@ $(function(){
 						round()
 					}
 					else{
-						var i = 0.7,
+						var i = 0.75,
 							top = fade.newdom.GetCurrentStyle(modal,'top');
 						var round = function(){
 							setTimeout(function(){
-								i = i - 0.1;
+								i = i - 0.05;
 								fade_in.style.opacity = i;
 								top = parseFloat(top) - 20;
 								modal.style.top = top + 'px';
-								if(top > -100){
+								if(top > -120){
 									round()
 								}
 							},10);
