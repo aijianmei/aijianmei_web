@@ -158,6 +158,10 @@ class IndexAction extends Action {
 		$this->assign('uid', $this->mid);
 
 		//目录树
+		//$tree_channel_en 一级目录
+		//$tree_parent 二级目录
+		//$tree_category_id 三级目录
+		//article['id']  四级目录
 		$string="select category_id,name,channel,parent from ai_article,ai_article_category where ai_article.category_id=ai_article_category.id and ai_article.id=".$id;
 		$result=mysql_query($string);
 		$result=mysql_fetch_array($result);
