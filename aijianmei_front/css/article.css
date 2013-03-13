@@ -424,21 +424,17 @@
 			color: #0079CA;
 			font-weight:bold;
 		}
-		.author_other{
+		.two_code{
+			float:left;
 			height:100px;
 			width:120px;
-			margin: 0px auto;			
+			margin:15px;			
 		}
-		.author_other ul{
-			list-style:disc;
-			padding-left:20px;
-		}
-		.author_other .aut_other_arts{	
-			height:30px;
-			line-height:30px;
-		}
-		.aut_other_arts a{
-			color:#0079CA;
+		.ms_code{
+			float: left;
+			margin-top:46px;
+			font-size: 17px;
+			font-weight: 700;
 		}
 	/*footer*/
 
