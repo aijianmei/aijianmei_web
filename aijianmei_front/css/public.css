@@ -30,21 +30,22 @@ button{
 }
 
 .body{
-	position:absolute;
-	width:100%;
-	height:100%;
-	background:#fff;
-	z-index:9999;
-	opacity:0.93;
-	top:20px;
-	display:none;
+	position: fixed;
+	background: black;
+	z-index: 9999;
+	opacity: 0.85;
+	top: 0px;
+	display: none;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
 }
 /******** 登陆 *******/
 .sheet{
-	position:absolute;	
+	position:fixed;	
 	z-index:10000;
 	width:100%;
-	margin:20px;
+	margin-top:120px;
 	display:none;
 }
 /********* 直接登陆爱健美 *******/
@@ -53,7 +54,7 @@ button{
 		height:300px;
 		background:url(../images/tbg.png);
 		margin:0 auto;
-		border-radius:0 0px 10px 10px;
+		border-radius:10px;
 		box-shadow: 0px 5px 15px rgba(114,114,113,1);
 	}
 	/******* 关闭按钮 *******/
@@ -62,6 +63,7 @@ button{
 			height:20px;
 			font-size:26px;
 			float:right;
+			margin:10px;
 			background: url(../images/login.png) no-repeat 0 -388px;
 		}
 		.log h3{
@@ -361,7 +363,7 @@ button{
 		}
 		
 		#nav .home{
-			background:url(../images/home_bg.png) no-repeat left;
+			border-radius: 4px 0 0 4px;
 			width:90px;
 		}
 		#nav .home a span{
