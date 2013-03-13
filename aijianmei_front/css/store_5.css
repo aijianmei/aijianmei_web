@@ -554,6 +554,11 @@
 							height: 27px;
 							line-height: 27px;
 							margin-left: 27px;
+						}.to .praise{
+							display: inline-block;
+							height: 27px;
+							line-height: 27px;
+							margin-left: 27px;
 						}
 						.target .to{
 							float:right;

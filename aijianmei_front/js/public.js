@@ -59,17 +59,21 @@ $(function(){
 
 $(function(){
 	$("#login").click(function(){
-		$("div.body").slideDown(300,function(){
-			$("body").css("overflow","hidden").height("100%");
+		$("div.body").show("fast",function(){
+			// $("body").css("overflow","hidden").height("100%");
 			$(this).css("display","block");
+			$("div.sheet").slideDown(200);
 			$("div.sheet").css("display","block");
 		});
 	});
 	$(".close_btn").click(function(){
-		$("body").css("overflow","visible");
-		$("div.sheet").slideUp(300,function(){
+		// $("body").css("overflow","visible");
+		$("div.sheet").slideUp(200,function(){
 		$("div.sheet").css("display","none");
-		$("div.body").css("display","none");
+		$("div.body").slideUp(300,function(){
+			$("div.body").css("display","none");
+		});
+		
 		});
 	});
 	
@@ -122,9 +126,16 @@ $(function(){
 				if(element.addEventListener){
 					element.addEventListener(type,handle,false)
 				}
-				if(element.attachEvent){
+				else if(element.attachEvent){
 					element.attachEvent("on" + type,handle)
 				} 
+				else {
+		            element["on" + type] = handler;
+		            this.AddEvent = function(element, type, handler)
+		            {
+		                element["on" + type] = handler;
+		            };
+		        }
 			}
 			var getdom = function(){
 				this.$ = function(id){
@@ -300,7 +311,13 @@ $(function(){
 				init : function(obj){
 					var Obj = fade.newdom.getElementsByClass(obj)[0] || document.getElementsByTagName(obj)[0] || document.getElementById(obj);
 					Obj.onclick = function(event){
-						event.preventDefault();
+						var _e = event ? event : window.event;
+						if(_e.preventDefault){
+							_e.preventDefault();
+						}
+						else{
+							_e.returnValue = false;
+						}
 						fade.handlecontent();
 						fade.changestyle('1');
 						this.style.background = '';
@@ -308,7 +325,8 @@ $(function(){
 							fade_in = fade.newdom.getElementsByClass('fade_in')[0];
 						var click_back = function(){
 							fade.changestyle('0');
-							fade_in.removeAttribute('class')
+							// fade_in.removeAttribute('class')
+							fade_in.className = ''
 						}
 						addevent(closed,'click',click_back);
 						addevent(fade_in,'click',click_back);
