@@ -131,12 +131,16 @@
 				margin: 0 auto;
 				width: 722px;
 			}
-				.plan_article_tl{
-					display: inline-block;
-					line-height: 40px;
-					font-size: 20px;
-					color: #56888F;
-				}
+		
+			.plan_article_tl{
+				display: inline-block;
+				height: 40px;
+				padding-top: 8px;
+				font-size: 16px;
+				color: #56888F;
+				font-weight: 700;
+			}
+			
 				.add_expend{
 					display: block;
 					margin: 5px 0 10px 0;
@@ -320,7 +324,16 @@ margin-bottom: 20px;
 				font-weight:bold;
 			}
 		
-		
+		.tab_btn{
+			margin: 0 5px;
+			width: 50px;
+			height: 20px;
+			background: none;
+			color: #656565;
+		}
+		.curr_tit{
+			background:lightblue;
+		}
 /******* 视频 *************/		
 	.video{
 		display:inline-block;

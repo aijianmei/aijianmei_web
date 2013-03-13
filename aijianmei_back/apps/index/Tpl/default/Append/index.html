@@ -6,7 +6,9 @@
 				<span class="corner_left"></span>
 				<div class="lay_sider">
 					<div class="subsider">
-						<h1 class="video_all">补充</h1>
+						<span class="border_line"></span>
+						<h3 class="video_all">补充</h3>
+						<span class="border_line"></span>
 						<ul>
 						<php>foreach($categories as $c) {</php>
 							<php>if($c['name']) {</php>
@@ -35,7 +37,7 @@
 						</ul>
 					</div>
 				</div>
-				<span class="corner_bottom"></span>
+				<span class="border_line"></span>
 			</div>
 
 
@@ -90,14 +92,13 @@
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
 						<h1 class="public_title">最佳十篇文章</h1>
-						<ul>
+						<ul class="new_video clearfix">
 						<php>foreach($hotArticles as $a) {</php>
-							<li class="article">
-								<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="article_pic"><img src="/public/images/article/{$a['img']}" alt="no" /></a>
-								<div class="article_content">
-									<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="title_3">{$a['title']}</a>
-									<p>{$a['content']|htmlspecialchars_decode|getShort=###,20|formatComment}</p>
-								</div>
+							<li class="tr_classify">
+								<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="video_1"><img src="../Public/images/article/{$a['img']}" width="165px" height="134px" alt="no" /></a>
+								
+									<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="plan_article_tl">{$a['title']}</a>
+									<p  class="summary">{$a['brief']}</p>								
 							</li>
 						<php>}</php>
 							<!-- <li class="article">
@@ -173,14 +174,12 @@
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
 						<h1 class="public_title">最近补充品文章</h1>
-						<ul>
+						<ul class="new_video clearfix">
 						<php>foreach($lastArticles as $a) {</php>
-							<li class="article">
-								<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="article_pic"><img src="/public/images/article/{$a['img']}" alt="no" /></a>
-								<div class="article_content">
-									<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="title_3">{$a['title']}</a>
-									<p>{$a['content']|htmlspecialchars_decode|getShort=###,20|formatComment}</p>
-								</div>
+							<li class="tr_classify">
+								<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="video_1"><img src="../Public/images/article/{$a['img']}" width="165px" height="134px" alt="no" /></a>
+									<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="plan_article_tl">{$a['title']}</a>
+									<p class="summary">{$a['brief']}</p>								
 							</li>
 						<php>}</php>
 							<!-- <li class="article">

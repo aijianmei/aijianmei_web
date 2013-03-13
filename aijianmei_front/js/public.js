@@ -108,11 +108,13 @@ $(function(){
 	})
 	
 //导航栏样式改变	
+
 	$("#nav").children().click(function(){
 		$(this).css("background","#2E6A92");
 		
 		$(this).siblings().removeClass().css("background","");
 	})
+
 		
 					
 });
@@ -303,12 +305,14 @@ $(function(){
 						fade.handlecontent();
 						fade.changestyle('1');
 						this.style.background = '';
-						var closed = fade.newdom.getElementsByClass('closed')[0];
-						closed.onclick = function(){
-							var fade_in = fade.newdom.getElementsByClass('fade_in')[0];
+						var closed = fade.newdom.getElementsByClass('closed')[0],
+							fade_in = fade.newdom.getElementsByClass('fade_in')[0];
+						var click_back = function(){
 							fade.changestyle('0');
 							fade_in.removeAttribute('class')
 						}
+						addevent(closed,'click',click_back);
+						addevent(fade_in,'click',click_back);
 					}
 				},
 				handlecontent : function(){
@@ -329,11 +333,11 @@ $(function(){
 							top = fade.newdom.GetCurrentStyle(modal,'top');
 						var round = function(){
 							setTimeout(function(){
-								i = i + 0.1;
+								i = i + 0.05;
 								fade_in.style.opacity = i;
 								top = parseFloat(top) + 20;
 								modal.style.top = top + 'px';
-								if(top < 40){
+								if(top < 200){
 									round()
 								}
 							},1);
@@ -341,15 +345,15 @@ $(function(){
 						round()
 					}
 					else{
-						var i = 0.7,
+						var i = 0.75,
 							top = fade.newdom.GetCurrentStyle(modal,'top');
 						var round = function(){
 							setTimeout(function(){
-								i = i - 0.1;
+								i = i - 0.05;
 								fade_in.style.opacity = i;
 								top = parseFloat(top) - 20;
 								modal.style.top = top + 'px';
-								if(top > -100){
+								if(top > -120){
 									round()
 								}
 							},10);
@@ -359,7 +363,8 @@ $(function(){
 				}
 			};
 			fade.init('store');
-			fade.init('forum')
+			fade.init('forum');
+			fade.init('teach')
 //视频列表 切换分类
 $("li.select>a").click(function(){
 	$(this).addClass("pre").siblings().removeClass("pre");

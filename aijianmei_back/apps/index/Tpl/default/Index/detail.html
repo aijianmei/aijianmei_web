@@ -2,7 +2,14 @@
 
 <div id="content">
 			<div class="content_left clearfix">
-				<h1 class="title_1">爱健美文章</h1>
+				<span>
+				<span>您所在的位置:</span>
+				<a href="/index.php?app=index">爱健美</a>->
+				<a href="/index.php?app=index&mod={$tree_channel_en}">{$first}</a>->
+				<a href="/index.php?app=index&mod={$tree_channel_en}&act=articleDetail&id={$tree_parent}">{$second}</a>->
+				<a href="/index.php?app=index&mod={$tree_channel_en}&act=articleDetail&id={$tree_category_id}">{$third}</a>->
+				<a href="index.php?app=index&mod=Index&act=articleDetail&id={$article['id']}">{$article['title']}</a>
+				</span>
 				<php>$keywords = split(',', $article['keyword']);foreach($keywords as $k) {</php>
 				<span class="goal">{$k}</span>
 				<php>}</php>
@@ -11,9 +18,11 @@
 					<h2 class="title_2">{$article['title']}</h2>
 					<div class="web_expend_1">
 						<a class="sprite_7">1343</a>
+						<span class="for_sprite_7">评论数</span>
 						<span class="prompt">{$article['author']}</span>
 						<span>{$article['source']}</span>			
 						<span>我要分享</span>
+
 						
 						<include file="../Public/share" />
 						<script type="text/javascript">
@@ -98,8 +107,8 @@
 								<p>页面1</p>	
 							</div> -->
 						</span>
-						<a class="sprite_8" aid="{$article['id']}" href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'like'))}"><span class="praise">{$article['like']}</span></a>
-						<a class="sprite_9" aid="{$article['id']}" href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'unlike'))}"><span class="praise">{$article['unlike']}</span></a>
+						<a class="sprite_8" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$article['like']}</span></a>
+						<a class="sprite_9" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$article['unlike']}</span></a>
 						<span class="relay">转发到</span>
 						<include file="../Public/share" />
 						<!-- JiaThis Button BEGIN -->
@@ -123,6 +132,7 @@
 						
 						
 					</div>
+					<wb:like appkey="5Q8YPj"></wb:like>
 					<div class="border_comment">
 						<span class="word_num">0/300</span>
 						<php>if(getMid()){</php>
@@ -132,15 +142,15 @@
 						<span>注册</span>
 						<php>}</php>
 						
-						<div class="textarea"><textarea class="comment_inp" name="comment" id="comment">有什么感想，来说说吧</textarea></div>
-						<a class="comment" href="javascript:void(0);" onclick="comments(comment.value, {$article['id']}, 'Article')" aid="{$article['id']}">发表评论</a>
+						<div class="textarea"><textarea class="comment_inp" name="comment" >有什么感想，来说说吧</textarea></div>
+						<a class="comment" id="not_login">发表评论</a>
 					</div>
 					<div class="check_comment">
 						<a class="comment_1">全部评论(0)</a>
 						<a class="comment_2 comment_3">精选评论</a>
 					</div>
 					<div class="cm_content tab_2">
-						<div class="cm_top">
+						<div class="page">
 							<span class="page_1">
 								<span class="lay_page">
 									<!-- <a class="choice_page">1</a>
@@ -252,15 +262,11 @@
 						<h4 class="sider_t">关于作者</h4>
 						<div>
 							<div class="author_info">
-								<a href="">
-									<img class="author_face" src="../Public/images/pal/zp_03.jpg" alt="" />
-									<span class="author_nick">爱健美</span>
-								</a>
-								<p class="author_label">关注互联网创业</p>
+								<iframe width="100%" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=100&skin=1&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=2692984661&verifier=3c08c88d&dpc=1"></iframe>
+								<p class="author_label">推广健身文化，传播健康理念</p>
 							</div>
 							<div class="author_wb">
-								<button class="aut_wb"><span class="sina_icon">关注</span></button>
-								<a href="" class="aut_nick">@爱健美</a>
+								<wb:follow-button uid="2692984661" type="red_4" >关注</wb:follow-button>
 							</div>
 							<div class="author_other">
 								<h4>作者的其他文章</h4>

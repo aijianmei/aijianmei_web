@@ -73,35 +73,39 @@
 	}
 	.now{
 		margin-top:20px;
+	}	
+	/*更改部分 2013 03 09*/
+	.hot_video,.new_video{
+		margin: 0 auto;
+		width: 722px;
 	}
-	.article{
+	.plan_article_tl{
+		display: inline-block;
+		height: 40px;
+		padding-top: 8px;
+		font-size: 16px;
+		color: #56888F;
+		font-weight: 700;
+	}	
+	.tr_classify{
 		float: left;
-		width: 314px;
-		height: 64px;
-		margin: 5px 35px;
-		padding: 7px 0px;
-		border: 2px solid #CCC;
+		width: 165px;
+		margin:0 9px 0px 0;
+		border:3px solid transparent;
 	}
-	.article .article_pic{
-		float: left;
-		margin-right:10px;
+	.video_1{
+		display: block;
+		height:134px;
 	}
-	.article img{
-		border-radius: 8px;
+	.summary{
+		height:70px;
+		line-height: 20px;
+		font-size: 12px;
 	}
-		.article_content{
-			float: left;
-			width: 185px;
-		}
-		.article_content .title_3{
-			line-height: 18px;
-			font-size: 13px;
-			font-weight: 600;
-			color: #2C5AD1;
-		}
-		.article_content p{
-			font-size: 12px;
-		}
+	.new_video img,.hot_video img{
+		border-radius: 4px;
+	}
+	/*更改部分 2013 03 09*/
 /*nutri一级页面部分*/
 
 

@@ -1,11 +1,12 @@
 ﻿<!DOCTYPE html>
-	<html>
+	<html xmlns:wb=“http://open.weibo.com/wb”>
 		<head>
 			<meta charset="utf-8"/>
 			<title>爱健美</title>
 			<link rel="stylesheet" href="../Public/css/public.css" />
 			<link rel="stylesheet" href="../Public/css/{$cssFile}.css" />	
-			<link rel="stylesheet" href="../Public/css/jquery-ui.css" />	
+			<link rel="stylesheet" href="../Public/css/jquery-ui.css" />
+			<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>	
 		</head>
 <body>
 		<div class="body"></div>
@@ -93,12 +94,12 @@
 					</div>
 					<ul id="nav">
 						<li class="home"><a href="/index.php?app=index"><span>首页</span></a></li>
-						<li class="store"><a href="javascript:void(0);" onclick="alert('正在建设中')"><span>商店</span></a></li>
+						<li class="store"><a href='#'><span>商店</span></a></li>
 						<li><a href="/index.php?app=index&mod=Plan">健身计划</a></li>
 						<li><a href="/index.php?app=index&mod=Train">锻炼</a></li>
 						<li><a href="/index.php?app=index&mod=Nutri">营养</a></li>
 						<li><a href="/index.php?app=index&mod=Append">补充</a></li>
-						<li><a href="javascript:void(0);" onclick="alert('正在建设中')">论坛</a></li>
+						<li><a href="#">论坛</a></li>
 						<li><a href="{:U('home/User/index')}">交友互动</a></li>
 					</ul>
 					<span class="position">爱健美/首页</span>

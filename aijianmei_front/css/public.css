@@ -767,3 +767,17 @@ button{
 		padding: 15px;
 		overflow-y: auto;
 	}
+
+/*上下页按钮统一风格相应css*/
+.choice_page{
+				margin:10px 0;
+			}
+			.choice_page li{
+				float: right;
+				margin: 0 4px;
+				padding: 2px;				
+			}
+				.strong{
+					font-weight:600;
+					color:#0E709A;
+				}

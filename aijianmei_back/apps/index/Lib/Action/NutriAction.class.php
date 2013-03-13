@@ -2,7 +2,7 @@
 class NutriAction extends Action {
 	public function index()
 	{
-		$cate = M('article_category')->where(array('channel'=>'3'))->findAll();
+		$cate = M('article_category')->where(array('channel'=>'3'))->order('id desc')->limit(8)->findAll();
 		foreach($cate as $c) {
 			if($c['parent'] == NULL) $realCate[$c['id']] = $c;
 			else $realCate[$c['parent']]['children'][] = $c;
@@ -26,7 +26,7 @@ class NutriAction extends Action {
 	{
 		$id = intval($_GET['id']);
 		
-		$cate = M('article_category')->where(array('channel'=>'3'))->findAll();
+		$cate = M('article_category')->where(array('channel'=>'3'))->order('id desc')->limit(2)->findAll();
 		foreach($cate as $c) {
 			if($c['parent'] == NULL) $realCate[$c['id']] = $c;
 			else $realCate[$c['parent']]['children'][] = $c;
