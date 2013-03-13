@@ -177,7 +177,7 @@
 				<div class="lay_sider">
 					<div class="subsider">
 						<span class="border_line"></span>
-						<h3 class="video_all">补充</h3>
+						<h3 class="video_all">营养</h3>
 						<span class="border_line"></span>
 						<ul>
 							<?php foreach($categories as $c) { ?>
@@ -213,10 +213,11 @@
 							<h1 class="public_title">最热文章</h1>
 							<ul>
 							<?php foreach($articles as $a) { ?>
-								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
-									<p><?php echo ($a['title']); ?></p>
-									
+								<li class="tr_classify">
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="video_1"><img src="<?php echo ($SITE_URL); ?>/public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt=""></a>
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
+									<p class="summary"><?php echo ($a['brief']); ?>
+									</p>
 								</li>
 							<?php } ?>
 								<!-- <li class="nubble">
@@ -247,10 +248,11 @@
 						<h1 class="public_title">最近文章</h1>
 							<ul>
 							<?php foreach($articles as $a) { ?>
-								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
-									<p><?php echo ($a['title']); ?></p>
-									
+									<li class="tr_classify">
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="video_1"><img src="<?php echo ($SITE_URL); ?>/public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt=""></a>
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
+									<p class="summary"><?php echo ($a['brief']); ?>
+									</p>
 								</li>
 							<?php } ?>
 								<!-- <li class="nubble">

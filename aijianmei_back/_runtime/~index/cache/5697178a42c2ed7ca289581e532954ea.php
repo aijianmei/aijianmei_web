@@ -1,11 +1,12 @@
 <?php if (!defined('THINK_PATH')) exit();?>﻿<!DOCTYPE html>
-	<html>
+	<html xmlns:wb=“http://open.weibo.com/wb”>
 		<head>
 			<meta charset="utf-8"/>
 			<title>爱健美</title>
 			<link rel="stylesheet" href="../Public/css/public.css" />
 			<link rel="stylesheet" href="../Public/css/<?php echo ($cssFile); ?>.css" />	
-			<link rel="stylesheet" href="../Public/css/jquery-ui.css" />	
+			<link rel="stylesheet" href="../Public/css/jquery-ui.css" />
+			<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>	
 		</head>
 <body>
 		<div class="body"></div>
@@ -93,12 +94,12 @@
 					</div>
 					<ul id="nav">
 						<li class="home"><a href="/index.php?app=index"><span>首页</span></a></li>
-						<li class="store"><a href="javascript:void(0);" onclick="alert('正在建设中')"><span>商店</span></a></li>
+						<li class="store"><a href='#'><span>商店</span></a></li>
 						<li><a href="/index.php?app=index&mod=Plan">健身计划</a></li>
 						<li><a href="/index.php?app=index&mod=Train">锻炼</a></li>
 						<li><a href="/index.php?app=index&mod=Nutri">营养</a></li>
 						<li><a href="/index.php?app=index&mod=Append">补充</a></li>
-						<li><a href="javascript:void(0);" onclick="alert('正在建设中')">论坛</a></li>
+						<li><a href="#">论坛</a></li>
 						<li><a href="<?php echo U('home/User/index');?>">交友互动</a></li>
 					</ul>
 					<span class="position">爱健美/首页</span>
@@ -180,16 +181,14 @@
 						<span class="border_line"></span>
 						<ul>
 							<?php foreach($categories as $c) { ?>
-							<?php if($c['name']) { ?>
-							<li class="each_video all">
-								<a href="/index.php?app=index&mod=Nutri&act=articleList&id=<?php echo ($c['id']); ?>"><?php echo ($c['name']); ?></a>
-							</li>
-							<?php } ?>
-							<?php foreach($c['children'] as $child) { ?>
-							<li class="each_video">
-								<a href="/index.php?app=index&mod=Nutri&act=articleList&id=<?php echo ($child['id']); ?>"><?php echo ($child['name']); ?></a>
-							</li>
-							<?php } ?>
+								<li class="each_video all">
+									<?php echo ($c['name']); ?>
+								</li>
+								<?php foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList'; ?>
+									<li class="each_video">
+										<a href="/index.php?app=index&mod=Nutri&act=<?php echo ($action); ?>&id=<?php echo ($child['id']); ?>"><?php echo ($child['name']); ?></a>
+									</li>
+								<?php } ?>
 							<?php } ?>
 							<!-- <li class="each_video">
 								<a href="nutri_1.html">减肥营养</a>
@@ -258,11 +257,10 @@
 						<ul class="new_video clearfix">
 						<?php foreach($hotArticles as $a) { ?>
 							<li class="tr_classify">
-								<a href="<?php echo U('index/Index/articleDetail',array('id'=>$a['id']));?>" class="video_1"><img width="165px" height="134px" src="../Public/images/add/<?php echo ($a['img']); ?>" alt="no" /></a>
-								
-									<a href="<?php echo U('index/Index/articleDetail',array('id'=>$a['id']));?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
-									<p class="summary"><?php echo ($a['brief']); ?></p>
-								
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="video_1"><img src="<?php echo ($SITE_URL); ?>/public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt=""></a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
+								<p class="summary"><?php echo ($a['brief']); ?>
+								</p>
 							</li>
 						<?php } ?>
 							<!-- <li class="article">
@@ -339,13 +337,13 @@
 					<div class="lay_top clearfix">
 						<h1 class="public_title">最近补充品文章</h1>
 						<ul class="new_video clearfix">
-						<?php foreach($hotArticles as $a) { ?>
+						<?php foreach($lastArticles as $a) { ?>
 							<li class="tr_classify">
-								<a href="<?php echo U('index/Index/articleDetail',array('id'=>$a['id']));?>" class="video_1"><img width="165px" height="134px" src="../Public/images/add/<?php echo ($a['img']); ?>" alt="no" /></a>
-								
-									<a href="<?php echo U('index/Index/articleDetail',array('id'=>$a['id']));?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
-									<p class="summary"><?php echo ($a['brief']); ?></p>
-								
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="video_1"><img src="<?php echo ($SITE_URL); ?>/public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt=""></a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
+								<p class="summary"><?php echo ($a['brief']); ?>
+								</p>
+								<!-- <a href="#" class="add_expend">查看所有质量增加程序</a> -->
 							</li>
 						<?php } ?>
 							<!-- <li class="article">
@@ -420,21 +418,17 @@
 				<div class="part_top clearfix">
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
-						<h1 class="public_title">增加内容分类</h1>
-						<h2 class="title_4">全部</h2>
-						<ul class="re_nav">
-						<?php foreach($cate as $c){ ?>
-							<li>
-								<a><?php echo ($c['name']); ?></a>
-							</li>
-						<?php } ?>
-							<!-- <li>
-								<a>减肥营养</a>
-							</li>
-							<li>
-								<a>肌肉增益营养</a>
-							</li> -->
+						<h1 class="public_title">目录</h1>
+						<?php foreach($categories as $c) { ?>
+						<h2 class="title_4"><?php echo ($c['name']); ?></h2>
+						<ul class="re_nav clearfix">
+							<?php foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList'; ?>
+									<li class="each_video">
+										<a href="/index.php?app=index&mod=Nutri&act=<?php echo ($action); ?>&id=<?php echo ($child['id']); ?>"><?php echo ($child['name']); ?></a>
+									</li>
+								<?php } ?>
 						</ul>
+						<?php } ?>
 					</div>
 					<span class="corner_bottom"></span>
 				</div>

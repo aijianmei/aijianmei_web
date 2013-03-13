@@ -181,17 +181,25 @@
 						<span class="border_line"></span>
 						<ul>
 						<?php foreach($categories as $c) { ?>
-							<?php if($c['name']) { ?>
+								<li class="each_video all">
+									<?php echo ($c['name']); ?>
+								</li>
+								<?php foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList'; ?>
+									<li class="each_video">
+										<a href="/index.php?app=index&mod=Append&act=articleList&id=<?php echo ($child['id']); ?>"><?php echo ($child['name']); ?></a>
+									</li>
+								<?php } ?>
+							<?php } ?>	
+						<!-- <?php foreach($categories as $c) { ?>
 							<li class="each_video all">
-								<a href="/index.php?app=index&mod=Append&act=articleList&id=<?php echo ($c['id']); ?>"><?php echo ($c['name']); ?></a>
-							</li>
-							<?php } ?>
+									<?php echo ($c['name']); ?>
+								</li>
 							<?php foreach($c['children'] as $child) { ?>
 							<li class="each_video">
 								<a href="/index.php?app=index&mod=Append&act=articleList&id=<?php echo ($child['id']); ?>"><?php echo ($child['name']); ?></a>
 							</li>
 							<?php } ?>
-						<?php } ?>
+						<?php } ?> -->
 							<!-- <li class="each_video">
 								<a href="add_1.html">肌肉大厦</a>
 							</li>
@@ -265,12 +273,14 @@
 						<ul class="new_video clearfix">
 						<?php foreach($hotArticles as $a) { ?>
 							<li class="tr_classify">
-								<a href="<?php echo U('index/Append/index',array('id'=>$a['id']));?>" class="video_1"><img src="../Public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt="no" /></a>
-								
-									<a href="<?php echo U('index/Append/index',array('id'=>$a['id']));?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
-									<p  class="summary"><?php echo ($a['brief']); ?></p>								
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="video_1"><img src="<?php echo ($SITE_URL); ?>/public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt=""></a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
+								<p class="summary"><?php echo ($a['brief']); ?>
+								</p>
 							</li>
-						<?php } ?>
+							<?php } ?>
+						
+							
 							<!-- <li class="article">
 								<a href="article.html" class="article_pic"><img src="../Public/images/add/06.jpg" alt="no" /></a>
 								<div class="article_content">
@@ -347,11 +357,12 @@
 						<ul class="new_video clearfix">
 						<?php foreach($lastArticles as $a) { ?>
 							<li class="tr_classify">
-								<a href="<?php echo U('index/Append/index',array('id'=>$a['id']));?>" class="video_1"><img src="../Public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt="no" /></a>
-									<a href="<?php echo U('index/Append/index',array('id'=>$a['id']));?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
-									<p class="summary"><?php echo ($a['brief']); ?></p>								
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="video_1"><img src="<?php echo ($SITE_URL); ?>/public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt=""></a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
+								<p class="summary"><?php echo ($a['brief']); ?>
+								</p>
 							</li>
-						<?php } ?>
+							<?php } ?>
 							<!-- <li class="article">
 								<a href="article.html" class="article_pic"><img src="../Public/images/add/06.jpg" alt="no" /></a>
 								<div class="article_content">
@@ -424,14 +435,25 @@
 				<div class="part_top clearfix">
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
-						<h1 class="public_title">目录</h1>
+					<h1 class="public_title">目录</h1>
+						<?php foreach($categories as $c) { ?>
+						<h2 class="title_4"><?php echo ($c['name']); ?></h2>
+						<ul class="re_nav clearfix">
+								<?php foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList'; ?>
+									<li class="each_video">
+										<a href="/index.php?app=index&mod=Append&act=articleList&id=<?php echo ($child['id']); ?>"><?php echo ($child['name']); ?></a>
+									</li>
+								<?php } ?>
+							<?php } ?>
+						</ul>
+						<!-- <h1 class="public_title">目录</h1>
 						<h2 class="title_4">全部</h2>
 						<ul class="re_nav">
-						<?php foreach($cate as $c){ ?>
+						<?php foreach($categories as $c){ ?>
 							<li>
 								<a href="/index.php?app=index&mod=Append&act=articleList&id=<?php echo ($c['id']); ?>"><?php echo ($c['name']); ?></a>
 							</li>
-						<?php } ?>
+						<?php } ?> -->
 							<!-- <li>
 								<a>肌肉大厦</a>
 							</li>
