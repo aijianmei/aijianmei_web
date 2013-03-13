@@ -304,9 +304,13 @@ $(function(){
 						fade.handlecontent();
 						fade.changestyle('1');
 						this.style.background = '';
-						var closed = fade.newdom.getElementsByClass('closed')[0];
+						var closed = fade.newdom.getElementsByClass('closed')[0],
+							fade_in = fade.newdom.getElementsByClass('fade_in')[0];
 						closed.onclick = function(){
-							var fade_in = fade.newdom.getElementsByClass('fade_in')[0];
+							fade.changestyle('0');
+							fade_in.removeAttribute('class')
+						}
+						fade_in.onclick = function(){
 							fade.changestyle('0');
 							fade_in.removeAttribute('class')
 						}
