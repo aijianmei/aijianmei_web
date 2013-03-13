@@ -131,12 +131,16 @@
 				margin: 0 auto;
 				width: 722px;
 			}
-				.plan_article_tl{
-					display: inline-block;
-					line-height: 40px;
-					font-size: 20px;
-					color: #56888F;
-				}
+		
+			.plan_article_tl{
+				display: inline-block;
+				height: 40px;
+				padding-top: 8px;
+				font-size: 16px;
+				color: #56888F;
+				font-weight: 700;
+			}
+			
 				.add_expend{
 					display: block;
 					margin: 5px 0 10px 0;
