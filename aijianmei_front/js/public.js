@@ -112,12 +112,13 @@ $(function(){
 	})
 	
 //导航栏样式改变	
-	// $("#nav").children().click(function(){
-	// 	if(!($(this).hasClass("home"))){
-	// 		$(this).css("background","#2E6A92")
-	// 	}
-	// 	$(this).siblings().css("background","");
-	// })
+
+	$("#nav").children().click(function(){
+		$(this).css("background","#2E6A92");
+		
+		$(this).siblings().removeClass().css("background","");
+	})
+
 		
 					
 });

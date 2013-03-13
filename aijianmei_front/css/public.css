@@ -363,7 +363,7 @@ button{
 		}
 		
 		#nav .home{
-			background:url(../images/home_bg.png) no-repeat left;
+			border-radius: 4px 0 0 4px;
 			width:90px;
 		}
 		#nav .home a span{
