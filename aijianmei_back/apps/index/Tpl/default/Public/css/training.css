@@ -131,16 +131,12 @@
 				margin: 0 auto;
 				width: 722px;
 			}
-		
-			.plan_article_tl{
-				display: inline-block;
-				height: 40px;
-				padding-top: 8px;
-				font-size: 16px;
-				color: #56888F;
-				font-weight: 700;
-			}
-			
+				.plan_article_tl{
+					display: inline-block;
+					line-height: 40px;
+					font-size: 20px;
+					color: #56888F;
+				}
 				.add_expend{
 					display: block;
 					margin: 5px 0 10px 0;
@@ -330,6 +326,10 @@ margin-bottom: 20px;
 			height: 20px;
 			background: none;
 			color: #656565;
+			font-size: 15px;
+			display: inline-block;
+			text-align: center;
+			line-height: 20px;
 		}
 		.curr_tit{
 			background:lightblue;
