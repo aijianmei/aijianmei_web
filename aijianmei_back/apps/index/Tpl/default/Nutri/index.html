@@ -11,16 +11,14 @@
 						<span class="border_line"></span>
 						<ul>
 							<php>foreach($categories as $c) {</php>
-							<php>if($c['name']) {</php>
-							<li class="each_video all">
-								<a href="/index.php?app=index&mod=Nutri&act=articleList&id={$c['id']}">{$c['name']}</a>
-							</li>
-							<php>}</php>
-							<php>foreach($c['children'] as $child) {</php>
-							<li class="each_video">
-								<a href="/index.php?app=index&mod=Nutri&act=articleList&id={$child['id']}">{$child['name']}</a>
-							</li>
-							<php>}</php>
+								<li class="each_video all">
+									{$c['name']}
+								</li>
+								<php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
+									<li class="each_video">
+										<a href="/index.php?app=index&mod=Nutri&act={$action}&id={$child['id']}">{$child['name']}</a>
+									</li>
+								<php>}</php>
 							<php>}</php>
 							<!-- <li class="each_video">
 								<a href="nutri_1.html">减肥营养</a>
@@ -89,11 +87,10 @@
 						<ul class="new_video clearfix">
 						<php>foreach($hotArticles as $a) {</php>
 							<li class="tr_classify">
-								<a href="{:U('index/Index/articleDetail',array('id'=>$a['id']))}" class="video_1"><img width="165px" height="134px"  src="../Public/images/article/{$a['img']}" alt="no" /></a>
-								
-									<a href="{:U('index/Index/articleDetail',array('id'=>$a['id']))}" class="plan_article_tl">{$a['title']}</a>
-									<p class="summary">{$a['brief']}</p>
-								
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_1"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+								<p class="summary">{$a['brief']}
+								</p>
 							</li>
 						<php>}</php>
 							<!-- <li class="article">
@@ -172,11 +169,11 @@
 						<ul class="new_video clearfix">
 						<php>foreach($lastArticles as $a) {</php>
 							<li class="tr_classify">
-								<a href="{:U('index/Index/articleDetail',array('id'=>$a['id']))}" class="video_1"><img width="165px" height="134px" src="../Public/images/article/{$a['img']}" alt="no" /></a>
-								
-									<a href="{:U('index/Index/articleDetail',array('id'=>$a['id']))}" class="plan_article_tl">{$a['title']}</a>
-									<p class="summary">{$a['brief']}</p>
-								
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_1"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+								<p class="summary">{$a['brief']}
+								</p>
+								<!-- <a href="#" class="add_expend">查看所有质量增加程序</a> -->
 							</li>
 						<php>}</php>
 							<!-- <li class="article">
@@ -251,21 +248,17 @@
 				<div class="part_top clearfix">
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
-						<h1 class="public_title">增加内容分类</h1>
-						<h2 class="title_4">全部</h2>
-						<ul class="re_nav">
-						<php>foreach($cate as $c){</php>
-							<li>
-								<a>{$c['name']}</a>
-							</li>
-						<php>}</php>
-							<!-- <li>
-								<a>减肥营养</a>
-							</li>
-							<li>
-								<a>肌肉增益营养</a>
-							</li> -->
+						<h1 class="public_title">目录</h1>
+						<php>foreach($categories as $c) {</php>
+						<h2 class="title_4">{$c['name']}</h2>
+						<ul class="re_nav clearfix">
+							<php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
+									<li class="each_video">
+										<a href="/index.php?app=index&mod=Nutri&act={$action}&id={$child['id']}">{$child['name']}</a>
+									</li>
+								<php>}</php>
 						</ul>
+						<php>}</php>
 					</div>
 					<span class="corner_bottom"></span>
 				</div>

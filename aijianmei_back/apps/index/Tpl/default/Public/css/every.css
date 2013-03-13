@@ -174,33 +174,33 @@
 	height: 230px;
 	width: 310px;
 	overflow: hidden;}
-#dv_scroll{
+#dv_scroll,#dv_scroll_1,#dv_scroll_2{
 	position:absolute;
 	height:230px;
 	overflow:hidden;
 	width:300px;}
-#dv_scroll .Scroller-Container{
+#dv_scroll .Scroller-Container,#dv_scroll_1 .Scroller-Container,#dv_scroll_2 .Scroller-Container{
 	width:100%;
 }
-#dv_scroll_bar {
+#dv_scroll_bar,#dv_scroll_bar_1,#dv_scroll_bar_2{
 	position: absolute;
 	right: 0px;
 	width: 7px;
 	height: 230px;}
-#dv_scroll_bar .Scrollbar-Track{
+#dv_scroll_bar .Scrollbar-Track,#dv_scroll_bar_1 .Scrollbar-Track,#dv_scroll_bar_2 .Scrollbar-Track{
 	position: absolute;
 	left: 0;
 	width: 7px;
 	height: 230px;}
-#dv_scroll_bar .Scrollbar-Handle{
-	transition:all 1s;
-	-webkit-transition:all 1s;
-	-ms-transition:all 1s;
-	-o-transition:all 1s;
+#dv_scroll_bar .Scrollbar-Handle,#dv_scroll_bar_1 .Scrollbar-Handle,#dv_scroll_bar_2 .Scrollbar-Handle{
+	transition:opacity 1s;
+	-webkit-transition:opacity 1s;
+	-ms-transition:opacity 1s;
+	-o-transition:opacity 1s;
 	position:absolute;
 	top:0;
 	width:7px;
-	height:28px;
+	height:90px;
 	overflow:hidden;
 	background-color:gray;
 	border-radius:5px;
@@ -208,12 +208,20 @@
 	opacity: 0;
 	filter:alpha(opacity=0);
 }
-#dv_scroll_text {
+#dv_scroll_text,#dv_scroll_text_1,#dv_scroll_text_2{
 	position:absolute;
+}
+.loading_more{
+	display: block;
+	line-height: 28px;
+	font-size: 18px;
+	font-weight: 700;
+	color: black;
+	text-align: center;
 }
 /* scr_con style */
 			.target{
-				margin-top: 15px;
+				padding-top: 15px;
 				border-bottom: 1px solid #CCC;
 			}
 			.target_pic{

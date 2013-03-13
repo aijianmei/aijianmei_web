@@ -91,9 +91,11 @@
 	}
 	.plan_article_tl{
 		display: inline-block;
-		line-height: 40px;
-		font-size: 20px;
+		height: 40px;
+		padding-top: 8px;
+		font-size: 16px;
 		color: #56888F;
+		font-weight: 700;
 	}	
 	.tr_classify{
 		float: left;

@@ -14,6 +14,17 @@ class TrainAction extends Action {
 		$articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
 		$this->assign('articles', $articles);
 		$this->assign('categories', $parent);
+		//$this->display();
+		
+		//assign hotArticles
+		$order = 'click';
+		$hotArticles = D('Article')->getTrainArticles($order);
+		$this->assign('hotArticles', $hotArticles);
+		
+		//assign lastArticles		
+		$order = 'create_time';
+		$hotArticles = D('Article')->getTrainArticles($order);
+		$this->assign('lastArticles', $hotArticles);
 		$this->display();
 	}
 	
