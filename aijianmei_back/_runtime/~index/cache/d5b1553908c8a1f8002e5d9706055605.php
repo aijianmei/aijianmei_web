@@ -177,210 +177,285 @@
 				<div class="lay_sider">
 					<div class="subsider">
 						<span class="border_line"></span>
-						<h3 class="video_all">补充</h3>
+						<h3 class="video_all">全部</h3>
 						<span class="border_line"></span>
 						<ul>
 							<?php foreach($categories as $c) { ?>
-							<?php if($c['name']) { ?>
-							<li class="each_video all">
-								<a href="/index.php?app=index&mod=Append&act=articleList&id=<?php echo ($child['id']); ?>"><?php echo ($c['name']); ?></a>
-							</li>
-							<?php } ?>
-							<?php foreach($c['children'] as $child) { ?>
-							<li class="each_video">
-								<a href="/index.php?app=index&mod=Append&act=articleList&id=<?php echo ($child['id']); ?>"><?php echo ($child['name']); ?></a>
-							</li>
-							<?php } ?>
-							<?php } ?>
+								<li class="each_video all">
+									<?php echo ($c['name']); ?>
+								</li>
+								<?php foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList'; ?>
+									<li class="each_video">
+										<a href="/index.php?app=index&mod=Train&act=<?php echo ($action); ?>&id=<?php echo ($child['id']); ?>"><?php echo ($child['name']); ?></a>
+									</li>
+								<?php } ?>
+							<?php } ?>							
 							<!-- <li class="each_video">
-								<a href="add_1.html">减肥</a>
+								<a href="#">暖/降温</a>
 							</li>
 							<li class="each_video">
-								<a href="add_11.html">一般卫生与健康</a>
+								<a href="#">主体类型</a>
 							</li>
 							<li class="each_video">
-								<a href="add_11.html">菜谱成分</a>
+								<a href="#">伸展</a>
+							</li>
+							<li class="each_video">
+								<a href="#">重复与组数</a>
+							</li>
+							<li class="each_video all">
+								程序
+							</li>
+							<li class="each_video">
+								<a href="#">减肥</a>
+							</li>
+							<li class="each_video">
+								<a href="#">肌肉增益</a>
+							</li>
+							<li class="each_video">
+								<a href="#">女性</a>
+							</li>
+							<li class="each_video">
+								<a href="#">体重</a>
+							</li>
+							<li class="each_video">
+								<a href="#">初学者</a>
+							</li>
+							<li class="each_video all">
+								练习
+							</li>	
+							<li class="each_video">
+								<a href="#">复合演习</a>
+							</li>
+							<li class="each_video">
+								<a href="#">隔离练习</a>
+							</li>
+							<li class="each_video">
+								<a href="#">肌练习</a>
+							</li>
+							<li class="each_video">
+								<a href="#">体重演习</a>
+							</li>
+							<li class="each_video all">
+								肌肉组
+							</li>
+							<li class="each_video">
+								<a href="#">背部</a>
+							</li>
+							<li class="each_video">
+								<a href="#">胸部</a>
+							</li>
+							<li class="each_video">
+								<a href="#">腿</a>
+							</li>
+							<li class="each_video">
+								<a href="#">腹肌</a>
+							</li>
+							<li class="each_video">
+								<a href="#">武器</a>
+							</li>
+							<li class="each_video">
+								<a href="#">肩</a>
 							</li> -->
+							<span class="border_line"></span>
 						</ul>
 					</div>
 				</div>
-				<span class="border_line"></span>
+				<span class="corner_bottom"></span>
 			</div>
+
 
 			<div class="right_sider">
 
 				<div class="part_top clearfix">
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
-						<h1 class="public_title">肌肉增加视频</h1>
-						<div class="content clearfix">
-							<div class="ct clearfix">
-								<a class="video"><img src="../Public/images/add/sd3_01.jpg" alt="no" /></a>
-								<ul class="list">
-									<li class="each">
-										<a class="each_pic">
-											<img src="../Public/images/add/sd3_02.jpg" alt="" />
-										</a>
-									</li>
-									<li class="each">
-										<a class="each_pic">
-											<img src="../Public/images/add/sd3_03.jpg" alt="" />
-										</a>
-									</li>
-									<li class="each">
-										<a class="each_pic">
-											<img src="../Public/images/add/sd3_04.jpg" alt="" />
-										</a>
-									</li>
-								</ul>
+						<h1 class="public_title">了解锻炼的意义</h1>
+						<div class="" style="margin:0 15px;">
+							<div class="tr_top clearfix">
+							<a class="store.html"><img src="../Public/images/training/duanlian_23.jpg" alt="no" class="supple_pic" /></a>
+							<div class="lay_detail">
+								<a href="article.html" class="detail">锻炼重在技巧</a>
+								<p>最好的选择，最快的锻炼方式和最优秀的视频教学</p>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="read_art">点击阅读</a>
 							</div>
-							<div class="ct none clearfix">
-								<a class="video"><img src="../Public/images/add/sd3_02.jpg" alt="no"
-								width="346px" height="422px" /></a>
-								<p>yellow</p>
 							</div>
-							<div class="ct none clearfix">
-								<a class="video"><img src="../Public/images/add/sd3_03.jpg" alt="no"
-								width="346px" height="422px"  /></a>
-								<p>green</p>
-							</div>
-							<div class="ct none clearfix">
-								<a class="video"><img src="../Public/images/add/sd3_04.jpg" alt="no"
-								width="346px" height="422px"  /></a>
-								<p>red</p>
-							</div>
-							<ul class="tab_mune">
-								<li class="tab add">
-								</li>
-								<li class="tab">
-								</li>
-								<li class="tab">
-								</li>
-								<li class="tab">
-								</li>
+							<ul class="clearfix">
+							<li class="classify">
+								<a href="/index.php?app=index&mod=Index&act=articleList&id=1" class="lay_cf">
+									
+										<img src="../Public/images/training/abs.png" width="220" height="214px" alt="" class="best" />
+										<p>最畅销分类一：XX蛋白粉</p>
+									
+								</a>
+							</li>
+							<li class="classify">
+								<a href="/index.php?app=index&mod=Index&act=articleList&id=2" class="lay_cf">
+									<div>
+										<img src="../Public/images/training/cardio.png" width="220" height="214px" alt="" class="best" />
+										<p>最畅销分类一：XX蛋白粉</p>
+									</div>
+								</a>
+							</li>
+							<li class="classify">
+								<a href="/index.php?app=index&mod=Index&act=articleList&id=3" class="lay_cf">
+									<div>
+										<img src="../Public/images/training/triceps.png" width="220" height="214px" alt="" class="best" />
+										<p>最畅销分类一：XX蛋白粉</p>
+										<p class="price"></p>
+									</div>
+								</a>
+							</li>
 							</ul>
 						</div>
 					</div>
 					<span class="corner_bottom"></span>
 				</div>
-
-				<div class="part_top clearfix">
-					<span class="corner_left"></span>
+				    <div class="part_top clearfix">
 					<div class="lay_top clearfix">
 						<div class="block_1 clearfix">
-							<h1 class="public_title">最热文章</h1>
+							<h1 class="public_title">add muscle</h1>
 							<ul>
-							<?php foreach($articles as $a) { ?>
 								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
-									<p><?php echo ($a['title']); ?></p>
-									
-								</li>
-							<?php } ?>
-								<!-- <li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/112.png" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/training/111.jpg" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
 								</li>
 								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/113.jpg" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/training/112.png" alt="no" class="rt_picture" /></a>
+									<p>add muscle</p>
+									<p>add muscle</p>
+								</li>
+								<li class="nubble">
+									<a href="article.html"><img src="../Public/images/training/113.jpg" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
 								</li>
 								<li class="nubble defferent">
-									<a href="article.html"><img src="../Public/images/add/114.jpg" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/training/114.jpg" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
-								</li> -->
+								</li>
 							</ul>
 						</div>
-					</div>
-					<span class="corner_bottom"></span>
-				</div>	
-
-				<div class="part_top clearfix">
-					<span class="corner_left"></span>
-					<div class="lay_top clearfix">
-						<div class="block_1 clearfix">
-						<h1 class="public_title">最近文章</h1>
+						<div class="block_2 clearfix">
+							<h1 class="public_title">add muscle</h1>
 							<ul>
-							<?php foreach($articles as $a) { ?>
 								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
-									<p><?php echo ($a['title']); ?></p>
-									
-								</li>
-							<?php } ?>
-								<!-- <li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/112.png" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/training/115.jpg" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
 								</li>
 								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/113.jpg" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/training/116.png" alt="no" class="rt_picture" /></a>
+									<p>add muscle</p>
+									<p>add muscle</p>
+								</li>
+								<li class="nubble">
+									<a href="article.html"><img src="../Public/images/training/117.png" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
 								</li>
 								<li class="nubble defferent">
-									<a href="article.html"><img src="../Public/images/add/114.jpg" alt="no" class="rt_picture" /></a>
+									<a href="article.html"><img src="../Public/images/training/118.jpg" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
-								</li> -->
+								</li>
 							</ul>
 						</div>
 					</div>
-					<span class="corner_bottom"></span>
-				</div>	
-
-				<div class="mode_2 clearfix">
-					<ul class="s_nav_left">
-						<li>排序</li>
-						<li class="current_click"><a href="<?php echo U('index/Append/articleList', array('id'=>$_GET['id'],'order'=>'create_time'));?>">时间</a></li>
-						<li><a href="<?php echo U('index/Append/articleList', array('id'=>$_GET['id'],'order'=>'click'));?>">人气</a></li>
-						<li>阅读器</li>
-					</ul>
-					<ul class="s_nav_right">
-						<!-- <li>下一页</li>
-						<li>上一页</li> -->
-						<?php echo ($pager['backstr']); ?>
-						<?php echo ($pager['thestr']); ?>
-						<?php echo ($pager['nextstr']); ?>
-						<li><?php echo ($pager['pg']); ?>/<?php echo ($pager['page']); ?></li>
-						<li class="strong">共<?php echo ($pager['countall']); ?>篇文章</li>									
-					</ul>
 				</div>
-				<div class="mode_3">
-				<?php foreach($articles as $a) { ?>
-					<div class="ar_block">
-						<h2><a href="article.html"><?php echo ($a['title']); ?></a></h2>
-						<span>作者：<?php echo ($a['author']); ?></span><span>日期：<?php echo date('Y-m-d H:i:s',$a['create_time']) ?></span><span>点击：<?php echo ($a['click']); ?></span>
-						<p><?php echo ($a['brief']); ?></p>
+				<div class="part_3 clearfix">
+				<div class="video">
+						<div class="all">
+						<h3 class="tit">全部<a href="/index.php?app=index&mod=Train&act=articleList" class="tab_btn curr_tit">视频</a><a href="/index.php?app=index&mod=Train&act=videoList" class="tab_btn">文章</a></h3>
+							<!-- <h3 class="tit">全部<span class="sort1" id="show"><a href="/index.php?app=index&mod=Train&act=articleList">文章</a></span>
+							<span class="sort2"><a href="/index.php?app=index&mod=Train&act=videoList">视频</a></span>
+							</h3> -->
+							<ul class="all_ul">
+								<li class="select">
+									<span class="opt">范围：</span>
+									<a class="pre">不限</a>
+									<a>今日</a>
+									<a>本周</a>
+									<a>本月</a>
+								</li>
+								<li class="select">
+									<span class="opt">排序：</span>
+									<a class="pre">最新发布</a>
+									<a>最多播放</a>
+									<a>最多评论</a>
+									<a>最多收藏</a>
+								</li>
+							</ul>
+							<!-- <ul class="all_ul">
+								<li class="select">
+									<span class="opt">范围：</span>
+									<a class="pre">不限</a>
+									<a>今日</a>
+									<a>本周</a>
+									<a>本月</a>
+								</li>
+								<li class="select">
+									<span class="opt">排序：</span>
+									<a class="pre">最新发布</a>
+									<a>最多播放</a>
+									<a>最多评论</a>
+									<a>最多收藏</a>
+								</li>
+							</ul> -->
+						</div>
+						<div class="each">					
+								<?php foreach($articles as $a) { ?>
+								<ul class="vdos">		
+										<li class="pic">
+											<a href=""></a>
+										</li>
+										<li class="info">
+											<span>视频名称：</span>
+											<a href="">身体部位</a>
+										</li>
+										<li class="info">
+											<span>围度测量方法</span>
+										</li>
+										<li class="info">
+											<span>发布时间：</span>
+											<a href="">两天前</a>
+										</li>
+										<li class="info">
+											<span>播放：</span>
+											<a href="">131次</a>
+										</li>
+									</ul>
+								<?php } ?>								
+							
+						</div>	
+						<!-- <div class="each clearfix">
+						<?php foreach($articles as $a) { ?>
+							<div class="arts">
+								<img src="<?php echo ($SITE_URL); ?>/public/images/article/<?php echo ($a['img']); ?>" class="pic"/>
+									<dl class="info">
+										<dt class="art_title"><a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>"><?php echo ($a['title']); ?></a></dt>
+										<dd>
+										阅读：<span class="count">0</span>
+										分享：<span class="count">0</span>
+										收藏：<span class="count">0</span>
+										</dd>
+									</dl>							
+							</div>
+							<?php } ?>
+						</div> -->
+						
+						<div class="page">
+							<button class="prev"><a href="">上一页</a></button>
+							<a href="" class="record">1</a>
+							<a href="" class="record">2</a>
+							<a href="" class="record">3</a>
+							<button class="next"><a href="">下一页</a></button>
+						</div>
 					</div>
-				<?php } ?>
-					<!-- <div class="ar_block">
-						<h2><a href="article.html">哑铃全身锻炼计划</a></h2>
-						<span>作者：</span><span>日期：</span><span>点击：</span>
-						<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
-					</div>
-					<div class="ar_block">
-						<h2><a href="article.html">先各种热身5-10分钟</a></h2>
-						<span>作者：</span><span>日期：</span><span>点击：</span>
-						<p>  热身动作锻炼流程 、在线哑铃锻炼流程(主要学习流程、锻炼速度、领悟组间休息) </p>
-					</div>
-					<div class="ar_block">
-						<h2><a href="article.html">哑铃全身锻炼计划</a></h2>
-						<span>作者：</span><span>日期：</span><span>点击：</span>
-						<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
-					</div>
-					<div class="ar_block">
-						<h2><a href="article.html">先各种热身5-10分钟</a></h2>
-						<span>作者：</span><span>日期：</span><span>点击：</span>
-						<p>  热身动作锻炼流程 、在线哑铃锻炼流程(主要学习流程、锻炼速度、领悟组间休息) </p>
-					</div> -->
-				</div>
-									
 			</div>
 		</div>
+	</div>
 				<div id="footer">
 					<div class="f_list">
 						<h4>发现爱健美</h4>

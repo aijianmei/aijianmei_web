@@ -177,7 +177,7 @@
 				<div class="lay_sider">
 					<div class="subsider">
 						<span class="border_line"></span>
-						<h3 class="video_all">全部</h3>
+						<h3 class="video_all">锻炼</h3>
 						<span class="border_line"></span>
 						<ul>
 							<?php foreach($categories as $c) { ?>
@@ -313,9 +313,9 @@
 				<div class="part_top clearfix">
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
-						<h1 class="public_title">最近锻炼文章</h1>
+						<h1 class="public_title">最佳锻炼文章</h1>
 						<ul class="new_video clearfix">
-							<?php foreach($articles as $a) { ?>
+							<?php foreach($hotArticles as $a) { ?>
 							<li class="tr_classify">
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="video_1"><img src="<?php echo ($SITE_URL); ?>/public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt=""></a>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
@@ -374,9 +374,9 @@
 				<div class="part_top clearfix">
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
-						<h1 class="public_title">最佳锻炼文章<span class="hr_3 hr"></span></h1>
+						<h1 class="public_title">最近锻炼文章<span class="hr_3 hr"></span></h1>
 						<ul class="hot_video clearfix">
-						<?php foreach($articles as $a) { ?>
+						<?php foreach($lastArticles as $a) { ?>
 							<li class="tr_classify">
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="video_2"><img src="<?php echo ($SITE_URL); ?>/public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt=""></a>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
@@ -441,9 +441,9 @@
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="video_2"><img src="<?php echo ($SITE_URL); ?>/public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt=""></a>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
 								<p class="summary"><?php echo ($a['brief']); ?></p>
-								<a href="#" class="add_expend">查看所有其他锻炼程序</a>
 							</li>
 						<?php } ?>
+						<a href="#" class="add_expend">查看所有其他锻炼程序</a>
 						</ul>
 					</div>
 					<span class="corner_bottom"></span>
@@ -490,18 +490,6 @@
 								<a href="training_1.html"><?php echo ($child['name']); ?></a>
 							</li>
 							<?php } ?>
-							<!-- <li>
-								<a>暖/降温</a>
-							</li>
-							<li>
-								<a>主体类型</a>
-							</li>
-							<li>
-								<a>伸展</a>
-							</li>
-							<li>
-								<a>重复与组数</a>
-							</li> -->
 						</ul>
 						<?php } ?>
 						<!-- <h2 class="title_4">程序</h2>

@@ -100,13 +100,13 @@
 						<div class="block_1 clearfix">
 							<h1 class="public_title">最热文章</h1>
 							<ul>
-							<php>foreach($articles as $a) {</php>
-								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
-									<p>{$a['title']}</p>
-									
-								</li>
-							<php>}</php>
+						<php>foreach($articles as $a) {</php>
+							<li class="tr_classify">
+								<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="video_1"><img src="../Public/images/article/{$a['img']}" width="165px" height="134px" alt="no" /></a>
+									<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="plan_article_tl">{$a['title']}</a>
+									<p class="summary">{$a['brief']}</p>								
+							</li>
+						<php>}</php>
 								<!-- <li class="nubble">
 									<a href="article.html"><img src="../Public/images/add/112.png" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
@@ -134,13 +134,13 @@
 						<div class="block_1 clearfix">
 						<h1 class="public_title">最近文章</h1>
 							<ul>
-							<php>foreach($articles as $a) {</php>
-								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
-									<p>{$a['title']}</p>
-									
-								</li>
-							<php>}</php>
+						<php>foreach($articles as $a) {</php>
+							<li class="tr_classify">
+								<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="video_1"><img src="../Public/images/article/{$a['img']}" width="165px" height="134px" alt="no" /></a>
+									<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="plan_article_tl">{$a['title']}</a>
+									<p class="summary">{$a['brief']}</p>								
+							</li>
+						<php>}</php>
 								<!-- <li class="nubble">
 									<a href="article.html"><img src="../Public/images/add/112.png" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>

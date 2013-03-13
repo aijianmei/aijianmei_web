@@ -2,12 +2,21 @@
 class AppendAction extends Action {
 	public function index()
 	{
-		$cate = M('article_category')->where(array('channel'=>'4'))->findAll();
+		$map['channel'] = '4';
+		$cate = M('article_category')->where($map)->findAll();
+		foreach($cate as $c) {
+			if($c['parent'] == NULL) $parent[$c['id']] = $c;
+			else $parent[$c['parent']]['children'][] = $c; 
+			$cate_id[] = $c['id'];
+		}
+		$this->assign('categories', $parent);
+		
+		/*$cate = M('article_category')->where(array('channel'=>'4'))->findAll();
 		foreach($cate as $c) {
 			if($c['parent']==NULL) $realCate[$c['id']] = $c;
 			else $realCate[$c['parent']]['children'][] = $c;;
 			$cate_id[] = $c['id'];
-		}
+		}*/
 		$map['category_id'] = array('in', implode(',', $cate_id));
 		$articles = M('article')->where($map)->findAll();
 		//print_r($articles);
@@ -17,9 +26,9 @@ class AppendAction extends Action {
 		
 		$lastArticles = D('Article')->getAppendArticles('create_time');
 		$this->assign('lastArticles', $lastArticles);
-		$this->assign('cate', $cate);
+		//$this->assign('cate', $cate);
 		$this->assign('articles', $articles);
-		$this->assign('categories', $realCate);
+		//$this->assign('categories', $realCate);
 		$this->assign('cssFile', 'add');
 		$this->display();
 	}
@@ -50,6 +59,38 @@ class AppendAction extends Action {
 		$this->assign('categories', $realCate);
 		$this->assign('cssFile', 'add');
 		$this->display('list');
+	}
+	
+	//get append video list
+	public function videoList()
+	{
+		$id = intval($_GET['id']);
+		$videos = M('video')->where(array('category_id'=>$id))->findAll();
+		//print_r($videos);
+		$cate = M('article_category')->where(array('channel'=>'2', 'type'=>'2'))->findAll();
+		foreach($cate as $c) {
+			if($c['parent']==NULL) $realCate[$c['id']] = $c;
+			else $realCate[$c['parent']]['children'][] = $c;
+			$cate_id[] = $c['id'];
+		}
+		$this->assign('videos', $videos);
+		$this->assign('categories', $realCate);
+		$this->assign('cssFile', 'video');
+		$this->display('vlist');
+	}
+	
+	//get append video detail
+	public function videoDetail()
+	{
+		$id = intval($_GET['id']);
+		$table = (isset($_GET['from']) && $_GET['from']=='daily') ? 'daily_video' : 'video';
+		$video = M($table)->where(array('id'=>$id))->find();
+		//$videoInfo = D('Article')->getVideoInfoByLink($video['link']);
+		//print_r($video);
+		//$this->assign('videoInfo', $videoInfo);
+		$this->assign('video', $video);
+		$this->assign('cssFile', 'v');
+		$this->display('video');
 	}
 }
 ?>
