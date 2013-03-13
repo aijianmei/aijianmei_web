@@ -306,14 +306,12 @@ $(function(){
 						this.style.background = '';
 						var closed = fade.newdom.getElementsByClass('closed')[0],
 							fade_in = fade.newdom.getElementsByClass('fade_in')[0];
-						closed.onclick = function(){
+						var click_back = function(){
 							fade.changestyle('0');
 							fade_in.removeAttribute('class')
 						}
-						fade_in.onclick = function(){
-							fade.changestyle('0');
-							fade_in.removeAttribute('class')
-						}
+						addevent(closed,'click',click_back);
+						addevent(fade_in,'click',click_back);
 					}
 				},
 				handlecontent : function(){
@@ -365,6 +363,7 @@ $(function(){
 			};
 			fade.init('store');
 			fade.init('forum');
+			fade.init('teach')
 //视频列表 切换分类
 $("li.select>a").click(function(){
 	$(this).addClass("pre").siblings().removeClass("pre");
