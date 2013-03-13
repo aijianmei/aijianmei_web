@@ -98,7 +98,7 @@
 								<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="video_1"><img src="../Public/images/article/{$a['img']}" width="165px" height="134px" alt="no" /></a>
 								
 									<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="plan_article_tl">{$a['title']}</a>
-									<p  class="summary">{$a['content']|htmlspecialchars_decode|getShort=###,20|formatComment}</p>								
+									<p  class="summary">{$a['brief']}</p>								
 							</li>
 						<php>}</php>
 							<!-- <li class="article">
@@ -179,7 +179,7 @@
 							<li class="tr_classify">
 								<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="video_1"><img src="../Public/images/article/{$a['img']}" width="165px" height="134px" alt="no" /></a>
 									<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="plan_article_tl">{$a['title']}</a>
-									<p class="summary">{$a['content']|htmlspecialchars_decode|getShort=###,20|formatComment}</p>								
+									<p class="summary">{$a['brief']}</p>								
 							</li>
 						<php>}</php>
 							<!-- <li class="article">
