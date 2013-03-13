@@ -5,6 +5,7 @@
 	<meta charset="utf-8"/>
 	<title>爱健美</title>
 	<link rel="stylesheet" href="css/public.css" />
+	<link rel="stylesheet" type="text/css" href="css/training.css"/>
 	<link rel="stylesheet" href="css/nutri.css" />			
 </head>
 <body>
@@ -88,12 +89,12 @@
 					<li class="store"><a href="store.html"><span>商店</span></a></li>
 					<li><a href="plan.html">健身计划</a></li>
 					<li><a href="training.html">锻炼</a></li>
-					<li><a href="nutri.html">营养</a></li>
+					<li class="now_position"><a href="nutri.html">营养</a></li>
 					<li><a href="add.html">补充</a></li>
 					<li><a href="activity.html">论坛</a></li>
 					<li><a href="pal.html">交友互动</a></li>
 				</ul>
-				<span class="position">爱健美/首页</span>
+				<span class="position">爱健美/营养</span>
 			</div>
 
 		<div id="banner">
@@ -249,50 +250,67 @@
 							</ul>
 						</div>
 					</div>
-					<span class="corner_bottom"></span>
-				</div>	
-
-				<div class="mode_2 clearfix">
-					<ul class="s_nav_left">
-						<li>排序</li>
-						<li class="current_click">时间</li>
-						<li>人气</li>
-						<li>阅读器</li>
-					</ul>
-					<ul class="s_nav_right">
-						<li>下一页</li>
-						<li>上一页</li>
-						<li>1/17</li>
-						<li class="strong">共600篇文章</li>									
-					</ul>
 				</div>
+				<div class="video">	
+						<div class="all">
+							<h3 class="tit">全部<a href="training_1.html" class="tab_btn">视频</a><a href="nutri_1.html" class="tab_btn curr_tit">文章</a></h3>
+							<ul class="all_ul">
+								<li class="select">
+									<span class="opt">范围：</span>
+									<a class="pre">不限</a>
+									<a>今日</a>
+									<a>本周</a>
+									<a>本月</a>
+								</li>
+								<li class="select">
+									<span class="opt">排序：</span>
+									<a class="pre">最新发布</a>
+									<a>最多播放</a>
+									<a>最多评论</a>
+									<a>最多收藏</a>
+								</li>
+							</ul>
+						</div>
+					</div>
 				<div class="mode_3">
 					<div class="ar_block">
+						<img class="block_img" src="images/art2.png"/>
 						<h2><a href="article.html">肩部锻炼视频训练</a></h2>
 						<span>作者：未知 - 肌肉网</span><span>日期：2012-09-27 13:44</span><span>点击：22</span>
 						<p>地域组的做法我之前只试过做颈前的，而且一般是安排在第一个动作做，这次安排在最后一个...</p>
 					</div>
 					<div class="ar_block">
+						<img class="block_img" src="images/art2.png"/>
 						<h2><a href="article.html">哑铃全身锻炼计划</a></h2>
 						<span>作者：</span><span>日期：</span><span>点击：</span>
 						<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
 					</div>
 					<div class="ar_block">
+						<img class="block_img" src="images/art2.png"/>
 						<h2><a href="article.html">先各种热身5-10分钟</a></h2>
 						<span>作者：</span><span>日期：</span><span>点击：</span>
 						<p>  热身动作锻炼流程 、在线哑铃锻炼流程(主要学习流程、锻炼速度、领悟组间休息) </p>
 					</div>
 					<div class="ar_block">
+						<img class="block_img" src="images/art2.png"/>
 						<h2><a href="article.html">哑铃全身锻炼计划</a></h2>
 						<span>作者：</span><span>日期：</span><span>点击：</span>
 						<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
 					</div>
 					<div class="ar_block">
+						<img class="block_img" src="images/art2.png"/>
 						<h2><a href="article.html">先各种热身5-10分钟</a></h2>
 						<span>作者：</span><span>日期：</span><span>点击：</span>
 						<p>  热身动作锻炼流程 、在线哑铃锻炼流程(主要学习流程、锻炼速度、领悟组间休息) </p>
 					</div>
-				</div>									
+				</div>
+				<div class="page">
+							<button class="prev"><a href="">上一页</a></button>
+							<a href="" class="record current_page">1</a>
+							<a href="" class="record">2</a>
+							<a href="" class="record">3</a>
+							<button class="next"><a href="">下一页</a></button>
+					</div>									
 			</div>
 		</div>
 
@@ -354,5 +372,10 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/public.js"></script>
 	<script type="text/javascript" src="js/add.js"></script>
+	<script type="text/javascript">
+		$(".tit a").click(function(){
+			$(this).addClass("curr_tit").siblings().removeClass("curr_tit");
+		})
+	</script>
 </body>
 </html>
