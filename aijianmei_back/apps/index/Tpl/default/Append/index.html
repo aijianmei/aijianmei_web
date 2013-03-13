@@ -11,17 +11,25 @@
 						<span class="border_line"></span>
 						<ul>
 						<php>foreach($categories as $c) {</php>
-							<php>if($c['name']) {</php>
+								<li class="each_video all">
+									{$c['name']}
+								</li>
+								<php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
+									<li class="each_video">
+										<a href="/index.php?app=index&mod=Append&act=articleList&id={$child['id']}">{$child['name']}</a>
+									</li>
+								<php>}</php>
+							<php>}</php>	
+						<!-- <php>foreach($categories as $c) {</php>
 							<li class="each_video all">
-								<a href="/index.php?app=index&mod=Append&act=articleList&id={$c['id']}">{$c['name']}</a>
-							</li>
-							<php>}</php>
+									{$c['name']}
+								</li>
 							<php>foreach($c['children'] as $child) {</php>
 							<li class="each_video">
 								<a href="/index.php?app=index&mod=Append&act=articleList&id={$child['id']}">{$child['name']}</a>
 							</li>
 							<php>}</php>
-						<php>}</php>
+						<php>}</php> -->
 							<!-- <li class="each_video">
 								<a href="add_1.html">肌肉大厦</a>
 							</li>
@@ -95,12 +103,14 @@
 						<ul class="new_video clearfix">
 						<php>foreach($hotArticles as $a) {</php>
 							<li class="tr_classify">
-								<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="video_1"><img src="../Public/images/article/{$a['img']}" width="165px" height="134px" alt="no" /></a>
-								
-									<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="plan_article_tl">{$a['title']}</a>
-									<p  class="summary">{$a['brief']}</p>								
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_1"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+								<p class="summary">{$a['brief']}
+								</p>
 							</li>
-						<php>}</php>
+							<php>}</php>
+						
+							
 							<!-- <li class="article">
 								<a href="article.html" class="article_pic"><img src="../Public/images/add/06.jpg" alt="no" /></a>
 								<div class="article_content">
@@ -177,11 +187,12 @@
 						<ul class="new_video clearfix">
 						<php>foreach($lastArticles as $a) {</php>
 							<li class="tr_classify">
-								<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="video_1"><img src="../Public/images/article/{$a['img']}" width="165px" height="134px" alt="no" /></a>
-									<a href="{:U('index/Append/index',array('id'=>$a['id']))}" class="plan_article_tl">{$a['title']}</a>
-									<p class="summary">{$a['brief']}</p>								
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_1"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+								<p class="summary">{$a['brief']}
+								</p>
 							</li>
-						<php>}</php>
+							<php>}</php>
 							<!-- <li class="article">
 								<a href="article.html" class="article_pic"><img src="../Public/images/add/06.jpg" alt="no" /></a>
 								<div class="article_content">
@@ -254,14 +265,25 @@
 				<div class="part_top clearfix">
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
-						<h1 class="public_title">目录</h1>
+					<h1 class="public_title">目录</h1>
+						<php>foreach($categories as $c) {</php>
+						<h2 class="title_4">{$c['name']}</h2>
+						<ul class="re_nav clearfix">
+								<php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
+									<li class="each_video">
+										<a href="/index.php?app=index&mod=Append&act=articleList&id={$child['id']}">{$child['name']}</a>
+									</li>
+								<php>}</php>
+							<php>}</php>
+						</ul>
+						<!-- <h1 class="public_title">目录</h1>
 						<h2 class="title_4">全部</h2>
 						<ul class="re_nav">
-						<php>foreach($cate as $c){</php>
+						<php>foreach($categories as $c){</php>
 							<li>
 								<a href="/index.php?app=index&mod=Append&act=articleList&id={$c['id']}">{$c['name']}</a>
 							</li>
-						<php>}</php>
+						<php>}</php> -->
 							<!-- <li>
 								<a>肌肉大厦</a>
 							</li>
