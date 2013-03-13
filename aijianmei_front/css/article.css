@@ -425,7 +425,9 @@
 			font-weight:bold;
 		}
 		.author_other{
-			padding:0 20px 20px;			
+			height:100px;
+			width:120px;
+			margin: 0px auto;			
 		}
 		.author_other ul{
 			list-style:disc;
