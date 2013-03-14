@@ -183,6 +183,7 @@ class IndexAction extends Action {
 		$this->assign("tree_parent",$tree_parent);
 		$this->assign("tree_channel_en",$tree_channel_en);
 		$this->assign("tree_category_id",$tree_category_id);
+		
 		$this->display('detail');
 	}
 	
