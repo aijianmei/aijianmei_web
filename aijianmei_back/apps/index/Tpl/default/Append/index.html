@@ -12,7 +12,7 @@
 						<ul>
 						<php>foreach($categories as $c) {</php>
 								<li class="each_video all">
-									{$c['name']}
+									<a href="/index.php?app=index&mod=Append&act=articleList&id={$child['id']}">{$c['name']}</a>
 								</li>
 								<php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
 									<li class="each_video">
