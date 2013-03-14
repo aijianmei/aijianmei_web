@@ -229,7 +229,7 @@
 							<ul>
 								<?php foreach($lastArticles as $a) { ?>
 								<li class="tr_classify">
-									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="video_2"><img src="<?php echo ($SITE_URL); ?>/public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt=""></a>
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="video_2"><img src="<?php echo ($SITE_URL); ?>/Public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt=""></a>
 									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
 									<p class="summary"><?php echo ($a['brief']); ?></p>
 									<!-- <a href="#" class="add_expend">查看所有腹肌锻炼程序</a> -->
@@ -287,7 +287,7 @@
 				<div class="mode_3">
 							<?php foreach($articles as $a) { ?>
 								<div class="ar_block">
-									<img class="block_img" src="../Public/images/training/118.jpg"/>
+									<img class="block_img" src="../Public/images/training/<?php echo ($a['img']); ?>"/>
 									<h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>"><?php echo ($a['title']); ?></a></h2>
 									<span>作者：</span><span>日期：</span><span >点击：4</span>
 									<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
