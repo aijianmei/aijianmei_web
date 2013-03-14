@@ -3,7 +3,7 @@
 }
 
 /******* Banner *******/
-		#banner{
+		/*#banner{
 			width:960px;
 			height:470px;
 			overflow:hidden;
@@ -63,7 +63,7 @@
 		#banner .next{
 			right:20px;
 			background:url(../images/turn_right.png) no-repeat right top;
-		}	
+		}*/	
 			
 
 	
