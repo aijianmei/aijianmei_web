@@ -198,7 +198,7 @@
 			</div>
 
 
-					<div class="right_sider">
+			<div class="right_sider">
 
 				<div class="part_top clearfix">
 					<span class="corner_left"></span>

@@ -50,33 +50,38 @@ class NutriAction extends Action {
 		//var_dump($articles);
 		$this->assign('articles', $articles);
 		$this->assign('categories', $realCate);
+		//$this->assign('cssFile', 'video');
 		$this->assign('cssFile', 'nutri');
 		$this->display('list');
 	}
 	
-	public function videoList()
-	{
-		$id = intval($_GET['id']);
-		$this->display();
-	}
-	
-	//get append video list
 	/*public function videoList()
 	{
 		$id = intval($_GET['id']);
-		$videos = M('video')->where(array('category_id'=>$id))->findAll();
-		//print_r($videos);
-		$cate = M('article_category')->where(array('channel'=>'2', 'type'=>'2'))->findAll();
+		$this->display();
+	}*/
+	
+	//get append video list
+	public function videoList()
+	{
+		$id = intval($_GET['id']);
+		$this->assign('cssFile', 'video');
+		$this->assign('cssFile', 'nutri');
+		$cate = M('article_category')->where(array('channel'=>'2', 'type'=>'1'))->findAll();
+		
 		foreach($cate as $c) {
 			if($c['parent']==NULL) $realCate[$c['id']] = $c;
 			else $realCate[$c['parent']]['children'][] = $c;
 			$cate_id[] = $c['id'];
 		}
-		$this->assign('videos', $videos);
+
 		$this->assign('categories', $realCate);
-		$this->assign('cssFile', 'video');
+		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
+		$articles = M('article')->where($map)->findAll();
+		$this->assign('articles', $articles);
+		
 		$this->display('vlist');
-	}*/
+	}
 	
 	//get append video detail
 	public function videoDetail()
