@@ -89,10 +89,10 @@
 					<li class="now_position"><a href="training.html">锻炼</a></li>
 					<li><a href="nutri.html">营养</a></li>
 					<li><a href="add.html">补充</a></li>
-					<li><a href="activity.html">论坛</a></li>
+					<li class="forum"><a href="activity.html">论坛</a></li>
 					<li><a href="pal.html">交友互动</a></li>
 				</ul>
-				<span class="position">爱健美/首页</span>
+				<span class="position">爱健美/锻炼</span>
 		</div>
 
 		<div id="banner">
@@ -159,9 +159,6 @@
 			<a class="ps_right"></a>
 			</div>
 		</div>	<!--Banner End -->
-
-
-
 		<div id="content" class="clearfix">
 			<div class="sider_all">
 				<div class="lay_sider">
@@ -355,7 +352,7 @@
 					
 					<div class="video">
 						<div class="all">
-							<h3 class="tit">全部<button class="tab_btn curr_tit">视频</button><button class="tab_btn">文章</button></h3>
+							<h3 class="tit">全部<a href="training_1.html" class="tab_btn curr_tit">视频</a><a href="nutri_1.html" class="tab_btn">文章</a></h3>
 							<ul class="all_ul">
 								<li class="select">
 									<span class="opt">范围：</span>
@@ -675,16 +672,17 @@
 								</li>
 							</ul>
 					</div>
-					<div class="page">
-							<button class="prev"><a href="">上一页</a></button>
-							<a href="" class="record current_page">1</a>
-							<a href="" class="record">2</a>
-							<a href="" class="record">3</a>
-							<button class="next"><a href="">下一页</a></button>
-					</div>
+					<div>
+						<ul class="choice_page clearfix">
+							<li><a>下一页</a></li>
+							<li><a>上一页</a></li>
+							<li>1/17</li>
+							<li class="strong">共600篇文章</li>	
+						</ul>
 					</div>
 				</div>
-	<div class="part_top clearfix">
+			</div>
+			<div class="part_top clearfix">
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
 						<h1 class="public_title">增加内容分类</h1>
@@ -781,7 +779,7 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/public.js"></script>
 	<script type="text/javascript">
-		$(".tit button").click(function(){
+		$(".tit a").click(function(){
 			$(this).addClass("curr_tit").siblings().removeClass("curr_tit");
 		})
 	</script>

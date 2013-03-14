@@ -1,4 +1,4 @@
-﻿/****** Reset **********/
+/****** Reset **********/
 body,ul,li,p,h1,h2,h3,h4,button,input,dl,dd{
 	margin:0;
 	padding:0;
@@ -12,7 +12,7 @@ img{
 body{
 	font:14px Tahoma Arial,Helvetica,sans-serif;
 	color:#656565;
-	background:url(../images/b_g.jpg) repeat;	
+	background:url(../images/b_g.jpg) repeat;
 }
 ul{
 	list-style:none;
@@ -30,21 +30,22 @@ button{
 }
 
 .body{
+	display:none;
 	position:absolute;
+	left:0;
 	width:100%;
 	height:100%;
-	background:#fff;
-	z-index:9999;
-	opacity:0.93;
-	top:20px;
-	display:none;
+	z-index:99;	
+	opacity: 0.7;
+	filter:alpha(opacity=70);
+	background: black;
 }
 /******** 登陆 *******/
 .sheet{
 	position:absolute;	
-	z-index:10000;
+	z-index:100;
 	width:100%;
-	margin:20px;
+	margin-top:120px;
 	display:none;
 }
 /********* 直接登陆爱健美 *******/
@@ -53,7 +54,8 @@ button{
 		height:300px;
 		background:url(../images/tbg.png);
 		margin:0 auto;
-		border-radius:0 0px 10px 10px;
+		*margin-left: 170px;
+		border-radius:10px;
 		box-shadow: 0px 5px 15px rgba(114,114,113,1);
 	}
 	/******* 关闭按钮 *******/
@@ -62,14 +64,19 @@ button{
 			height:20px;
 			font-size:26px;
 			float:right;
+			margin:10px;
 			background: url(../images/login.png) no-repeat 0 -388px;
 		}
 		.log h3{
 			text-align:center;
 			padding-top:20px;
 		}
-		.log .ai_account,.log .other_account{
-			display:inline-block;
+		.log .ai_account{
+			float:left;
+			width:330px;
+		}
+		.log .other_account{
+			float:right;
 			width:330px;
 		}
 		.text_input{
@@ -88,8 +95,9 @@ button{
 		#mail,#psd{
 			display:block;
 			width:253px;
-			height:35px;
-			margin:10px 15px 30px 20px;
+			height:15px;
+			padding: 10px 0 10px 10px;
+			margin:10px 15px 24px 20px;
 			border:1px solid;
 			color:#989898;
 			border-radius:4px;
@@ -101,8 +109,28 @@ button{
 			color:red;
 			display:none;
 		}
+		/*验证码*/
+		.checkCode{
+			padding: 0 0 10px 20px;
+			height: 25px;
+			line-height: 25px;
+		}
+		.checkBox{
+			width: 50px;
+			height: 20px;
+			border: 1px inset #ccc;
+		}
+		.checkImg{
+			width: 60px;
+			height: 25px;
+			margin: 0 0 -7px 15px;
+			background: #ccc;
+		}
+		.checkChange{
+		}
 	/****** 登陆按钮 *********/
 		.submit_btn{
+			float:left;
 			width:80px;
 			height:30px;
 			margin-left:20px;
@@ -114,7 +142,8 @@ button{
 	/******* 忘记密码 **********/
 		.forget{
 			float:right;
-			margin-right:120px;
+			margin-right:75px;
+			margin-top: 10px;
 		}
 	.other_account{
 		float:right;
@@ -337,7 +366,7 @@ button{
 		}
 		
 		#nav .home{
-			background:url(../images/home_bg.png) no-repeat left;
+			border-radius: 4px 0 0 4px;
 			width:90px;
 		}
 		#nav .home a span{
@@ -379,6 +408,7 @@ button{
 				float:left;
 			}
 			.change_1 .pic_1{
+				display: block;
 				width: 860px;
 				height: 270px;
 				background: #DFDFDF;
@@ -428,7 +458,8 @@ button{
 				}
 		.choice_area{
 			position:relative;
-			background: #ccc;
+			*height:110px;
+			background:rgb(232, 234, 255);
 		}
 		.choice_area .ul_2{
 			margin:0 70px;
@@ -698,3 +729,62 @@ button{
 			opacity:0.9;
 			filter:alpha(opacity=90);
 		}
+/*添加检测内容是否存在提示,屏蔽按钮，显示产品即将推出*/
+	.fade_in{
+		position: fixed;
+		left: 0px;
+		right: 0px;
+		top: 0px;
+		bottom: 0px;
+		z-index: 1000;
+		opacity: 0;
+		filter: alpha(opacity=0);
+		background: #000;
+		filter:alpha(opacity=80)\9; /* IE6、IE7、IE8支持 */
+	}
+	.modal{
+		position: fixed;
+		left: 50%;
+		top: -100px;
+		z-index: 1001;
+		width: 850px;
+		height: 100px;
+		margin-left: -425px;
+		background: white;
+		border-radius: 6px;
+	}
+	.modal_header{
+		border-bottom: 1px solid #eee;
+	}
+	.modal_header .closed{
+		float: right;
+		margin: 6px 14px 0 0;
+		font-size: 30px;
+		font-weight: 700;
+	}
+	.modal_header h3{
+		line-height: 30px;
+		padding: 10px 16px;
+		font-size: 19px;
+		color: black;
+	}
+	.modal_body{
+		text-align: left;
+		max-height: 800px;
+		padding: 15px;
+		overflow-y: auto;
+	}
+
+/*上下页按钮统一风格相应css*/
+.choice_page{
+				margin:10px 0;
+			}
+			.choice_page li{
+				float: right;
+				margin: 0 4px;
+				padding: 2px;				
+			}
+				.strong{
+					font-weight:600;
+					color:#0E709A;
+				}

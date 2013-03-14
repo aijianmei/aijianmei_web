@@ -76,36 +76,39 @@ class IndexAction extends Action {
 	{	
 		$o = $_GET['o'];
 		if($o=='like') {
-			if($this->mid) {
+			if($this->mid) {				
 				$is_vote = M('article_vote')->where(array('uid'=>$this->mid, 'article_id'=>$_GET['id']))->find();
 				if(!empty($is_vote)) {
 					echo '<script type="text/javascript">alert("已经投票");</script>';
 				}else {
-					$like = M('article')->field('like')->where(array('id'=>$_GET['id']))->find();
+					/* $like = M('article')->field('like')->where(array('id'=>$_GET['id']))->find();
 					$data['id'] = $_GET['id'];
 					$data['like'] = $like['like'];
 					M('article')->save($data);
-					M('article_vote')->add(array('uid'=>$this->mid, 'article'=>$_GET['id']));
+					 */
+					M('')->query('update ai_article set `like`=`like`+1 where id='.$_GET['id']);
+					$data['uid'] = $this->mid;
+					$data['article_id'] = $_GET['id'];
+					M('')->query('insert into ai_article_vote (`uid`,`article_id`) values ("'.$this->mid.'","'.$_GET['id'].'"');
 				}				
 			}else {
-				echo '<script type="text/javascript">alert("请登录")</script>';
+				//echo '<script type="text/javascript">alert("请登录")</script>';
 			}
-		}
-		
-		if($o=='unlike') {
+		}elseif($o=='unlike') {
 			if($this->mid) {
 				$is_vote = M('article_vote')->where(array('uid'=>$this->mid, 'article_id'=>$_GET['id']))->find();
 				if(!empty($is_vote)) {
 					echo '<script type="text/javascript">alert("已经投票");</script>';
 				}else {
-					$unlike = M('article')->field('unlike')->where(array('id'=>$_GET['id']))->find();
+					/* $unlike = M('article')->field('unlike')->where(array('id'=>$_GET['id']))->find();
 					$data['id'] = $_GET['id'];
 					$data['unlike'] = $unlike['unlike'];
-					M('article')->save($data);
-					M('article_vote')->add(array('uid'=>$this->mid, 'article'=>$_GET['id']));
+					M('article')->save($data); */
+					M('')->query('update ai_article set `unlike`=`unlike`+1  where id='.$_GET['id']);
+					M('article_vote')->add(array('uid'=>$this->mid, 'article_id'=>$_GET['id']));
 				}
 			}else {
-				echo '<script type="text/javascript">alert("请登录")</script>';
+				//echo '<script type="text/javascript">alert("请登录")</script>';
 			}
 		}
 		global $ts;
@@ -116,12 +119,31 @@ class IndexAction extends Action {
 		$this->assign('article', $article); 
 		
 		
-		$articleComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->findAll();
+		$commentCounts = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->count();
+		
+		$pager = api('Pager');
+		$pager->setCounts($commentCounts);
+		$pager->setList(10);
+		$pager->makePage();
+		$from = ($pager->pg -1) * $pager->countlist;		
+		$pagerArray = (array)$pager;
+		$this->assign('pager', $pagerArray);
+		//print_r($pagerArray);
+		
+		$articleComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->limit("$from,$pager->countlist")->findAll();
 		foreach($articleComments as $ac) {
 			$comments[$ac['id']]['content'] = $ac;
 			$comments[$ac['id']]['user'] = getUserInfo($ac['uid']);			
 			$comments[$ac['id']]['children'] = M('comments')->where(array('topParent'=>$ac['id'], 'parent_type'=>'3'))->order('`create_time` asc')->findAll();
 		}
+		
+		$hotComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->order('`like` desc')->limit("$from,$pager->countlist")->findAll();
+		foreach($hotComments as $ac) {
+			$hotArticlecomments[$ac['id']]['content'] = $ac;
+			$hotArticlecomments[$ac['id']]['user'] = getUserInfo($ac['uid']);
+			$hotArticlecomments[$ac['id']]['children'] = M('comments')->where(array('topParent'=>$ac['id'], 'parent_type'=>'3'))->order('`create_time` asc')->findAll();
+		}
+		$this->assign('hotComments', $hotArticlecomments);
 		
 		$promote = M('promote')->find();
 		$this->assign('promote', $promote);
@@ -131,8 +153,37 @@ class IndexAction extends Action {
 		$this->assign('promote_article', $promoteArticle);
 		
 		$this->assign('comments', $comments);
+
 		$this->assign('cssFile', 'article');
 		$this->assign('uid', $this->mid);
+
+		//目录树
+		//$tree_channel_en 一级目录
+		//$tree_parent 二级目录
+		//$tree_category_id 三级目录
+		//article['id']  四级目录
+		$string="select category_id,name,channel,parent from ai_article,ai_article_category where ai_article.category_id=ai_article_category.id and ai_article.id=".$id;
+		$result=mysql_query($string);
+		$result=mysql_fetch_array($result);
+		$channel=$result['channel'];
+		$tree_category_id=$result['category_id'];
+		switch($channel){
+			case 1: {$tree_channel="健身计划 ";$tree_channel_en="Plan";}break;
+			case 2:{$tree_channel="锻炼 ";$tree_channel_en="Train";}break;
+			case 3:{$tree_channel="营养 ";$tree_channel_en="Nutri";}break;
+			case 4:{$tree_channel="补充 ";$tree_channel_en="Append";}break;
+		}
+		$tree_parent=$result['parent'];		
+		$tree_name=$result['name'];
+		$result=mysql_query("select name from ai_article_category where id=".$tree_parent);
+		$tree_parentName=mysql_fetch_array($result);
+		$this->assign("first",$tree_channel);
+		$this->assign("second",$tree_parentName['name']);
+		$this->assign("third",$tree_name);
+		$this->assign("tree_parent",$tree_parent);
+		$this->assign("tree_channel_en",$tree_channel_en);
+		$this->assign("tree_category_id",$tree_category_id);
+		
 		$this->display('detail');
 	}
 	
@@ -258,6 +309,14 @@ class IndexAction extends Action {
 	public function daily()
 	{
 		$id = intval($_GET['id']);
+		$o = $_GET['o'];
+		if($o=='like_comment') {
+			$comment_id = $_GET['comment_id'];
+			$data['id'] = $_GET['comment_id'];
+			
+			M('')->query('UPDATE `ai_comments` SET `like`=`like`+1 where `id`='.$comment_id);
+		}
+		
 		$daily = M('daily')->where(array('id'=>$id))->find();
 		$videos = M('daily_video')->where(array('daily_id'=>$id))->findAll();
 		
@@ -266,7 +325,17 @@ class IndexAction extends Action {
 				$videos[$k]['img'] = D('Article')->getVideoImgById($v['id']);
 			}
 		}
-		$comments = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->findAll();
+		
+		$commentsCount = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->count();
+		$pager = api('Pager');
+		$pager->setCounts($commentsCount);
+		$pager->setList(10);
+		$pager->makePage();
+		$from = ($pager->pg-1) * $pager->countlist;
+		$pagerArray = (array)$pager;
+		$this->assign('pager', $pagerArray);
+		
+		$comments = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->limit("$from,$pager->countlist")->findAll();
 		foreach($comments as $k=>$c) {
 			$comments[$k] = $c;
 			$comments[$k]['userInfo'] = getUserInfo($c['uid']);

@@ -6,7 +6,9 @@
 				<span class="corner_left"></span>
 				<div class="lay_sider">
 					<div class="subsider">
-						<h1 class="video_all">补充</h1>
+						<span class="border_line"></span>
+						<h3 class="video_all">营养</h3>
+						<span class="border_line"></span>
 						<ul>
 							<php>foreach($categories as $c) {</php>
 							<php>if($c['name']) {</php>
@@ -20,12 +22,7 @@
 							</li>
 							<php>}</php>
 							<php>}</php>
-							<!-- <li class="each_video">
-								<a href="nutri_1.html">减肥营养</a>
-							</li>
-							<li class="each_video">
-								<a href="nutri_1.html">肌肉增益营养</a>
-							</li> -->
+							<span class="border_line"></span>
 						</ul>
 					</div>
 				</div>
@@ -40,28 +37,15 @@
 						<div class="block_1 clearfix">
 							<h1 class="public_title">最热文章</h1>
 							<ul>
-							<php>foreach($articles as $a) {</php>
-								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
-									<p>{$a['title']}</p>
-									
+							<php>foreach($hotArticles as $a) {</php>
+								<li class="tr_classify">
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_1"><img src="{$SITE_URL}/Public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+									<p class="summary">{$a['brief']}
+									</p>
+									<!-- <a href="#" class="add_expend">查看所有质量增加程序</a> -->
 								</li>
-							<php>}</php>
-								<!-- <li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/112.png" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
-								</li>
-								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/113.jpg" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
-								</li>
-								<li class="nubble defferent">
-									<a href="article.html"><img src="../Public/images/add/114.jpg" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
-								</li> -->
+								<php>}</php>
 							</ul>
 						</div>
 					</div>
@@ -74,76 +58,61 @@
 						<div class="block_1 clearfix">
 						<h1 class="public_title">最近文章</h1>
 							<ul>
-							<php>foreach($articles as $a) {</php>
-								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
-									<p>{$a['title']}</p>
-									
+								<php>foreach($lastArticles as $a) {</php>
+								<li class="tr_classify">
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_2"><img src="{$SITE_URL}/Public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+									<p class="summary">{$a['brief']}</p>
+									<!-- <a href="#" class="add_expend">查看所有腹肌锻炼程序</a> -->
 								</li>
-							<php>}</php>
-								<!-- <li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/112.png" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
-								</li>
-								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/113.jpg" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
-								</li>
-								<li class="nubble defferent">
-									<a href="article.html"><img src="../Public/images/add/114.jpg" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
-								</li> -->
+								<php>}</php>
 							</ul>
 						</div>
 					</div>
-					<span class="corner_bottom"></span>
-				</div>	
-
-				<div class="mode_2 clearfix">
-					<ul class="s_nav_left">
-						<li>排序</li>
-						<li class="current_click">时间</li>
-						<li>人气</li>
-						<li>阅读器</li>
-					</ul>
-					<ul class="s_nav_right">
-						<li>下一页</li>
-						<li>上一页</li>
-						<li>1/17</li>
-						<li class="strong">共600篇文章</li>									
-					</ul>
+				</div>
+				<div class="video">
+						<div class="all">
+							<h3 class="tit">全部<a href="/index.php?app=index&mod=Nutri&act=videoList" class="tab_btn">视频</a><a href="/index.php?app=index&mod=Nutri&act=articleList" class="tab_btn curr_tit">文章</a></h3>
+							<!-- <h3 class="tit">全部<span class="sort1" id="show"><a href="/index.php?app=index&mod=Train&act=articleList">文章</a></span>
+							<span class="sort2"><a href="/index.php?app=index&mod=Train&act=videoList">视频</a></span>
+							</h3> -->
+							<ul class="all_ul">
+								<li class="select">
+									<span class="opt">范围：</span>
+									<a class="pre">不限</a>
+									<a>今日</a>
+									<a>本周</a>
+									<a>本月</a>
+								</li>
+								<li class="select">
+									<span class="opt">排序：</span>
+									<a class="pre">最新发布</a>
+									<a>最多播放</a>
+									<a>最多评论</a>
+									<a>最多收藏</a>
+								</li>
+							</ul>
+						</div>
 				</div>
 				<div class="mode_3">
-				<php>foreach($articles as $a) {</php>
-					<div class="ar_block">
-						<h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
-						<span>作者：{$a['author']}</span><span>日期：{$a['create_time']}</span><span>点击：{$a['click']}</span>
-						<p>{$a['content']|htmlspecialchars_decode|getShort=###, 20|formatComment}</p>
-					</div>
-				<php>}</php>
-					<!-- <div class="ar_block">
-						<h2><a href="article.html">哑铃全身锻炼计划</a></h2>
-						<span>作者：</span><span>日期：</span><span>点击：</span>
-						<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
-					</div>
-					<div class="ar_block">
-						<h2><a href="article.html">先各种热身5-10分钟</a></h2>
-						<span>作者：</span><span>日期：</span><span>点击：</span>
-						<p>  热身动作锻炼流程 、在线哑铃锻炼流程(主要学习流程、锻炼速度、领悟组间休息) </p>
-					</div>
-					<div class="ar_block">
-						<h2><a href="article.html">哑铃全身锻炼计划</a></h2>
-						<span>作者：</span><span>日期：</span><span>点击：</span>
-						<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
-					</div>
-					<div class="ar_block">
-						<h2><a href="article.html">先各种热身5-10分钟</a></h2>
-						<span>作者：</span><span>日期：</span><span>点击：</span>
-						<p>  热身动作锻炼流程 、在线哑铃锻炼流程(主要学习流程、锻炼速度、领悟组间休息) </p>
-					</div> -->
+							<php>foreach($articles as $a) {</php>
+								<div class="ar_block">
+									<img class="block_img" src="../Public/images/nutri/{$a['img']}"/>
+									<h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
+									<span>作者：</span><span>日期：</span><span >点击：4</span>
+									<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
+								</div>
+							<php>}</php>
+				</div>
+				<div class="page">
+							<span>{$pager[backstr]}</span>
+							<span>{$pager[thestr]}</span>
+							<span>{$pager[nextstr]}</span>
+							<!-- <button class="prev"><a href="">上一页</a></button>
+							<a href="" class="record current_page">1</a>
+							<a href="" class="record">2</a>
+							<a href="" class="record">3</a>
+							<button class="next"><a href="">下一页</a></button> -->
 				</div>									
 			</div>
 		</div>

@@ -1,22 +1,15 @@
-	.triangle{
-		border-color:#BCBCBC #fff #fff #fff;
-	}
-.wrapper{
-	background: white;
-}
+
 /***********************content开始*************************/
 #content{
 	margin: 20px 60px;
 }
 #content .left_sub{
-	float:left;
-	width:157px;
+	margin:0;
 }
 	.left_sub .title_1{
 		margin-right: 30px;
 		padding-bottom: 6px;
 		font-size: 16px;
-		border-bottom: 1px solid #CCC;
 	}
 	.left_sub .all{
 		font-size: 14px;
@@ -28,11 +21,12 @@
 		padding-left: 11px;
 		line-height: 32px;
 		font-size: 13px;
-		border-bottom: 1px solid #CCC;
 	}
 #content .right_content{
 	float:left;
 	width:703px;
+	margin-left:15px;
+	_margin-left:7px;
 }
 	.right_content .hr{
 				display: inline-block;
@@ -40,7 +34,7 @@
 				height:0px;
 				margin-top: 14px;
 				border: 1px solid #70BDFA;
-				*margin-top: -14px;//for ie8
+				*margin-top: -14px;/*for ie8*/
 	}
 	.right_content .hr_1{width: 74%;}
 	.right_content .hr_2{width: 77%;}

@@ -68,13 +68,13 @@
 								<span>0</span>
 								<span class="triangle"></span>
 							</a>
-							<div class="page_times" style="postion:absolute;display:none;right:0px;width:50px; background:white;line-height:20px;border:1px solid #ccc;">
+							<!-- <div class="page_times" style="postion:absolute;display:none;right:0px;width:50px; background:white;line-height:20px;border:1px solid #ccc;">
 								<p>页面1</p>
 								<p>页面1</p>	
-							</div>
+							</div> -->
 						</span>
-						<a class="sprite_8"><span class="praise">100</span></a>
-						<a class="sprite_9"><span class="praise">100</span></a>
+						<a class="sprite_8" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$daily['like']}</span></a>
+						<a class="sprite_9" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$daily['unlike']}</span></a>
 						<span class="relay">转发到</span>
 						<include file="../Public/share" />
 						<!-- JiaThis Button BEGIN -->
@@ -116,16 +116,19 @@
 						<div class="cm_top">
 							<span class="page_1">
 								<span class="lay_page">
-									<a class="choice_page">1</a>
+									<!-- <a class="choice_page">1</a>
 									<a>2</a>
 									<a>3</a>
 									<a>4</a>
-									<a>5</a>
+									<a>5</a> -->
+									{$pager['backstr']}
+									{$pager['thestr']}
+									{$pager['nextstr']}
 								</span>
-								<a class="pre_page">上一页</a>
-								<a class="next_page">下一页</a>
+								<!-- <a class="pre_page">上一页</a>
+								<a class="next_page">下一页</a> -->
 							</span>
-							<span>第0页</span>  <span>第0条</span>
+							<span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
 							
 						</div>
 						
@@ -157,16 +160,19 @@
 						<div class="cm_top">
 							<span class="page_1">
 								<span class="lay_page">
-									<a class="choice_page">1</a>
+									<!-- <a class="choice_page">1</a>
 									<a>2</a>
 									<a>3</a>
 									<a>4</a>
-									<a>5</a>
+									<a>5</a> -->
+									{$pager['backstr']}
+									{$pager['thestr']}
+									{$pager['nextstr']}
 								</span>
-								<a class="pre_page">上一页</a>
-								<a class="next_page">下一页</a>
+								<!-- <a class="pre_page">上一页</a>
+								<a class="next_page">下一页</a> -->
 							</span>
-							<span>第0页</span>  <span>第0条</span>
+							<span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
 							
 						</div>
 						<div class="cm_bottom">
@@ -219,14 +225,14 @@
 			<div class="content_right">
 				<a href="store_5.html"><img src="../Public/images/article/1.png" alt="no" border="0" /></a>
 				<h4 class="title_4">精华推荐</h4>
-					<div class="recommend">
+					<!-- <div class="recommend">
 						<a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
 						<p class="intro">新闻百科：为什么大陆同胞赴美不用、、、</p>
 					</div>
 					<div class="recommend">
 						<a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
 						<p class="intro">新闻百科：为什么大陆同胞赴美不用、、、</p>
-					</div>
+					</div> -->
 			</div>
 		</div>
 <include file="../Public/footer" />

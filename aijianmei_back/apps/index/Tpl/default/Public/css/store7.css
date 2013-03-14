@@ -1,11 +1,8 @@
 ﻿.wrapper{
-	background:#EDEDED;
+
 	padding-bottom:100px;
 }
-	#header{
-		background:#fff;
-		box-shadow:0 0 8px #ccc;
-	}
+
 	.content{
 		width:915px;
 		margin:0 auto;

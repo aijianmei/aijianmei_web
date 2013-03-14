@@ -419,6 +419,10 @@ CM.intro = {
 		var scrollbar = null;
 		scroller  = new Scrolling.Scroller(document.getElementById('dv_scroll'), 430, 209);
 		scrollbar = new Scrolling.Scrollbar(document.getElementById('dv_scroll_bar'), scroller, new Scrolling.ScrollTween());
+		scroller  = new Scrolling.Scroller(document.getElementById('dv_scroll_1'), 430, 209);
+		scrollbar = new Scrolling.Scrollbar(document.getElementById('dv_scroll_bar_1'), scroller, new Scrolling.ScrollTween());
+		scroller  = new Scrolling.Scroller(document.getElementById('dv_scroll_2'), 430, 209);
+		scrollbar = new Scrolling.Scrollbar(document.getElementById('dv_scroll_bar_2'), scroller, new Scrolling.ScrollTween());
 }
 };
 ////////////////////  start  ////////////////////
@@ -427,12 +431,17 @@ $(function() {
 });
 //添加效果
 var newdom = new getdom,
-	scr_con = newdom.getElementsByClass('scr_con')[0],
-	ScrollbarHandle = newdom.getElementsByClass('Scrollbar-Handle')[0];
-	scr_con.onmouseover = function(){
-		ScrollbarHandle.style.opacity = 0.9;
-		ScrollbarHandle.style.filter ="alpha(opacity=90)";
+	scr_con = newdom.getElementsByClass('scr_con'),
+	ScrollbarHandle = newdom.getElementsByClass('Scrollbar-Handle');
+	for(var i = 0;i < scr_con.length;i++){
+		scr_con[i].index = i;
+		scr_con[i].onmouseover = function(){
+			ScrollbarHandle[this.index].style.opacity = 0.9;
+			ScrollbarHandle[this.index].style.filter ="alpha(opacity=90)";
+		}
+		scr_con[i].onmouseout = function(){
+			ScrollbarHandle[this.index].style.opacity = 0;
+			ScrollbarHandle[this.index].style.filter ="alpha(opacity=0)";
+		}
 	}
-	scr_con.onmouseout = function(){
-		ScrollbarHandle.style.opacity = 0;
-	}
+		
