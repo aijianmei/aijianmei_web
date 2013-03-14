@@ -52,6 +52,23 @@ class TrainAction extends Action {
 	public function videoList()
 	{
 		$id = intval($_GET['id']);
+		$this->assign('cssFile', 'video');
+		$this->assign('cssFile', 'training');
+		$cate = M('article_category')->where(array('channel'=>'2', 'type'=>'1'))->findAll();
+		
+		foreach($cate as $c) {
+			if($c['parent']==NULL) $realCate[$c['id']] = $c;
+			else $realCate[$c['parent']]['children'][] = $c;
+			$cate_id[] = $c['id'];
+		}
+
+		$this->assign('categories', $realCate);
+		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
+		$articles = M('article')->where($map)->findAll();
+		$this->assign('articles', $articles);
+		
+		$this->display('vlist');
+		/*$id = intval($_GET['id']);
 		$videos = M('video')->where(array('category_id'=>$id))->findAll();
 		//print_r($videos);
 		$cate = M('article_category')->where(array('channel'=>'2', 'type'=>'2'))->findAll();
@@ -63,7 +80,8 @@ class TrainAction extends Action {
 		$this->assign('videos', $videos);
 		$this->assign('categories', $realCate);
 		$this->assign('cssFile', 'video');
-		$this->display('vlist');
+		$this->assign('cssFile', 'training');
+		$this->display('vlist');*/
 	}
 	
 	public function videoDetail()

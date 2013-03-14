@@ -56,7 +56,9 @@ class AppendAction extends Action {
 		$articles = M('article')->where(array('category_id'=>$id))->order("$order desc")->limit("$from,$pager->countlist")->findAll();
 		
 		$this->assign('articles', $articles);
+		print_r($articles);
 		$this->assign('categories', $realCate);
+		//print_r($articles);
 		$this->assign('cssFile', 'add');
 		$this->display('list');
 	}
@@ -65,6 +67,23 @@ class AppendAction extends Action {
 	public function videoList()
 	{
 		$id = intval($_GET['id']);
+		$this->assign('cssFile', 'video');
+		$this->assign('cssFile', 'add');
+		$cate = M('article_category')->where(array('channel'=>'2', 'type'=>'1'))->findAll();
+		
+		foreach($cate as $c) {
+			if($c['parent']==NULL) $realCate[$c['id']] = $c;
+			else $realCate[$c['parent']]['children'][] = $c;
+			$cate_id[] = $c['id'];
+		}
+
+		$this->assign('categories', $realCate);
+		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
+		$articles = M('article')->where($map)->findAll();
+		$this->assign('articles', $articles);
+		
+		$this->display('vlist');
+		/*$id = intval($_GET['id']);
 		$videos = M('video')->where(array('category_id'=>$id))->findAll();
 		//print_r($videos);
 		$cate = M('article_category')->where(array('channel'=>'2', 'type'=>'2'))->findAll();
@@ -75,8 +94,10 @@ class AppendAction extends Action {
 		}
 		$this->assign('videos', $videos);
 		$this->assign('categories', $realCate);
+				print_r( $realCate);
 		$this->assign('cssFile', 'video');
-		$this->display('vlist');
+		$this->assign('cssFile', 'add');
+		$this->display('vlist');*/
 	}
 	
 	//get append video detail

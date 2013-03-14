@@ -131,12 +131,14 @@
 				margin: 0 auto;
 				width: 722px;
 			}
-				.plan_article_tl{
-					display: inline-block;
-					line-height: 40px;
-					font-size: 20px;
-					color: #56888F;
-				}
+	.plan_article_tl{
+		display: inline-block;
+		height: 40px;
+		padding-top: 8px;
+		font-size: 16px;
+		color: #56888F;
+		font-weight: 700;
+	}	
 				.add_expend{
 					display: block;
 					margin: 5px 0 10px 0;
@@ -393,6 +395,31 @@ margin-bottom: 20px;
 				margin-top:8px;
 				font-size:12px;
 			}
+			
+			/****** mode_3 ------------------------------*****/
+		.mode_3{
+
+		}
+			.ar_block{
+				margin: 20px;
+				padding: 20px 0 20px 10px;
+				background: #f3f3f3;
+
+			}
+			.block_img{
+				float: left;
+				width: 81px;
+				height: 70px;
+				margin-right: 10px;
+			}
+			.ar_block span{
+				display: inline-block;
+				margin: 4px 20px 4px 0;
+			}
+			.ar_block p{
+				margin-right: 50px;
+			}
+			
 		/******** 文章列表 ********/
 			.arts{
 				float:left;
