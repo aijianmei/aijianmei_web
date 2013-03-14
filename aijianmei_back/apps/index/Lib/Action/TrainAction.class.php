@@ -40,7 +40,16 @@ class TrainAction extends Action {
 			else $realCate[$c['parent']]['children'][] = $c;
 			$cate_id[] = $c['id'];
 		}
-
+		
+		//get hotArticles
+		$order = 'click';
+		$hotArticles = D('Article')->getTrainArticles($order);
+		$this->assign('hotArticles', $hotArticles);
+		//get lastArticles		
+		$order = 'create_time';
+		$hotArticles = D('Article')->getTrainArticles($order);
+		$this->assign('lastArticles', $hotArticles);
+		
 		$this->assign('categories', $realCate);
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
 		$articles = M('article')->where($map)->findAll();
@@ -66,6 +75,15 @@ class TrainAction extends Action {
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
 		$articles = M('article')->where($map)->findAll();
 		$this->assign('articles', $articles);
+		
+		//get hotArticles
+		$order = 'click';
+		$hotArticles = D('Article')->getTrainArticles($order);
+		$this->assign('hotArticles', $hotArticles);
+		//get lastArticles		
+		$order = 'create_time';
+		$hotArticles = D('Article')->getTrainArticles($order);
+		$this->assign('lastArticles', $hotArticles);
 		
 		$this->display('vlist');
 		/*$id = intval($_GET['id']);

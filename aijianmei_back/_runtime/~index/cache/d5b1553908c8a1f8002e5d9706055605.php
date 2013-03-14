@@ -206,26 +206,15 @@
 						<div class="block_1 clearfix">
 							<h1 class="public_title">最热文章</h1>
 							<ul>
-								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
+								<?php foreach($hotArticles as $a) { ?>
+								<li class="tr_classify">
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="video_1"><img src="<?php echo ($SITE_URL); ?>/public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt=""></a>
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
+									<p class="summary"><?php echo ($a['brief']); ?>
+									</p>
+									<!-- <a href="#" class="add_expend">查看所有质量增加程序</a> -->
 								</li>
-								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
-								</li>
-								<li class="nubble">
-									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
-								</li>
-								<li class="nubble defferent">
-									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
-								</li>
+								<?php } ?>
 							</ul>
 						</div>
 					</div>
@@ -238,7 +227,15 @@
 						<div class="block_1 clearfix">
 						<h1 class="public_title">最近文章</h1>
 							<ul>
-								<li class="nubble">
+								<?php foreach($lastArticles as $a) { ?>
+								<li class="tr_classify">
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="video_2"><img src="<?php echo ($SITE_URL); ?>/public/images/article/<?php echo ($a['img']); ?>" width="165px" height="134px" alt=""></a>
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo ($a['id']); ?>" class="plan_article_tl"><?php echo ($a['title']); ?></a>
+									<p class="summary"><?php echo ($a['brief']); ?></p>
+									<!-- <a href="#" class="add_expend">查看所有腹肌锻炼程序</a> -->
+								</li>
+								<?php } ?>
+								<!--<li class="nubble">
 									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
@@ -257,7 +254,7 @@
 									<a href="article.html"><img src="../Public/images/add/111.jpg" alt="no" class="rt_picture" /></a>
 									<p>add muscle</p>
 									<p>add muscle</p>
-								</li>
+								</li>  -->
 							</ul>
 						</div>
 					</div>

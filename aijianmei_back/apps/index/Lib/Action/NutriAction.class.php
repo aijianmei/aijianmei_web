@@ -48,6 +48,15 @@ class NutriAction extends Action {
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
 		$articles = M('article')->where($map)->findAll();
 		//var_dump($articles);
+		
+		//get hotArticles
+		$order = 'click';
+		$hotArticles = D('Article')->getNutriArticles($order);
+		$this->assign('hotArticles', $hotArticles);
+		//print_r($hotArticles);
+		//get lastArticles
+		$lastArticles = D('Article')->getNutriArticles('create_time');
+		$this->assign('lastArticles', $lastArticles);
 		$this->assign('articles', $articles);
 		$this->assign('categories', $realCate);
 		//$this->assign('cssFile', 'video');
@@ -79,6 +88,15 @@ class NutriAction extends Action {
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
 		$articles = M('article')->where($map)->findAll();
 		$this->assign('articles', $articles);
+		
+		//get hotArticles
+		$order = 'click';
+		$hotArticles = D('Article')->getNutriArticles($order);
+		$this->assign('hotArticles', $hotArticles);
+		//print_r($hotArticles);
+		//get lastArticles
+		$lastArticles = D('Article')->getNutriArticles('create_time');
+		$this->assign('lastArticles', $lastArticles);
 		
 		$this->display('vlist');
 	}
