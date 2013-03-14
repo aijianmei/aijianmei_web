@@ -60,6 +60,13 @@ class AppendAction extends Action {
 		$this->assign('categories', $realCate);
 		//print_r($articles);
 		$this->assign('cssFile', 'add');
+		
+		$hotArticles = D('Article')->getAppendArticles('click');
+		$this->assign('hotArticles', $hotArticles);
+		//foreach($hotArticles as $a) echo $a['title'];//$a['title']=substr($a['title'],0,10)."...";		
+		$lastArticles = D('Article')->getAppendArticles('create_time');
+		$this->assign('lastArticles', $lastArticles);
+		
 		$this->display('list');
 	}
 	
