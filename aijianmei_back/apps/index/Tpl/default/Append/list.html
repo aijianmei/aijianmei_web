@@ -19,7 +19,7 @@
 										<a href="/index.php?app=index&mod=Append&act={$action}&id={$child['id']}">{$child['name']}</a>
 									</li>
 								<php>}</php>
-							<php>}</php>							
+							<php>}</php>				
 							<span class="border_line"></span>
 						</ul>
 					</div>
@@ -145,8 +145,8 @@
 						</div>
 				</div>
 				<div class="mode_3">
-								<div class="ar_block">
-									<img class="block_img" src="../Public/images/training/118.jpg"/>
+								<!-- <div class="ar_block">
+									<img class="block_img" src="../Public/images/add/{$a['img']}"/>
 									<h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
 									<span>作者：</span><span>日期：</span><span >点击：4</span>
 									<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
@@ -156,15 +156,15 @@
 									<h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
 									<span>作者：</span><span>日期：</span><span >点击：4</span>
 									<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
-								</div>
-							<!--  <php>foreach($articles as $a) {</php>
+								</div> -->
+							<php>foreach($articles as $a) {</php>
 								<div class="ar_block">
-									<img class="block_img" src="../Public/images/training/118.jpg"/>
+									<img class="block_img" src="../Public/images/add/{$a['img']}"/>
 									<h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
 									<span>作者：</span><span>日期：</span><span >点击：4</span>
 									<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
 								</div>
-							<php>}</php>-->
+							<php>}</php>
 				</div>
 				<div class="page">
 							<button class="prev"><a href="">上一页</a></button>
