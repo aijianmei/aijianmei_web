@@ -3,6 +3,24 @@
 }
 
 /******* Banner *******/
+	.lay_banner .ul_1{
+			width:4300px;
+			position: relative;
+		}
+		.choice_area li{
+			float: left;
+			display: inline-block;
+			height: 80px;
+			width: 120px;
+			margin: 12px 9px;
+			cursor: pointer;
+			border: 3px solid transparent;
+
+		}
+		.ul_2 li img{
+			width:120px;
+			height:80px;
+		}
 		/*#banner{
 			width:960px;
 			height:470px;
