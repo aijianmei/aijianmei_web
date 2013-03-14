@@ -38,9 +38,6 @@
 			padding-top:10px;
 			border-right: 1px solid #CCC;
 		}
-			.style_info{
-			
-			}
 				.style_info .name{
 					font-size:16px;
 				}
@@ -489,7 +486,6 @@
 	.other_fans{
 		width:360px;
 		float:right;
-		border:1px solid #ccc;
 	}
 		.other_top{
 			background: #F7F7F7;
@@ -514,14 +510,14 @@
 			.others_title{
 				position: absolute;
 				top: -10px;
-				background: white;
+				background: #FAFAFA;
 				padding-right: 5px;			
 			}
 			.others .re_more{
 				position: absolute;
 				right: 0;
 				top: -10px;
-				background: white;
+				background: #FAFAFA;
 				padding-left: 5px;	
 				font-size:13px;
 				color:#0079B7;
@@ -541,9 +537,9 @@
 					}
 	
 		.scanning{
-			padding:0 20px;
-			border-top: 1px solid #F3EFE3;
-			background:#F8F5E9;
+			background: white;
+			border: 1px solid #E0E0E0;
+			margin: 10px;
 		}
 			.scan{
 				float:left;
@@ -601,15 +597,62 @@
 .album_detail{
 	padding:5px;
 }
-
+.icon_acount{
+	color:#888;
+	font-size:13px;
+	display:inline-block;
+	margin-right:5px;
+}
 .total_img{
 	margin-left:35px;
 }
+.upload{
+	height: 40px;
+	background: #F1F1F1;
+	margin: 20px;
+}
+.upload .totaled{
+	float:left;
+	margin:10px;
+}
+.upload .upload_button{
+	width:67px;
+	height:22px;
+	margin:10px;
+	color:white;
+	font-weight:bold;
+	background:url(../images/pal/uploadBtn.jpg);
+	cursor:pointer;
+}
+
 /*相册列表*/
 .my_album{
 width: 670px;
 float: left;	
 }
+.album_menu{
+	margin:15px;
+
+}
+.clock{
+	width:17px;
+	background:url(../images/pal/albumList.png) no-repeat 0px 0px;
+	cursor:pointer;
+}
+.repost,.like{
+	float:right;
+	width:80px;
+	height:19px;
+	color:#555;
+	cursor:pointer;
+}
+.repost{
+	background:url(../images/pal/albumList.png) no-repeat 0px -25px;
+}
+.like{
+	background:url(../images/pal/albumList.png) no-repeat 0px -50px;
+}
+
 .picture_list{
 	float:left;
 	margin:15px;
@@ -621,7 +664,41 @@ float: left;
 }
 .picture_detail{
 	color:#97ABBE;
-	padding:5px 0;
+	margin:0 15px 10px 0;
+	float:left;
+	font-size:13px;
+}
+.transmit_icon,.comment_icon,.like_icon{
+	display:inline-block;
+	width:15px;
+	height:12px;
+}
+.transmit_icon{	
+	background:url(../images/pal/icon.png) no-repeat 0 0;
+}
+.comment_icon{
+	background:url(../images/pal/icon.png) no-repeat 0 -22px;
+}
+.like_icon{
+	background:url(../images/pal/icon.png) no-repeat 0 -44px;
+}
+.comment_pic{
+	margin:30px 20px;
+}
+.comment_pic #enter{
+	border-top: 1px solid #CCC;
+	border-radius: 4px;
+	width:620px;
+}
+.sync_wb{
+	margin:10px 0;
+}
+.submit_comment{
+	width:50px;
+	height:30px;
+	float:right;
+	background:url(../images/pal/albumList.png) no-repeat 0px -75px;
+	cursor:pointer;
 }
 .sider{
 margin:15px;
@@ -691,6 +768,54 @@ padding: 10px 0;
 	float:left;
 	
 }
+
+/*上传照片*/
+.upload_title{
+	margin:15px;
+}
+.sa{
+	float: left;
+	margin: 3px 15px;
+}
+.select_alum{
+	margin:15px;
+}
+.creat_album{
+	margin: 0 20px;
+	width: 70px;
+	height: 25px;
+	border: 1px solid #E2E2E2;
+	color: #888;
+	background: #F9F9F9;
+	cursor: pointer;
+}
+.main_sel{
+height: 575px;
+border: 1px solid #CCC;
+margin: 20px
+}
+.open_file{
+	width:77px;
+	height:25px;
+	margin: 20px;
+	background:url(../images/pal/01.jpg);
+	color:white;
+	cursor:pointer;
+}
+.picture_area{
+background: white;
+height: 509px;
+position: relative;
+}
+.picture_area .open_file{
+position: absolute;
+left: 350px;
+top: 160px;
+width: 189px;
+height: 35px;
+background:url(../images/pal/02.jpg);
+}
+
 
 /*单张相片*/
 .big_picture_wrap{

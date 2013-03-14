@@ -1,26 +1,16 @@
-.wrapper{
-	background:#fff;
-	margin:0 auto;
-	width:980px;
-}
-	.wrapper .triangle{
-		border-color:#BCBCBC #FFF #FFF #FFF;
-	}
+
 .content{
 	height:800px;
 	margin:10px 20px;
 }
-/******* ²à±ßÀ¸ *********/
+/******* ï¿½ï¿½ï¿½ï¿½ï¿½ *********/
 	.sidebar{
-		width:165px;
-		float:left;
+			margin:0;
 	}
-	/****** ÊÓÆµ/ÎÄÕÂ ********/
+	/****** ï¿½ï¿½Æµ/ï¿½ï¿½ï¿½ï¿½ ********/
 		.sort{
 			height:30px;
-			border-bottom:1px solid #ccc;
 			line-height:30px;
-			padding:0 0 8px 20px;
 		}
 			.sort1,.sort2{
 				display:inline-block;
@@ -35,7 +25,7 @@
 			#show{
 				background:lightblue;
 			}
-	/********** È«²¿ ***********/
+	/********** È«ï¿½ï¿½ ***********/
 		.bar{
 			display:none;
 		}
@@ -44,7 +34,6 @@
 		}
 		.list{
 			height: 30px;
-			border-bottom: 1px solid #E5E5E5;
 			line-height: 30px;
 			padding-left: 20px;
 		}
@@ -58,7 +47,7 @@
 			}
 		
 		
-/******* ÊÓÆµ *************/		
+/******* ï¿½ï¿½Æµ *************/		
 	.video{
 		display:inline-block;
 		width:745px;
@@ -69,7 +58,7 @@
 		width:740px;
 		margin:0 auto;
 	}
-	/****** Ñ¡Ôñ·ÖÀà ********/
+	/****** Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ ********/
 		.video .select{
 			margin:10px;
 		}
@@ -89,12 +78,12 @@
 				background:#69696C;
 				color:white;
 			}
-		/******* ÁÐ±í ********/
+		/******* ï¿½Ð±ï¿½ ********/
 		.video .each{
 			padding-bottom:20px;
 			border-bottom:1px solid #ccd
 		}
-		/***** ÊÓÆµÁÐ±í ****/
+		/***** ï¿½ï¿½Æµï¿½Ð±ï¿½ ****/
 		.video .vdos{
 			width:130px;
 			display:inline-block;
@@ -119,7 +108,7 @@
 				margin-top:8px;
 				font-size:12px;
 			}
-		/******** ÎÄÕÂÁÐ±í ********/
+		/******** ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ ********/
 			.arts{
 				float:left;
 				width: 350px;
@@ -164,7 +153,7 @@
 					}
 		
 		
-	/****** ·­Ò³ *****/
+	/****** ï¿½ï¿½Ò³ *****/
 	.page{
 		margin:15px;
 		text-align:center;

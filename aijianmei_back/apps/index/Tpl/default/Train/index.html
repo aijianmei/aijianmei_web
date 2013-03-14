@@ -6,7 +6,9 @@
 				<span class="corner_left"></span>
 				<div class="lay_sider">
 					<div class="subsider">
-						<h3 class="video_all">全部</h3>
+						<span class="border_line"></span>
+						<h3 class="video_all">锻炼</h3>
+						<span class="border_line"></span>
 						<ul>
 							<php>foreach($categories as $c) {</php>
 								<li class="each_video all">
@@ -18,76 +20,11 @@
 									</li>
 								<php>}</php>
 							<php>}</php>							
-							<!-- <li class="each_video">
-								<a href="#">暖/降温</a>
-							</li>
-							<li class="each_video">
-								<a href="#">主体类型</a>
-							</li>
-							<li class="each_video">
-								<a href="#">伸展</a>
-							</li>
-							<li class="each_video">
-								<a href="#">重复与组数</a>
-							</li>
-							<li class="each_video all">
-								程序
-							</li>
-							<li class="each_video">
-								<a href="#">减肥</a>
-							</li>
-							<li class="each_video">
-								<a href="#">肌肉增益</a>
-							</li>
-							<li class="each_video">
-								<a href="#">女性</a>
-							</li>
-							<li class="each_video">
-								<a href="#">体重</a>
-							</li>
-							<li class="each_video">
-								<a href="#">初学者</a>
-							</li>
-							<li class="each_video all">
-								练习
-							</li>	
-							<li class="each_video">
-								<a href="#">复合演习</a>
-							</li>
-							<li class="each_video">
-								<a href="#">隔离练习</a>
-							</li>
-							<li class="each_video">
-								<a href="#">肌练习</a>
-							</li>
-							<li class="each_video">
-								<a href="#">体重演习</a>
-							</li>
-							<li class="each_video all">
-								肌肉组
-							</li>
-							<li class="each_video">
-								<a href="#">背部</a>
-							</li>
-							<li class="each_video">
-								<a href="#">胸部</a>
-							</li>
-							<li class="each_video">
-								<a href="#">腿</a>
-							</li>
-							<li class="each_video">
-								<a href="#">腹肌</a>
-							</li>
-							<li class="each_video">
-								<a href="#">武器</a>
-							</li>
-							<li class="each_video">
-								<a href="#">肩</a>
-							</li> -->
+							
 						</ul>
 					</div>
 				</div>
-				<span class="corner_bottom"></span>
+				<span class="border_line"></span>
 			</div>
 
 
@@ -141,12 +78,12 @@
 				<div class="part_top clearfix">
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
-						<h1 class="public_title">最近锻炼文章</h1>
+						<h1 class="public_title">最佳锻炼文章</h1>
 						<ul class="new_video clearfix">
-							<php>foreach($articles as $a) {</php>
+							<php>foreach($hotArticles as $a) {</php>
 							<li class="tr_classify">
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_1"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">{$a['title']}</a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}
 								</p>
 								<!-- <a href="#" class="add_expend">查看所有质量增加程序</a> -->
@@ -202,12 +139,12 @@
 				<div class="part_top clearfix">
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
-						<h1 class="public_title">最佳锻炼文章<span class="hr_3 hr"></span></h1>
+						<h1 class="public_title">最近锻炼文章<span class="hr_3 hr"></span></h1>
 						<ul class="hot_video clearfix">
-						<php>foreach($articles as $a) {</php>
+						<php>foreach($lastArticles as $a) {</php>
 							<li class="tr_classify">
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_2"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">{$a['title']}</a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}</p>
 								<!-- <a href="#" class="add_expend">查看所有腹肌锻炼程序</a> -->
 							</li>
@@ -267,11 +204,11 @@
 						<php>foreach($articles as $a) {</php>
 							<li class="tr_classify">
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_2"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">{$a['title']}</a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}</p>
-								<a href="#" class="add_expend">查看所有其他锻炼程序</a>
 							</li>
 						<php>}</php>
+						<a href="#" class="add_expend">查看所有其他锻炼程序</a>
 						</ul>
 					</div>
 					<span class="corner_bottom"></span>
@@ -318,18 +255,6 @@
 								<a href="training_1.html">{$child['name']}</a>
 							</li>
 							<php>}</php>
-							<!-- <li>
-								<a>暖/降温</a>
-							</li>
-							<li>
-								<a>主体类型</a>
-							</li>
-							<li>
-								<a>伸展</a>
-							</li>
-							<li>
-								<a>重复与组数</a>
-							</li> -->
 						</ul>
 						<php>}</php>
 						<!-- <h2 class="title_4">程序</h2>

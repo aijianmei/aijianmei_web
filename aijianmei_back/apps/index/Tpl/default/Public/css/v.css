@@ -3,9 +3,6 @@
 	#content{
 		margin:0 15px;
 	}
-	.title_main{
-
-	}
 	.video_content{
 		position:relative;
 		height:450px;
@@ -190,7 +187,7 @@
 		height:0;
 		font-size:0;
 		line-height:0;
-		border-color:#BCBCBC #F0F2EF #F0F2EF #F0F2EF;
+		border-color:#BCBCBC #F7F7F7 #F7F7F7 #F7F7F7;
 		border-style:solid;
 		border-width:5px;
 		margin-top:-2px;
@@ -354,7 +351,6 @@
 			min-height: 100%;
 			width:300px;
 			margin-left: 14px;
-			background: white;
 		}
 		.re{
 			margin-top:89px;

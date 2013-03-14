@@ -80,14 +80,20 @@
 				font-size: 20px;
 			}
 			.tr_top{
+				margin-top: 10px;
+				padding: 10px 0;
 				border: 1px solid #CCC;
 				border-radius: 8px;
 			}
 			.classify{
 				float: left;
 				width: 220px;
-				margin: 18px 9px;
+				margin: 18px 14px;
 				border: 1px solid #CCC;
+			}
+			.classify .best{
+				height:130px;
+				width:220px;
 			}
 			.supple_pic{
 				float: left;
@@ -95,9 +101,13 @@
 			}
 			.detail{
 				display: inline-block;
-				margin: 22px 0 10px 0;
+				margin: 10px 0;
 				font-size: 20px;
 				color: #003096;
+			}
+			.read_content{
+				font-size: 15px;
+				line-height: 20px;
 			}
 			.lay_detail{
 				float:left;
@@ -326,6 +336,10 @@ margin-bottom: 20px;
 			height: 20px;
 			background: none;
 			color: #656565;
+			font-size: 15px;
+			display: inline-block;
+			text-align: center;
+			line-height: 20px;
 		}
 		.curr_tit{
 			background:lightblue;
@@ -455,7 +469,7 @@ margin-bottom: 20px;
 		.re_nav li a{
 			color:#0E709A;
 		}
-		
+
 		
 	/****** 翻页 *****/
 	.page{

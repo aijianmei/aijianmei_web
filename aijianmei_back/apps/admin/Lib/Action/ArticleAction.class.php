@@ -57,11 +57,12 @@ class ArticleAction extends AdministratorAction {
 		$this->assign('categories', $cate);
 		$this->assign('type', 'edit');
 		//print_r($article);
-		$this->display('add');
+		$this->display('edit');
 	}
 	
 	public function doEdit()
 	{
+		$img = $_POST['img'];
 		if(isset($_POST['id'])) {
 			//$data['uid']      = $this->mid;
 			$id               = t($_POST['id']);
@@ -76,7 +77,7 @@ class ArticleAction extends AdministratorAction {
 			//$data['create_time'] = time();
 				
 		
-			if(isset($_FILES['img']['name'])) {
+			if( $_FILES['img']['name']!= NULL) {
 				if(!move_uploaded_file($_FILES['img']['tmp_name'], '/var/www/html/aijianmei/public/images/article/'.$_FILES['img']['name'])) {
 					echo 'error'.'<br />';
 				}
@@ -89,10 +90,12 @@ class ArticleAction extends AdministratorAction {
 				M('article')->where(array('id'=>$id))->save($data);
 				echo '<script>alert("success")</script>';
 				//$this->redirect('/index.php?app=admin&mod=Article&act=borswe');
-			}
-				
-				
+			}			
 		}
+		/*echo $data['title']."<br>";
+		echo $data['category_id']."<br>";
+		echo $data['content']."<br>";	
+		echo '<script>alert("success? or not failure")</script>';*/
 	}
 	
 	public function broswe()

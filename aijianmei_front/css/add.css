@@ -23,7 +23,8 @@
 }
 
 	.tr_top{
-		margin: 7px 20px;
+		margin: 10px 15px;
+		padding: 10px 0;
 		border: 1px solid #CCC;
 		border-radius: 8px;
 	}
@@ -40,8 +41,16 @@
 	}
 	.supple_pic{
 		float: left;
-		margin-left: 10px;
+		margin:0 10px;
 		margin-right: 20px;
+	}
+	.lay_detail{
+		float: left;
+		width: 254px;
+	}
+	.read_content{
+		font-size: 15px;
+		line-height: 20px;
 	}
 	.detail{
 		display: inline-block;
@@ -222,7 +231,7 @@
 			}
 				.strong{
 					font-weight:600;
-					color:#ff0000;
+					color:#0E709A;
 				}
 /****** mode_3 ------------------------------*****/
 		.mode_3{

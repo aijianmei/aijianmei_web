@@ -1,29 +1,4 @@
-body, dl, dd, h1, h2, h3, h4, h5, h6,form{margin:0;}   
-ol,li,input，span{margin:0; padding:0;}
-ul{list-style:none;margin:0; padding:0; }
-a{
-	cursor:pointer;
-	text-decoration: none;
-}
-body{background: url(../images/bg.jpg)}
-.clearfix {
 
-}
-.clearfix:before {
-display: table; content: ""
-}
-.clearfix:after {
-display: table; content: ""
-}
-.clearfix:after {
-clear: both
-}
-#wrap{margin:0 auto;
-width:980px;
-font:12px/1.125 Arial,Helvetica,sans-serif;
-background: white;
-}
-/***********************header开始*************************/
 #header a{outline: 0px;s}
 
 /***********************content开始*************************/
