@@ -72,7 +72,7 @@ button{
 		}
 		.log .ai_account,.log .other_account{
 			display:inline-block;
-			width:330px;
+			width:310px;
 		}
 		.text_input{
 			position:relative;
@@ -373,6 +373,9 @@ button{
 			background:url(../images/store.png) no-repeat left;
 
 		}
+		#nav .last{
+			border-radius: 0 4px 4px 0;
+		}
 	/********** 显示当前位置 ***********/
 		.position{
 			display: inline-block;
@@ -454,7 +457,7 @@ button{
 				}
 		.choice_area{
 			position:relative;
-			background: #ccc;
+			background:rgb(232, 234, 255);
 		}
 		.choice_area .ul_2{
 			margin:0 70px;
