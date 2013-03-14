@@ -9,6 +9,8 @@ class AppendAction extends Action {
 			else $parent[$c['parent']]['children'][] = $c; 
 			$cate_id[] = $c['id'];
 		}
+		$articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
+		$this->assign('articles', $articles);
 		$this->assign('categories', $parent);
 		
 		/*$cate = M('article_category')->where(array('channel'=>'4'))->findAll();
