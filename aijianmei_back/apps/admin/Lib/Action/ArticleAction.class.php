@@ -48,7 +48,6 @@ class ArticleAction extends AdministratorAction {
 	
 	public function edit()
 	{
-		echo '<script>alert("in edit fucntion!")</script>';
 		$id = intval($_GET['id']);
 		
 		if($id == 0) die(0);
@@ -64,7 +63,6 @@ class ArticleAction extends AdministratorAction {
 	public function doEdit()
 	{
 		$img = $_POST['img'];
-		echo "image:".$img;
 		if(isset($_POST['id'])) {
 			//$data['uid']      = $this->mid;
 			$id               = t($_POST['id']);
