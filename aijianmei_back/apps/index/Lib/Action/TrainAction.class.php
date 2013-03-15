@@ -55,16 +55,26 @@ class TrainAction extends Action {
 		
 		//get hotArticles
 		$order = 'click';
-		$hotArticles = D('Article')->getTrainArticles($order);
+		$hotArticles = D('Article')->getTrainArticles($order, $id);
 		$this->assign('hotArticles', $hotArticles);
 		//get lastArticles		
 		$order = 'create_time';
-		$hotArticles = D('Article')->getTrainArticles($order);
+		$hotArticles = D('Article')->getTrainArticles($order, $id);
 		$this->assign('lastArticles', $hotArticles);
 		
 		$this->assign('categories', $realCate);
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
-		$articles = M('article')->where($map)->findAll();
+		
+		$count = M('article')->where($map)->count();
+		$pager = api('Pager');
+		$pager->setCounts($count);
+		$pager->setList(6);
+		$pager->makePage();
+		$from = ($pager->pg-1) * $pager->countlist;
+		$pageArray = (array)$pager;
+	
+		$articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();
+		$this->assign('pager', $pageArray);
 		$this->assign('articles', $articles);
 		
 		 //banner 滚动图片列表
