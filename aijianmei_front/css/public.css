@@ -408,6 +408,7 @@ button{
 				float:left;
 			}
 			.change_1 .pic_1{
+				display: block;
 				width: 860px;
 				height: 270px;
 				background: #DFDFDF;
