@@ -105,11 +105,11 @@ class AppendAction extends Action {
 		//print_r($articles);
 		$this->assign('cssFile', 'add');
 		
-		$hotArticles = D('Article')->getAppendArticles('click');
+		$hotArticles = D('Article')->getAppendArticles('click', $id);
 		$this->assign('hotArticles', $hotArticles);
 		//foreach($hotArticles as $a) echo $a['title'];
 		$a['title']=substr($a['title'],0,10)."...";		
-		$lastArticles = D('Article')->getAppendArticles('create_time');
+		$lastArticles = D('Article')->getAppendArticles('create_time', $id);
 		$this->assign('lastArticles', $lastArticles);
 		
 		 //banner 滚动图片列表
