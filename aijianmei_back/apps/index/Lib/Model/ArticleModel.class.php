@@ -46,17 +46,27 @@ class ArticleModel extends Model {
 		return $result;
 	}
 	
-	public function getNutriArticles($order)
+	public function getNutriArticles($order, $id=null)
 	{
-		$sql = "select a.* from ai_article a,ai_article_category c where c.channel=3 and a.category_id=c.id order by $order desc limit 0,8";
+		if($id) {
+			$sql = "select a.* from ai_article a where a.category_id=".$id." order by ".$order." desc limit 0,8";
+		}else {
+			$sql = "select a.* from ai_article a,ai_article_category c where c.channel=3 and a.category_id=c.id order by $order desc limit 0,8";
+		}
+		
 		$result = M('')->query($sql);
 		
 		return $result;
 	}
 	
-	public function getAppendArticles($order)
+	public function getAppendArticles($order, $id=null)
 	{
-		$sql = "select a.* from ai_article a,ai_article_category c where c.channel=4 and a.category_id=c.id order by $order desc limit 0,8";
+		if($id) {
+			$sql = "select a.* from ai_article a where a.category_id=".$id." order by ".$order." desc limit 0,8";
+		}else {
+			$sql = "select a.* from ai_article a,ai_article_category c where c.channel=4 and a.category_id=c.id order by $order desc limit 0,8";
+		}
+		
 		$result = M('')->query($sql);
 	
 		return $result;
