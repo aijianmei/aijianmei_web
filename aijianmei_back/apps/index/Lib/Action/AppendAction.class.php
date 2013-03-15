@@ -86,20 +86,19 @@ class AppendAction extends Action {
 			else $realCate[$c['parent']]['children'][] = $c;;
 			$cate_id[] = $c['id'];
 		}
-		//echo "id:$id<br>";
+		
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
-		//print_r($cate_id);
+		// 查询满足要求的总记录数
 		$articleCount = M('article')->where(array('category_id'=>$id))->count();
-		//echo "article count:$articleCount";
-		$pager = api('Pager');
-		$pager->setCounts($articleCount);
+
+		$pager = api('Pager');	// 实例化分页类 
+		$pager->setCounts($articleCount); //传入总记录数
 		$pager->setList(10);
 		$pager->makePage();
 		$pageArray = (array)$pager;
 		$this->assign('pager', $pageArray);
 		$from = ($pager->pg-1) * $pager->countlist;
 		$articles = M('article')->where(array('category_id'=>$id))->order("$order desc")->limit("$from,$pager->countlist")->findAll();
-		echo "from:$from<br>$pager->pg-1<br>countlist:$pager->countlist";
 		$this->assign('articles', $articles);
 		$this->assign('categories', $realCate);
 		//print_r($articles);
@@ -111,6 +110,17 @@ class AppendAction extends Action {
 		$a['title']=substr($a['title'],0,10)."...";		
 		$lastArticles = D('Article')->getAppendArticles('create_time');
 		$this->assign('lastArticles', $lastArticles);
+		
+		 //banner 滚动图片列表
+		 $change_1="12.jpg";
+	     $change_2="09.jpg";
+	     $change_3="10.jpg";
+	     $change_4="11.jpg";
+		 $this->assign('change_1',$change_1);
+		 $this->assign('change_2',$change_2);
+		 $this->assign('change_3',$change_3);
+		 $this->assign('change_4',$change_4);
+		//-------END--------
 		
 		$this->display('list');
 	}
@@ -139,6 +149,17 @@ class AppendAction extends Action {
 		//foreach($hotArticles as $a) echo $a['title'];//$a['title']=substr($a['title'],0,10)."...";		
 		$lastArticles = D('Article')->getAppendArticles('create_time');
 		$this->assign('lastArticles', $lastArticles);
+		
+		 //banner 滚动图片列表
+		 $change_1="12.jpg";
+	     $change_2="09.jpg";
+	     $change_3="10.jpg";
+	     $change_4="11.jpg";
+		 $this->assign('change_1',$change_1);
+		 $this->assign('change_2',$change_2);
+		 $this->assign('change_3',$change_3);
+		 $this->assign('change_4',$change_4);
+		//-------END--------
 		
 		$this->display('vlist');
 		/*$id = intval($_GET['id']);
