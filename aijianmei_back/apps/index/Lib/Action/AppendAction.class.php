@@ -56,8 +56,10 @@ class AppendAction extends Action {
 			else $realCate[$c['parent']]['children'][] = $c;;
 			$cate_id[] = $c['id'];
 		}
+		echo "$id<br>";
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
 		$articleCount = M('article')->where(array('category_id'=>$id))->count();
+		echo "article count:$articleCount";
 		$pager = api('Pager');
 		$pager->setCounts($articleCount);
 		$pager->setList(10);
@@ -65,8 +67,7 @@ class AppendAction extends Action {
 		$pageArray = (array)$pager;
 		$this->assign('pager', $pageArray);
 		$from = ($pager->pg-1) * $pager->countlist;
-		$articles = M('article')->where(array('category_id'=>$id))->order("$order desc")->limit("$from,$pager->countlist")->findAll();
-		echo "$id ";
+		$articles = M('article')->where(array('category_id'=>$id))->order("$order desc")->findAll();
 		//echo "from:$from<br>$pager->pg-1<br>countlist:$pager->countlist";
 		$this->assign('articles', $articles);
 		print_r($articles);
