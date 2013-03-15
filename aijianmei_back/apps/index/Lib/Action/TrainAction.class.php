@@ -55,11 +55,11 @@ class TrainAction extends Action {
 		
 		//get hotArticles
 		$order = 'click';
-		$hotArticles = D('Article')->getTrainArticles($order);
+		$hotArticles = D('Article')->getTrainArticles($order, $id);
 		$this->assign('hotArticles', $hotArticles);
 		//get lastArticles		
 		$order = 'create_time';
-		$hotArticles = D('Article')->getTrainArticles($order);
+		$hotArticles = D('Article')->getTrainArticles($order, $id);
 		$this->assign('lastArticles', $hotArticles);
 		
 		$this->assign('categories', $realCate);
