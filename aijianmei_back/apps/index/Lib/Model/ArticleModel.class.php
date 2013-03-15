@@ -36,11 +36,11 @@ class ArticleModel extends Model {
 	public function getTrainArticles($order,$id=null)
 	{
 		if($id) {
-			
+			$sql = "select a.* from ai_article a where a.category_id=".$id." order by ".$order." desc limit 0,8";
 		}else {
-			
+			$sql = "select a.* from ai_article a,ai_article_category c where c.channel=2 and a.category_id=c.id order by $order desc limit 0,8";
 		}
-		$sql = "select a.* from ai_article a,ai_article_category c where c.channel=2 and a.category_id=c.id order by $order desc limit 0,8";
+		
 		$result = M('')->query($sql);
 	
 		return $result;
