@@ -10,9 +10,9 @@
 						<h3 class="video_all">补充</h3>
 						<span class="border_line"></span>
 						<ul>
-						<php>foreach($categories as $c) {</php>
+						<php>foreach($parent_categories as $c) {</php>
 								<li class="each_video all">
-									<a href="/index.php?app=index&mod=Append&act=articleList&id={$child['id']}">{$c['name']}</a>
+									<a href="/index.php?app=index&mod=Append&act=articleList&id={$c['id']}">{$c['name']}</a>
 								</li>
 								<php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
 									<li class="each_video">
@@ -266,7 +266,7 @@
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
 					<h1 class="public_title">目录</h1>
-						<php>foreach($categories as $c) {</php>
+						<php>foreach($parent_categories as $c) {</php>
 						<h2 class="title_4">{$c['name']}</h2>
 						<ul class="re_nav clearfix">
 								<php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
