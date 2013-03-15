@@ -93,10 +93,11 @@ class AppendAction extends Action {
 
 		$pager = api('Pager');	// 实例化分页类 
 		$pager->setCounts($articleCount); //传入总记录数
-		$pager->setList(10);
-		$pager->makePage();
+		$pager->setList(10);	// 设置每页显示的记录数
+		$pager->makePage();		//生成数字分页
 		$pageArray = (array)$pager;
 		$this->assign('pager', $pageArray);
+		
 		$from = ($pager->pg-1) * $pager->countlist;
 		$articles = M('article')->where(array('category_id'=>$id))->order("$order desc")->limit("$from,$pager->countlist")->findAll();
 		$this->assign('articles', $articles);
@@ -104,11 +105,11 @@ class AppendAction extends Action {
 		//print_r($articles);
 		$this->assign('cssFile', 'add');
 		
-		$hotArticles = D('Article')->getAppendArticles('click');
+		$hotArticles = D('Article')->getAppendArticles('click', $id);
 		$this->assign('hotArticles', $hotArticles);
 		//foreach($hotArticles as $a) echo $a['title'];
 		$a['title']=substr($a['title'],0,10)."...";		
-		$lastArticles = D('Article')->getAppendArticles('create_time');
+		$lastArticles = D('Article')->getAppendArticles('create_time', $id);
 		$this->assign('lastArticles', $lastArticles);
 		
 		 //banner 滚动图片列表
