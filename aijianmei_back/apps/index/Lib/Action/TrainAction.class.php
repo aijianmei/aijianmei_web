@@ -64,7 +64,16 @@ class TrainAction extends Action {
 		
 		$this->assign('categories', $realCate);
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
-		$articles = M('article')->where($map)->findAll();
+		
+		$count = M('article')->where($map)->count();
+		$pager = api('Pager');
+		$pager->setCounts($count);
+		$pager->setList(6);
+		$pager->makePage();
+		$from = ($pager->pg-1) * $pager->countlist;
+	
+		$articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();
+		$this->assign('pager', $pager);
 		$this->assign('articles', $articles);
 		
 		 //banner 滚动图片列表
