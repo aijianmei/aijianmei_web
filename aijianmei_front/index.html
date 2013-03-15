@@ -5,6 +5,12 @@
 			<title>爱健美</title>
 			<link rel="stylesheet" href="css/public.css" />
 			<link rel="stylesheet" href="css/index.css" />
+			<script language="javascript">
+				function reloadcode(){
+				document.getElementById('safecode').src = 'fristphp.php?' + Math.random(); //fristphp.php为图片生成代码
+
+				}
+			</script>
 		</head>
 		<body>
 			<div class="body"></div>
@@ -27,9 +33,9 @@
 							</div>
 							<div class="checkCode">
 								<span>验证码：</span>
-								<input type="text" class="checkBox"/>
-								<img class="checkImg"/>
-								<a class="checkChange">换一换</a>
+								<input type="text" name="code" class="checkBox"/>
+								<img src="fristphp.php" id="safecode" class="checkImg" alt="看不清，换一张"/>
+								<a href="javascript:reloadcode();" class="checkChange">换一换</a>
 							</div>
 							
 							<button type="submit" class="submit_btn">登录</button>
