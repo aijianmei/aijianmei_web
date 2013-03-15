@@ -62,11 +62,11 @@ class NutriAction extends Action {
 		
 		//get hotArticles
 		$order = 'click';
-		$hotArticles = D('Article')->getNutriArticles($order);
+		$hotArticles = D('Article')->getNutriArticles($order, $id);
 		$this->assign('hotArticles', $hotArticles);
 		//print_r($hotArticles);
 		//get lastArticles
-		$lastArticles = D('Article')->getNutriArticles('create_time');
+		$lastArticles = D('Article')->getNutriArticles('create_time', $id);
 		$this->assign('lastArticles', $lastArticles);
 		$this->assign('articles', $articles);
 		$this->assign('categories', $realCate);
