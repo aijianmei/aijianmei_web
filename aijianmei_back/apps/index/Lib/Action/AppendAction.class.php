@@ -48,18 +48,46 @@ class AppendAction extends Action {
 	
 	public function articleList()
 	{
-		$order = isset($_GET['order']) ? t($_GET['order']) : 'create_time';
+		$id = intval($_GET['id']);
+		$this->assign('cssFile', 'video');
+		$this->assign('cssFile', 'add');
+		$cate = M('article_category')->where(array('channel'=>'4'))->findAll();
+		print_r($cate);
+		foreach($cate as $c) {
+			if($c['parent']==NULL) $realCate[$c['id']] = $c;
+			else $realCate[$c['parent']]['children'][] = $c;
+			$cate_id[] = $c['id'];
+		}
+		
+		//get hotArticles
+		$order = 'click';
+		$hotArticles = D('Article')->getAppendArticles($order);
+		$this->assign('hotArticles', $hotArticles);
+		//get lastArticles		
+		$order = 'create_time';
+		$hotArticles = D('Article')->getAppendArticles($order);
+		$this->assign('lastArticles', $hotArticles);
+		
+		$this->assign('categories', $realCate);
+		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
+		$articles = M('article')->where($map)->findAll();
+		$this->assign('articles', $articles);
+		
+		$this->display('list');
+		/*$order = isset($_GET['order']) ? t($_GET['order']) : 'create_time';
 		$id = intval($_GET['id']);
 		$cate = M('article_category')->where(array('channel'=>'4'))->findAll();
+		//print_r($cate);
 		foreach($cate as $c) {
 			if($c['parent']==NULL) $realCate[$c['id']] = $c;
 			else $realCate[$c['parent']]['children'][] = $c;;
 			$cate_id[] = $c['id'];
 		}
-		echo "$id<br>";
+		//echo "id:$id<br>";
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
+		//print_r($cate_id);
 		$articleCount = M('article')->where(array('category_id'=>$id))->count();
-		echo "article count:$articleCount";
+		//echo "article count:$articleCount";
 		$pager = api('Pager');
 		$pager->setCounts($articleCount);
 		$pager->setList(10);
@@ -83,7 +111,7 @@ class AppendAction extends Action {
 		$lastArticles = D('Article')->getAppendArticles('create_time');
 		$this->assign('lastArticles', $lastArticles);
 		
-		$this->display('list');
+		$this->display('list');*/
 	}
 	
 	//get append video list
