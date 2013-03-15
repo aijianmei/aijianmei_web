@@ -71,6 +71,7 @@ button{
 			text-align:center;
 			padding-top:20px;
 		}
+<<<<<<< HEAD
 		.log .ai_account{
 			float:left;
 			width:330px;
@@ -78,6 +79,11 @@ button{
 		.log .other_account{
 			float:right;
 			width:330px;
+=======
+		.log .ai_account,.log .other_account{
+			display:inline-block;
+			width:310px;
+>>>>>>> refs/remotes/origin/master
 		}
 		.text_input{
 			position:relative;
@@ -375,6 +381,9 @@ button{
 		#nav .store span{
 			background:url(../images/store.png) no-repeat left;
 
+		}
+		#nav .last{
+			border-radius: 0 4px 4px 0;
 		}
 	/********** 显示当前位置 ***********/
 		.position{
