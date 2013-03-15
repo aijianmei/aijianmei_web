@@ -88,8 +88,12 @@
 			.classify{
 				float: left;
 				width: 220px;
-				margin: 18px 9px;
+				margin: 18px 14px;
 				border: 1px solid #CCC;
+			}
+			.classify .best{
+				height:130px;
+				width:220px;
 			}
 			.supple_pic{
 				float: left;
