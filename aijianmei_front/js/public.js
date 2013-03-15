@@ -60,14 +60,14 @@ $(function(){
 $(function(){
 	$("#login").click(function(){
 		$("div.body").show("fast",function(){
-			// $("body").css("overflow","hidden").height("100%");
-			$(this).css("display","block");
+			$("html").css("overflow","hidden").height("100%");
+			$(this).css({"display":"block","opacity":"0.7"});
 			$("div.sheet").slideDown(200);
 			$("div.sheet").css("display","block");
 		});
 	});
 	$(".close_btn").click(function(){
-		// $("body").css("overflow","visible");
+		$("html").css("overflow","scroll");
 		$("div.sheet").slideUp(200,function(){
 		$("div.sheet").css("display","none");
 		$("div.body").slideUp(300,function(){
