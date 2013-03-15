@@ -8,9 +8,18 @@
 
 
 	.tr_top{
-		margin:5px 20px;
+		margin:10px 15px 0 15px;
+		padding: 10px 0;
 		border: 1px solid #CCC;
 		border-radius: 8px;
+	}
+	.lay_detail{
+		float: left;
+		width: 254px;
+	}
+	.read_content{
+		font-size: 15px;
+		line-height: 20px;
 	}
 	.expend{
 		float: right;
@@ -25,12 +34,11 @@
 	}
 	.supple_pic{
 		float: left;
-		margin-left: 10px;
-		margin-right: 20px;
+		margin:0 10px;
 	}
 	.detail{
 		display: inline-block;
-		margin: 22px 0 10px 0;
+		margin: 10px 0;
 		font-size: 20px;
 		color: #003096;
 	}
