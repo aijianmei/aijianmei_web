@@ -16,8 +16,10 @@ $(function(){
 			$(".next_page").css({'color':'#656565'})
 		}
 	})
+	
 
-	//下一页、上一页//4==$(".tab_2 .lay_page a").length-1
+	//下一页、上一页
+	//4==$(".tab_2 .lay_page a").length-1
 	$(".next_page").click(function(){
 		var index = $(".choice_page").index();
 		if(index != 4){
