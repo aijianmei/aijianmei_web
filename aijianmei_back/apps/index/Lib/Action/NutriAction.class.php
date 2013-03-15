@@ -57,7 +57,15 @@ class NutriAction extends Action {
 			$cate_id[] = $c['id'];
 		}
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
-		$articles = M('article')->where($map)->findAll();
+		
+		$count = M('article')->where($map)->count();
+		$pager = api('Pager');
+		$pager->setCounts($count);
+		$pager->setList(6);
+		$pager->makePage();
+		$from = ($pager->pg-1) * $pager->countlist;
+		$articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();
+		$this->assign('pager', $pager);
 		//var_dump($articles);
 		
 		//get hotArticles
