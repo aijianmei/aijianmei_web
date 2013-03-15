@@ -9,9 +9,11 @@ class AppendAction extends Action {
 			else $parent[$c['parent']]['children'][] = $c; 
 			$cate_id[] = $c['id'];
 		}
+		//print_r($cate);
 		$articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
 		$this->assign('articles', $articles);
-		$this->assign('categories', $parent);
+		$this->assign('categories', $cate);
+		$this->assign('parent_categories', $parent);
 		
 		/*$cate = M('article_category')->where(array('channel'=>'4'))->findAll();
 		foreach($cate as $c) {
@@ -48,17 +50,16 @@ class AppendAction extends Action {
 	
 	public function articleList()
 	{
-		$id = intval($_GET['id']);
+		/*$id = intval($_GET['id']);
 		$this->assign('cssFile', 'video');
 		$this->assign('cssFile', 'add');
 		$cate = M('article_category')->where(array('channel'=>'4'))->findAll();
-		print_r($cate);
 		foreach($cate as $c) {
 			if($c['parent']==NULL) $realCate[$c['id']] = $c;
 			else $realCate[$c['parent']]['children'][] = $c;
 			$cate_id[] = $c['id'];
 		}
-		
+
 		//get hotArticles
 		$order = 'click';
 		$hotArticles = D('Article')->getAppendArticles($order);
@@ -70,11 +71,13 @@ class AppendAction extends Action {
 		
 		$this->assign('categories', $realCate);
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
+		//print_r($map);
 		$articles = M('article')->where($map)->findAll();
 		$this->assign('articles', $articles);
 		
-		$this->display('list');
-		/*$order = isset($_GET['order']) ? t($_GET['order']) : 'create_time';
+		$this->display('list');*/
+		
+		$order = isset($_GET['order']) ? t($_GET['order']) : 'create_time';
 		$id = intval($_GET['id']);
 		$cate = M('article_category')->where(array('channel'=>'4'))->findAll();
 		//print_r($cate);
@@ -95,13 +98,11 @@ class AppendAction extends Action {
 		$pageArray = (array)$pager;
 		$this->assign('pager', $pageArray);
 		$from = ($pager->pg-1) * $pager->countlist;
-		$articles = M('article')->where(array('category_id'=>$id))->order("$order desc")->findAll();
-		//echo "from:$from<br>$pager->pg-1<br>countlist:$pager->countlist";
+		$articles = M('article')->where(array('category_id'=>$id))->order("$order desc")->limit("$from,$pager->countlist")->findAll();
+		echo "from:$from<br>$pager->pg-1<br>countlist:$pager->countlist";
 		$this->assign('articles', $articles);
-		print_r($articles);
 		$this->assign('categories', $realCate);
 		//print_r($articles);
-		echo 
 		$this->assign('cssFile', 'add');
 		
 		$hotArticles = D('Article')->getAppendArticles('click');
@@ -111,7 +112,7 @@ class AppendAction extends Action {
 		$lastArticles = D('Article')->getAppendArticles('create_time');
 		$this->assign('lastArticles', $lastArticles);
 		
-		$this->display('list');*/
+		$this->display('list');
 	}
 	
 	//get append video list
