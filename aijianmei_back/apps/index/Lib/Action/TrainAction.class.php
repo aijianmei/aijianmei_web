@@ -71,9 +71,10 @@ class TrainAction extends Action {
 		$pager->setList(6);
 		$pager->makePage();
 		$from = ($pager->pg-1) * $pager->countlist;
+		$pageArray = (array)$pager;
 	
 		$articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();
-		$this->assign('pager', $pager);
+		$this->assign('pager', $pageArray);
 		$this->assign('articles', $articles);
 		
 		 //banner 滚动图片列表
