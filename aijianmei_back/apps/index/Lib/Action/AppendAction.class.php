@@ -54,18 +54,20 @@ class AppendAction extends Action {
 		$pageArray = (array)$pager;
 		$this->assign('pager', $pageArray);
 		$from = ($pager->pg-1) * $pager->countlist;
-		
 		$articles = M('article')->where(array('category_id'=>$id))->order("$order desc")->limit("$from,$pager->countlist")->findAll();
-		
+		echo "$id ";
+		//echo "from:$from<br>$pager->pg-1<br>countlist:$pager->countlist";
 		$this->assign('articles', $articles);
 		print_r($articles);
 		$this->assign('categories', $realCate);
 		//print_r($articles);
+		echo 
 		$this->assign('cssFile', 'add');
 		
 		$hotArticles = D('Article')->getAppendArticles('click');
 		$this->assign('hotArticles', $hotArticles);
-		//foreach($hotArticles as $a) echo $a['title'];//$a['title']=substr($a['title'],0,10)."...";		
+		//foreach($hotArticles as $a) echo $a['title'];
+		$a['title']=substr($a['title'],0,10)."...";		
 		$lastArticles = D('Article')->getAppendArticles('create_time');
 		$this->assign('lastArticles', $lastArticles);
 		
