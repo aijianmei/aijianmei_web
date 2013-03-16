@@ -3,8 +3,8 @@
 }
 
 /******* Banner *******/
-	.lay_banner .ul_1{
-			width:4300px;
+	/*.lay_banner .ul_1{
+			width:3440px;
 			position: relative;
 		}
 		.choice_area li{
@@ -20,8 +20,8 @@
 		.ul_2 li img{
 			width:120px;
 			height:80px;
-		}
-		/*#banner{
+		}*/
+		#banner{
 			width:960px;
 			height:470px;
 			overflow:hidden;
@@ -81,7 +81,7 @@
 		#banner .next{
 			right:20px;
 			background:url(../images/turn_right.png) no-repeat right top;
-		}*/	
+		}	
 			
 
 	
