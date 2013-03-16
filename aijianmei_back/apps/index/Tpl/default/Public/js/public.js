@@ -59,17 +59,21 @@ $(function(){
 
 $(function(){
 	$("#login").click(function(){
-		$("div.body").slideDown(300,function(){
-			$("body").css("overflow","hidden").height("100%");
-			$(this).css("display","block");
+		$("div.body").show("fast",function(){
+			$("html").css("overflow","hidden").height("100%");
+			$(this).css({"display":"block","opacity":"0.7"});
+			$("div.sheet").slideDown(200);
 			$("div.sheet").css("display","block");
 		});
 	});
 	$(".close_btn").click(function(){
-		$("body").css("overflow","visible");
-		$("div.sheet").slideUp(300,function(){
+		$("html").css("overflow","scroll");
+		$("div.sheet").slideUp(200,function(){
 		$("div.sheet").css("display","none");
-		$("div.body").css("display","none");
+		$("div.body").slideUp(300,function(){
+			$("div.body").css("display","none");
+		});
+		
 		});
 	});
 	
@@ -107,13 +111,6 @@ $(function(){
 		})		
 	})
 	
-//导航栏样式改变	
-	$("#nav").children().click(function(){
-		if(!($(this).hasClass("home"))){
-			$(this).css("background","#2E6A92")
-		}
-		$(this).siblings().css("background","");
-	})
 		
 					
 });
@@ -122,9 +119,16 @@ $(function(){
 				if(element.addEventListener){
 					element.addEventListener(type,handle,false)
 				}
-				if(element.attachEvent){
+				else if(element.attachEvent){
 					element.attachEvent("on" + type,handle)
 				} 
+				else {
+		            element["on" + type] = handler;
+		            this.AddEvent = function(element, type, handler)
+		            {
+		                element["on" + type] = handler;
+		            };
+		        }
 			}
 			var getdom = function(){
 				this.$ = function(id){
@@ -300,16 +304,25 @@ $(function(){
 				init : function(obj){
 					var Obj = fade.newdom.getElementsByClass(obj)[0] || document.getElementsByTagName(obj)[0] || document.getElementById(obj);
 					Obj.onclick = function(event){
-						event.preventDefault();
+						var _e = event ? event : window.event;
+						if(_e.preventDefault){
+							_e.preventDefault();
+						}
+						else{
+							_e.returnValue = false;
+						}
 						fade.handlecontent();
 						fade.changestyle('1');
 						this.style.background = '';
-						var closed = fade.newdom.getElementsByClass('closed')[0];
-						closed.onclick = function(){
-							var fade_in = fade.newdom.getElementsByClass('fade_in')[0];
+						var closed = fade.newdom.getElementsByClass('closed')[0],
+							fade_in = fade.newdom.getElementsByClass('fade_in')[0];
+						var click_back = function(){
 							fade.changestyle('0');
-							fade_in.removeAttribute('class')
+							// fade_in.removeAttribute('class')
+							fade_in.className = ''
 						}
+						addevent(closed,'click',click_back);
+						addevent(fade_in,'click',click_back);
 					}
 				},
 				handlecontent : function(){
@@ -330,11 +343,11 @@ $(function(){
 							top = fade.newdom.GetCurrentStyle(modal,'top');
 						var round = function(){
 							setTimeout(function(){
-								i = i + 0.1;
+								i = i + 0.05;
 								fade_in.style.opacity = i;
 								top = parseFloat(top) + 20;
 								modal.style.top = top + 'px';
-								if(top < 40){
+								if(top < 200){
 									round()
 								}
 							},1);
@@ -342,15 +355,15 @@ $(function(){
 						round()
 					}
 					else{
-						var i = 0.7,
+						var i = 0.75,
 							top = fade.newdom.GetCurrentStyle(modal,'top');
 						var round = function(){
 							setTimeout(function(){
-								i = i - 0.1;
+								i = i - 0.05;
 								fade_in.style.opacity = i;
 								top = parseFloat(top) - 20;
 								modal.style.top = top + 'px';
-								if(top > -100){
+								if(top > -120){
 									round()
 								}
 							},10);
@@ -360,7 +373,8 @@ $(function(){
 				}
 			};
 			fade.init('store');
-			fade.init('forum')
+			fade.init('forum');
+			
 //视频列表 切换分类
 $("li.select>a").click(function(){
 	$(this).addClass("pre").siblings().removeClass("pre");
@@ -372,4 +386,4 @@ $("li.select>a").click(function(){
 		// $(this).child("a").
 	// })
 // })	
-
+fade.init('teach');
