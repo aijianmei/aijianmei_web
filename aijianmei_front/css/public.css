@@ -555,8 +555,11 @@ button{
 				display:block;
 			}
 .now_position{
-	background:#2E6A92;
+	background:url(../images/nav_p.jpg) repeat-x;
 }	
+.last{
+	border-radius: 0 4px 4px 0;
+}
 /****** 翻页 *****/
 .page{
 	margin:15px;

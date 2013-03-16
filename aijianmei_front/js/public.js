@@ -110,7 +110,10 @@ $(function(){
 			$(".more>ul").hide();
 		})		
 	})
-	
+	//导航栏样式
+	$("#nav>li").click(function(){
+		$(this).addClass("now_position").siblings().removeClass("now_position");
+	})
 		
 					
 });
