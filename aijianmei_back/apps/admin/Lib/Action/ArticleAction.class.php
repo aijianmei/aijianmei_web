@@ -18,7 +18,7 @@ class ArticleAction extends AdministratorAction {
 
 			if(isset($_FILES['img']['name'])) {
 				if(!move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'])) {
-					echo 'error'.'<br />';					
+					echo 'add error '.'<br />';					
 				}
 				$data['img'] = $_FILES['img']['name'];
 			}
@@ -78,8 +78,8 @@ class ArticleAction extends AdministratorAction {
 				
 		
 			if( $_FILES['img']['name']!= NULL) {
-				if(!move_uploaded_file($_FILES['img']['tmp_name'], '/var/www/html/aijianmei/public/images/article/'.$_FILES['img']['name'])) {
-					echo 'error'.'<br />';
+			if(!move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'])) {
+					echo 'picture upload failed '.'<br />';					
 				}
 				$data['img'] = $_FILES['img']['name'];
 			}
