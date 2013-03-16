@@ -142,8 +142,8 @@
 						<span>注册</span>
 						<php>}</php>
 						
-						<div class="textarea"><textarea class="comment_inp" name="comment" >有什么感想，来说说吧</textarea></div>
-						<a class="comment" id="not_login">发表评论</a>
+						<div class="textarea"><textarea id="comment" class="comment_inp" name="comment" >有什么感想，来说说吧</textarea></div>
+						<a class="comment" id="not_login" href="javascript:void(0)" onclick="comments(comment.value, {$article['id']}, 'Article')" aid="{$article['id']}">发表评论</a>
 					</div>
 					<div class="check_comment">
 						<a class="comment_1">全部评论(0)</a>
