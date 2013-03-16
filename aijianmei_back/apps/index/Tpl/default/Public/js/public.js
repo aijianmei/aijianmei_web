@@ -49,17 +49,17 @@ $(function(){
 	//透明效果
 	$("#banner .ul_1 .massage").hover(
 		function(){
-			$(this).css("opacity","0.6")
+			$(this).css("opacity","0.8")
 		},
 		function(){
-			$(this).css("opacity","0.3")
+			$(this).css("opacity","0.2")
 		}
 	)
 })
 
 $(function(){
 	$("#login").click(function(){
-		$("div.body").show("fast",function(){
+		$("div.body").slideDown(300,function(){
 			$("html").css("overflow","hidden").height("100%");
 			$(this).css({"display":"block","opacity":"0.7"});
 			$("div.sheet").slideDown(200);
@@ -376,14 +376,16 @@ $(function(){
 			fade.init('forum');
 			
 //视频列表 切换分类
-$("li.select>a").click(function(){
+$("li.select>a").mouseover(function(){
 	$(this).addClass("pre").siblings().removeClass("pre");
+	
 })	
+//鼠标移上图片显示进入
+$("a.show_enter").mouseover(function(){
+	$(this).children(".enter_icon").css("display","block");
+	$(this).mouseout(function(){
+		$(this).children(".enter_icon").css("display","none");
+	})
+});
 
-//网站正在建设中...
-// $(function(){
-	// $("waiting").click(function(){
-		// $(this).child("a").
-	// })
-// })	
 fade.init('teach');

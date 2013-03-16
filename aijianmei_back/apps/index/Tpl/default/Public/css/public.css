@@ -12,7 +12,7 @@ img{
 body{
 	font:14px Tahoma Arial,Helvetica,sans-serif;
 	color:#656565;
-	background:url(../images/b_g.jpg) repeat;	
+	background:url(../images/b_g.jpg) repeat;
 }
 ul{
 	list-style:none;
@@ -30,21 +30,22 @@ button{
 }
 
 .body{
+	display:none;
 	position:absolute;
+	left:0;
 	width:100%;
 	height:100%;
-	background:#fff;
-	z-index:9999;
-	opacity:0.93;
-	top:20px;
-	display:none;
+	z-index:99;	
+	opacity: 0.7;
+	filter:alpha(opacity=70);
+	background: black;
 }
 /******** 登陆 *******/
 .sheet{
 	position:absolute;	
-	z-index:10000;
+	z-index:100;
 	width:100%;
-	margin:20px;
+	margin-top:120px;
 	display:none;
 }
 /********* 直接登陆爱健美 *******/
@@ -53,7 +54,8 @@ button{
 		height:300px;
 		background:url(../images/tbg.png);
 		margin:0 auto;
-		border-radius:0 0px 10px 10px;
+		*margin-left: 170px;
+		border-radius:10px;
 		box-shadow: 0px 5px 15px rgba(114,114,113,1);
 	}
 	/******* 关闭按钮 *******/
@@ -62,14 +64,19 @@ button{
 			height:20px;
 			font-size:26px;
 			float:right;
-			background: url(../images/login.png) no-repeat 0 -388px;
+			margin:10px;
+			background: url(../images/login.png) no-repeat 0 -250px;
 		}
 		.log h3{
 			text-align:center;
 			padding-top:20px;
 		}
-		.log .ai_account,.log .other_account{
-			display:inline-block;
+		.log .ai_account{
+			float:left;
+			width:330px;
+		}
+		.log .other_account{
+			float:right;
 			width:330px;
 		}
 		.text_input{
@@ -88,8 +95,9 @@ button{
 		#mail,#psd{
 			display:block;
 			width:253px;
-			height:35px;
-			margin:10px 15px 30px 20px;
+			height:15px;
+			padding: 10px 0 10px 10px;
+			margin:10px 15px 24px 20px;
 			border:1px solid;
 			color:#989898;
 			border-radius:4px;
@@ -105,7 +113,7 @@ button{
 		.checkCode{
 			padding: 0 0 10px 20px;
 			height: 25px;
-			position: relative;
+			line-height: 25px;
 		}
 		.checkBox{
 			width: 50px;
@@ -113,26 +121,23 @@ button{
 			border: 1px inset #ccc;
 		}
 		.checkImg{
-			position: absolute;
-			left: 148px;
 			width: 60px;
-			height: 22px;
+			height: 25px;
+			margin: 0 0 -7px 15px;
 			background: #ccc;
 		}
 		.checkChange{
-			position: absolute;
-			left: 210px;
-			top: 5px;
 		}
 	/****** 登陆按钮 *********/
 		.submit_btn{
+			float:left;
 			width:80px;
 			height:30px;
 			margin-left:20px;
 			color:white;
 			font-size:16px;
 			font-weight:bold;
-			background:url(../images/login.png) no-repeat 0 -348px;
+			background:url(../images/login.png) no-repeat 0 -281px;
 		}
 	/******* 忘记密码 **********/
 		.forget{
@@ -148,52 +153,51 @@ button{
 		padding:15px;
 	}
 		.accounts{
-			height:145px;
+			height:100px;
 		}
-		.accounts a{
-			width:115px;
-			height:34px;
-			display:block;
-			float:left;
-			margin:5px;
+		.accounts a,.cop5{
+			width: 77px;
+			height: 34px;
+			line-height: 34px;
+			padding-left: 43px;
+			display: block;
+			float: left;
+			margin: 5px;
+			font-weight: 700;
+			color: white;
 		}
 	/******** 各种账号登陆 **************/
 		.accounts .cop1{
-			background:url(../images/login.png) no-repeat 0 0;
+			background:url(../images/login.png) no-repeat 0 -167px;
 		}
-		.accounts .cop1:hover{
-			background:url(../images/login.png) no-repeat 0 -44px;
-		}
+		/*.accounts .cop1:hover{
+			background:url(../images/login.png) no-repeat 0 -41px;
+		}*/
 		.accounts .cop2{
-			background:url(../images/login.png) no-repeat 0 -87px;
+			background:url(../images/login.png) no-repeat 0 -41px;
 		}
-		.accounts .cop2:hover{
+		/*.accounts .cop2:hover{
 			background:url(../images/login.png) no-repeat 0 -131px;
-		}
+		}*/
 		.accounts .cop3{
-			background:url(../images/login.png) no-repeat 0 -174px;
-		}
-		.accounts .cop3:hover{
-			background:url(../images/login.png) no-repeat 0 -218px;
-		}
-		.accounts .cop4{
-			background:url(../images/login.png) no-repeat 0 -261px;
-		}
-		.accounts .cop4:hover{
-			background:url(../images/login.png) no-repeat 0 -305px;
-		}
-		.accounts .cop5{
-			background:url(../images/login.png) no-repeat 0 -87px;
-		}
-		.accounts .cop5:hover{
-			background:url(../images/login.png) no-repeat 0 -131px;
-		}
-		.accounts .cop6{
 			background:url(../images/login.png) no-repeat 0 0;
 		}
-		.accounts .cop6:hover{
-			background:url(../images/login.png) no-repeat 0 -44px;
+		/*.accounts .cop3:hover{
+			background:url(../images/login.png) no-repeat 0 -218px;
+		}*/
+		.accounts .cop4{
+			background:url(../images/login.png) no-repeat 0 -126px;
 		}
+		/*.accounts .cop4:hover{
+			background:url(../images/login.png) no-repeat 0 -305px;
+		}*/
+		.cop5{
+			width: 80px;
+			padding-left: 40px;
+			margin:30px 0 0 70px;
+			background:url(../images/login.png) no-repeat 0 -209px;
+		}
+		
 .wrapper{
 	width:980px;
 	margin:0 auto;
@@ -361,7 +365,7 @@ button{
 		}
 		
 		#nav .home{
-			background:url(../images/home_bg.png) no-repeat left;
+			border-radius: 4px 0 0 4px;
 			width:90px;
 		}
 		#nav .home a span{
@@ -403,24 +407,9 @@ button{
 				float:left;
 			}
 			.change_1 .pic_1{
+				display: block;
 				width: 860px;
 				height: 270px;
-				background: #DFDFDF;
-			}
-			.change_1 .pic_2{
-				width: 860px;
-				height: 270px;
-				background:blue;
-			}
-			.change_1 .pic_3{
-				width: 860px;
-				height: 270px;
-				background: red;
-			}
-			.change_1 .pic_4{
-				width: 860px;
-				height: 270px;
-				background: green;
 			}
 			.change_1 .massage{
 				position: absolute;
@@ -430,9 +419,10 @@ button{
 				height: 270px;
 				width: 180px;
 				padding: 0 20px;
-				opacity: 0.3;
-				filter:alpha(opacity=30);
+				opacity: 0.2;
+				filter:alpha(opacity=20);
 				background: #020200;
+				z-index: 10;
 			}
 				.massage .title{
 					padding: 10px 0;
@@ -452,7 +442,8 @@ button{
 				}
 		.choice_area{
 			position:relative;
-			background: #ccc;
+			*height:110px;
+			background:rgb(232, 234, 255);
 		}
 		.choice_area .ul_2{
 			margin:0 70px;
@@ -479,13 +470,15 @@ button{
 				width: 40px;
 				height: 80px;
 				top: 12px;
-				left: 10px;background: url(../images/turn_left.png) no-repeat;}
+				left: 10px;
+				background: url(../images/turn_left.png) no-repeat;}
 			.ps_right{position: absolute;
 				display: inline-block;
 				width: 40px;
 				height: 80px;
 				top: 12px;
-				right: 10px;background: url(../images/turn_right.png) no-repeat;
+				right: 10px;
+				background: url(../images/turn_right.png) no-repeat;
 			}
 
 /******** Footer link *********/	
@@ -767,3 +760,32 @@ button{
 		padding: 15px;
 		overflow-y: auto;
 	}
+
+/*上下页按钮统一风格相应css*/
+.choice_page{
+				margin:10px 0;
+			}
+			.choice_page li{
+				float: right;
+				margin: 0 4px;
+				padding: 2px;				
+			}
+				.strong{
+					font-weight:600;
+					color:#0E709A;
+				}
+
+/*鼠标移上图片显示“进入”图片*/
+.show_enter{
+	position: relative;
+	display: block;
+}
+span.enter_icon{
+	width: 50px;
+	height: 30px;
+	background: url(../images/02.png) no-repeat;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	display: none;
+}
