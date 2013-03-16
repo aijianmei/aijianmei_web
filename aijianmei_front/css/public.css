@@ -65,7 +65,7 @@ button{
 			font-size:26px;
 			float:right;
 			margin:10px;
-			background: url(../images/login.png) no-repeat 0 -388px;
+			background: url(../images/login.png) no-repeat 0 -250px;
 		}
 		.log h3{
 			text-align:center;
@@ -137,7 +137,7 @@ button{
 			color:white;
 			font-size:16px;
 			font-weight:bold;
-			background:url(../images/login.png) no-repeat 0 -348px;
+			background:url(../images/login.png) no-repeat 0 -281px;
 		}
 	/******* 忘记密码 **********/
 		.forget{
@@ -153,52 +153,51 @@ button{
 		padding:15px;
 	}
 		.accounts{
-			height:145px;
+			height:100px;
 		}
-		.accounts a{
-			width:115px;
-			height:34px;
-			display:block;
-			float:left;
-			margin:5px;
+		.accounts a,.cop5{
+			width: 77px;
+			height: 34px;
+			line-height: 34px;
+			padding-left: 43px;
+			display: block;
+			float: left;
+			margin: 5px;
+			font-weight: 700;
+			color: white;
 		}
 	/******** 各种账号登陆 **************/
 		.accounts .cop1{
-			background:url(../images/login.png) no-repeat 0 0;
+			background:url(../images/login.png) no-repeat 0 -167px;
 		}
-		.accounts .cop1:hover{
-			background:url(../images/login.png) no-repeat 0 -44px;
-		}
+		/*.accounts .cop1:hover{
+			background:url(../images/login.png) no-repeat 0 -41px;
+		}*/
 		.accounts .cop2{
-			background:url(../images/login.png) no-repeat 0 -87px;
+			background:url(../images/login.png) no-repeat 0 -41px;
 		}
-		.accounts .cop2:hover{
+		/*.accounts .cop2:hover{
 			background:url(../images/login.png) no-repeat 0 -131px;
-		}
+		}*/
 		.accounts .cop3{
-			background:url(../images/login.png) no-repeat 0 -174px;
-		}
-		.accounts .cop3:hover{
-			background:url(../images/login.png) no-repeat 0 -218px;
-		}
-		.accounts .cop4{
-			background:url(../images/login.png) no-repeat 0 -261px;
-		}
-		.accounts .cop4:hover{
-			background:url(../images/login.png) no-repeat 0 -305px;
-		}
-		.accounts .cop5{
-			background:url(../images/login.png) no-repeat 0 -87px;
-		}
-		.accounts .cop5:hover{
-			background:url(../images/login.png) no-repeat 0 -131px;
-		}
-		.accounts .cop6{
 			background:url(../images/login.png) no-repeat 0 0;
 		}
-		.accounts .cop6:hover{
-			background:url(../images/login.png) no-repeat 0 -44px;
+		/*.accounts .cop3:hover{
+			background:url(../images/login.png) no-repeat 0 -218px;
+		}*/
+		.accounts .cop4{
+			background:url(../images/login.png) no-repeat 0 -126px;
 		}
+		/*.accounts .cop4:hover{
+			background:url(../images/login.png) no-repeat 0 -305px;
+		}*/
+		.cop5{
+			width: 80px;
+			padding-left: 40px;
+			margin:30px 0 0 70px;
+			background:url(../images/login.png) no-repeat 0 -209px;
+		}
+		
 .wrapper{
 	width:980px;
 	margin:0 auto;
@@ -420,9 +419,10 @@ button{
 				height: 270px;
 				width: 180px;
 				padding: 0 20px;
-				opacity: 0.3;
-				filter:alpha(opacity=30);
+				opacity: 0.2;
+				filter:alpha(opacity=20);
 				background: #020200;
+				z-index: 10;
 			}
 				.massage .title{
 					padding: 10px 0;
