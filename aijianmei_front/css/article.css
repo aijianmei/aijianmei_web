@@ -329,6 +329,7 @@
 						}
 						.target .to{
 							float:right;
+							display: none;
 						}
 						.to .sprite_8{
 							display: inline-block;
