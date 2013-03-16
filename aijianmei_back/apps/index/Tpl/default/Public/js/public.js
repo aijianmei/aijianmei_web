@@ -1,49 +1,4 @@
 $(function(){
-	$("#login").click(function(){
-		$("div.body").slideDown(300,function(){
-			$("body").css("overflow","hidden").height("100%");
-			$(this).css("display","block");
-			$("div.sheet").css("display","block");
-		});
-	});
-	$(".close_btn").click(function(){
-		$("body").css("overflow","visible");
-		$("div.sheet").slideUp(300,function(){
-		$("div.sheet").css("display","none");
-		$("div.body").css("display","none");
-		});
-	});
-	
-	$(".ai_account input").focus(function(){
-		$(this).val(null).siblings().hide();			
-	});
-	$(".ai_account input").blur(function(){
-		if(!($(this).val())){
-			$(this).siblings("label").show();
-		}
-		else{
-			var e_reg = new RegExp(),
-				p_reg = new RegExp();
-				e_reg = /^\w+((_-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|_-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/,
-				p_reg = /[0-9A-Za-z]{6,16}/;
-			var email = $("#mail").val(),
-				psd = $("#psd").val();
-				
-			if(e_reg.test(email) == false){
-				$("#mail").next().show();
-			}
-			if(p_reg.test(psd) == false){
-				//console.log(this);
-				$("#psd").next().show();
-			}
-		}
-	});
-					
-})
-
-
-
-$(function(){
 	var sWidth = $("#banner").width(), //获取焦点图的宽度（显示面积）
 		len = $("#banner .ul_1 li").length, //获取焦点图个数
 		index = 0,
@@ -88,7 +43,7 @@ $(function(){
 	var move = function(index){
 		var nowleft = -index*sWidth;
 		$("#banner .ul_1").stop(true,false).animate({"left":nowleft},300);
-		$("#banner .ul_2 li").css("border","3px solid transparent").eq(index).css("border","3px solid yellow");
+		$("#banner .ul_2 li").css("border","3px solid transparent").eq(index).css("border","3px solid #4298CE");
 	}
 
 	//透明效果
@@ -118,10 +73,10 @@ $(function(){
 		});
 	});
 	
-	$(".ai_account input").focus(function(){
-		$(this).val(null).siblings().hide();			
+	$(".text_input input").focus(function(){
+		$(this).siblings().hide();			
 	});
-	$(".ai_account input").blur(function(){
+	$(".text_input input").blur(function(){
 		if(!($(this).val())){
 			$(this).siblings("label").show();
 		}
@@ -161,19 +116,16 @@ $(function(){
 	})
 		
 					
-})
-
-
-
+});
 //js for border
-			// var addevent = function(element,type,handle){
-			// 	if(element.addEventListener){
-			// 		element.addEventListener(type,handle,false)
-			// 	}
-			// 	if(element.attachEvent){
-			// 		element.attachEvent("on" + type,handle)
-			// 	} 
-			// }
+			var addevent = function(element,type,handle){
+				if(element.addEventListener){
+					element.addEventListener(type,handle,false)
+				}
+				if(element.attachEvent){
+					element.attachEvent("on" + type,handle)
+				} 
+			}
 			var getdom = function(){
 				this.$ = function(id){
 					return document.getElementById(id);
@@ -196,6 +148,17 @@ $(function(){
 			        }
 			        return classElements;
 			    }
+			    this.GetCurrentStyle = function(obj, prop){
+				    if (obj.currentStyle){ //IE
+				        return obj.currentStyle[prop];
+				    }
+				    else if (window.getComputedStyle){ //非IE
+				        propprop = prop.replace (/([A-Z])/g, "-$1");
+				        propprop = prop.toLowerCase ();
+				        return document.defaultView.getComputedStyle(obj,null)[propprop];
+				    }
+				    return null;
+				}
 			}
 
 			var getaction = function(classname,obj){
@@ -274,27 +237,139 @@ $(function(){
 						}
 							
 			}
-			// var changebutton = function(obj,url,num){
+			var addtitle = function(obj){
+				var newdom = new getdom,
+					Obj = newdom.getElementsByClass(obj)[0],
+					title = newdom.getElementsByClass('title_tip')[0],
+					text = Obj.getAttribute('data-original-title');
+				var handle = function(){
+					if(window.ActiveXObject){
+						Obj.setAttribute('title',text)
+					}
+					else{
+						//确定提示内容的宽度，适当调整
+						var handlewidth = function(){
+							if(text.length < 5){
+								title.style.width = '80px';
+							}
+							else if(text.length < 9){
+								title.style.width = '120px'
+							}
+							else if(text.length < 13){
+								title.style.width = '160px'
+							}
+							else{
+								title.style.width = '200px'
+							}
+						}
+						handlewidth();
+						//获取data-original-title的内容
+						var datatitle = function(){
+							var div = document.createElement('div');
+								textnode = document.createTextNode(text);
+							div.appendChild(textnode);
+							title.appendChild(div);
+						}
+						datatitle()
+						//确定obj的位置，并是提示对齐被提示内容
+						var textalign = function(){
+							var left = Obj.offsetLeft,
+								top = Obj.offsetTop,
+								width = Obj.offsetWidth,
+								titlewidth = title.style.width,
+								align = left + width/2,
+								half = parseFloat(titlewidth)/2;
+								title.style.left = align - half + 'px';
+								title.style.top = top + 30 + 'px';
+						} 
+						textalign();
+						title.style.display = 'block';
+					}
+				}
+				var remove = function(){
+					title.removeChild(title.lastChild);
+					title.style.display = 'none';
+				}
+				addevent(Obj,"mouseover",handle);
+				addevent(Obj,"mouseout",remove);
+			}
 
-			// 	var newdom = new getdom,
-			// 		id = newdom.getElementsByClass(obj),
-			// 		image = id.style.backgroundImage;
-			// 		var currentpositionY = id.style.backgroundPositionY;
-			// 	id.onmouseover = function(){
-			// 		if(num != null){
-			// 			this.style.background = 'url('+url+')';
-			// 			this.style.backgroundPositionX = '0px';
-			// 			this.style.backgroundPositionY = num;
-						
-			// 		}					
-			// 		else{
-			// 			this.style.background = 'url('+url+')';
-			// 		}
-			// 		// console.log(this.style.backgroundPosition)			
-			// 	}
-			// 	id.onmouseout = function(){
-			// 		this.style.backgroundImage = image;
-			// 		this.style.backgroundPositionX = '0px'
-			// 		this.style.backgroundPositionY = currentpositionY;
-			// 	}
-			// }
+			//对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
+			var fade = {
+				newdom : new getdom,
+				init : function(obj){
+					var Obj = fade.newdom.getElementsByClass(obj)[0] || document.getElementsByTagName(obj)[0] || document.getElementById(obj);
+					Obj.onclick = function(event){
+						event.preventDefault();
+						fade.handlecontent();
+						fade.changestyle('1');
+						this.style.background = '';
+						var closed = fade.newdom.getElementsByClass('closed')[0];
+						closed.onclick = function(){
+							var fade_in = fade.newdom.getElementsByClass('fade_in')[0];
+							fade.changestyle('0');
+							fade_in.removeAttribute('class')
+						}
+					}
+				},
+				handlecontent : function(){
+					var body = document.getElementsByTagName('body')[0],
+						div_1 = document.createElement('div'),
+						div_2 = document.createElement('div');
+					div_1.className = 'fade_in';
+					div_2.className = 'modal';
+					div_2.innerHTML = '<div class="modal_header"><a class="closed">×</a><h3>我们正在检测中</h3></div><p class="modal_body">即将推出，敬请期待...</p>';
+					body.appendChild(div_1);
+					body.appendChild(div_2);
+				},
+				changestyle : function(T){
+					var fade_in = fade.newdom.getElementsByClass('fade_in')[0],
+						modal = fade.newdom.getElementsByClass('modal')[0];
+					if(T == '1'){
+						var i = 0,
+							top = fade.newdom.GetCurrentStyle(modal,'top');
+						var round = function(){
+							setTimeout(function(){
+								i = i + 0.1;
+								fade_in.style.opacity = i;
+								top = parseFloat(top) + 20;
+								modal.style.top = top + 'px';
+								if(top < 40){
+									round()
+								}
+							},1);
+						}
+						round()
+					}
+					else{
+						var i = 0.7,
+							top = fade.newdom.GetCurrentStyle(modal,'top');
+						var round = function(){
+							setTimeout(function(){
+								i = i - 0.1;
+								fade_in.style.opacity = i;
+								top = parseFloat(top) - 20;
+								modal.style.top = top + 'px';
+								if(top > -100){
+									round()
+								}
+							},10);
+						}
+						round()
+					}	
+				}
+			};
+			fade.init('store');
+			fade.init('forum')
+//视频列表 切换分类
+$("li.select>a").click(function(){
+	$(this).addClass("pre").siblings().removeClass("pre");
+})	
+
+//网站正在建设中...
+// $(function(){
+	// $("waiting").click(function(){
+		// $(this).child("a").
+	// })
+// })	
+

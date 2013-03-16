@@ -326,6 +326,10 @@ margin-bottom: 20px;
 			height: 20px;
 			background: none;
 			color: #656565;
+			font-size: 15px;
+			display: inline-block;
+			text-align: center;
+			line-height: 20px;
 		}
 		.curr_tit{
 			background:lightblue;
@@ -455,7 +459,7 @@ margin-bottom: 20px;
 		.re_nav li a{
 			color:#0E709A;
 		}
-		
+
 		
 	/****** 翻页 *****/
 	.page{

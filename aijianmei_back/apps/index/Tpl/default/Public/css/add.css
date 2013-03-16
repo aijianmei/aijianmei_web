@@ -1,22 +1,4 @@
-﻿.clearfix {
-
-	}
-	.clearfix:before {
-	display: table; content: ""
-	}
-	.clearfix:after {
-	display: table; content: ""
-	}
-	.clearfix:after {
-	clear: both
-	}
-	a{cursor:pointer;}
-	.triangle{
-		border-color:#BCBCBC #fff #fff #fff;
-	}
-.wrapper{
-	background: white;
-}
+﻿
 /***********************content开始*************************/
 
 #content{
@@ -33,7 +15,7 @@
 		padding-left: 11px;
 		line-height: 32px;
 		font-size: 13px;
-		border-bottom: 1px solid #CCC;
+		/*border-bottom: 1px solid #CCC;*/
 	}
 #content .right_training{
 	float:left;
@@ -102,34 +84,37 @@
 	.now{
 		margin-top:20px;
 	}
-	.article{
+	/*更改部分 2013 03 09*/
+	.hot_video,.new_video{
+		margin: 0 auto;
+		width: 722px;
+	}
+	.plan_article_tl{
+		display: inline-block;
+		height: 40px;
+		padding-top: 8px;
+		font-size: 16px;
+		color: #56888F;
+		font-weight: 700;
+	}	
+	.tr_classify{
 		float: left;
-		width: 314px;
-		height: 64px;
-		margin: 5px 35px;
-		padding: 7px 0px;
-		border: 2px solid #CCC;
+		width: 165px;
+		margin:0 9px 5px 0;
+		border:3px solid transparent;
 	}
-	.article .article_pic{
-		float: left;
-		margin-right:10px;
+	.video_1{
+		display: block;
+		height:134px;
 	}
-	.article img{
-		border-radius: 8px;
+	.summary{
+		height:70px;
+		line-height: 20px;
+		font-size: 12px;
 	}
-		.article_content{
-			float: left;
-			width: 185px;
-		}
-		.article_content .title_3{
-			line-height: 18px;
-			font-size: 13px;
-			font-weight: 600;
-			color: #2C5AD1;
-		}
-		.article_content p{
-			font-size: 12px;
-		}
+	.new_video img,.hot_video img{
+		border-radius: 4px;
+	}
 /*add一级页面部分结束*/
 
 
@@ -137,6 +122,7 @@
 /*子页面新增视频内容*/
 		.content{
 			width: 700px;
+			margin:5px auto;
 		}
 		.content .ct{
 			padding: 14px 8px 20px 8px;
@@ -182,10 +168,10 @@
 				background: #E6E6E6;			
 			}
 
-/*part_2-------------------------------------------*/
-	.part_2{
-	margin-bottom: 20px;
-	}
+.part_2{
+margin: 0 23px;
+margin-bottom: 20px;
+}
 	.block_1,.block_2{
 
 	}
@@ -197,7 +183,7 @@
 		}
 		.nubble{
 			float: left;
-			margin: 5px 20px;
+			margin: 5px 30px 0 0;
 		}
 		.defferent{
 			margin-right:0px;
@@ -209,47 +195,148 @@
 			.rt_picture{
 
 			}
-/****** mode_2--------------------------------- *****/
-		.mode_2{
-			padding: 4px 0;
-			border:1px solid #ccc;
-			border-top: 3px solid #C6DAE5; 
+/*从视频页面copy过来---------------------------------------------*/
+.part_3{
+	height:800px;
+	/*margin:10px 20px;*/
+}
+/******* 侧边栏 *********/
+	.sidebar{
+		width:165px;
+		float:left;
+		font-size: 12px;
+	}
+	/****** 视频/文章 ********/
+		.sort{
+			height:30px;
+			border-bottom:1px solid #ccc;
+			line-height:30px;
+			padding:0 0 8px 20px;
 		}
-			.s_nav_left{
-
+			.sort1,.sort2{
+				display:inline-block;
+				line-height:24px;
+				width:50px;
+				text-align:center;
+				font-size:16px;
+				font-weight:bold;
+				margin-right:10px;
+				cursor:pointer;
 			}
-			.s_nav_left li{
-				float: left;
-				margin: 0 4px;
-				padding: 2px 4px;
-				border: 1px solid #ddd;
+			#show{
+				background:lightblue;
 			}
-				.current_click{
-					color:white;
-					background:#FF0000;
+	/********** 全部 ***********/
+		.bar{
+			display:none;
+		}
+		.current{
+			display:block;
+		}
+		.list{
+			height: 30px;
+			border-bottom: 1px solid #E5E5E5;
+			line-height: 30px;
+			padding-left: 20px;
+		}
+			.list a{
+				display: block;
+				color: #51639E;
+			}
+			.list a:hover{
+				text-decoration:underline;
+				font-weight:bold;
+			}
+		
+		.tab_btn{
+			margin: 0 5px;
+			width: 50px;
+			height: 20px;
+			background: none;
+			color: #656565;
+			font-size: 15px;
+			display: inline-block;
+			text-align: center;
+			line-height: 20px;
+		}
+		.curr_tit{
+			background:lightblue;
+		}
+/******* 视频 *************/		
+	.video{
+		display:inline-block;
+		margin-left:15px;
+	}
+	.all .all_ul{
+		border-bottom:1px solid #E5E5E5;
+		margin:0 auto;
+	}
+	/****** 选择分类 ********/
+		.video .select{
+			margin:10px;
+		}
+			.select a{
+				color:#6377AD;
+				display: inline-block;
+				margin-right: 15px;
+				font-weight:bold;
+				width:70px;
+				text-align:center;
+				cursor:pointer;
+			}
+			.select a:hover{
+				text-decoration:underline;
+			}
+			.select .pre{
+				background:#69696C;
+				color:white;
+			}
+		/******* 列表 ********/
+		.video .each{
+			padding-bottom:20px;
+			border-bottom:1px solid #ccd
+		}
+		/***** 视频列表 ****/
+		.video .vdos{
+			width:140px;
+			display:inline-block;
+			margin:20px 10px 5px 0;
+			
+		}
+			.video .vdos .pic{
+				border-radius:4px;
+				width:130px;
+				height:90px;
+				background:#ccc;
+			}
+				.vdos .pic a{
+					width:130px;
+					height:80px;
 				}
-			.s_nav_right{
-
-			}
-			.s_nav_right li{
-				float: right;
-				margin: 0 4px;
-				padding: 2px;				
-			}
-				.strong{
-					font-weight:600;
-					color:#ff0000;
+				.vdos .pic a{
+					display:block;
+					cursor:pointer;
 				}
-/****** mode_3 ------------------------------*****/
+			.vdos .info{
+				margin-top:8px;
+				font-size:12px;
+			}
+			
+			/****** mode_3 ------------------------------*****/
 		.mode_3{
 
 		}
 			.ar_block{
-				margin: 20px auto;
+				margin: 20px;
 				padding: 20px 0 20px 10px;
-				width: 600px;
 				background: #f3f3f3;
 
+			}
+			.ar_block .block_img{
+				float: left;
+				width: 81px;
+				height: 70px;
+				margin-right: 10px;
 			}
 			.ar_block span{
 				display: inline-block;
@@ -258,7 +345,89 @@
 			.ar_block p{
 				margin-right: 50px;
 			}
+			
+		/******** 文章列表 ********/
+			.arts{
+				float:left;
+				width: 350px;
+				height: 82px;
+				margin-right: 15px;
+				margin-top: 20px;
+			}
+				.arts .pic{
+					width: 104px;
+					height: 75px;
+					border: 1px solid #ccc;
+					padding: 3px;
+					float:left;
+				}
+				.arts .info{
+					height: 82px;
+					width: 200px;
+					display: inline-block;
+					margin-left: 10px;
+				}
+					.info .art_title{
+						
+						font-weight: bold;
+						margin-bottom:5px;
+					}
+					.art_title a{
+						color: #2E4874;
+					}
+					.art_content{
+						margin:0px;
+						line-height:20px;
+						text-indent:2em;
+					}
+					.read_all{
+						color:#2D4974;
+						float:right;
+					}
+					.count{
+						color: red;
+						font-weight: bold;
+						margin-right: 10px;
+					}
 
+	/*底部汇总导航栏*/
+		.title_4{
+			padding: 5px 0 5px 10px;
+			margin: 5px 0;
+			font-size: 16px;
+			background: #CCC;
+		}
+		.re_nav{
+
+		}
+		.re_nav li{
+			float: left;
+			width: 326px;
+			margin-right: 3px;
+			padding: 10px;
+			font-size: 13px;
+			font-weight: 700;
+			border-bottom: 1px dotted #CCC;
+		}
+		.re_nav li a{
+			color:#0E709A;
+		}
+		
+		
+	/****** 翻页 *****/
+	.page{
+		margin:15px;
+		text-align:center;
+	}
+		.prev,.next{
+			width:60px;
+			height:20px;
+			background: #CCC;
+		}
+		.record{
+			display:inline-block;
+			margin:0 3px;
+		}
 
 
 	

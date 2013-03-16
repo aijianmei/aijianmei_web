@@ -30,7 +30,8 @@ color:#8C7E7E;
 			width: 241px;
 			height: 120px;}
 		.logo a{outline: 0px;}
-		.returnbutton{position: absolute;
+		.returnbutton{
+			position: absolute;
 			display: inline-block;
 			top: 30px;
 			left: 15px;
@@ -39,7 +40,7 @@ color:#8C7E7E;
 			height: 37px;
 			border:0px;
 			cursor:pointer;
-			background: url(../images/wm1.png) 0px 0px no-repeat;
+			background: url(../images/wm1.png) 0px -280px no-repeat;
 		}
 /***********************content开始*************************/
 	#content{background: url(../images/border.png) no-repeat}
@@ -60,15 +61,13 @@ color:#8C7E7E;
 				
 			}
 				.target{
-				background: url(../images/wm1.png) no-repeat;)
+				background: url(../images/wm1.png) no-repeat;
 				}			
-				.logo_1{background-position: 0px -46px;}
-				.logo_2{background-position: 0px -102px;}
-				.logo_3{background-position: 0px -159px;}
-				.logo_4{background-position: 0px -217px;}
-				.logo_5{background-position: 0px -273px;}
-				.logo_6{background-position: 0px -331px;}
-				.logo_7{background-position: 0px -388px;}
+				.logo_1{background-position: 0px 0px;}
+				.logo_2{background-position: 0px -56px;}
+				.logo_3{background-position: 0px -112px;}
+				.logo_6{background-position: 0px -168px;}
+				.logo_7{background-position: 0px -224px;}
 			.target_login{height:47px;
 				margin-left: 52px;
 				height: 47px;

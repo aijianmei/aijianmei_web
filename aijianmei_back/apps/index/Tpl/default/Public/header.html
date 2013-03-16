@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
-	<html>
+	<html xmlns:wb=“http://open.weibo.com/wb”>
 		<head>
 			<meta charset="utf-8"/>
 			<title>爱健美</title>
 			<link rel="stylesheet" href="../Public/css/public.css" />
-			<link rel="stylesheet" href="../Public/css/{$cssFile}.css" />
+			<link rel="stylesheet" href="../Public/css/{$cssFile}.css" />	
 			<link rel="stylesheet" href="../Public/css/jquery-ui.css" />
-			
+			<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>	
 		</head>
 <body>
 		<div class="body"></div>
@@ -19,12 +19,12 @@
 							<h4 class="tit">使用注册邮箱登陆</h4>
 							<div class="text_input">
 								<label for="mail">爱健美注册邮箱</label>
-								<input type="text" id="email" name="email" />
+								<input type="text" id="mail" name="email" />
 								<span class="tip">请输入正确的邮箱地址</span>
 							</div>
 							<div class="text_input">
 								<label for="psd">密码</label>
-								<input type="password" id="password" name="password" />
+								<input type="password" id="psd" name="password" />
 								<span class="tip">密码长度为6~16个的数字或者字母</span>
 							</div>
 							<button type="submit" class="submit_btn">登陆</button>
@@ -43,12 +43,6 @@
 								_dl_login.src = 'http://open.denglu.cc/connect/logincode?appid=44031dena3J8cuBsQeX40lcpjSsPM3&v=1.0.2&widget=1&styletype=1&size=452_132&asyn=true&time=' + _dl_time;
 							})();
 						</script>
-							<!-- <a class="cop1" href="#"></a>
-							<a class="cop2" href=""></a> -->
-							<!-- <a class="cop3" href=""></a>
-							<a class="cop4" href=""></a> -->
-							<!-- <a class="cop5" href=""></a>
-							<a class="cop6" href=""></a> -->
 						</div>
 						<span class="clearfix">未注册过爱健美也可以直接登陆哦</span>
 						
@@ -77,9 +71,9 @@
 						</li>
 						<li class="more"><a href="">帐号<span class="triangle"></span> </a>
 							<ul class="account">
-								<li><a href="/index.php?app=home&mod=User&act=myinfo">个人资料</a></li>
-								<li><a href="/index.php?app=home&mod=User&act=address">收货地址</a></li>
-								<li><a href="{:U('home/User/modFace')}">修改头像</a></li>
+								<li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
+								<li><a href="/index.php?app=home&mod=Account&act=address">收货地址</a></li>
+								<li><a href="mod_face.html">修改头像</a></li>
 								<li><a href="/index.php?app=home&mod=Account&act=bind">绑定帐号</a></li>
 								<li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
 							</ul>
@@ -100,12 +94,12 @@
 					</div>
 					<ul id="nav">
 						<li class="home"><a href="/index.php?app=index"><span>首页</span></a></li>
-						<li class="store"><a href="javascript:void(0);" onclick="alert('正在建设中')"><span>商店</span></a></li>
+						<li class="store"><a href='#'><span>商店</span></a></li>
 						<li><a href="/index.php?app=index&mod=Plan">健身计划</a></li>
 						<li><a href="/index.php?app=index&mod=Train">锻炼</a></li>
 						<li><a href="/index.php?app=index&mod=Nutri">营养</a></li>
 						<li><a href="/index.php?app=index&mod=Append">补充</a></li>
-						<li><a href="javascript:void(0);" onclick="alert('正在建设中')">论坛</a></li>
+						<li><a href="#">论坛</a></li>
 						<li><a href="{:U('home/User/index')}">交友互动</a></li>
 					</ul>
 					<span class="position">爱健美/首页</span>

@@ -5,16 +5,22 @@
 			<title>爱健美</title>
 			<link rel="stylesheet" href="css/public.css" />
 			<link rel="stylesheet" href="css/index.css" />
+			<script language="javascript">
+				function reloadcode(){
+				document.getElementById('safecode').src = 'fristphp.php?' + Math.random(); //fristphp.php为图片生成代码
+
+				}
+			</script>
 		</head>
 		<body>
 			<div class="body"></div>
 			<div class="sheet">
 				<div class="log">
 					<button class="close_btn"></button>
-					<h3>登陆爱健美</h3>
+					<h3>登录爱健美</h3>
 					<div class="ai_account">
 						<form action="">
-							<h4 class="tit">使用注册邮箱登陆</h4>
+							<h4 class="tit">使用注册邮箱登录</h4>
 							<div class="text_input">
 								<label for="mail">爱健美注册邮箱</label>
 								<input type="text" id="mail"/>
@@ -25,13 +31,14 @@
 								<input type="password" id="psd"/>
 								<span class="tip">密码长度为6~16个的数字或者字母</span>
 							</div>
-							<div class="check">
-					
-								<input type="text" id="checkBox">
-								<span class="checkImage"></span>
-								<button>换一换</button>
+							<div class="checkCode">
+								<span>验证码：</span>
+								<input type="text" name="code" class="checkBox"/>
+								<img src="fristphp.php" id="safecode" class="checkImg" alt="看不清，换一张"/>
+								<a href="javascript:reloadcode();" class="checkChange">换一换</a>
 							</div>
-							<button type="submit" class="submit_btn">登陆</button>
+							
+							<button type="submit" class="submit_btn">登录</button>
 							<a href="retrieve.html" class="forget">忘记密码</a>
 						</form>
 					</div>
@@ -89,26 +96,81 @@
 						</a>
 					</div>
 					<ul id="nav">
-						<li class="home"><a href="index.html"><span>首页</span></a></li>
+						<li class="home now_position"><a href="index.html"><span>首页</span></a></li>
 						<li class="store waiting"><a href="store.html"><span>商店</span></a></li>
 						<li><a href="plan.html">健身计划</a></li>
 						<li><a href="training.html">锻炼</a></li>
 						<li><a href="nutri.html">营养</a></li>
 						<li><a href="add.html">补充</a></li>
-						<li><a href="activity.html">论坛</a></li>
-						<li><a href="pal.html">交友互动</a></li>
+						<li class="forum"><a href="activity.html">论坛</a></li>
+						<li class="last"><a href="pal.html">交友互动</a></li>
 					</ul>
 					<span class="position">爱健美/首页</span>
 				</div>
 				
-				<div id="banner">
+				<!-- <div id="banner">
 					<ul>
-						<li><a href="#"><img src="images/banner.jpg" alt=""/></a></li>
-						<li><a href="#"><img src="images/2.gif" alt="" /></a></li>
-						<li><a href="#"><img src="images/3.gif" alt="" /></a></li>
-						<li><a href="#"><img src="images/2.gif" alt="" /></a></li>
+						<li><a href="#"><img src="images/2.jpg" alt=""/></a></li>
+						<li><a href="#"><img src="images/3.jpg" alt="" /></a></li>
+						<li><a href="#"><img src="images/4.jpg" alt="" /></a></li>
+						<li><a href="#"><img src="images/1.jpg" alt="" /></a></li>
 					</ul>
-				</div>
+				</div> -->
+
+
+				<div id="banner">
+					<div class="lay_banner">
+						<ul class="ul_1 clearfix">
+							<li class="change_1">
+								<a>
+									<img src="images/4.jpg" alt="no" class="pic_1" />
+								</a>
+							</li>
+							<li class="change_1">
+								<a>
+									<img src="images/3.jpg" alt="no" class="pic_2" />
+								</a>
+							</li>
+							<li class="change_1">
+								<a>
+									<img src="images/2.jpg" alt="no" class="pic_3" />
+								</a>
+							</li>
+							<li class="change_1">
+								<a>
+									<img src="images/1.jpg" alt="no" class="pic_4" />
+								</a>
+							</li>
+							<li class="change_1">
+								<a>
+									<img src="images/5.jpg" alt="no" class="pic_4" />
+								</a>
+							</li>
+						</ul>
+						</div>
+						<div class="choice_area">
+						<ul class="ul_2 clearfix">
+							<li class="first_choice">
+								<img src="images/4.jpg" alt="" class="relative_pic" />
+							</li>
+							<li>
+								<img src="images/3.jpg" alt="" class="relative_pic" />
+							</li>
+							<li>
+								<img src="images/2.jpg" alt="" class="relative_pic" />
+							</li>
+							<li>
+								<img src="images/1.jpg" alt="" class="relative_pic" />
+							</li>
+							<li>
+								<img src="images/5.jpg" alt="" class="relative_pic" />
+							</li>
+						</ul>
+						<a class="ps_left"></a>
+						<a class="ps_right"></a>
+						</div>
+				</div>	<!--Banner End -->
+
 				<div id="content">
 					<h1>天天锻炼<span class="hr"></span></h1>
 					<div class="part clearfix">
@@ -276,7 +338,5 @@
 			</div>
 			<script type="text/javascript" src="js/jquery.js"></script>
 			<script type="text/javascript" src="js/public.js"></script>
-			<script type="text/javascript" src="js/index.js"></script>
-			
 		</body>
 	</html>

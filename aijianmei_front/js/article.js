@@ -92,8 +92,9 @@ $(function(){
 			$(".sheet").css("top", document.body.scrollTop);
 			$(".log").css("border-radius","10px");
 			$("div.sheet").css("display","block");
-			console.log($(document.body.scrollTop));
+			
 		});
+		console.log(document.body.scrollTop);
 	})
 	$(".close_btn").click(function(){
 		$("body").css("overflow","visible");
