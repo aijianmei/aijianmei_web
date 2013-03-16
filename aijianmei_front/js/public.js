@@ -59,7 +59,7 @@ $(function(){
 
 $(function(){
 	$("#login").click(function(){
-		$("div.body").show("fast",function(){
+		$("div.body").slideDown(300,function(){
 			$("html").css("overflow","hidden").height("100%");
 			$(this).css({"display":"block","opacity":"0.7"});
 			$("div.sheet").slideDown(200);
