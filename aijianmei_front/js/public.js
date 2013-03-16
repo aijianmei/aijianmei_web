@@ -49,10 +49,10 @@ $(function(){
 	//透明效果
 	$("#banner .ul_1 .massage").hover(
 		function(){
-			$(this).css("opacity","0.6")
+			$(this).css("opacity","0.8")
 		},
 		function(){
-			$(this).css("opacity","0.3")
+			$(this).css("opacity","0.2")
 		}
 	)
 })
