@@ -12,22 +12,22 @@
 								计划
 							</li>
 							<li class="each_video">
-								<a href="add_1.html">找到一个计划</a>
+								<a href="{:U('index/Plan/index')}">找到一个计划</a>
 							</li>
 							<li class="each_video">
-								<a href="add_1.html">脂肪损失</a>
+								<a href="{:U('index/Plan/plan_loss')}">脂肪损失</a>
 							</li>
 							<li class="each_video">
-								<a href="add_1.html">肌肉建设</a>
+								<a href="{:U('index/Plan/plan_build')}">肌肉建设</a>
 							</li>
 							<li class="each_video">
-								<a href="add_11.html">寻找教练</a>
+								<a href="{:U('index/Plan/coach')}">寻找教练</a>
 							</li>
 							<li class="each_video">
-								<a href="add_11.html">寻找健身房</a>
+								<a href="{:U('index/Plan/gym')}">寻找健身房</a>
 							</li>
 							<li class="each_video">
-								<a href="add_11.html">每日锻炼</a>
+								<a href="{:U('index/Train/index')}">每日锻炼</a>
 							</li>
 						</ul>
 					</div>
@@ -78,8 +78,9 @@
 						<div class="part_2 clearfix">
 							<div class="expand_1">
 								<span class="relay">转发到</span>
+                                <include file="../Public/share" />
 								<!-- JiaThis Button BEGIN -->
-								<div class="jiathis_style">
+								<!--<div class="jiathis_style">
 									<a class="jiathis_button_qzone"></a>
 									<a class="jiathis_button_tsina"></a>
 									<a class="jiathis_button_tqq"></a>
@@ -87,7 +88,7 @@
 									<a class="jiathis_button_kaixin001"></a>
 									<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 								</div>
-								<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1359878070244822" charset="utf-8"></script>
+								<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1359878070244822" charset="utf-8"></script>-->
 								<!-- JiaThis Button END -->
 								<!-- <a class="sprite_1"></a>
 								<a class="sprite_2"></a>
@@ -127,12 +128,12 @@
 											<a class="name">{$c['userInfo']['uname']}</a>
 											<p>{$c['content']}</p>
 											<p class="bottom_ms">
-												<span class="to">
+												<!--<span class="to">
 													<a>转发<span>(0)</span></a>
 													<a>回复<span>(0)</span></a>
-												</span>	
-												<span>22个小时前</span>
-												<span>来自<em></em></span>
+												</span>	-->
+												<span><php>echo date('Y-m-d H:i:s', $c['content']['create_time'])</php></span>
+												<span>来自<em>爱健美网</em></span>
 											</p>
 										</div>
 									</div>
@@ -162,8 +163,12 @@
 							</div>
 							<div class="border_comment">
 								<span class="word_num">0/300</span>
-								<span>登录</span>|
-								<span>注册</span>
+								<php>if(getMid()){</php>
+                                <php>echo getUserName(getMid())</php>
+                                <php>}else {</php>
+                                <span>登录</span>|
+                                <span>注册</span>
+                                <php>}</php>
 								
 								<div class="textarea"><textarea class="comment_inp" name="comment" id="comment">有什么感想，来说说吧</textarea></div>
 								<a class="comment" href="javascript:void(0)" onclick="comments(comment.value, {$i['article']['id']}, 'Daily')">发表评论</a>

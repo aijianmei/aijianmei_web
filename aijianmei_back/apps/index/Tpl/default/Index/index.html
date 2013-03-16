@@ -16,12 +16,12 @@
 								<span>上班族健身</span>
 							</a>
 							<ul class="expend">
-							<?php foreach($daily as $d) { 
-								  	if($d['channel']=='1') { ?>
+							<?php foreach($shangban as $d) { 
+								  	 ?>
 								<li>
-									<a href="/index.php?app=index&mod=Index&act=daily&id=<?php echo $d['id']?>"><?php echo $d['title']?></a>
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo $d['id']?>"><?php echo $d['title']?></a>
 								</li>
-							<?php };}?>
+							<?php }?>
 								
 							</ul>
 						</div>
@@ -30,11 +30,11 @@
 								<img src="../Public/images/mr_02.jpg" />
 								<span>日常健身</span></a>
 							<ul class="expend">
-							<?php foreach($daily as $d) { if($d['channel']=='2') { ?>
+							<?php foreach($richang as $d) {  ?>
 								<li>
-									<a href="/index.php?app=index&mod=Index&act=daily&id=<?php echo $d['id']?>"><?php echo $d['title']?></a>
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo $d['id']?>"><?php echo $d['title']?></a>
 								</li>
-							<?php };} ?>
+							<?php } ?>
 								
 							</ul>
 						</div>
@@ -43,11 +43,11 @@
 								<img src="../Public/images/mr_03.jpg" />
 								<span>专业运动员</span></a>
 							<ul class="expend">
-							<?php foreach($daily as $d) { if($d['channel']=='3') { ?>
+							<?php foreach($zhuanye as $d) {  ?>
 								<li>
-									<a href="/index.php?app=index&mod=Index&act=daily&id=<?php echo $$d['id']?>"><?php echo $d['title']?></a>
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo $$d['id']?>"><?php echo $d['title']?></a>
 								</li>
-							<?php };} ?>
+							<?php } ?>
 								
 							</ul>
 						</div>
@@ -56,11 +56,11 @@
 							<img src="../Public/images/mr_04.jpg" />
 							<span>健美运动员</span></a>
 							<ul class="expend">
-								<?php foreach($daily as $d) { if($d['channel']=='4') { ?>
+								<?php foreach($jianmei as $d) {  ?>
 								<li>
-									<a href="/index.php?app=index&mod=Index&act=daily&id=<?php echo $d['id']?>"><?php echo $d['title']?></a>
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo $d['id']?>"><?php echo $d['title']?></a>
 								</li>
-							<?php };} ?>
+							<?php } ?>
 								
 							</ul>
 						</div>

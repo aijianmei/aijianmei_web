@@ -62,6 +62,17 @@ class IndexAction extends Action {
 		
 		$daily = M('daily')->findAll();
 		
+		$shangban = M('article')->where(array('category_id'=>'43'))->limit('0,4')->order('id desc')->findAll();
+		$this->assign('shangban', $shangban);
+		
+		$richang =  M('article')->where(array('category_id'=>'44'))->limit('0,4')->order('id desc')->findAll();
+		$this->assign('richang', $richang);
+		
+		$zhuanye =  M('article')->where(array('category_id'=>'45'))->limit('0,4')->order('id desc')->findAll();
+		$this->assign('zhuanye', $zhuanye);
+		
+		$jianmei =  M('article')->where(array('category_id'=>'46'))->limit('0,4')->order('id desc')->findAll();
+		$this->assign('jianmei', $jianmei);
 		
 		$this->assign('daily', $daily);
 		$this->display();
