@@ -51,7 +51,7 @@
 							<ul>
 								<php>foreach($lastArticles as $a) {</php>
 								<li class="tr_classify">
-									<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_1"><img src="{$SITE_URL}/Public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+									<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_1"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
 									<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 									<p class="summary">{$a['brief']}
 									</p>
@@ -103,28 +103,28 @@
 							</ul> -->
 						</div>
 						<div class="each">					
-								<php>foreach($articles as $v) {</php>
+								<php>foreach($articles as $a) {</php>
 								<ul class="vdos">		
 										<li class="pic">
-											<a href="{$v['link']}"></a>
+											<a href=""></a>
 										</li>
 										<li class="info">
 											<span>视频名称：</span>
-											<a href="{$v['link']}">{$v['title']}</a>
+											<a href="">身体部位</a>
 										</li>
 										<li class="info">
-											<span>{$v['brief']}</span>
+											<span>围度测量方法</span>
 										</li>
 										<li class="info">
 											<span>发布时间：</span>
-											<a href="">{$v['create_time']}</a>  <!-- 改为now - create_time -->
+											<a href="">两天前</a>
 										</li>
 										<li class="info">
 											<span>播放：</span>
-											<a href="">{$v['click_count']}</a>
+											<a href="">131次</a>
 										</li>
 									</ul>
-								<php>}</php>							
+								<php>}</php>								
 							
 						</div>	
 						<!-- <div class="each clearfix">
