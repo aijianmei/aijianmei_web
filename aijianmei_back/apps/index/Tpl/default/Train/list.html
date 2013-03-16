@@ -119,8 +119,8 @@
 								<div class="ar_block">
 									<img class="block_img" src="../Public/images/training/{$a['img']}"/>
 									<h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
-									<span>作者：</span><span>日期：</span><span >点击：4</span>
-									<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
+									<span>作者：{$a['author']}</span><span>日期：</span><span >点击：{$a['reader_count']}</span>
+									<p>{$a['brief']}...</p>
 								</div>
 							<php>}</php>
 				</div>

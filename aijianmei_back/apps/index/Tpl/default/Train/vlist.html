@@ -213,25 +213,25 @@
 							</ul> -->
 						</div>
 						<div class="each">					
-								<php>foreach($articles as $a) {</php>
+								<php>foreach($articles as $v) {</php>
 								<ul class="vdos">		
 										<li class="pic">
-											<a href=""></a>
+											<a href="{$v['link']}"></a>
 										</li>
 										<li class="info">
 											<span>视频名称：</span>
-											<a href="">身体部位</a>
+											<a href="{$v['link']}">{$v['title']}</a>
 										</li>
 										<li class="info">
-											<span>围度测量方法</span>
+											<span>{$v['brief']}</span>
 										</li>
 										<li class="info">
 											<span>发布时间：</span>
-											<a href="">两天前</a>
+											<a href="">{$v['create_time']}</a>  <!-- 改为now - create_time -->
 										</li>
 										<li class="info">
 											<span>播放：</span>
-											<a href="">131次</a>
+											<a href="">{$v['click_count']}</a>
 										</li>
 									</ul>
 								<php>}</php>								
