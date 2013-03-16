@@ -411,22 +411,6 @@ button{
 				display: block;
 				width: 860px;
 				height: 270px;
-				background: #DFDFDF;
-			}
-			.change_1 .pic_2{
-				width: 860px;
-				height: 270px;
-				background:blue;
-			}
-			.change_1 .pic_3{
-				width: 860px;
-				height: 270px;
-				background: red;
-			}
-			.change_1 .pic_4{
-				width: 860px;
-				height: 270px;
-				background: green;
 			}
 			.change_1 .massage{
 				position: absolute;
@@ -486,13 +470,15 @@ button{
 				width: 40px;
 				height: 80px;
 				top: 12px;
-				left: 10px;background: url(../images/turn_left.png) no-repeat;}
+				left: 10px;
+				background: url(../images/turn_left.png) no-repeat;}
 			.ps_right{position: absolute;
 				display: inline-block;
 				width: 40px;
 				height: 80px;
 				top: 12px;
-				right: 10px;background: url(../images/turn_right.png) no-repeat;
+				right: 10px;
+				background: url(../images/turn_right.png) no-repeat;
 			}
 
 /******** Footer link *********/	
