@@ -7,7 +7,7 @@ class ArticleModel extends Model {
 	
 	public function getDaily($channel)
 	{
-		$sql = "select d.id,d.title,d.img,d.content,d.create_time,v.id as vid,v.title as vtitle,v.link,v.intro from ai_daily as d
+		$sql = "select d.id,d.title,d.img,d.content,d.create_time,d.like,d.unlike,v.id as vid,v.title as vtitle,v.link,v.intro from ai_daily as d
 				left join ai_daily_video  as v on v.daily_id=d.id 
 				where d.channel=".$channel;
 		
@@ -22,7 +22,7 @@ class ArticleModel extends Model {
 			if($daily[$r['id']]) {
 				$daily[$r['id']]['video'][] = array('id'=>$r['vid'], 'title'=>$r['vtitle'], 'link'=>$r['link'], 'intro'=>$r['intro'], 'img'=>$info['img']);
 			}else {
-				$daily[$r['id']]['article'] = array('id'=>$r['id'], 'title'=>$r['title'], 'img'=>$r['img'], 'content'=>$r['content'], 'ctime'=>$r['create_time']);
+				$daily[$r['id']]['article'] = array('id'=>$r['id'], 'title'=>$r['title'], 'img'=>$r['img'], 'content'=>$r['content'], 'ctime'=>$r['create_time'], 'like'=>$r['like'], 'unlike'=>$r['unlike']);
 				$daily[$r['id']]['video'][] = array('id'=>$r['vid'], 'title'=>$r['vtitle'], 'link'=>$r['link'], 'intro'=>$r['intro'], 'img'=>$info['img']);
 			}
 			

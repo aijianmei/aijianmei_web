@@ -111,8 +111,8 @@
 										<p>页面1</p>-->	
 									</div>
 								</span>
-								<a class="sprite_8" href="javascript:void(0)" onclick="like({$i['id']})"><span class="praise" id="like">{$i['like']}</span></a>
-								<a class="sprite_9" href="javascript:void(0)" onclick="unlike({$i['id']})"><span class="praise" id="unlike">{$i['unlike']}</span></a>			
+								<a class="sprite_8" href="javascript:void(0)" onclick="like({$i['article']['id']})"><span class="praise" id="like">{$i['article']['like']}</span></a>
+								<a class="sprite_9" href="javascript:void(0)" onclick="unlike({$i['article']['id']})"><span class="praise" id="unlike">{$i['article']['unlike']}</span></a>			
 							</div>
 							<div class="expand_3 clearfix">
 								<div class="check_comment">
@@ -426,8 +426,10 @@
 				return false;	
 			}
 			$.get('{:U("index/Index/daily", array("o"=>"like"))}',{'id':id, 'belong':'daily'},function(m){
-				if(m>0) {
-					$("#like").text(m);
+				var msg = eval('(' + m + ')');
+				var like = msg.like;
+				if(like>0) {
+					$("#like").text(like);
 					alert('投票成功');						
 				}else {
 					alert('投票失败');	
@@ -440,8 +442,10 @@
 				return false;	
 			}
 			$.get('{:U("index/Index/daily", array("o"=>"unlike"))}', {'id':id, 'belong':'daily'}, function(m){
-				if(m>0) {
-					$("#unlike").text(m);
+				var msg = eval('(' + m + ')');
+				var unlike = msg.unlike;
+				if(unlike>0) {
+					$("#unlike").text(unlike);
 					alert('投票成功');
 				}else {
 					alert('投票失败');	
