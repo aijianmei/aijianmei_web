@@ -37,7 +37,7 @@
     	<dd>
     		<select name="category">
     			<php>foreach($categories as $c) {</php>
-    			<option value="{$c['id']}" <php>if($article['category_id']==$c['id']){</php>> selected="selected"<php>}</php>>{$c['name']}</option>
+    			<option value="{$c['id']}" <php>if($article['category_id']==$c['id']){</php> selected="selected"<php>}</php>>{$c['name']}</option>
     			<php>}</php>
     		</select>
     	</dd>

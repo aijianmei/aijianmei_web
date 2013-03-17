@@ -42,7 +42,7 @@
 					<p class="show_time"><php>echo date('Y-m-d', $i['article']['ctime'])</php></p>	
 					<div class="package clearfix">			
 						<div class="part_1">
-							<h3 class="nowaday">{$i['article']['title']}</h3>
+							<h3 class="nowaday">{$i['article']['title']}</h3><br /><br />
 							{$i['article']['content']|htmlspecialchars_decode}
 							<!--<div class="show_pic">
 								<a><img src="/public/images/article/{$i['article']['img']}" alt="no" /></a>
@@ -52,6 +52,7 @@
 								<h2>锻炼视频示范</h2>
 								<ul class="video_list">
 								<php>foreach($i['video'] as $v) {</php>
+                                	<span>{$v['title']}</span>
 									<li style="position:relative;">
 										<a href="javascript:void(0)">
 											<!--<img src="{$v['img']}" width="150" />-->
@@ -72,8 +73,8 @@
 										</a>
 									</li> -->
 								</ul>
-								<span>发布时间  <span>5:00pm</span></span>
-								<a class="video_commit">评论(13)</a>
+								<span>发布时间  <span><php>echo date('Y-m-d H:i:s',$i['article']['ctime'])</php></span></span>
+								<a class="video_commit">评论(<php>count($i['comments'])</php>)</a>
 							</div>
 							<a href="{:U('index/Index/daily', array('id'=>$i['article']['id'], 'type'=>$_GET['type']))}" class="checking">查看</a>
 						</div>
@@ -203,8 +204,8 @@
                                 <span>注册</span>
                                 <php>}</php>
 								
-								<div class="textarea"><textarea class="comment_inp" name="comment" id="comment">有什么感想，来说说吧</textarea></div>
-								<a class="comment" href="javascript:void(0)" onclick="comments(comment.value, {$i['article']['id']}, 'Daily')">发表评论</a>
+								<div class="textarea"><textarea class="comment_inp" name="comment" id="comment_{$i['article']['id']}">有什么感想，来说说吧</textarea></div>
+								<a class="comment" href="javascript:void(0)" onclick="comments(comment_{$i['article']['id']}.value, {$i['article']['id']}, 'Daily')" aid="{$i['article']['id']}">发表评论</a>
 							</div>
 						</div>
 					</div>

@@ -66,9 +66,12 @@
 			function comments(comment, aid, act) {
 				if(!USER.id) {alert('请登录'); return false;}
 				var action = 'add'+act+'Comment';
+				//var comment = document.getElementById('comment').value;
+				
 				$.post('/index.php?app=index&mod=Index&act='+action, {'comment':comment, 'aid':aid}, function(msg) {
 					//ui.success('success');
 					location.reload();
+					
 				})
 			}
 			</script>
