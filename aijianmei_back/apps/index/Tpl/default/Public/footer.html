@@ -72,5 +72,18 @@
 				})
 			}
 			</script>
+			//验证码刷新
+			<script type='text/javascript' charset='utf-8'>
+			 $(function()
+	        {
+	            $("#safecode,#reloadcode").click(function(event)
+	            {
+	                $("#safecode").load("/public/captcha.php" + "?timestamp=" + (new Date()).getTime(),{},function(responseText, textStatus, XMLHttpRequest)
+	                {
+	                    $("#safecode").attr("src","/public/captcha.php");
+	                });
+				});
+	        })
+			</script>
 		</body>
 	</html>

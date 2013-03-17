@@ -27,6 +27,14 @@
 								<input type="password" id="psd" name="password" />
 								<span class="tip">密码长度为6~16个的数字或者字母</span>
 							</div>
+							<div class="checkCode">
+								<span>验证码：</span>
+								<input type="text"  class="checkBox" id="verify" name="verify" value=""/>
+								<img src="/public/captcha.php"  id="safecode" class="checkImg" alt="看不清，换一张" />
+								<a href="#" class="checkChange" id="reloadcode">换一换</a>
+									
+
+							</div>
 							<button type="submit" class="submit_btn">登陆</button>
 							<a href="retrieve.html" class="forget">忘记密码</a>
 						</form>
