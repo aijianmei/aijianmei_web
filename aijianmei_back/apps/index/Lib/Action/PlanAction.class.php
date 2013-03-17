@@ -8,6 +8,18 @@ class PlanAction extends Action {
 			$article[$d['channel']][] = $d;
 		}
 		$this->assign('article', $article);
+		
+		$shangban = M('article')->where(array('category_id'=>'43'))->limit('0,4')->order('id desc')->findAll();
+		$this->assign('shangban', $shangban);
+		
+		$richang =  M('article')->where(array('category_id'=>'44'))->limit('0,4')->order('id desc')->findAll();
+		$this->assign('richang', $richang);
+		
+		$zhuanye =  M('article')->where(array('category_id'=>'45'))->limit('0,4')->order('id desc')->findAll();
+		$this->assign('zhuanye', $zhuanye);
+		
+		$jianmei =  M('article')->where(array('category_id'=>'46'))->limit('0,4')->order('id desc')->findAll();
+		$this->assign('jianmei', $jianmei);
 
 		//banner 滚动图片列表
 		 $change_1="01.jpg";

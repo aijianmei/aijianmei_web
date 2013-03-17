@@ -30,7 +30,7 @@
 									<dt><a href="/index.php?app=index&mod=Index&act=info&type=1"><img class="show_pic" src="../Public/images/mr_01.jpg" alt="" /></a></dt>
 									<dd class="sort_title"><a href="/index.php?app=index&mod=Index&act=info&type=1">上班族健身</a></dd>
 									<dd>
-										<?php foreach($article[1] as $id=>$t) { ?>
+										<?php foreach($shangban as $id=>$t) { ?>
 										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=daily&id=<?php echo $t['id']?>"><?php echo $t['title'];?></a>
 										<?php } ?>
 										
@@ -42,7 +42,7 @@
 									<dt><a href="/index.php?app=index&mod=Index&act=info&type=2"><img class="show_pic" src="../Public/images/mr_02.jpg" alt="" /></a></dt>
 									<dd class="sort_title"><a href="/index.php?app=index&mod=Index&act=info&type=2">日常健身</a></dd>
 									<dd>
-										<?php foreach($article[2] as $id=>$t) { ?>
+										<?php foreach($richang as $id=>$t) { ?>
 										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=daily&id=<?php echo $t['id']?>"><?php echo $t['name'];?></a>
 										<?php } ?>
 										
@@ -54,7 +54,7 @@
 									<dt><a href="/index.php?app=index&mod=Index&act=info&type=3"><img class="show_pic" src="../Public/images/mr_03.jpg" alt="" /></a></dt>
 									<dd class="sort_title"><a href="/index.php?app=index&mod=Index&act=info&type=3">专业运动员</a></dd>
 									<dd>
-										<?php foreach($aritcle[3] as $id=>$t) { ?>
+										<?php foreach($zhuanye as $id=>$t) { ?>
 										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=daily&id=<?php echo $t['id']?>"><?php echo $t['name'];?></a>
 										<?php } ?>
 										
@@ -66,7 +66,7 @@
 									<dt><a href="/index.php?app=index&mod=Index&act=info&type=4"><img class="show_pic" src="../Public/images/mr_04.jpg" alt="" /></a></dt>
 									<dd class="sort_title"><a href="/index.php?app=index&mod=Index&act=info&type=4">健美运动员</a></dd>
 									<dd>
-										<?php foreach($$article[4] as $id=>$t) { ?>
+										<?php foreach($jianmei as $id=>$t) { ?>
 										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=daily&id=<?php echo $t['id']?>"><?php echo $t['name'];?></a>
 										<?php } ?>
 										
