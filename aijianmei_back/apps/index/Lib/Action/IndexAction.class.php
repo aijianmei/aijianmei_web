@@ -326,7 +326,13 @@ class IndexAction extends Action {
 			$data['id'] = $_GET['comment_id'];
 			
 			M('')->query('UPDATE `ai_comments` SET `like`=`like`+1 where `id`='.$comment_id);
-		}
+		}elseif($o=='like') { // add like to daily article
+        	echo M('')->query('update ai_daily set `like`=`like`+1 where `id`='.$id);
+            return;
+        }elseif($o=='unlike') { // add unlike to daily article
+        	echo M('')->query('update ai_daily set `unlike`=`unlike`+1 where `id`='.$id);
+            return;
+        }
 		
 		$daily = M('daily')->where(array('id'=>$id))->find();
 		$videos = M('daily_video')->where(array('daily_id'=>$id))->findAll();
