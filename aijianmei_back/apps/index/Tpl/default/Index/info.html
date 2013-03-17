@@ -111,8 +111,8 @@
 										<p>页面1</p>-->	
 									</div>
 								</span>
-								<a class="sprite_8" href="javascript:void(0)" onclick="like()"><span class="praise">{}</span></a>
-								<a class="sprite_9" href="javascript:void(0)" onclick="unlike()"><span class="praise">{}</span></a>			
+								<a class="sprite_8" href="javascript:void(0)" onclick="like({$i['id']})"><span class="praise" id="like">{$i['like']}</span></a>
+								<a class="sprite_9" href="javascript:void(0)" onclick="unlike({$i['id']})"><span class="praise" id="unlike">{$i['unlike']}</span></a>			
 							</div>
 							<div class="expand_3 clearfix">
 								<div class="check_comment">
@@ -419,4 +419,34 @@
 				</div> -->
 			</div>	
 		</div>
+        <script type="text/javascript">
+		function like(id) {
+			if(USER.id<=0) {
+				alert('请先登录');
+				return false;	
+			}
+			$.get('{:U("index/Index/daily", array("o"=>"like"))}',{'id':id, 'belong':'daily'},function(m){
+				if(m>0) {
+					$("#like").text(m);
+					alert('投票成功');						
+				}else {
+					alert('投票失败');	
+				}
+			})	
+		}
+		function unlike(id) {
+			if(USER.id<=0) {
+				alert('请先登录');
+				return false;	
+			}
+			$.get('{:U("index/Index/daily", array("o"=>"unlike"))}', {'id':id, 'belong':'daily'}, function(m){
+				if(m>0) {
+					$("#unlike").text(m);
+					alert('投票成功');
+				}else {
+					alert('投票失败');	
+				}
+			})
+		}
+		</script>
 <include file="../Public/footer" />
