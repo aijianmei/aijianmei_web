@@ -425,11 +425,16 @@
 				alert('请先登录');
 				return false;	
 			}
+			if(getCookie('like')==id) {
+				alert('已经投票');
+				return;	
+			}
 			$.get('{:U("index/Index/daily", array("o"=>"like"))}',{'id':id, 'belong':'daily'},function(m){
 				var msg = eval('(' + m + ')');
 				var like = msg.like;
 				if(like>0) {
 					$("#like").text(like);
+					setCookie('like', id);
 					alert('投票成功');						
 				}else {
 					alert('投票失败');	
@@ -441,16 +446,34 @@
 				alert('请先登录');
 				return false;	
 			}
+			if(getCookie('unlike')==id) {
+				alert('已经投票');
+				return false;	
+			}
 			$.get('{:U("index/Index/daily", array("o"=>"unlike"))}', {'id':id, 'belong':'daily'}, function(m){
 				var msg = eval('(' + m + ')');
 				var unlike = msg.unlike;
 				if(unlike>0) {
 					$("#unlike").text(unlike);
+					setCookie('unlike',id);
 					alert('投票成功');
 				}else {
 					alert('投票失败');	
 				}
 			})
+		}
+		function setCookie(name,value) {
+			var days = 3; // 3天内不可以重复刷票
+			var expr = new Date();
+			expr.setTime(expr.getTime()+days*60*60*24*1000);
+			document.cookie = name + '=' + escape(value) + ';expires=' + expr.toGMTString();
+		}
+		function getCookie(name) {
+			var arr = document.cookie.split('; ');
+			for(var i=0;i<arr.length;i++) {
+				var temp = arr[i].split('=');
+				if(temp[0]==name) return unescape(temp[1]);	
+			}
 		}
 		</script>
 <include file="../Public/footer" />
