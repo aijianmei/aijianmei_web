@@ -46,11 +46,18 @@
 								<p>20wall ball shots,20 pound ball</p> -->
 								<div class="show_video">
 									<h4>视频：</h4>
+                                    <ul class="video_list">
 									<php>foreach($videos as $v) {</php>
-									 <a href="{:U('index/Train/videoDetail', array('from'=>'daily', 'id'=>$v['id']))}">
-										<img src="{$v['img']}">
-									</a> 
+									 <li style="position:relative;">
+										<a href="javascript:void(0)">
+											<!--<img src="{$v['img']}" width="150" />-->
+                                            
+                                            <embed src="{$v['link']}" quality="high" width="400" height="300" align="middle" autostart="false" loop="false" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
+                                        
+										</a>										
+									</li>
 									<php>}</php>
+                                    </ul>
 								</div>
 							</div>
 							<div class="module_right">
