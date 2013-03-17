@@ -95,7 +95,7 @@
 							<dl class="user_info clearfix">
 								<dt>
 									<a href="personal.html" class="about_user">
-										<img src="../Public/images/pal/ad1.jpg" alt="" class="user_img" />
+										<img src="{$userInfo['face']}" alt="" class="user_img" />
 									</a>
 								</dt>
 								<dd>
@@ -120,7 +120,7 @@
 							<dl class="member_info clearfix">
 								<dt>
 									<a href="" class="about_member">
-										<img src="../Public/images/pal/ad1.jpg" alt="" class="member_img" />
+										<img src="<php>echo getUserFace($m['id'])</php>" alt="" class="member_img" />
 									</a>
 								</dt>
 								<dd class="member_name">
