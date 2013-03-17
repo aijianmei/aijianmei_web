@@ -364,6 +364,37 @@ class IndexAction extends Action {
 		$this->assign('videos', $videos);
 		$this->assign('comments', $comments);
 		$this->assign('cssFile', 'article');
+        
+        $promote = M('promote')->find();
+		$this->assign('promote', $promote);
+		
+		$promoteArticle = M('article')->where(array('is_promote'=>1))->findAll();
+		
+		$this->assign('promote_article', $promoteArticle);
+        
+        $string="select category_id,name,channel,parent from ai_article,ai_article_category where ai_article.category_id=ai_article_category.id and ai_article.id=".$id;
+		$result=mysql_query($string);
+		$result=mysql_fetch_array($result);
+		$channel=$result['channel'];
+		$tree_category_id=$result['category_id'];
+		switch($channel){
+			case 1: {$tree_channel="健身计划 ";$tree_channel_en="Plan";}break;
+			case 2:{$tree_channel="锻炼 ";$tree_channel_en="Train";}break;
+			case 3:{$tree_channel="营养 ";$tree_channel_en="Nutri";}break;
+			case 4:{$tree_channel="补充 ";$tree_channel_en="Append";}break;
+		}
+		$tree_parent=$result['parent'];		
+		$tree_name=$result['name'];
+		$result=mysql_query("select name from ai_article_category where id=".$tree_parent);
+		$tree_parentName=mysql_fetch_array($result);
+		$this->assign("first",$tree_channel);
+		$this->assign("second",$tree_parentName['name']);
+		$this->assign("third",$tree_name);
+		$this->assign("tree_parent",$tree_parent);
+		$this->assign("tree_channel_en",$tree_channel_en);
+		$this->assign("tree_category_id",$tree_category_id);
+        
+        $this->assign('parent', $_GET['type']);
 		$this->display();
 	}
 	
