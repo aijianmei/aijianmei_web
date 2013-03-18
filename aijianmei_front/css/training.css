@@ -37,14 +37,12 @@
 			}
 			.tr_classify{
 				float: left;
-				width: 165px;
-				
-				margin:0 9px 5px 0;
-				border:3px solid transparent;
+				width: 169px;
+				margin: 10px 11px 5px 0;
 			}
 			.video_1{
 				display: block;
-				height:134px;
+				height:154px;
 			}
 			.pic_ct{
 				font-size: 13px;
@@ -153,7 +151,8 @@
 					font-size: 12px;
 				}
 				.new_video img,.hot_video img{
-					border-radius: 4px;
+					border-radius: 8px;
+					border:2px solid transparent;
 				}
 			.article_top{
 				height:120px;

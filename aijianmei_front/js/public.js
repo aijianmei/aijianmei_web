@@ -386,8 +386,10 @@ $("li.select>a").mouseover(function(){
 //鼠标移上图片显示进入
 $("a.show_enter").mouseover(function(){
 	$(this).children(".enter_icon").css("display","block");
+	$(this).children("img").css("border-color","#21ace3");
 	$(this).mouseout(function(){
 		$(this).children(".enter_icon").css("display","none");
+		$(this).children("img").css("border-color","transparent");
 	})
 });
 

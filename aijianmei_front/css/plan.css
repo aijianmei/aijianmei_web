@@ -32,14 +32,15 @@
 	}
 		.train .sort{
 			float: left;
-			width: 170px;
-			margin: 12px;
+			width: 174px;
+			margin: 12px 11px;
 		}
 			.sort .show_pic{
 				width:170px;
 				height:130px;
 				border-radius:8px;
 				box-shadow:0 0 8px #ccc;
+				border:2px solid transparent;
 			}
 			.sort .sort_title{
 				text-align:center;
