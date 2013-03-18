@@ -5,7 +5,7 @@ $(function() {
 	var len = $("#banner ul li").length; //获取焦点图个数
 	var index = 0;
 	var picTimer;
-	
+	//cjxlkkads
 	//添加按钮,上一页、下一页两个按钮
 	var btn = "<div class='btn'>";
 	for(var i=0; i < len; i++) {
