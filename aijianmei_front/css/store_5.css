@@ -261,11 +261,14 @@
 					.md_left{
 						display:none;
 						float: left;
-						width: 730px;
+						width: 620px;
 					}
 						.produce_introduce{
 							margin: 0px auto;
 							width: 672px;
+						}
+						.produce_introduce img{
+							width: 620px;
 						}
 						.other_intro{
 							margin-bottom: 50px;
@@ -288,15 +291,19 @@
 								}
 							.other_1{
 								float: left;
-								width: 393px;
-								height: 368px;
-								margin-top: 29px;
+								width: 350px;
+								height: 365px;
+								margin-top: 15px;
 								background: #CCC;
 
 							}
 							.other_2{
 								float:right;
-								width:;
+								margin-top: 15px;
+							}
+							.other_2 img{
+								width: 235px;
+								height: 365px;
 							}
 							.title_8{
 								margin-top: 30px;
@@ -308,9 +315,13 @@
 								font-size: 24px;
 								color: black;
 							}
+							.other_intro_img{
+								width: 620px;
+								height: 270px;
+							}
 					.md_right{
-						float: left;
-						width: 198px;
+						float: right;
+						width: 300px;
 						border: 1px solid #CCC;
 					}
 						.ad_title{
@@ -334,7 +345,7 @@
 								top: 0px;
 								left:0px;
 								display: none;
-								width: 198px;
+								width: 300px;
 								height: 100%;
 								background: black;
 								opacity: 0.3;
@@ -568,7 +579,6 @@
 			float:right;
 			min-height: 100%;
 			width:300px;
-			margin-right: 10px;
 		}
 		.bottom_part_right .title_4{
 			margin : 10px 0;
