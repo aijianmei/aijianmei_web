@@ -1,34 +1,3 @@
-/*.clearfix:after{
-	content:"";
-	clear:both;
-	display:block;
-	height:0;
-	visibility:hidden;
-	line-height:0;
-}
-.clearfix{
-	zoom:1;
-} 
-.logo{
-	margin-right:12px;
-}
-.body{
-	position:fixed;
-	width:980px;
-}
-.sheet{
-	position:fixed;
-	width:980px;
-}
-a{
-	cursor:pointer;
-}
-body{
-	font:14px Tahoma Arial,Helvetica,sans-serif;
-	color:#656565;
-	width:980px;
-	margin:0 auto;
-}
 	/*header*/
 	#header{
 		width:980px;
@@ -292,11 +261,14 @@ body{
 					.md_left{
 						display:none;
 						float: left;
-						width: 730px;
+						width: 620px;
 					}
 						.produce_introduce{
 							margin: 0px auto;
 							width: 672px;
+						}
+						.produce_introduce img{
+							width: 620px;
 						}
 						.other_intro{
 							margin-bottom: 50px;
@@ -319,15 +291,19 @@ body{
 								}
 							.other_1{
 								float: left;
-								width: 393px;
-								height: 368px;
-								margin-top: 29px;
+								width: 350px;
+								height: 365px;
+								margin-top: 15px;
 								background: #CCC;
 
 							}
 							.other_2{
 								float:right;
-								width:;
+								margin-top: 15px;
+							}
+							.other_2 img{
+								width: 235px;
+								height: 365px;
 							}
 							.title_8{
 								margin-top: 30px;
@@ -339,9 +315,13 @@ body{
 								font-size: 24px;
 								color: black;
 							}
+							.other_intro_img{
+								width: 620px;
+								height: 270px;
+							}
 					.md_right{
-						float: left;
-						width: 198px;
+						float: right;
+						width: 300px;
 						border: 1px solid #CCC;
 					}
 						.ad_title{
@@ -365,7 +345,7 @@ body{
 								top: 0px;
 								left:0px;
 								display: none;
-								width: 198px;
+								width: 300px;
 								height: 100%;
 								background: black;
 								opacity: 0.3;
@@ -505,6 +485,10 @@ body{
 						display: inline-block;
 						float: right;
 					}
+					.cm_top .concrete_page{
+						display:inline-block;
+						line-height: 25px;
+					}
 						.page_1 .choice_page{
 							display: inline-block;
 							padding: 4px;
@@ -568,33 +552,33 @@ body{
 						.target .bottom_ms{
 							padding:10px 0;
 						}
+						.to .sprite_8{
+							display: inline-block;
+							background: url(../images/wm3.png) no-repeat;
+							background-position: 0 -263px;
+							width: 53px;
+							height: 25px;
+							margin-bottom: -4px;
+						}
+						.to .praise{
+							display: inline-block;
+							height: 27px;
+							line-height: 27px;
+							margin-left: 27px;
+						}.to .praise{
+							display: inline-block;
+							height: 27px;
+							line-height: 27px;
+							margin-left: 27px;
+						}
 						.target .to{
 							float:right;
 							display:inline;
 						}
-				.relation{
-					margin-bottom: 100px;
-				} 
-				.relation .title_6{
-					border-bottom: 1px solid #DFDFDF;
-				}
-					.title_6 .add_relation{
-						display: inline-block;
-						height: 27px;
-						line-height: 27px;
-						margin-bottom: -1px;
-						font-size: 15px;
-						border-bottom: 1px solid #5AB0FF;						
-					}
-				.relation p{
-					line-height: 27px;
-					font-size: 18px;					
-				}
 		.bottom_part_right{
 			float:right;
 			min-height: 100%;
 			width:300px;
-			margin-right: 10px;
 		}
 		.bottom_part_right .title_4{
 			margin : 10px 0;

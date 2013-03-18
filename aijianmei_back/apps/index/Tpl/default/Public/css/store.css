@@ -220,13 +220,28 @@
 	.char{
 		margin:0 9px;
 	}
-	.char_pro{
-		position: relative;
-		float: left;
-		margin: 10px 15px 0 0;
-		border: 2px solid #f2f2ff;
-		font-weight: 600;
-	}
+		.con_pro{
+			float: left;
+			width: 193px;
+		}
+			.char_pro{
+				position: relative;
+				margin: 10px 10px 0 0;
+				border: 2px solid #f2f2ff;
+				font-weight: 600;
+			}
+			.item_attr{
+				padding: 15px 10px;
+			}
+				.item_attr_detail{
+					margin-bottom: 10px;
+				}
+				.item_attr_detail span{
+					float: right;
+				}
+				.p_name{
+					color: #0E709A; 
+				}
 	.add_pro{
 		margin-right: 0px;
 	}

@@ -344,9 +344,135 @@
 				background: black;
 			}
 
-
+	.char{
+		margin:0 9px;
+	}
+		.con_pro{
+			float: left;
+			width: 193px;
+		}
+			.char_pro{
+				position: relative;
+				margin: 10px 10px 0 0;
+				border: 2px solid #f2f2ff;
+				font-weight: 600;
+			}
+			.item_attr{
+				padding: 15px 10px;
+			}
+				.item_attr_detail{
+					margin-bottom: 10px;
+				}
+				.item_attr_detail span{
+					float: right;
+				}
+	.add_pro{
+		margin-right: 0px;
+	}
+		.char_pro i{
+			position:absolute;
+			top:-7px;
+			left:-7px;
+			display:inline-block;
+			width:84px;
+			height:84px;
+			background: url(../images/sd_.png)
+		}
+		.char_pro .profit{
+			position:absolute;
+			top:7px;
+			left:97px;
+			color:red;
+			font-size: 16px;
+			font-weight: 800;
+		}
+			.char_pic .pic{
+				height: 212px;
+				width: 176px;
+				background: #CCC;				
+			}
+		.pro_name,.pro_price{
+			height:22px;
+			text-align: center;
+			line-height: 22px;
+		}
+		.pro_name{
+			background:#a1d8ff;
+		}
+		.pro_price{
+			background:#fe0002;
+		}
+			.pro_price a{
+				color:white;
+			}
+	.more_pro{
+		float: right;
+		margin: 10px;
+		font-size: 18px;
+		font-weight: bold;
+		cursor: pointer;
+	}
+	.hot{
+		height:280px;
+	}
+	.sell{
+		text-align:right;
+	}
+	.hot_pro{
+		float: left;
+		height: 205px;
+		width: 715px;
+		margin: 10px 34px;
+	}
+	.new{
+		margin-top:10px;
+	}
 	
+.chose_info{
+	background: url(../images/thbg.jpg);
+	height: 35px;
+}
+.chose_info_btn{
+	width: 60px;
+height: 29px;
+border: 1px solid #CCC;
+font-size: 20px;
+margin: 0 5px;
+}
 
+	.list0{
+		height: 100px;
+		border-bottom: 1px solid #CCC;
+		margin:0 20px;
+	}
+		.produc_list{
+			float: left;
+			width: 160px;
+			text-align: center;	
+		}
+		.p_list_detail{
+			margin-top: 30px;
+			position: relative;
+		}
+			.produc_list_img{
+				width: 80px;
+				height: 80px;
+				padding: 8px;
+			}
+			.p_name{
+				color: #0E709A;
+			}
+			.p_name:hover{
+				text-decoration: underline;
+			}
+			.p_price{
+				color: red;
+			}
+			.p_pay{
+				position: absolute;
+				top: 30px;
+				left: 45px;
+			}
 
 
 

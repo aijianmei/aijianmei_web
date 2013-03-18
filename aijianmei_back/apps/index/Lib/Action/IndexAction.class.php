@@ -314,6 +314,28 @@ class IndexAction extends Action {
 		$cate = M('article_category')->where(array('type'=>'2'))->findAll();
 		$this->assign('info', $info);
 		$this->assign('cssFile', 'every');
+
+		//目录树
+		$channel=$type;
+		switch($channel){
+			case 1: {$tree_channel="上班族健身 ";$tree_channel_en=1;}break;
+			case 2:{$tree_channel="日常健身 ";$tree_channel_en=2;}break;
+			case 3:{$tree_channel="运动员 ";$tree_channel_en=3;}break;
+			case 4:{$tree_channel="健身运动员 ";$tree_channel_en=4;}break;
+		}
+		$this->assign("first",$tree_channel);
+		//banner 滚动图片列表
+		 $change_1="1.jpg";
+		 $change_2="2.jpg";
+		 $change_3="3.jpg";
+		 $change_4="4.jpg";
+		 $this->assign('change_1',$change_1);
+		 $this->assign('change_2',$change_2);
+		 $this->assign('change_3',$change_3);
+		 $this->assign('change_4',$change_4);
+		//-------END--------
+
+
 		$this->display();
 	}
 	

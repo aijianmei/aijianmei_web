@@ -36,7 +36,11 @@
 			</div>
 
 			<div class="content">
-				<h2>每天锻炼</h2>
+				<h2><span>
+				<a href="/index.php?app=index">爱健美</a>->
+				<a href="/index.php?app=index&mod=Plan">健身计划</a>->
+				<a href="/index.php?app=index&mod=Index&act=info&type={$tree_channel_en}">{$first}</a>
+				</span></h2>
 				<php>foreach($info as $i) {</php>
 				<div class="module_1">
 					<p class="show_time"><php>echo date('Y-m-d', $i['article']['ctime'])</php></p>	
