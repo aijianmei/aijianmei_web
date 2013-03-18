@@ -4,8 +4,9 @@ class IndexAction extends Action {
 	{
 		if (!empty($_GET['token'])) {
 			require_once $_SERVER['DOCUMENT_ROOT'].'/Denglu.php';
-			$api = new Denglu('44031dena3J8cuBsQeX40lcpjSsPM3', '85015440v4NfCVj6aTNfZAg0idQv03', 'utf-8');
 			
+			$api = new Denglu('44031dena3J8cuBsQeX40lcpjSsPM3', '85015440v4NfCVj6aTNfZAg0idQv03', 'utf-8');
+			$token = $_GET['token'];
 			try {
 				
 				$userInfo = $api->getUserInfoByToken($_GET['token']);
@@ -53,6 +54,54 @@ class IndexAction extends Action {
 			}catch (DengluException $e) {
 				echo $e->geterrorDescription();
 			}
+		}
+		
+		if(!empty($_REQUEST['code'])) {
+			require_once $_SERVER['DOCUMENT_ROOT'].'/saetv2.ex.class.php';
+			$sina = new SaeTOAuthV2('3622140445', 'f94d063d06365972215c62acaadf95c3');	
+			
+			$token = $sina->getAccessToken('code', array('code'=>$_REQUEST['code'], 'redirect_uri'=>'http://dev.aijianmei.com/index.php'));
+			$client = new SaeTClientV2('3622140445', 'f94d063d06365972215c62acaadf95c3', $token['access_token']);
+			
+			$uid_get = $client->get_uid();
+			$uid = $uid_get['uid'];
+			$user_message = $client->show_user_by_id( $uid);
+			//print_r($user_message);
+			
+			$logId = M('others')->field('uid')->where(array('mediaID'=>'3', 'mediaUserID'=>$user_message['id'], 'personID'=>$user_message['idstr']))->find();
+			if($logId) {
+				service('Passport')->loginLocal($logId['uid']);	
+			}else {
+				$data['email'] = '';
+				$data['password'] = '';
+				$data['uname'] = $user_message['screen_name'];
+				//$data['province'] = $userInfo['province'];
+				//$data['city']  = $userInfo['city'];
+				$data['sex']   = $user_message['gender'];
+				$data['location'] = $user_message['location'];
+				$data['is_active'] = 1;
+				$data['ctime'] = time();
+				
+				$uid = M('user')->add($data);				
+				service('Passport')->loginLocal($uid);
+				
+				$other['uid'] = $uid;
+				$other['mediaID'] = '3';
+				$other['friendsCount'] = $user_message['friends_count'];
+				$other['favouritesCount'] = $user_message['favourites_count'];
+				$other['profileImageUrl'] = $user_message['profile_image_url'];
+				$other['mediaUserID'] = $user_message['id'];
+				$other['url']  = $user_message['url'];
+				$other['homepage'] = $user_message['url'];
+				$other['description'] = $user_message['description'];
+				$other['domain'] = $user_message['domain'];
+				$other['followersCount'] = $user_message['followers_count'];
+				$other['statusesCount']  = $user_message['statuses_count'];
+				$other['personID'] = $user_message['idstr'];
+				
+				M('others')->add($other);	
+			}
+			
 		}
 		
 		
