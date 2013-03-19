@@ -500,7 +500,9 @@ $(function(){
 			};
 			fade.init('store');
 			fade.init('forum');
-			
+			if(document.getElementById('teach')){
+				fade.init('teach');
+			}
 //视频列表 切换分类
 $("li.select>a").mouseover(function(){
 	$(this).addClass("pre").siblings().removeClass("pre");
@@ -516,4 +518,3 @@ $("a.show_enter").mouseover(function(){
 	})
 });
 
-fade.init('teach');
