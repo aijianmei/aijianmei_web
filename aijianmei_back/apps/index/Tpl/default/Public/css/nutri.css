@@ -6,11 +6,21 @@
 	margin-top: 10px;
 }
 
-
+	.part_content{
+		margin:10px 15px 0 15px;
+	}
 	.tr_top{
-		margin:5px 20px;
+		padding: 10px 0;
 		border: 1px solid #CCC;
 		border-radius: 8px;
+	}
+	.lay_detail{
+		float: left;
+		width: 254px;
+	}
+	.read_content{
+		font-size: 15px;
+		line-height: 20px;
 	}
 	.expend{
 		float: right;
@@ -25,12 +35,11 @@
 	}
 	.supple_pic{
 		float: left;
-		margin-left: 10px;
-		margin-right: 20px;
+		margin:0 10px;
 	}
 	.detail{
 		display: inline-block;
-		margin: 22px 0 10px 0;
+		margin: 10px 0;
 		font-size: 20px;
 		color: #003096;
 	}
@@ -47,20 +56,24 @@
 	}
 	.classify{
 		float: left;
-		width: 222px;
-		margin: 18px 18px;
-		*padding-bottom: 18px;
+		width: 243px;
+		margin: 16px 15px 0 0;
 	}
 	.classify .best{
-		display:block;
-		border: 1px solid #ccc;
+		height:140px;
+		width:239px;
+		border: 2px solid transparent;
+	}
+	.classify .best_classify{
+		line-height: 30px;
+		font-size: 16px;
+		font-weight: bold;
+		text-align: center;
+	}
+	.last_classify{
+		margin-right: 0px;
 	}
 	.classify .lay_cf{
-	}
-	.classify p{
-		line-height: 22px;
-		text-align: center;
-		background: #E0E0E0;
 	}
 	.classify .price{
 		color: red;
@@ -176,9 +189,9 @@
 			}
 			.block_img{
 				float: left;
-				width: 81px;
-				height: 70px;
-				margin-right: 10px;
+width: 81px;
+height: 70px;
+margin-right: 10px;
 			}
 			.ar_block span{
 				display: inline-block;
@@ -187,168 +200,7 @@
 			.ar_block p{
 				margin-right: 50px;
 			}
-	/********** 全部 ***********/
-		.bar{
-			display:none;
-		}
-		.current{
-			display:block;
-		}
-		.list{
-			height: 30px;
-			border-bottom: 1px solid #E5E5E5;
-			line-height: 30px;
-			padding-left: 20px;
-		}
-			.list a{
-				display: block;
-				color: #51639E;
-			}
-			.list a:hover{
-				text-decoration:underline;
-				font-weight:bold;
-			}
-		
-		.tab_btn{
-			margin: 0 5px;
-			width: 50px;
-			height: 20px;
-			background: none;
-			color: #656565;
-			font-size: 15px;
-			display: inline-block;
-			text-align: center;
-			line-height: 20px;
-		}
-		.curr_tit{
-			background:lightblue;
-		}
-		
-/******* 视频 *************/		
-	.video{
-		display:inline-block;
-		margin-left:15px;
-	}
-	.all .all_ul{
-		border-bottom:1px solid #E5E5E5;
-		margin:0 auto;
-	}
-		/****** 选择分类 ********/
-		.video .select{
-			margin:10px;
-		}
-			.select a{
-				color:#6377AD;
-				display: inline-block;
-				margin-right: 15px;
-				font-weight:bold;
-				width:70px;
-				text-align:center;
-				cursor:pointer;
-			}
-			.select a:hover{
-				text-decoration:underline;
-			}
-			.select .pre{
-				background:#69696C;
-				color:white;
-			}
-		/******* 列表 ********/
-		.video .each{
-			padding-bottom:20px;
-			border-bottom:1px solid #ccd
-		}
-		/***** 视频列表 ****/
-		.video .vdos{
-			width:140px;
-			display:inline-block;
-			margin:20px 10px 5px 0;
-			
-		}
-			.video .vdos .pic{
-				border-radius:4px;
-				width:130px;
-				height:90px;
-				background:#ccc;
-			}
-				.vdos .pic a{
-					width:130px;
-					height:80px;
-				}
-				.vdos .pic a{
-					display:block;
-					cursor:pointer;
-				}
-			.vdos .info{
-				margin-top:8px;
-				font-size:12px;
-			}
-		/******** 文章列表 ********/
-			.arts{
-				float:left;
-				width: 350px;
-				height: 82px;
-				margin-right: 15px;
-				margin-top: 20px;
-			}
-				.arts .pic{
-					width: 104px;
-					height: 75px;
-					border: 1px solid #ccc;
-					padding: 3px;
-					float:left;
-				}
-				.arts .info{
-					height: 82px;
-					width: 200px;
-					display: inline-block;
-					margin-left: 10px;
-				}
-					.info .art_title{
-						
-						font-weight: bold;
-						margin-bottom:5px;
-					}
-					.art_title a{
-						color: #2E4874;
-					}
-					.art_content{
-						margin:0px;
-						line-height:20px;
-						text-indent:2em;
-					}
-					.read_all{
-						color:#2D4974;
-						float:right;
-					}
-					.count{
-						color: red;
-						font-weight: bold;
-						margin-right: 10px;
-					}
-		/*底部汇总导航栏*/
-		.title_4{
-			padding: 5px 0 5px 10px;
-			margin: 5px 0;
-			font-size: 16px;
-			background: #CCC;
-		}
-		.re_nav{
 
-		}
-		.re_nav li{
-			float: left;
-			width: 326px;
-			margin-right: 3px;
-			padding: 10px;
-			font-size: 13px;
-			font-weight: 700;
-			border-bottom: 1px dotted #CCC;
-		}
-		.re_nav li a{
-			color:#0E709A;
-		}
-					
 	/****** 翻页 *****/
 	.page{
 		margin:15px;
@@ -357,12 +209,12 @@
 		.prev,.next{
 			width:60px;
 			height:20px;
-			background: #CCC;
 		}
 		.record{
 			display:inline-block;
 			margin:0 3px;
 		}
+		
 
 
 

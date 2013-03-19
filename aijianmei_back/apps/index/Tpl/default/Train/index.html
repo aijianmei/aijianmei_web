@@ -29,189 +29,121 @@
 
 
 			<div class="right_sider">
-
 				<div class="part_top clearfix">
-					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
 						<h1 class="public_title">了解锻炼的意义</h1>
-						<div class="" style="margin:0 15px;">
+						<div class="part_content">
 							<div class="tr_top clearfix">
-							<a class="/index.php?app=index&mod=Train&act=articleList&id=36"><img src="../Public/images/training/duanlian_23.jpg" alt="no" class="supple_pic" /></a>
+							<a href="/index.php?app=index&mod=Train&act=articleList&id=36" class="store.html"><img src="../Public/images/training/duanlian_23.jpg" alt="no" class="supple_pic" /></a>
 							<div class="lay_detail">
-								<a href="article.html" class="detail">锻炼重在技巧</a>
-								<p>最好的选择，最快的锻炼方式和最优秀的视频教学</p>
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="read_art">点击阅读</a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=51" class="detail" data-original-title="内容">健身,请遵循这些原则</a>
+								<div class="title_tip"><div class="angle"></div></div>
+								<p class="read_content">刻苦锻炼以达到自己的健身目标。尽管有时候你会很忙，但最好还是要坚持健身，否则你很容易就会失去已有的健身效果！</p>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=51" class="read_art">点击阅读</a>
 							</div>
 							</div>
 							<ul class="clearfix">
-							<li class="classify">
-								<a href="/index.php?app=index&mod=Index&act=articleList&id=1" class="lay_cf">
-									
-										<img src="../Public/images/training/abs.png" width="220" height="214px" alt="" class="best" />
-										<p>最畅销分类一：XX蛋白粉</p>
+							<li class="classify" >
+								<a href="/index.php?app=index&mod=Index&act=articleList&id=1" class="lay_cf show_enter">
+								<span class="enter_icon"></span>		
+										<img src="../Public/images/training/abs.png"width="220" height="214px" alt="" class="best" />
+										<p class="best_classify">健身</p>
 									
 								</a>
 							</li>
 							<li class="classify">
-								<a href="/index.php?app=index&mod=Index&act=articleList&id=2" class="lay_cf">
-									<div>
+								<a href="/index.php?app=index&mod=Index&act=articleList&id=2" class="lay_cf show_enter">
+									<span class="enter_icon"></span>
 										<img src="../Public/images/training/cardio.png" width="220" height="214px" alt="" class="best" />
-										<p>最畅销分类一：XX蛋白粉</p>
-									</div>
+										<p class="best_classify">锻炼方法</p>
+									
 								</a>
 							</li>
-							<li class="classify">
-								<a href="/index.php?app=index&mod=Index&act=articleList&id=3" class="lay_cf">
-									<div>
+							<li class="classify last_classify" >
+								<a href="/index.php?app=index&mod=Index&act=articleList&id=3" class="lay_cf show_enter">
+								<span class="enter_icon"></span>
 										<img src="../Public/images/training/triceps.png" width="220" height="214px" alt="" class="best" />
-										<p>最畅销分类一：XX蛋白粉</p>
-										<p class="price"></p>
-									</div>
+										<p class="best_classify">基础知识</p>
 								</a>
 							</li>
 							</ul>
 						</div>
 					</div>
-					<span class="corner_bottom"></span>
 				</div>
 
 				<div class="part_top clearfix">
-					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
-						<h1 class="public_title">最佳锻炼文章</h1>
-						<ul class="new_video clearfix">
-							<php>foreach($hotArticles as $a) {</php>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_1"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+						<h1 class="public_title">最佳锻炼文章<span class="hr_3 hr"></span></h1>
+						<ul class="hot_video clearfix">
+							<php>$i=1;foreach($hotArticles as $a) {	
+							if($i%4==0){</php>
+							<li class="tr_classify last_classify">
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_2 show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}
 								</p>
-								<!-- <a href="#" class="add_expend">查看所有质量增加程序</a> -->
 							</li>
-							<php>}</php>
-							<!-- <li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_1"><img src="../Public/images/training/fatloss.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">脂肪损失</a>
-								<p class="summary">找到合适的锻炼，同时保持精益肌肉燃烧脂肪！</p>
-								<a href="#" class="add_expend">查看更多脂肪损失程序</a>
+							<php>}else {</php>
+								<li class="tr_classify ">
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_2 show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+								<p class="summary">{$a['brief']}
+								</p>
 							</li>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_1"><img src="../Public/images/training/strength.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">力量锻炼</a>
-								<p class="summary">训练设计的纯实力！ 5X5，温德勒，西部和更多！</p>
-								<a href="#" class="add_expend">查看所有力量锻炼程序</a>
-							</li>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_1"><img src="../Public/images/training/home.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">家庭锻炼</a>
-								<p class="summary">你并不需要一间健身房，看到了巨大的成果。这些以家庭为基础的锻炼！</p>
-								<a href="#" class="add_expend">查看所有家庭锻炼程序</a>
-							</li>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_1"><img src="../Public/images/training/women.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">女性</a>
-								<p class="summary">锻炼程序专为女生和她们的目标而设定！</p>
-								<a href="#" class="add_expend">查看所有女性锻炼程序</a>
-							</li>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_1"><img src="../Public/images/training/sports.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">体育运动</a>
-								<p class="summary">通过提高你的表现，获得你的竞争对手优势！</p>
-								<a href="#" class="add_expend">查看所有体育运动程序</a>
-							</li>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_1"><img src="../Public/images/training/bodyweight.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">体重</a>
-								<p class="summary">建立这些体重只有锻炼的肌肉和力量！</p>
-								<a href="#" class="add_expend">查看所有肌肉锻炼程序</a>
-							</li>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_1"><img src="../Public/images/training/beginner.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">初学者</a>
-								<p class="summary">刚刚起步的？这些训练将让你在正确的道路上获得成功！</p>
-								<a href="#" class="add_expend">查看所有初学者锻炼程序</a>
-							</li> -->
+							<php>}$i+=1;
+							}</php>
 						</ul>
 					</div>
-					<span class="corner_bottom"></span>
 				</div>
 
 				<div class="part_top clearfix">
-					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
-						<h1 class="public_title">最近锻炼文章<span class="hr_3 hr"></span></h1>
-						<ul class="hot_video clearfix">
-						<php>foreach($lastArticles as $a) {</php>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_2"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+						<h1 class="public_title">最近锻炼文章</h1>
+						<ul class="new_video clearfix">
+						<php>$i=1;foreach($lastArticles as $a) {	
+							if($i%4==0){
+						    </php>
+							<li class="tr_classify last_classify">
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}</p>
 								<!-- <a href="#" class="add_expend">查看所有腹肌锻炼程序</a> -->
 							</li>
-						<php>}</php>
-							<!-- <li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_2"><img src="../Public/images/training/chest.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">胸部锻炼</a>
-								<p class="summary">完整的训练，旨在建立低，中及上胸部！</p>
-								<a href="#" class="add_expend">查看所有胸部锻炼程序</a>
+						<php>}else {</php>
+							<li class="tr_classify ">
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+								<p class="summary">{$a['brief']}</p>
+								<!-- <a href="#" class="add_expend">查看所有腹肌锻炼程序</a> -->
 							</li>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_2"><img src="images/training/biceps.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">二头肌训练</a>
-								<p class="summary">这些训练会帮你收拾你的肱二头肌的肌肉质量和大小！</p>
-								<a href="#" class="add_expend">查看所有二头肌训练程序</a>
-							</li>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_2"><img src="../Public/images/training/back.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">背部训练</a>
-								<p class="summary">获取的锻炼，你需要建立一个强大的，宽，厚回来！</p>
-								<a href="#" class="add_expend">查看所有背部锻炼程序</a>
-							</li>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_2"><img src="../Public/images/training/legs.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">腿部训练</a>
-								<p class="summary">训练专门设计，建设，加强和音的腿！</p>
-								<a href="#" class="add_expend">查看所有腿部锻炼程序</a>
-							</li>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_2"><img src="../Public/images/training/shoulders.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">肩部训练</a>
-								<p class="summary">训练旨在建立“椰子，如”肩膀上，你的体质至关重要！</p>
-								<a href="#" class="add_expend">查看所有胸部锻炼程序</a>
-							</li>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_2"><img src="../Public/images/training/triceps.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">三头肌训练</a>
-								<p class="summary">如果你想大的武器，你需要大的三头肌！使用这些锻炼三头肌质量收拾！</p>
-								<a href="#" class="add_expend">查看所有三头肌训练程序</a>
-							</li>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="video_2"><img src="../Public/images/training/cardio.png" width="165px" height="134px" alt=""></a>
-								<a href="#" class="plan_article_tl">心</a>
-								<p class="summary">心没有很无聊！事情搞混淆了这些有氧锻炼！</p>
-								<a href="#" class="add_expend">查看所有心程序</a>
-							</li> -->
+					<php>}$i+=1;
+					}</php>
 						</ul>
 					</div>
-					<span class="corner_bottom"></span>
 				</div>
 
 				<div class="part_top clearfix">
-					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
 						<h1 class="public_title">其他分类</h1>
 						<ul class="hot_video clearfix">
-						<php>foreach($articles as $a) {</php>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_2"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+						<php>$i=1;foreach($articles as $a) {
+							if($i%4==0){
+						</php>
+							<li class="tr_classify last_classify">
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}</p>
 							</li>
-						<php>}</php>
-						<a href="#" class="add_expend">查看所有其他锻炼程序</a>
+						<php>}else {</php>
+						<li class="tr_classify ">
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+								<p class="summary">{$a['brief']}</p>
+							</li>
+						<php>}$i+=1;	
+						}</php>
 						</ul>
 					</div>
-					<span class="corner_bottom"></span>
 				</div>
 						
 
@@ -257,62 +189,7 @@
 							<php>}</php>
 						</ul>
 						<php>}</php>
-						<!-- <h2 class="title_4">程序</h2>
-						<ul class="re_nav clearfix">
-							<li>
-								<a href="training_1.html">减肥</a>
-							</li>
-							<li>
-								<a>肌肉增益</a>
-							</li>
-							<li>
-								<a>女性</a>
-							</li>
-							<li>
-								<a>体重</a>
-							</li>
-							<li>
-								<a>初学者</a>
-							</li>
-						</ul>
-						<h2 class="title_4">练习</h2>
-						<ul class="re_nav clearfix">
-							<li>
-								<a href="training_1.html">复合演习</a>
-							</li>
-							<li>
-								<a>隔离练习</a>
-							</li>
-							<li>
-								<a>肌练习</a>
-							</li>
-							<li>
-								<a>体重演习</a>
-							</li>
-						</ul>
-						<h2 class="title_4">肌肉组</h2>
-						<ul class="re_nav clearfix">
-							<li>
-								<a href="training_1.html">背部</a>
-							</li>
-							<li>
-								<a>胸部</a>
-							</li>
-							<li>
-								<a>腿</a>
-							</li>
-							<li>
-								<a>腹肌</a>
-							</li>
-							<li>
-								<a>武器</a>
-							</li>
-							<li>
-								<a>肩</a>
-							</li>
-						</ul> -->
 					</div>
-					<span class="corner_bottom"></span>
 				</div>
 
 			</div>

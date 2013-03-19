@@ -1,4 +1,4 @@
-﻿/****** Reset **********/
+/****** Reset **********/
 body,ul,li,p,h1,h2,h3,h4,button,input,dl,dd{
 	margin:0;
 	padding:0;
@@ -7,6 +7,7 @@ img,button,input{
 	border:0;
 }
 img{
+	display: block;
 	outline:0;
 }
 body{
@@ -457,7 +458,7 @@ button{
 			display: inline-block;
 			height: 80px;
 			width: 140px;
-			margin: 12px 15px;
+			margin: 6px;
 			cursor: pointer;
 			border: 3px solid transparent;
 
@@ -555,8 +556,11 @@ button{
 				display:block;
 			}
 .now_position{
-	background:#2E6A92;
+	background:url(../images/nav_p.jpg) repeat-x;
 }	
+.last{
+	border-radius: 0 4px 4px 0;
+}
 /****** 翻页 *****/
 .page{
 	margin:15px;
@@ -623,11 +627,11 @@ button{
 		margin-top: 10px;
 	}
 			.public_title{
-				padding-left: 20px;
-				font-size: 26px;
-				line-height: 34px;
 				height: 34px;
-				color: #656565;
+				line-height: 34px;
+				text-indent: 20px;
+				font-size: 26px;
+				color: black;
 				background: url(../images/thbg.jpg) repeat-x;
 			}
 			.right_sider{

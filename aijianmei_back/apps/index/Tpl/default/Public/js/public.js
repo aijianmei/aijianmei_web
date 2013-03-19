@@ -46,13 +46,13 @@ $(function(){
 		$("#banner .ul_2 li").css("border","3px solid transparent").eq(index).css("border","3px solid #4298CE");
 	}
 
-	//透明效果
-	$("#banner .ul_1 .massage").hover(
+	//透明效果  版图修改过这些地方
+	$(".lay_banner").hover(
 		function(){
-			$(this).css("opacity","0.8")
+			$('.massage').css("opacity","0.8")
 		},
 		function(){
-			$(this).css("opacity","0.2")
+			$('.massage').css("opacity","0")
 		}
 	)
 })
@@ -167,11 +167,131 @@ $(function(){
 				    return null;
 				}
 			}
+			//动态添加页面的版图，可以动态调节大小，图片个数
+			var dynamicPicture = {
+				newdom : new getdom,
+				handlew_h : function(obj,num,supply_width,supply_height,t){
+					obj.style.width = t ? supply_width + 'px' : supply_width*num + 'px';
+					obj.style.height = supply_height + 'px';
+				},
+				handlenumber : function(obj,num,supply_width,supply_height){
+					var a = 18*num,
+						x = (supply_width - a)/num,
+						y = (supply_height - 20);
+					obj.style.width = x + 'px';
+					obj.style.height = y + 'px'
+					obj.firstChild.style.width = x + 'px'; 
+					obj.firstChild.style.height = y + 'px';
+				},
+				getHtml : function(types,classname){
+					if(classname != ''){
+						var Types = document.createElement(types);
+						Types.className = classname;
+						return Types;
+					}
+					else{
+						return document.createElement(types);
+					}
+				},
+				appear : function(){
+					var massage = dynamicPicture.newdom.getElementsByClass('massage')[this.index];
+					this.firstChild.appendChild(massage);
+				},
+				getul_1 : function(arr_1,arr_2,number,s_width,s_height){
+					var lay_banner = dynamicPicture.newdom.getElementsByClass('lay_banner')[0],
+						ul = dynamicPicture.getHtml('ul','ul_1 clearfix'),
+						li = {},
+						a = {},
+						img = {},
+						i; 
+					for(var i = 0;i < number;i++){
+						li[i] = dynamicPicture.getHtml('li','change_1');
+						a[i] = dynamicPicture.getHtml('a','relation_1');
+						a[i].href = arr_2[i];
+						img[i] = dynamicPicture.getHtml('img','pic_1');
+						img[i].src = arr_1[i];	
+						a[i].appendChild(img[i]);
+						li[i].index = i;
+						addevent(li[i],'mouseover',dynamicPicture.appear);
+						li[i].appendChild(a[i]);
+						ul.appendChild(li[i]);
+					}
+					dynamicPicture.handlew_h(ul,number,s_width,s_height);
+					lay_banner.appendChild(ul);	
+				},
+				getul_2 : function(arr_1,number,s_width,s_height){
+					var choice_area = dynamicPicture.newdom.getElementsByClass('choice_area')[0],
+						ul = dynamicPicture.getHtml('ul','ul_2 clearfix'),
+						li = {},
+						img = {},
+						a_1 = dynamicPicture.getHtml('a','ps_left'),
+						a_2 = dynamicPicture.getHtml('a','ps_right');
+					for(var i = 0;i < number;i++){
+						if(i == 0){
+							li[i] = dynamicPicture.getHtml('li','first_choice');
+						}
+						else{
+							li[i] = dynamicPicture.getHtml('li');
+						}
+						img[i] = dynamicPicture.getHtml('img','relative_pic');
+						img[i].src = arr_1[i];	
+						li[i].appendChild(img[i]);
+						ul.appendChild(li[i]);
+						ul.appendChild(a_1);
+						ul.appendChild(a_2);
+						dynamicPicture.handlenumber(li[i],number,s_width,s_height);
+					};	
+					dynamicPicture.handlew_h(ul,number,s_width,s_height,1);
+					choice_area.appendChild(ul);	
+				},
+				init : function(option){
+					var body = document.getElementsByTagName('body')[0],
+						li_1 = [],
+						num = option.Num,
+						width = option.Width,
+						f_height = option.F_height,
+						b_height = option.B_height,
+						b_width = option.B_width,
+						pic = option.Pic,
+						small_pic = option.Small_pic,
+						href = option.Href;
+					dynamicPicture.getul_1(pic,href,num,width,f_height),	
+					dynamicPicture.getul_2(small_pic,num,b_width,b_height);	
+				}
+			}
+			//添加内容示范
+			// dynamicPicture.init({
+			// 	Num : 4,//这是版图的个数
+			// 	Width : '860',//大图的宽度
+			// 	F_height : '270',//大图的高度
+			// 	B_height : '110',//对应小图的高度
+			// 	B_width : '720',//对应小图的总长
+			// 	Pic : [//大图的地址
+			// 		'images/banner.jpg',
+			// 		'images/1.gif',
+			// 		'images/2.gif',
+			// 		'images/3.gif'
+			// 	],
+			// 	Small_pic : [//对应小图的地址
+			// 		'images/banner.jpg',
+			// 		'images/1.gif',
+			// 		'images/2.gif',
+			// 		'images/3.gif'
+			// 	],
+			// 	Href : [//大图的相应链接
+			// 		'plan.html',
+			// 		'plan.html',
+			// 		'plan.html',
+			// 		'plan.html'
+			// 	]
+			// })
 
+
+
+			//为obj的子元素添加有色边框
 			var getaction = function(classname,obj){
 				var newdom = new getdom,
 					classname = newdom.getElementsByClass(classname);	
-				
 				var defaule = {
 					'color': obj.choicecolor ? obj.choicecolor : '#D273FF',
 					'borderwidth':obj.choiceborderwidth ? obj.choiceborderwidth : '3px'
@@ -219,6 +339,7 @@ $(function(){
 				}
 					
 			}
+			//改变obj的背景原色
 			var changecolor = function(obj,color,childcolor){
 					var newgetdom = new getdom,
 						target = newgetdom.getElementsByClass(obj);
@@ -244,6 +365,7 @@ $(function(){
 						}
 							
 			}
+			//为需要添加提示内容的函数，选用需要添加的对象obj;
 			var addtitle = function(obj){
 				var newdom = new getdom,
 					Obj = newdom.getElementsByClass(obj)[0],
@@ -300,6 +422,52 @@ $(function(){
 				addevent(Obj,"mouseover",handle);
 				addevent(Obj,"mouseout",remove);
 			}
+//视频列表 切换分类
+$("li.select>a").mouseover(function(){
+	$(this).addClass("pre").siblings().removeClass("pre");
+	
+})	
+//鼠标移上图片显示进入
+$("a.show_enter").mouseover(function(){
+	$(this).children(".enter_icon").css("display","block");
+	$(this).children("img").css("border-color","#21ace3");
+	$(this).mouseout(function(){
+		$(this).children(".enter_icon").css("display","none");
+		$(this).children("img").css("border-color","transparent");
+	})
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 			//对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
 			var fade = {
@@ -377,18 +545,7 @@ $(function(){
 			};
 			fade.init('store');
 			fade.init('forum');
-			
-//视频列表 切换分类
-$("li.select>a").mouseover(function(){
-	$(this).addClass("pre").siblings().removeClass("pre");
-	
-})	
-//鼠标移上图片显示进入
-$("a.show_enter").mouseover(function(){
-	$(this).children(".enter_icon").css("display","block");
-	$(this).mouseout(function(){
-		$(this).children(".enter_icon").css("display","none");
-	})
-});
+			if(document.getElementById('teach')){
+				fade.init('teach');
+			}
 
-fade.init('teach');
