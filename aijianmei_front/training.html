@@ -92,71 +92,30 @@
 					<li class="forum"><a href="activity.html">论坛</a></li>
 					<li><a href="pal.html">交友互动</a></li>
 				</ul>
-				<span class="position">爱健美/首页</span>
 		</div>
 
 		<div id="banner">
 			<div class="lay_banner">
-			<ul class="ul_1 clearfix">
-				<li class="change_1">
-					<a>
-						<img src="images/06.jpg" alt="no" class="pic_1" />
-						<div class="massage" style="display:inline-block;">
-							<h1 class="title">此张大图名称</h1>
-							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="images/4.png" alt="no" class="png" />
-						</div>
-					</a>
-				</li>
-				<li class="change_1">
-					<a>
-						<img src="images/13.jpg" alt="no" class="pic_2" />
-						<div class="massage" style="display:inline-block;">
-							<h1 class="title">此张大图名称</h1>
-							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="images/4.png" alt="no" class="png" />
-						</div>
-					</a>
-				</li>
-				<li class="change_1">
-					<a>
-						<img src="images/14.jpg" alt="no" class="pic_3" />
-						<div class="massage" style="display:inline-block;">
-							<h1 class="title">此张大图名称</h1>
-							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="images/4.png" alt="no" class="png" />
-						</div>
-					</a>
-				</li>
-				<li class="change_1">
-					<a>
-						<img src="images/15.jpg" alt="no" class="pic_4" />
-						<div class="massage" style="display:inline-block;">
-							<h1 class="title">此张大图名称</h1>
-							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="images/4.png" alt="no" class="png" />
-						</div>
-					</a>
-				</li>
-			</ul>
 			</div>
 			<div class="choice_area">
-			<ul class="ul_2 clearfix">
-				<li class="first_choice">
-					<img src="images/120.jpg" alt="" class="relative_pic" />
-				</li>
-				<li>
-					<img src="images/060.jpg" alt="" class="relative_pic" />
-				</li>
-				<li>
-					<img src="images/050.jpg" alt="" class="relative_pic" />
-				</li>
-				<li>
-					<img src="images/040.jpg" alt="" class="relative_pic" />
-				</li>
-			</ul>
-			<a class="ps_left"></a>
-			<a class="ps_right"></a>
+			</div>
+			<div style="display:hidden;">
+				<div class="massage" style="display:inline-block;">
+					<h1 class="title">此张大图名称1</h1>
+					<p>大图介绍：阿萨德合肥卡萨帝豪</p>
+				</div>
+				<div class="massage" style="display:inline-block;">
+					<h1 class="title">此张大图名称2</h1>
+					<p>大图介绍：阿萨德合肥卡萨帝豪</p>
+				</div>
+				<div class="massage" style="display:inline-block;">
+					<h1 class="title">此张大图名称3</h1>
+					<p>大图介绍：阿萨德合肥卡萨帝豪</p>
+				</div>
+				<div class="massage" style="display:inline-block;">
+					<h1 class="title">此张大图名称4</h1>
+					<p>大图介绍：阿萨德合肥卡萨帝豪</p>
+				</div>
 			</div>
 		</div>	<!--Banner End -->
 
@@ -635,6 +594,33 @@
 		   $('#goTopBtn').css({'right':topbtn_posi});
 		   
 		 });
+
+		//版图的相关填补信息
+			dynamicPicture.init({
+				Num : 4,//这是版图的个数
+				Width : '860',//大图的宽度
+				F_height : '270',//大图的高度
+				B_height : '110',//对应小图的高度
+				B_width : '720',//对应小图的总长
+				Pic : [//大图的地址
+					'images/06.jpg',
+					'images/13.jpg',
+					'images/14.jpg',
+					'images/15.jpg'
+				],
+				Small_pic : [//对应小图的地址
+					'images/120.jpg',
+					'images/060.jpg',
+					'images/050.jpg',
+					'images/040.jpg'
+				],
+				Href : [//大图的相应链接
+					'plan.html',
+					'plan.html',
+					'plan.html',
+					'plan.html'
+				]
+			})
 
 
 		addtitle('detail')

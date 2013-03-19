@@ -6,9 +6,10 @@
 	margin-top: 10px;
 }
 
-
-	.tr_top{
+	.part_content{
 		margin:10px 15px 0 15px;
+	}
+	.tr_top{
 		padding: 10px 0;
 		border: 1px solid #CCC;
 		border-radius: 8px;
@@ -55,20 +56,24 @@
 	}
 	.classify{
 		float: left;
-		width: 222px;
-		margin: 18px 18px;
-		*padding-bottom: 18px;
+		width: 243px;
+		margin: 16px 15px 0 0;
 	}
 	.classify .best{
-		display:block;
-		border: 1px solid #ccc;
+		height:140px;
+		width:239px;
+		border: 2px solid transparent;
+	}
+	.classify .best_classify{
+		line-height: 30px;
+		font-size: 16px;
+		font-weight: bold;
+		text-align: center;
+	}
+	.last_classify{
+		margin-right: 0px;
 	}
 	.classify .lay_cf{
-	}
-	.classify p{
-		line-height: 22px;
-		text-align: center;
-		background: #E0E0E0;
 	}
 	.classify .price{
 		color: red;

@@ -1,13 +1,4 @@
 ﻿/***********************content开始*************************/
-	/*#banner切换图片独立部分*/
-	#banner{
-		padding-top: 10px;
-		margin: 0 auto;
-	}
-	/*#banner结束*/	
-	#content{
-		padding-top: 15px;
-	}
 	/*左边导航栏结束*/		
 	.training{
 		float:left;
