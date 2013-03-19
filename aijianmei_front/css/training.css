@@ -139,9 +139,11 @@
 			}
 				.plan_article_tl{
 					display: inline-block;
-					line-height: 40px;
-					font-size: 20px;
+					height: 40px;
+					padding-top: 8px;
+					font-size: 16px;
 					color: #56888F;
+					font-weight: 700;
 				}
 				.add_expend{
 					display: block;
@@ -190,10 +192,11 @@
 								width: 130px;
 							}
 			.pertinence{
-				position:relative;
+				position: relative;
 				height: 410px;
+				margin: 0 197px;
 				font-size: 14px;
-				background:url(../images/training/workout_53.jpg) no-repeat;
+				background: url(../images/training/training_bottom.png) no-repeat;
 			}			
 			.pertinence span{
 				font-size: 13px;
@@ -207,8 +210,8 @@
 			}
 					.pt_part_1{
 						position: absolute;
-						top: 88px;
-						left: 4px;
+						top: 92px;
+						left: -152px;
 					}
 					.pt_part_1 li{
 						margin-bottom: 14px;
@@ -216,14 +219,15 @@
 					}
 					.pt_part_2{
 						position: absolute;
+						width: 165px;
 						top: 88px;
-						left: 573px;
+						left: 401px;
 					}
 					.pt_part_2 li{
 						margin-bottom: 14px;
 						text-align: left;
 					}
-					.special{margin-top: 27px;}
+					.special{margin-top: 29px;}
 /***********************footer开始*************************/
 	#footer{background: url(../images/training/workout_54.jpg)}
 
