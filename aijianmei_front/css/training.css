@@ -37,12 +37,8 @@
 			}
 			.tr_classify{
 				float: left;
-				width: 169px;
-				margin: 10px 11px 5px 0;
-			}
-			.video_1{
-				display: block;
-				height:154px;
+				width: 178px;
+				margin: 0 15px 5px 0;
 			}
 			.pic_ct{
 				font-size: 13px;
@@ -80,18 +76,27 @@
 			.tr_top{
 				margin-top: 10px;
 				padding: 10px 0;
-				border: 1px solid #CCC;
+				border: 1px solid #21ace3;
 				border-radius: 8px;
 			}
 			.classify{
 				float: left;
-				width: 220px;
-				margin: 18px 14px;
-				border: 1px solid #CCC;
+				width: 243px;
+				margin: 16px 15px 0 0;
+			}
+			.last_classify{
+				margin-right: 0px;
 			}
 			.classify .best{
-				height:130px;
-				width:220px;
+				height:140px;
+				width:239px;
+				border:2px solid transparent;
+			}
+			.classify .best_classify{
+				line-height: 30px;
+				font-size: 16px;
+				font-weight: bold;
+				text-align: center;
 			}
 			.supple_pic{
 				float: left;
@@ -136,8 +141,7 @@
 			}
 
 			.hot_video,.new_video{
-				margin: 0 auto;
-				width: 722px;
+				margin: 10px 15px;
 			}
 				.plan_article_tl{
 					display: inline-block;
@@ -151,6 +155,8 @@
 					font-size: 12px;
 				}
 				.new_video img,.hot_video img{
+					height:137px;
+					width:176px;
 					border-radius: 8px;
 					border:2px solid transparent;
 				}

@@ -7,6 +7,7 @@ img,button,input{
 	border:0;
 }
 img{
+	display: block;
 	outline:0;
 }
 body{
