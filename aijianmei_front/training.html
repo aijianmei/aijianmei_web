@@ -164,7 +164,6 @@
 
 		<div id="content" class="clearfix">
 			<div class="sider_all">
-				<span class="corner_left"></span>
 				<div class="lay_sider">
 					<div class="subsider">
 						<span class="border_line"></span>
@@ -255,7 +254,7 @@
 				<div class="part_top clearfix">
 					<div class="lay_top clearfix">
 						<h1 class="public_title">了解锻炼的意义</h1>
-						<div class="" style="margin:0 15px;">
+						<div class="part_content">
 							<div class="tr_top clearfix">
 							<a href="http://dev.aijianmei.com/index.php?app=index&mod=Index&act=articleDetail&id=51" class="store.html"><img src="images/training/duanlian_23.jpg" alt="no" class="supple_pic" /></a>
 							<div class="lay_detail">
@@ -359,7 +358,6 @@
 				</div>
 
 				<div class="part_top clearfix">
-					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
 						<h1 class="public_title">最佳锻炼文章<span class="hr_3 hr"></span></h1>
 						<ul class="hot_video clearfix">
@@ -423,7 +421,7 @@
 					</div>
 				</div>
 				<div class="part_top clearfix">
-					<span class="corner_left"></span>
+
 					<div class="lay_top clearfix">
 						<h1 class="public_title">其他分类</h1>
 						<ul class="hot_video clearfix">
@@ -467,7 +465,7 @@
 
 
 				<div class="part_top clearfix">
-					<span class="corner_left"></span>
+
 					<div class="lay_top clearfix">
 						<h1 class="public_title">目录</h1>
 						<h2 class="title_4">训练基础知识</h2>
@@ -543,7 +541,6 @@
 							</li>
 						</ul>
 					</div>
-					<span class="corner_bottom"></span>
 				</div>
 
 			</div>
@@ -606,12 +603,40 @@
 	</div>
 	<!-- 添加返回顶部按钮 -->
 		<div id="goTopBtn" class="goTopBtn">
-			<a title="我要上去！" alt="回到顶部" />Top</a>
+			<a title="我要上去！" alt="回到顶部" /></a>
 		</div>
 	<!-- 返回顶部按钮 -->
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/public.js"></script>
 	<script type="text/javascript">
+		$(function(){
+		   $(window).scroll(function () {
+		     if($(window).scrollTop() >= 300)//距离顶部多少高度显示按钮
+		     {
+		     $('#goTopBtn').slideDown(200);
+		     }else
+		     {
+		     $('#goTopBtn').slideUp(200);
+		     }
+		   }); 
+		     
+		   $('#goTopBtn').click(function(){
+		    $('body,html').animate({scrollTop:0},500)
+		   });
+		   
+		   //按钮定位
+		   var win_width= $(window).width();    //窗口宽度
+		   var content_width= $('.wrapper').width();     //容器宽度
+		   var topbtn_width= $('#goTopBtn').width(); //按钮宽度
+		   //alert([win_width - content_width]/2);
+		   
+		//距离主体部分的右侧距离
+		   var topbtn_posi = ([win_width - content_width ]/2 - topbtn_width - 50);
+		   $('#goTopBtn').css({'right':topbtn_posi});
+		   
+		 });
+
+
 		addtitle('detail')
 	</script>
 </body>
