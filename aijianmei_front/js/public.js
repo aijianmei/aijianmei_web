@@ -423,6 +423,52 @@ $(function(){
 				addevent(Obj,"mouseover",handle);
 				addevent(Obj,"mouseout",remove);
 			}
+//视频列表 切换分类
+$("li.select>a").mouseover(function(){
+	$(this).addClass("pre").siblings().removeClass("pre");
+	
+})	
+//鼠标移上图片显示进入
+$("a.show_enter").mouseover(function(){
+	$(this).children(".enter_icon").css("display","block");
+	$(this).children("img").css("border-color","#21ace3");
+	$(this).mouseout(function(){
+		$(this).children(".enter_icon").css("display","none");
+		$(this).children("img").css("border-color","transparent");
+	})
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 			//对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
 			var fade = {
@@ -503,18 +549,4 @@ $(function(){
 			if(document.getElementById('teach')){
 				fade.init('teach');
 			}
-//视频列表 切换分类
-$("li.select>a").mouseover(function(){
-	$(this).addClass("pre").siblings().removeClass("pre");
-	
-})	
-//鼠标移上图片显示进入
-$("a.show_enter").mouseover(function(){
-	$(this).children(".enter_icon").css("display","block");
-	$(this).children("img").css("border-color","#21ace3");
-	$(this).mouseout(function(){
-		$(this).children(".enter_icon").css("display","none");
-		$(this).children("img").css("border-color","transparent");
-	})
-});
 
