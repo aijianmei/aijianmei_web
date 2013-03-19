@@ -289,83 +289,82 @@ $(function(){
 
 
 			//为obj的子元素添加有色边框
-			// var getaction = function(classname,obj){
-			// 	var newdom = new getdom,
-			// 		classname = newdom.getElementsByClass(classname);	
-				
-			// 	var defaule = {
-			// 		'color': obj.choicecolor ? obj.choicecolor : '#D273FF',
-			// 		'borderwidth':obj.choiceborderwidth ? obj.choiceborderwidth : '3px'
-			// 	}
+			var getaction = function(classname,obj){
+				var newdom = new getdom,
+					classname = newdom.getElementsByClass(classname);	
+				var defaule = {
+					'color': obj.choicecolor ? obj.choicecolor : '#D273FF',
+					'borderwidth':obj.choiceborderwidth ? obj.choiceborderwidth : '3px'
+				}
 
-			// 	//获取对象索引号
-			// 	var getindex = function(obj){
-			// 		for(var i = 0;i < classname.length;i++){
-			// 			switch(obj){
-			// 				case classname[i]:return i;
-			// 				break;
-			// 			}
+				//获取对象索引号
+				var getindex = function(obj){
+					for(var i = 0;i < classname.length;i++){
+						switch(obj){
+							case classname[i]:return i;
+							break;
+						}
 						
-			// 		}
-			// 	}
-			// 	var getborder = function(num){
-			// 		for(var i = 0;i <　classname.length;i++){
-			// 			if(i == num){
-			// 				classname[num].style.borderColor = defaule.color;
-			// 				classname[num].style.borderWidth = defaule.borderwidth;
-			// 				classname[num].style.borderStyle = 'solid'
-			// 			}
-			// 		}
+					}
+				}
+				var getborder = function(num){
+					for(var i = 0;i <　classname.length;i++){
+						if(i == num){
+							classname[num].style.borderColor = defaule.color;
+							classname[num].style.borderWidth = defaule.borderwidth;
+							classname[num].style.borderStyle = 'solid'
+						}
+					}
 						
-			// 	}
-			// 	var clearborder = function(num){
-			// 		for(var i = 0;i <　classname.length;i++){
-			// 			if(i == num){
-			// 				classname[num].style.borderColor = '';
-			// 				classname[num].style.borderWidth = '';
-			// 			}
-			// 		}
+				}
+				var clearborder = function(num){
+					for(var i = 0;i <　classname.length;i++){
+						if(i == num){
+							classname[num].style.borderColor = '';
+							classname[num].style.borderWidth = '';
+						}
+					}
 						
-			// 	}
+				}
 
-			// 	for(var i = 0;i <　classname.length;i++){
-			// 		classname[i].onmouseover = function(){
-			// 			var index = getindex(this);
-			// 				getborder(index)
-			// 		}
-			// 		classname[i].onmouseout = function(){
-			// 			var index = getindex(this);
-			// 				clearborder(index)
-			// 		}
-			// 	}
+				for(var i = 0;i <　classname.length;i++){
+					classname[i].onmouseover = function(){
+						var index = getindex(this);
+							getborder(index)
+					}
+					classname[i].onmouseout = function(){
+						var index = getindex(this);
+							clearborder(index)
+					}
+				}
 					
-			// }
+			}
 			//改变obj的背景原色
-			// var changecolor = function(obj,color,childcolor){
-			// 		var newgetdom = new getdom,
-			// 			target = newgetdom.getElementsByClass(obj);
+			var changecolor = function(obj,color,childcolor){
+					var newgetdom = new getdom,
+						target = newgetdom.getElementsByClass(obj);
 						
-			// 			for(var i = 0;i < target.length;i++){
-			// 				target[i].onmouseover = function(){
-			// 					this.style.background = color;
-			// 					if(this.childNodes[0]){
-			// 						var targetchlid = this.childNodes[0];
-			// 						targetchlid.style.color = childcolor;
-			// 					}
+						for(var i = 0;i < target.length;i++){
+							target[i].onmouseover = function(){
+								this.style.background = color;
+								if(this.childNodes[0]){
+									var targetchlid = this.childNodes[0];
+									targetchlid.style.color = childcolor;
+								}
 								
 									
-			// 				}
-			// 				target[i].onmouseout = function(){
-			// 					this.style.background = '';
-			// 					if(this.childNodes[0]){
-			// 						var targetchlid = this.childNodes[0];
-			// 						targetchlid.style.color = ''
-			// 					}
+							}
+							target[i].onmouseout = function(){
+								this.style.background = '';
+								if(this.childNodes[0]){
+									var targetchlid = this.childNodes[0];
+									targetchlid.style.color = ''
+								}
 								
-			// 				}		
-			// 			}
+							}		
+						}
 							
-			// }
+			}
 			//为需要添加提示内容的函数，选用需要添加的对象obj;
 			var addtitle = function(obj){
 				var newdom = new getdom,

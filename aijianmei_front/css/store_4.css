@@ -1,44 +1,3 @@
-/*.clearfix {
-
-	}
-	.clearfix:before {
-	display: table; content: ""
-	}
-	.clearfix:after {
-	display: table; content: ""
-	}
-	.clearfix:after {
-	clear: both
-	}
-	a{cursor:pointer;}
-	.triangle{
-		border-color:#BCBCBC #fff #fff #fff;
-	}
-.wrapper{
-	background: white;
-}
-/***********************content开始*************************/
-/*#content{
-	margin: 20px 0px;
-}
-
-/**********右边主要内容部分**********/
-/*		.right_sider{
-			float:left;
-			width:790px;
-		}
-	
-		.part_top{
-			position: relative;
-			margin-bottom: 10px;
-			padding-bottom: 1px;
-			background: #D7DBDD;
-		}
-		.lay_top{
-			width:783px;
-			margin-bottom: 5px;
-			background: #e6f0f7;
-		}*/
 		.content{
 			margin:10px;
 		}
@@ -363,8 +322,14 @@
 				.item_attr_detail{
 					margin-bottom: 10px;
 				}
+				.attr_detail{
+					color:black;
+				}
 				.item_attr_detail span{
 					float: right;
+				}
+				.attr_detail span{
+					color:#21ace3;
 				}
 	.add_pro{
 		margin-right: 0px;
