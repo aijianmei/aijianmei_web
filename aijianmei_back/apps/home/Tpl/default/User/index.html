@@ -58,12 +58,15 @@
 										<span class="scan_pic_name">腹肌、手臂训练范例</span>
 									</a>
 								</li>
-								<li class="scan"><a class="scan_art" href="">别人都在看的文章1</a></li>
+                                <php>foreach($articles as $a) {</php>
+                                <li class="scan"><a class="scan_art" href="{:U('index/Index/ArticleDetail', array('id'=>$a['id']))}">{$a['title']}</a></li>
+                                <php>}</php>
+								<!--<li class="scan"><a class="scan_art" href="">别人都在看的文章1</a></li>
 								<li class="scan"><a class="scan_art" href="">别人都在看的文章2</a></li>
 								<li class="scan"><a class="scan_art" href="">别人都在看的文章3</a></li>
 								<li class="scan"><a class="scan_art" href="">别人都在看的文章4</a></li>
 								<li class="scan"><a class="scan_art" href="">别人都在看的文章5</a></li>
-								<li class="scan"><a class="scan_art" href="">别人都在看的文章6</a></li>
+								<li class="scan"><a class="scan_art" href="">别人都在看的文章6</a></li>-->
 							</ul>
 						</div>
 						<div class="recommand">
