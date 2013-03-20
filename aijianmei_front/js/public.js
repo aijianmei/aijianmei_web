@@ -118,6 +118,7 @@ $(function(){
 					
 });
 //js for border
+			//添加事件监听
 			var addevent = function(element,type,handle){
 				if(element.addEventListener){
 					element.addEventListener(type,handle,false)
@@ -133,6 +134,7 @@ $(function(){
 		            };
 		        }
 			}
+			//获取dom元素
 			var getdom = function(){
 				this.$ = function(id){
 					return document.getElementById(id);
@@ -436,6 +438,17 @@ $("a.show_enter").mouseover(function(){
 		$(this).children("img").css("border-color","transparent");
 	})
 });
+
+
+//公共部分！！！选择页面，上下页切换
+	$(".page a").hover(
+		function(){
+			$(this).css("border-color","#21ace3")
+		},
+		function(){
+			$(this).css("border-color","")
+		}
+	)
 
 
 
