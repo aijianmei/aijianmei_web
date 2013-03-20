@@ -236,8 +236,14 @@
 				.item_attr_detail{
 					margin-bottom: 10px;
 				}
+				.attr_detail{
+					color:black;
+				}
 				.item_attr_detail span{
 					float: right;
+				}
+				.attr_detail span{
+					color:#21ace3;
 				}
 				.p_name{
 					color: #0E709A; 

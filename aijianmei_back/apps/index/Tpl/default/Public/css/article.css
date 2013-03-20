@@ -254,7 +254,7 @@
 					margin:20px 0;
 				}
 				.tab_1{
-					/*display:none;*/
+					display:none;
 				}
 				.cm_content .cm_top{
 					height: 25px;
@@ -263,7 +263,10 @@
 						display: inline-block;
 						float: right;
 					}
-
+					.cm_top .concrete_page{
+						display:inline-block;
+						line-height: 25px;
+					}
 						.page_1 .choice_page{
 							display: inline-block;
 							padding: 4px;
@@ -311,7 +314,7 @@
 						.target .target_pic{
 
 							float:left;
-							/*height:120px;*/
+							height:120px;
 							margin-right: 10px;
 						}
 						.target .care{
@@ -326,6 +329,7 @@
 						}
 						.target .to{
 							float:right;
+							display: none;
 						}
 						.to .sprite_8{
 							display: inline-block;
@@ -341,24 +345,6 @@
 							line-height: 27px;
 							margin-left: 27px;
 						}
-				.relation{
-					margin-bottom: 100px;
-				} 
-				.relation .title_6{
-					border-bottom: 1px solid #DFDFDF;
-				}
-					.title_6 .add_relation{
-						display: inline-block;
-						height: 27px;
-						line-height: 27px;
-						margin-bottom: -1px;
-						font-size: 15px;
-						border-bottom: 1px solid #5AB0FF;						
-					}
-				.relation p{
-					line-height: 27px;
-					font-size: 18px;					
-				}
 		/*右边广告部分*/
 		.content_right{
 			float:right;
@@ -415,7 +401,7 @@
 			font-weight:bold;
 		}
 		.author_label{
-			width: 253px;
+			text-align: center;
 			margin: 15px 0;
 		}
 		.author_wb{
@@ -439,19 +425,17 @@
 			color: #0079CA;
 			font-weight:bold;
 		}
-		.author_other{
-			padding:0 20px 20px;			
+		.two_code{
+			float:left;
+			height:100px;
+			width:120px;
+			margin:15px;			
 		}
-		.author_other ul{
-			list-style:disc;
-			padding-left:20px;
-		}
-		.author_other .aut_other_arts{	
-			height:30px;
-			line-height:30px;
-		}
-		.aut_other_arts a{
-			color:#0079CA;
+		.ms_code{
+			float: left;
+			margin-top:46px;
+			font-size: 17px;
+			font-weight: 700;
 		}
 	/*footer*/
 

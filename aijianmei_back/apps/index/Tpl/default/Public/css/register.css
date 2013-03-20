@@ -5,7 +5,6 @@ a:hover{
 /***********************content开始*************************/
 #content{
 	height:880px;
-	margin-top: 70px;
 }
 	/********leftsidebar开始*********/	
 	.leftsidebar{
@@ -261,13 +260,17 @@ a:hover{
 			background:#61A200;
 			border-radius: 4px;
 		}
-						.user_part .user{
+						.user{
 							display: block;
 							height: 57px;
 							line-height: 57px;
 							font-size: 20px;
 							border-bottom: 1px solid #CCC;
 							color: #00A3FF;
+						}
+						p.user{
+							border-bottom: 0;
+							text-align: center;
 						}
 		.rightsidebar .cooperate_target{
 			padding-top: 15px;

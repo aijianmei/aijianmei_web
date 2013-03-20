@@ -3,11 +3,11 @@
 	height:800px;
 	margin:10px 20px;
 }
-/******* ï¿½ï¿½ï¿½ï¿½ï¿½ *********/
+/******* ²à±ßÀ¸ *********/
 	.sidebar{
 			margin:0;
 	}
-	/****** ï¿½ï¿½Æµ/ï¿½ï¿½ï¿½ï¿½ ********/
+	/****** ÊÓÆµ/ÎÄÕÂ ********/
 		.sort{
 			height:30px;
 			line-height:30px;
@@ -25,7 +25,7 @@
 			#show{
 				background:lightblue;
 			}
-	/********** È«ï¿½ï¿½ ***********/
+	/********** È«²¿ ***********/
 		.bar{
 			display:none;
 		}
@@ -47,7 +47,7 @@
 			}
 		
 		
-/******* ï¿½ï¿½Æµ *************/		
+/******* ÊÓÆµ *************/		
 	.video{
 		display:inline-block;
 		width:745px;
@@ -58,7 +58,7 @@
 		width:740px;
 		margin:0 auto;
 	}
-	/****** Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ ********/
+	/****** Ñ¡Ôñ·ÖÀà ********/
 		.video .select{
 			margin:10px;
 		}
@@ -78,12 +78,12 @@
 				background:#69696C;
 				color:white;
 			}
-		/******* ï¿½Ð±ï¿½ ********/
+		/******* ÁÐ±í ********/
 		.video .each{
 			padding-bottom:20px;
 			border-bottom:1px solid #ccd
 		}
-		/***** ï¿½ï¿½Æµï¿½Ð±ï¿½ ****/
+		/***** ÊÓÆµÁÐ±í ****/
 		.video .vdos{
 			width:130px;
 			display:inline-block;
@@ -108,7 +108,7 @@
 				margin-top:8px;
 				font-size:12px;
 			}
-		/******** ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ ********/
+		/******** ÎÄÕÂÁÐ±í ********/
 			.arts{
 				float:left;
 				width: 350px;
@@ -153,7 +153,7 @@
 					}
 		
 		
-	/****** ï¿½ï¿½Ò³ *****/
+	/****** ·­Ò³ *****/
 	.page{
 		margin:15px;
 		text-align:center;

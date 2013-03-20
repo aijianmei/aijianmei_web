@@ -1,12 +1,11 @@
-<?php
+﻿<?php
 class IndexAction extends Action {
 	public function index() 
 	{
 		if (!empty($_GET['token'])) {
 			require_once $_SERVER['DOCUMENT_ROOT'].'/Denglu.php';
-			
 			$api = new Denglu('44031dena3J8cuBsQeX40lcpjSsPM3', '85015440v4NfCVj6aTNfZAg0idQv03', 'utf-8');
-			$token = $_GET['token'];
+			
 			try {
 				
 				$userInfo = $api->getUserInfoByToken($_GET['token']);
@@ -55,36 +54,46 @@ class IndexAction extends Action {
 				echo $e->geterrorDescription();
 			}
 		}
-		
+
 		if(!empty($_REQUEST['code'])) {
 			require_once $_SERVER['DOCUMENT_ROOT'].'/saetv2.ex.class.php';
 			$sina = new SaeTOAuthV2('3622140445', 'f94d063d06365972215c62acaadf95c3');	
-			
+
 			$token = $sina->getAccessToken('code', array('code'=>$_REQUEST['code'], 'redirect_uri'=>'http://dev.aijianmei.com/index.php'));
 			$client = new SaeTClientV2('3622140445', 'f94d063d06365972215c62acaadf95c3', $token['access_token']);
-			
+
 			$uid_get = $client->get_uid();
 			$uid = $uid_get['uid'];
 			$user_message = $client->show_user_by_id( $uid);
 			//print_r($user_message);
-			
-			$logId = M('others')->field('uid')->where(array('mediaID'=>'3', 'mediaUserID'=>$user_message['id'], 'personID'=>$user_message['idstr']))->find();
+
+			//$logId = M('others')->field('uid')->where(array('mediaID'=>'3', 'mediaUserID'=>$user_message['id'], 'personID'=>$user_message['idstr']))->find();
+			$log_sql = 'select uid from ai_others where mediaID=3 and mediaUserID='.$user_message['id'].' and personID='.$user_message['idstr'].'';
+			//echo $log_sql;
+			$logId = M('')->query($log_sql);
+			//var_dump($logId);
 			if($logId) {
-				service('Passport')->loginLocal($logId['uid']);	
+				service('Passport')->loginLocal($logId[0]['uid']);	
 			}else {
 				$data['email'] = '';
 				$data['password'] = '';
-				$data['uname'] = $user_message['screen_name'];
+				$data['uname'] = $user_message['screen_name'] ? $user_message['screen_name'] : $user_message['name'];
 				//$data['province'] = $userInfo['province'];
 				//$data['city']  = $userInfo['city'];
-				$data['sex']   = $user_message['gender'];
+				$data['sex']   = $user_message['gender']=='m' ? 1 : 0;
 				$data['location'] = $user_message['location'];
 				$data['is_active'] = 1;
 				$data['ctime'] = time();
 				
-				$uid = M('user')->add($data);				
+				//print_r($data);
+				$sql = 'insert into ai_user (`uname`,`sex`,`location`,`is_active`,`ctime`) values ("'.$data['uname'].'","'.$data['sex'].'","'.$data['location'].'","'.$data['is_active'].'","'.$data['ctime'].'")';
+				M('')->query($sql);
+
+				$uid = mysql_insert_id();
+				//var_dump($uid);
+				//$uid = M('user')->add($data);				
 				service('Passport')->loginLocal($uid);
-				
+
 				$other['uid'] = $uid;
 				$other['mediaID'] = '3';
 				$other['friendsCount'] = $user_message['friends_count'];
@@ -99,9 +108,22 @@ class IndexAction extends Action {
 				$other['statusesCount']  = $user_message['statuses_count'];
 				$other['personID'] = $user_message['idstr'];
 				
-				M('others')->add($other);	
+				//print_r($other);
+				$other_sql = 'INSERT INTO `aijianmei`.`ai_others` 
+				( `uid`, `mediaID`, `friendsCount`, `favouritesCount`, `profileImageUrl`,
+				 `mediaUserID`, `url`, `homepage`, `description`, `domain`, `followersCount`, 
+				 `statusesCount`, `personID`) VALUES ( 
+				 "'.$other['uid'].'", "'.$other['mediaID'].'", "'.$other['friendsCount'].'", 
+				 "'.$other['favouritesCount'].'", "'.$other['profileImageUrl'].'", "'.$other['mediaUserID'].'", 
+				 "'.$other['url'].'", "'.$other['homepage'].'", "'.$other['description'].'", 
+				 "'.$other['domain'].'", "'.$other['followersCount'].'", "'.$other['statusesCount'].'", "'.$other['personID'].'")';
+				echo $other_sql;
+				//mysql_query($other_sql);
+				M('')->query($other_sql);
+
+				//M('others')->add($other);	
 			}
-			
+
 		}
 		
 		
