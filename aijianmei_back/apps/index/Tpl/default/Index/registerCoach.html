@@ -181,8 +181,9 @@
 					<div class="box box_8">
 						<label class="items" for="text_18"><span class="show_state">*</span>验证码</label>
 						<input type="text" class="text proven_box" id="text_18">
+                        <img src="/public/captcha.php" id="safecode" class="checkImg" alt="看不清，换一张" />
 						<div class="prompt_box_8">
-							<a class="proven_pic"></a><a class="forchange">换一换</a>
+							<a class="proven_pic"></a><a class="forchange" onclick="safecode.src='/public/captcha.php'">换一换</a>
 						</div>
 					</div>
 					<div class="box box_9">
@@ -195,7 +196,7 @@
 			<div class="rightsidebar">
 					<div class="A_login">
 						<p>已有爱健美帐号?</p>
-						<a href="/index.php?app=index&mod=Index&act=login" class="loginbutton">登录</a>
+						<a href="/index.php?app=home&mod=Index&act=login" class="loginbutton">登录</a>
 					</div>
 					<div class="user_part">
 						<a href="/index.php?app=index&mod=Index&act=registerGym" class="user">

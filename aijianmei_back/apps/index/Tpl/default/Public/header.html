@@ -59,7 +59,7 @@
 						</script> -->
 						</div>
 						<span class="clearfix">未注册过爱健美也可以直接登录哦</span>
-						<a class="cop5" href="">爱健美注册</a>
+						<a class="cop5" href="{:U('index/Index/selectRegister')}">爱健美注册</a>
 						
 					</div>
 				</div>	
@@ -115,6 +115,6 @@
 						<li><a href="/index.php?app=index&mod=Nutri">营养</a></li>
 						<li><a href="/index.php?app=index&mod=Append">补充</a></li>
 						<li><a href="#">论坛</a></li>
-						<li><a href="{:U('home/User/index')}">交友互动</a></li>
+						<li><a href="<php>if(getMid()){</php>{:U('home/User/index')}<php>}else{</php>{:U('home/Index/index')}<php>}</php>">交友互动</a></li>
 					</ul>
 				</div>
