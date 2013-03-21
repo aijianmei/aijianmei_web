@@ -263,34 +263,26 @@
 margin: 0 23px;
 margin-bottom: 20px;
 }
-	.block_1,.block_2{
-
-	}
-		.title_3{
-			padding: 5px 0;
-			margin: 10px 0;
-			border-bottom: 1px solid #CCC;
-			color: black;
+		.content_sw{
+			margin: 10px 15px;
+		}
+		.son_sw{
+			margin-right: -15px;
 		}
 		.nubble{
 			float: left;
-			margin: 5px 30px 0 0;
-		}
-		.defferent{
-			margin-right:0px;
+			margin: 0 15px 5px 0;
 		}
 		.nubble p{
 			font-size: 16px;
 			color: #0C84BD;			
 		}
 			.rt_picture{
-
+				width: 174px;
+				height: 100px;
+				border: 2px solid transparent;
 			}
 /*从视频页面copy过来---------------------------------------------*/
-.part_3{
-	height:800px;
-	/*margin:10px 20px;*/
-}
 /******* 侧边栏 *********/
 	.sidebar{
 		width:165px;
@@ -356,7 +348,7 @@ margin-bottom: 20px;
 /******* 视频 *************/		
 	.video{
 		display:inline-block;
-		margin-left:15px;
+		margin:0 15px;
 	}
 	.all .all_ul{
 		border-bottom:1px solid #E5E5E5;
@@ -384,30 +376,23 @@ margin-bottom: 20px;
 			}
 		/******* 列表 ********/
 		.video .each{
-			padding-bottom:20px;
-			border-bottom:1px solid #ccd
+			margin-right: -15px;
+			padding-bottom: 20px;
+			border-bottom: 1px solid #ccd;
 		}
 		/***** 视频列表 ****/
 		.video .vdos{
-			width:140px;
-			display:inline-block;
-			margin:20px 10px 5px 0;
+			width: 175px;
+			display: inline-block;
+			margin: 10px 15px 5px 0;
 			
 		}
 			.video .vdos .pic{
-				border-radius:4px;
-				width:130px;
-				height:90px;
-				background:#ccc;
+				border-radius: 4px;
+				width: 175px;
+				height: 100px;
+				background: #ccc;
 			}
-				.vdos .pic a{
-					width:130px;
-					height:80px;
-				}
-				.vdos .pic a{
-					display:block;
-					cursor:pointer;
-				}
 			.vdos .info{
 				margin-top:8px;
 				font-size:12px;
