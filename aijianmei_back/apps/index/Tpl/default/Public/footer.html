@@ -2,38 +2,38 @@
 					<div class="f_list">
 						<h4>发现爱健美</h4>
 						<ul id="app">	
-							<li><a href="store.html">爱健美商店</a></li>
-							<li><a href="training.html">锻炼</a></li>
-							<li><a href="plan.html">健身计划</a></li>
-							<li><a href="nutri.html">营养</a></li>
-							<li><a href="add.html">补充</a></li>
-							<li><a href="pal.html">交友互动</a></li>
+							<li><a href="#">爱健美商店</a></li>
+							<li><a href="/index.php?app=index&mod=Train">锻炼</a></li>
+							<li><a href="/index.php?app=index&mod=Plan">健身计划</a></li>
+							<li><a href="/index.php?app=index&mod=Nutri">营养</a></li>
+							<li><a href="/index.php?app=index&mod=Append">补充</a></li>
+							<li><a href="/index.php?app=home&mod=Index&act=index">交友互动</a></li>
 						</ul>
 					</div>
 					<div class="f_list">
 						<h4>获取帮助</h4>
 						<ul id="article">						
-							<li><a href="help.html">新手指南</a></li>
-							<li><a href="direct.html">社区指导原则</a></li>
-							<li><a href="feedback.html">意见反馈</a></li>
+							<li><a href="#">新手指南</a></li>
+							<li><a href="#">社区指导原则</a></li>
+							<li><a href="#">意见反馈</a></li>
 						</ul>
 					</div>
 					<div class="f_list">
 						<h4>关于我们</h4>
 						<ul id="video">						
-							<li><a href="about_us.html">关于爱健美</a></li>
-							<li><a href="contact.html">联系我们</a></li>
-							<li><a href="join.html">加入爱健美</a></li>
-							<li><a href="ad.html">广告投放与品牌推广</a></li>
-							<li><a href="privacy.html">隐私政策</a></li>
+							<li><a href="#">关于爱健美</a></li>
+							<li><a href="#">联系我们</a></li>
+							<li><a href="#">加入爱健美</a></li>
+							<li><a href="#">广告投放与品牌推广</a></li>
+							<li><a href="#">隐私政策</a></li>
 						</ul>
 					</div>
 					<div class="f_list">
 						<h4>更多</h4>
 						<ul id="teach">					
-							<li><a href="app.html">下载IOS客户端</a></li>
-							<li><a href="app.html">下载Android客户端</a></li>
-							<li><a href="links.html">友情链接</a></li>
+							<li><a href="#">下载IOS客户端</a></li>
+							<li><a href="#">下载Android客户端</a></li>
+							<li><a href="#">友情链接</a></li>
 						</ul>
 					</div>
 					<div class="f_list login" >
@@ -53,6 +53,12 @@
 					<a href="intro.html">www.aijianmei.com</a>
 				</div>
 			</div>
+<!-- 添加返回顶部按钮 -->
+		<div id="goTopBtn" class="goTopBtn">
+			<a title="我要上去！" alt="回到顶部" /></a>
+		</div>
+	<!-- 返回顶部按钮 -->
+			
 			<script type="text/javascript">
 			var USER = {
 					'id' : <php>echo $uid ? $uid : '0'</php>,
@@ -73,6 +79,35 @@
 					location.reload();
 					
 				})
+
+
+			$(function(){
+		   $(window).scroll(function () {
+		     if($(window).scrollTop() >= 300)//距离顶部多少高度显示按钮
+		     {
+		     $('#goTopBtn').slideDown(200);
+		     }else
+		     {
+		     $('#goTopBtn').slideUp(200);
+		     }
+		   }); 
+		     
+		   $('#goTopBtn').click(function(){
+		    $('body,html').animate({scrollTop:0},500)
+		   });
+		   
+		   //按钮定位
+		   var win_width= $(window).width();    //窗口宽度
+		   var content_width= $('.wrapper').width();     //容器宽度
+		   var topbtn_width= $('#goTopBtn').width(); //按钮宽度
+		   //alert([win_width - content_width]/2);
+		   
+		//距离主体部分的右侧距离
+		   var topbtn_posi = ([win_width - content_width ]/2 - topbtn_width - 50);
+		   $('#goTopBtn').css({'right':topbtn_posi});
+		   
+		 });
+
 			}
 			</script>
 			//验证码刷新

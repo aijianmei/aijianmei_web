@@ -27,10 +27,10 @@ class TrainAction extends Action {
 		$this->assign('lastArticles', $hotArticles);
 
 		//banner 滚动图片列表
-		 $change_1="06.jpg";
-		 $change_2="13.jpg";
-		 $change_3="14.jpg";
-		 $change_4="15.jpg";
+		 $change_1="training_1.jpg";
+		 $change_2="training_2.jpg";
+		 $change_3="training_3.jpg";
+		 $change_4="training_4.jpg";
 		 $this->assign('change_1',$change_1);
 		 $this->assign('change_2',$change_2);
 		 $this->assign('change_3',$change_3);

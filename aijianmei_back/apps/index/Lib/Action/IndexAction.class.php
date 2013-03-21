@@ -253,7 +253,7 @@ class IndexAction extends Action {
 			case 1: {$tree_channel="健身计划 ";$tree_channel_en="Plan";}break;
 			case 2:{$tree_channel="锻炼 ";$tree_channel_en="Train";}break;
 			case 3:{$tree_channel="营养 ";$tree_channel_en="Nutri";}break;
-			case 4:{$tree_channel="补充 ";$tree_channel_en="Append";}break;
+			case 4:{$tree_channel="辅助品 ";$tree_channel_en="Append";}break;
 		}
 		$tree_parent=$result['parent'];		
 		$tree_name=$result['name'];
@@ -396,14 +396,50 @@ class IndexAction extends Action {
 		}
 		$this->assign("first",$tree_channel);
 		//banner 滚动图片列表
-		 $change_1="1.jpg";
-		 $change_2="2.jpg";
-		 $change_3="3.jpg";
-		 $change_4="4.jpg";
+		if($type==1)
+		{
+		 $change_1="1-1.jpg";
+		 $change_2="1-2.jpg";
+		 $change_3="1-3.jpg";
+		 $change_4="1-4.jpg";
 		 $this->assign('change_1',$change_1);
 		 $this->assign('change_2',$change_2);
 		 $this->assign('change_3',$change_3);
 		 $this->assign('change_4',$change_4);
+		}
+		else if($type==2)
+		{
+		 $change_1="2-1.jpg";
+		 $change_2="2-2.jpg";
+		 $change_3="2-3.jpg";
+		 $change_4="2-4.jpg";
+		 $this->assign('change_1',$change_1);
+		 $this->assign('change_2',$change_2);
+		 $this->assign('change_3',$change_3);
+		 $this->assign('change_4',$change_4);
+		}
+		else if($type==3)
+		{
+		 $change_1="3-1.jpg";
+		 $change_2="3-2.jpg";
+		 $change_3="3-3.jpg";
+		 $change_4="3-4.jpg";
+		 $this->assign('change_1',$change_1);
+		 $this->assign('change_2',$change_2);
+		 $this->assign('change_3',$change_3);
+		 $this->assign('change_4',$change_4);			
+		}
+		else
+		{
+		 $change_1="4-1.jpg";
+		 $change_2="4-2.jpg";
+		 $change_3="4-3.jpg";
+		 $change_4="4-4.jpg";
+		 $this->assign('change_1',$change_1);
+		 $this->assign('change_2',$change_2);
+		 $this->assign('change_3',$change_3);
+		 $this->assign('change_4',$change_4);	
+		}
 		//-------END--------
 
 

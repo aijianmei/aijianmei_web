@@ -22,10 +22,10 @@ class PlanAction extends Action {
 		$this->assign('jianmei', $jianmei);
 
 		//banner 滚动图片列表
-		 $change_1="01.jpg";
-		 $change_2="02.jpg";
-		 $change_3="07.jpg";
-		 $change_4="16.jpg";
+		 $change_1="plan_1.jpg";
+		 $change_2="plan_2.jpg";
+		 $change_3="plan_3.jpg";
+		 $change_4="plan_4.jpg";
 		 $this->assign('change_1',$change_1);
 		 $this->assign('change_2',$change_2);
 		 $this->assign('change_3',$change_3);

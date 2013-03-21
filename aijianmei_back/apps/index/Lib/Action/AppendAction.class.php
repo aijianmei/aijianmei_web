@@ -36,10 +36,10 @@ class AppendAction extends Action {
 		$this->assign('cssFile', 'add');
 
 		//banner 滚动图片列表
-		 $change_1="12.jpg";
-	     $change_2="09.jpg";
-	     $change_3="10.jpg";
-	     $change_4="11.jpg";
+		 $change_1="append_1.jpg";
+	     $change_2="append_2.jpg";
+	     $change_3="append_3.jpg";
+	     $change_4="append_4.jpg";
 		 $this->assign('change_1',$change_1);
 		 $this->assign('change_2',$change_2);
 		 $this->assign('change_3',$change_3);
