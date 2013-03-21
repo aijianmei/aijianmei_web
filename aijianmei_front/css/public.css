@@ -659,16 +659,16 @@ button{
 			.right_sider{
 				float:left;
 				width:790px;
-				border: #E0E0E0 1px solid;
 			}
 			.part_top{
 				position: relative;
-				padding-bottom: 1px;
 			}
 			.lay_top{
 				width:790px;
-				margin-bottom: 5px;
+				margin-bottom: 10px;
 				background: #FFF;
+				border: 1px solid #E0E0E0;
+				border-top:none;
 			}
 	/*导航栏共用样式*/
 			.sider_all{
