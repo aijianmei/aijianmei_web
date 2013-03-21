@@ -12,7 +12,7 @@
 						<ul>
 						<php>foreach($parent_categories as $c) {</php>
 								<li class="each_video all">
-									<!-- a href="/index.php?app=index&mod=Append&act=articleList&id={$c['id']}"> -->{$c['name']}
+									<a href="/index.php?app=index&mod=Append&act=articleList&id={$c['id']}">{$c['name']}
 								</li>
 								<php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
 									<li class="each_video">
@@ -20,28 +20,6 @@
 									</li>
 								<php>}</php>
 							<php>}</php>	
-						<!-- <php>foreach($categories as $c) {</php>
-							<li class="each_video all">
-									{$c['name']}
-								</li>
-							<php>foreach($c['children'] as $child) {</php>
-							<li class="each_video">
-								<a href="/index.php?app=index&mod=Append&act=articleList&id={$child['id']}">{$child['name']}</a>
-							</li>
-							<php>}</php>
-						<php>}</php> -->
-							<!-- <li class="each_video">
-								<a href="add_1.html">肌肉大厦</a>
-							</li>
-							<li class="each_video">
-								<a href="add_1.html">减肥</a>
-							</li>
-							<li class="each_video">
-								<a href="add_11.html">一般卫生与健康</a>
-							</li>
-							<li class="each_video">
-								<a href="add_11.html">菜谱成分</a>
-							</li> -->
 						</ul>
 					</div>
 				</div>
@@ -52,48 +30,45 @@
 			<div class="right_sider">
 
 				<div class="part_top clearfix">
-					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
 						<h1 class="public_title">最畅销的保健品</h1>
+						<div class="part_content">
 						<div class="tr_top clearfix">
 							<a href="article.html" class="store.html"><img src="../Public/images/add/01.jpg" alt="no" class="supple_pic" /></a>
-							<div>
-								<a href="article.html" class="detail">超过10000的订单</a>
-								<p>最好的选择，最快的运输和订单超过450元的免费礼物</p>
+							<div class="lay_detail">
+								<a href="article.html"  class="detail" data-original-title="内容">超过10000的订单</a>
+								<div class="title_tip"><div class="angle"></div></div>
+								<p class="read_content">最好的选择，最快的运输和订单超过450元的免费礼物</p>
 								<a href="article.html" class="purchase">点击购买</a>
 							</div>
 						</div>
 						<ul class="clearfix">
 							<li class="classify">
-								<a href="/index.php?app=index&mod=Append&act=articleList&id=48" class="lay_cf">
-									
+								<a href="/index.php?app=index&mod=Append&act=articleList&id=48" class="lay_cf show_enter">
+									<span class="enter_icon"></span>
 										<img src="../Public/images/add/02.jpg" alt="" class="best" />
 										<p class="best_classify">辅助品知识</p>
-										<p class="price"></p>
 									
 								</a>
 							</li>
 							<li class="classify">
-								<a href="/index.php?app=index&mod=Append&act=articleList&id=49" class="lay_cf">
-									<div>
+								<a href="/index.php?app=index&mod=Append&act=articleList&id=49" class="lay_cf show_enter">
+									<span class="enter_icon"></span>
 										<img src="../Public/images/add/02.jpg" alt="" class="best" />
 										<p class="best_classify">减脂辅助品</p>
-										<p class="price"></p>
-									</div>
+
 								</a>
 							</li>
-							<li class="classify">
-								<a href="/index.php?app=index&mod=Append&act=articleList&id=50" class="lay_cf">
-									<div>
+							<li class="classify last_classify">
+								<a href="/index.php?app=index&mod=Append&act=articleList&id=50" class="lay_cf show_enter">
+									<span class="enter_icon"></span>
 										<img src="../Public/images/add/02.jpg" alt="" class="best" />
 										<p class="best_classify">增肌辅助品</p>
-										<p class="price"></p>
-									</div>
 								</a>
 							</li>
 						</ul>
 					</div>
-					<span class="corner_bottom"></span>
+					</div>
 				</div>
 
 				<div class="part_top clearfix">
@@ -103,77 +78,14 @@
 						<ul class="new_video clearfix">
 						<php>foreach($hotArticles as $a) {</php>
 							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_1"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter">
+									<span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}
 								</p>
 							</li>
 							<php>}</php>
 						
-							
-							<!-- <li class="article">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/06.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a href="article.html" class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/07.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a href="article.html" class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a href="article.html" class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article clearfix">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a href="article.html" class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article clearfix">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/06.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a href="article.html" class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article clearfix">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/07.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a href="article.html" class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article clearfix">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article clearfix">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article clearfix">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li> -->
 						</ul>
 						<a class="expend">更多</a>
 					</div>
@@ -187,75 +99,12 @@
 						<ul class="new_video clearfix">
 						<php>foreach($lastArticles as $a) {</php>
 							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_1"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}
 								</p>
 							</li>
 							<php>}</php>
-							<!-- <li class="article">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/06.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/07.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a href="article.html" class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a href="article.html" class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article clearfix">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article clearfix">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/06.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article clearfix">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/07.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article clearfix">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article clearfix">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li>
-							<li class="article clearfix">
-								<a href="article.html" class="article_pic"><img src="../Public/images/add/05.jpg" alt="no" /></a>
-								<div class="article_content">
-									<a class="title_3">5 healthy lunch ideas</a>
-									<p>dont ieave your child's nutnition up to wonding machines and piayfore trades serd him ir</p>
-								</div>
-							</li> -->
 						</ul>
 						<a class="expend">更多</a>
 					</div>
@@ -276,26 +125,6 @@
 								<php>}</php>
 							<php>}</php>
 						</ul>
-						<!-- <h1 class="public_title">目录</h1>
-						<h2 class="title_4">全部</h2>
-						<ul class="re_nav">
-						<php>foreach($categories as $c){</php>
-							<li>
-								<a href="/index.php?app=index&mod=Append&act=articleList&id={$c['id']}">{$c['name']}</a>
-							</li>
-						<php>}</php> -->
-							<!-- <li>
-								<a>肌肉大厦</a>
-							</li>
-							<li>
-								<a>减肥</a>
-							</li>
-							<li>
-								<a>一般卫生与健康</a>
-							</li>
-							<li>
-								<a>菜谱成分</a>
-							</li> -->
 						</ul>
 					</div>
 					<span class="corner_bottom"></span>
