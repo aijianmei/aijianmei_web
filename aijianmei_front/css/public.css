@@ -448,7 +448,7 @@ button{
 			background:rgb(232, 234, 255);
 		}
 		.choice_area .ul_2{
-			margin:0 70px;
+			margin:0 40px;
 		}
 		.ul_2 li img{
 			width:140px;
@@ -472,14 +472,14 @@ button{
 				width: 40px;
 				height: 80px;
 				top: 12px;
-				left: 10px;
+				left: 0px;
 				background: url(../images/turn_left.png) no-repeat;}
 			.ps_right{position: absolute;
 				display: inline-block;
 				width: 40px;
 				height: 80px;
 				top: 12px;
-				right: 10px;
+				right: 0px;
 				background: url(../images/turn_right.png) no-repeat;
 			}
 
@@ -814,4 +814,5 @@ span.enter_icon{
 	right: 5px;
 	top: 5px;
 	display: none;
+	z-index: 100;
 }

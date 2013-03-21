@@ -117,7 +117,7 @@ $(function(){
 		
 					
 });
-//js for border
+//js from weimian..................
 			//添加事件监听
 			var addevent = function(element,type,handle){
 				if(element.addEventListener){
@@ -475,8 +475,56 @@ $("a.show_enter").mouseover(function(){
 			}
 			// move('background','images/wm2.png','-220px')第一个是对象class属性，第二个是地址，第三个是雪碧图的Y值
 
-
-
+//添加控制透明函数
+		var getclass = {//控制渐变透明度
+				opacity : function(obj,filter,speed){
+					var newdom = new getdom,
+						obj = newdom.getElementsByClass(obj)[0] || obj,
+						obj_opacity = newdom.GetCurrentStyle(obj,'opacity') ? newdom.GetCurrentStyle(obj,'opacity') : 1,
+						obj_filter = newdom.GetCurrentStyle(obj,'filter'),//获取filter的值，表现形式为alpha(opacity=10);
+						value = obj_filter.replace(/[^0-9]/ig,"");//使用正则表达式转换为数字字符串（80）
+					obj.style.opacity = obj_opacity;
+					var change_opacity = function(){
+						if(obj_opacity > filter){
+							var time = function(){
+								setTimeout(function(){
+									if(obj_opacity > filter){
+										obj_opacity = obj_opacity - 0.1;
+										obj.style.opacity = parseFloat(obj.style.opacity) - 0.1;
+										if(document.all){
+											value = parseFloat(value) - 10;
+											obj.style.filter = 'alpha(opacity = '+value+')';//兼容ie
+										}
+										time();
+									}
+								},speed)
+							};
+							time();
+						}
+						else{
+							var time = function(){
+								setTimeout(function(){
+									if(filter > obj_opacity){
+										filter = filter - 0.1;
+										obj.style.opacity = parseFloat(obj.style.opacity) + 0.1;
+										if(document.all){
+											value = parseFloat(value) + 10;//将字符串转化为数字，使用的是parsefloat
+											obj.style.filter = 'alpha(opacity = '+value+')';//兼容ie
+										}
+										time();
+									}
+								},speed)
+							};
+							time();
+						}
+					}
+					change_opacity();
+				}
+			}
+		//使用方式
+		// document.getElementsByTagName('input')[0].onclick = function(){
+		// 		getclass.opacity('picture',0.4,10);
+		// 	}	
 
 
 
