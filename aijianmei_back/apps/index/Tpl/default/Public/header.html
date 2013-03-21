@@ -46,9 +46,9 @@
 						<!-- http://open.denglu.cc/transfer/qzone?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F -->
 						<!-- a class="cop1" href="http://open.denglu.cc/transfer/renren?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F"></a> -->
 						<a class="cop1" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://dev.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1">微博帐号</a>
-						<a class="cop2" href="http://open.denglu.cc/transfer/qzone?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F">QQ帐号</a>
+						<!--<a class="cop2" href="http://open.denglu.cc/transfer/qzone?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F">QQ帐号</a>
 						<a class="cop3" href="http://open.denglu.cc/transfer/renren?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F">人人帐号</a>
-						<a class="cop4" href="http://open.denglu.cc/transfer/douban?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F">豆瓣帐号</a>
+						<a class="cop4" href="http://open.denglu.cc/transfer/douban?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F">豆瓣帐号</a>-->
 						<!-- <script type='text/javascript' charset='utf-8'>
 							(function() {
 								var _dl_time = new Date().getTime();
@@ -59,7 +59,7 @@
 						</script> -->
 						</div>
 						<span class="clearfix">未注册过爱健美也可以直接登录哦</span>
-						<a class="cop5" href="">爱健美注册</a>
+						<a class="cop5" href="{:U('index/Index/selectRegister')}">爱健美注册</a>
 						
 					</div>
 				</div>	
@@ -115,6 +115,6 @@
 						<li><a href="/index.php?app=index&mod=Nutri">营养</a></li>
 						<li><a href="/index.php?app=index&mod=Append">补充</a></li>
 						<li><a href="#">论坛</a></li>
-						<li><a href="{:U('home/User/index')}">交友互动</a></li>
+						<li><a href="<php>if(getMid()){</php>{:U('home/User/index')}<php>}else{</php>{:U('home/Index/index')}<php>}</php>">交友互动</a></li>
 					</ul>
 				</div>

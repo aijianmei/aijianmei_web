@@ -35,7 +35,8 @@
 					<div class="other_account clearfix">
 						<h4 class="tit">使用合作网站账号登陆</h4>
 						<div class="accounts">
-						<script id='denglu_login_js' type='text/javascript' charset='utf-8'></script>
+                        <a class="cop1" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://dev.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1">微博帐号</a>
+						<!--<script id='denglu_login_js' type='text/javascript' charset='utf-8'></script>
 						<script type='text/javascript' charset='utf-8'>
 							(function() {
 								var _dl_time = new Date().getTime();
@@ -43,7 +44,7 @@
 								_dl_login.id = _dl_login.id + '_' + _dl_time;
 								_dl_login.src = 'http://open.denglu.cc/connect/logincode?appid=44031dena3J8cuBsQeX40lcpjSsPM3&v=1.0.2&widget=1&styletype=1&size=452_132&asyn=true&time=' + _dl_time;
 							})();
-						</script>
+						</script>-->
 							<!-- <a class="cop1" href="#"></a>
 							<a class="cop2" href=""></a>
 							<a class="cop3" href=""></a>
@@ -107,7 +108,7 @@
 						<li><a href="/index.php?app=index&mod=Nutri">营养</a></li>
 						<li><a href="/index.php?app=index&mod=Append">补充</a></li>
 						<li><a hrefhref="javascript:void(0);" onclick="alert('正在建设中')">论坛</a></li>
-						<li><a hrefhref="{:U('home/User/index')}" >交友互动</a></li>
+						<li><a hrefhref="<php>if(getMid()){</php>{:U('home/User/index')}<php>}else{</php>{:U('home/Index/index')}<php>}</php>" >交友互动</a></li>
 					</ul>
 					<span class="position">爱健美/首页</span>
 				</div>
