@@ -1,5 +1,5 @@
 /****** Reset **********/
-body,ul,li,p,h1,h2,h3,h4,button,input,dl,dd{
+body,ul,li,p,h1,h2,h3,h4,button,input,dl,dd,fieldset{
 	margin:0;
 	padding:0;
 }
@@ -11,7 +11,7 @@ img{
 	outline:0;
 }
 body{
-	font:14px Tahoma Arial,Helvetica,sans-serif;
+	font:14px Tahoma Arial,sans-serif,Helvetica;
 	color:#656565;
 	background:url(../images/b_g.jpg) repeat;
 }
@@ -301,6 +301,7 @@ button{
 			right:0px; 
 			top:0px; 
 			border:0;
+			margin: 3px 20px 2px 0;
 		}
 			.search label,.search legend{ 
 				display:none;
@@ -448,7 +449,7 @@ button{
 			background:rgb(232, 234, 255);
 		}
 		.choice_area .ul_2{
-			margin:0 70px;
+			margin:0 60px;
 		}
 		.ul_2 li img{
 			width:140px;
@@ -459,7 +460,7 @@ button{
 			display: inline-block;
 			height: 80px;
 			width: 140px;
-			margin: 6px 17px;
+			margin: 6px 19px;
 			cursor: pointer;
 			border: 3px solid transparent;
 
@@ -652,9 +653,10 @@ button{
 				height: 34px;
 				line-height: 34px;
 				text-indent: 20px;
-				font-size: 26px;
+				font-size: 21px;
 				color: black;
 				background: url(../images/thbg.jpg) repeat-x;
+				font-family: '微软雅黑'，'黑体',Tahoma Arial;
 			}
 			.right_sider{
 				float:left;
