@@ -408,7 +408,7 @@ button{
 				position: relative;
 				float:left;
 			}
-			.change_1 .pic_1{
+			.pic_1,.pic_2,.pic_3,.pic_4{
 				display: block;
 				width: 860px;
 				height: 270px;
@@ -421,8 +421,8 @@ button{
 				height: 270px;
 				width: 180px;
 				padding: 0 20px;
-				opacity: 0.2;
-				filter:alpha(opacity=20);
+				opacity: 0.3;
+				filter:alpha(opacity=30);
 				background: #020200;
 				z-index: 10;
 			}
@@ -448,7 +448,7 @@ button{
 			background:rgb(232, 234, 255);
 		}
 		.choice_area .ul_2{
-			margin:0 40px;
+			margin:0 70px;
 		}
 		.ul_2 li img{
 			width:140px;
@@ -459,7 +459,7 @@ button{
 			display: inline-block;
 			height: 80px;
 			width: 140px;
-			margin: 6px;
+			margin: 6px 17px;
 			cursor: pointer;
 			border: 3px solid transparent;
 
