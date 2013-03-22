@@ -174,7 +174,7 @@ class IndexAction extends Action {
 					M('')->query('insert into ai_article_vote (`uid`,`article_id`) values ("'.$this->mid.'","'.$_GET['id'].'"');
 				}				
 			}else {
-				//echo '<script type="text/javascript">alert("请登录")</script>';
+				
 			}
 		}elseif($o=='unlike') {
 			if($this->mid) {
@@ -190,7 +190,7 @@ class IndexAction extends Action {
 					M('article_vote')->add(array('uid'=>$this->mid, 'article_id'=>$_GET['id']));
 				}
 			}else {
-				//echo '<script type="text/javascript">alert("请登录")</script>';
+				
 			}
 		}
 		global $ts;
@@ -569,9 +569,25 @@ class IndexAction extends Action {
 			if (!($invite_info = $this->__getInviteInfo($invite_code)))
 				unset($invite_code, $invite_info);
 		}
+        $area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
+		foreach($area as $a) {
+			$child[$a['area_id']] = M('area')->where(array('pid'=>$a['area_id']))->order('`area_id` ASC')->findAll();	
+		}
+		$this->assign('children', $child);
+        $this->assign('area', $area);
+        //print_r($area);
 		$this->assign('cssFile', 'register');
 		$this->display();
 	}
+    
+    public function getCity()
+    {
+    	$pid = $_GET['pid'];
+        $area = M('area')->where(array('pid'=>$pid))->order('`area_id` ASC')->findAll();
+		
+		
+       	echo json_encode($area);
+    }
 	
 	public function registerCoach()
 	{
@@ -610,6 +626,12 @@ class IndexAction extends Action {
 			if (!($invite_info = $this->__getInviteInfo($invite_code)))
 				unset($invite_code, $invite_info);
 		}
+		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
+		foreach($area as $a) {
+			$child[$a['area_id']] = M('area')->where(array('pid'=>$a['area_id']))->order('`area_id` ASC')->findAll();	
+		}
+		$this->assign('children', $child);
+        $this->assign('area', $area);
 		$this->assign('cssFile', 'register');
 		$this->display();
 	}
@@ -651,6 +673,12 @@ class IndexAction extends Action {
 			if (!($invite_info = $this->__getInviteInfo($invite_code)))
 				unset($invite_code, $invite_info);
 		}
+		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
+		foreach($area as $a) {
+			$child[$a['area_id']] = M('area')->where(array('pid'=>$a['area_id']))->order('`area_id` ASC')->findAll();	
+		}
+		$this->assign('children', $child);
+        $this->assign('area', $area);
 		$this->assign('cssFile', 'register');
 		$this->display();
 	}
