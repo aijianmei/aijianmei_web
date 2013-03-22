@@ -138,8 +138,8 @@
 						<php>if(getMid()){</php>
 						<php>echo getUserName(getMid())</php>
 						<php>}else {</php>
-						<span>登录</span>|
-						<span>注册</span>
+						<span><a href="{:U('home/Index/login')}">登录</a></span>|
+						<span><a href="{:U('index/Index/selectRegister')}">注册</a></span>
 						<php>}</php>
 						
 						<div class="textarea"><textarea id="comment" class="comment_inp" name="comment" >有什么感想，来说说吧</textarea></div>
