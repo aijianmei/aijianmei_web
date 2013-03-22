@@ -97,11 +97,11 @@
 					</div> -->
 					<div class="web_expend_2">
 						<span class="read_time">
-							<a style="height:16px;width:52px;line-height:16px;background:0;">
+							<!--<a style="height:16px;width:52px;line-height:16px;background:0;">
 								<span>阅读</span>
 								<span>0</span>
 								<span class="triangle"></span>
-							</a>
+							</a>-->
 							<!-- <div class="page_times" style="postion:absolute;display:none;right:0px;width:50px; background:white;line-height:20px;border:1px solid #ccc;">
 								<p>页面1</p>
 								<p>页面1</p>	
@@ -146,10 +146,13 @@
 						<a class="comment" id="<php>if(!getMid()) echo 'not_login';</php>" href="javascript:void(0)" onclick="comments(comment.value, {$article['id']}, 'Article')" aid="{$article['id']}">发表评论</a>
 					</div>
 					<div class="check_comment">
-						<a class="comment_1">全部评论(0)</a>
-						<a class="comment_2 comment_3">精选评论</a>
+						<a class="comment_1">全部评论(<php>echo count($comments)</php>)</a>
+						<!--<a class="comment_2 comment_3">精选评论</a>-->
 					</div>
 					<div class="cm_content tab_2">
+                    <style type="text/css">
+					.page{margin:0;}
+					</style>
 						<div class="page">
 							<span class="page_1">
 								<span class="lay_page">
@@ -285,8 +288,8 @@
 						<h4 class="sider_t">精华推荐</h4>
 						<php>foreach($promote_article as $p) {</php>
 						<div class="recommend">							
-							<a><img src="/public/images/article/{$p['img']}" width="90" height="60" alt="no" border="0" /></a>
-							<p class="intro">{$p['title']}</p>
+							<a href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}"><img src="/public/images/article/{$p['img']}" width="90" height="60" alt="no" border="0" /></a>
+							<p class="intro"><a href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}">{$p['title']}</a></p>
 						</div>
 						<php>}</php>
 						<!-- <div class="recommend">
