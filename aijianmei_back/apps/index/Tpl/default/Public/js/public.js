@@ -52,7 +52,7 @@ $(function(){
 			$('.massage').css("opacity","0.8")
 		},
 		function(){
-			$('.massage').css("opacity","0")
+			$('.massage').css("opacity","0.2")
 		}
 	)
 })
