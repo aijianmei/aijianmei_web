@@ -305,11 +305,11 @@ $(function(){
 				addevent(Obj,"mouseover",handle);
 				addevent(Obj,"mouseout",remove);
 			}
-//视频列表 切换分类
-$("li.select>a").mouseover(function(){
-	$(this).addClass("pre").siblings().removeClass("pre");
+// //视频列表 切换分类
+// $("li.select>a").mouseover(function(){
+// 	$(this).addClass("pre").siblings().removeClass("pre");
 	
-})	
+// })	
 //鼠标移上图片显示进入
 $("a.show_enter").mouseover(function(){
 	$(this).children(".enter_icon").css("display","block");
