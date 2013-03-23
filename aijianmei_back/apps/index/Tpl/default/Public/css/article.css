@@ -237,24 +237,19 @@
 					border-top: 4px solid #D1D1D1;
 					background: whiteSmoke;
 				}
-				.check_comment .comment_1,.check_comment .comment_2{
+				.check_comment .comment_1{
 					display: inline-block;
 					line-height: 32px;
 					font-weight: 600;
 					padding: 0 20px;
 					margin-top: -4px;
 					color:#656565;
-				}
-				.check_comment .comment_3{
 					border-top: 4px solid #007AFF;
 					background: #DAF3FF;
 
 				}
 				.cm_content{
 					margin:20px 0;
-				}
-				.tab_1{
-					display:none;
 				}
 				.cm_content .cm_top{
 					height: 25px;
@@ -314,7 +309,7 @@
 						.target .target_pic{
 
 							float:left;
-							/*height:120px;*/
+							height:120px;
 							margin-right: 10px;
 						}
 						.target .care{
