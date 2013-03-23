@@ -1,41 +1,7 @@
 <?php
 class AppendAction extends Action {
-	public function index()
-	{
-		$map['channel'] = '4';
-		$cate = M('article_category')->where($map)->findAll();
-		foreach($cate as $c) {
-			if($c['parent'] == NULL) $parent[$c['id']] = $c;
-			else $parent[$c['parent']]['children'][] = $c; 
-			$cate_id[] = $c['id'];
-		}
-		//print_r($cate);
-		$articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
-		$this->assign('articles', $articles);
-		$this->assign('categories', $cate);
-		$this->assign('parent_categories', $parent);
-		
-		/*$cate = M('article_category')->where(array('channel'=>'4'))->findAll();
-		foreach($cate as $c) {
-			if($c['parent']==NULL) $realCate[$c['id']] = $c;
-			else $realCate[$c['parent']]['children'][] = $c;;
-			$cate_id[] = $c['id'];
-		}*/
-		$map['category_id'] = array('in', implode(',', $cate_id));
-		$articles = M('article')->where($map)->findAll();
-		//print_r($articles);
-		$hotArticles = D('Article')->getAppendArticles('click');
-		$this->assign('hotArticles', $hotArticles);
-		//foreach($hotArticles as $a) echo $a['title'];//$a['title']=substr($a['title'],0,10)."...";
-		
-		$lastArticles = D('Article')->getAppendArticles('create_time');
-		$this->assign('lastArticles', $lastArticles);
-		//$this->assign('cate', $cate);
-		$this->assign('articles', $articles);
-		//$this->assign('categories', $realCate);
-		$this->assign('cssFile', 'training');
-
-		//banner 滚动图片列表
+	function show_banner(){
+			//banner 滚动图片列表
 		 $change_1="append_1.jpg";
 	     $change_2="append_2.jpg";
 	     $change_3="append_3.jpg";
@@ -69,10 +35,51 @@ class AppendAction extends Action {
 		 $this->assign('describe_3',$describe_3);
 		 $this->assign('describe_4',$describe_4);
 		 $this->assign('name_1',$name_1);
-		 $this->assign('name_2',$name_1);
-		 $this->assign('name_3',$name_1);
-		 $this->assign('name_3',$name_1);
+		 $this->assign('name_2',$name_2);
+		 $this->assign('name_3',$name_3);
+		 $this->assign('name_4',$name_4);
 		//-------END--------
+
+		}
+	public function index()
+	{
+		
+		$map['channel'] = '4';
+		$cate = M('article_category')->where($map)->findAll();
+		foreach($cate as $c) {
+			if($c['parent'] == NULL) $parent[$c['id']] = $c;
+			else $parent[$c['parent']]['children'][] = $c; 
+			$cate_id[] = $c['id'];
+		}
+		//print_r($cate);
+		$articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
+		$this->assign('articles', $articles);
+		$this->assign('categories', $cate);
+		$this->assign('parent_categories', $parent);
+		
+		/*$cate = M('article_category')->where(array('channel'=>'4'))->findAll();
+		foreach($cate as $c) {
+			if($c['parent']==NULL) $realCate[$c['id']] = $c;
+			else $realCate[$c['parent']]['children'][] = $c;;
+			$cate_id[] = $c['id'];
+		}*/
+		$map['category_id'] = array('in', implode(',', $cate_id));
+		$articles = M('article')->where($map)->findAll();
+		//print_r($articles);
+		$hotArticles = D('Article')->getAppendArticles('click');
+		$this->assign('hotArticles', $hotArticles);
+		//foreach($hotArticles as $a) echo $a['title'];//$a['title']=substr($a['title'],0,10)."...";
+		
+		$lastArticles = D('Article')->getAppendArticles('create_time');
+		$this->assign('lastArticles', $lastArticles);
+		//$this->assign('cate', $cate);
+		$this->assign('articles', $articles);
+		//$this->assign('categories', $realCate);
+		$this->assign('cssFile', 'training');
+		$this->show_banner();//banner 滚动图片列表
+/*
+		
+		*/
 		$this->display();
 	}
 	
@@ -139,19 +146,7 @@ class AppendAction extends Action {
 		$a['title']=substr($a['title'],0,10)."...";		
 		$lastArticles = D('Article')->getAppendArticles('create_time', $id);
 		$this->assign('lastArticles', $lastArticles);
-		
-		 //banner 滚动图片列表
-		 $change_1="12.jpg";
-	     $change_2="09.jpg";
-	     $change_3="10.jpg";
-	     $change_4="11.jpg";
-
-		 $this->assign('change_1',$change_1);
-		 $this->assign('change_2',$change_2);
-		 $this->assign('change_3',$change_3);
-		 $this->assign('change_4',$change_4);
-
-		//-------END--------
+		$this->show_banner();//banner 滚动图片列表
 		
 		$this->display('list');
 	}
@@ -180,18 +175,7 @@ class AppendAction extends Action {
 		//foreach($hotArticles as $a) echo $a['title'];//$a['title']=substr($a['title'],0,10)."...";		
 		$lastArticles = D('Article')->getAppendArticles('create_time');
 		$this->assign('lastArticles', $lastArticles);
-		
-		 //banner 滚动图片列表
-		 $change_1="12.jpg";
-	     $change_2="09.jpg";
-	     $change_3="10.jpg";
-	     $change_4="11.jpg";
-		 $this->assign('change_1',$change_1);
-		 $this->assign('change_2',$change_2);
-		 $this->assign('change_3',$change_3);
-		 $this->assign('change_4',$change_4);
-		//-------END--------
-		
+		$this->show_banner();//banner 滚动图片列表
 		$this->display('vlist');
 		/*$id = intval($_GET['id']);
 		$videos = M('video')->where(array('category_id'=>$id))->findAll();
