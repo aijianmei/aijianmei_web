@@ -117,10 +117,18 @@ class AppendAction extends Action {
 	     $change_2="09.jpg";
 	     $change_3="10.jpg";
 	     $change_4="11.jpg";
+	     $articleid_1="60";
+		 $articleid_2="56";
+		 $articleid_3="92";
+		 $articleid_4="57";
 		 $this->assign('change_1',$change_1);
 		 $this->assign('change_2',$change_2);
 		 $this->assign('change_3',$change_3);
 		 $this->assign('change_4',$change_4);
+		 $this->assign('articleid_1',$articleid_1);
+		 $this->assign('articleid_2',$articleid_2);
+		 $this->assign('articleid_3',$articleid_3);
+		 $this->assign('articleid_4',$articleid_4);
 		//-------END--------
 		
 		$this->display('list');

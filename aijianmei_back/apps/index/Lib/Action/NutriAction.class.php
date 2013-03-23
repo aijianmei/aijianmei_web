@@ -38,10 +38,18 @@ class NutriAction extends Action {
 		 $change_2="nutri_2.jpg";
 		 $change_3="nutri_3.jpg";
 		 $change_4="nutri_4.jpg";
+		 $articleid_1="26";
+		 $articleid_2="34";
+		 $articleid_3="41";
+		 $articleid_4="32";
 		 $this->assign('change_1',$change_1);
 		 $this->assign('change_2',$change_2);
 		 $this->assign('change_3',$change_3);
 		 $this->assign('change_4',$change_4);
+		 $this->assign('articleid_1',$articleid_1);
+		 $this->assign('articleid_2',$articleid_2);
+		 $this->assign('articleid_3',$articleid_3);
+		 $this->assign('articleid_4',$articleid_4);
 		//-------END--------			 
 		$this->display();
 	}
