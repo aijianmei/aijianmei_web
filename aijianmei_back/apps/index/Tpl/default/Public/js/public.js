@@ -545,6 +545,8 @@ $("a.show_enter").mouseover(function(){
 			};
 			fade.init('store');
 			fade.init('forum');
+                        fade.init('foot-store');
+                        fade.init('dev');
 			if(document.getElementById('teach')){
 				fade.init('teach');
 			}
