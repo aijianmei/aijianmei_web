@@ -31,7 +31,7 @@ class NutriAction extends Action {
 		//print_r($realCate);
 		//$this->assign('categories', $realCate);
 		//$this->assign('cate', $cate);
-		$this->assign('cssFile', 'nutri');
+		$this->assign('cssFile', 'training');
 
 		//banner 滚动图片列表
 		 $change_1="nutri_1.jpg";
