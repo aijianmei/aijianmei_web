@@ -44,6 +44,18 @@ class AppendAction extends Action {
 		 $articleid_2="56";
 		 $articleid_3="92";
 		 $articleid_4="57";
+		 $name_1="为什么你现在就需要蛋白质营养品";
+		 $name_2="蛋白质的种类和益处的介绍";
+		 $name_3="肌肉生长你所需的6种营养辅助品";
+		 $name_4="肌氨酸";
+		 $describe_1="蛋白质是身体用作功能的三种大量营养素之一 ,充足的蛋白质摄入量对身体健康是至关重要的。很多人在食物中吸取蛋白质会有困难…… ";
+		 $describe_2="蛋白质的辅助品种类繁多，包括了蛋白粉、增重粉、替餐奶昔和蛋白质条，它们都含有大量的蛋白质。它们便携，可以在一天中的任何时刻食用，这是正餐所没有办法做到的。";
+		 $describe_3="把这些营养辅助品加到你的节食计划当中，这样是增加肌肉和能力的最快、最有效率的方法。下面这6种营养辅助品会使你的身体达到一个代谢同化、燃烧脂肪、增加肌肉的阶段…… 
+
+";
+		 $describe_4="肌氨酸能提高肌肉的力量和耐力，提高身体恢复力和减低疲劳感，显然这些对你的训练很有帮助。肌氨酸是一种天然的供能物质，而主要供能对象是肌肉细胞。
+
+";
 		 $this->assign('change_1',$change_1);
 		 $this->assign('change_2',$change_2);
 		 $this->assign('change_3',$change_3);
@@ -52,6 +64,14 @@ class AppendAction extends Action {
 		 $this->assign('articleid_2',$articleid_2);
 		 $this->assign('articleid_3',$articleid_3);
 		 $this->assign('articleid_4',$articleid_4);
+		  $this->assign('describe_1',$describe_1);
+		 $this->assign('describe_2',$describe_2);
+		 $this->assign('describe_3',$describe_3);
+		 $this->assign('describe_4',$describe_4);
+		 $this->assign('name_1',$name_1);
+		 $this->assign('name_2',$name_1);
+		 $this->assign('name_3',$name_1);
+		 $this->assign('name_3',$name_1);
 		//-------END--------
 		$this->display();
 	}
