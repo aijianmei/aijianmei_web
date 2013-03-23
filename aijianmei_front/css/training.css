@@ -28,8 +28,11 @@
 			}
 			.tr_classify{
 				float: left;
-				width: 178px;
-				margin: 0 15px 5px 0;
+				width: 170px;
+				margin: 0 10px 10px 0;
+				padding: 5px;
+				border: 1px solid #e6e4e4;
+				box-shadow: 0 0 8px #ccc;
 			}
 			.pic_ct{
 				font-size: 13px;
@@ -70,8 +73,7 @@
 			.tr_top{
 				margin-top: 10px;
 				padding: 10px 0;
-				border: 1px solid #21ace3;
-				border-radius: 8px;
+				border: 1px solid rgb(243, 243, 243);
 			}
 			.classify{
 				float: left;
@@ -101,6 +103,7 @@
 				margin: 10px 0;
 				font-size: 20px;
 				color: #003096;
+				font-family: '微软雅黑'，'黑体',Tahoma Arial;
 			}
 			.read_content{
 				font-size: 15px;
@@ -139,7 +142,7 @@
 			}
 				.plan_article_tl{
 					display: inline-block;
-					height: 40px;
+					height: 22px;
 					padding-top: 8px;
 					font-size: 16px;
 					color: #56888F;
@@ -151,10 +154,8 @@
 					font-size: 12px;
 				}
 				.new_video img,.hot_video img{
-					height:137px;
-					width:176px;
-					border-radius: 8px;
-					border:2px solid transparent;
+					height: 110px;
+					width: 172px;
 				}
 			.article_top{
 				height:120px;
@@ -193,7 +194,7 @@
 							}
 			.pertinence{
 				position: relative;
-				height: 410px;
+				height: 425px;
 				margin: 0 197px;
 				font-size: 14px;
 				background: url(../images/training/training_bottom.png) no-repeat;
