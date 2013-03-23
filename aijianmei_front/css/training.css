@@ -31,6 +31,7 @@
 				width: 170px;
 				margin: 0 10px 10px 0;
 				padding: 5px;
+				font-size: 12px;
 				border: 1px solid #e6e4e4;
 				box-shadow: 0 0 8px #ccc;
 			}
@@ -43,9 +44,8 @@
 			}
 
 			.summary{
-				height:58px;
-				line-height: 20px;
-				font-size: 12px;
+				height:60px;
+				line-height: 18px;
 			}
 			.clear_both{
 				clear:both;
@@ -403,7 +403,7 @@ margin-bottom: 20px;
 				height: 100px;
 				background: #ccc;
 			}
-			.vdos .info{
+			.info{
 				height:15px;
 				margin-top:8px;
 				font-size:12px;
