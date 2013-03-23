@@ -706,10 +706,24 @@ button{
 		font-weight: 600;
 	}
 	.each_video{
+		transition:all .2s;
+		-webkit-transition:all .2s ease-in;
+		-mos-transition:all .2s;
+		-o-transition:all .2s;
 		line-height: 32px;
 		font-size: 13px;
 		margin:2px;
 		padding-left:20px;
+		border-radius:6px;
+	}
+	.each_video:hover{
+		background: #21ace3;
+		color:white;
+		box-shadow: 0 0 4px black;
+	}
+	.each_video:hover a{
+		font-weight: 700;
+		color:white;
 	}
 	.right_training{
 		float:left;
