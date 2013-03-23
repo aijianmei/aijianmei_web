@@ -708,6 +708,7 @@ button{
 	.each_video{
 		line-height: 32px;
 		font-size: 13px;
+		margin:2px;
 		padding-left:20px;
 	}
 	.right_training{
