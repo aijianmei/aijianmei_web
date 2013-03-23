@@ -33,7 +33,7 @@ class AppendAction extends Action {
 		//$this->assign('cate', $cate);
 		$this->assign('articles', $articles);
 		//$this->assign('categories', $realCate);
-		$this->assign('cssFile', 'add');
+		$this->assign('cssFile', 'training');
 
 		//banner 滚动图片列表
 		 $change_1="append_1.jpg";
