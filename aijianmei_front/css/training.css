@@ -140,6 +140,9 @@
 			.hot_video,.new_video{
 				margin: 10px 15px;
 			}
+			.lay_hot_video,.lay_new_video{
+				margin-right: -10px;
+			}
 				.plan_article_tl{
 					display: inline-block;
 					height: 35px;
@@ -403,6 +406,8 @@ margin-bottom: 20px;
 				font-size:12px;
 			}
 			.play_time{
+				display: inline-block;
+				height: 16px;
 				padding-left: 27px;
 				background: url(../images/wm3.png) 0 -416px no-repeat;
 			}
