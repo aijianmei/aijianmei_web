@@ -52,7 +52,7 @@ $(function(){
 			$('.massage').css("opacity","0.8")
 		},
 		function(){
-			$('.massage').css("opacity","0.2")
+			$('.massage').css("opacity","0.3")
 		}
 	)
 })
@@ -117,7 +117,8 @@ $(function(){
 		
 					
 });
-//js for border
+//js from weimian..................
+			//添加事件监听
 			var addevent = function(element,type,handle){
 				if(element.addEventListener){
 					element.addEventListener(type,handle,false)
@@ -133,6 +134,7 @@ $(function(){
 		            };
 		        }
 			}
+			//获取dom元素
 			var getdom = function(){
 				this.$ = function(id){
 					return document.getElementById(id);
@@ -166,126 +168,7 @@ $(function(){
 				    }
 				    return null;
 				}
-			}
-			//动态添加页面的版图，可以动态调节大小，图片个数
-			var dynamicPicture = {
-				newdom : new getdom,
-				handlew_h : function(obj,num,supply_width,supply_height,t){
-					obj.style.width = t ? supply_width + 'px' : supply_width*num + 'px';
-					obj.style.height = supply_height + 'px';
-				},
-				handlenumber : function(obj,num,supply_width,supply_height){
-					var a = 18*num,
-						x = (supply_width - a)/num,
-						y = (supply_height - 20);
-					obj.style.width = x + 'px';
-					obj.style.height = y + 'px'
-					obj.firstChild.style.width = x + 'px'; 
-					obj.firstChild.style.height = y + 'px';
-				},
-				getHtml : function(types,classname){
-					if(classname != ''){
-						var Types = document.createElement(types);
-						Types.className = classname;
-						return Types;
-					}
-					else{
-						return document.createElement(types);
-					}
-				},
-				appear : function(){
-					var massage = dynamicPicture.newdom.getElementsByClass('massage')[this.index];
-					this.firstChild.appendChild(massage);
-				},
-				getul_1 : function(arr_1,arr_2,number,s_width,s_height){
-					var lay_banner = dynamicPicture.newdom.getElementsByClass('lay_banner')[0],
-						ul = dynamicPicture.getHtml('ul','ul_1 clearfix'),
-						li = {},
-						a = {},
-						img = {},
-						i; 
-					for(var i = 0;i < number;i++){
-						li[i] = dynamicPicture.getHtml('li','change_1');
-						a[i] = dynamicPicture.getHtml('a','relation_1');
-						a[i].href = arr_2[i];
-						img[i] = dynamicPicture.getHtml('img','pic_1');
-						img[i].src = arr_1[i];	
-						a[i].appendChild(img[i]);
-						li[i].index = i;
-						addevent(li[i],'mouseover',dynamicPicture.appear);
-						li[i].appendChild(a[i]);
-						ul.appendChild(li[i]);
-					}
-					dynamicPicture.handlew_h(ul,number,s_width,s_height);
-					lay_banner.appendChild(ul);	
-				},
-				getul_2 : function(arr_1,number,s_width,s_height){
-					var choice_area = dynamicPicture.newdom.getElementsByClass('choice_area')[0],
-						ul = dynamicPicture.getHtml('ul','ul_2 clearfix'),
-						li = {},
-						img = {},
-						a_1 = dynamicPicture.getHtml('a','ps_left'),
-						a_2 = dynamicPicture.getHtml('a','ps_right');
-					for(var i = 0;i < number;i++){
-						if(i == 0){
-							li[i] = dynamicPicture.getHtml('li','first_choice');
-						}
-						else{
-							li[i] = dynamicPicture.getHtml('li');
-						}
-						img[i] = dynamicPicture.getHtml('img','relative_pic');
-						img[i].src = arr_1[i];	
-						li[i].appendChild(img[i]);
-						ul.appendChild(li[i]);
-						ul.appendChild(a_1);
-						ul.appendChild(a_2);
-						dynamicPicture.handlenumber(li[i],number,s_width,s_height);
-					};	
-					dynamicPicture.handlew_h(ul,number,s_width,s_height,1);
-					choice_area.appendChild(ul);	
-				},
-				init : function(option){
-					var body = document.getElementsByTagName('body')[0],
-						li_1 = [],
-						num = option.Num,
-						width = option.Width,
-						f_height = option.F_height,
-						b_height = option.B_height,
-						b_width = option.B_width,
-						pic = option.Pic,
-						small_pic = option.Small_pic,
-						href = option.Href;
-					dynamicPicture.getul_1(pic,href,num,width,f_height),	
-					dynamicPicture.getul_2(small_pic,num,b_width,b_height);	
-				}
-			}
-			//添加内容示范
-			// dynamicPicture.init({
-			// 	Num : 4,//这是版图的个数
-			// 	Width : '860',//大图的宽度
-			// 	F_height : '270',//大图的高度
-			// 	B_height : '110',//对应小图的高度
-			// 	B_width : '720',//对应小图的总长
-			// 	Pic : [//大图的地址
-			// 		'images/banner.jpg',
-			// 		'images/1.gif',
-			// 		'images/2.gif',
-			// 		'images/3.gif'
-			// 	],
-			// 	Small_pic : [//对应小图的地址
-			// 		'images/banner.jpg',
-			// 		'images/1.gif',
-			// 		'images/2.gif',
-			// 		'images/3.gif'
-			// 	],
-			// 	Href : [//大图的相应链接
-			// 		'plan.html',
-			// 		'plan.html',
-			// 		'plan.html',
-			// 		'plan.html'
-			// 	]
-			// })
-
+			}		
 
 
 			//为obj的子元素添加有色边框
@@ -438,7 +321,91 @@ $("a.show_enter").mouseover(function(){
 });
 
 
+//公共部分！！！选择页面，上下页切换
+	$(".page a").hover(
+		function(){
+			$(this).css("border-color","#21ace3")
+		},
+		function(){
+			$(this).css("border-color","")
+		}
+	)
+//动态改变背景图片，用在那些背景鼠标过去按钮原色变化的对象上
+			var move = function(obj,url,num){
+				var newdom = new getdom,
+					id = newdom.getElementsByClass(obj)[0],
+					image = id.style.backgroundImage,
+					currentpositionY = id.style.backgroundPositionY;
+				id.onmouseover = function(){
+					if(num != null){
+						this.style.background = 'url('+url+')';
+						this.style.backgroundPositionX = '0px';
+						this.style.backgroundPositionY = num;
+						
+					}					
+					else{
+						this.style.background = 'url('+url+')';
+					}
+					// console.log(this.style.backgroundPosition)			
+				}
+				id.onmouseout = function(){
+					this.style.backgroundImage = image;
+					this.style.backgroundPositionX = '0px';
+					this.style.backgroundPositionY = currentpositionY;
+				}
+			}
+			// move('background','images/wm2.png','-220px')第一个是对象class属性，第二个是地址，第三个是雪碧图的Y值
 
+//添加控制透明函数
+		var getclass = {//控制渐变透明度
+				opacity : function(obj,filter,speed){
+					var newdom = new getdom,
+						obj = newdom.getElementsByClass(obj)[0] || obj,
+						obj_opacity = newdom.GetCurrentStyle(obj,'opacity') ? newdom.GetCurrentStyle(obj,'opacity') : 1,
+						obj_filter = newdom.GetCurrentStyle(obj,'filter'),//获取filter的值，表现形式为alpha(opacity=10);
+						value = obj_filter.replace(/[^0-9]/ig,"");//使用正则表达式转换为数字字符串（80）
+					obj.style.opacity = obj_opacity;
+					var change_opacity = function(){
+						if(obj_opacity > filter){
+							var time = function(){
+								setTimeout(function(){
+									if(obj_opacity > filter){
+										obj_opacity = obj_opacity - 0.1;
+										obj.style.opacity = parseFloat(obj.style.opacity) - 0.1;
+										if(document.all){
+											value = parseFloat(value) - 10;
+											obj.style.filter = 'alpha(opacity = '+value+')';//兼容ie
+										}
+										time();
+									}
+								},speed)
+							};
+							time();
+						}
+						else{
+							var time = function(){
+								setTimeout(function(){
+									if(filter > obj_opacity){
+										filter = filter - 0.1;
+										obj.style.opacity = parseFloat(obj.style.opacity) + 0.1;
+										if(document.all){
+											value = parseFloat(value) + 10;//将字符串转化为数字，使用的是parsefloat
+											obj.style.filter = 'alpha(opacity = '+value+')';//兼容ie
+										}
+										time();
+									}
+								},speed)
+							};
+							time();
+						}
+					}
+					change_opacity();
+				}
+			}
+		//使用方式
+		// document.getElementsByTagName('input')[0].onclick = function(){
+		// 		getclass.opacity('picture',0.4,10);
+		// 	}	
 
 
 
@@ -545,8 +512,6 @@ $("a.show_enter").mouseover(function(){
 			};
 			fade.init('store');
 			fade.init('forum');
-                        fade.init('foot-store');
-                        fade.init('dev');
 			if(document.getElementById('teach')){
 				fade.init('teach');
 			}

@@ -1,49 +1,49 @@
 $(function(){
-	//页面选择
-	$(".lay_page a").click(function(){
-		$(".lay_page a").removeClass("choice_page")
-		$(this).addClass("choice_page")
-		if($(".lay_page a").index(this) == 0){
-			$(".pre_page").css({'color':'#ccc'})
-		}
-		else{
-			$(".pre_page").css({'color':'#656565','cursor':'pointer'})
-		}
-		if($(".lay_page a").index(this) == 4){
-			$(".next_page").css({'color':'#ccc','cursor':'default'})
-		}
-		else{
-			$(".next_page").css({'color':'#656565'})
-		}
-	})
+	// //页面选择
+	// $(".lay_page a").click(function(){
+	// 	$(".lay_page a").removeClass("choice_page")
+	// 	$(this).addClass("choice_page")
+	// 	if($(".lay_page a").index(this) == 0){
+	// 		$(".pre_page").css({'color':'#ccc'})
+	// 	}
+	// 	else{
+	// 		$(".pre_page").css({'color':'#656565','cursor':'pointer'})
+	// 	}
+	// 	if($(".lay_page a").index(this) == 4){
+	// 		$(".next_page").css({'color':'#ccc','cursor':'default'})
+	// 	}
+	// 	else{
+	// 		$(".next_page").css({'color':'#656565'})
+	// 	}
+	// })
 	
 
 	//下一页、上一页
 	//4==$(".tab_2 .lay_page a").length-1
-	$(".next_page").click(function(){
-		var index = $(".choice_page").index();
-		if(index != 4){
-			index++;
-			$(".pre_page").css({'color':'#656565','cursor':'pointer'})
-			$(".lay_page a").removeClass("choice_page")
-			$(".lay_page a").eq(index).addClass("choice_page")
-		}
-		if(index == 4){
-			$(".next_page").css({'color':'#ccc','cursor':'default'})
-		}
-	})
-	$(".pre_page").click(function(){
-		var index = $(".choice_page").index();
-		if(index != 0){
-			index--;
-			$(".next_page").css({'color':'#656565','cursor':'pointer'})
-			$(".lay_page a").removeClass("choice_page")
-			$(".lay_page a").eq(index).addClass("choice_page")
-		}
-		if(index == 0){
-			$(".pre_page").css({'color':'#ccc','cursor':'default'})
-		}
-	})
+	// $(".next_page").click(function(){
+	// 	var index = $(".choice_page").index();
+	// 	if(index != 4){
+	// 		index++;
+	// 		$(".pre_page").css({'color':'#656565','cursor':'pointer'})
+	// 		$(".lay_page a").removeClass("choice_page")
+	// 		$(".lay_page a").eq(index).addClass("choice_page")
+	// 	}
+	// 	if(index == 4){
+	// 		$(".next_page").css({'color':'#ccc','cursor':'default'})
+	// 	}
+	// })
+	// $(".pre_page").click(function(){
+	// 	var index = $(".choice_page").index();
+	// 	if(index != 0){
+	// 		index--;
+	// 		$(".next_page").css({'color':'#656565','cursor':'pointer'})
+	// 		$(".lay_page a").removeClass("choice_page")
+	// 		$(".lay_page a").eq(index).addClass("choice_page")
+	// 	}
+	// 	if(index == 0){
+	// 		$(".pre_page").css({'color':'#ccc','cursor':'default'})
+	// 	}
+	// })
 
 	//全部评论
 	$(".comment_1").click(
