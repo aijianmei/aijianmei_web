@@ -12,7 +12,6 @@ class InfoAction extends Action {
         public function aboutUs()
         {            
             $this->display('about_us');
-            $this->ajaxReturn('123');
         }
 
 /*

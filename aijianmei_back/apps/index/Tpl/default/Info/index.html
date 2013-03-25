@@ -16,13 +16,15 @@
             $.ajax({
                 dataType:'html',
                 url:requestUrl,
-                success:function(data,statue){                    
-                    mainContent = data;
+                success:function(te,statue){
+                    mainContent = te;
                     $('.content').empty().append(mainContent);
+                    return false;
                 },
-                error:function(data,statue){                    
-                    mainContent = data;
+                error:function(te,statue){
+                    mainContent = te;
                     $('.content').empty().append(mainContent);
+                    return false;
                 }
             });            
             return false;
