@@ -1,7 +1,49 @@
 <?php
 class AppendAction extends Action {
+	function show_banner(){
+			//banner 滚动图片列表
+		 $change_1="append_1.jpg";
+	     $change_2="append_2.jpg";
+	     $change_3="append_3.jpg";
+	     $change_4="append_4.jpg";
+	     $articleid_1="60";
+		 $articleid_2="56";
+		 $articleid_3="92";
+		 $articleid_4="57";
+		 $name_1="为什么你现在就需要蛋白质营养品";
+		 $name_2="蛋白质的种类和益处的介绍";
+		 $name_3="肌肉生长你所需的6种营养辅助品";
+		 $name_4="肌氨酸";
+		 $describe_1="蛋白质是身体用作功能的三种大量营养素之一 ,充足的蛋白质摄入量对身体健康是至关重要的。很多人在食物中吸取蛋白质会有困难…… ";
+		 $describe_2="蛋白质的辅助品种类繁多，包括了蛋白粉、增重粉、替餐奶昔和蛋白质条，它们都含有大量的蛋白质。它们便携，可以在一天中的任何时刻食用，这是正餐所没有办法做到的。";
+		 $describe_3="把这些营养辅助品加到你的节食计划当中，这样是增加肌肉和能力的最快、最有效率的方法。下面这6种营养辅助品会使你的身体达到一个代谢同化、燃烧脂肪、增加肌肉的阶段…… 
+
+";
+		 $describe_4="肌氨酸能提高肌肉的力量和耐力，提高身体恢复力和减低疲劳感，显然这些对你的训练很有帮助。肌氨酸是一种天然的供能物质，而主要供能对象是肌肉细胞。
+
+";
+		 $this->assign('change_1',$change_1);
+		 $this->assign('change_2',$change_2);
+		 $this->assign('change_3',$change_3);
+		 $this->assign('change_4',$change_4);
+		 $this->assign('articleid_1',$articleid_1);
+		 $this->assign('articleid_2',$articleid_2);
+		 $this->assign('articleid_3',$articleid_3);
+		 $this->assign('articleid_4',$articleid_4);
+		  $this->assign('describe_1',$describe_1);
+		 $this->assign('describe_2',$describe_2);
+		 $this->assign('describe_3',$describe_3);
+		 $this->assign('describe_4',$describe_4);
+		 $this->assign('name_1',$name_1);
+		 $this->assign('name_2',$name_2);
+		 $this->assign('name_3',$name_3);
+		 $this->assign('name_4',$name_4);
+		//-------END--------
+
+		}
 	public function index()
 	{
+		
 		$map['channel'] = '4';
 		$cate = M('article_category')->where($map)->findAll();
 		foreach($cate as $c) {
@@ -33,18 +75,11 @@ class AppendAction extends Action {
 		//$this->assign('cate', $cate);
 		$this->assign('articles', $articles);
 		//$this->assign('categories', $realCate);
-		$this->assign('cssFile', 'add');
-
-		//banner 滚动图片列表
-		 $change_1="append_1.jpg";
-	     $change_2="append_2.jpg";
-	     $change_3="append_3.jpg";
-	     $change_4="append_4.jpg";
-		 $this->assign('change_1',$change_1);
-		 $this->assign('change_2',$change_2);
-		 $this->assign('change_3',$change_3);
-		 $this->assign('change_4',$change_4);
-		//-------END--------
+		$this->assign('cssFile', 'training');
+		$this->show_banner();//banner 滚动图片列表
+/*
+		
+		*/
 		$this->display();
 	}
 	
@@ -111,17 +146,7 @@ class AppendAction extends Action {
 		$a['title']=substr($a['title'],0,10)."...";		
 		$lastArticles = D('Article')->getAppendArticles('create_time', $id);
 		$this->assign('lastArticles', $lastArticles);
-		
-		 //banner 滚动图片列表
-		 $change_1="12.jpg";
-	     $change_2="09.jpg";
-	     $change_3="10.jpg";
-	     $change_4="11.jpg";
-		 $this->assign('change_1',$change_1);
-		 $this->assign('change_2',$change_2);
-		 $this->assign('change_3',$change_3);
-		 $this->assign('change_4',$change_4);
-		//-------END--------
+		$this->show_banner();//banner 滚动图片列表
 		
 		$this->display('list');
 	}
@@ -150,18 +175,7 @@ class AppendAction extends Action {
 		//foreach($hotArticles as $a) echo $a['title'];//$a['title']=substr($a['title'],0,10)."...";		
 		$lastArticles = D('Article')->getAppendArticles('create_time');
 		$this->assign('lastArticles', $lastArticles);
-		
-		 //banner 滚动图片列表
-		 $change_1="12.jpg";
-	     $change_2="09.jpg";
-	     $change_3="10.jpg";
-	     $change_4="11.jpg";
-		 $this->assign('change_1',$change_1);
-		 $this->assign('change_2',$change_2);
-		 $this->assign('change_3',$change_3);
-		 $this->assign('change_4',$change_4);
-		//-------END--------
-		
+		$this->show_banner();//banner 滚动图片列表
 		$this->display('vlist');
 		/*$id = intval($_GET['id']);
 		$videos = M('video')->where(array('category_id'=>$id))->findAll();

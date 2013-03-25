@@ -72,52 +72,37 @@
 
 				<div class="part_top clearfix">
 					<div class="lay_top clearfix">
-						<h1 class="public_title">最佳锻炼文章<span class="hr_3 hr"></span></h1>
-						<ul class="hot_video clearfix">
-							<php>$i=1;foreach($hotArticles as $a) {	
-							if($i%4==0){</php>
-							<li class="tr_classify last_classify">
+						<h1 class="public_title">最佳锻炼文章<span class="hr_3 hr"></h1>
+						<div class="hot_video">
+						<ul class="lay_new_video clearfix">
+							<php>foreach($hotArticles as $a) {</php>
+							<li class="tr_classify ">
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}
 								</p>
 							</li>
-							<php>}else {</php>
-								<li class="tr_classify ">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
-								<p class="summary">{$a['brief']}
-								</p>
-							</li>
-							<php>}$i+=1;
-							}</php>
+							<php>}</php>
 						</ul>
+					</div>
 					</div>
 				</div>
 
 				<div class="part_top clearfix">
 					<div class="lay_top clearfix">
 						<h1 class="public_title">最近锻炼文章</h1>
-						<ul class="new_video clearfix">
-						<php>$i=1;foreach($lastArticles as $a) {	
-							if($i%4==0){
-						    </php>
-							<li class="tr_classify last_classify">
+						<div class="hot_video">
+						<ul class="lay_hot_video clearfix">
+						<php>foreach($lastArticles as $a) {</php>
+							<li class="tr_classify">
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}</p>
 								<!-- <a href="#" class="add_expend">查看所有腹肌锻炼程序</a> -->
 							</li>
-						<php>}else {</php>
-							<li class="tr_classify ">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
-								<p class="summary">{$a['brief']}</p>
-								<!-- <a href="#" class="add_expend">查看所有腹肌锻炼程序</a> -->
-							</li>
-					<php>}$i+=1;
-					}</php>
+						<php>}</php>
 						</ul>
+					</div>
 					</div>
 				</div>
 
@@ -125,22 +110,14 @@
 					<div class="lay_top clearfix">
 						<h1 class="public_title">其他分类</h1>
 						<ul class="hot_video clearfix">
-						<php>$i=1;foreach($articles as $a) {
-							if($i%4==0){
+						<php>foreach($articles as $a) {
 						</php>
-							<li class="tr_classify last_classify">
+							<li class="tr_classify ">
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}</p>
 							</li>
-						<php>}else {</php>
-						<li class="tr_classify ">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
-								<p class="summary">{$a['brief']}</p>
-							</li>
-						<php>}$i+=1;	
-						}</php>
+						<php>}</php>
 						</ul>
 					</div>
 				</div>

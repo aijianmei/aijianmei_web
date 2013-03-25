@@ -31,6 +31,7 @@
 				width: 170px;
 				margin: 0 10px 10px 0;
 				padding: 5px;
+				font-size: 12px;
 				border: 1px solid #e6e4e4;
 				box-shadow: 0 0 8px #ccc;
 			}
@@ -43,9 +44,8 @@
 			}
 
 			.summary{
-				height:70px;
-				line-height: 20px;
-				font-size: 12px;
+				height:60px;
+				line-height: 18px;
 			}
 			.clear_both{
 				clear:both;
@@ -140,11 +140,14 @@
 			.hot_video,.new_video{
 				margin: 10px 15px;
 			}
+			.lay_hot_video,.lay_new_video{
+				margin-right: -10px;
+			}
 				.plan_article_tl{
 					display: inline-block;
-					height: 22px;
+					height: 35px;
 					padding-top: 8px;
-					font-size: 16px;
+					font-size: 14px;
 					color: #56888F;
 					font-weight: 700;
 				}
@@ -268,7 +271,7 @@ margin-bottom: 20px;
 			margin: 10px 15px;
 		}
 		.whole_part{
-			margin-right: -10px;
+			margin-right: -15px;
 		}
 		.son_sw{
 			margin-right: -15px;
@@ -355,29 +358,32 @@ margin-bottom: 20px;
 		margin:0 15px;
 	}
 	.all .all_ul{
-		border-bottom:1px solid #E5E5E5;
-		margin:0 auto;
+		line-height: 23px;
+		padding-bottom: 5px;
+		margin:10px auto;
+		border-bottom: 1px solid rgb(231, 231, 231);
 	}
 	/****** 选择分类 ********/
 		.video .select{
-			margin:10px;
+			
+		}
+		.opt{
+			vertical-align: top;
+			font-size: 14px;
+		}
+		.opt_length{
+			display: inline-block;
+			width: 530px;
 		}
 			.select a{
-				color:#6377AD;
-				display: inline-block;
-				margin-right: 15px;
-				font-weight:bold;
-				width:70px;
-				text-align:center;
-				cursor:pointer;
+				color: rgb(33, 172, 227);
+				font-size: 13px;
+				cursor: pointer;
 			}
-			.select a:hover{
-				text-decoration:underline;
-			}
-			.select .pre{
-				background:#69696C;
+			/*.select .pre{
+				background:rgb(33, 172, 227);
 				color:white;
-			}
+			}*/
 		/******* 列表 ********/
 		.video .each{
 			margin-right: -15px;
@@ -386,22 +392,25 @@ margin-bottom: 20px;
 		}
 		/***** 视频列表 ****/
 		.vdos{
-			width: 174px;
+			width: 173px;
 			display: inline-block;
 			margin: 0 15px 5px 0;
 			
 		}
 			.vdos .pic{
 				border-radius: 4px;
-				width: 174px;
+				width: 173px;
 				height: 100px;
 				background: #ccc;
 			}
-			.vdos .info{
+			.info{
+				height:15px;
 				margin-top:8px;
 				font-size:12px;
 			}
 			.play_time{
+				display: inline-block;
+				height: 16px;
 				padding-left: 27px;
 				background: url(../images/wm3.png) 0 -416px no-repeat;
 			}

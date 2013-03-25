@@ -6,8 +6,8 @@
 				<span>您所在的位置:</span>
 				<a href="/index.php?app=index">爱健美</a>->
 				<a href="/index.php?app=index&mod={$tree_channel_en}">{$first}</a>->
-				<a href="/index.php?app=index&mod={$tree_channel_en}&act=articleDetail&id={$tree_parent}">{$second}</a>->
-				<a href="/index.php?app=index&mod={$tree_channel_en}&act=articleDetail&id={$tree_category_id}">{$third}</a>->
+				<a href="/index.php?app=index&mod={$tree_channel_en}&act=articleList&id={$tree_parent}">{$second}</a>->
+				<a href="/index.php?app=index&mod={$tree_channel_en}&act=articleList&id={$tree_category_id}">{$third}</a>->
 				<a href="index.php?app=index&mod=Index&act=articleDetail&id={$article['id']}">{$article['title']}</a>
 				</span>
 				<php>$keywords = split(',', $article['keyword']);foreach($keywords as $k) {</php>
@@ -282,7 +282,10 @@
 					</div>
 					<div class="sider_m">
 						<h4 class="sider_t">推荐商品</h4>
+						<a href="#"><img class="recommend_prod" src="../Public/images/store_5/sd5_16.jpg" alt="no" border="0" /></a>
+						<!--
 						<a href="{$promote['link']}"><img class="recommend_prod" src="{$promote['image']}" alt="no" border="0" /></a>
+					-->
 					</div>
 					<div class="sider_m">
 						<h4 class="sider_t">精华推荐</h4>

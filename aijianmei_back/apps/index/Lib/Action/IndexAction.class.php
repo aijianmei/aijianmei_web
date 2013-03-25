@@ -1,5 +1,145 @@
 ﻿<?php
 class IndexAction extends Action {
+function show_banner($type){
+	if($type==1){
+		 $articleid_1="74";
+		 $articleid_2="72";
+		 $articleid_3="70";
+		 $articleid_4="69";
+		 $name_1="体重训练之锻炼";
+		 $name_2="体重训练之营养";
+		 $name_3="体重训练：辅助品 ";
+		 $name_4="体重训练：生活方式";
+		 $describe_1="如果你的目标是“不去健身房，短时间塑造健美身材”，那你就来对地方了。通过我们网站每天更新的健身资讯，你就能在指尖的点击间获取专业科学的健身规划。";
+		 $describe_2="最佳的身体体脂水平需要三个主要的东西：合适的营养、规律的锻炼和有效率的恢复。阅读一下这篇文章来确保你身体正确的自我修复，剩下的就是控制好你的营养摄入了。";
+		 $describe_3="所谓营养辅助品，就是辅助那些你从食物上面得到营养的东西。它们可以帮助你提升整体营养水平和为了达到特定目标而所需的条件。";
+		 $describe_4="不管你是谁、在哪里运动、或者你有多少经验，有几点你必须要遵守以成功达到目标。健身是很长的一个过程，而不是由一个月的随机零散的几个锻炼就完成了。";
+		 $change_1="1-1.jpg";
+		 $change_2="1-2.jpg";
+		 $change_3="1-3.jpg";
+		 $change_4="1-4.jpg";
+		 $this->assign('change_1',$change_1);
+		 $this->assign('change_2',$change_2);
+		 $this->assign('change_3',$change_3);
+		 $this->assign('change_4',$change_4);
+		 $this->assign('articleid_1',$articleid_1);
+		 $this->assign('articleid_2',$articleid_2);
+		 $this->assign('articleid_3',$articleid_3);
+		 $this->assign('articleid_4',$articleid_4);
+		  $this->assign('describe_1',$describe_1);
+		 $this->assign('describe_2',$describe_2);
+		 $this->assign('describe_3',$describe_3);
+		 $this->assign('describe_4',$describe_4);
+		 $this->assign('name_1',$name_1);
+		 $this->assign('name_2',$name_2);
+		 $this->assign('name_3',$name_3);
+		 $this->assign('name_4',$name_4);
+		}else if($type==2)
+		{
+		 $articleid_1="79";
+		 $articleid_2="78";
+		 $articleid_3="77";
+		 $articleid_4="76";
+		 $name_1="日常健身：锻炼";
+		 $name_2="日常健身：营养";
+		 $name_3="日常健身：辅助品 ";
+		 $name_4="日常健身：生活方式";
+		 $describe_1="我们所提供的锻炼计划和内容适用不同年龄层的男女朋友。在这里，女性朋友们可以拥有苗条、性感的身材，而男性朋友则可以收获强壮、结实的体魄。";
+		 $describe_2="你的目标是提高健身水平、显得更修长和增加整体的健康状况，对吗？如果是，那么这个营养计划会帮助你踏上正轨。";
+		 $describe_3="营养辅助品是在传统日常的食物来源之外为你提供额外的营养。他们有助于那些缺少特定营养的人补充营养，或者是对那种需要某种额外营养的人提供帮助。";
+		 $describe_4="健身计划是设计来促成这些目标的，你的目标是承诺跟随这些健身计划，读并且跟随我们的营养信息并且给予身体时间来恢复和改变，那是你健身的三个基础：营养、锻炼、恢复。";
+		 $change_1="2-1.jpg";
+		 $change_2="2-2.jpg";
+		 $change_3="2-3.jpg";
+		 $change_4="2-4.jpg";
+		 $this->assign('change_1',$change_1);
+		 $this->assign('change_2',$change_2);
+		 $this->assign('change_3',$change_3);
+		 $this->assign('change_4',$change_4);
+		 $this->assign('articleid_1',$articleid_1);
+		 $this->assign('articleid_2',$articleid_2);
+		 $this->assign('articleid_3',$articleid_3);
+		 $this->assign('articleid_4',$articleid_4);
+		  $this->assign('describe_1',$describe_1);
+		 $this->assign('describe_2',$describe_2);
+		 $this->assign('describe_3',$describe_3);
+		 $this->assign('describe_4',$describe_4);
+		 $this->assign('name_1',$name_1);
+		 $this->assign('name_2',$name_2);
+		 $this->assign('name_3',$name_3);
+		 $this->assign('name_4',$name_4);
+		}else if($type==3)
+		{
+		 $articleid_1="89";
+		 $articleid_2="88";
+		 $articleid_3="87";
+		 $articleid_4="91";
+		 $name_1="运动员：锻炼";
+		 $name_2="运动员：营养";
+		 $name_3="运动员：辅助品";
+		 $name_4="运动员：生活方式";
+		 $describe_1="无论是足球、篮球还是羽毛球运动员，这些计划的出发点都是帮助你达到最专业、具有竞争力的运动员水准。";
+		 $describe_2="如果你的目标是锻炼出像运动员一样的身材，那么你的饮食是至关重要的。首先，从了解自己的体脂水平开始，然后开始向你的目标进发！";
+		 $describe_3="营养辅助品在保持运动员动力、身体恢复还有为巅峰状态作准备方面扮演着至关重要的角色。";
+		 $describe_4="我们的目标是为了帮助我们的运动员成为中国最好的运动员，如果你跟随我们的每日例行运动。花点时间读网站上关于营养和辅助品的推荐，你肯定能把身体推到新的健身水平去。";
+		 $change_1="3-1.jpg";
+		 $change_2="3-2.jpg";
+		 $change_3="3-3.jpg";
+		 $change_4="3-4.jpg";
+		 $this->assign('change_1',$change_1);
+		 $this->assign('change_2',$change_2);
+		 $this->assign('change_3',$change_3);
+		 $this->assign('change_4',$change_4);	
+		 $this->assign('articleid_1',$articleid_1);
+		 $this->assign('articleid_2',$articleid_2);
+		 $this->assign('articleid_3',$articleid_3);
+		 $this->assign('articleid_4',$articleid_4);
+		  $this->assign('describe_1',$describe_1);
+		 $this->assign('describe_2',$describe_2);
+		 $this->assign('describe_3',$describe_3);
+		 $this->assign('describe_4',$describe_4);
+		 $this->assign('name_1',$name_1);
+		 $this->assign('name_2',$name_2);
+		 $this->assign('name_3',$name_3);
+		 $this->assign('name_4',$name_4);
+		}else 
+		{
+		 $articleid_1="91";
+		 $articleid_2="84";
+		 $articleid_3="82";
+		 $articleid_4="75";
+		 $name_1="健身运动员：锻炼";
+		 $name_2="健身运动员：营养";
+		 $name_3="健身运动员：辅助品";
+		 $name_4="健身运动员：生活方式";
+		 $describe_1="我们会指导你在健身的正轨锻炼——阅读我们关于训练、营养和补充品文章和教学视频，你会懂得很多丰富的健身知识，这对你实现目标来说非常重要。";
+		 $describe_2="营养特别容易被忽视，你每天需要3-5餐，并且中间最好夹杂一些小吃。这样吃一段时间，例如三个月，加上锻炼，你会迟早都能达到目标了。";
+		 $describe_3="通过在正确的时间服用适合分量的营养辅助品，你可以帮助你的身体来达到膳食不能达到的境界。";
+		 $describe_4="你要理解拥有完美身体的过场是很漫长而且顺序渐进的。不存在什么“一个月完美计划”，紧紧跟随我们的锻炼计划，在每天的锻炼中都投入努力和精力。";
+		 $change_1="4-1.jpg";
+		 $change_2="4-2.jpg";
+		 $change_3="4-3.jpg";
+		 $change_4="4-4.jpg";
+		 $this->assign('change_1',$change_1);
+		 $this->assign('change_2',$change_2);
+		 $this->assign('change_3',$change_3);
+		 $this->assign('change_4',$change_4);	
+		 $this->assign('articleid_1',$articleid_1);
+		 $this->assign('articleid_2',$articleid_2);
+		 $this->assign('articleid_3',$articleid_3);
+		 $this->assign('articleid_4',$articleid_4);
+		  $this->assign('describe_1',$describe_1);
+		 $this->assign('describe_2',$describe_2);
+		 $this->assign('describe_3',$describe_3);
+		 $this->assign('describe_4',$describe_4);
+		 $this->assign('name_1',$name_1);
+		 $this->assign('name_2',$name_2);
+		 $this->assign('name_3',$name_3);
+		 $this->assign('name_4',$name_4);
+		}
+
+	}
+
 	public function index() 
 	{
 		if (!empty($_GET['token'])) {
@@ -396,50 +536,7 @@ class IndexAction extends Action {
 		}
 		$this->assign("first",$tree_channel);
 		//banner 滚动图片列表
-		if($type==1)
-		{
-		 $change_1="1-1.jpg";
-		 $change_2="1-2.jpg";
-		 $change_3="1-3.jpg";
-		 $change_4="1-4.jpg";
-		 $this->assign('change_1',$change_1);
-		 $this->assign('change_2',$change_2);
-		 $this->assign('change_3',$change_3);
-		 $this->assign('change_4',$change_4);
-		}
-		else if($type==2)
-		{
-		 $change_1="2-1.jpg";
-		 $change_2="2-2.jpg";
-		 $change_3="2-3.jpg";
-		 $change_4="2-4.jpg";
-		 $this->assign('change_1',$change_1);
-		 $this->assign('change_2',$change_2);
-		 $this->assign('change_3',$change_3);
-		 $this->assign('change_4',$change_4);
-		}
-		else if($type==3)
-		{
-		 $change_1="3-1.jpg";
-		 $change_2="3-2.jpg";
-		 $change_3="3-3.jpg";
-		 $change_4="3-4.jpg";
-		 $this->assign('change_1',$change_1);
-		 $this->assign('change_2',$change_2);
-		 $this->assign('change_3',$change_3);
-		 $this->assign('change_4',$change_4);			
-		}
-		else
-		{
-		 $change_1="4-1.jpg";
-		 $change_2="4-2.jpg";
-		 $change_3="4-3.jpg";
-		 $change_4="4-4.jpg";
-		 $this->assign('change_1',$change_1);
-		 $this->assign('change_2',$change_2);
-		 $this->assign('change_3',$change_3);
-		 $this->assign('change_4',$change_4);	
-		}
+		$this->show_banner($type);
 		//-------END--------
 
 
@@ -510,7 +607,7 @@ class IndexAction extends Action {
 			case 1: {$tree_channel="健身计划 ";$tree_channel_en="Plan";}break;
 			case 2:{$tree_channel="锻炼 ";$tree_channel_en="Train";}break;
 			case 3:{$tree_channel="营养 ";$tree_channel_en="Nutri";}break;
-			case 4:{$tree_channel="补充 ";$tree_channel_en="Append";}break;
+			case 4:{$tree_channel="辅助品";$tree_channel_en="Append";}break;
 		}
 		$tree_parent=$result['parent'];		
 		$tree_name=$result['name'];

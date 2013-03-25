@@ -46,29 +46,24 @@ $(function(){
 	// })
 
 	//全部评论
-	$(".comment_1").click(
-		function(){
-			$(".comment_2").removeClass("comment_3")
-			$(this).addClass("comment_3")
-			$(".tab_1").css("display","block")
-			$(".tab_2").css("display","none")
-		}
-	)
-	$(".comment_2").click(
-		function(){
-			$(".comment_1").removeClass("comment_3")
-			$(this).addClass("comment_3")
-			$(".tab_2").css("display","block")
-			$(".tab_1").css("display","none")
-		}
-	)
+	// $(".comment_1").click(
+	// 	function(){
+	// 		$(".comment_2").removeClass("comment_3")
+	// 		$(this).addClass("comment_3")
+	// 		$(".tab_1").css("display","block")
+	// 		$(".tab_2").css("display","none")
+	// 	}
+	// )
+	// $(".comment_2").click(
+	// 	function(){
+	// 		$(".comment_1").removeClass("comment_3")
+	// 		$(this).addClass("comment_3")
+	// 		$(".tab_2").css("display","block")
+	// 		$(".tab_1").css("display","none")
+	// 	}
+	// )
 
-	//praise
-	$(".sprite_8").add(".sprite_9").click(function(){
-		var time = parseInt($(this).children().text());
-		time++;
-		$(this).children().html(time)
-	})
+	
 
 	//页面下拉列表
 	$(".read_time").hover(

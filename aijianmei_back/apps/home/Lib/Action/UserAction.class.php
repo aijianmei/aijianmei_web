@@ -68,8 +68,11 @@ class UserAction extends Action {
         $groups = M('friend_group')->where(array('uid'=>$this->mid))->findAll();
         $this->assign('groups', $groups);
         
-        $members = M('user')->limit('0,6')->findAll();
-        $this->assign('members', $members);
+        $active_members = M('user')->limit('0,6')->findAll();
+        $this->assign('active_members', $active_members);
+		
+		$new_members = M('user')->limit('0,20')->order('ctime desc')->findAll();
+		$this->assign('new_members', $new_members);
         
         $videos = M('video')->limit('0,3')->order('create_time desc')->findAll();
         $this->assign('videos', $videos);

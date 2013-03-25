@@ -119,7 +119,7 @@
 						</div>
 						<div class="member clearfix">
 							<h4>最活跃的会员</h4>
-							<php>foreach($members as $m) {</php>
+							<php>foreach($active_members as $m) {</php>
 							<dl class="member_info clearfix">
 								<dt>
 									<a href="" class="about_member">
@@ -164,7 +164,7 @@
 						</div>
 						<div class="member clearfix">
 							<h4>最新会员</h4>
-							<php>foreach($members as $m) {</php>
+							<php>foreach($new_members as $m) {</php>
 							<dl class="new_member_info clearfix">
 								<dt>
 									<a href="" class="about_member">
@@ -300,8 +300,8 @@
 								<input type="hidden" name="weibo_content_type" id="weibo_content_type" value="0" />
 								<ul class="btn clearfix">
 									<li class="select s1 f_b" onclick="weibo_content_type.value='0'">微博</li>
-									<li class="select s2" onclick="weibo_content_type.value='1'">爱问</li>
-									<li class="select s3" onclick="weibo_content_type.value='2'">预约</li>
+									<!--<li class="select s2" onclick="weibo_content_type.value='1'">爱问</li>
+									<li class="select s3" onclick="weibo_content_type.value='2'">预约</li>-->
 								</ul>
 								<div class="dialog">
 									<p class="dl_time">

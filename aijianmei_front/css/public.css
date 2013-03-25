@@ -322,8 +322,8 @@ button{
 		
 	/******* Logo ******/
 		.logo{
-			width:253px;
-			height:120px;
+			width:230px;
+			margin: 30px 0 0 20px;
 			float:left;
 		}
 			.logo a{
@@ -702,9 +702,24 @@ button{
 	}
 
 	.each_video{
+		transition:all 0.1s;
+		-webkit-transition:all 0.1s ease-out;
+		-moz-transition:all 0.1s;
+		-o-transition:all 0.1s;
 		line-height: 32px;
 		font-size: 13px;
+		margin:2px;
 		padding-left:20px;
+		border-radius:6px;
+	}
+	.each_video:hover{
+		background: #21ace3;
+		color:white;
+		box-shadow: 0 0 8px #21ace3;
+	}
+	.each_video:hover a{
+		font-weight: 700;
+		color:white;
 	}
 	.all{
 		font-size: 15px;
