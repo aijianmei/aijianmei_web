@@ -1011,42 +1011,6 @@ function show_banner($type){
 	
 	}
 	
-	public function about_us()
-	{
-		$this->assign('cssFile', 'about_us');
-		$this->display();	
-	}
-	
-	public function founders()
-	{
-		$this->assign('cssFile', 'about_us');
-		$this->display();
-	}
-	
-	public function ad()
-	{
-		$this->assign('cssFile', 'about_us');
-		$this->display();
-	}
-	
-	public function privacy()
-	{
-		$this->assign('cssFile', 'about_us');
-		$this->display();
-	}
-	
-	public function join()
-	{
-		$this->assign('cssFile', 'about_us');
-		$this->display();
-	}
-	
-	public function __call($name, $arguments)
-	{
-		$this->assign('cssFile', 'about_us');
-		$this->display($name);
-	}
-	
 	//检查昵称是否符合规则，且是否为唯一
 	public function isValidNickName($name) {
 	
