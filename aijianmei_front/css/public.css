@@ -856,3 +856,8 @@ span.enter_icon{
 	display: none;
 	z-index: 100;
 }
+/*商店价格红色显示*/
+.item_attr_detail .S_price{
+	float: none;
+	color: red;
+}
