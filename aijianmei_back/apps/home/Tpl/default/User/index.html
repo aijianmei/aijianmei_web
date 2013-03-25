@@ -97,19 +97,19 @@
 						<div class="user clearfix">
 							<dl class="user_info clearfix">
 								<dt>
-									<a href="personal.html" class="about_user">
+									<a href="{:U('home/Space/index', array('uid'=>$userInfo['uid']))}" class="about_user">
 										<img src="{$userInfo['face']}" alt="" class="user_img" />
 									</a>
 								</dt>
 								<dd>
-									<a href="personal.html" class="user_name">{$userInfo['uname']}</a>
+									<a href="{:U('home/Space/index', array('uid'=>$userInfo['uid']))}" class="user_name">{$userInfo['uname']}</a>
 								</dd>
 								<dd><a class="user_name user_rank"></a></dd>
 							</dl>
 							<ul class="user_atten">
-								<li class="attentions"><a href="fans.html"><span class="atten_amount">{$userInfo['followers_count']}</span>关注</a></li>
-								<li class="fans"><a href="fans.html"><span class="atten_amount">{$userInfo['followed_count']}</span>粉丝</a></li>
-								<li class="weibo"><a href="personal.html"><span class="atten_amount">{$userInfo['weibo_count']}</span>微博</a></li>
+								<li class="attentions"><a href="{:U('home/Space/follow', array('type'=>'following', 'uid'=>$userInfo['uid']))}"><span class="atten_amount">{$userInfo['followers_count']}</span>关注</a></li>
+								<li class="fans"><a href="{:U('home/Space/follow', array('type'=>'follower', 'uid'=>$userInfo['uid']))}"><span class="atten_amount">{$userInfo['followed_count']}</span>粉丝</a></li>
+								<li class="weibo"><a href="{:U('home/Space/index', array('uid'=>$userInfo['uid']))}"><span class="atten_amount">{$userInfo['weibo_count']}</span>微博</a></li>
 							</ul>
 						</div>
 						<div class="review">
@@ -282,11 +282,11 @@
 								</dd>
 							</dl>
 						</div> -->
-						<div class="member">
+						<!--<div class="member">
 							<h4>公告栏</h4>
 							<p class="notice">公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>
 							<a href="" class="view_detail">查看详情>></a>
-						</div>
+						</div>-->
 					</div><!--End Right-->
 					<div class="middle">
 						<div class="main_top clearfix">
@@ -368,10 +368,10 @@
 							</ul>
 							
 						</div> -->
-						<div class="ad">
+						<!--<div class="ad">
 							<button title="关闭" class="close_ad"></button>
 							<a href=""><img src="../Public/images/pal/banner.jpg" alt="" /></a>
-						</div>
+						</div>-->
 						<div class="sort clearfix">
 							<ul class="grade clearfix">
 								<li class="grade_item current">全部</li>
