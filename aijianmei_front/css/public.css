@@ -706,10 +706,10 @@ button{
 		font-weight: 600;
 	}
 	.each_video{
-		transition:all .2s;
-		-webkit-transition:all .2s ease-in;
-		-mos-transition:all .2s;
-		-o-transition:all .2s;
+		transition:all 0.1s;
+		-webkit-transition:all 0.1s ease-out;
+		-moz-transition:all 0.1s;
+		-o-transition:all 0.1s;
 		line-height: 32px;
 		font-size: 13px;
 		margin:2px;
@@ -719,7 +719,7 @@ button{
 	.each_video:hover{
 		background: #21ace3;
 		color:white;
-		box-shadow: 0 0 4px black;
+		box-shadow: 0 0 8px #21ace3;
 	}
 	.each_video:hover a{
 		font-weight: 700;
