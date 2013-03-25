@@ -245,6 +245,18 @@ button{
 			float:left;
 			margin:2px;
 		}
+		#my_cart{
+			position: relative;
+
+		}
+		.cart{
+			position: absolute;
+			width: 30px;
+			height: 14px;
+			left: -30px;
+			display: inline-block;
+			background: url("../images/cart0.png") no-repeat;
+		}
 		#login{
 			cursor:pointer;
 		}
