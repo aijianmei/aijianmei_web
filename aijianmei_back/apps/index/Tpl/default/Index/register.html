@@ -11,7 +11,7 @@
 				<form class="formest" action="/index.php?app=index&mod=Index&act=doRegister" method="post" id="form1">
 					<div class="box box_1">
 						<label class="items" for="text_1"><span class="show_state state_1">*</span>注册邮箱</label>
-						<input type="text" class="text" name="email" id="text_1" value="">
+						<input type="text" class="text" name="email" id="text_1" value="" onblur="checkEmail(this)">
 						<div class="prompt_box_1 same_prompt"></div>
 					</div>
 					<div class="box box_2">
@@ -211,7 +211,7 @@
 					</div>
 					<div class="box box_9">
 						<input type="checkbox" class="protect_box">
-						<span>我已阅读协议<a class="linktoprotect">《爱健美服务使用协议》</a></span>
+						<span>我已阅读协议<a href="http://dev.aijianmei.com/apps/index/Tpl/default/Public/direct.html" class="linktoprotect">《爱健美服务使用协议》</a></span>
 					</div>
 					<div class="box_10"><a class="submit_1 for_submit_2"><span class="open_1">立即开通</span></a></div>
 				</form>
@@ -230,6 +230,17 @@
 			$("#province_2").change(function() {
 				getCity("province_2", "city_2");
 			});
+			function checkEmail(obj) {
+				var email = obj.value;
+				$.post('/ajax.php?act=check_email', {'email':email}, function(m) {
+					if(m==1) {
+						alert('该邮箱已经注册！');
+						obj.value='';
+					}else {
+						//	
+					}
+				})
+			}
 			</script>
 			<div class="rightsidebar">
 					<div class="A_login">
