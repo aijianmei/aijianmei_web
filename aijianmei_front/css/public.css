@@ -700,15 +700,20 @@ button{
 		padding-bottom: 6px;
 		font-size: 16px;
 	}
-	.all{
-		font-size: 16px;
-		color:black;
-		font-weight: 600;
-	}
+
 	.each_video{
 		line-height: 32px;
 		font-size: 13px;
 		padding-left:20px;
+	}
+	.all{
+		font-size: 15px;
+		color:black;
+		font-weight: 600;
+		padding-left: 10px;
+	}
+	.all a{
+		color: black;
 	}
 	.right_training{
 		float:left;
