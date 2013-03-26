@@ -8,6 +8,7 @@
 			<link rel="stylesheet" href="../Public/css/{$cssFile}.css" />	
 			<!-- <link rel="stylesheet" href="../Public/css/jquery-ui.css" />  -->
 			<!--  <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>	-->
+
 		</head>
 <body>
 		<div class="body"></div>
@@ -69,6 +70,7 @@
 			<div class="wrapper">
 				<div id="header">
 					<ul class="top">
+						<li><a id="my_cart"><span class="cart"></span>购物车(0) </a>|</li>
 					<php>if(getMid()) {</php>
 					<li><span>欢迎你，<php>echo getUserName(getMid())</php></span>
 					<php>} else {</php>
@@ -105,7 +107,7 @@
 						</fieldset>
 					</form>
 					<div class="logo">
-						<a href="index.hmtl">
+						<a href="/index.php?app=index">
 							<img src="../Public/images/logo.png" alt="aijianmei" />
 						</a>
 					</div>
