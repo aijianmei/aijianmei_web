@@ -9,10 +9,10 @@ f<include file="../Public/header" />
 							<span class="border_line"></span>
 							<h3 class="video_all">计划</h3>
 							<span class="border_line"></span>
-							<li id="loss" class="each_video"><a href="{:U('index/Plan/plan_loss')}">上班族锻炼</a></li>
-							<li id="build" class="each_video"><a href="{:U('index/Plan/plan_build')}">日常健身</a></li>
-							<li class="each_video"><a href="{:U('index/Plan/coach')}">运动员</a></li>
-							<li class="each_video"><a href="{:U('index/Plan/gym')}">健身运动员</a></li>
+							<li id="loss" class="each_video"><a href="/index.php?app=index&mod=Index&act=info&type=1">上班族锻炼</a></li>
+							<li id="build" class="each_video"><a href="/index.php?app=index&mod=Index&act=info&type=2">日常健身</a></li>
+							<li class="each_video"><a href="/index.php?app=index&mod=Index&act=info&type=3">运动员</a></li>
+							<li class="each_video"><a href="/index.php?app=index&mod=Index&act=info&type=4">健身运动员</a></li>
 							<span class="border_line"></span>
 						</ul>
 					</div>
@@ -27,7 +27,7 @@ f<include file="../Public/header" />
 						<div class="train clearfix">
 							<div class="sort">
 								<dl>
-									<dt><a href="/index.php?app=index&mod=Index&act=info&type=1"><img class="show_pic" src="../Public/images/mr_01.jpg" alt="" /></a></dt>
+									<dt><a href="/index.php?app=index&mod=Index&act=info&type=1" class="show_enter"><span class="enter_icon" style="display: none;"></span><img class="show_pic" src="../Public/images/mr_01.jpg" alt="" /></a></dt>
 									<dd class="sort_title"><a href="/index.php?app=index&mod=Index&act=info&type=1">上班族健身</a></dd>
 									<dd>
 										<?php foreach($shangban as $id=>$t) { ?>
@@ -39,7 +39,7 @@ f<include file="../Public/header" />
 							</div>
 							<div class="sort">
 								<dl>
-									<dt><a href="/index.php?app=index&mod=Index&act=info&type=2"><img class="show_pic" src="../Public/images/mr_02.jpg" alt="" /></a></dt>
+									<dt><a href="/index.php?app=index&mod=Index&act=info&type=2" class="show_enter"><span class="enter_icon" style="display: none;"></span><img class="show_pic" src="../Public/images/mr_02.jpg" alt="" /></a></dt>
 									<dd class="sort_title"><a href="/index.php?app=index&mod=Index&act=info&type=2">日常健身</a></dd>
 									<dd>
 										<?php foreach($richang as $id=>$t) { ?>
@@ -51,7 +51,7 @@ f<include file="../Public/header" />
 							</div>
 							<div class="sort">
 								<dl>
-									<dt><a href="/index.php?app=index&mod=Index&act=info&type=3"><img class="show_pic" src="../Public/images/mr_03.jpg" alt="" /></a></dt>
+									<dt><a href="/index.php?app=index&mod=Index&act=info&type=3" class="show_enter"><span class="enter_icon" style="display: none;"></span><img class="show_pic" src="../Public/images/mr_03.jpg" alt="" /></a></dt>
 									<dd class="sort_title"><a href="/index.php?app=index&mod=Index&act=info&type=3">运动员</a></dd>
 									<dd>
 										<?php foreach($zhuanye as $id=>$t) { ?>
@@ -63,7 +63,7 @@ f<include file="../Public/header" />
 							</div>
 							<div class="sort">
 								<dl>
-									<dt><a href="/index.php?app=index&mod=Index&act=info&type=4"><img class="show_pic" src="../Public/images/mr_04.jpg" alt="" /></a></dt>
+									<dt><a href="/index.php?app=index&mod=Index&act=info&type=4" class="show_enter"><span class="enter_icon" style="display: none;"></span><img class="show_pic" src="../Public/images/mr_04.jpg" alt="" /></a></dt>
 									<dd class="sort_title"><a href="/index.php?app=index&mod=Index&act=info&type=4">健身运动员</a></dd>
 									<dd>
 										<?php foreach($jianmei as $id=>$t) { ?>
@@ -77,6 +77,7 @@ f<include file="../Public/header" />
 					</div>
 					<span class="corner_bottom"></span>
 				</div>
+				<!--
 				<div class="part_top clearfix">
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
@@ -143,9 +144,9 @@ f<include file="../Public/header" />
 						</div>
 					</div>
 					<span class="corner_bottom"></span>
-				</div><!--End step-->
+				</div>--><!--End step-->
 
-
+						<!--
 						<div id="show_hide">
 								<div class="exer">
 									<span class="corner_left"></span>
@@ -179,7 +180,7 @@ f<include file="../Public/header" />
 					</div>
 					<span class="corner_bottom"></span>
 				</div>
-			</div><!--End content-->
+			</div>--><!--End content-->
 		</div>
 
 <include file="../Public/footer" />
