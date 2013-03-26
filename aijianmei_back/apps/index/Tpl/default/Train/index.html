@@ -10,10 +10,14 @@
 						<h3 class="video_all">全部</h3>
 						<span class="border_line"></span>
 						<ul>
-							<php>foreach($categories as $c) {</php>
-								<li class="each_video all">
-									<a href="{:U('index/Train/articleList', array('id'=>$c['id']))}">{$c['name']}</a>
+							<li class="each_video all">
+									<a href="/index.php?app=index&mod=Train">健身</a>
 								</li>
+							<php>foreach($categories as $c) {</php>
+								<!--<li class="each_video all">
+									<a href="{:U('index/Train/articleList', array('id'=>$c['id']))}">{$c['name']}</a>
+								</li>-->
+								
 								<php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
 									<li class="each_video">
 										<a href="/index.php?app=index&mod=Train&act={$action}&id={$child['id']}">{$child['name']}</a>
@@ -109,7 +113,7 @@
 				<div class="part_top clearfix">
 					<div class="lay_top clearfix">
 						<h1 class="public_title">其他分类</h1>
-						<ul class="hot_video clearfix">
+						<ul class="lay_hot_video clearfix">
 						<php>foreach($articles as $a) {
 						</php>
 							<li class="tr_classify ">
@@ -122,7 +126,7 @@
 					</div>
 				</div>
 						
-
+				<!--
 				<div class="clear_both">
 					<h1 class="public_title">根据身体部位找到适合的锻炼视频</h1>
 					<div class="pertinence">
@@ -148,7 +152,7 @@
 							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">犊牛<span>(腓肠肌)</span></a></li>
 						</ul>
 					</div>
-				</div>
+				</div>-->
 
 
 				<div class="part_top clearfix">
