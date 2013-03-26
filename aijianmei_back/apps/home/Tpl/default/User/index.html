@@ -41,19 +41,19 @@
 							<h4 class="left_sort">别人都在看</h4>
 							<ul>
 								<li  class="scan">
-									<a class="scan_pic" href="">
+									<a class="scan_pic" href="{:U('index/Train/index')}">
 										<img class="scan_pic_img" src="../Public/images/pal/v1.jpg" alt="" />
 										<span class="scan_pic_name">胸肌、手臂训练范例</span>
 									</a>
 								</li>
 								<li class="scan" >
-									<a class="scan_pic" href="">
+									<a class="scan_pic" href="{:U('index/Train/index')}">
 										<img class="scan_pic_img" src="../Public/images/pal/v2.jpg" alt="" />
 										<span class="scan_pic_name">腹肌、手臂训练范例</span>
 									</a>
 								</li>
 								<li class="scan" >
-									<a class="scan_pic" href="">
+									<a class="scan_pic" href="{:U('index/Train/index')}">
 										<img class="scan_pic_img" src="../Public/images/pal/v3.jpg" alt="" />
 										<span class="scan_pic_name">腹肌、手臂训练范例</span>
 									</a>
@@ -97,19 +97,19 @@
 						<div class="user clearfix">
 							<dl class="user_info clearfix">
 								<dt>
-									<a href="personal.html" class="about_user">
+									<a href="{:U('home/Space/index', array('uid'=>$userInfo['uid']))}" class="about_user">
 										<img src="{$userInfo['face']}" alt="" class="user_img" />
 									</a>
 								</dt>
 								<dd>
-									<a href="personal.html" class="user_name">{$userInfo['uname']}</a>
+									<a href="{:U('home/Space/index', array('uid'=>$userInfo['uid']))}" class="user_name">{$userInfo['uname']}</a>
 								</dd>
 								<dd><a class="user_name user_rank"></a></dd>
 							</dl>
 							<ul class="user_atten">
-								<li class="attentions"><a href="fans.html"><span class="atten_amount">{$userInfo['followers_count']}</span>关注</a></li>
-								<li class="fans"><a href="fans.html"><span class="atten_amount">{$userInfo['followed_count']}</span>粉丝</a></li>
-								<li class="weibo"><a href="personal.html"><span class="atten_amount">{$userInfo['weibo_count']}</span>微博</a></li>
+								<li class="attentions"><a href="{:U('home/Space/follow', array('type'=>'following', 'uid'=>$userInfo['uid']))}"><span class="atten_amount">{$userInfo['followers_count']}</span>关注</a></li>
+								<li class="fans"><a href="{:U('home/Space/follow', array('type'=>'follower', 'uid'=>$userInfo['uid']))}"><span class="atten_amount">{$userInfo['followed_count']}</span>粉丝</a></li>
+								<li class="weibo"><a href="{:U('home/Space/index', array('uid'=>$userInfo['uid']))}"><span class="atten_amount">{$userInfo['weibo_count']}</span>微博</a></li>
 							</ul>
 						</div>
 						<div class="review">
@@ -282,11 +282,11 @@
 								</dd>
 							</dl>
 						</div> -->
-						<div class="member">
+						<!--<div class="member">
 							<h4>公告栏</h4>
 							<p class="notice">公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>
 							<a href="" class="view_detail">查看详情>></a>
-						</div>
+						</div>-->
 					</div><!--End Right-->
 					<div class="middle">
 						<div class="main_top clearfix">
@@ -368,19 +368,19 @@
 							</ul>
 							
 						</div> -->
-						<div class="ad">
+						<!--<div class="ad">
 							<button title="关闭" class="close_ad"></button>
 							<a href=""><img src="../Public/images/pal/banner.jpg" alt="" /></a>
-						</div>
+						</div>-->
 						<div class="sort clearfix">
-							<ul class="grade clearfix">
+							<!--<ul class="grade clearfix">
 								<li class="grade_item current">全部</li>
 								<li class="grade_item">初学者</li>
 								<li class="grade_item">运动员</li>
 								<li class="grade_item">健美者</li>
 								<li class="grade_item">减肥者</li>
 								<li class="grade_item">模特</li>
-							</ul>
+							</ul>-->
 							<div class="search_adv">
 								<form action="">
 									<input class="inner_search" type="text" value="查找作者、内容或标签"/>
@@ -389,13 +389,13 @@
 							</div>
 						</div>
 						<div class="weibo">
-							<ul class="clearfix">
+							<!--<ul class="clearfix">
 								<li class="wb_item curr_sort"><a href="">全部</a></li>
 								<li class="wb_item"><a href="">原创</a></li>
 								<li class="wb_item"><a href="">图片</a></li>
 								<li class="wb_item"><a href="">视频</a></li>
 								<li class="wb_item"><a href="">音乐</a></li>
-							</ul>
+							</ul>-->
 						</div>
 						<div class="data">
 							<!-- <div class="wb_face">
@@ -512,12 +512,12 @@
 					<div class="f_list">
 						<h4>发现爱健美</h4>
 						<ul id="app">	
-							<li><a href="store.html">爱健美商店</a></li>
-							<li><a href="training.html">锻炼</a></li>
-							<li><a href="plan.html">健身计划</a></li>
-							<li><a href="nutri.html">营养</a></li>
-							<li><a href="add.html">补充</a></li>
-							<li><a href="pal.html">交友互动</a></li>
+							<li><a href="#">爱健美商店</a></li>
+							<li><a href="{:U('index/Train/index')}">锻炼</a></li>
+							<li><a href="{:U('index/Plan/index')}">健身计划</a></li>
+							<li><a href="{:U('index/Nutri/index')}">营养</a></li>
+							<li><a href="{:U('index/Append/index')}">补充</a></li>
+							<li><a href="{:U('home/User/index')}">交友互动</a></li>
 						</ul>
 					</div>
 					<div class="f_list">

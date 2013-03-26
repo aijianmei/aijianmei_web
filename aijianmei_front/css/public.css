@@ -245,6 +245,18 @@ button{
 			float:left;
 			margin:2px;
 		}
+		#my_cart{
+			position: relative;
+
+		}
+		.cart{
+			position: absolute;
+			width: 30px;
+			height: 14px;
+			left: -30px;
+			display: inline-block;
+			background: url("../images/cart0.png") no-repeat;
+		}
 		#login{
 			cursor:pointer;
 		}
@@ -700,11 +712,7 @@ button{
 		padding-bottom: 6px;
 		font-size: 16px;
 	}
-	.all{
-		font-size: 16px;
-		color:black;
-		font-weight: 600;
-	}
+
 	.each_video{
 		transition:all 0.1s;
 		-webkit-transition:all 0.1s ease-out;
@@ -716,6 +724,10 @@ button{
 		padding-left:20px;
 		border-radius:6px;
 	}
+	.each_video a{
+		cursor: pointer;
+		display: block;
+	}
 	.each_video:hover{
 		background: #21ace3;
 		color:white;
@@ -724,6 +736,17 @@ button{
 	.each_video:hover a{
 		font-weight: 700;
 		color:white;
+	}
+	.all{
+		font-size: 15px;
+		color:black;
+		font-weight: 600;
+		padding-left: 10px;
+		cursor: pointer;
+	}
+	.all a{
+		color: black;
+		display: block;
 	}
 	.right_training{
 		float:left;
@@ -832,4 +855,9 @@ span.enter_icon{
 	top: 5px;
 	display: none;
 	z-index: 100;
+}
+/*商店价格红色显示*/
+.item_attr_detail .S_price{
+	float: none;
+	color: red;
 }
