@@ -514,5 +514,7 @@ $("a.show_enter").mouseover(function(){
 			fade.init('forum');
 			if(document.getElementById('teach')){
 				fade.init('teach');
+			}if(document.getElementById('my_cart')){
+				fade.init('my_cart');
 			}
 
