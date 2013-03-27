@@ -163,8 +163,8 @@
 						<h2 class="title_4">{$c['name']}</h2>
 						<ul class="re_nav clearfix">
 							<php>foreach($c['children'] as $child) {</php>
-							<li>
-								<a href="training_1.html">{$child['name']}</a>
+                                                        <li class="each_video">
+								<a href="/index.php?app=index&mod=Train&act={$action}&id={$child['id']}">{$child['name']}</a>
 							</li>
 							<php>}</php>
 						</ul>
