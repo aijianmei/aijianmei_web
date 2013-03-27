@@ -243,12 +243,15 @@
 	display:none; 
 	text-align:center; 
 	line-height:30px; 
-	width:28px; 
+	width:60px; 
 	bottom:35px; 
-	height:90px; 
+	height:60px; 
 	font-size:12px; 
 	cursor:pointer;
 	background: url(../images/01.png) no-repeat;
+}
+.goTopBtn:hover{
+	background: url(../images/go1.png) no-repeat;
 }
 .goTopBtn a{
 	/*display: block;
