@@ -128,7 +128,7 @@
 
 /*子页面新增视频内容*/
 		.content{
-			width: 700px;
+			width: 730px;
 			margin:5px auto;
 		}
 		.content .ct{
@@ -159,12 +159,12 @@
 					height: 103px;					
 				}
 		.content .tab_mune{
-			width:703px;
+			width:730px;
 			height:49px;
 		}
 			.tab_mune .tab{
 				float: left;
-				width: 173px;
+				width: 180px;
 				height: 47px;
 				border: 1px solid #D8D8D8;
 				background: url(../images/store_4/sd3_06.jpg) repeat-x;

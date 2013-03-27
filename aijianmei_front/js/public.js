@@ -367,11 +367,11 @@ $(function(){
 $("a.show_enter").mouseover(function(){
 	$(this).children(".enter_icon").css("display","block");
 	$(this).children("img").css("border-color","#21ace3");
-	$(this).children(".v_enter").css('backgroundPositionY','-571px')
+	$(this).children(".v_enter").css('background','url(images/wm3.png) no-repeat 0 -490px')
 	$(this).mouseout(function(){
 		$(this).children(".enter_icon").css("display","none");
 		$(this).children("img").css("border-color","transparent");
-		$(this).children(".v_enter").css('backgroundPositionY','-490px')
+		$(this).children(".v_enter").css('background','')
 	})
 });
 
