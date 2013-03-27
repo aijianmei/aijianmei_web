@@ -382,6 +382,7 @@ margin-bottom: 20px;
 			width: 530px;
 		}
 			.select a{
+				display: inline-block;
 				color: rgb(33, 172, 227);
 				font-size: 13px;
 				cursor: pointer;
@@ -484,7 +485,7 @@ margin-bottom: 20px;
 	/*底部汇总导航栏*/
 
 		.position_nav{
-			margin-right: -2px;
+			margin: 0px -2px 2px 0;
 		}
 		.nav_cf{
 			position: relative;
@@ -523,10 +524,10 @@ margin-bottom: 20px;
 			z-index: 100;
 			opacity: 0;
 			filter:alpha(opacity=0);
-			transition:opacity .5s linear;
-			-webkit-transition:opacity .5s linear;
-			-moz-transition:opacity .5s linear;
-			-o-transition:opacity .5s linear;
+			transition:opacity 0.3s linear;
+			-webkit-transition:opacity 0.3s linear;
+			-moz-transition:opacity 0.3s linear;
+			-o-transition:opacity 0.3s linear;
 		}
 		.nav_detail li{			
 			float: left;
@@ -550,8 +551,8 @@ margin-bottom: 20px;
 			opacity: 0;
 			filter:alpha(opacity=0);
 			z-index: 99;
-			transition:opacity .5s linear;
-			-webkit-transition:opacity .5s linear;
-			-moz-transition:opacity .5s linear;
-			-o-transition:opacity .5s linear;
+			transition:opacity 0.3s linear;
+			-webkit-transition:opacity 0.3s linear;
+			-moz-transition:opacity 0.3s linear;
+			-o-transition:opacity 0.3s linear;
 		}

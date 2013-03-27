@@ -202,47 +202,21 @@
 			.rt_picture{
 
 			}
-/****** mode_2--------------------------------- *****/
-		.mode_2{
-			padding: 4px 0;
-			border:1px solid #ccc;
-			border-top: 3px solid #C6DAE5; 
-		}
-			.s_nav_left{
-
-			}
-			.s_nav_left li{
-				float: left;
-				margin: 0 4px;
-				padding: 2px 4px;
-				border: 1px solid #ddd;
-			}
-				.current_click{
-					color:white;
-					background:#FF0000;
-				}
-			.s_nav_right{
-
-			}
-			.s_nav_right li{
-				float: right;
-				margin: 0 4px;
-				padding: 2px;				
-			}
-				.strong{
-					font-weight:600;
-					color:#0E709A;
-				}
 /****** mode_3 ------------------------------*****/
 		.mode_3{
 
 		}
 			.ar_block{
-				margin: 20px auto;
+				margin: 20px;
 				padding: 20px 0 20px 10px;
-				width: 600px;
 				background: #f3f3f3;
 
+			}
+			.block_img{
+				float: left;
+				width: 81px;
+				height: 70px;
+				margin-right: 10px;
 			}
 			.ar_block span{
 				display: inline-block;
@@ -250,6 +224,35 @@
 			}
 			.ar_block p{
 				margin-right: 50px;
+			}
+/******* 视频 *************/		
+	.video{
+		display:inline-block;
+		margin:0 15px;
+	}
+	.all .all_ul{
+		line-height: 23px;
+		padding-bottom: 5px;
+		margin:10px auto;
+		border-bottom: 1px solid rgb(231, 231, 231);
+	}
+	/****** 选择分类 ********/
+		.video .select{
+			
+		}
+		.opt{
+			vertical-align: top;
+			font-size: 14px;
+		}
+		.opt_length{
+			display: inline-block;
+			width: 530px;
+		}
+			.select a{
+				display: inline-block;
+				color: rgb(33, 172, 227);
+				font-size: 13px;
+				cursor: pointer;
 			}
 
 
