@@ -408,7 +408,10 @@ margin-bottom: 20px;
 				margin-top:8px;
 				font-size:12px;
 			}
-			.play_time{
+			.tr_classify .t_play_time{
+				background: url(../images/wm3.png) 0 -465px no-repeat;
+			}
+			.play_time,.t_play_time{
 				display: inline-block;
 				height: 16px;
 				padding-left: 27px;
