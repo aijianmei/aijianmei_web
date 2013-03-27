@@ -367,9 +367,11 @@ $(function(){
 $("a.show_enter").mouseover(function(){
 	$(this).children(".enter_icon").css("display","block");
 	$(this).children("img").css("border-color","#21ace3");
+	$(this).children(".v_enter").css('backgroundPositionY','-571px')
 	$(this).mouseout(function(){
 		$(this).children(".enter_icon").css("display","none");
 		$(this).children("img").css("border-color","transparent");
+		$(this).children(".v_enter").css('backgroundPositionY','-490px')
 	})
 });
 
@@ -386,25 +388,28 @@ $("a.show_enter").mouseover(function(){
 //动态改变背景图片，用在那些背景鼠标过去按钮原色变化的对象上
 			var move = function(obj,url,num){
 				var newdom = new getdom,
-					id = newdom.getElementsByClass(obj)[0],
-					image = id.style.backgroundImage,
-					currentpositionY = id.style.backgroundPositionY;
-				id.onmouseover = function(){
-					if(num != null){
-						this.style.background = 'url('+url+')';
-						this.style.backgroundPositionX = '0px';
-						this.style.backgroundPositionY = num;
-						
-					}					
-					else{
-						this.style.background = 'url('+url+')';
+					id = newdom.getElementsByClass(obj),
+					len = id.length,
+					image = id[0].style.backgroundImage,
+					currentpositionY = id[0].style.backgroundPositionY;
+				for(var i = 0;i < len;i++){
+					id[i].onmouseover = function(){
+						if(num != null){
+							this.style.background = 'url('+url+')';
+							this.style.backgroundPositionX = '0px';
+							this.style.backgroundPositionY = num;
+							
+						}					
+						else{
+							this.style.background = 'url('+url+')';
+						}
+						// console.log(this.style.backgroundPosition)			
 					}
-					// console.log(this.style.backgroundPosition)			
-				}
-				id.onmouseout = function(){
-					this.style.backgroundImage = image;
-					this.style.backgroundPositionX = '0px';
-					this.style.backgroundPositionY = currentpositionY;
+					id[i].onmouseout = function(){
+						this.style.backgroundImage = image;
+						this.style.backgroundPositionX = '0px';
+						this.style.backgroundPositionY = currentpositionY;
+					}
 				}
 			}
 			// move('background','images/wm2.png','-220px')第一个是对象class属性，第二个是地址，第三个是雪碧图的Y值

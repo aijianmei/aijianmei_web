@@ -408,6 +408,15 @@ margin-bottom: 20px;
 				margin-top:8px;
 				font-size:12px;
 			}
+			.v_enter{
+				width: 70px;
+				height: 70px;
+				background: url(../images/wm3.png) no-repeat 0 -490px;
+				position: absolute;
+				left: 53px;
+				top: 15px;
+				z-index: 100;
+			}
 			.tr_classify .t_play_time{
 				background: url(../images/wm3.png) 0 -465px no-repeat;
 			}
