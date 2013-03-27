@@ -1,14 +1,17 @@
 <include file="../Public/header" />
+<script type="text/javascript" src="../Public/js/jquery.js"></script>	
+	<script type="text/javascript" src="../Public/js/public.js"></script>	
+	<script type="text/javascript" src="../Public/js/register.js"></script>
 <div id="content">
 			<div class="leftsidebar">
 				<div class="choice_register">
 					<a class="method email choice_me_1">电子邮箱注册</a>
-					<a class="method telephone">手机号码注册</a>
+					<!--<a class="method telephone">手机号码注册</a>-->
 				</div>
 				<form class="formest" action="/index.php?app=index&mod=Index&act=doRegister" method="post" id="form1">
 					<div class="box box_1">
 						<label class="items" for="text_1"><span class="show_state state_1">*</span>注册邮箱</label>
-						<input type="text" class="text" name="email" id="text_1" value="">
+						<input type="text" class="text" name="email" id="text_1" value="" onblur="checkEmail(this)">
 						<div class="prompt_box_1 same_prompt"></div>
 					</div>
 					<div class="box box_2">
@@ -38,26 +41,30 @@
 					</div>
 					<div class="box box_6">
 						<div class="province_box_1">
-							<select class="choice_province" size="value" name="province">
-						  		<option value="">广东</option>
+							<select class="choice_province" size="value" name="province" id="province_1">
+                            <php>foreach($area as $a) {</php>
+                            <option value="{$a['area_id']}">{$a['title']}</option>
+                            <php>}</php>
+						  		<!--<option value="">广东</option>
 						 		<option value="saab">北京</option>
 						  		<option value="opel">上海</option>
 						  		<option value="audi">福建</option>
 						  		<option value="saab">河南</option>
 						  		<option value="opel">香港</option>
-						  		<option value="audi">广西</option>
+						  		<option value="audi">广西</option>-->
 							</select>
 						</div>
 						<div class="province_box_2">
-							<select class="choice_province" size="value" name="city">
-						  		<option value="">广州</option>
-						 		<option value="saab">汕头</option>
-						  		<option value="opel">深圳</option>
-						  		<option value="audi">潮州</option>
-						  		<option value="saab">韶关</option>
-						  		<option value="opel">东莞</option>
-						  		<option value="audi">汕尾</option>
+                        <select class="parent"><option></option></select>
+                        <php>foreach($children as $k=>$child) {</php>
+							<select class="choice_province parent" size="value" name="city" id="{$k}"  style="display:none;">
+						  		 
+                                	<php>foreach($child as $c){</php>
+                                    	<option value="{$c['area_id']}">{$c['title']}</option>
+                                    <php>}</php>
+                                
 							</select>
+                            <php>}</php>
 						</div>
 					</div>
 					<div class="box box_7">
@@ -98,7 +105,7 @@
 						<label class="items" for="text_8"><span class="show_state">*</span>验证码</label>
 						<input type="text" class="text proven_box" id="text_8">
 						<div class="prompt_box_8">
-							<a class="proven_pic"></a><a class="forchange">换一换</a>
+							<!--<a class="proven_pic"></a>--><img id="verify_code" src="/public/captcha.php" /><a class="forchange" href="javascript:void(0)" onclick="verify_code.src='/public/captcha.php'">换一换</a>
 						</div>
 					</div>
 					<div class="box box_9">
@@ -140,26 +147,24 @@
 					</div>
 					<div class="box box_6">
 						<div class="province_box_1">
-							<select class="choice_province" size="value">
-						  		<option value="">广东</option>
-						 		<option value="saab">北京</option>
-						  		<option value="opel">上海</option>
-						  		<option value="audi">福建</option>
-						  		<option value="saab">河南</option>
-						  		<option value="opel">香港</option>
-						  		<option value="audi">广西</option>
+							<select class="choice_province" name="province" size="value" id="provinve_2" onchange="getCity(this)">
+                            <php>foreach($area as $a) {</php>
+                            <option value="{$a['area_id']}">{$a['title']}</option>
+                            <php>}</php>
+						  		
 							</select>
 						</div>
 						<div class="province_box_2">
-							<select class="choice_province" size="value">
-						  		<option value="">广州</option>
-						 		<option value="saab">汕头</option>
-						  		<option value="opel">深圳</option>
-						  		<option value="audi">潮州</option>
-						  		<option value="saab">韶关</option>
-						  		<option value="opel">东莞</option>
-						  		<option value="audi">汕尾</option>
+                        <php>foreach($children as $k=>$child) {</php>
+							<select class="choice_province parent" size="value" id="{$k}" name="city">
+						  		
+                                
+                                	<php>foreach($child as $c){</php>
+                                    	<option class="parent_{$k}" value="{$c['area_id']}">{$c['title']}</option>
+                                    <php>}</php>
+                                
 							</select>
+                            <php>}</php>
 						</div>
 					</div>
 					<div class="box box_7">
@@ -206,11 +211,37 @@
 					</div>
 					<div class="box box_9">
 						<input type="checkbox" class="protect_box">
-						<span>我已阅读协议<a class="linktoprotect">《爱健美服务使用协议》</a></span>
+						<span>我已阅读协议<a href="http://dev.aijianmei.com/apps/index/Tpl/default/Public/direct.html" class="linktoprotect">《爱健美服务使用协议》</a></span>
 					</div>
 					<div class="box_10"><a class="submit_1 for_submit_2"><span class="open_1">立即开通</span></a></div>
 				</form>
 			</div>
+            <script type="text/javascript">
+			function getCity(parent, child) {
+				var pid = $("#"+parent).val();
+				
+				
+			}
+			$("#province_1").change(function() {
+				var pid = $("#province_1").val();
+				$(".parent").hide();
+				$(".parent[id="+pid+"]").show();
+			});
+			$("#province_2").change(function() {
+				getCity("province_2", "city_2");
+			});
+			function checkEmail(obj) {
+				var email = obj.value;
+				$.post('/ajax.php?act=check_email', {'email':email}, function(m) {
+					if(m==1) {
+						alert('该邮箱已经注册！');
+						obj.value='';
+					}else {
+						//	
+					}
+				})
+			}
+			</script>
 			<div class="rightsidebar">
 					<div class="A_login">
 						<p>已有爱健美帐号?</p>
@@ -227,12 +258,12 @@
 					<div class="cooperate_target">
 						<p>使用合作网站帐号登录</p>
 						<div class="websibe">
-							<a class="cooperate web_1"></a>
-							<a class="cooperate web_2"></a>
+							<a class="cooperate web_1" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://dev.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a>
+							<!--<a class="cooperate web_2"></a>
 							<a class="cooperate web_3"></a>
 							<a class="cooperate web_4"></a>
 							<a class="cooperate web_5"></a>
-							<a class="cooperate web_6"></a>
+							<a class="cooperate web_6"></a>-->
 						</div>
 					</div>
 					<div class="A_intro">
@@ -242,8 +273,6 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="js/jquery.js"></script>	
-	<script type="text/javascript" src="js/public.js"></script>	
-	<script type="text/javascript" src="js/register.js"></script>
+	
 </body>
 </html>

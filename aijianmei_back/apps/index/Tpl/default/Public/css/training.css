@@ -28,8 +28,11 @@
 			}
 			.tr_classify{
 				float: left;
-				width: 178px;
-				margin: 0 15px 5px 0;
+				width: 170px;
+				margin: 0 10px 10px 0;
+				padding: 5px;
+				border: 1px solid #e6e4e4;
+				box-shadow: 0 0 8px #ccc;
 			}
 			.pic_ct{
 				font-size: 13px;
@@ -40,7 +43,7 @@
 			}
 
 			.summary{
-				height:70px;
+				height:58px;
 				line-height: 20px;
 				font-size: 12px;
 			}
@@ -65,13 +68,12 @@
 				font-size: 20px;
 			}
 			.part_content{
-				margin:10px 15px 0 15px;
+				margin:10px 15px;
 			}
 			.tr_top{
 				margin-top: 10px;
 				padding: 10px 0;
-				border: 1px solid #21ace3;
-				border-radius: 8px;
+				border: 1px solid rgb(243, 243, 243);
 			}
 			.classify{
 				float: left;
@@ -101,6 +103,7 @@
 				margin: 10px 0;
 				font-size: 20px;
 				color: #003096;
+				font-family: '微软雅黑'，'黑体',Tahoma Arial;
 			}
 			.read_content{
 				font-size: 15px;
@@ -137,11 +140,14 @@
 			.hot_video,.new_video{
 				margin: 10px 15px;
 			}
+			.lay_hot_video,.lay_new_video{
+				margin-right: -10px;
+			}
 				.plan_article_tl{
 					display: inline-block;
-					height: 40px;
+					height: 35px;
 					padding-top: 8px;
-					font-size: 16px;
+					font-size: 14px;
 					color: #56888F;
 					font-weight: 700;
 				}
@@ -151,10 +157,8 @@
 					font-size: 12px;
 				}
 				.new_video img,.hot_video img{
-					height:137px;
-					width:176px;
-					border-radius: 8px;
-					border:2px solid transparent;
+					height: 110px;
+					width: 172px;
 				}
 			.article_top{
 				height:120px;
@@ -193,7 +197,7 @@
 							}
 			.pertinence{
 				position: relative;
-				height: 410px;
+				height: 425px;
 				margin: 0 197px;
 				font-size: 14px;
 				background: url(../images/training/training_bottom.png) no-repeat;
@@ -266,6 +270,9 @@ margin-bottom: 20px;
 		.content_sw{
 			margin: 10px 15px;
 		}
+		.whole_part{
+			margin-right: -15px;
+		}
 		.son_sw{
 			margin-right: -15px;
 		}
@@ -278,8 +285,8 @@ margin-bottom: 20px;
 			color: #0C84BD;			
 		}
 			.rt_picture{
-				width: 174px;
-				height: 100px;
+				width: 170px;
+				height: 96px;
 				border: 2px solid transparent;
 			}
 /*从视频页面copy过来---------------------------------------------*/
@@ -381,21 +388,33 @@ margin-bottom: 20px;
 			border-bottom: 1px solid #ccd;
 		}
 		/***** 视频列表 ****/
-		.video .vdos{
-			width: 175px;
+		.vdos{
+			width: 173px;
 			display: inline-block;
-			margin: 10px 15px 5px 0;
+			margin: 0 15px 5px 0;
 			
 		}
-			.video .vdos .pic{
+			.vdos .pic{
 				border-radius: 4px;
-				width: 175px;
+				width: 173px;
 				height: 100px;
 				background: #ccc;
 			}
 			.vdos .info{
+				height:15px;
 				margin-top:8px;
 				font-size:12px;
+			}
+			.play_time{
+				display: inline-block;
+				height: 16px;
+				padding-left: 27px;
+				background: url(../images/wm3.png) 0 -416px no-repeat;
+			}
+			.comment_time{
+				float:right;
+				padding-left: 20px;
+				background: url(../images/wm3.png) 0 -439px no-repeat;
 			}
 		/******** 文章列表 ********/
 			.arts{

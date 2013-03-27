@@ -13,25 +13,25 @@
 					<div class="f_list">
 						<h4>获取帮助</h4>
 						<ul id="article">
-							<li><a href="../Public/help.html">新手指南</a></li>
-							<li><a href="../Public/direct.html">社区指导原则</a></li>
-							<li><a href="../Public/feedback.html">意见反馈</a></li>
+							<li><a href="#">新手指南</a></li>
+							<li><a href="{:U('index/Index/direct')}">社区指导原则</a></li>
+							<li><a href="{:U('index/Index/feedback')}">意见反馈</a></li>
 						</ul>
 					</div>
 					<div class="f_list">
 						<h4>关于我们</h4>
 						<ul id="video">
-                                                        <li><a href="../Public/about_us.html">关于爱健美</a></li>
-							<li><a href="../Public/contact.html">联系我们</a></li>
-							<li><a href="../Public/join.html">加入爱健美</a></li>
-							<li><a href="../Public/ad.html">广告投放与品牌推广</a></li>
-							<li><a href="../Public/privacy.html">隐私政策</a></li>
+                        <li><a href="{:U('index/Index/about_us')}">关于爱健美</a></li>
+							<li><a href="{:U('index/Index/contact')}">联系我们</a></li>
+							<li><a href="{:U('index/Index/join')}">加入爱健美</a></li>
+							<li><a href="{:U('index/Index/ad')}">广告投放与品牌推广</a></li>
+							<li><a href="{:U('index/Index/privacy')}">隐私政策</a></li>
 						</ul>
 					</div>
 					<div class="f_list">
 						<h4>更多</h4>
 						<ul id="teach">
-                                                    <li class="ttt"><a href="#">下载IOS客户端</a></li>
+                         <li><a href="#">下载IOS客户端</a></li>
 							<li><a href="#">下载Android客户端</a></li>
 							<li><a href="#">友情链接</a></li>
 						</ul>
@@ -50,7 +50,7 @@
 				</div><!--Footer End-->
 				<div id="lower_footer">
 					<span>广州加伦信息科技有限公司- 粤ICP备12085654号</span>
-					<a href="intro.html">www.aijianmei.com</a>
+					<a href="/index.php?app=index">www.aijianmei.com</a>
 				</div>
 			</div>
 <!-- 添加返回顶部按钮 -->
@@ -65,10 +65,211 @@
 					'name' : '',
 			}
 			</script>
-			<script type="text/javascript" src="../Public/js/jquery.js"></script>
+
+            <script type="text/javascript" src="../Public/js/jquery.js"></script>
 			<script type="text/javascript" src="../Public/js/public.js"></script>
-                        <script type="text/javascript" src="../Public/js/{$cssFile}.js"></script>
+            <script type="text/javascript" src="../Public/js/{$cssFile}.js"></script>
 			<script type="text/javascript">
+				$(function() {
+
+
+				//大图自动切换，左右切换，选择切换
+
+
+					var sWidth = $("#banner").width(); //获取焦点图的宽度（显示面积）
+
+
+					var len = $("#banner ul li").length; //获取焦点图个数
+
+
+					var index = 0;
+
+
+					var picTimer;
+
+
+					
+
+				//cjxlkkads
+					//添加按钮,上一页、下一页两个按钮
+
+
+					var btn = "<div class='btn'>";
+
+
+					for(var i=0; i < len; i++) {
+
+
+						btn += "<span></span>";
+
+
+					}
+
+
+					btn += "</div><div class='preNext pre'></div><div class='preNext next'></div>";
+
+
+					
+
+
+					$("#banner").append(btn);
+
+
+					
+
+
+
+
+
+					//为小按钮添加鼠标点击事件，以显示相应的内容
+
+
+					$("#banner .btn span").css("background","url(images/dian.png)").click(function() {
+
+
+						index = $("#banner .btn span").index(this);
+
+
+						showPics(index);
+
+
+					}).eq(0).trigger("click");
+
+
+
+
+
+					//上一页、下一页按钮透明度处理
+
+
+					$("#banner .preNext").css("opacity",0).hover(function() {
+
+
+						$(this).stop(true,false).animate({"opacity":"0.5"},300);
+
+
+					},function() {
+
+
+						$(this).stop(true,false).animate({"opacity":"0"},300);
+
+
+					});
+
+
+
+
+
+					//上一页按钮
+
+
+					$("#banner .pre").click(function() {
+
+
+						index -= 1;
+
+
+						if(index == -1) {index = len - 1;}
+
+
+						showPics(index);
+
+
+					});
+
+
+
+
+
+					//下一页按钮
+
+
+					$("#banner .next").click(function() {
+
+
+						index += 1;
+
+
+						if(index == len) {index = 0;}
+
+
+						showPics(index);
+
+
+					});
+
+
+
+
+
+					//左右滚动，外围ul元素的宽度
+
+
+					$("#banner ul").css("width",sWidth * (len));
+
+
+					
+
+
+					//鼠标滑上焦点图时停止自动播放，滑出时开始自动播放
+
+
+					$("#banner").hover(function() {
+
+
+						clearInterval(picTimer);
+
+
+					},function() {
+
+
+						picTimer = setInterval(function() {
+
+
+							showPics(index);
+
+
+							index++;
+
+
+							if(index == len) {index = 0;}
+
+
+						},3000);
+
+
+					}).trigger("mouseleave");
+
+
+					
+
+
+					//显示图片函数，根据接收的index值显示相应的内容
+
+
+					function showPics(index) { //普通切换
+
+
+						var nowLeft = -index*sWidth; //根据index值计算ul元素的left值
+
+
+						$("#banner ul").stop(true,false).animate({"left":nowLeft},300); //通过animate()调整ul元素滚动到计算出的position
+
+
+						$("#banner .btn span").css("background","url(../Public/images/dian.png)")
+
+
+											 .eq(index).css("background","url(../Public/images/landian.png)"); //为当前的按钮切换到选中的效果
+
+
+					}
+
+
+
+
+
+				});
+
 			function comments(comment, aid, act) {
 				if(!USER.id) {alert('请登录'); return false;}
 				var action = 'add'+act+'Comment';
@@ -109,6 +310,14 @@
 		 });
 
 			}
+			$(".tr_classify").hover(
+			function(){
+				$(this).css("box-shadow","0 0 8px #21ace3")
+			},
+			function(){
+				$(this).css("box-shadow","")
+			}
+		)
 			</script>
 			
 			<script type='text/javascript' charset='utf-8'>//验证码刷新

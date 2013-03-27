@@ -1,5 +1,5 @@
 /****** Reset **********/
-body,ul,li,p,h1,h2,h3,h4,button,input,dl,dd{
+body,ul,li,p,h1,h2,h3,h4,button,input,dl,dd,fieldset{
 	margin:0;
 	padding:0;
 }
@@ -11,7 +11,7 @@ img{
 	outline:0;
 }
 body{
-	font:14px Tahoma Arial,Helvetica,sans-serif;
+	font:14px Tahoma Arial,sans-serif,Helvetica;
 	color:#656565;
 	background:url(../images/b_g.jpg) repeat;
 }
@@ -245,6 +245,18 @@ button{
 			float:left;
 			margin:2px;
 		}
+		#my_cart{
+			position: relative;
+
+		}
+		.cart{
+			position: absolute;
+			width: 30px;
+			height: 14px;
+			left: -30px;
+			display: inline-block;
+			background: url("../images/cart0.png") no-repeat;
+		}
 		#login{
 			cursor:pointer;
 		}
@@ -301,6 +313,7 @@ button{
 			right:0px; 
 			top:0px; 
 			border:0;
+			margin: 3px 20px 2px 0;
 		}
 			.search label,.search legend{ 
 				display:none;
@@ -321,8 +334,8 @@ button{
 		
 	/******* Logo ******/
 		.logo{
-			width:253px;
-			height:120px;
+			width:230px;
+			margin: 30px 0 0 20px;
 			float:left;
 		}
 			.logo a{
@@ -408,7 +421,7 @@ button{
 				position: relative;
 				float:left;
 			}
-			.change_1 .pic_1{
+			.pic_1,.pic_2,.pic_3,.pic_4{
 				display: block;
 				width: 860px;
 				height: 270px;
@@ -421,8 +434,8 @@ button{
 				height: 270px;
 				width: 180px;
 				padding: 0 20px;
-				opacity: 0.2;
-				filter:alpha(opacity=20);
+				opacity: 0.3;
+				filter:alpha(opacity=30);
 				background: #020200;
 				z-index: 10;
 			}
@@ -448,18 +461,18 @@ button{
 			background:rgb(232, 234, 255);
 		}
 		.choice_area .ul_2{
-			margin:0 40px;
+			margin:0 60px;
 		}
 		.ul_2 li img{
-			width:158px;
-			height:83px;
+			width:140px;
+			height:80px;
 		}
 		.choice_area li{
 			float: left;
 			display: inline-block;
-			height: 83px;
-			width: 158px;
-			margin: 6px 15px;
+			height: 80px;
+			width: 140px;
+			margin: 6px 19px;
 			cursor: pointer;
 			border: 3px solid transparent;
 
@@ -652,23 +665,24 @@ button{
 				height: 34px;
 				line-height: 34px;
 				text-indent: 20px;
-				font-size: 26px;
+				font-size: 21px;
 				color: black;
 				background: url(../images/thbg.jpg) repeat-x;
+				font-family: '微软雅黑'，'黑体',Tahoma Arial;
 			}
 			.right_sider{
 				float:left;
 				width:790px;
-				border: #E0E0E0 1px solid;
 			}
 			.part_top{
 				position: relative;
-				padding-bottom: 1px;
 			}
 			.lay_top{
 				width:790px;
-				margin-bottom: 5px;
+				margin-bottom: 10px;
 				background: #FFF;
+				border: 1px solid #E0E0E0;
+				border-top:none;
 			}
 	/*导航栏共用样式*/
 			.sider_all{
@@ -698,15 +712,41 @@ button{
 		padding-bottom: 6px;
 		font-size: 16px;
 	}
-	.all{
-		font-size: 16px;
-		color:black;
-		font-weight: 600;
-	}
+
 	.each_video{
+		transition:all 0.1s;
+		-webkit-transition:all 0.1s ease-out;
+		-moz-transition:all 0.1s;
+		-o-transition:all 0.1s;
 		line-height: 32px;
 		font-size: 13px;
+		margin:2px;
 		padding-left:20px;
+		border-radius:6px;
+	}
+	.each_video a{
+		cursor: pointer;
+		display: block;
+	}
+	.each_video:hover{
+		background: #21ace3;
+		color:white;
+		box-shadow: 0 0 8px #21ace3;
+	}
+	.each_video:hover a{
+		font-weight: 700;
+		color:white;
+	}
+	.all{
+		font-size: 15px;
+		color:black;
+		font-weight: 600;
+		padding-left: 10px;
+		cursor: pointer;
+	}
+	.all a{
+		color: black;
+		display: block;
 	}
 	.right_training{
 		float:left;
@@ -815,4 +855,9 @@ span.enter_icon{
 	top: 5px;
 	display: none;
 	z-index: 100;
+}
+/*商店价格红色显示*/
+.item_attr_detail .S_price{
+	float: none;
+	color: red;
 }

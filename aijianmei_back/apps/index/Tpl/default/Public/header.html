@@ -9,6 +9,7 @@
 			<link rel="stylesheet" href="../Public/css/{$cssFile}.css" />	
 			<!-- <link rel="stylesheet" href="../Public/css/jquery-ui.css" />  -->
 			<!--  <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>	-->
+
 		</head>
 <body>
 		<div class="body"></div>
@@ -70,6 +71,7 @@
 			<div class="wrapper">
 				<div id="header">
 					<ul class="top">
+						<li><a id="my_cart"><span class="cart"></span>购物车(0) </a>|</li>
 					<php>if(getMid()) {</php>
 					<li><span>欢迎你，<php>echo getUserName(getMid())</php></span>
 					<php>} else {</php>
@@ -83,8 +85,9 @@
 								<li><a href="/index.php?app=home&mod=user&act=atme">查看@我</a></li>
 								<li><a href="/index.php?app=home&mod=space&act=follow&type=follower&uid={$uid}">查看粉丝</a></li>
 								<li><a href="/index.php?app=home&mod=message&act=notify">查看通知</a></li>
-								<li><a href="order.html">查看预约</a></li>
+								<!--<li><a href="order.html">查看预约</a></li>-->
 							</ul>
+
 						</li>
 						<li class="more"><a href="">帐号<span class="triangle"></span> </a>
 							<ul class="account">
@@ -105,7 +108,7 @@
 						</fieldset>
 					</form>
 					<div class="logo">
-						<a href="index.hmtl">
+						<a href="/index.php?app=index">
 							<img src="../Public/images/logo.png" alt="aijianmei" />
 						</a>
 					</div>

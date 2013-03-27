@@ -1,5 +1,43 @@
 <?php
 class NutriAction extends Action {
+	function show_banner(){
+			 $change_1="nutri_1.jpg";
+		 $change_2="nutri_2.jpg";
+		 $change_3="nutri_3.jpg";
+		 $change_4="nutri_4.jpg";
+		 $articleid_1="26";
+		 $articleid_2="34";
+		 $articleid_3="41";
+		 $articleid_4="32";
+		 $name_1="6个燃脂的提示";
+		 $name_2="7个肌肉养成的营养规则";
+		 $name_3="初学者运动前的营养指导 ";
+		 $name_4="制定减肥目标";
+		 $describe_1="燃脂需要一个专门针对你自身营养和锻炼的方法。营养是修长身材的基础，而锻炼就像是是把所有因素凝聚起来的催化剂。如果你能按照下面列出来的6个提示去办，你便能有效地减少你身上多余的脂肪…";
+		 $describe_2="7个肌肉养成的营养规则
+营养领域是一个完全不同的世界，计算卡路里和大量营养素的比例可要比在健身房里做几组运动难多了。下面我将会列出一些基本的原则来帮助你踏上正轨
+";
+		 $describe_3="一个健康好看的身型不是从你进入健身房那一刻才开始形成的。下面我会教你如何在健身前吸收营养，让你甩掉脂肪和增加肌肉。";
+		 $describe_4="你没有理由放弃，我会帮助你，通过提供有用的信息跟你一起达到你的目标。现在开始制定一个目标，读下面的文字，接着付诸行动……";
+		 $this->assign('change_1',$change_1);
+		 $this->assign('change_2',$change_2);
+		 $this->assign('change_3',$change_3);
+		 $this->assign('change_4',$change_4);
+		 $this->assign('articleid_1',$articleid_1);
+		 $this->assign('articleid_2',$articleid_2);
+		 $this->assign('articleid_3',$articleid_3);
+		 $this->assign('articleid_4',$articleid_4);
+		  $this->assign('describe_1',$describe_1);
+		 $this->assign('describe_2',$describe_2);
+		 $this->assign('describe_3',$describe_3);
+		 $this->assign('describe_4',$describe_4);
+		 $this->assign('name_1',$name_1);
+		 $this->assign('name_2',$name_2);
+		 $this->assign('name_3',$name_3);
+		 $this->assign('name_4',$name_4);
+		//-------END--------	
+
+	}
 	public function index()
 	{
 		$map['channel'] = '3';
@@ -31,18 +69,10 @@ class NutriAction extends Action {
 		//print_r($realCate);
 		//$this->assign('categories', $realCate);
 		//$this->assign('cate', $cate);
-		$this->assign('cssFile', 'nutri');
+		$this->assign('cssFile', 'training');
 
-		//banner 滚动图片列表
-		 $change_1="nutri_1.jpg";
-		 $change_2="nutri_2.jpg";
-		 $change_3="nutri_3.jpg";
-		 $change_4="nutri_4.jpg";
-		 $this->assign('change_1',$change_1);
-		 $this->assign('change_2',$change_2);
-		 $this->assign('change_3',$change_3);
-		 $this->assign('change_4',$change_4);
-		//-------END--------			 
+		$this->show_banner();//banner 滚动图片列表
+	
 		$this->display();
 	}
 	
@@ -82,17 +112,7 @@ class NutriAction extends Action {
 		//$this->assign('cssFile', 'video');
 		$this->assign('cssFile', 'nutri');
 		
-		 //banner 滚动图片列表
-		 $change_1="03.jpg";
-		 $change_2="04.jpg";
-		 $change_3="05.jpg";
-		 $change_4="17.jpg";
-		 $this->assign('change_1',$change_1);
-		 $this->assign('change_2',$change_2);
-		 $this->assign('change_3',$change_3);
-		 $this->assign('change_4',$change_4);
-		//-------END--------
-			
+		$this->show_banner();//banner 滚动图片列表
 		$this->display('list');
 	}
 	
@@ -129,18 +149,7 @@ class NutriAction extends Action {
 		//get lastArticles
 		$lastArticles = D('Article')->getNutriArticles('create_time');
 		$this->assign('lastArticles', $lastArticles);
-		
-		 //banner 滚动图片列表
-		 $change_1="03.jpg";
-		 $change_2="04.jpg";
-		 $change_3="05.jpg";
-		 $change_4="17.jpg";
-		 $this->assign('change_1',$change_1);
-		 $this->assign('change_2',$change_2);
-		 $this->assign('change_3',$change_3);
-		 $this->assign('change_4',$change_4);
-		//-------END--------	
-		
+		$this->show_banner();//banner 滚动图片列表
 		$this->display('vlist');
 	}
 	
