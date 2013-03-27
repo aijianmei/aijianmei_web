@@ -215,10 +215,11 @@
 					.pt_part_1{
 						position: absolute;
 						top: 92px;
-						left: -152px;
+						left: -58px;
 					}
 					.pt_part_1 li{
-						margin-bottom: 14px;
+						height:30px;
+						line-height:30px;
 						text-align: right;
 					}
 					.pt_part_2{
@@ -228,7 +229,9 @@
 						left: 401px;
 					}
 					.pt_part_2 li{
-						margin-bottom: 14px;
+						height:30px;
+						line-height:30px;
+						margin-bottom:1px;
 						text-align: left;
 					}
 					.special{margin-top: 29px;}
@@ -243,12 +246,15 @@
 	display:none; 
 	text-align:center; 
 	line-height:30px; 
-	width:28px; 
+	width:60px; 
 	bottom:35px; 
-	height:90px; 
+	height:60px; 
 	font-size:12px; 
 	cursor:pointer;
 	background: url(../images/01.png) no-repeat;
+}
+.goTopBtn:hover{
+	background: url(../images/go1.png) no-repeat;
 }
 .goTopBtn a{
 	/*display: block;
