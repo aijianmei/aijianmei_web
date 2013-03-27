@@ -654,14 +654,13 @@
 		   //添加目录动态快
 		   $('.nav_cf').mouseover(function(){
 		   		var index = $(".nav_cf").index(this);
-		   		$('.title_hint').css('visibility','visible').eq(index).css('visibility','hidden');
-		   		$('.nav_detail').css('visibility','hidden').eq(index).css('visibility','visible');
-		   		$('.bg_opacity').css({'opacity':'0.4','visibility':'visible'}).eq(index).css('opacity','0');
+		   		$('.title_hint').css('opacity','1').eq(index).css('opacity','0');
+		   		$('.nav_detail').css('opacity','0').eq(index).css('opacity','1');
+		   		$('.bg_opacity').css('opacity','0.4').eq(index).css('opacity','0');
 		   })
 		   $('.nav_cf').mouseout(function(){
-		   		var index = $(".nav_cf").index(this);
-		   		$('.nav_detail').css('visibility','hidden');
-		   		$('.title_hint').css('visibility','visible');
+		   		$('.nav_detail').css('opacity','0');
+		   		$('.title_hint').css('opacity','1');
 		   })
 		   $('.position_nav').mouseleave(function(){
 		   		$('.bg_opacity').css({'opacity':'0'})
