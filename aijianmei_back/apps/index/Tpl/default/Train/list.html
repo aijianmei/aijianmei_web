@@ -122,7 +122,7 @@
 				
 				<div class="video">
 						<div class="all">
-							<h3 class="tit">全部<a href="/index.php?app=index&mod=Append&act=videoList" class="tab_btn">视频</a><a href="/index.php?app=index&mod=Append&act=articleList" class="tab_btn curr_tit">文章</a></h3>
+							<h3 class="tit">全部<a href="/index.php?app=index&mod=Train&act=videoList" class="tab_btn">视频</a><a href="/index.php?app=index&mod=Train&act=articleList" class="tab_btn curr_tit">文章</a></h3>
 							<!-- <h3 class="tit">全部<span class="sort1" id="show"><a href="/index.php?app=index&mod=Train&act=articleList">文章</a></span>
 							<span class="sort2"><a href="/index.php?app=index&mod=Train&act=videoList">视频</a></span>
 							</h3> -->
@@ -157,12 +157,17 @@
 									<span>作者：</span><span>日期：</span><span >点击：4</span>
 									<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
 								</div> -->
+                                <style type="text/css">
+								.ar_block{width:600px;padding:20px 0 20px 10px;}
+								.ar_block img{float:left;margin-right:10px;}
+								</style>
 							<php>foreach($articles as $a) {</php>
 								<div class="ar_block">
-									<img class="block_img" src="{$SITE_URL}/public/images/article/{$a['img']}"/>
+									<img width="81" class="block_img" src="{$SITE_URL}/public/images/article/{$a['img']}"/>
 									<h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
+                                    <p>{$a['brief']}...</p>
 									<span>作者：{$a['author']}</span><span>日期：</span><span >点击：{$a['reader_count']}</span>
-									<p>{$a['brief']}...</p>
+									
 								</div>
 							<php>}</php>
 				</div>

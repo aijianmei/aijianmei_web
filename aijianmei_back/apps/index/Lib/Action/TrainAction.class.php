@@ -137,6 +137,10 @@ class TrainAction extends Action {
 		$order = 'create_time';
 		$hotArticles = D('Article')->getTrainArticles($order);
 		$this->assign('lastArticles', $hotArticles);
+		//get video list
+		$video = D('Article')->getTrainVideo('create_time');
+		$this->assign('video', $video);
+		
 		$this->show_banner();//显示banner
 		$this->display('vlist');
 		/*$id = intval($_GET['id']);

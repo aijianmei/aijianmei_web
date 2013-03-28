@@ -175,6 +175,10 @@ class AppendAction extends Action {
 		//foreach($hotArticles as $a) echo $a['title'];//$a['title']=substr($a['title'],0,10)."...";		
 		$lastArticles = D('Article')->getAppendArticles('create_time');
 		$this->assign('lastArticles', $lastArticles);
+		
+		$video = D('Article')->getAppendVideo('create_time');
+		$this->assign('video', $video);
+		
 		$this->show_banner();//banner 滚动图片列表
 		$this->display('vlist');
 		/*$id = intval($_GET['id']);

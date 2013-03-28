@@ -212,26 +212,32 @@
 								</li>
 							</ul> -->
 						</div>
-						<div class="each">					
-								<php>foreach($articles as $a) {</php>
+						<div class="each">		
+                        <style type="text/css">
+						.pic{position:relative;width:173px;height:100px;background-color:#ddd;z-index:100;}
+						.pic embed{position:absolute;}
+						.pic a{position:absolute;top:0;left:0;display:inline-block;width:173px;height:100px;background-color:#ccc;z-index:100;}
+						</style>			
+								<php>foreach($video as $v) {</php>
 								<ul class="vdos">		
 										<li class="pic">
-											<a href=""></a>
+											<embed src="{$v['link']}" quality="high" width="173" height="100" align="middle" autostart="false" loop="false" allowscriptaccess="always" allowfullscreen="true" mode="transparent" type="application/x-shockwave-flash">
+                                            <a href=""></a>
 										</li>
 										<li class="info">
 											<span>视频名称：</span>
-											<a href="">身体部位</a>
+											<a href="">{$v['title']}</a>
 										</li>
 										<li class="info">
-											<span>围度测量方法</span>
+											<span>{$v['brief']}</span>
 										</li>
 										<li class="info">
 											<span>发布时间：</span>
-											<a href="">两天前</a>
+											<a href=""><php>echo date('Y-m-d H:i:s', $v['create_time'])</php></a>
 										</li>
 										<li class="info">
 											<span>播放：</span>
-											<a href="">131次</a>
+											<a href="">{$v['click']}次</a>
 										</li>
 									</ul>
 								<php>}</php>							

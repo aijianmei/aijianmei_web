@@ -46,6 +46,19 @@ class ArticleModel extends Model {
 		return $result;
 	}
 	
+	public function getTrainVideo($order,$id=null)
+	{
+		if($id) {
+			$sql = "select v.* from ai_video v where v.category_id=".$id." order by ".$order." desc limit 0,8";
+		}else {
+			$sql = "select v.* from ai_video v,ai_article_category c where c.channel=2 and v.category_id=c.id order by $order desc limit 0,8";
+		}
+		
+		$result = M('')->query($sql);
+	
+		return $result;	
+	}
+	
 	public function getNutriArticles($order, $id=null)
 	{
 		if($id) {
@@ -65,6 +78,19 @@ class ArticleModel extends Model {
 			$sql = "select a.* from ai_article a where a.category_id=".$id." order by ".$order." desc limit 0,8";
 		}else {
 			$sql = "select a.* from ai_article a,ai_article_category c where c.channel=4 and a.category_id=c.id order by $order desc limit 0,8";
+		}
+		
+		$result = M('')->query($sql);
+	
+		return $result;
+	}
+	
+	public function getAppendVideo($order, $id=null)
+	{
+		if($id) {
+			$sql = "select v.* from ai_video v where v.category_id=".$id." order by ".$order." desc limit 0,8";
+		}else {
+			$sql = "select v.* from ai_video v,ai_article_category c where c.channel=4 and v.category_id=c.id order by $order desc limit 0,8";
 		}
 		
 		$result = M('')->query($sql);
