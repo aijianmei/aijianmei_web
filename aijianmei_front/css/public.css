@@ -230,6 +230,7 @@ button{
 		border-style:solid;
 		border-width:5px;
 		margin-top:-2px;
+		vertical-align: middle;
 	}
 /******** Header **********/
 	#header{
@@ -270,10 +271,15 @@ button{
 		.more a:hover{
 			border-color:#ccc;
 		}
+		.more a:hover .triangle{
+			-webkit-transform: translate(0,0) rotate(180deg);
+		}
 		.more .on{
+			position: relative;
+			z-index: 101;
 			background:#fff;
 			border:1px solid #ccc;
-			border-bottom:0;
+			border-bottom:none;
 		}
 		.on .triangle{
 			border-color:#BCBCBC #fff #fff #fff;
@@ -281,10 +287,9 @@ button{
 		.top .message, .top .account{
 			background: white;
 			position: absolute;
-			right: 56px;
+			right: 60px;
 			border:1px solid #ccc;
-			border-top:0;
-			top:20px;
+			top:21px;
 			z-index:100;
 			display:none;
 		}
@@ -304,8 +309,8 @@ button{
 			font-size:12px;
 		}
 		.top .message li a:hover,.top .account li a:hover{
-			background:#ccc;
-			color:#656565;
+			background:#21ace3;
+			color:white;
 		}
 	/******** 顶部搜索框 ******/	
 		form.search fieldset{ 
