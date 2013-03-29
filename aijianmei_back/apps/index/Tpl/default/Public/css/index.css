@@ -86,6 +86,7 @@
 
 	
 /******** Content *********/
+
 	#content{
 		margin-bottom: 60px;
 		background: url(../images/border.png) no-repeat center top;
@@ -94,16 +95,20 @@
 		display: block;
 		height:165px;
 		width:221px;
-		border-radius:10px;
 		border:2px solid transparent;
 	}	
+	.lay_top{
+		width:960px;
+		margin:0 auto;
+		margin-bottom:10px;
+	}
 	.part{
-		margin:0px 25px;
+		margin:10px 15px;
 	}
 	.classify{
 		float: left;
-		width: 225px;
-		margin-right: 9px;
+		width: 221px;
+		margin-right:15px;
 	}
 	.classify p{
 		line-height: 45px;
@@ -117,19 +122,7 @@
 
 
 		/*每日锻炼*/
-		#content h1{
-			clear:both;
-			padding: 20px 0 0 20px;
-		}
-		.hr{
-			display: inline-block;
-			float: right;
-			height:0px;
-			width:86%;
-			margin-top: 14px;
-			border: 1px solid #70BDFA;
-			*margin-top: -14px;/*for ie8*/
-		}
+		
 		.expend{
 			clear:both;
 			font-size: 18px;

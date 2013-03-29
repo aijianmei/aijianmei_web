@@ -31,6 +31,7 @@
 				width: 170px;
 				margin: 0 10px 10px 0;
 				padding: 5px;
+				font-size: 12px;
 				border: 1px solid #e6e4e4;
 				box-shadow: 0 0 8px #ccc;
 			}
@@ -43,9 +44,8 @@
 			}
 
 			.summary{
-				height:58px;
-				line-height: 20px;
-				font-size: 12px;
+				height:60px;
+				line-height: 18px;
 			}
 			.clear_both{
 				clear:both;
@@ -215,10 +215,11 @@
 					.pt_part_1{
 						position: absolute;
 						top: 92px;
-						left: -152px;
+						left: -58px;
 					}
 					.pt_part_1 li{
-						margin-bottom: 14px;
+						height:30px;
+						line-height:30px;
 						text-align: right;
 					}
 					.pt_part_2{
@@ -228,7 +229,9 @@
 						left: 401px;
 					}
 					.pt_part_2 li{
-						margin-bottom: 14px;
+						height:30px;
+						line-height:30px;
+						margin-bottom:1px;
 						text-align: left;
 					}
 					.special{margin-top: 29px;}
@@ -243,12 +246,15 @@
 	display:none; 
 	text-align:center; 
 	line-height:30px; 
-	width:28px; 
+	width:60px; 
 	bottom:35px; 
-	height:90px; 
+	height:60px; 
 	font-size:12px; 
 	cursor:pointer;
 	background: url(../images/01.png) no-repeat;
+}
+.goTopBtn:hover{
+	background: url(../images/go1.png) no-repeat;
 }
 .goTopBtn a{
 	/*display: block;
@@ -358,29 +364,33 @@ margin-bottom: 20px;
 		margin:0 15px;
 	}
 	.all .all_ul{
-		border-bottom:1px solid #E5E5E5;
-		margin:0 auto;
+		line-height: 23px;
+		padding-bottom: 5px;
+		margin:10px auto;
+		border-bottom: 1px solid rgb(231, 231, 231);
 	}
 	/****** 选择分类 ********/
 		.video .select{
-			margin:10px;
+			
+		}
+		.opt{
+			vertical-align: top;
+			font-size: 14px;
+		}
+		.opt_length{
+			display: inline-block;
+			width: 530px;
 		}
 			.select a{
-				color:#6377AD;
 				display: inline-block;
-				margin-right: 15px;
-				font-weight:bold;
-				width:70px;
-				text-align:center;
-				cursor:pointer;
+				color: rgb(33, 172, 227);
+				font-size: 13px;
+				cursor: pointer;
 			}
-			.select a:hover{
-				text-decoration:underline;
-			}
-			.select .pre{
-				background:#69696C;
+			/*.select .pre{
+				background:rgb(33, 172, 227);
 				color:white;
-			}
+			}*/
 		/******* 列表 ********/
 		.video .each{
 			margin-right: -15px;
@@ -400,12 +410,23 @@ margin-bottom: 20px;
 				height: 100px;
 				background: #ccc;
 			}
-			.vdos .info{
+			.info{
 				height:15px;
 				margin-top:8px;
 				font-size:12px;
 			}
-			.play_time{
+			.v_enter{
+				width: 70px;
+				height: 70px;
+				position: absolute;
+				left: 53px;
+				top: 15px;
+				z-index: 100;
+			}
+			.tr_classify .t_play_time{
+				background: url(../images/wm3.png) 0 -465px no-repeat;
+			}
+			.play_time,.t_play_time{
 				display: inline-block;
 				height: 16px;
 				padding-left: 27px;
@@ -461,24 +482,76 @@ margin-bottom: 20px;
 					}
 
 	/*底部汇总导航栏*/
-		.title_4{
-			padding: 5px 0 5px 10px;
-			margin: 5px 0;
-			font-size: 16px;
-			background: #CCC;
-		}
-		.re_nav{
 
+		.position_nav{
+			margin: 0px -2px 2px 0;
 		}
-		.re_nav li{
+		.nav_cf{
+			position: relative;
+			float:left;
+			height: 165px;
+			width: 392px;
+			margin: 2px 0 0 2px;
+			color: white;
+			font-size: 22px;
+			font-weight: bold;
+			font-family: '微软雅黑','黑体';
+		}
+		.bg_1{
+			background: #06a9ef;
+		}
+		.bg_2{
+			background:#348acd;
+		}
+		.bg_3{
+			background:#0265de;
+		}
+		.bg_4{
+			background:#65c5fb;
+		}
+		.title_hint{
+			position: absolute;
+			text-align: center;
+			width: 392px;
+			line-height: 165px;
+			font-size: 40px;
+			opacity: 1;
+			filter:alpha(opacity=100);
+		}
+		.nav_detail{
+			position: absolute;
+			z-index: 100;
+			opacity: 0;
+			filter:alpha(opacity=0);
+			transition:opacity 0.3s linear;
+			-webkit-transition:opacity 0.3s linear;
+			-moz-transition:opacity 0.3s linear;
+			-o-transition:opacity 0.3s linear;
+		}
+		.nav_detail li{			
 			float: left;
-			width: 326px;
-			margin-right: 3px;
-			padding: 10px;
-			font-size: 13px;
-			font-weight: 700;
-			border-bottom: 1px dotted #CCC;
+			margin: 10px 0 0 10px;
 		}
-		.re_nav li a{
-			color:#0E709A;
+		.nav_detail a{
+			display: block;
+			width: 173px;
+			padding: 5px 0 5px 5px;
+			border: 1px solid transparent;
+			color: white;
+		}
+		.nav_detail a:hover{
+			border-color:white;
+		}
+		.bg_opacity{
+			position: absolute;
+			width: 392px;
+			height: 165px;
+			background: black;
+			opacity: 0;
+			filter:alpha(opacity=0);
+			z-index: 99;
+			transition:opacity 0.3s linear;
+			-webkit-transition:opacity 0.3s linear;
+			-moz-transition:opacity 0.3s linear;
+			-o-transition:opacity 0.3s linear;
 		}

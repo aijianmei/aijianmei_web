@@ -69,7 +69,7 @@
 							<!-- <h3 class="tit">全部<span class="sort1" id="show"><a href="/index.php?app=index&mod=Train&act=articleList">文章</a></span>
 							<span class="sort2"><a href="/index.php?app=index&mod=Train&act=videoList">视频</a></span>
 							</h3> -->
-							<ul class="all_ul">
+							<!--<ul class="all_ul">
 								<li class="select">
 									<span class="opt">范围：</span>
 									<a class="pre">不限</a>
@@ -84,7 +84,7 @@
 									<a>最多评论</a>
 									<a>最多收藏</a>
 								</li>
-							</ul>
+							</ul>-->
 							<!-- <ul class="all_ul">
 								<li class="select">
 									<span class="opt">范围：</span>
@@ -103,25 +103,25 @@
 							</ul> -->
 						</div>
 						<div class="each">					
-								<php>foreach($articles as $a) {</php>
+								<php>foreach($video as $v) {</php>
 								<ul class="vdos">		
 										<li class="pic">
 											<a href=""></a>
 										</li>
 										<li class="info">
 											<span>视频名称：</span>
-											<a href="">身体部位</a>
+											<a href="">{$v['title']}</a>
 										</li>
 										<li class="info">
-											<span>围度测量方法</span>
+											<span>{$v['brief']}</span>
 										</li>
 										<li class="info">
 											<span>发布时间：</span>
-											<a href="">两天前</a>
+											<a href=""><php>echo date('Y-m-d H:i:s', $v['create_time'])</php></a>
 										</li>
 										<li class="info">
 											<span>播放：</span>
-											<a href="">131次</a>
+											<a href="">{$v['click']}次</a>
 										</li>
 									</ul>
 								<php>}</php>								

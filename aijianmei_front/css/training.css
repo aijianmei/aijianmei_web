@@ -418,6 +418,7 @@ margin-bottom: 20px;
 			.v_enter{
 				width: 70px;
 				height: 70px;
+				background: url(../images/wm3.png) no-repeat 0 -490px;
 				position: absolute;
 				left: 53px;
 				top: 15px;
@@ -484,7 +485,7 @@ margin-bottom: 20px;
 	/*底部汇总导航栏*/
 
 		.position_nav{
-			margin: 0px -2px 2px 0;
+			margin-right: -2px;
 		}
 		.nav_cf{
 			position: relative;
@@ -517,6 +518,10 @@ margin-bottom: 20px;
 			font-size: 40px;
 			opacity: 1;
 			filter:alpha(opacity=100);
+			transition:opacity 1s linear;
+			-webkit-transition:opacity 1s linear;
+			-moz-transition:opacity 1s linear;
+			-o-transition:opacity 1s linear;
 		}
 		.nav_detail{
 			position: absolute;

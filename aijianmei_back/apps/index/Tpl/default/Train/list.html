@@ -119,68 +119,57 @@
 						</div>
 					</div>
 				</div>
-				
-				<div class="video">
-						<div class="all">
-							<h3 class="tit">全部<a href="/index.php?app=index&mod=Append&act=videoList" class="tab_btn">视频</a><a href="/index.php?app=index&mod=Append&act=articleList" class="tab_btn curr_tit">文章</a></h3>
-							<!-- <h3 class="tit">全部<span class="sort1" id="show"><a href="/index.php?app=index&mod=Train&act=articleList">文章</a></span>
-							<span class="sort2"><a href="/index.php?app=index&mod=Train&act=videoList">视频</a></span>
-							</h3> -->
-							<ul class="all_ul">
-								<!--<li class="select">
-									<span class="opt">范围：</span>
-									<a class="pre">不限</a>
-									<a>今日</a>
-									<a>本周</a>
-									<a>本月</a>
-								</li>
-								<li class="select">
-									<span class="opt">排序：</span>
-									<a class="pre">最新发布</a>
-									<a>最多播放</a>
-									<a>最多评论</a>
-									<a>最多收藏</a>
-								</li>-->
-							</ul>
+				<div class="part_top clearfix">
+					<div class="lay_top clearfix">
+						<h1 class="public_title">全部</h1>
+						<div class="video">
+                                                        <div class="all">
+                                                                <ul class="all_ul">
+                                                                        <li class="select">
+                                                                                <span class="opt">范围：</span>
+                                                                                <a class="pre">不限</a>
+                                                                                <a>今日</a>
+                                                                                <a>本周</a>
+                                                                                <a>本月</a>
+                                                                        </li>
+                                                                        <li class="select">
+                                                                                <span class="opt">排序：</span>
+                                                                                <a class="pre">最新发布</a>
+                                                                                <a>最多播放</a>
+                                                                                <a>最多评论</a>
+                                                                                <a>最多收藏</a>
+                                                                        </li>
+                                                                </ul>
+                                                        </div>
+                                                        <div class="mode_3">
+                                                                <php>foreach($articles as $a) {</php>
+                                                                        <div class="ar_block">
+                                                                                <img class="block_img" src="{$SITE_URL}/public/images/article/{$a['img']}"/>
+                                                                                <h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
+                                                                                <span>作者：{$a['author']}</span><span>日期：<php>echo date('Y-m-d',$a['create_time'])</php></span><span >点击：{$a['reader_count']}</span>
+                                                                                <p>{$a['brief']}...</p>
+                                                                        </div>
+                                                                <php>}</php>
+                                                        </div>
 						</div>
+                                                <div class="page clearfix">
+                                                    <span class="concrete_choice">
+                                                                        {$pager[backstr]}
+                                                                        {$pager[thestr]}
+                                                                        {$pager[nextstr]}
+                                                    </span>
+                                                    <span class="free_choice">
+                                                        <span>共{$pager[page]}页</span>
+                                                        <span class="concrete_page">
+                                                                到第
+                                                                <input type="text" value="2">
+                                                                页
+                                                        </span>
+                                                        <span class="sure_button">确定</span>
+                                                    </span>
+                                                </div>
+					</div>
 				</div>
-				<div class="mode_3">
-								<!-- <div class="ar_block">
-									<img class="block_img" src="../Public/images/add/{$a['img']}"/>
-									<h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
-									<span>作者：</span><span>日期：</span><span >点击：4</span>
-									<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
-								</div>
-								<div class="ar_block">
-									<img class="block_img" src="../Public/images/training/118.jpg"/>
-									<h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
-									<span>作者：</span><span>日期：</span><span >点击：4</span>
-									<p>器械方面：每周锻炼3次(每次锻炼40分钟-60分钟)。以下每一个动作做5组，一组做20RM。(如何理解RM？ 假设你用8KG的哑铃做一个动作...</p>
-								</div> -->
-							<php>foreach($articles as $a) {</php>
-								<div class="ar_block">
-									<img class="block_img" src="{$SITE_URL}/public/images/article/{$a['img']}"/>
-									<h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
-									<span>作者：{$a['author']}</span><span>日期：</span><span >点击：{$a['reader_count']}</span>
-									<p>{$a['brief']}...</p>
-								</div>
-							<php>}</php>
-				</div>
-                <style type="text/css">
-				.page{margin:15px;}
-				</style>
-				<div class="page" style="">
-							<span>{$pager[backstr]}</span>
-							<span>{$pager[thestr]}</span>
-							<span>{$pager[nextstr]}</span>		
-							<!-- <button class="prev"><a href="">上一页</a></button>
-							<a href="" class="record current_page">1</a>
-							<a href="" class="record">2</a>
-							<a href="" class="record">3</a>
-							<button class="next"><a href="">下一页</a></button>  -->
-				</div>	
-
-			</div>
-		</div>
+                        </div>
 	</div>
 <include file="../Public/footer" />

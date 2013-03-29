@@ -36,14 +36,14 @@ button{
 	left:0;
 	width:100%;
 	height:100%;
-	z-index:99;	
+	z-index:99;
 	opacity: 0.7;
 	filter:alpha(opacity=70);
 	background: black;
 }
 /******** 登陆 *******/
 .sheet{
-	position:absolute;	
+	position:absolute;
 	z-index:100;
 	width:100%;
 	margin-top:120px;
@@ -199,7 +199,7 @@ button{
 			margin:30px 0 0 70px;
 			background:url(../images/login.png) no-repeat 0 -209px;
 		}
-		
+
 .wrapper{
 	width:980px;
 	margin:0 auto;
@@ -265,7 +265,7 @@ button{
 			width:45px;
 			padding-bottom:3px;
 			border:1px solid transparent;
-			
+
 		}
 		.more a:hover{
 			border-color:#ccc;
@@ -307,31 +307,31 @@ button{
 			background:#ccc;
 			color:#656565;
 		}
-	/******** 顶部搜索框 ******/	
-		form.search fieldset{ 
-			position:absolute; 
-			right:0px; 
-			top:0px; 
+	/******** 顶部搜索框 ******/
+		form.search fieldset{
+			position:absolute;
+			right:0px;
+			top:0px;
 			border:0;
 			margin: 3px 20px 2px 0;
 		}
-			.search label,.search legend{ 
+			.search label,.search legend{
 				display:none;
 				border:0
 			}
-			.search input{ 
-				float:left; 
-				width:88px; 
-				height:17px; 
+			.search input{
+				float:left;
+				width:88px;
+				height:17px;
 				background:url(../images/input.jpg)no-repeat;
 			}
-			.search button{ 
-				float:left; 
-				width:23px; 
-				height:17px; 
+			.search button{
+				float:left;
+				width:23px;
+				height:17px;
 				background:url(../images/search.jpg) no-repeat;
-			}				
-		
+			}
+
 	/******* Logo ******/
 		.logo{
 			width:230px;
@@ -378,7 +378,7 @@ button{
 			height:36px;
 			margin-left: 10px;
 		}
-		
+
 		#nav .home{
 			border-radius: 4px 0 0 4px;
 			width:90px;
@@ -398,14 +398,14 @@ button{
 			bottom: 9px;
 			color: #989898;
 		}
-		
-/*********** Banner ***********/		
+
+/*********** Banner ***********/
 		#banner{
 			margin:0 auto;
 			width:860px;
 		}
-		
-		
+
+
 		.lay_banner{
 			position:relative;
 			margin: 0 auto;
@@ -496,7 +496,7 @@ button{
 				background: url(../images/turn_right.png) no-repeat;
 			}
 
-/******** Footer link *********/	
+/******** Footer link *********/
 	#footer{
 		height:195px;
 		background: url(../images/border.png) no-repeat center top;
@@ -555,7 +555,7 @@ button{
 				.douban{
 					background:url(../images/icon_result.png) 0 0 no-repeat;
 				}
-/******* Copyright *******/				
+/******* Copyright *******/
 	#lower_footer{
 		height:90px;
 		background: url(../images/border.png) no-repeat center top;
@@ -571,13 +571,13 @@ button{
 			}
 .now_position{
 	background:url(../images/nav_p.jpg) repeat-x;
-}	
+}
 .last{
 	border-radius: 0 4px 4px 0;
 }
 /****** 翻页 *****/
 .page{
-	margin:15px 176px;
+	margin:15px 155px;
 	text-align:center;
 }
 .page a{
@@ -706,7 +706,7 @@ button{
 				line-height: 30px;
 				padding-left: 10px;
 			}
-	/*左边导航栏*/	
+	/*左边导航栏*/
 	.title_1{
 		margin-right: 30px;
 		padding-bottom: 6px;
@@ -834,7 +834,7 @@ button{
 			.choice_page li{
 				float: right;
 				margin: 0 4px;
-				padding: 2px;				
+				padding: 2px;
 			}
 				.strong{
 					font-weight:600;

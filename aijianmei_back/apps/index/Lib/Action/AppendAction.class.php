@@ -125,9 +125,12 @@ class AppendAction extends Action {
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
 		// 查询满足要求的总记录数
 		$articleCount = M('article')->where(array('category_id'=>$id))->count();
-
+                $style['pre'] = 'prev';
+                $style['next'] = 'next';
+                $style['current'] = 'current_page';
 		$pager = api('Pager');	// 实例化分页类 
 		$pager->setCounts($articleCount); //传入总记录数
+                $pager->setStyle($style);
 		$pager->setList(10);	// 设置每页显示的记录数
 		$pager->makePage();		//生成数字分页
 		$pageArray = (array)$pager;
@@ -175,6 +178,10 @@ class AppendAction extends Action {
 		//foreach($hotArticles as $a) echo $a['title'];//$a['title']=substr($a['title'],0,10)."...";		
 		$lastArticles = D('Article')->getAppendArticles('create_time');
 		$this->assign('lastArticles', $lastArticles);
+		
+		$video = D('Article')->getAppendVideo('create_time');
+		$this->assign('video', $video);
+		
 		$this->show_banner();//banner 滚动图片列表
 		$this->display('vlist');
 		/*$id = intval($_GET['id']);

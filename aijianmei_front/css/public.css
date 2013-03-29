@@ -744,9 +744,27 @@ button{
 		padding-left: 10px;
 		cursor: pointer;
 	}
-	.all a{
-		color: black;
-		display: block;
+
+	.all .all_ul{
+		border-bottom:1px solid #E5E5E5;
+		width:740px;
+		margin:0 auto;
+	}
+	.all_ul .select{
+			margin:10px;
+		}
+		.select .pre {
+			background: #69696C;
+			color: white;
+		}
+	.select a {
+		color: #6377AD;
+		display: inline-block;
+		margin-right: 15px;
+		font-weight: bold;
+		width: 70px;
+		text-align: center;
+		cursor: pointer;
 	}
 	.right_training{
 		float:left;

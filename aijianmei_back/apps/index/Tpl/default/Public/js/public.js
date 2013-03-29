@@ -168,7 +168,60 @@ $(function(){
 				    }
 				    return null;
 				}
-			}		
+			}	
+
+
+		//添加控制透明函数
+			var getclass = {//控制渐变透明度
+				opacity : function(obj,filter,speed){
+					var newdom = new getdom,
+						obj = newdom.getElementsByClass(obj)[0] || obj,
+						obj_opacity = newdom.GetCurrentStyle(obj,'opacity') ? newdom.GetCurrentStyle(obj,'opacity') : 1,
+						obj_filter = newdom.GetCurrentStyle(obj,'filter'),//获取filter的值，表现形式为alpha(opacity=10);
+						value = obj_filter.replace(/[^0-9]/ig,"");//使用正则表达式转换为数字字符串（80）
+					obj.style.opacity = obj_opacity;
+					var change_opacity = function(){
+						if(obj_opacity > filter){
+							var time = function(){
+								setTimeout(function(){
+									if(obj_opacity > filter){
+										obj_opacity = obj_opacity - 0.1;
+										obj.style.opacity = parseFloat(obj.style.opacity) - 0.1;
+										if(document.all){
+											value = parseFloat(value) - 10;
+											obj.style.filter = 'alpha(opacity = '+value+')';//兼容ie
+										}
+										time();
+									}
+								},speed)
+							};
+							time();
+						}
+						else{
+							var time = function(){
+								setTimeout(function(){
+									if(filter > obj_opacity){
+										filter = filter - 0.1;
+										obj.style.opacity = parseFloat(obj.style.opacity) + 0.1;
+										if(document.all){
+											value = parseFloat(value) + 10;//将字符串转化为数字，使用的是parsefloat
+											obj.style.filter = 'alpha(opacity = '+value+')';//兼容ie
+										}
+										time();
+									}
+								},speed)
+							};
+							time();
+						}
+					}
+					change_opacity();
+				}
+			}
+		//使用方式
+		// document.getElementsByTagName('input')[0].onclick = function(){
+		// 		getclass.opacity('picture',0.4,10);
+		// 	}	
+
 
 
 			//为obj的子元素添加有色边框
@@ -305,18 +358,20 @@ $(function(){
 				addevent(Obj,"mouseover",handle);
 				addevent(Obj,"mouseout",remove);
 			}
-//视频列表 切换分类
-$("li.select>a").mouseover(function(){
-	$(this).addClass("pre").siblings().removeClass("pre");
+// //视频列表 切换分类
+// $("li.select>a").mouseover(function(){
+// 	$(this).addClass("pre").siblings().removeClass("pre");
 	
-})	
+// })	
 //鼠标移上图片显示进入
 $("a.show_enter").mouseover(function(){
 	$(this).children(".enter_icon").css("display","block");
 	$(this).children("img").css("border-color","#21ace3");
+	$(this).children(".v_enter").css('background','url(images/wm3.png) no-repeat 0 -490px')
 	$(this).mouseout(function(){
 		$(this).children(".enter_icon").css("display","none");
 		$(this).children("img").css("border-color","transparent");
+		$(this).children(".v_enter").css('background','')
 	})
 });
 
@@ -333,79 +388,33 @@ $("a.show_enter").mouseover(function(){
 //动态改变背景图片，用在那些背景鼠标过去按钮原色变化的对象上
 			var move = function(obj,url,num){
 				var newdom = new getdom,
-					id = newdom.getElementsByClass(obj)[0],
-					image = id.style.backgroundImage,
-					currentpositionY = id.style.backgroundPositionY;
-				id.onmouseover = function(){
-					if(num != null){
-						this.style.background = 'url('+url+')';
-						this.style.backgroundPositionX = '0px';
-						this.style.backgroundPositionY = num;
-						
-					}					
-					else{
-						this.style.background = 'url('+url+')';
+					id = newdom.getElementsByClass(obj),
+					len = id.length,
+					image = id[0].style.backgroundImage,
+					currentpositionY = id[0].style.backgroundPositionY;
+				for(var i = 0;i < len;i++){
+					id[i].onmouseover = function(){
+						if(num != null){
+							this.style.background = 'url('+url+')';
+							this.style.backgroundPositionX = '0px';
+							this.style.backgroundPositionY = num;
+							
+						}					
+						else{
+							this.style.background = 'url('+url+')';
+						}
+						// console.log(this.style.backgroundPosition)			
 					}
-					// console.log(this.style.backgroundPosition)			
-				}
-				id.onmouseout = function(){
-					this.style.backgroundImage = image;
-					this.style.backgroundPositionX = '0px';
-					this.style.backgroundPositionY = currentpositionY;
+					id[i].onmouseout = function(){
+						this.style.backgroundImage = image;
+						this.style.backgroundPositionX = '0px';
+						this.style.backgroundPositionY = currentpositionY;
+					}
 				}
 			}
 			// move('background','images/wm2.png','-220px')第一个是对象class属性，第二个是地址，第三个是雪碧图的Y值
 
-//添加控制透明函数
-		var getclass = {//控制渐变透明度
-				opacity : function(obj,filter,speed){
-					var newdom = new getdom,
-						obj = newdom.getElementsByClass(obj)[0] || obj,
-						obj_opacity = newdom.GetCurrentStyle(obj,'opacity') ? newdom.GetCurrentStyle(obj,'opacity') : 1,
-						obj_filter = newdom.GetCurrentStyle(obj,'filter'),//获取filter的值，表现形式为alpha(opacity=10);
-						value = obj_filter.replace(/[^0-9]/ig,"");//使用正则表达式转换为数字字符串（80）
-					obj.style.opacity = obj_opacity;
-					var change_opacity = function(){
-						if(obj_opacity > filter){
-							var time = function(){
-								setTimeout(function(){
-									if(obj_opacity > filter){
-										obj_opacity = obj_opacity - 0.1;
-										obj.style.opacity = parseFloat(obj.style.opacity) - 0.1;
-										if(document.all){
-											value = parseFloat(value) - 10;
-											obj.style.filter = 'alpha(opacity = '+value+')';//兼容ie
-										}
-										time();
-									}
-								},speed)
-							};
-							time();
-						}
-						else{
-							var time = function(){
-								setTimeout(function(){
-									if(filter > obj_opacity){
-										filter = filter - 0.1;
-										obj.style.opacity = parseFloat(obj.style.opacity) + 0.1;
-										if(document.all){
-											value = parseFloat(value) + 10;//将字符串转化为数字，使用的是parsefloat
-											obj.style.filter = 'alpha(opacity = '+value+')';//兼容ie
-										}
-										time();
-									}
-								},speed)
-							};
-							time();
-						}
-					}
-					change_opacity();
-				}
-			}
-		//使用方式
-		// document.getElementsByTagName('input')[0].onclick = function(){
-		// 		getclass.opacity('picture',0.4,10);
-		// 	}	
+
 
 
 
@@ -514,7 +523,5 @@ $("a.show_enter").mouseover(function(){
 			fade.init('forum');
 			if(document.getElementById('teach')){
 				fade.init('teach');
-			}if(document.getElementById('my_cart')){
-				fade.init('my_cart');
 			}
 

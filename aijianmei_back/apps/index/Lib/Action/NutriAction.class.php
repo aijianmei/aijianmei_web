@@ -89,12 +89,16 @@ class NutriAction extends Action {
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
 		
 		$count = M('article')->where($map)->count();
+                $style['pre'] = 'prev';
+                $style['next'] = 'next';
+                $style['current'] = 'current_page';
 		$pager = api('Pager');
 		$pager->setCounts($count);
+                $pager->styleInit($style);
 		$pager->setList(6);
 		$pager->makePage();
 		$from = ($pager->pg-1) * $pager->countlist;
-		$articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();
+		$articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();               
 		$pageArray = (array)$pager;
 		$this->assign('pager', $pageArray);
 		//var_dump($articles);

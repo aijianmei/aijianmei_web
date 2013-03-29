@@ -95,8 +95,12 @@ class TrainAction extends Action {
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
 		
 		$count = M('article')->where($map)->count();
+                $style['pre'] = 'prev';
+                $style['next'] = 'next';
+                $style['current'] = 'current_page';
 		$pager = api('Pager');
 		$pager->setCounts($count);
+                $pager->setStyle($style);
 		$pager->setList(6);
 		$pager->makePage();
 		$from = ($pager->pg-1) * $pager->countlist;
@@ -137,6 +141,10 @@ class TrainAction extends Action {
 		$order = 'create_time';
 		$hotArticles = D('Article')->getTrainArticles($order);
 		$this->assign('lastArticles', $hotArticles);
+		//get video list
+		$video = D('Article')->getTrainVideo('create_time');
+		$this->assign('video', $video);
+		
 		$this->show_banner();//显示banner
 		$this->display('vlist');
 		/*$id = intval($_GET['id']);
