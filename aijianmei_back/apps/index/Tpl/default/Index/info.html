@@ -2,518 +2,416 @@
 <include file="../Public/banner" />
 
 <div id="content" class="clearfix">
-			<div class="sider_all">
-				<span class="corner_left"></span>
-				<div class="lay_sider">
-					<div class="subsider">
-						<h1 class="video_all">视频</h1>
-						<ul>
-							<li class="each_video all">
-								计划
-							</li>
-							<li class="each_video">
-								<a href="/index.php?app=index&mod=Index&act=info&type={$tree_channel_en}">{$first}</a>
-							</li>
-							<!--
-							<li class="each_video">
-								<a href="{:U('index/Plan/index')}">找到一个计划</a>
-							</li>
-							<li class="each_video">
-								<a href="{:U('index/Plan/plan_loss')}">脂肪损失</a>
-							</li>
-							<li class="each_video">
-								<a href="{:U('index/Plan/plan_build')}">肌肉建设</a>
-							</li>
-							<li class="each_video">
-								<a href="{:U('index/Plan/coach')}">寻找教练</a>
-							</li>
-							<li class="each_video">
-								<a href="{:U('index/Plan/gym')}">寻找健身房</a>
-							</li>
-							<li class="each_video">
-								<a href="{:U('index/Train/index')}">每日锻炼</a>
-							</li>-->
-						</ul>
-					</div>
-				</div>
-				<span class="corner_bottom"></span>
-			</div>
+            <div class="sider_all">
+                <span class="corner_left"></span>
+                <div class="lay_sider">
+                    <div class="subsider">
+                        <h1 class="video_all">视频</h1>
+                        <ul>
+                            <li class="each_video all">
+                                计划
+                            </li>
+                            <li class="each_video">
+                                <a href="/index.php?app=index&mod=Index&act=info&type={$tree_channel_en}">{$first}</a>
+                            </li>
+                            <!--
+                            <li class="each_video">
+                                <a href="{:U('index/Plan/index')}">找到一个计划</a>
+                            </li>
+                            <li class="each_video">
+                                <a href="{:U('index/Plan/plan_loss')}">脂肪损失</a>
+                            </li>
+                            <li class="each_video">
+                                <a href="{:U('index/Plan/plan_build')}">肌肉建设</a>
+                            </li>
+                            <li class="each_video">
+                                <a href="{:U('index/Plan/coach')}">寻找教练</a>
+                            </li>
+                            <li class="each_video">
+                                <a href="{:U('index/Plan/gym')}">寻找健身房</a>
+                            </li>
+                            <li class="each_video">
+                                <a href="{:U('index/Train/index')}">每日锻炼</a>
+                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+                <span class="corner_bottom"></span>
+            </div>
 
-			<div class="content">
-				<h2><span>
-				<a href="/index.php?app=index">爱健美</a>->
-				<a href="/index.php?app=index&mod=Plan">健身计划</a>->
-				<a href="/index.php?app=index&mod=Index&act=info&type={$tree_channel_en}">{$first}</a>
-				</span></h2>
-				<php>foreach($info as $i) {</php>
-				<div class="module_1">
-					<p class="show_time"><php>echo date('Y-m-d', $i['article']['ctime'])</php></p>	
-					<div class="package clearfix">			
-						<div class="part_1">
-							<h3 class="nowaday">{$i['article']['title']}</h3><br /><br />
-							{$i['article']['content']|htmlspecialchars_decode}
-							<!--<div class="show_pic">
-								<a><img src="/public/images/article/{$i['article']['img']}" alt="no" /></a>
-								<a>enlarge image</a>
-							</div>-->
-							<div class="vidio">
-								<h2>锻炼视频示范</h2>
-								<ul class="video_list">
-								<php>foreach($i['video'] as $v) {</php>
-                                	<span>{$v['title']}</span>
-									<li style="position:relative;">
-										<a href="javascript:void(0)">
-											<!--<img src="{$v['img']}" width="150" />-->
+            <div class="content">
+                <h2><span>
+                <a href="/index.php?app=index">爱健美</a>->
+                <a href="/index.php?app=index&mod=Plan">健身计划</a>->
+                <a href="/index.php?app=index&mod=Index&act=info&type={$tree_channel_en}">{$first}</a>
+                </span></h2>
+                <php>foreach($info as $i) {</php>
+                <div class="module_1">
+                    <p class="show_time"><php>echo date('Y-m-d', $i['article']['ctime'])</php></p>	
+                    <div class="package clearfix">			
+                        <div class="part_1">
+                            <h3 class="nowaday">{$i['article']['title']}</h3><br /><br />
+                            {$i['article']['content']|htmlspecialchars_decode}
+                            <!--<div class="show_pic">
+                                <a><img src="/public/images/article/{$i['article']['img']}" alt="no" /></a>
+                                <a>enlarge image</a>
+                            </div>-->
+                            <div class="vidio">
+                                <h2>锻炼视频示范</h2>
+                                <ul class="video_list">
+                                <php>foreach($i['video'] as $v) {</php>
+                                    <span>{$v['title']}</span>
+                                    <li style="position:relative;">
+                                        <a href="javascript:void(0)">
+                                            <!--<img src="{$v['img']}" width="150" />-->
                                             
                                             <embed src="{$v['link']}" quality="high" width="400" height="300" align="middle" autostart="false" loop="false" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
                                         
-										</a>										
-									</li>
-								<php>}</php>
-									<!-- <li>
-										<a href="v.html">
-											<img src="../Public/images/every/mrlb_13.jpg" />
-										</a>
-									</li>
-									<li>
-										<a href="v.html">
-											<img src="../Public/images/every/mrlb_14.jpg" />
-										</a>
-									</li> -->
-								</ul>
-								<span>发布时间  <span><php>echo date('Y-m-d H:i:s',$i['article']['ctime'])</php></span></span>
-								<a class="video_commit">评论(<php>count($i['comments'])</php>)</a>
-							</div>
-							<a href="{:U('index/Index/daily', array('id'=>$i['article']['id'], 'type'=>$_GET['type']))}" class="checking">查看</a>
-						</div>
-						<div class="part_2 clearfix">
-							<div class="expand_1">
-								<span class="relay">转发到</span>
-                                <include file="../Public/share" />
-								<!-- JiaThis Button BEGIN -->
-								<!--<div class="jiathis_style">
-									<a class="jiathis_button_qzone"></a>
-									<a class="jiathis_button_tsina"></a>
-									<a class="jiathis_button_tqq"></a>
-									<a class="jiathis_button_renren"></a>
-									<a class="jiathis_button_kaixin001"></a>
-									<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-								</div>
-								<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1359878070244822" charset="utf-8"></script>-->
-								<!-- JiaThis Button END -->
-								<!-- <a class="sprite_1"></a>
-								<a class="sprite_2"></a>
-								<a class="sprite_3"></a>
-								<a class="sprite_4"></a>
-								<a class="sprite_5"></a>
-								<a class="sprite_6"></a> -->
-							</div>
-							<div class="expand_2">
-								<span class="read_time">
-									<a style="height:16px;width:56px;line-height:16px;background:0;">
-										<span>阅读</span>
-										<span>0</span>
-										<span class="triangle"></span>
-									</a>
-									<div class="page_times" style="postion:absolute;display:none;right:0px;width:50px; background:white;line-height:20px;border:1px solid #ccc;">
-										<!--<p>页面1</p>
-										<p>页面1</p>-->	
-									</div>
-								</span>
-								<a class="sprite_8" href="javascript:void(0)" onclick="like({$i['article']['id']})"><span class="praise" id="like">{$i['article']['like']}</span></a>
-								<a class="sprite_9" href="javascript:void(0)" onclick="unlike({$i['article']['id']})"><span class="praise" id="unlike">{$i['article']['unlike']}</span></a>			
-							</div>
-							<div class="expand_3 clearfix">
-								<div class="check_comment">
-									<a class="comment_1">全部评论(0)</a>
-									
-								</div>
-                                <div class="scr_con">				
-									<div id="dv_scroll">
-										<div id="dv_scroll_text" class="Scroller-Container">
-											<div class="newslist">
-												<ul>													
-												
-								<php>foreach($i['comments'] as $c) {</php>
-                                <li class="cm_bottom">
-														<div class="target clearfix">
-															<div class="target_pic">
-																<img src="{$c['userInfo']['face']}" alt="no" />
-																<span class="care">关注</span>
-															</div>
-															<div class="target_ct">
-																<a class="name">{$c['userInfo']['uname']}</a>
-																<p>{$c['content']}</p>
-																<p class="bottom_ms">
-															
-																	<span><php>echo date('Y-m-d H:i:s', $c['content']['create_time'])</php></span>
-																	<span>来自<em>爱健美网</em></span>
-																</p>
-															</div>
-														</div>
-													</li>
-								<!--<div class="cm_bottom">
-									<div class="target clearfix">
-										<div class="target_pic">
-											<img src="{$c['userInfo']['face']}" alt="no" />
-											<span class="care">关注</span>
-										</div>
-										<div class="target_ct">
-											<a class="name">{$c['userInfo']['uname']}</a>
-											<p>{$c['content']}</p>
-											<p class="bottom_ms">
-										
-												<span><php>echo date('Y-m-d H:i:s', $c['content']['create_time'])</php></span>
-												<span>来自<em>爱健美网</em></span>
-											</p>
-										</div>
-									</div>
-								</div>-->
-								<php>}</php>
+                                        </a>										
+                                    </li>
+                                <php>}</php>
+                                    <!-- <li>
+                                        <a href="v.html">
+                                            <img src="../Public/images/every/mrlb_13.jpg" />
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="v.html">
+                                            <img src="../Public/images/every/mrlb_14.jpg" />
+                                        </a>
+                                    </li> -->
                                 </ul>
-												<!--<a class="loading_more">加载更多</a>-->
-											</div>
-										</div>
-									</div>
-									<div id="dv_scroll_bar">
-										<div id="dv_scroll_track" class="Scrollbar-Track">
-											<div class="Scrollbar-Handle"></div>
-										</div>
-									</div>
-								</div>
-								<!-- <div class="cm_bottom">
-									<div class="target clearfix">
-										<div class="target_pic">
-											<img src="../Public/images/every/mrlb_02.png" alt="no" />
-											<span class="care">关注</span>
-										</div>
-										<div class="target_ct">
-											<a class="name">huifei</a>
-											<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的.</p>
-											<p class="bottom_ms">
-												<span class="to">
-													<a>转发<span>(0)</span></a>
-													<a>回复<span>(0)</span></a>
-												</span>	
-												<span>22个小时前</span>
-												<span>来自<em></em></span>
-											</p>
-										</div>
-									</div>
-								</div> -->	
-								<a href="arm.html" class="check_more">查看所有评论</a>
-							</div>
-							<div class="border_comment">
-								<span class="word_num">0/300</span>
-								<php>if(getMid()){</php>
+                                <span>发布时间  <span><php>echo date('Y-m-d H:i:s',$i['article']['ctime'])</php></span></span>
+                                <a class="video_commit">评论(<php>count($i['comments'])</php>)</a>
+                            </div>
+                            <a href="{:U('index/Index/daily', array('id'=>$i['article']['id'], 'type'=>$_GET['type']))}" class="checking">查看</a>
+                        </div>
+                        <div class="part_2 clearfix">
+                            <div class="expand_1">
+                                <span class="relay">转发到</span>
+                                <include file="../Public/share" />
+                                <!-- JiaThis Button BEGIN -->
+                                <!--<div class="jiathis_style">
+                                    <a class="jiathis_button_qzone"></a>
+                                    <a class="jiathis_button_tsina"></a>
+                                    <a class="jiathis_button_tqq"></a>
+                                    <a class="jiathis_button_renren"></a>
+                                    <a class="jiathis_button_kaixin001"></a>
+                                    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                                </div>
+                                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1359878070244822" charset="utf-8"></script>-->
+                                <!-- JiaThis Button END -->
+                                <!-- <a class="sprite_1"></a>
+                                <a class="sprite_2"></a>
+                                <a class="sprite_3"></a>
+                                <a class="sprite_4"></a>
+                                <a class="sprite_5"></a>
+                                <a class="sprite_6"></a> -->
+                            </div>
+                            <div class="expand_2">
+                                <span class="read_time">
+                                    <a style="height:16px;width:56px;line-height:16px;background:0;">
+                                        <span>阅读</span>
+                                        <span>0</span>
+                                        <span class="triangle"></span>
+                                    </a>
+                                    <div class="page_times" style="postion:absolute;display:none;right:0px;width:50px; background:white;line-height:20px;border:1px solid #ccc;">
+                                        <!--<p>页面1</p>
+                                        <p>页面1</p>-->	
+                                    </div>
+                                </span>
+                                <a class="sprite_8" href="javascript:void(0)" onclick="like({$i['article']['id']})"><span class="praise" id="like">{$i['article']['like']}</span></a>
+                                <a class="sprite_9" href="javascript:void(0)" onclick="unlike({$i['article']['id']})"><span class="praise" id="unlike">{$i['article']['unlike']}</span></a>			
+                            </div>
+                            <div class="expand_3 clearfix">
+                                <div class="check_comment">
+                                    <a class="comment_1">全部评论(0)</a>
+                                    
+                                </div>
+                                <div class="scr_con">				
+                                    <div id="dv_scroll">
+                                        <div id="dv_scroll_text" class="Scroller-Container">
+                                            <div class="newslist">
+                                                <ul>													
+                                                
+                                <php>foreach($i['comments'] as $c) {</php>
+                                <li class="cm_bottom">
+                                                        <div class="target clearfix">
+                                                            <div class="target_pic">
+                                                                <img src="{$c['userInfo']['face']}" alt="no" />
+                                                                <span class="care">关注</span>
+                                                            </div>
+                                                            <div class="target_ct">
+                                                                <a class="name">{$c['userInfo']['uname']}</a>
+                                                                <p>{$c['content']}</p>
+                                                                <p class="bottom_ms">
+                                                            
+                                                                    <span><php>echo date('Y-m-d H:i:s', $c['content']['create_time'])</php></span>
+                                                                    <span>来自<em>爱健美网</em></span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                <!--<div class="cm_bottom">
+                                    <div class="target clearfix">
+                                        <div class="target_pic">
+                                            <img src="{$c['userInfo']['face']}" alt="no" />
+                                            <span class="care">关注</span>
+                                        </div>
+                                        <div class="target_ct">
+                                            <a class="name">{$c['userInfo']['uname']}</a>
+                                            <p>{$c['content']}</p>
+                                            <p class="bottom_ms">
+                                        
+                                                <span><php>echo date('Y-m-d H:i:s', $c['content']['create_time'])</php></span>
+                                                <span>来自<em>爱健美网</em></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                <php>}</php>
+                                </ul>
+                                                <!--<a class="loading_more">加载更多</a>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="dv_scroll_bar">
+                                        <div id="dv_scroll_track" class="Scrollbar-Track">
+                                            <div class="Scrollbar-Handle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="cm_bottom">
+                                    <div class="target clearfix">
+                                        <div class="target_pic">
+                                            <img src="../Public/images/every/mrlb_02.png" alt="no" />
+                                            <span class="care">关注</span>
+                                        </div>
+                                        <div class="target_ct">
+                                            <a class="name">huifei</a>
+                                            <p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的.</p>
+                                            <p class="bottom_ms">
+                                                <span class="to">
+                                                    <a>转发<span>(0)</span></a>
+                                                    <a>回复<span>(0)</span></a>
+                                                </span>	
+                                                <span>22个小时前</span>
+                                                <span>来自<em></em></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div> -->	
+                                <a href="arm.html" class="check_more">查看所有评论</a>
+                            </div>
+                            <div class="border_comment">
+                                <span class="word_num">0/300</span>
+                                <php>if(getMid()){</php>
                                 <php>echo getUserName(getMid())</php>
                                 <php>}else {</php>
                                 <span>登录</span>|
                                 <span>注册</span>
                                 <php>}</php>
-								
-								<div class="textarea"><textarea class="comment_inp" name="comment" id="comment_{$i['article']['id']}">有什么感想，来说说吧</textarea></div>
-								<a class="comment" href="javascript:void(0)" onclick="comments(comment_{$i['article']['id']}.value, {$i['article']['id']}, 'Daily')" aid="{$i['article']['id']}">发表评论</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<php>}</php>
-				<!-- <div class="module_1">
-					<p class="show_time">2012 12 21</p>	
-					<div class="package clearfix">			
-						<div class="part_1">
-							<h3 class="nowaday">friday 121207</h3>
-							<span>for time:</span>
-							<p>95 pound overhead squat,30 reps 7 muscle-ups</p>
-							<span>post times to comments</span>
-							<div class="show_pic">
-								<a><img src="../Public/images/every/mrlb_08.jpg" alt="no" /></a>
-								<a>enlarge image</a>
-							</div>
-							<div class="vidio">
-								<h2>锻炼视频示范</h2>
-								<ul class="video_list">
-									<li>
-										<a href="v.html">
-											<img src="../Public/images/every/mrlb_12.jpg" />
-										</a>
-									</li>
-									<li>
-										<a href="v.html">
-											<img src="../Public/images/every/mrlb_13.jpg" />
-										</a>
-									</li>
-									<li>
-										<a href="v.html">
-											<img src="../Public/images/every/mrlb_14.jpg" />
-										</a>
-									</li>
-								</ul>
-								<span>发布时间  <span>5:00pm</span></span>
-								<a class="video_commit">评论(13)</a>
-							</div>
-							<a href="arm.html" class="checking">查看</a>
-						</div>
-						<div class="part_2 clearfix">
-							<div class="expand_1">
-								<span class="relay">转发到</span>
-								<a class="sprite_1"></a>
-								<a class="sprite_2"></a>
-								<a class="sprite_3"></a>
-								<a class="sprite_4"></a>
-								<a class="sprite_5"></a>
-								<a class="sprite_6"></a>
-							</div>
-							<div class="expand_2">
-								<span class="read_time">
-									<a style="height:16px;width:56px;line-height:16px;background:0;">
-										<span>阅读</span>
-										<span>0</span>
-										<span class="triangle"></span>
-									</a>
-									<div class="page_times" style="postion:absolute;display:none;right:0px;width:50px; background:white;line-height:20px;border:1px solid #ccc;">
-										<p>页面1</p>
-										<p>页面1</p>	
-									</div>
-								</span>
-								<a class="sprite_8"><span class="praise">100</span></a>
-								<a class="sprite_9"><span class="praise">100</span></a>			
-							</div>
-							<div class="expand_3 clearfix">
-								<div class="check_comment">
-									<a class="comment_1">全部评论(0)</a>
-									<a class="comment_2 comment_3">精选评论</a>
-								</div>
-								<div class="cm_bottom">
-									<div class="target clearfix">
-										<div class="target_pic">
-											<img src="../Public/images/every/mrlb_02.png" alt="no" />
-											<span class="care">关注</span>
-										</div>
-										<div class="target_ct">
-											<a class="name">huifei</a>
-											<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的.</p>
-											<p class="bottom_ms">
-												<span class="to">
-													<a>转发<span>(0)</span></a>
-													<a>回复<span>(0)</span></a>
-												</span>	
-												<span>22个小时前</span>
-												<span>来自<em></em></span>
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="cm_bottom">
-									<div class="target clearfix">
-										<div class="target_pic">
-											<img src="../Public/images/every/mrlb_02.png" alt="no" />
-											<span class="care">关注</span>
-										</div>
-										<div class="target_ct">
-											<a class="name">huifei</a>
-											<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的.</p>
-											<p class="bottom_ms">
-												<span class="to">
-													<a>转发<span>(0)</span></a>
-													<a>回复<span>(0)</span></a>
-												</span>	
-												<span>22个小时前</span>
-												<span>来自<em></em></span>
-											</p>
-										</div>
-									</div>
-								</div>	
-								<a href="arm.html" class="check_more">查看所有评论</a>
-							</div>
-							<div class="border_comment">
-								<span class="word_num">0/300</span>
-								<span>登录</span>|
-								<span>注册</span>
-								
-								<div class="textarea"><textarea class="comment_inp" name="comment">有什么感想，来说说吧</textarea></div>
-								<a class="comment">发表评论</a>
-							</div>
-						</div>
-					</div>
-				</div> -->
-				<!-- <div class="module_1">
-					<p class="show_time">2012 12 21</p>	
-					<div class="package clearfix">			
-						<div class="part_1">
-							<h3 class="nowaday">friday 121207</h3>
-							<span>for time:</span>
-							<p>95 pound overhead squat,30 reps 7 muscle-ups</p>
-							<span>post times to comments</span>
-							<div class="show_pic">
-								<a><img src="images/every/mrlb_08.jpg" alt="no" /></a>
-								<a>enlarge image</a>
-							</div>
-							<div class="vidio">
-								<h2>锻炼视频示范</h2>
-								<ul class="video_list">
-									<li>
-										<a href="v.html">
-											<img src="../Public/images/every/mrlb_12.jpg" />
-										</a>
-									</li>
-									<li>
-										<a href="v.html">
-											<img src="../Public/images/every/mrlb_13.jpg" />
-										</a>
-									</li>
-									<li>
-										<a href="v.html">
-											<img src="../Public/images/every/mrlb_14.jpg" />
-										</a>
-									</li>
-								</ul>
-								<span>发布时间  <span>5:00pm</span></span>
-								<a class="video_commit">评论(13)</a>
-							</div>
-							<a href="arm.html" class="checking">查看</a>
-						</div>
-						<div class="part_2 clearfix">
-							<div class="expand_1">
-								<span class="relay">转发到</span>
-								<a class="sprite_1"></a>
-								<a class="sprite_2"></a>
-								<a class="sprite_3"></a>
-								<a class="sprite_4"></a>
-								<a class="sprite_5"></a>
-								<a class="sprite_6"></a>
-							</div>
-							<div class="expand_2">
-								<span class="read_time">
-									<a style="height:16px;width:56px;line-height:16px;background:0;">
-										<span>阅读</span>
-										<span>0</span>
-										<span class="triangle"></span>
-									</a>
-									<div class="page_times" style="postion:absolute;display:none;right:0px;width:50px; background:white;line-height:20px;border:1px solid #ccc;">
-										<p>页面1</p>
-										<p>页面1</p>	
-									</div>
-								</span>
-								<a class="sprite_8"><span class="praise">100</span></a>
-								<a class="sprite_9"><span class="praise">100</span></a>			
-							</div>
-							<div class="expand_3 clearfix">
-								<div class="check_comment">
-									<a class="comment_1">全部评论(0)</a>
-									<a class="comment_2 comment_3">精选评论</a>
-								</div>
-								<div class="cm_bottom">
-									<div class="target clearfix">
-										<div class="target_pic">
-											<img src="../Public/images/every/mrlb_02.png" alt="no" />
-											<span class="care">关注</span>
-										</div>
-										<div class="target_ct">
-											<a class="name">huifei</a>
-											<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的.</p>
-											<p class="bottom_ms">
-												<span class="to">
-													<a>转发<span>(0)</span></a>
-													<a>回复<span>(0)</span></a>
-												</span>	
-												<span>22个小时前</span>
-												<span>来自<em></em></span>
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="cm_bottom">
-									<div class="target clearfix">
-										<div class="target_pic">
-											<img src="../Public/images/every/mrlb_02.png" alt="no" />
-											<span class="care">关注</span>
-										</div>
-										<div class="target_ct">
-											<a class="name">huifei</a>
-											<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的.</p>
-											<p class="bottom_ms">
-												<span class="to">
-													<a>转发<span>(0)</span></a>
-													<a>回复<span>(0)</span></a>
-												</span>	
-												<span>22个小时前</span>
-												<span>来自<em></em></span>
-											</p>
-										</div>
-									</div>
-								</div>	
-								<a href="arm.html" class="check_more">查看所有评论</a>
-							</div>
-							<div class="border_comment">
-								<span class="word_num">0/300</span>
-								<span>登录</span>|
-								<span>注册</span>
-								
-								<div class="textarea"><textarea class="comment_inp" name="comment">有什么感想，来说说吧</textarea></div>
-								<a class="comment">发表评论</a>
-							</div>
-						</div>
-					</div>
-				</div> -->
-			</div>	
-		</div>
+                                
+                                <div class="textarea"><textarea class="comment_inp" name="comment" id="comment_{$i['article']['id']}">有什么感想，来说说吧</textarea></div>
+                                <a class="comment" href="javascript:void(0)" onclick="comments(comment_{$i['article']['id']}.value, {$i['article']['id']}, 'Daily')" aid="{$i['article']['id']}">发表评论</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <php>}</php>
+                <div class="page">
+                            <span class="page_1">
+                                <span class="lay_page">
+                                    <!-- <a class="choice_page">1</a>
+                                    <a>2</a>
+                                    <a>3</a>
+                                    <a>4</a>
+                                    <a>5</a> -->
+                                    {$pager['backstr']}
+                                    {$pager['thestr']}
+                                    {$pager['nextstr']}
+                                </span>
+                                <!-- <a class="pre_page">上一页</a>
+                                <a class="next_page">下一页</a> -->
+                            </span>
+                            <span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
+                            
+                        </div>
+                    <p class="show_time">2012 12 21</p>	
+                    <div class="package clearfix">			
+                        <div class="part_1">
+                            <h3 class="nowaday">friday 121207</h3>
+                            <span>for time:</span>
+                            <p>95 pound overhead squat,30 reps 7 muscle-ups</p>
+                            <span>post times to comments</span>
+                            <div class="show_pic">
+                                <a><img src="images/every/mrlb_08.jpg" alt="no" /></a>
+                                <a>enlarge image</a>
+                            </div>
+                            <div class="vidio">
+                                <h2>锻炼视频示范</h2>
+                                <ul class="video_list">
+                                    <li>
+                                        <a href="v.html">
+                                            <img src="../Public/images/every/mrlb_12.jpg" />
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="v.html">
+                                            <img src="../Public/images/every/mrlb_13.jpg" />
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="v.html">
+                                            <img src="../Public/images/every/mrlb_14.jpg" />
+                                        </a>
+                                    </li>
+                                </ul>
+                                <span>发布时间  <span>5:00pm</span></span>
+                                <a class="video_commit">评论(13)</a>
+                            </div>
+                            <a href="arm.html" class="checking">查看</a>
+                        </div>
+                        <div class="part_2 clearfix">
+                            <div class="expand_1">
+                                <span class="relay">转发到</span>
+                                <a class="sprite_1"></a>
+                                <a class="sprite_2"></a>
+                                <a class="sprite_3"></a>
+                                <a class="sprite_4"></a>
+                                <a class="sprite_5"></a>
+                                <a class="sprite_6"></a>
+                            </div>
+                            <div class="expand_2">
+                                <span class="read_time">
+                                    <a style="height:16px;width:56px;line-height:16px;background:0;">
+                                        <span>阅读</span>
+                                        <span>0</span>
+                                        <span class="triangle"></span>
+                                    </a>
+                                    <div class="page_times" style="postion:absolute;display:none;right:0px;width:50px; background:white;line-height:20px;border:1px solid #ccc;">
+                                        <p>页面1</p>
+                                        <p>页面1</p>	
+                                    </div>
+                                </span>
+                                <a class="sprite_8"><span class="praise">100</span></a>
+                                <a class="sprite_9"><span class="praise">100</span></a>			
+                            </div>
+                            <div class="expand_3 clearfix">
+                                <div class="check_comment">
+                                    <a class="comment_1">全部评论(0)</a>
+                                    <a class="comment_2 comment_3">精选评论</a>
+                                </div>
+                                <div class="cm_bottom">
+                                    <div class="target clearfix">
+                                        <div class="target_pic">
+                                            <img src="../Public/images/every/mrlb_02.png" alt="no" />
+                                            <span class="care">关注</span>
+                                        </div>
+                                        <div class="target_ct">
+                                            <a class="name">huifei</a>
+                                            <p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的.</p>
+                                            <p class="bottom_ms">
+                                                <span class="to">
+                                                    <a>转发<span>(0)</span></a>
+                                                    <a>回复<span>(0)</span></a>
+                                                </span>	
+                                                <span>22个小时前</span>
+                                                <span>来自<em></em></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cm_bottom">
+                                    <div class="target clearfix">
+                                        <div class="target_pic">
+                                            <img src="../Public/images/every/mrlb_02.png" alt="no" />
+                                            <span class="care">关注</span>
+                                        </div>
+                                        <div class="target_ct">
+                                            <a class="name">huifei</a>
+                                            <p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的.</p>
+                                            <p class="bottom_ms">
+                                                <span class="to">
+                                                    <a>转发<span>(0)</span></a>
+                                                    <a>回复<span>(0)</span></a>
+                                                </span>	
+                                                <span>22个小时前</span>
+                                                <span>来自<em></em></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>	
+                                <a href="arm.html" class="check_more">查看所有评论</a>
+                            </div>
+                            <div class="border_comment">
+                                <span class="word_num">0/300</span>
+                                <span>登录</span>|
+                                <span>注册</span>
+                                
+                                <div class="textarea"><textarea class="comment_inp" name="comment">有什么感想，来说说吧</textarea></div>
+                                <a class="comment">发表评论</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>	
+        </div>
         <script type="text/javascript">
-		function like(id) {
-			if(USER.id<=0) {
-				alert('请先登录');
-				return false;	
-			}
-			if(getCookie('like')==id) {
-				alert('已经投票');
-				return;	
-			}
-			$.get('{:U("index/Index/daily", array("o"=>"like"))}',{'id':id, 'belong':'daily'},function(m){
-				var msg = eval('(' + m + ')');
-				var like = msg.like;
-				if(like>0) {
-					$("#like").text(like);
-					setCookie('like', id);
-					alert('投票成功');						
-				}else {
-					alert('投票失败');	
-				}
-			})	
-		}
-		function unlike(id) {
-			if(USER.id<=0) {
-				alert('请先登录');
-				return false;	
-			}
-			if(getCookie('unlike')==id) {
-				alert('已经投票');
-				return false;	
-			}
-			$.get('{:U("index/Index/daily", array("o"=>"unlike"))}', {'id':id, 'belong':'daily'}, function(m){
-				var msg = eval('(' + m + ')');
-				var unlike = msg.unlike;
-				if(unlike>0) {
-					$("#unlike").text(unlike);
-					setCookie('unlike',id);
-					alert('投票成功');
-				}else {
-					alert('投票失败');	
-				}
-			})
-		}
-		function setCookie(name,value) {
-			var days = 3; // 3天内不可以重复刷票
-			var expr = new Date();
-			expr.setTime(expr.getTime()+days*60*60*24*1000);
-			document.cookie = name + '=' + escape(value) + ';expires=' + expr.toGMTString();
-		}
-		function getCookie(name) {
-			var arr = document.cookie.split('; ');
-			for(var i=0;i<arr.length;i++) {
-				var temp = arr[i].split('=');
-				if(temp[0]==name) return unescape(temp[1]);	
-			}
-		}
-		</script>
+        function like(id) {
+            if(USER.id<=0) {
+                alert('请先登录');
+                return false;	
+            }
+            if(getCookie('like')==id) {
+                alert('已经投票');
+                return;	
+            }
+            $.get('{:U("index/Index/daily", array("o"=>"like"))}',{'id':id, 'belong':'daily'},function(m){
+                var msg = eval('(' + m + ')');
+                var like = msg.like;
+                if(like>0) {
+                    $("#like").text(like);
+                    setCookie('like', id);
+                    alert('投票成功');						
+                }else {
+                    alert('投票失败');	
+                }
+            })	
+        }
+        function unlike(id) {
+            if(USER.id<=0) {
+                alert('请先登录');
+                return false;	
+            }
+            if(getCookie('unlike')==id) {
+                alert('已经投票');
+                return false;	
+            }
+            $.get('{:U("index/Index/daily", array("o"=>"unlike"))}', {'id':id, 'belong':'daily'}, function(m){
+                var msg = eval('(' + m + ')');
+                var unlike = msg.unlike;
+                if(unlike>0) {
+                    $("#unlike").text(unlike);
+                    setCookie('unlike',id);
+                    alert('投票成功');
+                }else {
+                    alert('投票失败');	
+                }
+            })
+        }
+        function setCookie(name,value) {
+            var days = 3; // 3天内不可以重复刷票
+            var expr = new Date();
+            expr.setTime(expr.getTime()+days*60*60*24*1000);
+            document.cookie = name + '=' + escape(value) + ';expires=' + expr.toGMTString();
+        }
+        function getCookie(name) {
+            var arr = document.cookie.split('; ');
+            for(var i=0;i<arr.length;i++) {
+                var temp = arr[i].split('=');
+                if(temp[0]==name) return unescape(temp[1]);	
+            }
+        }
+        </script>
 <include file="../Public/footer" />
