@@ -577,8 +577,9 @@ button{
 }
 /****** 翻页 *****/
 .page{
-	margin:15px 155px;
-	text-align:center;
+	width: 450px;
+	margin: 10px auto;
+	text-align: center;
 }
 .page a{
 	display:inline-block;
