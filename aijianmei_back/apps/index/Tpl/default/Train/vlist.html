@@ -215,25 +215,26 @@
 						<div class="each">		
                         <style type="text/css">
 						.pic{position:relative;width:173px;height:100px;background-color:#ddd;z-index:100;}
-						.pic embed{position:absolute;}
+						.pic iframe{position:absolute;z-index:1;}
 						.pic a{position:absolute;top:0;left:0;display:inline-block;width:173px;height:100px;background-color:#ccc;z-index:100;}
 						</style>			
 								<php>foreach($video as $v) {</php>
 								<ul class="vdos">		
 										<li class="pic">
-											<embed src="{$v['link']}" quality="high" width="173" height="100" align="middle" autostart="false" loop="false" allowscriptaccess="always" allowfullscreen="true" mode="transparent" type="application/x-shockwave-flash">
-                                            <a href=""></a>
+                                        	<a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">
+                                            	<img width="173" height="100" src="{$v['logo']}" />
+                                            </a>                                          
 										</li>
 										<li class="info">
 											<span>视频名称：</span>
-											<a href="">{$v['title']}</a>
+											<a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">{$v['title']}</a>
 										</li>
 										<li class="info">
 											<span>{$v['brief']}</span>
 										</li>
 										<li class="info">
 											<span>发布时间：</span>
-											<a href=""><php>echo date('Y-m-d H:i:s', $v['create_time'])</php></a>
+											<a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}"><php>echo date('Y-m-d H:i:s', $v['create_time'])</php></a>
 										</li>
 										<li class="info">
 											<span>播放：</span>
