@@ -25,66 +25,66 @@
 // URL组装 支持不同模式和路由 2010-2-5 更新
 function U($url, $params = false, $redirect = false, $suffix = true)
 {
-	// 普通模式
-	if (false === strpos($url, '/')) {
-		$url .='//';
-	}
+    // 普通模式
+    if (false === strpos($url, '/')) {
+        $url .='//';
+    }
 
-	// 填充默认参数
-	$urls = explode('/',$url);
-	$app  = ($urls[0]) ? $urls[0] : APP_NAME;
-	$mod  = ($urls[1]) ? $urls[1] : 'Index';
-	$act  = ($urls[2]) ? $urls[2] : 'index';
+    // 填充默认参数
+    $urls = explode('/',$url);
+    $app  = ($urls[0]) ? $urls[0] : APP_NAME;
+    $mod  = ($urls[1]) ? $urls[1] : 'Index';
+    $act  = ($urls[2]) ? $urls[2] : 'index';
 
-	// 组合默认路径
-	$site_url = SITE_URL.'/index.php?app='.$app.'&mod='.$mod.'&act='.$act;
+    // 组合默认路径
+    $site_url = SITE_URL.'/index.php?app='.$app.'&mod='.$mod.'&act='.$act;
 
-	// 填充附加参数
-	if ($params) {
-		if (is_array($params)) {
-			$params = http_build_query($params);
-			$params = urldecode($params);
-		}
-		$params = str_replace('&amp;', '&', $params);
-		$site_url .= '&' . $params;
-	}
+    // 填充附加参数
+    if ($params) {
+        if (is_array($params)) {
+            $params = http_build_query($params);
+            $params = urldecode($params);
+        }
+        $params = str_replace('&amp;', '&', $params);
+        $site_url .= '&' . $params;
+    }
 
-	// 开启路由和Rewrite
-	if (C('URL_ROUTER_ON')) {
-		// 载入路由
-		$router_ruler = C('router');
-		$router_key   = $app . '/' . ucfirst($mod) . '/' . $act;
+    // 开启路由和Rewrite
+    if (C('URL_ROUTER_ON')) {
+        // 载入路由
+        $router_ruler = C('router');
+        $router_key   = $app . '/' . ucfirst($mod) . '/' . $act;
 
-		//路由命中
-		if (isset($router_ruler[$router_key])) {
-			//填充路由参数
-			$site_url = SITE_URL . '/' . $router_ruler[$router_key];
+        //路由命中
+        if (isset($router_ruler[$router_key])) {
+            //填充路由参数
+            $site_url = SITE_URL . '/' . $router_ruler[$router_key];
 
-			//填充附加参数
-			if ($params) {
-				// 解析替换URL中的参数
-				parse_str($params, $r);
-				foreach ($r as $k => $v) {
-					if (strpos($site_url, '['.$k.']'))
-						$site_url = str_replace('['.$k.']', $v, $site_url);
-					else
-						$lr[$k]	= $v;
-				}
+            //填充附加参数
+            if ($params) {
+                // 解析替换URL中的参数
+                parse_str($params, $r);
+                foreach ($r as $k => $v) {
+                    if (strpos($site_url, '['.$k.']'))
+                        $site_url = str_replace('['.$k.']', $v, $site_url);
+                    else
+                        $lr[$k]	= $v;
+                }
 
-				// 填充剩余参数
-				if (is_array($lr) && count($lr) > 0)
-					$site_url .= '?' . http_build_query($lr);
-			}
-			// 去除URL中无替换的参数
-			$site_url = preg_replace('/\/\[(.+?)\]/i', '', $site_url);
-		}
-	}
+                // 填充剩余参数
+                if (is_array($lr) && count($lr) > 0)
+                    $site_url .= '?' . http_build_query($lr);
+            }
+            // 去除URL中无替换的参数
+            $site_url = preg_replace('/\/\[(.+?)\]/i', '', $site_url);
+        }
+    }
 
-	// 输出地址或跳转
-	if ($redirect)
-		redirect($site_url);
-	else
-		return $site_url;
+    // 输出地址或跳转
+    if ($redirect)
+        redirect($site_url);
+    else
+        return $site_url;
 }
 
 /**
@@ -366,12 +366,12 @@ function import($class,$baseUrl = '',$ext='.class.php')
         }else {
             // 加载其它项目应用类库
             $class    =   substr_replace($class, '', 0,strlen($class_strut[0])+1);
-			$baseUrl =  APPS_PATH.'/'.$class_strut[0].'/'.LIB_DIR.'/';
+            $baseUrl =  APPS_PATH.'/'.$class_strut[0].'/'.LIB_DIR.'/';
         }
     }
     if(substr($baseUrl, -1) != "/")    $baseUrl .= "/";
     $classfile = $baseUrl . $class . $ext;
-	if($ext == '.class.php' && is_file($classfile)) {
+    if($ext == '.class.php' && is_file($classfile)) {
         // 冲突检测
         $class = basename($classfile,$ext);
         if(isset($_class[$class]))
@@ -464,7 +464,7 @@ function D($name='',$app='')
         import($app.'.Model.'.implode('.',$array).'.'.$className);
     }else{
         $className =  $name.'Model';
-    	$_ENV['app'] = $app;
+        $_ENV['app'] = $app;
         import($app.'.Model.'.$className);
     }
     if(class_exists($className)) {
@@ -570,13 +570,13 @@ function L($name=null,$value=null) {
         }
         
         if(is_array($value)) {
-        	if(isset($_lang[$name])) {
-        		$_lang[$name] = str_replace(array_keys($value), $value, $_lang[$name]);
-        		return $_lang[$name];
-        	}
+            if(isset($_lang[$name])) {
+                $_lang[$name] = str_replace(array_keys($value), $value, $_lang[$name]);
+                return $_lang[$name];
+            }
         } else {
-	        $_lang[$name] = $value;// 语言定义
-	        return;
+            $_lang[$name] = $value;// 语言定义
+            return;
         }
     }
     // 批量定义
@@ -663,24 +663,24 @@ function X($name,$params=array(),$domain='Service') {
     if(isset($_service[$domain.'_'.$app.'_'.$name]))
         return $_service[$domain.'_'.$app.'_'.$name];
 
-	$class = $name.$domain;
+    $class = $name.$domain;
     
     if(!class_exists($class)){
-    	if(file_exists(LIB_PATH.$domain.'/'.$class.'.class.php')){
-    		require_cache(LIB_PATH.$domain.'/'.$class.'.class.php');
-    	}else{
-    		require_cache(SITE_PATH.'/addons/'.strtolower($domain).'s/'.$class.'.class.php');
-    	}
+        if(file_exists(LIB_PATH.$domain.'/'.$class.'.class.php')){
+            require_cache(LIB_PATH.$domain.'/'.$class.'.class.php');
+        }else{
+            require_cache(SITE_PATH.'/addons/'.strtolower($domain).'s/'.$class.'.class.php');
+        }
     }
 
-	//服务不可用时 记录日志 或 抛出异常
-	if(class_exists($class)){
-		$obj   =  new $class($params);
-		$_service[$domain.'_'.$app.'_'.$name] =  $obj;
-		return $obj;
-	}else{
-		throw_exception(L('_CLASS_NOT_EXIST_').':'.$class);
-	}
+    //服务不可用时 记录日志 或 抛出异常
+    if(class_exists($class)){
+        $obj   =  new $class($params);
+        $_service[$domain.'_'.$app.'_'.$name] =  $obj;
+        return $obj;
+    }else{
+        throw_exception(L('_CLASS_NOT_EXIST_').':'.$class);
+    }
 }
 
 // 执行 行为
@@ -699,10 +699,10 @@ function X($name,$params=array(),$domain='Service') {
 function W($name, $data = array(), $return = false) {
     $class = $name.'Widget';
     if(file_exists(LIB_PATH.'Widget/'.$class.'.class.php')){
-		require_cache(LIB_PATH.'Widget/'.$class.'.class.php');
-	}else{
-		require_cache(SITE_PATH.'/addons/widgets/'.$class.'.class.php');
-	}
+        require_cache(LIB_PATH.'Widget/'.$class.'.class.php');
+    }else{
+        require_cache(SITE_PATH.'/addons/widgets/'.$class.'.class.php');
+    }
     if(!class_exists($class))
         throw_exception(L('_CLASS_NOT_EXIST_').':'.$class);
     $widget		=	new $class();
@@ -716,7 +716,7 @@ function W($name, $data = array(), $return = false) {
 // 全局缓存设置和读取
 function S($name,$value='',$expire='',$type='') {
 
-	static $_cache;
+    static $_cache;
 
     if(!class_exists('Cache'))
         require_once SITE_PATH . '/core/sociax/Cache.class.php';
@@ -749,7 +749,7 @@ function S($name,$value='',$expire='',$type='') {
 
 // 快速文件数据读取和保存 针对简单类型数据 字符串、数组
 function F($name,$value='',$path=false) {
-	return S($name,$value);
+    return S($name,$value);
 }
 
 // 根据PHP各种类型变量生成唯一标识号
@@ -929,8 +929,8 @@ function cookie($name,$value='',$option=null)
             $option = array('expire'=>$option);
         }else if( is_string($option) ) {
             parse_str($option,$option);
-    	}
-    	$config	=	array_merge($config,array_change_key_case($option));
+        }
+        $config	=	array_merge($config,array_change_key_case($option));
     }
 
     // 清除指定前缀的所有cookie
@@ -983,8 +983,8 @@ function ts_cookie($name,$value='',$option=null)
             $option = array('expire'=>$option);
         }else if( is_string($option) ) {
             parse_str($option,$option);
-    	}
-    	$config	=	array_merge($config,array_change_key_case($option));
+        }
+        $config	=	array_merge($config,array_change_key_case($option));
     }
 
     // 清除指定前缀的所有cookie
@@ -1021,4 +1021,42 @@ function ts_cookie($name,$value='',$option=null)
         }
     }
 }
+
+/**
+ +----------------------------------------------------------
+ * arrayIsNull函数用于检测数据非空值判断 或者非任何值判断
+ * function array_is_null 
+ +----------------------------------------------------------
+ * @param string $key 判断变量名称默认为空
+ +----------------------------------------------------------
+ * @return  true or false
+ +----------------------------------------------------------
+ */
+if(!function_exists("arrayIsNull"))
+{
+
+function arrayIsNull($arr=null){
+    if(is_array($arr)){
+        foreach($arr as $k=>$v){
+            if($v&&!is_array($v)){
+                return false;
+            }
+            $t=array_map('arrayIsNull',$v);
+            if(!$t){
+                return false;
+            }
+        }
+        return true;        
+    }elseif(!$arr){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+}
+ 
+
+
+
 ?>
