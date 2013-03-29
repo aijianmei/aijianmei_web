@@ -78,11 +78,10 @@ a:hover{
 					color:black;
 				}
 						.show_state{
-							position: relative;
-							top: 8px;
-							left: -6px;
 							font-size: 20px;
 							color: red;
+							padding-right: 3px;
+							vertical-align: top;
 						}
 						.text{
 							width: 318px;
