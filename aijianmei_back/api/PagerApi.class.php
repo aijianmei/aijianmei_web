@@ -163,7 +163,7 @@ class PagerApi extends Api {
 		if ($i==$pg){
 			return " <a class='".$this->style['current']."'>".$i."</a>";
 		}else{
-			return " <a href=".PagerApi::replacepg($this->url,5,$i)." class='".$this->style['num']."'><u>".$i."</u></a>";
+			return " <a href=".PagerApi::replacepg($this->url,5,$i)." class='".$this->style['num']."'>".$i."</a>";
 		}
 	}
 
