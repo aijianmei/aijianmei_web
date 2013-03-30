@@ -30,7 +30,8 @@ class PagerApi extends Api {
          * @param <int> $countall 总页数
          * @param <int> $countlist 每页显示数
          */
-	function __construct($countall=0, $countlist=20){
+	function __construct($countall=0, $countlist=20)
+        {
 		//记录数与每页显示数不能整队时，页数取余后加1
 		$this->countall = $countall;
 		$this->countlist = $countlist;
@@ -59,7 +60,7 @@ class PagerApi extends Api {
         //----------------------------------------------------------------------
         
         /**
-         * 生成分页html代码
+         * 将Html代码赋值到变量
          */
 	public function makePage()
 	{
@@ -111,6 +112,7 @@ class PagerApi extends Api {
 		//生成上页下页等文字链接
 		$this->backstr = $this->gotoback($this->pg);
 		$this->nextstr = $this->gotonext($this->pg,$this->page);
+                $this->topgstr = $this->makepgarray($this->url);
 		/*echo (" 共".$this->countall." 条,每页".$this->countlist."条，共".$this->page."页".$this->backstr.$this->thestr.$this->nextstr); */
 	}
 	
@@ -159,13 +161,29 @@ class PagerApi extends Api {
          * @param <int> $pg 当前页序数
          * @return <string> 数字分页的html
          */
-	function makepg($i,$pg){
+	function makepg($i,$pg)
+        {
 		if ($i==$pg){
 			return " <a class='".$this->style['current']."'>".$i."</a>";
 		}else{
-			return " <a href=".PagerApi::replacepg($this->url,5,$i)." class='".$this->style['num']."'><u>".$i."</u></a>";
+			return " <a href=".PagerApi::replacepg($this->url,5,$i)." class='".$this->style['num']."'>".$i."</a>";
 		}
 	}
+
+        //----------------------------------------------------------------------
+
+        /**
+         * 生成各个页数的link
+         *
+         * @param <string> $url 当前页面链接
+         * @return <array> $topgstr 各个页数的链接数组
+         */
+        function makepgarray($url)
+        {
+            for($i=1;$i<=$page;$i++)
+                $topgstr[$i] = $this->replacepg($url, 5, $i);
+            return $topgstr;
+        }
 
         //----------------------------------------------------------------------
 
@@ -175,7 +193,8 @@ class PagerApi extends Api {
          * @param <int> $pg 当前页序数
          * @return <string> ’上一页‘的html代码
          */
-	function gotoback($pg){
+	function gotoback($pg)
+        {
 		if ($pg-1>0){
 			return $this->gotoback="<a href=".$this->replacepg($this->url,2,0)." class='".$this->style['pre']."'>上一页</a>";
 		}else{
@@ -193,7 +212,8 @@ class PagerApi extends Api {
          * @param <int> $page 总页数
          * @return <string> ’下一页‘的html代码
          */
-	function gotonext($pg,$page){
+	function gotonext($pg,$page)
+        {
 		if ($pg < $page){
 			return " <a href=".$this->replacepg($this->url,1,0)." class='".$this->style['next']."'>下一页</a>";
 		}else{
@@ -218,7 +238,8 @@ class PagerApi extends Api {
          *  - 只在flag=5时需要，平时设0
          * @return <string> $url 链接
          */
-	function replacepg($url,$flag,$i){
+	function replacepg($url,$flag,$i)
+        {
 		if ($flag == 1){
 			$temp_pg = $this->pg;
 			return str_replace("pg=".$temp_pg,"pg=".($this->pg+1),$url);
@@ -246,7 +267,8 @@ class PagerApi extends Api {
          *
          * @return <string> $url
          */
-	function getUrl(){
+	function getUrl()
+        {
 		$url="http://".$_SERVER["HTTP_HOST"];
 		if(isset($_SERVER["REQUEST_URI"])){
 			$url.=$_SERVER["REQUEST_URI"];

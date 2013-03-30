@@ -125,9 +125,12 @@ class AppendAction extends Action {
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
 		// 查询满足要求的总记录数
 		$articleCount = M('article')->where(array('category_id'=>$id))->count();
-
+                $style['pre'] = 'prev';
+                $style['next'] = 'next';
+                $style['current'] = 'current_page';
 		$pager = api('Pager');	// 实例化分页类 
 		$pager->setCounts($articleCount); //传入总记录数
+                $pager->setStyle($style);
 		$pager->setList(10);	// 设置每页显示的记录数
 		$pager->makePage();		//生成数字分页
 		$pageArray = (array)$pager;

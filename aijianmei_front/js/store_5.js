@@ -81,10 +81,6 @@ $(function(){
 		}
 	)
 
-	//textarea focus()
-	$(".comment_inp").click(function(){
-		$(this).html("");
-	})
 //五六级商店页面底部共同部分
 
 	//广告增加效果
@@ -125,34 +121,34 @@ $(function(){
 		}
 	)
 	
-	//放大镜
-	$(".show_food").mouseleave(function(){  
-        $(".small").css({"display":"none"});  
-        $(".enlarge").css("display","none");  
-    }).mousemove(function(e){  
-        topset=$(this).offset().top;  
-        leftset=$(this).offset().left;
-        width = $(this).width()+5;
-        height = $(this).height()+5;
-        if(e.pageX<leftset+80){  
-            LTX=leftset;  
-        }
-        else if(e.pageX>leftset+width-80)  
-            LTX=leftset+width-160;  
-        else  
-            LTX=e.pageX-80;
-        if(e.pageY<topset+80)  
-            LTY=topset;  
-        else if(e.pageY>topset+height-80)  
-            LTY=topset+height-160;  
-        else  
-            LTY=e.pageY-80;
+	// //放大镜
+	// $(".show_food").mouseleave(function(){  
+ //        $(".small").css({"display":"none"});  
+ //        $(".enlarge").css("display","none");  
+ //    }).mousemove(function(e){  
+ //        topset=$(this).offset().top;  
+ //        leftset=$(this).offset().left;
+ //        width = $(this).width()+5;
+ //        height = $(this).height()+5;
+ //        if(e.pageX<leftset+80){  
+ //            LTX=leftset;  
+ //        }
+ //        else if(e.pageX>leftset+width-80)  
+ //            LTX=leftset+width-160;  
+ //        else  
+ //            LTX=e.pageX-80;
+ //        if(e.pageY<topset+80)  
+ //            LTY=topset;  
+ //        else if(e.pageY>topset+height-80)  
+ //            LTY=topset+height-160;  
+ //        else  
+ //            LTY=e.pageY-80;
 
-        $(".small").css({"top":LTY,"left":LTX,"display":"block"});
-        position_x="-"+Math.round((LTX-leftset)*2)+"px";  
-        position_y="-"+Math.round((LTY-topset)*6)+"px"; 
-        $(".enlarge").css({"display":"block"});  
-        $(".enlarge img").css({"top":position_y,"left":position_x});  
-    });  
+ //        $(".small").css({"top":LTY,"left":LTX,"display":"block"});
+ //        position_x="-"+Math.round((LTX-leftset)*2)+"px";  
+ //        position_y="-"+Math.round((LTY-topset)*6)+"px"; 
+ //        $(".enlarge").css({"display":"block"});  
+ //        $(".enlarge img").css({"top":position_y,"left":position_x});  
+ //    });  
 })
 

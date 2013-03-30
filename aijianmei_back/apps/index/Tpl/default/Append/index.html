@@ -124,16 +124,51 @@
 				<div class="part_top clearfix">
 					<div class="lay_top clearfix">
 					<h1 class="public_title">目录</h1>
-						<php>foreach($parent_categories as $c) {</php>
-						<h2 class="title_4">{$c['name']}</h2>
-						<ul class="re_nav clearfix">
-								<php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
-									<li class="each_video">
-										<a href="/index.php?app=index&mod=Append&act=articleList&id={$child['id']}">{$child['name']}</a>
-									</li>
-								<php>}</php>
-							<php>}</php>
-						</ul>
+						<ul class="position_nav clearfix">
+							<li class="nav_cf bg_1">
+								<p class="title_hint">训练基础知识</p>
+								<ul class="nav_detail">
+									<li><a>心</a></li>
+									<li><a>暖/降温</a></li>
+									<li><a>主体类型</a></li>
+									<li><a>伸展</a></li>
+									<li><a>重复与组数</a></li>
+								</ul>
+								<i class="bg_opacity"></i>
+							</li>
+							<li class="nav_cf bg_2">
+								<p class="title_hint">程序</p>
+								<ul class="nav_detail">
+									<li><a>心</a></li>
+									<li><a>暖/降温</a></li>
+									<li><a>主体类型</a></li>
+									<li><a>伸展</a></li>
+									<li><a>重复与组数</a></li>
+								</ul>
+								<i class="bg_opacity"></i>
+							</li>
+							<li class="nav_cf bg_3">
+								<p class="title_hint">练习</p>
+								<ul class="nav_detail">
+									<li><a>心</a></li>
+									<li><a>暖/降温</a></li>
+									<li><a>主体类型</a></li>
+									<li><a>伸展</a></li>
+									<li><a>重复与组数</a></li>
+								</ul>
+								<i class="bg_opacity"></i>
+							</li>
+							<li class="nav_cf bg_4">
+								<p class="title_hint">肌肉组</p>
+								<ul class="nav_detail">
+									<li><a>心</a></li>
+									<li><a>暖/降温</a></li>
+									<li><a>主体类型</a></li>
+									<li><a>伸展</a></li>
+									<li><a>重复与组数</a></li>
+								</ul>
+								<i class="bg_opacity"></i>
+							</li>
 						</ul>
 					</div>
 					<span class="corner_bottom"></span>

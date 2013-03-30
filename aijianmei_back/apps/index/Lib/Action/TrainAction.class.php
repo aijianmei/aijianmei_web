@@ -95,8 +95,12 @@ class TrainAction extends Action {
 		$map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
 		
 		$count = M('article')->where($map)->count();
+                $style['pre'] = 'prev';
+                $style['next'] = 'next';
+                $style['current'] = 'current_page';
 		$pager = api('Pager');
 		$pager->setCounts($count);
+                $pager->setStyle($style);
 		$pager->setList(6);
 		$pager->makePage();
 		$from = ($pager->pg-1) * $pager->countlist;
@@ -139,7 +143,13 @@ class TrainAction extends Action {
 		$this->assign('lastArticles', $hotArticles);
 		//get video list
 		$video = D('Article')->getTrainVideo('create_time');
-		$this->assign('video', $video);
+		foreach($video as $k=>$v) {
+			$videos[$k] = $v;
+			$data = json_decode($this->getVideoData($v['link']));
+			$videos[$k]['logo'] = $data->data[0]->logo;	
+		}
+		//print_r($videos);
+		$this->assign('video', $videos);
 		
 		$this->show_banner();//显示banner
 		$this->display('vlist');
@@ -170,6 +180,15 @@ class TrainAction extends Action {
 		$this->assign('video', $video);
 		$this->assign('cssFile', 'v');
 		$this->display('video');
+	}
+	
+	protected function getVideoData($link)
+	{
+		$id = str_replace('http://player.youku.com/player.php/sid/', '', $link);
+		$id = str_replace('/v.swf', '', $id);
+		$url = 'http://v.youku.com/player/getPlayList/VideoIDS/'.$id.'/version/5/source/out?onData=%5Btype%20Function%5D&n=3';
+		$json = file_get_contents($url);
+		return $json;
 	}
 }
 ?>

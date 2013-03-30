@@ -98,7 +98,7 @@ class NutriAction extends Action {
 		$pager->setList(6);
 		$pager->makePage();
 		$from = ($pager->pg-1) * $pager->countlist;
-		$articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();
+		$articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();               
 		$pageArray = (array)$pager;
 		$this->assign('pager', $pageArray);
 		//var_dump($articles);
