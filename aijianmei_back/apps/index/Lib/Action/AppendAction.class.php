@@ -141,7 +141,7 @@ class AppendAction extends Action {
 		$this->assign('articles', $articles);
 		$this->assign('categories', $realCate);
 		//print_r($articles);
-		$this->assign('cssFile', 'add');
+		$this->assign('cssFile', 'training');
 		
 		$hotArticles = D('Article')->getAppendArticles('click', $id);
 		$this->assign('hotArticles', $hotArticles);
