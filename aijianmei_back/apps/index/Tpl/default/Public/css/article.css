@@ -309,7 +309,6 @@
 						.target .target_pic{
 
 							float:left;
-							height:120px;
 							margin-right: 10px;
 						}
 						.target .care{
@@ -367,12 +366,17 @@
 			.recommend_prod{
 				width:293px;
 			}
-			.recommend img{
+			.recommend_pic{
 				float:left;
+			}
+			.recommend img{
 				margin-right: 10px;
 			}
-			.recommend .intro{
-
+			.recommend_ms{
+				float:left;
+			}
+			.bottom_ms{
+				clear:both;
 			}
 			
 	/*关于作者*/

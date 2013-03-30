@@ -13,7 +13,7 @@ class ArticleModel extends Model {
 */
     public function getDailyLimit($channel,$limit,$nums)
     {
-        $sql = "select d.id,d.title,d.img,d.content,d.create_time,d.like,d.unlike,v.id as vid,v.title as vtitle,v.link,v.intro from ai_daily as d
+        $sql = "select d.id,d.title,d.img,d.content,d.create_time,d.like,d.unlike,d.read_count,v.id as vid,v.title as vtitle,v.link,v.intro from ai_daily as d
                 left join ai_daily_video  as v on v.daily_id=d.id 
                 where d.channel=".$channel." ORDER BY d.create_time DESC  limit ".$limit.",".$nums." ";
         
