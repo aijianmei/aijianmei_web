@@ -309,6 +309,7 @@
 						.target .target_pic{
 
 							float:left;
+							min-height:100px;
 							margin-right: 10px;
 						}
 						.target .care{
@@ -360,23 +361,24 @@
 			margin : 10px 0;
 		}
 		.content_right .recommend{
-			height:70px;
-			padding:10px;
+			height: 60px;
+			padding: 5px;
+			margin: 10px;
+			border: 1px solid #e6e4e4;
+			box-shadow: 0 0 6px #ccc;
 		}	
 			.recommend_prod{
 				width:293px;
 			}
 			.recommend_pic{
 				float:left;
-			}
-			.recommend img{
 				margin-right: 10px;
 			}
-			.recommend_ms{
-				float:left;
+			.recommend h3{
+				margin-bottom: 24px;
 			}
-			.bottom_ms{
-				clear:both;
+			.recommend .intro{
+				float:left;
 			}
 			
 	/*关于作者*/
