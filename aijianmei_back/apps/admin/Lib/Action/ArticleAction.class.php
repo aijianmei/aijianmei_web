@@ -223,7 +223,6 @@ class ArticleAction extends AdministratorAction {
     
     public function addDaily()
     {
-        echo 'here';
         if(isset($_POST['title'])) {
             $data['id'] = intval($_POST['aid']);
             $data['uid'] = $this->mid;
@@ -239,7 +238,6 @@ class ArticleAction extends AdministratorAction {
             }
             
             if(!empty($data['title']) && !empty($data['content'])) {
-                echo 'once</br>';
                 if($data['id']>0) {
                     unset($data['uid']);
                     unset($data['create_time']);
@@ -248,20 +246,20 @@ class ArticleAction extends AdministratorAction {
                 }else {
                     $vid = M('daily')->add($data);
                 }
-                
-                
                 $videos = $_POST['videos'];
                 $titles = $_POST['v_title'];
                 $intros = $_POST['v_intro'];
-                if(is_array($videos) && is_array($titles) && is_array($intros) && arrayIsNull($videos)) {
-                    echo $length = min(array(count($videos), count($titles), count($intros)));
+                if(is_array($videos) && is_array($titles) && is_array($intros)) {
+                    $length = min(array(count($videos), count($titles), count($intros)));
                     for($i=0;$i<=$length;$i++) {
+                        if($videos[$i]!=''&&$titles[$i]!=''&&$intros[$i]!=''){
                         $vdata['daily_id'] = $vid;
                         $vdata['link'] = $videos[$i];
                         $vdata['title'] = $titles[$i];
                         $vdata['intro'] = $intros[$i];
                         $vdata['create_time'] = time();
                         M('daily_video')->add($vdata);
+                        }
                     }
                 }
                 
