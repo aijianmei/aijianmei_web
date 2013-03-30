@@ -252,7 +252,7 @@ class ArticleAction extends AdministratorAction {
                 if(is_array($videos) && is_array($titles) && is_array($intros)) {
                     $length = min(array(count($videos), count($titles), count($intros)));
                     for($i=0;$i<=$length;$i++) {
-                        if($videos[$i]!=''&&$titles[$i]!=''&&$intros[$i]!=''){
+                        if($videos[$i]!=''){
                         $vdata['daily_id'] = $vid;
                         $vdata['link'] = $videos[$i];
                         $vdata['title'] = $titles[$i];
