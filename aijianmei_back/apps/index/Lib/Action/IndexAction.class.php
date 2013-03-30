@@ -342,9 +342,13 @@ function show_banner($type){
         
         
         $commentCounts = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->count();
+        $style['pre'] = 'prev';
+                $style['next'] = 'next';
+                $style['current'] = 'current_page';
         
         $pager = api('Pager');
         $pager->setCounts($commentCounts);
+        $pager->setStyle($style);
         $pager->setList(10);
         $pager->makePage();
         $from = ($pager->pg -1) * $pager->countlist;		
