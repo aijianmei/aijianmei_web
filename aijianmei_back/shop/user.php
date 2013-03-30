@@ -150,6 +150,7 @@ elseif ($action == 'act_register')
     else
     {
         include_once(ROOT_PATH . 'includes/lib_passport.php');
+		include_once(ROOT_PATH . 'includes/lib_aijianmei.php');
 
         $username = isset($_POST['username']) ? trim($_POST['username']) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
@@ -203,7 +204,8 @@ elseif ($action == 'act_register')
         }
 
         if (register($username, $password, $email, $other) !== false)
-        {
+        {			
+			
             /*把新注册用户的扩展信息插入数据库*/
             $sql = 'SELECT id FROM ' . $ecs->table('reg_fields') . ' WHERE type = 0 AND display = 1 ORDER BY dis_order, id';   //读出所有自定义扩展字段的id
             $fields_arr = $db->getAll($sql);
@@ -237,6 +239,10 @@ elseif ($action == 'act_register')
             {
                 send_regiter_hash($_SESSION['user_id']);
             }
+			
+			/*把注册用户信息插入爱健美主站*/
+			aijianmei_register($username, $password, $email, $other);
+			
             $ucdata = empty($user->ucdata)? "" : $user->ucdata;
             show_message(sprintf($_LANG['register_success'], $username . $ucdata), array($_LANG['back_up_page'], $_LANG['profile_lnk']), array($back_act, 'user.php'), 'info');
         }
@@ -271,11 +277,12 @@ elseif ($action == 'validate_email')
 elseif ($action == 'is_registered')
 {
     include_once(ROOT_PATH . 'includes/lib_passport.php');
+	include_once(ROOT_PATH . 'includes/lib_aijianmei.php');
 
     $username = trim($_GET['username']);
     $username = json_str_iconv($username);
 
-    if ($user->check_user($username) || admin_registered($username))
+    if ($user->check_user($username) || admin_registered($username) || aijianmei_registered($username))
     {
         echo 'false';
     }
@@ -288,8 +295,11 @@ elseif ($action == 'is_registered')
 /* 验证用户邮箱地址是否被注册 */
 elseif($action == 'check_email')
 {
+	include_once(ROOT_PATH . 'includes/lib_passport.php');
+	include_once(ROOT_PATH . 'includes/lib_aijianmei.php');
+	
     $email = trim($_GET['email']);
-    if ($user->check_email($email))
+    if ($user->check_email($email) || aijianmei_email($email))
     {
         echo 'false';
     }
@@ -355,6 +365,11 @@ elseif ($action == 'act_login')
 
     if ($user->login($username, $password,isset($_POST['remember'])))
     {
+		include_once(ROOT_PATH.'/includes/lib_aijianmei.php');
+		
+		// 登录爱健美主站
+		aijianmei_login($username, $password);
+		
         update_user_info();
         recalculate_price();
 

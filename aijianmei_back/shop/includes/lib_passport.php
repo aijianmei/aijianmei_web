@@ -401,4 +401,6 @@ function admin_registered( $adminname )
     return $res;
 }
 
+
+
 ?>
