@@ -85,6 +85,8 @@
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}
 								</p>
+								<span class="t_play_time">点击:<span>0</span></span>
+								<span class="comment_time">评论: <span>0</span></span>
 							</li>
 							<php>}</php>
 						</ul>
@@ -102,7 +104,8 @@
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}</p>
-								<!-- <a href="#" class="add_expend">查看所有腹肌锻炼程序</a> -->
+								<span class="t_play_time">点击:<span>0</span></span>
+								<span class="comment_time">评论: <span>0</span></span>
 							</li>
 						<php>}</php>
 						</ul>
@@ -120,6 +123,8 @@
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}</p>
+								<span class="t_play_time">点击:<span>0</span></span>
+								<span class="comment_time">评论: <span>0</span></span>
 							</li>
 						<php>}</php>
 						</ul>
@@ -159,16 +164,52 @@
 					<span class="corner_left"></span>
 					<div class="lay_top clearfix">
 						<h1 class="public_title">目录</h1>
-						<php>foreach($categories as $c) {</php>
-						<h2 class="title_4">{$c['name']}</h2>
-						<ul class="re_nav clearfix">
-							<php>foreach($c['children'] as $child) {</php>
-                                                        <li class="each_video">
-								<a href="/index.php?app=index&mod=Train&act={$action}&id={$child['id']}">{$child['name']}</a>
+						<ul class="position_nav clearfix">
+							<li class="nav_cf bg_1">
+								<p class="title_hint">训练基础知识</p>
+								<ul class="nav_detail">
+									<li><a>心</a></li>
+									<li><a>暖/降温</a></li>
+									<li><a>主体类型</a></li>
+									<li><a>伸展</a></li>
+									<li><a>重复与组数</a></li>
+								</ul>
+								<i class="bg_opacity"></i>
 							</li>
-							<php>}</php>
+							<li class="nav_cf bg_2">
+								<p class="title_hint">程序</p>
+								<ul class="nav_detail">
+									<li><a>心</a></li>
+									<li><a>暖/降温</a></li>
+									<li><a>主体类型</a></li>
+									<li><a>伸展</a></li>
+									<li><a>重复与组数</a></li>
+								</ul>
+								<i class="bg_opacity"></i>
+							</li>
+							<li class="nav_cf bg_3">
+								<p class="title_hint">练习</p>
+								<ul class="nav_detail">
+									<li><a>心</a></li>
+									<li><a>暖/降温</a></li>
+									<li><a>主体类型</a></li>
+									<li><a>伸展</a></li>
+									<li><a>重复与组数</a></li>
+								</ul>
+								<i class="bg_opacity"></i>
+							</li>
+							<li class="nav_cf bg_4">
+								<p class="title_hint">肌肉组</p>
+								<ul class="nav_detail">
+									<li><a>心</a></li>
+									<li><a>暖/降温</a></li>
+									<li><a>主体类型</a></li>
+									<li><a>伸展</a></li>
+									<li><a>重复与组数</a></li>
+								</ul>
+								<i class="bg_opacity"></i>
+							</li>
 						</ul>
-						<php>}</php>
 					</div>
 				</div>
 

@@ -98,7 +98,7 @@ class NutriAction extends Action {
 		$pager->setList(6);
 		$pager->makePage();
 		$from = ($pager->pg-1) * $pager->countlist;
-		$articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();
+		$articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();               
 		$pageArray = (array)$pager;
 		$this->assign('pager', $pageArray);
 		//var_dump($articles);
@@ -114,7 +114,7 @@ class NutriAction extends Action {
 		$this->assign('articles', $articles);
 		$this->assign('categories', $realCate);
 		//$this->assign('cssFile', 'video');
-		$this->assign('cssFile', 'nutri');
+		$this->assign('cssFile', 'training');
 		
 		$this->show_banner();//banner 滚动图片列表
 		$this->display('list');
@@ -131,7 +131,7 @@ class NutriAction extends Action {
 	{
 		$id = intval($_GET['id']);
 		$this->assign('cssFile', 'video');
-		$this->assign('cssFile', 'nutri');
+		$this->assign('cssFile', 'training');
 		$cate = M('article_category')->where(array('channel'=>'2', 'type'=>'1'))->findAll();
 		
 		foreach($cate as $c) {
