@@ -375,7 +375,12 @@ $("li.show_enter").mouseover(function(){
 	})
 });
 
+//textarea focus()
+	$(".comment_inp").click(function(){
+		$(this).html("");
+	})
 
+	
 //公共部分！！！选择页面，上下页切换
 	$(".page a").hover(
 		function(){

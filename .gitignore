@@ -1,3 +1,4 @@
 *.DS_Store
 aijianmei_back/config.inc.php
 _runtime/*
+aijianmei_back/_runtime/*
