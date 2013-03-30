@@ -122,15 +122,6 @@
 		.expand_1 .sprite_6{
 			background-position: 0px -104px;						
 		}
-		.expand_2{
-
-		}
-		.read_time{
-			position:relative;
-			float:right;
-			height:27px;
-			line-height: 27px;
-		}
 		.expand_2 .sprite_8{
 			background-position: 0 -362px;
 			width: 50px;
@@ -154,15 +145,13 @@
 				border-top: 4px solid #D1D1D1;
 				background: whiteSmoke;
 			}
-			.comment_1,.comment_2{
+			.comment_1{
 				display: inline-block;
 				line-height: 32px;
 				font-weight: 600;
 				padding: 0 20px;
 				margin-top: -4px;
 				color:#656565;
-			}
-			.comment_3{
 				border-top: 4px solid #007AFF;
 				background: #DAF3FF;
 
