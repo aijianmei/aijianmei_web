@@ -303,11 +303,6 @@ function show_banner($type){
                 if(!empty($is_vote)) {
                     echo '<script type="text/javascript">alert("已经投票");</script>';
                 }else {
-                    /* $like = M('article')->field('like')->where(array('id'=>$_GET['id']))->find();
-                    $data['id'] = $_GET['id'];
-                    $data['like'] = $like['like'];
-                    M('article')->save($data);
-                     */
                     M('')->query('update ai_article set `like`=`like`+1 where id='.$_GET['id']);
                     $data['uid'] = $this->mid;
                     $data['article_id'] = $_GET['id'];
@@ -322,10 +317,6 @@ function show_banner($type){
                 if(!empty($is_vote)) {
                     echo '<script type="text/javascript">alert("已经投票");</script>';
                 }else {
-                    /* $unlike = M('article')->field('unlike')->where(array('id'=>$_GET['id']))->find();
-                    $data['id'] = $_GET['id'];
-                    $data['unlike'] = $unlike['unlike'];
-                    M('article')->save($data); */
                     M('')->query('update ai_article set `unlike`=`unlike`+1  where id='.$_GET['id']);
                     M('article_vote')->add(array('uid'=>$this->mid, 'article_id'=>$_GET['id']));
                 }
@@ -333,6 +324,8 @@ function show_banner($type){
                 
             }
         }
+        $string="update ai_article set reader_count=reader_count+1 where id=".$_GET['id'];
+        mysql_query($string);
         global $ts;
             
         $id = (int) $_GET['id'];
