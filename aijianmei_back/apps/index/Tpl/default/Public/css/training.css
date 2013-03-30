@@ -1,5 +1,5 @@
 ﻿/***********************content开始*************************/
-	/*左边导航栏结束*/		
+	/*左边导航栏结束*/
 	.training{
 		float:left;
 		width:760px;
@@ -179,7 +179,7 @@
 				margin-right: 15px;
 				border-top: 1px solid #CCC;
 			}
-							
+
 							.more_cf{
 								display: inline-block;
 								height: 20px;
@@ -202,7 +202,7 @@
 				margin: 0 197px;
 				font-size: 14px;
 				background: url(../images/training/training_bottom.png) no-repeat;
-			}			
+			}
 			.pertinence span{
 				font-size: 13px;
 				font-weight: 300;
@@ -240,17 +240,17 @@
 	#footer{background: url(../images/training/workout_54.jpg)}
 
 
-/*添加返回顶部按钮*/	
-.goTopBtn { 
+/*添加返回顶部按钮*/
+.goTopBtn {
 	position:fixed;
 	_position:absolute;
-	display:none; 
-	text-align:center; 
-	line-height:30px; 
-	width:60px; 
-	bottom:35px; 
-	height:60px; 
-	font-size:12px; 
+	display:none;
+	text-align:center;
+	line-height:30px;
+	width:60px;
+	bottom:35px;
+	height:60px;
+	font-size:12px;
 	cursor:pointer;
 	background: url(../images/01.png) no-repeat;
 }
@@ -289,7 +289,7 @@ margin-bottom: 20px;
 		}
 		.nubble p{
 			font-size: 16px;
-			color: #0C84BD;			
+			color: #0C84BD;
 		}
 			.rt_picture{
 				width: 170px;
@@ -344,7 +344,7 @@ margin-bottom: 20px;
 				text-decoration:underline;
 				font-weight:bold;
 			}
-		
+
 		.tab_btn{
 			margin: 0 5px;
 			width: 50px;
@@ -359,7 +359,7 @@ margin-bottom: 20px;
 		.curr_tit{
 			background:lightblue;
 		}
-/******* 视频 *************/		
+/******* 视频 *************/
 	.video{
 		display:inline-block;
 		margin:0 15px;
@@ -372,7 +372,7 @@ margin-bottom: 20px;
 	}
 	/****** 选择分类 ********/
 		.video .select{
-			
+
 		}
 		.opt{
 			vertical-align: top;
@@ -403,7 +403,7 @@ margin-bottom: 20px;
 			width: 173px;
 			display: inline-block;
 			margin: 0 15px 5px 0;
-			
+
 		}
 			.vdos .pic{
 				border-radius: 4px;
@@ -461,7 +461,7 @@ margin-bottom: 20px;
 					margin-left: 10px;
 				}
 					.info .art_title{
-						
+
 						font-weight: bold;
 						margin-bottom:5px;
 					}
@@ -534,7 +534,7 @@ margin-bottom: 20px;
 			-moz-transition:opacity 0.3s linear;
 			-o-transition:opacity 0.3s linear;
 		}
-		.nav_detail li{			
+		.nav_detail li{
 			float: left;
 			margin: 10px 0 0 10px;
 		}

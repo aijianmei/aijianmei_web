@@ -648,33 +648,9 @@
 		   $('#goTopBtn').css({'right':topbtn_posi});
 		   
 
-
-		   //添加目录动态快
-		   $('.nav_cf').mouseover(function(){
-		   		var index = $(".nav_cf").index(this);
-		   		$('.title_hint').css('opacity','1').eq(index).css('opacity','0');
-		   		$('.nav_detail').css('opacity','0').eq(index).css('opacity','1');
-		   		$('.bg_opacity').css('opacity','0.4').eq(index).css('opacity','0');
-		   })
-		   $('.nav_cf').mouseout(function(){
-		   		$('.nav_detail').css('opacity','0');
-		   		$('.title_hint').css('opacity','1');
-		   })
-		   $('.position_nav').mouseleave(function(){
-		   		$('.bg_opacity').css({'opacity':'0'})
-		   })
 		 });
 
-		
-
-		$(".tr_classify").hover(
-			function(){
-				$(this).css("box-shadow","0 0 8px #21ace3")
-			},
-			function(){
-				$(this).css("box-shadow","")
-			}
-		)
+	
 		//handle opacity
 		// var Opacity = function(){
 		// 	var newdom = new getdom,

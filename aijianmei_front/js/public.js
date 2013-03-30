@@ -374,6 +374,29 @@ $("li.show_enter").mouseover(function(){
 		$(this).children().children(".v_enter").css('background','')
 	})
 });
+//添加目录动态快---------------------------------------
+		   $('.nav_cf').mouseover(function(){
+		   		var index = $(".nav_cf").index(this);
+		   		$('.title_hint').css('opacity','1').eq(index).css('opacity','0');
+		   		$('.nav_detail').css('opacity','0').eq(index).css('opacity','1');
+		   		$('.bg_opacity').css('opacity','0.4').eq(index).css('opacity','0');
+		   })
+		   $('.nav_cf').mouseout(function(){
+		   		$('.nav_detail').css('opacity','0');
+		   		$('.title_hint').css('opacity','1');
+		   })
+		   $('.position_nav').mouseleave(function(){
+		   		$('.bg_opacity').css({'opacity':'0'})
+		   })
+//为板块添加css3渐变边框---------------------------
+		$(".tr_classify").add(".recommend").hover(
+			function(){
+				$(this).css("box-shadow","0 0 8px #21ace3")
+			},
+			function(){
+				$(this).css("box-shadow","")
+			}
+		)
 
 //textarea focus()
 	$(".comment_inp").click(function(){
