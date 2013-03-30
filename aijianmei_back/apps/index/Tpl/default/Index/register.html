@@ -1,278 +1,293 @@
 <include file="../Public/header" />
 <script type="text/javascript" src="../Public/js/jquery.js"></script>	
-	<script type="text/javascript" src="../Public/js/public.js"></script>	
-	<script type="text/javascript" src="../Public/js/register.js"></script>
+    <script type="text/javascript" src="../Public/js/public.js"></script>	
+    <script type="text/javascript" src="../Public/js/register.js"></script>
 <div id="content">
-			<div class="leftsidebar">
-				<div class="choice_register">
-					<a class="method email choice_me_1">电子邮箱注册</a>
-					<!--<a class="method telephone">手机号码注册</a>-->
-				</div>
-				<form class="formest" action="/index.php?app=index&mod=Index&act=doRegister" method="post" id="form1">
-					<div class="box box_1">
-						<label class="items" for="text_1"><span class="show_state state_1">*</span>注册邮箱</label>
-						<input type="text" class="text" name="email" id="text_1" value="" onblur="checkEmail(this)">
-						<div class="prompt_box_1 same_prompt"></div>
-					</div>
-					<div class="box box_2">
-						<label class="items" for="text_2"><span class="show_state">*</span>创建密码</label>
-						<input type="password" name="password" class="text" id="text_2">
-						<div class="prompt_box_2">
-						</div>
-					</div>
-					<div class="box box_3">
-						<label class="items" for="text_3"><span class="show_state">*</span>再次输入密码</label>
-						<input type="password" name="repassword" class="text" id="text_3">
-						<div class="prompt_box_3"></div>
-					</div>
-					<div class="box box_4">
-						<label class="items" for="text_4"><span class="show_state">*</span>昵称</label>
-						<input type="text" class="text" name="nickname" id="text_4">
-						<div class="prompt_box_4"></div>
-					</div>
-					<div class="box box_5">
-						<div class="items"><span class="show_state">*</span>性别</div>
-						<div class="sex_box">
-							<label for="male">男</label>
-							<input type="radio" name="sex" id="male" class="sex_1" value="0" checked>
-							<label for="female">女</label>
-							<input type="radio" name="sex" id="female" value="1">
-						</div>
-					</div>
-					<div class="box box_6">
-						<div class="province_box_1">
-							<select class="choice_province" size="value" name="province" id="province_1">
+            <div class="leftsidebar">
+                <div class="choice_register">
+                    <a class="method email choice_me_1">电子邮箱注册</a>
+                    <!--<a class="method telephone">手机号码注册</a>-->
+                </div>
+                <form class="formest" action="/index.php?app=index&mod=Index&act=doRegister" method="post" id="registerForm">
+                    <div class="box box_1">
+                        <label class="items" for="text_1"><span class="show_state state_1">*</span>注册邮箱</label>
+                        <input type="text" class="text" name="email" id="email" value="" onblur="checkEmail()">
+                        <div class="prompt_box_1 same_prompt" id="emailMessage"></div>
+                    </div>
+                    <div class="box box_2">
+                        <label class="items" for="text_2"><span class="show_state">*</span>创建密码</label>
+                        <input type="password" name="password" class="text" id="password" onfocus="checkEmail()" onblur="checkPassword()">
+                        <div class="prompt_box_1 same_prompt" id="passwordMessage">
+                        </div>
+                    </div>
+                    <div class="box box_3">
+                        <label class="items" for="text_3"><span class="show_state">*</span>再次输入密码</label>
+                        <input type="password" name="repassword" class="text" id="repassword" onblur="checkPassword()">
+                        <div class="prompt_box_1 same_prompt" id="repasswordMessage"></div>
+                    </div>
+                    <div class="box box_4">
+                        <label class="items" for="text_4"><span class="show_state">*</span>昵称</label>
+                        <input type="text" class="text" name="nickname" id="nickname" onblur="checkNickname()">
+                        <div class="prompt_box_1 same_prompt" id="nicknameMessage"></div>
+                    </div>
+                    <div class="box box_5">
+                        <div class="items"><span class="show_state">*</span>性别</div>
+                        <div class="sex_box">
+                            <label for="male">男</label>
+                            <input type="radio" name="sex" id="male" class="sex_1" value="0" checked>
+                            <label for="female">女</label>
+                            <input type="radio" name="sex" id="female" value="1">
+                        </div>
+                    </div>
+                    <div class="box box_6">
+                        <div class="province_box_1">
+                            <select class="choice_province" size="value" name="province" id="province_1">
                             <php>foreach($area as $a) {</php>
                             <option value="{$a['area_id']}">{$a['title']}</option>
                             <php>}</php>
-						  		<!--<option value="">广东</option>
-						 		<option value="saab">北京</option>
-						  		<option value="opel">上海</option>
-						  		<option value="audi">福建</option>
-						  		<option value="saab">河南</option>
-						  		<option value="opel">香港</option>
-						  		<option value="audi">广西</option>-->
-							</select>
-						</div>
-						<div class="province_box_2">
+                                <!--<option value="">广东</option>
+                                <option value="saab">北京</option>
+                                <option value="opel">上海</option>
+                                <option value="audi">福建</option>
+                                <option value="saab">河南</option>
+                                <option value="opel">香港</option>
+                                <option value="audi">广西</option>-->
+                            </select>
+                        </div>
+                        <div class="province_box_2">
                         <select class="parent"><option></option></select>
                         <php>foreach($children as $k=>$child) {</php>
-							<select class="choice_province parent" size="value" name="city" id="{$k}"  style="display:none;">
-						  		 
-                                	<php>foreach($child as $c){</php>
-                                    	<option value="{$c['area_id']}">{$c['title']}</option>
+                            <select class="choice_province parent" size="value" name="city" id="{$k}"  style="display:none;">
+                                 
+                                    <php>foreach($child as $c){</php>
+                                        <option value="{$c['area_id']}">{$c['title']}</option>
                                     <php>}</php>
                                 
-							</select>
+                            </select>
                             <php>}</php>
-						</div>
-					</div>
-					<div class="box box_7">
-						<label class="items" for="text_7">详细地址</label>
-						<input type="text" class="text" id="text_7" name="address">
-						<div class="prompt_box_7">您的详细地址有助于更快捷的帮您找到您喜欢的内容
-						</div>
-					</div>
-					<!-- 增加目的块 -->
-					<div class="box box_5">
-						<div class="items">目的</div>
-						<div class="sex_box">
-							<label for="one">减肥</label>
-							<input type="radio" name="goal" id="one" class="sex_1" value="减肥" checked>
-							<label for="two">健身</label>
-							<input type="radio" name="goal" id="two" class="sex_1" value="健身">
-							<label for="third">瑜伽</label>
-							<input type="radio" name="goal" id="third" class="sex_1" value="瑜伽">
-							<label for="four">增肌</label>
-							<input type="radio" name="goal" id="four" class="sex_1" value="增肌">
-						</div>
-					</div>
-					<div class="box box_5">
-						<div class="items">我是</div>
-						<div class="sex_box">
-							<label for="one">初学者</la员bel>
-							<input type="radio" name="begin" id="one" class="sex_1" value="初学者" checked>
-							<label for="two">运动</label>
-							<input type="radio" name="begin" id="two" class="sex_1" value="运动">
-							<label for="third">健身者</label>
-							<input type="radio" name="begin" id="third" class="sex_1" value="健身者">
-							<label for="four">减肥者</label>
-							<input type="radio" name="begin" id="four" class="sex_1" value="减肥者">
-						</div>
-					</div>
-					<!-- -end- -->
-					<div class="box box_8">
-						<label class="items" for="text_8"><span class="show_state">*</span>验证码</label>
-						<input type="text" class="text proven_box" id="text_8">
-						<div class="prompt_box_8">
-							<!--<a class="proven_pic"></a>--><img id="verify_code" src="/public/captcha.php" /><a class="forchange" href="javascript:void(0)" onclick="verify_code.src='/public/captcha.php'">换一换</a>
-						</div>
-					</div>
-					<div class="box box_9">
-						<input type="checkbox" class="protect_box">
-						<span>我已阅读协议<a class="linktoprotect">《爱健美服务使用协议》</a></span>
-					</div>
-					<div class="box_10"><a href="javascript:void(0)" onclick="form1.submit()" class="submit_1"><span class="open">立即开通</span></a></div>
-				</form>
-				<form class="formest_1">
-					<div class="box box_1">
-						<label class="items" for="text_11"><span class="show_state state_1">*</span>手机号</label>
-						<input type="text" class="text" id="text_11" value="">
-						<div class="prompt1_box_1"></div>
-					</div>
-					<div class="box box_2">
-						<label class="items" for="text_22"><span class="show_state">*</span>创建密码</label>
-						<input type="password" class="text" id="text_22">
-						<div class="prompt1_box_2">
-						</div>
-					</div>
-					<div class="box box_3">
-						<label class="items" for="text_33"><span class="show_state">*</span>再次输入密码</label>
-						<input type="password" class="text" id="text_33">
-						<div class="prompt1_box_3"></div>
-					</div>
-					<div class="box box_4">
-						<label class="items" for="text_44"><span class="show_state">*</span>昵称</label>
-						<input type="text" class="text" id="text_44">
-						<div class="prompt1_box_4"></div>
-					</div>
-					<div class="box box_5">
-						<div class="items"><span class="show_state">*</span>性别</div>
-						<div class="sex_box">
-							<label for="male">男</label>
-							<input type="radio" name="sex" id="male" class="sex_1" value="male" checked>
-							<label for="female">女</label>
-							<input type="radio" name="sex" id="female" value="male">
-						</div>
-					</div>
-					<div class="box box_6">
-						<div class="province_box_1">
-							<select class="choice_province" name="province" size="value" id="provinve_2" onchange="getCity(this)">
-                            <php>foreach($area as $a) {</php>
-                            <option value="{$a['area_id']}">{$a['title']}</option>
-                            <php>}</php>
-						  		
-							</select>
-						</div>
-						<div class="province_box_2">
-                        <php>foreach($children as $k=>$child) {</php>
-							<select class="choice_province parent" size="value" id="{$k}" name="city">
-						  		
-                                
-                                	<php>foreach($child as $c){</php>
-                                    	<option class="parent_{$k}" value="{$c['area_id']}">{$c['title']}</option>
-                                    <php>}</php>
-                                
-							</select>
-                            <php>}</php>
-						</div>
-					</div>
-					<div class="box box_7">
-						<label class="items" for="text_17">详细地址</label>
-						<input type="text" class="text" id="text_17">
-						<div class="prompt_box_7">您的详细地址有助于更快捷的帮您找到您喜欢的内容
-						</div>
-					</div>
-					<!-- 增加目的块 -->
-					<div class="box box_5">
-						<div class="items">目的</div>
-						<div class="sex_box">
-							<label for="one">减肥</label>
-							<input type="radio" name="goal" id="one" class="sex_1" value="male" checked>
-							<label for="two">健身</label>
-							<input type="radio" name="goal" id="two" class="sex_1" value="male">
-							<label for="third">瑜伽</label>
-							<input type="radio" name="goal" id="third" class="sex_1" value="male" checked>
-							<label for="four">增肌</label>
-							<input type="radio" name="goal" id="four" class="sex_1" value="male">
-						</div>
-					</div>
-					<div class="box box_5">
-						<div class="items">我是</div>
-						<div class="sex_box">
-							<label for="one">初学者</la员bel>
-							<input type="radio" name="begin" id="one" class="sex_1" value="male" checked>
-							<label for="two">运动</label>
-							<input type="radio" name="begin" id="two" class="sex_1" value="male">
-							<label for="third">健身者</label>
-							<input type="radio" name="begin" id="third" class="sex_1" value="male" checked>
-							<label for="four">减肥者</label>
-							<input type="radio" name="begin" id="four" class="sex_1" value="male">
-						</div>
-					</div>
-					<!-- -end- -->
-					<div class="box box_8">
-						<label class="items" for="text_18"><span class="show_state">*</span>验证码</label>
-						<input type="text" class="text proven_box" id="text_18">
-                        <img src="/public/captcha.php" id="safecode" class="checkImg" alt="看不清，换一张" />
-						<div class="prompt_box_8">
-							<a class="proven_pic"></a><a class="forchange" onclick="safecode.src='/public/captcha.php'">换一换</a>
-						</div>
-					</div>
-					<div class="box box_9">
-						<input type="checkbox" class="protect_box">
-						<span>我已阅读协议<a href="http://dev.aijianmei.com/apps/index/Tpl/default/Public/direct.html" class="linktoprotect">《爱健美服务使用协议》</a></span>
-					</div>
-					<div class="box_10"><a class="submit_1 for_submit_2"><span class="open_1">立即开通</span></a></div>
-				</form>
-			</div>
+                        </div>
+                    </div>
+                    <div class="box box_7">
+                        <label class="items" for="text_7">详细地址</label>
+                        <input type="text" class="text" id="text_7" name="address">
+                        <div class="prompt_box_7">您的详细地址有助于更快捷的帮您找到您喜欢的内容
+                        </div>
+                    </div>
+                    <!-- 增加目的块 -->
+                    <div class="box box_5">
+                        <div class="items">目的</div>
+                        <div class="sex_box">
+                            <label for="one">减肥</label>
+                            <input type="radio" name="goal" id="one" class="sex_1" value="减肥" checked>
+                            <label for="two">健身</label>
+                            <input type="radio" name="goal" id="two" class="sex_1" value="健身">
+                            <label for="third">瑜伽</label>
+                            <input type="radio" name="goal" id="third" class="sex_1" value="瑜伽">
+                            <label for="four">增肌</label>
+                            <input type="radio" name="goal" id="four" class="sex_1" value="增肌">
+                        </div>
+                    </div>
+                    <div class="box box_5">
+                        <div class="items">我是</div>
+                        <div class="sex_box">
+                            <label for="one">初学者</la员bel>
+                            <input type="radio" name="begin" id="one" class="sex_1" value="初学者" checked>
+                            <label for="two">运动</label>
+                            <input type="radio" name="begin" id="two" class="sex_1" value="运动">
+                            <label for="third">健身者</label>
+                            <input type="radio" name="begin" id="third" class="sex_1" value="健身者">
+                            <label for="four">减肥者</label>
+                            <input type="radio" name="begin" id="four" class="sex_1" value="减肥者">
+                        </div>
+                    </div>
+                    <!-- -end- -->
+                    <div class="box box_8">
+                        <label class="items" for="text_8"><span class="show_state">*</span>验证码</label>
+                        <input type="text" class="text proven_box" id="verifyStr" name="verifyStr" onkeyup="checkVerify()" onchange="checkVerify()" onblur="checkVerify()">
+                        <div class="prompt_box_8">
+                            <!--<a class="proven_pic"></a>--><img id="verify_code" src="/public/captcha.php" /><a class="forchange" href="javascript:void(0)" onclick="verify_code.src='/public/captcha.php'">换一换</a>
+                            <span id="verifyStrMessage"></span>
+                        </div>
+                    </div>
+                    <div class="box box_9">
+                        <input type="checkbox" class="protect_box" id="protect_box_btn">
+                        <span>我已阅读协议<a class="linktoprotect">《爱健美服务使用协议》</a></span>
+                    </div>
+                    <div class="box_10"><a href="javascript:void(0)" onclick="RegisterSubmit()" class="submit_1" id="submitPic"><span class="open">立即开通</span></a></div>
+                </form>
+            </div>
             <script type="text/javascript">
-			function getCity(parent, child) {
-				var pid = $("#"+parent).val();
-				
-				
-			}
-			$("#province_1").change(function() {
-				var pid = $("#province_1").val();
-				$(".parent").hide();
-				$(".parent[id="+pid+"]").show();
-			});
-			$("#province_2").change(function() {
-				getCity("province_2", "city_2");
-			});
-			function checkEmail(obj) {
-				var email = obj.value;
-				$.post('/ajax.php?act=check_email', {'email':email}, function(m) {
-					if(m==1) {
-						alert('该邮箱已经注册！');
-						obj.value='';
-					}else {
-						//	
-					}
-				})
-			}
-			</script>
-			<div class="rightsidebar">
-					<div class="A_login">
-						<p>已有爱健美帐号?</p>
-						<a href="/index.php?app=home&mod=Index&act=login" class="loginbutton">登录</a>
-					</div>
-					<div class="user_part">
-						<a href="/index.php?app=index&mod=Index&act=registerGym" class="user">
-							v  健身房注册
-						</a>
-						<a href="/index.php?app=index&mod=Index&act=registerCoach" class="user">
-							v  教练注册
-						</a>
-					</div>
-					<div class="cooperate_target">
-						<p>使用合作网站帐号登录</p>
-						<div class="websibe">
-							<a class="cooperate web_1" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://dev.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a>
-							<!--<a class="cooperate web_2"></a>
-							<a class="cooperate web_3"></a>
-							<a class="cooperate web_4"></a>
-							<a class="cooperate web_5"></a>
-							<a class="cooperate web_6"></a>-->
-						</div>
-					</div>
-					<div class="A_intro">
-						<h1 class="intro_topic">爱健美</h1>
-						<p class="intro_conduct">具有人气的健美产品，先拥有1536人用户，拥有500家健身</p>
-					</div>
-			</div>
-		</div>
-	</div>
-	
+            var IsCanOpen=0;
+            function getCity(parent, child) {
+                var pid = $("#"+parent).val();
+            }
+            $("#province_1").change(function() {
+                var pid = $("#province_1").val();
+                $(".parent").hide();
+                $(".parent[id="+pid+"]").show();
+            });
+            $("#province_2").change(function() {
+                getCity("province_2", "city_2");
+            });
+            function checkEmail() {
+                var email =$("#email").val();
+                var reyx= /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+                if(email!=''&& reyx.test(email)){
+                $.post('ajax.php?act=check_email', {'email':email}, function(m) {
+                    if(m==1) {
+                        alert('该邮箱已经注册！');
+                        $("#email").val('');
+                        return false;
+                    }else {
+                        //new action
+                        $("#emailMessage").html("<span style='color:green;'>邮件可用</span>");
+                    }
+                })
+                }
+                else{
+                $("#email").focus();
+                $("#emailMessage").html("<span style='color:red;'>请输入正确的邮箱</span>");
+                }
+            }
+            function checkPassword()
+            {
+                var passwordStr=$("#password").val();
+                var repasswordStr=$("#repassword").val();
+                if(passwordStr==''&&repasswordStr==''){
+                    $("#password").focus();
+                    $("#passwordMessage").html("<span style='color:red;'>请输入密码</span>");
+                }
+                else if(passwordStr==''&&repasswordStr!=''){
+                    $("#password").val('');
+                    $("#passwordMessage").html("<span style='color:red;'>密码不能为空</span>");
+                }
+                else if(passwordStr!=''&&repasswordStr==''){
+                    $("#repassword").val('');
+                    $("#repasswordMessage").html("<span style='color:red;'>密码不能为空</span>");
+                }
+                else if(passwordStr!=''&&repasswordStr!=''&&passwordStr!=repasswordStr){
+                    $("#repassword").val('');
+                    $("#repasswordMessage").html("<span style='color:red;'>密码需一致</span>");
+                }
+                else{
+                   $("#passwordMessage").html("<span style='color:green;'>密码正确</span>");
+                   $("#repasswordMessage").html("<span style='color:green;'>密码正确</span>");
+                    return true;
+                }
+                return false;
+            }
+            function RegisterSubmit(){
+            if(IsCanOpen==1){ $("#registerForm").submit();}
+               
+            }
+            function checkVerify() {
+                var verifyStr =$("#verifyStr").val();
+                if(verifyStr!=''&& verifyStr.length==5){
+                $.post('ajax.php?act=check_Verify', {'Verify':verifyStr}, function(m) {
+                    if(m==0) {
+                        $("#verifyStr").val('');
+                        return false;
+                    }else {
+                        //new action
+                        $("#verifyStrMessage").html("<span style='color:green;'>正确</span>");
+                        return true;
+                    }
+                })
+                }
+                else{
+                $("#verifyStr").focus();
+                }  
+            }
+            function checkNickname(){
+                var nicknameStr=$("#nickname").val();
+                var pattern=/^([a-zA-Z]|\d|_)*$/;  
+                if(pattern.test(nicknameStr)&&nicknameStr!=''){
+                    $("#nicknameMessage").html("<span style='color:green;'>昵称可使用</span>");
+                    return true;
+                }
+                else{
+                    $("#nickname").val('');
+                    $("#nickname").focus();
+                    $("#nicknameMessage").html("<span style='color:red;'>请输入正确的昵称</span>");
+                    return false;                    
+                }
+                return false; 
+            }
+            
+            $(document).ready(function(){
+
+                $("#protect_box_btn").click(function() {
+                if($("#email").val()=='')
+                {
+                    $("#email").focus(); checkEmail();
+                    $("#protect_box_btn").attr("checked",false);
+                    return false;
+                }
+                if($("#password").val()=='')
+                {
+                    $("#password").focus();checkPassword();
+                    $("#protect_box_btn").attr("checked",false);
+                    return false;
+                }
+                if($("#repassword").val()=='')
+                {
+                    $("#repassword").focus();checkPassword();
+                    $("#protect_box_btn").attr("checked",false);
+                    return false;
+                }
+                if($("#nickname").val()=='')
+                {
+                    $("#nickname").focus();checkNickname();
+                    $("#protect_box_btn").attr("checked",false);
+                    return false;
+                }
+                if($("#verifyStr").val()==''){
+                    $("#verifyStr").focus();checkVerify();
+                    $("#protect_box_btn").attr("checked",false);
+                    return false;
+                }
+                if($("#protect_box_btn").prop("checked")== true){
+                    IsCanOpen=1;
+                    $("#submitPic").attr('style','background: none repeat scroll 0 0 green');
+                  }
+                  else{
+                    IsCanOpen=0;
+                    $("#submitPic").attr('style','background: none repeat scroll 0 0 gray');
+                  }
+                });
+            })
+            </script>
+            <div class="rightsidebar">
+                    <div class="A_login">
+                        <p>已有爱健美帐号?</p>
+                        <a href="/index.php?app=home&mod=Index&act=login" class="loginbutton">登录</a>
+                    </div>
+                    <div class="user_part">
+                        <a href="/index.php?app=index&mod=Index&act=registerGym" class="user">
+                            v  健身房注册
+                        </a>
+                        <a href="/index.php?app=index&mod=Index&act=registerCoach" class="user">
+                            v  教练注册
+                        </a>
+                    </div>
+                    <div class="cooperate_target">
+                        <p>使用合作网站帐号登录</p>
+                        <div class="websibe">
+                            <a class="cooperate web_1" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://dev.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a>
+                            <!--<a class="cooperate web_2"></a>
+                            <a class="cooperate web_3"></a>
+                            <a class="cooperate web_4"></a>
+                            <a class="cooperate web_5"></a>
+                            <a class="cooperate web_6"></a>-->
+                        </div>
+                    </div>
+                    <div class="A_intro">
+                        <h1 class="intro_topic">爱健美</h1>
+                        <p class="intro_conduct">具有人气的健美产品，先拥有1536人用户，拥有500家健身</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
