@@ -150,26 +150,21 @@
 						<!--<a class="comment_2 comment_3">精选评论</a>-->
 					</div>
 					<div class="cm_content tab_2">
-                    <style type="text/css">
-					.page{margin:0;}
-					</style>
-						<div class="page">
-							<span class="page_1">
-								<span class="lay_page">
-									<!-- <a class="choice_page">1</a>
-									<a>2</a>
-									<a>3</a>
-									<a>4</a>
-									<a>5</a> -->
+						<div class="page clearfix">
+							<span class="concrete_choice">
+							
 									{$pager['backstr']}
 									{$pager['thestr']}
 									{$pager['nextstr']}
-								</span>
-								<!-- <a class="pre_page">上一页</a>
-								<a class="next_page">下一页</a> -->
 							</span>
-							<span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
-							
+							<span class="free_choice">
+							<!--<span>第{$pager['pg']}页</span> -->
+							<span class="concrete_page">
+                            到第<input type="text" value="2">页
+                        	</span> 
+                        	<span>共{$pager['countall']}条</span>
+                        	<span class="sure_button">确定</span>
+							</span>
 						</div>
 						<div class="cm_bottom">
 							<h5 class="title_5">推荐精华</h5>
