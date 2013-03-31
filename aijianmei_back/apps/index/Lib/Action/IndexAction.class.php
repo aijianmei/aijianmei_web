@@ -325,7 +325,7 @@ function show_banner($type){
             }
         }
         $string="update ai_article set reader_count=reader_count+1 where id=".$_GET['id'];
-        mysql_query($string);
+        M('')->query($string);
         global $ts;
             
         $id = (int) $_GET['id'];
@@ -336,9 +336,8 @@ function show_banner($type){
         
         $commentCounts = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->count();
         $style['pre'] = 'prev';
-                $style['next'] = 'next';
-                $style['current'] = 'current_page';
-        
+        $style['next'] = 'next';
+        $style['current'] = 'current_page';
         $pager = api('Pager');
         $pager->setCounts($commentCounts);
         //$pager->setStyle($style);

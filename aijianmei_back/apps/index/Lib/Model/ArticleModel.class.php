@@ -180,5 +180,12 @@ class ArticleModel extends Model {
         
         return $result;
     }
+    public function getCountRecommentsById($id)
+    {
+        $sql=null;$numsArr=null;
+        $sql="select count(*) as nums from ai_comments where parent_id=".$id;
+        $numsArr= M('')->query($sql);
+        return !empty($numsArr[0]['nums'])?$numsArr[0]['nums']:0;
+    }
 }
 ?>

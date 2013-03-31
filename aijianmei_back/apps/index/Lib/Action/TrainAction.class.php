@@ -49,52 +49,26 @@ class TrainAction extends Action {
         
         $articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
         foreach ($articles as $key => $value) {
-            $articles[$key]['CommNumber']=0;
-        }
-        $sql1="SElECT count(*) as CommNumber,parent_id as id  FROM ai_comments group by `parent_id`";
-        $result1= M('')->query($sql1);
-        foreach($result1 as $key => $value){
-            foreach ($articles as $varkey => $varvalue) {
-                if($varvalue['id']==$value['id']){
-                    $articles[$varkey]['CommNumber']=$value['CommNumber'];
-                }
-            }	
+            $articles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
         }
         $this->assign('articles', $articles);
         $this->assign('categories', $parent);
         //$this->display();
         
         //assign hotArticles
-        $order = 'click';
+        $order = 'reader_count';
         $hotArticles = D('Article')->getTrainArticles($order);
         foreach ($hotArticles as $key => $value) {
-            $hotArticles[$key]['hotCommNumber']=0;
+            $hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
         }
-        $sql2="SElECT count(*) as hotCommNumber,parent_id as id FROM ai_comments group by `parent_id`";
-        $result2= M('')->query($sql2);
-        foreach($result2 as $key => $value){
-            foreach ($hotArticles as $varkey => $varvalue) {
-                if($varvalue['id']==$value['id']){
-                    $hotArticles[$varkey]['hotCommNumber']=$value['hotCommNumber'];
-                }
-            }	
-        }
+        //print_r( $hotArticles);
         $this->assign('hotArticles', $hotArticles);
         
         //assign lastArticles		
         $order = 'create_time';
         $lastArticles = D('Article')->getTrainArticles($order);
         foreach ($lastArticles as $key => $value) {
-            $lastArticles[$key]['lastCommNumber']=0;
-        }
-        $sql3="SElECT count(*) as lastCommNumber,parent_id as id  FROM ai_comments  group by `parent_id`";
-        $result3= M('')->query($sql3);
-        foreach($result3 as $key => $value){
-            foreach ($lastArticles as $varkey => $varvalue) {
-                if($varvalue['id']==$value['id']){
-                    $lastArticles[$varkey]['lastCommNumber']=$value['lastCommNumber'];
-                }
-            }	
+            $lastArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
         }
         $this->assign('lastArticles', $lastArticles);
 
@@ -118,10 +92,16 @@ class TrainAction extends Action {
         //get hotArticles
         $order = 'click';
         $hotArticles = D('Article')->getTrainArticles($order, $id);
+        foreach($hotArticles as $key => $value){
+            $hotArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
+        }
         $this->assign('hotArticles', $hotArticles);
         //get lastArticles		
         $order = 'create_time';
         $hotArticles = D('Article')->getTrainArticles($order, $id);
+        foreach($hotArticles as $key => $value){
+            $hotArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
+        }
         $this->assign('lastArticles', $hotArticles);
         
         $this->assign('categories', $realCate);
