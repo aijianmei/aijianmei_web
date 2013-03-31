@@ -625,7 +625,6 @@ function show_banner($type){
         $tree_name=$result['name'];
         $result=mysql_query("select name from ai_article_category where id=".$tree_parent);
         $tree_parentName=mysql_fetch_array($result);
-        $this->assign("otherArticle",$otherArticle);
         $this->assign("first",$tree_channel);
         $this->assign("second",$tree_parentName['name']);
         $this->assign("third",$tree_name);
