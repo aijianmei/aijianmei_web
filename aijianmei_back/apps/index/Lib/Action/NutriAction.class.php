@@ -61,20 +61,14 @@ class NutriAction extends Action {
         $order = 'reader_count';
         $hotArticles = D('Article')->getNutriArticles($order);
         foreach($hotArticles as $key => $value){
-            $sql=null;$numsArr=null;
-            $sql="select count(*) as nums from ai_comments where parent_id=".$value['id'];
-            $numsArr= M('')->query($sql);
-            $hotArticles[$key]['recomnums']=!empty($numsArr[0]['nums'])?$numsArr[0]['nums']:0;
+            $hotArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
         }
         $this->assign('hotArticles', $hotArticles);
         //print_r($hotArticles);
 
         $lastArticles = D('Article')->getNutriArticles('create_time');
         foreach($lastArticles as $key => $value){
-            $sql=null;$numsArr=null;
-            $sql="select count(*) as nums from ai_comments where parent_id=".$value['id'];
-            $numsArr= M('')->query($sql);
-            $lastArticles[$key]['recomnums']=!empty($numsArr[0]['nums'])?$numsArr[0]['nums']:0;
+            $lastArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
         }
         $this->assign('lastArticles', $lastArticles);
         //print_r($lastArticles);
