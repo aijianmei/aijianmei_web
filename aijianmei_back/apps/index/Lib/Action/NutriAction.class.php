@@ -116,7 +116,7 @@ class NutriAction extends Action {
         $lastArticles = D('Article')->getNutriArticles('create_time', $id);
         foreach($lastArticles as $key => $value){
             $sql=null;$numsArr=null;
-            $sql="select count(*) as nums from ai_comments where parent_id=$value['id']";
+            $sql="select count(*) as nums from ai_comments where parent_id="$value['id'];
             $numsArr= M('')->query($sql);
             $lastArticles[$key]['recomnums']=$numsArr['nums'];
         }
