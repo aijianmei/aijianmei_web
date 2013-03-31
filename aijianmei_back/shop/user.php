@@ -362,11 +362,11 @@ elseif ($action == 'act_login')
             show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
         }
     }
-
+	
+	include_once(ROOT_PATH . 'includes/lib_passport.php');
+	include_once(ROOT_PATH.'/includes/lib_aijianmei.php');
     if ($user->login($username, $password,isset($_POST['remember'])))
     {
-		include_once(ROOT_PATH.'/includes/lib_aijianmei.php');
-		
 		// 登录爱健美主站
 		aijianmei_login($username, $password);
 		
@@ -375,7 +375,15 @@ elseif ($action == 'act_login')
 
         $ucdata = isset($user->ucdata)? $user->ucdata : '';
         show_message($_LANG['login_success'] . $ucdata , array($_LANG['back_up_page'], $_LANG['profile_lnk']), array($back_act,'user.php'), 'info');
-    }
+		
+    }elseif(can_login_aijianmei($username, $password)) {
+		$email = get_aijianmei_email($username);
+		register($username, $password, $email);
+		aijianmei_login($username, $password);
+		
+		$ucdata = isset($user->ucdata)? $user->ucdata : '';
+        show_message($_LANG['login_success'] . $ucdata , array($_LANG['back_up_page'], $_LANG['profile_lnk']), array($back_act,'user.php'), 'info');
+	}
     else
     {
         $_SESSION['login_fail'] ++ ;
@@ -444,12 +452,18 @@ elseif ($action == 'signin')
 /* 退出会员中心 */
 elseif ($action == 'logout')
 {
+	include_once(ROOT_PATH.'/includes/lib_aijianmei.php');
+	
     if ((!isset($back_act)|| empty($back_act)) && isset($GLOBALS['_SERVER']['HTTP_REFERER']))
     {
         $back_act = strpos($GLOBALS['_SERVER']['HTTP_REFERER'], 'user.php') ? './index.php' : $GLOBALS['_SERVER']['HTTP_REFERER'];
     }
 
     $user->logout();
+	
+	/* 退出爱健美主站 */
+	aijianmei_logout();
+	
     $ucdata = empty($user->ucdata)? "" : $user->ucdata;
     show_message($_LANG['logout'] . $ucdata, array($_LANG['back_up_page'], $_LANG['back_home_lnk']), array($back_act, 'index.php'), 'info');
 }
