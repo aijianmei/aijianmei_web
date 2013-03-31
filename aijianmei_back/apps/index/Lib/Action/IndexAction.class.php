@@ -341,7 +341,7 @@ function show_banner($type){
         
         $pager = api('Pager');
         $pager->setCounts($commentCounts);
-        $pager->setStyle($style);
+        //$pager->setStyle($style);
         $pager->setList(10);
         $pager->makePage();
         $from = ($pager->pg -1) * $pager->countlist;		
