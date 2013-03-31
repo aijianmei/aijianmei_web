@@ -600,8 +600,14 @@ function show_banner($type){
         
         $promoteArticle = M('article')->where(array('is_promote'=>1))->findAll();
         //add others ArticleInfo kon 20130331
-        $otherArticle = M('article')->where(array('uid'=>$daily['uid']))->findAll();
-        
+        //$otherArticleSql = M('article')->where(array('uid'=>$daily['uid']))->findAll();
+        $otherArticleSql = "select * from ai_article where uid=".$daily['uid']." and id > ".$daily['id']." order by id desc limit 0,3";
+        $otherArticle=mysql_query($otherArticleSql);
+        $result=array();
+        while ($row = mysql_fetch_assoc($otherArticle)) {
+            $result[]=$row;
+        }
+        $this->assign('otherArticle', $result);
         $this->assign('promote_article', $promoteArticle);
         
         $string="select category_id,name,channel,parent from ai_article,ai_article_category where ai_article.category_id=ai_article_category.id and ai_article.id=".$id;
@@ -619,6 +625,7 @@ function show_banner($type){
         $tree_name=$result['name'];
         $result=mysql_query("select name from ai_article_category where id=".$tree_parent);
         $tree_parentName=mysql_fetch_array($result);
+        $this->assign("otherArticle",$otherArticle);
         $this->assign("first",$tree_channel);
         $this->assign("second",$tree_parentName['name']);
         $this->assign("third",$tree_name);
