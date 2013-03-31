@@ -11,7 +11,17 @@
                                 计划
                             </li>
                             <li class="each_video">
-                                <a href="/index.php?app=index&mod=Index&act=info&type={$tree_channel_en}">{$first}</a>
+                                <!--<a href="/index.php?app=index&mod=Index&act=info&type={$tree_channel_en}">{$first}</a>-->
+                                <a href="{:U('index/Index/info', array('type'=>1))}">上班族健身</a>
+                            </li>
+                            <li class="each_video">
+                            	<a href="{:U('index/Index/info', array('type'=>2))}">日常健身</a>
+                            </li>
+                            <li class="each_video">
+                            	<a href="{:U('index/Index/info', array('type'=>3))}">运动员</a>
+                            </li>
+                            <li class="each_video">
+                            	<a href="{:U('index/Index/info', array('type'=>4))}">健身运动员</a>
                             </li>
                             <!--
                             <li class="each_video">
@@ -160,14 +170,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="arm.html" class="check_more">查看所有评论</a>
+                                <a href="{:U('index/Index/daily', array('id'=>$i['article']['id'],'type'=>'1'))}" class="check_more">查看所有评论</a>
                             </div>
                             <div class="border_comment">
                                 <span class="word_num">0/300</span>
                                 <php>if(getMid()){</php>
                                 <php>echo getUserName(getMid())</php>
                                 <php>}else {</php>
-                                <span><a href="javascript:void(0)" id="login2">登录</a></span>|
+                                <span><a href="{:U('home/Public/login')}">登录</a></span>|
                                 <span><a href="{:U('index/Index/selectRegister')}">注册</a></span>
                                 <php>}</php>
                                 

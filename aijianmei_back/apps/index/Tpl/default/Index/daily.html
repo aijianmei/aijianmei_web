@@ -145,7 +145,7 @@
                                 <h4>作者的其他文章</h4>
                                 <ul>
                                     <php>foreach($otherArticle as $v) {</php>
-                                    <li class="aut_other_arts"><a href="{:U('index/Index/daily', array('id'=>$i['article']['id'], 'type'=>$_GET['type']))}" class="checking">{$v['title']}</a></li>
+                                    <li class="aut_other_arts"><a href="{:U('index/Index/daily', array('id'=>$v['article']['id'], 'type'=>$_GET['type']))}" class="checking">{$v['title']}</a></li>
                                     <php>}</php>
                                 </ul>
                             </div>
