@@ -3,7 +3,7 @@
             <div class="content_left clearfix">
                 <span>
                 <span>您所在的位置:</span>
-                <a href="/index.php?app=index">爱健�?/a>->
+                <a href="/index.php?app=index">爱健美</a>->
                 <a href="{:U('index/Index/info', array('id'=>$parent))}">天天锻炼</a>->
                 <a href="">{$daily['title']}</a>
                 </span>
@@ -13,8 +13,8 @@
                 <div class="essay_ct">
                     <div class="web_expend_1">
                         <a class="sprite_7"><php>echo count($comments)</php></a>
-                        <span class="for_sprite_7">评论�?/span>
-                        <span class="show_time"><php>echo date('D', $daily['create_time'])</php> <span> <php>echo date('Y�?m�?d�?, $daily['create_time'])</php></span></span>
+                        <span class="for_sprite_7">评论数</span>
+                        <span class="show_time"><php>echo date('D', $daily['create_time'])</php> <span> <php>echo date('Y年 m月 d日', $daily['create_time'])</php></span></span>
                         <span>我要分享</span>
                         <include file="../Public/share" />			
                     </div>
@@ -24,7 +24,7 @@
                             <div class="module_left">
                             {$daily['content']|htmlspecialchars_decode}
                                 <div class="show_video">
-                                    <h4>视频�?/h4>
+                                    <h4>视频：</h4>
                                     <ul class="video_list">
                                     <php>foreach($videos as $v) {</php>
                                      <li style="position:relative;">
@@ -47,9 +47,9 @@
                                 <span class="triangle"></span>
                             </a>
                         </span>
-                        <a class="sprite_8" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登�?);return false;"<php>}</php>><span class="praise">{$daily['like']}</span></a>
-                        <a class="sprite_9" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登�?);return false;"<php>}</php>><span class="praise">{$daily['unlike']}</span></a>
-                        <span class="relay">转发�?/span>
+                        <a class="sprite_8" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$daily['like']}</span></a>
+                        <a class="sprite_9" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$daily['unlike']}</span></a>
+                        <span class="relay">转发到</span>
                         <include file="../Public/share" />
                         <a class="collect">收藏</a>					
                     </div>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="check_comment">
                         <a class="comment_1">全部评论(0)</a>
-                        <a class="comment_2 comment_3">精�?评论</a>
+                        <a class="comment_2 comment_3">精选评论</a>
                     </div>
                     <div class="cm_content tab_2">
                         <div class="cm_top">
@@ -80,7 +80,7 @@
                                     {$pager['nextstr']}
                                 </span>
                             </span>
-                            <span>第{$pager['pg']}�?/span>  <span>共{$pager['countall']}�?/span>
+                            <span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
                             
                         </div>
                         
@@ -117,7 +117,7 @@
                                     {$pager['nextstr']}
                                 </span>
                             </span>
-                            <span>第{$pager['pg']}�?/span>  <span>共{$pager['countall']}�?/span>
+                            <span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
                             
                         </div>
                         <div class="cm_bottom">
@@ -132,20 +132,20 @@
             <div class="content_right">
                 <div>
                     <div class="sider_m">
-                        <h4 class="sider_t">关于作�?</h4>
+                        <h4 class="sider_t">关于作者</h4>
                         <div>
                             <div class="author_info">
                                 <iframe width="100%" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=100&skin=1&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=2692984661&verifier=3c08c88d&dpc=1"></iframe>
-                                <p class="author_label">推广健身文化，传播健康理�?/p>
+                                <p class="author_label">推广健身文化，传播健康理念</p>
                             </div>
                             <div class="author_wb">
                                 <wb:follow-button uid="2692984661" type="red_4" >关注</wb:follow-button>
                             </div>
                             <div class="author_other">
-                                <h4>作�?的其他文�?/h4>
+                                <h4>作者的其他文章</h4>
                                 <ul>
                                     <php>foreach($otherArticle as $v) {</php>
-                                    <li class="aut_other_arts"><a href="{:U('index/Index/daily', array('id'=>$i['article']['id'], 'type'=>$_GET['type']))}" class="checking">{$v['title']}</a></li>
+                                    <li class="aut_other_arts"><a href="{:U('index/Index/daily', array('id'=>$v['article']['id'], 'type'=>$_GET['type']))}" class="checking">{$v['title']}</a></li>
                                     <php>}</php>
                                 </ul>
                             </div>
@@ -168,3 +168,4 @@
 
             </div>
         </div>
+<include file="../Public/footer" />
