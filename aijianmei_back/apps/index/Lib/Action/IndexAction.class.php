@@ -599,6 +599,8 @@ function show_banner($type){
         $this->assign('promote', $promote);
         
         $promoteArticle = M('article')->where(array('is_promote'=>1))->findAll();
+        //add others ArticleInfo kon 20130331
+        $otherArticle = M('article')->where(array('uid'=>$daily['uid']))->findAll();
         
         $this->assign('promote_article', $promoteArticle);
         
@@ -623,7 +625,6 @@ function show_banner($type){
         $this->assign("tree_parent",$tree_parent);
         $this->assign("tree_channel_en",$tree_channel_en);
         $this->assign("tree_category_id",$tree_category_id);
-        
         $this->assign('parent', $_GET['type']);
         $this->display();
     }

@@ -1,291 +1,224 @@
 <include file="../Public/header" />
-
 <div id="content">
-			<div class="content_left clearfix">
-				<span>
-				<span>您所在的位置:</span>
-				<a href="/index.php?app=index">爱健美</a>->
-				<a href="{:U('index/Index/info', array('id'=>$parent))}">天天锻炼</a>->
+            <div class="content_left clearfix">
+                <span>
+                <span>您所在的位置:</span>
+                <a href="/index.php?app=index">爱健美</a>->
+                <a href="{:U('index/Index/info', array('id'=>$parent))}">天天锻炼</a>->
                 <a href="">{$daily['title']}</a>
-				</span>
-				<span>{$daily['keyword']}</span>
-				<!-- <span class="goal">瘦身</span>
-				<span class="goal_part">腰部 XX XX</span> -->
-				<div class="essay_ct">
-					<div class="web_expend_1">
-						<a class="sprite_7"><php>echo count($comments)</php></a>
+                </span>
+                <span>{$daily['keyword']}</span>
+                <!-- <span class="goal">瘦身</span>
+                <span class="goal_part">腰部 XX XX</span> -->
+                <div class="essay_ct">
+                    <div class="web_expend_1">
+                        <a class="sprite_7"><php>echo count($comments)</php></a>
                         <span class="for_sprite_7">评论数</span>
-						<span class="show_time"><php>echo date('D', $daily['create_time'])</php> <span> <php>echo date('Y年 m月 d日', $daily['create_time'])</php></span></span>
-						<span>我要分享</span>
-						<include file="../Public/share" />
-						<!-- JiaThis Button BEGIN -->
-						<!-- <div class="jiathis_style">
-							<a class="jiathis_button_qzone"></a>
-							<a class="jiathis_button_tsina"></a>
-							<a class="jiathis_button_tqq"></a>
-							<a class="jiathis_button_renren"></a>
-							<a class="jiathis_button_kaixin001"></a>
-							<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-						</div>
-						<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1359878070244822" charset="utf-8"></script> -->
-						<!-- JiaThis Button END -->
-						<!-- <a class="sprite_1"></a>
-						<a class="sprite_2"></a>
-						<a class="sprite_3"></a>
-						<a class="sprite_4"></a>
-						<a class="sprite_5"></a>
-						<a class="sprite_6"></a> -->				
-					</div>
-					<!-- 与article.html不同的部分 -->
-					<div class="show_module clearfix">
-						<h1 class="titler">{$daily['title']}</h1>
-						<div>
-							<div class="module_left">
-							{$daily['content']|htmlspecialchars_decode}
-								<!-- <h3>内容</h3>
-								<span>for time:</span>
-								<p>20wall ball shots,20 pound ball</p>
-								<p>20wall ball shots,20 pound ball</p>
-								<p>20wall ball shots,20 pound ball</p>
-								<p>20wall ball shots,20 pound ball</p>
-								<p>20wall ball shots,20 pound ball</p>
-								<p>20wall ball shots,20 pound ball</p> -->
-								<div class="show_video">
-									<h4>视频：</h4>
+                        <span class="show_time"><php>echo date('D', $daily['create_time'])</php> <span> <php>echo date('Y年 m月 d日', $daily['create_time'])</php></span></span>
+                        <span>我要分享</span>
+                        <include file="../Public/share" />
+                        <!-- JiaThis Button BEGIN -->
+                        <!-- <div class="jiathis_style">
+                            <a class="jiathis_button_qzone"></a>
+                            <a class="jiathis_button_tsina"></a>
+                            <a class="jiathis_button_tqq"></a>
+                            <a class="jiathis_button_renren"></a>
+                            <a class="jiathis_button_kaixin001"></a>
+                            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                        </div>
+                        <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1359878070244822" charset="utf-8"></script> -->
+                        <!-- JiaThis Button END -->
+                        <!-- <a class="sprite_1"></a>
+                        <a class="sprite_2"></a>
+                        <a class="sprite_3"></a>
+                        <a class="sprite_4"></a>
+                        <a class="sprite_5"></a>
+                        <a class="sprite_6"></a> -->				
+                    </div>
+                    <!-- 与article.html不同的部分 -->
+                    <div class="show_module clearfix">
+                        <h1 class="titler">{$daily['title']}</h1>
+                        <div>
+                            <div class="module_left">
+                            {$daily['content']|htmlspecialchars_decode}
+                                <!-- <h3>内容</h3>
+                                <span>for time:</span>
+                                <p>20wall ball shots,20 pound ball</p>
+                                <p>20wall ball shots,20 pound ball</p>
+                                <p>20wall ball shots,20 pound ball</p>
+                                <p>20wall ball shots,20 pound ball</p>
+                                <p>20wall ball shots,20 pound ball</p>
+                                <p>20wall ball shots,20 pound ball</p> -->
+                                <div class="show_video">
+                                    <h4>视频：</h4>
                                     <ul class="video_list">
-									<php>foreach($videos as $v) {</php>
-									 <li style="position:relative;">
-										<a href="javascript:void(0)">
-											<!--<img src="{$v['img']}" width="150" />-->
+                                    <php>foreach($videos as $v) {</php>
+                                     <li style="position:relative;">
+                                        <a href="javascript:void(0)">
+                                            <!--<img src="{$v['img']}" width="150" />-->
                                             
                                             <embed src="{$v['link']}" quality="high" width="620" height="450" align="middle" autostart="false" loop="false" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
                                         
-										</a>										
-									</li>
-									<php>}</php>
+                                        </a>										
+                                    </li>
+                                    <php>}</php>
                                     </ul>
-								</div>
-							</div>
-							<!--<div class="module_right">
-								<a>
-									<img src="../Public/images/article/{$article['img']}">
-								</a>
-							</div>-->
-						</div>
-					</div>
-					<!-- end -->
-					<div class="web_expend_2">
-						<span class="read_time">
-							<a style="height:16px;width:52px;line-height:16px;background:0;">
-								<span>阅读</span>
-								<span>0</span>
-								<span class="triangle"></span>
-							</a>
-							<!-- <div class="page_times" style="postion:absolute;display:none;right:0px;width:50px; background:white;line-height:20px;border:1px solid #ccc;">
-								<p>页面1</p>
-								<p>页面1</p>	
-							</div> -->
-						</span>
-						<a class="sprite_8" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$daily['like']}</span></a>
-						<a class="sprite_9" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$daily['unlike']}</span></a>
-						<span class="relay">转发到</span>
-						<include file="../Public/share" />
-						<!-- JiaThis Button BEGIN -->
-						<!-- <div class="jiathis_style">
-							<a class="jiathis_button_qzone"></a>
-							<a class="jiathis_button_tsina"></a>
-							<a class="jiathis_button_tqq"></a>
-							<a class="jiathis_button_renren"></a>
-							<a class="jiathis_button_kaixin001"></a>
-							<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-						</div>
-						<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1359878070244822" charset="utf-8"></script> -->
-						<!-- JiaThis Button END -->
-						<!-- <a class="sprite_1"></a>
-						<a class="sprite_2"></a>
-						<a class="sprite_3"></a>
-						<a class="sprite_4"></a>
-						<a class="sprite_5"></a>
-						<a class="sprite_6"></a> -->
-						<a class="collect">收藏</a>					
-					</div>
+                                </div>
+                            </div>
+                            <!--<div class="module_right">
+                                <a>
+                                    <img src="../Public/images/article/{$article['img']}">
+                                </a>
+                            </div>-->
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <div class="web_expend_2">
+                        <span class="read_time">
+                            <a style="height:16px;width:52px;line-height:16px;background:0;">
+                                <span>阅读</span>
+                                <span>{$daily['reader_count']}</span>
+                                <span class="triangle"></span>
+                            </a>
+                        </span>
+                        <a class="sprite_8" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$daily['like']}</span></a>
+                        <a class="sprite_9" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$daily['unlike']}</span></a>
+                        <span class="relay">转发到</span>
+                        <include file="../Public/share" />
+                        <a class="collect">收藏</a>					
+                    </div>
                     <wb:like appkey="5Q8YPj"></wb:like>
-					<div class="border_comment">
-						<span class="word_num">0/300</span>
-						<php>if(getMid()){</php>
-						<php>echo getUserName(getMid())</php>
-						<php>}else {</php>
-						<span>登录</span>|
-						<span>注册</span>
-						<php>}</php>
-						
-						<div class="textarea"><textarea class="comment_inp" name="comment" id="comment">有什么感想，来说说吧</textarea></div>
-						<a class="comment" href="javascript:void(0)" onclick="comments(comment.value, {$daily['id']}, 'Daily')" aid="{$daily['id']}">发表评论</a>
-					</div>
-					<div class="check_comment">
-						<a class="comment_1">全部评论(0)</a>
-						<a class="comment_2 comment_3">精选评论</a>
-					</div>
-					<div class="cm_content tab_2">
-						<div class="cm_top">
-							<span class="page_1">
-								<span class="lay_page">
-									<!-- <a class="choice_page">1</a>
-									<a>2</a>
-									<a>3</a>
-									<a>4</a>
-									<a>5</a> -->
-									{$pager['backstr']}
-									{$pager['thestr']}
-									{$pager['nextstr']}
-								</span>
-								<!-- <a class="pre_page">上一页</a>
-								<a class="next_page">下一页</a> -->
-							</span>
-							<span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
-							
-						</div>
-						
-						<div class="cm_bottom">
-							<h5 class="title_5">推荐精华</h5>
-							<php>foreach($comments as $c) {</php>
-							<div class="target">
-								<div class="target_pic">
-									<img src="{$c['userInfo']['face']}" alt="no" />
-									<span class="care">关注</span>
-								</div>
-								<a class="name">{$c['userInfo']['uname']}</a>
-								<p>{$c['content']}</p>
-								<p class="bottom_ms">
-									<span class="to">
-										<a>转发<span>(0)</span></a>
-										<a>回复<span>(0)</span></a>
-									</span>	
-									<span><php>echo date('Y-m-d H:i:s',$c['content']['create_time'])</php></span>
-									<span>来自<em>爱健美网</em></span>
-									
-								</p>
-							</div>
-							<php>}</php>
-						</div>
-							
-					</div>
-					<div class="cm_content tab_1">
-						<div class="cm_top">
-							<span class="page_1">
-								<span class="lay_page">
-									<!-- <a class="choice_page">1</a>
-									<a>2</a>
-									<a>3</a>
-									<a>4</a>
-									<a>5</a> -->
-									{$pager['backstr']}
-									{$pager['thestr']}
-									{$pager['nextstr']}
-								</span>
-								<!-- <a class="pre_page">上一页</a>
-								<a class="next_page">下一页</a> -->
-							</span>
-							<span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
-							
-						</div>
-						<div class="cm_bottom">
-							<h5 class="title_5">全部推荐</h5>
-							<!-- <div class="target">
-								<div class="target_pic">
-									<img src="../Public/images/article/9.png" alt="no" />
-									<span class="care">关注</span>
-								</div>
-								<a class="name">huifei</a>
-								<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
-								<p class="bottom_ms">
-									<span class="to">
-										<a>转发<span>(0)</span></a>
-										<a>回复<span>(0)</span></a>
-									</span>	
-									<span>22个小时前</span>
-									<span>来自<em></em></span>
-									
-								</p>
-							</div> -->
-							<!-- <div class="target">
-								<div class="target_pic">
-									<img src="../Public/images/article/9.png" alt="no" />
-									<span class="care">关注</span>
-								</div>
-								<a class="name">huifei</a>
-								<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
-								<p class="bottom_ms">
-									<span class="to">
-										<a>转发<span>(0)</span></a>
-										<a>回复<span>(0)</span></a>
-									</span>
-									<span>22个小时前</span>
-									<span>来自<em></em></span>
-										
-								</p>
-							</div> -->
-						</div>
-					</div>
-					<div class="relation">
-						<h5 class="title_6"><a class="add_relation">相关推荐</a></h5>
-						<!-- <p>计划生育实施之后、、</p>
-						<p>计划生育实施之后、、</p>
-						<p>计划生育实施之后、、</p>
-						<p>计划生育实施之后、、</p> -->
-					</div>
-				</div>
-			</div>
-			<div class="content_right">
-            	<div>
-                	<div class="sider_m">
-						<h4 class="sider_t">关于作者</h4>
-						<div>
-							<div class="author_info">
-								<iframe width="100%" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=100&skin=1&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=2692984661&verifier=3c08c88d&dpc=1"></iframe>
-								<p class="author_label">推广健身文化，传播健康理念</p>
-							</div>
-							<div class="author_wb">
-								<wb:follow-button uid="2692984661" type="red_4" >关注</wb:follow-button>
-							</div>
-							<div class="author_other">
-								<h4>作者的其他文章</h4>
-								<ul>
-									<li class="aut_other_arts"><a href="">作者的其他文章</a></li>
-									<li class="aut_other_arts"><a href="">作者的其他文章</a></li>
-									<li class="aut_other_arts"><a href="">作者的其他文章</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-                    <div class="sider_m">
-						<h4 class="sider_t">推荐商品</h4>
-						<a href="{$promote['link']}"><img class="recommend_prod" src="{$promote['image']}" alt="no" border="0" /></a>
-					</div>
-                    <div class="sider_m">
-						<h4 class="sider_t">精华推荐</h4>
-						<php>foreach($promote_article as $p) {</php>
-						<div class="recommend">							
-							<a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
-							<p class="intro">{$p['title']}</p>
-						</div>
-						<php>}</php>
-						<!-- <div class="recommend">
-							<a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
-							<p class="intro">新闻百科：为什么大陆同胞赴美不用、、、</p>
-						</div> -->
-					</div>
+                    <div class="border_comment">
+                        <span class="word_num">0/300</span>
+                        <php>if(getMid()){</php>
+                        <php>echo getUserName(getMid())</php>
+                        <php>}else {</php>
+                        <span>登录</span>|
+                        <span>注册</span>
+                        <php>}</php>
+                        
+                        <div class="textarea"><textarea class="comment_inp" name="comment" id="comment">有什么感想，来说说吧</textarea></div>
+                        <a class="comment" href="javascript:void(0)" onclick="comments(comment.value, {$daily['id']}, 'Daily')" aid="{$daily['id']}">发表评论</a>
+                    </div>
+                    <div class="check_comment">
+                        <a class="comment_1">全部评论(0)</a>
+                        <a class="comment_2 comment_3">精选评论</a>
+                    </div>
+                    <div class="cm_content tab_2">
+                        <div class="cm_top">
+                            <span class="page_1">
+                                <span class="lay_page">
+                                    <!-- <a class="choice_page">1</a>
+                                    <a>2</a>
+                                    <a>3</a>
+                                    <a>4</a>
+                                    <a>5</a> -->
+                                    {$pager['backstr']}
+                                    {$pager['thestr']}
+                                    {$pager['nextstr']}
+                                </span>
+                                <!-- <a class="pre_page">上一页</a>
+                                <a class="next_page">下一页</a> -->
+                            </span>
+                            <span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
+                            
+                        </div>
+                        
+                        <div class="cm_bottom">
+                            <h5 class="title_5">推荐精华</h5>
+                            <php>foreach($comments as $c) {</php>
+                            <div class="target">
+                                <div class="target_pic">
+                                    <img src="{$c['userInfo']['face']}" alt="no" />
+                                    <span class="care">关注</span>
+                                </div>
+                                <a class="name">{$c['userInfo']['uname']}</a>
+                                <p>{$c['content']}</p>
+                                <p class="bottom_ms">
+                                    <span class="to">
+                                        <a>转发<span>(0)</span></a>
+                                        <a>回复<span>(0)</span></a>
+                                    </span>	
+                                    <span><php>echo date('Y-m-d H:i:s',$c['content']['create_time'])</php></span>
+                                    <span>来自<em>爱健美网</em></span>
+                                    
+                                </p>
+                            </div>
+                            <php>}</php>
+                        </div>
+                            
+                    </div>
+                    <div class="cm_content tab_1">
+                        <div class="cm_top">
+                            <span class="page_1">
+                                <span class="lay_page">
+                                    {$pager['backstr']}
+                                    {$pager['thestr']}
+                                    {$pager['nextstr']}
+                                </span>
+                            </span>
+                            <span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
+                            
+                        </div>
+                        <div class="cm_bottom">
+                            <h5 class="title_5">全部推荐</h5>
+                        </div>
+                    </div>
+                    <div class="relation">
+                        <h5 class="title_6"><a class="add_relation">相关推荐</a></h5>
+                    </div>
                 </div>
-				<!-- <a href="store_5.html"><img src="../Public/images/article/1.png" alt="no" border="0" /></a>
-				<h4 class="title_4">精华推荐</h4>
-					<div class="recommend">
-						<a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
-						<p class="intro">新闻百科：为什么大陆同胞赴美不用、、、</p>
-					</div>
-					<div class="recommend">
-						<a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
-						<p class="intro">新闻百科：为什么大陆同胞赴美不用、、、</p>
-					</div> -->
-			</div>
-		</div>
+            </div>
+            <div class="content_right">
+                <div>
+                    <div class="sider_m">
+                        <h4 class="sider_t">关于作者</h4>
+                        <div>
+                            <div class="author_info">
+                                <iframe width="100%" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=100&skin=1&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=2692984661&verifier=3c08c88d&dpc=1"></iframe>
+                                <p class="author_label">推广健身文化，传播健康理念</p>
+                            </div>
+                            <div class="author_wb">
+                                <wb:follow-button uid="2692984661" type="red_4" >关注</wb:follow-button>
+                            </div>
+                            <div class="author_other">
+                                <h4>作者的其他文章</h4>
+                                <ul>
+                                    <li class="aut_other_arts"><a href="">作者的其他文章</a></li>
+                                    <li class="aut_other_arts"><a href="">作者的其他文章</a></li>
+                                    <li class="aut_other_arts"><a href="">作者的其他文章</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sider_m">
+                        <h4 class="sider_t">推荐商品</h4>
+                        <a href="{$promote['link']}"><img class="recommend_prod" src="{$promote['image']}" alt="no" border="0" /></a>
+                    </div>
+                    <div class="sider_m">
+                        <h4 class="sider_t">精华推荐</h4>
+                        <php>foreach($promote_article as $p) {</php>
+                        <div class="recommend">							
+                            <a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
+                            <p class="intro">{$p['title']}</p>
+                        </div>
+                        <php>}</php>
+                        <!-- <div class="recommend">
+                            <a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
+                            <p class="intro">新闻百科：为什么大陆同胞赴美不用、、、</p>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- <a href="store_5.html"><img src="../Public/images/article/1.png" alt="no" border="0" /></a>
+                <h4 class="title_4">精华推荐</h4>
+                    <div class="recommend">
+                        <a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
+                        <p class="intro">新闻百科：为什么大陆同胞赴美不用、、、</p>
+                    </div>
+                    <div class="recommend">
+                        <a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
+                        <p class="intro">新闻百科：为什么大陆同胞赴美不用、、、</p>
+                    </div> -->
+            </div>
+        </div>
 <include file="../Public/footer" />
