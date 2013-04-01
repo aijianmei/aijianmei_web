@@ -2,78 +2,78 @@
 <include file="../Public/banner" />
 
 <div id="content" class="clearfix">
-			<div class="sider_all">
-				<span class="corner_left"></span>
-				<div class="lay_sider">
-					<div class="subsider">
-						<span class="border_line"></span>
-						<h3 class="video_all">营养</h3>
-						<span class="border_line"></span>
-						<ul>
-							<php>foreach($categories as $c) {</php>
-							<php>if($c['name']) {</php>
-							<li class="each_video all">
-								<a href="/index.php?app=index&mod=Nutri&act=articleList&id={$c['id']}">{$c['name']}</a>
-							</li>
-							<php>}</php>
-							<php>foreach($c['children'] as $child) {</php>
-							<li class="each_video">
-								<a href="/index.php?app=index&mod=Nutri&act=articleList&id={$child['id']}">{$child['name']}</a>
-							</li>
-							<php>}</php>
-							<php>}</php>
-							<span class="border_line"></span>
-						</ul>
-					</div>
-				</div>
-				<span class="corner_bottom"></span>
-			</div>
-			
-			<div class="right_sider">
+            <div class="sider_all">
+                <span class="corner_left"></span>
+                <div class="lay_sider">
+                    <div class="subsider">
+                        <span class="border_line"></span>
+                        <h3 class="video_all">营养</h3>
+                        <span class="border_line"></span>
+                        <ul>
+                            <php>foreach($categories as $c) {</php>
+                            <php>if($c['name']) {</php>
+                            <li class="each_video all">
+                                <a href="/index.php?app=index&mod=Nutri&act=articleList&id={$c['id']}">{$c['name']}</a>
+                            </li>
+                            <php>}</php>
+                            <php>foreach($c['children'] as $child) {</php>
+                            <li class="each_video">
+                                <a href="/index.php?app=index&mod=Nutri&act=articleList&id={$child['id']}">{$child['name']}</a>
+                            </li>
+                            <php>}</php>
+                            <php>}</php>
+                            <span class="border_line"></span>
+                        </ul>
+                    </div>
+                </div>
+                <span class="corner_bottom"></span>
+            </div>
+            
+            <div class="right_sider">
 
-				<div class="part_top clearfix">
-					<div class="lay_top clearfix">
-							<h1 class="public_title">最热文章</h1>
-							<div class="hot_video">
-							<ul class="lay_hot_video clearfix">
-							<php>foreach($hotArticles as $a) {</php>
-								<li class="tr_classify">
-									<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_1"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-									<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
-									<p class="summary">{$a['brief']}
-									</p>
-									<span class="t_play_time">点击:<span>0</span></span>
-								<span class="comment_time">评论: <span>0</span></span>
-								</li>
-								<php>}</php>
-							</ul>
-						</div>
-					</div>
-					<span class="corner_bottom"></span>
-				</div>	
+                <div class="part_top clearfix">
+                    <div class="lay_top clearfix">
+                            <h1 class="public_title">最热文章</h1>
+                            <div class="hot_video">
+                            <ul class="lay_hot_video clearfix">
+                            <php>foreach($hotArticles as $a) {</php>
+                                <li class="tr_classify">
+                                    <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_1"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+                                    <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+                                    <p class="summary">{$a['brief']}
+                                    </p>
+                                    <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
+                                <span class="comment_time">评论: <span>{$a['recomnums']}</span></span>
+                                </li>
+                                <php>}</php>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="corner_bottom"></span>
+                </div>	
 
-				<div class="part_top clearfix">
-					<div class="lay_top clearfix">
-						<h1 class="public_title">最近文章</h1>
-						<div class="hot_video">
-							<ul class="lay_hot_video clearfix">
-								<php>foreach($lastArticles as $a) {</php>
-								<li class="tr_classify">
-									<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_2"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-									<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
-									<p class="summary">{$a['brief']}</p>
-									<span class="t_play_time">点击:<span>0</span></span>
-								<span class="comment_time">评论: <span>0</span></span>
-								</li>
-								<php>}</php>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="part_top clearfix">
-					<div class="lay_top clearfix">
-						<h1 class="public_title">全部</h1>
-						<div class="video">
+                <div class="part_top clearfix">
+                    <div class="lay_top clearfix">
+                        <h1 class="public_title">最近文章</h1>
+                        <div class="hot_video">
+                            <ul class="lay_hot_video clearfix">
+                                <php>foreach($lastArticles as $a) {</php>
+                                <li class="tr_classify">
+                                    <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="video_2"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+                                    <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+                                    <p class="summary">{$a['brief']}</p>
+                                    <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
+                                <span class="comment_time">评论: <span>{$a['recomnums']}</span></span>
+                                </li>
+                                <php>}</php>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="part_top clearfix">
+                    <div class="lay_top clearfix">
+                        <h1 class="public_title">全部</h1>
+                        <div class="video">
                                                         <div class="all">
                                                                 <ul class="all_ul">
                                                                         <li class="select">
@@ -102,7 +102,7 @@
                                                                         </div>
                                                                 <php>}</php>
                                                         </div>
-						</div>
+                        </div>
                                                 <div class="page clearfix">
                                                     <span class="concrete_choice">
                                                                         {$pager[backstr]}
@@ -113,14 +113,14 @@
                                                         <span>共{$pager[page]}页</span>
                                                         <span class="concrete_page">
                                                                 到第
-                                                                <input type="text" value="2">
+                                                                <input type="text" value="">
                                                                 页
                                                         </span>
                                                         <span class="sure_button">确定</span>
                                                     </span>
                                                 </div>
-					</div>
-				</div>								
-			</div>
-		</div>
+                    </div>
+                </div>								
+            </div>
+        </div>
 <include file="../Public/footer" />

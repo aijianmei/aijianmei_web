@@ -201,7 +201,7 @@
             function checkNickname(){
                 var nicknameStr=$("#nickname").val();
                 var pattern=/^([a-zA-Z]|\d|_)*$/;  
-                if(pattern.test(nicknameStr)&&nicknameStr!=''){
+                if(nicknameStr!=''){
                     $("#nicknameMessage").html("<span style='color:green;'>昵称可使用</span>");
                     return true;
                 }
