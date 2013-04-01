@@ -154,15 +154,34 @@ class TrainAction extends Action {
         $order = 'create_time';
         $hotArticles = D('Article')->getTrainArticles($order);
         $this->assign('lastArticles', $hotArticles);
-        //get video list
-        $video = D('Article')->getTrainVideo('create_time');
-        foreach($video as $k=>$v) {
+        //最热视频
+        $hot_video = D('Article')->getTrainVideo('click', $id);
+        foreach($hot_video as $k=>$v) {
+            $hotvideos[$k] = $v;
+            $data = json_decode($this->getVideoData($v['link']));
+            $hotvideos[$k]['logo'] = $data->data[0]->logo;	
+        }
+        //print_r($videos);
+        $this->assign('hot_video', $hotvideos);
+		
+		//最新视频
+		$new_video = D('Article')->getTrainVideo('create_time', $id);
+		foreach($new_video as $k=>$v) {
+            $newvideos[$k] = $v;
+            $data = json_decode($this->getVideoData($v['link']));
+            $newvideos[$k]['logo'] = $data->data[0]->logo;	
+        }
+		$this->assign('new_video', $newvideos);
+		
+		// all video
+		$videos = D('Article')->getTrainVideo('id', $id);
+		foreach($videos as $k=>$v) {
             $videos[$k] = $v;
             $data = json_decode($this->getVideoData($v['link']));
             $videos[$k]['logo'] = $data->data[0]->logo;	
         }
-        //print_r($videos);
-        $this->assign('video', $videos);
+		$this->assign('videos', $videos);
+
         
         $this->show_banner();//显示banner
         $this->display('vlist');
@@ -187,6 +206,7 @@ class TrainAction extends Action {
         $id = intval($_GET['id']);
         $table = (isset($_GET['from']) && $_GET['from']=='daily') ? 'daily_video' : 'video';
         $video = M($table)->where(array('id'=>$id))->find();
+		if($table=='video') M('')->query('update `ai_video` set `click`=`click`+1 where `id`='.$id);
         //$videoInfo = D('Article')->getVideoInfoByArticle($video['Article']);
         //print_r($video);
         //$this->assign('videoInfo', $videoInfo);
