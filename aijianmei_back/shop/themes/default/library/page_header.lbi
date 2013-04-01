@@ -25,13 +25,14 @@ var process_request = "{$lang.process_request}";
  </div>
 </div>
 <div  class="blank"></div>
-<div id="mainNav" class="clearfix">
-  <a href="/index.php?app=index">Home</a>
-  <a href="../index.php"{if $navigator_list.config.index eq 1} class="cur"{/if}>{$lang.home}<span></span></a>
-  <a href="/index.php?app=index&mod=Train" >asdfsd</a>
+<div class="WrapNav clearfix">
+<div id="mainNav" class="nav clearfix">
+  <a class="home" href="/index.php?app=index"><span>首页</span></a>
+  <a href="../index.php"{if $navigator_list.config.index eq 1} class="store cur"{/if}>{$lang.home}<span></span></a>
   <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
   <a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if} {if $nav.active eq 1} class="cur"{/if}>{$nav.name}<span></span></a>
  <!-- {/foreach} -->
+</div>
 </div>
 <!--search start-->
 <div id="search"  class="clearfix">
