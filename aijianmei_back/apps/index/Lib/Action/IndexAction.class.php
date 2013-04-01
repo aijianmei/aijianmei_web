@@ -128,7 +128,7 @@ function show_banner($type){
          $this->assign('articleid_2',$articleid_2);
          $this->assign('articleid_3',$articleid_3);
          $this->assign('articleid_4',$articleid_4);
-          $this->assign('describe_1',$describe_1);
+         $this->assign('describe_1',$describe_1);
          $this->assign('describe_2',$describe_2);
          $this->assign('describe_3',$describe_3);
          $this->assign('describe_4',$describe_4);
@@ -257,7 +257,6 @@ function show_banner($type){
                  "'.$other['favouritesCount'].'", "'.$other['profileImageUrl'].'", "'.$other['mediaUserID'].'", 
                  "'.$other['url'].'", "'.$other['homepage'].'", "'.$other['description'].'", 
                  "'.$other['domain'].'", "'.$other['followersCount'].'", "'.$other['statusesCount'].'", "'.$other['personID'].'")';
-                echo $other_sql;
                 //mysql_query($other_sql);
                 M('')->query($other_sql);
 
@@ -284,7 +283,6 @@ function show_banner($type){
         
         $jianmei =  M('article')->where(array('category_id'=>'46'))->limit('0,4')->order('id desc')->findAll();
         $this->assign('jianmei', $jianmei);
-        
         $this->assign('daily', $daily);
         $this->display();
     }
