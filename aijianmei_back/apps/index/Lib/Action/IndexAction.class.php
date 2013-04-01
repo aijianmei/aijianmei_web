@@ -70,10 +70,10 @@ function show_banner($type){
          $this->assign('name_4',$name_4);
         }else if($type==3)
         {
-         $articleid_1="89";
-         $articleid_2="88";
-         $articleid_3="87";
-         $articleid_4="91";
+         $articleid_1="90";
+         $articleid_2="89";
+         $articleid_3="88";
+         $articleid_4="87";
          $name_1="运动员：锻炼";
          $name_2="运动员：营养";
          $name_3="运动员：辅助品";
@@ -94,7 +94,7 @@ function show_banner($type){
          $this->assign('articleid_2',$articleid_2);
          $this->assign('articleid_3',$articleid_3);
          $this->assign('articleid_4',$articleid_4);
-          $this->assign('describe_1',$describe_1);
+         $this->assign('describe_1',$describe_1);
          $this->assign('describe_2',$describe_2);
          $this->assign('describe_3',$describe_3);
          $this->assign('describe_4',$describe_4);

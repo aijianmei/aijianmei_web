@@ -7,8 +7,8 @@ class AppendAction extends Action {
          $change_3="append_3.jpg";
          $change_4="append_4.jpg";
          $articleid_1="60";
-         $articleid_2="56";
-         $articleid_3="92";
+         $articleid_2="92";
+         $articleid_3="56";
          $articleid_4="57";
          $name_1="为什么你现在就需要蛋白质营养品";
          $name_2="蛋白质的种类和益处的介绍";
@@ -30,7 +30,7 @@ class AppendAction extends Action {
          $this->assign('articleid_2',$articleid_2);
          $this->assign('articleid_3',$articleid_3);
          $this->assign('articleid_4',$articleid_4);
-          $this->assign('describe_1',$describe_1);
+         $this->assign('describe_1',$describe_1);
          $this->assign('describe_2',$describe_2);
          $this->assign('describe_3',$describe_3);
          $this->assign('describe_4',$describe_4);
@@ -133,6 +133,9 @@ class AppendAction extends Action {
         //foreach($hotArticles as $a) echo $a['title'];
         $a['title']=substr($a['title'],0,10)."...";		
         $lastArticles = D('Article')->getAppendArticles('create_time', $id);
+        foreach($lastArticles as $key => $value){
+            $lastArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
+        }
         $this->assign('lastArticles', $lastArticles);
         $this->show_banner();//banner 滚动图片列表
         

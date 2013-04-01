@@ -99,7 +99,7 @@ class NutriAction extends Action {
         $pager = api('Pager');
         $pager->setCounts($count);
         //$pager->styleInit($style);
-        $pager->setList(6);
+        $pager->setList(8);
         $pager->makePage();
         $from = ($pager->pg-1) * $pager->countlist;
         $articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();               
@@ -110,11 +110,16 @@ class NutriAction extends Action {
         //get hotArticles
         $order = 'reader_count';
         $hotArticles = D('Article')->getNutriArticles($order, $id);
+        foreach($hotArticles as $key => $value){
+            $hotArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
+        }
         $this->assign('hotArticles', $hotArticles);
         //print_r($hotArticles);
         //get lastArticles
         $lastArticles = D('Article')->getNutriArticles('create_time', $id);
-
+        foreach($lastArticles as $key => $value){
+            $lastArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
+        }
         $this->assign('lastArticles', $lastArticles);
         $this->assign('articles', $articles);
         $this->assign('categories', $realCate);

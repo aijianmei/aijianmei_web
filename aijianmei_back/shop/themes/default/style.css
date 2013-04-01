@@ -112,7 +112,7 @@ visibility:hidden;
      导航部分
 ==================== */
   /*顶部管理型导航*/
-  .log{height:50px;}
+  .log{height:30px;}
   .log li{float:left;}
   .log .userInfo{*margin-right:10px; /*width:300px;*/ text-align:left;}
   .log .userInfo a{color:#006acd; text-decoration:none;}
@@ -125,12 +125,20 @@ visibility:hidden;
   }
   #topNav a{color:#006ad0; text-decoration:none;}
   /*页面主导航*/
-  #mainNav{padding:0 25px; width:910px;}
-  #mainNav a{display:block; height:26p; float:left; line-height:26px; text-align:center;
+  .WrapNav{width:960px;margin-bottom:6px;}
+  #mainNav{width:685px;background:url(images/nav.png) no-repeat ;height:36px;line-height:36px;float:right;margin-top:-40px;}
+  /*#mainNav a{display:block; height:26p; float:left; line-height:26px; text-align:center;
   padding:0 15px; background:url(images/NavBg.gif) no-repeat 0 -29px; position:relative;
   margin-right:2px; color:#026acb; text-decoration:none;
-  }
-  #mainNav a span{width:3px; height:26px; background:url(images/NavBg.gif) no-repeat 0 -88px;
+  }*/
+  #mainNav a{color:#fff;font-size:16px;display:inline-block;_display:block;line-height:36px;text-align:center;width:80px;text-decoration: none;cursor:pointer;}
+  #mainNav a:hover{background:url(images/nav_p.jpg) repeat-x; }
+  #mainNav .home{border-radius: 4px 0 0 4px;}
+  #mainNav .home span{display:inline-block;width:85px;height:36px;margin-left: 10px;}
+  #mainNav .home span{background:url(images/home.png) no-repeat left;}
+  #mainNav .store{position:relative;width:60px;padding-left:22px;}
+  #mainNav .store span{position:absolute;width: 23px;height: 36px;left: 10px;background:url(images/store.png) no-repeat left;}
+/*    #mainNav a span{width:3px; height:26px; background:url(images/NavBg.gif) no-repeat 0 -88px;
   position:absolute; top:0px; right:0px;
   }
   #mainNav a:hover{display:block; height:26p; float:left; line-height:26px; text-align:center;
@@ -143,7 +151,7 @@ visibility:hidden;
   }
   #mainNav a:hover span,#mainNav .cur span{width:3px; height:26px; background:url(images/NavBg.gif) no-repeat 0 -59px;
   position:absolute; top:0px; right:0px;
-  }
+  } */
   /*搜索*/
   #search{border:1px solid #5cb4e6; background:url(images/searchBg.gif) repeat-x left top; width:918px;
   padding:0px 20px; height:36px; line-height:36px;
@@ -497,3 +505,31 @@ visibility:hidden;
  float:left;
  width:300px;
 }
+
+	/******** Navigation ************
+		.nav{
+			width:685px;
+			height:36px;
+			background:url(images/nav.png) no-repeat ;
+			margin:60px 30px 0 0;
+			_margin-right:15px;
+		}
+		.nav li{
+			width:85px;
+			height:36px;
+			float:left;
+			text-align:center;
+		}
+		.nav a{
+			color:#fff;
+			font-size:16px;
+			display:inline-block;
+			_display:block;
+			line-height:36px;
+			text-align:center;
+			width:85px;
+		}
+		.nav a:hover{
+			background:#428AB2;
+		}*/
+
