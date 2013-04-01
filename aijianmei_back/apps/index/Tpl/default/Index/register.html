@@ -182,7 +182,7 @@
             }
             function checkVerify() {
                 var verifyStr =$("#verifyStr").val();
-                if(verifyStr!=''&& verifyStr.length==5){
+                if(verifyStr!=''&& verifyStr.length>=5){
                 $.post('ajax.php?act=check_Verify', {'Verify':verifyStr}, function(m) {
                     if(m==0) {
                         $("#verifyStr").val('');

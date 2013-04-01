@@ -15,13 +15,13 @@
                                 <a href="{:U('index/Index/info', array('type'=>1))}">上班族健身</a>
                             </li>
                             <li class="each_video">
-                            	<a href="{:U('index/Index/info', array('type'=>2))}">日常健身</a>
+                                <a href="{:U('index/Index/info', array('type'=>2))}">日常健身</a>
                             </li>
                             <li class="each_video">
-                            	<a href="{:U('index/Index/info', array('type'=>3))}">运动员</a>
+                                <a href="{:U('index/Index/info', array('type'=>3))}">运动员</a>
                             </li>
                             <li class="each_video">
-                            	<a href="{:U('index/Index/info', array('type'=>4))}">健身运动员</a>
+                                <a href="{:U('index/Index/info', array('type'=>4))}">健身运动员</a>
                             </li>
                             <!--
                             <li class="each_video">
@@ -73,9 +73,11 @@
                                     <li style="position:relative;">
                                         <a href="javascript:void(0)">
                                             <!--<img src="{$v['img']}" width="150" />-->
-                                            
+                                            <php>if(!empty($v['link'])){</php>
                                             <embed src="{$v['link']}" quality="high" width="400" height="300" align="middle" autostart="false" loop="false" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
-                                        
+                                         <php>}else{</php>
+                                         <img src="apps/index/Tpl/default/Public/images/Mark_v.jpg">
+                                         <php>}</php>
                                         </a>										
                                     </li>
                                 <php>}</php>
