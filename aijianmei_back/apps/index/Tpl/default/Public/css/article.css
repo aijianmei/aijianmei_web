@@ -1,4 +1,4 @@
-	/*header*/
+﻿	/*header*/
 	#header{
 		width:980px;
 	}
@@ -377,9 +377,31 @@
 			.recommend h3{
 				margin-bottom: 24px;
 			}
-			.recommend .intro{
+			
+			.recommend img{
 				float:left;
+				padding-right:5px;
 			}
+			.recommend{
+				padding:10px;
+			}
+			.recommend p{
+				padding-bottom:15px;
+			}
+			.tr_classify .t_play_time{
+				background: url(../images/wm3.png) 0 -465px no-repeat;
+			}
+			.play_time,.t_play_time{
+				display: inline-block;
+				height: 16px;
+				padding-left: 27px;
+				background: url(../images/wm3.png) 0 -416px no-repeat;
+			}
+			.comment_time{
+				float:right;
+				padding-left: 20px;
+				background: url(../images/wm3.png) 0 -439px no-repeat;
+			}	
 			
 	/*关于作者*/
 		.author_info{
