@@ -13,7 +13,7 @@ class ArticleModel extends Model {
 */
     public function getDailyLimit($channel,$limit,$nums)
     {
-        $sql = "select d.id,d.title,d.img,d.content,d.create_time,d.like,d.unlike,v.id as vid,v.title as vtitle,v.link,v.intro from ai_daily as d
+        $sql = "select d.id,d.title,d.img,d.content,d.create_time,d.like,d.unlike,d.read_count,v.id as vid,v.title as vtitle,v.link,v.intro from ai_daily as d
                 left join ai_daily_video  as v on v.daily_id=d.id 
                 where d.channel=".$channel." ORDER BY d.create_time DESC  limit ".$limit.",".$nums." ";
         
@@ -71,7 +71,7 @@ class ArticleModel extends Model {
         if($id) {
             $sql = "select a.* from ai_article a where a.category_id=".$id." order by ".$order." desc limit 0,8";
         }else {
-            $sql = "select a.* from ai_article a,ai_article_category c where c.channel=2 and a.category_id=c.id order by $order desc limit 0,8";
+            $sql = "select a.* from ai_article a left join ai_article_category c on a.category_id=c.id where c.channel=2 order by a.".$order." desc limit 0,8";
         }
         
         $result = M('')->query($sql);
@@ -179,6 +179,13 @@ class ArticleModel extends Model {
         $result = M('')->query($sql);
         
         return $result;
+    }
+    public function getCountRecommentsById($id)
+    {
+        $sql=null;$numsArr=null;
+        $sql="select count(*) as nums from ai_comments where parent_id=".$id;
+        $numsArr= M('')->query($sql);
+        return !empty($numsArr[0]['nums'])?$numsArr[0]['nums']:0;
     }
 }
 ?>

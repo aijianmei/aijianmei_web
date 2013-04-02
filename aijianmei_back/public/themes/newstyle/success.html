@@ -25,11 +25,11 @@ document.onload = setTimeout("Jump()" , {$waitSecond}* 1000);
       <dd>
         <h2>{$message}</h2>
         <present name="closeWin" >
-          <p>系统将在 <span style="color:blue;font-weight:bold">{$waitSecond}</span> 秒后自动关闭，如果不想等待,直接点击 <A HREF="{$jumpUrl}">这里</A> 关闭</p>
+          <p>系统将在 <span style="color:blue;font-weight:bold">{$waitSecond}</span> 秒后自动关闭,如果不想等待,直接点击 <A HREF="{$jumpUrl}">这里</A> 关闭</p>
         </present>
         <notpresent name="closeWin" >
           <p>系统将在 <span style="color:blue;font-weight:bold">{$waitSecond}</span> 秒后自动跳转,如果不想等待,直接点击 <A HREF="{$jumpUrl}">这里</A> 跳转<br/>
-            或者 <a href="<php>if(APP_NAME=='admin' || ACTION_NAME=='Admin'){echo U('admin/Index/index'); }else{echo "__ROOT__/" ;}</php>">返回首页</a></p>
+            或者<a href="<php>if(APP_NAME=='admin' || ACTION_NAME=='Admin'){echo U('admin/Index/index'); }else{echo "__ROOT__/" ;}</php>">返回首页</a></p>
         </notpresent>
       </dd>
     </dl>
@@ -48,11 +48,11 @@ document.onload = setTimeout("Jump()" , {$waitSecond}* 1000);
       <dd>
       <h2 style="color:red">{$message}</h2>
         <present name="closeWin" >
-      <p>系统将在 <span style="color:blue;font-weight:bold">{$waitSecond}</span> 秒后自动关闭，如果不想等待,直接点击 <A HREF="{$jumpUrl}">这里</A> 关闭</p>
+      <p>系统将在 <span style="color:blue;font-weight:bold">{$waitSecond}</span> 秒后自动关闭，如果不想等待直接点击 <A HREF="{$jumpUrl}">这里</A> 关闭</p>
       </present>
       <notpresent name="closeWin" >
         <p>系统将在 <span style="color:blue;font-weight:bold">{$waitSecond}</span> 秒后自动跳转,如果不想等待,直接点击 <A HREF="{$jumpUrl}">这里</A> 跳转<br/>
-          或者 <a href="<php>if(APP_NAME=='admin' || ACTION_NAME=='Admin'){echo U('admin/Index/index'); }else{echo "__ROOT__/" ;}</php>">返回首页</a></p>
+          或者<a href="<php>if(APP_NAME=='admin' || ACTION_NAME=='Admin'){echo U('admin/Index/index'); }else{echo "__ROOT__/" ;}</php>">返回首页</a></p>
       </notpresent>
       </dd>
     </dl>
@@ -62,7 +62,7 @@ document.onload = setTimeout("Jump()" , {$waitSecond}* 1000);
   </div>
 </eq>
 <php>if($isAdmin != '1'){</php>
-    <include file="__THEME__/footer" />
+    <include file="__THEME__/aijianmei_footer" />
 <php>}else {</php>
     </body>
 <php>}</php>

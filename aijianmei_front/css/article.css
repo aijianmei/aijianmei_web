@@ -309,7 +309,7 @@
 						.target .target_pic{
 
 							float:left;
-							height:120px;
+							min-height:100px;
 							margin-right: 10px;
 						}
 						.target .care{

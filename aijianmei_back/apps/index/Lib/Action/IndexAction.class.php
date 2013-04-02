@@ -70,10 +70,10 @@ function show_banner($type){
          $this->assign('name_4',$name_4);
         }else if($type==3)
         {
-         $articleid_1="89";
-         $articleid_2="88";
-         $articleid_3="87";
-         $articleid_4="91";
+         $articleid_1="90";
+         $articleid_2="89";
+         $articleid_3="88";
+         $articleid_4="87";
          $name_1="运动员：锻炼";
          $name_2="运动员：营养";
          $name_3="运动员：辅助品";
@@ -94,7 +94,7 @@ function show_banner($type){
          $this->assign('articleid_2',$articleid_2);
          $this->assign('articleid_3',$articleid_3);
          $this->assign('articleid_4',$articleid_4);
-          $this->assign('describe_1',$describe_1);
+         $this->assign('describe_1',$describe_1);
          $this->assign('describe_2',$describe_2);
          $this->assign('describe_3',$describe_3);
          $this->assign('describe_4',$describe_4);
@@ -128,7 +128,7 @@ function show_banner($type){
          $this->assign('articleid_2',$articleid_2);
          $this->assign('articleid_3',$articleid_3);
          $this->assign('articleid_4',$articleid_4);
-          $this->assign('describe_1',$describe_1);
+         $this->assign('describe_1',$describe_1);
          $this->assign('describe_2',$describe_2);
          $this->assign('describe_3',$describe_3);
          $this->assign('describe_4',$describe_4);
@@ -257,7 +257,6 @@ function show_banner($type){
                  "'.$other['favouritesCount'].'", "'.$other['profileImageUrl'].'", "'.$other['mediaUserID'].'", 
                  "'.$other['url'].'", "'.$other['homepage'].'", "'.$other['description'].'", 
                  "'.$other['domain'].'", "'.$other['followersCount'].'", "'.$other['statusesCount'].'", "'.$other['personID'].'")';
-                echo $other_sql;
                 //mysql_query($other_sql);
                 M('')->query($other_sql);
 
@@ -284,7 +283,6 @@ function show_banner($type){
         
         $jianmei =  M('article')->where(array('category_id'=>'46'))->limit('0,4')->order('id desc')->findAll();
         $this->assign('jianmei', $jianmei);
-        
         $this->assign('daily', $daily);
         $this->display();
     }
@@ -303,11 +301,6 @@ function show_banner($type){
                 if(!empty($is_vote)) {
                     echo '<script type="text/javascript">alert("已经投票");</script>';
                 }else {
-                    /* $like = M('article')->field('like')->where(array('id'=>$_GET['id']))->find();
-                    $data['id'] = $_GET['id'];
-                    $data['like'] = $like['like'];
-                    M('article')->save($data);
-                     */
                     M('')->query('update ai_article set `like`=`like`+1 where id='.$_GET['id']);
                     $data['uid'] = $this->mid;
                     $data['article_id'] = $_GET['id'];
@@ -322,10 +315,6 @@ function show_banner($type){
                 if(!empty($is_vote)) {
                     echo '<script type="text/javascript">alert("已经投票");</script>';
                 }else {
-                    /* $unlike = M('article')->field('unlike')->where(array('id'=>$_GET['id']))->find();
-                    $data['id'] = $_GET['id'];
-                    $data['unlike'] = $unlike['unlike'];
-                    M('article')->save($data); */
                     M('')->query('update ai_article set `unlike`=`unlike`+1  where id='.$_GET['id']);
                     M('article_vote')->add(array('uid'=>$this->mid, 'article_id'=>$_GET['id']));
                 }
@@ -333,6 +322,8 @@ function show_banner($type){
                 
             }
         }
+        $string="update ai_article set reader_count=reader_count+1 where id=".$_GET['id'];
+        M('')->query($string);
         global $ts;
             
         $id = (int) $_GET['id'];
@@ -343,12 +334,11 @@ function show_banner($type){
         
         $commentCounts = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->count();
         $style['pre'] = 'prev';
-                $style['next'] = 'next';
-                $style['current'] = 'current_page';
-        
+        $style['next'] = 'next';
+        $style['current'] = 'current_page';
         $pager = api('Pager');
         $pager->setCounts($commentCounts);
-        $pager->setStyle($style);
+        //$pager->setStyle($style);
         $pager->setList(10);
         $pager->makePage();
         $from = ($pager->pg -1) * $pager->countlist;		
@@ -606,7 +596,15 @@ function show_banner($type){
         $this->assign('promote', $promote);
         
         $promoteArticle = M('article')->where(array('is_promote'=>1))->findAll();
-        
+        //add others ArticleInfo kon 20130331
+        //$otherArticleSql = M('article')->where(array('uid'=>$daily['uid']))->findAll();
+        $otherArticleSql = "select * from ai_article where uid=".$daily['uid']." and id > ".$daily['id']." order by id desc limit 0,3";
+        $otherArticle=mysql_query($otherArticleSql);
+        $result=array();
+        while ($row = mysql_fetch_assoc($otherArticle)) {
+            $result[]=$row;
+        }
+        $this->assign('otherArticle', $result);
         $this->assign('promote_article', $promoteArticle);
         
         $string="select category_id,name,channel,parent from ai_article,ai_article_category where ai_article.category_id=ai_article_category.id and ai_article.id=".$id;
@@ -630,7 +628,6 @@ function show_banner($type){
         $this->assign("tree_parent",$tree_parent);
         $this->assign("tree_channel_en",$tree_channel_en);
         $this->assign("tree_category_id",$tree_category_id);
-        
         $this->assign('parent', $_GET['type']);
         $this->display();
     }

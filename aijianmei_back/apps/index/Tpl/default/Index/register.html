@@ -182,7 +182,7 @@
             }
             function checkVerify() {
                 var verifyStr =$("#verifyStr").val();
-                if(verifyStr!=''&& verifyStr.length==5){
+                if(verifyStr!=''&& verifyStr.length>=5){
                 $.post('ajax.php?act=check_Verify', {'Verify':verifyStr}, function(m) {
                     if(m==0) {
                         $("#verifyStr").val('');
@@ -201,7 +201,7 @@
             function checkNickname(){
                 var nicknameStr=$("#nickname").val();
                 var pattern=/^([a-zA-Z]|\d|_)*$/;  
-                if(pattern.test(nicknameStr)&&nicknameStr!=''){
+                if(nicknameStr!=''){
                     $("#nicknameMessage").html("<span style='color:green;'>昵称可使用</span>");
                     return true;
                 }
