@@ -215,27 +215,25 @@
 			}
 					.pt_part_1{
 						position: absolute;
-						top: 85px;
-						left: -154px;
+						top: 90px;
+						left: -65px;
 					}
 					.pt_part_1 li{
-						height:30px;
-						line-height:30px;
+						height:31px;
+						line-height:31px;
 						text-align: right;
 					}
 					.pt_part_2{
 						position: absolute;
 						width: 165px;
-						top: 88px;
+						top: 84px;
 						left: 401px;
 					}
 					.pt_part_2 li{
-						height:30px;
-						line-height:30px;
-						margin-bottom:1px;
+						height:32px;
+						line-height:32px;
 						text-align: left;
 					}
-					.special{margin-top: 29px;}
 /***********************footer开始*************************/
 	#footer{background: url(../images/training/workout_54.jpg)}
 
