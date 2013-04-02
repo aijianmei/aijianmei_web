@@ -163,53 +163,77 @@ class TrainAction extends Action {
         }
         //print_r($videos);
         $this->assign('hot_video', $hotvideos);
-		
-		//最新视频
-		$new_video = D('Article')->getTrainVideo('create_time', $id);
-		foreach($new_video as $k=>$v) {
+        
+        //最新视频
+        $new_video = D('Article')->getTrainVideo('create_time', $id);
+        foreach($new_video as $k=>$v) {
             $newvideos[$k] = $v;
             $data = json_decode($this->getVideoData($v['link']));
             $newvideos[$k]['logo'] = $data->data[0]->logo;	
         }
-		$this->assign('new_video', $newvideos);
-		
-		// all video
-		$videos = D('Article')->getTrainVideo('id', $id);
-		foreach($videos as $k=>$v) {
+        $this->assign('new_video', $newvideos);
+        
+        // all video
+        $videos = D('Article')->getTrainVideo('id', $id);
+        foreach($videos as $k=>$v) {
             $videos[$k] = $v;
             $data = json_decode($this->getVideoData($v['link']));
             $videos[$k]['logo'] = $data->data[0]->logo;	
         }
-		$this->assign('videos', $videos);
-
-        
+        $this->assign('videos', $videos);
         $this->show_banner();//显示banner
         $this->display('vlist');
-        /*$id = intval($_GET['id']);
-        $videos = M('video')->where(array('category_id'=>$id))->findAll();
-        //print_r($videos);
-        $cate = M('article_category')->where(array('channel'=>'2', 'type'=>'2'))->findAll();
-        foreach($cate as $c) {
-            if($c['parent']==NULL) $realCate[$c['id']] = $c;
-            else $realCate[$c['parent']]['children'][] = $c;
-            $cate_id[] = $c['id'];
-        }
-        $this->assign('videos', $videos);
-        $this->assign('categories', $realCate);
-        $this->assign('cssFile', 'video');
-        $this->assign('cssFile', 'training');
-        $this->display('vlist');*/
     }
     
     public function videoDetail()
     {
+        $nums=7;
         $id = intval($_GET['id']);
+        $pnum = intval($_GET['pg'])?intval($_GET['pg']):0;
         $table = (isset($_GET['from']) && $_GET['from']=='daily') ? 'daily_video' : 'video';
         $video = M($table)->where(array('id'=>$id))->find();
-		if($table=='video') M('')->query('update `ai_video` set `click`=`click`+1 where `id`='.$id);
-        //$videoInfo = D('Article')->getVideoInfoByArticle($video['Article']);
-        //print_r($video);
-        //$this->assign('videoInfo', $videoInfo);
+        if($table=='video') M('')->query('update `ai_video` set `click`=`click`+1 where `id`='.$id);
+        
+        $video['create_time']=date("Y-m-d H:i:s",$video['create_time']);
+        $otherVideo=D('Article')->getVideoCategory($table,$video['category_id'],2);
+        foreach($otherVideo as $k=>$v){
+            $data = json_decode($this->getVideoData($v['link']));
+            $otherVideo[$k]['logo'] = $data->data[0]->logo;	
+        }
+        
+        $getRecommentsSql="select * from ai_video_comments where pid=$id";
+        $Recomments=M('')->query($getRecommentsSql);
+        $cRecomnums=count($Recomments);
+        $pager = api('Pager');
+        $pager->setCounts(count($Recomments));
+        //$pager->setStyle($style);
+        $pager->setList($nums);
+        $pager->makePage();
+        $from = ($pager->pg -1) * $pager->countlist;		
+        $pagerArray = (array)$pager;
+        #$pagerArray['thestr']=printf($pagerArray['thestr'],$str);
+        $this->assign('pager', $pagerArray);
+        $this->assign('cRecomnums', $cRecomnums);
+        $recommecntListSql="select a.*,b.uname as username from ai_video_comments a left join ai_user b on a.uid=b.uid where a.pid=$id order by a.create_time desc limit $pnum , $nums";
+        $RecommentsList=M('')->query($recommecntListSql);
+        
+        foreach($RecommentsList as $key => $value){
+            $getimgsql="select profileImageUrl from ai_others where uid='".$value['uid']."'";
+            $getimgArr=M('')->query($getimgsql);
+            if($getimgArr['profileImageUrl'])
+            {
+                $RecommentsList[$key]['img']=$getimgArr['profileImageUrl'];
+            }
+            else{
+                $RecommentsList[$key]['img']="/data/uploads/avatar/".$value['uid']."/middle.jpg";
+            }
+            $RecommentsList[$key]['create_time']=date("Y-m-d H:i:s",$RecommentsList[$key]['create_time']);
+        }
+        $this->assign('RecommentsList', $RecommentsList);
+        $sql = "select * from ai_".$table." where category_id=$Category order by id desc limit 0,$nums";
+        $result = M('')->query($sql);
+        $this->assign('otherVideo', $otherVideo);
+        //print_r($_SESSION);
         $this->assign('video', $video);
         $this->assign('cssFile', 'v');
         $this->display('video');

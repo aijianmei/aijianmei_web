@@ -85,72 +85,72 @@
                     </div>
                     </div>
                 </div>
-				<div class="part_top clearfix">
-					<div class="lay_top clearfix">
-						<h1 class="public_title">最近锻炼文章</h1>
-							<div class="hot_video">
-							<ul class="lay_hot_video clearfix">
-								<php>foreach($lastArticles as $a) {</php>
-									<li class="tr_classify">
-										<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-										<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
-										<p class="summary">{$a['brief']}</p>
-										<span class="t_play_time">点击:<span>0</span></span>
-										<span class="comment_time">评论: <span>0</span></span>
-									</li>
-								<php>}</php>
-							</ul>
-						</div>
-					</div>
-				</div>
+                <div class="part_top clearfix">
+                    <div class="lay_top clearfix">
+                        <h1 class="public_title">最近锻炼文章</h1>
+                            <div class="hot_video">
+                            <ul class="lay_hot_video clearfix">
+                                <php>foreach($lastArticles as $a) {</php>
+                                    <li class="tr_classify">
+                                        <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+                                        <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+                                        <p class="summary">{$a['brief']}</p>
+                                        <span class="t_play_time">点击:<span>0</span></span>
+                                        <span class="comment_time">评论: <span>0</span></span>
+                                    </li>
+                                <php>}</php>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-				<div class="part_top clearfix">
-					<div class="lay_top clearfix">
-						<h1 class="public_title">其他分类</h1>
-						<div class="hot_video">
-						<ul class="lay_hot_video clearfix">
-						<php>foreach($articles as $a) {
-						</php>
-							<li class="tr_classify ">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
-								<p class="summary">{$a['brief']}</p>
-								<span class="t_play_time">点击:<span>0</span></span>
-								<span class="comment_time">评论: <span>0</span></span>
-							</li>
-						<php>}</php>
-						</ul>
-						</div>
-					</div>
-				</div>
-						
-				<!--
-				<div class="clear_both">
-					<h1 class="public_title">根据身体部位找到适合的锻炼视频</h1>
-					<div class="pertinence">
-						<ul class="pt_part_1">
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">颈部</a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">肩膀<span>(美洲)</span></a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">陷阱<span>(斜方肌)</span></a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">二头肌<span>(肱二头肌)</span></a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">前臂<span>(肱)</span></a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">胸部<span>(胸大肌)</span></a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">防抱死制动系统<span>(腹直肌)</span></a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">四边形<span>(四头肌)</span></a></li>
-						</ul>
-						<ul class="pt_part_2">
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">陷阱<span>(斜方肌)</span></a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">肱三头肌<span>(肱三头)</span></a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">拉特<span>(背阔肌)</span></a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">回到中间<span>(菱形)</span></a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">下背部<span></span></a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">臀部<span>(臀大肌、臀中肌)</span></a></li>
-							<li class="special"><a href="/index.php?app=index&mod=Train&act=videoList&id=1">四边形<span>(四头肌)</span></a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">拉筋<span>(股二头肌)</span></a></li>
-							<li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">犊牛<span>(腓肠肌)</span></a></li>
-						</ul>
-					</div>
-				</div>-->
+                <div class="part_top clearfix">
+                    <div class="lay_top clearfix">
+                        <h1 class="public_title">其他分类</h1>
+                        <div class="hot_video">
+                        <ul class="lay_hot_video clearfix">
+                        <php>foreach($articles as $a) {
+                        </php>
+                            <li class="tr_classify ">
+                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+                                <p class="summary">{$a['brief']}</p>
+                                <span class="t_play_time">点击:<span>0</span></span>
+                                <span class="comment_time">评论: <span>0</span></span>
+                            </li>
+                        <php>}</php>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+                        
+                <!--
+                <div class="clear_both">
+                    <h1 class="public_title">根据身体部位找到适合的锻炼视频</h1>
+                    <div class="pertinence">
+                        <ul class="pt_part_1">
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">颈部</a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">肩膀<span>(美洲)</span></a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">陷阱<span>(斜方肌)</span></a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">二头肌<span>(肱二头肌)</span></a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">前臂<span>(肱)</span></a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">胸部<span>(胸大肌)</span></a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">防抱死制动系统<span>(腹直肌)</span></a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">四边形<span>(四头肌)</span></a></li>
+                        </ul>
+                        <ul class="pt_part_2">
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">陷阱<span>(斜方肌)</span></a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">肱三头肌<span>(肱三头)</span></a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">拉特<span>(背阔肌)</span></a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">回到中间<span>(菱形)</span></a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">下背部<span></span></a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">臀部<span>(臀大肌、臀中肌)</span></a></li>
+                            <li class="special"><a href="/index.php?app=index&mod=Train&act=videoList&id=1">四边形<span>(四头肌)</span></a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">拉筋<span>(股二头肌)</span></a></li>
+                            <li><a href="/index.php?app=index&mod=Train&act=videoList&id=1">犊牛<span>(腓肠肌)</span></a></li>
+                        </ul>
+                    </div>
+                </div>-->
                         
                 
                  <div class="part_top clearfix">

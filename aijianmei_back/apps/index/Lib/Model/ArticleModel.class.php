@@ -191,5 +191,12 @@ class ArticleModel extends Model {
         $numsArr= M('')->query($sql);
         return !empty($numsArr[0]['nums'])?$numsArr[0]['nums']:0;
     }
+    
+    public function getVideoCategory($table,$Category,$nums){
+        $sql = "select * from ai_".$table." where category_id=$Category order by id desc limit 0,$nums";
+        $result = M('')->query($sql);
+        return $result;
+    }
+    
 }
 ?>
