@@ -3,7 +3,7 @@ error_reporting(0);
 session_start();
 define('SITE_PATH', getcwd());
 $_dbConfig=require_once('config.inc.php');
-$_actAllowArr=array('check_email'=>'email','check_Verify'=>'Verify','delCategory'=>'aid');
+$_actAllowArr=array('check_email'=>'email','check_Verify'=>'Verify','delCategory'=>'aid','addVideoCommont'=>'data');
 if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
 {
     if(function_exists($_REQUEST['act'])){
@@ -53,4 +53,33 @@ function delCategory($id){
     exit;
 }
 
+
+function addVideoCommont($data=null){
+    global $_dbConfig;
+    $pid=$_POST['pid']?$_POST['pid']:'';
+    $uid=$_POST['uid']?$_POST['uid']:exit();
+    $connect=$_POST['connect']?trim($_POST['connect']):exit();
+    @$db = mysql_connect($_dbConfig['DB_HOST'], $_dbConfig['DB_USER'], $_dbConfig['DB_PWD']);
+    @mysql_select_db('aijianmei', $db);
+    mysql_query("set names 'utf8'");
+    $sql="INSERT INTO ai_video_comments (uid,connect,pid,create_time) VALUES ('".$uid."','".trim($_POST['connect'])."','".$pid."',".time().")";
+    $res = mysql_query($sql, $db);
+    $data=null;
+    if($res) {
+        $data['username']=$_SESSION['userInfo']['uname'];
+        $data['connect']=$connect;
+        $data['create_time']=date("Y-m-d H:i:s",time());
+        $imgsql="select profileImageUrl from ai_others where uid='".$uid."'";
+        $imgsArr=mysql_query($imgsql, $db);
+        $row = mysql_fetch_array($imgsArr);
+        $data['img'] =$row['profileImageUrl'];
+        if(empty($data['img'])){$data['img']="/data/uploads/avatar/$uid/middle.jpg";}
+        //$data['img']="/data/uploads/avatar/$uid/middle.jpg";
+        echo json_encode($data);
+    }else {
+        echo json_encode(0);
+    }
+    mysql_close($db);
+    exit;
+}
 ?>

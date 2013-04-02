@@ -36,7 +36,7 @@ class ArticleAction extends AdministratorAction {
                 $insertId=M('article')->getLastInsID();
                 if(!empty($_POST['morecategory'])){
                     foreach($_POST['morecategory'] as $key => $value){
-                       D('article')->addArticeGroup($insertId,$value);
+                       D('Article')->addArticeGroup($insertId,$value);
                     }
                 }  
                 echo '<script>alert("success")</script>';		
@@ -57,7 +57,7 @@ class ArticleAction extends AdministratorAction {
         $article = M('article')->where(array('id'=>$id))->select();
         $this->assign('article', $article[0]);
         $cate = $this->getCategories();
-        $articleGroup=D('article')->getArticeGroup($id,$article[0]['category_id']);
+        $articleGroup=D('Article')->getArticeGroup($id,$article[0]['category_id']);
         $this->assign('articleGroup', $articleGroup);
         $this->assign('categories', $cate);
         $this->assign('type', 'edit');
@@ -93,9 +93,9 @@ class ArticleAction extends AdministratorAction {
                     !empty($data['content'])) {
                 M('article')->where(array('id'=>$id))->save($data);
                 if(!empty($_POST['morecategory'])){
-                    D('article')->cleanArticeGroup($id);
+                    D('Article')->cleanArticeGroup($id);
                     foreach($_POST['morecategory'] as $key => $value){
-                       D('article')->insertArticeGroup($id,$value);
+                       D('Article')->insertArticeGroup($id,$value);
                     }
                 }   
                 echo '<script>alert("success")</script>';
