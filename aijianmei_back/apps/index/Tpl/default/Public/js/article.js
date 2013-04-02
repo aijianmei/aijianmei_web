@@ -28,17 +28,6 @@ $(function(){
 		$(".sheet").css("top",0);
 	});
 
-	//消除没有人评论提示文本
-	var removetext = function(){
-		var newdom = new getdom,
-			empty_content = newdom.getElementsByClass("empty_content")[0];
-			empty_content.parentNode.style.color = 'blue'
-			// alert(empty_content.nextSibling.innerHTML)
-			if(empty_content.nextSibling.className != null){
-				empty_content.style.display = 'none';
-			}
-	}
-	removetext();
 	
 })
 
