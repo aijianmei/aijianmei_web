@@ -171,58 +171,6 @@ $(function(){
             }	
 
 
-        //添加控制透明函数
-            var getclass = {//控制渐变透明度
-                opacity : function(obj,filter,speed){
-                    var newdom = new getdom,
-                        obj = newdom.getElementsByClass(obj)[0] || obj,
-                        obj_opacity = newdom.GetCurrentStyle(obj,'opacity') ? newdom.GetCurrentStyle(obj,'opacity') : 1,
-                        obj_filter = newdom.GetCurrentStyle(obj,'filter'),//获取filter的值，表现形式为alpha(opacity=10);
-                        value = obj_filter.replace(/[^0-9]/ig,"");//使用正则表达式转换为数字字符串（80）
-                    obj.style.opacity = obj_opacity;
-                    var change_opacity = function(){
-                        if(obj_opacity > filter){
-                            var time = function(){
-                                setTimeout(function(){
-                                    if(obj_opacity > filter){
-                                        obj_opacity = obj_opacity - 0.1;
-                                        obj.style.opacity = parseFloat(obj.style.opacity) - 0.1;
-                                        if(document.all){
-                                            value = parseFloat(value) - 10;
-                                            obj.style.filter = 'alpha(opacity = '+value+')';//兼容ie
-                                        }
-                                        time();
-                                    }
-                                },speed)
-                            };
-                            time();
-                        }
-                        else{
-                            var time = function(){
-                                setTimeout(function(){
-                                    if(filter > obj_opacity){
-                                        filter = filter - 0.1;
-                                        obj.style.opacity = parseFloat(obj.style.opacity) + 0.1;
-                                        if(document.all){
-                                            value = parseFloat(value) + 10;//将字符串转化为数字，使用的是parsefloat
-                                            obj.style.filter = 'alpha(opacity = '+value+')';//兼容ie
-                                        }
-                                        time();
-                                    }
-                                },speed)
-                            };
-                            time();
-                        }
-                    }
-                    change_opacity();
-                }
-            }
-        //使用方式
-        // document.getElementsByTagName('input')[0].onclick = function(){
-        // 		getclass.opacity('picture',0.4,10);
-        // 	}	
-
-
 
             //为obj的子元素添加有色边框
             var getaction = function(classname,obj){
@@ -389,7 +337,7 @@ $("li.show_enter").mouseover(function(){
 		   		$('.bg_opacity').css({'opacity':'0'})
 		   })
 //为板块添加css3渐变边框---------------------------
-		$(".tr_classify").add(".recommend").hover(
+		$(".tr_classify").add(".recommend").add(".tr_top").hover(
 			function(){
 				$(this).css("box-shadow","0 0 8px #21ace3")
 			},
