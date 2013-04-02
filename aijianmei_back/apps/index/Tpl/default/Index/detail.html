@@ -145,7 +145,7 @@
                         <h4 class="sider_t">精华推荐</h4>
                         <php>foreach($promote_article as $p) {</php>
                         <div class="recommend">							
-                            <a href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}"><img src="/public/images/article/{$p['img']}" width="90" height="60" alt="no" border="0" /></a>
+                            <a href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}" class="recommend_pic"><img src="/public/images/article/{$p['img']}" width="90" height="60" alt="no" border="0" /></a>
                             <p class="intro"><a href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}">{$p['title']}</a></p>
                         </div>
                         <php>}</php>
