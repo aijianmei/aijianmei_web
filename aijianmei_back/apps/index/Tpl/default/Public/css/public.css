@@ -1,4 +1,4 @@
-/****** Reset **********/
+﻿/****** Reset **********/
 body,ul,li,p,h1,h2,h3,h4,button,input,dl,dd,fieldset{
 	margin:0;
 	padding:0;
@@ -583,13 +583,12 @@ button{
 /****** 翻页 *****/
 .page{
 	width: 450px;
-	margin: 10px auto;
+	margin:10px auto;
 	text-align: center;
 }
 .page a{
 	display:inline-block;
 	margin:0 2px;
-	width:20px;
 	height:20px;
 	border: 2px solid rgb(236, 236, 236);
 	line-height: 20px;
