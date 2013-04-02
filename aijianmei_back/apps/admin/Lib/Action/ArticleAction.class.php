@@ -15,14 +15,13 @@ class ArticleAction extends AdministratorAction {
             $data['create_time'] = time();
             
             
-
+            //print_r($_POST);exit;
             if(isset($_FILES['img']['name'])) {
                 if(!move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'])) {
                     echo 'add error '.'<br />';					
                 }
                 $data['img'] = $_FILES['img']['name'];
             }
-            
             if (!empty($data['title']) &&
                 !empty($data['category_id']) &&
                 !empty($data['content'])) {
@@ -34,7 +33,12 @@ class ArticleAction extends AdministratorAction {
                 }else {
                     M('article')->add($data);
                 }
-                
+                $insertId=M('article')->getLastInsID();
+                if(!empty($_POST['morecategory'])){
+                    foreach($_POST['morecategory'] as $key => $value){
+                       D('article')->addArticeGroup($insertId,$value);
+                    }
+                }  
                 echo '<script>alert("success")</script>';		
                 //$this->redirect('/index.php?app=admin&mod=Article&act=borswe');
             }
@@ -49,14 +53,14 @@ class ArticleAction extends AdministratorAction {
     public function edit()
     {
         $id = intval($_GET['id']);
-        
         if($id == 0) die(0);
         $article = M('article')->where(array('id'=>$id))->select();
         $this->assign('article', $article[0]);
         $cate = $this->getCategories();
+        $articleGroup=D('article')->getArticeGroup($id,$article[0]['category_id']);
+        $this->assign('articleGroup', $articleGroup);
         $this->assign('categories', $cate);
         $this->assign('type', 'edit');
-        //print_r($article);
         $this->display('edit');
     }
     
@@ -88,6 +92,12 @@ class ArticleAction extends AdministratorAction {
                     !empty($data['category_id']) &&
                     !empty($data['content'])) {
                 M('article')->where(array('id'=>$id))->save($data);
+                if(!empty($_POST['morecategory'])){
+                    D('article')->cleanArticeGroup($id);
+                    foreach($_POST['morecategory'] as $key => $value){
+                       D('article')->insertArticeGroup($id,$value);
+                    }
+                }   
                 echo '<script>alert("success")</script>';
                 //$this->redirect('/index.php?app=admin&mod=Article&act=borswe');
             }			
