@@ -302,6 +302,13 @@
 						font-size: 15px;
 						background: #E9E9E9;
 					}
+					.empty_content{
+						margin: 60px 0;
+						font-size: 30px;
+						font-weight: bold;
+						text-align: center;
+						color: black;
+					}
 					.cm_bottom .target{
 						margin-top: 15px;
 						border-bottom: 1px solid #CCC;
