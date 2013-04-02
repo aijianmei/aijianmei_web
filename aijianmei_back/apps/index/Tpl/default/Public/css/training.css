@@ -120,7 +120,7 @@
 				width: 81px;
 				height:31px;
 				line-height: 31px;
-				margin-top: 20px;
+				margin-top: 10px;
 				font-size: 16px;
 				text-align: center;
 				color: white;
@@ -215,8 +215,8 @@
 			}
 					.pt_part_1{
 						position: absolute;
-						top: 92px;
-						left: -58px;
+						top: 86px;
+						left: -155px;
 					}
 					.pt_part_1 li{
 						height:30px;
@@ -226,7 +226,7 @@
 					.pt_part_2{
 						position: absolute;
 						width: 165px;
-						top: 88px;
+						top: 81px;
 						left: 401px;
 					}
 					.pt_part_2 li{
@@ -235,7 +235,7 @@
 						margin-bottom:1px;
 						text-align: left;
 					}
-					.special{margin-top: 29px;}
+					.special{margin-top: 10px;}
 /***********************footer开始*************************/
 	#footer{background: url(../images/training/workout_54.jpg)}
 
