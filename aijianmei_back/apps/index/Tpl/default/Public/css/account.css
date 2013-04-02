@@ -1,27 +1,6 @@
-body, dl, dd, h1, h2, h3, h4, h5, h6,form{margin:0;}   
-ol,li,input{margin:0; padding:0;}
-ul{list-style:none;margin:0; padding:0; }
-a{
-	cursor:pointer;
-	text-decoration: none;
-}
-body{background: url(../images/bg.jpg)}
-.clearfix {
-
-}
-.clearfix:before {
-display: table; content: ""
-}
-.clearfix:after {
-display: table; content: ""
-}
-.clearfix:after {
-clear: both
-}
-#wrap{margin:0 auto;
-width:980px;
-font:12px/1.125 Arial,Helvetica,sans-serif;
-color:#8C7E7E;
+#wrap{
+	width:980px;
+	margin:0 auto;
 }
 /***********************header开始*************************/
 	#header{position: relative;
@@ -45,57 +24,73 @@ color:#8C7E7E;
 /***********************content开始*************************/
 	#content{background: url(../images/border.png) no-repeat}
 		.content_tip{
-			margin-top: 0px;
 			padding-top: 25px;
 			text-align: center;
 			font-size: 20px;
 			font-weight: 700;
 		}
-		.choice_login{margin: 0 auto;
-				width: 428px;
-				margin-bottom: 10px;}
-		.choice_login a:hover{opacity: 0.8;}
+		.choice_login{
+			margin: 0 auto;
+			width: 428px;
+			margin-bottom: 10px;
+		}
+		.choice_login a:hover{
+			opacity: 0.8;
+		}
 			.lay_target{
 				float: left;
 				padding:9px;
 				
 			}
 				.target{
-				background: url(../images/wm1.png) no-repeat;
+					background: url(../images/wm1.png) no-repeat;
 				}			
 				.logo_1{background-position: 0px 0px;}
 				.logo_2{background-position: 0px -56px;}
 				.logo_3{background-position: 0px -112px;}
 				.logo_6{background-position: 0px -168px;}
 				.logo_7{background-position: 0px -224px;}
-			.target_login{height:47px;
+			.target_login{
+				height:47px;
 				margin-left: 52px;
 				height: 47px;
 				line-height: 47px;
 				font-size: 18px;
 				font-weight: 700;
-				color: white;}
-			.changesize{font-size: 16px;
-				margin-left: 66px;}
-			.target{display: inline-block;
+				color: white;
+			}
+			.changesize{
+				font-size: 16px;
+				margin-left: 66px;
+			}
+			.target{
+				display: inline-block;
 				width: 196px;
 				height: 47px;
 			}
-		.local_account{clear:both;
-				text-align: center;
-				background: url(../images/border.png) repeat-x}
+		.local_account{
+			clear:both;
+			text-align: center;
+			background: url(../images/border.png) repeat-x
+		}
+		.account_pic{
+			padding: 9px;
+		}
 		.local_account .local_mas{
-				padding-top: 35px;
-				font-size: 20px;
-				font-weight: 700;
-				background: url(../images/border.png) repeat-x
-				}
-		.local_account .click_this{color: #D00;}
+			padding: 35px 0;
+			font-size: 20px;
+			font-weight: 700;
+			background: url(../images/border.png) repeat-x
+		}
+		.local_account .click_this{
+			color: #D00;
+		}
 /***********************footer开始*************************/
-	#footer{
+
+	.conceal{
+		display: block;
+		padding-top: 20px;
+		font-size: 13px;
 		text-align: center;
-		height:28px;
+		color: #FF4545;
 	}
-	#footer .conceal{display: block;
-				font-size: 13px;
-				color: #FF4545;}

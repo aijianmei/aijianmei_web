@@ -68,13 +68,12 @@
                     </div>
                     <div class="check_comment">
                         <a class="comment_1">全部评论(0)</a>
-                        <a class="comment_2 comment_3">精选评论</a>
+                        <!--<a class="comment_2 comment_3">精选评论</a>-->
                     </div>
                     <div class="cm_content tab_2">
                         <div class="cm_top">
                             <span class="page_1">
                                 <span class="lay_page">
-
                                     {$pager['backstr']}
                                     {$pager['thestr']}
                                     {$pager['nextstr']}
@@ -108,6 +107,7 @@
                         </div>
                             
                     </div>
+                    <!--
                     <div class="cm_content tab_1">
                         <div class="cm_top">
                             <span class="page_1">
@@ -124,6 +124,7 @@
                             <h5 class="title_5">全部推荐</h5>
                         </div>
                     </div>
+                    -->
                     <div class="relation">
                         <h5 class="title_6"><a class="add_relation">相关推荐</a></h5>
                     </div>
@@ -141,26 +142,29 @@
                             <div class="author_wb">
                                 <wb:follow-button uid="2692984661" type="red_4" >关注</wb:follow-button>
                             </div>
-                            <div class="author_other">
-                                <h4>作者的其他文章</h4>
-                                <ul>
-                                    <php>foreach($otherArticle as $v) {</php>
-                                    <li class="aut_other_arts"><a href="{:U('index/Index/daily', array('id'=>$v['article']['id'], 'type'=>$_GET['type']))}" class="checking">{$v['title']}</a></li>
-                                    <php>}</php>
-                                </ul>
+                            <div class="clearfix">
+                                <img src="../Public/images/weima.jpg" class="two_code">
+                                <div class="ms_code">
+                                    <p><span></span>扫描微信二维码</p>
+                                    <p>随时获取新资讯</p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!--
                     <div class="sider_m">
                         <h4 class="sider_t">推荐商品</h4>
                         <a href="{$promote['link']}"><img class="recommend_prod" src="{$promote['image']}" alt="no" border="0" /></a>
                     </div>
+                    -->
                     <div class="sider_m">
                         <h4 class="sider_t">精华推荐</h4>
                         <php>foreach($promote_article as $p) {</php>
                         <div class="recommend">							
-                            <a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
-                            <p class="intro">{$p['title']}</p>
+                            <a ><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
+                            <p class="intro" >{$p['title']}</p>
+                            <span class="t_play_time">点击:<span>{$p['reader_count']}</span></span>
+                            <span class="comment_time">评论: <span>{$p['CommNumber']}</span></span>
                         </div>
                         <php>}</php>
                     </div>
