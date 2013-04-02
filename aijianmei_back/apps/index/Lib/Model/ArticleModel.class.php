@@ -71,7 +71,8 @@ class ArticleModel extends Model {
         if($id) {
             $sql = "select a.* from ai_article a where a.category_id=".$id." order by ".$order." desc limit 0,8";
         }else {
-            $sql = "select a.* from ai_article a left join ai_article_category c on a.category_id=c.id where c.channel=2 order by a.".$order." desc limit 0,8";
+            $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+            $sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid order by a.".$order." desc limit 0,8";
         }
         
         $result = M('')->query($sql);
@@ -84,7 +85,8 @@ class ArticleModel extends Model {
         if($id) {
             $sql = "select v.* from ai_video v where v.category_id=".$id." order by ".$order." desc limit 0,8";
         }else {
-            $sql = "select v.* from ai_video v,ai_article_category c where c.channel=2 and v.category_id=c.id order by $order desc limit 0,8";
+            $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+            $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid order by $order desc limit 0,8";
         }
         
         $result = M('')->query($sql);
@@ -97,9 +99,9 @@ class ArticleModel extends Model {
         if($id) {
             $sql = "select a.* from ai_article a where a.category_id=".$id." order by ".$order." desc limit 0,8";
         }else {
-            $sql = "select a.* from ai_article a,ai_article_category c where c.channel=3 and a.category_id=c.id order by $order desc limit 0,8";
+            $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =3";
+            $sql = "select a.* from ai_article a,($orderTableSql) t where a.id=t.aid order by $order desc limit 0,8";
         }
-        
         $result = M('')->query($sql);
         
         return $result;
@@ -110,7 +112,8 @@ class ArticleModel extends Model {
         if($id) {
             $sql = "select a.* from ai_article a where a.category_id=".$id." order by ".$order." desc limit 0,8";
         }else {
-            $sql = "select a.* from ai_article a,ai_article_category c where c.channel=4 and a.category_id=c.id order by $order desc limit 0,8";
+            $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =4";
+            $sql = "select a.* from ai_article a,($orderTableSql) t where a.id=t.aid order by $order desc limit 0,8";
         }
         
         $result = M('')->query($sql);
@@ -123,7 +126,8 @@ class ArticleModel extends Model {
         if($id) {
             $sql = "select v.* from ai_video v where v.category_id=".$id." order by ".$order." desc limit 0,8";
         }else {
-            $sql = "select v.* from ai_video v,ai_article_category c where c.channel=4 and v.category_id=c.id order by $order desc limit 0,8";
+            $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =4";
+            $sql = "select v.* from ai_video v,($orderTableSql) t  where  v.id=t.aid order by $order desc limit 0,8";
         }
         
         $result = M('')->query($sql);
