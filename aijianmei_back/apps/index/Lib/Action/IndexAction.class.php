@@ -339,7 +339,7 @@ function show_banner($type){
         $pager = api('Pager');
         $pager->setCounts($commentCounts);
         //$pager->setStyle($style);
-        $pager->setList(10);
+        $pager->setList( );
         $pager->makePage();
         $from = ($pager->pg -1) * $pager->countlist;		
         $pagerArray = (array)$pager;
@@ -365,7 +365,7 @@ function show_banner($type){
         $this->assign('promote', $promote);
         
         $promoteArticle = M('article')->where(array('is_promote'=>1))->findAll();
-        
+
         $this->assign('promote_article', $promoteArticle);
         
         $this->assign('comments', $comments);
@@ -596,6 +596,10 @@ function show_banner($type){
         $this->assign('promote', $promote);
         
         $promoteArticle = M('article')->where(array('is_promote'=>1))->findAll();
+        foreach ($promoteArticle as $key => $value) {
+            $promoteArticle[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
+        }
+
         //add others ArticleInfo kon 20130331
         //$otherArticleSql = M('article')->where(array('uid'=>$daily['uid']))->findAll();
         $otherArticleSql = "select * from ai_article where uid=".$daily['uid']." and id > ".$daily['id']." order by id desc limit 0,3";
@@ -606,6 +610,12 @@ function show_banner($type){
         }
         $this->assign('otherArticle', $result);
         $this->assign('promote_article', $promoteArticle);
+        
+        
+        
+        
+        
+        
         
         $string="select category_id,name,channel,parent from ai_article,ai_article_category where ai_article.category_id=ai_article_category.id and ai_article.id=".$id;
         $result=mysql_query($string);
