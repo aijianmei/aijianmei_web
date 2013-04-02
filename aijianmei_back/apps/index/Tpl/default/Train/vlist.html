@@ -1,259 +1,260 @@
 <include file="../Public/header" />
 <include file="../Public/banner" />
-			<!--Banner End -->
-		<div id="content" class="clearfix">
-			<div class="sider_all">
-				<div class="lay_sider">
-					<div class="subsider">
-						<span class="border_line"></span>
-						<h3 class="video_all">全部</h3>
-						<span class="border_line"></span>
-						<ul>
-							<php>foreach($categories as $c) {</php>
+            <!--Banner End -->
+        <div id="content" class="clearfix">
+            <div class="sider_all">
+                <div class="lay_sider">
+                    <div class="subsider">
+                        <span class="border_line"></span>
+                        <h3 class="video_all">全部</h3>
+                        <span class="border_line"></span>
+                        <ul>
+                            <php>foreach($categories as $c) {</php>
 
-								<li class="each_video all">
+                                <li class="each_video all">
 
-									{$c['name']}
+                                    {$c['name']}
 
-								</li>
+                                </li>
 
-								<php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
+                                <php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
 
-									<li class="each_video">
+                                    <li class="each_video">
 
-										<a href="/index.php?app=index&mod=Train&act={$action}&id={$child['id']}">{$child['name']}</a>
+                                        <a href="/index.php?app=index&mod=Train&act={$action}&id={$child['id']}">{$child['name']}</a>
 
-									</li>
+                                    </li>
 
-								<php>}</php>
+                                <php>}</php>
 
-							<php>}</php>
-							<span class="border_line"></span>
-						</ul>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="right_sider">
-
-				<div class="part_top clearfix">
-					<div class="lay_top clearfix">
-						<h1 class="public_title">了解锻炼的意�?/h1>
-						<div class="part_content">
-							<div class="tr_top clearfix">
-							<a class="store.html"><img src="../Public/images/training/duanlian_23.jpg" alt="no" class="supple_pic" /></a>
-							<div class="lay_detail">
-								<a href="article.html" class="detail">锻炼重在�?��</a>
-								<p>�?��的�?择，�?��的锻炼方式和�?���?��视频教学</p>
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="read_art">点击阅读</a>
-							</div>
-							</div>
-							<ul class="clearfix" style="margin-right:-15px;">
-							<li class="classify show_enter">
-								<a href="/index.php?app=index&mod=Index&act=articleList&id=1" class="lay_cf">
-										<span class="enter_icon"></span>
-										<img src="../Public/images/training/abs.png" width="220" height="214px" alt="" class="best" />
-										<p class="best_classify">�?���?��类一：XX蛋白�?/p>
-									
-								</a>
-							</li>
-							<li class="classify show_enter">
-								<a href="classify.html" class="lay_cf">
-										<span class="enter_icon"></span>
-										<img src="../Public/images/training/cardio.png" width="220" height="214px" alt="" class="best" />
-										<p class="best_classify">�?���?��类一：XX蛋白�?/p>
-									
-								</a>
-							</li>
-							<li class="classify show_enter">
-								<a href="classify.html" class="lay_cf">
-										<span class="enter_icon"></span>
-										<img src="../Public/images/training/triceps.png" width="220" height="214px" alt="" class="best" />
-										<p class="best_classify">�?���?��类一：XX蛋白�?/p>
-								</a>
-							</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-				<div class="part_top">
-					<div class="lay_top">
-						<h1 class="public_title">�?��视频</h1>
-						<div class="content_sw clearfix">
-								<div class="whole_part">
-                                <php>foreach($hot_video as $v){</php>
-									<ul class="vdos">
-										<li class="pic show_enter">
-											<a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">
-												<span class="v_enter"></span>
-												<img src="{$v['logo']}" alt="no" class="rt_picture" />
-											</a>
-										</li>
-										<li class="info">
-											<span>视频名称�?/span>
-											<a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">{$v['title']}</a>
-										</li>
-										<li class="info">
-											<span>{$v['brief']}</span>
-										</li>
-										<li class="info">
-											<span class="play_time">播放:<span> {$v['click']}</span></span>
-											<span class="comment_time">评论: <span>0</span></span>
-										</li>
-									</ul>
-                                   <php>}</php>
-									
-								</div>
-						</div>
-					</div>
-				</div>
-				<div class="part_top">
-					<div class="lay_top">		
-						<h1 class="public_title">�?��视频</h1>
-						<div class="content_sw clearfix">
-								<div class="whole_part">
-                                <php>foreach($new_video as $v){</php>
-									<ul class="vdos">
-										<li class="pic show_enter">
-											<a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">
-												<span class="v_enter"></span>
-												<img src="{$v['logo']}" alt="no" class="rt_picture" />
-											</a>
-										</li>
-										<li class="info">
-											<span>视频名称�?/span>
-											<a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">{$v['title']}</a>
-										</li>
-										<li class="info">
-											<span>{$v['brief']}</span>
-										</li>
-										<li class="info">
-											<span class="play_time">播放:<span> {$v['click']}</span></span>
-											<span class="comment_time">评论: <span>0</span></span>
-										</li>
-									</ul>
-                                  <php>}</php>
-									
-								</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="part_top">
-					<div class="lay_top">
-						<h1 class="public_title">视频</h1>
-						<div class="video">
-								<div class="all">
-									<ul class="all_ul">
-										<!--<li class="select">
-											<span class="opt">范围</span>
-											<a class="pre">不限</a>
-											<a>今日</a>
-											<a>本周</a>
-											<a>本月</a>
-										</li>
-										<li class="select">
-											<span class="opt">排序</span>
-											<a class="pre">�?��发布</a>
-											<a>�?��播放</a>
-											<a>�?��评论</a>
-											<a>�?��收藏</a>
-										</li>-->
-										<li class="select">
-											<span class="opt">部位</span>
-											<span class="opt_length">
-												<a href="{:U('index/Train/videoList', array('id'=>54))}">颈部</a>
-												<a href="{:U('index/Train/videoList', array('id'=>55))}">肩膀</a>
-												<a href="{:U('index/Train/videoList', array('id'=>56))}">斜方�?/a>
-												<a href="{:U('index/Train/videoList', array('id'=>57))}">肱二头肌</a>
-												<a href="{:U('index/Train/videoList', array('id'=>58))}">前臂</a>
-												<a href="{:U('index/Train/videoList', array('id'=>59))}">胸大�?/a>
-												<a href="{:U('index/Train/videoList', array('id'=>60))}">腹肌</a>
-												<a href="{:U('index/Train/videoList', array('id'=>61))}">四头�?/a>
-												<a href="{:U('index/Train/videoList', array('id'=>62))}">斜方�?/a>
-												<a href="{:U('index/Train/videoList', array('id'=>63))}">肱三头肌</a>
-												<a href="{:U('index/Train/videoList', array('id'=>64))}">背阔�?/a>
-												<a href="{:U('index/Train/videoList', array('id'=>65))}">棱形</a>
-												<a href="{:U('index/Train/videoList', array('id'=>66))}">下背�?/a>
-												<a href="{:U('index/Train/videoList', array('id'=>67))}">�?���?/a>
-												<a href="{:U('index/Train/videoList', array('id'=>68))}">腓肠�?/a>
-											<span>
-										</li>
-									</ul>
-								</div>
-						<div class="each">
-                        <php>foreach($videos as $v){</php>
-									<ul class="vdos">
-										<li class="pic">
-											<a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}"><img src="{$v['logo']}" width="170" height="96" /></a>
-										</li>
-										<li class="info">
-											<span>视频名称�?/span>
-											<a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">{$v['title']}</a>
-										</li>
-										<li class="info">
-											<span>{$v['brief']}</span>
-										</li>
-										<li class="info">
-											<span class="play_time">播放:<span> {$v['click']}</span></span>
-											<span class="comment_time">评论: <span>0</span></span>
-										</li>
-									</ul>
                             <php>}</php>
-									
-					</div>
-					<div class="page clearfix">
-						<!--<span class="concrete_choice">
-							<a href="" class="prev">上一�?/a>
-							<a href="">1</a>
-							<a href="" class="current_page">2</a>
-							<a href="">3</a>
-							<a href="" class="next">下一�?/a>
-						</span>
-						<span class="free_choice">
-							<span>�?00�?/span>
-							<span class="concrete_page">
-								到第
-								<input type="text" value="2" />
-								�?							</span>
-							<span class="sure_button">确定</span>
-							
-						</span>-->
-					</div>
-				</div>
-			</div>
-			<!--<div class="part_top clearfix">
-					<span class="corner_left"></span>
-					<div class="lay_top clearfix">
-						<h1 class="public_title">增加内容分类</h1>
-						<h2 class="title_4">全部</h2>
-						<ul class="re_nav">
-							<li>
-								<a href="training_1.html">增加肌肉</a>
-							</li>
-							<li>
-								<a>减少脂肪</a>
-							</li>
-							<li>
-								<a>卫生与健�?/a>
-							</li>
-							<li>
-								<a>免疫功能</a>
-							</li>
-							<li>
-								<a>补充提示与注�?/a>
-							</li>
-							<li>
-								<a>保健品行�?/a>
-							</li>
-						</ul>
-					</div>
-				</div>-->
+                            <span class="border_line"></span>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-				
-			</div><!--right-->
-	</div>
-	
+
+            <div class="right_sider">
+
+                <div class="part_top clearfix">
+                    <div class="lay_top clearfix">
+                        <h1 class="public_title">了解锻炼的意义</h1>
+                        <div class="part_content">
+                            <div class="tr_top clearfix">
+                            <a class="store.html"><img src="../Public/images/training/duanlian_23.jpg" alt="no" class="supple_pic" /></a>
+                            <div class="lay_detail">
+                                <a href="article.html" class="detail">锻炼重在技巧</a>
+                                <p>最好的选择，最快的锻炼方式和最优秀的视频教学</p>
+                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="read_art">点击阅读</a>
+                            </div>
+                            </div>
+                            <ul class="clearfix" style="margin-right:-15px;">
+                            <li class="classify show_enter">
+                                <a href="/index.php?app=index&mod=Index&act=articleList&id=1" class="lay_cf">
+                                        <span class="enter_icon"></span>
+                                        <img src="../Public/images/training/abs.png" width="220" height="214px" alt="" class="best" />
+                                        <p class="best_classify">最畅销分类一：XX蛋白粉</p>
+                                    
+                                </a>
+                            </li>
+                            <li class="classify show_enter">
+                                <a href="classify.html" class="lay_cf">
+                                        <span class="enter_icon"></span>
+                                        <img src="../Public/images/training/cardio.png" width="220" height="214px" alt="" class="best" />
+                                        <p class="best_classify">最畅销分类一：XX蛋白粉</p>
+                                    
+                                </a>
+                            </li>
+                            <li class="classify show_enter">
+                                <a href="classify.html" class="lay_cf">
+                                        <span class="enter_icon"></span>
+                                        <img src="../Public/images/training/triceps.png" width="220" height="214px" alt="" class="best" />
+                                        <p class="best_classify">最畅销分类一：XX蛋白粉</p>
+                                </a>
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="part_top">
+                    <div class="lay_top">
+                        <h1 class="public_title">最热视频</h1>
+                        <div class="content_sw clearfix">
+                                <div class="whole_part">
+                                <php>foreach($hot_video as $v){</php>
+                                    <ul class="vdos">
+                                        <li class="pic show_enter">
+                                            <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">
+                                                <span class="v_enter"></span>
+                                                <img src="{$v['logo']}" alt="no" class="rt_picture" />
+                                            </a>
+                                        </li>
+                                        <li class="info">
+                                            <span>视频名称：</span>
+                                            <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">{$v['title']}</a>
+                                        </li>
+                                        <li class="info">
+                                            <span>{$v['brief']}</span>
+                                        </li>
+                                        <li class="info">
+                                            <span class="play_time">播放:<span> {$v['click']}</span></span>
+                                            <span class="comment_time">评论: <span>0</span></span>
+                                        </li>
+                                    </ul>
+                                   <php>}</php>
+                                    
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="part_top">
+                    <div class="lay_top">		
+                        <h1 class="public_title">最新视频</h1>
+                        <div class="content_sw clearfix">
+                                <div class="whole_part">
+                                <php>foreach($new_video as $v){</php>
+                                    <ul class="vdos">
+                                        <li class="pic show_enter">
+                                            <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">
+                                                <span class="v_enter"></span>
+                                                <img src="{$v['logo']}" alt="no" class="rt_picture" />
+                                            </a>
+                                        </li>
+                                        <li class="info">
+                                            <span>视频名称：</span>
+                                            <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">{$v['title']}</a>
+                                        </li>
+                                        <li class="info">
+                                            <span>{$v['brief']}</span>
+                                        </li>
+                                        <li class="info">
+                                            <span class="play_time">播放:<span> {$v['click']}</span></span>
+                                            <span class="comment_time">评论: <span>0</span></span>
+                                        </li>
+                                    </ul>
+                                  <php>}</php>
+                                    
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="part_top">
+                    <div class="lay_top">
+                        <h1 class="public_title">视频</h1>
+                        <div class="video">
+                                <div class="all">
+                                    <ul class="all_ul">
+                                        <!--<li class="select">
+                                            <span class="opt">范围</span>
+                                            <a class="pre">不限</a>
+                                            <a>今日</a>
+                                            <a>本周</a>
+                                            <a>本月</a>
+                                        </li>
+                                        <li class="select">
+                                            <span class="opt">排序</span>
+                                            <a class="pre">最新发布</a>
+                                            <a>最多播放</a>
+                                            <a>最多评论</a>
+                                            <a>最多收藏</a>
+                                        </li>-->
+                                        <li class="select">
+                                            <span class="opt">部位</span>
+                                            <span class="opt_length">
+                                                <a href="{:U('index/Train/videoList', array('id'=>54))}">颈部</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>55))}">肩膀</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>56))}">斜方肌</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>57))}">肱二头肌</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>58))}">前臂</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>59))}">胸大肌</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>60))}">腹肌</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>61))}">四头肌</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>62))}">斜方肌</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>63))}">肱三头肌</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>64))}">背阔肌</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>65))}">棱形</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>66))}">下背部</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>67))}">臀大肌</a>
+                                                <a href="{:U('index/Train/videoList', array('id'=>68))}">腓肠肌</a>
+                                            <span>
+                                        </li>
+                                    </ul>
+                                </div>
+                        <div class="each">
+                        <php>foreach($videos as $v){</php>
+                                    <ul class="vdos">
+                                        <li class="pic">
+                                            <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}"><img src="{$v['logo']}" width="170" height="96" /></a>
+                                        </li>
+                                        <li class="info">
+                                            <span>视频名称：</span>
+                                            <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">{$v['title']}</a>
+                                        </li>
+                                        <li class="info">
+                                            <span>{$v['brief']}</span>
+                                        </li>
+                                        <li class="info">
+                                            <span class="play_time">播放:<span> {$v['click']}</span></span>
+                                            <span class="comment_time">评论: <span>0</span></span>
+                                        </li>
+                                    </ul>
+                            <php>}</php>
+                                    
+                    </div>
+                    <div class="page clearfix">
+                        <!--<span class="concrete_choice">
+                            <a href="" class="prev">上一页</a>
+                            <a href="">1</a>
+                            <a href="" class="current_page">2</a>
+                            <a href="">3</a>
+                            <a href="" class="next">下一页</a>
+                        </span>
+                        <span class="free_choice">
+                            <span>共100页</span>
+                            <span class="concrete_page">
+                                到第
+                                <input type="text" value="2" />
+                                页
+                            </span>
+                            <span class="sure_button">确定</span>
+                            
+                        </span>-->
+                    </div>
+                </div>
+            </div>
+            <!--<div class="part_top clearfix">
+                    <span class="corner_left"></span>
+                    <div class="lay_top clearfix">
+                        <h1 class="public_title">增加内容分类</h1>
+                        <h2 class="title_4">全部</h2>
+                        <ul class="re_nav">
+                            <li>
+                                <a href="training_1.html">增加肌肉</a>
+                            </li>
+                            <li>
+                                <a>减少脂肪</a>
+                            </li>
+                            <li>
+                                <a>卫生与健康</a>
+                            </li>
+                            <li>
+                                <a>免疫功能</a>
+                            </li>
+                            <li>
+                                <a>补充提示与注意</a>
+                            </li>
+                            <li>
+                                <a>保健品行业</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>-->
+
+                
+            </div><!--right-->
+    </div>
+    
 <include file="../Public/footer" />
