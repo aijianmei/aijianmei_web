@@ -372,21 +372,20 @@
 			}
 			.recommend_pic{
 				float:left;
-				margin-right: 10px;
-			}
-			.recommend h3{
-				margin-bottom: 24px;
-			}
-			
+			}			
 			.recommend img{
-				float:left;
 				padding-right:5px;
 			}
 			.recommend{
 				padding:10px;
 			}
-			.recommend p{
-				padding-bottom:15px;
+			.recommend .intro{
+				float:left;
+				width:166px;
+			}
+			.intro h3{
+				height: 45px;
+				font-size: 14px;
 			}
 			.tr_classify .t_play_time{
 				background: url(../images/wm3.png) 0 -465px no-repeat;
