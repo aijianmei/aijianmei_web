@@ -105,7 +105,7 @@ visibility:hidden;
   .blank{height:8px; line-height:8px; clear:both; visibility:hidden;}
   .blank5{height:5px; line-height:5px;/* _margin:-3px 0;*/ clear:both; visibility:hidden;}
   /*布局*/
-  .AreaL{width:200px; float:left; margin-right:10px;}
+  .AreaL{width:200px; float:left; margin-right:10px;margin-top:-45px;}
   .AreaR{width:750px; float:left;}
 
 /* ====================
@@ -153,7 +153,7 @@ visibility:hidden;
   position:absolute; top:0px; right:0px;
   } */
   /*搜索*/
-  #search{border:1px solid #5cb4e6; background:url(images/searchBg.gif) repeat-x left top; width:918px;
+  #search{border:1px solid #5cb4e6; background:url(images/searchBg.gif) repeat-x left top; width:708px;float:right;
   padding:0px 20px; height:36px; line-height:36px;
   }
   #search a{color:#fff; text-decoration:none;}
@@ -163,7 +163,7 @@ visibility:hidden;
   #search .go{background:url(images/bnt_search.gif); border:none; width:52px; height:19px;/* position:relative; top:2px; utf8下*/}
   /*当前位置*/
   #ur_here{border:1px solid #c5e4ff; border-top:none; background:url(images/uh_bg.gif) repeat-x left top;
-  height:36px; line-height:36px; padding:0 12px;
+  height:36px; line-height:36px; padding:0 12px;width:724px;float:right;
   }
   #ur_here a{color:#006cce; text-decoration:none;}
 
@@ -507,30 +507,101 @@ visibility:hidden;
  width:300px;
 }
 
-	/******** Navigation ************
-		.nav{
-			width:685px;
-			height:36px;
-			background:url(images/nav.png) no-repeat ;
-			margin:60px 30px 0 0;
-			_margin-right:15px;
+/*********** Banner ***********/		
+		#banner{
+			margin:0 auto;
+			width:860px;
 		}
-		.nav li{
-			width:85px;
-			height:36px;
-			float:left;
-			text-align:center;
+		
+		
+		.lay_banner{
+			position:relative;
+			margin: 0 auto;
+			width: 860px;
+			height:270px;
+			overflow: hidden;
 		}
-		.nav a{
-			color:#fff;
-			font-size:16px;
-			display:inline-block;
-			_display:block;
-			line-height:36px;
-			text-align:center;
-			width:85px;
+		.lay_banner .ul_1{
+			width:3440px;
+			position: relative;
 		}
-		.nav a:hover{
-			background:#428AB2;
-		}*/
+			.change_1{
+				position: relative;
+				float:left;
+			}
+			.pic_1,.pic_2,.pic_3,.pic_4{
+				display: block;
+				width: 860px;
+				height: 270px;
+			}
+			.change_1 .massage{
+				position: absolute;
+				right: 0px;
+				top: 0px;
+				display:inline-block;
+				height: 270px;
+				width: 180px;
+				padding: 0 20px;
+				opacity: 0.3;
+				filter:alpha(opacity=30);
+				background: #020200;
+				z-index: 10;
+			}
+				.massage .title{
+					padding: 10px 0;
+					font-size: 18px;
+					border-bottom: 1px solid white;
+					color: white;
+				}
+				.massage p{
+					font-size: 15px;
+					color: white;
+					margin-right: 16px;
+				}
+				.massage .png{
+					position: absolute;
+					right: 18px;
+					bottom: 25px;
+				}
+		.choice_area{
+			position:relative;
+			*height:110px;
+			background:rgb(232, 234, 255);
+		}
+		.choice_area .ul_2{
+			margin:0 60px;
+		}
+		.ul_2 li img{
+			width:140px;
+			height:80px;
+		}
+		.choice_area li{
+			float: left;
+			display: inline-block;
+			height: 80px;
+			width: 140px;
+			margin: 6px 19px;
+			cursor: pointer;
+			border: 3px solid transparent;
+
+		}
+		.choice_area .first_choice{
+			border: 3px solid #4298CE;
+		}
+			.ps_left{position: absolute;
+				display: inline-block;
+				width: 40px;
+				height: 80px;
+				top: 12px;
+				left: 0px;
+				background: url(images/turn_left.png) no-repeat;}
+			.ps_right{position: absolute;
+				display: inline-block;
+				width: 40px;
+				height: 80px;
+				top: 12px;
+				right: 0px;
+				background: url(images/turn_right.png) no-repeat;
+			}
+
 
