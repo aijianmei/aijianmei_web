@@ -10,21 +10,16 @@
                         <h3 class="video_all">全部</h3>
                         <span class="border_line"></span>
                         <ul>
-                            <li class="each_video all">
-                                <a href="/index.php?app=index&mod=Append">营养辅助品</a>
-                            </li>
-                        <php>foreach($parent_categories as $c) {</php>
-                            <!--
+                            <php>foreach($categories as $c) {</php>
                                 <li class="each_video all">
-                                    <a href="/index.php?app=index&mod=Append&act=articleList&id={$c['id']}">{$c['name']}
-                                </li><li class="each_video all">-->
-
+                                    {$c['name']}
+                                </li>
                                 <php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
                                     <li class="each_video">
-                                        <a href="/index.php?app=index&mod=Append&act=articleList&id={$child['id']}">{$child['name']}</a>
+                                        <a href="/index.php?app=index&mod=Nutri&act={$action}&id={$child['id']}">{$child['name']}</a>
                                     </li>
                                 <php>}</php>
-                            <php>}</php>	
+                            <php>}</php>
                         </ul>
                     </div>
                 </div>
