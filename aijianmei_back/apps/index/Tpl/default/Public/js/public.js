@@ -364,18 +364,46 @@ $(function(){
 	
 // })	
 //鼠标移上图片显示进入
-$("a.show_enter").mouseover(function(){
-	$(this).children(".enter_icon").css("display","block");
-	$(this).children("img").css("border-color","#21ace3");
-	$(this).children(".v_enter").css('background','url(images/wm3.png) no-repeat 0 -490px')
+$("li.show_enter").mouseover(function(){
+	$(this).children().children(".enter_icon").css("display","block");
+	$(this).children().children("img").css("border-color","#21ace3");
+	$(this).children().children(".v_enter").css('background','url(images/wm3.png) no-repeat 0 -490px')
 	$(this).mouseout(function(){
-		$(this).children(".enter_icon").css("display","none");
-		$(this).children("img").css("border-color","transparent");
-		$(this).children(".v_enter").css('background','')
+		$(this).children().children(".enter_icon").css("display","none");
+		$(this).children().children("img").css("border-color","transparent");
+		$(this).children().children(".v_enter").css('background','')
 	})
 });
+//添加目录动态快---------------------------------------
+		   $('.nav_cf').mouseover(function(){
+		   		var index = $(".nav_cf").index(this);
+		   		$('.title_hint').css('opacity','1').eq(index).css('opacity','0');
+		   		$('.nav_detail').css('opacity','0').eq(index).css('opacity','1');
+		   		$('.bg_opacity').css('opacity','0.4').eq(index).css('opacity','0');
+		   })
+		   $('.nav_cf').mouseout(function(){
+		   		$('.nav_detail').css('opacity','0');
+		   		$('.title_hint').css('opacity','1');
+		   })
+		   $('.position_nav').mouseleave(function(){
+		   		$('.bg_opacity').css({'opacity':'0'})
+		   })
+//为板块添加css3渐变边框---------------------------
+		$(".tr_classify").add(".recommend").hover(
+			function(){
+				$(this).css("box-shadow","0 0 8px #21ace3")
+			},
+			function(){
+				$(this).css("box-shadow","")
+			}
+		)
 
+//textarea focus()
+	$(".comment_inp").click(function(){
+		$(this).html("");
+	})
 
+	
 //公共部分！！！选择页面，上下页切换
 	$(".page a").hover(
 		function(){
