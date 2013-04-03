@@ -73,7 +73,7 @@
 				// $(function() {
 
 
-				// //大图自动切换，左右切换，选择切换
+				// 	//大图自动切换，左右切换，选择切换
 
 
 				// 	var sWidth = $("#banner").width(); //获取焦点图的宽度（显示面积）
@@ -90,7 +90,7 @@
 
 					
 
-				// //cjxlkkads
+				// 	//cjxlkkads
 				// 	//添加按钮,上一页、下一页两个按钮
 
 
@@ -148,7 +148,7 @@
 				// 		$(this).stop(true,false).animate({"opacity":"0.5"},300);
 
 
-				// 	},function() {
+				// 		},function() {
 
 
 				// 		$(this).stop(true,false).animate({"opacity":"0"},300);
@@ -205,7 +205,7 @@
 				// 	//左右滚动，外围ul元素的宽度
 
 
-				// 	// $("#banner ul").css("width",sWidth * (len));
+				// 	$("#banner ul").css("width",sWidth * (len));
 
 
 					
@@ -220,7 +220,7 @@
 				// 		clearInterval(picTimer);
 
 
-				// 	},function() {
+				// 		},function() {
 
 
 				// 		picTimer = setInterval(function() {
@@ -265,26 +265,23 @@
 				// 	}
 
 
-
-
-
 				// });
 
-			function comments(comment, aid, act) {
-				if(!USER.id) {alert('请登录'); return false;}
-				var action = 'add'+act+'Comment';
-				//var comment = document.getElementById('comment').value;
-				
-				$.post('/index.php?app=index&mod=Index&act='+action, {'comment':comment, 'aid':aid}, function(msg) {
-					//ui.success('success');
-					location.reload();
+				function comments(comment, aid, act) {
+					if(!USER.id) {alert('请登录'); return false;}
+					var action = 'add'+act+'Comment';
+					//var comment = document.getElementById('comment').value;
 					
-				})
-
-
+					$.post('/index.php?app=index&mod=Index&act='+action, {'comment':comment, 'aid':aid}, function(msg) {
+						//ui.success('success');
+						location.reload();
+						
+					})
+				}
+				
 				$(function(){
 					$(window).scroll(function () {
-						if($(window).scrollTop() >= 300){//距离顶部多少高度显示按钮
+						if($(window).scrollTop() >= 300){
 							$('#goTopBtn').slideDown(200);
 						}
 						else{
@@ -293,7 +290,7 @@
 					}); 
 					     
 					$('#goTopBtn').click(function(){
-					$('body,html').animate({scrollTop:0},500)
+						$('body,html').animate({scrollTop:0},500)
 					});
 				   
 				  	//按钮定位
@@ -306,16 +303,15 @@
 					var topbtn_posi = ([win_width - content_width ]/2 - topbtn_width - 50);
 					$('#goTopBtn').css({'right':topbtn_posi});
 					   
-					});
-					$(".tr_classify").hover(
-						function(){
-							$(this).css("box-shadow","0 0 8px #21ace3")
-						},
-						function(){
-							$(this).css("box-shadow","")
-						}
-					)
-				}	
+				});
+				$(".tr_classify").hover(
+					function(){
+						$(this).css("box-shadow","0 0 8px #21ace3")
+					},
+					function(){
+						$(this).css("box-shadow","")
+					}
+				)	
 			</script>
 			
 			<script type='text/javascript' charset='utf-8'>//验证码刷新
