@@ -546,6 +546,7 @@ function show_banner($type){
     
     public function daily()
     {
+        $pagenums=7;
         $id = intval($_GET['id']);
         $o = $_GET['o'];
         if($o=='like_comment') {
@@ -562,6 +563,8 @@ function show_banner($type){
             echo json_encode(M('daily')->field('unlike')->where(array('id'=>$id))->find());
             return;
         }
+        $upReaderCountSql="update ai_daily set read_count=read_count+1 where id=$id";
+        M('')->query($upReaderCountSql);
         
         $daily = M('daily')->where(array('id'=>$id))->find();
         $videos = M('daily_video')->where(array('daily_id'=>$id))->findAll();
@@ -575,7 +578,7 @@ function show_banner($type){
         $commentsCount = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->count();
         $pager = api('Pager');
         $pager->setCounts($commentsCount);
-        $pager->setList(10);
+        $pager->setList($pagenums);
         $pager->makePage();
         $from = ($pager->pg-1) * $pager->countlist;
         $pagerArray = (array)$pager;
@@ -587,6 +590,7 @@ function show_banner($type){
             $comments[$k]['userInfo'] = getUserInfo($c['uid']);
         }
         //print_r($daily);
+        $this->assign('commentsCount', $commentsCount);
         $this->assign('daily', $daily);
         $this->assign('videos', $videos);
         $this->assign('comments', $comments);
