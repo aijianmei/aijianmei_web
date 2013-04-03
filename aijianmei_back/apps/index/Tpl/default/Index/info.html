@@ -142,7 +142,7 @@
                                 <div class="scr_con">				
                                             <div class="newslist">
                                                 <ul>													
-                                                
+                                                    <php>if (empty($i['comments'])) echo '当前没有人评论哦'</php>
                                 <php>foreach($i['comments'] as $c) {</php>
                                 <li class="cm_bottom">
                                                         <div class="target clearfix">

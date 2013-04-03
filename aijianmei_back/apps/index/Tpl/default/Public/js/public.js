@@ -17,8 +17,6 @@ $(function(){
         move(index);
     })
 
-
-
     //点击切换
     $("#banner .ul_2 li").click(function(){
         index = $("#banner .ul_2 li").index(this);
@@ -44,6 +42,7 @@ $(function(){
         var nowleft = -index*sWidth;
         $("#banner .ul_1").stop(true,false).animate({"left":nowleft},300);
         $("#banner .ul_2 li").css("border","3px solid transparent").eq(index).css("border","3px solid #4298CE");
+        $("#banner .ul_2").css("width","860px")
     }
 
     //透明效果  版图修改过这些地方
@@ -312,7 +311,7 @@ $(function(){
     
 // })	
 //鼠标移上图片显示进入
-$("li .show_enter").mouseover(function(){
+$("li .show_enter").add("div .show_enter").mouseover(function(){
 	$(this).children(".enter_icon").css("display","block");
 	$(this).children("img").css("border-color","#21ace3");
 	$(this).children(".v_enter").css('background','url(images/wm3.png) no-repeat 0 -490px')

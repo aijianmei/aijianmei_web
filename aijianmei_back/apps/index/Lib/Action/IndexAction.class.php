@@ -353,18 +353,6 @@ function show_banner($type){
         }
         $this->assign('commentCounts', $commentCounts?$commentCounts:0);
         $this->assign('comments', $result);
-//         foreach($articleComments as $ac) {
-//             $comments[$ac['id']]['content'] = $ac;
-//             $comments[$ac['id']]['user'] = getUserInfo($ac['uid']);			
-//             $comments[$ac['id']]['children'] = M('comments')->where(array('topParent'=>$ac['id'], 'parent_type'=>'3'))->order('`create_time` asc')->findAll();
-//         }
-        
-//         $hotComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->order('`like` desc')->limit("$from,$pager->countlist")->findAll();
-//         foreach($hotComments as $ac) {
-//             $hotArticlecomments[$ac['id']]['content'] = $ac;
-//             $hotArticlecomments[$ac['id']]['user'] = getUserInfo($ac['uid']);
-//             $hotArticlecomments[$ac['id']]['children'] = M('comments')->where(array('topParent'=>$ac['id'], 'parent_type'=>'3'))->order('`create_time` asc')->findAll();
-//         }
         
         $this->assign('hotComments', $hotArticlecomments);
         
@@ -372,11 +360,11 @@ function show_banner($type){
         $this->assign('promote', $promote);
         
         $promoteArticle = M('article')->where(array('is_promote'=>1))->findAll();
-
+        foreach($promoteArticle as $key =>$value){
+            $promoteArticle[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
+        }
+        
         $this->assign('promote_article', $promoteArticle);
-        
-        
-
         $this->assign('cssFile', 'article');
         $this->assign('uid', $this->mid);
 

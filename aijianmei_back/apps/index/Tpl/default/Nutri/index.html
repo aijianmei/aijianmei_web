@@ -36,7 +36,7 @@
 							" class="store.html"><img src="../Public/images/nutri/01_1.jpg" alt="no" class="supple_pic" /></a>
 							<div class="lay_detail">
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=41
-									" class="detail"  data-original-title="内容">营初学者运动前的营养指导</a>
+									" class="detail"  data-original-title="内容">初学者运动前的营养指导</a>
 								<div class="title_tip"><div class="angle"></div></div>
 								<p class="read_content">一个健康好看的身型不是从你进入健身房那一刻才开始形成的。在运动前摄取合适的营养可以帮助你最大化地获得效果。下面我会教你如何在健身前吸收营养，让你甩掉脂肪和增加肌肉。</p>
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=41
@@ -84,8 +84,8 @@
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}
 								</p>
-								<span class="t_play_time">点击:<span>0</span></span>
-								<span class="comment_time">评论: <span>0</span></span>
+								<span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
+								<span class="comment_time">评论: <span>{$a['recomnums']}</span></span>
 							</li>
 						<php>}</php>
 						</ul>
@@ -106,8 +106,8 @@
 								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
 								<p class="summary">{$a['brief']}
 								</p>
-								<span class="t_play_time">点击:<span>0</span></span>
-								<span class="comment_time">评论: <span>0</span></span>
+								<span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
+								<span class="comment_time">评论: <span>{$a['recomnums']}</span></span>
 							</li>
 						<php>}</php>
 

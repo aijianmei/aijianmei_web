@@ -84,8 +84,7 @@ class ArticleModel extends Model {
     public function getTrainVideo($order,$id=null)
     {
         if($id) {
-            $orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND a.category_id=$id";
-            $sql = "select v.* from ai_video v where vid in ($orderTableSql) order by ".$order." desc limit 0,8";
+            $sql = "select v.* from ai_video v where v.category_id=".$id." order by ".$order." desc limit 0,8";
         }else {
             $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
             $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid order by $order desc limit 0,8";
