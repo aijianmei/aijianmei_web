@@ -200,6 +200,12 @@ class ArticleModel extends Model {
         $result = M('')->query($sql);
         return $result;
     }
-    
+    public function getVideoCountRecommentsById($id)
+    {
+        $sql=null;$numsArr=null;
+        $sql="select count(*) as nums from ai_video_comments where pid=".$id;
+        $numsArr= M('')->query($sql);
+        return !empty($numsArr[0]['nums'])?$numsArr[0]['nums']:0;
+    }
 }
 ?>
