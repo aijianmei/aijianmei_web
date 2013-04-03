@@ -60,69 +60,58 @@
     <!-- 返回顶部按钮 -->
             
             <script type="text/javascript">
-            var USER = {
-                    'id' : <php>echo $uid ? $uid : '0'</php>,
-                    'name' : '',
-            }
+                var USER = {
+                        'id' : <php>echo $uid ? $uid : '0'</php>,
+                        'name' : '',
+                }
             </script>
 
             <script type="text/javascript" src="../Public/js/jquery.js"></script>
             <script type="text/javascript" src="../Public/js/public.js"></script>
             <script type="text/javascript" src="../Public/js/{$cssFile}.js"></script>
             <script type="text/javascript">
-
-            function comments(comment, aid, act) {
-                if(!USER.id) {alert('请登录'); return false;}
-                var action = 'add'+act+'Comment';
-                //var comment = document.getElementById('comment').value;
-                
-                $.post('/index.php?app=index&mod=Index&act='+action, {'comment':comment, 'aid':aid}, function(msg) {
-                    //ui.success('success');
-                    location.reload();
-                    
-            })
+                $(function(){
 
 
-            $(function(){
-               $(window).scroll(function () {
-                 if($(window).scrollTop() >= 300)//距离顶部多少高度显示按钮
-                 {
-                 $('#goTopBtn').slideDown(200);
-                 }else
-                 {
-                 $('#goTopBtn').slideUp(200);
-                 }
-               }); 
-                 
-               $('#goTopBtn').click(function(){
-                $('body,html').animate({scrollTop:0},500)
-               });
-           
-               //按钮定位
-               var win_width= $(window).width();    //窗口宽度
-               var content_width= $('.wrapper').width();     //容器宽度
-               var topbtn_width= $('#goTopBtn').width(); //按钮宽度
-               //alert([win_width - content_width]/2);
-           
-                //距离主体部分的右侧距离
-                   var topbtn_posi = ([win_width - content_width ]/2 - topbtn_width - 50);
-                   $('#goTopBtn').css({'right':topbtn_posi});
-                   
+                    $(window).scroll(function () {
+                        if($(window).scrollTop() >= 300){
+                            $('#goTopBtn').slideDown(200);
+                        }else{
+                            $('#goTopBtn').slideUp(200);
+                        }
+                    }); 
+                     
+                    $('#goTopBtn').click(function(){
+                        $('body,html').animate({scrollTop:0},500)
+                    });
+               
+                   //按钮定位
+                   var win_width= $(window).width();    //窗口宽度
+                   var content_width= $('.wrapper').width();     //容器宽度
+                   var topbtn_width= $('#goTopBtn').width(); //按钮宽度
+                   //alert([win_width - content_width]/2);
+               
+                    //距离主体部分的右侧距离
+                    var topbtn_posi = ([win_width - content_width ]/2 - topbtn_width - 50);
+                    $('#goTopBtn').css({'right':topbtn_posi});
+                       
 
-                $(".tr_classify").hover(
-                function(){
-                    $(this).css("box-shadow","0 0 8px #21ace3")
-                },
-                function(){
-                    $(this).css("box-shadow","")
-                }
-                 )
-            })
+
+
+                    function comments(comment, aid, act) {
+                        if(!USER.id) {alert('请登录'); return false;}
+                        var action = 'add'+act+'Comment';
+                        //var comment = document.getElementById('comment').value;
+                        
+                        $.post('/index.php?app=index&mod=Index&act='+action, {'comment':comment, 'aid':aid}, function(msg) {
+                            //ui.success('success');
+                            location.reload();
+                         })   
+                    }
+                })
             </script>
-            
             <script type='text/javascript' charset='utf-8'>//验证码刷新
-             $(function()
-            {
+             $(function(){
                 $("#safecode,#reloadcode").click(function(event)
                 {
                     $("#safecode").load("/public/captcha.php" + "?timestamp=" + (new Date()).getTime(),{},function(responseText, textStatus, XMLHttpRequest)
