@@ -11,9 +11,9 @@
 						<span class="border_line"></span>
 						<ul>
 							<php>foreach($categories as $c) {</php>
-								<li class="each_video all">
+								<!--<li class="each_video all">
 									<a href="/index.php?app=index&mod=Train&act={$action}&id={$c['id']}">{$c['name']}</a>
-								</li>
+								</li>-->
 								<php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
 									<li class="each_video">
 										<a href="/index.php?app=index&mod=Train&act={$action}&id={$child['id']}">{$child['name']}</a>
