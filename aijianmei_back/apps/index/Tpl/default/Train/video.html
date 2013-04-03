@@ -61,7 +61,7 @@
                                 <a class="comment" onclick="addVideoCommont();">发表评论</a>
                             </div>
                             <div class="check_comment">
-                                <a class="comment_1">全部评论(<?php echo $CRecommentsNums;?>)</a>
+                                <a class="comment_1">全部评论(<?php echo $cRecomnums;?>)</a>
                             </div>
                             <div class="cm_content tab_2">
                                 <div class="cm_top">
@@ -73,7 +73,6 @@
                                         <?php printf($pager['backstr'],'class="next_page"');?>
                                     </span>
                                     <span>第<?php echo $_GET['pg'];?>页</span>
-                                    
                                 </div>
                                 <div class="cm_bottom" id="recomment_fdiv">
                                     <h5 class="title_5" >推荐精华</h5>
@@ -89,7 +88,7 @@
                                                     <a>回复<span>(0)</span></a>
                                                 </span>
                                                 <span><?php echo $v['create_time'];?></span>
-                                                <span>来自<em></em></span>
+                                                <span>来自<em>爱健美</em></span>
                                             </p>
                                         </div>
                                     </div>

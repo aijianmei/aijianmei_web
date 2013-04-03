@@ -353,7 +353,6 @@ function show_banner($type){
         }
         $this->assign('commentCounts', $commentCounts?$commentCounts:0);
         $this->assign('comments', $result);
-        
         $this->assign('hotComments', $hotArticlecomments);
         
         $promote = M('promote')->find();
