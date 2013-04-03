@@ -17,8 +17,6 @@ $(function(){
         move(index);
     })
 
-
-
     //点击切换
     $("#banner .ul_2 li").click(function(){
         index = $("#banner .ul_2 li").index(this);
@@ -44,6 +42,7 @@ $(function(){
         var nowleft = -index*sWidth;
         $("#banner .ul_1").stop(true,false).animate({"left":nowleft},300);
         $("#banner .ul_2 li").css("border","3px solid transparent").eq(index).css("border","3px solid #4298CE");
+        $("#banner .ul_2").css("width","3440px")
     }
 
     //透明效果  版图修改过这些地方
