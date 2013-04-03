@@ -41,14 +41,16 @@ class AppendAction extends Action {
         //-------END--------
 
         }
+
     public function index()
     {
         
         $map['channel'] = '4';
         $cate = M('article_category')->where($map)->findAll();
-        foreach($cate as $c) {
+        foreach($cate as $c) 
             if($c['parent'] == NULL) $parent[$c['id']] = $c;
-            else $parent[$c['parent']]['children'][] = $c; 
+        foreach($cate as $c) {
+            if($c['parent'] != NULL) $parent[$c['parent']]['children'][] = $c;
             $cate_id[] = $c['id'];
         }
         //print_r($cate);
