@@ -94,9 +94,18 @@
 	#content img{
 		display: block;
 		height:165px;
-		width:221px;
+		width:219px;
 		border:2px solid transparent;
 	}	
+	.classify i{
+		position: absolute;
+		top: -5px;
+		left: -5px;
+		display: inline-block;
+		width: 84px;
+		height: 84px;
+		background: url(../images/new.png);
+	}
 	.lay_top{
 		width:960px;
 		margin:0 auto;
