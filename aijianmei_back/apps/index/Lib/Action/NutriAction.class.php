@@ -42,9 +42,10 @@ class NutriAction extends Action {
     {
         $map['channel'] = '3';
         $cate = M('article_category')->where($map)->findAll();
-        foreach($cate as $c) {
+        foreach($cate as $c)
             if($c['parent'] == NULL) $parent[$c['id']] = $c;
-            else $parent[$c['parent']]['children'][] = $c; 
+        foreach($cate as $c) {
+            if($c['parent'] != NULL) $parent[$c['parent']]['children'][] = $c;
             $cate_id[] = $c['id'];
         }
         $articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
