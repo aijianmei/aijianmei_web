@@ -41,9 +41,10 @@ class TrainAction extends Action {
         $this->assign('cssFile', 'training');
         $map['channel'] = '2';
         $cate = M('article_category')->where($map)->findAll();
-        foreach($cate as $c) {
+        foreach($cate as $c)
             if($c['parent'] == NULL) $parent[$c['id']] = $c;
-            else $parent[$c['parent']]['children'][] = $c; 
+        foreach($cate as $c) {
+            if($c['parent'] != NULL) $parent[$c['parent']]['children'][] = $c;
             $cate_id[] = $c['id'];
         }
         
