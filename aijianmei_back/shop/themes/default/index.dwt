@@ -444,6 +444,7 @@ function check_email()
   <div class="box">
    <div class="helpTitBg clearfix">
     <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+
    </div>
   </div>
 </div>
