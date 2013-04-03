@@ -108,7 +108,13 @@ function addDetaiCommont($data=null){
         $imgsArr=mysql_query($imgsql, $db);
         $row = mysql_fetch_array($imgsArr);
         $data['img'] =$row['profileImageUrl'];
-        if(empty($data['img'])){$data['img']="/data/uploads/avatar/$uid/middle.jpg";}
+        if(empty($data['img'])){
+            $data['img']="/data/uploads/avatar/$uid/middle.jpg";
+            if(!is_file($data['img']))
+            {
+                $data['img']="public/themes/newstyle/images/user_pic_middle.gif";
+            }
+        }
         //$data['img']="/data/uploads/avatar/$uid/middle.jpg";
         echo json_encode($data);
     }else {

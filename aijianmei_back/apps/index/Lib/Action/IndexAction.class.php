@@ -294,6 +294,7 @@ function show_banner($type){
 
     public function articleDetail()
     {	
+        $pagenums=7;
         $o = $_GET['o'];
         if($o=='like') {
             if($this->mid) {				
@@ -338,27 +339,33 @@ function show_banner($type){
         $style['current'] = 'current_page';
         $pager = api('Pager');
         $pager->setCounts($commentCounts);
-        //$pager->setStyle($style);
-        $pager->setList( );
+        $pager->setList($pagenums);
         $pager->makePage();
         $from = ($pager->pg -1) * $pager->countlist;		
         $pagerArray = (array)$pager;
         $this->assign('pager', $pagerArray);
-        //print_r($pagerArray);
-        
-        $articleComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->limit("$from,$pager->countlist")->findAll();
-        foreach($articleComments as $ac) {
-            $comments[$ac['id']]['content'] = $ac;
-            $comments[$ac['id']]['user'] = getUserInfo($ac['uid']);			
-            $comments[$ac['id']]['children'] = M('comments')->where(array('topParent'=>$ac['id'], 'parent_type'=>'3'))->order('`create_time` asc')->findAll();
+        //$articleComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->limit("$from,$pager->countlist")->findAll();
+        $sql="select * from ai_comments where parent_id=$id order by create_time desc limit $from,$pager->countlist";
+        $result=null;
+        $result=M('article')->query($sql);
+        foreach($result as $key=> $value){
+            $result[$key]['user'] = getUserInfo($value['uid']);
         }
+        $this->assign('commentCounts', $commentCounts?$commentCounts:0);
+        $this->assign('comments', $result);
+//         foreach($articleComments as $ac) {
+//             $comments[$ac['id']]['content'] = $ac;
+//             $comments[$ac['id']]['user'] = getUserInfo($ac['uid']);			
+//             $comments[$ac['id']]['children'] = M('comments')->where(array('topParent'=>$ac['id'], 'parent_type'=>'3'))->order('`create_time` asc')->findAll();
+//         }
         
-        $hotComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->order('`like` desc')->limit("$from,$pager->countlist")->findAll();
-        foreach($hotComments as $ac) {
-            $hotArticlecomments[$ac['id']]['content'] = $ac;
-            $hotArticlecomments[$ac['id']]['user'] = getUserInfo($ac['uid']);
-            $hotArticlecomments[$ac['id']]['children'] = M('comments')->where(array('topParent'=>$ac['id'], 'parent_type'=>'3'))->order('`create_time` asc')->findAll();
-        }
+//         $hotComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->order('`like` desc')->limit("$from,$pager->countlist")->findAll();
+//         foreach($hotComments as $ac) {
+//             $hotArticlecomments[$ac['id']]['content'] = $ac;
+//             $hotArticlecomments[$ac['id']]['user'] = getUserInfo($ac['uid']);
+//             $hotArticlecomments[$ac['id']]['children'] = M('comments')->where(array('topParent'=>$ac['id'], 'parent_type'=>'3'))->order('`create_time` asc')->findAll();
+//         }
+        
         $this->assign('hotComments', $hotArticlecomments);
         
         $promote = M('promote')->find();
@@ -368,16 +375,11 @@ function show_banner($type){
 
         $this->assign('promote_article', $promoteArticle);
         
-        $this->assign('comments', $comments);
+        
 
         $this->assign('cssFile', 'article');
         $this->assign('uid', $this->mid);
 
-        //目录树
-        //$tree_channel_en 一级目录
-        //$tree_parent 二级目录
-        //$tree_category_id 三级目录
-        //article['id']  四级目录
         $string="select category_id,name,channel,parent from ai_article,ai_article_category where ai_article.category_id=ai_article_category.id and ai_article.id=".$id;
         $result=mysql_query($string);
         $result=mysql_fetch_array($result);
@@ -399,7 +401,6 @@ function show_banner($type){
         $this->assign("tree_parent",$tree_parent);
         $this->assign("tree_channel_en",$tree_channel_en);
         $this->assign("tree_category_id",$tree_category_id);
-        
         $this->display('detail');
     }
     
@@ -614,13 +615,6 @@ function show_banner($type){
         }
         $this->assign('otherArticle', $result);
         $this->assign('promote_article', $promoteArticle);
-        
-        
-        
-        
-        
-        
-        
         $string="select category_id,name,channel,parent from ai_article,ai_article_category where ai_article.category_id=ai_article_category.id and ai_article.id=".$id;
         $result=mysql_query($string);
         $result=mysql_fetch_array($result);
