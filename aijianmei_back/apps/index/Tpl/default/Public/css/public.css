@@ -729,7 +729,6 @@ button{
 		font-size: 13px;
 		margin:2px;
 		padding-left:20px;
-		border-radius:6px;
 	}
 	.each_video a{
 		cursor: pointer;
@@ -738,7 +737,6 @@ button{
 	.each_video:hover{
 		background: #21ace3;
 		color:white;
-		box-shadow: 0 0 8px #21ace3;
 	}
 	.each_video:hover a{
 		font-weight: 700;

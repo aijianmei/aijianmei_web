@@ -31,3 +31,4 @@ $(function(){
 	
 })
 
+// move('sure_button','../images/icon_result.png','-256px');
