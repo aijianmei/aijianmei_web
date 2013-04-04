@@ -373,19 +373,23 @@ margin-bottom: 20px;
 
 		}
 		.opt{
-			vertical-align: top;
+			float:left;
 			font-size: 14px;
 		}
 		.opt_length{
-			display: inline-block;
+			float: left;
 			width: 530px;
+			max-height: 100px
 		}
-			.select a{
-				display: inline-block;
-				color: rgb(33, 172, 227);
-				font-size: 13px;
-				cursor: pointer;
-			}
+		.select a {
+			color: #21aec3;
+			display: inline-block;
+			margin-right: 15px;
+			font-weight: bold;
+			width: 70px;
+			text-align: center;
+			cursor: pointer;
+		}
 			/*.select .pre{
 				background:rgb(33, 172, 227);
 				color:white;
@@ -399,12 +403,12 @@ margin-bottom: 20px;
 		/***** 视频列表 ****/
 		.vdos{
 			float:left;
-			width: 177px;
+			width: 178px;
 			margin: 0 15px 5px 0;
-			_width:160px;
+
 		}
 			.vdos .pic{
-				width: 177px;
+				width: 178px;
 				height: 100px;
 			}
 			.info{
