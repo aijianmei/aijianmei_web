@@ -155,6 +155,7 @@ function show_banner($type){
                 //print_r($logId);
                 if($logId) {
                     service('Passport')->loginLocal($logId['uid']);
+					service('Shop')->login($logId['uid']); // 同步登录商城
                 }else {
                     $data['email'] = $userInfo['email'];
                     $data['password'] = '';
@@ -169,7 +170,10 @@ function show_banner($type){
                     //print_r($data);
                     
                     $uid = M('user')->add($data);				
-                    service('Passport')->loginLocal($uid);					
+                    service('Passport')->loginLocal($uid);	
+					
+					// 同步注册商城
+					service('Shop')->register($data['uname'], $data['email'], $data['password']);				
                     
                     $other['uid'] = $uid;
                     $other['mediaID'] = $userInfo['mediaID'];
@@ -806,7 +810,7 @@ function show_banner($type){
         if (!$this->isValidEmail($_POST['email']))
             $this->error(L('email_format_error_retype'));
         if (!$this->isValidNickName($_POST['nickname']))
-            $this->error(L('username_format_error'));
+            //$this->error(L('username_format_error'));
         if (strlen($_POST['password']) < 6 || strlen($_POST['password']) > 16 || $_POST['password'] != $_POST['repassword'])
             $this->error(L('password_rule'));
         if (!$this->isEmailAvailable($_POST['email']))
@@ -830,6 +834,7 @@ function show_banner($type){
         $data['uid'] = $uid;
         M('user_attr')->add($data);
         service('Passport')->loginLocal($uid);
+		service('Shop')->register($data['uname'], $data['email'], $data['password']);
         
         redirect(U('index/Index/index'));
     }
