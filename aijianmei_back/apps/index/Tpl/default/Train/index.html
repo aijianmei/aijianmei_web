@@ -13,7 +13,11 @@
                             <li class="each_video all">{$c['name']}</li>
                                 <php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
                                 <li class="each_video">
+                                <php> if($child['id']!='53'){</php>
                                 <a href="/index.php?app=index&mod=Train&act={$action}&id={$child['id']}">{$child['name']}</a>
+                                <php> }else{</php>
+                                 <a href="/index.php?app=index&mod=Train&act=videoList&id={$child['id']}">{$child['name']}</a>
+                                <php> }</php>
                                 </li>
                                 <php>}</php>
                             <php>}</php>

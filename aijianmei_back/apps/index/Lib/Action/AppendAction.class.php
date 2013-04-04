@@ -102,7 +102,6 @@ class AppendAction extends Action {
             else $realCate[$c['parent']]['children'][] = $c;;
             $cate_id[] = $c['id'];
         }
-        
         $map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
         // 查询满足要求的总记录数
         $articleCount = M('article')->where(array('category_id'=>$id))->count();
