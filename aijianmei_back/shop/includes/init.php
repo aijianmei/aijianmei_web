@@ -152,7 +152,7 @@ if (is_spider())
 // 主站已登录
 session_start();
 
-if($_SESSION['user_id']>0) {
+if(isset($_SESSION['user_id']) && $_SESSION['user_id']>0) {
     if (!defined('INIT_NO_USERS')) {
         define('INIT_NO_USERS', true);
     }
