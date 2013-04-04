@@ -37,8 +37,8 @@ margin-right: 50px;
                             </li>
                             <php>}</php>
                             <php>foreach($c['children'] as $child) {</php>
-                            <li class="each_video">
-                                <a href="/index.php?app=index&mod=Nutri&act=articleList&id={$child['id']}">{$child['name']}</a>
+                            <li class="each_video" <php> if($_GET['id']==$child['id']) {</php>  style="background: #21ace3;color: white;box-shadow: 0 0 8px #21ace3;"<php>}</php>>
+                                <a href="/index.php?app=index&mod=Nutri&act=articleList&id={$child['id']}" <php> if($_GET['id']==$child['id']) {</php> style="color: white;"<php>}</php>>{$child['name']}</a>
                             </li>
                             <php>}</php>
                             <php>}</php>
