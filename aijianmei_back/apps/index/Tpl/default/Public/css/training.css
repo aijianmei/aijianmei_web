@@ -290,7 +290,7 @@ margin-bottom: 20px;
 			color: #0C84BD;
 		}
 			.rt_picture{
-				width: 170px;
+				width: 174px;
 				height: 96px;
 				border: 2px solid transparent;
 			}
@@ -398,16 +398,14 @@ margin-bottom: 20px;
 		}
 		/***** 视频列表 ****/
 		.vdos{
-			width: 173px;
-			display: inline-block;
+			float:left;
+			width: 177px;
 			margin: 0 15px 5px 0;
-
+			_width:160px;
 		}
 			.vdos .pic{
-				border-radius: 4px;
-				width: 173px;
+				width: 177px;
 				height: 100px;
-				background: #ccc;
 			}
 			.info{
 				height:15px;
@@ -426,7 +424,8 @@ margin-bottom: 20px;
 			.tr_classify .t_play_time{
 				background: url(../images/wm3.png) 0 -465px no-repeat;
 			}
-			.play_time,.t_play_time{
+			.t_play_time,.play_time{
+				float:left;
 				display: inline-block;
 				height: 16px;
 				padding-left: 27px;
@@ -434,8 +433,10 @@ margin-bottom: 20px;
 			}
 			.comment_time{
 				float:right;
+				display: inline-block;
+				height:16px;
 				padding-left: 20px;
-				background: url(../images/wm3.png) 0 -439px no-repeat;
+				background: url(../images/wm3.png) 0 -440px no-repeat;
 			}
 		/******** 文章列表 ********/
 			.arts{

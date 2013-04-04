@@ -387,7 +387,8 @@
 			.tr_classify .t_play_time{
 				background: url(../images/wm3.png) 0 -465px no-repeat;
 			}
-			.play_time,.t_play_time{
+			.t_play_time{
+				float:left;
 				display: inline-block;
 				height: 16px;
 				padding-left: 24px;
@@ -395,8 +396,10 @@
 			}
 			.comment_time{
 				float:right;
+				display: inline-block;
+				height:16px;
 				padding-left: 20px;
-				background: url(../images/wm3.png) 0 -439px no-repeat;
+				background: url(../images/wm3.png) 0 -440px no-repeat;
 			}	
 			
 	/*关于作者*/
