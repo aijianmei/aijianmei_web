@@ -19,9 +19,9 @@
 
                                 <php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
 
-                                    <li class="each_video">
+                                    <li class="each_video" <php> if($_GET['id']==$child['id']) {</php>  style="background: #21ace3;color: white;box-shadow: 0 0 8px #21ace3;"<php>}</php>>
 
-                                        <a href="/index.php?app=index&mod=Train&act={$action}&id={$child['id']}">{$child['name']}</a>
+                                        <a href="/index.php?app=index&mod=Train&act={$action}&id={$child['id']}" <php> if($_GET['id']==$child['id']) {</php> style="color: white;"<php>}</php>>{$child['name']}</a>
 
                                     </li>
 
@@ -99,7 +99,7 @@
                                         </li>
                                         <li class="info">
                                             <span class="play_time">播放:<span> {$v['click']}</span></span>
-                                            <span class="comment_time">评论: <span>0</span></span>
+                                            <span class="comment_time">评论: <span>{$v['recommons']}</span></span>
                                         </li>
                                     </ul>
                                    <php>}</php>
@@ -129,8 +129,9 @@
                                             <span>{$v['brief']}</span>
                                         </li>
                                         <li class="info">
+                                        
                                             <span class="play_time">播放:<span> {$v['click']}</span></span>
-                                            <span class="comment_time">评论: <span>0</span></span>
+                                            <span class="comment_time">评论: <span>{$v['recommons']}</span></span>
                                         </li>
                                     </ul>
                                   <php>}</php>
@@ -198,30 +199,32 @@
                                         </li>
                                         <li class="info">
                                             <span class="play_time">播放:<span> {$v['click']}</span></span>
-                                            <span class="comment_time">评论: <span>0</span></span>
+                                            <span class="comment_time">评论: <span>{$v['recommons']}</span></span>
                                         </li>
                                     </ul>
                             <php>}</php>
                                     
                     </div>
                     <div class="page clearfix">
-                        <!--<span class="concrete_choice">
-                            <a href="" class="prev">上一页</a>
-                            <a href="">1</a>
-                            <a href="" class="current_page">2</a>
-                            <a href="">3</a>
-                            <a href="" class="next">下一页</a>
+                        <span class="concrete_choice">
+                        <?php printf($pager['backstr'],'class="prev"');?>
+
+                            <?php printf($pager['thestr'],'class="current_page"');?>
+
+                            <?php printf($pager['nextstr'],'class="next"');?>
+
                         </span>
                         <span class="free_choice">
-                            <span>共100页</span>
+                            <span>共{$pager[page]}页</span>
                             <span class="concrete_page">
                                 到第
-                                <input type="text" value="2" />
+                                <input type="text" value="<?php echo $_GET['pg']?>" id="pagenums"/>
                                 页
                             </span>
-                            <span class="sure_button">确定</span>
+                            <input type="hidden" id="vid" value="<?php echo $_GET['id']?>">
+                            <span class="sure_button" onclick="returnPageUrl();">确定</span>
                             
-                        </span>-->
+                        </span>
                     </div>
                 </div>
             </div>
@@ -256,5 +259,12 @@
                 
             </div><!--right-->
     </div>
-    
+<script>
+function returnPageUrl(){
+    if($("#pagenums").val()>0&&$("#vid").val()>0){
+        window.location.href='index.php?app=index&mod=Train&act=videoList&id='+$("#vid").val()+'&pg='+$("#pagenums").val(); // 跳转到B目录
+    }
+}
+
+</script>
 <include file="../Public/footer" />

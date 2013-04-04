@@ -135,13 +135,11 @@ class TrainAction extends Action {
         $this->assign('cssFile', 'video');
         $this->assign('cssFile', 'training');
         $cate = M('article_category')->where(array('channel'=>'2', 'type'=>'1'))->findAll();
-        
         foreach($cate as $c) {
             if($c['parent']==NULL) $realCate[$c['id']] = $c;
             else $realCate[$c['parent']]['children'][] = $c;
             $cate_id[] = $c['id'];
         }
-
         $this->assign('categories', $realCate);
         $map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
         $articles = M('article')->where($map)->findAll();
@@ -150,17 +148,24 @@ class TrainAction extends Action {
         //get hotArticles
         $order = 'click';
         $hotArticles = D('Article')->getTrainArticles($order);
+        foreach($hotArticles as $key => $value){
+            $hotArticles[$key]['recommons']=D('Article')->getVideoCountRecommentsById($value['id']);
+        }
         $this->assign('hotArticles', $hotArticles);
         //get lastArticles		
         $order = 'create_time';
-        $hotArticles = D('Article')->getTrainArticles($order);
-        $this->assign('lastArticles', $hotArticles);
+        $lastArticles = D('Article')->getTrainArticles($order);
+        foreach($lastArticles as $key => $value){
+            $lastArticles[$key]['recommons']=D('Article')->getVideoCountRecommentsById($value['id']);
+        }
+        $this->assign('lastArticles', lastArticles);
         //最热视频
         $hot_video = D('Article')->getTrainVideo('click', $id);
         foreach($hot_video as $k=>$v) {
             $hotvideos[$k] = $v;
             $data = json_decode($this->getVideoData($v['link']));
-            $hotvideos[$k]['logo'] = $data->data[0]->logo;	
+            $hotvideos[$k]['logo'] = $data->data[0]->logo;
+            $hotvideos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);            
         }
         //print_r($videos);
         $this->assign('hot_video', $hotvideos);
@@ -170,16 +175,32 @@ class TrainAction extends Action {
         foreach($new_video as $k=>$v) {
             $newvideos[$k] = $v;
             $data = json_decode($this->getVideoData($v['link']));
-            $newvideos[$k]['logo'] = $data->data[0]->logo;	
+            $newvideos[$k]['logo'] = $data->data[0]->logo;
+            $newvideos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);            
         }
         $this->assign('new_video', $newvideos);
         
         // all video
-        $videos = D('Article')->getTrainVideo('id', $id);
+        
+        $pagenums=8;
+        $page = (int) $_GET['pg']?(int) $_GET['pg']:0; 
+        //$videos = D('Article')->getTrainVideo('id', $id);
+        $sql = "select * from ai_video where category_id=".$id." order by id desc";
+        $videosCountArr = M('')->query($sql);
+        $counnums=count($videosCountArr);
+        $pager = api('Pager');
+        $pager->setCounts($counnums);
+        $pager->setList($pagenums);
+        $pager->makePage();
+        $from = ($pager->pg -1) * $pager->countlist;		
+        $pagerArray = (array)$pager;
+        $this->assign('pager', $pagerArray);
+        $videos = M('')->query("select * from ai_video where category_id=".$id." order by id desc limit $from,$pager->countlist");
         foreach($videos as $k=>$v) {
             $videos[$k] = $v;
             $data = json_decode($this->getVideoData($v['link']));
-            $videos[$k]['logo'] = $data->data[0]->logo;	
+            $videos[$k]['logo'] = $data->data[0]->logo;
+            $videos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);            
         }
         $this->assign('videos', $videos);
         $this->show_banner();//显示banner
@@ -214,6 +235,7 @@ class TrainAction extends Action {
         $pagerArray = (array)$pager;
         #$pagerArray['thestr']=printf($pagerArray['thestr'],$str);
         $this->assign('pager', $pagerArray);
+        $cRecomnums=$cRecomnums?$cRecomnums:0;
         $this->assign('cRecomnums', $cRecomnums);
         $recommecntListSql="select a.*,b.uname as username from ai_video_comments a left join ai_user b on a.uid=b.uid where a.pid=$id order by a.create_time desc limit $pnum , $nums";
         $RecommentsList=M('')->query($recommecntListSql);

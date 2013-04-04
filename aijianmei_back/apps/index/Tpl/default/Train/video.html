@@ -3,22 +3,17 @@
             <div>
                 <h3 class="title_main">{$video['title']}</h3>
                 <div class="video_content clearfix">
-                    <span class="bn_right"></span>
-                    <div class="v_area">
-                        
+                    <div class="v_area">                        
                         <embed src="{$video['link']}" quality="high" width="634" height="450" align="middle" allownetworking="all" allowscriptaccess="always" type="application/x-shockwave-flash" allowfullscreen="true">
                     </div>
                     <div class="v_re">
-                        <span class="bn_left"></span>
-                        <ul class="v_nav clearfix">
-                            <li class="tabclass">视频信息</li>
-                        </ul>
+                        <h3 class="tabclass">视频信息</h3>
                         <div class="tab block">
                             <div class="v_infro1">
-                                <span>分类:<span>{$video['title']}</span></span>
+                                <span>视频名字:<span>{$video['title']}</span></span>
                                 <p>发布时间:<span>{$video['create_time']}</span></p>
                                 <div class="v_infro2">
-                                    <h3>视频简介:</h3>
+                                    <h3>视频信息:</h3>
                                     {$video['brief']}
                                 </div>
                             </div>
@@ -33,23 +28,7 @@
                                 <a class="sprite_9"><span class="praise">{$video['unlike']}</span></a>
                                 <span class="relay">转发到</span>
                                 <a class="sprite_1"></a>
-                                <a class="sprite_2"></a>
-                                <a class="sprite_3"></a>
-                                <a class="sprite_4"></a>
-                                <a class="sprite_5"></a>
-                                <a class="sprite_6"></a>
-                                <a class="collect">收藏</a>
-                                <span class="read_time">
-                                    <a style="height:16px;width:56px;line-height:16px;background:0;">
-                                        <span>阅读</span>
-                                        <span>{$video['click']}</span>
-                                          <!--<span class="triangle"></span>-->
-                                    </a>
-                                    <div class="page_times" style="postion:absolute;display:none;right:0px;width:50px; background:white;line-height:20px;border:1px solid #ccc;">
-                                        <p>页面1</p>
-                                        <p>页面1</p>	
-                                    </div>
-                                </span>						
+                                <a class="collect">收藏</a>				
                             </div>
                             <div class="border_comment">
                                 <span class="word_num">0/300</span>
@@ -61,19 +40,18 @@
                                 <a class="comment" onclick="addVideoCommont();">发表评论</a>
                             </div>
                             <div class="check_comment">
-                                <a class="comment_1">全部评论(<?php echo $CRecommentsNums;?>)</a>
+                                <a class="comment_1">全部评论(<?php echo $cRecomnums;?>)</a>
                             </div>
                             <div class="cm_content tab_2">
                                 <div class="cm_top">
                                     <span class="page_1">
                                         <span class="lay_page">
-                                            <?php printf($pager['thestr'],'class="choice_page"');?>
+                                        <?php printf($pager['thestr'],'class="choice_page"');?>
                                         </span>
                                         <?php printf($pager['backstr'],'class="pre_page"');?>
-                                        <?php printf($pager['backstr'],'class="next_page"');?>
+                                        <?php printf($pager['nextstr'],'class="next_page"');?>
                                     </span>
                                     <span>第<?php echo $_GET['pg'];?>页</span>
-                                    
                                 </div>
                                 <div class="cm_bottom" id="recomment_fdiv">
                                     <h5 class="title_5" >推荐精华</h5>
@@ -89,82 +67,27 @@
                                                     <a>回复<span>(0)</span></a>
                                                 </span>
                                                 <span><?php echo $v['create_time'];?></span>
-                                                <span>来自<em></em></span>
+                                                <span>来自<em>爱健美</em></span>
                                             </p>
                                         </div>
                                     </div>
                                     <php>}</php>
                                 </div>	
                             </div>
-                            <div class="cm_content tab_1">
-                                <div class="cm_top">
-                                    <span>第0页</span>  <span>第0条</span>
-                                    <span class="page_1">
-                                        <span class="lay_page">
-                                            <a class="choice_page">1</a>
-                                            <a>211</a>
-                                            <a>3</a>
-                                            <a>4</a>
-                                            <a>5</a>
-                                            {$pager->thestr}
-                                        </span>
-                                        <a class="pre_page">上一页</a>
-                                        <a class="next_page">下一页</a>
-                                    </span>
-                                </div>
-                                <div class="cm_bottom">
-                                    <h5 class="title_5">全部推荐</h5>
-                                    <div class="target">
-                                        <div class="target_pic">
-                                            <img src="" alt="no" />
-                                            <span class="care">关注</span>
-                                        </div>
-                                        <a class="name">huifei</a>
-                                        <p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
-                                        <p class="bottom_ms">
-                                            <span>22个小时前</span>
-                                            <span>来自<em></em></span>
-                                            <span class="to">
-                                                <a>转发<span>(0)</span></a>
-                                                <a>回复<span>(0)</span></a>
-                                            </span>	
-                                        </p>
-                                    </div>
-                                    <div class="target">
-                                        <div class="target_pic">
-                                            <img src="" alt="no" />
-                                            <span class="care">关注</span>
-                                        </div>
-                                        <a class="name">huifei</a>
-                                        <p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
-                                        <p class="bottom_ms">
-                                            <span>22个小时前</span>
-                                            <span>来自<em></em></span>
-                                            <span class="to">
-                                                <a>转发<span>(0)</span></a>
-                                                <a>回复<span>(0)</span></a>
-                                            </span>	
-                                        </p>
-                                    </div>
-                                </div>
-                        </div>
                     </div>
                     <div class="bottom_part_right">
-                        <div class="re">
-                            <h4 class="show_re">相关视频</h4>
-                            <ul class="cream">
+                        <div class="sider_m">
+                            <h4 class="sider_t">精华推荐</h4>
                             <?php foreach($otherVideo as $v) { ?>
-                                <li class="sp clearfix">
-                                    <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}"><img class="re_pic" src="{$v['logo']}" alt="no" /></a>
-                                    <div class="re_ct">
-                                        <p>视频名称:<span>{$v['title']}</span></p>
-                                        <p>简介:<span>{$video['brief']}</span></p>
+                                <div class="recommend clearfix">
+                                    <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}" class="recommend_pic"><img width="90" height="60px" src="{$v['logo']}" alt="no" /></a>
+                                    <div class="intro">
+                                        <h3><a>{$v['title']}</a></h3>
+                                        <span class="t_play_time">点击:<span> </span>{$p['reader_count']}</span><span class="comment_time">评论: <span>{$p['CommNumber']}</span></span>
                                     </div>
-                                </li>
+                                </div>
                                 <?php }?>
-                            </ul>
                         </div>
-                        <a><img src="../Public/images/v/01.png" class="adv"></a>
                     </div>
             </div>
         </div>

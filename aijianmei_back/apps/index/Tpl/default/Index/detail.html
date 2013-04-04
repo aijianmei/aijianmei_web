@@ -4,7 +4,7 @@
             <div class="content_left clearfix">
                 <span>
                 <span>您所在的位置:</span>
-                <a href="/index.php?app=index">爱健�?/a>->
+                <a href="/index.php?app=index">爱健美</a>->
                 <a href="/index.php?app=index&mod={$tree_channel_en}">{$first}</a>->
                 <a href="/index.php?app=index&mod={$tree_channel_en}&act=articleList&id={$tree_parent}">{$second}</a>->
                 <a href="/index.php?app=index&mod={$tree_channel_en}&act=articleList&id={$tree_category_id}">{$third}</a>->
@@ -18,7 +18,7 @@
                     <h2 class="title_2">{$article['title']}</h2>
                     <div class="web_expend_1">
                         <a class="sprite_7"><?php echo $commentCounts;?></a>
-                        <span class="for_sprite_7">评论�?/span>
+                        <span class="for_sprite_7">评论数</span>
                         <span class="prompt">{$article['author']}</span>
                         <span>{$article['source']}</span>			
                         <span>我要分享</span>
@@ -41,9 +41,9 @@
                     <div class="web_expend_2">
                         <span class="read_time">
                         </span>
-                        <a class="sprite_8" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登�?);return false;"<php>}</php>><span class="praise">{$article['like']}</span></a>
-                        <a class="sprite_9" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登�?);return false;"<php>}</php>><span class="praise">{$article['unlike']}</span></a>
-                        <span class="relay">转发�?/span>
+                        <a class="sprite_8" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$article['like']}</span></a>
+                        <a class="sprite_9" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$article['unlike']}</span></a>
+                        <span class="relay">转发到</span>
                         <include file="../Public/share" />
 
                         <a class="collect">收藏</a>
@@ -60,8 +60,12 @@
                         <span><a href="{:U('index/Index/selectRegister')}">注册</a></span>
                         <php>}</php>
                         
-                        <div class="textarea"><textarea id="comment" class="comment_inp" name="comment" >有什么感想，来说说吧</textarea></div>
-                        <a class="comment" id="<php>if(!getMid()) echo 'not_login';</php>" href="javascript:void(0)" onclick="comments(comment.value, {$article['id']}, 'Article')" aid="{$article['id']}">发表评论</a>
+                        <div class="textarea">
+                        <textarea class="comment_inp" name="comment" id="commentbox">有什么感想，来说说吧</textarea>
+                        <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
+                        <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
+                        </div>
+                        <a class="comment" id="<php>if(!getMid()) echo 'not_login';</php>" href="javascript:void(0)" onclick="addDetaiCommont();" >发表评论</a>
                     </div>
                     <div class="check_comment">
                         <a class="comment_1">全部评论(<?php echo $commentCounts;?>)</a>
@@ -75,14 +79,14 @@
                                 <?php printf($pager['backstr'],'class="next_page"');?>
                             </span>		
                             <span class="free_choice">
-                                <span>共{$pager['page']}�?/span>
-                                <span class="concrete_page">�?input type="text" />�?/span>
+                                <span>共{$pager['page']}页</span>
+                                <span class="concrete_page">到<input type="text" />页</span>
                                 <span class="sure_button">确定</span>
                             </span>			
                         </div>
                         <php> }</php>
-                        <div class="cm_bottom">
-                            <php> if(empty($comments)){ </php><p class="empty_content">当前没有人评论哦~</p><php>}</php>
+                        <div class="cm_bottom" id="recomment_fdiv">
+                            <php> if(empty($comments)){ </php><p class="empty_content" id="empty_content">当前没有人评论哦~</p><php>}</php>
                             <php>foreach($comments as $k=>$c) {</php>
                             <div class="target">
                                 <div class="target_pic">
@@ -95,10 +99,7 @@
                                 </div>
                                 <p class="bottom_ms">
                                     <span>
-
-                                        <php>echo date('Y-m-d H:i:s', $c['content']['create_time'])</php>
-
-
+                                        <php>echo date('Y-m-d H:i:s', $c['create_time'])</php>
                                     </span>
                                     <span>来自<em>爱健美网</em></span>
                                     
@@ -114,11 +115,11 @@
             <div class="content_right">
                 <div>
                     <div class="sider_m">
-                        <h4 class="sider_t">关于作�?</h4>
+                        <h4 class="sider_t">关于作者</h4>
                         <div>
                             <div class="author_info">
                                 <iframe width="100%" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=100&skin=1&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=2692984661&verifier=3c08c88d&dpc=1"></iframe>
-                                <p class="author_label">推广健身文化，传播健康理�?/p>
+                                <p class="author_label">推广健身文化，传播健康理念</p>
                             </div>
                             <div class="author_wb">
                                 <wb:follow-button uid="2692984661" type="red_4" >关注</wb:follow-button>
@@ -126,8 +127,8 @@
                             <div class="clearfix">
                                 <img src="../Public/images/weima.jpg" class="two_code">
                                 <div class="ms_code">
-                                    <p><span></span>扫描微信二维�?/p>
-                                    <p>随时获取新资�?/p>
+                                    <p><span></span>扫描微信二维码</p>
+                                    <p>随时获取新资讯</p>
                                 </div>
                             </div>
                         </div>
@@ -145,12 +146,12 @@
                         <h4 class="sider_t">精华推荐</h4>
                         <php>foreach($promote_article as $p) {</php>
                         <div class="recommend">							
-                            <a href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}" class="recommend_pic"><img src="/public/images/article/{$p['img']}" width="90" height="60" alt="no" border="0" /></a><div class="intro"><p><a href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}">{$p['title']}</a></p><span class="t_play_time">点击:<span>{$a['reader_count']}</span></span><span class="comment_time">评论: <span>{$a['CommNumber']}</span></span></div>
+                            <a href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}" class="recommend_pic"><img src="/public/images/article/{$p['img']}" width="90" height="60" alt="no" border="0" /></a><div class="intro"><h3><a href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}">{$p['title']}</a></h3><span class="t_play_time">点击:<span> </span>{$p['reader_count']}</span><span class="comment_time">评论: <span>{$p['CommNumber']}</span></span></div>
                         </div>
                         <php>}</php>
                         <!-- <div class="recommend">
                             <a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
-                            <p class="intro">新闻百科：为�?��大陆同胞赴美不用、�?�?/p>
+                            <p class="intro">新闻百科：为什么大陆同胞赴美不用、、、</p>
                         </div> -->
                     </div>
                 </div>
@@ -167,10 +168,10 @@
             dataType:"json",
             data: "act=addDetaiCommont&data=ford&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&content="+$("#commentbox").val()+"&ptype=1",
             success: function(data){
-            alert("添加评论成功�?);
+            alert("添加评论成功！");
              var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">关注</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.connect+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div';   
              $("#recomment_fdiv").append(innerHtml);
-             
+             $("#empty_content").html('');
             }
             });
         }

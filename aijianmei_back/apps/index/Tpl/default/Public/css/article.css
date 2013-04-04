@@ -376,9 +376,6 @@
 			.recommend img{
 				padding-right:5px;
 			}
-			.recommend{
-				padding:10px;
-			}
 			.recommend .intro{
 				float:left;
 				width:166px;
@@ -393,8 +390,8 @@
 			.play_time,.t_play_time{
 				display: inline-block;
 				height: 16px;
-				padding-left: 27px;
-				background: url(../images/wm3.png) 0 -416px no-repeat;
+				padding-left: 24px;
+				background:  url("../images/wm3.png") no-repeat scroll 0 -463px transparent;
 			}
 			.comment_time{
 				float:right;

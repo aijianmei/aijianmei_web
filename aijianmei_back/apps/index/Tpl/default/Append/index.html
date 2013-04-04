@@ -10,13 +10,13 @@
                         <h3 class="video_all">全部</h3>
                         <span class="border_line"></span>
                         <ul>
-                            <php>foreach($parent_categories as $c) {</php>
-                                <li class="each_video all">
-                                    {$c['name']}
+                            <php>foreach($categories as $c) { $action=$c['type']=='1'?'articleList':'videoList';</php>
+                                <li class="each_video">
+                                    <a href="/index.php?app=index&mod=Nutri&act={$action}&id={$c['id']}" >{$c['name']}</a>
                                 </li>
                                 <php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
-                                    <li class="each_video">
-                                        <a href="/index.php?app=index&mod=Nutri&act={$action}&id={$child['id']}">{$child['name']}</a>
+                                    <li class="each_video" >
+                                        <a href="/index.php?app=index&mod=Nutri&act={$action}&id={$child['id']}" >{$child['name']}</a>
                                     </li>
                                 <php>}</php>
                             <php>}</php>
@@ -26,85 +26,59 @@
                 <span class="border_line"></span>
             </div>
 
-
             <div class="right_sider">
-
-				<div class="part_top clearfix">
-					<div class="lay_top clearfix">
-						<h1 class="public_title">最畅销的保健品</h1>
-						<div class="part_content">
-						<div class="tr_top clearfix">
-						<a href="/index.php?app=index&mod=Index&act=articleDetail&id=56" class="store.html"><img src="../Public/images/add/Glutamine.jpg" alt="no" class="supple_pic" /></a>
-							<div class="lay_detail">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=56
-						"  class="detail" data-original-title="内容">蛋白质的种类和益处的介绍
-						</a>
-								<div class="title_tip"><div class="angle"></div></div>
-								<p class="read_content">蛋白质对于保持最佳健康状态和体脂水平来说是至关重要的。对于运动员或者喜欢运动的人来说，提高蛋白质摄取量有助于身体的快速恢复、保养或者肌肉块的增加。</p>
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id=56
-								" class="purchase">点击购买</a>
-							</div>
-						</div>
-						<ul class="clearfix">
-							<li class="classify">
-								<a href="/index.php?app=index&mod=Append&act=articleList&id=48" class="lay_cf show_enter">
-									<span class="enter_icon"></span>
-										<img src="../Public/images/add/add01_1.jpg" alt="" class="best" />
-										<p class="best_classify">辅助品知识</p>
-									
-								</a>
-							</li>
-							<li class="classify">
-								<a href="/index.php?app=index&mod=Append&act=articleList&id=49" class="lay_cf show_enter">
-									<span class="enter_icon"></span>
-										<img src="../Public/images/add/add02.jpg" alt="" class="best" />
-										<p class="best_classify">减脂辅助品</p>
-
-								</a>
-							</li>
-							<li class="classify last_classify">
-								<a href="/index.php?app=index&mod=Append&act=articleList&id=50" class="lay_cf show_enter">
-									<span class="enter_icon"></span>
-										<img src="../Public/images/add/add03.jpg" alt="" class="best" />
-										<p class="best_classify">增肌辅助品</p>
-								</a>
-							</li>
-						</ul>
-					</div>
-					</div>
-				</div>
-
-				<div class="part_top clearfix">
-					<span class="corner_left"></span>
-					<div class="lay_top clearfix">
-						<h1 class="public_title">最佳补充品文章</h1>
-						<div class="new_video">
-						<ul class="lay_new_video clearfix">
-						<php>foreach($hotArticles as $a) {</php>
-							<li class="tr_classify">
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter">
-									<span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-								<a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
-								<p class="summary">{$a['brief']}
-								</p>
-								<span class="t_play_time">点击:<span>{$a['recomnums']}</span></span>
-								<span class="comment_time">评论: <span>{$a['recomnums']}</span></span>
-							</li>
-							<php>}</php>
-						
-						</ul>
-						
-					</div>
-				</div>
-				</div>
+                <div class="part_top clearfix">
+                    <div class="lay_top clearfix">
+                        <h1 class="public_title">最精彩的营养文章</h1>
+                        <div class="part_content">
+                            <div class="tr_top clearfix">
+                            <a href="/index.php?app=index&mod=Index&act=articleDetail&id=41
+                            " class="store.html"><img src="../Public/images/nutri/01_1.jpg" alt="no" class="supple_pic" /></a>
+                            <div class="lay_detail">
+                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id=41
+                                    " class="detail"  data-original-title="内容">初学者运动前的营养指导</a>
+                                <div class="title_tip"><div class="angle"></div></div>
+                                <p class="read_content">一个健康好看的身型不是从你进入健身房那一刻才开始形成的。在运动前摄取合适的营养可以帮助你最大化地获得效果。下面我会教你如何在健身前吸收营养，让你甩掉脂肪和增加肌肉。</p>
+                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id=41
+                                    " class="read_art">点击阅读</a>
+                            </div>
+                        </div>
+                        <ul class="clearfix">
+                            <li class="classify">
+                                <a href="/index.php?app=index&mod=Nutri&act=articleList&id=29" class="lay_cf show_enter">
+                                <span class="enter_icon"></span>	
+                                        <img src="../Public/images/nutri/nutri01.jpg" width="220" height="214px" alt="" class="best"/>
+                                        <p class="best_classify">增肌</p>									
+                                </a>
+                            </li>
+                            <li class="classify">
+                                <a href="/index.php?app=index&mod=Nutri&act=articleList&id=28" class="lay_cf show_enter">
+                                    <span class="enter_icon"></span>
+                                        <img src="../Public/images/nutri/nutri02.jpg" width="220" height="214px" alt="" class="best" />
+                                        <p class="best_classify">减脂</p>
+                                        <p class="price"></p>									
+                                </a>
+                            </li>
+                            <li class="classify last_classify">
+                                <a href="/index.php?app=index&mod=Nutri&act=articleList&id=31" class="lay_cf show_enter">
+                                    <span class="enter_icon"></span>
+                                        <img src="../Public/images/nutri/nutri03.jpg" width="220" height="214px" alt="" class="best" />
+                                        <p class="best_classify">一般饮食习惯</p>
+                                        <p class="price"></p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
 
                 <div class="part_top clearfix">
                     <span class="corner_left"></span>
                     <div class="lay_top clearfix">
-                        <h1 class="public_title">最近补充品文章</h1>
+                        <h1 class="public_title">最佳营养文章</h1>
                         <div class="new_video">
                         <ul class="lay_new_video clearfix">
-                        <php>foreach($lastArticles as $a) {</php>
+                        <php>foreach($hotArticles as $a) {</php>
                             <li class="tr_classify">
                                 <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
                                 <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
@@ -113,30 +87,52 @@
                                 <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
                                 <span class="comment_time">评论: <span>{$a['recomnums']}</span></span>
                             </li>
-                            <php>}</php>
+                        <php>}</php>
                         </ul>
-                        
                     </div>
                     </div>
                 </div>
 
                 <div class="part_top clearfix">
+                    <span class="corner_left"></span>
                     <div class="lay_top clearfix">
-                    <h1 class="public_title">目录</h1>
+                        <h1 class="public_title">最近营养文章</h1>
+                        <div class="new_video">
+                        <ul class="lay_new_video clearfix">
+                        <php>foreach($lastArticles as $a) {</php>
+                            <li class="tr_classify">
+                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter">
+                                    <span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+                                <p class="summary">{$a['brief']}
+                                </p>
+                                <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
+                                <span class="comment_time">评论: <span>{$a['recomnums']}</span></span>
+                            </li>
+                        <php>}</php>
+
+                        </ul>
+                        </div>						
+                    </div>
+                </div>
+
+                <div class="part_top clearfix">
+                    <div class="lay_top clearfix">
+                        <h1 class="public_title">目录</h1>
                         <ul class="position_nav clearfix">
                             <li class="nav_cf bg_1">
-                                <p class="title_hint">辅助品知识</p>
-                                <ul class="nav_detail">
-                                    <!--<li><a>心</a></li>
-                                    <li><a>暖/降温</a></li>
+                                <p class="title_hint">增肌</p>
+                                <!--<ul class="nav_detail">
+                                    <li><a>增肌</a></li>
+                                    <li><a>暖/减脂</a></li>
                                     <li><a>主体类型</a></li>
                                     <li><a>伸展</a></li>
-                                    <li><a>重复与组数</a></li>-->
-                                </ul>
-                               <a href="index.php?app=index&mod=Append&act=articleList&id=48"><i class="bg_opacity"></i></a>
+                                    <li><a>重复与组数</a></li>
+                                </ul>-->
+                                <a href="index.php?app=index&mod=Nutri&act=articleList&id=29"><i class="bg_opacity"></i></a>
                             </li>
                             <li class="nav_cf bg_2">
-                                <p class="title_hint">减脂辅助品</p>
+                                <p class="title_hint">减脂</p>
                                 <ul class="nav_detail">
                                     <!--<li><a>心</a></li>
                                     <li><a>暖/降温</a></li>
@@ -144,10 +140,10 @@
                                     <li><a>伸展</a></li>
                                     <li><a>重复与组数</a></li>-->
                                 </ul>
-                                <a href="index.php?app=index&mod=Append&act=articleList&id=49"><i class="bg_opacity"></i></a>
+                                <a href="index.php?app=index&mod=Nutri&act=articleList&id=28"><i class="bg_opacity"></i></a>
                             </li>
                             <li class="nav_cf bg_3">
-                                <p class="title_hint">增肌辅助品</p>
+                                <p class="title_hint">一般饮食知识</p>
                                 <ul class="nav_detail">
                                     <!--<li><a>心</a></li>
                                     <li><a>暖/降温</a></li>
@@ -155,7 +151,7 @@
                                     <li><a>伸展</a></li>
                                     <li><a>重复与组数</a></li>-->
                                 </ul>
-                                <a href="index.php?app=index&mod=Append&act=articleList&id=50"><i class="bg_opacity"></i></a>
+                                <a href="index.php?app=index&mod=Nutri&act=articleList&id=31"><i class="bg_opacity"></i></a>
                             </li>
                         </ul>
                     </div>

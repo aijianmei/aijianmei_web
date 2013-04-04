@@ -139,6 +139,7 @@ if (is_spider())
              $user = & init_users();
         }
     }
+	
     $_SESSION = array();
     $_SESSION['user_id']     = 0;
     $_SESSION['user_name']   = '';
@@ -147,10 +148,23 @@ if (is_spider())
     $_SESSION['discount']    = 1.00;
 }
 
+
+// 主站已登录
+session_start();
+
+if(isset($_SESSION['user_id']) && $_SESSION['user_id']>0) {
+    if (!defined('INIT_NO_USERS')) {
+        define('INIT_NO_USERS', true);
+    }
+
+}
+
+
 if (!defined('INIT_NO_USERS'))
 {
     /* 初始化session */
     include(ROOT_PATH . 'includes/cls_session.php');
+	
 
     $sess = new cls_session($db, $ecs->table('sessions'), $ecs->table('sessions_data'));
 
@@ -200,6 +214,7 @@ if (!defined('INIT_NO_SMARTY'))
 
 if (!defined('INIT_NO_USERS'))
 {
+	
     /* 会员信息 */
     $user =& init_users();
 
