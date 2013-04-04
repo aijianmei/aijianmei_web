@@ -157,6 +157,26 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_id']>0) {
         define('INIT_NO_USERS', true);
     }
 
+
+    /* 初始化session */
+    include(ROOT_PATH . 'includes/cls_session.php');
+    
+
+    $sess = new cls_session($db, $ecs->table('sessions'), $ecs->table('sessions_data'));
+
+    define('SESS_ID', $sess->get_session_id());
+
+    $GLOBALS['_SESSION']['admin_id'] = 0;
+    $GLOBALS['_SESSION']['user_id']  = $_SESSION['user_id'];
+    $GLOBALS['_SESSION']['user_name']= $_SESSION['user_name'];
+    $GLOBALS['_SESSION']['user_rank']= 0;
+    $GLOBALS['_SESSION']['discount'] = 0;
+    $GLOBALS['_SESSION']['email']   = '';
+
+    $sess->update_session();
+
+    $user = & init_users();
+
 }
 
 
