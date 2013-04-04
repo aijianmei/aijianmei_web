@@ -135,13 +135,11 @@ class TrainAction extends Action {
         $this->assign('cssFile', 'video');
         $this->assign('cssFile', 'training');
         $cate = M('article_category')->where(array('channel'=>'2', 'type'=>'1'))->findAll();
-        
         foreach($cate as $c) {
             if($c['parent']==NULL) $realCate[$c['id']] = $c;
             else $realCate[$c['parent']]['children'][] = $c;
             $cate_id[] = $c['id'];
         }
-
         $this->assign('categories', $realCate);
         $map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
         $articles = M('article')->where($map)->findAll();
@@ -183,7 +181,21 @@ class TrainAction extends Action {
         $this->assign('new_video', $newvideos);
         
         // all video
-        $videos = D('Article')->getTrainVideo('id', $id);
+        
+        $pagenums=8;
+        $page = (int) $_GET['pg']?(int) $_GET['pg']:0; 
+        //$videos = D('Article')->getTrainVideo('id', $id);
+        $sql = "select * from ai_video where category_id=".$id." order by id desc";
+        $videosCountArr = M('')->query($sql);
+        $counnums=count($videosCountArr);
+        $pager = api('Pager');
+        $pager->setCounts($counnums);
+        $pager->setList($pagenums);
+        $pager->makePage();
+        $from = ($pager->pg -1) * $pager->countlist;		
+        $pagerArray = (array)$pager;
+        $this->assign('pager', $pagerArray);
+        $videos = M('')->query("select * from ai_video where category_id=".$id." order by id desc limit $from,$pager->countlist");
         foreach($videos as $k=>$v) {
             $videos[$k] = $v;
             $data = json_decode($this->getVideoData($v['link']));
