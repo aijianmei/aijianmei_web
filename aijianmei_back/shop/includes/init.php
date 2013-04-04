@@ -149,6 +149,17 @@ if (is_spider())
 }
 
 
+// 主站已登录
+session_start();
+
+if($_SESSION['user_id']>0) {
+    if (!defined('INIT_NO_USERS')) {
+        define('INIT_NO_USERS', true);
+    }
+
+}
+
+
 if (!defined('INIT_NO_USERS'))
 {
     /* 初始化session */
