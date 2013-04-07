@@ -99,6 +99,7 @@ class View extends Think
      */
     public function display($templateFile='',$charset='',$contentType='text/html')
     {
+        $this->assign('_buttomTagInfo',unserialize(include_once("buttomTagInfo.php")));
         $this->fetch($templateFile,$charset,$contentType,true);
     }
 
@@ -163,9 +164,9 @@ class View extends Think
      */
     public function fetch($templateFile='',$charset='',$contentType='text/html',$display=false)
     {
-		//注入全局变量ts
-		global	$ts;
-		$this->tVar['ts'] = $ts;
+        //注入全局变量ts
+        global	$ts;
+        $this->tVar['ts'] = $ts;
         $GLOBALS['_viewStartTime'] = microtime(TRUE);
         if(null===$templateFile)
             // 使用null参数作为模版名直接返回不做任何输出
@@ -177,21 +178,21 @@ class View extends Think
         //页面缓存
         ob_start();
         ob_implicit_flush(0);
-		//如果在风格包中存在相关的模板包.则使用风格包中模板.
-		if(file_exists(THEME_TEMPLATE_PATH.'/'.MODULE_NAME.'/'.$templateFile.C('TMPL_TEMPLATE_SUFFIX'))){
-			//当前模版路径
-			C('TEMPLATE_PATH', THEME_TEMPLATE_PATH);
-			//项目模板目录
-			C('APP_TMPL_PATH', THEME_URL.'/apps/'.APP_NAME.'/');
-			//项目公共文件目录
-			C('APP_PUBLIC_PATH', C('APP_TMPL_PATH').'Public');
+        //如果在风格包中存在相关的模板包.则使用风格包中模板.
+        if(file_exists(THEME_TEMPLATE_PATH.'/'.MODULE_NAME.'/'.$templateFile.C('TMPL_TEMPLATE_SUFFIX'))){
+            //当前模版路径
+            C('TEMPLATE_PATH', THEME_TEMPLATE_PATH);
+            //项目模板目录
+            C('APP_TMPL_PATH', THEME_URL.'/apps/'.APP_NAME.'/');
+            //项目公共文件目录
+            C('APP_PUBLIC_PATH', C('APP_TMPL_PATH').'Public');
 
-			$templateFile	=	THEME_TEMPLATE_PATH.'/'.MODULE_NAME.'/'.$templateFile.C('TMPL_TEMPLATE_SUFFIX');
-			C('TMPL_FILE_NAME', C('TEMPLATE_PATH').'/'.MODULE_NAME.'/'.ACTION_NAME.C('TMPL_TEMPLATE_SUFFIX'));
-		}else{
-		    // 自动定位模板文件
+            $templateFile	=	THEME_TEMPLATE_PATH.'/'.MODULE_NAME.'/'.$templateFile.C('TMPL_TEMPLATE_SUFFIX');
+            C('TMPL_FILE_NAME', C('TEMPLATE_PATH').'/'.MODULE_NAME.'/'.ACTION_NAME.C('TMPL_TEMPLATE_SUFFIX'));
+        }else{
+            // 自动定位模板文件
             $templateFile   = $this->parseTemplateFile($templateFile);
-		}
+        }
 
         $engine  = strtolower(C('TMPL_ENGINE_TYPE'));
         if('php'==$engine) {
@@ -333,8 +334,8 @@ class View extends Think
             '__URL__'		=>	__URL__,        // 当前模块地址
             '__ACTION__'	=>	__ACTION__,     // 当前操作地址
             '__SELF__'		=>	__SELF__,       // 当前页面地址
-			'__THEME__'		=>	__THEME__,		// 主题页面地址
-			'__UPLOAD__'	=>	__UPLOAD__,		// 上传文件地址
+            '__THEME__'		=>	__THEME__,		// 主题页面地址
+            '__UPLOAD__'	=>	__UPLOAD__,		// 上传文件地址
         );
         if(C('TOKEN_ON')) {
             if(strpos($content,'{__TOKEN__}')) {
@@ -389,19 +390,19 @@ class View extends Think
      */
     private function parseTemplateFile($templateFile) {
 
-		//模版绝对路径正确，直接输出
-		if(file_exists($templateFile)){
-			 return $templateFile;
-		}
+        //模版绝对路径正确，直接输出
+        if(file_exists($templateFile)){
+             return $templateFile;
+        }
 
-		if(''==$templateFile) {
+        if(''==$templateFile) {
             // 如果模板文件名为空 按照默认规则定位
             $templateFile = C('TMPL_FILE_NAME');
-		//2009-06-02修改
+        //2009-06-02修改
         }elseif(strpos($templateFile,'&')){
             // 引入其它模块的操作模板
             $templateFile   =   str_replace('&','/',$templateFile).C('TMPL_TEMPLATE_SUFFIX');
-		//修改结束
+        //修改结束
         }elseif(strpos($templateFile,'@')){
             // 引入其它主题的操作模板 必须带上模块名称 例如 blue@User:add
             $templateFile   =   TMPL_PATH.str_replace(array('@',':'),'/',$templateFile).C('TMPL_TEMPLATE_SUFFIX');

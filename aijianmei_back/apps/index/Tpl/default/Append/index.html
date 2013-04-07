@@ -10,10 +10,9 @@
                         <h3 class="video_all">全部</h3>
                         <span class="border_line"></span>
                         <ul>
-                            <php>foreach($categories as $k=> $c) {</php>
-                                <li class="each_video" <php> if($k==0) {</php>  style="background: #21ace3;color: white;box-shadow: 0 0 8px #21ace3;"<php>}</php>>
-                                    <!--<a href="/index.php?app=index&mod=Nutri&act={$action}&id={$c['id']}" >{$c['name']}</a>-->
-                                    {$c['name']}
+                            <php>foreach($categories as $k=> $c) { $action=$c['type']==1?'articleList':'';</php> 
+                                <li class="each_video" <php> if($_GET['id']==$c['id']||($c['id']==39&&$_GET['id']=='')) {</php>  style="background: #21ace3;color: white;box-shadow: 0 0 8px #21ace3;"<php>}</php>>
+                                    <a href="/index.php?app=index&mod=Append<?php if($c['id']!=39){ echo "&act=".$action;}?>&id={$c['id']}" >{$c['name']}</a>
                                 </li>
                                 <php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
                                     <li class="each_video">
@@ -122,7 +121,7 @@
                         <h1 class="public_title">目录</h1>
                         <ul class="position_nav clearfix">
                             <li class="nav_cf bg_1">
-                                <p class="title_hint">增肌</p>
+                                <p class="title_hint">辅助品知识</p>
                                 <!--<ul class="nav_detail">
                                     <li><a>增肌</a></li>
                                     <li><a>暖/减脂</a></li>
@@ -130,10 +129,10 @@
                                     <li><a>伸展</a></li>
                                     <li><a>重复与组数</a></li>
                                 </ul>-->
-                                <a href="index.php?app=index&mod=Nutri&act=articleList&id=29"><i class="bg_opacity"></i></a>
+                                <a href="index.php?app=index&mod=Append&id=48"><i class="bg_opacity"></i></a>
                             </li>
                             <li class="nav_cf bg_2">
-                                <p class="title_hint">减脂</p>
+                                <p class="title_hint">减脂辅助品</p>
                                 <ul class="nav_detail">
                                     <!--<li><a>心</a></li>
                                     <li><a>暖/降温</a></li>
@@ -141,10 +140,10 @@
                                     <li><a>伸展</a></li>
                                     <li><a>重复与组数</a></li>-->
                                 </ul>
-                                <a href="index.php?app=index&mod=Nutri&act=articleList&id=28"><i class="bg_opacity"></i></a>
+                                <a href="index.php?app=index&mod=Append&id=49"><i class="bg_opacity"></i></a>
                             </li>
                             <li class="nav_cf bg_3">
-                                <p class="title_hint">一般饮食知识</p>
+                                <p class="title_hint">增肌辅助品</p>
                                 <ul class="nav_detail">
                                     <!--<li><a>心</a></li>
                                     <li><a>暖/降温</a></li>
@@ -152,7 +151,7 @@
                                     <li><a>伸展</a></li>
                                     <li><a>重复与组数</a></li>-->
                                 </ul>
-                                <a href="index.php?app=index&mod=Nutri&act=articleList&id=31"><i class="bg_opacity"></i></a>
+                                <a href="index.php?app=index&mod=Append&id=50"><i class="bg_opacity"></i></a>
                             </li>
                         </ul>
                     </div>
