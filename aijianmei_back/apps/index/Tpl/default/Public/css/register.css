@@ -237,7 +237,9 @@ a:hover{
 				}
 	/********rightsidebar开始*********/
 		.rightsidebar{
-			margin-left: 792px;
+			float: left;
+			width: 203px;
+			margin-left: 10px;
 			font-size: 17px;
 			font-weight: 700;
 			color: #656565;
