@@ -10,14 +10,14 @@
                         <h3 class="video_all">全部</h3>
                         <span class="border_line"></span>
                         <ul>
-                            <php>foreach($categories as $c) {</php>
-                                <li class="each_video">
+                            <php>foreach($categories as $k=> $c) {</php>
+                                <li class="each_video" <php> if($k==0) {</php>  style="background: #21ace3;color: white;box-shadow: 0 0 8px #21ace3;"<php>}</php>>
                                     <!--<a href="/index.php?app=index&mod=Nutri&act={$action}&id={$c['id']}" >{$c['name']}</a>-->
                                     {$c['name']}
                                 </li>
                                 <php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
-                                    <li class="each_video" >
-                                        <a href="/index.php?app=index&mod=Nutri&act={$action}&id={$child['id']}" >{$child['name']}</a>
+                                    <li class="each_video">
+                                        <a href="/index.php?app=index&mod=Nutri&act={$action}&id={$child['id']}">{$child['name']}</a>
                                     </li>
                                 <php>}</php>
                             <php>}</php>
