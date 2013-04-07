@@ -314,11 +314,11 @@ $(function(){
 $("li .show_enter").add("div .show_enter").mouseover(function(){
 	$(this).children(".enter_icon").css("display","block");
 	$(this).children("img").css("border-color","#21ace3");
-	$(this).children(".v_enter").css('background','url(images/wm3.png) no-repeat 0 -490px')
+	$(this).children().children(".v_enter").css('background','url(images/wm3.png) no-repeat 0 -490px')
 	$(this).mouseout(function(){
 		$(this).children(".enter_icon").css("display","none");
 		$(this).children("img").css("border-color","transparent");
-		$(this).children(".v_enter").css('background','')
+		$(this).children().children(".v_enter").css('background','')
 	})
 });
 //添加目录动态快---------------------------------------

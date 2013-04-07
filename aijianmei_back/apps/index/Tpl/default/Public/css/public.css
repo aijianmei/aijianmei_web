@@ -534,10 +534,15 @@ button{
 			#about{
 				width:190px;
 			}
+			#about a{
+				margin-left: 20px;
+			}
+			#about .public a{
+				margin-left: 29px;
+			}
 			.f_list #about li{
 				float:left;
-				width:70px;
-				padding-left:20px;
+				width:84px;
 			}
 			#footer .login{
 				margin:40px 0 0 0;
@@ -552,7 +557,6 @@ button{
 					background:url(../images/icon_result.png) 0 -52px no-repeat;
 				}
 				#footer  .login .public{
-					padding-left:30px;
 					background:url(../images/icon_result.png) 0 -104px no-repeat;
 				}
 				.qZone{
