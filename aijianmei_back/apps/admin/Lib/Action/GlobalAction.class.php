@@ -193,7 +193,7 @@ class GlobalAction extends AdministratorAction {
             $model = M('');
             $setting = $model->query("ALTER TABLE {$db_prefix}credit_setting ADD {$_POST['name']} INT(11) DEFAULT 0;");
             $user    = $model->query("ALTER TABLE {$db_prefix}credit_user ADD {$_POST['name']} INT(11) DEFAULT 0;");
-			// 清缓存
+            // 清缓存
             F('_service_credit_type', null);
             $this->assign('jumpUrl', U('admin/Global/creditType'));
             $this->success('保存成功');
@@ -234,7 +234,7 @@ class GlobalAction extends AdministratorAction {
             $model = M('');
             $setting = $model->query("ALTER TABLE {$db_prefix}credit_setting CHANGE {$oldName['name']} {$_POST['name']} INT(11);");
             $user    = $model->query("ALTER TABLE {$db_prefix}credit_user CHANGE {$oldName['name']} {$_POST['name']} INT(11);");
-			// 清缓存
+            // 清缓存
             F('_service_credit_type', null);
             $this->assign('jumpUrl', U('admin/Global/creditType'));
             $this->success('保存成功');
@@ -269,7 +269,7 @@ class GlobalAction extends AdministratorAction {
                 $setting = $model->query("ALTER TABLE {$db_prefix}credit_setting DROP {$v['name']};");
                 $user    = $model->query("ALTER TABLE {$db_prefix}credit_user DROP {$v['name']};");
             }
-			// 清缓存
+            // 清缓存
             F('_service_credit_type', null);
             echo 1;
         }else{
@@ -318,7 +318,7 @@ class GlobalAction extends AdministratorAction {
 
         $res = M('credit_setting')->add($_POST);
         if ($res) {
-			// 清缓存
+            // 清缓存
             F('_service_credit_rules', null);
             $this->assign('jumpUrl', U('admin/Global/credit'));
             $this->success('保存成功');
@@ -369,7 +369,7 @@ class GlobalAction extends AdministratorAction {
 
         $res = M('credit_setting')->save($_POST);
         if ($res) {
-			// 清缓存
+            // 清缓存
             F('_service_credit_rules', null);
             $this->assign('jumpUrl', U('admin/Global/credit'));
             $this->success('保存成功');
@@ -394,11 +394,11 @@ class GlobalAction extends AdministratorAction {
 
         $res = M('credit_setting')->where($map)->delete();
         if ($res) {
-			// 清缓存
+            // 清缓存
             F('_service_credit_rules', null);
             echo 1;
         } else {
-        	echo 0;
+            echo 0;
         }
     }
     //批量用户积分设置
@@ -655,8 +655,8 @@ class GlobalAction extends AdministratorAction {
         $res = isset($_POST['document_id']) ? M('document')->save($_POST) : M('document')->add($_POST);
 
         if ($res) {
-        	// 清理缓存
-        	F('_action_footer_document', null);
+            // 清理缓存
+            F('_action_footer_document', null);
             if ( isset($_POST['document_id']) ) {
                 $this->assign('jumpUrl', U('admin/Global/document'));
             } else {
@@ -720,11 +720,11 @@ class GlobalAction extends AdministratorAction {
         $res = $res && M('document')->where('`document_id`=' . $_POST['baseid'])->setField( 'display_order', $order[$_POST['document_id']]  );
 
         if ($res) {
-        	// 清理缓存
-        	F('_action_footer_document', null);
-        	echo 1;
+            // 清理缓存
+            F('_action_footer_document', null);
+            echo 1;
         } else {
-        	echo 0;
+            echo 0;
         }
     }
 
@@ -735,6 +735,54 @@ class GlobalAction extends AdministratorAction {
         $this->display();
     }
 
+    /*底部标签配置*/
+    public function buttomTag(){
+        $sql = "select * from ai_buttom_tag";
+        $tags = M('')->query($sql);
+        foreach($tags as $val){     //得到输出数组格式：array('key'=>array('name'=>$name,'url'=>$url))
+            $result[$val['key_name']] = array('name'=>$val['name'],'url'=>$val['url'],'id'=>$val['id']);
+        }
+        //var_dump($result);
+        $this->assign('buttomTag',$result);
+        $this->display('bottomTag');
+    }
+    
+    /*接收底部标签配置数据*/
+    public function doButtomTag(){
+        //var_dump($_POST);
+        if($_POST['actcode']=='delbuttominfo'&&!empty($_POST['delid'])){
+            echo $_POST['delid'];exit;
+        }
+        $v = $_POST;
+        $newTagInfo = array_splice($v,-3,3);
+        //更新原记录
+        foreach($v as $key=>$value){
+            $sql = "update ai_buttom_tag set url='$value' where name='$key'";
+            $res = M('')->query($sql);
+            if($res) echo "修改成功";
+        }
+        //新增记录
+        if(($_POST['newTag']!=""||$_P['newTagName'])){
+            $tagKey = $_POST['newTag'];
+            $name = $_POST['newTagName'];
+            $url = $_POST['newTagUrl'];
+            $insertSql = "insert into ai_buttom_tag(name,url,key_name) values('$name','$url','$tagKey')";
+            $result = M('')->query($insertSql);
+            if(!empty($result))echo 123;
+        }
+        $filename="buttomTagInfo.php";
+        $fp=fopen($filename,'wb');
+        $writeInfoSql="select * from ai_buttom_tag";
+        $writeInfoResult = M('')->query($writeInfoSql);
+        foreach($writeInfoResult as $val){     //得到输出数组格式：array('key'=>array('name'=>$name,'url'=>$url))
+            $writeInfo[$val['key_name']] = array('name'=>$val['name'],'url'=>$val['url'],'id'=>$val['id']);
+        }
+        fwrite($fp,"<?php\n\r return '".serialize($writeInfo)."';");
+        fclose($fp);
+        
+        
+    }
+    
     public function doSaveAudit(){
         if($_POST){
             $_LOG['uid'] = $this->mid;
@@ -753,11 +801,11 @@ class GlobalAction extends AdministratorAction {
         $this->success("配置成功");
     }
 
-	public function testSendEmail(){
-		$service = service('Mail');
-		$subject = '这是一封测试邮件';
-		$content = '这是一封来自'.SITE_URL.'的测试邮件，您能收到这封邮件表明邮件服务器已配置正确。<br />
-					如果您不清楚这封邮件的来由，请删除，为给您带来的不便表示歉意';
-		echo ( $info = $service->send_email($_POST['testSendEmailTo'], $subject, $content) )?$info:'1';
-	}
+    public function testSendEmail(){
+        $service = service('Mail');
+        $subject = '这是一封测试邮件';
+        $content = '这是一封来自'.SITE_URL.'的测试邮件，您能收到这封邮件表明邮件服务器已配置正确。<br />
+                    如果您不清楚这封邮件的来由，请删除，为给您带来的不便表示歉意';
+        echo ( $info = $service->send_email($_POST['testSendEmailTo'], $subject, $content) )?$info:'1';
+    }
 }

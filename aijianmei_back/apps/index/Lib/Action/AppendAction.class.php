@@ -53,6 +53,7 @@ class AppendAction extends Action {
             if($c['parent'] != NULL) $parent[$c['parent']]['children'][] = $c;
             $cate_id[] = $c['id'];
         }
+        $cate_id=(!empty($_GET['id'])&&$_GET['id']!=39)?$_GET['id']:$cate_id;
         //print_r($cate);
         $articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
         foreach($articles as $key => $value){
@@ -71,14 +72,14 @@ class AppendAction extends Action {
         $map['category_id'] = array('in', implode(',', $cate_id));
         $articles = M('article')->where($map)->findAll();
         //print_r($articles);
-        $hotArticles = D('Article')->getAppendArticles('click');
+        $hotArticles = D('Article')->getAppendArticles('click',$_GET['id']==39?'':$_GET['id']);
         foreach($hotArticles as $key => $value){
             $hotArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
         }
         $this->assign('hotArticles', $hotArticles);
         //foreach($hotArticles as $a) echo $a['title'];//$a['title']=substr($a['title'],0,10)."...";
         
-        $lastArticles = D('Article')->getAppendArticles('create_time');
+        $lastArticles = D('Article')->getAppendArticles('create_time',$_GET['id']==39?'':$_GET['id']);
         foreach($lastArticles as $key => $value){
             $lastArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
         }
@@ -117,7 +118,7 @@ class AppendAction extends Action {
         $this->assign('pager', $pageArray);
         
         $from = ($pager->pg-1) * $pager->countlist;
-        $articles = M('article')->where(array('category_id'=>$id))->order("$order desc")->limit("$from,$pager->countlist")->findAll();
+        $articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order("$order desc")->limit("$from,$pager->countlist")->findAll();
         foreach($articles as $key => $value){
             $articles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
         }

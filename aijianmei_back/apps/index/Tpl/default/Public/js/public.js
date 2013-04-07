@@ -57,64 +57,64 @@ $(function(){
 })
 
 $(function(){
-	$("#login").click(function(){
-		$("div.body").slideDown(300,function(){
-			$("html").css("overflow","hidden").height("100%");
-			$(this).css({"display":"block","opacity":"0.7"});
-			$("div.sheet").slideDown(200);
-			$("div.sheet").css("display","block");
-		});
-	});
-	$(".close_btn").click(function(){
-		$("html").css("overflow","scroll");
-		$("div.sheet").slideUp(200,function(){
-		$("div.sheet").css("display","none");
-		$("div.body").slideUp(300,function(){
-			$("div.body").css("display","none");
-		});
-		
-		});
-	});
-	
-	$(".text_input input").focus(function(){
-		$(this).siblings().hide();			
-	});
-	$(".text_input input").blur(function(){
-		if(!($(this).val())){
-			$(this).siblings("label").show();
-		}
-		else{
-			var e_reg = new RegExp(),
-				p_reg = new RegExp();
-				e_reg = /^\w+((_-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|_-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/,
-				p_reg = /[0-9A-Za-z]{6,16}/;
-			var email = $("#mail").val(),
-				psd = $("#psd").val();
-				
-			if(e_reg.test(email) == false){
-				$("#mail").next().show();
-			}
-			if(p_reg.test(psd) == false){
-				//console.log(this);
-				$("#psd").next().show();
-			}
-		}
-	});
-	//顶部top部分，鼠标滑过显示更多内容	
-	$(".more").mouseover(function(){
-		$(this).children($("ul")).show();
-		$(this).children($("a")).first().addClass("on");
-		$(this).mouseout(function(){
-			$(this).children($("a")).first().removeClass("on");
-			$(".more>ul").hide();
-		})		
-	})
-	//导航栏样式
-	$("#nav>li").click(function(){
-		$(this).addClass("now_position").siblings().removeClass("now_position");
-	})
-		
-					
+    $("#login").click(function(){
+        $("div.body").slideDown(300,function(){
+            $("html").css("overflow","hidden").height("100%");
+            $(this).css({"display":"block","opacity":"0.7"});
+            $("div.sheet").slideDown(200);
+            $("div.sheet").css("display","block");
+        });
+    });
+    $(".close_btn").click(function(){
+        $("html").css("overflow","scroll");
+        $("div.sheet").slideUp(200,function(){
+        $("div.sheet").css("display","none");
+        $("div.body").slideUp(300,function(){
+            $("div.body").css("display","none");
+        });
+        
+        });
+    });
+    
+    $(".text_input input").focus(function(){
+        $(this).siblings().hide();			
+    });
+    $(".text_input input").blur(function(){
+        if(!($(this).val())){
+            $(this).siblings("label").show();
+        }
+        else{
+            var e_reg = new RegExp(),
+                p_reg = new RegExp();
+                e_reg = /^\w+((_-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|_-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/,
+                p_reg = /[0-9A-Za-z]{6,16}/;
+            var email = $("#mail").val(),
+                psd = $("#psd").val();
+                
+            if(e_reg.test(email) == false){
+                $("#mail").next().show();
+            }
+            if(p_reg.test(psd) == false){
+                //console.log(this);
+                $("#psd").next().show();
+            }
+        }
+    });
+    //顶部top部分，鼠标滑过显示更多内容	
+    $(".more").mouseover(function(){
+        $(this).children($("ul")).show();
+        $(this).children($("a")).first().addClass("on");
+        $(this).mouseout(function(){
+            $(this).children($("a")).first().removeClass("on");
+            $(".more>ul").hide();
+        })		
+    })
+    //导航栏样式
+    $("#nav>li").click(function(){
+        $(this).addClass("now_position").siblings().removeClass("now_position");
+    })
+        
+                    
 });
 //js from weimian..................
             //添加事件监听
@@ -312,43 +312,43 @@ $(function(){
 // })	
 //鼠标移上图片显示进入
 $("li .show_enter").add("div .show_enter").mouseover(function(){
-	$(this).children(".enter_icon").css("display","block");
-	$(this).children("img").css("border-color","#21ace3");
-	$(this).children(".v_enter").css('background','url(images/wm3.png) no-repeat 0 -490px')
-	$(this).mouseout(function(){
-		$(this).children(".enter_icon").css("display","none");
-		$(this).children("img").css("border-color","transparent");
-		$(this).children(".v_enter").css('background','')
-	})
+    $(this).children(".enter_icon").css("display","block");
+    $(this).children("img").css("border-color","#21ace3");
+    $(this).children(".v_enter").css('background','url(images/wm3.png) no-repeat 0 -490px')
+    $(this).mouseout(function(){
+        $(this).children(".enter_icon").css("display","none");
+        $(this).children("img").css("border-color","transparent");
+        $(this).children(".v_enter").css('background','')
+    })
 });
 //添加目录动态快---------------------------------------
-		   $('.nav_cf').mouseover(function(){
-		   		var index = $(".nav_cf").index(this);
-		   		$('.title_hint').css('opacity','1').eq(index).css('opacity','0');
-		   		$('.nav_detail').css('opacity','0').eq(index).css('opacity','1');
-		   		$('.bg_opacity').css('opacity','0.4').eq(index).css('opacity','0');
-		   })
-		   $('.nav_cf').mouseout(function(){
-		   		$('.nav_detail').css('opacity','0');
-		   		$('.title_hint').css('opacity','1');
-		   })
-		   $('.position_nav').mouseleave(function(){
-		   		$('.bg_opacity').css({'opacity':'0'})
-		   })
+           $('.nav_cf').mouseover(function(){
+                var index = $(".nav_cf").index(this);
+                $('.title_hint').css('opacity','1').eq(index).css('opacity','0');
+                $('.nav_detail').css('opacity','0').eq(index).css('opacity','1');
+                $('.bg_opacity').css('opacity','0.4').eq(index).css('opacity','0');
+           })
+           $('.nav_cf').mouseout(function(){
+                $('.nav_detail').css('opacity','0');
+                $('.title_hint').css('opacity','1');
+           })
+           $('.position_nav').mouseleave(function(){
+                $('.bg_opacity').css({'opacity':'0'})
+           })
 //为板块添加css3渐变边框---------------------------
-		$(".tr_classify").add(".recommend").add(".tr_top").hover(
-			function(){
-				$(this).css("box-shadow","0 0 8px #21ace3")
-			},
-			function(){
-				$(this).css("box-shadow","")
-			}
-		)
+        $(".tr_classify").add(".recommend").add(".tr_top").hover(
+            function(){
+                $(this).css("box-shadow","0 0 8px #21ace3")
+            },
+            function(){
+                $(this).css("box-shadow","")
+            }
+        )
 
 //textarea focus()
-	$(".comment_inp").click(function(){
-		$(this).html("");
-	})
+    $(".comment_inp").click(function(){
+        $(this).html("");
+    })
 
 //公共部分！！！选择页面，上下页切换
     $(".page a").hover(
