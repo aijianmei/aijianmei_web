@@ -7,6 +7,13 @@
                         <li><a href="#"><img src="../Public/images/banner/index_4.jpg" alt="" /></a></li>-->
                         <li><a href="#"><img src="../Public/images/banner/index_5.jpg" alt="" /></a></li>
                     </ul>
+                    <div class="btn">
+                        <span class="current"></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="preNext pre"></div>
+                    <div class="preNext next"></div>
                 </div>
                 <div id="content">
                     <div class="part_top clearfix">
@@ -107,53 +114,5 @@
                             </div>
                         </div>
                     </div>-->
-                                </div>
-                                <script type="text/javascript">
-                                $(function() {
-                                var sWidth = $("#banner").width(); //获取焦点图的宽度（显示面积）
-                                var len = $("#banner ul li").length; //获取焦点图个数
-                                var index = 0;
-                                var picTimer;
-                                var btn = "<div class='btn'>";
-                                for(var i=0; i < len; i++) {
-                                btn += "<span></span>";
-                                }
-                                btn += "</div><div class='preNext pre'></div><div class='preNext next'></div>";
-                                $("#banner").append(btn);
-                                $("#banner .btn span").css("background","url(images/dian.png)").click(function() {
-                                index = $("#banner .btn span").index(this);
-                                showPics(index);
-                                }).eq(0).trigger("click");
-                                $("#banner .preNext").css("opacity",0).hover(function() {
-                                $(this).stop(true,false).animate({"opacity":"0.5"},300);
-                                },function() {
-                                $(this).stop(true,false).animate({"opacity":"0"},300);
-                                });
-                                $("#banner .pre").click(function() {
-                                index -= 1;
-                                if(index == -1) {index = len - 1;}
-                                showPics(index);
-                                });
-                                $("#banner .next").click(function() {
-                                index += 1;
-                                if(index == len) {index = 0;}
-                                showPics(index);
-                                });
-                                $("#banner").hover(function() {
-                                clearInterval(picTimer);
-                                },function() {
-                                picTimer = setInterval(function() {
-                                showPics(index);
-                                index++;
-                                if(index == len) {index = 0;
-                                },3000);
-                                }).trigger("mouseleave");
-                                function showPics(index) { //普通切换
-                                var nowLeft = -index*sWidth; //根据index值计算ul元素的left值
-                                $("#banner ul").stop(true,false).animate({"left":nowLeft},300); //通过animate()调整ul元素滚动到计算出的position
-                                $("#banner .btn span").css("background","url(images/dian.png)")
-                                .eq(index).css("background","url(images/landian.png)"); //为当前的按钮切换到选中的效果
-                                }
-                                });
-                            </script>                                
+                                </div>                                
 <include file="../Public/footer" />
