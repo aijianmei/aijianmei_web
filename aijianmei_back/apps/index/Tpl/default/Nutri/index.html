@@ -10,8 +10,8 @@
                         <h3 class="video_all">全部</h3>
                         <span class="border_line"></span>
                         <ul>
-                            <php>foreach($categories as $c) {</php>
-                                <li class="each_video all">
+                            <php>foreach($categories as $key =>$c) {</php>
+                                <li class="each_video all" <php> if($_GET['if']=='') {</php>  style="background: #21ace3;color: white;box-shadow: 0 0 8px #21ace3;"<php>}</php>>
                                     {$c['name']}
                                 </li>
                                 <php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
