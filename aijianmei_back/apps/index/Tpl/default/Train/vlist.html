@@ -95,7 +95,7 @@
                                             <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">{$v['title']}</a>
                                         </li>
                                         <li class="info">
-                                            <span>{$v['brief']}</span>
+                                            <span alt="{$v['brief']}" title="{$v['brief']}"><?php echo msubstr($v['brief'],0,12) ?></span>
                                         </li>
                                         <li class="info">
                                             <span class="play_time">播放:<span> {$v['click']}</span></span>
@@ -126,7 +126,7 @@
                                             <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">{$v['title']}</a>
                                         </li>
                                         <li class="info">
-                                            <span>{$v['brief']}</span>
+                                            <span alt="{$v['brief']}" title="{$v['brief']}"><?php echo msubstr($v['brief'],0,12) ?></span>
                                         </li>
                                         <li class="info">
                                         
@@ -195,7 +195,7 @@
                                             <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">{$v['title']}</a>
                                         </li>
                                         <li class="info">
-                                            <span>{$v['brief']}</span>
+                                            <span alt="{$v['brief']}" title="{$v['brief']}"><?php echo msubstr($v['brief'],0,12) ?></span>
                                         </li>
                                         <li class="info">
                                             <span class="play_time">播放:<span> {$v['click']}</span></span>
