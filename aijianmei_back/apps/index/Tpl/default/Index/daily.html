@@ -145,7 +145,7 @@
                         <php>foreach($promote_article as $p) {</php>
                         <div class="recommend">							
                             <a  href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}"><img src="/public/images/article/{$p['img']}" alt="no" border="0" width="90" height="60" /></a>
-                            <p class="intro" >{$p['title']}</p>
+                            <div class="intro" ><h3><a>{$p['title']}</a></h3></div>
                             <span class="t_play_time">点击:<span>{$p['reader_count']}</span></span>
                             <span class="comment_time">评论: <span>{$p['CommNumber']}</span></span>
                         </div>

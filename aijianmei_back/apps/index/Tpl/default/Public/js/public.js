@@ -57,7 +57,14 @@ $(function(){
 })
 
 $(function(){
-	$("#login").click(function(){
+	$(".login").click(function(e){
+        var _e = event ? event : window.event;
+        if(_e.preventDefault){
+            _e.preventDefault();
+        }
+        else{
+            _e.returnValue = false;
+        }
 		$("div.body").slideDown(300,function(){
 			$("html").css("overflow","hidden").height("100%");
 			$(this).css({"display":"block","opacity":"0.7"});
