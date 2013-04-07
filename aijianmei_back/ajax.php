@@ -90,6 +90,7 @@ function addVideoCommont($data=null){
 }
 
 function addDetaiCommont($data=null){
+    ob_end_clean();
     global $_dbConfig;
     $pid=$_POST['pid']?$_POST['pid']:'';
     $uid=$_POST['uid']?$_POST['uid']:exit();
@@ -120,7 +121,7 @@ function addDetaiCommont($data=null){
         echo json_encode(0);
     }
     mysql_close($db);
-    exit;
+    exit();
 }
 
 
