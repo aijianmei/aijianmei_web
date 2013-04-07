@@ -590,9 +590,8 @@ button{
 .page a{
 	display:inline-block;
 	margin:0 2px;
-	width:20px;
+	min-width:20px;
 	height:20px;
-	width:20px;
 	border: 2px solid rgb(236, 236, 236);
 	line-height: 20px;
 	color:#333;
@@ -715,7 +714,7 @@ button{
 				padding-left: 10px;
 			}
 	/*左边导航栏*/	
-	/*.title_1{
+	.title_1{
 		margin-right: 30px;
 		padding-bottom: 6px;
 		font-size: 16px;
@@ -775,7 +774,7 @@ button{
 	.right_training{
 		float:left;
 		width:703px;
-	}*/
+	}
 	/*添加提示内容块的样式*/
 		.title_tip{
 			position: absolute;
