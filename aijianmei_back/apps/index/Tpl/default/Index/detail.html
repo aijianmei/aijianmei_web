@@ -65,7 +65,7 @@
                         <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
                         <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
                         </div>
-                        <a class="comment" id="<php>if(!getMid()) echo 'not_login';</php>" href="javascript:void(0)" onclick="addDetaiCommont();" ">发表评论</a>
+                        <a class="comment" id="<php>if(!getMid()) echo 'not_login';</php>" href="javascript:void(0)" onclick="addDetaiCommont();" >发表评论</a>
                     </div>
                     <div class="check_comment">
                         <a class="comment_1">全部评论(<?php echo $commentCounts;?>)</a>
@@ -80,7 +80,7 @@
                             </span>		
                             <span class="free_choice">
                                 <span>共{$pager['page']}页</span>
-                                <span class="concrete_page">到<input type="text" />页</span>
+                                <span class="concrete_page">到 <input type="text" /> 页</span>
                                 <span class="sure_button">确定</span>
                             </span>			
                         </div>
@@ -169,9 +169,10 @@
             data: "act=addDetaiCommont&data=ford&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&content="+$("#commentbox").val()+"&ptype=1",
             success: function(data){
             alert("添加评论成功！");
-             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">关注</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.connect+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div';   
-             $("#recomment_fdiv").append(innerHtml);
-             $("#empty_content").html('');
+             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">关注</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.connect+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div'; 
+            $("#commentbox").val('');          
+            $("#recomment_fdiv").prepend(innerHtml);
+            $("#empty_content").html('');
             }
             });
         }

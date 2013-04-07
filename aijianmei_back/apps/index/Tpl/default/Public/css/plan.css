@@ -35,10 +35,18 @@
 			width: 174px;
 			margin: 12px 11px;
 		}
+		.sort i{
+			position: absolute;
+			top: -5px;
+			left: -5px;
+			display: inline-block;
+			width: 84px;
+			height: 84px;
+			background: url(../images/new.png);
+		}
 			.sort .show_pic{
 				width:170px;
 				height:130px;
-				border-radius:8px;
 				box-shadow:0 0 8px #ccc;
 				border:2px solid transparent;
 			}

@@ -10,7 +10,7 @@
                         <ul>
                             <php>foreach($categories as $c) {</php>
                             <span class="border_line"></span>
-                            <li class="each_video all" <php> if($_GET['if']=='') {</php>  style="background: #21ace3;color: white;box-shadow: 0 0 8px #21ace3;"<php>}</php>>{$c['name']}</li>
+                            <li class="each_video all" <php> if($_GET['id']=='') {</php>  style="background: #21ace3;color: white;box-shadow: 0 0 8px #21ace3;"<php>}</php>>{$c['name']}</li>
                                 <php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
                                 <li class="each_video">
                                 <php> if($child['id']!='53'){</php>

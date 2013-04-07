@@ -8,30 +8,33 @@
                         <li><a href="#"><img src="../Public/images/banner/index_5.jpg" alt="" /></a></li>
                     </ul>
                 </div>
-                                <div id="content">
+                <div id="content">
                     <div class="part_top clearfix">
                         <div class="lay_top clearfix">
                             <h1 class="public_title">天天锻炼</h1>
                             <div class="part clearfix">
                                 <div class="classify">
-                                                                    <a href="/index.php?app=index&mod=Index&act=info&type=1" class="show_enter"/>
-                                                                            <span class="enter_icon" style="display: none;"></span>
-                                                                            <img src="../Public/images/mr_01.jpg" />
-                                                                            <p>上班族健身</p>
-                                                                    </a>
-                                                                    <ul class="expend">
-                                                                    <?php foreach($shangban as $d) { ?>
-                                                                            <li>
-                                                                                    <a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo $d['id']?>" ><?php echo $d['title']?></a>
-                                                                            </li>
-                                                                    <?php } ?>
-                                                                    </ul>
+                                    <a href="/index.php?app=index&mod=Index&act=info&type=1" class="show_enter"/>
+                                        <span class="enter_icon" style="display: none;"></span>
+                                        <img src="../Public/images/mr_01.jpg" />
+                                        <p>上班族健身</p>
+                                        <i></i>
+                                    </a>
+                                    <ul class="expend">
+                                    <?php foreach($shangban as $d) { ?>
+                                        <li>
+                                            <a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo $d['id']?>" ><?php echo $d['title']?></a>
+                                        </li>
+                                    <?php } ?>
+                                </ul>
                                 </div>
                                 <div class="classify">
                                                                     <a href="/index.php?app=index&mod=Index&act=info&type=2" class="show_enter">
                                                                             <span class="enter_icon" style="display: none;"></span>
                                                                             <img src="../Public/images/mr_02.jpg" />
-                                                                            <p>日常健身</p></a>
+                                                                            <p>日常健身</p>
+                                                                            <i></i>
+                                                                        </a>
                                                                     <ul class="expend">
                                                                     <?php foreach($richang as $d) {  ?>
                                                                             <li>
@@ -44,7 +47,9 @@
                                                                     <a href="/index.php?app=index&mod=Index&act=info&type=3" class="show_enter">
                                                                             <span class="enter_icon" style="display: none;"></span>
                                                                             <img src="../Public/images/mr_03.jpg" />
-                                                                            <p>运动员</p></a>
+                                                                            <p>运动员</p>
+                                                                            <i></i>
+                                                                        </a>
                                                                     <ul class="expend">
                                                                     <?php foreach($zhuanye as $d) {  ?>
                                                                             <li>
@@ -57,7 +62,9 @@
                                                                     <a href="/index.php?app=index&mod=Index&act=info&type=4" class="show_enter">
                                                                     <span class="enter_icon" style="display: none;"></span>
                                                                     <img src="../Public/images/mr_04.jpg" />
-                                                                    <p>健身运动员</p></a>
+                                                                    <p>健身运动员</p>
+                                                                    <i></i>
+                                                                </a>
                                                                     <ul class="expend">
                                                                             <?php foreach($jianmei as $d) {  ?>
                                                                             <li>
