@@ -11,8 +11,11 @@
                         <span class="border_line"></span>
                         <ul>
                             <php>foreach($categories as $k=> $c) { $action=$c['type']==1?'articleList':'';</php> 
-                                <li class="each_video" <php> if($_GET['id']==$c['id']||($c['id']==39&&$_GET['id']=='')) {</php>  style="background: #21ace3;color: white;box-shadow: 0 0 8px #21ace3;"<php>}</php>>
-                                    <a href="/index.php?app=index&mod=Append<?php if($c['id']!=39){ echo "&act=".$action;}?>&id={$c['id']}" >{$c['name']}</a>
+                                <li class="each_video<php> if($c['id']==39){echo ' all';}</php>" <php> if($_GET['id']==$c['id']||($c['id']==39&&$_GET['id']=='')) {</php>  style="background: #21ace3;color: white;box-shadow: 0 0 8px #21ace3;"<php>}</php>>
+                                    <php> if($c['id']!=39){</php>
+                                    <a href="/index.php?app=index&mod=Append&act=<php> echo $action;</php>&id=<php> echo $c['id'];</php>" ><php> echo $c['name'];</php></a>
+                                    <php>
+                                        }else{ echo $c['name'];}</php>
                                 </li>
                                 <php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
                                     <li class="each_video">
@@ -29,42 +32,42 @@
             <div class="right_sider">
                 <div class="part_top clearfix">
                     <div class="lay_top clearfix">
-                        <h1 class="public_title">最精彩的营养文章</h1>
+                        <h1 class="public_title">最畅销的保健品</h1>
                         <div class="part_content">
-                            <div class="tr_top clearfix">
-                            <a href="/index.php?app=index&mod=Index&act=articleDetail&id=41
-                            " class="store.html"><img src="../Public/images/nutri/01_1.jpg" alt="no" class="supple_pic" /></a>
+                        <div class="tr_top clearfix">
+                        <a href="/index.php?app=index&mod=Index&act=articleDetail&id=56" class="store.html"><img src="../Public/images/add/Glutamine.jpg" alt="no" class="supple_pic" /></a>
                             <div class="lay_detail">
-                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id=41
-                                    " class="detail"  data-original-title="内容">初学者运动前的营养指导</a>
+                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id=56
+                        "  class="detail" data-original-title="内容">蛋白质的种类和益处的介绍
+                        </a>
                                 <div class="title_tip"><div class="angle"></div></div>
-                                <p class="read_content">一个健康好看的身型不是从你进入健身房那一刻才开始形成的。在运动前摄取合适的营养可以帮助你最大化地获得效果。下面我会教你如何在健身前吸收营养，让你甩掉脂肪和增加肌肉。</p>
-                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id=41
-                                    " class="read_art">点击阅读</a>
+                                <p class="read_content">蛋白质对于保持最佳健康状态和体脂水平来说是至关重要的。对于运动员或者喜欢运动的人来说，提高蛋白质摄取量有助于身体的快速恢复、保养或者肌肉块的增加。</p>
+                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id=56
+                                " class="purchase">点击购买</a>
                             </div>
                         </div>
                         <ul class="clearfix">
                             <li class="classify">
-                                <a href="/index.php?app=index&mod=Nutri&act=articleList&id=29" class="lay_cf show_enter">
-                                <span class="enter_icon"></span>	
-                                        <img src="../Public/images/nutri/nutri01.jpg" width="220" height="214px" alt="" class="best"/>
-                                        <p class="best_classify">增肌</p>									
+                                <a href="/index.php?app=index&mod=Append&act=articleList&id=48" class="lay_cf show_enter">
+                                    <span class="enter_icon"></span>
+                                        <img src="../Public/images/add/add01_1.jpg" alt="" class="best" />
+                                        <p class="best_classify">辅助品知识</p>
+                                    
                                 </a>
                             </li>
                             <li class="classify">
-                                <a href="/index.php?app=index&mod=Nutri&act=articleList&id=28" class="lay_cf show_enter">
+                                <a href="/index.php?app=index&mod=Append&act=articleList&id=49" class="lay_cf show_enter">
                                     <span class="enter_icon"></span>
-                                        <img src="../Public/images/nutri/nutri02.jpg" width="220" height="214px" alt="" class="best" />
-                                        <p class="best_classify">减脂</p>
-                                        <p class="price"></p>									
+                                        <img src="../Public/images/add/add02.jpg" alt="" class="best" />
+                                        <p class="best_classify">减脂辅助品</p>
+
                                 </a>
                             </li>
                             <li class="classify last_classify">
-                                <a href="/index.php?app=index&mod=Nutri&act=articleList&id=31" class="lay_cf show_enter">
+                                <a href="/index.php?app=index&mod=Append&act=articleList&id=50" class="lay_cf show_enter">
                                     <span class="enter_icon"></span>
-                                        <img src="../Public/images/nutri/nutri03.jpg" width="220" height="214px" alt="" class="best" />
-                                        <p class="best_classify">一般饮食习惯</p>
-                                        <p class="price"></p>
+                                        <img src="../Public/images/add/add03.jpg" alt="" class="best" />
+                                        <p class="best_classify">增肌辅助品</p>
                                 </a>
                             </li>
                         </ul>

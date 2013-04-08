@@ -754,12 +754,17 @@ class GlobalAction extends AdministratorAction {
             echo $_POST['delid'];exit;
         }
         $v = $_POST;
-        $newTagInfo = array_splice($v,-3,3);
+        //$newTagInfo = array_splice($v,-3,3);
         //更新原记录
+        if($v['newTagName']==''){unset($v['newTagName']);}else{$newTagInfo['newTagName']=$v['newTagName'];}
+        if($v['newTagUrl']==''){unset($v['newTagUrl']);}else{$newTagInfo['newTagUrl']=$v['newTagUrl'];}
+        if($v['newTag']==''){unset($v['newTag']);}else{$newTagInfo['newTag']=$v['newTag'];}
         foreach($v as $key=>$value){
-            $sql = "update ai_buttom_tag set url='$value' where name='$key'";
-            $res = M('')->query($sql);
-            if($res) echo "修改成功";
+            if(!empty($value[0])&&!empty($value[1])){
+                //$sql=null;
+                $sql = "update ai_buttom_tag set name='".$value[0]."',url='".$value[1]."' where id='".$key."'";
+                $res = M('')->query($sql);
+            }
         }
         //新增记录
         if(($_POST['newTag']!=""||$_P['newTagName'])){
