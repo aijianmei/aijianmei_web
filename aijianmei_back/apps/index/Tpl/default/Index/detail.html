@@ -1,5 +1,5 @@
 <include file="../Public/header" />
-
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 <div id="content">
             <div class="content_left clearfix">
                 <span>
@@ -24,7 +24,7 @@
                         <span>我要分享</span>
 
                         
-                        <include file="../Public/share" />
+                        <!--<include file="../Public/share" />-->
                         <script type="text/javascript">
                         
                         </script>
@@ -41,12 +41,16 @@
                     <div class="web_expend_2">
                         <span class="read_time">
                         </span>
-                        <a class="sprite_8" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$article['like']}</span></a>
-                        <a class="sprite_9" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$article['unlike']}</span></a>
+                        <!--<a class="sprite_8" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$article['like']}</span></a>
+                        <a class="sprite_9" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$article['unlike']}</span></a>-->
+                        <input type="hidden" id="articleid" value="<?php echo $_GET['id'];?>" uid="<?php echo getMid();?>" tname="v">
+                        <a class="sprite_8" aid="{$article['id']}" act="like"><span class="praise">{$article['like']}</span></a>
+                        <a class="sprite_9" aid="{$article['id']}" act="unlike"><span class="praise">{$article['unlike']}</span></a>
+
                         <span class="relay">转发到</span>
                         <include file="../Public/share" />
 
-                        <a class="collect">收藏</a>
+                        <!--<a class="collect">收藏</a>-->
                         
                         
                     </div>
@@ -59,7 +63,6 @@
                         <span><a href="javascript:void(0);" class="login">登录</a></span>|
                         <span><a href="{:U('index/Index/selectRegister')}">注册</a></span>
                         <php>}</php>
-                        
                         <div class="textarea">
                         <textarea class="comment_inp" name="comment" id="commentbox">有什么感想，来说说吧</textarea>
                         <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
@@ -80,8 +83,8 @@
                             </span>		
                             <span class="free_choice">
                                 <span>共{$pager['page']}页</span>
-                                <span class="concrete_page">到 <input type="text" /> 页</span>
-                                <span class="sure_button">确定</span>
+                                <!--<span class="concrete_page">到 <input type="text" /> 页</span>
+                                <span class="sure_button">确定</span>-->
                             </span>			
                         </div>
                         <php> }</php>
@@ -176,5 +179,6 @@
             }
             });
         }
+        var _mid=<?php echo getMid();?>
         </script>
 <include file="../Public/footer" />
