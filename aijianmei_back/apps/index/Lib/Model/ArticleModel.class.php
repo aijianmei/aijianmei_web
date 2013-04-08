@@ -26,9 +26,9 @@ class ArticleModel extends Model {
         foreach ($result as $r) {
             $info = $parser->getVideoInfo($r['link']);
             if($daily[$r['id']]) {
-                $daily[$r['id']]['video'][] = array('id'=>$r['vid'], 'title'=>$r['vtitle'], 'link'=>$r['link'], 'intro'=>$r['intro'], 'img'=>$info['img']);
+                $daily[$r['id']]['video'][] = array('id'=>$r['vid'], 'title'=>$r['vtitle'], 'link'=>$r['link'], 'intro'=>$r['intro'], 'img'=>$info['img'], 'read_count'=>$r['read_count']);
             }else {
-                $daily[$r['id']]['article'] = array('id'=>$r['id'], 'title'=>$r['title'], 'img'=>$r['img'], 'content'=>$r['content'], 'ctime'=>$r['create_time'], 'like'=>$r['like'], 'unlike'=>$r['unlike']);
+                $daily[$r['id']]['article'] = array('id'=>$r['id'], 'title'=>$r['title'], 'img'=>$r['img'], 'content'=>$r['content'], 'ctime'=>$r['create_time'], 'like'=>$r['like'], 'unlike'=>$r['unlike'],'read_count'=>$r['read_count']);
                 $daily[$r['id']]['video'][] = array('id'=>$r['vid'], 'title'=>$r['vtitle'], 'link'=>$r['link'], 'intro'=>$r['intro'], 'img'=>$info['img']);
             }
             
