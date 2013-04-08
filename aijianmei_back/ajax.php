@@ -130,24 +130,38 @@ function senLike($data){
     //$articleid=$_GET['articleid'];
     $mid=$_POST['mid'];
     $articleid=$_POST['articleid'];
-    $checkLikeSql="select * from ai_article_vote where uid=$mid and article_id=$articleid";
+    $ptype=$_POST['ptype'];
+    $tname=$_POST['tname'];
+    $checkLikeSql= $tname=='v'?"select * from ai_article_vote where uid=$mid and article_id=$articleid":"select * from ai_daily_vote where uid=$mid and article_id=$articleid";
     $checkLikeInfo=C_mysqlQuery($checkLikeSql);
     $checkLikeInfo = mysql_fetch_array($checkLikeInfo);
-    $lact=$_POST['lact'];
     $a=null;
-    $tablename=$_POST['type']=='v'?'ai_article_vote':'ai_daily';
     if($checkLikeInfo){
         $a="2";
     }else{
-        if($tablename=='v'){
-            $usql="update ai_article set `$lact`=`$lact`+1 where id=$articleid";
+        if($_POST['ptype']=='like'&&$tname=='v'){
+            $usql="update ai_article set `like`=`like`+1 where id=$articleid";
             C_mysqlQuery($usql);
             $insql='insert into ai_article_vote (`uid`,`article_id`) values ("'.$mid.'","'.$articleid.'")';
             C_mysqlQuery($insql);
-        }else{
-            C_mysqlQuery("update ai_daily set `$lact`=`$lact`+1 where `id`='.$articleid.'");
         }
-
+        elseif($_POST['ptype']=='unlike'&&$tname=='v'){
+            $usql="update ai_article set `unlike`=`unlike`+1 where id=$articleid";
+            C_mysqlQuery($usql);
+            $insql='insert into ai_article_vote (`uid`,`article_id`) values ("'.$mid.'","'.$articleid.'")';
+            C_mysqlQuery($insql); 
+        }
+        elseif($_POST['ptype']=='like'&&$tname=='d'){
+            $usql="update ai_daily set `like`=`like`+1 where id=$articleid";
+            C_mysqlQuery($usql);
+            $insql='insert into ai_daily_vote (`uid`,`article_id`) values ("'.$mid.'","'.$articleid.'")';
+            C_mysqlQuery($insql); 
+        }elseif($_POST['ptype']=='unlike'&&$tname=='d'){
+            $usql="update ai_daily set `unlike`=`unlike`+1 where id=$articleid";
+            C_mysqlQuery($usql);
+            $insql='insert into ai_daily_vote (`uid`,`article_id`) values ("'.$mid.'","'.$articleid.'")';
+            C_mysqlQuery($insql);
+        }
        $a="1";
     }
     echo json_encode($a);

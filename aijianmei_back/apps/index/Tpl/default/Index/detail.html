@@ -41,11 +41,9 @@
                     <div class="web_expend_2">
                         <span class="read_time">
                         </span>
-                        <!--<a class="sprite_8" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$article['like']}</span></a>
-                        <a class="sprite_9" aid="{$article['id']}" <php>if(getMid()){</php> href="{:U('index/Index/articleDetail', array('id'=>$article['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$article['unlike']}</span></a>-->
                         <input type="hidden" id="articleid" value="<?php echo $_GET['id'];?>" uid="<?php echo getMid();?>" tname="v">
-                        <a class="sprite_8" aid="{$article['id']}" act="like"><span class="praise">{$article['like']}</span></a>
-                        <a class="sprite_9" aid="{$article['id']}" act="unlike"><span class="praise">{$article['unlike']}</span></a>
+                        <a class="sprite_8" aid="{$article['id']}" act="like"><span class="praise" id="sprite_8_num">{$article['like']}</span></a>
+                        <a class="sprite_9" aid="{$article['id']}" act="unlike"><span class="praise" id="sprite_9_num">{$article['unlike']}</span></a>
 
                         <span class="relay">转发到</span>
                         <include file="../Public/share" />
