@@ -42,7 +42,7 @@ class GlobalAction extends AdministratorAction {
              || intval($_POST['max_following'])<0
              || intval($_POST['max_search_time'])<0  
         ){
-            $this->error('数字变量的值必须大于等于0');
+            $this->error('数字变量的�?必须大于等于0');
         }
         $_POST['max_post_time'] = intval($_POST['max_post_time']);
         $_POST['max_refresh_time'] = intval($_POST['max_refresh_time']);
@@ -50,7 +50,7 @@ class GlobalAction extends AdministratorAction {
         $_POST['max_search_time'] = intval($_POST['max_search_time']);
 
         if (intval($_POST['length']) <= 0) {
-            $this->error('全站微博、评论字数限制的值必须大于0');
+            $this->error('全站微博、评论字数限制的值必须大�?');
         }
 
         //保存LOGO
@@ -96,7 +96,7 @@ class GlobalAction extends AdministratorAction {
 
         $res = model('Xdata')->lput('siteopt', $_POST);
         if ($res) {
-            //表情需要flush一下
+            //表情�?��flush�?��
             model('Expression')->getAllExpression(true);
             $this->assign('jumpUrl', U('admin/Global/siteopt'));
             $this->success('保存成功');
@@ -165,7 +165,7 @@ class GlobalAction extends AdministratorAction {
         $this->display();
     }
     public function doAddCreditType(){
-        // if ( !$this->__isValidRequest('name') ) $this->error('数据不完整');
+        // if ( !$this->__isValidRequest('name') ) $this->error('数据不完�?);
         $name = h(t($_POST['name']));
         $alias=h(t($_POST['alias']));
         if(empty($name) ){
@@ -193,7 +193,7 @@ class GlobalAction extends AdministratorAction {
             $model = M('');
             $setting = $model->query("ALTER TABLE {$db_prefix}credit_setting ADD {$_POST['name']} INT(11) DEFAULT 0;");
             $user    = $model->query("ALTER TABLE {$db_prefix}credit_user ADD {$_POST['name']} INT(11) DEFAULT 0;");
-            // 清缓存
+            // 清缓�?
             F('_service_credit_type', null);
             $this->assign('jumpUrl', U('admin/Global/creditType'));
             $this->success('保存成功');
@@ -202,7 +202,7 @@ class GlobalAction extends AdministratorAction {
         }
     }
     public function doEditCreditType(){
-        // if ( !$this->__isValidRequest('id,name') ) $this->error('数据不完整');
+        // if ( !$this->__isValidRequest('id,name') ) $this->error('数据不完�?);
         $name = h(t($_POST['name']));
         $alias=h(t($_POST['alias']));
         if(empty($name) ){
@@ -216,7 +216,7 @@ class GlobalAction extends AdministratorAction {
         $creditTypeDao = M('credit_type');
         //获取原字段名
         $oldName = $creditTypeDao->find($_POST['id']);
-        //修改字段名
+        //修改字段�?
         $res = $creditTypeDao->save($_POST);
 
         $_LOG['uid'] = $this->mid;
@@ -234,7 +234,7 @@ class GlobalAction extends AdministratorAction {
             $model = M('');
             $setting = $model->query("ALTER TABLE {$db_prefix}credit_setting CHANGE {$oldName['name']} {$_POST['name']} INT(11);");
             $user    = $model->query("ALTER TABLE {$db_prefix}credit_user CHANGE {$oldName['name']} {$_POST['name']} INT(11);");
-            // 清缓存
+            // 清缓�?
             F('_service_credit_type', null);
             $this->assign('jumpUrl', U('admin/Global/creditType'));
             $this->success('保存成功');
@@ -249,7 +249,7 @@ class GlobalAction extends AdministratorAction {
 
         $map['id'] = array('in', $ids);
         $creditTypeDao = M('credit_type');
-        //获取字段名
+        //获取字段�?
         $typeName = $creditTypeDao->where($map)->findAll();
 
         $_LOG['uid'] = $this->mid;
@@ -260,7 +260,7 @@ class GlobalAction extends AdministratorAction {
         $_LOG['ctime'] = time();
         M('AdminLog')->add($_LOG);
 
-        //清除type信息和对应字段
+        //清除type信息和对应字�?
         $res = M('credit_type')->where($map)->delete();
         if ($res){
             $db_prefix  = C('DB_PREFIX');
@@ -269,7 +269,7 @@ class GlobalAction extends AdministratorAction {
                 $setting = $model->query("ALTER TABLE {$db_prefix}credit_setting DROP {$v['name']};");
                 $user    = $model->query("ALTER TABLE {$db_prefix}credit_user DROP {$v['name']};");
             }
-            // 清缓存
+            // 清缓�?
             F('_service_credit_type', null);
             echo 1;
         }else{
@@ -293,9 +293,9 @@ class GlobalAction extends AdministratorAction {
     public function doAddCredit() {
         $name = trim($_POST['name']);
         if($name == "" && $_POST['name'] != ""){
-            $this->error('名称不能为空格');
+            $this->error('名称不能为空�?);
         }
-        if ( !$this->__isValidRequest('name') ) $this->error('数据不完整');
+        if ( !$this->__isValidRequest('name') ) $this->error('数据不完�?);
 
         $_POST = array_map('t',$_POST);
         $_POST = array_map('h',$_POST);
@@ -303,7 +303,7 @@ class GlobalAction extends AdministratorAction {
         $creditType = M('credit_type')->order('id ASC')->findAll();
         foreach($creditType as $v){
             if(!is_numeric($_POST[$v['name']])){
-                $this->error($v['alias'].'的值必须为数字！');
+                $this->error($v['alias'].'的�?必须为数字！');
             }
         }
 
@@ -318,7 +318,7 @@ class GlobalAction extends AdministratorAction {
 
         $res = M('credit_setting')->add($_POST);
         if ($res) {
-            // 清缓存
+            // 清缓�?
             F('_service_credit_rules', null);
             $this->assign('jumpUrl', U('admin/Global/credit'));
             $this->success('保存成功');
@@ -341,9 +341,9 @@ class GlobalAction extends AdministratorAction {
     public function doEditCredit() {
         $name = trim($_POST['name']);
         if($name == "" && $_POST['name'] != ""){
-            $this->error('名称不能为空格');
+            $this->error('名称不能为空�?);
         }
-        if ( !$this->__isValidRequest('id,name') ) $this->error('数据不完整');
+        if ( !$this->__isValidRequest('id,name') ) $this->error('数据不完�?);
 
         $_POST = array_map('t',$_POST);
         $_POST = array_map('h',$_POST);
@@ -351,7 +351,7 @@ class GlobalAction extends AdministratorAction {
         $creditType = M('credit_type')->order('id ASC')->findAll();
         foreach($creditType as $v){
             if(!is_numeric($_POST[$v['name']])){
-                $this->error($v['alias'].'的值必须为数字！');
+                $this->error($v['alias'].'的�?必须为数字！');
             }
         }
 
@@ -369,7 +369,7 @@ class GlobalAction extends AdministratorAction {
 
         $res = M('credit_setting')->save($_POST);
         if ($res) {
-            // 清缓存
+            // 清缓�?
             F('_service_credit_rules', null);
             $this->assign('jumpUrl', U('admin/Global/credit'));
             $this->success('保存成功');
@@ -394,7 +394,7 @@ class GlobalAction extends AdministratorAction {
 
         $res = M('credit_setting')->where($map)->delete();
         if ($res) {
-            // 清缓存
+            // 清缓�?
             F('_service_credit_rules', null);
             echo 1;
         } else {
@@ -416,7 +416,7 @@ class GlobalAction extends AdministratorAction {
         $_POST['active']!='all' && $map['is_active'] = intval($_POST['active']);
         $user = D('User','home')->where($map)->field('uid')->findAll();
         if($user == false){
-            $this->error('查询失败，没有这样条件的人');
+            $this->error('查询失败，没有这样条件的�?);
         }
         //组装积分规则
         $setCredit = X('Credit');
@@ -427,7 +427,7 @@ class GlobalAction extends AdministratorAction {
 
 
 
-        if($_POST['action'] == 'set'){//积分修改为
+        if($_POST['action'] == 'set'){//积分修改�?
             foreach($user as $v){
                 $setCredit->setUserCredit($v['uid'],$action,'reset');
                 if($setCredit->getInfo()===false)$this->error('保存失败');
@@ -460,16 +460,16 @@ class GlobalAction extends AdministratorAction {
         $this->success('保存成功');
     }
 
-    /** 系统配置 - 邀请配置 **/
+    /** 系统配置 - �?��配置 **/
 
-    //邀请配置
+    //�?��配置
     function invite(){
         $data = model('Invite')->getSet();
         $this->assign( $data );
         $this->display();
     }
 
-    //邀请码发放
+    //�?��码发�?
     function invitecode(){
         $num = intval($_POST['send_type_num']);
         $user = t($_POST['send_type_user']);
@@ -483,14 +483,14 @@ class GlobalAction extends AdministratorAction {
             $user = explode(',', $user);
             foreach ($user as $k=>$v){
                 model('Invite')->sendcode($v,$num);
-                x('Notify')->sendIn($v,'admin_sendinvitecode',array('num'=>$num)); //通知发送
+                x('Notify')->sendIn($v,'admin_sendinvitecode',array('num'=>$num)); //通知发�?
             }
         }
 
         if( $_POST ){
             $_LOG['uid'] = $this->mid;
             $_LOG['type'] = '1';
-            $data[] = '全局 - 邀请配置 ';
+            $data[] = '全局 - �?��配置 ';
             if( $_POST['__hash__'] )unset( $_POST['__hash__'] );
             $data[] = $_POST;
             $_LOG['data'] = serialize($data);
@@ -618,13 +618,13 @@ class GlobalAction extends AdministratorAction {
         if (($_POST['document_id'] = intval($_POST['document_id'])) <= 0)
             unset($_POST['document_id']);
 
-        // 格式化数据
+        // 格式化数�?
         $_POST['title']         = H(t($_POST['title']));
         $_POST['is_active']     = intval($_POST['is_active']);
         $_POST['is_on_footer']  = intval($_POST['is_on_footer']);
         $_POST['last_editor_id']= $this->mid;
         $_POST['mtime']         = time();
-        if (preg_match('/^\s*((?:https?|ftp):\/\/(?:www\.)?(?:[a-zA-Z0-9][a-zA-Z0-9\-]*\.)?[a-zA-Z0-9][a-zA-Z0-9\-]*(?:\.[a-zA-Z]+)+(?:\:[0-9]*)?(?:\/[^\x{2e80}-\x{9fff}\s<\'\"“”‘’]*)?)\s*$/u', strip_tags(html_entity_decode($_POST['content'], ENT_QUOTES, 'UTF-8')), $url)
+        if (preg_match('/^\s*((?:https?|ftp):\/\/(?:www\.)?(?:[a-zA-Z0-9][a-zA-Z0-9\-]*\.)?[a-zA-Z0-9][a-zA-Z0-9\-]*(?:\.[a-zA-Z]+)+(?:\:[0-9]*)?(?:\/[^\x{2e80}-\x{9fff}\s<\'\"“�?‘�?]*)?)\s*$/u', strip_tags(html_entity_decode($_POST['content'], ENT_QUOTES, 'UTF-8')), $url)
             || preg_match('/^\s*((?:mailto):\/\/[a-zA-Z0-9_]+@[a-zA-Z0-9][a-zA-Z0-9\.]*[a-zA-Z0-9])\s*$/u', strip_tags(html_entity_decode($_POST['content'], ENT_QUOTES, 'UTF-8')), $url)) {
             $_POST['content'] = h($url[1]);
         } else {
@@ -637,7 +637,7 @@ class GlobalAction extends AdministratorAction {
             $_POST['ctime']     = $_POST['mtime'];
         }
 
-        // 数据检查
+        // 数据�?��
         if (empty($_POST['title']))
             $this->error('标题不能为空');
 
@@ -660,7 +660,7 @@ class GlobalAction extends AdministratorAction {
             if ( isset($_POST['document_id']) ) {
                 $this->assign('jumpUrl', U('admin/Global/document'));
             } else {
-                // 为排序方便, 新建完毕后, 将display_order设置为ad_id
+                // 为排序方�? 新建完毕�? 将display_order设置为ad_id
                 M('document')->where("`document_id`=$res")->setField('display_order', $res);
                 $this->assign('jumpUrl', U('admin/Global/addDocument'));
             }
@@ -709,13 +709,13 @@ class GlobalAction extends AdministratorAction {
             exit;
         }
 
-        //转为结果集为array('id'=>'order')的格式
+        //转为结果集为array('id'=>'order')的格�?
         foreach($res as $v) {
             $order[$v['document_id']] = intval($v['display_order']);
         }
         unset($res);
 
-        //交换order值
+        //交换order�?
         $res =         M('document')->where('`document_id`=' . $_POST['document_id'])->setField(  'display_order', $order[$_POST['baseid']] );
         $res = $res && M('document')->where('`document_id`=' . $_POST['baseid'])->setField( 'display_order', $order[$_POST['document_id']]  );
 
@@ -755,7 +755,7 @@ class GlobalAction extends AdministratorAction {
         }
         $v = $_POST;
         //$newTagInfo = array_splice($v,-3,3);
-        //更新原记录
+        //更新原记�?
         if($v['newTagName']==''){unset($v['newTagName']);}else{$newTagInfo['newTagName']=$v['newTagName'];}
         if($v['newTagUrl']==''){unset($v['newTagUrl']);}else{$newTagInfo['newTagUrl']=$v['newTagUrl'];}
         if($v['newTag']==''){unset($v['newTag']);}else{$newTagInfo['newTag']=$v['newTag'];}
@@ -808,8 +808,8 @@ class GlobalAction extends AdministratorAction {
 
     public function testSendEmail(){
         $service = service('Mail');
-        $subject = '这是一封测试邮件';
-        $content = '这是一封来自'.SITE_URL.'的测试邮件，您能收到这封邮件表明邮件服务器已配置正确。<br />
+        $subject = '这是�?��测试邮件';
+        $content = '这是�?��来自'.SITE_URL.'的测试邮件，您能收到这封邮件表明邮件服务器已配置正确�?br />
                     如果您不清楚这封邮件的来由，请删除，为给您带来的不便表示歉意';
         echo ( $info = $service->send_email($_POST['testSendEmailTo'], $subject, $content) )?$info:'1';
     }
