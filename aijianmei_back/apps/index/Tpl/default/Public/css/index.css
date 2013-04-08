@@ -10,7 +10,7 @@
 			position:relative;
 		}
 		#banner ul{
-			height:470px;
+			height:450px;
 			position:absolute;
 		}
 		#banner ul li{
@@ -36,6 +36,9 @@
 			bottom:0;
 			text-align:center;
 		}
+		#banner .btn .current{
+			background:url(../images/landian.png);
+		}
 		#banner .btn span{
 			display:inline-block;
 			_display:inline;
@@ -45,7 +48,7 @@
 			_font-size:0;
 			margin-left:5px;
 			cursor:pointer;
-			background:#fff;
+			background:url(../images/dian.png);
 		}
 
 		#banner .preNext{

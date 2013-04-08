@@ -51,9 +51,9 @@
                                 <span class="triangle"></span>
                             </a>
                         </span>
-                        <input type="hidden" id="articleid" value="<?php echo $_GET['id'];?>" uid="<?php echo getMid();?>" tname="v">
-                        <a class="sprite_8" aid="{$article['id']}" act="like"><span class="praise">{$article['like']}</span></a>
-                        <a class="sprite_9" aid="{$article['id']}" act="unlike"><span class="praise">{$article['unlike']}</span></a>
+                        <input type="hidden" id="articleid" value="<?php echo $_GET['id'];?>" uid="<?php echo getMid();?>" tname="d">
+                        <a class="sprite_8" aid="{$daily['id']}" act="like"><span class="praise"  id="sprite_8_num">{$daily['like']}</span></a>
+                        <a class="sprite_9" aid="{$daily['id']}" act="unlike"><span class="praise"  id="sprite_9_num">{$daily['unlike']}</span></a>
                         <span class="relay">转发到</span>
                         <include file="../Public/share" />
                         <a class="collect">收藏</a>					

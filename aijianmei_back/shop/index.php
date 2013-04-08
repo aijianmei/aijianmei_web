@@ -158,6 +158,8 @@ if (!$smarty->is_cached('index.dwt', $cache_id))
     assign_dynamic('index');
 }
 
+$smarty->assign('cat_rec', $cat_rec);
+
 $smarty->display('index.dwt', $cache_id);
 
 /*------------------------------------------------------ */
