@@ -8,7 +8,8 @@ $_actAllowArr=array(
 'check_Verify'=>'Verify',
 'delCategory'=>'aid',
 'addVideoCommont'=>'data',
-'addDetaiCommont'=>'data',);
+'addDetaiCommont'=>'data',
+'senLike'=>'data',);
 if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
 {
     if(function_exists($_REQUEST['act'])){
@@ -124,7 +125,40 @@ function addDetaiCommont($data=null){
     exit();
 }
 
+function senLike($data){
+    //$mid=$_GET['mid'];
+    //$articleid=$_GET['articleid'];
+    $mid=$_POST['mid'];
+    $articleid=$_POST['articleid'];
+    $checkLikeSql="select * from ai_article_vote where uid=$mid and article_id=$articleid";
+    $checkLikeInfo=C_mysqlQuery($checkLikeSql);
+    $checkLikeInfo = mysql_fetch_array($checkLikeInfo);
+    $lact=$_POST['lact'];
+    $a=null;
+    $tablename=$_POST['type']=='v'?'ai_article_vote':'ai_daily';
+    if($checkLikeInfo){
+        $a="2";
+    }else{
+        if($tablename=='v'){
+            $usql="update ai_article set `$lact`=`$lact`+1 where id=$articleid";
+            C_mysqlQuery($usql);
+            $insql='insert into ai_article_vote (`uid`,`article_id`) values ("'.$mid.'","'.$articleid.'")';
+            C_mysqlQuery($insql);
+        }else{
+            C_mysqlQuery("update ai_daily set `$lact`=`$lact`+1 where `id`='.$articleid.'");
+        }
 
-
-
+       $a="1";
+    }
+    echo json_encode($a);
+    exit();
+}
+function C_mysqlQuery($sql){
+    global $_dbConfig;
+    @$db = mysql_connect($_dbConfig['DB_HOST'], $_dbConfig['DB_USER'], $_dbConfig['DB_PWD']);
+    @mysql_select_db('aijianmei', $db);
+    mysql_query("set names 'utf8'");
+    $res = mysql_query($sql, $db);
+    return $res;
+}
 ?>

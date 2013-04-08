@@ -218,11 +218,13 @@ class TrainAction extends Action {
         
         $video['create_time']=date("Y-m-d H:i:s",$video['create_time']);
         $otherVideo=D('Article')->getVideoCategory($table,$video['category_id'],2);
+        
         foreach($otherVideo as $k=>$v){
             $data = json_decode($this->getVideoData($v['link']));
-            $otherVideo[$k]['logo'] = $data->data[0]->logo;	
+            $otherVideo[$k]['CommNumber']=D('Article')->getVideoCountRecommentsById($v['id']);
+            $otherVideo[$k]['logo'] = $data->data[0]->logo;
+            $otherVideo[$k]['CommNumber']=$otherVideo[$k]['CommNumber']?$otherVideo[$k]['CommNumber']:0;
         }
-        
         $getRecommentsSql="select * from ai_video_comments where pid=$id";
         $Recomments=M('')->query($getRecommentsSql);
         $cRecomnums=count($Recomments);

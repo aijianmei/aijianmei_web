@@ -1,5 +1,5 @@
 <include file="../Public/header" />
-
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 <div id="content">
             <div class="content_left clearfix">
                 <span>
@@ -46,7 +46,7 @@
                         <span class="relay">转发�?/span>
                         <include file="../Public/share" />
 
-                        <a class="collect">收藏</a>
+                        <!--<a class="collect">收藏</a>-->
                         
                         
                     </div>
@@ -59,7 +59,6 @@
                         <span><a href="javascript:void(0);" class="login">登录</a></span>|
                         <span><a href="{:U('index/Index/selectRegister')}">注册</a></span>
                         <php>}</php>
-                        
                         <div class="textarea">
                         <textarea class="comment_inp" name="comment" id="commentbox">有什么感想，来说说吧</textarea>
                         <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
@@ -176,5 +175,6 @@
             }
             });
         }
+        var _mid=<?php echo getMid();?>
         </script>
 <include file="../Public/footer" />
