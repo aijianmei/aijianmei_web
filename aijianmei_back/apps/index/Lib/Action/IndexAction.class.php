@@ -155,7 +155,7 @@ function show_banner($type){
                 //print_r($logId);
                 if($logId) {
                     service('Passport')->loginLocal($logId['uid']);
-					service('Shop')->login($logId['uid']); // 同步登录商城
+                    service('Shop')->login($logId['uid']); // 同步登录商城
                 }else {
                     $data['email'] = $userInfo['email'];
                     $data['password'] = '';
@@ -171,9 +171,9 @@ function show_banner($type){
                     
                     $uid = M('user')->add($data);				
                     service('Passport')->loginLocal($uid);	
-					
-					// 同步注册商城
-					service('Shop')->register($data['uname'], $data['email'], $data['password']);				
+                    
+                    // 同步注册商城
+                    service('Shop')->register($data['uname'], $data['email'], $data['password']);				
                     
                     $other['uid'] = $uid;
                     $other['mediaID'] = $userInfo['mediaID'];
@@ -834,7 +834,7 @@ function show_banner($type){
         $data['uid'] = $uid;
         M('user_attr')->add($data);
         service('Passport')->loginLocal($uid);
-		service('Shop')->register($data['uname'], $data['email'], $data['password']);
+        service('Shop')->register($data['uname'], $data['email'], $data['password']);
         
         redirect(U('index/Index/index'));
     }
@@ -1051,6 +1051,7 @@ function show_banner($type){
     
     public function __call($name, $arguments)
     {
+        //echo contact;
         $this->assign('cssFile', 'about_us');
         $this->display($name);
     }

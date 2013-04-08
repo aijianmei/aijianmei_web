@@ -54,8 +54,9 @@ class AppendAction extends Action {
             $cate_id[] = $c['id'];
         }
         $cate_id=(!empty($_GET['id'])&&$_GET['id']!=39)?$_GET['id']:$cate_id;
-        //print_r($cate);
-        $articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
+        $Articlesid=D('Article')->getArticlesid($cate_id);
+        //$articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
+        $articles = M('article')->where(array('id'=>array('in', implode(',', $Articlesid))))->order('id desc')->limit(8)->findAll();
         foreach($articles as $key => $value){
             $articles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
         }
@@ -97,9 +98,6 @@ class AppendAction extends Action {
         $map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
         // 查询满足要求的总记录数
         $articleCount = M('article')->where(array('category_id'=>$id))->count();
-                $style['pre'] = 'prev';
-                $style['next'] = 'next';
-                $style['current'] = 'current_page';
         $pager = api('Pager');	// 实例化分页类 
         $pager->setCounts($articleCount); //传入总记录数
         //$pager->setStyle($style);
@@ -109,6 +107,7 @@ class AppendAction extends Action {
         $this->assign('pager', $pageArray);
         
         $from = ($pager->pg-1) * $pager->countlist;
+        $Articlesid=D('Article')->getArticlesid($id);
         $articles = M('article')->where(array('category_id'=>array('in', $id)))->order("$order desc")->limit("$from,$pager->countlist")->findAll();
         foreach($articles as $key => $value){
             $articles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);

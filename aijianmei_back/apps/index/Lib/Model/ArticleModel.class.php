@@ -69,11 +69,13 @@ class ArticleModel extends Model {
     public function getTrainArticles($order,$id=null)
     {
         if($id) {
-            $orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND a.category_id=$id";
-            $sql = "select a.* from ai_article a where id in ($orderTableSql) order by ".$order." desc limit 0,8";
+            
+            
+            $orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND a.category_id in ($id)";
+            $sql = "select a.* from ai_article a where id in ($orderTableSql) or category_id=$id group by a.id  order by ".$order." desc limit 0,8";
         }else {
             $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
-            $sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid order by a.".$order." desc limit 0,8";
+            $sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by a.".$order." desc limit 0,8";
         }
         
         $result = M('')->query($sql);
@@ -84,10 +86,10 @@ class ArticleModel extends Model {
     public function getTrainVideo($order,$id=null)
     {
         if($id) {
-            $sql = "select v.* from ai_video v where v.category_id=".$id." order by ".$order." desc limit 0,8";
+            $sql = "select v.* from ai_video v where v.category_id=".$id."  order by ".$order." desc limit 0,8";
         }else {
             $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
-            $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid order by $order desc limit 0,8";
+            $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by $order desc limit 0,8";
         }
         
         $result = M('')->query($sql);
@@ -99,10 +101,10 @@ class ArticleModel extends Model {
     {
         if($id) {
             $orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND a.category_id=$id";
-            $sql = "select a.* from ai_article a where id in ($orderTableSql) order by ".$order." desc limit 0,8";
+            $sql = "select a.* from ai_article a where id in ($orderTableSql) group by a.id order by ".$order." desc limit 0,8";
         }else {
             $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =3";
-            $sql = "select a.* from ai_article a,($orderTableSql) t where a.id=t.aid order by $order desc limit 0,8";
+            $sql = "select a.* from ai_article a,($orderTableSql) t where a.id=t.aid group by a.id order by $order desc limit 0,8";
         }
         $result = M('')->query($sql);
         
@@ -113,10 +115,10 @@ class ArticleModel extends Model {
     {
         if($id) {
             $orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND a.category_id=$id";
-            $sql = "select a.* from ai_article a where a.id in ($orderTableSql) order by ".$order." desc limit 0,8";
+            $sql = "select a.* from ai_article a where a.id in ($orderTableSql) group by a.id order by ".$order." desc limit 0,8";
         }else {
             $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =4";
-            $sql = "select a.* from ai_article a,($orderTableSql) t where a.id=t.aid order by $order desc limit 0,8";
+            $sql = "select a.* from ai_article a,($orderTableSql) t where a.id=t.aid group by a.id order by $order desc limit 0,8";
         }
         
         $result = M('')->query($sql);
@@ -206,6 +208,16 @@ class ArticleModel extends Model {
         $sql="select count(*) as nums from ai_video_comments where pid=".$id;
         $numsArr= M('')->query($sql);
         return !empty($numsArr[0]['nums'])?$numsArr[0]['nums']:0;
+    }
+    public function getArticlesid($category_id){
+        if(is_array($category_id)){
+          foreach($category_id as $key=>$value){
+              $vstr.=empty($vstr)?$value:",".$value;
+          }
+          $category_id=$vstr;
+        }
+        $sql="select aid from ai_article_category_group where category_id in ($category_id)";
+        return $Articlesids = M('')->query($sql);
     }
 }
 ?>
