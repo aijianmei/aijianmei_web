@@ -136,7 +136,8 @@ function addDetaiCommont($data=null){
 function senLike($data){
     //$mid=$_GET['mid'];
     //$articleid=$_GET['articleid'];
-    $mid=$_POST['mid'];
+    //$mid=$_POST['mid'];
+    $mid=$_SESSION['mid'];
     $articleid=$_POST['articleid'];
     $ptype=$_POST['ptype'];
     $tname=$_POST['tname'];
