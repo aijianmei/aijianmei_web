@@ -669,6 +669,7 @@ button{
 			color:#0E709A;
 		}
 	/*内容横条样式*/
+	/*锻炼，营养，补充，首页板块样式相同，共用相同css-----------outside*/
 	#content{
 		margin-top: 10px;
 	}
@@ -694,6 +695,55 @@ button{
 				background: #FFF;
 				border: 1px solid #E0E0E0;
 				border-top:none;
+			}
+			.tr_classify{
+				float: left;
+				width: 170px;
+				margin: 0 10px 10px 0;
+				padding: 5px;
+				font-size: 12px;
+				border: 1px solid #e6e4e4;
+				box-shadow: 0 0 8px #ccc;
+			}
+			.summary{
+				height:60px;
+				line-height: 18px;
+				word-wrap: break-word;
+			}
+			.hot_video,.new_video{
+				margin: 10px 15px;
+			}
+			.lay_hot_video,.lay_new_video{
+				margin-right: -10px;
+			}
+			.plan_article_tl{
+				display: inline-block;
+				height: 35px;
+				padding-top: 8px;
+				font-size: 14px;
+				color: #56888F;
+				font-weight: 700;
+			}
+			.new_video img,.hot_video img{
+				height: 110px;
+				width: 170px;
+			}
+			.tr_classify .t_play_time{
+				background: url(../images/wm3.png) 0 -465px no-repeat;
+			}
+			.t_play_time,.play_time{
+				float:left;
+				display: inline-block;
+				height: 16px;
+				padding-left: 27px;
+				background: url(../images/wm3.png) 0 -416px no-repeat;
+			}
+			.comment_time{
+				float:right;
+				display: inline-block;
+				height:16px;
+				padding-left: 20px;
+				background: url(../images/wm3.png) 0 -440px no-repeat;
 			}
 	/*导航栏共用样式*/
 			.sider_all{
