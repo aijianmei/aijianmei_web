@@ -58,7 +58,7 @@ $(function(){
 
 $(function(){
 	$(".login").click(function(e){
-        var _e = event ? event : window.event;
+        var _e = window.event ? window.event : e || arguments[0];
         if(_e.preventDefault){
             _e.preventDefault();
         }
@@ -503,6 +503,7 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
             fade.init('store');
             fade.init('forum');
             fade.init('friends');
+			fade.init('my_cart');
             if(document.getElementById('teach')){
                 fade.init('teach');
             }

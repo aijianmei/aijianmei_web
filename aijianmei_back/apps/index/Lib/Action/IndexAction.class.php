@@ -1028,7 +1028,7 @@ function show_banner($type){
     public function feedback()
     {
         if(!empty($_POST['email'])&&!empty($_POST['content'])){
-            $insertsql="insert into ai_feedback_info (email,content,isread,create_time) values ('".$_POST['email']."','".$_POST['email']."','0','".time()."')";
+            $insertsql="insert into ai_feedback_info (email,content,isread,create_time) values ('".$_POST['email']."','".$_POST['content']."','0','".time()."')";
             $logId = M('')->query($insertsql);
         }
         $this->assign('cssFile', 'about_us');
