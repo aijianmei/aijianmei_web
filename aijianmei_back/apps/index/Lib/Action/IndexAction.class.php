@@ -1025,6 +1025,16 @@ function show_banner($type){
         $this->display();	
     }
     
+    public function feedback()
+    {
+        if(!empty($_POST['email'])&&!empty($_POST['content'])){
+            $insertsql="insert into ai_feedback_info (email,content,isread,create_time) values ('".$_POST['email']."','".$_POST['email']."','0','".time()."')";
+            $logId = M('')->query($insertsql);
+        }
+        $this->assign('cssFile', 'about_us');
+        $this->display('feedback');	
+    }
+    
     public function founders()
     {
         $this->assign('cssFile', 'about_us');

@@ -70,6 +70,7 @@ class IndexAction extends AdministratorAction {
                 '动态管理'	=>	U('admin/Content/feed'),
                 '举报管理'	=>	U('admin/Content/denounce'),
                 '管理日志'   =>	U('admin/Content/adminLog'),
+                '用户反馈管理'	=>	U('admin/Content/feedback'),
             ),
         );
 
