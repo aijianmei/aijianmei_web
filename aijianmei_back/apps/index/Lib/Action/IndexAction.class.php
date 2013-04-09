@@ -836,7 +836,7 @@ function show_banner($type){
         service('Passport')->loginLocal($uid);
         service('Shop')->register($data['uname'], $data['email'], $data['password']);
         
-        redirect(U('index/Index/index'));
+        redirect(U('home/Account/index'));
     }
     
     public function doRegisterCoach()

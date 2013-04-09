@@ -33,9 +33,9 @@
                     <div class="box box_5">
                         <div class="items"><span class="show_state">*</span>性别</div>
                         <div class="sex_box">
-                            <label for="male">男</label>
+                            <label for="male">�?/label>
                             <input type="radio" name="sex" id="male" class="sex_1" value="0" checked>
-                            <label for="female">女</label>
+                            <label for="female">�?/label>
                             <input type="radio" name="sex" id="female" value="1">
                         </div>
                     </div>
@@ -70,10 +70,10 @@
                     <div class="box box_7">
                         <label class="items" for="text_7">详细地址</label>
                         <input type="text" class="text" id="text_7" name="address">
-                        <div class="prompt_box_7">您的详细地址有助于更快捷的帮您找到您喜欢的内容
+                        <div class="prompt_box_7">您的详细地址有助于更快捷的帮您找到您喜欢的内�?                        </div>
                         </div>
                     </div>
-                    <!-- 增加目的块 -->
+                    <!-- 增加目的�?-->
                     <div class="box box_5">
                         <div class="items">目的</div>
                         <div class="sex_box">
@@ -90,31 +90,31 @@
                     <div class="box box_5">
                         <div class="items">我是</div>
                         <div class="sex_box">
-                            <label for="one">初学者</la员bel>
-                            <input type="radio" name="begin" id="one" class="sex_1" value="初学者" checked>
+                            <label for="one">初学�?/la员bel>
+                            <input type="radio" name="begin" id="one" class="sex_1" value="初学�? checked>
                             <label for="two">运动</label>
                             <input type="radio" name="begin" id="two" class="sex_1" value="运动">
-                            <label for="third">健身者</label>
-                            <input type="radio" name="begin" id="third" class="sex_1" value="健身者">
-                            <label for="four">减肥者</label>
-                            <input type="radio" name="begin" id="four" class="sex_1" value="减肥者">
+                            <label for="third">健身�?/label>
+                            <input type="radio" name="begin" id="third" class="sex_1" value="健身�?>
+                            <label for="four">减肥�?/label>
+                            <input type="radio" name="begin" id="four" class="sex_1" value="减肥�?>
                         </div>
                     </div>
                     <!-- -end- -->
                     <div class="box box_8">
-                        <label class="items" for="text_8"><span class="show_state">*</span>验证码</label>
+                        <label class="items" for="text_8"><span class="show_state">*</span>验证�?/label>
                         <input type="text" class="text proven_box" id="verifyStr" name="verifyStr" onkeyup="checkVerify()" onchange="checkVerify()" onblur="checkVerify()">
                         <div class="prompt_box_8">
-                            <!--<a class="proven_pic"></a>--><img id="verify_code" src="/public/captcha.php" /><a class="forchange" href="javascript:void(0)" onclick="verify_code.src='/public/captcha.php'">换一换</a>
+                            <!--<a class="proven_pic"></a>--><img id="verify_code" src="/public/captcha.php" /><a class="forchange" href="javascript:void(0)" onclick="verify_code.src='/public/captcha.php'">换一�?/a>
                             <span id="verifyStrMessage"></span>
                         </div>
                     </div>
                     <div class="box box_9">
                         <!-- outside choose this  2013/4/9 add checked="checked" for input-->
                         <input type="checkbox" class="protect_box" id="protect_box_btn" checked="checked">
-                        <span>我已阅读协议<a class="linktoprotect">《爱健美服务使用协议》</a></span>
+                        <span>我已阅读协议<a class="linktoprotect">《爱健美服务使用协议�?/a></span>
                     </div>
-                    <div class="box_10"><a href="javascript:void(0)" onclick="RegisterSubmit()" class="submit_1" id="submitPic"><span class="open">立即开通</span></a></div>
+                    <div class="box_10"><a href="javascript:void(0)" onclick="RegisterSubmit()" class="submit_1" id="submitPic"><span class="open">立即�??</span></a></div>
                 </form>
             </div>
             <script type="text/javascript">
@@ -136,17 +136,17 @@
                 if(email!=''&& reyx.test(email)){
                 $.post('ajax.php?act=check_email', {'email':email}, function(m) {
                     if(m==1) {
-                        alert('该邮箱已经注册！');
+                        //alert('该邮箱已经注册！');
                         $("#email").val('');
+                        $("#emailMessage").html("<span style='color:red;'>该邮箱已经注册！</span>");
                         return false;
                     }else {
-                        //new action
                         $("#emailMessage").html("<span style='color:green;'>邮件可用</span>");
                     }
                 })
                 }
                 else{
-                $("#email").focus();
+                //$("#email").focus();
                 $("#emailMessage").html("<span style='color:red;'>请输入正确的邮箱</span>");
                 }
             }
@@ -154,39 +154,22 @@
             {
                 var passwordStr=$("#password").val();
                 var repasswordStr=$("#repassword").val();
-                if(passwordStr==''&&repasswordStr==''){
-                    $("#password").focus();
-                    $("#passwordMessage").html("<span style='color:red;'>请输入密码</span>");
-                }
-                else if(passwordStr==''&&repasswordStr!=''){
-                    $("#password").val('');
-                    $("#passwordMessage").html("<span style='color:red;'>密码不能为空</span>");
-                }
-                else if(passwordStr!=''&&repasswordStr==''){
-                    $("#repassword").val('');
-                    $("#repasswordMessage").html("<span style='color:red;'>密码不能为空</span>");
-                }
-                else if(passwordStr!=''&&repasswordStr!=''&&passwordStr!=repasswordStr){
-                    $("#repassword").val('');
-                    $("#repasswordMessage").html("<span style='color:red;'>密码需一致</span>");
+                if(passwordStr!=''&&repasswordStr!=''&&passwordStr==repasswordStr){
+                $("#repasswordMessage").html("<span style='color:green;'>密码正确</span>");
                 }
                 else{
-                   $("#passwordMessage").html("<span style='color:green;'>密码正确</span>");
-                   $("#repasswordMessage").html("<span style='color:green;'>密码正确</span>");
+                $("#repasswordMessage").html("<span style='color:red;'>密码错误</span>");
                     return true;
                 }
                 return false;
-            }
-            function RegisterSubmit(){
-            if(IsCanOpen==1){ $("#registerForm").submit();}
-               
             }
             function checkVerify() {
                 var verifyStr =$("#verifyStr").val();
                 if(verifyStr!=''&& verifyStr.length>=5){
                 $.post('ajax.php?act=check_Verify', {'Verify':verifyStr}, function(m) {
                     if(m==0) {
-                        $("#verifyStr").val('');
+                        //$("#verifyStr").val('');
+                        $("#verifyStrMessage").html("<span style='color:red;'>错误</span>");
                         return false;
                     }else {
                         //new action
@@ -196,19 +179,18 @@
                 })
                 }
                 else{
-                $("#verifyStr").focus();
+                //$("#verifyStr").focus();
                 }  
             }
             function checkNickname(){
                 var nicknameStr=$("#nickname").val();
                 var pattern=/^([a-zA-Z]|\d|_)*$/;  
                 if(nicknameStr!=''){
-                    $("#nicknameMessage").html("<span style='color:green;'>昵称可使用</span>");
+                    $("#nicknameMessage").html("<span style='color:green;'>昵称可使�?/span>");
                     return true;
                 }
                 else{
                     $("#nickname").val('');
-                    $("#nickname").focus();
                     $("#nicknameMessage").html("<span style='color:red;'>请输入正确的昵称</span>");
                     return false;                    
                 }
@@ -220,30 +202,30 @@
                 $("#protect_box_btn").click(function() {
                 if($("#email").val()=='')
                 {
-                    $("#email").focus(); checkEmail();
+                    $("#email").focus();
                     $("#protect_box_btn").attr("checked",false);
                     return false;
                 }
                 if($("#password").val()=='')
                 {
-                    $("#password").focus();checkPassword();
+                    $("#password").focus();
                     $("#protect_box_btn").attr("checked",false);
                     return false;
                 }
                 if($("#repassword").val()=='')
                 {
-                    $("#repassword").focus();checkPassword();
+                    $("#repassword").focus();
                     $("#protect_box_btn").attr("checked",false);
                     return false;
                 }
                 if($("#nickname").val()=='')
                 {
-                    $("#nickname").focus();checkNickname();
+                    $("#nickname").focus();
                     $("#protect_box_btn").attr("checked",false);
                     return false;
                 }
                 if($("#verifyStr").val()==''){
-                    $("#verifyStr").focus();checkVerify();
+                    $("#verifyStr").focus();
                     $("#protect_box_btn").attr("checked",false);
                     return false;
                 }
@@ -257,18 +239,24 @@
                   }
                 });
             })
+                        function RegisterSubmit(){
+            if(IsCanOpen==1){ $("#registerForm").submit();}
+               
+            }
             </script>
             <div class="rightsidebar">
                     <div class="A_login">
-                        <p>已有爱健美帐号?</p>
+                        <p>已有爱健美帐�?</p>
                         <a href="/index.php?app=home&mod=Index&act=login" class="loginbutton">登录</a>
                     </div>
                     <div class="user_part">
-                        <a href="/index.php?app=index&mod=Index&act=registerGym" class="user">
-                            v  健身房注册
+                        <!--<a href="/index.php?app=index&mod=Index&act=registerGym" class="user" >-->
+                        <a class="user" href="#" onclick="alert('暂未�?��');return false;">
+                         v  健身房注�?
                         </a>
-                        <a href="/index.php?app=index&mod=Index&act=registerCoach" class="user">
-                            v  教练注册
+                        <!--<a href="/index.php?app=index&mod=Index&act=registerCoach" class="user">-->
+                        <a class="user" href="#" onclick="alert('暂未�?��');return false;">
+                             v  教练注册
                         </a>
                     </div>
                     <div class="cooperate_target">
@@ -284,8 +272,8 @@
                     </div>
                     <!--
                     <div class="A_intro">
-                        <h1 class="intro_topic">爱健美</h1>
-                        <p class="intro_conduct">具有人气的健美产品，先拥有1536人用户，拥有500家健身</p>
+                        <!--<h1 class="intro_topic">爱健�?/h1>
+                        <p class="intro_conduct">具有人气的健美产品，先拥�?536人用户，拥有500家健�?/p>-->
                     </div>
                     -->
             </div>
