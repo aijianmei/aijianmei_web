@@ -99,6 +99,24 @@
 <!-- sheet end -->
 <style type="text/css">
 .slide_down:hover ul{display:block;}
+.slide_down a{
+            position:relative;
+            display:inline-block;
+            width:45px;
+            padding-bottom:3px;
+            border:1px solid transparent;
+            
+        }
+        .slide_down .on{
+            position: relative;
+            z-index: 101;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-bottom: none;
+        }
+        .slide_down a:hover{
+            border-color:#ccc;
+        }
 </style>
 <!-- aijianmei_header -->
 <div class="wrapper">
@@ -176,6 +194,14 @@
 
 <script>
 $(document).ready(function(){
+    $(".slide_down").mouseover(function(){
+        $(this).children($("ul")).show();
+        $(this).children($("a")).first().addClass("on");
+        $(this).mouseout(function(){
+            $(this).children($("a")).first().removeClass("on");
+            $(".slide_down>ul").hide();
+        })      
+    })
     $(".header_dropdown").hover(
         function(){ 
       var type = $(this).attr('id');

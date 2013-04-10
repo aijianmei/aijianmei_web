@@ -10,6 +10,26 @@ $_actAllowArr=array(
 'addVideoCommont'=>'data',
 'addDetaiCommont'=>'data',
 'senLike'=>'data',);
+
+/*ajax 过滤处理*/
+ if(!empty($_REQUEST['act'])){
+     foreach($_REQUEST as $key => $value){
+        $_REQUEST[$key]=MooAddslashes($value);
+    }
+    foreach($_POST as $key => $value){
+        $_POST[$key]=MooAddslashes($value);
+    }
+    foreach($_GET as $key => $value){
+        $_GET[$key]=MooAddslashes($value);
+    }
+}
+
+//addcslashes 处理
+function MooAddslashes($value) {
+return $value = is_array($value) ? array_map('MooAddslashes', $value) : addslashes($value);
+}
+
+
 if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
 {
     if(function_exists($_REQUEST['act'])){
@@ -62,14 +82,17 @@ function delCategory($id){
 
 
 function addVideoCommont($data=null){
+    //ob_end_clean();
+    
     global $_dbConfig;
     $pid=$_POST['pid']?$_POST['pid']:'';
     $uid=$_POST['uid']?$_POST['uid']:exit();
-    $connect=$_POST['connect']?trim($_POST['connect']):exit();
-    @$db = mysql_connect($_dbConfig['DB_HOST'], $_dbConfig['DB_USER'], $_dbConfig['DB_PWD']);
-    @mysql_select_db('aijianmei', $db);
+    $connect=$_POST['content']?trim($_POST['content']):exit();
+    $db = mysql_connect($_dbConfig['DB_HOST'], $_dbConfig['DB_USER'], $_dbConfig['DB_PWD']);
+    mysql_select_db('aijianmei', $db);
     mysql_query("set names 'utf8'");
-    $sql="INSERT INTO ai_video_comments (uid,connect,pid,create_time) VALUES ('".$uid."','".trim($_POST['connect'])."','".$pid."',".time().")";
+    //$sql="INSERT INTO ai_video_comments (uid,connect,pid,create_time) VALUES ('".$uid."','".trim($connect)."','".$pid."',".time().")";
+    $sql="INSERT INTO ai_comments (uid,content,parent_id,parent_type,create_time,source,topParent) VALUES ('".$uid."','".$connect."','".$pid."',4,".time().",'','0')";
     $res = mysql_query($sql, $db);
     $data=null;
     if($res) {
@@ -80,8 +103,13 @@ function addVideoCommont($data=null){
         $imgsArr=mysql_query($imgsql, $db);
         $row = mysql_fetch_array($imgsArr);
         $data['img'] =$row['profileImageUrl'];
-        if(empty($data['img'])){$data['img']="/data/uploads/avatar/$uid/middle.jpg";}
-        //$data['img']="/data/uploads/avatar/$uid/middle.jpg";
+        if(empty($data['img'])){
+            $data['img']="data/uploads/avatar/".$uid."/middle.jpg";
+            if(!is_file($data['img']))
+            {
+                $data['img']="public/themes/newstyle/images/user_pic_middle.gif";
+            }
+        }
         echo json_encode($data);
     }else {
         echo json_encode(0);
@@ -128,7 +156,8 @@ function addDetaiCommont($data=null){
 function senLike($data){
     //$mid=$_GET['mid'];
     //$articleid=$_GET['articleid'];
-    $mid=$_POST['mid'];
+    //$mid=$_POST['mid'];
+    $mid=$_SESSION['mid'];
     $articleid=$_POST['articleid'];
     $ptype=$_POST['ptype'];
     $tname=$_POST['tname'];
