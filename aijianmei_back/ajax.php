@@ -10,6 +10,26 @@ $_actAllowArr=array(
 'addVideoCommont'=>'data',
 'addDetaiCommont'=>'data',
 'senLike'=>'data',);
+
+/*ajax 过滤处理*/
+ if(!empty($_REQUEST['act'])){
+     foreach($_REQUEST as $key => $value){
+        $_REQUEST[$key]=MooAddslashes($value);
+    }
+    foreach($_POST as $key => $value){
+        $_POST[$key]=MooAddslashes($value);
+    }
+    foreach($_GET as $key => $value){
+        $_GET[$key]=MooAddslashes($value);
+    }
+}
+
+//addcslashes 处理
+function MooAddslashes($value) {
+return $value = is_array($value) ? array_map('MooAddslashes', $value) : addslashes($value);
+}
+
+
 if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
 {
     if(function_exists($_REQUEST['act'])){
