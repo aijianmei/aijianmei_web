@@ -24,6 +24,7 @@
 		margin-top:20px;
 	}
 	.content p{
+		text-indent: 20px;
 		font-size: 14px;
 		line-height: 22px;
 		margin-top: 10px;
@@ -31,6 +32,15 @@
 	.content p a{
 		text-decoration:underline;
 		color:#47AEE8;
+	}
+	.content img{
+		margin:10px auto;
+	}
+	.content .img_control{
+		max-width: 600px;
+	}
+	.content .remove_indent{
+		text-indent: 0;
 	}
 .sider{
 	background-color: white;
