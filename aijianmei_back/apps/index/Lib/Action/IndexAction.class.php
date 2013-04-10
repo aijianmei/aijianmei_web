@@ -215,8 +215,8 @@ function show_banner($type){
             //echo $log_sql;
             $logId = M('')->query($log_sql);
             //var_dump($logId);
-			$setMailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
-			$setMail = M('')->query($setMailSql);
+            $setMailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
+            $setMail = M('')->query($setMailSql);
             if($logId) {
                 service('Passport')->loginLocal($logId[0]['uid']);	
             }else {
@@ -270,9 +270,9 @@ function show_banner($type){
 
         }
         if($_POST['email']!=''&&$_POST['emailact']=='upemail'){
-			$umailsql="update ai_others set email='".trim($_POST['email'])."' where uid='".addslashes($_POST['emailuid'])."'";
-			M('')->query($umailsql);
-		}
+            $umailsql="update ai_others set email='".trim($_POST['email'])."' where uid='".addslashes($_POST['emailuid'])."'";
+            M('')->query($umailsql);
+        }
         
         $this->setTitle('index');
         $this->assign('uid',$this->mid);
@@ -292,19 +292,41 @@ function show_banner($type){
         $jianmei =  M('article')->where(array('category_id'=>'46'))->limit('0,4')->order('id desc')->findAll();
         $this->assign('jianmei', $jianmei);
         $this->assign('daily', $daily);
-		if(isset($setMail)&&$setMail[0]['email']==''){
-			//redirect(U('index/Index/setmail'));
-		}
+        if(isset($setMail)&&$setMail[0]['email']==''){
+            //redirect(U('index/Index/setmail'));
+        }
+        //add by kon at 20130410 start
+        /*首页添加最新4篇文章视频*/
+        
+        $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit 0,4";
+        $hot_video = M('')->query($sql);
+        foreach($hot_video as $k=>$v) {
+            $hotvideos[$k] = $v;
+            $data = json_decode($this->getVideoData($v['link']));
+            $hotvideos[$k]['logo'] = $data->data[0]->logo;
+            $hotvideos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);            
+        }
+        $this->assign('hotvideos', $hotvideos);
+        /*首页添加最新4篇文章*/
+        $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id";
+        $sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by a.create_time desc limit 0,4";
+        $hotArticles = M('')->query($sql);
+        foreach ($hotArticles as $key => $value) {
+            $hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
+        }
+        $this->assign('hotArticles', $hotArticles);
+        //add by kon at 20130410 end
         $this->display();
     }
-	
-	public function setmail()
-	{
-		$this->assign('cssFile', 'register');
-		$this->display('setmail');
-	}
-	
-	
+    
+    public function setmail()
+    {
+        $this->assign('cssFile', 'register');
+        $this->display('setmail');
+    }
+    
+    
     public function app()
     {
         $this->display();
@@ -1189,6 +1211,14 @@ function show_banner($type){
         }
     
         return $res;
+    }
+    protected function getVideoData($link)
+    {
+        $id = str_replace('http://player.youku.com/player.php/sid/', '', $link);
+        $id = str_replace('/v.swf', '', $id);
+        $url = 'http://v.youku.com/player/getPlayList/VideoIDS/'.$id.'/version/5/source/out?onData=%5Btype%20Function%5D&n=3';
+        $json = file_get_contents($url);
+        return $json;
     }
 }
 ?>

@@ -2,7 +2,7 @@
     <html xmlns:wb=“http://open.weibo.com/wb”>
         <head>
             <meta charset="utf-8"/>
-            <title>爱健美</title>
+            <title><php>if(!empty($article['title'])||!empty($daily['title'])){</php>{$daily['title']}{$article['title']}<php>}else{</php>爱健美<php>}</php></title>
             <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21432667"></script>
             <link rel="stylesheet" href="../Public/css/public.css" />
             <link rel="stylesheet" href="../Public/css/{$cssFile}.css" />	
