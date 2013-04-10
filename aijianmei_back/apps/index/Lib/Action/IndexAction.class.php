@@ -201,8 +201,7 @@ function show_banner($type){
 
         if(!empty($_REQUEST['code'])) {
             require_once $_SERVER['DOCUMENT_ROOT'].'/saetv2.ex.class.php';
-            $sina = new SaeTOAuthV2('3622140445', 'f94d063d06365972215c62acaadf95c3');	
-
+            $sina = new SaeTOAuthV2('3622140445', 'f94d063d06365972215c62acaadf95c3');
             $token = $sina->getAccessToken('code', array('code'=>$_REQUEST['code'], 'redirect_uri'=>'http://dev.aijianmei.com/index.php'));
             $client = new SaeTClientV2('3622140445', 'f94d063d06365972215c62acaadf95c3', $token['access_token']);
 
@@ -216,6 +215,8 @@ function show_banner($type){
             //echo $log_sql;
             $logId = M('')->query($log_sql);
             //var_dump($logId);
+			$setMailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
+			$setMail = M('')->query($setMailSql);
             if($logId) {
                 service('Passport')->loginLocal($logId[0]['uid']);	
             }else {
@@ -268,7 +269,10 @@ function show_banner($type){
             }
 
         }
-        
+        if($_POST['email']!=''&&$_POST['emailact']=='upemail'){
+			$umailsql="update ai_others set email='".trim($_POST['email'])."' where uid='".addslashes($_POST['emailuid'])."'";
+			M('')->query($umailsql);
+		}
         
         $this->setTitle('index');
         $this->assign('uid',$this->mid);
@@ -288,9 +292,19 @@ function show_banner($type){
         $jianmei =  M('article')->where(array('category_id'=>'46'))->limit('0,4')->order('id desc')->findAll();
         $this->assign('jianmei', $jianmei);
         $this->assign('daily', $daily);
+		if(isset($setMail)&&$setMail[0]['email']==''){
+			//redirect(U('index/Index/setmail'));
+		}
         $this->display();
     }
-
+	
+	public function setmail()
+	{
+		$this->assign('cssFile', 'register');
+		$this->display('setmail');
+	}
+	
+	
     public function app()
     {
         $this->display();
