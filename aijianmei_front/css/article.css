@@ -304,27 +304,50 @@
 					}
 					.cm_bottom .target{
 						margin-top: 15px;
-						border-bottom: 1px solid #CCC;
 					}
+					.lay_target{
+						margin-bottom: 10px;
+					}
+						.lay_target .target_content{
+							box-shadow: none;
+						}
 						.target .target_pic{
-
 							float:left;
-							min-height:100px;
 							margin-right: 10px;
 						}
-						.target .care{
-							display:block;
+						.target_content{
+float: left;
+max-width: 570px;
+padding: 5px;
+border: 1px solid #ccc;
+box-shadow: 0 0 12px rgb(150, 150, 150);
 						}
+						.bugle_this{
+
+						}
+						.staircase{
+
+						}
+						/*.target .care{
+							display:block;
+						}*/
 						.target .name{
-							display: block;
-							padding: 10px 0;
+							display: inline-block;
+padding: 2px 0 10px 15px;
+font-weight: bold;
 						}
 						.target .bottom_ms{
-							padding:14px 0;
+							padding:14px 10px 0 0;
+						}
+						.write_back{
+display: inline-block;
+background: #EBEFF7;
+text-align: center;
+width: 40px;
+margin-right: -10px;
 						}
 						.target .to{
 							float:right;
-							display: none;
 						}
 						.to .sprite_8{
 							display: inline-block;
@@ -339,6 +362,41 @@
 							height: 27px;
 							line-height: 27px;
 							margin-left: 27px;
+						}
+						.post_area{
+background: #EBEFF7;
+						}
+						.part_back{
+							clear: right;
+width: 550px;
+margin: 0 auto;
+						}
+						.btn_back{
+float: right;
+margin-right: 10px;
+						}
+						.pop_content{
+width: 530px;
+height: 80px;
+padding: 9px;
+						}
+						.part_sure{
+							zoom: 1;
+overflow: hidden;
+line-height: 25px;
+padding: 5px 0;
+						}
+						.rule{
+							float:left;
+						}
+						.sure_back{
+							float: right;
+width: 70px;
+height: 25px;
+/*line-height: 25px;*/
+border: 1px solid #ccc;
+background: #21aec3;
+color: white;
 						}
 		/*右边广告部分*/
 		.content_right{

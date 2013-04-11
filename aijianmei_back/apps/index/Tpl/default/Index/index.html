@@ -87,43 +87,43 @@
                     <div class="part_top_1 clearfix">
                         <div class="lay_top_1 clearfix">
                             <h1 class="public_title">最新文章</h1>
-                            <div class="new_video">
-                                <ul class="lay_new_video clearfix">
-                                <?php foreach($hotArticles as $key => $value) {  ?>
-                                    <li class="tr_classify">
-                                        <a href="{:U('index/Index/articleDetail', array('id'=>$value['id']))}" class="show_enter">
-                                            <span class="enter_icon"></span>
-                                            <img src="../public/images/article/<?php echo $value['img'];?>" alt="<?php echo $value['title'];?>" title="<?php echo $value['title'];?>">
-                                        </a>
+                            <ul class="new_video clearfix">
+                            <?php foreach($hotArticles as $key => $value) {  ?>
+                                <li class="tr_classify">
+                                    <a href="{:U('index/Index/articleDetail', array('id'=>$value['id']))}" class="show_enter">
+                                        <span class="enter_icon"></span>
+                                        <img src="../public/images/article/<?php echo $value['img'];?>" alt="<?php echo $value['title'];?>" title="<?php echo $value['title'];?>">
+                                    </a>
+                                    <div class="lay_tr">
                                         <a href="" class="plan_article_tl"><?php echo $value['title'];?></a>
                                         <p class="summary"><?php echo msubstr($value['brief'],0,42) ?></p>
                                         <span class="t_play_time">点击:<span></span><?php echo $value['reader_count']?></span>
                                         <span class="comment_time">评论:<span><?php echo $value['CommNumber'];?></span></span>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
+                                    </div>
+                                </li>
+                                <?php } ?>
+                            </ul>
                         </div>
                     </div>
                     <div class="part_top_1 clearfix">
-                        <div class="lay_top_1 clearfix">
+                        <div class="lay_top_2 clearfix">
                             <h1 class="public_title">最新视频</h1>
-                            <div class="new_video">
-                                <ul class="lay_new_video clearfix">
-                                <?php foreach($hotvideos as $key => $value) {  ?>
-                                    <li class="tr_classify">
-                                        <a href="{:U('index/Train/videoDetail', array('id'=>$value['id']))}" class="show_enter">
-                                            <span class="enter_icon"></span>
-                                            <img src="<?php echo $value['logo'];?>" alt="<?php echo $value['title'];?>">
-                                        </a>
+                            <ul class="new_video clearfix">
+                            <?php foreach($hotvideos as $key => $value) {  ?>
+                                <li class="tr_classify">
+                                    <a href="{:U('index/Train/videoDetail', array('id'=>$value['id']))}" class="show_enter">
+                                        <span class="enter_icon"></span>
+                                        <img src="<?php echo $value['logo'];?>" alt="<?php echo $value['title'];?>">
+                                    </a>
+                                    <div class="lay_tr">
                                         <a href="{:U('index/Train/videoDetail', array('id'=>$value['id']))}" class="plan_article_tl" alt="<?php echo $value['title'];?>" title="<?php echo $value['title'];?>"><?php echo $value['title'];?></a>
                                         <p class="summary" alt="<?php echo $value['brief'];?>" title="<?php echo $value['brief'];?>"><?php echo msubstr($value['brief'],0,42) ?></p>
                                         <span class="t_play_time">点击:<span><?php echo $value['click'];?></span></span>
                                         <span class="comment_time">评论:<span><?php echo $value['recommons'];?></span></span>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
+                                    </div>
+                                </li>
+                                <?php } ?>
+                            </ul>
                         </div>
                     </div>
                 </div>                                
