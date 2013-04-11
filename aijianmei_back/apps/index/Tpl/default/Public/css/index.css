@@ -147,6 +147,15 @@
 	.summary{
 		height:45px;
 	}
+	.v_enter {
+		width: 70px;
+		height: 70px;
+		background: url(../images/wm3.png) no-repeat 0 -490px;
+		position: absolute;
+		left: 53px;
+		top: 15px;
+		z-index: 100;
+	}
 	.plan_article_tl{
 		padding: 0;
 	}
