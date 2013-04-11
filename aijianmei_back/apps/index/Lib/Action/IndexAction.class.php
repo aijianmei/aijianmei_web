@@ -273,6 +273,10 @@ function show_banner($type){
             $umailsql="update ai_others set email='".trim($_POST['email'])."' where uid='".addslashes($_POST['emailuid'])."'";
             M('')->query($umailsql);
         }
+        if(!empty($_GET['apiType'])&&$_GET['apiType']=='renren'){
+            print_r($_GET);
+            print_r($_SERVER);
+        }
         
         $this->setTitle('index');
         $this->assign('uid',$this->mid);
