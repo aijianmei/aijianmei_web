@@ -13,13 +13,19 @@ Template Type: type_0
 /* ====================
      公共样式
 ==================== */
-body{background:url(images/b_g.jpg); font-size:12px; font-family:"宋体",Verdana, Arial; line-height:150%; margin:5px 0 0 0; padding:0; color:#404040;}
+body{background:url(images/b_g.jpg); font-size:12px; font-family:"宋体",Verdana, Arial; line-height:150%; margin:0; padding:0; color:#404040;}
 div{margin:0 auto; padding:0;}
 h1,h2,h3,h4,h5,h6,ul,li,dl,dt,dd,form,img,p{
 margin:0; padding:0; border:none; list-style-type:none;
 }
+.wrapper{
+  width: 980px;
+margin: 0 auto;
+background: #f7f7f7;
+box-shadow: 0 0 5px 0 silver;
+}
 .block{
-  width:960px; height:auto;
+  width:940px; height:auto;
 }
 .f_l{float:left;}
 .f_r{float:right;}
@@ -47,7 +53,7 @@ visibility:hidden;
   /*边框*/
   .B_blue{border:1px solid #c5e4ff;}
   .B_input{border:1px solid #0f97ed;}
-  .inputBg{border:1px solid #b3b3b3; background:url(images/inputbg.gif) repeat-x left top; height:18px;}
+  .inputBg{border:1px solid #b3b3b3;width: 122px; background:url(images/inputbg.gif) repeat-x left top; height:18px;}
   /*字体颜色*/
   .f1{color:#ff6666;}
   .f2{color:#006bd0; font-weight:bold; margin-right:15px;}
@@ -70,7 +76,7 @@ visibility:hidden;
   text-align:center; line-height:21px; color:#fff; border:none; cursor:pointer;
   }
   .bnt_blue_2{
-  background:url(images/bg.gif) no-repeat 0px -696px; width:139px; height:21px;
+  background:url(images/bg.gif) no-repeat 0px -696px; width:124px; height:21px;
   text-align:center; line-height:21px; color:#fff; border:none; cursor:pointer;
   }
   .bnt_bonus{
@@ -105,7 +111,7 @@ visibility:hidden;
   .blank{height:8px; line-height:8px; clear:both; visibility:hidden;}
   .blank5{height:5px; line-height:5px;/* _margin:-3px 0;*/ clear:both; visibility:hidden;}
   /*布局*/
-  .AreaL{width:200px; float:left; margin-right:10px;margin-top:-45px;}
+  .AreaL{width:140px; float:left; margin-right:10px;margin-top:-45px;}
   .AreaR{width:750px; float:left;}
 
 /* ====================
@@ -153,10 +159,13 @@ visibility:hidden;
   position:absolute; top:0px; right:0px;
   } */
   /*搜索*/
-  #search{border:1px solid #5cb4e6; background:url(images/searchBg.gif) repeat-x left top; width:708px;float:right;
-  padding:0px 20px; height:36px; line-height:36px;
+  #search{ background: url(images/thbg.jpg) repeat-x; width:750px;float:right;
+  padding:0px 20px; height:34px; line-height:34px;
   }
-  #search a{color:#fff; text-decoration:none;}
+  .outside{
+    width:880px!important;
+  }
+  #search a{color:black; text-decoration:none;}
   #search .keys{background:url(images/bg.gif) no-repeat 0 -28px;
   color:#fff; padding-left:40px;
   }
@@ -171,10 +180,10 @@ visibility:hidden;
      模块
 ==================== */
    /*购物车*/
-   .cart{background:url(images/catBg.gif) no-repeat left top; padding:15px 10px 15px 50px;
+   .cart{background:url(images/catbg.jpg) no-repeat left top; padding:15px 10px 15px 15px;
    color:#006bcd; height:50px;  _padding:12px 10px 15px 50px;
    }
-   .cart a{color:#006bcd; text-decoration:none;}
+   .cart a{color:#006bcd; text-decoration:none;line-height: 13px;}
    .cart a:hover{color:#006bcd; text-decoration:underline;}
    /*商品分类*/
    #category_tree{border:4px solid #f1faff; background-color:#fff;}

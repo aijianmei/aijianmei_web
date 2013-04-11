@@ -316,11 +316,12 @@
 							margin-right: 10px;
 						}
 						.target_content{
-float: left;
-max-width: 570px;
-padding: 5px;
-border: 1px solid #ccc;
-box-shadow: 0 0 12px rgb(150, 150, 150);
+							position: relative;
+							float: left;
+							max-width: 570px;
+							padding: 5px;
+							border: 1px solid #ccc;
+							box-shadow: 0 0 12px #c5c5c5;
 						}
 						.bugle_this{
 
@@ -373,6 +374,7 @@ margin: 0 auto;
 						}
 						.btn_back{
 float: right;
+height:20px;
 margin-right: 10px;
 						}
 						.pop_content{
