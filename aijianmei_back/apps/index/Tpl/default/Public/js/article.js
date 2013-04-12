@@ -21,7 +21,7 @@ $(function(){
             });
         }
         else{
-            alert("请先登录");
+            alert("先登录");
         }
     })
         $(".sprite_9").click(function(){
