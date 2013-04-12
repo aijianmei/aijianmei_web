@@ -870,11 +870,15 @@ function show_banner($type){
         $data['goal']     = $_POST['goal'];
         $data['im']       = $_POST['begin'];
         
+        include_once('shopApi.php');
+        $sdata=$data;
+        $sdata['password']=$_POST['password'];
+        _postCurlRegister($sdata);
         $uid = M('user')->add($data);
         $data['uid'] = $uid;
         M('user_attr')->add($data);
         service('Passport')->loginLocal($uid);
-        service('Shop')->register($data['uname'], $data['email'], $data['password']);
+        //service('Shop')->register($data['uname'], $data['email'], $data['password']);
         
         redirect(U('home/Account/index'));
     }
