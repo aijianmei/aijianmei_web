@@ -896,4 +896,78 @@ class ContentAction extends AdministratorAction {
         $this->assign($data);
         $this->display();
     }
+
+    /**
+     * 底部内容管理
+     */
+    public function footer(){
+        $sql = "select * from ai_footer";
+        $footer = M('')->query($sql);
+        $link= "index.php?app=admin&mod=Content&act=addFooter";        
+        $this->assign('data',$footer);
+        $this->assign('addLink',$link);
+        $this->display('footer');
+    }
+
+    /**
+     * 增加栏目页面
+     */
+    public function addFooter(){        
+        $this->display();
+    }
+
+    /**
+     * 修改栏目页面
+     */
+    public function editFooter(){
+        $id=intval($_GET['id']);//获取栏目id
+        $type='edit';//修改
+        $sql = "select id,title,content,key_name,model_url from ai_footer where id=$id";
+        $data = M('')->query($sql);
+        if (empty($data)) {//栏目不存在
+            $this->footer();
+            return;
+        }
+        $this->assign($data[0]);
+        $this->assign('type',$type);
+        $this->display('addFooter');
+    }
+
+    /**
+     * 修改栏目逻辑
+     */
+    public function doEditFooter(){
+        $footer = M('Footer');
+        $id = intval($_POST['id']);
+        $msg = array(//获取与过滤数据
+            'title' => htmlspecialchars(trim($_POST['title'])),
+            'content' => $_POST['content'],
+            'key_name' => htmlspecialchars(trim($_POST['key_name'])),
+            'model_url' => trim($_POST['model_url']),
+            'last_edit' => time()
+        );
+        if ( ! $_POST['id'] ) {//创建栏目的逻辑
+            $msg['create_time'] = time();
+            $footer->add($msg);
+        } else {//修改栏目的逻辑
+            $flag = $footer->where("id=$id")->save($msg);
+            if ( ! $flag) ;//栏目不存在
+        }
+        $this->footer();
+    }
+
+    /**
+     * 删除栏目逻辑
+     */
+    public function doDeleteFooter(){
+        $footer_id = explode(',',$_POST['ids']);
+        $res = 'TRUE';
+        foreach ($footer_id as $id){
+            $id = intval($id);
+            $sql = "delete from ai_footer where id=$id";
+            $flag = M('')->query($sql);
+            if ( ! $flag) $res = 'FALSE';//删除出错，可能ID不存在
+        }
+        echo $res;
+    }
 }

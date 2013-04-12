@@ -116,7 +116,7 @@ if ($this->_foreach['nav_middle_list']['total'] > 0):
         <script type="text/javascript" src="http://dev.aijianmei.com/apps/index/Tpl/default/Public/js/public.js"></script>
 </div>
 
-<div class="clearfix" style="width:940px">
+<div class="clearfix" style="width:940px;margin-top:20px;">
 <div id="search"  class="clearfix">
   <div class="keys f_l">
    <script type="text/javascript">

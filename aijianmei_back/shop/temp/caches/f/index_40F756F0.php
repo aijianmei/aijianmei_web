@@ -1,4 +1,4 @@
-<?php exit;?>a:3:{s:8:"template";a:20:{i:0;s:66:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/index.dwt";i:1;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/page_header.lbi";i:2;s:73:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/cart.lbi";i:3;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/category_tree.lbi";i:4;s:74:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/top10.lbi";i:5;s:83:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/promotion_info.lbi";i:6;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/order_query.lbi";i:7;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/invoice_query.lbi";i:8;s:78:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/vote_list.lbi";i:9;s:79:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/email_list.lbi";i:10;s:77:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/index_ad.lbi";i:11;s:81:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/new_articles.lbi";i:12;s:88:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_promotion.lbi";i:13;s:83:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_best.lbi";i:14;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_new.lbi";i:15;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_hot.lbi";i:16;s:76:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/auction.lbi";i:17;s:78:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/group_buy.lbi";i:18;s:73:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/help.lbi";i:19;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/page_footer.lbi";}s:7:"expires";i:1365691501;s:8:"maketime";i:1365687901;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php exit;?>a:3:{s:8:"template";a:20:{i:0;s:66:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/index.dwt";i:1;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/page_header.lbi";i:2;s:73:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/cart.lbi";i:3;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/category_tree.lbi";i:4;s:74:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/top10.lbi";i:5;s:83:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/promotion_info.lbi";i:6;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/order_query.lbi";i:7;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/invoice_query.lbi";i:8;s:78:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/vote_list.lbi";i:9;s:79:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/email_list.lbi";i:10;s:77:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/index_ad.lbi";i:11;s:81:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/new_articles.lbi";i:12;s:88:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_promotion.lbi";i:13;s:83:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_best.lbi";i:14;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_new.lbi";i:15;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_hot.lbi";i:16;s:76:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/auction.lbi";i:17;s:78:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/group_buy.lbi";i:18;s:73:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/help.lbi";i:19;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/page_footer.lbi";}s:7:"expires";i:1365748388;s:8:"maketime";i:1365744788;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta name="Generator" content="ECSHOP v2.7.3" />
@@ -101,7 +101,7 @@ var process_request = "正在处理您的请求...";
         <script type="text/javascript" src="http://dev.aijianmei.com/apps/index/Tpl/default/Public/js/jquery.js"></script>
         <script type="text/javascript" src="http://dev.aijianmei.com/apps/index/Tpl/default/Public/js/public.js"></script>
 </div>
-<div class="clearfix" style="width:940px">
+<div class="clearfix" style="width:940px;margin-top:20px;">
 <div id="search"  class="clearfix">
   <div class="keys f_l">
    <script type="text/javascript">
@@ -126,7 +126,7 @@ var process_request = "正在处理您的请求...";
   <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="f_r"  style="_position:relative; top:5px;">
    <select name="category" id="category" class="B_input">
       <option value="0">所有分类</option>
-      <option value="1" >ces</option>    </select>
+      <option value="1" >ces</option><option value="2" >&nbsp;&nbsp;&nbsp;&nbsp;asdfasdfasdgsadg</option>    </select>
    <input name="keywords" type="text" id="keyword" value="" class="B_input" style="width:110px;"/>
    <input name="imageField" type="submit" value="" class="go" style="cursor:pointer;" />
    <a href="search.php?act=advanced_search">高级搜索</a>
@@ -150,28 +150,26 @@ var process_request = "正在处理您的请求...";
   
 <div class="cart" id="ECS_CARTINFO">
  554fcae493e564ee0dc75bdf2ebf94cacart_info|a:1:{s:4:"name";s:9:"cart_info";}554fcae493e564ee0dc75bdf2ebf94ca</div>
-<div class="blank5"></div>
-<div class="box">
+<div class="blank5"></div><div class="box">
  <div class="box_1">
   <div id="category_tree">
          <dl>
      <dt><a href="category.php?id=1">ces</a></dt>
-            
+          <dd><a href="category.php?id=2">asdfasdfasdgsadg</a></dd>
+                   
        </dl>
      
   </div>
  </div>
 </div>
-<div class="blank5"></div>
-<div class="box">
+<div class="blank5"></div><div class="box">
  <div class="box_2">
   <div class="top10Tit"></div>
   <div class="top10List clearfix">
     </div>
  </div>
 </div>
-<div class="blank5"></div>
-<script>var invalid_order_sn = "无效订单号"</script>
+<div class="blank5"></div><script>var invalid_order_sn = "无效订单号"</script>
 <div class="box">
  <div class="box_1">
   <h3><span>订单查询</span></h3>
@@ -186,8 +184,7 @@ var process_request = "正在处理您的请求...";
   </div>
  </div>
 </div>
-<div class="blank5"></div>
-554fcae493e564ee0dc75bdf2ebf94cavote|a:1:{s:4:"name";s:4:"vote";}554fcae493e564ee0dc75bdf2ebf94ca<div class="box">
+<div class="blank5"></div>554fcae493e564ee0dc75bdf2ebf94cavote|a:1:{s:4:"name";s:4:"vote";}554fcae493e564ee0dc75bdf2ebf94ca<div class="box">
  <div class="box_1">
   <h3><span>邮件订阅</span></h3>
   <div class="boxCenterList RelaArticle">
@@ -285,10 +282,31 @@ function check_email()
   <div id="show_best_area" class="clearfix goodsBox">
       <div class="goodsItem">
          <span class="best"></span>
-           <a href="goods.php?id=1"><img src="images/no_picture.gif" alt="aea12132" class="goodsimg" /></a><br />
-           <p><a href="goods.php?id=1" title="aea12132">aea1213...</a></p>
+           <a href="goods.php?id=1"><img src="images/201304/thumb_img/1_thumb_G_1365743169532.jpg" alt="aea" class="goodsimg" /></a><br />
+           <p><a href="goods.php?id=1" title="aea">aea</a></p>
            <font class="f1">
                      ￥100元                     </font>
+        </div>
+    <div class="goodsItem">
+         <span class="best"></span>
+           <a href="goods.php?id=4"><img src="images/201304/thumb_img/4_thumb_G_1365743389596.jpg" alt="adsf" class="goodsimg" /></a><br />
+           <p><a href="goods.php?id=4" title="adsf">adsf</a></p>
+           <font class="f1">
+                     ￥100元                     </font>
+        </div>
+    <div class="goodsItem">
+         <span class="best"></span>
+           <a href="goods.php?id=3"><img src="images/201304/thumb_img/3_thumb_G_1365743362075.jpg" alt="asdf" class="goodsimg" /></a><br />
+           <p><a href="goods.php?id=3" title="asdf">asdf</a></p>
+           <font class="f1">
+                     ￥2元                     </font>
+        </div>
+    <div class="goodsItem">
+         <span class="best"></span>
+           <a href="goods.php?id=2"><img src="images/201304/thumb_img/2_thumb_G_1365743134882.jpg" alt="danbaifen" class="goodsimg" /></a><br />
+           <p><a href="goods.php?id=2" title="danbaifen">danbaif...</a></p>
+           <font class="f1">
+                     ￥2元                     </font>
         </div>
     <div class="more"><a href="search.php?intro=best"><img src="themes/default/images/more.gif" /></a></div>
     </div>
@@ -302,8 +320,15 @@ function check_email()
   <div id="show_new_area" class="clearfix goodsBox">
       <div class="goodsItem">
          <span class="news"></span>
-           <a href="goods.php?id=1"><img src="images/no_picture.gif" alt="aea12132" class="goodsimg" /></a><br />
-           <p><a href="goods.php?id=1" title="aea12132">aea1213...</a></p>
+           <a href="goods.php?id=1"><img src="images/201304/thumb_img/1_thumb_G_1365743169532.jpg" alt="aea" class="goodsimg" /></a><br />
+           <p><a href="goods.php?id=1" title="aea">aea</a></p>
+           <font class="f1">
+                     ￥100元                     </font>
+        </div>
+    <div class="goodsItem">
+         <span class="news"></span>
+           <a href="goods.php?id=4"><img src="images/201304/thumb_img/4_thumb_G_1365743389596.jpg" alt="adsf" class="goodsimg" /></a><br />
+           <p><a href="goods.php?id=4" title="adsf">adsf</a></p>
            <font class="f1">
                      ￥100元                     </font>
         </div>
@@ -319,8 +344,15 @@ function check_email()
   <div id="show_hot_area" class="clearfix goodsBox">
       <div class="goodsItem">
          <span class="hot"></span>
-           <a href="goods.php?id=1"><img src="images/no_picture.gif" alt="aea12132" class="goodsimg" /></a><br />
-           <p><a href="goods.php?id=1" title="aea12132">aea1213...</a></p>
+           <a href="goods.php?id=1"><img src="images/201304/thumb_img/1_thumb_G_1365743169532.jpg" alt="aea" class="goodsimg" /></a><br />
+           <p><a href="goods.php?id=1" title="aea">aea</a></p>
+           <font class="f1">
+                     ￥100元                     </font>
+        </div>
+    <div class="goodsItem">
+         <span class="hot"></span>
+           <a href="goods.php?id=4"><img src="images/201304/thumb_img/4_thumb_G_1365743389596.jpg" alt="adsf" class="goodsimg" /></a><br />
+           <p><a href="goods.php?id=4" title="adsf">adsf</a></p>
            <font class="f1">
                      ￥100元                     </font>
         </div>
@@ -407,7 +439,6 @@ function check_email()
 >&nbsp;&nbsp;Licensed</a><br />
         <div align="left"  id="rss"><a href="feed.php"><img src="themes/default/images/xml_rss2.gif" alt="rss" /></a></div>
  </div>
-</div>
-</div>
+</div></div>
 </body>
 </html>
