@@ -19,7 +19,16 @@ if (!defined('IN_ECS'))
 }
 
 error_reporting(E_ALL);
-
+/*
+get the ecshop session by curl api and set in php session
+mod by kontem at 20130412
+start 
+*/
+session_start();
+if(@$_SESSION['euserinfo']&&!$GLOBALS){
+    @$GLOBALS=$_SESSION['euserinfo'];
+}
+/*}}}end*/
 if (__FILE__ == '')
 {
     die('Fatal error code: 0');
@@ -126,7 +135,6 @@ if ($_CFG['shop_closed'] == 1)
 
     die('<div style="margin: 150px; text-align: center; font-size: 14px"><p>' . $_LANG['shop_closed'] . '</p><p>' . $_CFG['close_comment'] . '</p></div>');
 }
-
 if (is_spider())
 {
     /* 如果是蜘蛛的访问，那么默认为访客方式，并且不记录到日志中 */
@@ -139,7 +147,6 @@ if (is_spider())
              $user = & init_users();
         }
     }
-	
     $_SESSION = array();
     $_SESSION['user_id']     = 0;
     $_SESSION['user_name']   = '';
@@ -148,37 +155,10 @@ if (is_spider())
     $_SESSION['discount']    = 1.00;
 }
 
-
-// 主站已登录
-session_start();
-//print_r($_SESSION);
-if(isset($_SESSION['user_id']) && $_SESSION['user_id']>0) {
-    if (!defined('INIT_NO_USERS')) {
-        define('INIT_NO_USERS', true);
-    }
-
-
-    /* 初始化session */
-    /*include(ROOT_PATH . 'includes/cls_session.php');
-    
-
-    $sess = new cls_session($db, $ecs->table('sessions'), $ecs->table('sessions_data'));
-
-    define('SESS_ID', $sess->get_session_id());
-
-
-    $sess->update_session(array('admin_id'=>0, 'user_id'=>$_SESSION['user_id'], 'user_name'=>$_SESSION['user_name'], 'user_rank'=>0, 'discount'=>0, 'email'=>0));
-    */
-    $user = & init_users();
-
-}
-
-
 if (!defined('INIT_NO_USERS'))
 {
     /* 初始化session */
     include(ROOT_PATH . 'includes/cls_session.php');
-	
 
     $sess = new cls_session($db, $ecs->table('sessions'), $ecs->table('sessions_data'));
 
@@ -228,7 +208,6 @@ if (!defined('INIT_NO_SMARTY'))
 
 if (!defined('INIT_NO_USERS'))
 {
-	
     /* 会员信息 */
     $user =& init_users();
 

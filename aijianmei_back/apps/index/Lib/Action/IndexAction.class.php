@@ -431,6 +431,7 @@ function show_banner($type){
         $this->assign("third",$tree_name);
         $this->assign("tree_parent",$tree_parent);
         $this->assign("tree_channel_en",$tree_channel_en);
+        $this->assign('headertitle', $article['title']);
         $this->assign("tree_category_id",$tree_category_id);
         $this->display('detail');
     }
@@ -563,6 +564,7 @@ function show_banner($type){
             case 4:{$tree_channel="健身运动员 ";$tree_channel_en=4;}break;
         }
         $this->assign("first",$tree_channel);
+        
         //banner 滚动图片列表
         $this->show_banner($type);
         //-------END--------
@@ -573,6 +575,7 @@ function show_banner($type){
         $from = ($pager->pg -1) * $pager->countlist;		
         $pagerArray = (array)$pager;
         $this->assign('pager', $pagerArray);
+        $this->assign('headertitle', $tree_channel);
         $this->display();
     }
     
@@ -624,6 +627,7 @@ function show_banner($type){
         //print_r($daily);
         $this->assign('commentsCount', $commentsCount);
         $this->assign('daily', $daily);
+
         $this->assign('videos', $videos);
         $this->assign('comments', $comments);
         $this->assign('cssFile', 'article');
@@ -668,6 +672,7 @@ function show_banner($type){
         $this->assign("tree_channel_en",$tree_channel_en);
         $this->assign("tree_category_id",$tree_category_id);
         $this->assign('parent', $_GET['type']);
+        $this->assign('headertitle', trim($daily['title']));
         $this->display();
     }
     
@@ -870,11 +875,15 @@ function show_banner($type){
         $data['goal']     = $_POST['goal'];
         $data['im']       = $_POST['begin'];
         
+        include_once('shopApi.php');
+        $sdata=$data;
+        $sdata['password']=$_POST['password'];
+        _postCurlRegister($sdata);
         $uid = M('user')->add($data);
         $data['uid'] = $uid;
         M('user_attr')->add($data);
         service('Passport')->loginLocal($uid);
-        service('Shop')->register($data['uname'], $data['email'], $data['password']);
+        //service('Shop')->register($data['uname'], $data['email'], $data['password']);
         
         redirect(U('home/Account/index'));
     }

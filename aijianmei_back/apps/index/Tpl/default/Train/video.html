@@ -2,10 +2,10 @@
 <div id="content">
             <div>
                 <span>
-                <span>您所在的位置:</span>
-                <a href="/index.php?app=index">爱健�?/a>->
-                <a href="/index.php?app=index&mod=Train">锻炼</a>->
-                <a href="/index.php?app=index&mod=Train&act=videoList&id=53">肌肉�?/a>->
+                <span>æ‚¨æ‰€åœ¨çš„ä½ç½®:</span>
+                <a href="/index.php?app=index">çˆ±å¥ç¾?/a>->
+                <a href="/index.php?app=index&mod=Train">é”»ç‚¼</a>->
+                <a href="/index.php?app=index&mod=Train&act=videoList&id=53">è‚Œè‚‰ç»?/a>->
                 <a href="#">{$video['title']}</a>
                 </span>
                 <div class="video_content clearfix">
@@ -13,13 +13,13 @@
                         <embed src="{$video['link']}" quality="high" width="634" height="450" align="middle" allownetworking="all" allowscriptaccess="always" type="application/x-shockwave-flash" allowfullscreen="true">
                     </div>
                     <div class="v_re">
-                        <h3 class="tabclass">视频信息</h3>
+                        <h3 class="tabclass">è§†é¢‘ä¿¡æ¯</h3>
                         <div class="tab block">
                             <div class="v_infro1">
-                                <span>视频名字:<span>{$video['title']}</span></span>
-                                <p>发布时间:<span>{$video['create_time']}</span></p>
+                                <span>è§†é¢‘åå­—:<span>{$video['title']}</span></span>
+                                <p>å‘å¸ƒæ—¶é—´:<span>{$video['create_time']}</span></p>
                                 <div class="v_infro2">
-                                    <h3>视频信息:</h3>
+                                    <h3>è§†é¢‘ä¿¡æ¯:</h3>
                                     {$video['brief']}
                                 </div>
                             </div>
@@ -32,20 +32,20 @@
                             <div class="web_expend_2">
                                 <a class="sprite_8"><span class="praise">{$video['like']}</span></a>
                                 <a class="sprite_9"><span class="praise">{$video['unlike']}</span></a>
-                                <span class="relay">转发�?/span>
+                                <span class="relay">è½¬å‘åˆ?/span>
                                 <include file="../Public/share" />				
                             </div>
                             <div class="border_comment">
                                 <span class="word_num">0/300</span>
-                                <span><a href="index.php?app=home&mod=Public&act=login">登录</a></span>|
-                                <span><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a></span>
+                                <span><a href="index.php?app=home&mod=Public&act=login">ç™»å½•</a></span>|
+                                <span><a href="/index.php?app=index&mod=Index&act=selectRegister">æ³¨å†Œ </a></span>
                                 <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
                                 <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
-                                <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox">有什么感想，来说说吧</textarea></div>
-                                <a class="comment" onclick="addVideoCommont();">发表评论</a>
+                                <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox">æœ‰ä»€ä¹ˆæ„Ÿæƒ³ï¼Œæ¥è¯´è¯´å§</textarea></div>
+                                <a class="comment" onclick="addVideoCommont();">å‘è¡¨è¯„è®º</a>
                             </div>
                             <div class="check_comment">
-                                <a class="comment_1">全部评论(<?php echo $cRecomnums;?>)</a>
+                                <a class="comment_1">å…¨éƒ¨è¯„è®º(<?php echo $cRecomnums;?>)</a>
                             </div>
                             <div class="cm_content tab_2">
                                 <div class="cm_top">
@@ -56,23 +56,23 @@
                                         <?php printf($pager['backstr'],'class="pre_page"');?>
                                         <?php printf($pager['nextstr'],'class="next_page"');?>
                                     </span>
-                                    <span>�??php echo $_GET['pg'];?>�?/span>
+                                    <span>ç¬??php echo $_GET['pg'];?>é¡?/span>
                                 </div>
                                 <div class="cm_bottom" id="recomment_fdiv">
-                                    <h5 class="title_5" >推荐精华</h5>
+                                    <h5 class="title_5" >æŽ¨èç²¾åŽ</h5>
                                     <php> foreach($RecommentsList as $v){ </php>
                                     <div class="target clearfix">
-                                        <div class="target_pic"><img src="<?php echo $v['img'];?>" alt="no" /><span class="care">关注</span></div>
+                                        <div class="target_pic"><img src="<?php echo $v['img'];?>" alt="no" /><span class="care">å…³æ³¨</span></div>
                                         <div class="cm_left">
                                             <a class="name"><?php echo $v['username'];?></a>
                                             <p><?php echo $v['connect'];?></p>
                                             <p class="bottom_ms">
                                                 <span class="to">
-                                                    <a>转发<span>(0)</span></a>
-                                                    <a>回复<span>(0)</span></a>
+                                                    <a>è½¬å‘<span>(0)</span></a>
+                                                    <a>å›žå¤<span>(0)</span></a>
                                                 </span>
                                                 <span><?php echo $v['create_time'];?></span>
-                                                <span>来自<em>爱健�?/em></span>
+                                                <span>æ¥è‡ª<em>çˆ±å¥ç¾?/em></span>
                                             </p>
                                         </div>
                                     </div>
@@ -82,13 +82,13 @@
                     </div>
                     <div class="bottom_part_right">
                         <div class="sider_m">
-                            <h4 class="sider_t">精华推荐</h4>
+                            <h4 class="sider_t">ç²¾åŽæŽ¨è</h4>
                             <?php foreach($otherVideo as $v) { ?>
                                 <div class="recommend clearfix">
                                     <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}" class="recommend_pic"><img width="90" height="60px" src="{$v['logo']}" alt="no" /></a>
                                     <div class="intro">
                                         <h3><a>{$v['title']}</a></h3>
-                                        <span class="t_play_time">点击:<span> </span>{$v['click']}</span><span class="comment_time">评论: <span>{$v['CommNumber']}</span></span>
+                                        <span class="t_play_time">ç‚¹å‡»:<span> </span>{$v['click']}</span><span class="comment_time">è¯„è®º: <span>{$v['CommNumber']}</span></span>
                                     </div>
                                 </div>
                                 <?php }?>
@@ -98,7 +98,7 @@
         </div>
         <script>
         function addVideoCommont(){
-            if($("#commentUid").val()==''){alert("请先登录");return false;}
+            if($("#commentUid").val()==''){alert("è¯·å…ˆç™»å½•");return false;}
             if($("#commentbox").val()==''){return false;}
             if($("#commentPid").val()==''){return false;}
             $.ajax({
@@ -107,7 +107,7 @@
             dataType:"json",
             data: "act=addVideoCommont&data=ford&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&connect="+$("#commentbox").val(),
             success: function(data){
-             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">关注</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.connect+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em></em></span></p></div></div';
+             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">å…³æ³¨</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.connect+'</p><p class="bottom_ms"><span class="to"><a>è½¬å‘<span>(0)</span></a><a>å›žå¤<span>(0)</span></a></span><span>'+data.create_time+'</span><span>æ¥è‡ª<em></em></span></p></div></div';
              $("#recomment_fdiv").append(innerHtml);
              
             }

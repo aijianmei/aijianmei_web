@@ -15,8 +15,9 @@
                     <div class="preNext pre"></div>
                     <div class="preNext next"></div>
                 </div>
-                <div id="content">
-                    <div class="part_top clearfix">
+                <!-- outside remove class=clearfix -->
+                <div id="content" class="clearfix">
+                    <div class="part_top">
                         <div class="lay_top clearfix">
                             <h1 class="public_title">天天锻炼</h1>
                             <div class="part clearfix">
@@ -84,7 +85,7 @@
                         </div>
                     </div>
 
-                    <div class="part_top_1 clearfix">
+                    <div class="part_top_1">
                         <div class="lay_top_1 clearfix">
                             <h1 class="public_title">最新文章</h1>
                             <ul class="new_video clearfix">
@@ -103,9 +104,25 @@
                                 </li>
                                 <?php } ?>
                             </ul>
+                            <div class="page clearfix">
+                                <span class="concrete_choice">
+                                                    {$pager[backstr]}
+                                                    {$pager[thestr]}
+                                                    {$pager[nextstr]}
+                                </span>
+                                <span class="free_choice">
+                                    <span>共{$pager[page]}页</span>
+                                    <span class="concrete_page">
+                                            到第
+                                            <input type="text">
+                                            页
+                                    </span>
+                                    <span class="sure_button" onclick="">确定</span>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                    <div class="part_top_1 clearfix">
+                    <div class="part_top_1">
                         <div class="lay_top_2 clearfix">
                             <h1 class="public_title">最新视频</h1>
                             <ul class="new_video clearfix">
