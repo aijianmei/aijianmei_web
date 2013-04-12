@@ -154,7 +154,7 @@
 		position: absolute;
 		left: 53px;
 		top: 15px;
-		z-index: 100;
+		z-index: 8;
 	}
 	.plan_article_tl{
 		padding: 0;
