@@ -944,8 +944,9 @@ class ContentAction extends AdministratorAction {
             'content' => $_POST['content'],
             'key_name' => htmlspecialchars(trim($_POST['key_name'])),
             'model_url' => trim($_POST['model_url']),
-            'last_edit' => time()
+            'last_edit' => time(),
         );
+        
         if ( ! $_POST['id'] ) {//创建栏目的逻辑
             $msg['create_time'] = time();
             $footer->add($msg);
@@ -953,6 +954,7 @@ class ContentAction extends AdministratorAction {
             $flag = $footer->where("id=$id")->save($msg);
             if ( ! $flag) ;//栏目不存在
         }
+        
         $this->footer();
     }
 

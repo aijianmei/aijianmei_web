@@ -81,6 +81,7 @@ class AppendAction extends Action {
         $this->assign('articles', $articles);
         $this->assign('cssFile', 'training');
         $this->show_banner();//banner 滚动图片列表
+        $this->assign('headertitle', '辅助品');
         $this->display();
     }
     
@@ -130,7 +131,14 @@ class AppendAction extends Action {
         }
         $this->assign('lastArticles', $lastArticles);
         $this->show_banner();//banner 滚动图片列表
-        
+                foreach($realCate as $k =>$v){
+            foreach($v['children'] as $k1=>$v1){
+                if($id==$v1['id'])
+                {
+                    $this->assign('headertitle', $v1['name']);
+                }
+            }
+        }
         $this->display('list');
     }
     
