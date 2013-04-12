@@ -74,6 +74,7 @@ class TrainAction extends Action {
         $this->assign('lastArticles', $lastArticles);
 
         $this->show_banner();//显示banner
+        $this->assign('headertitle', '锻炼');
         $this->display();
     }
     
@@ -123,9 +124,16 @@ class TrainAction extends Action {
         //$articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();
         $this->assign('pager', $pageArray);
         $this->assign('articles', $articles);
-        
-         $this->show_banner();//显示banner
-        
+        $this->show_banner();//显示banner
+        foreach($realCate as $k =>$v){
+            foreach($v['children'] as $k1=>$v1){
+                if($v1['id']==$id)
+                {
+                    
+                    $this->assign('headertitle', $v1['name']);
+                }
+            }
+        }
         $this->display('list');
     }
     
