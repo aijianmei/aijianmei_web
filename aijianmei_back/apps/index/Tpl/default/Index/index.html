@@ -104,6 +104,22 @@
                                 </li>
                                 <?php } ?>
                             </ul>
+                            <div class="page clearfix">
+                                <span class="concrete_choice">
+                                                    {$pager[backstr]}
+                                                    {$pager[thestr]}
+                                                    {$pager[nextstr]}
+                                </span>
+                                <span class="free_choice">
+                                    <span>共{$pager[page]}页</span>
+                                    <span class="concrete_page">
+                                            到第
+                                            <input type="text">
+                                            页
+                                    </span>
+                                    <span class="sure_button" onclick="">确定</span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="part_top_1">

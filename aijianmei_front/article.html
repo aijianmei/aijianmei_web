@@ -214,7 +214,8 @@
 									<img src="images/article/9.png" alt="no" />
 								</div>
 								<div class="target_content">
-									<span class="staircase">1楼</span><a class="name">huifei</a>
+									<span class="staircase">1楼</span>
+									<a class="name">huifei</a>
 									<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
 									<p class="bottom_ms">
 										<span class="to">
@@ -231,10 +232,12 @@
 									<img src="images/article/9.png" alt="no" />
 								</div>
 								<div class="target_content">
-									<span class="staircase">2楼</span><a class="name">huifei</a>
+									<span class="staircase">2楼</span>
+									<a class="name">huifei</a>
 									<div class="lay_target clearfix">
 										<div class="target_content">
-											<span class="staircase">1楼</span><a class="name">huifei</a>
+											<span class="staircase">1楼</span>
+											<a class="name">huifei</a>
 											<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
 										</div>
 									</div>
@@ -358,9 +361,10 @@
 			})
 			var aijianmei = {
 				newdom : new getdom,
-				answer : function(obj,text,obj_1){
+				answer : function(obj,text){
 					target_content = obj.parentNode.parentNode.parentNode;
-					if(!obj_1.nextSibling){
+					console.log(target_content.lastChild)
+					if(0){
 						var div = document.createElement('div');
 						div.innerHTML = text;
 						target_content.appendChild(div);
@@ -375,12 +379,11 @@
 				var newdom = new getdom,
 					write_back = newdom.getElementsByClass('write_back'),
 					len = write_back.length,
-					bottom_ms = newdom.getElementsByClass('bottom_ms'),
 					content = '<div class="post_area"><span class="btn_back">x</span><div class="part_back"><textarea class="pop_content"></textarea><div class="part_sure"><span class="rule">登录(请登录发言，并遵守相关规定)</span><input type="button" value="回复" class="sure_back" /></div></div></div>';
 					for(var i = 0;i < len;i++){
 						write_back[i].index = i;
 						write_back[i].onclick = function(){
-							aijianmei.answer(this,content,bottom_ms[i]);
+							aijianmei.answer(this,content);
 						}
 					}	
 			}

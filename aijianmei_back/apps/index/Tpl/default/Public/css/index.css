@@ -121,6 +121,9 @@
 	.hot_video,.new_video{
 		margin: 10px;
 	}
+	.page{
+		width:220px;
+	}
 	.lay_top_1 img{
 		height: 110px;
 		width: 170px;

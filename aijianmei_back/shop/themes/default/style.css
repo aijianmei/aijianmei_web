@@ -275,9 +275,8 @@ visibility:hidden;
 
    /*帮助*/
    .helpTitBg{background:url(images/helpTitBg.gif) repeat-x left top; text-align:left; border:1px solid #c5e4ff; background-color:#fff;
-   padding:0 0 10px 15px;
    }
-   .helpTitBg dl{float:left; margin-right:30px; _margin-right:20px; width: 140px;padding-left: 20px;}
+   .helpTitBg dl{float:left; margin-right:28px; _margin-right:20px; width: 140px;padding-left: 20px;}
    .helpTitBg dt{width:auto; height:33px; line-height:33px; text-align:left;
    font-weight:bold; color:#56a5ee; margin-bottom:8px;}
      .helpTitBg dt a{font-weight:bold; color:#56a5ee; text-decoration:none;}
