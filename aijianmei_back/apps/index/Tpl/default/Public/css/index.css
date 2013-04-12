@@ -110,6 +110,9 @@
 		border: 1px solid #E0E0E0;
 		border-top: none;
 	}
+	.lay_top_2 .tr_classify{
+		width: 430px;
+	}
 	.tr_classify{
 		width:440px;
 		margin:0;
@@ -139,6 +142,9 @@
 		position: relative;
 		float: left;
 		margin-right: 50px;
+	}
+	.lay_top_2 .lay_tr{
+		width: 200px;
 	}
 	.lay_tr{
 		float: left;

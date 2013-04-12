@@ -219,7 +219,7 @@
 									<p class="bottom_ms">
 										<span class="to">
 											<a class="fover">支持[0]</a>
-											<span class="">回复</span>
+											<a class="write_back">回复</a>
 										</span>	
 										<span>22个小时前</span>
 										<span>来自<em></em></span>	
@@ -242,7 +242,7 @@
 									<p class="bottom_ms">
 										<span class="to">
 											<a class="fover">支持[0]</a>
-											<span class="">回复</span>
+											<a class="write_back">回复</a>
 										</span>	
 										<span>22个小时前</span>
 										<span>来自<em></em></span>	
@@ -259,7 +259,7 @@
 									<p class="bottom_ms">
 										<span class="to">
 											<a class="fover">支持[0]</a>
-											<a class="write_back">回复</a>
+											<a class="write_back write_click">回复</a>
 										</span>	
 										<span>22个小时前</span>
 										<span>来自<em></em></span>	
@@ -356,6 +356,35 @@
 				time++;
 				$(this).children().html(time)
 			})
+			var aijianmei = {
+				newdom : new getdom,
+				answer : function(obj,text,obj_1){
+					target_content = obj.parentNode.parentNode.parentNode;
+					if(!obj_1.nextSibling){
+						var div = document.createElement('div');
+						div.innerHTML = text;
+						target_content.appendChild(div);
+						console.log(target_content.lastChild.className)
+					}
+					else{
+						target_content.removeChild(target_content.lastChild);
+					}				
+				}
+			}
+			var init = function(){
+				var newdom = new getdom,
+					write_back = newdom.getElementsByClass('write_back'),
+					len = write_back.length,
+					bottom_ms = newdom.getElementsByClass('bottom_ms'),
+					content = '<div class="post_area"><span class="btn_back">x</span><div class="part_back"><textarea class="pop_content"></textarea><div class="part_sure"><span class="rule">登录(请登录发言，并遵守相关规定)</span><input type="button" value="回复" class="sure_back" /></div></div></div>';
+					for(var i = 0;i < len;i++){
+						write_back[i].index = i;
+						write_back[i].onclick = function(){
+							aijianmei.answer(this,content,bottom_ms[i]);
+						}
+					}	
+			}
+			init()
 	</script>
 </body>
 </html>
