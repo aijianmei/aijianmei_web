@@ -13,7 +13,7 @@ class ArticleAction extends AdministratorAction {
             $data['content']  = t($_POST['content']);
             $data['keyword']  = t($_POST['keyword']);			
             $data['create_time'] = time();
-			$data['iswaterimg']  = t($_POST['iswaterimg']);
+            $data['iswaterimg']  = t($_POST['iswaterimg']);
             
             
             //print_r($_POST);exit;
@@ -21,8 +21,8 @@ class ArticleAction extends AdministratorAction {
                 if(!move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'])) 				{
                     echo 'add error '.'<br />';					
                 }
-				$waterImage='water.png';
-				$this->imageWaterMark($_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'],9,$waterImage);
+                //$waterImage='water.png';
+                //$this->imageWaterMark($_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'],9,$waterImage);
                 $data['img'] = $_FILES['img']['name'];
             }
             if (!empty($data['title']) &&
@@ -85,7 +85,7 @@ class ArticleAction extends AdministratorAction {
                 
         
             if( $_FILES['img']['name']!= NULL) {
-            	if(!move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'])) {
+                if(!move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'])) {
                     echo 'picture upload failed '.'<br />';					
                 }
                 $data['img'] = $_FILES['img']['name'];
@@ -368,18 +368,20 @@ class ArticleAction extends AdministratorAction {
         $map['id'] = array('in', t($_POST['ids']));
         echo M($table)->where($map)->delete() ? '1' : '0';
     }
-	function imageWaterMark($groundImage,$waterPos=0,$waterImage="",$waterText="",$textFont=5,$textColor="#FF0000") 
-	{ 
+    
+    
+    function imageWaterMark($groundImage,$waterPos=0,$waterImage="",$waterText="",$textFont=5,$textColor="#FF0000") 
+{ 
      $isWaterImage = FALSE; 
-     $formatMsg = "Ôİ²»Ö§³Ö¸ÃÎÄ¼ş¸ñÊ½£¬ÇëÓÃÍ¼Æ¬´¦ÀíÈí¼ş½«Í¼Æ¬×ª»»ÎªGIF¡¢JPG¡¢PNG¸ñÊ½¡£";
-     //¶ÁÈ¡Ë®Ó¡ÎÄ¼ş 
+     $formatMsg = "æš‚ä¸æ”¯æŒè¯¥æ–‡ä»¶æ ¼å¼ï¼Œè¯·ç”¨å›¾ç‰‡å¤„ç†è½¯ä»¶å°†å›¾ç‰‡è½¬æ¢ä¸ºGIFã€JPGã€PNGæ ¼å¼ã€‚";
+     //è¯»å–æ°´å°æ–‡ä»¶ 
      if(!empty($waterImage) && file_exists($waterImage)) 
      { 
          $isWaterImage = TRUE; 
          $water_info = getimagesize($waterImage); 
-         $water_w     = $water_info[0];//È¡µÃË®Ó¡Í¼Æ¬µÄ¿í 
-         $water_h     = $water_info[1];//È¡µÃË®Ó¡Í¼Æ¬µÄ¸ß
-         switch($water_info[2])//È¡µÃË®Ó¡Í¼Æ¬µÄ¸ñÊ½ 
+         $water_w     = $water_info[0];//å–å¾—æ°´å°å›¾ç‰‡çš„å®½ 
+         $water_h     = $water_info[1];//å–å¾—æ°´å°å›¾ç‰‡çš„é«˜
+         switch($water_info[2])//å–å¾—æ°´å°å›¾ç‰‡çš„æ ¼å¼ 
          { 
              case 1:$water_im = imagecreatefromgif($waterImage);break; 
              case 2:$water_im = imagecreatefromjpeg($waterImage);break; 
@@ -387,13 +389,13 @@ class ArticleAction extends AdministratorAction {
              default:die($formatMsg); 
          } 
      }
-     //¶ÁÈ¡±³¾°Í¼Æ¬ 
+     //è¯»å–èƒŒæ™¯å›¾ç‰‡ 
      if(!empty($groundImage) && file_exists($groundImage)) 
      { 
          $ground_info = getimagesize($groundImage); 
-         $ground_w     = $ground_info[0];//È¡µÃ±³¾°Í¼Æ¬µÄ¿í 
-         $ground_h     = $ground_info[1];//È¡µÃ±³¾°Í¼Æ¬µÄ¸ß
-         switch($ground_info[2])//È¡µÃ±³¾°Í¼Æ¬µÄ¸ñÊ½ 
+         $ground_w     = $ground_info[0];//å–å¾—èƒŒæ™¯å›¾ç‰‡çš„å®½ 
+         $ground_h     = $ground_info[1];//å–å¾—èƒŒæ™¯å›¾ç‰‡çš„é«˜
+         switch($ground_info[2])//å–å¾—èƒŒæ™¯å›¾ç‰‡çš„æ ¼å¼ 
          { 
              case 1:$ground_im = imagecreatefromgif($groundImage);break; 
              case 2:$ground_im = imagecreatefromjpeg($groundImage);break; 
@@ -403,82 +405,82 @@ class ArticleAction extends AdministratorAction {
      } 
      else 
      { 
-         die("ĞèÒª¼ÓË®Ó¡µÄÍ¼Æ¬²»´æÔÚ£¡"); 
+         die("éœ€è¦åŠ æ°´å°çš„å›¾ç‰‡ä¸å­˜åœ¨ï¼"); 
      }
-     //Ë®Ó¡Î»ÖÃ 
-     if($isWaterImage)//Í¼Æ¬Ë®Ó¡ 
+     //æ°´å°ä½ç½® 
+     if($isWaterImage)//å›¾ç‰‡æ°´å° 
      { 
          $w = $water_w; 
          $h = $water_h; 
-         $label = "Í¼Æ¬µÄ"; 
+         $label = "å›¾ç‰‡çš„"; 
      } 
-     else//ÎÄ×ÖË®Ó¡ 
+     else//æ–‡å­—æ°´å° 
      { 
-         $temp = imagettfbbox(ceil($textFont*2.5),0,"./cour.ttf",$waterText);//È¡µÃÊ¹ÓÃ TrueType ×ÖÌåµÄÎÄ±¾µÄ·¶Î§ 
+         $temp = imagettfbbox(ceil($textFont*2.5),0,"./cour.ttf",$waterText);//å–å¾—ä½¿ç”¨ TrueType å­—ä½“çš„æ–‡æœ¬çš„èŒƒå›´ 
          $w = $temp[2] - $temp[6]; 
          $h = $temp[3] - $temp[7]; 
          unset($temp); 
-         $label = "ÎÄ×ÖÇøÓò"; 
+         $label = "æ–‡å­—åŒºåŸŸ"; 
      } 
      if( ($ground_w<$w) || ($ground_h<$h) ) 
      { 
-         echo "ĞèÒª¼ÓË®Ó¡µÄÍ¼Æ¬µÄ³¤¶È»ò¿í¶È±ÈË®Ó¡".$label."»¹Ğ¡£¬ÎŞ·¨Éú³ÉË®Ó¡£¡"; 
+         echo "éœ€è¦åŠ æ°´å°çš„å›¾ç‰‡çš„é•¿åº¦æˆ–å®½åº¦æ¯”æ°´å°".$label."è¿˜å°ï¼Œæ— æ³•ç”Ÿæˆæ°´å°ï¼"; 
          return; 
      } 
      switch($waterPos) 
      { 
-         case 0://Ëæ»ú 
+         case 0://éšæœº 
              $posX = rand(0,($ground_w - $w)); 
              $posY = rand(0,($ground_h - $h)); 
              break; 
-         case 1://1Îª¶¥¶Ë¾Ó×ó 
+         case 1://1ä¸ºé¡¶ç«¯å±…å·¦ 
              $posX = 0; 
              $posY = 0; 
              break; 
-         case 2://2Îª¶¥¶Ë¾ÓÖĞ 
+         case 2://2ä¸ºé¡¶ç«¯å±…ä¸­ 
              $posX = ($ground_w - $w) / 2; 
              $posY = 0; 
              break; 
-         case 3://3Îª¶¥¶Ë¾ÓÓÒ 
+         case 3://3ä¸ºé¡¶ç«¯å±…å³ 
              $posX = $ground_w - $w; 
              $posY = 0; 
              break; 
-         case 4://4ÎªÖĞ²¿¾Ó×ó 
+         case 4://4ä¸ºä¸­éƒ¨å±…å·¦ 
              $posX = 0; 
              $posY = ($ground_h - $h) / 2; 
              break; 
-         case 5://5ÎªÖĞ²¿¾ÓÖĞ 
+         case 5://5ä¸ºä¸­éƒ¨å±…ä¸­ 
              $posX = ($ground_w - $w) / 2; 
              $posY = ($ground_h - $h) / 2; 
              break; 
-         case 6://6ÎªÖĞ²¿¾ÓÓÒ 
+         case 6://6ä¸ºä¸­éƒ¨å±…å³ 
              $posX = $ground_w - $w; 
              $posY = ($ground_h - $h) / 2; 
              break; 
-         case 7://7Îªµ×¶Ë¾Ó×ó 
+         case 7://7ä¸ºåº•ç«¯å±…å·¦ 
              $posX = 0; 
              $posY = $ground_h - $h; 
              break; 
-         case 8://8Îªµ×¶Ë¾ÓÖĞ 
+         case 8://8ä¸ºåº•ç«¯å±…ä¸­ 
              $posX = ($ground_w - $w) / 2; 
              $posY = $ground_h - $h; 
              break; 
-         case 9://9Îªµ×¶Ë¾ÓÓÒ 
+         case 9://9ä¸ºåº•ç«¯å±…å³ 
              $posX = $ground_w - $w; 
              $posY = $ground_h - $h; 
              break; 
-         default://Ëæ»ú 
+         default://éšæœº 
              $posX = rand(0,($ground_w - $w)); 
              $posY = rand(0,($ground_h - $h)); 
              break;     
      }
-     //Éè¶¨Í¼ÏñµÄ»ìÉ«Ä£Ê½ 
-     imagealphablending($ground_im, true);
-     if($isWaterImage)//Í¼Æ¬Ë®Ó¡ 
+     //è®¾å®šå›¾åƒçš„æ··è‰²æ¨¡å¼ 
+     //imagealphablending($ground_im, true);
+     if($isWaterImage)//å›¾ç‰‡æ°´å° 
      { 
-         imagecopy($ground_im, $water_im, $posX, $posY, 0, 0, $water_w,$water_h);//¿½±´Ë®Ó¡µ½Ä¿±êÎÄ¼ş         
+         imagecopy($ground_im, $water_im, $posX, $posY, 0, 0, $water_w,$water_h);//æ‹·è´æ°´å°åˆ°ç›®æ ‡æ–‡ä»¶         
      } 
-     else//ÎÄ×ÖË®Ó¡ 
+     else//æ–‡å­—æ°´å° 
      { 
          if( !empty($textColor) && (strlen($textColor)==7) ) 
          { 
@@ -488,20 +490,20 @@ class ArticleAction extends AdministratorAction {
          } 
          else 
          { 
-             die("Ë®Ó¡ÎÄ×ÖÑÕÉ«¸ñÊ½²»ÕıÈ·£¡"); 
+             die("æ°´å°æ–‡å­—é¢œè‰²æ ¼å¼ä¸æ­£ç¡®ï¼"); 
          } 
          imagestring ( $ground_im, $textFont, $posX, $posY, $waterText, imagecolorallocate($ground_im, $R, $G, $B));         
      }
-     //Éú³ÉË®Ó¡ºóµÄÍ¼Æ¬ 
+     //ç”Ÿæˆæ°´å°åçš„å›¾ç‰‡ 
      @unlink($groundImage); 
-     switch($ground_info[2])//È¡µÃ±³¾°Í¼Æ¬µÄ¸ñÊ½ 
+     switch($ground_info[2])//å–å¾—èƒŒæ™¯å›¾ç‰‡çš„æ ¼å¼ 
      { 
          case 1:imagegif($ground_im,$groundImage);break; 
          case 2:imagejpeg($ground_im,$groundImage);break; 
          case 3:imagepng($ground_im,$groundImage);break; 
          default:die($errorMsg); 
      }
-     //ÊÍ·ÅÄÚ´æ 
+     //é‡Šæ”¾å†…å­˜ 
      if(isset($water_info)) unset($water_info); 
      if(isset($water_im)) imagedestroy($water_im); 
      unset($ground_info); 

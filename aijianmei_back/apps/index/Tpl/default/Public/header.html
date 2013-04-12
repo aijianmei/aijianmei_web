@@ -42,6 +42,19 @@
                     <div class="other_account clearfix">
                         <h4 class="tit">使用合作网站账号登录</h4>
                         <div class="accounts">
+                                <script type="text/javascript">
+            var childWindow;
+            function toQzoneLogin()
+            {
+            alert("暂未开放!");return false;
+                childWindow = window.open("index.php","TencentLogin","width=450,height=320,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+            } 
+            
+            function closeChildWindow()
+            {
+                childWindow.close();
+            }
+        </script>
                         <!--<script src="//mat1.gtimg.com/app/openjs/openjs.js"></script>
                         <script defer="defer">
 
@@ -64,9 +77,9 @@
                         <!-- http://open.denglu.cc/transfer/qzone?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F -->
                         <!-- a class="cop1" href="http://open.denglu.cc/transfer/renren?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F"></a> -->
                         <a class="cop1" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://dev.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1">微博帐号</a>
-                        <!--<a class="cop2" href="javascript:void(0)" onclick="login()">腾讯微博</a>-->
-                        <a class="cop3" href="https://graph.renren.com/oauth/authorize?client_id=229477&redirect_uri=http://dev.aijianmei.com/&response_type=token&apiType=renren">人人帐号</a>
-                        <!--<a class="cop4" href="http://open.denglu.cc/transfer/douban?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F">豆瓣帐号</a>-->
+                        <a class="cop2"  onclick="toQzoneLogin();">QQ帐号</a>
+                        <!--<a class="cop3" href="https://graph.renren.com/oauth/authorize?client_id=229477&redirect_uri=http://dev.aijianmei.com/&response_type=token&apiType=renren">人人帐号</a>
+                        <a class="cop4" href="http://open.denglu.cc/transfer/douban?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F">豆瓣帐号</a>-->
                          <!--<script type='text/javascript' charset='utf-8'>
                             (function() {
                                 var _dl_time = new Date().getTime();
@@ -87,12 +100,15 @@
                 <div id="header">
                     <ul class="top">
                         <li class="my_cart"><a id="my_cart"><span class="cart"></span>购物车(0) </a>|</li>
+                        
                     <php>if(getMid()) {</php>
                     <li><span>欢迎你，<php>echo getUserName(getMid())</php></span>
                     <php>} else {</php>
                         <li><a href="javascript:;" class="login">登录 </a>|</li>
+                        
                         <li><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a>|</li>
                     <php>}</php>
+                    
                         <!--<li class="more"><a href="#">消息<span class="triangle"></span> </a>|
                             <ul class="message">
                                 <li><a href="/index.php?app=home&mod=message&act=index">查看私信</a></li>
