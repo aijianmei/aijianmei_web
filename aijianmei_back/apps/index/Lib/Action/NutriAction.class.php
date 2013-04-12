@@ -78,6 +78,7 @@ class NutriAction extends Action {
         //$this->assign('cate', $cate);
         $this->assign('cssFile', 'training');
         $this->show_banner();//banner 滚动图片列表
+         $this->assign('headertitle', '营养');
         $this->display();
     }
     

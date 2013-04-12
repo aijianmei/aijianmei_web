@@ -274,8 +274,8 @@ function show_banner($type){
             M('')->query($umailsql);
         }
         if(!empty($_GET['apiType'])&&$_GET['apiType']=='renren'){
-            print_r($_GET);
-            print_r($_SERVER);
+            //print_r($_GET);
+            //print_r($_SERVER);
         }
         
         $this->setTitle('index');
@@ -313,8 +313,7 @@ function show_banner($type){
         }
         $this->assign('hotvideos', $hotvideos);
         /*首页添加最新4篇文章*/
-        $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id";
-        $sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by a.create_time desc limit 0,4";
+        $sql = "select a.* from ai_article a group by a.id order by a.create_time desc limit 0,4";
         $hotArticles = M('')->query($sql);
         foreach ($hotArticles as $key => $value) {
             $hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
@@ -547,11 +546,11 @@ function show_banner($type){
     {
         static $nums=7;
         $type = (int) $_GET['type'];
-        $page = (int) $_GET['pg']?(int) $_GET['pg']:0;
+        $page = (int) $_GET['pg']?(int) $_GET['pg']:1;
         //$info=D('Article')->getDaily($type) old part
         $info_countnums = count(D('Article')->getDaily($type));
         //the new part by kontem 2013-03-29
-        $info = D('Article')->getDailyLimit($type,$page,$nums);
+        $info = D('Article')->getDailyLimit($type,($page-1)*$nums,$nums);
         $cate = M('article_category')->where(array('type'=>'2'))->findAll();
         $this->assign('info', $info);
         $this->assign('cssFile', 'every');
@@ -835,11 +834,11 @@ function show_banner($type){
     public function doRegister()
     {
         // 验证码
-        /* $verify_option = $this->_isVerifyOn('register');
-        if ($verify_option && (md5(strtoupper($_POST['verify'])) != $_SESSION['verify'])){
+        /* $verify_option = $this->_isVerifyOn('register');*/
+        if ((md5(strtoupper($_POST['verify'])) != $_SESSION['verify'])){
             $this->error(L('error_security_code'));
             exit;
-        } */
+        } 
         
         // 参数合法性检查
         $required_field = array(
