@@ -327,25 +327,26 @@
 
 						}
 						.staircase{
-
+							display: inline-block;
+							padding: 2px 0 10px 0;
 						}
 						/*.target .care{
 							display:block;
 						}*/
 						.target .name{
 							display: inline-block;
-padding: 2px 0 10px 15px;
-font-weight: bold;
+							padding: 2px 0 10px 15px;
+							font-weight: bold;
 						}
 						.target .bottom_ms{
 							padding:14px 10px 0 0;
 						}
 						.write_back{
-display: inline-block;
-background: #EBEFF7;
-text-align: center;
-width: 40px;
-margin-right: -10px;
+							display: inline-block;
+							background: #EBEFF7;
+							text-align: center;
+							width: 40px;
+							margin-right: -10px;
 						}
 						.target .to{
 							float:right;
@@ -365,40 +366,40 @@ margin-right: -10px;
 							margin-left: 27px;
 						}
 						.post_area{
-background: #EBEFF7;
+							background: #EBEFF7;
 						}
 						.part_back{
 							clear: right;
-width: 550px;
-margin: 0 auto;
+							width: 550px;
+							margin: 0 auto;
 						}
 						.btn_back{
-float: right;
-height:20px;
-margin-right: 10px;
+							float: right;
+							height:20px;
+							margin-right: 10px;
 						}
 						.pop_content{
-width: 530px;
-height: 80px;
-padding: 9px;
+							width: 530px;
+							height: 80px;
+							padding: 9px;
 						}
 						.part_sure{
 							zoom: 1;
-overflow: hidden;
-line-height: 25px;
-padding: 5px 0;
+							overflow: hidden;
+							line-height: 25px;
+							padding: 5px 0;
 						}
 						.rule{
 							float:left;
 						}
 						.sure_back{
 							float: right;
-width: 70px;
-height: 25px;
-/*line-height: 25px;*/
-border: 1px solid #ccc;
-background: #21aec3;
-color: white;
+							width: 70px;
+							height: 25px;
+							/*line-height: 25px;*/
+							border: 1px solid #ccc;
+							background: #21aec3;
+							color: white;
 						}
 		/*右边广告部分*/
 		.content_right{
