@@ -77,6 +77,9 @@
 		color: #BBB;
 	}
 	/*视频部分结束-----------------------*/
+	.v_bottom{
+		margin-top: 10px;
+	}
 	.bottom_part_left{
 		float:left;
 		width:636px;
@@ -296,10 +299,9 @@
 					font-size: 18px;					
 				}
 		.bottom_part_right{
-			float:left;
+			float:right;
 			min-height: 100%;
 			width:295px;
-			margin-left: 14px;
 		}
 		.sider_m{
 			border: 1px solid #ECECEC;

@@ -358,14 +358,14 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
     })
 
 //公共部分！！！选择页面，上下页切换
-    $(".page a").hover(
-        function(){
-            $(this).css("border-color","#21ace3")
-        },
-        function(){
-            $(this).css("border-color","")
-        }
-    )
+    // $(".page a").hover(
+    //     function(){
+    //         $(this).css("border-color","#21ace3")
+    //     },
+    //     function(){
+    //         $(this).css("border-color","")
+    //     }
+    // )
 //动态改变背景图片，用在那些背景鼠标过去按钮原色变化的对象上
             var move = function(obj,url,num){
                 var newdom = new getdom,
