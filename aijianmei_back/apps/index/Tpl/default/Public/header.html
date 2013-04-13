@@ -2,8 +2,8 @@
     <html xmlns:wb=“http://open.weibo.com/wb”>
         <head>
             <meta charset="utf-8"/>
-            <title>爱健美</title>
-                        <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21432667"></script>
+            <title><?php if(!empty($headertitle)){echo $headertitle;}else{echo '爱健美';}?></title>
+            <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21432667"></script>
             <link rel="stylesheet" href="../Public/css/public.css" />
             <link rel="stylesheet" href="../Public/css/{$cssFile}.css" />	
             <!-- <link rel="stylesheet" href="../Public/css/jquery-ui.css" />  -->
@@ -36,12 +36,25 @@
                                 <a href="#" class="checkChange" id="reloadcode">换一换</a>-->
                             </div>
                             <button type="submit" class="submit_btn">登录</button>
-                            <a href="retrieve.html" class="forget">忘记密码</a>
+                            <!--<a href="index.php?app=home&mod=Public&act=sendPassword" class="forget">忘记密码</a>-->
                         </form>
                     </div>
                     <div class="other_account clearfix">
                         <h4 class="tit">使用合作网站账号登录</h4>
                         <div class="accounts">
+                                <script type="text/javascript">
+            var childWindow;
+            function toQzoneLogin()
+            {
+            alert("暂未开放!");return false;
+                childWindow = window.open("index.php","TencentLogin","width=450,height=320,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+            } 
+            
+            function closeChildWindow()
+            {
+                childWindow.close();
+            }
+        </script>
                         <!--<script src="//mat1.gtimg.com/app/openjs/openjs.js"></script>
                         <script defer="defer">
 
@@ -63,9 +76,9 @@
                         <!--<script id='denglu_login_js' type='text/javascript' charset='utf-8'></script>-->
                         <!-- http://open.denglu.cc/transfer/qzone?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F -->
                         <!-- a class="cop1" href="http://open.denglu.cc/transfer/renren?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F"></a> -->
-                        <a class="cop1" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://dev.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1">微博帐号</a>
-                        <!--<a class="cop2" href="javascript:void(0)" onclick="login()">腾讯微博</a>-->
-                        <a class="cop3" href="https://graph.renren.com/oauth/authorize?client_id=229477&redirect_uri=http://dev.aijianmei.com&response_type=token">人人帐号</a>
+                        <a class="cop1" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1">微博帐号</a>
+                        <a class="cop2"  onclick="toQzoneLogin();">QQ帐号</a>
+                        <!--<a class="cop3" href="https://graph.renren.com/oauth/authorize?client_id=229477&redirect_uri=http://www.aijianmei.com/index.php?apiType=renren&response_type=token">人人帐号</a>-->
                         <!--<a class="cop4" href="http://open.denglu.cc/transfer/douban?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F">豆瓣帐号</a>-->
                          <!--<script type='text/javascript' charset='utf-8'>
                             (function() {
@@ -86,7 +99,7 @@
             <div class="wrapper">
                 <div id="header">
                     <ul class="top">
-                        <li><a id="my_cart"><span class="cart"></span>购物车(0) </a>|</li>
+                        <li class="my_cart"><a id="my_cart"><span class="cart"></span>购物车(0) </a>|</li>
                     <php>if(getMid()) {</php>
                     <li><span>欢迎你，<php>echo getUserName(getMid())</php></span>
                     <php>} else {</php>
@@ -114,6 +127,7 @@
                             </ul>
                         </li>
                     </ul>
+                    <!--
                     <form class="search">
                         <fieldset>
                             <legend>搜索</legend>
@@ -122,6 +136,7 @@
                             <button class="search_btn hide_text" type="submit"></button>
                         </fieldset>
                     </form>
+                    -->
                     <div class="logo">
                         <a href="/index.php?app=index">
                             <img src="../Public/images/logo.png" alt="aijianmei" />

@@ -331,8 +331,14 @@ class PublicAction extends Action{
             }else {
                 $refer_url = U('home/User/index');
             }
-			// 登录商城
-			service('Shop')->login($_SESSION['mid']);
+            /*ecshop curl login by kontem at 20130412 start*/
+            include_once('shopApi.php');
+            $shopdata['username']=$result['user']['uname'];
+            $shopdata['password']=$password;
+            _postCurlLogin($shopdata);
+            /*ecshop curl login by kontem at 20130412 end*/
+            // 登录商城
+            //service('Shop')->login($_SESSION['mid']);
             $this->assign('jumpUrl',$refer_url);
             $this->assign('waitSecond',5);
             $this->success($username.L('login_success').$result['login']);
@@ -381,9 +387,7 @@ class PublicAction extends Action{
 
     public function logout() {
         service('Passport')->logoutLocal();
-        
         Addons::hook('public_after_logout');
-
         $this->assign('jumpUrl',U('index/Index/index'));
         $this->assign('waitSecond',5);
         $this->success(L('exit_success'). ( (UC_SYNC)?uc_user_synlogout():'' ) );

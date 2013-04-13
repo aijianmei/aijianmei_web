@@ -209,25 +209,78 @@
 						</div>
 						<div class="cm_bottom">
 							<h5 class="title_5">推荐精华</h5>
-							<div class="target">
+							<div class="target clearfix">
 								<div class="target_pic">
 									<img src="images/article/9.png" alt="no" />
-									<span class="care">关注</span>
 								</div>
-								<a class="name">huifei</a>
-								<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
-								<p class="bottom_ms">
-									<span class="to">
-										<a class="sprite_8 tosprite_8"><span class="praise">100</span></a>
-										<a>转发<span>(0)</span></a>
-										<a>回复<span>(0)</span></a>
-									</span>	
-									<span>22个小时前</span>
-									<span>来自<em></em></span>
-									
-								</p>
+								<div class="target_content">
+									<span class="staircase">1楼</span>
+									<a class="name">huifei</a>
+									<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
+									<p class="bottom_ms">
+										<span class="to">
+											<a class="fover">支持[0]</a>
+											<a class="write_back">回复</a>
+										</span>	
+										<span>22个小时前</span>
+										<span>来自<em></em></span>	
+									</p>
+								</div>
+							</div>
+							<div class="target clearfix">
+								<div class="target_pic">
+									<img src="images/article/9.png" alt="no" />
+								</div>
+								<div class="target_content">
+									<span class="staircase">2楼</span>
+									<a class="name">huifei</a>
+									<div class="lay_target clearfix">
+										<div class="target_content">
+											<span class="staircase">1楼</span>
+											<a class="name">huifei</a>
+											<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
+										</div>
+									</div>
+									<p>asdfasdfasd</p>
+									<p class="bottom_ms">
+										<span class="to">
+											<a class="fover">支持[0]</a>
+											<a class="write_back">回复</a>
+										</span>	
+										<span>22个小时前</span>
+										<span>来自<em></em></span>	
+									</p>
+								</div>
+							</div>
+							<div class="target clearfix">
+								<div class="target_pic">
+									<img src="images/article/9.png" alt="no" />
+								</div>
+								<div class="target_content">
+									<span class="staircase">3楼</span><a class="name">huifei</a>
+									<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
+									<p class="bottom_ms">
+										<span class="to">
+											<a class="fover">支持[0]</a>
+											<a class="write_back write_click">回复</a>
+										</span>	
+										<span>22个小时前</span>
+										<span>来自<em></em></span>	
+									</p>
+									<div class="post_area">
+										<span class="btn_back">x</span>
+										<div class="part_back">
+											<textarea class="pop_content"></textarea>
+											<div class="part_sure">
+												<span class="rule">登录(请登录发言，并遵守相关规定)</span>
+												<input type="button" value="回复" class="sure_back" />
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>	
+
 					</div>
 				</div>
 			</div>
@@ -306,6 +359,35 @@
 				time++;
 				$(this).children().html(time)
 			})
+			var aijianmei = {
+				newdom : new getdom,
+				answer : function(obj,text){
+					target_content = obj.parentNode.parentNode.parentNode;
+					console.log(target_content.lastChild)
+					if(0){
+						var div = document.createElement('div');
+						div.innerHTML = text;
+						target_content.appendChild(div);
+						console.log(target_content.lastChild.className)
+					}
+					else{
+						target_content.removeChild(target_content.lastChild);
+					}				
+				}
+			}
+			var init = function(){
+				var newdom = new getdom,
+					write_back = newdom.getElementsByClass('write_back'),
+					len = write_back.length,
+					content = '<div class="post_area"><span class="btn_back">x</span><div class="part_back"><textarea class="pop_content"></textarea><div class="part_sure"><span class="rule">登录(请登录发言，并遵守相关规定)</span><input type="button" value="回复" class="sure_back" /></div></div></div>';
+					for(var i = 0;i < len;i++){
+						write_back[i].index = i;
+						write_back[i].onclick = function(){
+							aijianmei.answer(this,content);
+						}
+					}	
+			}
+			init()
 	</script>
 </body>
 </html>

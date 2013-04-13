@@ -155,7 +155,7 @@ function show_banner($type){
                 //print_r($logId);
                 if($logId) {
                     service('Passport')->loginLocal($logId['uid']);
-					service('Shop')->login($logId['uid']); // 同步登录商城
+                    service('Shop')->login($logId['uid']); // 同步登录商城
                 }else {
                     $data['email'] = $userInfo['email'];
                     $data['password'] = '';
@@ -171,9 +171,9 @@ function show_banner($type){
                     
                     $uid = M('user')->add($data);				
                     service('Passport')->loginLocal($uid);	
-					
-					// 同步注册商城
-					service('Shop')->register($data['uname'], $data['email'], $data['password']);				
+                    
+                    // 同步注册商城
+                    service('Shop')->register($data['uname'], $data['email'], $data['password']);				
                     
                     $other['uid'] = $uid;
                     $other['mediaID'] = $userInfo['mediaID'];
@@ -201,8 +201,7 @@ function show_banner($type){
 
         if(!empty($_REQUEST['code'])) {
             require_once $_SERVER['DOCUMENT_ROOT'].'/saetv2.ex.class.php';
-            $sina = new SaeTOAuthV2('3622140445', 'f94d063d06365972215c62acaadf95c3');	
-
+            $sina = new SaeTOAuthV2('3622140445', 'f94d063d06365972215c62acaadf95c3');
             $token = $sina->getAccessToken('code', array('code'=>$_REQUEST['code'], 'redirect_uri'=>'http://dev.aijianmei.com/index.php'));
             $client = new SaeTClientV2('3622140445', 'f94d063d06365972215c62acaadf95c3', $token['access_token']);
 
@@ -216,6 +215,8 @@ function show_banner($type){
             //echo $log_sql;
             $logId = M('')->query($log_sql);
             //var_dump($logId);
+            $setMailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
+            $setMail = M('')->query($setMailSql);
             if($logId) {
                 service('Passport')->loginLocal($logId[0]['uid']);	
             }else {
@@ -268,7 +269,14 @@ function show_banner($type){
             }
 
         }
-        
+        if($_POST['email']!=''&&$_POST['emailact']=='upemail'){
+            $umailsql="update ai_others set email='".trim($_POST['email'])."' where uid='".addslashes($_POST['emailuid'])."'";
+            M('')->query($umailsql);
+        }
+        if(!empty($_GET['apiType'])&&$_GET['apiType']=='renren'){
+            //print_r($_GET);
+            //print_r($_SERVER);
+        }
         
         $this->setTitle('index');
         $this->assign('uid',$this->mid);
@@ -288,9 +296,40 @@ function show_banner($type){
         $jianmei =  M('article')->where(array('category_id'=>'46'))->limit('0,4')->order('id desc')->findAll();
         $this->assign('jianmei', $jianmei);
         $this->assign('daily', $daily);
+        if(isset($setMail)&&$setMail[0]['email']==''){
+            //redirect(U('index/Index/setmail'));
+        }
+        //add by kon at 20130410 start
+        /*首页添加最新4篇文章视频*/
+        
+        $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit 0,4";
+        $hot_video = M('')->query($sql);
+        foreach($hot_video as $k=>$v) {
+            $hotvideos[$k] = $v;
+            $data = json_decode($this->getVideoData($v['link']));
+            $hotvideos[$k]['logo'] = $data->data[0]->logo;
+            $hotvideos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);            
+        }
+        $this->assign('hotvideos', $hotvideos);
+        /*首页添加最新4篇文章*/
+        $sql = "select a.* from ai_article a group by a.id order by a.create_time desc limit 0,4";
+        $hotArticles = M('')->query($sql);
+        foreach ($hotArticles as $key => $value) {
+            $hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
+        }
+        $this->assign('hotArticles', $hotArticles);
+        //add by kon at 20130410 end
         $this->display();
     }
-
+    
+    public function setmail()
+    {
+        $this->assign('cssFile', 'register');
+        $this->display('setmail');
+    }
+    
+    
     public function app()
     {
         $this->display();
@@ -391,6 +430,7 @@ function show_banner($type){
         $this->assign("third",$tree_name);
         $this->assign("tree_parent",$tree_parent);
         $this->assign("tree_channel_en",$tree_channel_en);
+        $this->assign('headertitle', $article['title']);
         $this->assign("tree_category_id",$tree_category_id);
         $this->display('detail');
     }
@@ -506,11 +546,11 @@ function show_banner($type){
     {
         static $nums=7;
         $type = (int) $_GET['type'];
-        $page = (int) $_GET['pg']?(int) $_GET['pg']:0;
+        $page = (int) $_GET['pg']?(int) $_GET['pg']:1;
         //$info=D('Article')->getDaily($type) old part
         $info_countnums = count(D('Article')->getDaily($type));
         //the new part by kontem 2013-03-29
-        $info = D('Article')->getDailyLimit($type,$page,$nums);
+        $info = D('Article')->getDailyLimit($type,($page-1)*$nums,$nums);
         $cate = M('article_category')->where(array('type'=>'2'))->findAll();
         $this->assign('info', $info);
         $this->assign('cssFile', 'every');
@@ -523,6 +563,7 @@ function show_banner($type){
             case 4:{$tree_channel="健身运动员 ";$tree_channel_en=4;}break;
         }
         $this->assign("first",$tree_channel);
+        
         //banner 滚动图片列表
         $this->show_banner($type);
         //-------END--------
@@ -533,6 +574,7 @@ function show_banner($type){
         $from = ($pager->pg -1) * $pager->countlist;		
         $pagerArray = (array)$pager;
         $this->assign('pager', $pagerArray);
+        $this->assign('headertitle', $tree_channel);
         $this->display();
     }
     
@@ -584,6 +626,7 @@ function show_banner($type){
         //print_r($daily);
         $this->assign('commentsCount', $commentsCount);
         $this->assign('daily', $daily);
+
         $this->assign('videos', $videos);
         $this->assign('comments', $comments);
         $this->assign('cssFile', 'article');
@@ -628,6 +671,7 @@ function show_banner($type){
         $this->assign("tree_channel_en",$tree_channel_en);
         $this->assign("tree_category_id",$tree_category_id);
         $this->assign('parent', $_GET['type']);
+        $this->assign('headertitle', trim($daily['title']));
         $this->display();
     }
     
@@ -790,11 +834,11 @@ function show_banner($type){
     public function doRegister()
     {
         // 验证码
-        /* $verify_option = $this->_isVerifyOn('register');
-        if ($verify_option && (md5(strtoupper($_POST['verify'])) != $_SESSION['verify'])){
+        /* $verify_option = $this->_isVerifyOn('register');*/
+        if ((md5(strtoupper($_POST['verify'])) != $_SESSION['verify'])){
             $this->error(L('error_security_code'));
             exit;
-        } */
+        } 
         
         // 参数合法性检查
         $required_field = array(
@@ -830,13 +874,17 @@ function show_banner($type){
         $data['goal']     = $_POST['goal'];
         $data['im']       = $_POST['begin'];
         
+        include_once('shopApi.php');
+        $sdata=$data;
+        $sdata['password']=$_POST['password'];
+        _postCurlRegister($sdata);
         $uid = M('user')->add($data);
         $data['uid'] = $uid;
         M('user_attr')->add($data);
         service('Passport')->loginLocal($uid);
-		service('Shop')->register($data['uname'], $data['email'], $data['password']);
+        //service('Shop')->register($data['uname'], $data['email'], $data['password']);
         
-        redirect(U('index/Index/index'));
+        redirect(U('home/Account/index'));
     }
     
     public function doRegisterCoach()
@@ -1025,6 +1073,16 @@ function show_banner($type){
         $this->display();	
     }
     
+    public function feedback()
+    {
+        if(!empty($_POST['email'])&&!empty($_POST['content'])){
+            $insertsql="insert into ai_feedback_info (email,content,isread,create_time) values ('".$_POST['email']."','".$_POST['content']."','0','".time()."')";
+            $logId = M('')->query($insertsql);
+        }
+        $this->assign('cssFile', 'about_us');
+        $this->display('feedback');	
+    }
+    
     public function founders()
     {
         $this->assign('cssFile', 'about_us');
@@ -1051,6 +1109,7 @@ function show_banner($type){
     
     public function __call($name, $arguments)
     {
+        //echo contact;
         $this->assign('cssFile', 'about_us');
         $this->display($name);
     }
@@ -1164,6 +1223,14 @@ function show_banner($type){
         }
     
         return $res;
+    }
+    protected function getVideoData($link)
+    {
+        $id = str_replace('http://player.youku.com/player.php/sid/', '', $link);
+        $id = str_replace('/v.swf', '', $id);
+        $url = 'http://v.youku.com/player/getPlayList/VideoIDS/'.$id.'/version/5/source/out?onData=%5Btype%20Function%5D&n=3';
+        $json = file_get_contents($url);
+        return $json;
     }
 }
 ?>

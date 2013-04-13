@@ -11,7 +11,6 @@ function addToCart(goodsId, parentId)
   var number       = 1;
   var formBuy      = document.forms['ECS_FORMBUY'];
   var quick		   = 0;
-
   // 检查是否有商品规格 
   if (formBuy)
   {
@@ -500,7 +499,6 @@ function set_insure_status()
     }
   }
 }
-
 /* *
  * 当支付方式改变时出发该事件
  * @param       pay_id      支付方式的id
@@ -731,7 +729,6 @@ function in_array(needle, haystack)
   }
   return false;
 }
-
 var pmwinposition = new Array();
 
 var userAgent = navigator.userAgent.toLowerCase();

@@ -1,0 +1,73 @@
+<include file="../Public/_header" />
+
+<!-- 编辑器样式文件 -->
+<link href="__PUBLIC__/js/editor/editor/theme/base-min.css" rel="stylesheet"/>
+<!--[if lt IE 8]>
+<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-sprite-min.css" rel="stylesheet"/>
+<![endif]-->
+<!--[if gte IE 8]><!-->
+<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-min-datauri.css" rel="stylesheet"/>
+<!--<![endif]-->
+
+<include file="__THEME__/editor" />
+
+<div class="so_main">
+  <div id="editTpl_div">
+  	<div class="page_tit"><eq name="type" value="edit">编辑<else/>添加</eq>底部栏目</div>
+	<div class="form2">
+	<form method="post" action="{:U('admin/Content/doEditFooter')}" enctype="multipart/form-data">
+	<eq name="type" value="edit"><input type="hidden" name="id" value="{$id}"></eq>
+    <dl class="lineD">
+      <dt>标题：</dt>
+      <dd><input name="title" type="text" value="{$title}"> * </dd>
+    </dl>
+
+    <dl class="lineD">
+      <dt>英文标签：</dt>
+      <dd><input name="key_name" type="text" value="{$key_name}"> * </dd>
+    </dl>
+        
+    <dl class="lineD">
+      <dt>链接地址：</dt>
+      <dd><input name="model_url" type="text" maxlength="100" value="{$model_url}" style="width:520px"> * </dd>
+    </dl>
+
+    <dl class="">
+      <dt></dt>
+      <dd>
+        <neq name="type_id" value="3">
+      	<textarea name="content" id="content" style="width:650px;height:200px">{$content}</textarea>
+        </neq>
+	  </dd>
+    </dl>
+	
+    <div class="page_btm">
+      <input type="submit" class="btn_b" value="确定" />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="{:U('admin/content/footer')}"><input type="button" class="btn_b" value="返回" /></a>
+    </div>
+	</form>
+  </div>
+  </div>
+</div>
+
+<script>
+$(function(){
+    loadEditor("content");
+
+    $('input[name=key_name]').blur(function(){
+        var $key_name = $(this).val();
+        var $model_url = $('input[name=model_url]').val();
+        var $url = 'http://www.aijianmei.com/index.php?app=index&mod=Index&act='+$key_name;
+        if ($model_url=='') $('input[name=model_url]').val($url);
+    })
+
+    $('input[type=submit]').click(function(){
+        var $flag = true;
+        $('input').each(function(){if ($(this).val()=='') $flag = false;});
+        if ( ! $flag) return $flag;
+    })
+
+});
+</script>
+<include file="../Public/_footer" />

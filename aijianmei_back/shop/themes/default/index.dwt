@@ -17,7 +17,9 @@
 {insert_scripts files='common.js,index.js'}
 </head>
 <body>
+  <div class="wrapper">
 <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
 <div class="blank"></div>
 <div class="block clearfix">
   <!--left start-->
@@ -260,17 +262,17 @@ function check_email()
     <div class="blank5"></div>
    <!--焦点图和站内快讯 END-->
    <!--今日特价，品牌 start-->
-    <div class="clearfix">
-      <!--特价-->
-      <!-- #BeginLibraryItem "/library/recommend_promotion.lbi" --><!-- #EndLibraryItem -->
-      <!--品牌-->
-      <div class="box f_r brandsIe6">
+  <!-- <div class="clearfix">
+                <!--特价-->
+                <!-- #BeginLibraryItem "/library/recommend_promotion.lbi" --><!-- #EndLibraryItem -->
+                <!--品牌-->
+      <!-- <div class="box f_r brandsIe6">
        <div class="box_1 clearfix" id="brands">
-        <!-- #BeginLibraryItem "/library/brands.lbi" --><!-- #EndLibraryItem -->
-       </div>
-      </div>
+        #BeginLibraryItem "/library/brands.lbi" --><!-- #EndLibraryItem
+       </div> -->
+      <!-- </div>
     </div>
-    <div class="blank5"></div>
+  <div class="blank5"></div> --> 
    <!-- TemplateBeginEditable name="右边主区域" -->
 <!-- #BeginLibraryItem "/library/recommend_best.lbi" -->
 
@@ -471,6 +473,8 @@ function check_email()
 <!--{/if}-->
 <!--友情链接 end-->
 <div class="blank"></div>
+<div id="lower_footer"><span>广州加伦信息科技有限公司- 粤ICP备12085654号</span><a href="/index.php?app=index">www.aijianmei.com</a></div>
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</div>
 </body>
 </html>

@@ -1,0 +1,23 @@
+<include file="../Public/header" />
+<div class="clearfix">
+<div class="content">
+<h2>意见反馈</h2>
+<p>感谢您的反馈，爱健美的成长离不开您的关注与支持。</p>
+<form action="/index.php?app=index&mod=Index&act=feedback"  method="post" id="feedbackform">
+                            <label for="email" class="email">您的邮箱：</label>
+                            <input type="text" id="email" name="email"/>
+                            <p>您的意见或建议（5~1000字）：</p>
+                            <textarea name="content" id="textarea" cols="70" rows="15"></textarea>
+                            <p class="note">意见内容不能为空哦！</p>
+                            <button type="button" class="sub_btn" onclick="feedbackSubmit();">确定</button>
+                            <button type="reset" class="reset_btn">取消</button>
+                        </form>
+                    </div>
+                    <script>
+                    function feedbackSubmit(){
+                        alert("提交成功！");
+                        $("#feedbackform").submit();
+                    }
+                    </script>
+            <include file="../Public/sider" />
+            <include file="../Public/footer" />

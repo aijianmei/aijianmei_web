@@ -34,9 +34,9 @@
                         <div class="items"><span class="show_state">*</span>性别</div>
                         <div class="sex_box">
                             <label for="male">男</label>
-                            <input type="radio" name="sex" id="male" class="sex_1" value="0" checked>
+                            <input type="radio" name="sex" id="male" class="sex_1" value="1" checked>
                             <label for="female">女</label>
-                            <input type="radio" name="sex" id="female" value="1">
+                            <input type="radio" name="sex" id="female" value="0">
                         </div>
                     </div>
                     <div class="box box_6">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <!-- 增加目的块 -->
-                    <div class="box box_5">
+                    <!--<div class="box box_5">
                         <div class="items">目的</div>
                         <div class="sex_box">
                             <label for="one">减肥</label>
@@ -99,7 +99,7 @@
                             <label for="four">减肥者</label>
                             <input type="radio" name="begin" id="four" class="sex_1" value="减肥者">
                         </div>
-                    </div>
+                    </div>-->
                     <!-- -end- -->
                     <div class="box box_8">
                         <label class="items" for="text_8"><span class="show_state">*</span>验证码</label>
@@ -111,7 +111,8 @@
                     </div>
                     <div class="box box_9">
                         <input type="checkbox" class="protect_box" id="protect_box_btn">
-                        <span>我已阅读协议<a class="linktoprotect">《爱健美服务使用协议》</a></span>
+                        <span>我已阅读协议<a class="linktoprotect" href="/index.php?app=index&mod=Index&act=service">《爱健美服务使用协议》</a>和<a class="linktoprotect" href="/index.php?app=index&mod=Index&act=privacy">《爱健美隐私条款》</a></span>
+                        
                     </div>
                     <div class="box_10"><a href="javascript:void(0)" onclick="RegisterSubmit()" class="submit_1" id="submitPic"><span class="open">立即开通</span></a></div>
                 </form>
@@ -135,17 +136,17 @@
                 if(email!=''&& reyx.test(email)){
                 $.post('ajax.php?act=check_email', {'email':email}, function(m) {
                     if(m==1) {
-                        alert('该邮箱已经注册！');
+                        //alert('该邮箱已经注册！');
                         $("#email").val('');
+                        $("#emailMessage").html("<span style='color:red;'>该邮箱已经注册！</span>");
                         return false;
                     }else {
-                        //new action
                         $("#emailMessage").html("<span style='color:green;'>邮件可用</span>");
                     }
                 })
                 }
                 else{
-                $("#email").focus();
+                //$("#email").focus();
                 $("#emailMessage").html("<span style='color:red;'>请输入正确的邮箱</span>");
                 }
             }
@@ -153,39 +154,22 @@
             {
                 var passwordStr=$("#password").val();
                 var repasswordStr=$("#repassword").val();
-                if(passwordStr==''&&repasswordStr==''){
-                    $("#password").focus();
-                    $("#passwordMessage").html("<span style='color:red;'>请输入密码</span>");
-                }
-                else if(passwordStr==''&&repasswordStr!=''){
-                    $("#password").val('');
-                    $("#passwordMessage").html("<span style='color:red;'>密码不能为空</span>");
-                }
-                else if(passwordStr!=''&&repasswordStr==''){
-                    $("#repassword").val('');
-                    $("#repasswordMessage").html("<span style='color:red;'>密码不能为空</span>");
-                }
-                else if(passwordStr!=''&&repasswordStr!=''&&passwordStr!=repasswordStr){
-                    $("#repassword").val('');
-                    $("#repasswordMessage").html("<span style='color:red;'>密码需一致</span>");
+                if(passwordStr!=''&&repasswordStr!=''&&passwordStr==repasswordStr){
+                $("#repasswordMessage").html("<span style='color:green;'>密码正确</span>");
                 }
                 else{
-                   $("#passwordMessage").html("<span style='color:green;'>密码正确</span>");
-                   $("#repasswordMessage").html("<span style='color:green;'>密码正确</span>");
+                $("#repasswordMessage").html("<span style='color:red;'>密码错误</span>");
                     return true;
                 }
                 return false;
-            }
-            function RegisterSubmit(){
-            if(IsCanOpen==1){ $("#registerForm").submit();}
-               
             }
             function checkVerify() {
                 var verifyStr =$("#verifyStr").val();
                 if(verifyStr!=''&& verifyStr.length>=5){
                 $.post('ajax.php?act=check_Verify', {'Verify':verifyStr}, function(m) {
                     if(m==0) {
-                        $("#verifyStr").val('');
+                        //$("#verifyStr").val('');
+                        $("#verifyStrMessage").html("<span style='color:red;'>错误</span>");
                         return false;
                     }else {
                         //new action
@@ -195,7 +179,7 @@
                 })
                 }
                 else{
-                $("#verifyStr").focus();
+                //$("#verifyStr").focus();
                 }  
             }
             function checkNickname(){
@@ -207,7 +191,6 @@
                 }
                 else{
                     $("#nickname").val('');
-                    $("#nickname").focus();
                     $("#nicknameMessage").html("<span style='color:red;'>请输入正确的昵称</span>");
                     return false;                    
                 }
@@ -219,30 +202,30 @@
                 $("#protect_box_btn").click(function() {
                 if($("#email").val()=='')
                 {
-                    $("#email").focus(); checkEmail();
+                    $("#email").focus();
                     $("#protect_box_btn").attr("checked",false);
                     return false;
                 }
                 if($("#password").val()=='')
                 {
-                    $("#password").focus();checkPassword();
+                    $("#password").focus();
                     $("#protect_box_btn").attr("checked",false);
                     return false;
                 }
                 if($("#repassword").val()=='')
                 {
-                    $("#repassword").focus();checkPassword();
+                    $("#repassword").focus();
                     $("#protect_box_btn").attr("checked",false);
                     return false;
                 }
                 if($("#nickname").val()=='')
                 {
-                    $("#nickname").focus();checkNickname();
+                    $("#nickname").focus();
                     $("#protect_box_btn").attr("checked",false);
                     return false;
                 }
                 if($("#verifyStr").val()==''){
-                    $("#verifyStr").focus();checkVerify();
+                    $("#verifyStr").focus();
                     $("#protect_box_btn").attr("checked",false);
                     return false;
                 }
@@ -256,6 +239,10 @@
                   }
                 });
             })
+                        function RegisterSubmit(){
+            if(IsCanOpen==1){ $("#registerForm").submit();}
+               
+            }
             </script>
             <div class="rightsidebar">
                     <div class="A_login">
@@ -263,11 +250,13 @@
                         <a href="/index.php?app=home&mod=Index&act=login" class="loginbutton">登录</a>
                     </div>
                     <div class="user_part">
-                        <a href="/index.php?app=index&mod=Index&act=registerGym" class="user">
-                            v  健身房注册
+                        <!--<a href="/index.php?app=index&mod=Index&act=registerGym" class="user" >-->
+                        <a class="user" href="#" onclick="alert('暂未开放');return false;">
+                         v  健身房注册
                         </a>
-                        <a href="/index.php?app=index&mod=Index&act=registerCoach" class="user">
-                            v  教练注册
+                        <!--<a href="/index.php?app=index&mod=Index&act=registerCoach" class="user">-->
+                        <a class="user" href="#" onclick="alert('暂未开放');return false;">
+                             v  教练注册
                         </a>
                     </div>
                     <div class="cooperate_target">
@@ -282,8 +271,8 @@
                         </div>
                     </div>
                     <div class="A_intro">
-                        <h1 class="intro_topic">爱健美</h1>
-                        <p class="intro_conduct">具有人气的健美产品，先拥有1536人用户，拥有500家健身</p>
+                        <!--<h1 class="intro_topic">爱健美</h1>
+                        <p class="intro_conduct">具有人气的健美产品，先拥有1536人用户，拥有500家健身</p>-->
                     </div>
             </div>
         </div>

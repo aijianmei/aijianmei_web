@@ -78,6 +78,7 @@ class NutriAction extends Action {
         //$this->assign('cate', $cate);
         $this->assign('cssFile', 'training');
         $this->show_banner();//banner 滚动图片列表
+         $this->assign('headertitle', '营养');
         $this->display();
     }
     
@@ -124,9 +125,17 @@ class NutriAction extends Action {
         $this->assign('lastArticles', $lastArticles);
         $this->assign('articles', $articles);
         $this->assign('categories', $realCate);
+        //print_r($realCate);
+        foreach($realCate as $k =>$v){
+            foreach($v['children'] as $k1=>$v1){
+                if($id==$v1['id'])
+                {
+                    $this->assign('headertitle', $v1['name']);
+                }
+            }
+        }
         //$this->assign('cssFile', 'video');
         $this->assign('cssFile', 'training');
-        
         $this->show_banner();//banner 滚动图片列表
         $this->display('list');
     }

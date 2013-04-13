@@ -55,8 +55,13 @@ $data = array (
   'retain_original_img' => '1',
   'member_email_validate' => '1',
   'message_board' => '1',
+<<<<<<< HEAD
   'certificate_id' => '',
   'token' => '',
+=======
+  'certificate_id' => '105075',
+  'token' => 'b999d01e372f57fb6922163eea2096071d7c8d81b728bac27e11116d03028ecf',
+>>>>>>> refs/heads/master
   'certi' => 'http://service.shopex.cn/openapi/api.php',
   'send_verify_email' => '0',
   'ent_id' => '',

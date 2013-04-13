@@ -11,9 +11,9 @@ class GlobalAction extends AdministratorAction {
         return true;
     }
 
-    /** ç³»ç»Ÿé…ç½® - ç«™ç‚¹é…ç½® **/
+    /** ÏµÍ³ÅäÖÃ - Õ¾µãÅäÖÃ **/
 
-    //ç«™ç‚¹è®¾ç½®
+    //Õ¾µãÉèÖÃ
     public function siteopt() {
         $site_opt = model('Xdata')->lget('siteopt');
         if(!$site_opt['site_logo']){
@@ -30,19 +30,19 @@ class GlobalAction extends AdministratorAction {
         $this->display();
     }
 
-    //è®¾ç½®ç«™ç‚¹
+    //ÉèÖÃÕ¾µã
     public function doSetSiteOpt() {
         if (empty($_POST)) {
-            $this->error('å‚æ•°é”™è¯¯');
+            $this->error('²ÎÊı´íÎó');
         }
 
-        //éªŒè¯æ•°å­—å‚æ•°
+        //ÑéÖ¤Êı×Ö²ÎÊı
         if( intval($_POST['max_post_time'])<0 
              || intval($_POST['max_refresh_time'])<0 
              || intval($_POST['max_following'])<0
              || intval($_POST['max_search_time'])<0  
         ){
-            $this->error('æ•°å­—å˜é‡çš„å€¼å¿…é¡»å¤§äºç­‰äº0');
+            $this->error('Êı×Ö±äÁ¿µÄÖµ±ØĞë´óÓÚµÈÓÚ0');
         }
         $_POST['max_post_time'] = intval($_POST['max_post_time']);
         $_POST['max_refresh_time'] = intval($_POST['max_refresh_time']);
@@ -50,10 +50,10 @@ class GlobalAction extends AdministratorAction {
         $_POST['max_search_time'] = intval($_POST['max_search_time']);
 
         if (intval($_POST['length']) <= 0) {
-            $this->error('å…¨ç«™å¾®åšã€è¯„è®ºå­—æ•°é™åˆ¶çš„å€¼å¿…é¡»å¤§äº0');
+            $this->error('È«Õ¾Î¢²©¡¢ÆÀÂÛ×ÖÊıÏŞÖÆµÄÖµ±ØĞë´óÓÚ0');
         }
 
-        //ä¿å­˜LOGO
+        //±£´æLOGO
         if(!empty($_FILES['site_logo']['name'])){
             $logo_options['save_to_db'] = false;
             $logo = X('Xattach')->upload('site_logo',$logo_options);
@@ -85,7 +85,7 @@ class GlobalAction extends AdministratorAction {
         $_POST['expression']                = t($_POST['expression']);
         $_LOG['uid'] = $this->mid;
         $_LOG['type'] = '3';
-        $data[] = 'å…¨å±€ - ç«™ç‚¹é…ç½® ';
+        $data[] = 'È«¾Ö - Õ¾µãÅäÖÃ ';
         $site_opt = model('Xdata')->lget('siteopt');
         $data[] = $site_opt;
         if( $_POST['__hash__'] ) unset( $_POST['__hash__'] );
@@ -96,16 +96,16 @@ class GlobalAction extends AdministratorAction {
 
         $res = model('Xdata')->lput('siteopt', $_POST);
         if ($res) {
-            //è¡¨æƒ…éœ€è¦flushä¸€ä¸‹
+            //±íÇéĞèÒªflushÒ»ÏÂ
             model('Expression')->getAllExpression(true);
             $this->assign('jumpUrl', U('admin/Global/siteopt'));
-            $this->success('ä¿å­˜æˆåŠŸ');
+            $this->success('±£´æ³É¹¦');
         }else {
-            $this->error('ä¿å­˜å¤±è´¥');
+            $this->error('±£´æÊ§°Ü');
         }
     }
 
-    /** ç³»ç»Ÿé…ç½® - æ³¨å†Œé…ç½® **/
+    /** ÏµÍ³ÅäÖÃ - ×¢²áÅäÖÃ **/
 
     public function register() {
         $register = model('Xdata')->lget('register');
@@ -129,7 +129,7 @@ class GlobalAction extends AdministratorAction {
 
             $_LOG['uid'] = $this->mid;
             $_LOG['type'] = '3';
-            $data[] = 'å…¨å±€ - æ³¨å†Œé…ç½® ';
+            $data[] = 'È«¾Ö - ×¢²áÅäÖÃ ';
             $site_opt['invite_set'] = $invite['invite_set'];
             if( $site_opt['__hash__'] ) unset( $site_opt['__hash__'] );
             $data[] = $site_opt;
@@ -140,14 +140,14 @@ class GlobalAction extends AdministratorAction {
             $_LOG['ctime'] = time();
             M('AdminLog')->add($_LOG);
 
-            $this->success('ä¿å­˜æˆåŠŸ');
+            $this->success('±£´æ³É¹¦');
         }else {
-            $this->error('ä¿å­˜å¤±è´¥');
+            $this->error('±£´æÊ§°Ü');
         }
     }
 
-    /** ç³»ç»Ÿé…ç½® - ç§¯åˆ†é…ç½® **/
-    //ç§¯åˆ†ç±»åˆ«è®¾ç½®
+    /** ÏµÍ³ÅäÖÃ - »ı·ÖÅäÖÃ **/
+    //»ı·ÖÀà±ğÉèÖÃ
     public function creditType(){
         $creditType = M('credit_type')->order('id ASC')->findAll();
         $this->assign('creditType',$creditType);
@@ -156,8 +156,8 @@ class GlobalAction extends AdministratorAction {
     public function editCreditType(){
         $type   = $_GET['type'];
         if($cid = intval($_GET['cid'])){
-            $creditType = M('credit_type')->where("`id`=$cid")->find();//ç§¯åˆ†ç±»åˆ«
-            if (!$creditType) $this->error('æ— æ­¤ç§¯åˆ†ç±»å‹');
+            $creditType = M('credit_type')->where("`id`=$cid")->find();//»ı·ÖÀà±ğ
+            if (!$creditType) $this->error('ÎŞ´Ë»ı·ÖÀàĞÍ');
             $this->assign('creditType',$creditType);
         }
 
@@ -165,14 +165,14 @@ class GlobalAction extends AdministratorAction {
         $this->display();
     }
     public function doAddCreditType(){
-        // if ( !$this->__isValidRequest('name') ) $this->error('æ•°æ®ä¸å®Œæ•´');
+        // if ( !$this->__isValidRequest('name') ) $this->error('Êı¾İ²»ÍêÕû');
         $name = h(t($_POST['name']));
         $alias=h(t($_POST['alias']));
         if(empty($name) ){
-            $this->error('åç§°ä¸èƒ½ä¸ºç©º');
+            $this->error('Ãû³Æ²»ÄÜÎª¿Õ');
         }
         if(empty($alias) ){
-            $this->error('åˆ«åä¸èƒ½ä¸ºç©º');
+            $this->error('±ğÃû²»ÄÜÎª¿Õ');
         }
 
         $_POST = array_map('t',$_POST);
@@ -180,7 +180,7 @@ class GlobalAction extends AdministratorAction {
 
         $_LOG['uid'] = $this->mid;
         $_LOG['type'] = '1';
-        $data[] = 'å…¨å±€ - ç§¯åˆ†é…ç½®  - ç§¯åˆ†ç±»å‹';
+        $data[] = 'È«¾Ö - »ı·ÖÅäÖÃ  - »ı·ÖÀàĞÍ';
         if( $_POST['__hash__'] )unset( $_POST['__hash__'] );
         $data[] = $_POST;
         $_LOG['data'] = serialize($data);
@@ -193,35 +193,35 @@ class GlobalAction extends AdministratorAction {
             $model = M('');
             $setting = $model->query("ALTER TABLE {$db_prefix}credit_setting ADD {$_POST['name']} INT(11) DEFAULT 0;");
             $user    = $model->query("ALTER TABLE {$db_prefix}credit_user ADD {$_POST['name']} INT(11) DEFAULT 0;");
-			// æ¸…ç¼“å­˜
+            // Çå»º´æ
             F('_service_credit_type', null);
             $this->assign('jumpUrl', U('admin/Global/creditType'));
-            $this->success('ä¿å­˜æˆåŠŸ');
+            $this->success('±£´æ³É¹¦');
         }else {
-            $this->error('ä¿å­˜å¤±è´¥');
+            $this->error('±£´æÊ§°Ü');
         }
     }
     public function doEditCreditType(){
-        // if ( !$this->__isValidRequest('id,name') ) $this->error('æ•°æ®ä¸å®Œæ•´');
+        // if ( !$this->__isValidRequest('id,name') ) $this->error('Êı¾İ²»ÍêÕû');
         $name = h(t($_POST['name']));
         $alias=h(t($_POST['alias']));
         if(empty($name) ){
-            $this->error('åç§°ä¸èƒ½ä¸ºç©º');
+            $this->error('Ãû³Æ²»ÄÜÎª¿Õ');
         }
         if(empty($alias) ){
-            $this->error('åˆ«åä¸èƒ½ä¸ºç©º');
+            $this->error('±ğÃû²»ÄÜÎª¿Õ');
         }
         $_POST = array_map('t',$_POST);
         $_POST = array_map('h',$_POST);
         $creditTypeDao = M('credit_type');
-        //è·å–åŸå­—æ®µå
+        //»ñÈ¡Ô­×Ö¶ÎÃû
         $oldName = $creditTypeDao->find($_POST['id']);
-        //ä¿®æ”¹å­—æ®µå
+        //ĞŞ¸Ä×Ö¶ÎÃû
         $res = $creditTypeDao->save($_POST);
 
         $_LOG['uid'] = $this->mid;
         $_LOG['type'] = '3';
-        $data[] = 'å…¨å±€ - ç§¯åˆ†é…ç½® - ç§¯åˆ†ç±»å‹ ';
+        $data[] = 'È«¾Ö - »ı·ÖÅäÖÃ - »ı·ÖÀàĞÍ ';
         $data[] = $oldName;
         if( $_POST['__hash__'] )unset( $_POST['__hash__'] );
         $data[] = $_POST;
@@ -234,12 +234,12 @@ class GlobalAction extends AdministratorAction {
             $model = M('');
             $setting = $model->query("ALTER TABLE {$db_prefix}credit_setting CHANGE {$oldName['name']} {$_POST['name']} INT(11);");
             $user    = $model->query("ALTER TABLE {$db_prefix}credit_user CHANGE {$oldName['name']} {$_POST['name']} INT(11);");
-			// æ¸…ç¼“å­˜
+            // Çå»º´æ
             F('_service_credit_type', null);
             $this->assign('jumpUrl', U('admin/Global/creditType'));
-            $this->success('ä¿å­˜æˆåŠŸ');
+            $this->success('±£´æ³É¹¦');
         }else {
-            $this->error('ä¿å­˜å¤±è´¥');
+            $this->error('±£´æÊ§°Ü');
         }
     }
     public function doDeleteCreditType(){
@@ -249,18 +249,18 @@ class GlobalAction extends AdministratorAction {
 
         $map['id'] = array('in', $ids);
         $creditTypeDao = M('credit_type');
-        //è·å–å­—æ®µå
+        //»ñÈ¡×Ö¶ÎÃû
         $typeName = $creditTypeDao->where($map)->findAll();
 
         $_LOG['uid'] = $this->mid;
         $_LOG['type'] = '2';
-        $data[] = 'å…¨å±€ - ç§¯åˆ†é…ç½® - ç§¯åˆ†ç±»å‹ ';
+        $data[] = 'È«¾Ö - »ı·ÖÅäÖÃ - »ı·ÖÀàĞÍ ';
         $data[] = $typeName;
         $_LOG['data'] = serialize($data);
         $_LOG['ctime'] = time();
         M('AdminLog')->add($_LOG);
 
-        //æ¸…é™¤typeä¿¡æ¯å’Œå¯¹åº”å­—æ®µ
+        //Çå³ıtypeĞÅÏ¢ºÍ¶ÔÓ¦×Ö¶Î
         $res = M('credit_type')->where($map)->delete();
         if ($res){
             $db_prefix  = C('DB_PREFIX');
@@ -269,14 +269,14 @@ class GlobalAction extends AdministratorAction {
                 $setting = $model->query("ALTER TABLE {$db_prefix}credit_setting DROP {$v['name']};");
                 $user    = $model->query("ALTER TABLE {$db_prefix}credit_user DROP {$v['name']};");
             }
-			// æ¸…ç¼“å­˜
+            // Çå»º´æ
             F('_service_credit_type', null);
             echo 1;
         }else{
             echo 0;
         }
     }
-    //ç§¯åˆ†è§„åˆ™è®¾ç½®
+    //»ı·Ö¹æÔòÉèÖÃ
     public function credit() {
         $list = M('credit_setting')->order('type ASC')->findPage(30);
         $creditType = M('credit_type')->order('id ASC')->findAll();
@@ -285,7 +285,7 @@ class GlobalAction extends AdministratorAction {
         $this->display();
     }
     public function addCredit() {
-        $creditType = M('credit_type')->order('id ASC')->findAll();//ç§¯åˆ†ç±»åˆ«
+        $creditType = M('credit_type')->order('id ASC')->findAll();//»ı·ÖÀà±ğ
         $this->assign('creditType',$creditType);
         $this->assign('type','add');
         $this->display('editCredit');
@@ -293,9 +293,9 @@ class GlobalAction extends AdministratorAction {
     public function doAddCredit() {
         $name = trim($_POST['name']);
         if($name == "" && $_POST['name'] != ""){
-            $this->error('åç§°ä¸èƒ½ä¸ºç©ºæ ¼');
+            $this->error('Ãû³Æ²»ÄÜÎª¿Õ¸ñ');
         }
-        if ( !$this->__isValidRequest('name') ) $this->error('æ•°æ®ä¸å®Œæ•´');
+        if ( !$this->__isValidRequest('name') ) $this->error('Êı¾İ²»ÍêÕû');
 
         $_POST = array_map('t',$_POST);
         $_POST = array_map('h',$_POST);
@@ -303,13 +303,13 @@ class GlobalAction extends AdministratorAction {
         $creditType = M('credit_type')->order('id ASC')->findAll();
         foreach($creditType as $v){
             if(!is_numeric($_POST[$v['name']])){
-                $this->error($v['alias'].'çš„å€¼å¿…é¡»ä¸ºæ•°å­—ï¼');
+                $this->error($v['alias'].'µÄÖµ±ØĞëÎªÊı×Ö£¡');
             }
         }
 
         $_LOG['uid'] = $this->mid;
         $_LOG['type'] = '1';
-        $data[] = 'å…¨å±€ - ç§¯åˆ†é…ç½® - ç§¯åˆ†è§„åˆ™ ';
+        $data[] = 'È«¾Ö - »ı·ÖÅäÖÃ - »ı·Ö¹æÔò ';
         if( $_POST['__hash__'] )unset( $_POST['__hash__'] );
         $data[] = $_POST;
         $_LOG['data'] = serialize($data);
@@ -318,20 +318,20 @@ class GlobalAction extends AdministratorAction {
 
         $res = M('credit_setting')->add($_POST);
         if ($res) {
-			// æ¸…ç¼“å­˜
+            // Çå»º´æ
             F('_service_credit_rules', null);
             $this->assign('jumpUrl', U('admin/Global/credit'));
-            $this->success('ä¿å­˜æˆåŠŸ');
+            $this->success('±£´æ³É¹¦');
         }else {
-            $this->error('ä¿å­˜å¤±è´¥');
+            $this->error('±£´æÊ§°Ü');
         }
     }
     public function editCredit() {
         $cid    = intval($_GET['cid']);
         $credit = M('credit_setting')->where("`id`=$cid")->find();
-        if (!$credit) $this->error('æ— æ­¤ç§¯åˆ†è§„åˆ™');
+        if (!$credit) $this->error('ÎŞ´Ë»ı·Ö¹æÔò');
 
-        $creditType = M('credit_type')->order('id ASC')->findAll();//ç§¯åˆ†ç±»åˆ«
+        $creditType = M('credit_type')->order('id ASC')->findAll();//»ı·ÖÀà±ğ
         $this->assign('creditType',$creditType);
 
         $this->assign('credit', $credit);
@@ -341,9 +341,9 @@ class GlobalAction extends AdministratorAction {
     public function doEditCredit() {
         $name = trim($_POST['name']);
         if($name == "" && $_POST['name'] != ""){
-            $this->error('åç§°ä¸èƒ½ä¸ºç©ºæ ¼');
+            $this->error('Ãû³Æ²»ÄÜÎª¿Õ¸ñ');
         }
-        if ( !$this->__isValidRequest('id,name') ) $this->error('æ•°æ®ä¸å®Œæ•´');
+        if ( !$this->__isValidRequest('id,name') ) $this->error('Êı¾İ²»ÍêÕû');
 
         $_POST = array_map('t',$_POST);
         $_POST = array_map('h',$_POST);
@@ -351,13 +351,13 @@ class GlobalAction extends AdministratorAction {
         $creditType = M('credit_type')->order('id ASC')->findAll();
         foreach($creditType as $v){
             if(!is_numeric($_POST[$v['name']])){
-                $this->error($v['alias'].'çš„å€¼å¿…é¡»ä¸ºæ•°å­—ï¼');
+                $this->error($v['alias'].'µÄÖµ±ØĞëÎªÊı×Ö£¡');
             }
         }
 
         $_LOG['uid'] = $this->mid;
         $_LOG['type'] = '3';
-        $data[] = 'å…¨å±€ - ç§¯åˆ†é…ç½® - ç§¯åˆ†è§„åˆ™ ';
+        $data[] = 'È«¾Ö - »ı·ÖÅäÖÃ - »ı·Ö¹æÔò ';
         $credit_info = M('credit_setting')->where('id='.$_POST['id'])->find();
         $data[] = $credit_info;
         $_POST['info'] = $credit_info['info'];
@@ -369,12 +369,12 @@ class GlobalAction extends AdministratorAction {
 
         $res = M('credit_setting')->save($_POST);
         if ($res) {
-			// æ¸…ç¼“å­˜
+            // Çå»º´æ
             F('_service_credit_rules', null);
             $this->assign('jumpUrl', U('admin/Global/credit'));
-            $this->success('ä¿å­˜æˆåŠŸ');
+            $this->success('±£´æ³É¹¦');
         }else {
-            $this->error('ä¿å­˜å¤±è´¥');
+            $this->error('±£´æÊ§°Ü');
         }
     }
     public function doDeleteCredit() {
@@ -386,7 +386,7 @@ class GlobalAction extends AdministratorAction {
 
         $_LOG['uid'] = $this->mid;
         $_LOG['type'] = '2';
-        $data[] = 'å…¨å±€ - ç§¯åˆ†é…ç½® - ç§¯åˆ†è§„åˆ™ ';
+        $data[] = 'È«¾Ö - »ı·ÖÅäÖÃ - »ı·Ö¹æÔò ';
         $data[] = M('credit_setting')->where('id='.$_POST['id'])->find();
         $_LOG['data'] = serialize($data);
         $_LOG['ctime'] = time();
@@ -394,14 +394,14 @@ class GlobalAction extends AdministratorAction {
 
         $res = M('credit_setting')->where($map)->delete();
         if ($res) {
-			// æ¸…ç¼“å­˜
+            // Çå»º´æ
             F('_service_credit_rules', null);
             echo 1;
         } else {
-        	echo 0;
+            echo 0;
         }
     }
-    //æ‰¹é‡ç”¨æˆ·ç§¯åˆ†è®¾ç½®
+    //ÅúÁ¿ÓÃ»§»ı·ÖÉèÖÃ
     public function creditUser(){
         $creditType = M('credit_type')->order('id ASC')->findAll();
         $this->assign('creditType',$creditType);
@@ -410,15 +410,15 @@ class GlobalAction extends AdministratorAction {
     }
     public function doCreditUser(){
         set_time_limit(0);
-        //æŸ¥è¯¢ç”¨æˆ·ID
+        //²éÑ¯ÓÃ»§ID
         $_POST['uId'] && $map['uid'] = array('in',explode(',',t($_POST['uId'])));
         $_POST['gId']!='all' && $map['admin_level'] = intval($_POST['gId']);
         $_POST['active']!='all' && $map['is_active'] = intval($_POST['active']);
         $user = D('User','home')->where($map)->field('uid')->findAll();
         if($user == false){
-            $this->error('æŸ¥è¯¢å¤±è´¥ï¼Œæ²¡æœ‰è¿™æ ·æ¡ä»¶çš„äºº');
+            $this->error('²éÑ¯Ê§°Ü£¬Ã»ÓĞÕâÑùÌõ¼şµÄÈË');
         }
-        //ç»„è£…ç§¯åˆ†è§„åˆ™
+        //×é×°»ı·Ö¹æÔò
         $setCredit = X('Credit');
         $creditType = $setCredit->getCreditType();
         foreach($creditType as $v){
@@ -427,15 +427,15 @@ class GlobalAction extends AdministratorAction {
 
 
 
-        if($_POST['action'] == 'set'){//ç§¯åˆ†ä¿®æ”¹ä¸º
+        if($_POST['action'] == 'set'){//»ı·ÖĞŞ¸ÄÎª
             foreach($user as $v){
                 $setCredit->setUserCredit($v['uid'],$action,'reset');
-                if($setCredit->getInfo()===false)$this->error('ä¿å­˜å¤±è´¥');
+                if($setCredit->getInfo()===false)$this->error('±£´æÊ§°Ü');
             }
-        }else{//å¢å‡ç§¯åˆ†
+        }else{//Ôö¼õ»ı·Ö
             foreach($user as $v){
                 $setCredit->setUserCredit($v['uid'],$action);
-                if($setCredit->getInfo()===false)$this->error('ä¿å­˜å¤±è´¥');
+                if($setCredit->getInfo()===false)$this->error('±£´æÊ§°Ü');
             }
         }
 
@@ -444,9 +444,9 @@ class GlobalAction extends AdministratorAction {
         $_LOG['uid'] = $this->mid;
         $_LOG['type'] = '1';
         if( $_POST['action'] == 'set' ){
-            $data[] = 'å…¨å±€ - ç§¯åˆ†é…ç½® - è®¾ç½®ç”¨æˆ·ç§¯åˆ† - ç§¯åˆ†ä¿®æ”¹æ“ä½œ ';
+            $data[] = 'È«¾Ö - »ı·ÖÅäÖÃ - ÉèÖÃÓÃ»§»ı·Ö - »ı·ÖĞŞ¸Ä²Ù×÷ ';
         }else{
-            $data[] = 'å…¨å±€ - ç§¯åˆ†é…ç½® - è®¾ç½®ç”¨æˆ·ç§¯åˆ† - ç§¯åˆ†å¢å‡æ“ä½œ ';
+            $data[] = 'È«¾Ö - »ı·ÖÅäÖÃ - ÉèÖÃÓÃ»§»ı·Ö - »ı·ÖÔö¼õ²Ù×÷ ';
         }
         $data['1'] = $action;
         $data['1']['uid'] = $_POST['uId'];
@@ -457,19 +457,19 @@ class GlobalAction extends AdministratorAction {
         $_LOG['ctime'] = time();
         M('AdminLog')->add($_LOG);
 
-        $this->success('ä¿å­˜æˆåŠŸ');
+        $this->success('±£´æ³É¹¦');
     }
 
-    /** ç³»ç»Ÿé…ç½® - é‚€è¯·é…ç½® **/
+    /** ÏµÍ³ÅäÖÃ - ÑûÇëÅäÖÃ **/
 
-    //é‚€è¯·é…ç½®
+    //ÑûÇëÅäÖÃ
     function invite(){
         $data = model('Invite')->getSet();
         $this->assign( $data );
         $this->display();
     }
 
-    //é‚€è¯·ç å‘æ”¾
+    //ÑûÇëÂë·¢·Å
     function invitecode(){
         $num = intval($_POST['send_type_num']);
         $user = t($_POST['send_type_user']);
@@ -483,14 +483,14 @@ class GlobalAction extends AdministratorAction {
             $user = explode(',', $user);
             foreach ($user as $k=>$v){
                 model('Invite')->sendcode($v,$num);
-                x('Notify')->sendIn($v,'admin_sendinvitecode',array('num'=>$num)); //é€šçŸ¥å‘é€
+                x('Notify')->sendIn($v,'admin_sendinvitecode',array('num'=>$num)); //Í¨Öª·¢ËÍ
             }
         }
 
         if( $_POST ){
             $_LOG['uid'] = $this->mid;
             $_LOG['type'] = '1';
-            $data[] = 'å…¨å±€ - é‚€è¯·é…ç½® ';
+            $data[] = 'È«¾Ö - ÑûÇëÅäÖÃ ';
             if( $_POST['__hash__'] )unset( $_POST['__hash__'] );
             $data[] = $_POST;
             $_LOG['data'] = serialize($data);
@@ -499,16 +499,16 @@ class GlobalAction extends AdministratorAction {
         }
 
 
-        $this->success('æ“ä½œæˆåŠŸ');
+        $this->success('²Ù×÷³É¹¦');
     }
 
-    /** ç³»ç»Ÿé…ç½® - å…¬å‘Šé…ç½® **/
+    /** ÏµÍ³ÅäÖÃ - ¹«¸æÅäÖÃ **/
 
     public function announcement() {
         if ($_POST) {
             $_LOG['uid'] = $this->mid;
             $_LOG['type'] = '3';
-            $data[] = 'å…¨å±€ - å…¬å‘Šé…ç½® ';
+            $data[] = 'È«¾Ö - ¹«¸æÅäÖÃ ';
             $data[] = model('Xdata')->lget('announcement');
             if( $_POST['__hash__'] )unset( $_POST['__hash__'] );
             $data[] = $_POST;
@@ -524,7 +524,7 @@ class GlobalAction extends AdministratorAction {
             F('_home_user_action_announcement', null);
 
             $this->assign('jumpUrl', U('admin/Global/announcement'));
-            $this->success('ä¿å­˜æˆåŠŸ');
+            $this->success('±£´æ³É¹¦');
         }else {
             $announcement = model('Xdata')->lget('announcement');
             $this->assign($announcement);
@@ -532,14 +532,14 @@ class GlobalAction extends AdministratorAction {
         }
     }
 
-    /** ç³»ç»Ÿé…ç½® - é‚®ä»¶é…ç½® **/
+    /** ÏµÍ³ÅäÖÃ - ÓÊ¼şÅäÖÃ **/
 
     public function email(){
         if($_POST){
 
             $_LOG['uid'] = $this->mid;
             $_LOG['type'] = '3';
-            $data[] = 'å…¨å±€ - é‚®ä»¶é…ç½® ';
+            $data[] = 'È«¾Ö - ÓÊ¼şÅäÖÃ ';
             $data[] = model('Xdata')->lget('email');
             if( $_POST['__hash__'] )unset( $_POST['__hash__'] );
             $data[] = $_POST;
@@ -550,7 +550,7 @@ class GlobalAction extends AdministratorAction {
             unset($_POST['__hash__']);
             model('Xdata')->lput('email',$_POST);
             $this->assign('jumpUrl', U('admin/Global/email'));
-            $this->success('ä¿å­˜æˆåŠŸ');
+            $this->success('±£´æ³É¹¦');
         }else{
             $email = model('Xdata')->lget('email');
             $this->assign($email);
@@ -558,14 +558,14 @@ class GlobalAction extends AdministratorAction {
         }
     }
 
-    /** ç³»ç»Ÿé…ç½® - é™„ä»¶é…ç½® **/
+    /** ÏµÍ³ÅäÖÃ - ¸½¼şÅäÖÃ **/
 
     public function attachConfig() {
         if ($_POST) {
 
             $_LOG['uid'] = $this->mid;
             $_LOG['type'] = '3';
-            $data[] = 'å…¨å±€ - é™„ä»¶é…ç½® ';
+            $data[] = 'È«¾Ö - ¸½¼şÅäÖÃ ';
             $data[] = model('Xdata')->lget('attach');
             if( $_POST['__hash__'] )unset( $_POST['__hash__'] );
             $data[] = $_POST;
@@ -578,9 +578,9 @@ class GlobalAction extends AdministratorAction {
             $_POST['attach_allow_extension'] = t($_POST['attach_allow_extension']);
             $this->assign('jumpUrl', U('admin/Global/attachConfig'));
             if ( model('Xdata')->lput('attach', $_POST) )
-                $this->success('ä¿å­˜æˆåŠŸ');
+                $this->success('±£´æ³É¹¦');
             else
-                $this->error('ä¿å­˜å¤±è´¥');
+                $this->error('±£´æÊ§°Ü');
 
         }else {
             $data = model('Xdata')->lget('attach');
@@ -589,7 +589,7 @@ class GlobalAction extends AdministratorAction {
         }
     }
 
-    /** ç³»ç»Ÿé…ç½® - æ–‡ç« é…ç½® **/
+    /** ÏµÍ³ÅäÖÃ - ÎÄÕÂÅäÖÃ **/
 
     public function document() {
         $data = M('document')->order('`display_order` ASC,`document_id` ASC')->findAll();
@@ -606,7 +606,7 @@ class GlobalAction extends AdministratorAction {
         $map['document_id'] = intval($_GET['id']);
         $document = M('document')->where($map)->find();
         if ( empty($document) )
-            $this->error('è¯¥æ–‡ç« ä¸å­˜åœ¨');
+            $this->error('¸ÃÎÄÕÂ²»´æÔÚ');
         $this->assign($document);
 
         $this->assign('type', 'edit');
@@ -618,13 +618,13 @@ class GlobalAction extends AdministratorAction {
         if (($_POST['document_id'] = intval($_POST['document_id'])) <= 0)
             unset($_POST['document_id']);
 
-        // æ ¼å¼åŒ–æ•°æ®
+        // ¸ñÊ½»¯Êı¾İ
         $_POST['title']         = H(t($_POST['title']));
         $_POST['is_active']     = intval($_POST['is_active']);
         $_POST['is_on_footer']  = intval($_POST['is_on_footer']);
         $_POST['last_editor_id']= $this->mid;
         $_POST['mtime']         = time();
-        if (preg_match('/^\s*((?:https?|ftp):\/\/(?:www\.)?(?:[a-zA-Z0-9][a-zA-Z0-9\-]*\.)?[a-zA-Z0-9][a-zA-Z0-9\-]*(?:\.[a-zA-Z]+)+(?:\:[0-9]*)?(?:\/[^\x{2e80}-\x{9fff}\s<\'\"â€œâ€â€˜â€™]*)?)\s*$/u', strip_tags(html_entity_decode($_POST['content'], ENT_QUOTES, 'UTF-8')), $url)
+        if (preg_match('/^\s*((?:https?|ftp):\/\/(?:www\.)?(?:[a-zA-Z0-9][a-zA-Z0-9\-]*\.)?[a-zA-Z0-9][a-zA-Z0-9\-]*(?:\.[a-zA-Z]+)+(?:\:[0-9]*)?(?:\/[^\x{2e80}-\x{9fff}\s<\'\"¡°¡±¡®¡¯]*)?)\s*$/u', strip_tags(html_entity_decode($_POST['content'], ENT_QUOTES, 'UTF-8')), $url)
             || preg_match('/^\s*((?:mailto):\/\/[a-zA-Z0-9_]+@[a-zA-Z0-9][a-zA-Z0-9\.]*[a-zA-Z0-9])\s*$/u', strip_tags(html_entity_decode($_POST['content'], ENT_QUOTES, 'UTF-8')), $url)) {
             $_POST['content'] = h($url[1]);
         } else {
@@ -632,18 +632,18 @@ class GlobalAction extends AdministratorAction {
             $_POST['content'] = $_POST['content'];
         }
         if (!isset($_POST['document_id'])) {
-            // æ–°å»ºæ–‡ç« 
+            // ĞÂ½¨ÎÄÕÂ
             $_POST['author_id'] = $this->mid;
             $_POST['ctime']     = $_POST['mtime'];
         }
 
-        // æ•°æ®æ£€æŸ¥
+        // Êı¾İ¼ì²é
         if (empty($_POST['title']))
-            $this->error('æ ‡é¢˜ä¸èƒ½ä¸ºç©º');
+            $this->error('±êÌâ²»ÄÜÎª¿Õ');
 
         $_LOG['uid'] = $this->mid;
         $_LOG['type'] = isset($_POST['document_id']) ? '3' : '1';
-        $data[] = 'å…¨å±€ - æ–‡ç« é…ç½® ';
+        $data[] = 'È«¾Ö - ÎÄÕÂÅäÖÃ ';
         isset($_POST['document_id']) && $data[] =  model('Xdata')->lget('platform');
         if( $_POST['__hash__'] ) unset( $_POST['__hash__'] );
         $data[] = $_POST;
@@ -651,22 +651,22 @@ class GlobalAction extends AdministratorAction {
         $_LOG['ctime'] = time();
         M('AdminLog')->add($_LOG);
 
-        // æäº¤
+        // Ìá½»
         $res = isset($_POST['document_id']) ? M('document')->save($_POST) : M('document')->add($_POST);
 
         if ($res) {
-        	// æ¸…ç†ç¼“å­˜
-        	F('_action_footer_document', null);
+            // ÇåÀí»º´æ
+            F('_action_footer_document', null);
             if ( isset($_POST['document_id']) ) {
                 $this->assign('jumpUrl', U('admin/Global/document'));
             } else {
-                // ä¸ºæ’åºæ–¹ä¾¿, æ–°å»ºå®Œæ¯•å, å°†display_orderè®¾ç½®ä¸ºad_id
+                // ÎªÅÅĞò·½±ã, ĞÂ½¨Íê±Ïºó, ½«display_orderÉèÖÃÎªad_id
                 M('document')->where("`document_id`=$res")->setField('display_order', $res);
                 $this->assign('jumpUrl', U('admin/Global/addDocument'));
             }
-            $this->success('ä¿å­˜æˆåŠŸ');
+            $this->success('±£´æ³É¹¦');
         } else {
-            $this->error('ä¿å­˜å¤±è´¥');
+            $this->error('±£´æÊ§°Ü');
         }
     }
 
@@ -679,7 +679,7 @@ class GlobalAction extends AdministratorAction {
 
         $_LOG['uid'] = $this->mid;
         $_LOG['type'] = '2';
-        $data[] = 'å…¨å±€ - æ–‡ç« é…ç½® ';
+        $data[] = 'È«¾Ö - ÎÄÕÂÅäÖÃ ';
         $data[] = model('Xdata')->lget('platform');
         if( $_POST['__hash__'] )unset( $_POST['__hash__'] );
         $data[] = $_POST;
@@ -689,7 +689,7 @@ class GlobalAction extends AdministratorAction {
 
         $map['document_id'] = array('in', t($_POST['ids']));
         echo M('document')->where($map)->delete() ? '1' : '0';
-        // æ¸…ç†ç¼“å­˜
+        // ÇåÀí»º´æ
         F('_action_footer_document', null);
     }
 
@@ -701,7 +701,7 @@ class GlobalAction extends AdministratorAction {
             exit;
         }
 
-        // è·å–è¯¦æƒ…
+        // »ñÈ¡ÏêÇé
         $map['document_id'] = array('in', array($_POST['document_id'], $_POST['baseid']));
         $res = M('document')->where($map)->field('document_id,display_order')->findAll();
         if ( count($res) < 2 ) {
@@ -709,37 +709,90 @@ class GlobalAction extends AdministratorAction {
             exit;
         }
 
-        //è½¬ä¸ºç»“æœé›†ä¸ºarray('id'=>'order')çš„æ ¼å¼
+        //×ªÎª½á¹û¼¯Îªarray('id'=>'order')µÄ¸ñÊ½
         foreach($res as $v) {
             $order[$v['document_id']] = intval($v['display_order']);
         }
         unset($res);
 
-        //äº¤æ¢orderå€¼
+        //½»»»orderÖµ
         $res =         M('document')->where('`document_id`=' . $_POST['document_id'])->setField(  'display_order', $order[$_POST['baseid']] );
         $res = $res && M('document')->where('`document_id`=' . $_POST['baseid'])->setField( 'display_order', $order[$_POST['document_id']]  );
 
         if ($res) {
-        	// æ¸…ç†ç¼“å­˜
-        	F('_action_footer_document', null);
-        	echo 1;
+            // ÇåÀí»º´æ
+            F('_action_footer_document', null);
+            echo 1;
         } else {
-        	echo 0;
+            echo 0;
         }
     }
 
-    /** å®¡æ ¸é…ç½® **/
+    /** ÉóºËÅäÖÃ **/
     public function audit(){
         $audit = model('Xdata')->lget('audit');
         $this->assign($audit);
         $this->display();
     }
 
+    /*µ×²¿±êÇ©ÅäÖÃ*/
+    public function buttomTag(){
+        $sql = "select * from ai_buttom_tag";
+        $tags = M('')->query($sql);
+        foreach($tags as $val){     //µÃµ½Êä³öÊı×é¸ñÊ½£ºarray('key'=>array('name'=>$name,'url'=>$url))
+            $result[$val['key_name']] = array('name'=>$val['name'],'url'=>$val['url'],'id'=>$val['id']);
+        }
+        //var_dump($result);
+        $this->assign('buttomTag',$result);
+        $this->display('bottomTag');
+    }
+    
+    /*½ÓÊÕµ×²¿±êÇ©ÅäÖÃÊı¾İ*/
+    public function doButtomTag(){
+        //var_dump($_POST);
+        if($_POST['actcode']=='delbuttominfo'&&!empty($_POST['delid'])){
+            echo $_POST['delid'];exit;
+        }
+        $v = $_POST;
+        //$newTagInfo = array_splice($v,-3,3);
+        //¸üĞÂÔ­¼ÇÂ¼
+        if($v['newTagName']==''){unset($v['newTagName']);}else{$newTagInfo['newTagName']=$v['newTagName'];}
+        if($v['newTagUrl']==''){unset($v['newTagUrl']);}else{$newTagInfo['newTagUrl']=$v['newTagUrl'];}
+        if($v['newTag']==''){unset($v['newTag']);}else{$newTagInfo['newTag']=$v['newTag'];}
+        foreach($v as $key=>$value){
+            if(!empty($value[0])&&!empty($value[1])){
+                //$sql=null;
+                $sql = "update ai_buttom_tag set name='".$value[0]."',url='".$value[1]."' where id='".$key."'";
+                $res = M('')->query($sql);
+            }
+        }
+        //ĞÂÔö¼ÇÂ¼
+        if(($_POST['newTag']!=""||$_P['newTagName'])){
+            $tagKey = $_POST['newTag'];
+            $name = $_POST['newTagName'];
+            $url = $_POST['newTagUrl'];
+            $insertSql = "insert into ai_buttom_tag(name,url,key_name) values('$name','$url','$tagKey')";
+            $result = M('')->query($insertSql);
+            if(!empty($result))echo 123;
+        }
+        $filename="buttomTagInfo.php";
+        $fp=fopen($filename,'wb');
+        $writeInfoSql="select * from ai_buttom_tag";
+        $writeInfoResult = M('')->query($writeInfoSql);
+        foreach($writeInfoResult as $val){     //µÃµ½Êä³öÊı×é¸ñÊ½£ºarray('key'=>array('name'=>$name,'url'=>$url))
+            $writeInfo[$val['key_name']] = array('name'=>$val['name'],'url'=>$val['url'],'id'=>$val['id']);
+        }
+        fwrite($fp,"<?php\n\r return '".serialize($writeInfo)."';");
+        fclose($fp);
+        
+        
+    }
+    
     public function doSaveAudit(){
         if($_POST){
             $_LOG['uid'] = $this->mid;
             $_LOG['type'] = '3';
-            $data[] = 'å…¨å±€ - å®¡æ ¸é…ç½® ';
+            $data[] = 'È«¾Ö - ÉóºËÅäÖÃ ';
             $data[] = model('Xdata')->lget('audit', $map);
             if( $_POST['__hash__'] )unset( $_POST['__hash__'] );
             $data[] = $_POST;
@@ -750,14 +803,14 @@ class GlobalAction extends AdministratorAction {
             model('Xdata')->lput('audit', $_POST);
         }
         $this->assign('jumpUrl', U('admin/Global/audit'));
-        $this->success("é…ç½®æˆåŠŸ");
+        $this->success("ÅäÖÃ³É¹¦");
     }
 
-	public function testSendEmail(){
-		$service = service('Mail');
-		$subject = 'è¿™æ˜¯ä¸€å°æµ‹è¯•é‚®ä»¶';
-		$content = 'è¿™æ˜¯ä¸€å°æ¥è‡ª'.SITE_URL.'çš„æµ‹è¯•é‚®ä»¶ï¼Œæ‚¨èƒ½æ”¶åˆ°è¿™å°é‚®ä»¶è¡¨æ˜é‚®ä»¶æœåŠ¡å™¨å·²é…ç½®æ­£ç¡®ã€‚<br />
-					å¦‚æœæ‚¨ä¸æ¸…æ¥šè¿™å°é‚®ä»¶çš„æ¥ç”±ï¼Œè¯·åˆ é™¤ï¼Œä¸ºç»™æ‚¨å¸¦æ¥çš„ä¸ä¾¿è¡¨ç¤ºæ­‰æ„';
-		echo ( $info = $service->send_email($_POST['testSendEmailTo'], $subject, $content) )?$info:'1';
-	}
+    public function testSendEmail(){
+        $service = service('Mail');
+        $subject = 'ÕâÊÇÒ»·â²âÊÔÓÊ¼ş';
+        $content = 'ÕâÊÇÒ»·âÀ´×Ô'.SITE_URL.'µÄ²âÊÔÓÊ¼ş£¬ÄúÄÜÊÕµ½Õâ·âÓÊ¼ş±íÃ÷ÓÊ¼ş·şÎñÆ÷ÒÑÅäÖÃÕıÈ·¡£<br />
+                    Èç¹ûÄú²»Çå³şÕâ·âÓÊ¼şµÄÀ´ÓÉ£¬ÇëÉ¾³ı£¬Îª¸øÄú´øÀ´µÄ²»±ã±íÊ¾Ç¸Òâ';
+        echo ( $info = $service->send_email($_POST['testSendEmailTo'], $subject, $content) )?$info:'1';
+    }
 }

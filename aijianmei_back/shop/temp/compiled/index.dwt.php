@@ -18,7 +18,13 @@
 <?php echo $this->smarty_insert_scripts(array('files'=>'common.js,index.js')); ?>
 </head>
 <body>
+<<<<<<< HEAD
 <?php echo $this->fetch('library/page_header.lbi'); ?>
+=======
+  <div class="wrapper">
+<?php echo $this->fetch('library/page_header.lbi'); ?>
+
+>>>>>>> refs/heads/master
 <div class="blank"></div>
 <div class="block clearfix">
   
@@ -72,6 +78,7 @@
     <div class="blank5"></div>
    
    
+<<<<<<< HEAD
     <div class="clearfix">
       
       <?php echo $this->fetch('library/recommend_promotion.lbi'); ?>
@@ -83,6 +90,19 @@
       </div>
     </div>
     <div class="blank5"></div>
+=======
+  <!-- <div class="clearfix">
+                
+                <?php echo $this->fetch('library/recommend_promotion.lbi'); ?>
+                
+      <!-- <div class="box f_r brandsIe6">
+       <div class="box_1 clearfix" id="brands">
+        #BeginLibraryItem "/library/brands.lbi" --><!-- #EndLibraryItem
+       </div> -->
+      <!-- </div>
+    </div>
+  <div class="blank5"></div> --> 
+>>>>>>> refs/heads/master
    
 <?php echo $this->fetch('library/recommend_best.lbi'); ?>
 <?php echo $this->fetch('library/recommend_new.lbi'); ?>
@@ -129,5 +149,9 @@
 
 <div class="blank"></div>
 <?php echo $this->fetch('library/page_footer.lbi'); ?>
+<<<<<<< HEAD
+=======
+</div>
+>>>>>>> refs/heads/master
 </body>
 </html>

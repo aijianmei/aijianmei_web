@@ -1,4 +1,5 @@
 <include file="../Public/header" />
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 <div id="content">
             <div class="content_left clearfix">
                 <span>
@@ -14,7 +15,7 @@
                     <div class="web_expend_1">
                         <a class="sprite_7"><php>echo count($comments)</php></a>
                         <span class="for_sprite_7">评论数</span>
-                        <span class="show_time"><php>echo date('D', $daily['create_time'])</php> <span> <php>echo date('Y年 m月 d日', $daily['create_time'])</php></span></span>
+                        <span class="show_time"><php>echo date('D', $daily['create_time'])</php> <span> <php>echo date('YY mm dd', $daily['create_time'])</php></span></span>
                         <span>我要分享</span>
                         <include file="../Public/share" />			
                     </div>
@@ -50,8 +51,9 @@
                                 <span class="triangle"></span>
                             </a>
                         </span>
-                        <a class="sprite_8" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'like'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$daily['like']}</span></a>
-                        <a class="sprite_9" aid="{$daily['id']}" <php>if(getMid()){</php> href="{:U('index/Index/daily', array('id'=>$daily['id'], 'o'=>'unlike'))}"<php>}else{</php>href="javascript:alert('请登录');return false;"<php>}</php>><span class="praise">{$daily['unlike']}</span></a>
+                        <input type="hidden" id="articleid" value="<?php echo $_GET['id'];?>" uid="<?php echo getMid();?>" tname="d">
+                        <a class="sprite_8" aid="{$daily['id']}" act="like"><span class="praise"  id="sprite_8_num">{$daily['like']}</span></a>
+                        <a class="sprite_9" aid="{$daily['id']}" act="unlike"><span class="praise"  id="sprite_9_num">{$daily['unlike']}</span></a>
                         <span class="relay">转发到</span>
                         <include file="../Public/share" />
                         <a class="collect">收藏</a>					
@@ -62,14 +64,14 @@
                         <php>if(getMid()){</php>
                         <php>echo getUserName(getMid())</php>
                         <php>}else {</php>
-                        <span><a href="index.php?app=home&mod=Public&act=login">登录</a></span>|
+                        <span><a href="index.php?app=home&mod=Public&act=login" class="login">登录</a></span>|
                         <span><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a></span>
                         <php>}</php>
                         
                         <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox">有什么感想，来说说吧</textarea></div>
                         <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
                         <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
-                        <a class="comment" href="javascript:void(0)" onclick="addDetaiCommont();">发表评论</a>
+                        <a class="comment" href="javascript:void(0)" onclick="addVideoCommont();">发表评论</a>
                     </div>
                     <div class="check_comment">
                         <a class="comment_1">全部评论(<?php echo $commentsCount;?>)</a>
@@ -94,7 +96,7 @@
                             <div class="target">
                                 <div class="target_pic">
                                     <img src="{$c['userInfo']['face']}" alt="no" />
-                                    <span class="care">关注</span>
+                                    <span class="care"></span>
                                 </div>
                                 <a class="name">{$c['userInfo']['uname']}</a>
                                 <p>{$c['content']}</p>
@@ -144,7 +146,7 @@
                         <h4 class="sider_t">精华推荐</h4>
                         <php>foreach($promote_article as $p) {</php>
                         <div class="recommend">							
-                            <a  href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}"><img src="/public/images/article/{$p['img']}" alt="no" border="0" width="90" height="60" /></a>
+                            <a  href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}" class="recommend_pic"><img src="/public/images/article/{$p['img']}" alt="no" border="0" width="90" height="60" /></a>
                             <div class="intro" ><h3><a>{$p['title']}</a></h3></div>
                             <span class="t_play_time">点击:<span>{$p['reader_count']}</span></span>
                             <span class="comment_time">评论: <span>{$p['CommNumber']}</span></span>
@@ -156,7 +158,7 @@
             </div>
         </div>
         <script>
-        function addDetaiCommont(){
+        function addVideoCommont(){
             if($("#commentUid").val()==''){alert("请先登录");return false;}
             if($("#commentbox").val()==''){return false;}
             if($("#commentPid").val()==''){return false;}
@@ -164,11 +166,13 @@
             type: "POST",
             url: "ajax.php",
             dataType:"json",
-            data: "act=addDetaiCommont&data=ford&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&content="+$("#commentbox").val()+"&ptype=1",
+            data: "act=addVideoCommont&data=ford&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&content="+$("#commentbox").val()+"&ptype=1",
             success: function(data){
             alert("添加评论成功！");
              var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">关注</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.connect+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div';   
-             $("#recomment_fdiv").append(innerHtml);
+            $("#commentbox").val('');          
+            $("#recomment_fdiv").prepend(innerHtml);
+            $("#empty_content").html('');
              
             }
             });

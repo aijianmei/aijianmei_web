@@ -74,6 +74,7 @@ class TrainAction extends Action {
         $this->assign('lastArticles', $lastArticles);
 
         $this->show_banner();//显示banner
+        $this->assign('headertitle', '锻炼');
         $this->display();
     }
     
@@ -91,7 +92,7 @@ class TrainAction extends Action {
         }
         
         //get hotArticles
-        $order = 'click';
+        $order = 'reader_count';
         $hotArticles = D('Article')->getTrainArticles($order, $id);
         foreach($hotArticles as $key => $value){
             $hotArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
@@ -108,10 +109,9 @@ class TrainAction extends Action {
         $this->assign('categories', $realCate);
         $map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
         
-        $count = M('article')->where($map)->count();
-                $style['pre'] = 'prev';
-                $style['next'] = 'next';
-                $style['current'] = 'current_page';
+        $sqlcount="select aid as id from ai_article_category_group where category_id=$id union select id from ai_article where category_id=$id";
+        $countArr = M('')->query($sqlcount);
+        $count = count($countArr);
         $pager = api('Pager');
         $pager->setCounts($count);
         //$pager->setStyle($style);
@@ -119,13 +119,21 @@ class TrainAction extends Action {
         $pager->makePage();
         $from = ($pager->pg-1) * $pager->countlist;
         $pageArray = (array)$pager;
-    
-        $articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();
+        $articlesSQl="select * from ai_article where id in ($sqlcount) or category_id=$id group by id order by create_time limit $from,$pager->countlist";
+        $articles = M('')->query($articlesSQl);
+        //$articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();
         $this->assign('pager', $pageArray);
         $this->assign('articles', $articles);
-        
-         $this->show_banner();//显示banner
-        
+        $this->show_banner();//显示banner
+        foreach($realCate as $k =>$v){
+            foreach($v['children'] as $k1=>$v1){
+                if($v1['id']==$id)
+                {
+                    
+                    $this->assign('headertitle', $v1['name']);
+                }
+            }
+        }
         $this->display('list');
     }
     
@@ -218,11 +226,13 @@ class TrainAction extends Action {
         
         $video['create_time']=date("Y-m-d H:i:s",$video['create_time']);
         $otherVideo=D('Article')->getVideoCategory($table,$video['category_id'],2);
+        
         foreach($otherVideo as $k=>$v){
             $data = json_decode($this->getVideoData($v['link']));
-            $otherVideo[$k]['logo'] = $data->data[0]->logo;	
+            $otherVideo[$k]['CommNumber']=D('Article')->getVideoCountRecommentsById($v['id']);
+            $otherVideo[$k]['logo'] = $data->data[0]->logo;
+            $otherVideo[$k]['CommNumber']=$otherVideo[$k]['CommNumber']?$otherVideo[$k]['CommNumber']:0;
         }
-        
         $getRecommentsSql="select * from ai_video_comments where pid=$id";
         $Recomments=M('')->query($getRecommentsSql);
         $cRecomnums=count($Recomments);
