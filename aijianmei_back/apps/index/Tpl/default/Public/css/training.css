@@ -377,9 +377,8 @@ margin-bottom: 20px;
 			font-size: 14px;
 		}
 		.opt_length{
-			float: left;
+			display: inline-block;
 			width: 530px;
-			max-height: 100px
 		}
 		.select a {
 			color: #21aec3;

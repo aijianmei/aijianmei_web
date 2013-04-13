@@ -587,7 +587,9 @@ button{
 }
 /****** 翻页 *****/
 .page{
-	margin:10px auto;
+	height: 24px;
+	line-height: 24px;
+	margin: 10px auto;
 	text-align: center;
 }
 .page a{
@@ -598,6 +600,10 @@ button{
 	border: 2px solid rgb(236, 236, 236);
 	line-height: 20px;
 	color:#333;
+}
+.concrete_choice{
+	display: inline-block;
+	vertical-align: top;
 }
 .page .prev,.page .next{
 	width:50px;
@@ -615,8 +621,6 @@ button{
 }
 .free_choice span{
 	float:left;
-	height: 24px;
-	line-height: 24px;
 	margin:0 6px;
 }
 .concrete_page input{
