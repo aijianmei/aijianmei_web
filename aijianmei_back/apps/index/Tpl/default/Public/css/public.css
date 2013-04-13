@@ -632,6 +632,7 @@ button{
 	font-weight: bold;
 	color: white;
 	background: url(../images/icon_result.png) 0 -225px no-repeat;
+	cursor:pointer;
 }
 	/*底部汇总导航栏*/
 		.title_4{

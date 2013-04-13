@@ -58,7 +58,7 @@
 			position:absolute;
 			top:178px;
 			cursor:pointer;
-			z-index:1000;
+			z-index:10;
 		}
 		#banner .pre{
 			left:20px;
@@ -142,13 +142,20 @@
 		position: relative;		
 	}
 	.lay_top_2 .show_share iframe{
-		padding-top: 10px;
+		margin-top: 22px;
 	}
 	.show_share iframe{
+		display:block;
 		margin: 12px 0;
 		height: 32px;
+		opacity: 0.5;
+		transition: opacity .6s ease-in-out;
+		-webkit-transition: opacity .6s ease-in-out;
 	}
-	.show_share{
+	.show_share iframe:hover{
+		opacity: 1;
+	}
+	/*.show_share{
 		opacity: 0.5;
 		filter: alpha(opacity=50);
 		transition: opacity .6s ease-in-out;
@@ -156,7 +163,7 @@
 	}
 	.show_share:hover{
 		opacity: 1;
-	}
+	}*/
 	.expand_more{
 		float: right;
 		line-height: 24px;
