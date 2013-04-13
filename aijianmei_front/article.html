@@ -267,7 +267,7 @@
 										<span>22个小时前</span>
 										<span>来自<em></em></span>	
 									</p>
-									<div class="post_area">
+									<!-- <div class="post_area">
 										<span class="btn_back">x</span>
 										<div class="part_back">
 											<textarea class="pop_content"></textarea>
@@ -276,7 +276,7 @@
 												<input type="button" value="回复" class="sure_back" />
 											</div>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>	
@@ -361,17 +361,32 @@
 			})
 			var aijianmei = {
 				newdom : new getdom,
+				removechlid : function(obj_1,obj_2){
+					obj_1.removeChild(obj_1.lastChild);
+					obj_2.className = "write_back";
+				},
+				circle : function(obj,obj_1,obj_2){
+					var len = obj.length;
+					for(var i = 0;i < len;i++){
+						obj[i].onclick = function(){
+							aijianmei.removechlid(obj_1,obj_2);
+						}
+					}
+				},
 				answer : function(obj,text){
 					target_content = obj.parentNode.parentNode.parentNode;
-					console.log(target_content.lastChild)
-					if(0){
+					if(obj.className != 'write_back write_click'){
 						var div = document.createElement('div');
 						div.innerHTML = text;
 						target_content.appendChild(div);
-						console.log(target_content.lastChild.className)
+						obj.className = "write_back write_click";
+						if(aijianmei.newdom.getElementsByClass('btn_back')){
+							var btn_back = aijianmei.newdom.getElementsByClass('btn_back');
+							aijianmei.circle(btn_back,target_content,obj)
+						}
 					}
 					else{
-						target_content.removeChild(target_content.lastChild);
+						aijianmei.removechlid(target_content,obj);	
 					}				
 				}
 			}
@@ -379,7 +394,7 @@
 				var newdom = new getdom,
 					write_back = newdom.getElementsByClass('write_back'),
 					len = write_back.length,
-					content = '<div class="post_area"><span class="btn_back">x</span><div class="part_back"><textarea class="pop_content"></textarea><div class="part_sure"><span class="rule">登录(请登录发言，并遵守相关规定)</span><input type="button" value="回复" class="sure_back" /></div></div></div>';
+					content = '<div class="post_area"><a class="btn_back">x</a><div class="part_back"><textarea class="pop_content"></textarea><div class="part_sure"><span class="rule">登录(请登录发言，并遵守相关规定)</span><input type="button" value="回复" class="sure_back" /></div></div></div>';
 					for(var i = 0;i < len;i++){
 						write_back[i].index = i;
 						write_back[i].onclick = function(){
