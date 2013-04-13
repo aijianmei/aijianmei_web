@@ -3,3 +3,4 @@ aijianmei_back/config.inc.php
 _runtime/*
 aijianmei_back/_runtime/*
 /nbproject/private/
+aijianmei_back/shop/temp/*
