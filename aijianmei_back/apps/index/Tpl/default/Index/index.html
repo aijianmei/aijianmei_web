@@ -89,17 +89,24 @@
                         <div class="lay_top_1 clearfix">
                             <h1 class="public_title">最新文章</h1>
                             <ul class="new_video clearfix">
+                            <!-- outside 2013/4/13-->
                             <?php foreach($hotArticles as $key => $value) {  ?>
                                 <li class="tr_classify">
-                                    <a href="{:U('index/Index/articleDetail', array('id'=>$value['id']))}" class="show_enter">
-                                        <span class="enter_icon"></span>
-                                        <img src="../public/images/article/<?php echo $value['img'];?>" alt="<?php echo $value['title'];?>" title="<?php echo $value['title'];?>">
-                                    </a>
+                                    <div class="lay_pic_share">
+                                        <a href="{:U('index/Index/articleDetail', array('id'=>$value['id']))}" class="show_enter">
+                                            <span class="enter_icon"></span>
+                                            <img src="../public/images/article/<?php echo $value['img'];?>" alt="<?php echo $value['title'];?>" title="<?php echo $value['title'];?>">
+                                        </a>
+                                        <div class="show_share"><wb:share-button count="n" type="button" size="big" height="100px"></wb:share-button></wb:share-button></div>
+                                    </div>
                                     <div class="lay_tr">
                                         <a href="" class="plan_article_tl"><?php echo $value['title'];?></a>
                                         <p class="summary"><?php echo msubstr($value['brief'],0,42) ?></p>
-                                        <span class="t_play_time">点击:<span></span><?php echo $value['reader_count']?></span>
-                                        <span class="comment_time">评论:<span><?php echo $value['CommNumber'];?></span></span>
+                                        <a class="expand_more">点击阅读》</a>
+                                        <div class="function_more clearfix">
+                                            <span class="t_play_time">点击:<span></span><?php echo $value['reader_count']?></span>
+                                            <span class="comment_time">评论:<span><?php echo $value['CommNumber'];?></span></span>
+                                        </div>
                                     </div>
                                 </li>
                                 <?php } ?>
@@ -128,19 +135,41 @@
                             <ul class="new_video clearfix">
                             <?php foreach($hotvideos as $key => $value) {  ?>
                                 <li class="tr_classify">
-                                    <a href="{:U('index/Train/videoDetail', array('id'=>$value['id']))}" class="show_enter">
-                                        <span class="v_enter"></span>
-                                        <img src="<?php echo $value['logo'];?>" alt="<?php echo $value['title'];?>">
-                                    </a>
+                                    <div class="lay_pic_share">
+                                        <a href="{:U('index/Train/videoDetail', array('id'=>$value['id']))}" class="show_enter">
+                                            <span class="v_enter"></span>
+                                            <img src="<?php echo $value['logo'];?>" alt="<?php echo $value['title'];?>">
+                                        </a>
+                                        <div class="show_share"><wb:share-button count="n" type="button" size="big" height="100px"></wb:share-button></wb:share-button></div>
+                                    </div>
                                     <div class="lay_tr">
                                         <a href="{:U('index/Train/videoDetail', array('id'=>$value['id']))}" class="plan_article_tl" alt="<?php echo $value['title'];?>" title="<?php echo $value['title'];?>"><?php echo $value['title'];?></a>
                                         <p class="summary" alt="<?php echo $value['brief'];?>" title="<?php echo $value['brief'];?>"><?php echo msubstr($value['brief'],0,42) ?></p>
-                                        <span class="t_play_time">点击:<span><?php echo $value['click'];?></span></span>
-                                        <span class="comment_time">评论:<span><?php echo $value['recommons'];?></span></span>
+                                        <a class="expand_more">点击阅读》</a>
+                                        <div class="function_more clearfix">
+                                            <span class="t_play_time">点击:<span><?php echo $value['click'];?></span></span>
+                                            <span class="comment_time">评论:<span><?php echo $value['recommons'];?></span></span>
+                                        </div>
                                     </div>
                                 </li>
                                 <?php } ?>
                             </ul>
+                            <div class="page">
+                                <span class="concrete_choice">
+                                                    {$pager[backstr]}
+                                                    {$pager[thestr]}
+                                                    {$pager[nextstr]}
+                                </span>
+                                <span class="free_choice clearfix">
+                                    <span>共{$pager[page]}页</span>
+                                    <span class="concrete_page">
+                                            到第
+                                            <input type="text">
+                                            页
+                                    </span>
+                                    <span class="sure_button" onclick="">确定</span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>                                

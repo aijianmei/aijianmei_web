@@ -606,9 +606,9 @@ button{
 	background:#21ace3;
 	color:white;
 }
-.concrete_choice{
+/*.concrete_choice{
 	float:left;
-}
+}*/
 /*outside*/
 .free_choice{
 	display: inline-block;
@@ -724,7 +724,7 @@ button{
 				height: 35px;
 				padding-top: 8px;
 				font-size: 14px;
-				color: #56888F;
+				color: #21ace3;
 				font-weight: 700;
 			}
 			.new_video img,.hot_video img{
