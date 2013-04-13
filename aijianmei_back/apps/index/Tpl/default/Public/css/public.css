@@ -587,7 +587,6 @@ button{
 }
 /****** 翻页 *****/
 .page{
-	width: 450px;
 	margin:10px auto;
 	text-align: center;
 }
@@ -609,6 +608,10 @@ button{
 }
 .concrete_choice{
 	float:left;
+}
+/*outside*/
+.free_choice{
+	display: inline-block;
 }
 .free_choice span{
 	float:left;

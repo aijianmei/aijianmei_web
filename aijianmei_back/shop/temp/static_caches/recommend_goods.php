@@ -2,32 +2,24 @@
 $data = array (
   'best' => 
   array (
-<<<<<<< HEAD
-  ),
-  'new' => 
-  array (
-  ),
-  'hot' => 
-  array (
-=======
     0 => 
     array (
-      'goods_id' => '2',
-      'sort_order' => '100',
+      'goods_id' => '1',
+      'sort_order' => '4',
     ),
     1 => 
     array (
-      'goods_id' => '1',
+      'goods_id' => '4',
       'sort_order' => '100',
     ),
     2 => 
     array (
-      'goods_id' => '4',
+      'goods_id' => '3',
       'sort_order' => '100',
     ),
     3 => 
     array (
-      'goods_id' => '3',
+      'goods_id' => '2',
       'sort_order' => '100',
     ),
   ),
@@ -35,17 +27,12 @@ $data = array (
   array (
     0 => 
     array (
-      'goods_id' => '2',
-      'sort_order' => '100',
+      'goods_id' => '1',
+      'sort_order' => '4',
     ),
     1 => 
     array (
       'goods_id' => '4',
-      'sort_order' => '100',
-    ),
-    2 => 
-    array (
-      'goods_id' => '3',
       'sort_order' => '100',
     ),
   ),
@@ -53,23 +40,19 @@ $data = array (
   array (
     0 => 
     array (
-      'goods_id' => '2',
-      'sort_order' => '100',
+      'goods_id' => '1',
+      'sort_order' => '4',
     ),
     1 => 
     array (
       'goods_id' => '4',
       'sort_order' => '100',
     ),
-    2 => 
-    array (
-      'goods_id' => '3',
-      'sort_order' => '100',
-    ),
->>>>>>> refs/heads/master
   ),
   'brand' => 
   array (
+    3 => 'outside',
+    2 => 'outside',
   ),
 );
 ?>

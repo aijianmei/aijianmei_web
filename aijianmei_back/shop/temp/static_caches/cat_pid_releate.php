@@ -1,20 +1,30 @@
 <?php
 $data = array (
-<<<<<<< HEAD
-=======
   0 => 
   array (
     'cat_id' => '1',
-    'cat_name' => 'a',
+    'cat_name' => 'ces',
     'measure_unit' => '',
     'parent_id' => '0',
     'is_show' => '1',
     'show_in_nav' => '0',
     'grade' => '0',
     'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => '4',
+    'has_children' => '1',
+    'goods_num' => '3',
   ),
->>>>>>> refs/heads/master
+  1 => 
+  array (
+    'cat_id' => '2',
+    'cat_name' => 'asdfasdfasdgsadg',
+    'measure_unit' => '',
+    'parent_id' => '1',
+    'is_show' => '1',
+    'show_in_nav' => '0',
+    'grade' => '0',
+    'sort_order' => '50',
+    'has_children' => '0',
+    'goods_num' => '1',
+  ),
 );
 ?>

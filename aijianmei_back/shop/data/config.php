@@ -30,10 +30,7 @@ define('AUTH_KEY', 'this is a key');
 
 define('OLD_AUTH_KEY', '');
 
-<<<<<<< HEAD
-define('API_TIME', '');
-=======
-define('API_TIME', '2013-04-12 05:48:01');
->>>>>>> refs/heads/master
+
+define('API_TIME', '2013-04-13 04:08:26');
 
 ?>

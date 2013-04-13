@@ -18,13 +18,9 @@
 <?php echo $this->smarty_insert_scripts(array('files'=>'common.js,index.js')); ?>
 </head>
 <body>
-<<<<<<< HEAD
-<?php echo $this->fetch('library/page_header.lbi'); ?>
-=======
   <div class="wrapper">
 <?php echo $this->fetch('library/page_header.lbi'); ?>
 
->>>>>>> refs/heads/master
 <div class="blank"></div>
 <div class="block clearfix">
   
@@ -78,19 +74,6 @@
     <div class="blank5"></div>
    
    
-<<<<<<< HEAD
-    <div class="clearfix">
-      
-      <?php echo $this->fetch('library/recommend_promotion.lbi'); ?>
-      
-      <div class="box f_r brandsIe6">
-       <div class="box_1 clearfix" id="brands">
-        <?php echo $this->fetch('library/brands.lbi'); ?>
-       </div>
-      </div>
-    </div>
-    <div class="blank5"></div>
-=======
   <!-- <div class="clearfix">
                 
                 <?php echo $this->fetch('library/recommend_promotion.lbi'); ?>
@@ -102,7 +85,6 @@
       <!-- </div>
     </div>
   <div class="blank5"></div> --> 
->>>>>>> refs/heads/master
    
 <?php echo $this->fetch('library/recommend_best.lbi'); ?>
 <?php echo $this->fetch('library/recommend_new.lbi'); ?>
@@ -148,10 +130,8 @@
 <?php endif; ?>
 
 <div class="blank"></div>
+<div id="lower_footer"><span>广州加伦信息科技有限公司- 粤ICP备12085654号</span><a href="/index.php?app=index">www.aijianmei.com</a></div>
 <?php echo $this->fetch('library/page_footer.lbi'); ?>
-<<<<<<< HEAD
-=======
 </div>
->>>>>>> refs/heads/master
 </body>
 </html>

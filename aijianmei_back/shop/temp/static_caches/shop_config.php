@@ -55,13 +55,8 @@ $data = array (
   'retain_original_img' => '1',
   'member_email_validate' => '1',
   'message_board' => '1',
-<<<<<<< HEAD
-  'certificate_id' => '',
-  'token' => '',
-=======
   'certificate_id' => '105075',
   'token' => 'b999d01e372f57fb6922163eea2096071d7c8d81b728bac27e11116d03028ecf',
->>>>>>> refs/heads/master
   'certi' => 'http://service.shopex.cn/openapi/api.php',
   'send_verify_email' => '0',
   'ent_id' => '',
@@ -153,7 +148,7 @@ $data = array (
   'integrate_config' => '',
   'hash_code' => '31693422540744c0a6b6da635b7a5a93',
   'template' => 'default',
-  'install_date' => '1365745429',
+  'install_date' => '1365681328',
   'ecs_version' => 'v2.7.3',
   'sms_user_name' => '',
   'sms_password' => '',
@@ -164,7 +159,7 @@ $data = array (
   'sms_balance' => '',
   'sms_last_request' => '',
   'affiliate' => 'a:3:{s:6:"config";a:7:{s:6:"expire";d:24;s:11:"expire_unit";s:4:"hour";s:11:"separate_by";i:0;s:15:"level_point_all";s:2:"5%";s:15:"level_money_all";s:2:"1%";s:18:"level_register_all";i:2;s:17:"level_register_up";i:60;}s:4:"item";a:4:{i:0;a:2:{s:11:"level_point";s:3:"60%";s:11:"level_money";s:3:"60%";}i:1;a:2:{s:11:"level_point";s:3:"30%";s:11:"level_money";s:3:"30%";}i:2;a:2:{s:11:"level_point";s:2:"7%";s:11:"level_money";s:2:"7%";}i:3;a:2:{s:11:"level_point";s:2:"3%";s:11:"level_money";s:2:"3%";}}s:2:"on";i:1;}',
-  'captcha' => '12',
+  'captcha' => '36',
   'captcha_width' => '100',
   'captcha_height' => '20',
   'sitemap' => 'a:6:{s:19:"homepage_changefreq";s:6:"hourly";s:17:"homepage_priority";s:3:"0.9";s:19:"category_changefreq";s:6:"hourly";s:17:"category_priority";s:3:"0.8";s:18:"content_changefreq";s:6:"weekly";s:16:"content_priority";s:3:"0.7";}',
