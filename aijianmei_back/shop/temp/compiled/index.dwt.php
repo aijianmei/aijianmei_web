@@ -109,29 +109,80 @@
 
 
 <?php if ($this->_var['img_links'] || $this->_var['txt_links']): ?>
-<div id="bottomNav" class="box">
+<!-- <div id="bottomNav" class="box">
  <div class="box_1">
   <div class="links clearfix">
     <?php $_from = $this->_var['img_links']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'link');if (count($_from)):
     foreach ($_from AS $this->_var['link']):
 ?>
-    <a href="<?php echo $this->_var['link']['url']; ?>" target="_blank" title="<?php echo $this->_var['link']['name']; ?>"><img src="<?php echo $this->_var['link']['logo']; ?>" alt="<?php echo $this->_var['link']['name']; ?>" border="0" /></a>
+   <!--  <a href="<?php echo $this->_var['link']['url']; ?>" target="_blank" title="<?php echo $this->_var['link']['name']; ?>"><img src="<?php echo $this->_var['link']['logo']; ?>" alt="<?php echo $this->_var['link']['name']; ?>" border="0" /></a> -->
     <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
     <?php if ($this->_var['txt_links']): ?>
     <?php $_from = $this->_var['txt_links']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'link');if (count($_from)):
     foreach ($_from AS $this->_var['link']):
 ?>
-    [<a href="<?php echo $this->_var['link']['url']; ?>" target="_blank" title="<?php echo $this->_var['link']['name']; ?>"><?php echo $this->_var['link']['name']; ?></a>]
+   <!--  [<a href="<?php echo $this->_var['link']['url']; ?>" target="_blank" title="<?php echo $this->_var['link']['name']; ?>"><?php echo $this->_var['link']['name']; ?></a>] -->
     <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
     <?php endif; ?>
-  </div>
+  <!-- </div>
  </div>
-</div>
+</div> -->
 <?php endif; ?>
 
+<!-- <div class="foot">
+        <div class="f_list">
+          <h4>发现爱健美</h4>
+          <ul id="app"> 
+            <li><a href="store.html">爱健美商店</a></li>
+            <li><a href="training.html">锻炼</a></li>
+            <li><a href="html">健身计划</a></li>
+            <li><a href="nutri.html">营养</a></li>
+            <li><a href="add.html">补充</a></li>
+            <li><a href="pal.html">交友互动</a></li>
+          </ul>
+        </div>
+        <div class="f_list">
+          <h4>获取帮助</h4>
+          <ul id="article">           
+            <li><a href="help.html">新手指南</a></li>
+            <li><a href="direct.html">社区指导原则</a></li>
+            <li><a href="feedback.html">意见反馈</a></li>
+          </ul>
+        </div>
+        <div class="f_list">
+          <h4>关于我们</h4>
+          <ul id="video">           
+            <li><a href="about_us.html">关于爱健美</a></li>
+            <li><a href="contact.html">联系我们</a></li>
+            <li><a href="join.html">加入爱健美</a></li>
+            <li><a href="ad.html">广告投放与品牌推广</a></li>
+            <li><a href="privacy.html">隐私政策</a></li>
+          </ul>
+        </div>
+        <div class="f_list">
+          <h4>更多</h4>
+          <ul id="teach">         
+            <li><a href="app.html">下载IOS客户端</a></li>
+            <li><a href="app.html">下载Android客户端</a></li>
+            <li><a href="#">友情链接</a></li>
+          </ul>
+        </div>
+        <div class="f_list login" >
+          <h4>关注我们</h4>
+          <ul id="about">
+            <li class="sina"><a href="http://weibo.com/aijianmei?topnav=1&wvr=5" target="_blank">新浪微博</a></li>
+            <li class="tencent"><a href="http://t.qq.com/aijianmeiweibo" target="_blank">腾讯微博</a></li>
+            <li class="netease"><a href="http://t.163.com/aijianmei" target="_blank">网易微博</a></li>
+            <li class="public"><a href="#" target="_blank">公共主页</a></li>
+            <li class="qZone"><a href="http://user.qzone.qq.com/2816973844/main#home" target="_blank">QQ空间</a></li>
+            <li class="douban"><a href="#" target="_blank">豆瓣</a></li>
+          </ul>   
+        </div>
+</div> -->
 <div class="blank"></div>
+
 <div id="lower_footer"><span>广州加伦信息科技有限公司- 粤ICP备12085654号</span><a href="/index.php?app=index">www.aijianmei.com</a></div>
-<?php echo $this->fetch('library/page_footer.lbi'); ?>
+<!-- #EndLibraryItem
 </div>
 </body>
 </html>

@@ -57,7 +57,6 @@ if ($this->_foreach['nav_middle_list']['total'] > 0):
 						<div class="massage" style="display:inline-block;">
 							<h1 class="title">此张大图名称</h1>
 							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="themes/default/images/4.png" alt="no" class="png" />
 						</div>
 					</a>
 				</li>
@@ -67,7 +66,6 @@ if ($this->_foreach['nav_middle_list']['total'] > 0):
 						<div class="massage" style="display:inline-block;">
 							<h1 class="title">此张大图名称</h1>
 							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="themes/default/images/4.png" alt="no" class="png" />
 						</div>
 					</a>
 				</li>
@@ -77,7 +75,6 @@ if ($this->_foreach['nav_middle_list']['total'] > 0):
 						<div class="massage" style="display:inline-block;">
 							<h1 class="title">此张大图名称</h1>
 							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="themes/default/images/4.png" alt="no" class="png" />
 						</div>
 					</a>
 				</li>
@@ -87,7 +84,6 @@ if ($this->_foreach['nav_middle_list']['total'] > 0):
 						<div class="massage" style="display:inline-block;">
 							<h1 class="title">此张大图名称</h1>
 							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="themes/default/images/4.png" alt="no" class="png" />
 						</div>
 					</a>
 				</li>

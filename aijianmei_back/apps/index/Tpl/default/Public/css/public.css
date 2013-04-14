@@ -456,11 +456,6 @@ button{
 					color: white;
 					margin-right: 16px;
 				}
-				.massage .png{
-					position: absolute;
-					right: 18px;
-					bottom: 25px;
-				}
 		.choice_area{
 			position:relative;
 			*height:110px;

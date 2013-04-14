@@ -358,14 +358,14 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
     })
 
 //公共部分！！！选择页面，上下页切换
-    // $(".page a").hover(
-    //     function(){
-    //         $(this).css("border-color","#21ace3")
-    //     },
-    //     function(){
-    //         $(this).css("border-color","")
-    //     }
-    // )
+    $(".page a").hover(
+        function(){
+            $(this).css("border-color","#21ace3")
+        },
+        function(){
+            $(this).css("border-color","")
+        }
+    )
 //动态改变背景图片，用在那些背景鼠标过去按钮原色变化的对象上
             var move = function(obj,url,num){
                 var newdom = new getdom,
@@ -500,10 +500,19 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
                     }	
                 }
             };
-            fade.init('store');
-            fade.init('forum');
-            fade.init('friends');
-            fade.init('my_cart');
+            var newdom = new getdom;
+            if(newdom.getElementsByClass('store')[0]){
+                fade.init('store');
+            }
+            if(newdom.getElementsByClass('forum')[0]){
+                fade.init('forum');
+            }
+            if(newdom.getElementsByClass('friends')[0]){
+                fade.init('friends');
+            }
+            if(newdom.getElementsByClass('my_cart')[0]){
+                fade.init('my_cart');
+            }
             if(document.getElementById('teach')){
                 fade.init('teach');
             }
