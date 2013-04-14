@@ -39,6 +39,7 @@ function reg(str){
 </script>
 </head>
 <body>
+  <div class="wrapper">
 <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
 <!--当前位置 start-->
 <div class="block box">
@@ -615,7 +616,8 @@ function reg(str){
 <!--{/if}-->
 <!--友情链接 end-->
 <div class="blank"></div>
-<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+<div id="lower_footer"><span>广州加伦信息科技有限公司- 粤ICP备12085654号</span><a href="/index.php?app=index">www.aijianmei.com</a></div>
+</div>
 </body>
 <script type="text/javascript">
 var goods_id = {$goods_id};

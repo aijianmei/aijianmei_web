@@ -263,8 +263,14 @@ visibility:hidden;
   }
   #search .go{background:url(images/bnt_search.gif); border:none; width:52px; height:19px;/* position:relative; top:2px; utf8下*/}
   /*当前位置*/
-  #ur_here{border:1px solid #c5e4ff; border-top:none; background:url(images/uh_bg.gif) repeat-x left top;
-  height:36px; line-height:36px; padding:0 12px;width:724px;float:right;
+  #ur_here{border: 1px solid #c5e4ff;
+border-top: none;
+background: url(images/uh_bg.gif) repeat-x left top;
+height: 36px;
+line-height: 36px;
+width: 788px;
+float: left;
+margin: 10px 0 0 150px;
   }
   #ur_here a{color:#006cce; text-decoration:none;}
 
@@ -409,7 +415,7 @@ visibility:hidden;
    #goodsInfo .gallery li{float:left; width:48px; margin:0 2px;}
    #goodsInfo .gallery li img{width:46px; height:46px; display:block;}
    /*文字信息*/
-   #goodsInfo .textInfo{background:#fff; width:473px; float:left; padding:10px;}
+   #goodsInfo .textInfo{background:#fff; width:514px; float:left; padding:10px;}
    #goodsInfo .textInfo p{font-size:14px; font-weight:bold; padding:0 5px 5px 8px;}
    #goodsInfo .textInfo ul{border-top:1px solid #ccc;}
    #goodsInfo .textInfo li{background:url(images/lineBg.gif) repeat-x left bottom; padding:0px 8px; _height:1%;}
