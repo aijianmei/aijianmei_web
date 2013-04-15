@@ -7,7 +7,14 @@
 	.content{
 		float: left;
 		width: 785px;
-	}
+	}	
+		.current_ms{
+			display: inline-block;
+			height: 30px;
+			line-height: 30px;
+			font-size: 16px;
+			font-family: '微软雅黑'，'黑体';
+		}
 		/*模块共同部分*/
 		.module_1{
 			margin-bottom: 10px;
@@ -74,6 +81,9 @@
 			font-size: 12px;
 			color: white;
 			background: url(../images/wm3.png) 0px -297px no-repeat;
+		}
+		.checking:hover{
+			color:white;
 		}
 		.part_2{
 			float: left;
@@ -162,43 +172,7 @@
 	position: relative;
 	height: 230px;
 	width: 310px;
-	overflow: hidden;}
-#dv_scroll,#dv_scroll_1,#dv_scroll_2{
-	position:absolute;
-	height:230px;
-	overflow:hidden;
-	width:300px;}
-#dv_scroll .Scroller-Container,#dv_scroll_1 .Scroller-Container,#dv_scroll_2 .Scroller-Container{
-	width:100%;
-}
-#dv_scroll_bar,#dv_scroll_bar_1,#dv_scroll_bar_2{
-	position: absolute;
-	right: 0px;
-	width: 7px;
-	height: 230px;}
-#dv_scroll_bar .Scrollbar-Track,#dv_scroll_bar_1 .Scrollbar-Track,#dv_scroll_bar_2 .Scrollbar-Track{
-	position: absolute;
-	left: 0;
-	width: 7px;
-	height: 230px;}
-#dv_scroll_bar .Scrollbar-Handle,#dv_scroll_bar_1 .Scrollbar-Handle,#dv_scroll_bar_2 .Scrollbar-Handle{
-	transition:opacity 1s;
-	-webkit-transition:opacity 1s;
-	-ms-transition:opacity 1s;
-	-o-transition:opacity 1s;
-	position:absolute;
-	top:0;
-	width:7px;
-	height:90px;
-	overflow:hidden;
-	background-color:gray;
-	border-radius:5px;
-	cursor:pointer;
-	opacity: 0;
-	filter:alpha(opacity=0);
-}
-#dv_scroll_text,#dv_scroll_text_1,#dv_scroll_text_2{
-	position:absolute;
+	overflow-y: scroll;
 }
 .loading_more{
 	display: block;
@@ -249,6 +223,9 @@
 				color: white;
 				background: url(../images/wm3.png) 0px -334px no-repeat;
 			}
+			.check_more:hover{
+				color:white;
+			}
 			/*expand_3  end------------*/
 
 		/*border_comment------*/
@@ -290,4 +267,7 @@
 				font-weight: 600;
 				background: url(../images/wm3.png) 0 -223px no-repeat;					
 			
+			}
+			.comment:hover{
+				color:white;
 			}
