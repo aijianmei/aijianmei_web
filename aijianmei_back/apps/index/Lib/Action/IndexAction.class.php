@@ -273,11 +273,15 @@ function show_banner($type){
             $umailsql="update ai_others set email='".trim($_POST['email'])."' where uid='".addslashes($_POST['emailuid'])."'";
             M('')->query($umailsql);
         }
+        
+        
         if(!empty($_GET['apiType'])&&$_GET['apiType']=='renren'){
             //print_r($_GET);
             //print_r($_SERVER);
         }
-        
+        if(!empty($_GET['qquid'])&&$_GET['qqapi']=='login'){
+            service('Passport')->loginLocal($_GET['qquid']);	
+        }
         $this->setTitle('index');
         $this->assign('uid',$this->mid);
         $this->assign('cssFile','index');
@@ -835,10 +839,10 @@ function show_banner($type){
     {
         // 验证码
         /* $verify_option = $this->_isVerifyOn('register');*/
-        if ((md5(strtoupper($_POST['verify'])) != $_SESSION['verify'])){
-            $this->error(L('error_security_code'));
-            exit;
-        } 
+//         if ((md5(strtoupper($_POST['verify'])) != $_SESSION['verify'])){
+//             $this->error(L('error_security_code'));
+//             exit;
+//         } 
         
         // 参数合法性检查
         $required_field = array(

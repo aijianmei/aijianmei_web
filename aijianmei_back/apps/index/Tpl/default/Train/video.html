@@ -37,8 +37,12 @@
                             </div>
                             <div class="border_comment">
                                 <span class="word_num">0/300</span>
+                                <php>if(getMid()){</php>
+                                <php>echo getUserName(getMid())</php>
+                                <php>}else {</php>
                                 <span><a href="javascript:void(0)" class="login">登录</a></span>|
                                 <span><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a></span>
+                                <php>}</php>
                                 <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
                                 <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
                                 <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox">有什么感想，来说说吧</textarea></div>
@@ -48,24 +52,15 @@
                                 <a class="comment_1">全部评论(<?php echo $cRecomnums;?>)</a>
                             </div>
                             <div class="cm_content tab_2">
-                                <div class="page">
-                                    <span class="concrete_choice">
-                                        <a class="prev">上一页</a> 
-                                        <a class="current_page">1</a>
-                                        <a>2</a>
-                                        <a>3</a>
-                                        <a>4</a>
-                                        <a>下一页</a>
-                                    </span>
-                                    <span class="free_choice clearfix">
-                                        <span>共{$pager[page]}页</span>
-                                        <span class="concrete_page">
-                                                到第
-                                                <input type="text">
-                                                页
+                                <div class="cm_top">
+                                    <span class="page_1">
+                                        <span class="lay_page">
+                                        <?php printf($pager['thestr'],'class="choice_page"');?>
                                         </span>
-                                        <span class="sure_button" onclick="">确定</span>
+                                        <?php printf($pager['backstr'],'class="pre_page"');?>
+                                        <?php printf($pager['nextstr'],'class="next_page"');?>
                                     </span>
+                                    <span>第<?php echo $_GET['pg'];?>页</span>
                                 </div>
                                 <div class="cm_bottom" id="recomment_fdiv">
                                     <h5 class="title_5" >推荐精华</h5>
@@ -74,7 +69,7 @@
                                         <div class="target_pic"><img src="<?php echo $v['img'];?>" alt="no" /><span class="care">关注</span></div>
                                         <div class="cm_left">
                                             <a class="name"><?php echo $v['username'];?></a>
-                                            <p><?php echo $v['connect'];?></p>
+                                            <p><?php echo $v['content'];?></p>
                                             <p class="bottom_ms">
                                                 <span class="to">
                                                     <a>转发<span>(0)</span></a>
@@ -114,10 +109,12 @@
             type: "POST",
             url: "ajax.php",
             dataType:"json",
-            data: "act=addVideoCommont&data=ford&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&connect="+$("#commentbox").val(),
+            data: "act=addVideoCommont&data=ford&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&content="+$("#commentbox").val(),
             success: function(data){
-             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">关注</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.connect+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em></em></span></p></div></div';
-             $("#recomment_fdiv").append(innerHtml);
+             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">关注</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.content+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em></em></span></p></div></div';
+                         $("#commentbox").val('');          
+            $("#recomment_fdiv").prepend(innerHtml);
+            $("#empty_content").html('');
              
             }
             });

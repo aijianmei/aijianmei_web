@@ -12,23 +12,23 @@
  * $Author: liubo $
  * $Id: init.php 17217 2011-01-19 06:29:08Z liubo $
 */
-
+@session_start();
 if (!defined('IN_ECS'))
 {
     die('Hacking attempt');
 }
 
-error_reporting(E_ALL);
-/*
-get the ecshop session by curl api and set in php session
-mod by kontem at 20130412
-start 
-*/
-session_start();
-if(@$_SESSION['euserinfo']&&!$GLOBALS){
-    @$GLOBALS=$_SESSION['euserinfo'];
+$aijianmeiUserInfo=null;
+if(@$_SESSION['mid']>0&&!empty($_SESSION['userInfo'])){
+    $aijianmeiUserInfo=$_SESSION;
 }
-/*}}}end*/
+else{
+    $_SESSION=NULL;
+}
+
+
+error_reporting(E_ALL);
+
 if (__FILE__ == '')
 {
     die('Fatal error code: 0');
@@ -135,6 +135,7 @@ if ($_CFG['shop_closed'] == 1)
 
     die('<div style="margin: 150px; text-align: center; font-size: 14px"><p>' . $_LANG['shop_closed'] . '</p><p>' . $_CFG['close_comment'] . '</p></div>');
 }
+
 if (is_spider())
 {
     /* 如果是蜘蛛的访问，那么默认为访客方式，并且不记录到日志中 */
@@ -208,9 +209,15 @@ if (!defined('INIT_NO_SMARTY'))
 
 if (!defined('INIT_NO_USERS'))
 {
-    /* 会员信息 */
-    $user =& init_users();
 
+    /* 会员信息 */
+    if(!empty($aijianmeiUserInfo)){
+        $_SESSION=array_merge($_SESSION,$aijianmeiUserInfo);
+    }
+    
+    $aijianmeiUserInfo=null;
+    $user =& init_users();
+    
     if (!isset($_SESSION['user_id']))
     {
         /* 获取投放站点的名称 */
@@ -287,6 +294,7 @@ if (!defined('INIT_NO_USERS'))
     {
         $smarty->assign('ecs_session', $_SESSION);
     }
+    //print_r($_SESSION);
 }
 
 if ((DEBUG_MODE & 1) == 1)

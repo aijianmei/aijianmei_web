@@ -331,12 +331,18 @@ class PublicAction extends Action{
             }else {
                 $refer_url = U('home/User/index');
             }
-            /*ecshop curl login by kontem at 20130412 start*/
-            include_once('shopApi.php');
-            $shopdata['username']=$result['user']['uname'];
-            $shopdata['password']=$password;
-            _postCurlLogin($shopdata);
-            /*ecshop curl login by kontem at 20130412 end*/
+             /*ecshoplogin by kontem at 20130412 start*/
+            $get_usernameSql="select * from ai_user where email='".$_POST['email']."' and password='".md5($_POST['password'])."'";
+            $get_usernameInfo = M('')->query($get_usernameSql);
+            $uid = M('')->query('select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"');
+            $_SESSION['user_id']   = $uid[0]['user_id'];
+            $_SESSION['user_name'] = $uid[0]['user_name'];
+            $_SESSION['email']     = $uid[0]['email'];
+            $time = time() - 3600;
+            @setcookie("ECS[user_id]",  '', $time, '/');  //set cookie         
+            @setcookie("ECS[password]", '', $time, '/');
+            
+            /*ecshop login by kontem at 20130412 end*/
             // 登录商城
             //service('Shop')->login($_SESSION['mid']);
             $this->assign('jumpUrl',$refer_url);
@@ -386,6 +392,16 @@ class PublicAction extends Action{
     }
 
     public function logout() {
+		$deluname=$_SESSION['userInfo']['uname'];
+		
+		$time = time() - 3600;
+        setcookie("ECS[user_id]",  '', $time, '/');            
+        setcookie("ECS[password]", '', $time, '/');
+		if(!empty($deluname))
+		{
+			$getSkeyArr=M('')->query("select sesskey FROM ecs_sessions WHERE user_name = '".$deluname."' LIMIT 1");
+			M('')->query("DELETE FROM ecs_sessions_data WHERE sesskey = '".$getSkeyArr[0]['sesskey']."' LIMIT 1");
+		}
         service('Passport')->logoutLocal();
         Addons::hook('public_after_logout');
         $this->assign('jumpUrl',U('index/Index/index'));

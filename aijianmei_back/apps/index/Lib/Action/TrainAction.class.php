@@ -249,7 +249,6 @@ class TrainAction extends Action {
         $this->assign('cRecomnums', $cRecomnums);
         $recommecntListSql="select a.*,b.uname as username from ai_video_comments a left join ai_user b on a.uid=b.uid where a.pid=$id order by a.create_time desc limit $pnum , $nums";
         $RecommentsList=M('')->query($recommecntListSql);
-        
         foreach($RecommentsList as $key => $value){
             $getimgsql="select profileImageUrl from ai_others where uid='".$value['uid']."'";
             $getimgArr=M('')->query($getimgsql);

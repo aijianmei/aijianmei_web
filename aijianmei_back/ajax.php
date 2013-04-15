@@ -82,22 +82,22 @@ function delCategory($id){
 
 
 function addVideoCommont($data=null){
-    //ob_end_clean();
+    ob_end_clean();
     
     global $_dbConfig;
     $pid=$_POST['pid']?$_POST['pid']:'';
     $uid=$_POST['uid']?$_POST['uid']:exit();
-    $connect=$_POST['content']?trim($_POST['content']):exit();
+    $content=$_POST['content']?trim($_POST['content']):exit();
     $db = mysql_connect($_dbConfig['DB_HOST'], $_dbConfig['DB_USER'], $_dbConfig['DB_PWD']);
     mysql_select_db('aijianmei', $db);
     mysql_query("set names 'utf8'");
     //$sql="INSERT INTO ai_video_comments (uid,connect,pid,create_time) VALUES ('".$uid."','".trim($connect)."','".$pid."',".time().")";
-    $sql="INSERT INTO ai_comments (uid,content,parent_id,parent_type,create_time,source,topParent) VALUES ('".$uid."','".$connect."','".$pid."',4,".time().",'','0')";
+    $sql="INSERT INTO ai_video_comments (uid,content,pid,create_time) VALUES ('".$uid."','".$content."','".$pid."',".time().")";
     $res = mysql_query($sql, $db);
     $data=null;
     if($res) {
         $data['username']=$_SESSION['userInfo']['uname'];
-        $data['connect']=$connect;
+        $data['content']=$content;
         $data['create_time']=date("Y-m-d H:i:s",time());
         $imgsql="select profileImageUrl from ai_others where uid='".$uid."'";
         $imgsArr=mysql_query($imgsql, $db);
@@ -123,16 +123,16 @@ function addDetaiCommont($data=null){
     global $_dbConfig;
     $pid=$_POST['pid']?$_POST['pid']:'';
     $uid=$_POST['uid']?$_POST['uid']:exit();
-    $connect=$_POST['content']?trim($_POST['content']):exit();
+    $content=$_POST['content']?trim($_POST['content']):exit();
     @$db = mysql_connect($_dbConfig['DB_HOST'], $_dbConfig['DB_USER'], $_dbConfig['DB_PWD']);
     @mysql_select_db('aijianmei', $db);
     mysql_query("set names 'utf8'");
-    $sql="INSERT INTO ai_comments (uid,content,parent_id,parent_type,create_time,source,topParent) VALUES ('".$uid."','".$connect."','".$pid."',1,".time().",'','0')";
+    $sql="INSERT INTO ai_comments (uid,content,parent_id,parent_type,create_time,source,topParent) VALUES ('".$uid."','".$content."','".$pid."',1,".time().",'','0')";
     $res = mysql_query($sql, $db);
     $data=null;
     if($res) {
         $data['username']=$_SESSION['userInfo']['uname'];
-        $data['connect']=$connect;
+        $data['connect']=$content;
         $data['create_time']=date("Y-m-d H:i:s",time());
         $imgsql="select profileImageUrl from ai_others where uid='".$uid."'";
         $imgsArr=mysql_query($imgsql, $db);

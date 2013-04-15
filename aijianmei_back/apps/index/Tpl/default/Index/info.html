@@ -136,13 +136,14 @@
                             </div>
                             <div class="expand_3 clearfix">
                                 <div class="check_comment">
+                                <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
                                     <a class="comment_1">全部评论(<php>echo count($i['comments'])</php>)</a>
                                     
                                 </div>
                                 <div class="scr_con">				
                                             <div class="newslist">
-                                                <ul>													
-                                                    <php>if (empty($i['comments'])) echo '当前没有人评论哦'</php>
+                                                <ul id="ppbox_{$i['article']['id']}">													
+                                                    <span id="appbox_{$i['article']['id']}"><php>if (empty($i['comments'])) echo '当前没有人评论哦'</php></span>
                                 <php>foreach($i['comments'] as $c) {</php>
                                 <li class="cm_bottom">
                                                         <div class="target clearfix">
@@ -155,7 +156,7 @@
                                                                 <p>{$c['content']}</p>
                                                                 <p class="bottom_ms">
                                                             
-                                                                    <span><php>echo date('Y-m-d H:i:s', $c['content']['create_time'])</php></span>
+                                                                    <span><php>echo date('Y-m-d H:i:s', $c['create_time'])</php></span>
                                                                     <span>来自<em>爱健美网</em></span>
                                                                 </p>
                                                             </div>
@@ -179,12 +180,12 @@
                                 <php>if(getMid()){</php>
                                 <php>echo getUserName(getMid())</php>
                                 <php>}else {</php>
-                                <span><a href="{:U('home/Public/login')}">登录</a></span>|
+                                <span><a href="#" class="login">登录</a></span>|
                                 <span><a href="{:U('index/Index/selectRegister')}">注册</a></span>
                                 <php>}</php>
                                 
                                 <div class="textarea"><textarea class="comment_inp" name="comment" id="comment_{$i['article']['id']}">有什么感想，来说说吧</textarea></div>
-                                <a class="comment" href="javascript:void(0)" onclick="comments(comment_{$i['article']['id']}.value, {$i['article']['id']}, 'Daily')" aid="{$i['article']['id']}">发表评论</a>
+                                <a class="comment" href="javascript:void(0)" onclick="addVideoCommont(comment_{$i['article']['id']}.value, {$i['article']['id']}, 'Daily')" aid="{$i['article']['id']}">发表评论</a>
                             </div>
                         </div>
                     </div>
@@ -266,5 +267,24 @@
                 if(temp[0]==name) return unescape(temp[1]);	
             }
         }
+        function addVideoCommont(cid,pid){
+            if($("#commentUid").val()==''){alert("请先登录");return false;}
+            if($("#"+cid).val()==''){return false;}
+            $.ajax({
+            type: "POST",
+            url: "ajax.php",
+            dataType:"json",
+            data: "act=addVideoCommont&data=ford&pid="+pid+"&uid="+$("#commentUid").val()+"&content="+cid+"&ptype=1",
+            success: function(data){
+            alert("添加评论成功！");
+             var innerHtml='<li class="cm_bottom"><div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">关注</span><div class="target_ct"><a class="name">'+data.username+'</a><p>'+data.content+'</p><p class="bottom_ms"><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div></li>';
+            $("#commentbox").val('');          
+            $("#ppbox_"+pid).prepend(innerHtml);
+            $("#appbox_"+pid).html('');
+             
+            }
+            });
+        }
+        </script>
         </script>
 <include file="../Public/footer" />
