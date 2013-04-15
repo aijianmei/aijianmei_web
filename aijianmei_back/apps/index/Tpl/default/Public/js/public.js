@@ -176,8 +176,128 @@ $(function(){
                 }
             }	
 
-
-
+            //添加爱健美对象
+            var aijianmei = {
+                newdom : new getdom,
+                T : 1,
+                F : 1,
+                // tab_class函数---可供点击或者鼠标在上面class移到该对象上，其他去除class
+                tab_class : function(obj,classname,event_type,t){
+                    var len = obj.length;
+                    var current_tab = function(e){
+                        var _e = window.event ? window.event : e || arguments[0],
+                            _target = _e.target ? _e.target : _e.srcElement;
+                        for(var i = 0;i < len;i++){
+                            if(_target == obj[i]){
+                                obj[i].className = classname;
+                                // 当t为真是运行if里面的代码
+                                if(t){
+                                    var prev_1 = aijianmei.newdom.getElementsByClass('prev_1')[0],
+                                        next_1 = aijianmei.newdom.getElementsByClass('next_1')[0];
+                                    if(i == len - 1){
+                                        prev_1.style.cssText = 'cursor:default;border-color:transparent;background: rgb(241, 241, 241);';
+                                        next_1.style.cssText = "cursor:pointer;border-color:#21ace3;background:white;"
+                                        aijianmei.T = 0;
+                                        aijianmei.F = 1;
+                                    }
+                                    else if(i == 0){
+                                        next_1.style.cssText = 'cursor:default;border-color:transparent;background: rgb(241, 241, 241);';
+                                        prev_1.style.cssText = "cursor:pointer;border-color:#21ace3;background:white;"
+                                        aijianmei.T = 1;
+                                        aijianmei.F = 0;
+                                    }
+                                    else{
+                                        prev_1.style.cssText = "cursor:pointer;border-color:#21ace3;background:white;"
+                                        next_1.style.cssText = "cursor:pointer;border-color:#21ace3;background:white;"
+                                        aijianmei.T = 1;
+                                        aijianmei.F = 1;
+                                    }
+                                }
+                            }
+                            else{
+                                obj[i].className = '';
+                            }
+                        }
+                    }
+                    for(var i = 0;i < len;i++){
+                        addevent(obj[i],event_type,current_tab);
+                    }
+                },
+                page : function(obj,pr,ne,classname){
+                    var len = obj.length;
+                    var get_index = function(){
+                        for(var i = 0;i < len;i++){
+                            if(obj[i].className == classname){
+                                return i;
+                            }
+                        }
+                    }
+                    pr.onclick = function(){
+                        var num = get_index();
+                        aijianmei.F = 1;
+                        if(obj[len - 2].className != classname && aijianmei.T == 1){
+                            if(num < len - 1){
+                                ne.style.cssText = "cursor:pointer;border-color:#21ace3;background:white;"
+                            }
+                            num++;
+                            for(var i = 0;i < len;i++){
+                                obj[i].className = i == num ? classname : '';
+                            }
+                        }
+                        else{
+                            this.style.cssText = 'cursor:default;border-color:transparent;background: rgb(241, 241, 241);;';
+                            if(len == 2){
+                                ne.style.cssText = "cursor:pointer;border-color:#21ace3;background:white;"
+                            }
+                            for(var i = 0;i < len;i++){
+                                obj[i].className = i == len - 1 ? classname : '';
+                            }
+                            aijianmei.T = 0;
+                        }
+                    }
+                    ne.onclick = function(){
+                        var num = get_index();
+                        aijianmei.T = 1;
+                        if(obj[1].className != classname && aijianmei.F == 1){
+                            if(num > len -2){
+                                pr.style.cssText = "cursor:pointer;border-color:#21ace3;background:white;"
+                            }
+                            num--;
+                            for(var i = 0;i < len;i++){
+                                obj[i].className = i == num ? classname : '';
+                            }
+                        }
+                        else{
+                            this.style.cssText = 'cursor:default;border-color:transparent;background: rgb(241, 241, 241);';
+                            if(len == 2){
+                                pr.style.cssText = "cursor:pointer;border-color:#21ace3;background:white;"
+                            }
+                            for(var i = 0;i < len;i++){
+                                obj[i].className = i == 0 ? classname : '';
+                            }
+                            aijianmei.F = 0;
+                        }
+                    };
+                }
+            }
+            var init = function(){
+                var newdom = new getdom;
+                if(newdom.getElementsByClass('concrete_choice_1')[0]){
+                    var prev_1 = newdom.getElementsByClass('prev_1')[0],
+                        next_1 = newdom.getElementsByClass('next_1')[0],
+                        arr_a_1 = newdom.getElementsByClass('concrete_choice_1')[0].getElementsByTagName('a'),
+                        len = arr_a_1.length;
+                        aijianmei.tab_class(arr_a_1,'current_page','click',1);
+                        if(len == 1){
+                            prev_1.style.cssText = 'cursor:default;border-color:transparent;background: rgb(241, 241, 241);';
+                            next_1.style.cssText = 'cursor:default;border-color:transparent;background: rgb(241, 241, 241);';
+                        }
+                        else{
+                            aijianmei.page(arr_a_1,prev_1,next_1,'current_page')
+                        }    
+                }                  
+            }
+            init();
             //为obj的子元素添加有色边框
             var getaction = function(classname,obj){
                 var newdom = new getdom,
@@ -366,34 +486,6 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
             $(this).css("border-color","")
         }
     )
-//动态改变背景图片，用在那些背景鼠标过去按钮原色变化的对象上
-            var move = function(obj,url,num){
-                var newdom = new getdom,
-                    id = newdom.getElementsByClass(obj),
-                    len = id.length,
-                    image = id[0].style.backgroundImage,
-                    currentpositionY = id[0].style.backgroundPositionY;
-                for(var i = 0;i < len;i++){
-                    id[i].onmouseover = function(){
-                        if(num != null){
-                            this.style.background = 'url('+url+')';
-                            this.style.backgroundPositionX = '0px';
-                            this.style.backgroundPositionY = num;
-                            
-                        }					
-                        else{
-                            this.style.background = 'url('+url+')';
-                        }
-                        // console.log(this.style.backgroundPosition)			
-                    }
-                    id[i].onmouseout = function(){
-                        this.style.backgroundImage = image;
-                        this.style.backgroundPositionX = '0px';
-                        this.style.backgroundPositionY = currentpositionY;
-                    }
-                }
-            }
-            // move('background','images/wm2.png','-220px')第一个是对象class属性，第二个是地址，第三个是雪碧图的Y值
 
 
 
