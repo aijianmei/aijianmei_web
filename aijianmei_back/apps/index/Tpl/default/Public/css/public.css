@@ -240,7 +240,7 @@ button{
 		position: fixed;
 		top: 0;
 		left:0;
-		z-index: 12;
+		z-index: 1200;
 		height: 70px;
 		width: 100%;
 		background: url(../images/dh_01.jpg) repeat-x;
