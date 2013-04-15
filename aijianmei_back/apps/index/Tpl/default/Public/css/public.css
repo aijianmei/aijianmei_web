@@ -33,6 +33,7 @@ button{
 .body{
 	display:none;
 	position:fixed;
+	top: 0;
 	left:0;
 	width:100%;
 	height:100%;
@@ -203,6 +204,7 @@ button{
 .wrapper{
 	width:980px;
 	margin:0 auto;
+	padding-top: 70px;
 	background:#f7f7f7;
 	box-shadow: 0 0 5px 0 silver;
 }
@@ -233,112 +235,29 @@ button{
 		vertical-align: middle;
 	}
 /******** Header **********/
-	#header{
-		height:125px;
-		position:relative;
+/*outside 2013/4/15*/
+	.header{
+		position: fixed;
+		top: 0;
+		left:0;
+		z-index: 12;
+		height: 70px;
+		width: 100%;
+		background: url(../images/dh_01.jpg) repeat-x;
 	}
-	/***** Top navigation *****/
-		.top{
-			position:absolute;
-			right:130px;
-		}
-		.top li{
-			position: relative;
-			float:left;
-			margin:2px;
-		}
-		#my_cart{
-			position: relative;
-
-		}
-		.cart{
-			position: absolute;
-			width: 30px;
-			height: 14px;
-			left: -30px;
-			display: inline-block;
-			background: url("../images/cart0.png") no-repeat;
-		}
-		#login{
-			cursor:pointer;
-		}
-		.more a{
-			display:inline-block;
-			width:45px;
-			padding-bottom:3px;
-			border:1px solid transparent;
-			
-		}
-		.more a:hover{
-			border-color:#ccc;
-		}
-		.more a:hover .triangle{
-			-webkit-transform: translate(0,0) rotate(180deg);
-		}
-		.more .on{
-			position: relative;
-			z-index: 101;
-			background:#fff;
-			border:1px solid #ccc;
-			border-bottom:none;
-		}
-		.on .triangle{
-			border-color:#BCBCBC #fff #fff #fff;
-		}
-		.top .message, .top .account{
-			background: white;
-			position: absolute;
-			right: 60px;
-			border:1px solid #ccc;
-			top:18px;
-			z-index:100;
-			display:none;
-		}
-		.top .account{
-			right:0;
-		}
-		.top .message li ,.top .account li{
-			float:none;
-			width:80px;
-			height:20px;
-			margin:5px;
-		}
-		.top .message li a,.top .account li a{
-			display:block;
-			line-height:20px;
-			width:80px;
-			font-size:12px;
-		}
-		.top .message li a:hover,.top .account li a:hover{
-			background:#21ace3;
-			color:white;
-		}
-	/******** 顶部搜索框 ******/	
-		form.search fieldset{ 
-			position:absolute; 
-			right:0px; 
-			top:0px; 
-			border:0;
-			margin: 3px 20px 2px 0;
-		}
-			.search label,.search legend{ 
-				display:none;
-				border:0
-			}
-			.search input{ 
-				float:left; 
-				width:88px; 
-				height:17px; 
-				background:url(../images/input.jpg)no-repeat;
-			}
-			.search button{ 
-				float:left; 
-				width:23px; 
-				height:17px; 
-				background:url(../images/search.jpg) no-repeat;
-			}				
-		
-	/******* Logo ******/
+	.h_bg{
+		margin: 0 auto;
+		width: 980px;
+		height: 64px;
+		text-align: center;
+		line-height: 64px;
+	}
+	.logo_1{
+		float: left;
+		width: 265px;
+		text-indent: -999em;
+		background: url(../images/wm3.png) 0 -651px no-repeat;
+	}
 		.logo{
 			width:230px;
 			margin: 30px 0 0 20px;
@@ -348,63 +267,71 @@ button{
 				display:block;
 			}
 	/******** Navigation ************/
-		#nav{
-			width:685px;
-			height:36px;
-			background:url(../images/nav.png) no-repeat ;
-			float:right;
-			margin:60px 30px 0 0;
-			_margin-right:15px;
+		.nav{
+			float: left;
+			width: 588px;
 		}
-		#nav li{
-			width:85px;
-			height:36px;
-			float:left;
-			text-align:center;
+		.nav li{
+			position: relative;
+			float: left;
+			margin:0 1px;
 		}
-		#nav a{
-			color:#fff;
-			font-size:16px;
-			display:inline-block;
-			_display:block;
-			line-height:36px;
-			text-align:center;
-			width:85px;
-		}
-		#nav a:hover{
-			background:#428AB2;
-		}
-	/******** "首页"样式 **********/
-		#nav .home a:hover{
-			background:none;
-		}
-		.home span,.store span{
-			display:inline-block;
-			width:85px;
-			height:36px;
-			margin-left: 10px;
-		}
-		
-		#nav .home{
-			border-radius: 4px 0 0 4px;
-			width:90px;
-		}
-		#nav .home a span{
-			background:url(../images/home.png) no-repeat left;
-		}
-		#nav .store span{
-			background:url(../images/store.png) no-repeat left;
-
-		}
-	/********** 显示当前位置 ***********/
-		.position{
+		.home,.store{
 			display: inline-block;
-			position: absolute;
-			right: 31px;
-			bottom: 9px;
-			color: #989898;
+			padding-left:30px;
+			background: url(../images/wm3.png) no-repeat;
 		}
-		
+		.home{
+			background-position: 0 -875px;
+		}
+		.store{
+			background-position: 0 -828px;
+		}
+		.nav a{
+			display: inline-block;
+			padding: 0 11px;
+			color: white;
+			font-size: 16px;
+		}
+		.nav_current a{
+			background: url(../images/dh_02.jpg) repeat-x;
+		}
+		.nav_current .ag_current{
+			position: absolute;
+			bottom: 0;
+			left: 46%;
+			display: inline-block;
+			width: 0;
+			height: 0;
+			line-height: 0;
+			font-size: 0;
+			overflow: hidden;
+			border-style: solid;
+			border-width: 5px;
+			border-color: transparent transparent white transparent;
+		}
+		.nav li:hover a{
+			background: url(../images/dh_02.jpg) repeat-x;
+		}
+	/*top 登录 注册--------------------*/
+		.top{
+			float: left;
+			height: 30px;
+			width: 103px;
+			margin: 16px 0 0 24px;
+			background: #21ace3;
+			color: white;
+		}
+		.top li{
+			float: left;
+			line-height: 30px;
+		}
+		.top a{
+			display: inline-block;
+		width: 48px;
+		text-align: center;
+		color: white;
+		}
 /*********** Banner ***********/		
 		#banner{
 			margin:0 auto;
@@ -589,10 +516,10 @@ button{
 }
 .page a,.concrete_choice span{
 	display:inline-block;
-	margin:0 -2px;
+	margin:0 -1px;
 	min-width:20px;
 	height:20px;
-	border: 2px solid rgb(236, 236, 236);
+	border: 2px solid transparent;
 	line-height: 20px;
 	color:#333;
 	cursor: pointer;
@@ -607,13 +534,11 @@ button{
 .page .current_page{
 	background:#21ace3;
 	color:white;
+	border: 2px solid transparent;
 	cursor: default;
 }
 .page a:hover,.concrete_choice span:hover{
 	border-color: #21ace3;
-}
-.page .current_page:hover{
-	border-color: white;
 }
 /*outside*/
 .free_choice{
