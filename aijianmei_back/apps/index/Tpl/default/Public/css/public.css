@@ -508,13 +508,13 @@ button{
 	border-radius: 0 4px 4px 0;
 }
 /****** 翻页 *****/
-.page_2,.page_1{
-height: 24px;
-line-height: 24px;
-margin: 10px auto;
-text-align: center;
+.page{
+	height: 24px;
+	line-height: 24px;
+	margin: 10px auto;
+	text-align: center;
 }
-.page_2 a,.page_1 a,.concrete_choice_2 span,.concrete_choice_1 span{
+.page a,.concrete_choice span{
 	display:inline-block;
 	margin:0 -1px;
 	min-width:20px;
@@ -524,27 +524,20 @@ text-align: center;
 	color:#333;
 	cursor: pointer;
 }
-.concrete_choice_2,.concrete_choice_1{
+.concrete_choice{
 	display: inline-block;
 	vertical-align: top;
 }
-.concrete_choice_2 .prev_2,.concrete_choice_1 .prev_1{
+.concrete_choice span{
 	width:50px;
-	border-color: #21ace3;
 }
-.concrete_choice_2 .next_2,.concrete_choice_1 .next_1{
-	width: 50px;
-	cursor:default;
-	border-color:transparent;
-	background: rgb(241, 241, 241);
-}
-.page_2 .current_page_2,.page_1 .current_page{
+.page .current_page{
 	background:#21ace3;
 	color:white;
 	border: 2px solid transparent;
 	cursor: default;
 }
-.page_2 a:hover,.page_1 a:hover{
+.page a:hover,.concrete_choice span:hover{
 	border-color: #21ace3;
 }
 /*outside*/

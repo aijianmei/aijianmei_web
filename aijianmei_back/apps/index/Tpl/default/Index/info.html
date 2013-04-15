@@ -49,9 +49,9 @@
             </div>
 
             <div class="content">
-                <h2><span>
-                <a href="/index.php?app=index">爱健美</a>->
-                <a href="/index.php?app=index&mod=Plan">健身计划</a>->
+                <h2><span class="current_ms">
+                <a href="/index.php?app=index">爱健美</a> ->
+                <a href="/index.php?app=index&mod=Plan">健身计划</a> ->
                 <a href="/index.php?app=index&mod=Index&act=info&type={$tree_channel_en}">{$first}</a>
                 </span></h2>
                 <php>foreach($info as $i) {</php>
@@ -120,17 +120,6 @@
                                 <a class="sprite_6"></a> -->
                             </div>
                             <div class="expand_2">
-                                <span class="read_time">
-                                    <a style="height:16px;width:56px;line-height:16px;background:0;">
-                                        <span>阅读</span>
-                                        <span>{$i['article']['read_count']}</span>
-                                        <span class="triangle"></span>
-                                    </a>
-                                    <div class="page_times" style="postion:absolute;display:none;right:0px;width:50px; background:white;line-height:20px;border:1px solid #ccc;">
-                                        <!--<p>页面1</p>
-                                        <p>页面1</p>-->	
-                                    </div>
-                                </span>
                                 <a class="sprite_8" href="javascript:void(0)" onclick="like({$i['article']['id']})"><span class="praise" id="like">{$i['article']['like']}</span></a>
                                 <a class="sprite_9" href="javascript:void(0)" onclick="unlike({$i['article']['id']})"><span class="praise" id="unlike">{$i['article']['unlike']}</span></a>			
                             </div>
@@ -192,24 +181,27 @@
                 </div>
                 <php>}</php>
                 <div class="page">
-                            <span class="page_1">
-                                <span class="lay_page">
-                                    <!-- <a class="choice_page">1</a>
-                                    <a>2</a>
-                                    <a>3</a>
-                                    <a>4</a>
-                                    <a>5</a> -->
-                                    {$pager['backstr']}
-                                    {$pager['thestr']}
-                                    {$pager['nextstr']}
-                                </span>
-                                <!-- <a class="pre_page">上一页</a>
-                                <a class="next_page">下一页</a> -->
-                            </span>
-                            <span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
-                            
-                        </div>
-
+                    <span class="concrete_choice">
+                       <span class="prev">上一页</span> 
+                        <a class="current_page">1</a>
+                        <a>2</a>
+                        <a>3</a>
+                        <a>4</a>
+                        <span class="next">下一页</span>
+                         <!-- {$pager[backstr]}
+                         {$pager[thestr]}
+                        {$pager[nextstr]} -->
+                    </span>
+                    <span class="free_choice clearfix">
+                        <span>共{$pager['countall']}页</span>
+                        <span class="concrete_page">
+                                到第
+                                <input type="text">
+                                页
+                        </span>
+                        <span class="sure_button" onclick="">确定</span>
+                    </span>
+                </div>
         </div>
         <script type="text/javascript">
         function like(id) {
