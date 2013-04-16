@@ -180,8 +180,12 @@ $(function(){
                 newdom : new getdom,
                 p_fixed : function(obj){
                     window.onscroll = function(){
-                        // console.log(document.body.scrollTop)
-                        if(document.body.scrollTop >= 50){
+                        var top = window.ActiveXObject ? document.documentElement.scrollTop : document.body.scrollTop || window.pageYOffset;
+                        // if(window.ActiveXObject){
+                        //     var top = document.documentElement.scrollTop;
+                        // }
+
+                        if(top >= 50){
                             obj.className = 'header p_fixed';
                         }
                         else{
