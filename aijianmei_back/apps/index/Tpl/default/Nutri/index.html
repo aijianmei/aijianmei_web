@@ -77,19 +77,19 @@
                     <div class="lay_top clearfix">
                         <h1 class="public_title">最佳营养文章</h1>
                         <div class="new_video">
-                            <ul class="lay_new_video clearfix">
-                            <php>foreach($hotArticles as $a) {</php>
-                                <li class="tr_classify">
-                                    <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-                                    <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
-                                    <p class="summary">{$a['brief']}
-                                    </p>
-                                    <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
-                                    <span class="comment_time">评论: <span>{$a['recomnums']}</span></span>
-                                </li>
-                            <php>}</php>
-                            </ul>
-                        </div>
+                        <ul class="lay_new_video clearfix">
+                        <php>foreach($hotArticles as $a) {</php>
+                            <li class="tr_classify">
+                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+                                <p class="summary">{$a['brief']}
+                                </p>
+                                <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
+                                <span class="comment_time">评论: <span>{$a['recomnums']}</span></span>
+                            </li>
+                        <php>}</php>
+                        </ul>
+                    </div>
                     </div>
                 </div>
 

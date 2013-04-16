@@ -83,6 +83,8 @@ class TrainAction extends Action {
     public function articleList()
     {
         $id = intval($_GET['id']);
+        $ordercon= $_GET['ordercon']?$_GET['ordercon']:'id';
+        $timecon = $_GET['timecon']?$_GET['timecon']:'';
         $this->assign('cssFile', 'video');
         $this->assign('cssFile', 'training');
         $cate = M('article_category')->where(array('channel'=>'2', 'type'=>'1'))->findAll();
@@ -115,10 +117,35 @@ class TrainAction extends Action {
         $count = count($countArr);
         $pager = api('Pager');
         $pager->setCounts($count);
-        //$pager->setStyle($style);
-        $pager->setList(6);
+        //$pager->styleInit($style);
+        $pager->setList(7);
         $pager->makePage();
         $from = ($pager->pg-1) * $pager->countlist;
+        //print_r($map);
+        $categoryStr=is_array($map['category_id'])? $map['category_id'][1]:$map['category_id'];
+        if($ordercon!='recomnums'){
+            if($timecon){
+                $dataArr=getDateInfo($timecon);
+                $timeStr="and create_time >='".$dataArr['start']."' and create_time <='".$dataArr['end']."'";
+            }
+            $comtmpsql="select * from ai_article where category_id in ($categoryStr)  $timeStr order by $ordercon desc limit $from,$pager->countlist ";
+            $articles=M('')->query($comtmpsql);
+        }
+        else{
+            //$map['category_id']=array('in', '29,30,31');
+            $comtmpsql="SELECT a. * , COUNT( b.id ) AS cnums FROM ai_article a LEFT JOIN ai_comments b ON a.id = b.parent_id
+        WHERE a.category_id IN ($categoryStr) GROUP BY b.parent_id UNION SELECT * , 0 AS cnums FROM ai_article a WHERE category_id IN ($categoryStr) AND id NOT IN (SELECT parent_id FROM ai_comments)";
+            $timeStr=null;
+            if($timecon){
+                $dataArr=getDateInfo($timecon);
+                $timeStr="where  t.create_time >='".$dataArr['start']."' and t.create_time <='".$dataArr['end']."'";
+            }
+            $comtmpsql="select * from ($comtmpsql) t $timeStr order by t.cnums desc limit $from,$pager->countlist ";
+            $articles=M('')->query($comtmpsql);
+        }
+        //print_r($articles);
+
+        //M('')->query($articlesSql);
         $pageArray = (array)$pager;
         $articlesSQl="select * from ai_article where id in ($sqlcount) or category_id=$id group by id order by create_time limit $from,$pager->countlist";
         $articles = M('')->query($articlesSQl);
@@ -260,7 +287,13 @@ class TrainAction extends Action {
                 $RecommentsList[$key]['img']=$getimgArr['profileImageUrl'];
             }
             else{
-                $RecommentsList[$key]['img']="/data/uploads/avatar/".$value['uid']."/middle.jpg";
+                if(is_file("data/uploads/avatar/".$value['uid']."/middle.jpg")){
+                    $RecommentsList[$key]['img']="/data/uploads/avatar/".$value['uid']."/middle.jpg";
+                }
+                else{
+                    $RecommentsList[$key]['img']="public/themes/newstyle/images/user_pic_middle.gif";
+                }
+                
             }
             $RecommentsList[$key]['create_time']=date("Y-m-d H:i:s",$RecommentsList[$key]['create_time']);
         }

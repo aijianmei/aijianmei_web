@@ -184,7 +184,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                        <div class="each clearfix">
+                        <div class="each">
                         <php>foreach($videos as $v){</php>
                                     <ul class="vdos">
                                         <li class="pic">
@@ -205,7 +205,7 @@
                             <php>}</php>
                                     
                     </div>
-                    <div class="page">
+                    <div class="page clearfix">
                         <span class="concrete_choice">
                         <?php printf($pager['backstr'],'class="prev"');?>
 
@@ -214,7 +214,7 @@
                             <?php printf($pager['nextstr'],'class="next"');?>
 
                         </span>
-                        <span class="free_choice clearfix">
+                        <span class="free_choice">
                             <span>共{$pager[page]}页</span>
                             <span class="concrete_page">
                                 到第

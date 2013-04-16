@@ -91,6 +91,8 @@ class AppendAction extends Action {
     {
         $order = isset($_GET['order']) ? t($_GET['order']) : 'create_time';
         $id = intval($_GET['id']);
+        $ordercon= $_GET['ordercon']?$_GET['ordercon']:'id';
+        $timecon = $_GET['timecon']?$_GET['timecon']:'';
         $cate = M('article_category')->where(array('channel'=>'4'))->findAll();
         //print_r($cate);
         foreach($cate as $c) {
@@ -104,16 +106,33 @@ class AppendAction extends Action {
         $pager = api('Pager');	// 实例化分页类 
         $pager->setCounts($articleCount); //传入总记录数
         //$pager->setStyle($style);
-        $pager->setList(10);	// 设置每页显示的记录数
+        $pager->setList(7);	// 设置每页显示的记录数
         $pager->makePage();		//生成数字分页
         $pageArray = (array)$pager;
         $this->assign('pager', $pageArray);
         
         $from = ($pager->pg-1) * $pager->countlist;
         $Articlesid=D('Article')->getArticlesid($id);
-        $articles = M('article')->where(array('category_id'=>array('in', $id)))->order("$order desc")->limit("$from,$pager->countlist")->findAll();
-        foreach($articles as $key => $value){
-            $articles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
+         $categoryStr=is_array($map['category_id'])? $map['category_id'][1]:$map['category_id'];
+        if($ordercon!='recomnums'){
+            if($timecon){
+                $dataArr=getDateInfo($timecon);
+                $timeStr="and  create_time >='".$dataArr['start']."' and create_time <='".$dataArr['end']."'";
+            }
+            $comtmpsql="select * from ai_article where category_id in ($categoryStr) $timeStr order by $ordercon desc limit $from,$pager->countlist ";
+            $articles=M('')->query($comtmpsql);
+        }
+        else{
+            //$map['category_id']=array('in', '29,30,31');
+            $comtmpsql="SELECT a. * , COUNT( b.id ) AS cnums FROM ai_article a LEFT JOIN ai_comments b ON a.id = b.parent_id
+        WHERE a.category_id IN ($categoryStr) GROUP BY b.parent_id UNION SELECT * , 0 AS cnums FROM ai_article a WHERE category_id IN ($categoryStr) AND id NOT IN (SELECT parent_id FROM ai_comments)";
+            $timeStr=null;
+            if($timecon){
+                $dataArr=getDateInfo($timecon);
+                $timeStr="where  t.create_time >='".$dataArr['start']."' and t.create_time <='".$dataArr['end']."'";
+            }
+            $comtmpsql="select * from ($comtmpsql) t $timeStr order by t.cnums desc limit $from,$pager->countlist ";
+            $articles=M('')->query($comtmpsql);
         }
         $this->assign('articles', $articles);
         $this->assign('categories', $realCate);

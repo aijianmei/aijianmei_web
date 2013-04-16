@@ -26,7 +26,7 @@ margin-right: 50px;
                 <div class="lay_sider">
                     <div class="subsider">
                         <span class="border_line"></span>
-                        <h3 class="video_all">全部asdfsa</h3>
+                        <h3 class="video_all">全部</h3>
                         <span class="border_line"></span>
                         <ul>
                             <php>foreach($categories as $c) {</php>
@@ -145,51 +145,50 @@ margin-right: 50px;
                     <div class="lay_top clearfix">
                         <h1 class="public_title">全部</h1>
                         <div class="video">
-                            <div class="all">
-                                    <ul class="all_ul">
-                                            <li class="select">
-                                                    <span class="opt">范围：</span>
-                                                    <a class="pre">不限</a>
-                                                    <a>今日</a>
-                                                    <a>本周</a>
-                                                    <a>本月</a>
-                                            </li>
-                                            <li class="select">
-                                                    <span class="opt">排序：</span>
-                                                    <a class="pre">最新发布</a>
-                                                    <a>最多播放</a>
-                                                    <a>最多评论</a>
-                                                    <a>最多收藏</a>
-                                            </li>
-                                    </ul>
-                            </div>
-                            <div class="mode_3">
-                                    <php>foreach($articles as $a) {</php>
-                                            <div class="ar_block">
-                                                    <img class="block_img" src="{$SITE_URL}/public/images/article/{$a['img']}"/>
-                                                    <h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
-                                                    <span>作者：{$a['author']}</span><span>日期：<php>echo date('Y-m-d',$a['create_time'])</php></span><span >点击：{$a['reader_count']}</span>
-                                                    <p>{$a['brief']}...</p>
-                                            </div>
-                                    <php>}</php>
-                            </div>
+                                                        <div class="all">
+                                                                <ul class="all_ul">
+                                                             <li class="select">
+                                                                                <span class="opt">范围：</span>
+                                                                                <a <?php if($_GET['timecon']==''){ echo 'class="pre"';}?> href="index.php?app=index&mod=Train&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=<?php echo $_GET['ordercon'];?>">不限</a>
+                                                                                <a <?php if($_GET['timecon']=='day'){ echo 'class="pre"';}?> href="index.php?app=index&mod=Train&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=<?php echo $_GET['ordercon'];?>&timecon=day">今日</a>
+                                                                                <a <?php if($_GET['timecon']=='week'){ echo 'class="pre"';}?> href="index.php?app=index&mod=Train&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=<?php echo $_GET['ordercon'];?>&timecon=week">本周</a>
+                                                                                <a <?php if($_GET['timecon']=='month'){ echo 'class="pre"';}?> href="index.php?app=index&mod=Train&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=<?php echo $_GET['ordercon'];?>&timecon=month">本月</a>
+                                                                        </li>
+                                                                        <li class="select">
+                                                                                <span class="opt">排序：</span>
+                                                                                <a <?php if(empty($_GET['ordercon'])||$_GET['ordercon']=='create_time'){ echo 'class="pre"';}?> href="index.php?app=index&mod=Train&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=create_time&timecon=<?php echo $_GET['timecon'];?>">最新发布</a>
+                                                                                <a <?php if($_GET['ordercon']=='reader_count'){echo 'class="pre"';}?> href="index.php?app=index&mod=Train&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=reader_count&timecon=<?php echo $_GET['timecon'];?>">最多阅读</a>
+                                                                                <a <?php if($_GET['ordercon']=='recomnums'){echo 'class="pre"';}?> href="index.php?app=index&mod=Train&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=recomnums&timecon=<?php echo $_GET['timecon'];?>">最多评论</a>
+                                                                        </li>
+                                                                </ul>
+                                                        </div>
+                                                        <div class="mode_3">
+                                                                <php>foreach($articles as $a) {</php>
+                                                                        <div class="ar_block">
+                                                                                <img class="block_img" src="{$SITE_URL}/public/images/article/{$a['img']}"/>
+                                                                                <h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
+                                                                                <span>作者：{$a['author']}</span><span>日期：<php>echo date('Y-m-d',$a['create_time'])</php></span><span >点击：{$a['reader_count']}</span>
+                                                                                <p>{$a['brief']}...</p>
+                                                                        </div>
+                                                                <php>}</php>
+                                                        </div>
                         </div>
-                            <div class="page clearfix">
-                                <span class="concrete_choice">
-                                                    {$pager[backstr]}
-                                                    {$pager[thestr]}
-                                                    {$pager[nextstr]}
-                                </span>
-                                <span class="free_choice">
-                                    <span>共{$pager[page]}页</span>
-                                    <span class="concrete_page">
-                                            到第
-                                            <input type="text">
-                                            页
-                                    </span>
-                                    <span class="sure_button" onclick="">确定</span>
-                                </span>
-                            </div>
+                                                <div class="page clearfix">
+                                                    <span class="concrete_choice">
+                                                                        {$pager[backstr]}
+                                                                        {$pager[thestr]}
+                                                                        {$pager[nextstr]}
+                                                    </span>
+                                                    <span class="free_choice">
+                                                        <span>共{$pager[page]}页</span>
+                                                        <span class="concrete_page">
+                                                                到第
+                                                                <input type="text">
+                                                                页
+                                                        </span>
+                                                        <span class="sure_button" onclick="">确定</span>
+                                                    </span>
+                                                </div>
                     </div>
                 </div>
                         </div>
