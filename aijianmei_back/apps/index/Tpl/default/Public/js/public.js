@@ -176,7 +176,26 @@ $(function(){
                 }
             }	
 
-
+            var aijianmei = {
+                newdom : new getdom,
+                p_fixed : function(obj){
+                    window.onscroll = function(){
+                        // console.log(document.body.scrollTop)
+                        if(document.body.scrollTop >= 50){
+                            obj.className = 'header p_fixed';
+                        }
+                        else{
+                            obj.className = 'header'
+                        }
+                    }
+                }
+            }
+            var init = function(){
+                var newdom = new getdom,
+                    header = newdom.getElementsByClass('header')[0];
+                aijianmei.p_fixed(header);
+            }
+            init();
 
             //为obj的子元素添加有色边框
             var getaction = function(classname,obj){
