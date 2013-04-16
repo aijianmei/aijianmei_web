@@ -321,6 +321,10 @@ button{
 /*outside 2013/4/15*/
 	div.p_fixed{
 		position: fixed;
+		top: 0;
+		left:0;
+		z-index: 1200;
+		height: 78px;
 		top:0;
 		left: 0;
 		z-index: 1000;
