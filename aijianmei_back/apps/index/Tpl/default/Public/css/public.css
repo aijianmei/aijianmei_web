@@ -552,6 +552,9 @@ button{
 			#footer .login{
 				margin:40px 0 0 0;
 			}
+			#footer .Login{
+				margin:40px 0 0 0;
+			}
 				.sina{
 					background:url(../images/icon_result.png) 0 -78px no-repeat;
 				}
@@ -561,7 +564,7 @@ button{
 				.netease{
 					background:url(../images/icon_result.png) 0 -52px no-repeat;
 				}
-				#footer  .login .public{
+				#footer  .Login .public{
 					background:url(../images/icon_result.png) 0 -104px no-repeat;
 				}
 				.qZone{
@@ -881,7 +884,7 @@ button{
 		right: 0px;
 		top: 0px;
 		bottom: 0px;
-		z-index: 1000;
+		z-index: 1010;
 		opacity: 0;
 		filter: alpha(opacity=0);
 		background: #000;
