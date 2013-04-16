@@ -75,6 +75,8 @@ class TrainAction extends Action {
 
         $this->show_banner();//显示banner
         $this->assign('headertitle', '锻炼');
+		//header current add by kon at 20130415
+		$this->assign('_current', 'train');
         $this->display();
     }
     
@@ -105,7 +107,6 @@ class TrainAction extends Action {
             $hotArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
         }
         $this->assign('lastArticles', $hotArticles);
-        
         $this->assign('categories', $realCate);
         $map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
         
@@ -134,6 +135,7 @@ class TrainAction extends Action {
                 }
             }
         }
+		$this->assign('_current', 'train');
         $this->display('list');
     }
     
@@ -212,6 +214,7 @@ class TrainAction extends Action {
         }
         $this->assign('videos', $videos);
         $this->show_banner();//显示banner
+		$this->assign('_current', 'train');
         $this->display('vlist');
     }
     
@@ -268,6 +271,7 @@ class TrainAction extends Action {
         //print_r($_SESSION);
         $this->assign('video', $video);
         $this->assign('cssFile', 'v');
+		$this->assign('_current', 'train');
         $this->display('video');
     }
     

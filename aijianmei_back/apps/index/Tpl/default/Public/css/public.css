@@ -173,9 +173,15 @@ button{
 		.accounts .cop1{
 			background:url(../images/login.png) no-repeat 0 -167px;
 		}
+		.accounts .copsina{
+			background:url(../images/sina_login.png);
+		}
 		/*.accounts .cop1:hover{
 			background:url(../images/login.png) no-repeat 0 -41px;
 		}*/
+		.accounts .copqq{
+			background:url(../images/Connect_logo_1.png);
+		}
 		.accounts .cop2{
 			background:url(../images/login.png) no-repeat 0 -41px;
 		}

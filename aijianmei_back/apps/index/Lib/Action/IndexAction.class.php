@@ -324,6 +324,9 @@ function show_banner($type){
         }
         $this->assign('hotArticles', $hotArticles);
         //add by kon at 20130410 end
+		
+		//header current add by kon at 20130415
+		$this->assign('_current', 'index');
         $this->display();
     }
     
@@ -420,10 +423,10 @@ function show_banner($type){
         $channel=$result['channel'];
         $tree_category_id=$result['category_id'];
         switch($channel){
-            case 1: {$tree_channel="健身计划 ";$tree_channel_en="Plan";}break;
-            case 2:{$tree_channel="锻炼 ";$tree_channel_en="Train";}break;
-            case 3:{$tree_channel="营养 ";$tree_channel_en="Nutri";}break;
-            case 4:{$tree_channel="辅助品 ";$tree_channel_en="Append";}break;
+            case 1: {$tree_channel="健身计划 ";$tree_channel_en="Plan";$_current='plan';}break;
+            case 2:{$tree_channel="锻炼 ";$tree_channel_en="Train";$_current='train';}break;
+            case 3:{$tree_channel="营养 ";$tree_channel_en="Nutri";$_current='nutri';}break;
+            case 4:{$tree_channel="辅助品 ";$tree_channel_en="Append";$_current='append';}break;
         }
         $tree_parent=$result['parent'];		
         $tree_name=$result['name'];
@@ -436,6 +439,8 @@ function show_banner($type){
         $this->assign("tree_channel_en",$tree_channel_en);
         $this->assign('headertitle', $article['title']);
         $this->assign("tree_category_id",$tree_category_id);
+		$this->assign('_current', $_current);
+		$this->assign('_act', 1);
         $this->display('detail');
     }
     
@@ -579,6 +584,7 @@ function show_banner($type){
         $pagerArray = (array)$pager;
         $this->assign('pager', $pagerArray);
         $this->assign('headertitle', $tree_channel);
+		$this->assign('_current', 'plan');
         $this->display();
     }
     
@@ -676,6 +682,7 @@ function show_banner($type){
         $this->assign("tree_category_id",$tree_category_id);
         $this->assign('parent', $_GET['type']);
         $this->assign('headertitle', trim($daily['title']));
+		$this->assign('_current', 'plan');
         $this->display();
     }
     
@@ -888,7 +895,7 @@ function show_banner($type){
         service('Passport')->loginLocal($uid);
         //service('Shop')->register($data['uname'], $data['email'], $data['password']);
         
-        redirect(U('home/Account/index'));
+        redirect(U('index/index/index'));
     }
     
     public function doRegisterCoach()

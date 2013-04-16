@@ -405,7 +405,7 @@ class PublicAction extends Action{
         service('Passport')->logoutLocal();
         Addons::hook('public_after_logout');
         $this->assign('jumpUrl',U('index/Index/index'));
-        $this->assign('waitSecond',5);
+        $this->assign('waitSecond',3);
         $this->success(L('exit_success'). ( (UC_SYNC)?uc_user_synlogout():'' ) );
     }
 
