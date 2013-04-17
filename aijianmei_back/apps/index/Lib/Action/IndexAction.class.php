@@ -1243,5 +1243,15 @@ function show_banner($type){
         $json = file_get_contents($url);
         return $json;
     }
+
+    public function footer()
+    {
+        $id = intval($_GET['id']);
+        $content = D('Article')->getFooterContent($id);
+        if ($content === FALSE) $content = D('Article')->getFooterContent(1);
+        $this->assign('content',$content);
+        $this->assign('cssFile','about_us');
+        $this->display('foot');
+    }
 }
 ?>

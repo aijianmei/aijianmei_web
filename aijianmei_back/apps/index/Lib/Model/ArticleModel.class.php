@@ -219,5 +219,19 @@ class ArticleModel extends Model {
         $sql="select aid from ai_article_category_group where category_id in ($category_id)";
         return $Articlesids = M('')->query($sql);
     }
+
+    /**
+     * 获取底部页面内容
+     *
+     * @param <int> $id 底部内容ID
+     * @return <boolean> FALSE ID对应内容不存在
+     * @return <string> ID对应的内容
+     */
+    public function getFooterContent($id){
+        $sql = "select content from ai_footer where id=$id";
+        $query = M('')->query($sql);
+        if (empty($query)) return FALSE;
+        return $query[0]['content'];
+    }
 }
 ?>
