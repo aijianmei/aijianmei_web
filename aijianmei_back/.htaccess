@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteRule index.html index.php
+RewriteRule ^(.+)-(.+)-(articleDetail)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4
+RewriteRule ^(.+)-(.+)-(daily)-(.+)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4&type=$5
+#index.php?app=index&mod=Index&act=daily&id=129&type=3
+#index.php?app=index&mod=Index&act=articleDetail&id=45
+
