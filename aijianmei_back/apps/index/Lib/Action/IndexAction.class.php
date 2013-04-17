@@ -682,6 +682,7 @@ function show_banner($type){
         $this->assign('parent', $_GET['type']);
         $this->assign('headertitle', trim($daily['title']));
 		$this->assign('_current', 'plan');
+		$this->assign('metatype', '1');
         $this->display();
     }
     

@@ -2,27 +2,6 @@
     <html xmlns:wb=“http://open.weibo.com/wb”>
         <head>
             <meta charset="utf-8"/>
-			<php>if($_act==1){</php>
-
-			<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.aijianmei.com/index.php?app=index&mod=Index&act=articleDetail&id={$_GET[id]}" />
-<meta property="og:title" content="{$article['title']}" />
-<meta property="og:description" content="爱健美|{$article['title']}" />
-<meta property="og:image" content="http://www.aijianmei.com/public/images/article/{$article['img']}" />
-<meta name="weibo: article:create_at" content="{$article['create_time']}" />
-<meta name="weibo: article:update_at" content="{$article['create_time']}" />
-
-<!--
-<meta property="og:type" content="webpage" />
-<meta property="og:url" content="http://www.aijianmei.com/index.php?app=index&mod=Index&act=articleDetail&id={$_GET[id]}" />
-<meta property="og:title" content="{$article['title']}" />
-<meta property="og:description" content="爱健美|{$article['title']}" />
-<meta property="og:image" content="http://www.aijianmei.com/public/images/article/{$article['img']}" />
-<meta name="weibo:webpage:create_at" content="{$article['create_time']}" />
-<meta name="weibo:webpage:update_at" content="{$article['create_time']}" />-->
-        
-
-			<php>}</php>
             <title><?php if(!empty($headertitle)){echo $headertitle;}else{echo '爱健美';}?></title>
             <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21432667"></script>
             <link rel="stylesheet" href="../Public/css/public.css" />
@@ -30,21 +9,27 @@
 			<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454" type="text/javascript" charset="utf-8"></script>			
             <!-- <link rel="stylesheet" href="../Public/css/jquery-ui.css" />  -->
             <!--  <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>	-->
-
-<!-- 编辑器样式文件 -->
-<link href="__PUBLIC__/js/editor/editor/theme/base-min.css" rel="stylesheet"/>
-<!--[if lt IE 8]><!-->
-<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-sprite-min.css" rel="stylesheet"/>
-<!--<![endif]-->
-<!--[if gte IE 8]><!-->
-<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-min-datauri.css" rel="stylesheet"/>
-<!--<![endif]-->
-{:Addons::hook('public_head',array('uid'=>$uid))}
-</head>
-
+			<!-- 编辑器样式文件 -->
+			<link href="__PUBLIC__/js/editor/editor/theme/base-min.css" rel="stylesheet"/>
+			<!--[if lt IE 8]><!-->
+			<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-sprite-min.css" rel="stylesheet"/>
+			<!--<![endif]-->
+			<!--[if gte IE 8]><!-->
+			<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-min-datauri.css" rel="stylesheet"/>
+			<!--<![endif]-->
+			<php>if($_act==1){</php>
+			<meta content="webpage" property="og:type"/>
+			<meta content="http://www.aijianmei.com/index.php?app=index&mod=Index&act=articleDetail&id={$_GET[id]}" property="og:url"/>
+			<meta content="{$article['title']}" property="og:title"/>
+			<meta content="{$article['brief']}" property="og:description"/>
+			<meta content="http://www.aijianmei.com/public/images/article/{$article['img']}" property="og:image"/>
+			<meta name="weibo:webpage:create_at" content="{$article['create_time']}" />
+			<meta name="weibo:webpage:update_at" content="" />
+			<php>}</php>
+			{:Addons::hook('public_head',array('uid'=>$uid))}
+		</head>
 <body class="">
 <!-- <div class="wrap"> -->
-
 <!-- sheet -->
 <div class="body"></div>
         <div class="sheet">
