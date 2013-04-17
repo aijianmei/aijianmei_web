@@ -8,39 +8,16 @@
             <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21432667"></script>
             <link rel="stylesheet" href="../Public/css/public.css" />
             <link rel="stylesheet" href="../Public/css/{$cssFile}.css" />
-			<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454" type="text/javascript" charset="utf-8"></script>			
-            <!-- <link rel="stylesheet" href="../Public/css/jquery-ui.css" />  -->
-            <!--  <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>	-->
-			<!-- 编辑器样式文件 -->
-			<link href="__PUBLIC__/js/editor/editor/theme/base-min.css" rel="stylesheet"/>
-			<!--[if lt IE 8]><!-->
-			<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-sprite-min.css" rel="stylesheet"/>
-			<!--<![endif]-->
-			<!--[if gte IE 8]><!-->
-			<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-min-datauri.css" rel="stylesheet"/>
-			<!--<![endif]-->
 			<php>if($_act==1){</php>
 			<meta content="webpage" property="og:type"/>
 			<meta content="http://www.aijianmei.com/index.php?app=index&mod=Index&act=articleDetail&id={$_GET[id]}" property="og:url"/>
 			<meta content="{$article['title']}" property="og:title"/>
 			<meta content="{$article['brief']}" property="og:description"/>
 			<meta content="http://www.aijianmei.com/public/images/article/{$article['img']}" property="og:image"/>
-			<meta name="weibo:webpage:create_at" content="{$article['create_time']}" />
-			<meta name="weibo:webpage:update_at" content="" />
 			<php>}</php>
-			<php>if($metatype==1){</php>
-			<meta property="og:type" content="video" />
-			<meta property="og:url" content="{$videos[0]['link']}" />
-			<meta property="og:title" content="{$daily['title']}" />
-			<meta property="og:description" content="爱健美视频|{$daily['title']}" />
-			<meta property="og:image" content="{$videos[0]['logo']}" />
-			<meta name="weibo:webpage:create_at" content="{$daily['create_time']}" />  
-			<php>}</php>
-			{:Addons::hook('public_head',array('uid'=>$uid))}
+			<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454" type="text/javascript" charset="utf-8"></script>	
 		</head>
 <body class="">
-<!-- <div class="wrap"> -->
-<!-- sheet -->
 <div class="body"></div>
         <div class="sheet">
                 <div class="log">
@@ -72,24 +49,6 @@
                     <div class="other_account clearfix">
                         <h4 class="tit">使用合作网站账号登录</h4>
                         <div class="accounts">
-                        <!--<script src="//mat1.gtimg.com/app/openjs/openjs.js"></script>
-                        <script defer="defer">
-
-                            T.init({
-                                appkey:100669978
-                            });
-
-                            function login() {
-
-                                T.login(function (loginStatus) {
-                                    alert(loginStatus.nick);
-                                },function (loginError) {
-                                    alert(loginError.message);
-                                });
-
-                            }
-
-                        </script>-->
                         <!--<script id='denglu_login_js' type='text/javascript' charset='utf-8'></script>-->
                         <!-- http://open.denglu.cc/transfer/qzone?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F -->
                         <!-- a class="cop1" href="http://open.denglu.cc/transfer/renren?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F"></a> -->
@@ -165,68 +124,3 @@
                 </div>
             </div>
             <div class="wrapper">
-                <!-- outsite
-                <div id="header">
-                    <ul class="top">
-                        <li class="my_cart"><a id="my_cart"><span class="cart"></span>购物车(0) </a>|</li>
-                        <php>if(getMid()) {</php>
-                        <li><span>欢迎你，<php>echo getUserName(getMid())</php></span>
-                        <php>} else {</php>
-                            <li><a href="javascript:;" class="login">登录 </a>|</li>
-                            <li><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a>|</li>
-                        <php>}</php>
-                        outside -->
-                        <!-- <li class="more"><a href="#">消息<span class="triangle"></span> </a>|
-                            <ul class="message">
-                                <li><a href="/index.php?app=home&mod=message&act=index">查看私信</a></li>
-                                <li><a href="/index.php?app=home&mod=user&act=comments">查看评论</a></li>
-                                <li><a href="/index.php?app=home&mod=user&act=atme">查看@我</a></li>
-                                <li><a href="/index.php?app=home&mod=space&act=follow&type=follower&uid={$uid}">查看粉丝</a></li>
-                                <li><a href="/index.php?app=home&mod=message&act=notify">查看通知</a></li>
-                                <!--<li><a href="order.html">查看预约</a></li>
-                            </ul>
-
-                        </li> -->
-                        <!-- outside
-                        <li class="more"><a href="">帐号<span class="triangle"></span> </a>
-                            <ul class="account">
-                                <li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
-                                <li><a href="/index.php?app=home&mod=Account&act=address">收货地址</a></li>
-                                <li><a href="mod_face.html">修改头像</a></li>
-                                <li><a href="/index.php?app=home&mod=Account&act=bind">绑定帐号</a></li>
-                                <li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    outside -->
-                    <!--
-                    <form class="search">
-                        <fieldset>
-                            <legend>搜索</legend>
-                            <label for="search_title">搜索：</label>
-                            <input type="text" id="search_title" class="search_txt"/>
-                            <button class="search_btn hide_text" type="submit"></button>
-                        </fieldset>
-                    </form>
-                    -->
-                    <!-- outside
-                    <div class="logo">
-                        <a href="/index.php?app=index">
-                            <img src="../Public/images/logo.png" alt="aijianmei" />
-                        </a>
-                    </div>
-                    <ul id="nav">
-                        <li class="home"><a href="/index.php?app=index"><span>首页</span></a></li>
-                        <li class="store"><a href='#'><span>商店</span></a></li>
-                        <li><a href="/index.php?app=index&mod=Plan">健身计划</a></li>
-                        <li><a href="/index.php?app=index&mod=Train">锻炼</a></li>
-                        <li><a href="/index.php?app=index&mod=Nutri">营养</a></li>
-                        <li><a href="/index.php?app=index&mod=Append">辅助品</a></li>
-                        <li class="forum"><a href="#">论坛</a></li>
-                        <li class="friends"><a href="#">交友互动</a></li>
-                        outside -->
-                        <!--<li><a href="<php>if(getMid()){</php>{:U('home/User/index')}<php>}else{</php>{:U('home/Index/index')}<php>}</php>">交友互动</a></li>-->
-                     <!-- outside   
-                    </ul>
-                </div>
-                outside -->
