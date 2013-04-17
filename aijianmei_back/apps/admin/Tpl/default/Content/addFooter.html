@@ -26,11 +26,6 @@
       <dt>英文标签：</dt>
       <dd><input name="key_name" type="text" value="{$key_name}"> * </dd>
     </dl>
-        
-    <dl class="lineD">
-      <dt>链接地址：</dt>
-      <dd><input name="model_url" type="text" maxlength="100" value="{$model_url}" style="width:520px"> * </dd>
-    </dl>
 
     <dl class="">
       <dt></dt>
@@ -54,13 +49,6 @@
 <script>
 $(function(){
     loadEditor("content");
-
-    $('input[name=key_name]').blur(function(){
-        var $key_name = $(this).val();
-        var $model_url = $('input[name=model_url]').val();
-        var $url = 'http://www.aijianmei.com/index.php?app=index&mod=Index&act='+$key_name;
-        if ($model_url=='') $('input[name=model_url]').val($url);
-    })
 
     $('input[type=submit]').click(function(){
         var $flag = true;

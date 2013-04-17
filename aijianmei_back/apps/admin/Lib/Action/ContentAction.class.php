@@ -942,14 +942,15 @@ class ContentAction extends AdministratorAction {
         $msg = array(//获取与过滤数据
             'title' => htmlspecialchars(trim($_POST['title'])),
             'content' => $_POST['content'],
-            'key_name' => htmlspecialchars(trim($_POST['key_name'])),
-            'model_url' => trim($_POST['model_url']),
+            'key_name' => htmlspecialchars(trim($_POST['key_name'])),            
             'last_edit' => time(),
         );
         
         if ( ! $_POST['id'] ) {//创建栏目的逻辑
             $msg['create_time'] = time();
-            $footer->add($msg);
+            $insert_id = $footer->add($msg);
+            $model_url['model_url'] = 'http://www.aijianmei.com/index.php?app=index&mod=Index&act=footer&id='.$insert_id;
+            $footer->where("id=$insert_id")->save($model_url);
         } else {//修改栏目的逻辑
             $flag = $footer->where("id=$id")->save($msg);
             if ( ! $flag) ;//栏目不存在
