@@ -15,6 +15,13 @@
 			<meta content="{$article['brief']}" property="og:description"/>
 			<meta content="http://www.aijianmei.com/public/images/article/{$article['img']}" property="og:image"/>
 			<php>}</php>
+			<php>if($metatype==1){</php>
+			<meta property="og:type" content="video" />
+			<meta property="og:url" content="http://www.aijianmei.com/index-Index-daily-{$_GET[id]}-{$_GET[type]}.html" />
+			<meta property="og:title" content="{$videos[0][title]}" />
+			<meta property="og:description" content="爱健美视频|{$videos[0][title]}" />
+			<meta property="og:image" content="{$videos[0][logo]}" />
+			<php>}</php>
 			<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454" type="text/javascript" charset="utf-8"></script>	
 		</head>
 <body class="">

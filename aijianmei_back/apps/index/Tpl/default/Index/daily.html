@@ -1,5 +1,4 @@
 <include file="../Public/header" />
-<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 <div id="content">
             <div class="content_left clearfix">
                 <span>
@@ -146,7 +145,7 @@
                         <h4 class="sider_t">精华推荐</h4>
                         <php>foreach($promote_article as $p) {</php>
                         <div class="recommend">							
-                            <a  href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}" class="recommend_pic"><img src="/public/images/article/{$p['img']}" alt="no" border="0" width="90" height="60" /></a>
+                            <a  href="/index-Index-articleDetail-{$p['id']}.html" class="recommend_pic"><img src="/public/images/article/{$p['img']}" alt="no" border="0" width="90" height="60" /></a>
                             <div class="intro" ><h3><a>{$p['title']}</a></h3></div>
                             <span class="t_play_time">点击:<span>{$p['reader_count']}</span></span>
                             <span class="comment_time">评论: <span>{$p['CommNumber']}</span></span>

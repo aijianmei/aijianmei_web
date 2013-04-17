@@ -95,7 +95,7 @@
                                 <span>发布时间  <span><php>echo date('Y-m-d H:i:s',$i['article']['ctime'])</php></span></span>
                                 <a class="video_commit">评论(<php>echo count($i['comments'])</php>)</a>
                             </div>
-                            <a href="{:U('index/Index/daily', array('id'=>$i['article']['id'], 'type'=>$_GET['type']))}" class="checking">查看</a>
+                            <a href="/index-Index-daily-{$i['article']['id']}-{$_GET['type']}.html" class="checking">查看</a>
                         </div>
                         <div class="part_2 clearfix">
                             <div class="expand_1">
@@ -172,7 +172,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="{:U('index/Index/daily', array('id'=>$i['article']['id'],'type'=>'1'))}" class="check_more">查看所有评论</a>
+                                <a href="/index-Index-daily-{$i['article']['id']}-{$_GET['type']}.html" class="check_more">查看所有评论</a>
                             </div>
                             <div class="border_comment">
                                 <span class="word_num">0/300</span>
