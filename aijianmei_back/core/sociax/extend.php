@@ -1293,6 +1293,12 @@ function getUserFace($uid,$size){
 	}else{
 		$type = 'big';
 	}
+        $apiImg= M('')->query("select profileImageUrl from ai_others where uid='".$uid."'");
+        if($apiImg){
+            $userface=$apiImg[0]['profileImageUrl'];
+            return $userface;
+        }
+        
 	$uid_to_path = convertUidToPath($uid);
 	$userface = SITE_PATH.'/data/uploads/avatar' . $uid_to_path . '/' . $type. '.jpg';
 	if(is_file($userface)){

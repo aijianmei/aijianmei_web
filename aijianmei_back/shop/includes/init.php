@@ -12,11 +12,20 @@
  * $Author: liubo $
  * $Id: init.php 17217 2011-01-19 06:29:08Z liubo $
 */
-
+@session_start();
 if (!defined('IN_ECS'))
 {
     die('Hacking attempt');
 }
+
+$aijianmeiUserInfo=null;
+if(@$_SESSION['mid']>0&&!empty($_SESSION['userInfo'])){
+    $aijianmeiUserInfo=$_SESSION;
+}
+else{
+    $_SESSION=NULL;
+}
+
 
 error_reporting(E_ALL);
 
@@ -200,9 +209,15 @@ if (!defined('INIT_NO_SMARTY'))
 
 if (!defined('INIT_NO_USERS'))
 {
-    /* 会员信息 */
-    $user =& init_users();
 
+    /* 会员信息 */
+    if(!empty($aijianmeiUserInfo)){
+        $_SESSION=array_merge($_SESSION,$aijianmeiUserInfo);
+    }
+    
+    $aijianmeiUserInfo=null;
+    $user =& init_users();
+    
     if (!isset($_SESSION['user_id']))
     {
         /* 获取投放站点的名称 */
@@ -279,6 +294,7 @@ if (!defined('INIT_NO_USERS'))
     {
         $smarty->assign('ecs_session', $_SESSION);
     }
+    //print_r($_SESSION);
 }
 
 if ((DEBUG_MODE & 1) == 1)

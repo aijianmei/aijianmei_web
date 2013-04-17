@@ -50,20 +50,19 @@
 <link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-min-datauri.css" rel="stylesheet"/>
 <!--<![endif]-->
 {:Addons::hook('public_head',array('uid'=>$uid))}
+<link rel="stylesheet" href="apps/index/Tpl/default/Public/css/public.css" />
+<link rel="stylesheet" href="apps/index/Tpl/default/Public/css/{$cssFile}.css" />
 </head>
 
-<body class="">
-<!-- <div class="wrap"> -->
-
-<!-- sheet -->
-<div class="body"></div>
-        <div class="sheet">
+        <body>
+            <div class="body"></div>
+            <div class="sheet">
                 <div class="log">
                     <button class="close_btn"></button>
-                    <h3>登陆爱健美</h3>
+                    <h3>登录爱健美</h3>
                     <div class="ai_account">
                         <form action="/index.php?app=home&mod=Public&act=doLogin" method="post">
-                            <h4 class="tit">使用注册邮箱登陆</h4>
+                            <h4 class="tit">使用注册邮箱登录</h4>
                             <div class="text_input">
                                 <label for="mail">爱健美注册邮箱</label>
                                 <input type="text" id="mail" name="email" />
@@ -74,53 +73,87 @@
                                 <input type="password" id="psd" name="password" />
                                 <span class="tip">密码长度为6~16个的数字或者字母</span>
                             </div>
-                            <button type="submit" class="submit_btn">登陆</button>
-                            <a href="retrieve.html" class="forget">忘记密码</a>
+                            <div class="checkCode">
+                                <!--<span>验证码：</span>
+                                <input type="text"  class="checkBox" id="verify" name="verify" value=""/>
+                                <img src="/public/captcha.php"  id="safecode" class="checkImg" alt="看不清，换一张" />
+                                <a href="#" class="checkChange" id="reloadcode">换一换</a>-->
+                            </div>
+                            <button type="submit" class="submit_btn">登录</button>
+                            <!--<a href="index.php?app=home&mod=Public&act=sendPassword" class="forget">忘记密码</a>-->
                         </form>
                     </div>
                     <div class="other_account clearfix">
-                        <h4 class="tit">使用合作网站账号登陆</h4>
+                        <h4 class="tit">使用合作网站账号登录</h4>
                         <div class="accounts">
-                        <script id='denglu_login_js' type='text/javascript' charset='utf-8'></script>
-                        <script type='text/javascript' charset='utf-8'>
+                                <script type="text/javascript">
+            var childWindow;
+            function toQzoneLogin()
+            {
+                childWindow = window.open("index.php","TencentLogin","width=450,height=320,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+            } 
+            
+            function closeChildWindow()
+            {
+                childWindow.close();
+            }
+        </script>
+                        <!--<script src="//mat1.gtimg.com/app/openjs/openjs.js"></script>
+                        <script defer="defer">
+
+                            T.init({
+                                appkey:100669978
+                            });
+
+                            function login() {
+
+                                T.login(function (loginStatus) {
+                                    alert(loginStatus.nick);
+                                },function (loginError) {
+                                    alert(loginError.message);
+                                });
+
+                            }
+
+                        </script>-->
+                        <!--<script id='denglu_login_js' type='text/javascript' charset='utf-8'></script>-->
+                        <!-- http://open.denglu.cc/transfer/qzone?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F -->
+                        <!-- a class="cop1" href="http://open.denglu.cc/transfer/renren?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F"></a> -->
+                    <a class="copsina" style="width:128px;height:32px;" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a>
+                    <a class="copqq" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100328471 &redirect_uri=www.aijianmei.com/qqlogin.php&scope=" style="width:128px;height:32px;"></a>
+                        <!--<a class="cop3" href="https://graph.renren.com/oauth/authorize?client_id=229477&redirect_uri=http://www.aijianmei.com/index.php?apiType=renren&response_type=token">人人帐号</a>-->
+                        <!--<a class="cop4" href="http://open.denglu.cc/transfer/douban?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F">豆瓣帐号</a>-->
+                         <!--<script type='text/javascript' charset='utf-8'>
                             (function() {
                                 var _dl_time = new Date().getTime();
                                 var _dl_login = document.getElementById('denglu_login_js');
                                 _dl_login.id = _dl_login.id + '_' + _dl_time;
                                 _dl_login.src = 'http://open.denglu.cc/connect/logincode?appid=44031dena3J8cuBsQeX40lcpjSsPM3&v=1.0.2&widget=1&styletype=1&size=452_132&asyn=true&time=' + _dl_time;
                             })();
-                        </script>
+                        </script>-->
                         </div>
-                        <span class="clearfix">未注册过爱健美也可以直接登陆哦</span>
+                        <span class="clearfix">未注册过爱健美也可以直接登录哦</span>
+                        <a class="cop5" href="{:U('index/Index/selectRegister')}">爱健美注册</a>
                         
                     </div>
                 </div>	
-            </div>
-<!-- sheet end -->
-<style type="text/css">
-.slide_down:hover ul{display:block;}
-</style>
-<!-- aijianmei_header -->
-<div class="wrapper">
-                <div id="header">
-                    <ul class="top">
-                    <php>if(getMid()) {</php>
-                    <li><span>欢迎你，<php>echo getUserName(getMid())</php></span>
-                    <php>} else {</php>
-                        <li><a href="javascript:;" id="login">登陆 </a>|</li>
-                        <li><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a>|</li>
-                    <php>}</php>
-                        <!--<li class="slide_down"><a href="#">消息<span class="triangle"></span> </a>|
-                            <ul class="message">
-                                <li><a href="/index.php?app=home&mod=message&act=index">查看私信</a></li>
-                                <li><a href="/index.php?app=home&mod=user&act=comments">查看评论</a></li>
-                                <li><a href="/index.php?app=home&mod=user&act=atme">查看@我</a></li>
-                                <li><a href="/index.php?app=home&mod=space&act=follow&type=follower&uid={$uid}">查看粉丝</a></li>
-                                <li><a href="/index.php?app=home&mod=message&act=notify">查看通知</a></li>
-                                <li><a href="order.html">查看预约</a></li>
-                            </ul>
-                        </li>-->
-                        <li class="slide_down"><a href="">帐号<span class="triangle"></span> </a>
+            </div><!-- End sheet -->
+            <div class="head">
+                <div class="most_top">
+				<php>if(!getMid()) {</php>
+                    <ul class="top_ms clearfix">
+                        <li><a href="javascript:;" class="login">登录 </a>|</li>
+                        <li><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a></li>
+                    </ul>
+					<php>} else {</php>
+                    <ul class="after_ms">
+                        <li class="person_massage">
+                            <div>
+                                <img src="<php>echo getUserFace(getMid(),'s')</php>" alt="no" />
+                                <span><php>echo getUserName(getMid())</php></span>
+                            </div>
+                        </li>
+                        <li class="more"><a href="">帐号<span class="triangle"></span> </a>
                             <ul class="account">
                                 <li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
                                 <!--<li><a href="/index.php?app=home&mod=Account&act=address">收货地址</a></li>
@@ -129,7 +162,70 @@
                                 <li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
                             </ul>
                         </li>
+                        <li class="special_buy">
+                            <a class="car_buy">购物车</a>
+                        </li>
                     </ul>
+					<php>}</php>
+                </div>
+                <div class="header">
+                    <div class="h_bg">
+                        <a href="/index.php?app=index"><div class="logo_1">logo</div></a>
+                        <ul class="nav">
+                            <li <php>if($_current=='index'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/index.php?app=index"><span class="home">首页</span></a></li>
+                            <li><i class="ag_current"></i><a href='#'><span class="store">商店</span></a></li>
+                            <li <php>if($_current=='plan'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/index.php?app=index&mod=Plan">健身计划</a></li>
+                            <li <php>if($_current=='train'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/index.php?app=index&mod=Train">锻炼</a>
+                               <!--  <ul class="conceal_part">
+                                    <li><a></a></li>
+                                </ul> -->
+                            </li>
+                            <li <php>if($_current=='nutri'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/index.php?app=index&mod=Nutri">营养</a>
+
+                            </li>
+                            <li <php>if($_current=='append'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/index.php?app=index&mod=Append">辅助品</a></li>
+                            <li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
+                            <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper">
+                <!-- outsite
+                <div id="header">
+                    <ul class="top">
+                        <li class="my_cart"><a id="my_cart"><span class="cart"></span>购物车(0) </a>|</li>
+                        <php>if(getMid()) {</php>
+                        <li><span>欢迎你，<php>echo getUserName(getMid())</php></span>
+                        <php>} else {</php>
+                            <li><a href="javascript:;" class="login">登录 </a>|</li>
+                            <li><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a>|</li>
+                        <php>}</php>
+                        outside -->
+                        <!-- <li class="more"><a href="#">消息<span class="triangle"></span> </a>|
+                            <ul class="message">
+                                <li><a href="/index.php?app=home&mod=message&act=index">查看私信</a></li>
+                                <li><a href="/index.php?app=home&mod=user&act=comments">查看评论</a></li>
+                                <li><a href="/index.php?app=home&mod=user&act=atme">查看@我</a></li>
+                                <li><a href="/index.php?app=home&mod=space&act=follow&type=follower&uid={$uid}">查看粉丝</a></li>
+                                <li><a href="/index.php?app=home&mod=message&act=notify">查看通知</a></li>
+                                <!--<li><a href="order.html">查看预约</a></li>
+                            </ul>
+
+                        </li> -->
+                        <!-- outside
+                        <li class="more"><a href="">帐号<span class="triangle"></span> </a>
+                            <ul class="account">
+                                <li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
+                                <li><a href="/index.php?app=home&mod=Account&act=address">收货地址</a></li>
+                                <li><a href="mod_face.html">修改头像</a></li>
+                                <li><a href="/index.php?app=home&mod=Account&act=bind">绑定帐号</a></li>
+                                <li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    outside -->
+                    <!--
                     <form class="search">
                         <fieldset>
                             <legend>搜索</legend>
@@ -138,107 +234,25 @@
                             <button class="search_btn hide_text" type="submit"></button>
                         </fieldset>
                     </form>
+                    -->
+                    <!-- outside
                     <div class="logo">
-                        <a href="{:U('index/Index/index')}">
-                            <img src="../apps/index/Tpl/default/Public/images/logo.png" alt="aijianmei" />
+                        <a href="/index.php?app=index">
+                            <img src="../Public/images/logo.png" alt="aijianmei" />
                         </a>
                     </div>
                     <ul id="nav">
                         <li class="home"><a href="/index.php?app=index"><span>首页</span></a></li>
-                        <li class="store"><a href="javascript:void(0);" onclick="alert('正在建设中')"><span>商店</span></a></li>
+                        <li class="store"><a href='#'><span>商店</span></a></li>
                         <li><a href="/index.php?app=index&mod=Plan">健身计划</a></li>
                         <li><a href="/index.php?app=index&mod=Train">锻炼</a></li>
                         <li><a href="/index.php?app=index&mod=Nutri">营养</a></li>
                         <li><a href="/index.php?app=index&mod=Append">辅助品</a></li>
-                        <li><a href="javascript:void(0);" onclick="alert('正在建设中')">论坛</a></li>
-                        <li><a href="javascript:void(0);" onclick="alert('正在建设中')">交友互动</a></li>
+                        <li class="forum"><a href="#">论坛</a></li>
+                        <li class="friends"><a href="#">交友互动</a></li>
+                        outside -->
+                        <!--<li><a href="<php>if(getMid()){</php>{:U('home/User/index')}<php>}else{</php>{:U('home/Index/index')}<php>}</php>">交友互动</a></li>-->
+                     <!-- outside   
                     </ul>
-                    <span class="position">爱健美/首页</span>
                 </div>
-<!-- aijianmei_header end -->
-
-<session name="userInfo">
-<php>if(isMobile()){</php>
-<include file="__THEME__/mobile_header" />
-<php>}else{</php>
-<!--顶部导航-->
-
-<!--/顶部导航-->
-<php>}</php>
-</session>
-<nosession name="userInfo">
-
-</nosession>
-{* 头部广告 *}
-<volist name="ts['ad']['header']" id="vo"> 
-    <div class="ad_header"><div class="ke-post">{$vo['content']}</div></div>
-</volist>  
-
-<script>
-$(document).ready(function(){
-    $(".header_dropdown").hover(
-        function(){ 
-      var type = $(this).attr('id');
-      if(type == 'message_show' || type == 'account_show') {
-        var obj = document.getElementById('message_list_container');
-        if(obj !== null) {
-          var isHas = $('#is_has_message').html();
-          if(isHas) {
-            $('#message_list_container').css("display", 'none');
-          }
-        }
-      }
-      $(this).addClass("hover"); 
-    },
-        function(){ 
-      var type = $(this).attr('id');
-      if(type == 'message_show' || type == 'account_show') {
-        var obj = document.getElementById('message_list_container');
-        if(obj !== null) {
-          var isHas = $('#is_has_message').html();
-          if(isHas) {
-            $('#message_list_container').css("display", '');
-          }
-        }
-      }
-      $(this).removeClass("hover"); 
-    }
-    );
-    
-    <php>if($mid > 0) {</php>
-        ui.countNew();
-        setInterval("ui.countNew()",120000);
-    <php>}</php>
-});
-</script>
-
-{* 注册引导 *}
-<php>if(!$mid && APP_NAME.'/'.MODULE_NAME != 'home/Public' && APP_NAME.'/'.MODULE_NAME != 'home/Index'){</php>
-<div class="content no_bg" style=" margin-bottom:10px;overflow:hidden;zoom:1">
-  <div  style="padding:10px 15px;zoom:1;overflow:hidden;">
-    <div style="float:right; width:220px; text-align:center; padding-top:5px;font-size:14px"><a class="regbtn4" title="立即注册" href="{:U('home/Public/register')}"> &nbsp;</a><br />
-      有帐号？<a href="{:U('home/Public/login')}"><strong>马上登录</strong></a></div>
-    <div style=" margin-right:250px;">
-      <h2 class="f18px lh30 fB">欢迎来到{$ts['site']['site_name']}，赶紧注册吧！</h2>
-      <p class="f14px cGray2">微博是一个大家表达真实自我的即时广播平台。赶紧开通微博，获得朋友、同事最新动态，通过网页、手机随时随地记录自己的点滴生活！</p>
-    </div>
-  </div>
-</div>
-<php>}</php>
-
-<script type="text/javascript">
-$(function() {
-  $('#iframe_group_li').live('mousemove', function() {
-    var group_width = $('#iframe_group').width();
-    var group_height = $('#iframe_group').height();
-    $('#iframe_g').css('width', group_width);
-    $('#iframe_g').css('height', group_height);
-  });
-  $('#iframe_app_li').live('mousemove', function() {
-    var app_width = $('#iframe_app').width();
-    var app_height = $('#iframe_app').height();
-    $('#iframe_a').css('width', app_width);
-    $('#iframe_a').css('height', app_height);
-  });
-});
-</script>
+                outside -->

@@ -53,8 +53,10 @@ class AppendAction extends Action {
             if($c['parent'] != NULL) $parent[$c['parent']]['children'][] = $c;
             $cate_id[] = $c['id'];
         }
-        //print_r($cate);
-        $articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
+        $cate_id=(!empty($_GET['id'])&&$_GET['id']!=39)?$_GET['id']:$cate_id;
+        $Articlesid=D('Article')->getArticlesid($cate_id);
+        //$articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
+        $articles = M('article')->where(array('id'=>array('in', implode(',', $Articlesid))))->order('id desc')->limit(8)->findAll();
         foreach($articles as $key => $value){
             $articles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
         }
@@ -62,32 +64,26 @@ class AppendAction extends Action {
         $this->assign('categories', $cate);
         $this->assign('parent_categories', $parent);
         
-        /*$cate = M('article_category')->where(array('channel'=>'4'))->findAll();
-        foreach($cate as $c) {
-            if($c['parent']==NULL) $realCate[$c['id']] = $c;
-            else $realCate[$c['parent']]['children'][] = $c;;
-            $cate_id[] = $c['id'];
-        }*/
         $map['category_id'] = array('in', implode(',', $cate_id));
         $articles = M('article')->where($map)->findAll();
         //print_r($articles);
-        $hotArticles = D('Article')->getAppendArticles('click');
+        $hotArticles = D('Article')->getAppendArticles('click',$_GET['id']==39?'':$_GET['id']);
         foreach($hotArticles as $key => $value){
             $hotArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
         }
         $this->assign('hotArticles', $hotArticles);
-        //foreach($hotArticles as $a) echo $a['title'];//$a['title']=substr($a['title'],0,10)."...";
         
-        $lastArticles = D('Article')->getAppendArticles('create_time');
+        $lastArticles = D('Article')->getAppendArticles('create_time',$_GET['id']==39?'':$_GET['id']);
         foreach($lastArticles as $key => $value){
             $lastArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
         }
         $this->assign('lastArticles', $lastArticles);
-        //$this->assign('cate', $cate);
         $this->assign('articles', $articles);
-        //$this->assign('categories', $realCate);
         $this->assign('cssFile', 'training');
         $this->show_banner();//banner 滚动图片列表
+        $this->assign('headertitle', '辅助品');
+		//header current add by kon at 20130415
+		$this->assign('_current', 'append');
         $this->display();
     }
     
@@ -95,6 +91,8 @@ class AppendAction extends Action {
     {
         $order = isset($_GET['order']) ? t($_GET['order']) : 'create_time';
         $id = intval($_GET['id']);
+        $ordercon= $_GET['ordercon']?$_GET['ordercon']:'id';
+        $timecon = $_GET['timecon']?$_GET['timecon']:'';
         $cate = M('article_category')->where(array('channel'=>'4'))->findAll();
         //print_r($cate);
         foreach($cate as $c) {
@@ -102,25 +100,39 @@ class AppendAction extends Action {
             else $realCate[$c['parent']]['children'][] = $c;;
             $cate_id[] = $c['id'];
         }
-        
         $map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
         // 查询满足要求的总记录数
         $articleCount = M('article')->where(array('category_id'=>$id))->count();
-                $style['pre'] = 'prev';
-                $style['next'] = 'next';
-                $style['current'] = 'current_page';
         $pager = api('Pager');	// 实例化分页类 
         $pager->setCounts($articleCount); //传入总记录数
         //$pager->setStyle($style);
-        $pager->setList(10);	// 设置每页显示的记录数
+        $pager->setList(7);	// 设置每页显示的记录数
         $pager->makePage();		//生成数字分页
         $pageArray = (array)$pager;
         $this->assign('pager', $pageArray);
         
         $from = ($pager->pg-1) * $pager->countlist;
-        $articles = M('article')->where(array('category_id'=>$id))->order("$order desc")->limit("$from,$pager->countlist")->findAll();
-        foreach($articles as $key => $value){
-            $articles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
+        $Articlesid=D('Article')->getArticlesid($id);
+         $categoryStr=is_array($map['category_id'])? $map['category_id'][1]:$map['category_id'];
+        if($ordercon!='recomnums'){
+            if($timecon){
+                $dataArr=getDateInfo($timecon);
+                $timeStr="and  create_time >='".$dataArr['start']."' and create_time <='".$dataArr['end']."'";
+            }
+            $comtmpsql="select * from ai_article where category_id in ($categoryStr) $timeStr order by $ordercon desc limit $from,$pager->countlist ";
+            $articles=M('')->query($comtmpsql);
+        }
+        else{
+            //$map['category_id']=array('in', '29,30,31');
+            $comtmpsql="SELECT a. * , COUNT( b.id ) AS cnums FROM ai_article a LEFT JOIN ai_comments b ON a.id = b.parent_id
+        WHERE a.category_id IN ($categoryStr) GROUP BY b.parent_id UNION SELECT * , 0 AS cnums FROM ai_article a WHERE category_id IN ($categoryStr) AND id NOT IN (SELECT parent_id FROM ai_comments)";
+            $timeStr=null;
+            if($timecon){
+                $dataArr=getDateInfo($timecon);
+                $timeStr="where  t.create_time >='".$dataArr['start']."' and t.create_time <='".$dataArr['end']."'";
+            }
+            $comtmpsql="select * from ($comtmpsql) t $timeStr order by t.cnums desc limit $from,$pager->countlist ";
+            $articles=M('')->query($comtmpsql);
         }
         $this->assign('articles', $articles);
         $this->assign('categories', $realCate);
@@ -140,7 +152,15 @@ class AppendAction extends Action {
         }
         $this->assign('lastArticles', $lastArticles);
         $this->show_banner();//banner 滚动图片列表
-        
+                foreach($realCate as $k =>$v){
+            foreach($v['children'] as $k1=>$v1){
+                if($id==$v1['id'])
+                {
+                    $this->assign('headertitle', $v1['name']);
+                }
+            }
+        }
+		$this->assign('_current', 'append');
         $this->display('list');
     }
     

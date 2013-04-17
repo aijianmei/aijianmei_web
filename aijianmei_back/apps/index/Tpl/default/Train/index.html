@@ -10,10 +10,14 @@
                         <ul>
                             <php>foreach($categories as $c) {</php>
                             <span class="border_line"></span>
-                            <li class="each_video all">{$c['name']}</li>
+                            <li class="each_video all" <php> if($_GET['id']=='') {</php>  style="background: #21ace3;color: white;box-shadow: 0 0 8px #21ace3;"<php>}</php>>{$c['name']}</li>
                                 <php>foreach($c['children'] as $child) { $action=$child['type']=='1'?'articleList':'videoList';</php>
                                 <li class="each_video">
+                                <php> if($child['id']!='53'){</php>
                                 <a href="/index.php?app=index&mod=Train&act={$action}&id={$child['id']}">{$child['name']}</a>
+                                <php> }else{</php>
+                                 <a href="/index.php?app=index&mod=Train&act=videoList&id={$child['id']}">{$child['name']}</a>
+                                <php> }</php>
                                 </li>
                                 <php>}</php>
                             <php>}</php>
@@ -76,7 +80,8 @@
                             <li class="tr_classify ">
                                 <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="../public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
                                 <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
-                                <p class="summary">{$a['brief']}
+                                <p class="summary">
+								<?php echo msubstr($a['brief'],0,36) ?>
                                 </p>
                                 <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
                                 <span class="comment_time">评论: <span>{$a['CommNumber']}</span></span>
@@ -95,7 +100,9 @@
                                     <li class="tr_classify">
                                         <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
                                         <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
-                                        <p class="summary">{$a['brief']}</p>
+                                        <p class="summary">
+										<?php echo msubstr($a['brief'],0,36) ?>
+										</p>
                                         <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
                                         <span class="comment_time">评论: <span>{$a['CommNumber']}</span></span>
                                     </li>

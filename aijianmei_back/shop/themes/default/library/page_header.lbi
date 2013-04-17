@@ -45,7 +45,6 @@ var process_request = "{$lang.process_request}";
 						<div class="massage" style="display:inline-block;">
 							<h1 class="title">此张大图名称</h1>
 							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="images/4.png" alt="no" class="png" />
 						</div>
 					</a>
 				</li>
@@ -55,7 +54,6 @@ var process_request = "{$lang.process_request}";
 						<div class="massage" style="display:inline-block;">
 							<h1 class="title">此张大图名称</h1>
 							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="images/4.png" alt="no" class="png" />
 						</div>
 					</a>
 				</li>
@@ -65,7 +63,6 @@ var process_request = "{$lang.process_request}";
 						<div class="massage" style="display:inline-block;">
 							<h1 class="title">此张大图名称</h1>
 							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="images/4.png" alt="no" class="png" />
 						</div>
 					</a>
 				</li>
@@ -75,7 +72,6 @@ var process_request = "{$lang.process_request}";
 						<div class="massage" style="display:inline-block;">
 							<h1 class="title">此张大图名称</h1>
 							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="../images/4.png" alt="no" class="png" />
 						</div>
 					</a>
 				</li>
@@ -104,7 +100,7 @@ var process_request = "{$lang.process_request}";
         <script type="text/javascript" src="http://dev.aijianmei.com/apps/index/Tpl/default/Public/js/public.js"></script>
 </div>
 <!--search start-->
-<div class="clearfix" style="width:960px">
+<div class="clearfix" style="width:940px;margin-top:20px;">
 <div id="search"  class="clearfix">
   <div class="keys f_l">
    <script type="text/javascript">

@@ -12,7 +12,7 @@
  * $Author: liubo $
  * $Id: index.php 17217 2011-01-19 06:29:08Z liubo $
 */
-
+@session_start();
 define('IN_ECS', true);
 
 require(dirname(__FILE__) . '/includes/init.php');
@@ -157,6 +157,8 @@ if (!$smarty->is_cached('index.dwt', $cache_id))
     /* 页面中的动态内容 */
     assign_dynamic('index');
 }
+
+$smarty->assign('cat_rec', $cat_rec);
 
 $smarty->display('index.dwt', $cache_id);
 

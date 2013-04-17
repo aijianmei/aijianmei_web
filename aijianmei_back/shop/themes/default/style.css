@@ -13,13 +13,111 @@ Template Type: type_0
 /* ====================
      公共样式
 ==================== */
-body{background:url(images/b_g.jpg); font-size:12px; font-family:"宋体",Verdana, Arial; line-height:150%; margin:5px 0 0 0; padding:0; color:#404040;}
+body{background:url(images/b_g.jpg); font-size:12px; font-family:"宋体",Verdana, Arial; line-height:150%; margin:0; padding:0; color:#404040;}
 div{margin:0 auto; padding:0;}
 h1,h2,h3,h4,h5,h6,ul,li,dl,dt,dd,form,img,p{
 margin:0; padding:0; border:none; list-style-type:none;
 }
+
+
+/*outside---------------------------*/
+.wrapper{
+  width: 980px;
+margin: 0 auto;
+background: #f7f7f7;
+box-shadow: 0 0 5px 0 silver;
+}
+a:hover {
+color: #47AEE8;
+}
+a {
+text-decoration: none;
+color: #656565;
+cursor: pointer;
+}
+/******** Footer link *********/  
+  .foot{
+    height:195px;
+    background: url(../images/border.png) no-repeat center top;
+    clear:both;
+  }
+    .foot h4{
+      color:#656565;
+      font-size:14px;
+      margin:5px 0 ;
+      display:inline-block;
+      _display:inline;
+    }
+    .f_list{
+      float:left;
+      margin:40px 30px;
+      _margin-left:15px;
+      padding:0 15px;
+    }
+      .f_list  ul li a{
+        font-size:12px;
+        color:#989898;
+        display:inline-block;
+        _display:inline;
+        margin:2px 0;
+      }
+      .f_list ul li a:hover{
+        color:#47AEE8;
+      }
+      #about{
+        width:190px;
+      }
+      #about a{
+        margin-left: 20px;
+      }
+      #about .public a{
+        margin-left: 29px;
+      }
+      .f_list #about li{
+        float:left;
+        width:84px;
+      }
+      .foot .login{
+        margin:40px 0 0 0;
+      }
+        .sina{
+          background:url(../images/icon_result.png) 0 -78px no-repeat;
+        }
+        .tencent{
+          background:url(../images/icon_result.png) 0 -130px no-repeat;
+        }
+        .netease{
+          background:url(../images/icon_result.png) 0 -52px no-repeat;
+        }
+        .foot  .login .public{
+          background:url(../images/icon_result.png) 0 -104px no-repeat;
+        }
+        .qZone{
+          background:url(../images/icon_result.png) 0 -26px no-repeat;
+        }
+        .douban{
+          background:url(../images/icon_result.png) 0 0 no-repeat;
+        }
+/******* Copyright *******/       
+  #lower_footer{
+    height:90px;
+    background: url(../images/border.png) no-repeat center top;
+  }
+    #lower_footer{
+      text-align: center;
+      font-size: 16px;
+      padding: 30px;
+      color:#656565;
+    }
+      #lower_footer span,#lower_footer a{
+        display:block;
+      }
+
+/*end outside---------------------------------*/
+
+
 .block{
-  width:960px; height:auto;
+  width:940px; height:auto;
 }
 .f_l{float:left;}
 .f_r{float:right;}
@@ -47,7 +145,7 @@ visibility:hidden;
   /*边框*/
   .B_blue{border:1px solid #c5e4ff;}
   .B_input{border:1px solid #0f97ed;}
-  .inputBg{border:1px solid #b3b3b3; background:url(images/inputbg.gif) repeat-x left top; height:18px;}
+  .inputBg{border:1px solid #b3b3b3;width: 122px; background:url(images/inputbg.gif) repeat-x left top; height:18px;}
   /*字体颜色*/
   .f1{color:#ff6666;}
   .f2{color:#006bd0; font-weight:bold; margin-right:15px;}
@@ -70,7 +168,7 @@ visibility:hidden;
   text-align:center; line-height:21px; color:#fff; border:none; cursor:pointer;
   }
   .bnt_blue_2{
-  background:url(images/bg.gif) no-repeat 0px -696px; width:139px; height:21px;
+  background:url(images/bg.gif) no-repeat 0px -696px; width:124px; height:21px;
   text-align:center; line-height:21px; color:#fff; border:none; cursor:pointer;
   }
   .bnt_bonus{
@@ -105,8 +203,8 @@ visibility:hidden;
   .blank{height:8px; line-height:8px; clear:both; visibility:hidden;}
   .blank5{height:5px; line-height:5px;/* _margin:-3px 0;*/ clear:both; visibility:hidden;}
   /*布局*/
-  .AreaL{width:200px; float:left; margin-right:10px;margin-top:-45px;}
-  .AreaR{width:750px; float:left;}
+  .AreaL{width:140px; float:left; margin-right:10px;margin-top:-45px;}
+  .AreaR{width:790px; float:left;}
 
 /* ====================
      导航部分
@@ -153,17 +251,26 @@ visibility:hidden;
   position:absolute; top:0px; right:0px;
   } */
   /*搜索*/
-  #search{border:1px solid #5cb4e6; background:url(images/searchBg.gif) repeat-x left top; width:708px;float:right;
-  padding:0px 20px; height:36px; line-height:36px;
+  #search{ background: url(images/thbg.jpg) repeat-x; width:750px;float:right;
+  padding:0px 20px; height:34px; line-height:34px;
   }
-  #search a{color:#fff; text-decoration:none;}
+  .outside{
+    width:880px!important;
+  }
+  #search a{color:black; text-decoration:none;}
   #search .keys{background:url(images/bg.gif) no-repeat 0 -28px;
   color:#fff; padding-left:40px;
   }
   #search .go{background:url(images/bnt_search.gif); border:none; width:52px; height:19px;/* position:relative; top:2px; utf8下*/}
   /*当前位置*/
-  #ur_here{border:1px solid #c5e4ff; border-top:none; background:url(images/uh_bg.gif) repeat-x left top;
-  height:36px; line-height:36px; padding:0 12px;width:724px;float:right;
+  #ur_here{border: 1px solid #c5e4ff;
+border-top: none;
+background: url(images/uh_bg.gif) repeat-x left top;
+height: 36px;
+line-height: 36px;
+width: 788px;
+float: left;
+margin: 10px 0 0 150px;
   }
   #ur_here a{color:#006cce; text-decoration:none;}
 
@@ -171,10 +278,10 @@ visibility:hidden;
      模块
 ==================== */
    /*购物车*/
-   .cart{background:url(images/catBg.gif) no-repeat left top; padding:15px 10px 15px 50px;
+   .cart{background:url(images/catbg.jpg) no-repeat left top; padding:15px 10px 15px 15px;
    color:#006bcd; height:50px;  _padding:12px 10px 15px 50px;
    }
-   .cart a{color:#006bcd; text-decoration:none;}
+   .cart a{color:#006bcd; text-decoration:none;line-height: 13px;}
    .cart a:hover{color:#006bcd; text-decoration:underline;}
    /*商品分类*/
    #category_tree{border:4px solid #f1faff; background-color:#fff;}
@@ -253,7 +360,7 @@ visibility:hidden;
    _padding:12px 0px 0px 0px;}
    .centerPadd .goodsBox .more{text-align:right; clear:both; margin:0 8px 8px 0;}
        /*单个商品*/
-       .goodsItem{width:150px; float:left; position:relative; overflow:hidden; margin:0px 14px 15px 14px;}
+       .goodsItem{width:150px; float:left; position:relative; overflow:hidden;margin: 0px 19px 15px 19px;}
        .goodsItem .goodsimg{width:140px; height:150px; border:4px solid #eef8ff; margin-bottom:4px;}
        .goodsItem img{width:52px; height:17px;}
        .goodsItem p{text-align:left; color:#3f3f3f;}
@@ -266,9 +373,8 @@ visibility:hidden;
 
    /*帮助*/
    .helpTitBg{background:url(images/helpTitBg.gif) repeat-x left top; text-align:left; border:1px solid #c5e4ff; background-color:#fff;
-   padding:0 0 10px 15px;
    }
-   .helpTitBg dl{float:left; margin-right:30px; _margin-right:20px; width: 140px;padding-left: 20px;}
+   .helpTitBg dl{float:left; margin-right:28px; _margin-right:20px; width: 140px;padding-left: 20px;}
    .helpTitBg dt{width:auto; height:33px; line-height:33px; text-align:left;
    font-weight:bold; color:#56a5ee; margin-bottom:8px;}
      .helpTitBg dt a{font-weight:bold; color:#56a5ee; text-decoration:none;}
@@ -309,7 +415,7 @@ visibility:hidden;
    #goodsInfo .gallery li{float:left; width:48px; margin:0 2px;}
    #goodsInfo .gallery li img{width:46px; height:46px; display:block;}
    /*文字信息*/
-   #goodsInfo .textInfo{background:#fff; width:473px; float:left; padding:10px;}
+   #goodsInfo .textInfo{background:#fff; width:514px; float:left; padding:10px;}
    #goodsInfo .textInfo p{font-size:14px; font-weight:bold; padding:0 5px 5px 8px;}
    #goodsInfo .textInfo ul{border-top:1px solid #ccc;}
    #goodsInfo .textInfo li{background:url(images/lineBg.gif) repeat-x left bottom; padding:0px 8px; _height:1%;}
@@ -439,9 +545,9 @@ visibility:hidden;
    .bNavList img{_position:relative; top:8px;}
    .links img{width:88px; height:30px; margin:5px;}
    /*版权*/
-   #footer{background:url(images/logo1.gif) no-repeat 5% 50%; padding-left:200px; width:760px; margin:10px auto;}
+   /*#footer{background:url(images/logo1.gif) no-repeat 5% 50%; padding-left:200px; width:760px; margin:10px auto;}
    #footer .text{background:url(images/footerLine.gif) no-repeat left center; padding-left:50px; *padding-bottom:20px;}
-   #footer .text a{color:#404040; text-decoration:none;}
+   #footer .text a{color:#404040; text-decoration:none;}*/
 
 
 /* ======商品比较浮动块 ====== */

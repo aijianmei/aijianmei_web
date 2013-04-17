@@ -32,19 +32,20 @@ button{
 
 .body{
 	display:none;
-	position:absolute;
+	position:fixed;
+	top: 0;
 	left:0;
 	width:100%;
 	height:100%;
-	z-index:99;	
+	z-index:1002;	
 	opacity: 0.7;
 	filter:alpha(opacity=70);
 	background: black;
 }
 /******** 登陆 *******/
 .sheet{
-	position:absolute;	
-	z-index:100;
+	position:fixed;	
+	z-index:1003;
 	width:100%;
 	margin-top:120px;
 	display:none;
@@ -172,9 +173,15 @@ button{
 		.accounts .cop1{
 			background:url(../images/login.png) no-repeat 0 -167px;
 		}
+		.accounts .copsina{
+			background:url(../images/sina_login.png);
+		}
 		/*.accounts .cop1:hover{
 			background:url(../images/login.png) no-repeat 0 -41px;
 		}*/
+		.accounts .copqq{
+			background:url(../images/Connect_logo_1.png);
+		}
 		.accounts .cop2{
 			background:url(../images/login.png) no-repeat 0 -41px;
 		}
@@ -203,6 +210,7 @@ button{
 .wrapper{
 	width:980px;
 	margin:0 auto;
+	padding-top: 10px;
 	background:#f7f7f7;
 	box-shadow: 0 0 5px 0 silver;
 }
@@ -233,111 +241,121 @@ button{
 		vertical-align: middle;
 	}
 /******** Header **********/
-	#header{
-		height:125px;
-		position:relative;
-	}
-	/***** Top navigation *****/
-		.top{
-			position:absolute;
-			right:130px;
+	/*top 登录 注册--------------------*/
+		.most_top{
+			width: 960px;
+			margin:10px auto;
+			height:30px;
 		}
-		.top li{
-			float:left;
-			margin:2px;
+		.top_ms{
+			float: right;
+			height: 30px;
+			min-width: 103px;
+			background: #21ace3;
+			color: white;
 		}
-		#my_cart{
-			position: relative;
-
+		.top_ms li{
+			float: left;
+			line-height: 30px;
 		}
-		.cart{
-			position: absolute;
-			width: 30px;
-			height: 14px;
-			left: -30px;
+		.top_ms a{
 			display: inline-block;
-			background: url("../images/cart0.png") no-repeat;
+			min-width: 48px;
+			padding: 0 5px;
+			text-align: center;
+			color: white;
 		}
-		#login{
-			cursor:pointer;
+		.after_ms{
+			float: right;
+			height: 28px;
+			border:1px solid #c4c4c4;
+			background: url(../images/dh_03.jpg) repeat-x;
+		}
+		.after_ms > li{
+			position: relative;
+			float: left;
+			padding: 2px 10px 2px 2px;
+			height: 24px;
+			line-height: 24px;
+			border-right: 1px solid #c4c4c3;
+			text-align: center;
+		}
+		.person_massage img{
+			display: inline;
+			width: 25px;
+			height: 25px;
+		}
+		.person_massage span{
+			display: inline;
+			min-width: 30px;
+			vertical-align: top;
 		}
 		.more a{
-			display:inline-block;
-			width:45px;
-			padding-bottom:3px;
-			border:1px solid transparent;
-			
+			display: inline-block;
+			width: 45px;
 		}
-		.more a:hover{
-			border-color:#ccc;
-		}
-		.more a:hover .triangle{
-			-webkit-transform: translate(0,0) rotate(180deg);
-		}
-		.more .on{
-			position: relative;
-			z-index: 101;
-			background:#fff;
-			border:1px solid #ccc;
-			border-bottom:none;
-		}
-		.on .triangle{
-			border-color:#BCBCBC #fff #fff #fff;
-		}
-		.top .message, .top .account{
+		.more .account{
 			background: white;
 			position: absolute;
-			right: 60px;
-			border:1px solid #ccc;
-			top:21px;
-			z-index:100;
-			display:none;
+			right: -1px;
+			border: 1px solid #ccc;
+			top: 28px;
+			z-index: 1004;
+			display: none;
 		}
-		.top .account{
-			right:2px;
+		.account li{
+			float: none;
+			width: 80px;
+			height: 20px;
+			margin: 5px;
 		}
-		.top .message li ,.top .account li{
-			float:none;
-			width:80px;
-			height:20px;
-			margin:5px;
+		.account a{
+			display: block;
+			line-height: 20px;
+			width: 80px;
+			font-size: 12px;
 		}
-		.top .message li a,.top .account li a{
-			display:block;
-			line-height:20px;
-			width:80px;
-			font-size:12px;
+		.after_ms .special_buy{
+			border-right:none;
 		}
-		.top .message li a:hover,.top .account li a:hover{
-			background:#21ace3;
-			color:white;
+		.car_buy{
+			display: inline-block;
+			padding-left: 34px;
+			line-height: 17px;
+			background: url(../images/car_buy.png) no-repeat;
 		}
-	/******** 顶部搜索框 ******/	
-		form.search fieldset{ 
-			position:absolute; 
-			right:0px; 
-			top:0px; 
-			border:0;
-			margin: 3px 20px 2px 0;
-		}
-			.search label,.search legend{ 
-				display:none;
-				border:0
-			}
-			.search input{ 
-				float:left; 
-				width:88px; 
-				height:17px; 
-				background:url(../images/input.jpg)no-repeat;
-			}
-			.search button{ 
-				float:left; 
-				width:23px; 
-				height:17px; 
-				background:url(../images/search.jpg) no-repeat;
-			}				
-		
-	/******* Logo ******/
+/*outside 2013/4/15*/
+	div.p_fixed{
+		position: fixed;
+		top: 0;
+		left:0;
+		z-index: 1200;
+		height: 78px;
+		top:0;
+		left: 0;
+		z-index: 1000;
+	}
+	.header{
+		position: relative;
+		left: 0;
+		z-index: 1001;
+		height: 79px;
+		width: 100%;
+		background: url(../images/dh_01.jpg) repeat-x;
+	}
+	.h_bg{
+		margin: 0 auto;
+		width: 960px;
+		height: 72px;
+		text-align: center;
+		line-height: 72px;
+	}
+	.logo_1{
+		float: left;
+		width: 265px;
+		text-indent: -999em;
+		background: url(../images/wm3.png) 0 -651px no-repeat;
+	}
 		.logo{
 			width:230px;
 			margin: 30px 0 0 20px;
@@ -347,63 +365,56 @@ button{
 				display:block;
 			}
 	/******** Navigation ************/
-		#nav{
-			width:685px;
-			height:36px;
-			background:url(../images/nav.png) no-repeat ;
-			float:right;
-			margin:60px 30px 0 0;
-			_margin-right:15px;
+		.nav{
+			float: left;
+			width: 695px;
 		}
-		#nav li{
-			width:85px;
-			height:36px;
-			float:left;
-			text-align:center;
+		.nav li{
+			position: relative;
+			float: left;
+			height: 72px;
+			margin:0 1px;
 		}
-		#nav a{
-			color:#fff;
-			font-size:16px;
-			display:inline-block;
-			_display:block;
-			line-height:36px;
-			text-align:center;
-			width:85px;
-		}
-		#nav a:hover{
-			background:#428AB2;
-		}
-	/******** "首页"样式 **********/
-		#nav .home a:hover{
-			background:none;
-		}
-		.home span,.store span{
-			display:inline-block;
-			width:85px;
-			height:36px;
-			margin-left: 10px;
-		}
-		
-		#nav .home{
-			border-radius: 4px 0 0 4px;
-			width:90px;
-		}
-		#nav .home a span{
-			background:url(../images/home.png) no-repeat left;
-		}
-		#nav .store span{
-			background:url(../images/store.png) no-repeat left;
-
-		}
-	/********** 显示当前位置 ***********/
-		.position{
+		.home,.store{
 			display: inline-block;
-			position: absolute;
-			right: 31px;
-			bottom: 9px;
-			color: #989898;
+			padding-left: 34px;
+			margin-top: 18px;
+			height: 54px;
+			line-height: 37px;
 		}
-		
+		.home{
+			background:url(../images/home.png) no-repeat;
+		}
+		.store{
+			background:url(../images/store.png) no-repeat;
+		}
+		.nav a{
+			display: inline-block;
+			padding: 0 8px;
+			color: white;
+			font-size: 23px;
+		}
+		.nav_current a{
+			background: url(../images/dh_02.jpg) repeat-x;
+		}
+		.nav_current .ag_current{
+			position: absolute;
+			bottom: 0;
+			left: 46%;
+			display: inline-block;
+			width: 0;
+			height: 0;
+			line-height: 0;
+			font-size: 0;
+			overflow: hidden;
+			border-style: solid;
+			border-width: 5px;
+			border-color: transparent transparent white transparent;
+		}
+		.nav li:hover a{
+			background: url(../images/dh_02.jpg) repeat-x;
+		}
+	
 /*********** Banner ***********/		
 		#banner{
 			margin:0 auto;
@@ -454,11 +465,6 @@ button{
 					font-size: 15px;
 					color: white;
 					margin-right: 16px;
-				}
-				.massage .png{
-					position: absolute;
-					right: 18px;
-					bottom: 25px;
 				}
 		.choice_area{
 			position:relative;
@@ -533,12 +539,20 @@ button{
 			#about{
 				width:190px;
 			}
+			#about a{
+				margin-left: 20px;
+			}
+			#about .public a{
+				margin-left: 29px;
+			}
 			.f_list #about li{
 				float:left;
-				width:70px;
-				padding-left:20px;
+				width:84px;
 			}
 			#footer .login{
+				margin:40px 0 0 0;
+			}
+			#footer .Login{
 				margin:40px 0 0 0;
 			}
 				.sina{
@@ -550,8 +564,7 @@ button{
 				.netease{
 					background:url(../images/icon_result.png) 0 -52px no-repeat;
 				}
-				#footer  .login .public{
-					padding-left:30px;
+				#footer  .Login .public{
 					background:url(../images/icon_result.png) 0 -104px no-repeat;
 				}
 				.qZone{
@@ -582,32 +595,43 @@ button{
 }
 /****** 翻页 *****/
 .page{
-	width: 450px;
-	margin:10px auto;
+	height: 24px;
+	line-height: 24px;
+	margin: 10px auto;
 	text-align: center;
 }
-.page a{
+.page a,.concrete_choice span{
 	display:inline-block;
-	margin:0 2px;
+	margin:0 -1px;
+	min-width:20px;
 	height:20px;
-	border: 2px solid rgb(236, 236, 236);
+	border: 2px solid transparent;
 	line-height: 20px;
 	color:#333;
+	cursor: pointer;
 }
-.page .prev,.page .next{
+.concrete_choice{
+	display: inline-block;
+	vertical-align: top;
+}
+.concrete_choice span{
 	width:50px;
 }
 .page .current_page{
 	background:#21ace3;
 	color:white;
+	border: 2px solid transparent;
+	cursor: default;
 }
-.concrete_choice{
-	float:left;
+.page a:hover,.concrete_choice span:hover{
+	border-color: #21ace3;
+}
+/*outside*/
+.free_choice{
+	display: inline-block;
 }
 .free_choice span{
 	float:left;
-	height: 24px;
-	line-height: 24px;
 	margin:0 6px;
 }
 .concrete_page input{
@@ -623,6 +647,7 @@ button{
 	font-weight: bold;
 	color: white;
 	background: url(../images/icon_result.png) 0 -225px no-repeat;
+	cursor:pointer;
 }
 	/*底部汇总导航栏*/
 		.title_4{
@@ -663,6 +688,7 @@ button{
 			color:#0E709A;
 		}
 	/*内容横条样式*/
+	/*锻炼，营养，补充，首页板块样式相同，共用相同css-----------outside*/
 	#content{
 		margin-top: 10px;
 	}
@@ -688,6 +714,55 @@ button{
 				background: #FFF;
 				border: 1px solid #E0E0E0;
 				border-top:none;
+			}
+			.tr_classify{
+				float: left;
+				width: 170px;
+				margin: 0 10px 10px 0;
+				padding: 5px;
+				font-size: 12px;
+				border: 1px solid #e6e4e4;
+				box-shadow: 0 0 8px #ccc;
+			}
+			.summary{
+				height:60px;
+				line-height: 18px;
+				word-wrap: break-word;
+			}
+			.hot_video,.new_video{
+				margin: 10px 15px;
+			}
+			.lay_hot_video,.lay_new_video{
+				margin-right: -10px;
+			}
+			.plan_article_tl{
+				display: inline-block;
+				height: 35px;
+				padding-top: 8px;
+				font-size: 14px;
+				color: #21ace3;
+				font-weight: 700;
+			}
+			.new_video img,.hot_video img{
+				height: 110px;
+				width: 170px;
+			}
+			.tr_classify .t_play_time{
+				background: url(../images/wm3.png) 0 -465px no-repeat;
+			}
+			.t_play_time,.play_time{
+				float:left;
+				display: inline-block;
+				height: 16px;
+				padding-left: 27px;
+				background: url(../images/wm3.png) 0 -416px no-repeat;
+			}
+			.comment_time{
+				float:right;
+				display: inline-block;
+				height:16px;
+				padding-left: 20px;
+				background: url(../images/wm3.png) 0 -440px no-repeat;
 			}
 	/*导航栏共用样式*/
 			.sider_all{
@@ -727,7 +802,6 @@ button{
 		font-size: 13px;
 		margin:2px;
 		padding-left:20px;
-		border-radius:6px;
 	}
 	.each_video a{
 		cursor: pointer;
@@ -736,7 +810,6 @@ button{
 	.each_video:hover{
 		background: #21ace3;
 		color:white;
-		box-shadow: 0 0 8px #21ace3;
 	}
 	.each_video:hover a{
 		font-weight: 700;
@@ -811,7 +884,7 @@ button{
 		right: 0px;
 		top: 0px;
 		bottom: 0px;
-		z-index: 1000;
+		z-index: 1020;
 		opacity: 0;
 		filter: alpha(opacity=0);
 		background: #000;
@@ -821,7 +894,7 @@ button{
 		position: fixed;
 		left: 50%;
 		top: -100px;
-		z-index: 1001;
+		z-index: 1020;
 		width: 850px;
 		height: 100px;
 		margin-left: -425px;
@@ -877,7 +950,7 @@ span.enter_icon{
 	right: 5px;
 	top: 5px;
 	display: none;
-	z-index: 100;
+	z-index: 9;
 }
 /*商店价格红色显示*/
 .item_attr_detail .S_price{

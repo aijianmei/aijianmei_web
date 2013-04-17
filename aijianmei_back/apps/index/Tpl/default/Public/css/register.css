@@ -3,9 +3,7 @@ a:hover{
 	color:#656565;
 }
 /***********************content开始*************************/
-#content{
-	height:880px;
-}
+
 	/********leftsidebar开始*********/	
 	.leftsidebar{
 		width: 735px;
@@ -188,6 +186,10 @@ a:hover{
 					float: left;
 					width: 85px;
 				}
+				.prompt_box_8 img{
+					display: inline;
+					margin: 0 15px;
+				}
 				.prompt_box_8 .proven_pic{
 					display: inline-block;
 					float:left;
@@ -197,10 +199,7 @@ a:hover{
 					background: url(../images/register/result.png) 0px -314px no-repeat;
 				}
 				.prompt_box_8 .forchange{
-					display: inline-block;
-					height: 40px;
-					line-height: 40px;
-					margin: 0 20px 0 10px;
+					vertical-align:top;
 					color: #0069DB;
 				}
 			.formest .box_9,.formest_1 .box_9{
@@ -239,7 +238,9 @@ a:hover{
 				}
 	/********rightsidebar开始*********/
 		.rightsidebar{
-			margin-left: 792px;
+			float: left;
+			width: 203px;
+			margin-left: 10px;
 			font-size: 17px;
 			font-weight: 700;
 			color: #656565;

@@ -1,288 +1,236 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>
-<neq name="ts['site']['page_title']" value="">
-    {$ts['site']['page_title']}
-<else/>
-    {$ts['site']['site_header_title']}
-</neq>    
-</title>
-<link rel="shortcut icon" href="__THEME__/favicon.ico" />
-<meta name="keywords" content="{$ts['site']['site_header_keywords']}" />
-<meta name="description" content="{$ts['site']['site_header_description']}" />
-<script>
-	var _UID_   = <php> echo (int) $uid;</php>;
-	var _MID_   = <php> echo (int) $mid;</php>;
-	var _ROOT_  = '__ROOT__';
-	var _THEME_ = '__THEME__';
-	var _PUBLIC_ = '__PUBLIC__';
-	var _LENGTH_ = <php> echo (int) $GLOBALS['ts']['site']['length'];</php>;
-	var _LANG_SET_ = '<php> echo LANG_SET;</php>';
-	var $CONFIG = {};
-		$CONFIG['uid'] = _UID_;
-		$CONFIG['mid'] = _MID_;
-		$CONFIG['root_path'] =_ROOT_;
-		$CONFIG['theme_path'] = _THEME_;
-		$CONFIG['public_path'] = _PUBLIC_;
-		$CONFIG['weibo_length'] = <php> echo (int) $GLOBALS['ts']['site']['length'];</php>;
-		$CONFIG['lang'] =  '<php> echo LANG_SET;</php>';
-    var bgerr;
-    try { document.execCommand('BackgroundImageCache', false, true);} catch(e) {  bgerr = e;}
-</script>
-<!-- 全局风格CSS -->
-<link href="__THEME__/public.css?20110820" rel="stylesheet" type="text/css" />
-<link href="__THEME__/layout.css?20110820" rel="stylesheet" type="text/css" />
-<link href="__THEME__/main.css?20110820" rel="stylesheet" type="text/css" />
-<link href="__PUBLIC__/js/tbox/box.css?20110820" rel="stylesheet" type="text/css" />
-<!-- 核心JS加载 -->
-<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/jquery.form.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/common.js?20110824"></script>
-<script type="text/javascript" src="__PUBLIC__/js/tbox/box.js?20110824"></script>
-<script type="text/javascript" src="__PUBLIC__/js/scrolltopcontrol.js?20110824"></script>
-<script type="text/javascript" src="__PUBLIC__/js/weibo.js?20110824"></script>
-<script type="text/javascript" src="__PUBLIC__/js/jquery.jgrow.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/jquery.isotope.min.js"></script>
+<!DOCTYPE html>
+    <html xmlns:wb=“http://open.weibo.com/wb”>
+        <head>
+            <meta charset="utf-8"/>
+			<php>if($_act==1){</php>
 
-<!-- 编辑器样式文件 -->
-<link href="__PUBLIC__/js/editor/editor/theme/base-min.css" rel="stylesheet"/>
-<!--[if lt IE 8]><!-->
-<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-sprite-min.css" rel="stylesheet"/>
-<!--<![endif]-->
-<!--[if gte IE 8]><!-->
-<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-min-datauri.css" rel="stylesheet"/>
-<!--<![endif]-->
-{:Addons::hook('public_head',array('uid'=>$uid))}
-</head>
+			<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.aijianmei.com/index.php?app=index&mod=Index&act=articleDetail&id={$_GET[id]}" />
+<meta property="og:title" content="{$article['title']}" />
+<meta property="og:description" content="爱健美|{$article['title']}" />
+<meta property="og:image" content="http://www.aijianmei.com/public/images/article/{$article['img']}" />
+<meta name="weibo: article:create_at" content="{$article['create_time']}" />
+<meta name="weibo: article:update_at" content="{$article['create_time']}" />
 
-<body class="page_home">
-<div class="wrap">
+<!--
+<meta property="og:type" content="webpage" />
+<meta property="og:url" content="http://www.aijianmei.com/index.php?app=index&mod=Index&act=articleDetail&id={$_GET[id]}" />
+<meta property="og:title" content="{$article['title']}" />
+<meta property="og:description" content="爱健美|{$article['title']}" />
+<meta property="og:image" content="http://www.aijianmei.com/public/images/article/{$article['img']}" />
+<meta name="weibo:webpage:create_at" content="{$article['create_time']}" />
+<meta name="weibo:webpage:update_at" content="{$article['create_time']}" />-->
+        
 
-<session name="userInfo">
-<php>if(isMobile()){</php>
-<include file="__THEME__/mobile_header" />
-<php>}else{</php>
-<!--顶部导航-->
-<div class="header_holder">
- <div class="header">
- <div class="logo_holder">
-    <div class="logo"><a href="{:U('home/Index')}"><img src="<php>echo $ts['site']['site_logo']?$ts['site']['site_logo']:__THEME__.'/images/logo.png';</php>" style="_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=crop)" /></a></div>
-    <form action="{:U('home/user/search')}" id="quick_search_form" method="post">
-    <div class="soso br3"><label id="_header_search_label" style="display: block;" onclick="$(this).hide();$('#_header_search_text').focus();">搜名字/标签/微博</label><input type="text" class="so_text" value="" name="k" id="_header_search_text" onblur="if($(this).val()=='') $('#_header_search_label').show();"/><input name="" type="button" onclick="$('#quick_search_form').submit()" class="so_btn hand br3"/></div>
-	<script>
-	if($('#_header_search_text').val()=='')
-		$('#_header_search_label').show();
-	else
-		$('#_header_search_label').hide();
-	</script>
-    </form>
-    <div class="nav">
-      <ul>
-        <li><a href="{:U('home')}" class="fb14">首页</a></li>
-		<li class="header_dropdown"><a href="{:U('home/Square/index')}" class="application">广场<span class="ico_arrow"></span></a>
-          <div class="dropmenu">
-                <dl class="square_list">
-                <dd><a href="{:U('home/Square/top')}">风云榜</a></dd>
-                <dd><a href="{:U('home/Square/star')}">名人堂</a></dd>
-                {:Addons::hook('header_square_tab', array('menu' => & $header_square_expend_menu))}
-				<volist name="header_square_expend_menu" id="vo">
-                	<dd><a href="{:U('home/Square/' . $vo['act'], $vo['param'])}">{$vo['name']}</a></dd>  
-				</volist>
-            </dl>
-          </div>
-        </li>
-        <php>if(!empty($my_group_list)){</php>
-		<li id="iframe_group_li" class="header_dropdown"><a href="{:U('group/index/newIndex')}" class="application">群组<span class="ico_arrow"></span></a>
-          <div id="iframe_group" class="dropmenu"><iframe id="iframe_g" style="position:absolute;_filter:alpha(opacity=0);opacity=0;z-index:-1;width:100%;height:100%;top:0;left:0;scrolling:no;" frameborder="0" src="about:blank"></iframe>
-                <dl class="group_list">
-                            <php>$moreGroup = false;</php>
-                            <php>foreach($my_group_list as $key=>$value){</php>
-                                <dd><a href="{:U('group/group/index',array('gid'=>$value['id']))}">{$value['name']}</a></dd>
-                                 <php>if($key>=5){
-                                       $moreGroup = true;
-                                       break;
-                                       }
-                                 </php>
-                            <php>}</php>
-                </dl>
-                <dl class="group_list_add">
-                <dd><php>if($moreGroup){</php><a href="{:U('group/SomeOne')}" class="right">更多&raquo;</a><php>}</php><a href="{:U('group/Index/add')}">创建群组</a></dd>
-                </dl>
-          </div>
-        </li>
-        <php>}</php>
-        <li id="iframe_app_li" class="header_dropdown"><a href="{:U('home/Index/addapp')}" class="application">应用<span class="ico_arrow"></span></a>
-          <div id="iframe_app" class="dropmenu"><iframe id="iframe_a" style="position:absolute;_filter:alpha(opacity=0);opacity=0;z-index:-1;width:100%;height:100%;top:0;left:0;scrolling:no;" frameborder="0" src="about:blank"></iframe>
-            <dl class="app_list">
-                <?php foreach ($ts['user_app'] as $_temp_type => $_temp_apps) { ?>
-                <?php foreach ($_temp_apps as $_temp_app) { ?>
-                    <dd>
-                        <?php if($_temp_type == 'local_app' || $_temp_type == 'local_default_app') { ?>
-                        <a href="<?php echo $_temp_app['app_entry'];?>" class="a14">
-                            <img class="app_ico" src="<?php echo $_temp_app['icon_url'];?>" />
-                            <?php echo $_temp_app['app_alias'];?>
+			<php>}</php>
+            <title><?php if(!empty($headertitle)){echo $headertitle;}else{echo '爱健美';}?></title>
+            <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21432667"></script>
+            <link rel="stylesheet" href="../Public/css/public.css" />
+            <link rel="stylesheet" href="../Public/css/{$cssFile}.css" />
+			<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454" type="text/javascript" charset="utf-8"></script>			
+            <!-- <link rel="stylesheet" href="../Public/css/jquery-ui.css" />  -->
+            <!--  <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>	-->
+
+        </head>
+        <body>
+            <div class="body"></div>
+            <div class="sheet">
+                <div class="log">
+                    <button class="close_btn"></button>
+                    <h3>登录爱健美</h3>
+                    <div class="ai_account">
+                        <form action="/index.php?app=home&mod=Public&act=doLogin" method="post">
+                            <h4 class="tit">使用注册邮箱登录</h4>
+                            <div class="text_input">
+                                <label for="mail">爱健美注册邮箱</label>
+                                <input type="text" id="mail" name="email" />
+                                <span class="tip">请输入正确的邮箱地址</span>
+                            </div>
+                            <div class="text_input">
+                                <label for="psd">密码</label>
+                                <input type="password" id="psd" name="password" />
+                                <span class="tip">密码长度为6~16个的数字或者字母</span>
+                            </div>
+                            <div class="checkCode">
+                                <!--<span>验证码：</span>
+                                <input type="text"  class="checkBox" id="verify" name="verify" value=""/>
+                                <img src="/public/captcha.php"  id="safecode" class="checkImg" alt="看不清，换一张" />
+                                <a href="#" class="checkChange" id="reloadcode">换一换</a>-->
+                            </div>
+                            <button type="submit" class="submit_btn">登录</button>
+                            <!--<a href="index.php?app=home&mod=Public&act=sendPassword" class="forget">忘记密码</a>-->
+                        </form>
+                    </div>
+                    <div class="other_account clearfix">
+                        <h4 class="tit">使用合作网站账号登录</h4>
+                        <div class="accounts">
+                                <script type="text/javascript">
+            var childWindow;
+            function toQzoneLogin()
+            {
+                childWindow = window.open("index.php","TencentLogin","width=450,height=320,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+            } 
+            
+            function closeChildWindow()
+            {
+                childWindow.close();
+            }
+        </script>
+                        <!--<script src="//mat1.gtimg.com/app/openjs/openjs.js"></script>
+                        <script defer="defer">
+
+                            T.init({
+                                appkey:100669978
+                            });
+
+                            function login() {
+
+                                T.login(function (loginStatus) {
+                                    alert(loginStatus.nick);
+                                },function (loginError) {
+                                    alert(loginError.message);
+                                });
+
+                            }
+
+                        </script>-->
+                        <!--<script id='denglu_login_js' type='text/javascript' charset='utf-8'></script>-->
+                        <!-- http://open.denglu.cc/transfer/qzone?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F -->
+                        <!-- a class="cop1" href="http://open.denglu.cc/transfer/renren?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F"></a> -->
+                    <a class="copsina" style="width:128px;height:32px;" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a>
+                    <a class="copqq" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100328471 &redirect_uri=www.aijianmei.com/qqlogin.php&scope=" style="width:128px;height:32px;"></a>
+                        <!--<a class="cop3" href="https://graph.renren.com/oauth/authorize?client_id=229477&redirect_uri=http://www.aijianmei.com/index.php?apiType=renren&response_type=token">人人帐号</a>-->
+                        <!--<a class="cop4" href="http://open.denglu.cc/transfer/douban?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F">豆瓣帐号</a>-->
+                         <!--<script type='text/javascript' charset='utf-8'>
+                            (function() {
+                                var _dl_time = new Date().getTime();
+                                var _dl_login = document.getElementById('denglu_login_js');
+                                _dl_login.id = _dl_login.id + '_' + _dl_time;
+                                _dl_login.src = 'http://open.denglu.cc/connect/logincode?appid=44031dena3J8cuBsQeX40lcpjSsPM3&v=1.0.2&widget=1&styletype=1&size=452_132&asyn=true&time=' + _dl_time;
+                            })();
+                        </script>-->
+                        </div>
+                        <span class="clearfix">未注册过爱健美也可以直接登录哦</span>
+                        <a class="cop5" href="{:U('index/Index/selectRegister')}">爱健美注册</a>
+                        
+                    </div>
+                </div>	
+            </div><!-- End sheet -->
+            <div class="head">
+                <div class="most_top">
+				<php>if(!getMid()) {</php>
+                    <ul class="top_ms clearfix">
+                        <li><a href="javascript:;" class="login">登录 </a>|</li>
+                        <li><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a></li>
+                    </ul>
+					<php>} else {</php>
+                    <ul class="after_ms">
+                        <li class="person_massage">
+                            <div>
+                                <img src="<php>echo getUserFace(getMid(),'s')</php>" alt="no" />
+                                <span><php>echo getUserName(getMid())</php></span>
+                            </div>
+                        </li>
+                        <li class="more"><a href="">帐号<span class="triangle"></span> </a>
+                            <ul class="account">
+                                <li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
+                                <!--<li><a href="/index.php?app=home&mod=Account&act=address">收货地址</a></li>
+                                <li><a href="mod_face.html">修改头像</a></li>
+                                <li><a href="/index.php?app=home&mod=Account&act=bind">绑定帐号</a></li>-->
+                                <li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
+                            </ul>
+                        </li>
+                        <li class="special_buy">
+                            <a class="car_buy">购物车</a>
+                        </li>
+                    </ul>
+					<php>}</php>
+                </div>
+                <div class="header">
+                    <div class="h_bg">
+                        <a><div class="logo_1">logo</div></a>
+                        <ul class="nav">
+                            <li <php>if($_current=='index'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/index.php?app=index"><span class="home">首页</span></a></li>
+                            <li><i class="ag_current"></i><a href='#'><span class="store">商店</span></a></li>
+                            <li <php>if($_current=='plan'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/index.php?app=index&mod=Plan">健身计划</a></li>
+                            <li <php>if($_current=='train'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/index.php?app=index&mod=Train">锻炼</a>
+                               <!--  <ul class="conceal_part">
+                                    <li><a></a></li>
+                                </ul> -->
+                            </li>
+                            <li <php>if($_current=='nutri'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/index.php?app=index&mod=Nutri">营养</a>
+
+                            </li>
+                            <li <php>if($_current=='append'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/index.php?app=index&mod=Append">辅助品</a></li>
+                            <li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
+                            <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper">
+                <!-- outsite
+                <div id="header">
+                    <ul class="top">
+                        <li class="my_cart"><a id="my_cart"><span class="cart"></span>购物车(0) </a>|</li>
+                        <php>if(getMid()) {</php>
+                        <li><span>欢迎你，<php>echo getUserName(getMid())</php></span>
+                        <php>} else {</php>
+                            <li><a href="javascript:;" class="login">登录 </a>|</li>
+                            <li><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a>|</li>
+                        <php>}</php>
+                        outside -->
+                        <!-- <li class="more"><a href="#">消息<span class="triangle"></span> </a>|
+                            <ul class="message">
+                                <li><a href="/index.php?app=home&mod=message&act=index">查看私信</a></li>
+                                <li><a href="/index.php?app=home&mod=user&act=comments">查看评论</a></li>
+                                <li><a href="/index.php?app=home&mod=user&act=atme">查看@我</a></li>
+                                <li><a href="/index.php?app=home&mod=space&act=follow&type=follower&uid={$uid}">查看粉丝</a></li>
+                                <li><a href="/index.php?app=home&mod=message&act=notify">查看通知</a></li>
+                                <!--<li><a href="order.html">查看预约</a></li>
+                            </ul>
+
+                        </li> -->
+                        <!-- outside
+                        <li class="more"><a href="">帐号<span class="triangle"></span> </a>
+                            <ul class="account">
+                                <li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
+                                <li><a href="/index.php?app=home&mod=Account&act=address">收货地址</a></li>
+                                <li><a href="mod_face.html">修改头像</a></li>
+                                <li><a href="/index.php?app=home&mod=Account&act=bind">绑定帐号</a></li>
+                                <li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    outside -->
+                    <!--
+                    <form class="search">
+                        <fieldset>
+                            <legend>搜索</legend>
+                            <label for="search_title">搜索：</label>
+                            <input type="text" id="search_title" class="search_txt"/>
+                            <button class="search_btn hide_text" type="submit"></button>
+                        </fieldset>
+                    </form>
+                    -->
+                    <!-- outside
+                    <div class="logo">
+                        <a href="/index.php?app=index">
+                            <img src="../Public/images/logo.png" alt="aijianmei" />
                         </a>
-                        <?php }else { ?>
-                        <a href="__ROOT__/apps/myop/userapp.php?id=<?php echo $_temp_app['app_id'];?>" class="a14">
-                            <img class="app_ico" src="http://appicon.manyou.com/icons/<?php echo $_temp_app['app_id'];?>" />
-                            <?php echo $_temp_app['app_alias'];?>
-                        </a>
-                        <?php }?>
-                    </dd>
-                <?php } // end of foreach?>
-                <?php } // end of foreach?>
-                </dl>
-                <dl class="app_list_add">
-                <dd><a href="{:U('home/Index/addapp')}"><span class="ico_app_add"></span>添加更多应用</a></dd>
-                </dl>
-          </div>
-        </li>
-  		{:Addons::hook('header_topnav', array('menu' => & $header_topnav))}
-  		<volist name="header_topnav" id="vo">
-  		<li><a href="{$vo['url']}" class="fb14">{$vo['name']}</a></li>
-  		</volist>
-      </ul>
-    </div>
- </div>
-	<!--个人信息区-->
-    <ul class="person">
-		<li>{:getUserSpace($mid,'fb14 username nocard','','',false)}</li>
-		<li class="header_dropdown" id="message_show"><a href="{:U('home/message/index')}" class="application">消息<span class="ico_arrow"></span></a>
-          <div class="dropmenu">
-                <ul class="message_list_container message_list_new">
-                </ul>
-                <dl class="message">
-      					<dd><a href="{:U('home/message/index')}">查看私信<gt name="userCount['message']" value="0">({$userCount.message})</gt></a></dd> 
-      					<dd><a href="{:U('home/user/atme')}">查看@我<gt name="userCount['atme']" value="0">({$userCount.atme})</gt></a></dd> 
-      					<dd><a href="{:U('home/user/comments')}">查看评论<gt name="userCount['comment']" value="0">({$userCount.comment})</gt></a></dd> 
-      					<dd><a href="{:U('home/message/notify')}">系统通知<gt name="userCount['notify']" value="0">({$userCount.notify})</gt></a></dd> 
-      					<dd><a href="{:U('home/message/appmessage')}">应用消息<gt name="userCount['appmessage']" value="0">({$userCount.appmessage})</gt></a></dd> 
-                </dl>
-                <dl class="square_list">
-                <dd><a href="javascript:ui.sendmessage(0)">发私信</a></dd>
-                </dl>
-          </div>
-        </li>
-		<li class="header_dropdown" id="account_show"><a href="{:U('home/Account')}" class="application">帐号<span class="ico_arrow"></span></a>
-          <div class="dropmenu">
-                <dl class="setup">
-                <dd><a href="{:U('home/User/findfriend')}">找人</a></dd>
-                <dd><a href="{:U('home/Account')}">设置</a></dd>
-                <dd><a href="{:U('home/Account/invite')}">邀请</a></dd>
-                <dd><a href="{:U('home/Account/weiboshare')}">小工具</a></dd>
-                {:Addons::hook('header_account_tab', array('menu' => & $header_account_drop_menu))}
-				        <volist name="header_account_drop_menu" id="vo">
-                	<dd><a href="{$vo['url']}">{$vo['name']}</a></dd>  
-				        </volist>
-                <eq name="isSystemAdmin" value="TRUE"><dd><a href="{:U('admin/index/index')}">后台管理</a></dd></eq>
-                </dl>
-                <dl class="square_list_add">
-                <dd><a href="{:U('home/Public/logout')}">退出</a></dd>
-                </dl>
-          </div>
-        </li>
-    </ul>
-	<!--/个人信息区-->
-	<!--消息提示框-->
-    <div id="message_list_container" class="layer_massage_box" style="display:none;">
-    	<ul id="is_has_message" class="message_list_container">
-        </ul>
-        <a href="javascript:void(0)" onclick="ui.closeCountList(this)" class="del"></a>
-    </div>
-	<!--/消息提示框-->
-  </div>
-</div>
-<!--/顶部导航-->
-<php>}</php>
-</session>
-<nosession name="userInfo">
-<div class="header_holder">
-    <div class="header">
-      <div class="logo"><a href="{:U('home/Index')}"><img src="<php>echo $ts['site']['site_logo']?$ts['site']['site_logo']:__THEME__.'/images/logo.png';</php>" style="_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=crop)" /></a></div>
-      <div id="indt" class="nav_sub br3">
-        <p>
-      	<eq name="ts['site']['site_anonymous_square']" value="1">
-      	  <a href="{:U('home/Square')}">微博广场</a>&nbsp;|&nbsp;
-      	</eq>
-      	<a href="{:U('home/Public/register')}">注册</a>&nbsp;|&nbsp;
-      	<a href="javascript:ui.quicklogin();">登录</a>
-        <p>
-      </div>
-  </div>
-</div>
-</nosession>
-{* 头部广告 *}
-<volist name="ts['ad']['header']" id="vo"> 
-    <div class="ad_header"><div class="ke-post">{$vo['content']}</div></div>
-</volist>  
-
-<script>
-$(document).ready(function(){
-	$(".header_dropdown").hover(
-		function(){ 
-      var type = $(this).attr('id');
-      if(type == 'message_show' || type == 'account_show') {
-        var obj = document.getElementById('message_list_container');
-        if(obj !== null) {
-          var isHas = $('#is_has_message').html();
-          if(isHas) {
-            $('#message_list_container').css("display", 'none');
-          }
-        }
-      }
-      $(this).addClass("hover"); 
-    },
-		function(){ 
-      var type = $(this).attr('id');
-      if(type == 'message_show' || type == 'account_show') {
-        var obj = document.getElementById('message_list_container');
-        if(obj !== null) {
-          var isHas = $('#is_has_message').html();
-          if(isHas) {
-            $('#message_list_container').css("display", '');
-          }
-        }
-      }
-      $(this).removeClass("hover"); 
-    }
-	);
-	
-	<php>if($mid > 0) {</php>
-		ui.countNew();
-		setInterval("ui.countNew()",120000);
-	<php>}</php>
-});
-</script>
-
-{* 注册引导 *}
-<php>if(!$mid && APP_NAME.'/'.MODULE_NAME != 'home/Public' && APP_NAME.'/'.MODULE_NAME != 'home/Index'){</php>
-<div class="content no_bg" style=" margin-bottom:10px;overflow:hidden;zoom:1">
-  <div  style="padding:10px 15px;zoom:1;overflow:hidden;">
-    <div style="float:right; width:220px; text-align:center; padding-top:5px;font-size:14px"><a class="regbtn4" title="立即注册" href="{:U('home/Public/register')}"> &nbsp;</a><br />
-      有帐号？<a href="{:U('home/Public/login')}"><strong>马上登录</strong></a></div>
-    <div style=" margin-right:250px;">
-      <h2 class="f18px lh30 fB">欢迎来到{$ts['site']['site_name']}，赶紧注册吧！</h2>
-      <p class="f14px cGray2">微博是一个大家表达真实自我的即时广播平台。赶紧开通微博，获得朋友、同事最新动态，通过网页、手机随时随地记录自己的点滴生活！</p>
-    </div>
-  </div>
-</div>
-<php>}</php>
-
-<script type="text/javascript">
-$(function() {
-  $('#iframe_group_li').live('mousemove', function() {
-    var group_width = $('#iframe_group').width();
-    var group_height = $('#iframe_group').height();
-    $('#iframe_g').css('width', group_width);
-    $('#iframe_g').css('height', group_height);
-  });
-  $('#iframe_app_li').live('mousemove', function() {
-    var app_width = $('#iframe_app').width();
-    var app_height = $('#iframe_app').height();
-    $('#iframe_a').css('width', app_width);
-    $('#iframe_a').css('height', app_height);
-  });
-});
-</script>
+                    </div>
+                    <ul id="nav">
+                        <li class="home"><a href="/index.php?app=index"><span>首页</span></a></li>
+                        <li class="store"><a href='#'><span>商店</span></a></li>
+                        <li><a href="/index.php?app=index&mod=Plan">健身计划</a></li>
+                        <li><a href="/index.php?app=index&mod=Train">锻炼</a></li>
+                        <li><a href="/index.php?app=index&mod=Nutri">营养</a></li>
+                        <li><a href="/index.php?app=index&mod=Append">辅助品</a></li>
+                        <li class="forum"><a href="#">论坛</a></li>
+                        <li class="friends"><a href="#">交友互动</a></li>
+                        outside -->
+                        <!--<li><a href="<php>if(getMid()){</php>{:U('home/User/index')}<php>}else{</php>{:U('home/Index/index')}<php>}</php>">交友互动</a></li>-->
+                     <!-- outside   
+                    </ul>
+                </div>
+                outside -->

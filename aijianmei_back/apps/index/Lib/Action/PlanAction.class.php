@@ -57,37 +57,39 @@ class PlanAction extends Action {
 		$jianmei =  M('article')->where(array('category_id'=>'46'))->limit('0,4')->order('id desc')->findAll();
 		$this->assign('jianmei', $jianmei);
 
-		$this->show_banner();//banner 滚动图片列表
-	
-		$this->display();
-	}
-	
-	public function plan_loss()
-	{
-		$this->show_banner();
-		$this->assign('cssFile', 'plan');
-		if($_GET['sex']=='m') {
-			$this->display('plan_loss_m');
-		}elseif ($_GET['sex']=='f') {
-			$this->display('plan_loss_f');
-		}else {
-			$this->display();
-		}		
-	}
-	
-	public function plan_build()
-	{
-		$this->show_banner();
-		
-		$this->assign('cssFile', 'plan');
-		if($_GET['sex']=='m') {
-			$this->display('plan_build_m');
-		}elseif ($_GET['sex']=='f') {
-			$this->display('plan_build_f');
-		}else {
-			$this->display();
-		}
-	}
+        $this->show_banner();//banner 滚动图片列表
+        $this->assign('headertitle', '健身计划');
+		//header current add by kon at 20130415
+		$this->assign('_current', 'plan');
+        $this->display();
+    }
+    
+    public function plan_loss()
+    {
+        $this->show_banner();
+        $this->assign('cssFile', 'plan');
+        if($_GET['sex']=='m') {
+            $this->display('plan_loss_m');
+        }elseif ($_GET['sex']=='f') {
+            $this->display('plan_loss_f');
+        }else {
+            $this->display();
+        }		
+    }
+    
+    public function plan_build()
+    {
+        $this->show_banner();
+        
+        $this->assign('cssFile', 'plan');
+        if($_GET['sex']=='m') {
+            $this->display('plan_build_m');
+        }elseif ($_GET['sex']=='f') {
+            $this->display('plan_build_f');
+        }else {
+            $this->display();
+        }
+    }
 
 	public function coach()
 	{

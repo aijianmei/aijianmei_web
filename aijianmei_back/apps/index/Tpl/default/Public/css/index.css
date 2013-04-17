@@ -3,24 +3,6 @@
 }
 
 /******* Banner *******/
-	/*.lay_banner .ul_1{
-			width:3440px;
-			position: relative;
-		}
-		.choice_area li{
-			float: left;
-			display: inline-block;
-			height: 80px;
-			width: 120px;
-			margin: 12px 9px;
-			cursor: pointer;
-			border: 3px solid transparent;
-
-		}
-		.ul_2 li img{
-			width:120px;
-			height:80px;
-		}*/
 		#banner{
 			width:960px;
 			height:470px;
@@ -28,7 +10,7 @@
 			position:relative;
 		}
 		#banner ul{
-			height:470px;
+			height:450px;
 			position:absolute;
 		}
 		#banner ul li{
@@ -54,6 +36,9 @@
 			bottom:0;
 			text-align:center;
 		}
+		#banner .btn .current{
+			background:url(../images/landian.png);
+		}
 		#banner .btn span{
 			display:inline-block;
 			_display:inline;
@@ -63,16 +48,17 @@
 			_font-size:0;
 			margin-left:5px;
 			cursor:pointer;
-			background:#fff;
+			background:url(../images/dian.png);
 		}
 
 		#banner .preNext{
-			width:200px;
+			/*width:200px;*/
+			width: 50px;
 			height:270px;
 			position:absolute;
 			top:178px;
 			cursor:pointer;
-			z-index:1000;
+			z-index:10;
 		}
 		#banner .pre{
 			left:20px;
@@ -91,19 +77,133 @@
 		margin-bottom: 60px;
 		background: url(../images/border.png) no-repeat center top;
 	}
-	#content img{
+	.classify img{
 		display: block;
 		height:165px;
-		width:221px;
+		width:219px;
+		box-shadow: 0 0 8px #ccc;
 		border:2px solid transparent;
 	}	
+	.classify i{
+		position: absolute;
+		top: -5px;
+		left: -5px;
+		display: inline-block;
+		width: 84px;
+		height: 84px;
+		background: url(../images/new.png);
+	}
 	.lay_top{
 		width:960px;
 		margin:0 auto;
 		margin-bottom:10px;
 	}
+	.part_top_1{
+		position: relative;
+		float: left;
+		width: 475px;
+		margin-left: 10px;
+	}
+	.lay_top_1,.lay_top_2{
+		width: 473px;
+		background: #FFF;
+		border: 1px solid #E0E0E0;
+		border-top: none;
+	}
+	.lay_top_2 .tr_classify{
+		width: 430px;
+	}
+	.tr_classify{
+		width:440px;
+		margin:0;
+		margin-bottom: 5px;
+	}
+	.hot_video,.new_video{
+		margin: 10px;
+	}
+	.lay_top_1 img{
+		height: 110px;
+		width: 170px;
+	}
+	.lay_top_2 img{
+		height:100px;
+		width:178px;
+	}
+	.lay_top_2 .tr_classify{
+		padding: 10px;
+	}
+	.lay_top_2 .t_play_time {
+		background: url(../images/wm3.png) 0 -416px no-repeat;
+	}
 	.part{
 		margin:10px 15px;
+	}
+	.show_enter{
+		position: relative;		
+	}
+	.lay_top_2 .show_share iframe{
+		margin-top: 22px;
+	}
+	.show_share iframe{
+		display:block;
+		margin: 12px 0;
+		height: 32px;
+		opacity: 0.5;
+		transition: opacity .6s ease-in-out;
+		-webkit-transition: opacity .6s ease-in-out;
+	}
+	.show_share iframe:hover{
+		opacity: 1;
+	}
+	/*.show_share{
+		opacity: 0.5;
+		filter: alpha(opacity=50);
+		transition: opacity .6s ease-in-out;
+		-webkit-transition: opacity .6s ease-in-out;
+	}
+	.show_share:hover{
+		opacity: 1;
+	}*/
+	.expand_more{
+		float: right;
+		line-height: 24px;
+		color:#21ace3;
+	}
+	.function_more{
+		padding: 6px 0;
+		margin-top: 25px;
+		border-top: 1px solid #e5e5e5;
+		border-bottom: 1px solid #e5e5e5;
+	}
+	.lay_top_2 .lay_tr{
+		width: 240px;
+	}
+	.lay_pic_share{
+		float:left;
+		margin-right: 10px;
+		height:165px;
+	}
+	.lay_top_2 .lay_pic_share{
+		height:154px;
+	}
+	.lay_tr{
+		float: left;
+		width: 260px;
+	}
+	.summary{
+		height:65px;
+	}
+	.v_enter {
+		width: 70px;
+		height: 70px;
+		background: url(../images/wm3.png) no-repeat 0 -490px;
+		position: absolute;
+		left: 53px;
+		top: 15px;
+		z-index: 8;
+	}
+	.plan_article_tl{
+		padding: 0;
 	}
 	.classify{
 		float: left;
