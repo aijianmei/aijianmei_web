@@ -11,7 +11,8 @@ img{
 	outline:0;
 }
 body{
-	font:14px Tahoma Arial,sans-serif,Helvetica;
+	font-family: Microsoft YaHei,"微软雅黑",Lucida,Verdana,Hiragino Sans GB,STHeiti,WenQuanYi Micro Hei,SimSun,sans-serif;
+	font-size:14px;
 	color:#656565;
 	background:url(../images/b_g.jpg) repeat;
 }
