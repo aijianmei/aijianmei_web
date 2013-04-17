@@ -149,7 +149,6 @@
                                                         <div class="target clearfix">
                                                             <div class="target_pic">
                                                                 <img src="{$c['userInfo']['face']}" alt="no" />
-                                                                <span class="care">关注</span>
                                                             </div>
                                                             <div class="target_ct">
                                                                 <a class="name">{$c['userInfo']['uname']}</a>
@@ -277,7 +276,7 @@
             data: "act=addVideoCommont&data=ford&pid="+pid+"&uid="+$("#commentUid").val()+"&content="+cid+"&ptype=1",
             success: function(data){
             alert("添加评论成功！");
-             var innerHtml='<li class="cm_bottom"><div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">关注</span><div class="target_ct"><a class="name">'+data.username+'</a><p>'+data.content+'</p><p class="bottom_ms"><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div></li>';
+             var innerHtml='<li class="cm_bottom"><div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><div class="target_ct"><a class="name">'+data.username+'</a><p>'+data.content+'</p><p class="bottom_ms"><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div></li>';
             $("#commentbox").val('');          
             $("#ppbox_"+pid).prepend(innerHtml);
             $("#appbox_"+pid).html('');

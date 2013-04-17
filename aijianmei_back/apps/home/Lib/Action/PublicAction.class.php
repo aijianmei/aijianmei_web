@@ -346,7 +346,7 @@ class PublicAction extends Action{
             // 登录商城
             //service('Shop')->login($_SESSION['mid']);
             $this->assign('jumpUrl',$refer_url);
-            $this->assign('waitSecond',5);
+            $this->assign('waitSecond',3);
             $this->success($username.L('login_success').$result['login']);
         }else {
             $this->error($lastError);

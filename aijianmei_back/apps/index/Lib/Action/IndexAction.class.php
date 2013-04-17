@@ -264,10 +264,9 @@ function show_banner($type){
                  "'.$other['domain'].'", "'.$other['followersCount'].'", "'.$other['statusesCount'].'", "'.$other['personID'].'")';
                 //mysql_query($other_sql);
                 M('')->query($other_sql);
-
+				
                 //M('others')->add($other);	
             }
-
         }
         if($_POST['email']!=''&&$_POST['emailact']=='upemail'){
             $umailsql="update ai_others set email='".trim($_POST['email'])."' where uid='".addslashes($_POST['emailuid'])."'";
