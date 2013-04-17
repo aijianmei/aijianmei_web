@@ -431,9 +431,9 @@ function show_banner($type){
         $tree_name=$result['name'];
         $result=mysql_query("select name from ai_article_category where id=".$tree_parent);
         $tree_parentName=mysql_fetch_array($result);
-        $this->assign("first",$tree_channel);
-        $this->assign("second",$tree_parentName['name']);
-        $this->assign("third",$tree_name);
+        $this->assign("first",trim($tree_channel));
+        $this->assign("second",trim($tree_parentName['name']));
+        $this->assign("third",trim($tree_name));
         $this->assign("tree_parent",$tree_parent);
         $this->assign("tree_channel_en",$tree_channel_en);
         $this->assign('headertitle', $article['title']);
@@ -615,9 +615,10 @@ function show_banner($type){
         foreach ($videos as $k=>$v) {
             if (!empty($v['link'])) {
                 $videos[$k]['img'] = D('Article')->getVideoImgById($v['id']);
+				$data = json_decode($this->getVideoData($v['link']));
+				$videos[$k]['logo'] = $data->data[0]->logo;
             }
         }
-        
         $commentsCount = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->count();
         $pager = api('Pager');
         $pager->setCounts($commentsCount);
@@ -626,7 +627,6 @@ function show_banner($type){
         $from = ($pager->pg-1) * $pager->countlist;
         $pagerArray = (array)$pager;
         $this->assign('pager', $pagerArray);
-        
         $comments = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->limit("$from,$pager->countlist")->findAll();
         foreach($comments as $k=>$c) {
             $comments[$k] = $c;
@@ -635,7 +635,6 @@ function show_banner($type){
         //print_r($daily);
         $this->assign('commentsCount', $commentsCount);
         $this->assign('daily', $daily);
-
         $this->assign('videos', $videos);
         $this->assign('comments', $comments);
         $this->assign('cssFile', 'article');

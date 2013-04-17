@@ -2,6 +2,8 @@
     <html xmlns:wb=“http://open.weibo.com/wb”>
         <head>
             <meta charset="utf-8"/>
+			<meta name="baidu_union_verify" content="c43c00cab8564dcf9a25e3a5c666410b">
+			<meta property="qc:admins" content="142030514561121165516375" />
             <title><?php if(!empty($headertitle)){echo $headertitle;}else{echo '爱健美';}?></title>
             <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21432667"></script>
             <link rel="stylesheet" href="../Public/css/public.css" />
@@ -25,6 +27,14 @@
 			<meta content="http://www.aijianmei.com/public/images/article/{$article['img']}" property="og:image"/>
 			<meta name="weibo:webpage:create_at" content="{$article['create_time']}" />
 			<meta name="weibo:webpage:update_at" content="" />
+			<php>}</php>
+			<php>if($metatype==1){</php>
+			<meta property="og:type" content="video" />
+			<meta property="og:url" content="{$videos[0]['link']}" />
+			<meta property="og:title" content="{$daily['title']}" />
+			<meta property="og:description" content="爱健美视频|{$daily['title']}" />
+			<meta property="og:image" content="{$videos[0]['logo']}" />
+			<meta name="weibo:webpage:create_at" content="{$daily['create_time']}" />  
 			<php>}</php>
 			{:Addons::hook('public_head',array('uid'=>$uid))}
 		</head>
@@ -62,18 +72,6 @@
                     <div class="other_account clearfix">
                         <h4 class="tit">使用合作网站账号登录</h4>
                         <div class="accounts">
-                                <script type="text/javascript">
-            var childWindow;
-            function toQzoneLogin()
-            {
-                childWindow = window.open("index.php","TencentLogin","width=450,height=320,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1");
-            } 
-            
-            function closeChildWindow()
-            {
-                childWindow.close();
-            }
-        </script>
                         <!--<script src="//mat1.gtimg.com/app/openjs/openjs.js"></script>
                         <script defer="defer">
 
