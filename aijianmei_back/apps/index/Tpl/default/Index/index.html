@@ -93,18 +93,18 @@
                             <?php foreach($hotArticles as $key => $value) {  ?>
                                 <li class="tr_classify">
                                     <div class="lay_pic_share">
-                                        <a href="{:U('index/Index/articleDetail', array('id'=>$value['id']))}" class="show_enter">
+                                        <a href="index-Index-articleDetail-{$value['id']}.html" class="show_enter">
                                             <span class="enter_icon"></span>
                                             <img src="../public/images/article/<?php echo $value['img'];?>" alt="<?php echo $value['title'];?>" title="<?php echo $value['title'];?>">
                                         </a>
                                         <div class="show_share">
-										<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="{:U('index/Index/articleDetail', array('id'=>$value['id']))}" pic="http://www.aijianmei.com/public/images/article/<?php echo $value['img'];?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+										<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-{$value['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php echo $value['img'];?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 										</div>
                                     </div>
                                     <div class="lay_tr">
-                                        <a href="{:U('index/Index/articleDetail', array('id'=>$value['id']))}" class="plan_article_tl"><?php echo $value['title'];?></a>
+                                        <a href="index-Index-articleDetail-{$value['id']}.html" class="plan_article_tl"><?php echo $value['title'];?></a>
                                         <p class="summary" alt="<?php echo $value['brief'];?>" title="<?php echo $value['brief'];?>"><?php echo msubstr($value['brief'],0,78) ?></p>
-                                        <a class="expand_more" href="{:U('index/Index/articleDetail', array('id'=>$value['id']))}">点击阅读》</a>
+                                        <a class="expand_more" href="index-Index-articleDetail-{$value['id']}.html">点击阅读》</a>
                                         <div class="function_more clearfix">
                                             <span class="t_play_time">点击:<span></span><?php echo $value['reader_count']?></span>
                                             <span class="comment_time">评论:<span><?php echo $value['CommNumber'];?></span></span>
