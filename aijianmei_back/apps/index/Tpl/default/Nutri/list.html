@@ -115,7 +115,7 @@ margin-right: 50px;
                                                                 <php>foreach($articles as $a) {</php>
                                                                         <div class="ar_block">
                                                                                 <img class="block_img" src="{$SITE_URL}/public/images/article/{$a['img']}"/>
-                                                                                <h2><a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}">{$a['title']}</a></h2>
+                                                                                <h2><a href="/index-Index-articleDetail-{$a['id']}.html">{$a['title']}</a></h2>
                                                                                 <span>作者：{$a['author']}</span><span>日期：<php>echo date('Y-m-d',$a['create_time'])</php></span><span >点击：{$a['reader_count']} 讨论数：{$a['cnums']}</span>
                                                                                 <p>{$a['brief']}...</p>
                                                                         </div>
