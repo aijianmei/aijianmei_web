@@ -884,7 +884,7 @@ button{
 		right: 0px;
 		top: 0px;
 		bottom: 0px;
-		z-index: 1020;
+		z-index: 1010;
 		opacity: 0;
 		filter: alpha(opacity=0);
 		background: #000;
