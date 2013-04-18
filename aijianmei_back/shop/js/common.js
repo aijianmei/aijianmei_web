@@ -29,7 +29,7 @@ function addToCart(goodsId, parentId)
   goods.goods_id = goodsId;
   goods.number   = number;
   goods.parent   = (typeof(parentId) == "undefined") ? 0 : parseInt(parentId);
-
+console.log('asdfas')
   Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), addToCartResponse, 'POST', 'JSON');
 }
 
@@ -956,7 +956,6 @@ function submit_div(goods_id, parentId)
   goods.goods_id = goods_id;
   goods.number   = number;
   goods.parent   = (typeof(parentId) == "undefined") ? 0 : parseInt(parentId);
-
   Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), addToCartResponse, 'POST', 'JSON');
 
   document.body.removeChild(docEle('speDiv'));

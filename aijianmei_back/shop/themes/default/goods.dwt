@@ -39,7 +39,6 @@ function reg(str){
 </script>
 </head>
 <body>
-  <div class="wrapper">
 <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
 <!--当前位置 start-->
 <div class="block box">
@@ -394,7 +393,7 @@ function reg(str){
       <a href="javascript:addToCart({$goods.goods_id})"><img src="images/bnt_cat.gif" /></a>
       <a href="javascript:collect({$goods.goods_id})"><img src="images/bnt_colles.gif" /></a>
       <!-- {if $affiliate.on} -->
-      <a href="user.php?act=affiliate&goodsid={$goods.goods_id}"><img src='images/bnt_recommend.gif'></a>
+      <!-- <a href="user.php?act=affiliate&goodsid={$goods.goods_id}"><img src='images/bnt_recommend.gif'></a> -->
       <!-- {/if} -->
       </li>
       </ul>

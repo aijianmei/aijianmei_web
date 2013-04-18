@@ -1,4 +1,4 @@
-<?php exit;?>a:3:{s:8:"template";a:19:{i:0;s:66:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/index.dwt";i:1;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/page_header.lbi";i:2;s:73:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/cart.lbi";i:3;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/category_tree.lbi";i:4;s:74:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/top10.lbi";i:5;s:83:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/promotion_info.lbi";i:6;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/order_query.lbi";i:7;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/invoice_query.lbi";i:8;s:78:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/vote_list.lbi";i:9;s:79:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/email_list.lbi";i:10;s:77:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/index_ad.lbi";i:11;s:81:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/new_articles.lbi";i:12;s:88:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_promotion.lbi";i:13;s:83:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_best.lbi";i:14;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_new.lbi";i:15;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_hot.lbi";i:16;s:76:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/auction.lbi";i:17;s:78:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/group_buy.lbi";i:18;s:73:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/help.lbi";}s:7:"expires";i:1366292288;s:8:"maketime";i:1366288688;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php exit;?>a:3:{s:8:"template";a:19:{i:0;s:66:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/index.dwt";i:1;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/page_header.lbi";i:2;s:73:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/cart.lbi";i:3;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/category_tree.lbi";i:4;s:74:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/top10.lbi";i:5;s:83:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/promotion_info.lbi";i:6;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/order_query.lbi";i:7;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/invoice_query.lbi";i:8;s:78:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/vote_list.lbi";i:9;s:79:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/email_list.lbi";i:10;s:77:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/index_ad.lbi";i:11;s:81:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/new_articles.lbi";i:12;s:88:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_promotion.lbi";i:13;s:83:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_best.lbi";i:14;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_new.lbi";i:15;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_hot.lbi";i:16;s:76:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/auction.lbi";i:17;s:78:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/group_buy.lbi";i:18;s:73:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/help.lbi";}s:7:"expires";i:1366300627;s:8:"maketime";i:1366297027;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta name="Generator" content="ECSHOP v2.7.3" />
@@ -11,8 +11,10 @@
 <link href="themes/default/style.css" rel="stylesheet" type="text/css" />
 <link rel="alternate" type="application/rss+xml" title="RSS|ECSHOP演示站 - Powered by ECShop" href="feed.php" />
 <script type="text/javascript" src="js/common.js"></script><script type="text/javascript" src="js/index.js"></script></head>
+<script type="text/javascript" src="themes/default/js/transport.js"></script>
+<script type="text/javascript" src="themes/default/js/utils.js"></script>
 <body>
-            <div class="body"></div>
+<div class="body"></div>
               <div class="sheet">
                 <div class="log">
                     <button class="close_btn"></button>
@@ -98,9 +100,6 @@
                 </div>
             </div>
   <div class="wrapper">
-<script type="text/javascript">
-var process_request = "正在处理您的请求...";
-</script>
 <div class="block clearfix">
 	<div id="banner">
 			<div class="lay_banner">
@@ -162,7 +161,7 @@ var process_request = "正在处理您的请求...";
 			<a class="ps_right"></a>
 			</div>
 		</div>	
-        <script type="text/javascript" src="../apps/index/Tpl/default/Public/js/jquery.js"></script>
+        <script type="text/javascript" src="http://dev.aijianmei.com/apps/index/Tpl/default/Public/js/jquery.js"></script>
         <script type="text/javascript" src="../apps/index/Tpl/default/Public/js/public.js"></script>
 </div>
 <div class="clearfix" style="width:940px;margin-top:20px;">
