@@ -30,7 +30,7 @@
            </font>
         </div>
   <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
-  <div class="more"><a href="search.php?intro=best"><img src="themes/default/images/more.gif" /></a></div>
+  <div class="more"><a href="search.php?intro=best">更多</a></div>
   <?php if ($this->_var['cat_rec_sign'] != 1): ?>
   </div>
 </div>

@@ -14,23 +14,23 @@
   </div>
   <div id="show_new_area" class="clearfix goodsBox">
   <?php endif; ?>
-  <?php $_from = $this->_var['new_goods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods');if (count($_from)):
-    foreach ($_from AS $this->_var['goods']):
+  <?php $_from = $this->_var['new_goods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_79601000_1366279937');if (count($_from)):
+    foreach ($_from AS $this->_var['goods_0_79601000_1366279937']):
 ?>
   <div class="goodsItem">
          <span class="news"></span>
-           <a href="<?php echo $this->_var['goods']['url']; ?>"><img src="<?php echo $this->_var['goods']['thumb']; ?>" alt="<?php echo htmlspecialchars($this->_var['goods']['name']); ?>" class="goodsimg" /></a><br />
-           <p><a href="<?php echo $this->_var['goods']['url']; ?>" title="<?php echo htmlspecialchars($this->_var['goods']['name']); ?>"><?php echo $this->_var['goods']['short_style_name']; ?></a></p>
+           <a href="<?php echo $this->_var['goods_0_79601000_1366279937']['url']; ?>"><img src="<?php echo $this->_var['goods_0_79601000_1366279937']['thumb']; ?>" alt="<?php echo htmlspecialchars($this->_var['goods_0_79601000_1366279937']['name']); ?>" class="goodsimg" /></a><br />
+           <p><a href="<?php echo $this->_var['goods_0_79601000_1366279937']['url']; ?>" title="<?php echo htmlspecialchars($this->_var['goods_0_79601000_1366279937']['name']); ?>"><?php echo $this->_var['goods_0_79601000_1366279937']['short_style_name']; ?></a></p>
            <font class="f1">
-           <?php if ($this->_var['goods']['promote_price'] != ""): ?>
-          <?php echo $this->_var['goods']['promote_price']; ?>
+           <?php if ($this->_var['goods_0_79601000_1366279937']['promote_price'] != ""): ?>
+          <?php echo $this->_var['goods_0_79601000_1366279937']['promote_price']; ?>
           <?php else: ?>
-          <?php echo $this->_var['goods']['shop_price']; ?>
+          <?php echo $this->_var['goods_0_79601000_1366279937']['shop_price']; ?>
           <?php endif; ?>
            </font>
         </div>
   <?php endforeach; endif; unset($_from); ?><?php $this->pop_vars();; ?>
-  <div class="more"><a href="search.php?intro=new"><img src="themes/default/images/more.gif" /></a></div>
+  <div class="more"><a href="search.php?intro=new"><!--<img src="themes/default/images/more.gif" />-->更多</a></div>
   <?php if ($this->_var['cat_rec_sign'] != 1): ?>
   </div>
 </div>

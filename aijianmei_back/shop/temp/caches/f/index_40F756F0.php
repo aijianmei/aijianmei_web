@@ -1,4 +1,4 @@
-<?php exit;?>a:3:{s:8:"template";a:20:{i:0;s:66:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/index.dwt";i:1;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/page_header.lbi";i:2;s:73:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/cart.lbi";i:3;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/category_tree.lbi";i:4;s:74:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/top10.lbi";i:5;s:83:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/promotion_info.lbi";i:6;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/order_query.lbi";i:7;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/invoice_query.lbi";i:8;s:78:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/vote_list.lbi";i:9;s:79:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/email_list.lbi";i:10;s:77:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/index_ad.lbi";i:11;s:81:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/new_articles.lbi";i:12;s:88:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_promotion.lbi";i:13;s:83:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_best.lbi";i:14;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_new.lbi";i:15;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_hot.lbi";i:16;s:76:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/auction.lbi";i:17;s:78:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/group_buy.lbi";i:18;s:73:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/help.lbi";i:19;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/page_footer.lbi";}s:7:"expires";i:1365829645;s:8:"maketime";i:1365826045;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php exit;?>a:3:{s:8:"template";a:19:{i:0;s:66:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/index.dwt";i:1;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/page_header.lbi";i:2;s:73:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/cart.lbi";i:3;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/category_tree.lbi";i:4;s:74:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/top10.lbi";i:5;s:83:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/promotion_info.lbi";i:6;s:80:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/order_query.lbi";i:7;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/invoice_query.lbi";i:8;s:78:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/vote_list.lbi";i:9;s:79:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/email_list.lbi";i:10;s:77:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/index_ad.lbi";i:11;s:81:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/new_articles.lbi";i:12;s:88:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_promotion.lbi";i:13;s:83:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_best.lbi";i:14;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_new.lbi";i:15;s:82:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/recommend_hot.lbi";i:16;s:76:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/auction.lbi";i:17;s:78:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/group_buy.lbi";i:18;s:73:"D:/core/aijianmei_web/aijianmei_back/shop/themes/default/library/help.lbi";}s:7:"expires";i:1366292288;s:8:"maketime";i:1366288688;}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta name="Generator" content="ECSHOP v2.7.3" />
@@ -12,27 +12,95 @@
 <link rel="alternate" type="application/rss+xml" title="RSS|ECSHOP演示站 - Powered by ECShop" href="feed.php" />
 <script type="text/javascript" src="js/common.js"></script><script type="text/javascript" src="js/index.js"></script></head>
 <body>
+            <div class="body"></div>
+              <div class="sheet">
+                <div class="log">
+                    <button class="close_btn"></button>
+                    <h3>登录爱健美</h3>
+                    <div class="ai_account">
+                        <form action="/index.php?app=home&mod=Public&act=doLogin" method="post">
+                            <h4 class="tit">使用注册邮箱登录</h4>
+                            <div class="text_input">
+                                <label for="mail">爱健美注册邮箱</label>
+                                <input type="text" id="mail" name="email" />
+                                <span class="tip">请输入正确的邮箱地址</span>
+                            </div>
+                            <div class="text_input">
+                                <label for="psd">密码</label>
+                                <input type="password" id="psd" name="password" />
+                                <span class="tip">密码长度为6~16个的数字或者字母</span>
+                            </div>
+                            <div class="checkCode">
+                            </div>
+                            <button type="submit" class="submit_btn">登录</button>
+                        </form>
+                    </div>
+                    <div class="other_account clearfix">
+                        <h4 class="tit">使用合作网站账号登录</h4>
+                        <div class="accounts">
+                    <a class="copsina" style="width:128px;height:32px;" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a>
+                    <a class="copqq" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100328471 &redirect_uri=www.aijianmei.com/qqlogin.php&scope=" style="width:128px;height:32px;"></a>
+                         <script type='text/javascript' charset='utf-8'>
+                            (function() {
+                                var _dl_time = new Date().getTime();
+                                var _dl_login = document.getElementById('denglu_login_js');
+                                _dl_login.id = _dl_login.id + '_' + _dl_time;
+                                _dl_login.src = 'http://open.denglu.cc/connect/logincode?appid=44031dena3J8cuBsQeX40lcpjSsPM3&v=1.0.2&widget=1&styletype=1&size=452_132&asyn=true&time=' + _dl_time;
+                            })();
+                        </script>
+                        </div>
+                        <span class="clearfix">未注册过爱健美也可以直接登录哦</span>
+                        <a class="cop5" href="{:U('index/Index/selectRegister')}">爱健美注册</a>
+                        
+                    </div>
+                </div>  
+            </div>
+            <div class="head">
+                <div class="most_top">
+                                <ul class="top_ms clearfix">
+                                    <li><a href="javascript:;" class="login">登录 </a>|</li>
+                                    <li><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a></li>
+                                </ul>
+                    <ul class="after_ms">
+                        <li class="person_massage">
+                            <div>
+                                <img src="<php>echo getUserFace(getMid(),'s')</php>" alt="no" />
+                                <span>kon</span>
+                            </div>
+                        </li>
+                        <li class="more"><a href="">帐号<span class="triangle"></span> </a>
+                            <ul class="account">
+                                <li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
+                                <li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
+                            </ul>
+                        </li>
+                        <li class="special_buy">
+                            <a class="car_buy">购物车</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="header">
+                    <div class="h_bg">
+                        <a href="/index.php?app=index"><div class="logo_1">logo</div></a>
+                        <ul class="nav">
+                            <li class="nav_current"><i class="ag_current"></i><a href="/index.php?app=index"><span class="home">首页</span></a></li>
+                            <li><i class="ag_current"></i><a href='#'><span class="store">商店</span></a></li>
+                            <li><i class="ag_current"></i><a href="/index.php?app=index&mod=Plan">健身计划</a></li>
+                            <li><i class="ag_current"></i><a href="/index.php?app=index&mod=Train">锻炼</a>
+                            </li>
+                            <li><i class="ag_current"></i><a href="/index.php?app=index&mod=Nutri">营养</a>
+                            </li>
+                            <li><i class="ag_current"></i><a href="/index.php?app=index&mod=Append">辅助品</a></li>
+                            <li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
+                            <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
   <div class="wrapper">
 <script type="text/javascript">
 var process_request = "正在处理您的请求...";
 </script>
-<div class="block clearfix">
- <div class="f_l"><a href="index.php" name="top"><img src="themes/default/images/logo.png" /></a></div>
- <div class="f_r log">
-   <ul>
-   <li class="userInfo">
-   <script type="text/javascript" src="js/transport.js"></script><script type="text/javascript" src="js/utils.js"></script>   <font id="ECS_MEMBERZONE">554fcae493e564ee0dc75bdf2ebf94camember_info|a:1:{s:4:"name";s:11:"member_info";}554fcae493e564ee0dc75bdf2ebf94ca </font>
-   </li>
-      </ul>
- </div>
-</div>
-<div  class="blank"></div>
-<div class="WrapNav clearfix">
-<div id="mainNav" class="nav clearfix">
-  <a class="home" href="/index.php?app=index"><span>首页</span></a>
-  <a href="index.php" class="store cur">商店<span></span></a>
-  </div>
-</div>
 <div class="block clearfix">
 	<div id="banner">
 			<div class="lay_banner">
@@ -43,7 +111,6 @@ var process_request = "正在处理您的请求...";
 						<div class="massage" style="display:inline-block;">
 							<h1 class="title">此张大图名称</h1>
 							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="themes/default/images/4.png" alt="no" class="png" />
 						</div>
 					</a>
 				</li>
@@ -53,7 +120,6 @@ var process_request = "正在处理您的请求...";
 						<div class="massage" style="display:inline-block;">
 							<h1 class="title">此张大图名称</h1>
 							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="themes/default/images/4.png" alt="no" class="png" />
 						</div>
 					</a>
 				</li>
@@ -63,7 +129,6 @@ var process_request = "正在处理您的请求...";
 						<div class="massage" style="display:inline-block;">
 							<h1 class="title">此张大图名称</h1>
 							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="themes/default/images/4.png" alt="no" class="png" />
 						</div>
 					</a>
 				</li>
@@ -73,7 +138,6 @@ var process_request = "正在处理您的请求...";
 						<div class="massage" style="display:inline-block;">
 							<h1 class="title">此张大图名称</h1>
 							<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-							<img src="themes/default/images/4.png" alt="no" class="png" />
 						</div>
 					</a>
 				</li>
@@ -98,8 +162,8 @@ var process_request = "正在处理您的请求...";
 			<a class="ps_right"></a>
 			</div>
 		</div>	
-        <script type="text/javascript" src="http://dev.aijianmei.com/apps/index/Tpl/default/Public/js/jquery.js"></script>
-        <script type="text/javascript" src="http://dev.aijianmei.com/apps/index/Tpl/default/Public/js/public.js"></script>
+        <script type="text/javascript" src="../apps/index/Tpl/default/Public/js/jquery.js"></script>
+        <script type="text/javascript" src="../apps/index/Tpl/default/Public/js/public.js"></script>
 </div>
 <div class="clearfix" style="width:940px;margin-top:20px;">
 <div id="search"  class="clearfix">
@@ -126,7 +190,7 @@ var process_request = "正在处理您的请求...";
   <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="f_r"  style="_position:relative; top:5px;">
    <select name="category" id="category" class="B_input">
       <option value="0">所有分类</option>
-      <option value="1" >ces</option><option value="2" >&nbsp;&nbsp;&nbsp;&nbsp;asdfasdfasdgsadg</option>    </select>
+      <option value="1" >a</option>    </select>
    <input name="keywords" type="text" id="keyword" value="" class="B_input" style="width:110px;"/>
    <input name="imageField" type="submit" value="" class="go" style="cursor:pointer;" />
    <a href="search.php?act=advanced_search">高级搜索</a>
@@ -148,9 +212,9 @@ var process_request = "正在处理您的请求...";
     <div class="blank5"></div>
     
   
-<div class="cart" id="ECS_CARTINFO">
+<!--<script type="text/javascript" src="js/transport.js"></script><div class="cart" id="ECS_CARTINFO">
  554fcae493e564ee0dc75bdf2ebf94cacart_info|a:1:{s:4:"name";s:9:"cart_info";}554fcae493e564ee0dc75bdf2ebf94ca</div>
-<div class="blank5"></div>
+<div class="blank5"></div>-->
 <div class="box">
  <div class="box_1">
   <div id="category_tree">
@@ -241,7 +305,6 @@ function check_email()
   
   <div class="AreaR">
    
-    <div class="box clearfix">
     
     
                                 <!-- <div class="box_1 clearfix">
@@ -263,8 +326,6 @@ function check_email()
                                    </div>-->
                                    <!--news end--
                                  </div>-->
-    </div>
-    <div class="blank5"></div>
    
    
   <!-- <div class="clearfix">
@@ -311,7 +372,7 @@ function check_email()
            <font class="f1">
                      ￥1003元                     </font>
         </div>
-    <div class="more"><a href="search.php?intro=best"><img src="themes/default/images/more.gif" /></a></div>
+    <div class="more"><a href="search.php?intro=best">更多</a></div>
     </div>
 </div>
 </div>
@@ -323,10 +384,10 @@ function check_email()
   <div id="show_new_area" class="clearfix goodsBox">
       <div class="goodsItem">
          <span class="news"></span>
-           <a href="goods.php?id=1"><img src="images/201304/thumb_img/1_thumb_G_1365745633445.jpg" alt="a" class="goodsimg" /></a><br />
-           <p><a href="goods.php?id=1" title="a">a</a></p>
+           <a href="goods.php?id=2"><img src="images/201304/thumb_img/2_thumb_G_1365745897434.jpg" alt="b" class="goodsimg" /></a><br />
+           <p><a href="goods.php?id=2" title="b">b</a></p>
            <font class="f1">
-                     ￥0元                     </font>
+                     ￥100元                     </font>
         </div>
     <div class="goodsItem">
          <span class="news"></span>
@@ -335,7 +396,14 @@ function check_email()
            <font class="f1">
                      ￥1003元                     </font>
         </div>
-    <div class="more"><a href="search.php?intro=new"><img src="themes/default/images/more.gif" /></a></div>
+    <div class="goodsItem">
+         <span class="news"></span>
+           <a href="goods.php?id=3"><img src="images/201304/thumb_img/3_thumb_G_1365745967901.jpg" alt="sdaf" class="goodsimg" /></a><br />
+           <p><a href="goods.php?id=3" title="sdaf">sdaf</a></p>
+           <font class="f1">
+                     ￥1003元                     </font>
+        </div>
+    <div class="more"><a href="search.php?intro=new"><!--<img src="themes/default/images/more.gif" />-->更多</a></div>
     </div>
 </div>
 </div>
@@ -347,10 +415,10 @@ function check_email()
   <div id="show_hot_area" class="clearfix goodsBox">
       <div class="goodsItem">
          <span class="hot"></span>
-           <a href="goods.php?id=1"><img src="images/201304/thumb_img/1_thumb_G_1365745633445.jpg" alt="a" class="goodsimg" /></a><br />
-           <p><a href="goods.php?id=1" title="a">a</a></p>
+           <a href="goods.php?id=2"><img src="images/201304/thumb_img/2_thumb_G_1365745897434.jpg" alt="b" class="goodsimg" /></a><br />
+           <p><a href="goods.php?id=2" title="b">b</a></p>
            <font class="f1">
-                     ￥0元                     </font>
+                     ￥100元                     </font>
         </div>
     <div class="goodsItem">
          <span class="hot"></span>
@@ -359,7 +427,14 @@ function check_email()
            <font class="f1">
                      ￥1003元                     </font>
         </div>
-    <div class="more"><a href="search.php?intro=hot"><img src="themes/default/images/more.gif" /></a></div>
+    <div class="goodsItem">
+         <span class="hot"></span>
+           <a href="goods.php?id=3"><img src="images/201304/thumb_img/3_thumb_G_1365745967901.jpg" alt="sdaf" class="goodsimg" /></a><br />
+           <p><a href="goods.php?id=3" title="sdaf">sdaf</a></p>
+           <font class="f1">
+                     ￥1003元                     </font>
+        </div>
+    <div class="more"><a href="search.php?intro=hot">更多</a></div>
     </div>
 </div>
 </div>
@@ -411,39 +486,68 @@ function check_email()
   </div>
 </div>
 <div class="blank"></div>
-<div id="bottomNav" class="box">
+<!-- <div id="bottomNav" class="box">
  <div class="box_1">
   <div class="links clearfix">
-        <a href="http://www.ecshop.com/" target="_blank" title="ECSHOP 网上商店管理系统"><img src="http://www.ecshop.com/images/logo/ecshop_logo.gif" alt="ECSHOP 网上商店管理系统" border="0" /></a>
-                [<a href="http://www.maifou.net/" target="_blank" title="买否网">买否网</a>]
-        [<a href="http://www.wdwd.com/" target="_blank" title="免费开独立网店">免费开独立网店</a>]
-          </div>
+       <!--  <a href="http://www.ecshop.com/" target="_blank" title="ECSHOP 网上商店管理系统"><img src="http://www.ecshop.com/images/logo/ecshop_logo.gif" alt="ECSHOP 网上商店管理系统" border="0" /></a> -->
+               <!--  [<a href="http://www.maifou.net/" target="_blank" title="买否网">买否网</a>] -->
+       <!--  [<a href="http://www.wdwd.com/" target="_blank" title="免费开独立网店">免费开独立网店</a>] -->
+          <!-- </div>
  </div>
-</div>
+</div> -->
+<!-- <div class="foot">
+        <div class="f_list">
+          <h4>发现爱健美</h4>
+          <ul id="app"> 
+            <li><a href="store.html">爱健美商店</a></li>
+            <li><a href="training.html">锻炼</a></li>
+            <li><a href="html">健身计划</a></li>
+            <li><a href="nutri.html">营养</a></li>
+            <li><a href="add.html">补充</a></li>
+            <li><a href="pal.html">交友互动</a></li>
+          </ul>
+        </div>
+        <div class="f_list">
+          <h4>获取帮助</h4>
+          <ul id="article">           
+            <li><a href="help.html">新手指南</a></li>
+            <li><a href="direct.html">社区指导原则</a></li>
+            <li><a href="feedback.html">意见反馈</a></li>
+          </ul>
+        </div>
+        <div class="f_list">
+          <h4>关于我们</h4>
+          <ul id="video">           
+            <li><a href="about_us.html">关于爱健美</a></li>
+            <li><a href="contact.html">联系我们</a></li>
+            <li><a href="join.html">加入爱健美</a></li>
+            <li><a href="ad.html">广告投放与品牌推广</a></li>
+            <li><a href="privacy.html">隐私政策</a></li>
+          </ul>
+        </div>
+        <div class="f_list">
+          <h4>更多</h4>
+          <ul id="teach">         
+            <li><a href="app.html">下载IOS客户端</a></li>
+            <li><a href="app.html">下载Android客户端</a></li>
+            <li><a href="#">友情链接</a></li>
+          </ul>
+        </div>
+        <div class="f_list login" >
+          <h4>关注我们</h4>
+          <ul id="about">
+            <li class="sina"><a href="http://weibo.com/aijianmei?topnav=1&wvr=5" target="_blank">新浪微博</a></li>
+            <li class="tencent"><a href="http://t.qq.com/aijianmeiweibo" target="_blank">腾讯微博</a></li>
+            <li class="netease"><a href="http://t.163.com/aijianmei" target="_blank">网易微博</a></li>
+            <li class="public"><a href="#" target="_blank">公共主页</a></li>
+            <li class="qZone"><a href="http://user.qzone.qq.com/2816973844/main#home" target="_blank">QQ空间</a></li>
+            <li class="douban"><a href="#" target="_blank">豆瓣</a></li>
+          </ul>   
+        </div>
+</div> -->
 <div class="blank"></div>
 <div id="lower_footer"><span>广州加伦信息科技有限公司- 粤ICP备12085654号</span><a href="/index.php?app=index">www.aijianmei.com</a></div>
-<div id="bottomNav" class="box">
- <div class="box_1">
-  <div class="bNavList clearfix">
-   <div class="f_l">
-      </div>
-   <div class="f_r">
-   <a href="#top"><img src="themes/default/images/bnt_top.gif" /></a> <a href="index.php"><img src="themes/default/images/bnt_home.gif" /></a>
-   </div>
-  </div>
- </div>
-</div>
-<div class="blank"></div>
-<div id="footer">
- <div class="text">
- &copy; 2005-2013 ECSHOP 版权所有，并保留所有权利。<br />
-                                                                                     <br />
-    554fcae493e564ee0dc75bdf2ebf94caquery_info|a:1:{s:4:"name";s:10:"query_info";}554fcae493e564ee0dc75bdf2ebf94ca<br />
-  <a href="http://www.ecshop.com" target="_blank" style=" font-family:Verdana; font-size:11px;">Powered&nbsp;by&nbsp;<strong><span style="color: #3366FF">ECShop</span>&nbsp;<span style="color: #FF9966">v2.7.3</span></strong></a>&nbsp;<a href="http://www.ecshop.com/license.php?product=ecshop_b2c&url=http%3A%2F%2Flocalhost%2Fshop%2F" target="_blank"
->&nbsp;&nbsp;Licensed</a><br />
-        <div align="left"  id="rss"><a href="feed.php"><img src="themes/default/images/xml_rss2.gif" alt="rss" /></a></div>
- </div>
-</div>
+<!-- #EndLibraryItem
 </div>
 </body>
 </html>
