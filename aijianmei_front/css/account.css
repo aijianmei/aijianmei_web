@@ -18,6 +18,11 @@ display: table; content: ""
 .clearfix:after {
 clear: both
 }
+.header_logo{
+	height: 79px;
+text-align: center;
+background: url(../images/dh_01.jpg) repeat-x;
+}
 #wrap{margin:0 auto;
 width:980px;
 font:12px/1.125 Arial,Helvetica,sans-serif;
@@ -43,7 +48,6 @@ color:#8C7E7E;
 			background: url(../images/wm1.png) 0px -280px no-repeat;
 		}
 /***********************content开始*************************/
-	#content{background: url(../images/border.png) no-repeat}
 		.content_tip{
 			margin-top: 0px;
 			padding-top: 25px;
@@ -83,12 +87,11 @@ color:#8C7E7E;
 			}
 		.local_account{clear:both;
 				text-align: center;
-				background: url(../images/border.png) repeat-x}
+}
 		.local_account .local_mas{
 				padding-top: 35px;
 				font-size: 20px;
 				font-weight: 700;
-				background: url(../images/border.png) repeat-x
 				}
 		.local_account .click_this{color: #D00;}
 /***********************footer开始*************************/

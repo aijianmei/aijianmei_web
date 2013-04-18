@@ -68,7 +68,7 @@
           $(".loginbutton").css("background","gray")
         }
         if($(".protect_box").attr("checked") != undefined){
-          $(".loginbutton").css("background","#D43638")
+          $(".loginbutton").css("background","#21ace3")
         }
       })
 		});
