@@ -256,7 +256,9 @@ class TrainAction extends Action {
         
         $video['create_time']=date("Y-m-d H:i:s",$video['create_time']);
         $otherVideo=D('Article')->getVideoCategory($table,$video['category_id'],2);
-        
+		$videoLogoData=null;
+        $videoLogoData=json_decode($this->getVideoData($video['link']));
+		$video['logo'] = $videoLogoData->data[0]->logo;
         foreach($otherVideo as $k=>$v){
             $data = json_decode($this->getVideoData($v['link']));
             $otherVideo[$k]['CommNumber']=D('Article')->getVideoCountRecommentsById($v['id']);
@@ -293,7 +295,6 @@ class TrainAction extends Action {
                 else{
                     $RecommentsList[$key]['img']="public/themes/newstyle/images/user_pic_middle.gif";
                 }
-                
             }
             $RecommentsList[$key]['create_time']=date("Y-m-d H:i:s",$RecommentsList[$key]['create_time']);
         }
@@ -305,6 +306,7 @@ class TrainAction extends Action {
         $this->assign('video', $video);
         $this->assign('cssFile', 'v');
 		$this->assign('_current', 'train');
+		$this->assign('_TrainVType','1');
         $this->display('video');
     }
     

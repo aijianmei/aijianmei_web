@@ -844,11 +844,11 @@ function show_banner($type){
     public function doRegister()
     {
         // 验证码
-        /* $verify_option = $this->_isVerifyOn('register');*/
-//         if ((md5(strtoupper($_POST['verify'])) != $_SESSION['verify'])){
-//             $this->error(L('error_security_code'));
-//             exit;
-//         } 
+        // /* $verify_option = $this->_isVerifyOn('register');*/
+        if ((md5(strtoupper($_POST['verifyStr'])) != $_SESSION['verify'])){
+            $this->error(L('error_security_code'));
+            exit;
+        } 
         
         // 参数合法性检查
         $required_field = array(
@@ -893,8 +893,8 @@ function show_banner($type){
         M('user_attr')->add($data);
         service('Passport')->loginLocal($uid);
         //service('Shop')->register($data['uname'], $data['email'], $data['password']);
-        
-        redirect(U('index/index/index'));
+        //redirect(U('index/Index/index'));
+        redirect(U('home/Account/index'));
     }
     
     public function doRegisterCoach()
