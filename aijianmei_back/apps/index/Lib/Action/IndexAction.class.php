@@ -394,9 +394,6 @@ function show_banner($type){
         
         
         $commentCounts = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->count();
-        $style['pre'] = 'prev';
-        $style['next'] = 'next';
-        $style['current'] = 'current_page';
         $pager = api('Pager');
         $pager->setCounts($commentCounts);
         $pager->setList($pagenums);
@@ -638,11 +635,19 @@ function show_banner($type){
         $from = ($pager->pg-1) * $pager->countlist;
         $pagerArray = (array)$pager;
         $this->assign('pager', $pagerArray);
-        $comments = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->limit("$from,$pager->countlist")->findAll();
+        $comments = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->order('`create_time` DESC')->limit("$from,$pager->countlist")->findAll();
         foreach($comments as $k=>$c) {
             $comments[$k] = $c;
             $comments[$k]['userInfo'] = getUserInfo($c['uid']);
         }
+		
+		$comments = $this->arr2tree($comments);
+		$comhtml=$this->tree2html($comments);
+		$this->assign('comhtml', $comhtml);
+		//print_r($comments);
+		//tree2html($tree);  
+		//print_r($tree); 
+		
         //print_r($daily);
         $this->assign('commentsCount', $commentsCount);
         $this->assign('daily', $daily);
@@ -1263,5 +1268,37 @@ function show_banner($type){
         $this->assign('cssFile','about_us');
         $this->display('foot');
     }
+	
+	function arr2tree($tree, $rootId = 0)
+	{
+		$return = array();  
+		foreach($tree as $leaf) {  
+			if($leaf['topParent'] == $rootId){
+				foreach($tree as $subleaf){
+					if($subleaf['topParent'] == $leaf['id']){
+						$leaf['children'] = $this->arr2tree($tree, $leaf['id']);
+						break;
+					}
+				}
+				$return[] = $leaf;
+			}
+		}
+		return $return;  
+	}
+	
+	function tree2html($tree) {
+	/*<div class="target_content">
+		<span class="staircase">1楼</span>
+			<a class="name">huifei</a>
+			<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
+</div>*/
+    foreach($tree as $leaf) {  
+        $htmlStr.='<div class="target_content"><a class="name">' .$leaf['userInfo']['uname']."</a>";  
+        if(!empty($leaf['children']))$htmlStr.=$this->tree2html($leaf['children']);  
+        $htmlStr.='<p>'.$leaf['content'].'</p>';  
+    }  
+    return  $htmlStr.='</div>';  
+}
+
 }
 ?>
