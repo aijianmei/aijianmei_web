@@ -14,18 +14,18 @@
   </div>
   <div id="show_new_area" class="clearfix goodsBox">
   <?php endif; ?>
-  <?php $_from = $this->_var['new_goods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_79601000_1366279937');if (count($_from)):
-    foreach ($_from AS $this->_var['goods_0_79601000_1366279937']):
+  <?php $_from = $this->_var['new_goods']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'goods_0_42899700_1366288915');if (count($_from)):
+    foreach ($_from AS $this->_var['goods_0_42899700_1366288915']):
 ?>
   <div class="goodsItem">
          <span class="news"></span>
-           <a href="<?php echo $this->_var['goods_0_79601000_1366279937']['url']; ?>"><img src="<?php echo $this->_var['goods_0_79601000_1366279937']['thumb']; ?>" alt="<?php echo htmlspecialchars($this->_var['goods_0_79601000_1366279937']['name']); ?>" class="goodsimg" /></a><br />
-           <p><a href="<?php echo $this->_var['goods_0_79601000_1366279937']['url']; ?>" title="<?php echo htmlspecialchars($this->_var['goods_0_79601000_1366279937']['name']); ?>"><?php echo $this->_var['goods_0_79601000_1366279937']['short_style_name']; ?></a></p>
+           <a href="<?php echo $this->_var['goods_0_42899700_1366288915']['url']; ?>"><img src="<?php echo $this->_var['goods_0_42899700_1366288915']['thumb']; ?>" alt="<?php echo htmlspecialchars($this->_var['goods_0_42899700_1366288915']['name']); ?>" class="goodsimg" /></a><br />
+           <p><a href="<?php echo $this->_var['goods_0_42899700_1366288915']['url']; ?>" title="<?php echo htmlspecialchars($this->_var['goods_0_42899700_1366288915']['name']); ?>"><?php echo $this->_var['goods_0_42899700_1366288915']['short_style_name']; ?></a></p>
            <font class="f1">
-           <?php if ($this->_var['goods_0_79601000_1366279937']['promote_price'] != ""): ?>
-          <?php echo $this->_var['goods_0_79601000_1366279937']['promote_price']; ?>
+           <?php if ($this->_var['goods_0_42899700_1366288915']['promote_price'] != ""): ?>
+          <?php echo $this->_var['goods_0_42899700_1366288915']['promote_price']; ?>
           <?php else: ?>
-          <?php echo $this->_var['goods_0_79601000_1366279937']['shop_price']; ?>
+          <?php echo $this->_var['goods_0_42899700_1366288915']['shop_price']; ?>
           <?php endif; ?>
            </font>
         </div>
