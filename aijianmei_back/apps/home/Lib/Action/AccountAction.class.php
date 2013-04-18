@@ -49,6 +49,12 @@ class AccountAction extends Action
 		{
 			$checkMailType=1;
 		}
+		if($_GET['esg']=='needemail'&&$checkMailType!=1){
+			$showMessage=1;
+			$esgNotice='尊敬的用户，为了方便联系请填写有效的联系方式';
+			$this->assign('showMessage',$showMessage);
+			$this->assign('esgNotice',$esgNotice);
+		}
 		$this->assign('checkMailType',$checkMailType);
         $this->assign( $data );
         $this->setTitle(L('setting').' - '.L('personal_profile'));
@@ -72,11 +78,9 @@ class AccountAction extends Action
             }
         }
 		if($_REQUEST['email']){
-			$checkMailsql="select email from ai_user where uid='".$this->mid."'";
-			$checkMailArr=M('')->query($checkMailsql);
-			$checkSameMailSql="select uid from ai_user where email='".trim($_REQUEST['email'])."'";
+			$checkSameMailSql="select uid from ai_user where email='".trim($_REQUEST['email'])."' and uid!='".$this->mid."'";
 			$checkSameMail=M('')->query($checkSameMailSql);
-			if(!$checkMailArr[0]['email']&&!$checkSameMail[0][uid])
+			if(empty($checkSameMail[0]['uid']))
 			{
 				$upSql="UPDATE ai_user SET email = '".$_REQUEST['email']."' WHERE uid ='".$this->mid."'";
 				M('')->query($upSql);

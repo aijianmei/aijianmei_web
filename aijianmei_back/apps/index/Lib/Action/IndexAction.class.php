@@ -218,7 +218,12 @@ function show_banner($type){
             $setMailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
             $setMail = M('')->query($setMailSql);
             if($logId) {
-                service('Passport')->loginLocal($logId[0]['uid']);	
+                service('Passport')->loginLocal($logId[0]['uid']);
+				$checkEmailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
+				$checkEmailArr=M('')->query($checkEmailSql);
+				if(empty($checkEmailArr[0]['email'])){
+					redirect(U('home/Account/index',array('esg'=>'needemail')));
+				}
             }else {
                 $data['email'] = '';
                 $data['password'] = '';
@@ -279,7 +284,13 @@ function show_banner($type){
             //print_r($_SERVER);
         }
         if(!empty($_GET['qquid'])&&$_GET['qqapi']=='login'){
-            service('Passport')->loginLocal($_GET['qquid']);	
+            service('Passport')->loginLocal($_GET['qquid']);
+			$_GET['qquid']=addslashes($_GET['qquid']);
+			$checkEmailSql="select email from ai_user where uid='".$_GET['qquid']."'";
+			$checkEmailArr=M('')->query($checkEmailSql);
+			if(empty($checkEmailArr[0]['email'])){
+				redirect(U('home/Account/index',array('esg'=>'needemail')));
+			}
         }
         $this->setTitle('index');
         $this->assign('uid',$this->mid);
