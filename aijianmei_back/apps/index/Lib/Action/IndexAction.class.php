@@ -142,6 +142,8 @@ function show_banner($type){
 
     public function index() 
     {
+	//print_r($_COOKIE['LOGGED_AIUSER']);
+	//print_r($_COOKIE);
         if (!empty($_GET['token'])) {
             require_once $_SERVER['DOCUMENT_ROOT'].'/Denglu.php';
             $api = new Denglu('44031dena3J8cuBsQeX40lcpjSsPM3', '85015440v4NfCVj6aTNfZAg0idQv03', 'utf-8');
