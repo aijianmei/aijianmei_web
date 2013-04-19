@@ -148,8 +148,7 @@
 			<a class="ps_right"></a>
 			</div>
 		</div>	<!--Banner End -->
-        <script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/jquery.js"></script>
-        <script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/public.js"></script>
+        <script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/ecpublic.js"></script>
 </div>
 <!--search start-->
 <div class="clearfix" style="width:940px;">
