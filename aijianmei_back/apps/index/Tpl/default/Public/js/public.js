@@ -108,6 +108,7 @@ $(function(){
         }
     });
     //顶部top部分，鼠标滑过显示更多内容    
+
     $(".more").mouseover(function(){
         $(this).children($("ul")).show();
         $(this).children($("a")).first().addClass("on");

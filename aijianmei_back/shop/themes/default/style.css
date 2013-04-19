@@ -644,9 +644,9 @@ border-top: none;
 background: url(images/uh_bg.gif) repeat-x left top;
 height: 36px;
 line-height: 36px;
-width: 788px;
+width: 938px;
 float: left;
-margin: 10px 0 0 150px;
+margin: 10px 0 0 ;
   }
   #ur_here a{color:#006cce; text-decoration:none;}
 
@@ -809,7 +809,10 @@ margin: 10px 0 0 150px;
    }
    .comments li img{position:absolute; right:0px; top:3px;}
    .comments li p{margin:3px auto; text-align:left;}
-   .commentsList{border:1px solid #ccc; background:#f7f7f7; padding:10px;}
+   .commentsList{border:1px solid #ccc; background:#f7f7f7; padding:10px;font-size: 12px;}
+   .commentsList img{
+    display: inline;
+   }
    .commentsList .inputBorder{border:1px solid #ccc; background:#fff;}
      .captcha{margin-left:0px; position:relative; top:-1px; *margin-left:8px; *position:relative; top:3px; cursor:pointer;}
     /* ====================
@@ -993,6 +996,7 @@ margin: 10px 0 0 150px;
 /*********** Banner ***********/		
 		#banner{
 			margin:0 auto;
+      padding: 20px 0;
 			width:860px;
 		}
 		
