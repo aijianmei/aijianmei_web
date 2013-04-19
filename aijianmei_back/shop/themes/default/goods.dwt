@@ -84,13 +84,13 @@ function reg(str){
 <div class="blank5"></div>
 
  <!-- #EndLibraryItem -->
-<!-- #BeginLibraryItem "/library/goods_related.lbi" -->
+<!-- #BeginLibraryItem " --><!-- /library/goods_related. --><!-- lbi --><!-- " -->
 
 <!-- {if $related_goods} -->
 <div class="box">
      <div class="box_1">
-      <h3><span>{$lang.releate_goods}</span></h3>
-      <div class="boxCenterList clearfix">
+      <!-- <h3><span>{$lang.releate_goods}</span></h3>
+      <div class="boxCenterList clearfix"> -->
       <!--{foreach from=$related_goods item=releated_goods_data}-->
         <ul class="clearfix">
           <li class="goodsimg"><a href="{$releated_goods_data.url}"><img src="{$releated_goods_data.goods_thumb}" alt="{$releated_goods_data.goods_name}" class="B_blue" /></a></li>
@@ -478,7 +478,7 @@ function reg(str){
      <div class="box">
      <div class="box_1">
       <h3><span class="text">{$lang.goods_tag}</span></h3>
-      <div class="boxCenterList clearfix ie6">
+      <div class="boxCenterList clearfix ie6">asdfasdf
        <form name="tagForm" action="javascript:;" onSubmit="return submitTag(this)" id="tagForm">
         <p id="ECS_TAGS" style="margin-bottom:5px;">
           <!-- 标记{foreach from=$tags item=tag}-->
@@ -614,7 +614,7 @@ function reg(str){
 </div>
 <!--{/if}-->
 <!--友情链接 end-->
-<div class="blank"></div>dsafadsgfasdgasdg
+<div class="blank"></div>
 <div id="lower_footer"><span>广州加伦信息科技有限公司- 粤ICP备12085654号</span><a href="/index.php?app=index">www.aijianmei.com</a></div>
 </div>
 </body>
