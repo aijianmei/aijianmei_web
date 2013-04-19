@@ -1,7 +1,8 @@
+
 {insert_scripts files='transport.js,utils.js'}
 <script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/jquery.js"></script>
 <script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/public.js"></script>
-<div class="body"></div>
+          <div class="body"></div>
               <div class="sheet">
                 <div class="log">
                     <button class="close_btn"></button>
@@ -175,8 +176,7 @@
     {/literal}
     </script>
     {if $searchkeywords}
-   {$lang.hot_search} ï¼?
-   {foreach from=$searchkeywords item=val}
+   {$lang.hot_search} ï¼?   {foreach from=$searchkeywords item=val}
    <a href="search.php?keywords={$val|escape:url}">{$val}</a>
    {/foreach}
    {/if}
