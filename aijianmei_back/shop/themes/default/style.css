@@ -555,6 +555,9 @@ visibility:hidden;
   /*模块容器*/
   .box{background:#f1f1f1; padding-bottom:2px; overflow:hidden;}
   .box_1{border:1px solid #ececec; background-color:#fff;}
+  .box_1 img{
+    display: inline;
+  }
   .box_2{border:1px solid #e0e0e0;
   }
   .boxCenterList{padding:8px;}
