@@ -45,7 +45,7 @@ img{
 body{
   font:14px Tahoma Arial,sans-serif,Helvetica;
   color:#656565;
-  background:url(../images/b_g.jpg) repeat;
+  background:url(images/b_g.jpg) repeat;
 }
 ul{
   list-style:none;
@@ -716,10 +716,10 @@ margin: 10px 0 0 150px;
      .brandsIe6{_width:250px;}/*在ie6下特价商品不存在的话品牌推荐永远靠右显示*/
    /*精品推荐，新品上市，热卖商品*/
    .centerPadd{ overflow:hidden;background:url(images/thbg.jpg) repeat-x;}
-   .itemTit{height:34px;  padding-left:190px; text-align:right;background:url(images/bg.gif) no-repeat 0px -192px;
+   .itemTit{height:34px;  padding-left:190px; text-align:right;background:url(images/bg.gif) no-repeat 0px -223px;
    /*margin-bottom:-3px; _margin-bottom:-2px;*/
    }
-   .itemTit.New{}
+   .itemTit.New{background:url(images/bg.gif) no-repeat 0px -192px;}
    .itemTit.Hot{background:url(images/bg.gif) no-repeat 0px -256px;}
    .itemTit img{position:relative; top:7px;}
    .itemTit h2{float:left; height:27px; background:url(images/itemH2Bg.gif) repeat-x left top; border:1px solid #d6ecff;
@@ -800,6 +800,7 @@ margin: 10px 0 0 150px;
    #goodsInfo .textInfo li dd.ddR{border-left:1px solid #eeecec; width:48%; padding-left:8px;}
      #goodsInfo .textInfo li dd.ddL{border-right:1px solid #eeecec;}
    #goodsInfo .textInfo a{color:#006bce; text-decoration:underline;}
+   #goodsInfo .textInfo img{display:inline-block;}
    #goodsInfo .textInfo .loop{background:#f7f7f7; margin-top:8px;}
    /*用户评论*/
    .ie6{padding-left:25px; _padding-left:15px; height:1%;}/*购买此商品的人还购买的商品*/
