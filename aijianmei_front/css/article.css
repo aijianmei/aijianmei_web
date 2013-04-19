@@ -248,6 +248,8 @@
 					background: #DAF3FF;
 
 				}
+
+				/*outside  2013/4/19*/
 				.cm_content{
 					margin:20px 0;
 				}
@@ -293,9 +295,6 @@
 							margin: 0;
 							border: 1px solid #CCC;
 						}
-				.cm_content .cm_bottom{
-
-				}
 					.cm_bottom .title_5{
 						margin: 16px 0;
 						padding: 8px;
@@ -401,6 +400,8 @@
 							background: #21aec3;
 							color: white;
 						}
+
+				/*outside end 20134/19*/
 		/*右边广告部分*/
 		.content_right{
 			float:right;
