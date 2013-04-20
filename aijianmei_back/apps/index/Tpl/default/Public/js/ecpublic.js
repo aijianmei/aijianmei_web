@@ -1,16 +1,17 @@
+
 jq(function(){
     var sWidth = jq("#banner").width(), //获取焦点图的宽度（显示面积）
-        len = jq("#banner .ul_1 li").length, //获取焦点图个数
+        len = jq("#banner .ul_1 li").length, //获取焦点图个�?
         index = 0,
         tab; 
 
-    //下一页切换
+    //下一页切�?
     jq(".ps_right").click(function(){
         index++;
         if(index == len) {index = 0;}
         move(index);
     })
-    //上一页切换
+    //上一页切�?
     jq(".ps_left").click(function(){
         index--;
         if(index == -1) {index = len - 1;}
@@ -45,7 +46,7 @@ jq(function(){
         jq("#banner .ul_2").css("width","860px")
     }
 
-    //透明效果  版图修改过这些地方
+    //透明效果  版图修改过这些地�?
     jq(".lay_banner").hover(
         function(){
             jq('.massage').css("opacity","0.8")
@@ -107,7 +108,7 @@ jq(function(){
             }
         }
     });
-    //顶部top部分，鼠标滑过显示更多内容    
+    //顶部top部分，鼠标滑过显示更多内�?   
     jq(".more").mouseover(function(){
         jq(this).children(jq("ul")).show();
         jq(this).children(jq("a")).first().addClass("on");
@@ -116,13 +117,14 @@ jq(function(){
             jq(".more>ul").hide();
         })      
     })
-    //导航栏样式
+    //导航栏样�?
     jq("#nav>li").click(function(){
         jq(this).addClass("now_position").siblings().removeClass("now_position");
     })
         
                     
 });
+
 //js from weimian..................
             //添加事件监听
             var addevent = function(element,type,handle){
@@ -143,6 +145,7 @@ jq(function(){
             //获取dom元素
             var getdom = function(){
                 this.jq = function(id){
+                this.$ = function(id){
                     return document.getElementById(id);
                 }
 
@@ -155,6 +158,7 @@ jq(function(){
                     var els = node.getElementsByTagName(tag);
                     var elsLen = els.length;
                     var pattern = new RegExp("(^|\\s)"+searchClass+"(\\s|jq)");
+                    var pattern = new RegExp("(^|\\s)"+searchClass+"(\\s|$)");
                     for (i = 0, j = 0; i < elsLen; i++) {
                             if ( pattern.test(els[i].className) ) {
                                     classElements[j] = els[i];
@@ -169,6 +173,7 @@ jq(function(){
                     }
                     else if (window.getComputedStyle){ //非IE
                         propprop = prop.replace (/([A-Z])/g, "-jq1");
+                        propprop = prop.replace (/([A-Z])/g, "-$1");
                         propprop = prop.toLowerCase ();
                         return document.defaultView.getComputedStyle(obj,null)[propprop];
                     }
@@ -210,7 +215,7 @@ jq(function(){
                     'borderwidth':obj.choiceborderwidth ? obj.choiceborderwidth : '3px'
                 }
 
-                //获取对象索引号
+                //获取对象索引�?
                 var getindex = function(obj){
                     for(var i = 0;i < classname.length;i++){
                         switch(obj){
@@ -221,7 +226,7 @@ jq(function(){
                     }
                 }
                 var getborder = function(num){
-                    for(var i = 0;i <　classname.length;i++){
+                    for(var i = 0;i <�?lassname.length;i++){
                         if(i == num){
                             classname[num].style.borderColor = defaule.color;
                             classname[num].style.borderWidth = defaule.borderwidth;
@@ -231,7 +236,7 @@ jq(function(){
                         
                 }
                 var clearborder = function(num){
-                    for(var i = 0;i <　classname.length;i++){
+                    for(var i = 0;i <�?lassname.length;i++){
                         if(i == num){
                             classname[num].style.borderColor = '';
                             classname[num].style.borderWidth = '';
@@ -240,7 +245,7 @@ jq(function(){
                         
                 }
 
-                for(var i = 0;i <　classname.length;i++){
+                for(var i = 0;i <�?lassname.length;i++){
                     classname[i].onmouseover = function(){
                         var index = getindex(this);
                             getborder(index)
@@ -252,7 +257,7 @@ jq(function(){
                 }
                     
             }
-            //改变obj的背景原色
+            //改变obj的背景原�?
             var changecolor = function(obj,color,childcolor){
                     var newgetdom = new getdom,
                         target = newgetdom.getElementsByClass(obj);
@@ -278,7 +283,7 @@ jq(function(){
                         }
                             
             }
-            //为需要添加提示内容的函数，选用需要添加的对象obj;
+            //为需要添加提示内容的函数，�?用需要添加的对象obj;
             var addtitle = function(obj){
                 var newdom = new getdom,
                     Obj = newdom.getElementsByClass(obj)[0],
@@ -305,7 +310,7 @@ jq(function(){
                             }
                         }
                         handlewidth();
-                        //获取data-original-title的内容
+                        //获取data-original-title的内�?
                         var datatitle = function(){
                             var div = document.createElement('div');
                                 textnode = document.createTextNode(text);
@@ -313,7 +318,7 @@ jq(function(){
                             title.appendChild(div);
                         }
                         datatitle()
-                        //确定obj的位置，并是提示对齐被提示内容
+                        //确定obj的位置，并是提示对齐被提示内�?
                         var textalign = function(){
                             var left = Obj.offsetLeft,
                                 top = Obj.offsetTop,
@@ -351,7 +356,7 @@ jq("li .show_enter").add("div .show_enter").mouseover(function(){
         jq(this).children().children(".v_enter").css('background','')
     })
 });
-//添加目录动态快---------------------------------------
+//添加目录动�?�?--------------------------------------
            jq('.nav_cf').mouseover(function(){
                 var index = jq(".nav_cf").index(this);
                 jq('.title_hint').css('opacity','1').eq(index).css('opacity','0');
@@ -380,7 +385,7 @@ jq("li .show_enter").add("div .show_enter").mouseover(function(){
         jq(this).html("");
     })
 
-//公共部分！！！选择页面，上下页切换
+//公共部分！！！�?择页面，上下页切�?
     jq(".page a").hover(
         function(){
             jq(this).css("border-color","#21ace3")
@@ -389,7 +394,7 @@ jq("li .show_enter").add("div .show_enter").mouseover(function(){
             jq(this).css("border-color","")
         }
     )
-//动态改变背景图片，用在那些背景鼠标过去按钮原色变化的对象上
+//动�?改变背景图片，用在那些背景鼠标过去按钮原色变化的对象�?
             var move = function(obj,url,num){
                 var newdom = new getdom,
                     id = newdom.getElementsByClass(obj),
@@ -416,7 +421,7 @@ jq("li .show_enter").add("div .show_enter").mouseover(function(){
                     }
                 }
             }
-            // move('background','images/wm2.png','-220px')第一个是对象class属性，第二个是地址，第三个是雪碧图的Y值
+            // move('background','images/wm2.png','-220px')第一个是对象class属�?，第二个是地�?��第三个是雪碧图的Y�?
 
 
 
@@ -447,9 +452,68 @@ jq("li .show_enter").add("div .show_enter").mouseover(function(){
 
 
 
+                },
+                opacity : function(obj,filter,speed){
+                    var newdom = new getdom,
+                        obj = newdom.getElementsByClass(obj)[0],
+                        ob_opacity = newdom.GetCurrentStyle(obj,'opacity') ? newdom.GetCurrentStyle(obj,'opacity') : 1,
+                        obj_opacity = [ob_opacity[0],ob_opacity[1], ob_opacity[2]].join(""),
+                        obj_filter = newdom.GetCurrentStyle(obj,'filter'),//获取filter的�?，表现形式为alpha(opacity=10);
+                        value = obj_filter.replace(/[^0-9]/ig,"");//使用正则表达式转换为数字字符串（80�?
+                    obj.style.opacity = obj_opacity;
+                    var change_opacity = function(){
+                        if(obj_opacity > filter){
+                            var time = function(){
+                                setTimeout(function(){
+                                    if(obj_opacity > filter){
+                                        obj_opacity = (obj_opacity * 10 - 1)/10;
+                                        obj.style.opacity = (parseFloat(obj.style.opacity) * 10 - 1)/10;
+                                        if(document.all){
+                                            value = parseFloat(value) - 10;
+                                            obj.style.filter = 'alpha(opacity = '+value+')';
+                                        }
+                                        time();
+                                    }
+                                },speed)
+                            };
+                            time();
+                        }
+                        else{
+                            var time = function(){
+                                setTimeout(function(){
+                                    if(filter > obj_opacity){
+                                        filter = (filter * 10 - 1)/10;
+                                        obj.style.opacity = (parseFloat(obj.style.opacity) * 10 + 1)/10;
+                                        if(document.all){
+                                            value = parseFloat(value) + 10;//将字符串转化为数字，使用的是parsefloat
+                                            obj.style.filter = 'alpha(opacity = '+value+')';
+                                        }
+                                        time();
+                                    }
+                                },speed)
+                            };
+                            time();
+                        }
+                    }
+                    change_opacity();
+                }
+            }
+            var init = function(){
+                var newdom = new getdom,
+                    header = newdom.getElementsByClass('header')[0],
+                    login = newdom.getElementsByClass('login')[0],
+                    body_1 = newdom.getElementsByClass('body')[0];
+                aijianmei.p_fixed(header);
+                login.onclick = function(){
+                    body_1.style.display = 'block';
+                    aijianmei.opacity('body',0.7,10);
+                }
+                // aijianmei
+            }
+            init();
 
 
-            //对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
+            //对象fade，添加一个功能，屏蔽按钮，显示产品即将推�?
             var fade = {
                 newdom : new getdom,
                 init : function(obj){
@@ -482,7 +546,7 @@ jq("li .show_enter").add("div .show_enter").mouseover(function(){
                         div_2 = document.createElement('div');
                     div_1.className = 'fade_in';
                     div_2.className = 'modal';
-                    div_2.innerHTML = '<div class="modal_header"><a class="closed">×</a><h3>我们正在检测中</h3></div><p class="modal_body">即将推出，敬请期待...</p>';
+                    div_2.innerHTML = '<div class="modal_header"><a class="closed">×</a><h3>我们正在�?���?/h3></div><p class="modal_body">即将推出，敬请期�?..</p>';
                     body.appendChild(div_1);
                     body.appendChild(div_2);
                 },

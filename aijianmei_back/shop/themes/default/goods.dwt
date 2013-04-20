@@ -216,12 +216,6 @@ function reg(str){
      <div class="clearfix">
       <p class="f_l">{$goods.goods_style_name}</p>
       <p class="f_r">
-      {if $prev_good}
-      <a href="{$prev_good.url}"><img alt="prev" src="./images/up.gif" /></a>
-      {/if}
-      {if $next_good}
-      <a href="{$next_good.url}"><img alt="next" src="./images/down.gif" /></a>
-      {/if}
       </p>
       </div>
       <ul>
@@ -262,18 +256,6 @@ function reg(str){
       </li>
       <li class="clearfix">
        <dd>
-       <!-- {if $goods.goods_brand neq "" and $cfg.show_brand} 显示商品品牌-->
-       <strong>{$lang.goods_brand}</strong><a href="{$goods.goods_brand_url}" >{$goods.goods_brand}</a>
-       <!--{/if}-->
-       </dd>
-       <dd class="ddR">
-       <!-- {if $cfg.show_goodsweight} 商品重量-->
-       <strong>{$lang.goods_weight}</strong>{$goods.goods_weight}
-       <!-- {/if} -->
-       </dd>
-      </li>
-      <li class="clearfix">
-       <dd>
        <!-- {if $cfg.show_addtime} 上架时间-->
       <strong>{$lang.add_time}</strong>{$goods.add_time}
       <!-- {/if} -->
@@ -296,7 +278,7 @@ function reg(str){
        </dd>
        <dd style="width:48%; padding-left:7px;">
        <strong>{$lang.goods_rank}</strong>
-      <img src="images/stars{$goods.comment_rank}.gif" alt="comment rank {$goods.comment_rank}" />
+        <img src="images/stars{$goods.comment_rank}.gif" alt="comment rank {$goods.comment_rank}" />
        </dd>
       </li>
 
@@ -328,12 +310,12 @@ function reg(str){
       <!--{/if}-->
       <li class="clearfix">
        <dd>
-       <strong>{$lang.amount}：</strong><font id="ECS_GOODS_AMOUNT" class="shop"></font>
+       <strong>支持服务:全国包邮</strong>
        </dd>
        <dd class="ddR">
-       <!-- {if $goods.give_integral > 0} 购买此商品赠送积分-->
-        <strong>{$lang.goods_give_integral}</strong><font class="f4">{$goods.give_integral} {$points_name}</font>
-        <!-- {/if} -->
+       <!-- {if $cfg.show_goodsweight} 商品重量-->
+       <strong>{$lang.goods_weight}</strong>{$goods.goods_weight}
+       <!-- {/if} -->
        </dd>
       </li>
       <!-- {if $goods.bonus_money} 红包-->

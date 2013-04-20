@@ -15,14 +15,29 @@
         {$lang.no_notes}
         <!--{/if}-->
        <!--翻页 start-->
-       <div id="buy_pagebar" class="f_r" style="margin-top:10px">
+       <div id="buy_pagebar" style="margin-top:10px">
         <form name="selectPageForm" action="{$smarty.server.PHP_SELF}" method="get">
         <!-- {if $pager.styleid eq 0 } -->
         <div id="buy_pager">
-          {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
-            <!--{foreach from=$pager.search key=key item=item}-->
-            <input type="hidden" name="{$key}" value="{$item}" />
-            <!--{/foreach}-->
+          <div class="page clearfix">
+            <span class="concrete_choice">
+              <a href="" class="prev">上一页</a>
+              <a href="">1</a>
+              <a href="" class="current_page">2</a>
+              <a href="">3</a>
+              <a href="" class="next">下一页</a>
+            </span>
+            <span class="free_choice">
+              <span>共100页</span>
+              <span class="concrete_page">
+                  到第
+                <input type="text" />
+                  页
+              </span>
+              <span class="sure_button">确定</span>
+              </span>
+            </span>
+          </div>
         </div>
         <!--{else}-->
 

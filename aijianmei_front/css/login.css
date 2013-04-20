@@ -119,6 +119,134 @@ margin-bottom: 20px;
 .sel_area{margin-top:20px;}
 .sel_area select{margin-right:30px;}
 .m{margin-right:30px;}
+
+
+/************ Login Next Step **************/
+.container{
+	width:850px;
+	margin:0 auto;
+}
+.want{
+	margin:20px 0;
+	text-align:center;
+}
+.item{
+display: block;
+width: 250px;
+height: 180px;
+float: left;
+
+margin-bottom:50px;
+}
+
+.item2{
+	margin:0 50px 50px 50px;
+	_margin-left:25px;
+}
+.item4{
+	margin:0 50px 50px 170px;
+}
+.cover{
+	height:180px;
+	position:relative;
+}
+.cover span{
+	position:absolute;
+	text-align:center;
+	width: 210px;
+	margin: 0 auto;
+	font-size:4em;
+	color:white;
+	font-weight: bold;
+	left: 7%;
+	top: 35%;
+}
+.c1{
+	background:#bdbad7;
+}
+.c2{
+	background:#5eb0df;
+}
+.c3{
+	background:#86cad7;
+}
+.c3 span{
+	left:12%;
+}
+.c4{
+	background:#AAC2DD;
+}
+.c4 span,.c5 span{
+	top: 33px;
+	left: 23px;
+}
+.c5{
+	background:#21ace3;
+}
+.check{
+	height:180px;
+}
+.cover .hasCheck{
+	height:180px;
+	width: 250px;
+	left: 0;
+	top:0;
+	background:url(../images/login/check.png) no-repeat;
+}
+.login_next{
+	text-align:center;
+	margin-left:40px;
+}
+
+/*********************Login Upload Face****************************/
+.uploadT{
+	text-align: center;
+	margin: 50px;
+}
+.uploadArea{
+	width: 390px;
+	margin: 0 auto;
+	position: relative;
+}
+.face{
+	width:150px;
+	height:150px;
+}
+.selectForm{
+	position: absolute;
+	left: 200px;
+	top: 0;
+}
+#pic, #takePic{
+	width: 96px;
+	height: 35px;
+	visibility:hidden;
+
+}
+.localUp,.takeUp{
+	width: 96px;
+	height: 35px;
+	background: url(../images/login/btn1.jpg) no-repeat;
+	position: absolute;
+	color: white;
+	font-size: 1.6em;
+	line-height: 35px;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+	top: 20px;	
+	left:0;
+}
+.takeUp{
+	top:90px;
+}
+.loginUpload_next{
+	text-align: center;
+	margin-top: 50px;
+}
+
+
+
 /***********************footer开始*************************/
 	#fonter{	
 				clear:both;
