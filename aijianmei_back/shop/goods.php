@@ -141,7 +141,7 @@ $cache_id = $goods_id . '-' . $_SESSION['user_rank'].'-'.$_CFG['lang'];
 $cache_id = sprintf('%X', crc32($cache_id));
 if (!$smarty->is_cached('goods.dwt', $cache_id))
 {
-echo 12;
+
     $smarty->assign('image_width',  $_CFG['image_width']);
     $smarty->assign('image_height', $_CFG['image_height']);
     $smarty->assign('helps',        get_shop_help()); // 网店帮助
@@ -192,7 +192,6 @@ echo 12;
         $smarty->assign('goods_id',           $goods['goods_id']);
         $smarty->assign('promote_end_time',   $goods['gmt_end_time']);
         $smarty->assign('categories',         get_categories_tree($goods['cat_id']));  // 分类树
-		print_r(get_categories_tree($goods['cat_id']));
         /* meta */
         $smarty->assign('keywords',           htmlspecialchars($goods['keywords']));
         $smarty->assign('description',        htmlspecialchars($goods['goods_brief']));
