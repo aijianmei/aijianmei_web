@@ -180,17 +180,18 @@ $(function(){
             var aijianmei = {
                 newdom : new getdom,
                 p_fixed : function(obj){
-                    window.onscroll = function(){
-                        var top = window.ActiveXObject ? document.documentElement.scrollTop : document.body.scrollTop || window.pageYOffset;
-                        // if(window.ActiveXObject){
-                        //     var top = document.documentElement.scrollTop;
-                        // }
-
-                        if(top >= 50){
-                            obj.className = 'header p_fixed';
-                        }
-                        else{
-                            obj.className = 'header'
+                    if(navigator.userAgent.indexOf("MSIE")>0){
+                        obj.className = 'header'
+                    }
+                    else{
+                        window.onscroll = function(){
+                            var top = document.body.scrollTop || window.pageYOffset;
+                            if(top >= 50){
+                                obj.className = 'header p_fixed';
+                            }
+                            else{
+                                obj.className = 'header'
+                            }       
                         }
                     }
                 }
