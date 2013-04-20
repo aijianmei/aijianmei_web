@@ -13,7 +13,7 @@ Template Type: type_0
 /* ====================
      公共样式
 ==================== */
-body{background:url(images/b_g.jpg); font-size:12px; font-family:"宋体",Verdana, Arial; line-height:150%; margin:0; padding:0; color:#404040;}
+body{background:url(images/b_g.jpg); font-size:12px; font-family:"微软雅黑","宋体",Verdana; line-height:150%; margin:0; padding:0; color:#404040;}
 div{margin:0 auto; padding:0;}
 h1,h2,h3,h4,h5,h6,ul,li,dl,dt,dd,form,img,p{
 margin:0; padding:0; border:none; list-style-type:none;
@@ -489,6 +489,62 @@ button{
       #lower_footer span,#lower_footer a{
         display:block;
       }
+/****** 翻页 *****/
+.page{
+  height: 24px;
+  line-height: 24px;
+  margin: 10px auto;
+  text-align: center;
+}
+.page a,.concrete_choice span{
+  display:inline-block;
+  margin:0 -1px;
+  min-width:20px;
+  height:20px;
+  border: 2px solid transparent;
+  line-height: 20px;
+  color:#333;
+  cursor: pointer;
+}
+.concrete_choice{
+  display: inline-block;
+  vertical-align: top;
+}
+.concrete_choice span{
+  width:50px;
+}
+.page .current_page{
+  background:#21ace3;
+  color:white;
+  border: 2px solid transparent;
+  cursor: default;
+}
+.page a:hover,.concrete_choice span:hover{
+  border-color: #21ace3;
+}
+/*outside*/
+.free_choice{
+  display: inline-block;
+}
+.free_choice span{
+  float:left;
+  margin:0 6px;
+}
+.concrete_page input{
+  width: 23px;
+  padding: 1px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+.sure_button{
+  display: inline-block;
+  width: 44px;
+  height: 23px;
+  font-weight: bold;
+  color: white;
+  background: url(images/icon_result.png) 0 -225px no-repeat;
+  cursor:pointer;
+}
 
 /*end outside---------------------------------*/
 
@@ -795,13 +851,11 @@ margin: 10px 0 0 ;
    #goodsInfo .gallery li img{width:46px; height:46px; display:block;}
    /*文字信息*/
    #goodsInfo .textInfo{background:#fff; width:514px; float:left; padding:10px;}
-   #goodsInfo .textInfo p{font-size:14px; font-weight:bold; padding:0 5px 5px 8px;}
-   #goodsInfo .textInfo ul{border-top:1px solid #ccc;}
-   #goodsInfo .textInfo li{background:url(images/lineBg.gif) repeat-x left bottom; padding:0px 8px; _height:1%;}
+   #goodsInfo .textInfo p{font-size:26px; font-weight:bold; padding:0 5px 5px 8px;}
+   #goodsInfo .textInfo li{ border-bottom: 1px dotted #ccc;padding:0px 8px; _height:1%;}
    #goodsInfo .textInfo li.padd{padding:7px 0px 7px 8px;}
-   #goodsInfo .textInfo li dd{width:50%; float:left; padding:7px 0px;}
-   #goodsInfo .textInfo li dd.ddR{border-left:1px solid #eeecec; width:48%; padding-left:8px;}
-     #goodsInfo .textInfo li dd.ddL{border-right:1px solid #eeecec;}
+   #goodsInfo .textInfo li dd{width:50%; float:left; padding:15px 0px;}
+   #goodsInfo .textInfo li dd.ddR{ width:48%; padding-left:8px;}
    #goodsInfo .textInfo a{color:#006bce; text-decoration:underline;}
    #goodsInfo .textInfo img{display:inline-block;}
    #goodsInfo .textInfo .loop{background:#f7f7f7; margin-top:8px;}
