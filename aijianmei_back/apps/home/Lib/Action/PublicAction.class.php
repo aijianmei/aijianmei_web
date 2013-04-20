@@ -309,6 +309,7 @@ class PublicAction extends Action{
         if(!$password){
             $this->error(L('please_input_password'));
         }
+		$_POST['remember']=1;
         $result = service('Passport')->loginLocal($username,$password,intval($_POST['remember']));
         $lastError = service('Passport')->getLastError(); 
         //检查是否激活
@@ -321,6 +322,10 @@ class PublicAction extends Action{
         Addons::hook('public_after_dologin',$result);
 
         if($result) {
+			@setcookie("LOGGED_AIUSER", $_POST['email'], time()+3600*24*30);
+			@setcookie('LOGGED_AICOD', md5("aijianmeipwd".$_POST['password']), time()+3600*24*30);			
+		
+		
             if(UC_SYNC && $result['reg_from_ucenter']){
                 //从UCenter导入ThinkSNS，跳转至帐号修改页
                 $refer_url = U('home/Public/userinfo');
@@ -397,6 +402,8 @@ class PublicAction extends Action{
 		$time = time() - 3600;
         setcookie("ECS[user_id]",  '', $time, '/');            
         setcookie("ECS[password]", '', $time, '/');
+		@setcookie("LOGGED_AIUSER",'', $time);
+		@setcookie('LOGGED_AICOD','', $time);		
 		if(!empty($deluname))
 		{
 			$getSkeyArr=M('')->query("select sesskey FROM ecs_sessions WHERE user_name = '".$deluname."' LIMIT 1");
