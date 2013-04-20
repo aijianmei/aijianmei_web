@@ -402,6 +402,8 @@ class PublicAction extends Action{
 		$time = time() - 3600;
         setcookie("ECS[user_id]",  '', $time, '/');            
         setcookie("ECS[password]", '', $time, '/');
+		@setcookie("LOGGED_AIUSER",'', $time);
+		@setcookie('LOGGED_AICOD','', $time);		
 		if(!empty($deluname))
 		{
 			$getSkeyArr=M('')->query("select sesskey FROM ecs_sessions WHERE user_name = '".$deluname."' LIMIT 1");
