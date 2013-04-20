@@ -889,9 +889,22 @@ EOD;
         $this->display();
     }
 
+    /**
+     * 
+     * @edit BB 2013.04.20
+     *  - add the process to verify security code
+     *  - add display code when send mail successed and annotate the old one
+     */
     public function doSendPassword() {
-        $_POST["email"]	= t($_POST["email"]);
+        
+        //验证码
         $this->assign('cssFile','retrieve');
+        if ((md5(strtoupper($_POST['verifyStr'])) != $_SESSION['verify'])){
+            $this->error(L('error_security_code'));
+            exit;
+        }
+        
+        $_POST["email"]	= t($_POST["email"]);        
         if ( !$this->isValidEmail($_POST['email']) )
             $this->error(L('email_format_error'));
 
@@ -917,7 +930,7 @@ EOD;
             global $ts;
             $email_sent = service('Mail')->send_email($user['email'], L('reset')."{$ts['site']['site_name']}".L('password'), $body);
 
-            if ($email_sent) {
+            if ($email_sent) {                
                 //$this->assign('jumpUrl', SITE_URL);
                 //$this->success(L('send_you_mailbox').$email.L('notice_accept'));
                 $this->display('retrieve');
