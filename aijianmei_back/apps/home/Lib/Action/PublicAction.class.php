@@ -885,11 +885,13 @@ EOD;
     }
 
     public function sendPassword() {
+        $this->assign('cssFile','retrieve');
         $this->display();
     }
 
     public function doSendPassword() {
         $_POST["email"]	= t($_POST["email"]);
+        $this->assign('cssFile','retrieve');
         if ( !$this->isValidEmail($_POST['email']) )
             $this->error(L('email_format_error'));
 
@@ -916,8 +918,9 @@ EOD;
             $email_sent = service('Mail')->send_email($user['email'], L('reset')."{$ts['site']['site_name']}".L('password'), $body);
 
             if ($email_sent) {
-                $this->assign('jumpUrl', SITE_URL);
-                $this->success(L('send_you_mailbox').$email.L('notice_accept'));
+                //$this->assign('jumpUrl', SITE_URL);
+                //$this->success(L('send_you_mailbox').$email.L('notice_accept'));
+                $this->display('retrieve');
             }else {
                 $this->error(L('email_send_error_retry'));
             }
@@ -925,6 +928,7 @@ EOD;
     }
 
     public function resetPassword() {
+        $this->assign('cssFile','retrieve');
         $code = explode('.', base64_decode($_GET['code']));
         $user = M('user')->where('`uid`=' . $code[0])->find();
 
