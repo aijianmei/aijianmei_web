@@ -27,6 +27,7 @@ class PassportService extends Service
 	 */
 	public function isLogged()
 	{
+		//免登陆 读取cookie kontem 0420 start
 		if(!empty($_COOKIE['LOGGED_AIUSER'])&&!empty($_COOKIE['LOGGED_AICOD'])){
 			$_dbConfig=require_once('config.inc.php');
 			$db =  mysql_connect($_dbConfig['DB_HOST'], $_dbConfig['DB_USER'], $_dbConfig['DB_PWD']);
@@ -43,7 +44,7 @@ class PassportService extends Service
 				$_SESSION['uname']	= $ResArr['uname'];
 			}
 		}
-            
+        //免登陆 读取cookie kontem 0420 end    
 		// 验证本地系统登录
 		if (intval($_SESSION['mid']) > 0)
 			return true;
