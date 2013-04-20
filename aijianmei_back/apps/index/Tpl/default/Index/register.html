@@ -2,6 +2,8 @@
 <script type="text/javascript" src="../Public/js/jquery.js"></script>	
     <script type="text/javascript" src="../Public/js/public.js"></script>	
     <script type="text/javascript" src="../Public/js/register.js"></script>
+	
+
 <div id="content" class="clearfix">
             <div class="leftsidebar">
                 <div class="choice_register">
@@ -58,15 +60,14 @@
                         <select class="parent"><option></option></select>
                         <php>foreach($children as $k=>$child) {</php>
                             <select class="choice_province parent" size="value" name="city" id="{$k}"  style="display:none;">
-                                 
                                     <php>foreach($child as $c){</php>
-                                        <option value="{$c['area_id']}">{$c['title']}</option>
-                                    <php>}</php>
-                                
+                                        <option value="{$c['area_id']}" >{$c['title']}</option>
+                                    <php>}</php> 
                             </select>
                             <php>}</php>
                         </div>
                     </div>
+					<input type="hidden" class="text" id="text_7" value="" id="cityStr">
                     <div class="box box_7">
                         <label class="items" for="text_7">详细地址</label>
                         <input type="text" class="text" id="text_7" name="address">
@@ -126,6 +127,8 @@
                 var pid = $("#province_1").val();
                 $(".parent").hide();
                 $(".parent[id="+pid+"]").show();
+				$(".parent[id="+pid+"]").attr("name","city");
+				$(".parent[id!="+pid+"]").attr("name","ncity");
             });
             $("#province_2").change(function() {
                 getCity("province_2", "city_2");

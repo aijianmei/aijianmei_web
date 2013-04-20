@@ -895,11 +895,10 @@ function show_banner($type){
         $data['is_init']  = '1';
         $data['sex']      = $_POST['sex'];
         $data['province'] = $_POST['province'];
-        $data['city']     = $_POST['province'];
+        $data['city']     = $_POST['city'];
         $data['address']  = $_POST['address'];
         $data['goal']     = $_POST['goal'];
         $data['im']       = $_POST['begin'];
-        
         include_once('shopApi.php');
         $sdata=$data;
         $sdata['password']=$_POST['password'];
