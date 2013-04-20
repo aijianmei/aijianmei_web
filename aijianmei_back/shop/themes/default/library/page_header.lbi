@@ -1,24 +1,24 @@
 
-{insert_scripts files='transport.js,utils.js'}
-<script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/jquery.js"></script>
-<script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/public.js"></script>
-          <div class="body"></div>
+		{insert_scripts files='transport.js,utils.js'}
+        <script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/jquery.js"></script>
+        <script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/public.js"></script>
+<div class="body"></div>
               <div class="sheet">
                 <div class="log">
                     <button class="close_btn"></button>
-                    <h3>登录爱健�?/h3>
+                    <h3>登录爱健美</h3>
                     <div class="ai_account">
                         <form action="/index.php?app=home&mod=Public&act=doLogin" method="post">
                             <h4 class="tit">使用注册邮箱登录</h4>
                             <div class="text_input">
-                                <label for="mail">爱健美注册邮�?/label>
+                                <label for="mail">爱健美注册邮箱</label>
                                 <input type="text" id="mail" name="email" />
                                 <span class="tip">请输入正确的邮箱地址</span>
                             </div>
                             <div class="text_input">
                                 <label for="psd">密码</label>
                                 <input type="password" id="psd" name="password" />
-                                <span class="tip">密码长度�?~16个的数字或�?字母</span>
+                                <span class="tip">密码长度为6~16个的数字或者字母</span>
                             </div>
                             <div class="checkCode">
                             </div>
@@ -39,8 +39,8 @@
                             })();
                         </script>
                         </div>
-                        <span class="clearfix">未注册过爱健美也可以直接登录�?/span>
-                        <a class="cop5" href="{:U('index/Index/selectRegister')}">爱健美注�?/a>
+                        <span class="clearfix">未注册过爱健美也可以直接登录哦</span>
+                        <a class="cop5" href="{:U('index/Index/selectRegister')}">爱健美注册</a>
                         
                     </div>
                 </div>  
@@ -61,11 +61,11 @@
                         <li class="more"><a href="">帐号<span class="triangle"></span> </a>
                             <ul class="account">
                                 <li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
-                                <li><a href="/index.php?app=home&mod=Public&act=logout">�?��帐号</a></li>
+                                <li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
                             </ul>
                         </li>
                         <li class="special_buy">
-                            <a class="car_buy">购物�?/a>
+                            <a class="car_buy">购物车</a>
                         </li>
                     </ul>
                 </div>
@@ -81,7 +81,7 @@
                             <li><i class="ag_current"></i><a href="/index.php?app=index&mod=Nutri">营养</a>
 
                             </li>
-                            <li><i class="ag_current"></i><a href="/index.php?app=index&mod=Append">辅助�?/a></li>
+                            <li><i class="ag_current"></i><a href="/index.php?app=index&mod=Append">辅助品</a></li>
                             <li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
                             <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>
                         </ul>
@@ -150,8 +150,6 @@
 			<a class="ps_right"></a>
 			</div>
 		</div>	<!--Banner End -->
-        <script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/jquery.js"></script>
-        <script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/public.js"></script>
 </div>
 <!--search start-->
 <div class="clearfix" style="width:940px;">
@@ -176,7 +174,8 @@
     {/literal}
     </script>
     {if $searchkeywords}
-   {$lang.hot_search} �?   {foreach from=$searchkeywords item=val}
+   {$lang.hot_search} ：
+   {foreach from=$searchkeywords item=val}
    <a href="search.php?keywords={$val|escape:url}">{$val}</a>
    {/foreach}
    {/if}
