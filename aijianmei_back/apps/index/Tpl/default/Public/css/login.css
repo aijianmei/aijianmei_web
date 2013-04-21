@@ -2,7 +2,7 @@ body, dl, dd, h1, h2, h3, h4, h5, h6, p, form{margin:0;}
 ol,li,input{margin:0; padding:0;}
 ul{list-style:none;margin:0; padding:0; }
 body{background: url(../images/bg.jpg);}
-a{cursor: pointer;}
+a{cursor: pointer;text-decoration:none;}
 .clearfix {
 
 }
@@ -15,12 +15,17 @@ display: table; content: ""
 .clearfix:after {
 clear: both
 }
+.header_logo{
+	height: 79px;
+text-align: center;
+background: url(../images/dh_01.jpg) repeat-x;
+}
 #wrap{margin:0 auto;
 width:980px;
 font:12px/1.125 Arial,Helvetica,sans-serif;}
 /***********************header开始*************************/
 	#header{position: relative;
-			height:120px;}
+		}
 		.logo{margin: 0 auto;
 			width: 253px;
 			}
@@ -49,7 +54,8 @@ font:12px/1.125 Arial,Helvetica,sans-serif;}
 					margin: 0 81px 0 236px;}
 		.massage_side{float: left;}
 		.massage_side ul li{position: relative;
-			width: 260px;
+			width: 300px;
+			width: 300px;
 			height: 60px;}
 		.massage_side .forinput{position: absolute;
 			top: 12px;
@@ -85,7 +91,10 @@ font:12px/1.125 Arial,Helvetica,sans-serif;}
 				font-weight: 700;
 				outline: 0px;}
 		.choice_1,.choice_2{width: 271px;
-				height: 38px;}
+				height: 38px;
+				margin-top: -25px;
+margin-bottom: 20px;
+				}
 			.choice_1 input,.choice_2 input{float: left;}
 			.choice_1 span,.choice_2 span{
 				margin-left: 10px;}
@@ -101,13 +110,144 @@ font:12px/1.125 Arial,Helvetica,sans-serif;}
 		.loginbutton{display: inline-block;
 				width: 70px;
 				height: 33px;
-				line-height: 33px;
+				line-height: 37px;
 				font-size: 17px;
 				font-weight: 800;
 				text-align: center;
 				color: white;
-				background-color: #D43638;
+				background-color: #21ace3;
 				border-radius: 5px;}
+.sel_area{margin-top:20px;}
+.sel_area select{margin-right:0px;}
+.m{margin-right:30px;}
+
+
+/************ Login Next Step **************/
+.container{
+	width:850px;
+	margin:0 auto;
+}
+.want{
+	margin:20px 0;
+	text-align:center;
+}
+.item{
+display: block;
+width: 250px;
+height: 180px;
+float: left;
+
+margin-bottom:50px;
+}
+
+.item2{
+	margin:0 50px 50px 50px;
+	_margin-left:25px;
+}
+.item4{
+	margin:0 50px 50px 170px;
+}
+.cover{
+	height:180px;
+	position:relative;
+}
+.cover span{
+	position:absolute;
+	text-align:center;
+	width: 210px;
+	margin: 0 auto;
+	font-size:4em;
+	color:white;
+	font-weight: bold;
+	left: 7%;
+	top: 35%;
+}
+.c1{
+	background:#bdbad7;
+}
+.c2{
+	background:#5eb0df;
+}
+.c3{
+	background:#86cad7;
+}
+.c3 span{
+	left:12%;
+}
+.c4{
+	background:#AAC2DD;
+}
+.c4 span,.c5 span{
+	top: 33px;
+	left: 23px;
+}
+.c5{
+	background:#21ace3;
+}
+.check{
+	height:180px;
+}
+.cover .hasCheck{
+	height:180px;
+	width: 250px;
+	left: 0;
+	top:0;
+	background:url(../images/login/check.png) no-repeat;
+}
+.login_next{
+	text-align:center;
+	margin-left:40px;
+}
+
+/*********************Login Upload Face****************************/
+.uploadT{
+	text-align: center;
+	margin: 50px;
+}
+.uploadArea{
+	width: 390px;
+	margin: 0 auto;
+	position: relative;
+}
+.face{
+	width:150px;
+	height:150px;
+}
+.selectForm{
+	position: absolute;
+	left: 200px;
+	top: 0;
+}
+#pic, #takePic{
+	width: 96px;
+	height: 35px;
+	visibility:hidden;
+
+}
+.localUp,.takeUp{
+	width: 96px;
+	height: 35px;
+	background: url(../images/login/btn1.jpg) no-repeat;
+	position: absolute;
+	color: white;
+	font-size: 1.6em;
+	line-height: 35px;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+	top: 20px;	
+	left:190px;
+}
+.takeUp{
+	top:90px;
+}
+.loginUpload_next{
+	text-align: center;
+	margin-top: 50px;
+}
+
+
+
 /***********************footer开始*************************/
 	#fonter{	
 				clear:both;

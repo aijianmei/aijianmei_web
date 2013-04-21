@@ -117,7 +117,7 @@ margin-bottom: 20px;
 				background-color: #21ace3;
 				border-radius: 5px;}
 .sel_area{margin-top:20px;}
-.sel_area select{margin-right:30px;}
+.sel_area select{margin-right: 0;}
 .m{margin-right:30px;}
 
 
@@ -235,7 +235,7 @@ margin-bottom:50px;
 	font-weight: bold;
 	cursor: pointer;
 	top: 20px;	
-	left:0;
+	left:190px;
 }
 .takeUp{
 	top:90px;
