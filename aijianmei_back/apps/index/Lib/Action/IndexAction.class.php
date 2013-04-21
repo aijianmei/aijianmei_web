@@ -222,7 +222,7 @@ function show_banner($type){
 				$checkEmailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
 				$checkEmailArr=M('')->query($checkEmailSql);
 				if(empty($checkEmailArr[0]['email'])){
-					redirect(U('home/Account/index',array('esg'=>'needemail')));
+					redirect(U('index/User/loginUserInfo'));
 				}
             }else {
                 $data['email'] = '';
@@ -269,7 +269,7 @@ function show_banner($type){
                  "'.$other['domain'].'", "'.$other['followersCount'].'", "'.$other['statusesCount'].'", "'.$other['personID'].'")';
                 //mysql_query($other_sql);
                 M('')->query($other_sql);
-				
+				redirect(U('index/User/loginUserInfo'));
                 //M('others')->add($other);	
             }
         }
@@ -289,7 +289,7 @@ function show_banner($type){
 			$checkEmailSql="select email from ai_user where uid='".$_GET['qquid']."'";
 			$checkEmailArr=M('')->query($checkEmailSql);
 			if(empty($checkEmailArr[0]['email'])){
-				redirect(U('home/Account/index',array('esg'=>'needemail')));
+				redirect(U('index/User/loginUserInfo'));
 			}
         }
         $this->setTitle('index');
