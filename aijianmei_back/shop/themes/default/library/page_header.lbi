@@ -1,6 +1,9 @@
 <script src="../js/ArtDialog/artDialog.min.js"></script>
 <script src="../js/ArtDialog/jquery.artDialog.min.js"></script>
 {insert_scripts files='transport.js,utils.js'}
+<link rel="stylesheet" type="text/css" href="themes/default/default.css" />
+<script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/jquery.js"></script>
+<script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/public.js"></script>
 <script>
 function showbox(){
 			var dialog=art.dialog({
@@ -158,8 +161,6 @@ function showbox(){
 			<a class="ps_right"></a>
 			</div>
 		</div>	<!--Banner End -->
-        <script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/jquery.js"></script>
-        <script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/public.js"></script>
 </div>
 <!--search start-->
 <div class="clearfix" style="width:940px;">
