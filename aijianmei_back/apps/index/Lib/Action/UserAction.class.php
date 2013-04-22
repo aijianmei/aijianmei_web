@@ -92,7 +92,7 @@ class UserAction extends Action {
 			}
 		}
 		else{
-			redirect(U('index/Index/index'));
+			//redirect(U('index/Index/index'));
 		}
 		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
         foreach($area as $a) {

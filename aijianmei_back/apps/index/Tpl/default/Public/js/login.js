@@ -36,6 +36,32 @@
 	   				$(".password").css("box-shadow","0px 0px 7px red");
    				}
   			});
+			
+			$(".passwordlib").focus(function(){
+  				if($(".passwordlib").val() == ""){
+	   				$(".passwordlib").css("box-shadow","0px 0px 7px red");
+	   				$(".label_3").css("color","#ccc");
+   				}
+   				if($(".passwordlib").val() != ""){
+	   				$(".passwordlib").css("box-shadow","0px 0px 7px red");
+   				}
+  			});
+			  			$(".rpasswordlib").focus(function(){
+  				if($(".rpasswordlib").val() == ""){
+	   				$(".rpasswordlib").css("box-shadow","0px 0px 7px red");
+	   				$(".label_4").css("color","#ccc");
+   				}
+   				if($(".rpasswordlib").val() != ""){
+	   				$(".rpasswordlib").css("box-shadow","0px 0px 7px red");
+	   				$(".rpasswordlib").css("box-shadow","0px 0px 7px red");
+   				}
+  			});
+			
+			
+			
+			
+			
+			
   			$(".password").keydown(function(){
    				$(".label_2").hide();
   			});
