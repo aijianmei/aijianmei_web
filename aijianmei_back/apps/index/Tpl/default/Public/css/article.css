@@ -129,12 +129,12 @@
 					font-weight: 600;
 				}
 				.article{
-					font-size: 14px;
 					line-height: 26px;
 					color:#424242;
 				}
-				.article .title_3{
-
+				.article span,.article font{
+					font-size: 16px!important;
+					font-family: "Helvetica Neue",Helvetica,STheiti,微软雅黑,宋体,Arial,Tahoma,sans-serif,serif!important;
 				}
 				.article p{
 					text-indent: 27px;
