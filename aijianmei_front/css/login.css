@@ -22,7 +22,7 @@ background: url(../images/dh_01.jpg) repeat-x;
 }
 #wrap{margin:0 auto;
 width:980px;
-font:12px/1.125 Arial,Helvetica,sans-serif;}
+font:12px/1.125 '微软雅黑',Arial,Helvetica,sans-serif;}
 /***********************header开始*************************/
 	#header{position: relative;
 		}
@@ -41,13 +41,12 @@ font:12px/1.125 Arial,Helvetica,sans-serif;}
 			background: url(../images/login/10.jpg) no-repeat;
 		}
 /***********************content开始*************************/
-	#content{background: url(../images/border.png) repeat-x;}
-		.content_tip{padding-top: 40px;
+		.content_tip{margin: 40px 0;
 			text-align: center;
 			font-size: 20px;
 			font-weight: 700;}
 
-		.mas_wrap{margin-top: 20px;}
+		/*.mas_wrap{margin-top: 20px;}*/
 				.lay_show_pic{float: left;
 					width: 114px;
 					height: 114px;
@@ -257,3 +256,15 @@ margin-bottom:50px;
 				font-weight: 700;
 				color: #979797;}
 	#fonter .linktomain{font-size: 17px;color: #979797;}
+
+
+
+/*outside login_new.html---------------------------*/
+
+.new_align{
+	float:none;
+	text-align: center;
+}
+.mas_wrap .new_align li{
+	margin:0 auto;
+}
