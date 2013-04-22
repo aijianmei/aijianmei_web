@@ -66,6 +66,7 @@ class UserAction extends Action {
 	public function loginUserInfo()
 	{
 		if($_SESSION['sinalogin']==1)$_SESSION['deslogin']=1;
+		$tplName='login';
 		if($_SESSION['mid']>0)
 		{
 			$check_sql="select * from ai_user where uid='".$_SESSION['mid']."'";
@@ -89,6 +90,9 @@ class UserAction extends Action {
 			 $this->assign('imgurl',$ImgArr[0]['profileImageUrl']);
 			 $tplName='login';
 			}
+		}
+		else{
+			redirect(U('index/Index/index'));
 		}
 		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
         foreach($area as $a) {
