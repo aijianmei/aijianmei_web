@@ -65,6 +65,7 @@ class UserAction extends Action {
 	
 	public function loginUserInfo()
 	{
+		if($_SESSION['sinalogin']==1)$_SESSION['deslogin']=1;
 		if($_SESSION['mid']>0)
 		{
 			$check_sql="select * from ai_user where uid='".$_SESSION['mid']."'";
@@ -94,6 +95,9 @@ class UserAction extends Action {
             $child[$a['area_id']] = M('area')->where(array('pid'=>$a['area_id']))->order('`area_id` ASC')->findAll();	
         }
 		$this->assign('refer_url', $_SERVER['HTTP_REFERER']?$_SERVER['HTTP_REFERER']:"/index.php");
+		if($_SESSION['sinalogin']==1){
+			$this->assign('refer_url',"/index.php");
+		}
 		$_SESSION['loginBef_url']=$_SERVER['HTTP_REFERER']?$_SERVER['HTTP_REFERER']:"/index.php";
         $this->assign('children', $child);
         $this->assign('area', $area);
@@ -107,6 +111,7 @@ class UserAction extends Action {
 			$healthArr=M('')->query("select * from ai_user_health where uid='".$_POST['mid']."'");
 			$this->assign('healthArr', $healthArr[0]);
 		}
+		$_SESSION['deslogin']=0;
 		$this->display('loginNext');
 	}
 
@@ -121,14 +126,18 @@ class UserAction extends Action {
 		$insertSql="REPLACE INTO ai_user_health (uid,is_increase_muscle,is_weight_gain,is_lose_weight,is_understand_health,is_fitness_friends) values('".$_SESSION['mid']."',".$valStr.")"; 
 		M('')->query($insertSql);
 	}
+	$_SESSION['deslogin']=0;
 	if($_SESSION['loginBef_url']!=''){
-		redirect($_SESSION['loginBef_url']);
+		//redirect($_SESSION['loginBef_url']);
+		redirect(U('index/Index/index'));
 	}
 	else{
-		redirect($_SESSION['loginBef_url']);
+		//redirect($_SESSION['loginBef_url']);
+		redirect(U('index/Index/index'));
 	}
 	}
 	public function ShowImg(){
+
      //不存在当前上传文件则上传
      // if(!file_exists($_FILES['upload_file']['name'])) 
 	 // {

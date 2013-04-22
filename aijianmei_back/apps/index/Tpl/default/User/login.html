@@ -11,7 +11,25 @@
 			<script type="text/javascript" src="../Public/js/jquery.js"></script>
 			<script type="text/javascript" src="../Public/js/login.js"></script>
 </head>
-
+<script language="javascript" type="text/javascript"> 
+document.onkeydown = function() 
+{ 
+/* 
+(ctrlKey == true && keyCode == 82)    Ctrl+R    ---刷新 
+(keyCode == 116)                      F5        ---刷新
+(ctrlKey == true && keyCode == 116)   Ctrl+F5   ---强制刷新 
+*/ 
+    //window.alert(event.keyCode); 
+    var k = event.keyCode; 
+    if((event.ctrlKey == true && k == 82) || (k == 116) || (event.ctrlKey == true && k == 116)) 
+     { 
+        //return (window.confirm("关闭?")); 
+         event.keyCode = 0; 
+         event.returnValue = false; 
+         event.cancelBubble = true; 
+     }
+} 
+</script>
 <body>
 		<div class="header_logo">
 			<a href="/"><img src="../Public/images/logo.png" border="0"></a>
@@ -91,7 +109,7 @@ function getCity(parent, child) {
 	$("#province_2").change(function() {
 	getCity("province_2", "city_2");
 	});
-function checkEmail() {
+function formSubmit(){
 	var email =$("#email").val();
 	var reyx= /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
 	if(reyx.test(email)){
@@ -102,7 +120,7 @@ function checkEmail() {
 		return false;
 	}else {
 		$("#emailMessage").html("<span style='color:green;'>邮件可用</span>");
-		return true;
+		$("#saveform").submit();
 	}
 	})
 	}
@@ -110,11 +128,6 @@ function checkEmail() {
 		$("#emailMessage").html("<span style='color:red;'>请输入正确的邮箱</span>");
 		return false;
 	}
-	return false;
-}
-function formSubmit(){
-	checkEmail();
-	$("#saveform").submit();
 }
 </script>
 </body>

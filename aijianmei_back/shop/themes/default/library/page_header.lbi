@@ -1,7 +1,17 @@
-
+<script src="../js/ArtDialog/artDialog.min.js"></script>
+<script src="../js/ArtDialog/jquery.artDialog.min.js"></script>
 {insert_scripts files='transport.js,utils.js'}
+<script>
+function showbox(){
+			var dialog=art.dialog({
+				content: document.getElementById('sheet'),
+				lock: true,
+				fixed: true,
+			});
+			}
+</script>
           <div class="body"></div>
-              <div class="sheet">
+              <div class="sheet" id="sheet">
                 <div class="log">
                     <button class="close_btn"></button>
                     <h3>登录爱健美</h3>
@@ -46,7 +56,7 @@
             <div class="head">
                 <div class="most_top">
                                 <ul class="top_ms clearfix">
-                                    <li><a href="javascript:;" class="login">登录 </a>|</li>
+                                    <li><a href="javascript:;" onclick="showbox();">登录 </a>|</li>
                                     <li><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a></li>
                                 </ul>
                     <ul class="after_ms">
