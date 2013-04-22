@@ -66,6 +66,7 @@ class UserAction extends Action {
 	public function loginUserInfo()
 	{
 		if($_SESSION['sinalogin']==1)$_SESSION['deslogin']=1;
+		$tplName='login';
 		if($_SESSION['mid']>0)
 		{
 			$check_sql="select * from ai_user where uid='".$_SESSION['mid']."'";
