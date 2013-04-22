@@ -68,10 +68,33 @@
           $(".loginbutton").css("background","gray")
         }
         if($(".protect_box").attr("checked") != undefined){
-          $(".loginbutton").css("background","#D43638")
+          $(".loginbutton").css("background","#21ace3")
         }
       })
 		});
+		
+		
+//Add style in LoginNxet page of user check.
+
+$(function(){
+	$(".cover").mouseover(function(){
+			$(this).children(".check").css("background","url(images/login/cover.png) no-repeat");
+			$(this).mouseout(function(){
+				$(this).children(".check").css("background","none");
+			});
+	});
+	$(".item").click(function(){
+		$(this).children(".cover").children("span:last").toggleClass("hasCheck");
+		//add js获取选项对应值 kon 0421 start
+		lid=$(this).attr("atid");
+		if($(this).children(".cover").children("span:last").attr("class")=='hasCheck'){
+			$("#CheckVal"+lid).val('1');
+		}else{
+			$("#CheckVal"+lid).val('0');
+		}
+		//}}}end
+	});
+})
 
 
 
