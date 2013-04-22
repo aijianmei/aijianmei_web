@@ -91,6 +91,9 @@ class UserAction extends Action {
 			 $tplName='login';
 			}
 		}
+		else{
+			redirect(U('index/Index/index'));
+		}
 		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
         foreach($area as $a) {
             $child[$a['area_id']] = M('area')->where(array('pid'=>$a['area_id']))->order('`area_id` ASC')->findAll();	
