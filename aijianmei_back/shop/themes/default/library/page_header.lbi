@@ -1,13 +1,12 @@
-<script src="../js/ArtDialog/artDialog.min.js"></script>
-<script src="../js/ArtDialog/jquery.artDialog.min.js"></script>
+<script src="../../apps/index/Tpl/default/Public/js/ArtDialog/artDialog.min.js"></script>
+<script src="../../apps/index/Tpl/default/Public/js/ArtDialog/jquery.artDialog.min.js"></script>
 {insert_scripts files='transport.js,utils.js'}
 <link rel="stylesheet" type="text/css" href="themes/default/default.css" />
-<script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/jquery.js"></script>
-<script type="text/javascript" src="../../apps/index/Tpl/default/Public/js/public.js"></script>
+
 <script>
 function showbox(){
 			var dialog=art.dialog({
-				content: document.getElementById('sheet'),
+				content: '<div class="sheet" id="sheet"></rwte>',
 				lock: true,
 				fixed: true,
 			});
