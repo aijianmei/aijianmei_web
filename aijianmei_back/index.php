@@ -19,7 +19,6 @@ define('NO_CACHE_RUNTIME', true);	// 是否关闭核心文件的编译缓存 (�
 if($_SESSION['deslogin']==1&&$_GET['act']!='setUserInfo'){$_SESSION=null;}
 //载入核心文件
 require(SITE_PATH.'/core/sociax.php');
-print_r($_SESSION);
 //实例化一个网站应用实例
 $App = new App();
 $App->run();
