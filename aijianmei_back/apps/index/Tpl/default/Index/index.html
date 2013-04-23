@@ -128,7 +128,7 @@
                                         </a>
                                         <div class="show_share">
 										<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="{:U('index/Train/videoDetail', array('id'=>$value['id']))}" pic="<?php echo $value['logo'];?>"  title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
-</div>
+                                    </div>
                                     </div>
                                     <div class="lay_tr">
                                         <a href="{:U('index/Train/videoDetail', array('id'=>$value['id']))}" class="plan_article_tl" alt="<?php echo $value['title'];?>" title="<?php echo $value['title'];?>"><?php echo $value['title'];?></a>
@@ -143,6 +143,9 @@
                                 <?php } ?>
                             </ul>
                         </div>
+                    </div>
+                    <div class="anymore">
+                        <a>加载更多资讯</a>
                     </div>
                 </div>                                
 <include file="../Public/footer" />

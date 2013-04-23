@@ -4,7 +4,7 @@
   <div id="category_tree">
     <!--{foreach from=$categories item=cat}-->
      <dl>
-     <dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
+     <dt><a href="{$cat.url}">dddddddddddd{$cat.name|escape:html}</a></dt>
      <!--{foreach from=$cat.cat_id item=child}-->
      <dd><a href="{$child.url}">{$child.name|escape:html}</a></dd>
        <!--{foreach from=$child.cat_id item=childer}-->
