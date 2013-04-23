@@ -1,19 +1,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <div class="box">
  <div class="box_1">
-  <div id="category_tree">
-    <!--{foreach from=$categories item=cat}-->
-     <dl>
-     <dt><a href="{$cat.url}">dddddddddddd{$cat.name|escape:html}</a></dt>
-     <!--{foreach from=$cat.cat_id item=child}-->
-     <dd><a href="{$child.url}">{$child.name|escape:html}</a></dd>
-       <!--{foreach from=$child.cat_id item=childer}-->
-       <dd>&nbsp;&nbsp;<a href="{$childer.url}">{$childer.name|escape:html}</a></dd>
+  <div class="sider_all">
+    <span class="border_line"></span>
+    <h4 class="video_all">全部</h4>
+    <span class="border_line"></span>
+    <div id="category_tree">
+      <!--{foreach from=$categories item=cat}-->
+       <dl>
+       <dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
+       <!--{foreach from=$cat.cat_id item=child}-->
+       <dd><a href="{$child.url}">{$child.name|escape:html}</a></dd>
+         <!--{foreach from=$child.cat_id item=childer}-->
+         <dd>&nbsp;&nbsp;<a href="{$childer.url}">{$childer.name|escape:html}</a></dd>
+         <!--{/foreach}-->
        <!--{/foreach}-->
-     <!--{/foreach}-->
-       
-       </dl>
-    <!--{/foreach}--> 
+         
+         </dl>
+      <!--{/foreach}--> 
+    </div>
+    <span class="border_line"></span>
   </div>
  </div>
 </div>
