@@ -411,7 +411,57 @@ button{
     .nav li:hover a{
       background: url(images/dh_02.jpg) repeat-x;
     }
+  /*导航栏共用样式*/
+      .sider_all{
+        position: relative;
+        float: left;
+        width: 135px;
+        margin: 0 10px 0 25px;
+        background: url(images/siderBg.jpg) repeat-y right top;
+      }
+      .border_line{
+        display:block;
+        width:134px;
+        height:2px;
+        background:url(images/borderLine.jpg) right top no-repeat;
+      }
+      .sider_all .video_all{
+        display: block;
+        margin: 0;
+        color: #000B00;
+        height: 30px;
+        line-height: 30px;
+        padding-left: 10px;
+      }
+/*左边导航栏*/ 
+  .title_1{
+    margin-right: 30px;
+    padding-bottom: 6px;
+    font-size: 16px;
+  }
 
+  .each_video{
+    transition:all 0.1s;
+    -webkit-transition:all 0.1s ease-out;
+    -moz-transition:all 0.1s;
+    -o-transition:all 0.1s;
+    line-height: 32px;
+    font-size: 13px;
+    margin:2px;
+    padding-left:20px;
+  }
+  .each_video a{
+    cursor: pointer;
+    display: block;
+  }
+  .each_video:hover{
+    background: #21ace3;
+    color:white;
+  }
+  .each_video:hover a{
+    font-weight: 700;
+    color:white;
+  }
 /******** Footer link *********/  
   .foot{
     height:195px;

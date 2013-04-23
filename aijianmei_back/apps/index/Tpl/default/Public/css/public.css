@@ -815,7 +815,7 @@ button{
 		font-weight: 700;
 		color:white;
 	}
-	.all{
+	/*.all{
 		font-size: 15px;
 		color:black;
 		font-weight: 600;
@@ -843,11 +843,11 @@ button{
 		width: 70px;
 		text-align: center;
 		cursor: pointer;
-	}
-	.right_training{
+	}*/
+	/*.right_training{
 		float:left;
 		width:703px;
-	}
+	}*/
 	/*添加提示内容块的样式*/
 		.title_tip{
 			position: absolute;
