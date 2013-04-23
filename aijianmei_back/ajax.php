@@ -9,7 +9,8 @@ $_actAllowArr=array(
 'delCategory'=>'aid',
 'addVideoCommont'=>'data',
 'addDetaiCommont'=>'data',
-'senLike'=>'data',);
+'senLike'=>'data',
+'indexmore'=>'pagenum');
 
 /*ajax ¹ıÂË´¦Àí*/
  if(!empty($_REQUEST['act'])){
@@ -52,6 +53,60 @@ function check_email($email) {
     }
     exit;
 }
+
+function indexmore($pagenum){
+    global $_dbConfig;
+	$page=intval($pagenum);
+	if($page<2||$page>5){exit;}
+    @$db = mysql_connect($_dbConfig['DB_HOST'], $_dbConfig['DB_USER'], $_dbConfig['DB_PWD']);
+    @mysql_select_db('aijianmei', $db);
+    mysql_query("set names 'utf8'");
+	$limits=($page-1)*4;
+	$limitnums=4;
+	$data=null;
+	$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+	$sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit ".$limits.",".$limitnums;
+	//$hot_video = M('')->query($sql);
+	$hot_videoRes = mysql_query($sql, $db);
+	$hot_video=null;
+	$info['isql']=$sql;
+	while ($row = mysql_fetch_assoc($hot_videoRes)) {
+		$hot_video[]=$row;
+	}
+	foreach($hot_video as $k=>$v) {
+            $hotvideos[$k] = $v;
+            $data = json_decode(getVideoData($v['link']));
+            $hotvideos[$k]['logo'] = $data->data[0]->logo;
+			$sql=null;$numsArr=null;
+			$sql="select count(*) as nums from ai_video_comments where pid=".$v['id'];
+			$numsArr= mysql_query($sql,$db);
+			$nums=mysql_fetch_assoc($numsArr);
+			$hotvideos[$k]['recommons']=(!empty($nums['nums']))?$nums['nums']:0;
+			$hotvideos[$k]['brief']=msubstr($hotvideos[$k]['brief'],0,78);	
+        }
+		$info['hotvideos']=$hotvideos;
+
+        $sql = "select a.* from ai_article a group by a.id order by a.create_time desc limit ".$limits.",".$limitnums;
+		$hotArticlesArr = mysql_query($sql, $db);
+		$hotArticles=null;
+		while ($row = mysql_fetch_assoc($hotArticlesArr)) {
+			$hotArticles[]=$row;
+		}
+        foreach ($hotArticles as $key => $value) {
+			$sql=null;$numsArr=null;
+			$sql="select count(*) as nums from ai_comments where parent_id=".$value['id'];
+			$numsArr= mysql_query($sql,$db);
+			$nums=mysql_fetch_assoc($numsArr);
+            $hotArticles[$key]['CommNumber']=(!empty($nums['nums']))?$nums['nums']:0;;
+			unset($hotArticles[$key]['content']);
+			$hotArticles[$key]['brief']=msubstr($hotArticles[$key]['brief'],0,78);	
+        }
+		$info['hotArticles']=$hotArticles;
+		echo json_encode($info);
+		exit;
+}
+
+
 
 
 function check_Verify($verify)
@@ -204,4 +259,32 @@ function C_mysqlQuery($sql){
     $res = mysql_query($sql, $db);
     return $res;
 }
+
+
+function getVideoData($link)
+{
+        $id = str_replace('http://player.youku.com/player.php/sid/', '', $link);
+        $id = str_replace('/v.swf', '', $id);
+        $url = 'http://v.youku.com/player/getPlayList/VideoIDS/'.$id.'/version/5/source/out?onData=%5Btype%20Function%5D&n=3';
+        $json = file_get_contents($url);
+        return $json;
+}
+
+function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=true)
+{
+		if(function_exists("mb_substr"))
+			return mb_substr($str, $start, $length, $charset);
+		elseif(function_exists('iconv_substr')) {
+			return iconv_substr($str,$start,$length,$charset);
+		}
+		$re['utf-8']   = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf]{2}|[\xf0-\xff][\x80-\xbf]{3}/";
+		$re['gb2312'] = "/[\x01-\x7f]|[\xb0-\xf7][\xa0-\xfe]/";
+		$re['gbk']	  = "/[\x01-\x7f]|[\x81-\xfe][\x40-\xfe]/";
+		$re['big5']	  = "/[\x01-\x7f]|[\x81-\xfe]([\x40-\x7e]|\xa1-\xfe])/";
+		preg_match_all($re[$charset], $str, $match);
+		$slice = join("",array_slice($match[0], $start, $length));
+		if($suffix) return $slice."¡­";
+		return $slice;
+}
+
 ?>
