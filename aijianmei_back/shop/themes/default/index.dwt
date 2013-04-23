@@ -22,7 +22,109 @@
 
 <body>
 <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
-
+<div class="block clearfix">
+  <div id="banner">
+      <div class="lay_banner">
+      <ul class="ul_1 clearfix">
+        <li class="change_1">
+          <a>
+            <img src="../images/1.jpg" alt="no" class="pic_1" />
+            <div class="massage" style="display:inline-block;">
+              <h1 class="title">此张大图名称</h1>
+              <p>大图介绍：阿萨德合肥卡萨帝豪</p>
+            </div>
+          </a>
+        </li>
+        <li class="change_1">
+          <a>
+            <img src="../images/2.jpg" alt="no" class="pic_1" />
+            <div class="massage" style="display:inline-block;">
+              <h1 class="title">此张大图名称</h1>
+              <p>大图介绍：阿萨德合肥卡萨帝豪</p>
+            </div>
+          </a>
+        </li>
+        <li class="change_1">
+          <a>
+            <img src="../images/4.jpg" alt="no" class="pic_1" />
+            <div class="massage" style="display:inline-block;">
+              <h1 class="title">此张大图名称</h1>
+              <p>大图介绍：阿萨德合肥卡萨帝豪</p>
+            </div>
+          </a>
+        </li>
+        <li class="change_1">
+          <a>
+            <img src="../images/5.jpg" alt="no" class="pic_1" />
+            <div class="massage" style="display:inline-block;">
+              <h1 class="title">此张大图名称</h1>
+              <p>大图介绍：阿萨德合肥卡萨帝豪</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+      </div>
+      <div class="choice_area">
+      <ul class="ul_2 clearfix">
+        <li class="first_choice">
+          <img src="../images/1.jpg" alt="" class="relative_pic" />
+        </li>
+        <li>
+          <img src="../images/2.jpg" alt="" class="relative_pic" />
+        </li>
+        <li>
+          <img src="../images/4.jpg" alt="" class="relative_pic" />
+        </li>
+        <li>
+          <img src="../images/5.jpg" alt="" class="relative_pic" />
+        </li>
+      </ul>
+      <a class="ps_left"></a>
+      <a class="ps_right"></a>
+      </div>
+    </div>  <!--Banner End -->
+</div>
+<!--search start-->
+<div class="clearfix" style="width:940px;">
+<div id="search"  class="clearfix">
+  <div class="keys f_l">
+   <script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+            alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+    {if $searchkeywords}
+   {$lang.hot_search} ：
+   {foreach from=$searchkeywords item=val}
+   <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+   {/foreach}
+   {/if}
+  </div>
+  <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="f_r"  style="_position:relative; top:5px;">
+   <select name="category" id="category" class="B_input">
+      <option value="0">{$lang.all_category}</option>
+      {$category_list}
+    </select>
+   <input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}" class="B_input" style="width:110px;"/>
+   <input name="imageField" type="submit" value="" class="go" style="cursor:pointer;" />
+   <a href="search.php?act=advanced_search">{$lang.advanced_search}</a>
+   </form>
+</div>
+</div>
+<!--search end-->
 <div class="blank"></div>
 <div class="block clearfix">
   <!--left start-->
