@@ -82,7 +82,9 @@
     
     <dl class="lineD" id="first_video">
     	<dt>视频</dt><dd><a href="javascript:void(0)" onclick="addVideoPanel()">继续添加视频</a></dd>
-    	<dd>链接：<input type="text" name="videos[]" size="50" /></dd>
+    	<dd>Flash链接：<input type="text" name="videos[]" size="50" /></dd>
+		<dd>Html链接：<input type="text" name="htmlurl[]" size="50" /></dd>
+		<dd>Wap链接：<input type="text" name="videos[]" size="50" /></dd>
     	<dd>标题：<input type="text" name="v_title[]" size="50" /></dd>
     	<dd>描述：<textarea name="v_intro[]" cols="40" rows="6"></textarea></dd>
     </dl>
@@ -124,7 +126,7 @@ function addimg(){
 } 
 
 function addVideoPanel() {
-	$("#first_video").append('<hr /><dd>链接：<input type="text" name="videos[]" size="50" /></dd><dd>标题：<input type="text" name="v_title[]" size="50" /></dd><dd>描述：<textarea name="v_intro[]" cols="40" rows="6"></textarea></dd>');
+	$("#first_video").append('<hr /><dd>Flash链接：<input type="text" name="videos[]" size="50" /></dd><dd>Html链接：<input type="text" name="htmlurl[]" size="50" /></dd><dd>Wap链接：<input type="text" name="videos[]" size="50" /></dd><dd>标题：<input type="text" name="v_title[]" size="50" /></dd><dd>描述：<textarea name="v_intro[]" cols="40" rows="6"></textarea></dd>');
 }
 </script>
 

@@ -67,7 +67,9 @@
                                     <h5 class="title_5" >推荐精华</h5>
                                     <php> foreach($RecommentsList as $v){ </php>
                                     <div class="target clearfix">
-                                        <div class="target_pic"><img src="<?php echo $v['img'];?>" alt="no" /><span class="care">关注</span></div>
+                                        <div class="target_pic"><img src="<?php echo $v['img'];?>" alt="no" />
+										<!--<span class="care">关注</span>-->
+										</div>
                                         <div class="cm_left">
                                             <a class="name"><?php echo $v['username'];?></a>
                                             <p><?php echo $v['content'];?></p>

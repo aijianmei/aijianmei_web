@@ -275,7 +275,6 @@ function show_banner($type){
 				$_SESSION['sinalogin']=1;
 				redirect(U('index/User/loginUserInfo'));
             }
-
         }
         if($_POST['email']!=''&&$_POST['emailact']=='upemail'){
             $umailsql="update ai_others set email='".trim($_POST['email'])."' where uid='".addslashes($_POST['emailuid'])."'";

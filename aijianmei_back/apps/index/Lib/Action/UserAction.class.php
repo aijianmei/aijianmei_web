@@ -11,7 +11,6 @@ class UserAction extends Action {
 	}
 	public function sendemail()
 	{
-		$_POST['email']="121156102@qq.com";
 		$codeurl=md5($_POST['email']);
 		$toemail=$_POST['email'];
 		$check_sql="select * from ai_returncode_log where codeurl='".$codeurl."' and uname='".$_POST['email']."'";
@@ -65,7 +64,7 @@ class UserAction extends Action {
 	
 	public function loginUserInfo()
 	{
-		if($_SESSION['sinalogin']==1)$_SESSION['deslogin']=1;
+		if($_SESSION['sinalogin']==1){$_SESSION['deslogin']=1;}
 		$tplName='login';
 		if($_SESSION['mid']>0)
 		{
@@ -92,7 +91,7 @@ class UserAction extends Action {
 			}
 		}
 		else{
-			//redirect(U('index/Index/index'));
+			redirect(U('index/Index/index'));
 		}
 		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
         foreach($area as $a) {
@@ -110,9 +109,15 @@ class UserAction extends Action {
 	public function setUserInfo()
 	{
 		if($_POST['mid']==$_SESSION['mid']&&$_POST['setInfoType']=='others'){
-			$upsql="UPDATE ai_user SET email='".$_POST['email']."', province='".$_POST['province']."',city='".$_POST['city']."',sex='".$_POST['sex']."' where uid='".$_POST['mid']."'";
+			$upsql="UPDATE ai_user SET password='".md5($_POST['passwordlib'])."',email='".$_POST['email']."', province='".$_POST['province']."',city='".$_POST['city']."',sex='".$_POST['sex']."' where uid='".$_POST['mid']."'";
 			M('')->query($upsql);
 			$healthArr=M('')->query("select * from ai_user_health where uid='".$_POST['mid']."'");
+			include_once('shopApi.php');
+			$sdata=null;
+			$sdata['username']=addslashes($_POST['nickname'];
+			$sdata['password']=addslashes($_POST['password'];
+			$sdata['email']   =addslashes($_POST['email']);
+			_postCurlRegister($sdata);
 			$this->assign('healthArr', $healthArr[0]);
 		}
 		$_SESSION['deslogin']=0;

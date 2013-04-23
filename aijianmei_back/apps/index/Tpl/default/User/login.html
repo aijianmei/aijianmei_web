@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-    <html xmlns:wb=“http://open.weibo.com/wb�?
+    <html xmlns:wb=“http://open.weibo.com/wb”>
         <head>
             <meta charset="utf-8"/>
 			<meta name="baidu_union_verify" content="c43c00cab8564dcf9a25e3a5c666410b">
 			<meta property="qc:admins" content="142030514561121165516375" />
-            <title><?php if(!empty($headertitle)){echo $headertitle;}else{echo '爱健美首�?- 推广健身文化，传播健康理�?;}?></title>
-			<meta name="keywords" content="爱健美，爱健美网，增肌�?增重、减肥�?瘦身、肌肉锻炼�?健身营养、健身补充营养�?健身运动、女性健�?>
-			<meta name="description" content="爱健美网，你可以在这里制定合适的健身计划�?观看专业的健身锻炼视频，学习专业的健身方法，了解健身运动前后的饮食营养补充，以及认识喜欢健身、运动的朋友哦！">
+            <title><?php if(!empty($headertitle)){echo $headertitle;}else{echo '爱健美首页 - 推广健身文化，传播健康理念';}?></title>
+			<meta name="keywords" content="爱健美，爱健美网，增肌、增重、减肥、瘦身、肌肉锻炼、健身营养、健身补充营养、健身运动、女性健身">
+			<meta name="description" content="爱健美网，你可以在这里制定合适的健身计划， 观看专业的健身锻炼视频，学习专业的健身方法，了解健身运动前后的饮食营养补充，以及认识喜欢健身、运动的朋友哦！">
 			<link rel="stylesheet" href="../Public/css/login.css" />
 			<script type="text/javascript" src="../Public/js/jquery.js"></script>
 			<script type="text/javascript" src="../Public/js/login.js"></script>
@@ -42,7 +42,7 @@ document.onkeydown = function()
 		<p class="content_tip">欢迎你！接下来只要简单地设置以下信息就可以了</p>
 		<div class="mas_wrap clearfix">
 			<div class="lay_show_pic">
-				<img src="{$imgurl}">
+				<img style="height:50px;width:50px;" src="{$imgurl}">
 			</div>
 			<form class="massage_side" action="/index.php?app=index&mod=User&act=setUserInfo" method="post" id="saveform">
 				<ul>
@@ -57,15 +57,15 @@ document.onkeydown = function()
 					</li>
 					<li>
 						<input type="password" id="passwordlib" class="input passwordlib" value="" name="passwordlib">
-						<label class="label_3 forinput">登录密码</label>
+						<label class="label_3 forinput">请输入密码</label>
 					</li>
 					<li>
 						<input type="password" id="repassword" class="input rpasswordlib" value="" name="repassword">
-						<label class="label_4 forinput">请再次输入密�?/label>
+						<label class="label_4 forinput">请再次输入密码</label>
 						<span id="repasswordMessage"></span>
 					</li>
 					<li class="sel_area">
-						<span>�?��地区�?</span>
+						<span>所在地区： </span>
                             <select class="choice_province" size="value" name="province" id="province_1">
                             <php>foreach($area as $a) {</php>
                             <option value="{$a['area_id']}" <php>if($a['area_id']==$userinfo['province']){echo 'selected="selected"';}</php>>{$a['title']}</option>
@@ -80,26 +80,26 @@ document.onkeydown = function()
                             <php>}</php>
 					</li>
 					<li>
-						<span>性别�?/span>
-						<input type="radio" name="sex" id="male" checked="checked" value="1"/><label for="male" class="m">�?/label>
-						<input type="radio" name="sex" id="female"  value="0"/><label for="female">�?/label>
+						<span>性别：</span>
+						<input type="radio" name="sex" id="male" checked="checked" value="1"/><label for="male" class="m">男</label>
+						<input type="radio" name="sex" id="female"  value="0"/><label for="female">女</label>
 					</li>
 				</ul>
 
 				<div class="choice_2">
 					<div class="lay_choice">
 						<input type="checkbox" class="protect_box" checked="checked">
-						<span>我已阅读协议<a class="linktoprotect" target="_blank" href="/index.php?app=index&mod=Index&act=service">《爱健美服务使用协议�?/a></span>
+						<span>我已阅读协议<a class="linktoprotect" target="_blank" href="/index.php?app=index&mod=Index&act=service">《爱健美服务使用协议》</a></span>
 					</div>
 				</div>
 				<input type="hidden" name="mid" value="<php>echo $_SESSION['mid'];</php>">
 				<input type="hidden" name="setInfoType" value="others">
-				<div class="login_bt"><a  onclick="formSubmit();" class="loginbutton">下一�?/a></div>
+				<div class="login_bt"><a  onclick="formSubmit();" class="loginbutton">下一步</a></div>
 			</form>
 		</div>
 	</div>
 	<div id="fonter">
-		<p class="company_intro">广州加伦信息科技有限公司- 粤ICP�?2085654�?/p>
+		<p class="company_intro">广州加伦信息科技有限公司- 粤ICP备12085654号</p>
 		<a href="http://www.aijianmei.com" class="linktomain">www.aijianmei.com</a>
 	</div>
 </div>
@@ -142,7 +142,7 @@ function formSubmit(){
 
 function checkPassword()
 {
-	var passwordStr=$("#password").val();
+	var passwordStr=$("#passwordlib").val();
 	var repasswordStr=$("#repassword").val();
 	if(passwordStr!=''&&repasswordStr!=''&&passwordStr==repasswordStr){
 		$("#repasswordMessage").html("<span style='color:green;'>密码正确</span>");

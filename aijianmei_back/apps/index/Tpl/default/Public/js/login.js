@@ -46,7 +46,8 @@
 	   				$(".passwordlib").css("box-shadow","0px 0px 7px red");
    				}
   			});
-			  			$(".rpasswordlib").focus(function(){
+			
+			$(".rpasswordlib").focus(function(){
   				if($(".rpasswordlib").val() == ""){
 	   				$(".rpasswordlib").css("box-shadow","0px 0px 7px red");
 	   				$(".label_4").css("color","#ccc");
@@ -56,33 +57,80 @@
 	   				$(".rpasswordlib").css("box-shadow","0px 0px 7px red");
    				}
   			});
+						
+			$(".email").focus(function(){
+  				if($(".email").val() == ""){
+	   				$(".email").css("box-shadow","0px 0px 7px red");
+	   				$(".label_2").css("color","#ccc");
+   				}
+   				if($(".email").val() != ""){
+	   				$(".email").css("box-shadow","0px 0px 7px red");
+	   				$(".email").css("box-shadow","0px 0px 7px red");
+   				}
+  			});
 			
 			
-			
-			
-			
-			
-  			$(".password").keydown(function(){
+  			$(".email").keydown(function(){
    				$(".label_2").hide();
   			});
-  			$(".password").blur(function(){
-  				if($(".password").val() != ""){
-   					$(".password").css("box-shadow","");
+  			$(".email").blur(function(){
+  				if($(".email").val() != ""){
+   					$(".email").css("box-shadow","");
    				}
-   				if($(".password").val() == ""){
-   					$(".password").css("box-shadow","");
+   				if($(".email").val() == ""){
+   					$(".email").css("box-shadow","");
    					$(".label_2").show();
    					$(".label_2").css("color","#ACACAC");
    				}
+ 			});			
+			
+			
+			
+  			$(".passwordlib").keydown(function(){
+   				$(".label_3").hide();
+  			});
+  			$(".passwordlib").blur(function(){
+  				if($(".passwordlib").val() != ""){
+   					$(".passwordlib").css("box-shadow","");
+   				}
+   				if($(".passwordlib").val() == ""){
+   					$(".passwordlib").css("box-shadow","");
+   					$(".label_3").show();
+   					$(".label_3").css("color","#ACACAC");
+   				}
  			});
-
+			
+  			$(".rpasswordlib").keydown(function(){
+   				$(".label_4").hide();
+  			});
+  			$(".rpasswordlib").blur(function(){
+  				if($(".rpasswordlib").val() != ""){
+   					$(".rpasswordlib").css("box-shadow","");
+   				}
+   				if($(".email").val() == ""){
+   					$(".email").css("box-shadow","");
+   					$(".label_4").show();
+   					$(".label_4").css("color","#ACACAC");
+   				}
+ 			});			
+			
+			
+			
+			
+			
 
   			//获取焦点
  			$(".label_1").click(function(){
  				$(".login_email").focus()
  			});
  			$(".label_2").click(function(){
- 				$(".password").focus()
+ 				$(".email").focus()
+ 			});
+			$(".label_3").click(function(){
+ 				$(".passwordlib").focus()
+ 			});
+			$(".label_4").click(function(){
+ 				$(".rpasswordlib").focus()
  			});
  			window.onload = function(){
 				$(".login_email").focus()
