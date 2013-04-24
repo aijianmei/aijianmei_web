@@ -11,13 +11,16 @@ class UserAction extends Action {
 	}
 	public function sendemail()
 	{
-		
-		$codeurl=md5($_POST['email']);
+		if ((md5(strtoupper($_POST['verifyStr'])) != $_SESSION['verify'])&&$_SESSION['is_PortMail']!=1){
+			redirect(U('index/User/setinfo'));
+		}
+		$_SESSION['is_PortMail']=1;
+		$codeurl=md5("aijianmei".$_POST['email']);
 		$toemail=$_POST['email'];
-		$check_sql="select * from ai_returncode_log where codeurl='".$codeurl."' and uname='".$_POST['email']."'";
+		$check_sql="select * from ai_returncode_log where codeurl='".$codeurl."' and uname='".$_POST['email']."' and out_time>".time();
 		$checkArr=M('')->query($check_sql);		
 		if(!$checkArr[0]['id']){
-			$_baseUrl="http://www.kon_aijianmei.com/index.php?app=index&mod=User&act=getmailcode&acitve=";
+			$_baseUrl="http://www.kon_aijianmei.com/index.php?app=index&mod=User&act=getmailcode&uname=".$_POST['email']."&acitve=";
 			$_baseUrl.=$codeurl;
 			$out_time=time()+3600;
 			$out_time_str=date("Y-m-d H:i:s",$out_time);
@@ -38,7 +41,7 @@ class UserAction extends Action {
 		else{
 			$out_time=$checkArr[0]['out_time'];
 			$out_time_str=date("Y-m-d H:i:s",$out_time);
-			$_baseUrl="http://www.kon_aijianmei.com/index.php?app=index&mod=User&act=getmailcode&acitve=";
+			$_baseUrl="http://www.kon_aijianmei.com/index.php?app=index&mod=User&act=getmailcode&uname=".$_POST['email']."&acitve=";
 			$_baseUrl.=$codeurl;
 			$service = service('Mail');
 			$subject = '重置密码邮件|爱健美网';
@@ -52,6 +55,7 @@ class UserAction extends Action {
 					爱健美网 '.SITE_URL;
 			$info = $service->send_email($toemail, $subject, $content);
 		}
+		echo $info;
         if($_POST['sendact']=='resend'){echo $info;exit;}
 		$this->assign('email', addslashes($_POST['email']));
 		$this->display('GetPwd_Second');
@@ -59,8 +63,29 @@ class UserAction extends Action {
 	
 	public function getmailcode()
 	{
+		if(md5("aijianmei".$_GET['uname'])==$_GET['acitve']){
+			$getLogSql="select * from ai_returncode_log where uname='".addslashes($_GET['uname'])."' and out_time>".time();
+			$getLogInfo=M('')->query($getLogSql);
+			if($getLogInfo[0]['id']>0){
+				$is_passver=1;
+				$_SESSION['psonkey']=md5($_GET['uname']);
+			}
+		}
+		if($is_passver!=1){redirect(U('index/User/setinfo'));}
+		$this->assign('email',$_GET['uname']);
 		$this->display('GetPwd_Third');
 	}
+	
+	public function updateUinfo(){
+		if($_SESSION['psonkey']==md5($_POST['email'])){
+			
+		}
+		print_r($_SESSION['psonkey']);
+		$this->display('GetPwd_Fourth');
+	}
+	
+	
+	
 	
 	public function loginUserInfo()
 	{
