@@ -168,6 +168,8 @@
                     body = newdom.getElementsByClass('body')[0],
                     sheet = newdom.getElementsByClass('sheet')[0],
                     close_btn = newdom.getElementsByClass('close_btn')[0],
+					more = newdom.getElementsByClass('more')[0],
+					account = newdom.getElementsByClass('account')[0],
                     len = login.length;
                 aijianmei.p_fixed(header);
                 for(var i = 0;i < len;i++){
@@ -180,6 +182,12 @@
                     sheet.style.display = 'none';
                     body.style.display = 'none';
                 }
+				more.onmouseover = function(){
+					account.style.display = 'block';
+				}
+				more.onmouseout = function(){
+					account.style.display = 'none'
+				}
             }
             init();
             //对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
