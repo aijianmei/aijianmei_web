@@ -54,8 +54,9 @@
                         
                     </div>
                     <wb:like appkey="5Q8YPj"></wb:like>
+					<form>
                     <div class="border_comment">
-                        <span class="word_num">0/300</span>
+                        <span class="word_num"><input disabled maxLength="4" name="used" size="2" value="0" class="inputtext">/<input disabled maxLength="4" name="total" size="2" value="300" class="inputtext"></span>
                         <php>if(getMid()){</php>
                         <php>echo getUserName(getMid())</php>
                         <php>}else {</php>
@@ -63,10 +64,11 @@
                         <span><a href="{:U('index/Index/selectRegister')}">注册</a></span>
                         <php>}</php>
                         <div class="textarea">
-                        <textarea class="comment_inp" name="comment" id="commentbox">有什么感想，来说说吧</textarea>
+                        <textarea class="comment_inp" name="comment" id="commentbox"  onKeyDown="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);" onKeyUp="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);">有什么感想，来说说吧</textarea>
                         <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
                         <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
                         </div>
+						</form>
                         <a class="comment" id="<php>if(!getMid()) echo 'not_login';</php>" href="javascript:void(0)" onclick="addDetaiCommont();" >发表评论</a>
                     </div>
                     <div class="check_comment">
@@ -93,7 +95,7 @@
                             <div class="target">
                                 <div class="target_pic">
                                     <img src="{$c['user']['face']}" alt="no" />
-                                    <span class="care">关注</span>
+                                    <!--<span class="care">关注</span>-->
                                 </div>
                                 <div class="target_cm">
                                     <a class="name">{$c['user']['uname']}</a>

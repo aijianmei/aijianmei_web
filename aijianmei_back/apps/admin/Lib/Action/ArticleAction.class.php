@@ -246,7 +246,8 @@ class ArticleAction extends AdministratorAction {
             $data['create_time'] = time();
             
             if(isset($_FILES['img']['name'])) {
-                @move_uploaded_file($_FILES['img']['tmp_name'], '/var/www/html/aijianmei/public/article/'.$_FILES['img']['name']);
+				$newfilename=$_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'];
+                @move_uploaded_file($_FILES['img']['tmp_name'], $newfilename);
                 $data['img'] = $_FILES['img']['name'];
             }
             
@@ -260,6 +261,8 @@ class ArticleAction extends AdministratorAction {
                     $vid = M('daily')->add($data);
                 }
                 $videos = $_POST['videos'];
+				$htmlurl= $_POST['htmlurl'];
+				$wapurl = $_POST['wapurl'];
                 $titles = $_POST['v_title'];
                 $intros = $_POST['v_intro'];
                 if(is_array($videos) && is_array($titles) && is_array($intros)) {
@@ -268,6 +271,8 @@ class ArticleAction extends AdministratorAction {
                         if($videos[$i]!=''){
                         $vdata['daily_id'] = $vid;
                         $vdata['link'] = $videos[$i];
+						$vdata['htmlurl'] = $htmlurl[$i];
+						$vdata['wapurl'] = $wapurl[$i];
                         $vdata['title'] = $titles[$i];
                         $vdata['intro'] = $intros[$i];
                         $vdata['create_time'] = time();
@@ -287,8 +292,6 @@ class ArticleAction extends AdministratorAction {
         $id = intval($_GET['id']);
         $article = M('daily')->where(array('id'=>$id))->find();
         $videos = M('daily_video')->where(array('daily_id'=>$id))->findAll();
-        //print_r($article);
-        //print_r($videos);
         $this->assign('article', $article);
         $this->assign('video', $videos);
         $this->assign('type', 'edit');

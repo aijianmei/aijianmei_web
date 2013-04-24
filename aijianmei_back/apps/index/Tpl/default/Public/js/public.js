@@ -1,3 +1,26 @@
+function gbcount(message,total,used,remain) 
+{
+	var max; 
+	max = total.value; 
+	if (message.value.length > max) { 
+		message.value = message.value.substring(0,max); 
+		used.value = max; 
+		remain.value = 0; 
+		alert("留言不能超过 300 个字!"); 
+	} 
+	else 
+	{ 
+		used.value = message.value.length; 
+		remain.value = max - used.value; 
+	} 
+}
+		
+	
+
+
+
+
+
 $(function(){
     var sWidth = $("#banner").width(), //获取焦点图的宽度（显示面积）
         len = $("#banner .ul_1 li").length, //获取焦点图个数
@@ -180,17 +203,18 @@ $(function(){
             var aijianmei = {
                 newdom : new getdom,
                 p_fixed : function(obj){
-                    window.onscroll = function(){
-                        var top = window.ActiveXObject ? document.documentElement.scrollTop : document.body.scrollTop || window.pageYOffset;
-                        // if(window.ActiveXObject){
-                        //     var top = document.documentElement.scrollTop;
-                        // }
-
-                        if(top >= 50){
-                            obj.className = 'header p_fixed';
-                        }
-                        else{
-                            obj.className = 'header'
+                    if(navigator.userAgent.indexOf("MSIE")>0){
+                        obj.className = 'header'
+                    }
+                    else{
+                        window.onscroll = function(){
+                            var top = document.body.scrollTop || window.pageYOffset;
+                            if(top >= 50){
+                                obj.className = 'header p_fixed';
+                            }
+                            else{
+                                obj.className = 'header'
+                            }       
                         }
                     }
                 }

@@ -250,9 +250,6 @@ button{
 			border:1px solid transparent;
 			
 		}
-		.more a:hover{
-			border-color:#ccc;
-		}
 		.more .on{
 			background:#fff;
 			border:1px solid #ccc;

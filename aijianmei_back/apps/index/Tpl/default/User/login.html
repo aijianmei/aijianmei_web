@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+    <html xmlns:wb=“http://open.weibo.com/wb”>
+        <head>
+            <meta charset="utf-8"/>
+			<meta name="baidu_union_verify" content="c43c00cab8564dcf9a25e3a5c666410b">
+			<meta property="qc:admins" content="142030514561121165516375" />
+            <title><?php if(!empty($headertitle)){echo $headertitle;}else{echo '爱健美首页 - 推广健身文化，传播健康理念';}?></title>
+			<meta name="keywords" content="爱健美，爱健美网，增肌、增重、减肥、瘦身、肌肉锻炼、健身营养、健身补充营养、健身运动、女性健身">
+			<meta name="description" content="爱健美网，你可以在这里制定合适的健身计划， 观看专业的健身锻炼视频，学习专业的健身方法，了解健身运动前后的饮食营养补充，以及认识喜欢健身、运动的朋友哦！">
+			<link rel="stylesheet" href="../Public/css/login.css" />
+			<script type="text/javascript" src="../Public/js/jquery.js"></script>
+			<script type="text/javascript" src="../Public/js/login.js"></script>
+</head>
+<script language="javascript" type="text/javascript"> 
+document.onkeydown = function() 
+{ 
+/* 
+(ctrlKey == true && keyCode == 82)    Ctrl+R    ---刷新 
+(keyCode == 116)                      F5        ---刷新
+(ctrlKey == true && keyCode == 116)   Ctrl+F5   ---强制刷新 
+*/ 
+    //window.alert(event.keyCode); 
+    var k = event.keyCode; 
+    if((event.ctrlKey == true && k == 82) || (k == 116) || (event.ctrlKey == true && k == 116)) 
+     { 
+        //return (window.confirm("关闭?")); 
+         event.keyCode = 0; 
+         event.returnValue = false; 
+         event.cancelBubble = true; 
+     }
+} 
+</script>
+<body>
+		<div class="header_logo">
+			<a href="/"><img src="../Public/images/logo.png" border="0"></a>
+		</div>
+<div id="wrap">
+	<div id="header">
+		<a href="<php>echo $refer_url;</php>"><span type="button" class="returnbutton"></span></a>
+	</div>
+	<div id="content">
+		<p class="content_tip">欢迎你！接下来只要简单地设置以下信息就可以了</p>
+		<div class="mas_wrap clearfix">
+			<div class="lay_show_pic">
+				<img style="height:50px;width:50px;" src="{$imgurl}">
+			</div>
+			<form class="massage_side" action="/index.php?app=index&mod=User&act=setUserInfo" method="post" id="saveform">
+				<ul>
+					<li>
+						<input type="text" id="login" class="input login_email" value="<php>echo $_SESSION['uname'];</php>" name="nickname" readonly="readonly" disabled="disabled">
+						<!--<label class="label_1 forinput">昵称</label>-->
+					</li>
+					<li>
+						<input type="email" id="email" class="input email" value="<php>echo $userinfo['email'];</php>" name="email">
+						<label class="label_2 forinput"><php>if(!$userinfo['email']){echo '登录邮箱地址';}</php></label>
+						<span id="emailMessage"></span>
+					</li>
+					<li>
+						<input type="password" id="passwordlib" class="input passwordlib" value="" name="passwordlib">
+						<label class="label_3 forinput">请输入密码</label>
+					</li>
+					<li>
+						<input type="password" id="repassword" class="input rpasswordlib" value="" name="repassword">
+						<label class="label_4 forinput">请再次输入密码</label>
+						<span id="repasswordMessage"></span>
+					</li>
+					<li class="sel_area">
+						<span>所在地区： </span>
+                            <select class="choice_province" size="value" name="province" id="province_1">
+                            <php>foreach($area as $a) {</php>
+                            <option value="{$a['area_id']}" <php>if($a['area_id']==$userinfo['province']){echo 'selected="selected"';}</php>>{$a['title']}</option>
+                            <php>}</php>
+                            </select>
+                        <php>foreach($children as $k=>$child) {</php>
+                            <select class="choice_province parent" size="value" name="city" id="{$k}"  <php>if($k!=$userinfo['province']){echo 'style="display:none;"';}</php>>
+                                    <php>foreach($child as $c){</php>
+                                        <option value="{$c['area_id']}" <php>if($c['area_id']==$userinfo['city']){echo 'selected="selected"';}</php>>{$c['title']}</option>
+                                    <php>}</php> 
+                            </select>
+                            <php>}</php>
+					</li>
+					<li>
+						<span>性别：</span>
+						<input type="radio" name="sex" id="male" checked="checked" value="1"/><label for="male" class="m">男</label>
+						<input type="radio" name="sex" id="female"  value="0"/><label for="female">女</label>
+					</li>
+				</ul>
+
+				<div class="choice_2">
+					<div class="lay_choice">
+						<input type="checkbox" class="protect_box" checked="checked">
+						<span>我已阅读协议<a class="linktoprotect" target="_blank" href="/index.php?app=index&mod=Index&act=service">《爱健美服务使用协议》</a></span>
+					</div>
+				</div>
+				<input type="hidden" name="mid" value="<php>echo $_SESSION['mid'];</php>">
+				<input type="hidden" name="setInfoType" value="others">
+				<div class="login_bt"><a  onclick="formSubmit();" class="loginbutton">下一步</a></div>
+			</form>
+		</div>
+	</div>
+	<div id="fonter">
+		<p class="company_intro">广州加伦信息科技有限公司- 粤ICP备12085654号</p>
+		<a href="http://www.aijianmei.com" class="linktomain">www.aijianmei.com</a>
+	</div>
+</div>
+<script type="text/javascript">
+var IsCanOpen=0;
+function getCity(parent, child) {
+	var pid = $("#"+parent).val();
+}
+	$("#province_1").change(function() {
+	var pid = $("#province_1").val();
+	$(".parent").hide();
+	$(".parent[id="+pid+"]").show();
+	$(".parent[id="+pid+"]").attr("name","city");
+	$(".parent[id!="+pid+"]").attr("name","ncity");
+	});
+	$("#province_2").change(function() {
+	getCity("province_2", "city_2");
+	});
+function formSubmit(){
+	checkPassword();
+	var email =$("#email").val();
+	var reyx= /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+	if(reyx.test(email)){
+	$.post('ajax.php?act=check_email', {'email':email}, function(m) {
+	if(m==1) {
+		$("#email").val('');
+		$("#emailMessage").html("<span style='color:red;'>该邮箱已经注册！</span>");
+		return false;
+	}else {
+		$("#emailMessage").html("<span style='color:green;'>邮件可用</span>");
+		$("#saveform").submit();
+	}
+	})
+	}
+	else{
+		$("#emailMessage").html("<span style='color:red;'>请输入正确的邮箱</span>");
+		return false;
+	}
+}
+
+function checkPassword()
+{
+	var passwordStr=$("#passwordlib").val();
+	var repasswordStr=$("#repassword").val();
+	if(passwordStr!=''&&repasswordStr!=''&&passwordStr==repasswordStr){
+		$("#repasswordMessage").html("<span style='color:green;'>密码正确</span>");
+	}
+	else{
+		$("#repasswordMessage").html("<span style='color:red;'>密码错误</span>");
+		return true;
+	}
+	return false;
+}
+</script>
+</body>
+</html>

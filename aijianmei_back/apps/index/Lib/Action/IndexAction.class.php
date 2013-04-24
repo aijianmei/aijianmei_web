@@ -166,6 +166,7 @@ function show_banner($type){
                     $data['location'] = $userInfo['location'];
                     $data['is_active'] = 1;
                     $data['ctime'] = time();
+					$data['is_email']=0;
                     
                     //print_r($data);
                     
@@ -191,9 +192,7 @@ function show_banner($type){
                     
                     M('others')->add($other);
                 }
-                
-                
-                //redirect(U('index/Index/index'));
+	
             }catch (DengluException $e) {
                 echo $e->geterrorDescription();
             }
@@ -219,11 +218,13 @@ function show_banner($type){
             $setMail = M('')->query($setMailSql);
             if($logId) {
                 service('Passport')->loginLocal($logId[0]['uid']);
+				$_SESSION['sinalogin']=1;
 				$checkEmailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
 				$checkEmailArr=M('')->query($checkEmailSql);
 				if(empty($checkEmailArr[0]['email'])){
-					redirect(U('home/Account/index',array('esg'=>'needemail')));
+					redirect(U('index/User/loginUserInfo'));
 				}
+				//service('Passport')->loginLocal($logId[0]['uid']);
             }else {
                 $data['email'] = '';
                 $data['password'] = '';
@@ -243,7 +244,7 @@ function show_banner($type){
                 //var_dump($uid);
                 //$uid = M('user')->add($data);				
                 service('Passport')->loginLocal($uid);
-
+				$_SESSION['mid']=$uid;
                 $other['uid'] = $uid;
                 $other['mediaID'] = '3';
                 $other['friendsCount'] = $user_message['friends_count'];
@@ -269,8 +270,10 @@ function show_banner($type){
                  "'.$other['domain'].'", "'.$other['followersCount'].'", "'.$other['statusesCount'].'", "'.$other['personID'].'")';
                 //mysql_query($other_sql);
                 M('')->query($other_sql);
-				
-                //M('others')->add($other);	
+				//redirect(U('index/User/loginUserInfo'));
+                //M('others')->add($other);
+				$_SESSION['sinalogin']=1;
+				redirect(U('index/User/loginUserInfo'));
             }
         }
         if($_POST['email']!=''&&$_POST['emailact']=='upemail'){
@@ -289,7 +292,9 @@ function show_banner($type){
 			$checkEmailSql="select email from ai_user where uid='".$_GET['qquid']."'";
 			$checkEmailArr=M('')->query($checkEmailSql);
 			if(empty($checkEmailArr[0]['email'])){
-				redirect(U('home/Account/index',array('esg'=>'needemail')));
+				$_SESSION['sinalogin']=1;
+				redirect(U('index/User/loginUserInfo'));
+				//redirect(U('home/Account/index',array('esg'=>'needemail')));
 			}
         }
         $this->setTitle('index');
@@ -899,6 +904,7 @@ function show_banner($type){
         $data['address']  = $_POST['address'];
         $data['goal']     = $_POST['goal'];
         $data['im']       = $_POST['begin'];
+		$data['im']       = $_POST['begin'];
         include_once('shopApi.php');
         $sdata=$data;
         $sdata['password']=$_POST['password'];
@@ -909,7 +915,9 @@ function show_banner($type){
         service('Passport')->loginLocal($uid);
         //service('Shop')->register($data['uname'], $data['email'], $data['password']);
         //redirect(U('index/Index/index'));
-        redirect(U('home/Account/index'));
+        //redirect(U('home/Account/index'));
+		//redirect(U('home/Account/index'));
+		redirect(U('index/User/loginUserInfo'));
     }
     
     public function doRegisterCoach()

@@ -24,6 +24,7 @@ margin:0; padding:0; border:none; list-style-type:none;
 .wrapper{
   width: 980px;
   margin: 0 auto;
+  padding-top:10px;
   background: #f7f7f7;
   box-shadow: 0 0 5px 0 silver;
   }
@@ -411,7 +412,56 @@ button{
     .nav li:hover a{
       background: url(images/dh_02.jpg) repeat-x;
     }
+  /*导航栏共用样式*/
+      .sider_all{
+        position: relative;
+        float: left;
+        width: 138px;
+        background: url(images/siderBg.jpg) repeat-y right top;
+      }
+      .border_line{
+        display:block;
+        width:138px;
+        height:2px;
+        background:url(images/borderLine.jpg) right top no-repeat;
+      }
+      .video_all{
+        display: block;
+        margin: 0;
+        color: #000B00;
+        height: 30px;
+        line-height: 30px;
+        padding-left: 10px;
+      }
+/*左边导航栏*/ 
+  .title_1{
+    margin-right: 30px;
+    padding-bottom: 6px;
+    font-size: 16px;
+  }
 
+  .each_video{
+    transition:all 0.1s;
+    -webkit-transition:all 0.1s ease-out;
+    -moz-transition:all 0.1s;
+    -o-transition:all 0.1s;
+    line-height: 32px;
+    font-size: 13px;
+    margin:2px;
+    padding-left:20px;
+  }
+  .each_video a{
+    cursor: pointer;
+    display: block;
+  }
+  .each_video:hover{
+    background: #21ace3;
+    color:white;
+  }
+  .each_video:hover a{
+    font-weight: 700;
+    color:white;
+  }
 /******** Footer link *********/  
   .foot{
     height:195px;
@@ -609,7 +659,7 @@ visibility:hidden;
   text-align:center; line-height:21px; color:#fff; border:none; cursor:pointer;
   }
   /*模块容器*/
-  .box{background:#f1f1f1; padding-bottom:2px; overflow:hidden;}
+  .box{/*background:#f1f1f1;*/ padding-bottom:2px; overflow:hidden;}
   .box_1{border:1px solid #ececec; background-color:#fff;}
   .box_1 img{
     display: inline;
@@ -686,6 +736,10 @@ visibility:hidden;
   position:absolute; top:0px; right:0px;
   } */
   /*搜索*/
+  .shop_search{
+    width:940px;
+    padding-bottom: 10px;
+  }
   #search{ background: url(images/thbg.jpg) repeat-x; width:900px;float:right;
   padding:0px 20px; height:34px; line-height:34px;
   }
@@ -705,7 +759,6 @@ height: 36px;
 line-height: 36px;
 width: 938px;
 float: left;
-margin: 10px 0 0 ;
   }
   #ur_here a{color:#006cce; text-decoration:none;}
 
@@ -719,14 +772,22 @@ margin: 10px 0 0 ;
    .cart a{color:#006bcd; text-decoration:none;line-height: 13px;}
    .cart a:hover{color:#006bcd; text-decoration:underline;}
    /*商品分类*/
-   #category_tree{border:4px solid #f1faff; background-color:#fff;}
-   #category_tree dl{margin:6px;}
-   #category_tree dt{background:url(images/lineBg.gif) repeat-x left bottom;
-   color:#3f3f3f;  padding:2px 0 3px 12px;
+   #category_tree{}
+   #category_tree dt{font-size: 13px;
+    line-height: 32px;
+    margin: 2px;
+    padding-left: 20px;
+    transition: all 0.1s ease 0s;
    }
-   #category_tree dt a{background:url(images/bg.gif) no-repeat 0 -69px;
-   color:#3f3f3f; padding-left:15px; text-decoration:none;
+   #category_tree dt:hover{
+    background: #21ace3;
    }
+   #category_tree dt:hover a{
+    color:white;
+   }
+   /*#category_tree dt a{;
+   color:#3f3f3f; text-decoration:none;
+   }*/
    #category_tree dd{padding:3px 0 3px 10px;}
    #category_tree dd a{color:#404040; text-decoration:none;}
    #category_tree dd a:hover{color:#ff6600; text-decoration:none;}
@@ -1053,7 +1114,7 @@ margin: 10px 0 0 ;
 /*********** Banner ***********/		
 		#banner{
 			margin:0 auto;
-      padding: 20px 0;
+      padding-bottom:10px;
 			width:860px;
 		}
 		

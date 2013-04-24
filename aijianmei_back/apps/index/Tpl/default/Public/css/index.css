@@ -102,7 +102,7 @@
 		position: relative;
 		float: left;
 		width: 475px;
-		margin-left: 10px;
+		margin:0 0 10px 10px;
 	}
 	.lay_top_1,.lay_top_2{
 		width: 473px;
@@ -232,6 +232,23 @@
 		}
 		.expend li a{
 
+		}
+
+
+		/*outside load_more 2013/4/23*/
+		.anymore {
+		    border: 1px solid #CCCCCC;
+		    box-shadow: 0 0 8px #CCCCCC;
+		    clear: both;
+		    font-size: 20px;
+		    line-height: 30px;
+		    margin: 10px;
+		    text-align: center;
+		     text-align: center;
+		}
+		.anymore a{
+			color:#21ace3;
+			font-family: '微软雅黑','黑体','Arial';
 		}
 
 

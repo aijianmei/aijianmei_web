@@ -16,7 +16,32 @@
                         <span class="for_sprite_7">评论数</span>
                         <span class="show_time"><php>echo date('D', $daily['create_time'])</php> <span> <php>echo date('Y-m-d', $daily['create_time'])</php></span></span>
                         <span>我要分享</span>
-                        <include file="../Public/share" />			
+						<a href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=<?php echo $videos[0]['htmlurl'];?>
+						&title=<?php echo $daily['title'];?>&content=utf-8&pic=<?php echo $videos[0][logo]?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">
+		<img src="apps/index/Tpl/default/Public/images/sina.jpg" class="icon" alt="分享到新浪微博">
+	</a>
+<script type="text/javascript">
+(function(){
+var p = {
+url:location.href,
+showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+desc:'',/*默认分享理由(可选)*/
+summary:'',/*分享摘要(可选)*/
+title:'<?php echo $daily['title'];?>',/*分享标题(可选)*/
+site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+pics:'<?php echo $videos[0][logo]?>', /*分享图片的路径(可选)*/
+style:'203',
+width:22,
+height:16
+};
+var s = [];
+for(var i in p){
+s.push(i + '=' + encodeURIComponent(p[i]||''));
+}
+document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+})();
+</script>
+<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>		
                     </div>
                     <div class="show_module clearfix">
                         <h1 class="titler">{$daily['title']}</h1>
@@ -54,7 +79,32 @@
                         <a class="sprite_8" aid="{$daily['id']}" act="like"><span class="praise"  id="sprite_8_num">{$daily['like']}</span></a>
                         <a class="sprite_9" aid="{$daily['id']}" act="unlike"><span class="praise"  id="sprite_9_num">{$daily['unlike']}</span></a>
                         <span class="relay">转发到</span>
-                        <include file="../Public/share" />
+					<a href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=<?php echo $videos[0]['htmlurl'];?>
+						&title=<?php echo $daily['title'];?>&content=utf-8&pic=<?php echo $videos[0][logo]?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">
+						<img src="apps/index/Tpl/default/Public/images/sina.jpg" class="icon" alt="分享到新浪微博">
+					</a>
+<script type="text/javascript">
+(function(){
+var p = {
+url:location.href,
+showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+desc:'',/*默认分享理由(可选)*/
+summary:'',/*分享摘要(可选)*/
+title:'<?php echo $daily['title'];?>',/*分享标题(可选)*/
+site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+pics:'<?php echo $videos[0][logo]?>', /*分享图片的路径(可选)*/
+style:'203',
+width:22,
+height:16
+};
+var s = [];
+for(var i in p){
+s.push(i + '=' + encodeURIComponent(p[i]||''));
+}
+document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+})();
+</script>
+<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
                         <a class="collect">收藏</a>					
                     </div>
                     <wb:like appkey="5Q8YPj"></wb:like>
@@ -95,7 +145,7 @@
                             <div class="target">
                                 <div class="target_pic">
                                     <img src="{$c['userInfo']['face']}" alt="no" />
-                                    <span class="care">关注</span>
+                                    <!--<span class="care">关注</span>-->
                                 </div>
                                 <a class="name">{$c['userInfo']['uname']}</a>
                                 <p>{$c['content']}</p>

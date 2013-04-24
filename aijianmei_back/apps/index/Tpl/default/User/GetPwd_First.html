@@ -1,0 +1,84 @@
+<include file="../Public/header" />						
+<link rel="stylesheet" href="../Public/css/retrieve.css" />
+<script type='text/javascript'>
+function refreshCaptcha()
+{
+var img = document.images['captchaimg'];
+img.src = img.src.substring(0,img.src.lastIndexOf("?"))+"?rand="+Math.random()*1000;
+}
+function clearshowinfo(){
+ $('#showcodestr').html('');
+}
+function checkVerify(){
+	var verifyStr =$("#verifyStr").val();
+	if(verifyStr!=''&& verifyStr.length>=5){
+		$.post('ajax.php?act=check_Verify', {'Verify':verifyStr}, function(m) {
+		if(m==0) {
+			$("#verifyStrMessage").html("<span style='color:red;'>错误</span>");
+			return false;
+		}else {
+		//new action
+			$("#verifyStrMessage").html("<span style='color:green;'>正确</span>");
+			return true;
+		}
+	})
+	}
+	else{
+	//$("#verifyStr").focus();
+	}  
+}
+function checkEmail() {
+	var email =$("#email").val();
+	var reyx= /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+	if(email!=''&& reyx.test(email)){
+	$.post('ajax.php?act=check_email', {'email':email}, function(m) {
+	if(m==1) {
+		return true;
+	}else {
+		$("#emailMessage").html("<span style='color:red;width:40px;'>用户不存在</span>");
+	}
+	})
+	}
+	else{
+		$("#emailMessage").html("<span style='color:red;width:40px;'>登录名不能为空</span>");
+		}
+}
+function formSub(id){
+	checkEmail();
+	checkVerify()
+	$("#"+id).submit();
+}
+</script>
+	<form id="content" class="clearfix" action="/index.php?app=index&mod=User&act=sendemail" method="post">
+		<h1 class="title">找回密码</h1>
+					<div class="form_cm">
+						<ol class="title_1 clearfix">
+							<li><a href="retrieve.html" class="current">填写绑定邮箱</a></li>
+							<li><a href="retrieve_2.html">接受密码找回邮件</a></li>
+							<li><a href="retrieve_4.html">重置密码</a></li>
+						</ol>
+						<h2 class="title_1">请填写登录名</h2>
+						<ul class="submit_cm">
+							<li>
+								<label for="text_1">登录名：</label>
+								<input type="text" id="email" class="text" name="email" onchange="checkEmail();"/>
+								<label id="emailMessage"></label>
+							</li>
+							<li>
+								<label for="text_2">验证码：</label>
+								<input type="text" id="verifyStr" class="text" onclick="clearshowinfo();"/>
+								<span class="show" id="showcodestr"></span>
+								<span class="code"><label for="text_2" style="height:18px;">
+								<a onclick="refreshCaptcha()">
+								<img id="captchaimg" src="../public/captcha.php?rand=1243573173" alt="换一张">
+								</a></label></span>
+							</li>
+							<li>
+								<a  class="submit" onclick=" formSub('content');">
+									提交
+								</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+<include file="../Public/footer" />
