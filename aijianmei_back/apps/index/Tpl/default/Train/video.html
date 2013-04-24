@@ -2,24 +2,24 @@
 <div id="content">
             <div>
                 <p class="position">
-                    <span>ÄúËùÔÚµÄÎ»ÖÃ:</span>
-                    <a href="/index.php?app=index">°®½¡ÃÀ</a>->
-                    <a href="/index.php?app=index&mod=Train&act=videoList&id=53">¼¡Èâ×é</a>->
+                    <span>æ‚¨æ‰€åœ¨çš„ä½ç½®:</span>
+                    <a href="/index.php?app=index">çˆ±å¥ç¾</a>->
+                    <a href="/index.php?app=index&mod=Train&act=videoList&id=53">è‚Œè‚‰ç»„</a>->
                     <a href="#">{$video['title']}</a>
                 </p>
-                <p class="ms_from">°®½¡ÃÀÍÅ¶Ó  ·¢±íÓÚ<span>14Ğ¡Ê±Ç°</span></p>
+                <p class="ms_from">çˆ±å¥ç¾å›¢é˜Ÿ  å‘è¡¨äº<span>14å°æ—¶å‰</span></p>
                 <div class="video_content clearfix">
                     <div class="v_area">                        
                         <embed src="{$video['link']}" quality="high" width="634" height="450" align="middle" allownetworking="all" allowscriptaccess="always" type="application/x-shockwave-flash" allowfullscreen="true">
                     </div>
                     <div class="v_re">
-                        <h3 class="tabclass">ÊÓÆµĞÅÏ¢</h3>
+                        <h3 class="tabclass">è§†é¢‘ä¿¡æ¯</h3>
                         <div class="tab block">
                             <div class="v_infro1">
-                                <span>ÊÓÆµÃû×Ö:<span>{$video['title']}</span></span>
-                                <p>·¢²¼Ê±¼ä:<span>{$video['create_time']}</span></p>
+                                <span>è§†é¢‘åå­—:<span>{$video['title']}</span></span>
+                                <p>å‘å¸ƒæ—¶é—´:<span>{$video['create_time']}</span></p>
                                 <div class="v_infro2">
-                                    <h3>ÊÓÆµĞÅÏ¢:</h3>
+                                    <h3>è§†é¢‘ä¿¡æ¯:</h3>
                                     {$video['brief']}
                                 </div>
                             </div>
@@ -35,16 +35,16 @@
                                 <span class="num_like">111</span>
                             </span>
                             <span class="click_share">
-                                ÎÒÒª·ÖÏí:
-                                <a class="share_obj_1">ÌÚÑ¶</a>
-                                <a class="share_obj_2">Î¢²©</a>
+                                æˆ‘è¦åˆ†äº«:
+                                <a class="share_obj_1">è…¾è®¯</a>
+                                <a class="share_obj_2">å¾®åš</a>
                             </span>
                         </div>
 <!--                    outside begin 2013/4/24 -->
                             <!-- <div class="web_expend_2">
                                 <a class="sprite_8"><span class="praise">{$video['like']}</span></a>
                                 <a class="sprite_9"><span class="praise">{$video['unlike']}</span></a>
-                                <span class="relay">×ª·¢µ½</span>
+                                <span class="relay">è½¬å‘åˆ°</span>
                                 <include file="../Public/share" />
                                               
                             </div> -->
@@ -54,21 +54,21 @@
                                 <php>if(getMid()){</php>
                                 <php>echo getUserName(getMid())</php>
                                 <php>}else {</php>
-                                <span><a href="javascript:void(0)" class="login">µÇÂ¼</a></span>|
-                                <span><a href="/index.php?app=index&mod=Index&act=selectRegister">×¢²á </a></span>
+                                <span><a href="javascript:void(0)" class="login">ç™»å½•</a></span>|
+                                <span><a href="/index.php?app=index&mod=Index&act=selectRegister">æ³¨å†Œ </a></span>
                                 <php>}</php>
                                 <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
                                 <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
-                                <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox">ÓĞÊ²Ã´¸ĞÏë£¬À´ËµËµ°É</textarea></div>
-                                <a class="comment" onclick="addVideoCommont();">·¢±íÆÀÂÛ</a>
+                                <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox">æœ‰ä»€ä¹ˆæ„Ÿæƒ³ï¼Œæ¥è¯´è¯´å§</textarea></div>
+                                <a class="comment" onclick="addVideoCommont();">å‘è¡¨è¯„è®º</a>
                             </div> -->
                             <div class="login_resgister">
                                 <p>
-                                    »¹Ã»ÓĞ<a>µÇÂ¼</a>²»ÄÜ·¢±íÆÀÂÛÅ¶£¡»¹Ã»ÓĞÕÊºÅÂğ£¿Ò²¿ÉÒÔÏÖÔÚ¾Í<a>×¢²á</a>
+                                    è¿˜æ²¡æœ‰<a>ç™»å½•</a>ä¸èƒ½å‘è¡¨è¯„è®ºå“¦ï¼è¿˜æ²¡æœ‰å¸å·å—ï¼Ÿä¹Ÿå¯ä»¥ç°åœ¨å°±<a>æ³¨å†Œ</a>
                                 </p>
                             </div>
                             <div class="check_comment">
-                                <p class="comment_1">È«²¿ÆÀÂÛ(<?php echo $cRecomnums;?>)</p>
+                                <p class="comment_1">å…¨éƒ¨è¯„è®º(<?php echo $cRecomnums;?>)</p>
                             </div>
                             <div class="cm_content tab_2">
                                 <!-- <div class="cm_top">
@@ -79,7 +79,7 @@
                                         <?php printf($pager['backstr'],'class="pre_page"');?>
                                         <?php printf($pager['nextstr'],'class="next_page"');?>
                                     </span>
-                                    <span>µÚ<?php echo $_GET['pg'];?>Ò³</span>
+                                    <span>ç¬¬<?php echo $_GET['pg'];?>é¡µ</span>
                                 </div> -->
                                 <div class="page clearfix">
                                     <span class="concrete_choice">
@@ -88,30 +88,30 @@
                                         {$pager[nextstr]}
                                     </span>
                                     <span class="free_choice">
-                                        <span>¹²{$pager[page]}Ò³</span>
+                                        <span>å…±{$pager[page]}é¡µ</span>
                                         <span class="concrete_page">
-                                            µ½µÚ
+                                            åˆ°ç¬¬
                                             <input type="text">
-                                            Ò³
+                                            é¡µ
                                         </span>
-                                        <span class="sure_button" onclick="">È·¶¨</span>
+                                        <span class="sure_button" onclick="">ç¡®å®š</span>
                                     </span>
                                 </div>
                                 <div class="cm_bottom" id="recomment_fdiv">
-                                    <h5 class="title_5" >ÍÆ¼ö¾«»ª</h5>
+                                    <h5 class="title_5" >æ¨èç²¾å</h5>
                                     <php> foreach($RecommentsList as $v){ </php>
                                     <div class="target clearfix">
-                                        <div class="target_pic"><img src="<?php echo $v['img'];?>" alt="no" /><span class="care">¹Ø×¢</span></div>
+                                        <div class="target_pic"><img src="<?php echo $v['img'];?>" alt="no" /><span class="care">å…³æ³¨</span></div>
                                         <div class="cm_left">
                                             <a class="name"><?php echo $v['username'];?></a>
                                             <p><?php echo $v['content'];?></p>
                                             <p class="bottom_ms">
                                                 <span class="to">
-                                                    <a>×ª·¢<span>(0)</span></a>
-                                                    <a>»Ø¸´<span>(0)</span></a>
+                                                    <a>è½¬å‘<span>(0)</span></a>
+                                                    <a>å›å¤<span>(0)</span></a>
                                                 </span>
                                                 <span><?php echo $v['create_time'];?></span>
-                                                <span>À´×Ô<em>°®½¡ÃÀ</em></span>
+                                                <span>æ¥è‡ª<em>çˆ±å¥ç¾</em></span>
                                             </p>
                                         </div>
                                     </div>
@@ -121,13 +121,13 @@
                     </div>
                     <div class="bottom_part_right">
                         <div class="sider_m">
-                            <h4 class="sider_t">¾«»ªÍÆ¼ö</h4>
+                            <h4 class="sider_t">ç²¾åæ¨è</h4>
                             <?php foreach($otherVideo as $v) { ?>
                                 <div class="recommend clearfix">
                                     <a href="/index-Train-videoDetail-{$v['id']}.html" class="recommend_pic"><img width="90" height="60px" src="{$v['logo']}" alt="no" /></a>
                                     <div class="intro">
                                         <h3><a>{$v['title']}</a></h3>
-                                        <span class="t_play_time">µã»÷:<span> </span>{$v['click']}</span><span class="comment_time">ÆÀÂÛ: <span>{$v['CommNumber']}</span></span>
+                                        <span class="t_play_time">ç‚¹å‡»:<span> </span>{$v['click']}</span><span class="comment_time">è¯„è®º: <span>{$v['CommNumber']}</span></span>
                                     </div>
                                 </div>
                                 <?php }?>
@@ -137,7 +137,7 @@
         </div>
         <script>
         function addVideoCommont(){
-            if($("#commentUid").val()==''){alert("ÇëÏÈµÇÂ¼");return false;}
+            if($("#commentUid").val()==''){alert("è¯·å…ˆç™»å½•");return false;}
             if($("#commentbox").val()==''){return false;}
             if($("#commentPid").val()==''){return false;}
             $.ajax({
@@ -146,17 +146,7 @@
             dataType:"json",
             data: "act=addVideoCommont&data=ford&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&content="+$("#commentbox").val(),
             success: function(data){
-             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">¹Ø×¢</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.content+'</p><p class="bottom_ms"><span class="to"><a>×ª·¢<span>(0)</span></a><a>»Ø¸´<span>(0)</span></a></span><span>'+data.create_time+'</span><span>À´×Ô<em></em></span></p></div></div';
-                         $("#commentbox").val('');          
-            $("#recomment_fdiv").prepend(innerHtml);
-            $("#empty_content").html('');
-             
-            }
-            });
-        }
-        
-        </script>
-<include file="../Public/footer" />g src="'+data.img+'" alt="no" /><span class="care">å…³æ³¨</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.content+'</p><p class="bottom_ms"><span class="to"><a>è½¬å‘<span>(0)</span></a><a>å›å¤<span>(0)</span></a></span><span>'+data.create_time+'</span><span>æ¥è‡ª<em></em></span></p></div></div';
+             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">å…³æ³¨</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.content+'</p><p class="bottom_ms"><span class="to"><a>è½¬å‘<span>(0)</span></a><a>å›å¤<span>(0)</span></a></span><span>'+data.create_time+'</span><span>æ¥è‡ª<em></em></span></p></div></div';
                          $("#commentbox").val('');          
             $("#recomment_fdiv").prepend(innerHtml);
             $("#empty_content").html('');
