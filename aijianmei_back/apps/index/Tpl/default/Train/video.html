@@ -1,12 +1,13 @@
 <include file="../Public/header" />
 <div id="content">
             <div>
-                <span>
-                <span>您所在的位置:</span>
-                <a href="/index.php?app=index">爱健美</a>->
-                <a href="/index.php?app=index&mod=Train&act=videoList&id=53">肌肉组</a>->
-                <a href="#">{$video['title']}</a>
-                </span>
+                <p class="position">
+                    <span>您所在的位置:</span>
+                    <a href="/index.php?app=index">爱健�?/a>->
+                    <a href="/index.php?app=index&mod=Train&act=videoList&id=53">肌肉�?/a>->
+                    <a href="#">{$video['title']}</a>
+                </p>
+                <p class="ms_from">爱健美团�? 发表�?span>14小时�?/span></p>
                 <div class="video_content clearfix">
                     <div class="v_area">                        
                         <embed src="{$video['link']}" quality="high" width="634" height="450" align="middle" allownetworking="all" allowscriptaccess="always" type="application/x-shockwave-flash" allowfullscreen="true">
@@ -28,17 +29,34 @@
             </div>
             <div class="v_bottom clearfix">
                     <div class="bottom_part_left">
-                            <div class="web_expend_2">
+                        <div class="share_part">
+                            <span class="wrap_like">
+                                <a class="click_like"></a>
+                                <span class="num_like">111</span>
+                            </span>
+                            <span class="click_share">
+                                我要分享:
+                                <a class="share_obj_1">腾讯</a>
+                                <a class="share_obj_2">微博</a>
+                            </span>
+                        </div>
+<!--                    outside begin 2013/4/24 -->
+                            <!-- <div class="web_expend_2">
                                 <a class="sprite_8"><span class="praise">{$video['like']}</span></a>
                                 <a class="sprite_9"><span class="praise">{$video['unlike']}</span></a>
-                        <span class="relay">转发到</span>
-                        <include file="../Public/share" />
-                                              
+                                <span class="relay">转发�?/span>
+                                <include file="../Public/share" />
+
                             </div>
 							<wb:like appkey="5Q8YPj"></wb:like>
 							<form>							
                             <div class="border_comment" style="margin-top:10px;">
                                 <span class="word_num"><input disabled maxLength="4" name="used" size="2" value="0" class="inputtext">/<input disabled maxLength="4" name="total" size="2" value="300" class="inputtext"></span>
+                            </div> -->
+							<wb:like appkey="5Q8YPj"></wb:like>  
+                            <!-- <div class="border_comment" style="margin-top:10px;">
+                                <span class="word_num">0/300</span>
+>>>>>>> refs/remotes/origin/MianBranch
                                 <php>if(getMid()){</php>
                                 <php>echo getUserName(getMid())</php>
                                 <php>}else {</php>
@@ -49,13 +67,18 @@
                                 <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
                                 <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox"  onKeyDown="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);" onKeyUp="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);">有什么感想，来说说吧</textarea></div>
                                 <a class="comment" onclick="addVideoCommont();">发表评论</a>
+                            </div> -->
+                            <div class="login_resgister">
+                                <p>
+                                    还没�?a>登录</a>不能发表评论哦！还没有帐号吗？也可以现在�?a>注册</a>
+                                </p>
                             </div>
 							</form>
                             <div class="check_comment">
-                                <a class="comment_1">全部评论(<?php echo $cRecomnums;?>)</a>
+                                <p class="comment_1">全部评论(<?php echo $cRecomnums;?>)</p>
                             </div>
                             <div class="cm_content tab_2">
-                                <div class="cm_top">
+                                <!-- <div class="cm_top">
                                     <span class="page_1">
                                         <span class="lay_page">
                                         <?php printf($pager['thestr'],'class="choice_page"');?>
@@ -63,7 +86,23 @@
                                         <?php printf($pager['backstr'],'class="pre_page"');?>
                                         <?php printf($pager['nextstr'],'class="next_page"');?>
                                     </span>
-                                    <span>第<?php echo $_GET['pg'];?>页</span>
+                                    <span>�??php echo $_GET['pg'];?>�?/span>
+                                </div> -->
+                                <div class="page clearfix">
+                                    <span class="concrete_choice">
+                                        {$pager[backstr]}
+                                        {$pager[thestr]}
+                                        {$pager[nextstr]}
+                                    </span>
+                                    <span class="free_choice">
+                                        <span>共{$pager[page]}�?/span>
+                                        <span class="concrete_page">
+                                            到第
+                                            <input type="text">
+                                            �?
+                                        </span>
+                                        <span class="sure_button" onclick="">确定</span>
+                                    </span>
                                 </div>
                                 <div class="cm_bottom" id="recomment_fdiv">
                                     <h5 class="title_5" >推荐精华</h5>
@@ -81,7 +120,7 @@
                                                     <a>回复<span>(0)</span></a>
                                                 </span>
                                                 <span><?php echo $v['create_time'];?></span>
-                                                <span>来自<em>爱健美</em></span>
+                                                <span>来自<em>爱健�?/em></span>
                                             </p>
                                         </div>
                                     </div>
