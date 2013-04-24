@@ -55,7 +55,6 @@ class UserAction extends Action {
 					爱健美网 '.SITE_URL;
 			$info = $service->send_email($toemail, $subject, $content);
 		}
-		echo $info;
         if($_POST['sendact']=='resend'){echo $info;exit;}
 		$this->assign('email', addslashes($_POST['email']));
 		$this->display('GetPwd_Second');
@@ -78,9 +77,11 @@ class UserAction extends Action {
 	
 	public function updateUinfo(){
 		if($_SESSION['psonkey']==md5($_POST['email'])){
-			
+			$sql="";
+		}else{
+			redirect(U('index/User/setinfo'));
 		}
-		print_r($_SESSION['psonkey']);
+		//print_r($_SESSION['psonkey']);
 		$this->display('GetPwd_Fourth');
 	}
 	
