@@ -25,28 +25,32 @@ function checkVerify(){
 	}
 	else{
 	//$("#verifyStr").focus();
+	return false;
 	}  
+	return false;
 }
 function checkEmail() {
 	var email =$("#email").val();
 	var reyx= /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
 	if(email!=''&& reyx.test(email)){
-	$.post('ajax.php?act=check_email', {'email':email}, function(m) {
-	if(m==1) {
-		return true;
-	}else {
-		$("#emailMessage").html("<span style='color:red;width:40px;'>用户不存在</span>");
+		$.post('ajax.php?act=check_email', {'email':email}, function(m) {
+			if(m==1) {
+				return true;
+			}else {
+				$("#emailMessage").html("<span style='color:red;width:40px;'>用户不存在</span>");
+			}
+		})
 	}
-	})
-	}
-	else{
+	else
+	{
 		$("#emailMessage").html("<span style='color:red;width:40px;'>登录名不能为空</span>");
-		}
+	}
+	return false;
 }
 function formSub(id){
-	checkEmail();
-	checkVerify()
-	$("#"+id).submit();
+	if(checkEmail()&&checkVerify()){
+		$("#"+id).submit();
+	}
 }
 </script>
 	<form id="content" class="clearfix" action="/index.php?app=index&mod=User&act=sendemail" method="post">
@@ -69,12 +73,12 @@ function formSub(id){
 								<input type="text" id="verifyStr" class="text" onclick="clearshowinfo();"/>
 								<span class="show" id="showcodestr"></span>
 								<span class="code"><label for="text_2" style="height:18px;">
-								<a onclick="refreshCaptcha()">
+								<a onclick="refreshCaptcha();">
 								<img id="captchaimg" src="../public/captcha.php?rand=1243573173" alt="换一张">
-								</a></label></span>
+								</a></label></span><label id="verifyStrMessage"></label>
 							</li>
 							<li>
-								<a  class="submit" onclick=" formSub('content');">
+								<a  class="submit" onclick="formSub('content');">
 									提交
 								</a>
 							</li>

@@ -11,6 +11,7 @@ class UserAction extends Action {
 	}
 	public function sendemail()
 	{
+		
 		$codeurl=md5($_POST['email']);
 		$toemail=$_POST['email'];
 		$check_sql="select * from ai_returncode_log where codeurl='".$codeurl."' and uname='".$_POST['email']."'";
@@ -51,7 +52,6 @@ class UserAction extends Action {
 					爱健美网 '.SITE_URL;
 			$info = $service->send_email($toemail, $subject, $content);
 		}
-		echo $info;
         if($_POST['sendact']=='resend'){echo $info;exit;}
 		$this->assign('email', addslashes($_POST['email']));
 		$this->display('GetPwd_Second');
