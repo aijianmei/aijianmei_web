@@ -1,3 +1,26 @@
+function gbcount(message,total,used,remain) 
+{
+	var max; 
+	max = total.value; 
+	if (message.value.length > max) { 
+		message.value = message.value.substring(0,max); 
+		used.value = max; 
+		remain.value = 0; 
+		alert("留言不能超过 300 个字!"); 
+	} 
+	else 
+	{ 
+		used.value = message.value.length; 
+		remain.value = max - used.value; 
+	} 
+}
+		
+	
+
+
+
+
+
 $(function(){
     var sWidth = $("#banner").width(), //获取焦点图的宽度（显示面积）
         len = $("#banner .ul_1 li").length, //获取焦点图个数

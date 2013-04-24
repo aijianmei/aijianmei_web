@@ -35,9 +35,10 @@
                         <include file="../Public/share" />
                                               
                             </div>
-							<wb:like appkey="5Q8YPj"></wb:like>  
+							<wb:like appkey="5Q8YPj"></wb:like>
+							<form>							
                             <div class="border_comment" style="margin-top:10px;">
-                                <span class="word_num">0/300</span>
+                                <span class="word_num"><input disabled maxLength="4" name="used" size="2" value="0" class="inputtext">/<input disabled maxLength="4" name="total" size="2" value="300" class="inputtext"></span>
                                 <php>if(getMid()){</php>
                                 <php>echo getUserName(getMid())</php>
                                 <php>}else {</php>
@@ -46,9 +47,10 @@
                                 <php>}</php>
                                 <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
                                 <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
-                                <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox">有什么感想，来说说吧</textarea></div>
+                                <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox"  onKeyDown="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);" onKeyUp="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);">有什么感想，来说说吧</textarea></div>
                                 <a class="comment" onclick="addVideoCommont();">发表评论</a>
                             </div>
+							</form>
                             <div class="check_comment">
                                 <a class="comment_1">全部评论(<?php echo $cRecomnums;?>)</a>
                             </div>

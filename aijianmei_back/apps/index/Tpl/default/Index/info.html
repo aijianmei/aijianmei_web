@@ -105,23 +105,6 @@
                             <div class="expand_1">
                                 <span class="relay">转发到</span>
                                 <include file="../Public/share" />
-                                <!-- JiaThis Button BEGIN -->
-                                <!--<div class="jiathis_style">
-                                    <a class="jiathis_button_qzone"></a>
-                                    <a class="jiathis_button_tsina"></a>
-                                    <a class="jiathis_button_tqq"></a>
-                                    <a class="jiathis_button_renren"></a>
-                                    <a class="jiathis_button_kaixin001"></a>
-                                    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-                                </div>
-                                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1359878070244822" charset="utf-8"></script>-->
-                                <!-- JiaThis Button END -->
-                                <!-- <a class="sprite_1"></a>
-                                <a class="sprite_2"></a>
-                                <a class="sprite_3"></a>
-                                <a class="sprite_4"></a>
-                                <a class="sprite_5"></a>
-                                <a class="sprite_6"></a> -->
                             </div>
                             <div class="expand_2">
                                 <a class="sprite_8" href="javascript:void(0)" onclick="like({$i['article']['id']})"><span class="praise" id="like">{$i['article']['like']}</span></a>
@@ -146,8 +129,7 @@
                                                             <div class="target_ct">
                                                                 <a class="name">{$c['userInfo']['uname']}</a>
                                                                 <p>{$c['content']}</p>
-                                                                <p class="bottom_ms">
-                                                            
+                                                                <p class="bottom_ms">                                                           
                                                                     <span><php>echo date('Y-m-d H:i:s', $c['create_time'])</php></span>
                                                                     <span>来自<em>爱健美网</em></span>
                                                                 </p>
@@ -167,8 +149,9 @@
                                 </div>
                                 <a href="/index-Index-daily-{$i['article']['id']}-{$_GET['type']}.html" class="check_more">查看所有评论</a>
                             </div>
+							<form>
                             <div class="border_comment">
-                                <span class="word_num">0/300</span>
+                                <span class="word_num"><input disabled maxLength="4" name="used" size="2" value="0" class="inputtext">/<input disabled maxLength="4" name="total" size="2" value="300" class="inputtext"></span>
                                 <php>if(getMid()){</php>
                                 <php>echo getUserName(getMid())</php>
                                 <php>}else {</php>
@@ -176,9 +159,10 @@
                                 <span><a href="{:U('index/Index/selectRegister')}">注册</a></span>
                                 <php>}</php>
                                 
-                                <div class="textarea"><textarea class="comment_inp" name="comment" id="comment_{$i['article']['id']}">有什么感想，来说说吧</textarea></div>
+                                <div class="textarea"><textarea class="comment_inp" name="comment" id="comment_{$i['article']['id']}" onKeyDown="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);" onKeyUp="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);">有什么感想，来说说吧</textarea></div>
                                 <a class="comment" href="javascript:void(0)" onclick="addVideoCommont(comment_{$i['article']['id']}.value, {$i['article']['id']}, 'Daily')" aid="{$i['article']['id']}">发表评论</a>
                             </div>
+							</form>
                         </div>
                     </div>
                 </div>
@@ -186,17 +170,10 @@
                 <div class="page">
                             <span class="page_1">
                                 <span class="lay_page">
-                                    <!-- <a class="choice_page">1</a>
-                                    <a>2</a>
-                                    <a>3</a>
-                                    <a>4</a>
-                                    <a>5</a> -->
                                     {$pager['backstr']}
                                     {$pager['thestr']}
                                     {$pager['nextstr']}
                                 </span>
-                                <!-- <a class="pre_page">上一页</a>
-                                <a class="next_page">下一页</a> -->
                             </span>
                             <span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
                             
@@ -204,6 +181,7 @@
 
         </div>
         <script type="text/javascript">
+
         function like(id) {
             if(USER.id<=0) {
                 alert('请先登录');
