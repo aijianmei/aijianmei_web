@@ -114,8 +114,8 @@ class UserAction extends Action {
 			$healthArr=M('')->query("select * from ai_user_health where uid='".$_POST['mid']."'");
 			include_once('shopApi.php');
 			$sdata=null;
-			$sdata['username']=addslashes($_POST['nickname'];
-			$sdata['password']=addslashes($_POST['password'];
+			$sdata['username']=addslashes($_POST['nickname']);
+			$sdata['password']=addslashes($_POST['password']);
 			$sdata['email']   =addslashes($_POST['email']);
 			_postCurlRegister($sdata);
 			$this->assign('healthArr', $healthArr[0]);

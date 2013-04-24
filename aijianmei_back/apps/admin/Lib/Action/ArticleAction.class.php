@@ -178,10 +178,10 @@ class ArticleAction extends AdministratorAction {
             $data['title'] = t($_POST['title']);
             $data['category_id'] = intval($_POST['category']);
             $data['link'] = t($_POST['source']);
+			$data['htmlurl'] = t($_POST['htmlurl']);
+			$data['wapurl'] = t($_POST['wapurl']);
             $data['brief'] = t($_POST['brief']);
-            $data['create_time'] = time();			
-
-            
+            $data['create_time'] = time();
             if(!empty($data['link']) &&
                !empty($data['title'])) {
                 
