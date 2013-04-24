@@ -565,3 +565,16 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
                 fade.init('teach');
             }
 
+$(document).ready(function() {
+  /* $("embed").each(function(){
+      var embedTag = $(this).parent().html();
+	  console.log(embedTag);
+      if ((embedTag != null) && (embedTag.length > 0)) {
+          if (!$(this).attr("wmode") || $(this).attr("wmode")=="Window"){
+              embedTag = embedTag.replace(/>/g," wmode=opaque>");//这里/g是表示替换掉所有
+              //$(this).innerHTML(embedTag);
+          }        
+      }       
+  }); */
+  $("embed").attr("wmode","transparent");
+ });
