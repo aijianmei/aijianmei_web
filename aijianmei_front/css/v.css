@@ -313,8 +313,8 @@
 /*outside 2013/4/24 第二期修改-------------------------*/
 
 .share_part{
-padding-bottom: 10px;
-border-bottom: 1px solid #EDEDED;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #EDEDED;
 }
 .share_part span,.share_part a{
 	display:inline-block;
@@ -324,16 +324,16 @@ border-bottom: 1px solid #EDEDED;
 	margin-right: 30px;
 }
 .click_like{
-width:58px;
-height:24px;
-background: url(../images/wm3.png) no-repeat 0 -997px;
+	width:58px;
+	height:24px;
+	background: url(../images/wm3.png) no-repeat 0 -997px;
 }
 .num_like{
-width:34px;
-height:24px;
-line-height: 24px;
-text-align: center;
-background: url(../images/wm3.png) no-repeat 0 -1030px;
+	width:34px;
+	height:24px;
+	line-height: 24px;
+	text-align: center;
+	background: url(../images/wm3.png) no-repeat 0 -1030px;
 }
 .click_share{
 
@@ -341,21 +341,20 @@ background: url(../images/wm3.png) no-repeat 0 -1030px;
 .click_share a{
 	width: 68px;
 	height:21px;
-text-indent: -9999em;
-background: url(../images/wm3.png) no-repeat;
+	text-indent: -9999em;
+	background: url(../images/wm3.png) no-repeat;
 }
 .click_share .share_obj_1{
-background-position: 0 -935px;
+	background-position: 0 -935px;
 }
 .click_share .share_obj_2{
-background-position: 0 -966px;
+	background-position: 0 -966px;
 }
 .login_resgister{
-margin: 10px 0;
+	margin: 10px 0;
     padding: 10px 0;
-    border-top:1px solid;
-    border-bottom: 1px solid;
-    -moz-border-image: url(../images/border-image.png) 1 0 1 0 stretch;
+    border-top: 1px solid #FEFEFE;
+    border-bottom: 1px solid #FEFEFE;
 }
 .login_resgister p{
     border: 1px solid #E8EDF2;
@@ -374,12 +373,12 @@ margin: 10px 0;
     padding: 5px 15px;
 }
 .border_comment{
-height: 150px;
+	height: 150px;
     margin-bottom: 10px;
     width: 100%;
 }
 .word_num{
- float: right;
+ 	float: right;
 }
 .textarea{
     margin: 7px 0;
