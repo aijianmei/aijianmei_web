@@ -49,6 +49,7 @@ button{
 	width:100%;
 	margin-top:120px;
 	display:none;
+	*margin-left:150px;
 }
 /********* 直接登陆爱健美 *******/
 	.sheet .log{
