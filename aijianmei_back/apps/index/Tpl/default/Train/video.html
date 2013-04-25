@@ -9,8 +9,16 @@
                 </p>
                 <p class="ms_from">爱健美团队  发表于<span>14小时前</span></p>
                 <div class="video_content clearfix">
-                    <div class="v_area">                        
-                        <embed src="{$video['link']}" quality="high" width="634" height="450" align="middle" allownetworking="all" allowscriptaccess="always" type="application/x-shockwave-flash" allowfullscreen="true">
+                    <div class="v_area">    
+                        <object width="634" height="450">
+                            <param value="{$video['link']}" name="movie">
+                            <param value="true" name="allowFullScreen">
+                            <param value="never" name="allowscriptaccess">
+                            <param value="internal" name="allownetworking">
+                            <param value="transparent" name="wmode">                     
+                            <embed src="{$video['link']}" quality="high" width="634" height="450" align="middle" allownetworking="all" allowscriptaccess="always" type="application/x-shockwave-flash" allowfullscreen="true" wmode="transparent">
+                            <param value="" name="flashvars">
+                        </object>
                     </div>
                     <div class="v_re">
                         <h3 class="tabclass">视频信息</h3>
