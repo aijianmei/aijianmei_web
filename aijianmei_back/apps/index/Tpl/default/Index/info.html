@@ -70,10 +70,27 @@
                                 <php>foreach($i['video'] as $v) {</php>
                                     <span>{$v['title']}</span>
                                     <li style="position:relative;">
-                                        <a href="javascript:void(0)">
+                                        <!-- <a href="javascript:void(0)"> -->
                                             <!--<img src="{$v['img']}" width="150" />-->
                                             <php>if(!empty($v['link'])){</php>
-                                            <embed src="{$v['link']}" quality="high" width="400" height="300" align="middle" autostart="false" loop="false" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
+                                            <object width="400" height="300">
+                                                <param value="{$v['link']}" name="movie">
+                                                <param value="true" name="allowFullScreen">
+                                                <param value="never" name="allowscriptaccess">
+                                                <param value="internal" name="allownetworking">
+                                                <param value="transparent" name="wmode">                     
+                                                <embed src="{$v['link']}" quality="high" width="400" height="300" align="middle" allownetworking="all" allowscriptaccess="always" type="application/x-shockwave-flash" allowfullscreen="true" wmode="transparent">
+                                                <param value="" name="flashvars">
+                                            </object>
+                                            <!-- <object width="400" height="300">
+                                                <param value="{$v['link']}" name="movie">
+                                                <param value="true" name="allowFullScreen">
+                                                <param value="never" name="allowscriptaccess">
+                                                <param value="internal" name="allownetworking">
+                                                <param value="transparent" name="wmode">
+                                                <embed src="{$v['link']}" quality="high" width="400" height="300" align="middle" autostart="false"  allownetworking="all" loop="false" allowScriptAccess="always" allowFullScreen="true" vmode="transparent" type="application/x-shockwave-flash"></embed>
+                                                <param value="" name="flashvars">
+                                            </object> -->
                                          <php>}else{</php>
 										 <php>if(!empty($i['article']['img'])){</php>
 											<img src="/public/images/article/{$i['article']['img']}">
@@ -81,7 +98,7 @@
                                          <img src="apps/index/Tpl/default/Public/images/Mark_v.jpg">
 										 <php>}</php>
                                          <php>}</php>
-                                        </a>										
+                                        <!-- </a> -->										
                                     </li>
                                 <php>}</php>
                                     <!-- <li>

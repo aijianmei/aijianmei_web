@@ -576,5 +576,5 @@ $(document).ready(function() {
           }        
       }       
   }); */
-  $("embed").attr({"wmode":"transparent","allowscriptaccess":"never","allownetworking":"internal","src":"1.mp4","quality":"","type":""});
+  $("embed").attr({"wmode":"transparent"});
  });
