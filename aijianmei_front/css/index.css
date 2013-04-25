@@ -157,6 +157,7 @@
 			top:152px;
 			background: black;
 			opacity: 0.35;
+			filter:alpha(opacity=35);
 			z-index: 2;
 		}
 		.bg_opc_2{
