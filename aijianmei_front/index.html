@@ -443,12 +443,11 @@
 	                			aijianmei.chang_top(bg_opc[this.index],1,120);
 	                			aijianmei.chang_top(ms_hidden_part[this.index],1,120);
 	                		}	
-		                	var wrap = function(){
+		                	show_enter[i].onmouseout = function(){
 		                		aijianmei.chang_top(bg_opc_2[this.index],0,120)
 		                		aijianmei.chang_top(bg_opc[this.index],0,120)
 		                		aijianmei.chang_top(ms_hidden_part[this.index],0,120)
-		                	}
-		                	addevent(show_enter[i],'mouseout',wrap);	
+		                	}	
 		                }	                	
 	            }
 	            init();
