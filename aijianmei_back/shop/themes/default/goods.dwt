@@ -716,9 +716,6 @@ function changePriceResponse(res)
 <!-- {/literal} -->
 </script>
 </html>
-result;
-  }
-}
 <!-- {/literal} -->
 </script>
 </html>

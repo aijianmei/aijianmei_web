@@ -21,10 +21,10 @@
         <!--{/if}-->
        </ul>
        <!--翻页 start-->
-       <div id="pagebar">
+       <div id="pagebar"  style="float:right;">
         <form name="selectPageForm" action="{$smarty.server.PHP_SELF}" method="get">
         <!-- {if $pager.styleid eq 0 } -->
-        <div class="page clearfix">
+        <!--<div class="page clearfix">
           <span class="concrete_choice">
             <a href="" class="prev">上一页</a>
             <a href="">1</a>
@@ -42,7 +42,13 @@
             <span class="sure_button">确定</span>
             </span>
           </span>
-        </div>
+        </div>-->
+	        <div id="pager">
+          {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+            <!--{foreach from=$pager.search key=key item=item}-->
+            <input type="hidden" name="{$key}" value="{$item}" />
+            <!--{/foreach}-->
+	    </div>
         <!--{else}-->
 
         <!--翻页 start-->
@@ -85,6 +91,51 @@
       <!--翻页 END-->
       <div class="blank5"></div>
       <!--评论表单 start-->
+      <div class="commentsList">
+      <form action="javascript:;" onsubmit="submitComment(this)" method="post" name="commentForm" id="commentForm">
+       <table width="710" border="0" cellspacing="5" cellpadding="0">
+        <tr>
+          <td width="64" align="right">{$lang.username}：</td>
+          <td width="631"{if !$enabled_captcha}{/if}><!--{if $smarty.session.user_name}-->{$smarty.session.user_name}<!--{else}-->{$lang.anonymous}<!--{/if}--></td>
+        </tr>
+        <tr>
+          <td align="right">E-mail：</td>
+          <td>
+          <input type="text" name="email" id="email"  maxlength="100" value="{$smarty.session.email|escape}" class="inputBorder"/>
+          </td>
+        </tr>
+        <tr>
+          <td align="right">{$lang.comment_rank}：</td>
+          <td>
+          <input name="comment_rank" type="radio" value="1" id="comment_rank1" /> <img src="../images/stars1.gif" />
+          <input name="comment_rank" type="radio" value="2" id="comment_rank2" /> <img src="../images/stars2.gif" />
+          <input name="comment_rank" type="radio" value="3" id="comment_rank3" /> <img src="../images/stars3.gif" />
+          <input name="comment_rank" type="radio" value="4" id="comment_rank4" /> <img src="../images/stars4.gif" />
+          <input name="comment_rank" type="radio" value="5" checked="checked" id="comment_rank5" /> <img src="../images/stars5.gif" />
+          </td>
+        </tr>
+        <tr>
+          <td align="right" valign="top">{$lang.comment_content}：</td>
+          <td>
+          <textarea name="content" class="inputBorder" style="height:50px; width:620px;"></textarea>
+          <input type="hidden" name="cmt_type" value="{$comment_type}" />
+          <input type="hidden" name="id" value="{$id}" />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          <!-- 判断是否启用验证码{if $enabled_captcha} -->
+          <div style="padding-left:15px; text-align:left; float:left;">
+          {$lang.comment_captcha}：<input type="text" name="captcha"  class="inputBorder" style="width:50px; margin-left:5px;"/>
+          <img src="captcha.php?{$rand}" alt="captcha" onClick="this.src='captcha.php?'+Math.random()" class="captcha">
+          </div>
+          <!-- {/if} -->
+          <input name="" type="submit"  value="" class="f_r" style="border:none; background:url(../images/commentsBnt.gif); width:75px; height:21px; margin-right:8px;">
+          </td>
+        </tr>
+      </table>
+      </form>
+      </div>
       <!--评论表单 end-->
       </div>
      </div>

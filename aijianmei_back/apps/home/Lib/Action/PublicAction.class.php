@@ -310,7 +310,8 @@ class PublicAction extends Action{
             $this->error(L('please_input_password'));
         }
 		$_POST['remember']=1;
-        $result = service('Passport')->loginLocal($username,$password,intval($_POST['remember']));
+        //$result = service('Passport')->loginLocal($username,$password,intval($_POST['remember']));
+		$result = service('Passport')->loginLocal($username,$password,1);
         $lastError = service('Passport')->getLastError(); 
         //检查是否激活
         if (!$result && $lastError =='用户未激活') {
@@ -325,7 +326,6 @@ class PublicAction extends Action{
 			@setcookie("LOGGED_AIUSER", $_POST['email'], time()+3600*24*30);
 			@setcookie('LOGGED_AICOD', md5("aijianmeipwd".$_POST['password']), time()+3600*24*30);			
 		
-		
             if(UC_SYNC && $result['reg_from_ucenter']){
                 //从UCenter导入ThinkSNS，跳转至帐号修改页
                 $refer_url = U('home/Public/userinfo');
@@ -339,20 +339,27 @@ class PublicAction extends Action{
              /*ecshoplogin by kontem at 20130412 start*/
             $get_usernameSql="select * from ai_user where email='".$_POST['email']."' and password='".md5($_POST['password'])."'";
             $get_usernameInfo = M('')->query($get_usernameSql);
-            $uid = M('')->query('select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"');
+			$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+            $uid = M('')->query($getUidSql);
             $_SESSION['user_id']   = $uid[0]['user_id'];
             $_SESSION['user_name'] = $uid[0]['user_name'];
             $_SESSION['email']     = $uid[0]['email'];
+			$_SESSION['ways']++;
             $time = time() - 3600;
-            @setcookie("ECS[user_id]",  '', $time, '/');  //set cookie         
+			if($_SESSION['mid']>0){
+				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
+			}
+            @setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
             @setcookie("ECS[password]", '', $time, '/');
-            
+            //print_r($_SESSION);
             /*ecshop login by kontem at 20130412 end*/
             // 登录商城
             //service('Shop')->login($_SESSION['mid']);
-            $this->assign('jumpUrl',$refer_url);
-            $this->assign('waitSecond',3);
-            $this->success($username.L('login_success').$result['login']);
+			//print_r($_SESSION);exit;
+			header("Location:$refer_url");
+            //$this->assign('jumpUrl',$refer_url);
+            //$this->assign('waitSecond',3);
+            //$this->success($username.L('login_success').$result['login']);
         }else {
             $this->error($lastError);
         }
@@ -406,8 +413,9 @@ class PublicAction extends Action{
 		@setcookie('LOGGED_AICOD','', $time);		
 		if(!empty($deluname))
 		{
-			$getSkeyArr=M('')->query("select sesskey FROM ecs_sessions WHERE user_name = '".$deluname."' LIMIT 1");
-			M('')->query("DELETE FROM ecs_sessions_data WHERE sesskey = '".$getSkeyArr[0]['sesskey']."' LIMIT 1");
+			$getSkeyArr=M('')->query("select sesskey FROM ecs_sessions WHERE user_name = '".$deluname."'");
+			M('')->query("DELETE FROM ecs_sessions_data WHERE sesskey = '".$getSkeyArr[0]['sesskey']."'");
+			M('')->query("DELETE FROM ecs_sessions WHERE sesskey = '".$getSkeyArr[0]['sesskey']."'");
 		}
         service('Passport')->logoutLocal();
         Addons::hook('public_after_logout');

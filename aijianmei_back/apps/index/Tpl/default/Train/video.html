@@ -7,7 +7,7 @@
                     <a href="/index.php?app=index&mod=Train&act=videoList&id=53">肌肉组</a>->
                     <a href="#">{$video['title']}</a>
                 </p>
-                <p class="ms_from">爱健美团队  发表于<span>14小时前</span></p>
+                <!--<p class="ms_from">爱健美团队  发表于<span>14小时前</span></p>-->
                 <div class="video_content clearfix">
                     <div class="v_area">    
                         <object width="634" height="450">
@@ -40,55 +40,61 @@
                         <div class="share_part">
                             <span class="wrap_like">
                                 <a class="click_like"></a>
-                                <span class="num_like">111</span>
+                                <span class="num_like">{$video['like']}</span>
                             </span>
                             <span class="click_share">
                                 我要分享:
-                                <a class="share_obj_1">腾讯</a>
-                                <a class="share_obj_2">微博</a>
+                                <!--<a class="share_obj_1">腾讯</a>-->
+								<script type="text/javascript">
+								(function(){
+								var p = {
+								url:location.href,
+								showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+								desc:'',/*默认分享理由(可选)*/
+								summary:'',/*分享摘要(可选)*/
+								title:'<?php echo $video['title'];?>',/*分享标题(可选)*/
+								site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+								pics:'<?php echo $video['logo']?>', /*分享图片的路径(可选)*/
+								style:'102',
+								width:68,
+								height:24
+								};
+								var s = [];
+								for(var i in p){
+								s.push(i + '=' + encodeURIComponent(p[i]||''));
+								}
+								document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+								})();
+								</script>
+								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+                                <a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=<?php echo $video['htmlurl'];?>&title=<?php echo $video['title'];?>&content=utf-8&pic=<?php echo $video['logo']?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a>
                             </span>
                         </div>
-<!--                    outside begin 2013/4/24 -->
-                            <!-- <div class="web_expend_2">
-                                <a class="sprite_8"><span class="praise">{$video['like']}</span></a>
-                                <a class="sprite_9"><span class="praise">{$video['unlike']}</span></a>
-                                <span class="relay">转发到</span>
-                                <include file="../Public/share" />
-                                              
-                            </div> -->
-							<wb:like appkey="5Q8YPj"></wb:like>  
-                            <!-- <div class="border_comment" style="margin-top:10px;">
-                                <span class="word_num">0/300</span>
+						<wb:like appkey="5Q8YPj"></wb:like>  
+						<div class="login_resgister">
+							<p>
+                                    还没有<a href="javascript:void(0)" class="login">登录</a>不能发表评论哦！还没有帐号吗？也可以现在就<a href="/index.php?app=index&mod=Index&act=selectRegister">注册</a>
+                                </p>
+                            </div>
+							<div class="border_comment" style="margin-top:10px;">
+							<form>
+				<span class="word_num"><input disabled maxLength="4" name="used" size="2" value="0" class="inputtext">/<input disabled maxLength="4" name="total" size="2" value="300" class="inputtext"></span>
                                 <php>if(getMid()){</php>
                                 <php>echo getUserName(getMid())</php>
                                 <php>}else {</php>
-                                <span><a href="javascript:void(0)" class="login">登录</a></span>|
-                                <span><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a></span>
+                                <span>&nbsp;&nbsp;</span>
+                                <span>&nbsp;&nbsp;</span>
                                 <php>}</php>
                                 <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
                                 <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
-                                <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox">有什么感想，来说说吧</textarea></div>
+                                <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox"  onKeyDown="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);" onKeyUp="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);">有什么感想，来说说吧</textarea></div>
                                 <a class="comment" onclick="addVideoCommont();">发表评论</a>
-                            </div> -->
-                            <div class="login_resgister">
-                                <p>
-                                    还没有<a>登录</a>不能发表评论哦！还没有帐号吗？也可以现在就<a>注册</a>
-                                </p>
+								</form>
                             </div>
                             <div class="check_comment">
                                 <p class="comment_1">全部评论(<?php echo $cRecomnums;?>)</p>
                             </div>
                             <div class="cm_content tab_2">
-                                <!-- <div class="cm_top">
-                                    <span class="page_1">
-                                        <span class="lay_page">
-                                        <?php printf($pager['thestr'],'class="choice_page"');?>
-                                        </span>
-                                        <?php printf($pager['backstr'],'class="pre_page"');?>
-                                        <?php printf($pager['nextstr'],'class="next_page"');?>
-                                    </span>
-                                    <span>第<?php echo $_GET['pg'];?>页</span>
-                                </div> -->
                                 <div class="page clearfix">
                                     <span class="concrete_choice">
                                         {$pager[backstr]}
@@ -106,10 +112,9 @@
                                     </span>
                                 </div>
                                 <div class="cm_bottom" id="recomment_fdiv">
-                                    <h5 class="title_5" >推荐精华</h5>
                                     <php> foreach($RecommentsList as $v){ </php>
                                     <div class="target clearfix">
-                                        <div class="target_pic"><img src="<?php echo $v['img'];?>" alt="no" /><span class="care">关注</span></div>
+                                        <div class="target_pic"><img src="<?php echo $v['img'];?>" alt="<?php echo $v['username'];?>" /></div>
                                         <div class="cm_left">
                                             <a class="name"><?php echo $v['username'];?></a>
                                             <p><?php echo $v['content'];?></p>

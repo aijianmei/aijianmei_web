@@ -407,7 +407,7 @@ function check_email()
            </font>
         </div>
   <!--{/foreach}-->
-  <div class="more"><a href="../search.php?intro=best"><img src="images/more.gif" />sdfasdf</a></div>
+  <div class="more"><a href="../search.php?intro=best"><img src="images/more.gif" /></a></div>
   <!-- {if $cat_rec_sign neq 1} -->
   </div>
 </div>
