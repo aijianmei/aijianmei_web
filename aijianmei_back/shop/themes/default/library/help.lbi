@@ -13,31 +13,31 @@
     
    <div class="clearfix">
 <dl>
-  <dt class="dt1"><a href="article_cat-6.html" title="购物指南" rel="nofollow">购物指南</a></dt>
+  <dt class="dt1"><a href="{$_buttomTagInfo.shopguide.url}" title="{$_buttomTagInfo.shopguide.name}" rel="nofollow">{$_buttomTagInfo.shopguide.name}</a></dt>
     <dd><a href="{$_buttomTagInfo.shop_need_know.url}" title="{$_buttomTagInfo.shop_need_know.name}" rel="nofollow">{$_buttomTagInfo.shop_need_know.name}</a></dd>
     <dd><a href="{$_buttomTagInfo.orderinfo.url}" title="{$_buttomTagInfo.orderinfo.name}" rel="nofollow">{$_buttomTagInfo.orderinfo.name}</a></dd>
     <dd><a href="{$_buttomTagInfo.shopprocess.url}" title="{$_buttomTagInfo.shopprocess.name}" rel="nofollow">{$_buttomTagInfo.shopprocess.name}</a></dd>
   </dl>
 <dl>
-  <dt class="dt2"><a href="article_cat-7.html" title="快递发货" rel="nofollow">快递发货</a></dt>
+  <dt class="dt2"><a href="{$_buttomTagInfo.expressdelivery.url}" title="{$_buttomTagInfo.expressdelivery.name}" rel="nofollow">{$_buttomTagInfo.expressdelivery.name}</a></dt>
     <dd><a href="{$_buttomTagInfo.shoprange.url}" title="{$_buttomTagInfo.shoprange.name} " rel="nofollow">{$_buttomTagInfo.shoprange.name}</a></dd>
     <dd><a href="{$_buttomTagInfo.shipmethos.url}" title="{$_buttomTagInfo.shipmethos.name} " rel="nofollow">{$_buttomTagInfo.shipmethos.name}</a></dd>
     <dd><a href="{$_buttomTagInfo.acceptance.url}" title="{$_buttomTagInfo.acceptance.name}" rel="nofollow">{$_buttomTagInfo.acceptance.name}</a></dd>
   </dl>
 <dl>
-  <dt class="dt3"><a href="article_cat-8.html" title="如何支付" rel="nofollow">如何支付</a></dt>
+  <dt class="dt3"><a href="{$_buttomTagInfo.howtopay.url}" title="{$_buttomTagInfo.howtopay.name}" rel="nofollow">{$_buttomTagInfo.howtopay.name}</a></dt>
     <dd><a href="{$_buttomTagInfo.onlinebankingpay.url}" title="{$_buttomTagInfo.onlinebankingpay.name} " rel="nofollow">{$_buttomTagInfo.onlinebankingpay.name}</a></dd>
     <dd><a href="{$_buttomTagInfo.alipay.url}" title="{$_buttomTagInfo.alipay.name}" rel="nofollow">{$_buttomTagInfo.alipay.name}</a></dd>
     <dd><a href="{$_buttomTagInfo.prepayment.url}" title="{$_buttomTagInfo.prepayment.name}" rel="nofollow">{$_buttomTagInfo.prepayment.name}</a></dd>
   </dl>
 <dl>
-  <dt class="dt4"><a href="article_cat-9.html" title="售后服务" rel="nofollow">售后服务</a></dt>
+  <dt class="dt4"><a href="{$_buttomTagInfo.salesservice.url}" title="{$_buttomTagInfo.salesservice.name}" rel="nofollow">{$_buttomTagInfo.salesservice.name}</a></dt>
     <dd><a href="{$_buttomTagInfo.returnprocess.url}" title="{$_buttomTagInfo.returnprocess.name}" rel="nofollow">{$_buttomTagInfo.returnprocess.name}</a></dd>
     <dd><a href="{$_buttomTagInfo.returnpolicy.url}" title="{$_buttomTagInfo.returnpolicy.name} " rel="nofollow">{$_buttomTagInfo.returnpolicy.name}</a></dd>
     <dd><a href="{$_buttomTagInfo.refundinstructions.url}" title="{$_buttomTagInfo.refundinstructions.name}" rel="nofollow">{$_buttomTagInfo.refundinstructions.name}</a></dd>
   </dl>
 <dl>
-  <dt class="dt5"><a href="article_cat-10.html" title="常见问题" rel="nofollow">常见问题</a></dt>
+  <dt class="dt5"><a href="{$_buttomTagInfo.askedquestions.url}" title="{$_buttomTagInfo.askedquestions.name}" rel="nofollow">{$_buttomTagInfo.askedquestions.name}</a></dt>
     <dd><a href="{$_buttomTagInfo.about.url}" title="{$_buttomTagInfo.about.name}" rel="nofollow">{$_buttomTagInfo.about.name}</a></dd>
     <dd><a href="{$_buttomTagInfo.termsservice.url}" title="{$_buttomTagInfo.termsservice.name}" rel="nofollow">{$_buttomTagInfo.termsservice.name}</a></dd>
     <dd><a href="{$_buttomTagInfo.shoppingguide.url}" title="{$_buttomTagInfo.shoppingguide.name}" rel="nofollow">{$_buttomTagInfo.shoppingguide.name}</a></dd>

@@ -3,5 +3,9 @@
                 <div class="content">
                     {$content}
                 </div>
-                <include file="../Public/sider" />	
+				<php>if($_GET['id']>8){</php>
+                <include file="../Public/shopsider" />
+				<php>}else{</php>
+ <include file="../Public/sider" />
+<php>}</php> 
             <include file="../Public/footer" />
