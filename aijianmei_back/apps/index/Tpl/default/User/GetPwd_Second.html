@@ -2,7 +2,8 @@
 <script type='text/javascript'>
 function sendEmail() {
 	var email =$("#email").val();
-	$.post('index.php?app=index&mod=User&act=sendemail&sendact=resend', {'email':email}, function(m) {
+	var sendact=$("#sendact").val();
+	$.post('index.php?app=index&mod=User&act=sendemail&sendact=resend', {'email':email,'sendact':sendact}, function(m) {
 	if(m==1) {
 		alert(m);
 	}else {
@@ -10,7 +11,8 @@ function sendEmail() {
 	}
 	})
 }
-</script>				
+</script>
+				
 <link rel="stylesheet" href="../Public/css/retrieve.css" />
 	<div id="content" class=" clearfix">
 		<h1 class="title">找回密码</h1>
@@ -22,11 +24,33 @@ function sendEmail() {
 				</ol>
 			</div>
 			<div class="text_2">
-			<a href="/index.php?app=index&mod=User&act=getmailcode" class="next">下一步</a>
+			<php> if($is_send==1){</php>
+			<p style="color:red;">邮件已经发送，请注意查收！</p>
+			<php> }</php>
+			<!--<a href="/index.php?app=index&mod=User&act=getmailcode" class="next">下一步</a>-->
 			<p>没有收到我们的邮箱？</p>
-			<p>到邮件垃圾箱找找，或者点击这里<a href="" class="again">重新发送找回密码邮件</a></p>
-			<input type="hidden" id="email" value="<php>echo $email</php>">
+			<p>到邮件垃圾箱找找，或者点击这里<a href="javascript:void(0);" class="again">重新发送找回密码邮件</a></p>
+			<input type="hidden" id="email"  name="email" value="<php>echo $email</php>">
+			<input type="hidden" id="sendact" name="sendact" value="resend">
 		</div>
 	</div>
-
+<script language="javascript" type="text/javascript"> 
+document.onkeydown = function() 
+{ 
+/* 
+(ctrlKey == true && keyCode == 82)    Ctrl+R    ---刷新 
+(keyCode == 116)                      F5        ---刷新
+(ctrlKey == true && keyCode == 116)   Ctrl+F5   ---强制刷新 
+*/ 
+    //window.alert(event.keyCode); 
+    var k = event.keyCode; 
+    if((event.ctrlKey == true && k == 82) || (k == 116) || (event.ctrlKey == true && k == 116)) 
+     { 
+        //return (window.confirm("关闭?")); 
+         event.keyCode = 0; 
+         event.returnValue = false; 
+         event.cancelBubble = true; 
+     }
+} 
+</script>
 <include file="../Public/footer" />

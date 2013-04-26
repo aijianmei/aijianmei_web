@@ -12,7 +12,9 @@ class UserAction extends Action {
 	public function sendemail()
 	{
 		if ((md5(strtoupper($_POST['verifyStr'])) != $_SESSION['verify'])&&$_SESSION['is_PortMail']!=1){
-			redirect(U('index/User/setinfo'));
+			if($_POST['sendact']!='resend'){
+				redirect(U('index/User/setinfo'));
+			}
 		}
 		$_SESSION['is_PortMail']=1;
 		$codeurl=md5("aijianmei".$_POST['email']);
@@ -20,7 +22,7 @@ class UserAction extends Action {
 		$check_sql="select * from ai_returncode_log where codeurl='".$codeurl."' and uname='".$_POST['email']."' and out_time>".time();
 		$checkArr=M('')->query($check_sql);		
 		if(!$checkArr[0]['id']){
-			$_baseUrl="http://www.kon_aijianmei.com/index.php?app=index&mod=User&act=getmailcode&uname=".$_POST['email']."&acitve=";
+			$_baseUrl=SITE_URL."/index.php?app=index&mod=User&act=getmailcode&uname=".$_POST['email']."&acitve=";
 			$_baseUrl.=$codeurl;
 			$out_time=time()+3600;
 			$out_time_str=date("Y-m-d H:i:s",$out_time);
@@ -41,7 +43,7 @@ class UserAction extends Action {
 		else{
 			$out_time=$checkArr[0]['out_time'];
 			$out_time_str=date("Y-m-d H:i:s",$out_time);
-			$_baseUrl="http://www.kon_aijianmei.com/index.php?app=index&mod=User&act=getmailcode&uname=".$_POST['email']."&acitve=";
+			$_baseUrl=SITE_URL."/index.php?app=index&mod=User&act=getmailcode&uname=".$_POST['email']."&acitve=";
 			$_baseUrl.=$codeurl;
 			$service = service('Mail');
 			$subject = '重置密码邮件|爱健美网';
@@ -56,6 +58,7 @@ class UserAction extends Action {
 			$info = $service->send_email($toemail, $subject, $content);
 		}
         if($_POST['sendact']=='resend'){echo $info;exit;}
+		$this->assign('is_send', $info);
 		$this->assign('email', addslashes($_POST['email']));
 		$this->display('GetPwd_Second');
 	}
@@ -84,9 +87,6 @@ class UserAction extends Action {
 		//print_r($_SESSION['psonkey']);
 		$this->display('GetPwd_Fourth');
 	}
-	
-	
-	
 	
 	public function loginUserInfo()
 	{
@@ -138,13 +138,31 @@ class UserAction extends Action {
 			$upsql="UPDATE ai_user SET password='".md5($_POST['passwordlib'])."',email='".$_POST['email']."', province='".$_POST['province']."',city='".$_POST['city']."',sex='".$_POST['sex']."' where uid='".$_POST['mid']."'";
 			M('')->query($upsql);
 			$healthArr=M('')->query("select * from ai_user_health where uid='".$_POST['mid']."'");
+			
 			include_once('shopApi.php');
 			$sdata=null;
-			$sdata['username']=addslashes($_POST['nickname']);
-			$sdata['password']=addslashes($_POST['password']);
+			$sdata['uname']=addslashes($_POST['uname']);
+			$sdata['password']=addslashes($_POST['passwordlib']);
 			$sdata['email']   =addslashes($_POST['email']);
 			_postCurlRegister($sdata);
 			$this->assign('healthArr', $healthArr[0]);
+			
+			$get_usernameSql="select * from ai_user where email='".$_POST['email']."'";
+			$get_usernameInfo = M('')->query($get_usernameSql);
+			$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+			$uid = M('')->query($getUidSql);
+			if($uid){
+				$_SESSION['user_id']   = $uid[0]['user_id'];
+				$_SESSION['user_name'] = $uid[0]['user_name'];
+				$_SESSION['email']     = $uid[0]['email'];
+				$_SESSION['ways']++;
+				$time = time() - 3600;
+				if($_SESSION['mid']>0){
+					$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
+				}
+				@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
+				@setcookie("ECS[password]", '', $time, '/');
+			}
 		}
 		$_SESSION['deslogin']=0;
 		$this->display('loginNext');
@@ -162,12 +180,16 @@ class UserAction extends Action {
 		M('')->query($insertSql);
 	}
 	$_SESSION['deslogin']=0;
-	if($_SESSION['loginBef_url']!=''){
+	//print_r($_SESSION);
+	if($_SESSION['loginBef_url']!=''&&$_SESSION['shoprefer_url']==''){
 		//redirect($_SESSION['loginBef_url']);
 		redirect(U('index/Index/index'));
 	}
+	elseif($_SESSION['shoprefer_url']!=''){
+		redirect($_SESSION['shoprefer_url']);
+		//redirect(U('index/Index/index'));
+	}
 	else{
-		//redirect($_SESSION['loginBef_url']);
 		redirect(U('index/Index/index'));
 	}
 	}
