@@ -224,6 +224,23 @@ function show_banner($type){
 				if(empty($checkEmailArr[0]['email'])){
 					redirect(U('index/User/loginUserInfo'));
 				}
+				$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
+				$get_usernameInfo = M('')->query($get_usernameSql);
+				$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+				$uid = M('')->query($getUidSql);
+				$_SESSION['user_id']   = $uid[0]['user_id'];
+				$_SESSION['user_name'] = $uid[0]['user_name'];
+				$_SESSION['email']     = $uid[0]['email'];
+				$_SESSION['ways']++;
+				$time = time() - 3600;
+				if($_SESSION['mid']>0){
+					$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
+				}
+				@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
+				@setcookie("ECS[password]", '', $time, '/');
+				redirect($_SESSION['refer_url']);
+				//header("Location:$refer_url");
+				//redirect(U('index/User/loginUserInfo'));
 				//service('Passport')->loginLocal($logId[0]['uid']);
             }else {
                 $data['email'] = '';
@@ -296,6 +313,7 @@ function show_banner($type){
 				redirect(U('index/User/loginUserInfo'));
 				//redirect(U('home/Account/index',array('esg'=>'needemail')));
 			}
+			redirect($_SESSION['refer_url']);
         }
         $this->setTitle('index');
         $this->assign('uid',$this->mid);

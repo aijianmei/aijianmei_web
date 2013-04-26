@@ -47,8 +47,9 @@ document.onkeydown = function()
 			<form class="massage_side" action="/index.php?app=index&mod=User&act=setUserInfo" method="post" id="saveform">
 				<ul>
 					<li>
-						<input type="text" id="login" class="input login_email" value="<php>echo $_SESSION['uname'];</php>" name="nickname" readonly="readonly" disabled="disabled">
+						<input type="text" id="login" class="input login_email" value="<php>echo $_SESSION['uname'];</php>" name="nickname" disabled="disabled">
 						<!--<label class="label_1 forinput">昵称</label>-->
+						<input type="hidden" value="<php>echo $_SESSION['uname'];</php>" name="uname">
 					</li>
 					<li>
 						<input type="email" id="email" class="input email" value="<php>echo $userinfo['email'];</php>" name="email">

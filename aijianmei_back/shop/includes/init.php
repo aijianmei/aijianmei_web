@@ -318,15 +318,18 @@ define('SITE_URL','http://www.kon_aijianmei.com');
 define('THEME_URL','http://www.kon_aijianmei.com/public');
 //$sql="select * from ai";
 //$res = $GLOBALS['db']->query($sql);
-if($_SESSION['mid']>0&&$_SESSION['user_img']==''){
+if($_SESSION['mid']>0){
 	$_SESSION['user_img']=getUserFace($_SESSION['mid'],'s');
 }
 //print_r($_SESSION);
+    if (isset($smarty))
+    {
 $smarty->assign('aijianmeiurl','http://www.kon_aijianmei.com');
 define('_BUTTOMROOT',dirname(dirname(dirname(__FILE__))));
 $_buttomTagInfo=unserialize(include(_BUTTOMROOT."/buttomTagInfo.php"));
 $smarty->assign('_buttomTagInfo',$_buttomTagInfo);
-
+$smarty->assign('ecs_session', $_SESSION);
+}
 //print_r($_SESSION);
 /* 判断是否支持 Gzip 模式 */
 if (!defined('INIT_NO_SMARTY') && gzip_enabled())
