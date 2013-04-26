@@ -111,6 +111,7 @@ if ($action == 'default')
 /* 显示会员注册界面 */
 if ($action == 'register')
 {
+die("403");
     if ((!isset($back_act)||empty($back_act)) && isset($GLOBALS['_SERVER']['HTTP_REFERER']))
     {
         $back_act = strpos($GLOBALS['_SERVER']['HTTP_REFERER'], 'user.php') ? './index.php' : $GLOBALS['_SERVER']['HTTP_REFERER'];
@@ -301,6 +302,7 @@ elseif($action == 'check_email')
 /* 用户登录界面 */
 elseif ($action == 'login')
 {
+die("403");
     if (empty($back_act))
     {
         if (empty($back_act) && isset($GLOBALS['_SERVER']['HTTP_REFERER']))

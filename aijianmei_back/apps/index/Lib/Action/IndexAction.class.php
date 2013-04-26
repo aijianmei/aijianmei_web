@@ -238,7 +238,7 @@ function show_banner($type){
 				}
 				@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
 				@setcookie("ECS[password]", '', $time, '/');
-				redirect($_SESSION['refer_url']);
+				redirect($_SESSION['shoprefer_url']);
 				//header("Location:$refer_url");
 				//redirect(U('index/User/loginUserInfo'));
 				//service('Passport')->loginLocal($logId[0]['uid']);

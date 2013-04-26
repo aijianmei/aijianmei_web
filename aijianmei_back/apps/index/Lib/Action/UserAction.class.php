@@ -180,12 +180,13 @@ class UserAction extends Action {
 		M('')->query($insertSql);
 	}
 	$_SESSION['deslogin']=0;
-	if($_SESSION['loginBef_url']!=''&&$_SESSION['refer_url']==''){
+	//print_r($_SESSION);
+	if($_SESSION['loginBef_url']!=''&&$_SESSION['shoprefer_url']==''){
 		//redirect($_SESSION['loginBef_url']);
 		redirect(U('index/Index/index'));
 	}
-	elseif($_SESSION['refer_url']!=''){
-		redirect($_SESSION['refer_url']);
+	elseif($_SESSION['shoprefer_url']!=''){
+		redirect($_SESSION['shoprefer_url']);
 		//redirect(U('index/Index/index'));
 	}
 	else{

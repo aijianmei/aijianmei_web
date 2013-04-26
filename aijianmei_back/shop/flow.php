@@ -180,6 +180,7 @@ elseif ($_REQUEST['step'] == 'link_buy')
 }
 elseif ($_REQUEST['step'] == 'login')
 {
+	die("403");
     include_once('languages/'. $_CFG['lang']. '/user.php');
 
     /*

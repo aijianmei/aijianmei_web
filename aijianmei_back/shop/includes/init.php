@@ -312,7 +312,7 @@ if ((DEBUG_MODE & 4) == 4)
 
 //print_r($_SESSION);
 $_SESSION['refer_url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-
+$_SESSION['shoprefer_url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 define('SITE_PATH','http://www.kon_aijianmei.com');
 define('SITE_URL','http://www.kon_aijianmei.com');
 define('THEME_URL','http://www.kon_aijianmei.com/public');
@@ -322,8 +322,8 @@ if($_SESSION['mid']>0){
 	$_SESSION['user_img']=getUserFace($_SESSION['mid'],'s');
 }
 //print_r($_SESSION);
-    if (isset($smarty))
-    {
+if (isset($smarty))
+{
 $smarty->assign('aijianmeiurl','http://www.kon_aijianmei.com');
 define('_BUTTOMROOT',dirname(dirname(dirname(__FILE__))));
 $_buttomTagInfo=unserialize(include(_BUTTOMROOT."/buttomTagInfo.php"));
