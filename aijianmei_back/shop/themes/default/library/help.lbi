@@ -177,38 +177,51 @@
                 changestyle : function(T){
                     var fade_in = fade.newdom.getElementsByClass('fade_in')[0],
                         modal = fade.newdom.getElementsByClass('modal')[0];
-                    if(T == '1'){
-                        var i = 0,
-                            top = fade.newdom.GetCurrentStyle(modal,'top');
-                        var round = function(){
-                            setTimeout(function(){
-                                i = i + 0.05;
-                                fade_in.style.opacity = i;
-                                top = parseFloat(top) + 20;
-                                modal.style.top = top + 'px';
-                                if(top < 200){
-                                    round()
-                                }
-                            },1);
-                        }
-                        round()
+                    if(isFirefox=navigator.userAgent.indexOf("Firefox")>0){
+                      if(T == '1'){
+                          var i = 0,
+                              top = fade.newdom.GetCurrentStyle(modal,'top');
+                          var round = function(){
+                              setTimeout(function(){
+                                  i = i + 0.05;
+                                  fade_in.style.opacity = i;
+                                  top = parseFloat(top) + 20;
+                                  modal.style.top = top + 'px';
+                                  if(top < 200){
+                                      round()
+                                  }
+                              },1);
+                          }
+                          round()
+                      }
+                      else{
+                          var i = 0.75,
+                              top = fade.newdom.GetCurrentStyle(modal,'top');
+                          var round = function(){
+                              setTimeout(function(){
+                                  i = i - 0.05;
+                                  fade_in.style.opacity = i;
+                                  top = parseFloat(top) - 20;
+                                  modal.style.top = top + 'px';
+                                  if(top > -120){
+                                      round()
+                                  }
+                              },10);
+                          }
+                          round()
+                      }   
                     }
                     else{
-                        var i = 0.75,
-                            top = fade.newdom.GetCurrentStyle(modal,'top');
-                        var round = function(){
-                            setTimeout(function(){
-                                i = i - 0.05;
-                                fade_in.style.opacity = i;
-                                top = parseFloat(top) - 20;
-                                modal.style.top = top + 'px';
-                                if(top > -120){
-                                    round()
-                                }
-                            },10);
-                        }
-                        round()
-                    }   
+                      if(T == '1'){
+                        fade_in.style.opacity = 0.8;
+                        modal.style.top = '200px'
+                      }
+                      else{
+                        fade_in.style.opacity = -0.05;
+                        modal.style.top = '-120px'
+                      }
+
+                    }
                 }
             };
             var newdom = new getdom;
