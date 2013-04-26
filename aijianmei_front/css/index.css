@@ -96,10 +96,12 @@
 		height:200px;
 		width:300px;
 	}
-	.show_enter{
-		position: relative;
-		padding: 2px;
+	.show_img{
+		padding:2px;
 		box-shadow: 0 0 8px #ccc;
+	}
+	.show_enter{
+		position: relative; 
 		overflow: hidden;
 	}
 	.lay_top{
@@ -140,7 +142,6 @@
 		.ms_hidden_part{
 			position: absolute;
 			top:152px;
-			left:2px;
 			width: 300px;
 			height:200px;
 			font:22px 'Microsoft YaHei',微软雅黑,Arial,Lucida Grande,Tahoma,sans-serif;
@@ -153,7 +154,6 @@
 			display: block;
 			width: 300px;
 			height:200px;
-			left:2px;
 			top:152px;
 			background: black;
 			opacity: 0.5;
@@ -165,7 +165,6 @@
 			display: block;
 			width: 300px;
 			height:200px;
-			left:2px;
 			top:152px;
 			z-index:6;
 		}

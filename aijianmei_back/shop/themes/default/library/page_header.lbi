@@ -1,5 +1,4 @@
 {insert_scripts files='transport.js,utils.js'}
-<link rel="stylesheet" type="text/css" href="themes/default/default.css" />
     <div class="body"></div>
     <div class="sheet" id="sheet">
         <div class="log">
