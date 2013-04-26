@@ -140,7 +140,11 @@
                     sheet = newdom.getElementsByClass('sheet')[0],
                     close_btn = newdom.getElementsByClass('close_btn')[0],
                     more = newdom.getElementsByClass('more')[0],
-                    len = login.length;
+                    label_1 = newdom.getElementsByClass('label_1')[0],
+                    label_2 = newdom.getElementsByClass('label_2')[0],
+                    len = login.length,
+                    mail = document.getElementById('mail'),
+                    psd = document.getElementById('psd');
                 aijianmei.p_fixed(header);
                 addevent(more,'mouseover',aijianmei.hover_1);
                 addevent(more,'mouseout',aijianmei.hover_2)
@@ -148,6 +152,48 @@
                     login[i].onclick = function(){
                         body.style.display = 'block';
                         sheet.style.display = 'block';
+                        if(mail.value != ""){
+                          label_1.style.display = 'none';
+                          label_2.style.display = 'none'
+                        }
+                        mail.onfocus = function(){
+                          label_1.style.display = 'none';
+                        }
+                        mail.onblur = function(){
+                          if(this.value == ''){
+                            label_1.style.display = 'block';
+                          }
+                          else{
+                            var e_reg = new RegExp(),
+                                e_reg = /^\w+((_-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|_-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/,
+                                v_mail = mail.value;
+                            if(e_reg.test(v_mail) == false){
+                                newdom.getElementsByClass('tip')[0].style.display = 'inline';
+                            }
+                            else{
+                                newdom.getElementsByClass('tip')[0].style.display = 'none';
+                            }
+                          }
+                        }
+                        psd.onfocus = function(){
+                          label_2.style.display = 'none';
+                        }
+                        psd.onblur = function(){
+                          if(this.value == ''){
+                            label_2.style.display = 'block'
+                          }
+                          else{
+                            var p_reg = new RegExp(),
+                                p_reg = /[0-9A-Za-z]{6,16}/,
+                                v_psd = psd.value;
+                            if(p_reg.test(v_psd) == false){
+                                newdom.getElementsByClass('tip')[1].style.display = 'inline';
+                            }
+                            else{
+                                newdom.getElementsByClass('tip')[1].style.display = 'none';
+                            }
+                          }
+                        }
                     }
                 }
                 close_btn.onclick = function(){
