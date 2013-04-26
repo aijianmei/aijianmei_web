@@ -8,12 +8,12 @@
                 <form action="/index.php?app=home&mod=Public&act=doLogin" method="post">
                     <h4 class="tit">使用注册邮箱登录</h4>
                     <div class="text_input">
-                        <label for="mail">爱健美注册邮箱</label>
+                        <label for="mail" class="label_1">爱健美注册邮箱</label>
                         <input type="text" id="mail" name="email" />
                         <span class="tip">请输入正确的邮箱地址</span>
                     </div>
                     <div class="text_input">
-                        <label for="psd">密码</label>
+                        <label for="psd"  class="label_2">密码</label>
                         <input type="password" id="psd" name="password" />
                         <span class="tip">密码长度为6~16个的数字或者字母</span>
                     </div>

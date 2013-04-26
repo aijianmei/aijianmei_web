@@ -88,6 +88,9 @@ $(function(){
         else{
             _e.returnValue = false;
         }
+        if($(".text_input input").val() != ''){
+            $(".text_input input").siblings().hide(); 
+        }
         $("div.body").slideDown(300,function(){
             $("html").css("overflow","hidden").height("100%");
             $(this).css({"display":"block","opacity":"0.7"});
@@ -105,7 +108,8 @@ $(function(){
         
         });
     });
-    
+
+
     $(".text_input input").focus(function(){
         $(this).siblings().hide();          
     });
