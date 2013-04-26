@@ -135,7 +135,7 @@ class UserAction extends Action {
 	public function setUserInfo()
 	{
 		if($_POST['mid']==$_SESSION['mid']&&$_POST['setInfoType']=='others'){
-			$upsql="UPDATE ai_user SET password='".md5($_POST['passwordlib'])."',email='".$_POST['email']."', province='".$_POST['province']."',city='".$_POST['city']."',sex='".$_POST['sex']."' where uid='".$_POST['mid']."'";
+			$upsql="UPDATE ai_user SET password='".md5($_POST['passwordlib'])."',email='".$_POST['email']."', province='".$_POST['province']."',city='".$_POST['city']."',sex='".$_POST['sex']."',is_init=1 where uid='".$_POST['mid']."'";
 			M('')->query($upsql);
 			$healthArr=M('')->query("select * from ai_user_health where uid='".$_POST['mid']."'");
 			
