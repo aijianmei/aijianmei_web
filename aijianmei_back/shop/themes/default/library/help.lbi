@@ -99,6 +99,14 @@
 
             var aijianmei = {
                 newdom : new getdom,
+                getclass : function(obj,T){
+                  if(T){
+                    return aijianmei.newdom.getElementsByClass(obj);
+                  }
+                  else{
+                    return aijianmei.newdom.getElementsByClass(obj)[0];
+                  }
+                },
                 p_fixed : function(obj){
                     if(navigator.userAgent.indexOf("MSIE")>0){
                         obj.className = 'header'
@@ -114,6 +122,14 @@
                             }       
                         }
                     }
+                },
+                hover_1 : function(){
+                  var account = aijianmei.getclass('account');
+                  account.style.display = 'block'
+                },
+                hover_2 : function(){
+                  var account = aijianmei.getclass('account');
+                  account.style.display = 'none'
                 }
             }
             var init = function(){
@@ -123,8 +139,11 @@
                     body = newdom.getElementsByClass('body')[0],
                     sheet = newdom.getElementsByClass('sheet')[0],
                     close_btn = newdom.getElementsByClass('close_btn')[0],
+                    more = newdom.getElementsByClass('more')[0],
                     len = login.length;
                 aijianmei.p_fixed(header);
+                addevent(more,'mouseover',aijianmei.hover_1);
+                addevent(more,'mouseout',aijianmei.hover_2)
                 for(var i = 0;i < len;i++){
                     login[i].onclick = function(){
                         body.style.display = 'block';
