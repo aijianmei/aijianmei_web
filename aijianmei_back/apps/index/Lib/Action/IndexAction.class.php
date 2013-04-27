@@ -238,9 +238,9 @@ function show_banner($type){
 				}
 				@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
 				@setcookie("ECS[password]", '', $time, '/');
-				if($_SESSION['shoprefer_url']!=''){
-					redirect($_SESSION['shoprefer_url']);
-				}
+				//if($_SESSION['shoprefer_url']!=''){
+				//	redirect($_SESSION['shoprefer_url']);
+				//}
 				//header("Location:$refer_url");
 				//redirect(U('index/User/loginUserInfo'));
 				//service('Passport')->loginLocal($logId[0]['uid']);
@@ -315,9 +315,9 @@ function show_banner($type){
 				redirect(U('index/User/loginUserInfo'));
 				//redirect(U('home/Account/index',array('esg'=>'needemail')));
 			}
-			if($_SESSION['shoprefer_url']!=''){
-				redirect($_SESSION['shoprefer_url']);
-			}
+			//if($_SESSION['shoprefer_url']!=''){
+			//	redirect($_SESSION['shoprefer_url']);
+			//}
         }
         $this->setTitle('index');
         $this->assign('uid',$this->mid);
@@ -935,9 +935,24 @@ function show_banner($type){
         $data['uid'] = $uid;
         M('user_attr')->add($data);
         service('Passport')->loginLocal($uid);
-        //service('Shop')->register($data['uname'], $data['email'], $data['password']);
-        //redirect(U('index/Index/index'));
-        //redirect(U('home/Account/index'));
+		
+		$get_usernameSql="select * from ai_user where email='".$_POST['email']."'";
+		$get_usernameInfo = M('')->query($get_usernameSql);
+		$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+		$uid = M('')->query($getUidSql);
+		$_SESSION['user_id']   = $uid[0]['user_id'];
+		$_SESSION['user_name'] = $uid[0]['user_name'];
+		$_SESSION['email']     = $uid[0]['email'];
+		$_SESSION['ways']++;
+		$time = time() - 3600;
+		if($_SESSION['mid']>0){
+			$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
+		}
+		@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
+		@setcookie("ECS[password]", '', $time, '/');
+		//if($_SESSION['shoprefer_url']!=''){
+		//	redirect($_SESSION['shoprefer_url']);
+		//}
 		//redirect(U('home/Account/index'));
 		redirect(U('index/User/loginUserInfo'));
     }
