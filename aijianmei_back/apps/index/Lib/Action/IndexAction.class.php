@@ -201,7 +201,7 @@ function show_banner($type){
         if(!empty($_REQUEST['code'])) {
             require_once $_SERVER['DOCUMENT_ROOT'].'/saetv2.ex.class.php';
             $sina = new SaeTOAuthV2('3622140445', 'f94d063d06365972215c62acaadf95c3');
-            $token = $sina->getAccessToken('code', array('code'=>$_REQUEST['code'], 'redirect_uri'=>'http://dev.aijianmei.com/index.php'));
+            $token = $sina->getAccessToken('code', array('code'=>$_REQUEST['code'], 'redirect_uri'=>'http://www.aijianmei.com/index.php'));
             $client = new SaeTClientV2('3622140445', 'f94d063d06365972215c62acaadf95c3', $token['access_token']);
 
             $uid_get = $client->get_uid();
@@ -238,7 +238,9 @@ function show_banner($type){
 				}
 				@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
 				@setcookie("ECS[password]", '', $time, '/');
-				redirect($_SESSION['shoprefer_url']);
+				if($_SESSION['shoprefer_url']!=''){
+					redirect($_SESSION['shoprefer_url']);
+				}
 				//header("Location:$refer_url");
 				//redirect(U('index/User/loginUserInfo'));
 				//service('Passport')->loginLocal($logId[0]['uid']);
@@ -313,7 +315,9 @@ function show_banner($type){
 				redirect(U('index/User/loginUserInfo'));
 				//redirect(U('home/Account/index',array('esg'=>'needemail')));
 			}
-			redirect($_SESSION['refer_url']);
+			if($_SESSION['shoprefer_url']!=''){
+				redirect($_SESSION['shoprefer_url']);
+			}
         }
         $this->setTitle('index');
         $this->assign('uid',$this->mid);

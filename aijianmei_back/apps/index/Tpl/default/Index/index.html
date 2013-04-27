@@ -155,7 +155,8 @@
 function showmore(){
 	var page=$("#morepagenum").val();
 		if(page>5){
-	return false;
+		$("#anymorelib").remove();
+		return false;
 	}
 	$.ajax({
    type: "POST",
@@ -178,6 +179,9 @@ function showmore(){
 	 
 	 $.getScript("http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454");
 	 page=(page*1)+1;
+	 if(page>5){
+		$("#anymorelib").remove();
+		}
 	 $("#morepagenum").val(page);
 	 }
    }
