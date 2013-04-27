@@ -146,8 +146,11 @@
                     mail = document.getElementById('mail'),
                     psd = document.getElementById('psd');
                 aijianmei.p_fixed(header);
-                addevent(more,'mouseover',aijianmei.hover_1);
-                addevent(more,'mouseout',aijianmei.hover_2)
+                if(more){
+                  addevent(more,'mouseover',aijianmei.hover_1);
+                  addevent(more,'mouseout',aijianmei.hover_2)
+                }
+                  
                 for(var i = 0;i < len;i++){
                     login[i].onclick = function(){
                         body.style.display = 'block';
