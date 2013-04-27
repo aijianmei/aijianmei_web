@@ -14,12 +14,6 @@ function gbcount(message,total,used,remain)
 		remain.value = max - used.value; 
 	} 
 }
-		
-	
-
-
-
-
 
 $(function(){
     var sWidth = $("#banner").width(), //获取焦点图的宽度（显示面积）
@@ -595,4 +589,47 @@ $(function(){
 }); 
  
  
- 
+ 			var aijianmei = {
+                newdom : new getdom,
+                p_fixed : function(obj){
+                    window.onscroll = function(){
+                        var top = document.body.scrollTop || window.pageYOffset || document.documentElement.scrollTop;
+                        if(top >= 50){
+                            obj.className = 'header p_fixed';
+                        }
+                        else{
+                            obj.className = 'header'
+                        }       
+                    }
+                },
+                change_num : function(obj,show){
+	            	var obj = aijianmei.newdom.getElementsByClass(obj),
+	            		len = obj.length,
+	            		show_num = aijianmei.newdom.getElementsByClass(show);
+	            	for(var i = 0;i < len;i++){
+	            		obj[i].index = i;
+	            		if(obj[i]){
+	            			obj[i].onkeyup = function(){
+	                			show_num[this.index].innerHTML = this.value.length;
+	                		}
+	                		obj[i].onkeydown = function(){
+	                			show_num[this.index].innerHTML = this.value.length;
+	                		}
+	            		} 		
+	            	}
+	            }
+            }
+            function change_number(obj_1,obj_2){
+            	aijianmei.change_num(obj_1,obj_2);
+            }
+            //change_number('comment_inp','lay_word_num')
+            var init = function(){
+                var newdom = new getdom,
+                    header = newdom.getElementsByClass('header')[0];
+                aijianmei.p_fixed(header);
+            }
+            init();
+	
+
+
+

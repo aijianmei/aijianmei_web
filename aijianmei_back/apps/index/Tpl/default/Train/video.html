@@ -78,7 +78,9 @@
                             </div>
 							<div class="border_comment" style="margin-top:10px;">
 							<form>
-				<span class="word_num"><input disabled maxLength="4" name="used" size="2" value="0" class="inputtext">/<input disabled maxLength="4" name="total" size="2" value="300" class="inputtext"></span>
+								<span class="word_num">
+								<span class="word_num"><span class="lay_word_num">0</span>/300</span>
+								</span>
                                 <php>if(getMid()){</php>
                                 <php>echo getUserName(getMid())</php>
                                 <php>}else {</php>
@@ -87,7 +89,7 @@
                                 <php>}</php>
                                 <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
                                 <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
-                                <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox"  onKeyDown="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);" onKeyUp="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);">有什么感想，来说说吧</textarea></div>
+                                <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox"  onKeyDown="change_number('comment_inp','lay_word_num');" onKeyUp="change_number('comment_inp','lay_word_num');"  maxlength=300>有什么感想，来说说吧</textarea></div>
                                 <a class="comment" onclick="addVideoCommont();">发表评论</a>
 								</form>
                             </div>
