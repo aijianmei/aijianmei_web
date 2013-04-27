@@ -890,3 +890,18 @@ span.enter_icon{
 	float: none;
 	color: red;
 }
+/*outside 2013/4/27********************************************/
+/*添加返回顶部按钮*/	
+.goTopBtn { 
+	position:fixed;
+	_position:absolute;
+	display:none; 
+	text-align:center; 
+	line-height:30px; 
+	width:60px; 
+	bottom:35px; 
+	height:60px; 
+	font-size:12px; 
+	cursor:pointer;
+	background: url(../images/btn_top.gif) no-repeat;
+}
