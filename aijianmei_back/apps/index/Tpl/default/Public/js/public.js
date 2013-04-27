@@ -356,8 +356,9 @@ $(function(){
                     title.removeChild(title.lastChild);
                     title.style.display = 'none';
                 }
-                addevent(Obj,"mouseover",handle);
-                addevent(Obj,"mouseout",remove);
+                //addevent(Obj,"mouseover",handle);
+                //addevent(Obj,"mouseout",remove);
+                ckon(Obj,"mouseout",remove,array);
             }
 // //视频列表 切换分类
 // $("li.select>a").mouseover(function(){

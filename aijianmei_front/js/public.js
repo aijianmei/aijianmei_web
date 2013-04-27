@@ -171,6 +171,47 @@ $(function(){
 			}	
 
 
+			var aijianmei = {
+                newdom : new getdom,
+                p_fixed : function(obj){
+                    window.onscroll = function(){
+                        var top = document.body.scrollTop || window.pageYOffset || document.documentElement.scrollTop;
+                        if(top >= 50){
+                            obj.className = 'header p_fixed';
+                        }
+                        else{
+                            obj.className = 'header'
+                        }       
+                    }
+                },
+                change_num : function(obj,show){
+	            	var obj = aijianmei.newdom.getElementsByClass(obj),
+	            		len = obj.length,
+	            		show_num = aijianmei.newdom.getElementsByClass(show);
+	            	for(var i = 0;i < len;i++){
+	            		obj[i].index = i;
+	            		if(obj[i]){
+	            			obj[i].onkeyup = function(){
+	                			show_num[this.index].innerHTML = this.value.length;
+	                		}
+	                		obj[i].onkeydown = function(){
+	                			show_num[this.index].innerHTML = this.value.length;
+	                		}
+	            		} 		
+	            	}
+	            }
+            }
+            function change_number(obj_1,obj_2){
+            	aijianmei.change_num(obj_1,obj_2);
+            }
+            change_number('comment_inp','lay_word_num')
+            var init = function(){
+                var newdom = new getdom,
+                    header = newdom.getElementsByClass('header')[0];
+                aijianmei.p_fixed(header);
+            }
+            init();
+
 		//添加控制透明函数
 			var getclass = {//控制渐变透明度
 				opacity : function(obj,filter,speed){
@@ -552,7 +593,7 @@ fade.init('forum');
 if(document.getElementById('teach')){
 	fade.init('teach');
 }
-
+/*outside 2013/4/27********************************************/
 $(function(){
     $(window).scroll(function () {
         if($(window).scrollTop() >= 300)//距离顶部多少高度显示按钮
