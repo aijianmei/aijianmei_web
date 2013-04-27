@@ -882,10 +882,10 @@ float: left;
      .brandsIe6{_width:250px;}/*在ie6下特价商品不存在的话品牌推荐永远靠右显示*/
    /*精品推荐，新品上市，热卖商品*/
    .centerPadd{ overflow:hidden;background:url(images/thbg.jpg) repeat-x;}
-   .itemTit{height:34px;  padding-left:190px; text-align:right;background:url(images/bg.gif) no-repeat 0px -223px;
+   .itemTit{height:34px;  padding-left:190px; text-align:right;background:url(images/bg.gif) no-repeat 0px -192px;
    /*margin-bottom:-3px; _margin-bottom:-2px;*/
    }
-   .itemTit.New{background:url(images/bg.gif) no-repeat 0px -192px;}
+   .itemTit.New{background:url(images/bg.gif) no-repeat 0px -223px;}
    .itemTit.Hot{background:url(images/bg.gif) no-repeat 0px -256px;}
    .itemTit img{position:relative; top:7px;}
    .itemTit h2{float:left; height:27px; background:url(images/itemH2Bg.gif) repeat-x left top; border:1px solid #d6ecff;

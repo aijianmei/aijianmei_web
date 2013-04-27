@@ -311,7 +311,7 @@ if ((DEBUG_MODE & 4) == 4)
 }
 
 //print_r($_SESSION);
-$_SESSION['refer_url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$_SESSION['refer_url'] = '';
 $_SESSION['shoprefer_url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 define('SITE_PATH','http://www.kon_aijianmei.com');
 define('SITE_URL','http://www.kon_aijianmei.com');

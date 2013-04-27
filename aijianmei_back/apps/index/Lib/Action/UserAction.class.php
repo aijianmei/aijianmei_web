@@ -182,11 +182,12 @@ class UserAction extends Action {
 	$_SESSION['deslogin']=0;
 	//print_r($_SESSION);
 	if($_SESSION['loginBef_url']!=''&&$_SESSION['shoprefer_url']==''){
-		//redirect($_SESSION['loginBef_url']);
+		//redirect($_SESSION['refer_url']);
 		redirect(U('index/Index/index'));
 	}
 	elseif($_SESSION['shoprefer_url']!=''){
-		redirect($_SESSION['shoprefer_url']);
+		$reurl=$_SESSION['shoprefer_url'];unset($_SESSION['shoprefer_url']);
+		redirect($reurl);
 		//redirect(U('index/Index/index'));
 	}
 	else{

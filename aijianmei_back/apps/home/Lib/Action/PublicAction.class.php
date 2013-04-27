@@ -356,7 +356,19 @@ class PublicAction extends Action{
             // 登录商城
             //service('Shop')->login($_SESSION['mid']);
 			//print_r($_SESSION);exit;
-			header("Location:$refer_url");
+	if($_SESSION['refer_url']!=''&&$_SESSION['shoprefer_url']==''){
+		$reurl=$_SESSION['refer_url'];unset($_SESSION['refer_url']);
+		redirect($_SESSION['refer_url']);
+		//redirect(U('index/Index/index'));
+	}
+	elseif($_SESSION['shoprefer_url']!=''){
+		$reurl=$_SESSION['shoprefer_url'];unset($_SESSION['shoprefer_url']);
+		redirect($reurl);
+		//redirect(U('index/Index/index'));
+	}
+	else{
+		redirect(U('index/Index/index'));
+	}
             //$this->assign('jumpUrl',$refer_url);
             //$this->assign('waitSecond',3);
             //$this->success($username.L('login_success').$result['login']);

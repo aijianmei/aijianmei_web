@@ -238,12 +238,19 @@ function show_banner($type){
 				}
 				@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
 				@setcookie("ECS[password]", '', $time, '/');
-				//if($_SESSION['shoprefer_url']!=''){
-				//	redirect($_SESSION['shoprefer_url']);
-				//}
-				//header("Location:$refer_url");
-				//redirect(U('index/User/loginUserInfo'));
-				//service('Passport')->loginLocal($logId[0]['uid']);
+				if($_SESSION['refer_url']!=''){
+					//$reurl=$_SESSION['refer_url'];
+					//unset($_SESSION['refer_url']);
+					//redirect($reurl);
+					redirect(U('index/Index/index'));
+				}
+				elseif($_SESSION['shoprefer_url']!=''){
+					$reurl=$_SESSION['shoprefer_url'];
+					unset($_SESSION['shoprefer_url']);
+					redirect($reurl);
+				}else{
+					redirect(U('index/Index/index'));
+				}
             }else {
                 $data['email'] = '';
                 $data['password'] = '';
@@ -315,9 +322,32 @@ function show_banner($type){
 				redirect(U('index/User/loginUserInfo'));
 				//redirect(U('home/Account/index',array('esg'=>'needemail')));
 			}
-			//if($_SESSION['shoprefer_url']!=''){
-			//	redirect($_SESSION['shoprefer_url']);
-			//}
+			$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
+			$get_usernameInfo = M('')->query($get_usernameSql);
+			$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+			$uid = M('')->query($getUidSql);
+			$_SESSION['user_id']   = $uid[0]['user_id'];
+			$_SESSION['user_name'] = $uid[0]['user_name'];
+			$_SESSION['email']     = $uid[0]['email'];
+			$_SESSION['ways']++;
+			$time = time() - 3600;
+			if($_SESSION['mid']>0){
+				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
+			}
+			@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
+			@setcookie("ECS[password]", '', $time, '/');
+			if($_SESSION['refer_url']!=''){
+				$reurl=$_SESSION['refer_url'];
+				unset($_SESSION['refer_url']);
+				redirect($reurl);
+			}
+			elseif($_SESSION['shoprefer_url']!=''){
+				$reurl=$_SESSION['shoprefer_url'];
+				unset($_SESSION['shoprefer_url']);
+				redirect($reurl);
+			}else{
+				redirect(U('index/Index/index'));
+			}
         }
         $this->setTitle('index');
         $this->assign('uid',$this->mid);
@@ -950,9 +980,18 @@ function show_banner($type){
 		}
 		@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
 		@setcookie("ECS[password]", '', $time, '/');
-		//if($_SESSION['shoprefer_url']!=''){
-		//	redirect($_SESSION['shoprefer_url']);
-		//}
+				if($_SESSION['refer_url']!=''){
+					$reurl=$_SESSION['refer_url'];
+					unset($_SESSION['refer_url']);
+					redirect($reurl);
+				}
+				elseif($_SESSION['shoprefer_url']!=''){
+					$reurl=$_SESSION['shoprefer_url'];
+					unset($_SESSION['shoprefer_url']);
+					redirect($reurl);
+				}else{
+					redirect(U('index/Index/index'));
+				}
 		//redirect(U('home/Account/index'));
 		redirect(U('index/User/loginUserInfo'));
     }
