@@ -70,8 +70,8 @@ button{
   width:100%;
   height:100%;
   z-index:1002; 
-  opacity: 0;
-  filter:alpha(opacity=0);
+  opacity: 0.7;
+  filter:alpha(opacity=70);
   background: black;
 }
 /******** 登陆 *******/
@@ -595,6 +595,52 @@ button{
   background: url(images/icon_result.png) 0 -225px no-repeat;
   cursor:pointer;
 }
+/*添加检测内容是否存在提示,屏蔽按钮，显示产品即将推出*/
+	.fade_in{
+		position: fixed;
+		left: 0px;
+		right: 0px;
+		top: 0px;
+		bottom: 0px;
+		z-index: 1010;
+		opacity: 0;
+		filter: alpha(opacity=0);
+		background: #000;
+		filter:alpha(opacity=80)\9; /* IE6、IE7、IE8支持 */
+	}
+	.modal{
+		position: fixed;
+		left: 50%;
+		top: -100px;
+		z-index: 1020;
+		width: 850px;
+		height: 100px;
+		margin-left: -425px;
+		background: white;
+		border-radius: 6px;
+	}
+	.modal_header{
+		border-bottom: 1px solid #eee;
+	}
+	.modal_header .closed{
+		float: right;
+		margin: 6px 14px 0 0;
+		font-size: 30px;
+		font-weight: 700;
+	}
+	.modal_header h3{
+		line-height: 30px;
+		padding: 10px 16px;
+		font-size: 19px;
+		color: black;
+	}
+	.modal_body{
+		text-align: left;
+		max-height: 800px;
+		padding: 15px;
+		overflow-y: auto;
+	}
+
 
 /*end outside---------------------------------*/
 
@@ -804,7 +850,7 @@ float: left;
    .top10List li a,#mallNews .NewsList li a,.boxCenterList li a{color:#3f3f3f; text-decoration:none;}
    .top10List li a:hover,#mallNews .NewsList li a:hover,.boxCenterList li a:hover{color:#ff6600; text-decoration:none;}
    /*首页焦点图*/
-   #focus{border-right:1px solid #c5e4ff; padding:8px; background:url(images/foucsBg.gif) repeat-x left top;}
+   /*#focus{border-right:1px solid #c5e4ff; padding:8px; background:url(images/foucsBg.gif) repeat-x left top;}*/
    #mallNews{width:230px; padding:8px 8px 0px 8px; background:url(images/foucsBg.gif) repeat-x left top;}
    #mallNews .NewsTit{background:url(images/bg.gif) 0px -132px; height:23px;}
    #mallNews .NewsList{background:#FFFFFF; padding:8px;}
@@ -836,10 +882,10 @@ float: left;
      .brandsIe6{_width:250px;}/*在ie6下特价商品不存在的话品牌推荐永远靠右显示*/
    /*精品推荐，新品上市，热卖商品*/
    .centerPadd{ overflow:hidden;background:url(images/thbg.jpg) repeat-x;}
-   .itemTit{height:34px;  padding-left:190px; text-align:right;background:url(images/bg.gif) no-repeat 0px -223px;
+   .itemTit{height:34px;  padding-left:190px; text-align:right;background:url(images/bg.gif) no-repeat 0px -192px;
    /*margin-bottom:-3px; _margin-bottom:-2px;*/
    }
-   .itemTit.New{background:url(images/bg.gif) no-repeat 0px -192px;}
+   .itemTit.New{background:url(images/bg.gif) no-repeat 0px -223px;}
    .itemTit.Hot{background:url(images/bg.gif) no-repeat 0px -256px;}
    .itemTit img{position:relative; top:7px;}
    .itemTit h2{float:left; height:27px; background:url(images/itemH2Bg.gif) repeat-x left top; border:1px solid #d6ecff;

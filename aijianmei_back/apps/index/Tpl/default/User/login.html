@@ -47,8 +47,9 @@ document.onkeydown = function()
 			<form class="massage_side" action="/index.php?app=index&mod=User&act=setUserInfo" method="post" id="saveform">
 				<ul>
 					<li>
-						<input type="text" id="login" class="input login_email" value="<php>echo $_SESSION['uname'];</php>" name="nickname" readonly="readonly" disabled="disabled">
+						<input type="text" id="login" class="input login_email" value="<php>echo $_SESSION['uname'];</php>" name="nickname" disabled="disabled">
 						<!--<label class="label_1 forinput">昵称</label>-->
+						<input type="hidden" value="<php>echo $_SESSION['uname'];</php>" name="uname">
 					</li>
 					<li>
 						<input type="email" id="email" class="input email" value="<php>echo $userinfo['email'];</php>" name="email">
@@ -119,7 +120,15 @@ function getCity(parent, child) {
 	getCity("province_2", "city_2");
 	});
 function formSubmit(){
-	checkPassword();
+	var passwordStr=$("#passwordlib").val();
+	var repasswordStr=$("#repassword").val();
+	if(passwordStr.length>5&&repasswordStr.length>5&&passwordStr==repasswordStr){
+		$("#repasswordMessage").html("<span style='color:green;'>密码正确</span>");
+	}
+	else{
+		$("#repasswordMessage").html("<span style='color:red;'>密码错误（长度不能少于6位）</span>");
+		return false;
+	}
 	var email =$("#email").val();
 	var reyx= /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
 	if(reyx.test(email)){
@@ -140,19 +149,6 @@ function formSubmit(){
 	}
 }
 
-function checkPassword()
-{
-	var passwordStr=$("#passwordlib").val();
-	var repasswordStr=$("#repassword").val();
-	if(passwordStr!=''&&repasswordStr!=''&&passwordStr==repasswordStr){
-		$("#repasswordMessage").html("<span style='color:green;'>密码正确</span>");
-	}
-	else{
-		$("#repasswordMessage").html("<span style='color:red;'>密码错误</span>");
-		return true;
-	}
-	return false;
-}
 </script>
 </body>
 </html>

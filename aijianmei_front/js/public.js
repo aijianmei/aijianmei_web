@@ -171,6 +171,47 @@ $(function(){
 			}	
 
 
+			var aijianmei = {
+                newdom : new getdom,
+                p_fixed : function(obj){
+                    window.onscroll = function(){
+                        var top = document.body.scrollTop || window.pageYOffset || document.documentElement.scrollTop;
+                        if(top >= 50){
+                            obj.className = 'header p_fixed';
+                        }
+                        else{
+                            obj.className = 'header'
+                        }       
+                    }
+                },
+                change_num : function(obj,show){
+	            	var obj = aijianmei.newdom.getElementsByClass(obj),
+	            		len = obj.length,
+	            		show_num = aijianmei.newdom.getElementsByClass(show);
+	            	for(var i = 0;i < len;i++){
+	            		obj[i].index = i;
+	            		if(obj[i]){
+	            			obj[i].onkeyup = function(){
+	                			show_num[this.index].innerHTML = this.value.length;
+	                		}
+	                		obj[i].onkeydown = function(){
+	                			show_num[this.index].innerHTML = this.value.length;
+	                		}
+	            		} 		
+	            	}
+	            }
+            }
+            function change_number(obj_1,obj_2){
+            	aijianmei.change_num(obj_1,obj_2);
+            }
+            change_number('comment_inp','lay_word_num')
+            var init = function(){
+                var newdom = new getdom,
+                    header = newdom.getElementsByClass('header')[0];
+                aijianmei.p_fixed(header);
+            }
+            init();
+
 		//添加控制透明函数
 			var getclass = {//控制渐变透明度
 				opacity : function(obj,filter,speed){
@@ -414,33 +455,33 @@ $("li.show_enter").mouseover(function(){
 		}
 	)
 //动态改变背景图片，用在那些背景鼠标过去按钮原色变化的对象上
-			var move = function(obj,url,num){
-				var newdom = new getdom,
-					id = newdom.getElementsByClass(obj),
-					len = id.length,
-					image = id[0].style.backgroundImage,
-					currentpositionY = id[0].style.backgroundPositionY;
-				for(var i = 0;i < len;i++){
-					id[i].onmouseover = function(){
-						if(num != null){
-							this.style.background = 'url('+url+')';
-							this.style.backgroundPositionX = '0px';
-							this.style.backgroundPositionY = num;
-							
-						}					
-						else{
-							this.style.background = 'url('+url+')';
-						}
-						// console.log(this.style.backgroundPosition)			
-					}
-					id[i].onmouseout = function(){
-						this.style.backgroundImage = image;
-						this.style.backgroundPositionX = '0px';
-						this.style.backgroundPositionY = currentpositionY;
-					}
-				}
+var move = function(obj,url,num){
+	var newdom = new getdom,
+		id = newdom.getElementsByClass(obj),
+		len = id.length,
+		image = id[0].style.backgroundImage,
+		currentpositionY = id[0].style.backgroundPositionY;
+	for(var i = 0;i < len;i++){
+		id[i].onmouseover = function(){
+			if(num != null){
+				this.style.background = 'url('+url+')';
+				this.style.backgroundPositionX = '0px';
+				this.style.backgroundPositionY = num;
+				
+			}					
+			else{
+				this.style.background = 'url('+url+')';
 			}
-			// move('background','images/wm2.png','-220px')第一个是对象class属性，第二个是地址，第三个是雪碧图的Y值
+			// console.log(this.style.backgroundPosition)			
+		}
+		id[i].onmouseout = function(){
+			this.style.backgroundImage = image;
+			this.style.backgroundPositionX = '0px';
+			this.style.backgroundPositionY = currentpositionY;
+		}
+	}
+}
+// move('background','images/wm2.png','-220px')第一个是对象class属性，第二个是地址，第三个是雪碧图的Y值
 
 
 
@@ -473,83 +514,108 @@ $("li.show_enter").mouseover(function(){
 
 
 
-			//对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
-			var fade = {
-				newdom : new getdom,
-				init : function(obj){
-					var Obj = fade.newdom.getElementsByClass(obj)[0] || document.getElementsByTagName(obj)[0] || document.getElementById(obj);
-					Obj.onclick = function(event){
-						var _e = event ? event : window.event;
-						if(_e.preventDefault){
-							_e.preventDefault();
-						}
-						else{
-							_e.returnValue = false;
-						}
-						fade.handlecontent();
-						fade.changestyle('1');
-						this.style.background = '';
-						var closed = fade.newdom.getElementsByClass('closed')[0],
-							fade_in = fade.newdom.getElementsByClass('fade_in')[0];
-						var click_back = function(){
-							fade.changestyle('0');
-							// fade_in.removeAttribute('class')
-							fade_in.className = ''
-						}
-						addevent(closed,'click',click_back);
-						addevent(fade_in,'click',click_back);
-					}
-				},
-				handlecontent : function(){
-					var body = document.getElementsByTagName('body')[0],
-						div_1 = document.createElement('div'),
-						div_2 = document.createElement('div');
-					div_1.className = 'fade_in';
-					div_2.className = 'modal';
-					div_2.innerHTML = '<div class="modal_header"><a class="closed">×</a><h3>我们正在检测中</h3></div><p class="modal_body">即将推出，敬请期待...</p>';
-					body.appendChild(div_1);
-					body.appendChild(div_2);
-				},
-				changestyle : function(T){
-					var fade_in = fade.newdom.getElementsByClass('fade_in')[0],
-						modal = fade.newdom.getElementsByClass('modal')[0];
-					if(T == '1'){
-						var i = 0,
-							top = fade.newdom.GetCurrentStyle(modal,'top');
-						var round = function(){
-							setTimeout(function(){
-								i = i + 0.05;
-								fade_in.style.opacity = i;
-								top = parseFloat(top) + 20;
-								modal.style.top = top + 'px';
-								if(top < 200){
-									round()
-								}
-							},1);
-						}
+//对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
+var fade = {
+	newdom : new getdom,
+	init : function(obj){
+		var Obj = fade.newdom.getElementsByClass(obj)[0] || document.getElementsByTagName(obj)[0] || document.getElementById(obj);
+		Obj.onclick = function(event){
+			var _e = event ? event : window.event;
+			if(_e.preventDefault){
+				_e.preventDefault();
+			}
+			else{
+				_e.returnValue = false;
+			}
+			fade.handlecontent();
+			fade.changestyle('1');
+			this.style.background = '';
+			var closed = fade.newdom.getElementsByClass('closed')[0],
+				fade_in = fade.newdom.getElementsByClass('fade_in')[0];
+			var click_back = function(){
+				fade.changestyle('0');
+				// fade_in.removeAttribute('class')
+				fade_in.className = ''
+			}
+			addevent(closed,'click',click_back);
+			addevent(fade_in,'click',click_back);
+		}
+	},
+	handlecontent : function(){
+		var body = document.getElementsByTagName('body')[0],
+			div_1 = document.createElement('div'),
+			div_2 = document.createElement('div');
+		div_1.className = 'fade_in';
+		div_2.className = 'modal';
+		div_2.innerHTML = '<div class="modal_header"><a class="closed">×</a><h3>我们正在检测中</h3></div><p class="modal_body">即将推出，敬请期待...</p>';
+		body.appendChild(div_1);
+		body.appendChild(div_2);
+	},
+	changestyle : function(T){
+		var fade_in = fade.newdom.getElementsByClass('fade_in')[0],
+			modal = fade.newdom.getElementsByClass('modal')[0];
+		if(T == '1'){
+			var i = 0,
+				top = fade.newdom.GetCurrentStyle(modal,'top');
+			var round = function(){
+				setTimeout(function(){
+					i = i + 0.05;
+					fade_in.style.opacity = i;
+					top = parseFloat(top) + 20;
+					modal.style.top = top + 'px';
+					if(top < 200){
 						round()
 					}
-					else{
-						var i = 0.75,
-							top = fade.newdom.GetCurrentStyle(modal,'top');
-						var round = function(){
-							setTimeout(function(){
-								i = i - 0.05;
-								fade_in.style.opacity = i;
-								top = parseFloat(top) - 20;
-								modal.style.top = top + 'px';
-								if(top > -120){
-									round()
-								}
-							},10);
-						}
-						round()
-					}	
-				}
-			};
-			fade.init('store');
-			fade.init('forum');
-			if(document.getElementById('teach')){
-				fade.init('teach');
+				},1);
 			}
+			round()
+		}
+		else{
+			var i = 0.75,
+				top = fade.newdom.GetCurrentStyle(modal,'top');
+			var round = function(){
+				setTimeout(function(){
+					i = i - 0.05;
+					fade_in.style.opacity = i;
+					top = parseFloat(top) - 20;
+					modal.style.top = top + 'px';
+					if(top > -120){
+						round()
+					}
+				},10);
+			}
+			round()
+		}	
+	}
+};
+fade.init('store');
+fade.init('forum');
+if(document.getElementById('teach')){
+	fade.init('teach');
+}
+/*outside 2013/4/27********************************************/
+$(function(){
+    $(window).scroll(function () {
+        if($(window).scrollTop() >= 300)//距离顶部多少高度显示按钮
+        {
+            $('#goTopBtn').slideDown(200);
+        }
+        else
+        {
+            $('#goTopBtn').slideUp(200);
+        }
+    });    
+    $('#goTopBtn').click(function(){
+        $('body,html').animate({scrollTop:0},500)
+    });     
+    //按钮定位
+    var win_width= $(window).width();    //窗口宽度
+    var content_width= $('.wrapper').width();     //容器宽度
+    var topbtn_width= $('#goTopBtn').width(); //按钮宽度
+    //alert([win_width - content_width]/2);   
+    //距离主体部分的右侧距离
+    var topbtn_posi = ([win_width - content_width ]/2 - topbtn_width - 50);
+    $('#goTopBtn').css({'right':topbtn_posi});
 
+
+});

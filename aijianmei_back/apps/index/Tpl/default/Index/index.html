@@ -88,7 +88,7 @@
                     <div class="part_top_1">
                         <div class="lay_top_1 clearfix">
                             <h1 class="public_title">最新文章</h1>
-                            <ul class="new_video clearfix">
+                            <ul class="new_video clearfix" id="new_Article">
                             <!-- outside 2013/4/13-->
                             <?php foreach($hotArticles as $key => $value) {  ?>
                                 <li class="tr_classify">
@@ -118,7 +118,7 @@
                     <div class="part_top_1">
                         <div class="lay_top_2 clearfix">
                             <h1 class="public_title">最新视频</h1>
-                            <ul class="new_video clearfix">
+                            <ul class="new_video clearfix" id="new_video">
                             <?php foreach($hotvideos as $key => $value) {  ?>
                                 <li class="tr_classify">
                                     <div class="lay_pic_share">
@@ -127,7 +127,8 @@
                                             <img src="<?php echo $value['logo'];?>" alt="<?php echo $value['title'];?>">
                                         </a>
                                         <div class="show_share">
-										<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="{:U('index/Train/videoDetail', array('id'=>$value['id']))}" pic="<?php echo $value['logo'];?>"  title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+										<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $value['htmlurl'];?>" pic="<?php echo $value['logo'];?>"  title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+										
                                     </div>
                                     </div>
                                     <div class="lay_tr">
@@ -144,8 +145,49 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="anymore">
+                    <div class="anymore" onclick="showmore();" id="anymorelib">
                         <a>加载更多资讯</a>
                     </div>
-                </div>                                
+					<input type="hidden" id="morepagenum" value="2">
+                </div>
+<script type="text/javascript">
+
+function showmore(){
+	var page=$("#morepagenum").val();
+		if(page>5){
+		$("#anymorelib").remove();
+		return false;
+	}
+	$.ajax({
+   type: "POST",
+   url: "/ajax.php?act=indexmore",
+   dataType:"json",
+   data: "pagenum="+page,
+   success: function(info){
+	 if(info.hotvideos!=''){
+	 hotvideosData=info.hotvideos;
+	 for(i in hotvideosData){
+		var innerhtml='<li class="tr_classify"><div class="lay_pic_share"><a href="/index.php?app=index&mod=Train&act=videoDetail&id='+hotvideosData[i].id+'" class="show_enter"><span class="v_enter"></span><img src="'+hotvideosData[i].logo+'" alt="'+hotvideosData[i].title+'"></a><div class="show_share"><wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="'+hotvideosData[i].htmlurl+'" pic="'+hotvideosData[i].logo+'"  title="'+hotvideosData[i].title+'" ralateuid="2692984661" width="300" height="30"></wb:share-button></div></div><div class="lay_tr"><a href="/index.php?app=index&mod=Train&act=videoDetail&id='+hotvideosData[i].id+'" class="plan_article_tl" alt="'+hotvideosData[i].title+'" title="'+hotvideosData[i].title+'">'+hotvideosData[i].title+'</a><p class="summary" alt="'+hotvideosData[i].brief+'" title="'+hotvideosData[i].brief+'">'+hotvideosData[i].brief+'</p><a class="expand_more" href="{:U('index/Train/videoDetail', array('id'=>$value['id']))}">点击阅读》</a><div class="function_more clearfix"><span class="t_play_time">点击:<span>'+hotvideosData[i].click+'</span></span><span class="comment_time">评论:<span>'+hotvideosData[i].recommons+'</span></span></div></div></li>';
+		$("#new_video").append(innerhtml);
+	 }
+	 
+	 hotArticles=info.hotArticles;
+	 for(i in hotArticles){
+		var innerhtml='<li class="tr_classify"><div class="lay_pic_share"><a href="index-Index-articleDetail-'+hotArticles[i].id+'.html" class="show_enter"><span class="enter_icon"></span><img src="../public/images/article/'+hotArticles[i].img+'" alt="'+hotArticles[i].title+'" title="'+hotArticles[i].title+'"></a><div class="show_share"><wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-'+hotArticles[i].id+'.html" pic="http://www.aijianmei.com/public/images/article/'+hotArticles[i].img+'" title="'+hotArticles[i].title+'" ralateuid="2692984661" width="300" height="30"></wb:share-button></div></div><div class="lay_tr"><a href="index-Index-articleDetail-'+hotArticles[i].id+'.html" class="plan_article_tl">'+hotArticles[i].title+'</a><p class="summary" alt="'+hotArticles[i].brief+'" title="'+hotArticles[i].brief+'">'+hotArticles[i].brief+'</p><a class="expand_more" href="index-Index-articleDetail-'+hotArticles[i].id+'.html">点击阅读》</a><div class="function_more clearfix"><span class="t_play_time">点击:<span></span>'+hotArticles[i].click+'</span><span class="comment_time">评论:<span>'+hotArticles[i].CommNumber+'</span></span></div></div></li>';
+		$("#new_Article").append(innerhtml);
+	 }
+	 
+	 $.getScript("http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454");
+	 page=(page*1)+1;
+	 if(page>5){
+		$("#anymorelib").remove();
+		}
+	 $("#morepagenum").val(page);
+	 }
+   }
+	});
+}
+</script>
+
+				
 <include file="../Public/footer" />

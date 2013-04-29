@@ -14,12 +14,6 @@ function gbcount(message,total,used,remain)
 		remain.value = max - used.value; 
 	} 
 }
-		
-	
-
-
-
-
 
 $(function(){
     var sWidth = $("#banner").width(), //获取焦点图的宽度（显示面积）
@@ -88,6 +82,9 @@ $(function(){
         else{
             _e.returnValue = false;
         }
+        if($(".text_input input").val() != ''){
+            $(".text_input input").siblings().hide(); 
+        }
         $("div.body").slideDown(300,function(){
             $("html").css("overflow","hidden").height("100%");
             $(this).css({"display":"block","opacity":"0.7"});
@@ -105,7 +102,8 @@ $(function(){
         
         });
     });
-    
+
+
     $(".text_input input").focus(function(){
         $(this).siblings().hide();          
     });
@@ -203,19 +201,14 @@ $(function(){
             var aijianmei = {
                 newdom : new getdom,
                 p_fixed : function(obj){
-                    if(navigator.userAgent.indexOf("MSIE")>0){
-                        obj.className = 'header'
-                    }
-                    else{
-                        window.onscroll = function(){
-                            var top = document.body.scrollTop || window.pageYOffset;
-                            if(top >= 50){
-                                obj.className = 'header p_fixed';
-                            }
-                            else{
-                                obj.className = 'header'
-                            }       
+                    window.onscroll = function(){
+                        var top = document.body.scrollTop || window.pageYOffset || document.documentElement.scrollTop;
+                        if(top >= 50){
+                            obj.className = 'header p_fixed';
                         }
+                        else{
+                            obj.className = 'header'
+                        }       
                     }
                 }
             }
@@ -357,8 +350,9 @@ $(function(){
                     title.removeChild(title.lastChild);
                     title.style.display = 'none';
                 }
-                addevent(Obj,"mouseover",handle);
-                addevent(Obj,"mouseout",remove);
+                //addevent(Obj,"mouseover",handle);
+                //addevent(Obj,"mouseout",remove);
+                ckon(Obj,"mouseout",remove,array);
             }
 // //视频列表 切换分类
 // $("li.select>a").mouseover(function(){
@@ -564,4 +558,78 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
             if(document.getElementById('teach')){
                 fade.init('teach');
             }
+
+$(document).ready(function() {
+  $("embed").attr({"wmode":"transparent"});
+ });
+$(function(){
+    $(window).scroll(function () {
+        if($(window).scrollTop() >= 300)//距离顶部多少高度显示按钮
+        {
+            $('#goTopBtn').slideDown(200);
+        }
+        else
+        {
+            $('#goTopBtn').slideUp(200);
+        }
+    });    
+    $('#goTopBtn').click(function(){
+        $('body,html').animate({scrollTop:0},500)
+    });     
+    //按钮定位
+    var win_width= $(window).width();    //窗口宽度
+    var content_width= $('.wrapper').width();     //容器宽度
+    var topbtn_width= $('#goTopBtn').width(); //按钮宽度
+    //alert([win_width - content_width]/2);   
+    //距离主体部分的右侧距离
+    var topbtn_posi = ([win_width - content_width ]/2 - topbtn_width - 50);
+    $('#goTopBtn').css({'right':topbtn_posi});
+
+
+}); 
+ 
+ 
+ 			var aijianmei = {
+                newdom : new getdom,
+                p_fixed : function(obj){
+                    window.onscroll = function(){
+                        var top = document.body.scrollTop || window.pageYOffset || document.documentElement.scrollTop;
+                        if(top >= 50){
+                            obj.className = 'header p_fixed';
+                        }
+                        else{
+                            obj.className = 'header'
+                        }       
+                    }
+                },
+                change_num : function(obj,show){
+	            	var obj = aijianmei.newdom.getElementsByClass(obj),
+	            		len = obj.length,
+	            		show_num = aijianmei.newdom.getElementsByClass(show);
+	            	for(var i = 0;i < len;i++){
+	            		obj[i].index = i;
+	            		if(obj[i]){
+	            			obj[i].onkeyup = function(){
+	                			show_num[this.index].innerHTML = this.value.length;
+	                		}
+	                		obj[i].onkeydown = function(){
+	                			show_num[this.index].innerHTML = this.value.length;
+	                		}
+	            		} 		
+	            	}
+	            }
+            }
+            function change_number(obj_1,obj_2){
+            	aijianmei.change_num(obj_1,obj_2);
+            }
+            //change_number('comment_inp','lay_word_num')
+            var init = function(){
+                var newdom = new getdom,
+                    header = newdom.getElementsByClass('header')[0];
+                aijianmei.p_fixed(header);
+            }
+            init();
+	
+
+
 

@@ -310,6 +310,27 @@ if ((DEBUG_MODE & 4) == 4)
     include(ROOT_PATH . 'includes/lib.debug.php');
 }
 
+//print_r($_SESSION);
+$_SESSION['refer_url'] = '';
+$_SESSION['shoprefer_url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+define('SITE_PATH','http://www.kon_aijianmei.com');
+define('SITE_URL','http://www.kon_aijianmei.com');
+define('THEME_URL','http://www.kon_aijianmei.com/public');
+//$sql="select * from ai";
+//$res = $GLOBALS['db']->query($sql);
+if($_SESSION['mid']>0){
+	$_SESSION['user_img']=getUserFace($_SESSION['mid'],'s');
+}
+//print_r($_SESSION);
+if (isset($smarty))
+{
+$smarty->assign('aijianmeiurl','http://www.kon_aijianmei.com');
+define('_BUTTOMROOT',dirname(dirname(dirname(__FILE__))));
+$_buttomTagInfo=unserialize(include(_BUTTOMROOT."/buttomTagInfo.php"));
+$smarty->assign('_buttomTagInfo',$_buttomTagInfo);
+$smarty->assign('ecs_session', $_SESSION);
+}
+//print_r($_SESSION);
 /* 判断是否支持 Gzip 模式 */
 if (!defined('INIT_NO_SMARTY') && gzip_enabled())
 {
@@ -319,5 +340,33 @@ else
 {
     ob_start();
 }
+
+function getUserFace($uid,$size){
+	$size = ($size)?$size:'m';
+	if($size=='m'){
+		$type = 'middle';
+	}elseif ($size=='s'){
+		$type = 'small';
+	}else{
+		$type = 'big';
+	}
+		$apiImg = $GLOBALS['db']->getAll("select profileImageUrl from ai_others where uid='".$uid."'");
+        if($apiImg){
+            $userface=$apiImg[0]['profileImageUrl'];
+            return $userface;
+        }
+        
+	$uid_to_path = '/' . $uid;
+	//$userface = SITE_PATH.'/data/uploads/avatar' . $uid_to_path . '/' . $type. '.jpg';
+
+	$userface =dirname(dirname(dirname(__FILE__))).'/data/uploads/avatar' . $uid_to_path . '/' . $type. '.jpg';
+	if(is_file($userface)){
+		return SITE_URL.'/data/uploads/avatar' . $uid_to_path . '/' . $type . '.jpg';
+	}else{
+		return THEME_URL."/images/user_pic_{$type}.gif";
+	}
+}
+
+
 
 ?>

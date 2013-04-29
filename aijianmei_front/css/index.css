@@ -93,27 +93,29 @@
 	}
 	#content img{
 		display: block;
-		height:165px;
-		width:221px;
-		border:2px solid transparent;
-	}	
+		height:200px;
+		width:300px;
+	}
+	.show_img{
+		padding:2px;
+		box-shadow: 0 0 8px #ccc;
+	}
+	.show_enter{
+		position: relative; 
+		overflow: hidden;
+	}
 	.lay_top{
 		width:960px;
 		margin:0 auto;
 		margin-bottom:10px;
 	}
 	.part{
-		margin:10px 15px;
+		margin:10px 12px;
 	}
 	.classify{
 		float: left;
-		width: 221px;
-		margin-right:15px;
-	}
-	.classify p{
-		line-height: 45px;
-		font-size: 22px;
-		text-align: center;
+		width: 304px;
+		margin-right:12px;
 	}
 	.part .spe{
 		margin-right: 0px;
@@ -125,6 +127,7 @@
 		
 		.expend{
 			clear:both;
+			margin-top: 15px;
 			font-size: 18px;
 		}
 		.expend li{
@@ -134,7 +137,45 @@
 
 		}
 
+		/*message hidden part (day day exercise)*/ /*outside 2013/4/25*/
 
+		.ms_hidden_part{
+			position: absolute;
+			top:152px;
+			width: 300px;
+			height:200px;
+			font:22px 'Microsoft YaHei',微软雅黑,Arial,Lucida Grande,Tahoma,sans-serif;
+			color:white;
+			text-align: center;
+			z-index: 4;
+		}
+		.bg_opc{
+			position: absolute;
+			display: block;
+			width: 300px;
+			height:200px;
+			top:152px;
+			background: black;
+			opacity: 0.5;
+			filter:alpha(opacity=50);
+			z-index: 2;
+		}
+		.bg_opc_2{
+			position: absolute;
+			display: block;
+			width: 300px;
+			height:200px;
+			top:152px;
+			z-index:6;
+		}
+		.ms_hidden_part h3{
+			 font-size: 28px;
+		    padding: 6px 0 36px;
+		    font-weight: bold;
+		}
+		.ms_hidden_part p{
+    		line-height: 32px;
+		}
 
 
 
