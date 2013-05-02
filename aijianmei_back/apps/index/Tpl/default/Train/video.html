@@ -9,7 +9,8 @@
                 </p>
                 <!--<p class="ms_from">爱健美团队  发表于<span>14小时前</span></p>-->
                 <div class="video_content clearfix">
-                    <div class="v_area">    
+                    <div class="v_area">
+						<php>if(!$video['wapurl']){</php>
                         <object width="634" height="450">
                             <param value="{$video['link']}" name="movie">
                             <param value="true" name="allowFullScreen">
@@ -19,6 +20,9 @@
                             <embed src="{$video['link']}" quality="high" width="634" height="450" align="middle" allownetworking="all" allowscriptaccess="always" type="application/x-shockwave-flash" allowfullscreen="true" wmode="transparent">
                             <param value="" name="flashvars">
                         </object>
+						<php>}else{</php>
+						<iframe height=450 width=634 src="{$video['wapurl']}" frameborder=0 allowfullscreen></iframe>
+						<php>}</php>
                     </div>
                     <div class="v_re">
                         <h3 class="tabclass">视频信息</h3>
@@ -38,9 +42,10 @@
             <div class="v_bottom clearfix">
                     <div class="bottom_part_left">
                         <div class="share_part">
+						<input type="hidden" name="videoid" value="{$video['id']}" id="videoid">
                             <span class="wrap_like">
                                 <a class="click_like"></a>
-                                <span class="num_like">{$video['like']}</span>
+                                <span class="num_like" id="video_num_like">{$video['like']}</span>
                             </span>
                             <span class="click_share">
                                 我要分享:
@@ -71,11 +76,11 @@
                             </span>
                         </div>
 						<wb:like appkey="5Q8YPj"></wb:like>  
-						<div class="login_resgister">
+						<php>if(!getMid()){</php><div class="login_resgister">
 							<p>
-                                    还没有<a href="javascript:void(0)" class="login">登录</a>不能发表评论哦！还没有帐号吗？也可以现在就<a href="/index.php?app=index&mod=Index&act=selectRegister">注册</a>
-                                </p>
-                            </div>
+								还没有<a href="javascript:void(0)" class="login">登录</a>不能发表评论哦！还没有帐号吗？也可以现在就<a href="/index.php?app=index&mod=Index&act=selectRegister">注册</a>
+							</p>
+                            </div><php>}</php>
 							<div class="border_comment" style="margin-top:10px;">
 							<form>
 								<span class="word_num">
@@ -99,9 +104,9 @@
                             <div class="cm_content tab_2">
                                 <div class="page clearfix">
                                     <span class="concrete_choice">
-                                        {$pager[backstr]}
-                                        {$pager[thestr]}
-                                        {$pager[nextstr]}
+										<?php printf($pager['backstr'],'class="prev"');?>
+										<?php printf($pager['thestr'],'class="current_page"');?>
+										<?php printf($pager['backstr'],'class="next"');?>
                                     </span>
                                     <span class="free_choice">
                                         <span>共{$pager[page]}页</span>

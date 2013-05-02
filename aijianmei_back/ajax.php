@@ -10,9 +10,10 @@ $_actAllowArr=array(
 'addVideoCommont'=>'data',
 'addDetaiCommont'=>'data',
 'senLike'=>'data',
-'indexmore'=>'pagenum');
+'indexmore'=>'pagenum',
+'backEditVideoUrl'=>'data',);
 
-/*ajax 过滤处理*/
+/*ajax */
  if(!empty($_REQUEST['act'])){
      foreach($_REQUEST as $key => $value){
         $_REQUEST[$key]=MooAddslashes($value);
@@ -25,7 +26,9 @@ $_actAllowArr=array(
     }
 }
 
-//addcslashes 处理
+
+
+//addcslashes 
 function MooAddslashes($value) {
 return $value = is_array($value) ? array_map('MooAddslashes', $value) : addslashes($value);
 }
@@ -38,6 +41,55 @@ if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
     }
     exit;
 }
+
+/*
+ *function name recordlike()
+ *author kontem
+ *date 20130503
+ *return json data
+ *record user like log
+ */
+function recordlike($data){
+	$mid=null;
+	$mid=$_SESSION['mid'];
+	if(!$mid){echo json_encode(2);exit();}
+	$videoid=null;
+	$videoid=intval($_POST['vid']);
+	$checkLikeSql=null;
+	$checkLikeSql="select * from  ai_video_vote where uid=$mid and article_id=$videoid";
+	$checkLikeInfo=array();
+    $checkLikeInfo=C_mysqlQuery($checkLikeSql);
+    $checkLikeInfo = mysql_fetch_assoc($checkLikeInfo);
+	if($checkLikeInfo){
+		echo json_encode(2);
+		exit();
+	}
+	else{
+		$usql="update ai_video set `like`=`like`+1 where id=$articleid";
+		C_mysqlQuery($usql);
+		$insql='insert into ai_video_vote (`uid`,`article_id`) values ("'.$mid.'","'.$articleid.'")';
+		C_mysqlQuery($insql);
+		echo json_encode(1);
+		exit();
+	}
+	
+}
+
+
+
+function backEditVideoUrl($data){
+	$vid=$_POST['vid']?$_POST['vid']:exit();
+    $url=$_POST['url']?$_POST['url']:'';
+    $urltype=$_POST['urltype']?$_POST['urltype']:'';
+	$sql="UPDATE ai_daily_video SET ".$urltype." = '".$url."' WHERE `id` =$vid";
+	$res=C_mysqlQuery($sql);
+	//$re['sql']=$sql;
+	$re['return']=($res>0)?true:false;
+	echo json_encode($re);exit;
+}
+
+
+
 
 function check_email($email) {
     global $_dbConfig;
@@ -283,7 +335,7 @@ function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=true)
 		$re['big5']	  = "/[\x01-\x7f]|[\x81-\xfe]([\x40-\x7e]|\xa1-\xfe])/";
 		preg_match_all($re[$charset], $str, $match);
 		$slice = join("",array_slice($match[0], $start, $length));
-		if($suffix) return $slice."…";
+		if($suffix) return $slice."...";
 		return $slice;
 }
 

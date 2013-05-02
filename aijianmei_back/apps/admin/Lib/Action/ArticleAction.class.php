@@ -293,6 +293,7 @@ class ArticleAction extends AdministratorAction {
         $article = M('daily')->where(array('id'=>$id))->find();
         $videos = M('daily_video')->where(array('daily_id'=>$id))->findAll();
         $this->assign('article', $article);
+		//print_r($videos);
         $this->assign('video', $videos);
         $this->assign('type', 'edit');
         $this->display('addDaily');

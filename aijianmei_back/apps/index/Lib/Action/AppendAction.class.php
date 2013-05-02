@@ -163,7 +163,6 @@ class AppendAction extends Action {
 		$this->assign('_current', 'append');
         $this->display('list');
     }
-    
     //get append video list
     public function videoList()
     {

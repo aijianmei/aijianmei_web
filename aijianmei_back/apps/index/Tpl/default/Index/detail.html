@@ -81,9 +81,9 @@
                         <php> if(!empty($pager['countall'])){</php>
                         <div class="page clearfix">
                             <span class="concrete_choice">
-                                <?php printf($pager['backstr'],'class="pre_page"');?>
-                                <?php printf($pager['thestr'],'class="choice_page"');?>
-                                <?php printf($pager['backstr'],'class="next_page"');?>
+								<?php printf($pager['backstr'],'class="prev"');?>
+                                <?php printf($pager['thestr'],'class="current_page"');?>
+                                <?php printf($pager['backstr'],'class="next"');?>
                             </span>		
                             <span class="free_choice">
                                 <span>共{$pager['page']}页</span>
@@ -180,6 +180,7 @@
             $("#commentbox").val('');          
             $("#recomment_fdiv").prepend(innerHtml);
             $("#empty_content").html('');
+			$(".prompt").html();
             }
             });
         }

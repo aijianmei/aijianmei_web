@@ -265,6 +265,7 @@ class TrainAction extends Action {
             $otherVideo[$k]['logo'] = $data->data[0]->logo;
             $otherVideo[$k]['CommNumber']=$otherVideo[$k]['CommNumber']?$otherVideo[$k]['CommNumber']:0;
         }
+
         $getRecommentsSql="select * from ai_video_comments where pid=$id";
         $Recomments=M('')->query($getRecommentsSql);
         $cRecomnums=count($Recomments);

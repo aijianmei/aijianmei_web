@@ -52,7 +52,7 @@ class PublicAction extends Action{
 
     public function login()
     {
-
+		redirect(U('index/Index/index'));
         if (service('Passport')->isLogged())
             redirect(U('home/User/index'));
 
@@ -293,6 +293,7 @@ class PublicAction extends Action{
 
     public function doLogin() {
         // 检查验证码
+		
         $opt_verify = $this->_isVerifyOn('login');
         if ($opt_verify && (md5(strtoupper($_POST['verify']))!=$_SESSION['verify'])) {
             $this->error(L('error_security_code'));

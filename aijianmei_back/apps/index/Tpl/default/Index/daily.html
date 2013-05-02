@@ -49,15 +49,23 @@ document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.
                                     <ul class="video_list">
                                     <php>foreach($videos as $v) {</php>
                                      <li style="position:relative;">
-                                        <a href="javascript:void(0)">            
-                                            <embed src="{$v['link']}" quality="high" width="620" height="450" align="middle" autostart="false" loop="false" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
-                                        
+                                        <a href="javascript:void(0)">
+											<php>if(!empty($v['wapurl'])){</php>
+											<iframe height=450 width=620 src="{$v['wapurl']}" frameborder=0 allowfullscreen></iframe>											
+											<php>}else{</php>
+											<embed src="{$v['link']}" quality="high" width="620" height="450" align="middle" autostart="false" loop="false" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
+											<php>}</php>
                                         </a>										
                                     </li>
                                     <php>}</php>
                                     <php> if(empty($videos)) {</php>
-                                    <img src="apps/index/Tpl/default/Public/images/Mark_v.jpg">
+										 <php>if(!empty($daily['img'])){</php>
+											<img src="/public/images/article/{$daily['img']}">
+										 <php>}else{</php>
+                                         <img src="apps/index/Tpl/default/Public/images/Mark_v.jpg">
+										 <php>}</php>
                                     <php> }</php>
+									
                                     </ul>
                                 </div>
                             </div>

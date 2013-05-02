@@ -238,11 +238,12 @@ function show_banner($type){
 				}
 				@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
 				@setcookie("ECS[password]", '', $time, '/');
-				if($_SESSION['refer_url']!=''){
-					//$reurl=$_SESSION['refer_url'];
-					//unset($_SESSION['refer_url']);
-					//redirect($reurl);
-					redirect(U('index/Index/index'));
+				if($_SESSION['refer_url']!=''&&$_SESSION['shoprefer_url']==''){
+					$reurl=$_SESSION['refer_url'];
+					unset($_SESSION['refer_url']);
+					redirect($reurl);
+					//print_r($_SESSION);exit;
+					//redirect(U('index/Index/index'));
 				}
 				elseif($_SESSION['shoprefer_url']!=''){
 					$reurl=$_SESSION['shoprefer_url'];
@@ -684,6 +685,7 @@ function show_banner($type){
 				$videos[$k]['logo'] = $data->data[0]->logo;
             }
         }
+		print_r($videos);
         $commentsCount = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->count();
         $pager = api('Pager');
         $pager->setCounts($commentsCount);
@@ -1348,6 +1350,7 @@ function show_banner($type){
         $content = D('Article')->getFooterContent($id);
         if ($content === FALSE) $content = D('Article')->getFooterContent(1);
         $this->assign('content',$content);
+		$this->assign('hid',$id);
         $this->assign('cssFile','about_us');
         $this->display('foot');
     }

@@ -12,7 +12,7 @@ function sendEmail() {
 	})
 }
 </script>
-				
+		
 <link rel="stylesheet" href="../Public/css/retrieve.css" />
 	<div id="content" class=" clearfix">
 		<h1 class="title">找回密码</h1>
@@ -34,23 +34,4 @@ function sendEmail() {
 			<input type="hidden" id="sendact" name="sendact" value="resend">
 		</div>
 	</div>
-<script language="javascript" type="text/javascript"> 
-document.onkeydown = function() 
-{ 
-/* 
-(ctrlKey == true && keyCode == 82)    Ctrl+R    ---刷新 
-(keyCode == 116)                      F5        ---刷新
-(ctrlKey == true && keyCode == 116)   Ctrl+F5   ---强制刷新 
-*/ 
-    //window.alert(event.keyCode); 
-    var k = event.keyCode; 
-    if((event.ctrlKey == true && k == 82) || (k == 116) || (event.ctrlKey == true && k == 116)) 
-     { 
-        //return (window.confirm("关闭?")); 
-         event.keyCode = 0; 
-         event.returnValue = false; 
-         event.cancelBubble = true; 
-     }
-} 
-</script>
 <include file="../Public/footer" />

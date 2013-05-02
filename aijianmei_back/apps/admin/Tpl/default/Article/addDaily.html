@@ -66,25 +66,22 @@
     
     <eq name="type" value="edit">
     <dl class="lineD">
-    	<dt>视频列表</dt>
-    	<dd>
-    		<ul>
+    	<dt style="width:50px;">视频列表</dt>
     		<php>foreach($video as $v) {</php>
-    			<li id="vid_{$v['id']}">
-    				<span>{$v['title']}</span>
-    				<a href="javascript:void(0)" onclick="deleteDailyVideo({$v['id']})">删除</a>
-    			</li>
+    			<div id="vid_{$v['id']}">
+    				<dd><span>{$v['title']}</span><a href="javascript:void(0)" onclick="deleteDailyVideo({$v['id']})">删除</a></dd>
+					<dd>Flash链接：<input type="text" name="" value="{$v['link']}" id="link_{$v['id']}"  size="300"><a onclick="backEditVideoUrl({$v['id']},'link');">Save</a></dd>
+					<dd>Html链接：<input type="text" name="" value="{$v['htmlurl']}" id="htmlurl_{$v['id']}"  size="300"><a onclick="backEditVideoUrl({$v['id']},'htmlurl');">Save</a></dd>
+					<dd>Wap链接：<input type="text" name="" value="{$v['wapurl']}" id="wapurl_{$v['id']}"  size="300"><a onclick="backEditVideoUrl({$v['id']},'wapurl');">Save</a></dd>
+    			</div>
     		<php>}</php>
-    		</ul>
-    	</dd>
     </dl>
     </eq>
-    
     <dl class="lineD" id="first_video">
     	<dt>视频</dt><dd><a href="javascript:void(0)" onclick="addVideoPanel()">继续添加视频</a></dd>
     	<dd>Flash链接：<input type="text" name="videos[]" size="50" /></dd>
 		<dd>Html链接：<input type="text" name="htmlurl[]" size="50" /></dd>
-		<dd>Wap链接：<input type="text" name="videos[]" size="50" /></dd>
+		<dd>Wap链接：<input type="text" name="wapurl[]" size="50" /></dd>
     	<dd>标题：<input type="text" name="v_title[]" size="50" /></dd>
     	<dd>描述：<textarea name="v_intro[]" cols="40" rows="6"></textarea></dd>
     </dl>
@@ -103,7 +100,27 @@ function deleteDailyVideo(vid) {
 	})
 }
 </script>
-<script type="text/javascript" > 
+<script type="text/javascript" >
+function backEditVideoUrl(id,urltype){
+	var targetUrl=$("#"+urltype+"_"+id).val()
+	$.ajax({
+	type: "POST",
+	url: "ajax.php",
+	dataType:"json",
+	data: "act=backEditVideoUrl&data=ford&vid="+id+"&url="+targetUrl+"&urltype="+urltype,
+	success: function(data){
+	 if(data.return)
+	 {
+		alert("修改成功");
+	 }
+	}
+	});
+}
+
+
+
+
+ 
 var typeId = "{$type_id}";
 $(document).ready(function(){
   bindListener();

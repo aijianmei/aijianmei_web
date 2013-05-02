@@ -15,6 +15,24 @@ function gbcount(message,total,used,remain)
 	} 
 }
 
+function recordlike(){
+ var vid=$("#videoid").val();
+	$.ajax({
+	type: "POST",
+	url: "ajax.php",
+	dataType:"json",
+	data: "act=recordlike&data=ford&vid="+vid,
+	success: function(data){
+		var video_num_like=$("#video_num_like").html();
+		video_num_like=video_num_like+1;
+		
+		alert(data);
+	}
+	});
+	}
+}
+
+
 $(function(){
     var sWidth = $("#banner").width(), //获取焦点图的宽度（显示面积）
         len = $("#banner .ul_1 li").length, //获取焦点图个数
