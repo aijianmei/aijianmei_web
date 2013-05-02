@@ -14,25 +14,28 @@ function gbcount(message,total,used,remain)
 		remain.value = max - used.value; 
 	} 
 }
-
+/*author kontem video like ajax start*/
 function recordlike(){
- var vid=$("#videoid").val();
-	$.ajax({
-	type: "POST",
-	url: "ajax.php",
-	dataType:"json",
-	data: "act=recordlike&data=ford&vid="+vid,
-	success: function(data){
-		var video_num_like=$("#video_num_like").html();
-		video_num_like=video_num_like+1;
-		
-		alert(data);
-	}
-	});
-	}
+		var vid=$("#videoid").val();
+		$.ajax({
+			type: "POST",
+			url: "ajax.php",
+			dataType:"json",
+			data: "act=recordlike&data=ford&vid="+vid,
+			success: function(data)
+			{
+				if(data==1){
+				var video_num_like=$("#video_num_like").val();
+				video_num_like=video_num_like*1+1;
+				$(".num_like").html(video_num_like);
+				}
+				else{
+				alert("你已经赞过了！");
+				}
+			}
+		});
 }
-
-
+/*}}}end*/
 $(function(){
     var sWidth = $("#banner").width(), //获取焦点图的宽度（显示面积）
         len = $("#banner .ul_1 li").length, //获取焦点图个数
