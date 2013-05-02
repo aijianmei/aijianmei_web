@@ -6,7 +6,7 @@
 	.video_content{
 		position:relative;
 		height:450px;
-		margin: 10px 0;
+		margin-top:10px;
 		overflow:hidden;
 	}
 	.v_area{
@@ -105,6 +105,7 @@
 	}
 	/*视频部分结束-----------------------*/
 	.v_bottom{
+		margin-top: 50px;
 	}
 	.bottom_part_left{
 		float:left;
