@@ -70,9 +70,9 @@
     		<php>foreach($video as $v) {</php>
     			<div id="vid_{$v['id']}">
     				<dd><span>{$v['title']}</span><a href="javascript:void(0)" onclick="deleteDailyVideo({$v['id']})">删除</a></dd>
-					<dd>Flash链接：<input type="text" name="" value="{$v['link']}" id="link_{$v['id']}"  size="300"><a onclick="backEditVideoUrl({$v['id']},'link');">Save</a></dd>
-					<dd>Html链接：<input type="text" name="" value="{$v['htmlurl']}" id="htmlurl_{$v['id']}"  size="300"><a onclick="backEditVideoUrl({$v['id']},'htmlurl');">Save</a></dd>
-					<dd>Wap链接：<input type="text" name="" value="{$v['wapurl']}" id="wapurl_{$v['id']}"  size="300"><a onclick="backEditVideoUrl({$v['id']},'wapurl');">Save</a></dd>
+					<dd>Flash链接：<input type="text" name="" value="{$v['link']}" id="link_{$v['id']}"  size="100"><a onclick="backEditVideoUrl({$v['id']},'link');">Save</a></dd>
+					<dd>Html链接：<input type="text" name="" value="{$v['htmlurl']}" id="htmlurl_{$v['id']}"  size="100"><a onclick="backEditVideoUrl({$v['id']},'htmlurl');">Save</a></dd>
+					<dd>Wap链接：<input type="text" name="" value="{$v['wapurl']}" id="wapurl_{$v['id']}"  size="100"><a onclick="backEditVideoUrl({$v['id']},'wapurl');">Save</a></dd>
     			</div>
     		<php>}</php>
     </dl>
