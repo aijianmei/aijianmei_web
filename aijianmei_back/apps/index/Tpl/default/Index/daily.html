@@ -11,34 +11,39 @@
                 <!-- <span class="goal">瘦身</span>
                 <span class="goal_part">腰部 XX XX</span> -->
                 <div class="essay_ct">
-                    <div class="web_expend_1">
+                   <div class="web_expend_1">
                         <a class="sprite_7"><php>echo count($comments)</php></a>
                         <span class="for_sprite_7">评论数</span>
                         <span class="show_time"><php>echo date('D', $daily['create_time'])</php> <span> <php>echo date('Y-m-d', $daily['create_time'])</php></span></span>
                         <span>我要分享</span>
-						<a href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=<?php echo $videos[0]['htmlurl'];?>&title=<?php echo $daily['title'];?>&content=utf-8&pic=<?php echo $videos[0][logo]?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank"><img src="apps/index/Tpl/default/Public/images/sina.jpg" class="icon" alt="分享到新浪微博"></a>
-<script type="text/javascript">
-(function(){
-var p = {
-url:location.href,
-showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
-desc:'',/*默认分享理由(可选)*/
-summary:'',/*分享摘要(可选)*/
-title:'<?php echo $daily['title'];?>',/*分享标题(可选)*/
-site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
-pics:'<?php echo $videos[0][logo]?>', /*分享图片的路径(可选)*/
-style:'203',
-width:22,
-height:16
-};
-var s = [];
-for(var i in p){
-s.push(i + '=' + encodeURIComponent(p[i]||''));
-}
-document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
-})();
-</script>
-<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>		
+						<span class="click_share">
+                                我要分享:
+                                <script type="text/javascript">
+								(function(){
+								var p = {
+								url:location.href,
+								showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+								desc:'',/*默认分享理由(可选)*/
+								summary:'',/*分享摘要(可选)*/
+								title:'<?php echo $daily['title'];?>',/*分享标题(可选)*/
+								site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+								pics:'<?php echo $videos[0][logo]?>', /*分享图片的路径(可选)*/
+								style:'102',
+								width:68,
+								height:21
+								};
+								var s = [];
+								for(var i in p){
+								s.push(i + '=' + encodeURIComponent(p[i]||''));
+								}
+								document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+								})();
+								</script>
+								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+								<a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=<?php echo $videos[0]['htmlurl'];?>
+						&title=<?php echo $daily['title'];?>&content=utf-8&pic=<?php echo $videos[0][logo]?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">
+					</a>
+							</span>	
                     </div>
                     <div class="show_module clearfix">
                         <h1 class="titler">{$daily['title']}</h1>
@@ -46,74 +51,69 @@ document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.
                             <div class="module_left">
                             {$daily['content']|htmlspecialchars_decode}
                                 <div class="show_video">
+                                    <h4>视频：</h4>
                                     <ul class="video_list">
                                     <php>foreach($videos as $v) {</php>
                                      <li style="position:relative;">
-                                        <a href="javascript:void(0)">
-											<php>if(!empty($v['wapurl'])){</php>
-											<iframe height=450 width=620 src="{$v['wapurl']}" frameborder=0 allowfullscreen></iframe>											
-											<php>}else{</php>
-											<embed src="{$v['link']}" quality="high" width="620" height="450" align="middle" autostart="false" loop="false" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
-											<php>}</php>
+                                        <a href="javascript:void(0)">            
+                                            <embed src="{$v['link']}" quality="high" width="620" height="450" align="middle" autostart="false" loop="false" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
+                                        
                                         </a>										
                                     </li>
                                     <php>}</php>
                                     <php> if(empty($videos)) {</php>
-										 <php>if(!empty($daily['img'])){</php>
-											<img src="/public/images/article/{$daily['img']}">
-										 <php>}else{</php>
-                                         <img src="apps/index/Tpl/default/Public/images/Mark_v.jpg">
-										 <php>}</php>
+                                    <img src="apps/index/Tpl/default/Public/images/Mark_v.jpg">
                                     <php> }</php>
-									
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="web_expend_2">
-                        <span class="read_time">
-                            <a style="height:16px;width:52px;line-height:16px;background:0;">
-                                <span>阅读</span>
-                                <span>{$daily['read_count']}</span>
-                                <span class="triangle"></span>
-                            </a>
-                        </span>
-                        <input type="hidden" id="articleid" value="<?php echo $_GET['id'];?>" uid="<?php echo getMid();?>" tname="d">
-                        <a class="sprite_8" aid="{$daily['id']}" act="like"><span class="praise"  id="sprite_8_num">{$daily['like']}</span></a>
-                        <a class="sprite_9" aid="{$daily['id']}" act="unlike"><span class="praise"  id="sprite_9_num">{$daily['unlike']}</span></a>
-                        <span class="relay">转发到</span>
-					<a href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=<?php echo $videos[0]['htmlurl'];?>
+					<div class="share_part">
+							<span class="wrap_like">
+								<input type="hidden" id="articleid" value="<?php echo $_GET['id'];?>" uid="<?php echo getMid();?>" tname="d">
+								<a class="sprite_8 click_like" aid="{$article['id']}" act="like"></a>
+								<span class="praise num_like" id="sprite_8_num" style="margin-left:1px;">{$daily['like']}</span>
+							</span>
+
+                            <span class="click_share">
+                                我要分享:
+                                <script type="text/javascript">
+								(function(){
+								var p = {
+								url:location.href,
+								showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+								desc:'',/*默认分享理由(可选)*/
+								summary:'',/*分享摘要(可选)*/
+								title:'<?php echo $daily['title'];?>',/*分享标题(可选)*/
+								site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+								pics:'<?php echo $videos[0][logo]?>', /*分享图片的路径(可选)*/
+								style:'102',
+								width:68,
+								height:21
+								};
+								var s = [];
+								for(var i in p){
+								s.push(i + '=' + encodeURIComponent(p[i]||''));
+								}
+								document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+								})();
+								</script>
+								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+								<a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=<?php echo $videos[0]['htmlurl'];?>
 						&title=<?php echo $daily['title'];?>&content=utf-8&pic=<?php echo $videos[0][logo]?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">
-						<img src="apps/index/Tpl/default/Public/images/sina.jpg" class="icon" alt="分享到新浪微博">
 					</a>
-<script type="text/javascript">
-(function(){
-var p = {
-url:location.href,
-showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
-desc:'',/*默认分享理由(可选)*/
-summary:'',/*分享摘要(可选)*/
-title:'<?php echo $daily['title'];?>',/*分享标题(可选)*/
-site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
-pics:'<?php echo $videos[0][logo]?>', /*分享图片的路径(可选)*/
-style:'203',
-width:22,
-height:16
-};
-var s = [];
-for(var i in p){
-s.push(i + '=' + encodeURIComponent(p[i]||''));
-}
-document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
-})();
-</script>
-<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
-                        <a class="collect">收藏</a>					
-                    </div>
+							</span>
+						</div>
+						
+						<php>if(!getMid()){</php><div class="login_resgister">
+							<p>
+								还没有<a href="javascript:void(0)" class="login">登录</a>不能发表评论哦！还没有帐号吗？也可以现在就<a href="/index.php?app=index&mod=Index&act=selectRegister">注册</a>
+							</p>
+                            </div><php>}</php>
                     <wb:like appkey="5Q8YPj"></wb:like>
                     <div class="border_comment">
-                        <span class="word_num"><span class="lay_word_num">0</span>/300</span>
+                        <span class="word_num">0/300</span>
                         <php>if(getMid()){</php>
                         <php>echo getUserName(getMid())</php>
                         <php>}else {</php>
@@ -121,7 +121,7 @@ document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.
                         <span><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a></span>
                         <php>}</php>
                         
-                        <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox" onKeyDown="change_number('comment_inp','lay_word_num');" onKeyUp="change_number('comment_inp','lay_word_num');"  maxlength=300>有什么感想，来说说吧</textarea></div>
+                        <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox">有什么感想，来说说吧</textarea></div>
                         <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
                         <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
                         <a class="comment" href="javascript:void(0)" onclick="addVideoCommont();">发表评论</a>

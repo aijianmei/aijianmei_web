@@ -116,7 +116,7 @@ margin-right: 50px;
                                                                         <div class="ar_block">
                                                                                 <img class="block_img" src="{$SITE_URL}/public/images/article/{$a['img']}"/>
                                                                                 <h2><a href="/index-Index-articleDetail-{$a['id']}.html">{$a['title']}</a></h2>
-                                                                                <span>作者：{$a['author']}</span><span>日期：<php>echo date('Y-m-d',$a['create_time'])</php></span><span >点击：{$a['reader_count']} 讨论数：{$a['cnums']}</span>
+                                                                                <span>作者：{$a['author']}</span><span>日期：<php>echo date('Y-m-d',$a['create_time'])</php></span><span >点击：{$a['reader_count']} </span>
                                                                                 <p>{$a['brief']}...</p>
                                                                         </div>
                                                                 <php>}</php>
@@ -124,9 +124,9 @@ margin-right: 50px;
                         </div>
                                                 <div class="page clearfix">
                                                     <span class="concrete_choice">
-                                                                        {$pager[backstr]}
-                                                                        {$pager[thestr]}
-                                                                        {$pager[nextstr]}
+								<?php printf($pager['backstr'],'class="prev"');?>
+                                <?php printf($pager['thestr'],'class="current_page"');?>
+                                <?php printf($pager['backstr'],'class="next"');?>
                                                     </span>
                                                     <span class="free_choice">
                                                         <span>共{$pager[page]}页</span>

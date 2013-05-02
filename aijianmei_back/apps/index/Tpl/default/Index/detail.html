@@ -23,9 +23,31 @@
                         <span class="prompt">{$article['author']}</span>
                         <span>{$article['source']}</span>			
                         <span>我要分享</span>
-
-                        
-                        <include file="../Public/share" />
+                            <span class="click_share">
+								<script type="text/javascript">
+								(function(){
+								var p = {
+								url:location.href,
+								showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+								desc:'',/*默认分享理由(可选)*/
+								summary:'',/*分享摘要(可选)*/
+								title:'<?php echo $article['title'];?>',/*分享标题(可选)*/
+								site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+								pics:'', /*分享图片的路径(可选)*/
+								style:'102',
+								width:68,
+								height:21
+								};
+								var s = [];
+								for(var i in p){
+								s.push(i + '=' + encodeURIComponent(p[i]||''));
+								}
+								document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+								})();
+								</script>
+								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+                                <a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=&title=<?php echo $article['title'];?>&content=utf-8&pic=<?php echo $aimgsrc;?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a>
+							</span>
                         <script type="text/javascript">
                         
                         </script>
@@ -39,7 +61,7 @@
                     {$article['content']|htmlspecialchars_decode}
                     </div>
 
-                    <div class="web_expend_2">
+                    <!--<div class="web_expend_2">
                         <span class="read_time">
                         </span>
                         <input type="hidden" id="articleid" value="<?php echo $_GET['id'];?>" uid="<?php echo getMid();?>" tname="v">
@@ -48,16 +70,12 @@
 
                         <span class="relay">转发到</span>
                         <include file="../Public/share" />
-
-                        <!--<a class="collect">收藏</a>-->
-                        
-                        
+     
                     </div>
                     <wb:like appkey="5Q8YPj"></wb:like>
 					<form>
                     <div class="border_comment">
                         <span class="word_num">
-						<!--<input disabled maxLength="4" name="used" size="2" value="0" class="inputtext">/<input disabled maxLength="4" name="total" size="2" value="300" class="inputtext">-->
 						<span class="word_num"><span class="lay_word_num">0</span>/300</span>
 						</span>
                         <php>if(getMid()){</php>
@@ -73,7 +91,55 @@
                         </div>
 						</form>
                         <a class="comment" id="<php>if(!getMid()) echo 'not_login';</php>" href="javascript:void(0)" onclick="addDetaiCommont();" >发表评论</a>
-                    </div>
+                    </div>-->
+					       <div class="share_part">
+							<span class="wrap_like">
+								<a class="sprite_8 click_like" aid="{$article['id']}" act="like"></a>
+								<span class="praise num_like" id="sprite_8_num" style="margin-left:1px;">{$article['like']}</span>
+							</span>
+
+                            <span class="click_share">
+                                我要分享:
+                                <!--<a class="share_obj_1">腾讯</a>-->
+								<script type="text/javascript">
+								(function(){
+								var p = {
+								url:location.href,
+								showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+								desc:'',/*默认分享理由(可选)*/
+								summary:'',/*分享摘要(可选)*/
+								title:'<?php echo $article['title'];?>',/*分享标题(可选)*/
+								site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+								pics:'', /*分享图片的路径(可选)*/
+								style:'102',
+								width:68,
+								height:24
+								};
+								var s = [];
+								for(var i in p){
+								s.push(i + '=' + encodeURIComponent(p[i]||''));
+								}
+								document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+								})();
+								</script>
+								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+                                <a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=&title=<?php echo $article['title'];?>&content=utf-8&pic=<?php echo $aimgsrc;?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a>
+							</span>
+						</div>
+						
+						<php>if(!getMid()){</php><div class="login_resgister">
+							<p>
+								还没有<a href="javascript:void(0)" class="login">登录</a>不能发表评论哦！还没有帐号吗？也可以现在就<a href="/index.php?app=index&mod=Index&act=selectRegister">注册</a>
+							</p>
+                            </div><php>}</php>
+						<wb:like appkey="5Q8YPj"></wb:like>
+						<div class="border_comment">
+						<input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
+                        <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
+							<span class="word_num"><span class="lay_word_num">0</span>/300</span>
+							<div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox"  onKeyDown="change_number('comment_inp','lay_word_num');" onKeyUp="change_number('comment_inp','lay_word_num');"  maxlength=300>有什么感想，来说说吧</textarea></div>
+							<a class="comment">发表评论</a>
+						</div>
                     <div class="check_comment">
                         <a class="comment_1">全部评论(<?php echo $commentCounts;?>)</a>
                     </div>
