@@ -43,9 +43,10 @@
                     <div class="bottom_part_left">
                         <div class="share_part">
 						<input type="hidden" name="videoid" value="{$video['id']}" id="videoid">
+						<input type="hidden" name="video_num_like" value="{$video['like']}" id="video_num_like">
                             <span class="wrap_like">
-                                <a class="click_like"></a>
-                                <span class="num_like" id="video_num_like">{$video['like']}</span>
+                                <a class="click_like" onclick="recordlike();"></a>
+                                <span class="num_like" >{$video['like']}</span>
                             </span>
                             <span class="click_share">
                                 我要分享:
@@ -127,8 +128,8 @@
                                             <p><?php echo $v['content'];?></p>
                                             <p class="bottom_ms">
                                                 <span class="to">
-                                                    <a>转发<span>(0)</span></a>
-                                                    <a>回复<span>(0)</span></a>
+                                                    <!--<a>转发<span>(0)</span></a>
+                                                    <a>回复<span>(0)</span></a>-->
                                                 </span>
                                                 <span><?php echo $v['create_time'];?></span>
                                                 <span>来自<em>爱健美</em></span>
@@ -174,6 +175,26 @@
             }
             });
         }
-        
+		
+		function recordlike(){
+		var vid=$("#videoid").val();
+		$.ajax({
+			type: "POST",
+			url: "ajax.php",
+			dataType:"json",
+			data: "act=recordlike&data=ford&vid="+vid,
+			success: function(data)
+			{
+				if(data==1){
+				var video_num_like=$("#video_num_like").val();
+				video_num_like=video_num_like*1+1;
+				$(".num_like").html(video_num_like);
+				}
+				else{
+				alert("你已经赞过了！");
+				}
+			}
+		});
+		}
         </script>
 <include file="../Public/footer" />

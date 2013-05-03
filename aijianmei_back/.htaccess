@@ -3,6 +3,9 @@ RewriteRule index.html index.php
 RewriteRule ^(.+)-(.+)-(articleDetail)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4
 RewriteRule ^(.+)-(.+)-(daily)-(.+)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4&type=$5
 RewriteRule ^(.+)-(Train)-(videoDetail)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4
+RewriteRule ^(.+)-(.+)-(info)-(.+).html index.php?app=$1&mod=$2&act=info&type=$4
+RewriteRule ^admin.html index.php?app=admin
+RewriteRule ^(.+).html index.php?app=index&mod=$1
 #index.php?app=index&mod=Index&act=daily&id=129&type=3
 #index.php?app=index&mod=Index&act=articleDetail&id=45
 #index.php?app=index&mod=Train&act=videoDetail&id=41

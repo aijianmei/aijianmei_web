@@ -11,8 +11,7 @@ img{
 	outline:0;
 }
 body{
-	font-family: Microsoft YaHei,"微软雅黑",Lucida,Verdana,Hiragino Sans GB,STHeiti,WenQuanYi Micro Hei,SimSun,sans-serif;
-	font-size:14px;
+	font:14px Tahoma Arial,sans-serif,Helvetica;
 	color:#656565;
 	background:url(../images/b_g.jpg) repeat;
 }
@@ -33,22 +32,24 @@ button{
 
 .body{
 	display:none;
-	position:absolute;
+	position:fixed;
+	top: 0;
 	left:0;
 	width:100%;
 	height:100%;
-	z-index:99;	
+	z-index:1002;	
 	opacity: 0.7;
 	filter:alpha(opacity=70);
 	background: black;
 }
 /******** 登陆 *******/
 .sheet{
-	position:absolute;	
-	z-index:100;
+	position:fixed;	
+	z-index:1003;
 	width:100%;
 	margin-top:120px;
 	display:none;
+	*margin-left:150px;
 }
 /********* 直接登陆爱健美 *******/
 	.sheet .log{
@@ -173,9 +174,15 @@ button{
 		.accounts .cop1{
 			background:url(../images/login.png) no-repeat 0 -167px;
 		}
+		.accounts .copsina{
+			background:url(../images/sina_login.png);
+		}
 		/*.accounts .cop1:hover{
 			background:url(../images/login.png) no-repeat 0 -41px;
 		}*/
+		.accounts .copqq{
+			background:url(../images/Connect_logo_1.png);
+		}
 		.accounts .cop2{
 			background:url(../images/login.png) no-repeat 0 -41px;
 		}
@@ -204,6 +211,7 @@ button{
 .wrapper{
 	width:980px;
 	margin:0 auto;
+	padding-top: 10px;
 	background:#f7f7f7;
 	box-shadow: 0 0 5px 0 silver;
 }
@@ -221,7 +229,6 @@ button{
 }
 /****** Triangle ******/
 	.triangle{
-		position: relative;
 		padding:0;
 		overflow:hidden;
 		width:0;
@@ -230,119 +237,126 @@ button{
 		line-height:0;
 		border-color:#BCBCBC #f7f7f7 #f7f7f7 #f7f7f7;
 		border-style:solid;
-		border-width:4px;
+		border-width:5px;
 		margin-top:-2px;
 		vertical-align: middle;
 	}
 /******** Header **********/
-	#header{
-		height:125px;
-		position:relative;
-	}
-	/***** Top navigation *****/
-		.top{
-			position:absolute;
-			right:130px;
+	/*top 登录 注册--------------------*/
+		.most_top{
+			width: 960px;
+			margin:10px auto;
+			height:30px;
 		}
-		.top li{
-			float:left;
-			margin:2px;
+		.top_ms{
+			float: right;
+			height: 30px;
+			min-width: 103px;
+			background: #21ace3;
+			color: white;
 		}
-		.more{
-			position: relative;
+		.top_ms li{
+			float: left;
+			line-height: 30px;
 		}
-		#my_cart{
-			position: relative;
-
-		}
-		.cart{
-			position: absolute;
-			width: 30px;
-			height: 14px;
-			left: -30px;
+		.top_ms a{
 			display: inline-block;
-			background: url("../images/cart0.png") no-repeat;
+			min-width: 48px;
+			padding: 0 5px;
+			text-align: center;
+			color: white;
 		}
-		#login{
-			cursor:pointer;
+		.after_ms{
+			float: right;
+			height: 28px;
+			border:1px solid #c4c4c4;
+			background: url(../images/dh_03.jpg) repeat-x;
+		}
+		.after_ms > li{
+			position: relative;
+			float: left;
+			padding: 2px 10px 2px 2px;
+			height: 24px;
+			line-height: 24px;
+			border-right: 1px solid #c4c4c3;
+			text-align: center;
+		}
+		.person_massage img{
+			display: inline;
+			width: 25px;
+			height: 25px;
+		}
+		.person_massage span{
+			display: inline;
+			min-width: 30px;
+			vertical-align: top;
 		}
 		.more a{
-			display:inline-block;
-			width:45px;
-			padding-bottom:3px;
-			border:1px solid transparent;
-			
+			display: inline-block;
+			width: 45px;
 		}
-		.more a:hover{
-			border-color:#ccc;
-		}
-		.more a:hover .triangle{
-			-webkit-transform: translate(0,0) rotate(180deg);
-		}
-		.more .on{
-			position: relative;
-			z-index: 101;
-			background:#fff;
-			border:1px solid #ccc;
-			border-bottom:none;
-		}
-		.on .triangle{
-			border-color:#BCBCBC #fff #fff #fff;
-		}
-		.top .message, .top .account{
+		.more .account{
 			background: white;
 			position: absolute;
-			right: 7px;
-			border:1px solid #ccc;
-			top:19px;
-			z-index:100;
-			display:none;
+			right: -1px;
+			border: 1px solid #ccc;
+			top: 28px;
+			z-index: 1004;
+			display: none;
 		}
-		.top .account{
-			right:0;
+		.account li{
+			float: none;
+			width: 80px;
+			height: 20px;
+			margin: 5px;
 		}
-		.top .message li ,.top .account li{
-			float:none;
-			width:80px;
-			height:20px;
-			margin:5px;
+		.account a{
+			display: block;
+			line-height: 20px;
+			width: 80px;
+			font-size: 12px;
 		}
-		.top .message li a,.top .account li a{
-			display:block;
-			line-height:20px;
-			width:80px;
-			font-size:12px;
+		.after_ms .special_buy{
+			border-right:none;
 		}
-		.top .message li a:hover,.top .account li a:hover{
-			background:#21ace3;
-			color:white;
+		.car_buy{
+			display: inline-block;
+			padding-left: 34px;
+			line-height: 17px;
+			background: url(../images/car_buy.png) no-repeat;
 		}
-	/******** 顶部搜索框 ******/	
-		form.search fieldset{ 
-			position:absolute; 
-			right:0px; 
-			top:0px; 
-			border:0;
-			margin: 3px 20px 2px 0;
-		}
-			.search label,.search legend{ 
-				display:none;
-				border:0
-			}
-			.search input{ 
-				float:left; 
-				width:88px; 
-				height:17px; 
-				background:url(../images/input.jpg)no-repeat;
-			}
-			.search button{ 
-				float:left; 
-				width:23px; 
-				height:17px; 
-				background:url(../images/search.jpg) no-repeat;
-			}				
-		
-	/******* Logo ******/
+/*outside 2013/4/15*/
+	div.p_fixed{
+		position: fixed;
+		top: 0;
+		left:0;
+		z-index: 1200;
+		height: 78px;
+		top:0;
+		left: 0;
+		z-index: 1000;
+	}
+	.header{
+		position: relative;
+		left: 0;
+		z-index: 1001;
+		height: 79px;
+		width: 100%;
+		background: url(../images/dh_01.jpg) repeat-x;
+	}
+	.h_bg{
+		margin: 0 auto;
+		width: 960px;
+		height: 72px;
+		text-align: center;
+		line-height: 72px;
+	}
+	.logo_1{
+		float: left;
+		width: 265px;
+		text-indent: -999em;
+		background: url(../images/wm3.png) 0 -651px no-repeat;
+	}
 		.logo{
 			width:230px;
 			margin: 30px 0 0 20px;
@@ -352,63 +366,56 @@ button{
 				display:block;
 			}
 	/******** Navigation ************/
-		#nav{
-			width:685px;
-			height:36px;
-			background:url(../images/nav.png) no-repeat ;
-			float:right;
-			margin:60px 30px 0 0;
-			_margin-right:15px;
+		.nav{
+			float: left;
+			width: 695px;
 		}
-		#nav li{
-			width:85px;
-			height:36px;
-			float:left;
-			text-align:center;
+		.nav li{
+			position: relative;
+			float: left;
+			height: 72px;
+			margin:0 1px;
 		}
-		#nav a{
-			color:#fff;
-			font-size:16px;
-			display:inline-block;
-			_display:block;
-			line-height:36px;
-			text-align:center;
-			width:85px;
-		}
-		#nav a:hover{
-			background:#428AB2;
-		}
-	/******** "首页"样式 **********/
-		#nav .home a:hover{
-			background:none;
-		}
-		.home span,.store span{
-			display:inline-block;
-			width:85px;
-			height:36px;
-			margin-left: 10px;
-		}
-		
-		#nav .home{
-			border-radius: 4px 0 0 4px;
-			width:90px;
-		}
-		#nav .home a span{
-			background:url(../images/home.png) no-repeat left;
-		}
-		#nav .store span{
-			background:url(../images/store.png) no-repeat left;
-
-		}
-	/********** 显示当前位置 ***********/
-		.position{
+		.home,.store{
 			display: inline-block;
-			position: absolute;
-			right: 31px;
-			bottom: 9px;
-			color: #989898;
+			padding-left: 34px;
+			margin-top: 18px;
+			height: 54px;
+			line-height: 37px;
 		}
-		
+		.home{
+			background:url(../images/home.png) no-repeat;
+		}
+		.store{
+			background:url(../images/store.png) no-repeat;
+		}
+		.nav a{
+			display: inline-block;
+			padding: 0 8px;
+			color: white;
+			font-size: 23px;
+		}
+		.nav_current a{
+			background: url(../images/dh_02.jpg) repeat-x;
+		}
+		.nav_current .ag_current{
+			position: absolute;
+			bottom: 0;
+			left: 46%;
+			display: inline-block;
+			width: 0;
+			height: 0;
+			line-height: 0;
+			font-size: 0;
+			overflow: hidden;
+			border-style: solid;
+			border-width: 5px;
+			border-color: transparent transparent white transparent;
+		}
+		.nav li:hover a{
+			background: url(../images/dh_02.jpg) repeat-x;
+		}
+	
 /*********** Banner ***********/		
 		#banner{
 			margin:0 auto;
@@ -459,11 +466,6 @@ button{
 					font-size: 15px;
 					color: white;
 					margin-right: 16px;
-				}
-				.massage .png{
-					position: absolute;
-					right: 18px;
-					bottom: 25px;
 				}
 		.choice_area{
 			position:relative;
@@ -538,12 +540,20 @@ button{
 			#about{
 				width:190px;
 			}
+			#about a{
+				margin-left: 20px;
+			}
+			#about .public a{
+				margin-left: 29px;
+			}
 			.f_list #about li{
 				float:left;
-				width:70px;
-				padding-left:20px;
+				width:84px;
 			}
 			#footer .login{
+				margin:40px 0 0 0;
+			}
+			#footer .Login{
 				margin:40px 0 0 0;
 			}
 				.sina{
@@ -555,8 +565,7 @@ button{
 				.netease{
 					background:url(../images/icon_result.png) 0 -52px no-repeat;
 				}
-				#footer  .login .public{
-					padding-left:30px;
+				#footer  .Login .public{
 					background:url(../images/icon_result.png) 0 -104px no-repeat;
 				}
 				.qZone{
@@ -587,6 +596,22 @@ button{
 }
 /****** 翻页 *****/
 .page{
+	height: 24px;
+	line-height: 24px;
+	margin: 10px auto;
+	text-align: center;
+}
+.concrete_choice span{
+	display:inline-block;
+	margin:0 -1px;
+	min-width:20px;
+	height:20px;
+	border: 2px solid transparent;
+	line-height: 20px;
+	color:#333;
+	cursor: pointer;
+}
+.page{
 	width: 450px;
 	margin: 10px auto;
 	text-align: center;
@@ -607,13 +632,31 @@ button{
 	background:#21ace3;
 	color:white;
 }
+
+
+
 .concrete_choice{
-	float:left;
+	display: inline-block;
+	vertical-align: top;
+}
+.concrete_choice span{
+	width:50px;
+}
+.page .current_page{
+	background:#21ace3;
+	color:white;
+	border: 2px solid transparent;
+	cursor: default;
+}
+.page a:hover,.concrete_choice span:hover{
+	border-color: #21ace3;
+}
+/*outside*/
+.free_choice{
+	display: inline-block;
 }
 .free_choice span{
 	float:left;
-	height: 24px;
-	line-height: 24px;
 	margin:0 6px;
 }
 .concrete_page input{
@@ -629,6 +672,7 @@ button{
 	font-weight: bold;
 	color: white;
 	background: url(../images/icon_result.png) 0 -225px no-repeat;
+	cursor:pointer;
 }
 	/*底部汇总导航栏*/
 		.title_4{
@@ -669,6 +713,7 @@ button{
 			color:#0E709A;
 		}
 	/*内容横条样式*/
+	/*锻炼，营养，补充，首页板块样式相同，共用相同css-----------outside*/
 	#content{
 		margin-top: 10px;
 	}
@@ -694,6 +739,55 @@ button{
 				background: #FFF;
 				border: 1px solid #E0E0E0;
 				border-top:none;
+			}
+			.tr_classify{
+				float: left;
+				width: 170px;
+				margin: 0 10px 10px 0;
+				padding: 5px;
+				font-size: 12px;
+				border: 1px solid #e6e4e4;
+				box-shadow: 0 0 8px #ccc;
+			}
+			.summary{
+				height:60px;
+				line-height: 18px;
+				word-wrap: break-word;
+			}
+			.hot_video,.new_video{
+				margin: 10px 15px;
+			}
+			.lay_hot_video,.lay_new_video{
+				margin-right: -10px;
+			}
+			.plan_article_tl{
+				display: inline-block;
+				height: 35px;
+				padding-top: 8px;
+				font-size: 14px;
+				color: #21ace3;
+				font-weight: 700;
+			}
+			.new_video img,.hot_video img{
+				height: 110px;
+				width: 170px;
+			}
+			.tr_classify .t_play_time{
+				background: url(../images/wm3.png) 0 -465px no-repeat;
+			}
+			.t_play_time,.play_time{
+				float:left;
+				display: inline-block;
+				height: 16px;
+				padding-left: 27px;
+				background: url(../images/wm3.png) 0 -416px no-repeat;
+			}
+			.comment_time{
+				float:right;
+				display: inline-block;
+				height:16px;
+				padding-left: 20px;
+				background: url(../images/wm3.png) 0 -440px no-repeat;
 			}
 	/*导航栏共用样式*/
 			.sider_all{
@@ -733,7 +827,6 @@ button{
 		font-size: 13px;
 		margin:2px;
 		padding-left:20px;
-		border-radius:6px;
 	}
 	.each_video a{
 		cursor: pointer;
@@ -742,13 +835,12 @@ button{
 	.each_video:hover{
 		background: #21ace3;
 		color:white;
-		box-shadow: 0 0 8px #21ace3;
 	}
 	.each_video:hover a{
 		font-weight: 700;
 		color:white;
 	}
-	.all{
+	/*.all{
 		font-size: 15px;
 		color:black;
 		font-weight: 600;
@@ -776,11 +868,11 @@ button{
 		width: 70px;
 		text-align: center;
 		cursor: pointer;
-	}
-	.right_training{
+	}*/
+	/*.right_training{
 		float:left;
 		width:703px;
-	}
+	}*/
 	/*添加提示内容块的样式*/
 		.title_tip{
 			position: absolute;
@@ -817,7 +909,7 @@ button{
 		right: 0px;
 		top: 0px;
 		bottom: 0px;
-		z-index: 1000;
+		z-index: 1010;
 		opacity: 0;
 		filter: alpha(opacity=0);
 		background: #000;
@@ -827,7 +919,7 @@ button{
 		position: fixed;
 		left: 50%;
 		top: -100px;
-		z-index: 1001;
+		z-index: 1020;
 		width: 850px;
 		height: 100px;
 		margin-left: -425px;
@@ -883,16 +975,14 @@ span.enter_icon{
 	right: 5px;
 	top: 5px;
 	display: none;
-	z-index: 100;
+	z-index: 9;
 }
 /*商店价格红色显示*/
 .item_attr_detail .S_price{
 	float: none;
 	color: red;
 }
-/*outside 2013/4/27********************************************/
-/*添加返回顶部按钮*/	
-.goTopBtn { 
+.goTopBtn {
 	position:fixed;
 	_position:absolute;
 	display:none; 
@@ -905,3 +995,668 @@ span.enter_icon{
 	cursor:pointer;
 	background: url(../images/btn_top.gif) no-repeat;
 }
+
+
+
+
+/*outside  mix article.css  2013/5/2------------------------------ beginning*/
+
+
+
+
+/*outside  mix article.css  2013/5/2------------------------------ ending*/
+
+
+
+
+/*outside  mix training.css  2013/5/2------------------------------ beginning*/
+
+			/**training公共选择器部分**/
+			.show_pic{
+				float: left;
+				margin: 10px 64px 0 30px;
+				opacity: 0.7;
+				transition:all 2s;
+				-webkit-transition:all 2s;
+				-o-transition:all 2s;
+				-moz-transition:all 2s;
+			}
+			.show_pic:hover{
+				opacity: 1;
+			}
+			.show_article{
+				display: block;
+				margin: 20px 0;
+				font-size: 22px;
+				color: #3B5A77;
+			}
+			.tr_classify{
+				float: left;
+				width: 170px;
+				margin: 0 10px 10px 0;
+				padding: 5px;
+				font-size: 12px;
+				border: 1px solid #e6e4e4;
+				box-shadow: 0 0 8px #ccc;
+			}
+			.pic_ct{
+				font-size: 13px;
+			}
+			.expert_intr{
+				font-size: 12px;
+				color:#27A5D6;
+			}
+
+			.summary{
+				height:60px;
+				line-height: 18px;
+			}
+			.clear_both{
+				clear:both;
+			}
+			.red{color:red;}
+			/**公共部分结束**/
+			.part_1{
+				padding:0 15px;
+				border-left: 2px solid #CCC;
+				border-right: 2px solid #ccc;
+			}
+			.other_part{
+				clear:both;
+				margin: 10px;
+				padding: 10px;
+				background: #F1F1F1;
+			}
+			.title_2{
+				margin-bottom: 20px;
+				font-size: 20px;
+			}
+			.part_content{
+				margin:10px 15px;
+			}
+			.tr_top{
+				margin-top: 10px;
+				padding: 10px 0;
+				border: 1px solid #e6e4e4;
+				box-shadow: 0 0 8px #ccc;
+			}
+			.classify{
+				float: left;
+				width: 243px;
+				margin: 16px 15px 0 0;
+			}
+			.last_classify{
+				margin-right: 0px;
+			}
+			.classify .best{
+				height:140px;
+				width:239px;
+				border:2px solid transparent;
+			}
+			.classify .best_classify{
+				line-height: 30px;
+				font-size: 16px;
+				font-weight: bold;
+				text-align: center;
+			}
+			.supple_pic{
+				float: left;
+				margin:0 10px;
+			}
+			.detail{
+				display: inline-block;
+				margin: 10px 0;
+				font-size: 20px;
+				color: #003096;
+				font-family: '微软雅黑'，'黑体',Tahoma Arial;
+			}
+			.read_content{
+				font-size: 15px;
+				line-height: 20px;
+			}
+			.lay_detail{
+				float:left;
+				width:254px;
+			}
+
+			.read_art{
+				display:inline-block;
+				width: 81px;
+				height:31px;
+				line-height: 31px;
+				margin-top: 10px;
+				font-size: 16px;
+				text-align: center;
+				color: white;
+				background: url(../images/10.png) no-repeat;
+			}
+			.read_art:hover{
+				color:white;
+			}
+			.tr_article_top{
+				height: 377px;
+				border: 1px solid #CCC;
+				border-radius: 15px;
+			}
+			.tr_article_top p{
+				padding-right: 45px;
+			}
+
+			.hot_video,.new_video{
+				margin: 10px 15px;
+			}
+			.lay_hot_video,.lay_new_video{
+				margin-right: -10px;
+			}
+				.plan_article_tl{
+					display: inline-block;
+					height: 35px;
+					padding-top: 8px;
+					font-size: 14px;
+					color: #56888F;
+					font-weight: 700;
+				}
+				.add_expend{
+					display: block;
+					margin: 5px 0 10px 0;
+					font-size: 12px;
+				}
+				.new_video img,.hot_video img{
+					height: 110px;
+					width: 170px;
+				}
+			.article_top{
+				height:120px;
+			}
+			.new_article{
+				margin: 0 19px 0 31px;
+			}
+			.article_h{
+				display: inline-block;
+				margin: 3px 0;
+				font-size: 18px;
+				color: #597AA5;
+			}
+			.article_classify{
+				float: left;
+				width: 215px;
+				margin-right: 15px;
+				border-top: 1px solid #CCC;
+			}
+
+				.more_cf{
+					display: inline-block;
+					height: 20px;
+					line-height: 20px;
+					padding-left: 14px;
+					font-size: 13px;
+					background: url(../images/training/1.png) no-repeat;
+				}
+				.article_pic{
+					float:left;
+					margin-right: 5px;
+				}
+				.pic_relation{
+					float: left;
+					width: 130px;
+				}
+			.pertinence{
+				position: relative;
+				height: 425px;
+				margin: 0 197px;
+				font-size: 14px;
+				background: url(../images/training/training_bottom.png) no-repeat;
+			}
+			.pertinence span{
+				font-size: 13px;
+				font-weight: 300;
+				color: #0070FF;
+			}
+			.pertinence a{color:#0E88BD;}
+			.pertinence a:hover{
+				color:#0E709A;
+				text-decoration: underline;
+			}
+					.pt_part_1{
+						position: absolute;
+						top: 90px;
+						left: -65px;
+					}
+					.pt_part_1 li{
+						height:31px;
+						line-height:31px;
+						text-align: right;
+					}
+					.pt_part_2{
+						position: absolute;
+						width: 165px;
+						top: 84px;
+						left: 401px;
+					}
+					.pt_part_2 li{
+						height:32px;
+						line-height:32px;
+						text-align: left;
+					}
+
+
+/*以上是锻炼页面跟子页面的共同部分，以下是锻炼子页面（training_1）的css部分*/
+.part_2{
+margin: 0 23px;
+margin-bottom: 20px;
+}
+		.content_sw{
+			margin: 10px 15px;
+		}
+		.whole_part{
+			margin-right: -15px;
+		}
+		.son_sw{
+			margin-right: -15px;
+		}
+		.nubble{
+			float: left;
+			margin: 0 15px 5px 0;
+		}
+		.nubble p{
+			font-size: 16px;
+			color: #0C84BD;
+		}
+			.rt_picture{
+				width: 174px;
+				height: 96px;
+				border: 2px solid transparent;
+			}
+/*从视频页面copy过来---------------------------------------------*/
+/******* 侧边栏 *********/
+	.sidebar{
+		width:165px;
+		float:left;
+		font-size: 12px;
+	}
+	/****** 视频/文章 ********/
+		.sort{
+			height:30px;
+			border-bottom:1px solid #ccc;
+			line-height:30px;
+			padding:0 0 8px 20px;
+		}
+			.sort1,.sort2{
+				display:inline-block;
+				line-height:24px;
+				width:50px;
+				text-align:center;
+				font-size:16px;
+				font-weight:bold;
+				margin-right:10px;
+				cursor:pointer;
+			}
+			#show{
+				background:lightblue;
+			}
+	/********** 全部 ***********/
+		.bar{
+			display:none;
+		}
+		.current{
+			display:block;
+		}
+		.list{
+			height: 30px;
+			border-bottom: 1px solid #E5E5E5;
+			line-height: 30px;
+			padding-left: 20px;
+		}
+			.list a{
+				display: block;
+				color: #51639E;
+			}
+			.list a:hover{
+				text-decoration:underline;
+				font-weight:bold;
+			}
+
+		.tab_btn{
+			margin: 0 5px;
+			width: 50px;
+			height: 20px;
+			background: none;
+			color: #656565;
+			font-size: 15px;
+			display: inline-block;
+			text-align: center;
+			line-height: 20px;
+		}
+		.curr_tit{
+			background:lightblue;
+		}
+/******* 视频 *************/
+	.video{
+		display:inline-block;
+		margin:0 15px;
+	}
+	.all .all_ul{
+		line-height: 23px;
+		padding-bottom: 5px;
+		margin:10px auto;
+		border-bottom: 1px solid rgb(231, 231, 231);
+	}
+	/****** 选择分类 ********/
+		.video .select{
+
+		}
+		.opt{
+			float:left;
+			font-size: 14px;
+		}
+		.opt_length{
+			display: inline-block;
+			width: 530px;
+		}
+		.select a {
+			color: #21aec3;
+			display: inline-block;
+			margin-right: 15px;
+			font-weight: bold;
+			width: 70px;
+			text-align: center;
+			cursor: pointer;
+		}
+			/*.select .pre{
+				background:rgb(33, 172, 227);
+				color:white;
+			}*/
+		/******* 列表 ********/
+		.video .each{
+			margin-right: -15px;
+			padding-bottom: 20px;
+			border-bottom: 1px solid #ccd;
+		}
+		/***** 视频列表 ****/
+		.vdos{
+			float:left;
+			width: 178px;
+			margin: 0 15px 5px 0;
+
+		}
+			.vdos .pic{
+				width: 178px;
+				height: 100px;
+			}
+			.info{
+				height:15px;
+				margin-top:8px;
+				font-size:12px;
+			}
+			.v_enter{
+				width: 70px;
+				height: 70px;
+				background: url(../images/wm3.png) no-repeat 0 -490px;
+				position: absolute;
+				left: 53px;
+				top: 15px;
+				z-index: 100;
+			}
+			.tr_classify .t_play_time{
+				background: url(../images/wm3.png) 0 -465px no-repeat;
+			}
+			.t_play_time,.play_time{
+				float:left;
+				display: inline-block;
+				height: 16px;
+				padding-left: 27px;
+				background: url(../images/wm3.png) 0 -416px no-repeat;
+			}
+			.comment_time{
+				float:right;
+				display: inline-block;
+				height:16px;
+				padding-left: 20px;
+				background: url(../images/wm3.png) 0 -440px no-repeat;
+			}
+		/******** 文章列表 ********/
+			.arts{
+				float:left;
+				width: 350px;
+				height: 82px;
+				margin-right: 15px;
+				margin-top: 20px;
+			}
+				.arts .pic{
+					width: 104px;
+					height: 75px;
+					border: 1px solid #ccc;
+					padding: 3px;
+					float:left;
+				}
+				.arts .info{
+					height: 82px;
+					width: 200px;
+					display: inline-block;
+					margin-left: 10px;
+				}
+					.info .art_title{
+
+						font-weight: bold;
+						margin-bottom:5px;
+					}
+					.art_title a{
+						color: #2E4874;
+					}
+					.art_content{
+						margin:0px;
+						line-height:20px;
+						text-indent:2em;
+					}
+					.read_all{
+						color:#2D4974;
+						float:right;
+					}
+					.count{
+						color: red;
+						font-weight: bold;
+						margin-right: 10px;
+					}
+
+	/*底部汇总导航栏*/
+
+		.position_nav{
+			margin-right: -2px;
+		}
+		.nav_cf{
+			position: relative;
+			float:left;
+			height: 165px;
+			width: 392px;
+			margin: 2px 0 0 2px;
+			color: white;
+			font-size: 22px;
+			font-weight: bold;
+			font-family: '微软雅黑','黑体';
+		}
+		.bg_1{
+			background: #06a9ef;
+		}
+		.bg_2{
+			background:#348acd;
+		}
+		.bg_3{
+			background:#0265de;
+		}
+		.bg_4{
+			background:#65c5fb;
+		}
+		.title_hint{
+			position: absolute;
+			text-align: center;
+			width: 392px;
+			line-height: 165px;
+			font-size: 40px;
+			opacity: 1;
+			filter:alpha(opacity=100);
+			transition:opacity 1s linear;
+			-webkit-transition:opacity 1s linear;
+			-moz-transition:opacity 1s linear;
+			-o-transition:opacity 1s linear;
+		}
+		.nav_detail{
+			position: absolute;
+			z-index: 100;
+			opacity: 0;
+			filter:alpha(opacity=0);
+			transition:opacity 0.3s linear;
+			-webkit-transition:opacity 0.3s linear;
+			-moz-transition:opacity 0.3s linear;
+			-o-transition:opacity 0.3s linear;
+		}
+		.nav_detail li{
+			float: left;
+			margin: 10px 0 0 10px;
+		}
+		.nav_detail a{
+			display: block;
+			width: 173px;
+			padding: 5px 0 5px 5px;
+			border: 1px solid transparent;
+			color: white;
+		}
+		.nav_detail a:hover{
+			border-color:white;
+		}
+		.bg_opacity{
+			position: absolute;
+			width: 392px;
+			height: 165px;
+			background: black;
+			opacity: 0;
+			filter:alpha(opacity=0);
+			z-index: 99;
+			transition:opacity 0.3s linear;
+			-webkit-transition:opacity 0.3s linear;
+			-moz-transition:opacity 0.3s linear;
+			-o-transition:opacity 0.3s linear;
+		}
+
+
+/*outside  mix training.css  2013/5/2------------------------------ beginning*/
+
+
+
+/*outside  mix nutri.css  2013/5/2------------------------------ beginning*/
+
+	.video_1{
+		display: block;
+		height:134px;
+	}
+	.summary{
+		height:70px;
+		line-height: 20px;
+		font-size: 12px;
+	}
+	.new_video img,.hot_video img{
+		border-radius: 4px;
+	}
+	.ar_block{
+		margin: 20px;
+		padding: 20px 0 20px 10px;
+		background: #f3f3f3;
+
+	}
+	.block_img{
+		float: left;
+		width: 81px;
+		height: 70px;
+		margin-right: 10px;
+	}
+	.ar_block span{
+		display: inline-block;
+		margin: 4px 20px 4px 0;
+	}
+	.ar_block p{
+		margin-right: 50px;
+	}	
+	.video{
+		display:inline-block;
+		margin:0 15px;
+	}
+	.all .all_ul{
+		line-height: 23px;
+		padding-bottom: 5px;
+		margin:10px auto;
+		border-bottom: 1px solid rgb(231, 231, 231);
+	}
+	/****** 选择分类 ********/
+		.video .select{
+			
+		}
+		.opt{
+			vertical-align: top;
+			font-size: 14px;
+		}
+		.opt_length{
+			display: inline-block;
+			width: 530px;
+		}
+		.select a{
+			display: inline-block;
+			color: rgb(33, 172, 227);
+			font-size: 13px;
+			cursor: pointer;
+		}
+
+
+/*outside  mix nutri.css  2013/5/2------------------------------ ending*/
+
+
+/*outside  mix add.css  2013/5/2------------------------------ beginning*/
+  /*共用nutri.css-----------------------------------------------------*/
+	
+	
+
+
+
+/*outside  mix add.css  2013/5/2------------------------------ ending*/
+
+
+/*outside  mix plan.css  2013/5/2------------------------------ beginning*/
+
+		.train .sort_1{
+			float: left;
+			width: 174px;
+			margin: 12px 11px;
+		}
+		.sort_1 i{
+			position: absolute;
+			top: -5px;
+			left: -5px;
+			display: inline-block;
+			width: 84px;
+			height: 84px;
+			background: url(../images/new.png);
+		}
+			.sort_1 .show_pic_1{
+				width:170px;
+				height:130px;
+				box-shadow:0 0 8px #ccc;
+				border:2px solid transparent;
+			}
+			.sort_1 .sort_title{
+				text-align:center;
+				font-size:16px;
+				font-weight:bold;
+				margin:5px;
+			}
+			.sort_1 .sub_sort{
+				display:block;
+				padding:2px;
+				font-size:13px;
+			}
+  
+	
+	
+
+
+
+/*outside  mix plan.css  2013/5/2------------------------------ ending*/
+
+

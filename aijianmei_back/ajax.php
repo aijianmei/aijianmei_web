@@ -11,7 +11,8 @@ $_actAllowArr=array(
 'addDetaiCommont'=>'data',
 'senLike'=>'data',
 'indexmore'=>'pagenum',
-'backEditVideoUrl'=>'data',);
+'backEditVideoUrl'=>'data',
+'recordlike'=>'data',);
 
 /*ajax */
  if(!empty($_REQUEST['act'])){
@@ -50,13 +51,14 @@ if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
  *record user like log
  */
 function recordlike($data){
+	
 	$mid=null;
 	$mid=$_SESSION['mid'];
 	if(!$mid){echo json_encode(2);exit();}
 	$videoid=null;
 	$videoid=intval($_POST['vid']);
 	$checkLikeSql=null;
-	$checkLikeSql="select * from  ai_video_vote where uid=$mid and article_id=$videoid";
+	$checkLikeSql="select * from  ai_video_vote where uid=$mid and vid=$videoid";
 	$checkLikeInfo=array();
     $checkLikeInfo=C_mysqlQuery($checkLikeSql);
     $checkLikeInfo = mysql_fetch_assoc($checkLikeInfo);
@@ -65,14 +67,13 @@ function recordlike($data){
 		exit();
 	}
 	else{
-		$usql="update ai_video set `like`=`like`+1 where id=$articleid";
+		$usql="update ai_video set `like`=`like`+1 where id=$videoid";
 		C_mysqlQuery($usql);
-		$insql='insert into ai_video_vote (`uid`,`article_id`) values ("'.$mid.'","'.$articleid.'")';
+		$insql='insert into ai_video_vote (`uid`,`vid`) values ("'.$mid.'","'.$videoid.'")';
 		C_mysqlQuery($insql);
 		echo json_encode(1);
 		exit();
 	}
-	
 }
 
 

@@ -448,8 +448,10 @@ function show_banner($type){
         $id = (int) $_GET['id'];
         $map['id'] = $id;
         $article = M('article')->where($map)->find();
+		preg_match_all("/src\s*=\s*[\"|\']?\s*([^\"\'\s]*)/i",str_ireplace("\\","",$article['content']),$out);
+		$aimgsrc=$out[1][0];
         $this->assign('article', $article); 
-        
+        $this->assign('aimgsrc', $aimgsrc); 
         
         $commentCounts = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->count();
         $pager = api('Pager');
@@ -685,7 +687,7 @@ function show_banner($type){
 				$videos[$k]['logo'] = $data->data[0]->logo;
             }
         }
-		print_r($videos);
+		//print_r($videos);
         $commentsCount = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->count();
         $pager = api('Pager');
         $pager->setCounts($commentsCount);

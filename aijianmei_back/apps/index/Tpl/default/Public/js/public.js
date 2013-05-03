@@ -1,35 +1,34 @@
 function gbcount(message,total,used,remain) 
 {
-	var max; 
-	max = total.value; 
-	if (message.value.length > max) { 
-		message.value = message.value.substring(0,max); 
-		used.value = max; 
-		remain.value = 0; 
-		alert("留言不能超过 300 个字!"); 
-	} 
-	else 
-	{ 
-		used.value = message.value.length; 
-		remain.value = max - used.value; 
-	} 
+    var max; 
+    max = total.value; 
+    if (message.value.length > max) { 
+        message.value = message.value.substring(0,max); 
+        used.value = max; 
+        remain.value = 0; 
+        alert("留言不能超过 300 个字!"); 
+    } 
+    else 
+    { 
+        used.value = message.value.length; 
+        remain.value = max - used.value; 
+    } 
 }
 
 function recordlike(){
  var vid=$("#videoid").val();
-	$.ajax({
-	type: "POST",
-	url: "ajax.php",
-	dataType:"json",
-	data: "act=recordlike&data=ford&vid="+vid,
-	success: function(data){
-		var video_num_like=$("#video_num_like").html();
-		video_num_like=video_num_like+1;
-		
-		alert(data);
-	}
-	});
-	}
+    $.ajax({
+        type: "POST",
+        url: "ajax.php",
+        dataType:"json",
+        data: "act=recordlike&data=ford&vid="+vid,
+        success: function(data){
+            var video_num_like=$("#video_num_like").html();
+            video_num_like=video_num_like+1;
+            
+            alert(data);
+        }
+    });
 }
 
 
@@ -228,6 +227,68 @@ $(function(){
                             obj.className = 'header'
                         }       
                     }
+                },
+                opacity : function(obj,filter,speed){
+                    var newdom = new getdom,
+                        obj = newdom.getElementsByClass(obj)[0],
+                        ob_opacity = newdom.GetCurrentStyle(obj,'opacity') ? newdom.GetCurrentStyle(obj,'opacity') : 1,
+                        obj_opacity = [ob_opacity[0],ob_opacity[1], ob_opacity[2]].join(""),
+                        obj_filter = newdom.GetCurrentStyle(obj,'filter'),//获取filter的值，表现形式为alpha(opacity=10);
+                        value = obj_filter.replace(/[^0-9]/ig,"");//使用正则表达式转换为数字字符串（80）
+                    obj.style.opacity = obj_opacity;
+                    var change_opacity = function(){
+                        if(obj_opacity > filter){
+                            var time = function(){
+                                setTimeout(function(){
+                                    if(obj_opacity > filter){
+                                        obj_opacity = (obj_opacity * 10 - 1)/10;
+                                        obj.style.opacity = (parseFloat(obj.style.opacity) * 10 - 1)/10;
+                                        if(document.all){
+                                            value = parseFloat(value) - 10;
+                                            obj.style.filter = 'alpha(opacity = '+value+')';
+                                        }
+                                        time();
+                                    }
+                                },speed)
+                            };
+                            time();
+                        }
+                        else{
+                            var time = function(){
+                                setTimeout(function(){
+                                    if(filter > obj_opacity){
+                                        filter = (filter * 10 - 1)/10;
+                                        obj.style.opacity = (parseFloat(obj.style.opacity) * 10 + 1)/10;
+                                        if(document.all){
+                                            value = parseFloat(value) + 10;//将字符串转化为数字，使用的是parsefloat
+                                            obj.style.filter = 'alpha(opacity = '+value+')';
+                                        }
+                                        time();
+                                    }
+                                },speed)
+                            };
+                            time();
+                        }
+                    }
+                    change_opacity();
+                },
+                chang_top : function(obj,T,length){  
+                    var i = 0;
+                    obj.style.top = aijianmei.newdom.GetCurrentStyle(obj,'top');
+                    var move = setInterval(function(){
+                        if(i < length){
+                            i = i + 10;
+                            if(T){  
+                                obj.style.top = parseFloat(obj.style.top) - 10 + 'px';
+                            }
+                            else{
+                                obj.style.top = parseFloat(obj.style.top) + 10 + 'px';
+                            }
+                        }
+                        else{
+                            clearInterval(move)
+                        }
+                    },1)        
                 }
             }
             var init = function(){
@@ -607,7 +668,7 @@ $(function(){
 }); 
  
  
- 			var aijianmei = {
+            var aijianmei = {
                 newdom : new getdom,
                 p_fixed : function(obj){
                     window.onscroll = function(){
@@ -621,24 +682,24 @@ $(function(){
                     }
                 },
                 change_num : function(obj,show){
-	            	var obj = aijianmei.newdom.getElementsByClass(obj),
-	            		len = obj.length,
-	            		show_num = aijianmei.newdom.getElementsByClass(show);
-	            	for(var i = 0;i < len;i++){
-	            		obj[i].index = i;
-	            		if(obj[i]){
-	            			obj[i].onkeyup = function(){
-	                			show_num[this.index].innerHTML = this.value.length;
-	                		}
-	                		obj[i].onkeydown = function(){
-	                			show_num[this.index].innerHTML = this.value.length;
-	                		}
-	            		} 		
-	            	}
-	            }
+                    var obj = aijianmei.newdom.getElementsByClass(obj),
+                        len = obj.length,
+                        show_num = aijianmei.newdom.getElementsByClass(show);
+                    for(var i = 0;i < len;i++){
+                        obj[i].index = i;
+                        if(obj[i]){
+                            obj[i].onkeyup = function(){
+                                show_num[this.index].innerHTML = this.value.length;
+                            }
+                            obj[i].onkeydown = function(){
+                                show_num[this.index].innerHTML = this.value.length;
+                            }
+                        }       
+                    }
+                }
             }
             function change_number(obj_1,obj_2){
-            	aijianmei.change_num(obj_1,obj_2);
+                aijianmei.change_num(obj_1,obj_2);
             }
             //change_number('comment_inp','lay_word_num')
             var init = function(){
@@ -647,7 +708,7 @@ $(function(){
                 aijianmei.p_fixed(header);
             }
             init();
-	
+    
 
 
 
