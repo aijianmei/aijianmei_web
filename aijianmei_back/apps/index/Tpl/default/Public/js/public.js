@@ -30,7 +30,7 @@ function recordlike(){
 				$(".num_like").html(video_num_like);
 				}
 				else{
-				alert("你已经赞过了！");
+				alert("你已经赞过了�?);
 				}
 			}
 		});
@@ -38,17 +38,17 @@ function recordlike(){
 /*}}}end*/
 $(function(){
     var sWidth = $("#banner").width(), //获取焦点图的宽度（显示面积）
-        len = $("#banner .ul_1 li").length, //获取焦点图个数
+        len = $("#banner .ul_1 li").length, //获取焦点图个�?
         index = 0,
         tab; 
 
-    //下一页切换
+    //下一页切�?
     $(".ps_right").click(function(){
         index++;
         if(index == len) {index = 0;}
         move(index);
     })
-    //上一页切换
+    //上一页切�?
     $(".ps_left").click(function(){
         index--;
         if(index == -1) {index = len - 1;}
@@ -83,7 +83,7 @@ $(function(){
         $("#banner .ul_2").css("width","860px")
     }
 
-    //透明效果  版图修改过这些地方
+    //透明效果  版图修改过这些地�?
     $(".lay_banner").hover(
         function(){
             $('.massage').css("opacity","0.8")
@@ -149,7 +149,7 @@ $(function(){
             }
         }
     });
-    //顶部top部分，鼠标滑过显示更多内容    
+    //顶部top部分，鼠标滑过显示更多内�?   
 
     $(".more").mouseover(function(){
         $(this).children($("ul")).show();
@@ -159,7 +159,7 @@ $(function(){
             $(".more>ul").hide();
         })      
     })
-    //导航栏样式
+    //导航栏样�?
     $("#nav>li").click(function(){
         $(this).addClass("now_position").siblings().removeClass("now_position");
     })
@@ -249,7 +249,7 @@ $(function(){
                     'borderwidth':obj.choiceborderwidth ? obj.choiceborderwidth : '3px'
                 }
 
-                //获取对象索引号
+                //获取对象索引�?
                 var getindex = function(obj){
                     for(var i = 0;i < classname.length;i++){
                         switch(obj){
@@ -260,7 +260,7 @@ $(function(){
                     }
                 }
                 var getborder = function(num){
-                    for(var i = 0;i <　classname.length;i++){
+                    for(var i = 0;i <�?lassname.length;i++){
                         if(i == num){
                             classname[num].style.borderColor = defaule.color;
                             classname[num].style.borderWidth = defaule.borderwidth;
@@ -270,7 +270,7 @@ $(function(){
                         
                 }
                 var clearborder = function(num){
-                    for(var i = 0;i <　classname.length;i++){
+                    for(var i = 0;i <�?lassname.length;i++){
                         if(i == num){
                             classname[num].style.borderColor = '';
                             classname[num].style.borderWidth = '';
@@ -279,7 +279,7 @@ $(function(){
                         
                 }
 
-                for(var i = 0;i <　classname.length;i++){
+                for(var i = 0;i <�?lassname.length;i++){
                     classname[i].onmouseover = function(){
                         var index = getindex(this);
                             getborder(index)
@@ -291,7 +291,7 @@ $(function(){
                 }
                     
             }
-            //改变obj的背景原色
+            //改变obj的背景原�?
             var changecolor = function(obj,color,childcolor){
                     var newgetdom = new getdom,
                         target = newgetdom.getElementsByClass(obj);
@@ -317,7 +317,7 @@ $(function(){
                         }
                             
             }
-            //为需要添加提示内容的函数，选用需要添加的对象obj;
+            //为需要添加提示内容的函数，�?用需要添加的对象obj;
             var addtitle = function(obj){
                 var newdom = new getdom,
                     Obj = newdom.getElementsByClass(obj)[0],
@@ -344,7 +344,7 @@ $(function(){
                             }
                         }
                         handlewidth();
-                        //获取data-original-title的内容
+                        //获取data-original-title的内�?
                         var datatitle = function(){
                             var div = document.createElement('div');
                                 textnode = document.createTextNode(text);
@@ -352,7 +352,7 @@ $(function(){
                             title.appendChild(div);
                         }
                         datatitle()
-                        //确定obj的位置，并是提示对齐被提示内容
+                        //确定obj的位置，并是提示对齐被提示内�?
                         var textalign = function(){
                             var left = Obj.offsetLeft,
                                 top = Obj.offsetTop,
@@ -391,7 +391,7 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
         $(this).children().children(".v_enter").css('background','')
     })
 });
-//添加目录动态快---------------------------------------
+//添加目录动�?�?--------------------------------------
            $('.nav_cf').mouseover(function(){
                 var index = $(".nav_cf").index(this);
                 $('.title_hint').css('opacity','1').eq(index).css('opacity','0');
@@ -420,7 +420,7 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
         $(this).html("");
     })
 
-//公共部分！！！选择页面，上下页切换
+//公共部分！！！�?择页面，上下页切�?
     $(".page a").hover(
         function(){
             $(this).css("border-color","#21ace3")
@@ -429,7 +429,7 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
             $(this).css("border-color","")
         }
     )
-//动态改变背景图片，用在那些背景鼠标过去按钮原色变化的对象上
+//动�?改变背景图片，用在那些背景鼠标过去按钮原色变化的对象�?
             var move = function(obj,url,num){
                 var newdom = new getdom,
                     id = newdom.getElementsByClass(obj),
@@ -456,7 +456,7 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
                     }
                 }
             }
-            // move('background','images/wm2.png','-220px')第一个是对象class属性，第二个是地址，第三个是雪碧图的Y值
+            // move('background','images/wm2.png','-220px')第一个是对象class属�?，第二个是地�?��第三个是雪碧图的Y�?
 
 
 
@@ -489,7 +489,7 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
 
 
 
-            //对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
+            //对象fade，添加一个功能，屏蔽按钮，显示产品即将推�?
             var fade = {
                 newdom : new getdom,
                 init : function(obj){
@@ -522,7 +522,7 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
                         div_2 = document.createElement('div');
                     div_1.className = 'fade_in';
                     div_2.className = 'modal';
-                    div_2.innerHTML = '<div class="modal_header"><a class="closed">×</a><h3>我们正在检测中</h3></div><p class="modal_body">即将推出，敬请期待...</p>';
+                    div_2.innerHTML = '<div class="modal_header"><a class="closed">×</a><h3>我们正在�?���?/h3></div><p class="modal_body">即将推出，敬请期�?..</p>';
                     body.appendChild(div_1);
                     body.appendChild(div_2);
                 },
@@ -602,7 +602,7 @@ $(function(){
     var content_width= $('.wrapper').width();     //容器宽度
     var topbtn_width= $('#goTopBtn').width(); //按钮宽度
     //alert([win_width - content_width]/2);   
-    //距离主体部分的右侧距离
+    //距离主体部分的右侧距�?
     var topbtn_posi = ([win_width - content_width ]/2 - topbtn_width - 50);
     $('#goTopBtn').css({'right':topbtn_posi});
 

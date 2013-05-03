@@ -4,97 +4,88 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>爱健美</title>
-	<link rel="stylesheet" href="css/public.css" />
-	<link rel="stylesheet" href="css/nutri.css" />			
+	<link rel="stylesheet" href="css/public.css" />		
 </head>
 <body>
-	<div class="body"></div>
-			<div class="sheet">
-				<div class="log">
-					<button class="close_btn"></button>
-					<h3>登陆爱健美</h3>
-					<div class="ai_account">
-						<form action="">
-							<h4 class="tit">使用注册邮箱登陆</h4>
-							<div class="text_input">
-								<label for="mail">爱健美注册邮箱</label>
-								<input type="text" id="mail"/>
-								<span class="tip">请输入正确的邮箱地址</span>
-							</div>
-							<div class="text_input">
-								<label for="psd">密码</label>
-								<input type="password" id="psd"/>
-								<span class="tip">密码长度为6~16个的数字或者字母</span>
-							</div>
-							<button type="submit" class="submit_btn">登陆</button>
-							<a href="retrieve.html" class="forget">忘记密码</a>
-						</form>
-					</div>
-					<div class="other_account clearfix">
-						<h4 class="tit">使用合作网站账号登陆</h4>
-						<div class="accounts">
-							<a class="cop1" href="#"></a>
-							<a class="cop2" href=""></a>
-							<a class="cop3" href=""></a>
-							<a class="cop4" href=""></a>
-							<a class="cop5" href=""></a>
-							<a class="cop6" href=""></a>
-						</div>
-						<span class="clearfix">未注册过爱健美也可以直接登陆哦</span>
-						
-					</div>
-				</div>	
-			</div><!-- End sheet -->
+	<div class="header_wrapper">
+		<div class="body"></div>
+        <div class="sheet">
+            <div class="log">
+                <button class="close_btn"></button>
+                <h3>登录爱健美</h3>
+                <div class="ai_account">
+                    <form action="/index.php?app=home&mod=Public&act=doLogin" method="post">
+                        <h4 class="tit">使用注册邮箱登录</h4>
+                        <div class="text_input">
+                            <label for="mail">爱健美注册邮箱</label>
+                            <input type="text" id="mail" name="email" />
+                            <span class="tip">请输入正确的邮箱地址</span>
+                        </div>
+                        <div class="text_input">
+                            <label for="psd">密码</label>
+                            <input type="password" id="psd" name="password" />
+                            <span class="tip">密码长度为6~16个的数字或者字母</span>
+                        </div>
+                        <div class="checkCode">
+                        </div>
+                        <button type="submit" class="submit_btn">登录</button>
+                    </form>
+                </div>
+                <div class="other_account clearfix">
+                    <h4 class="tit">使用合作网站账号登录</h4>
+                    <div class="accounts">
+	                    <a class="copsina" style="width:128px;height:32px;" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a>
+	                    <a class="copqq" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100328471 &redirect_uri=www.aijianmei.com/qqlogin.php&scope=" style="width:128px;height:32px;"></a>
+                      </div>
+                    <span class="clearfix">未注册过爱健美也可以直接登录哦</span>
+                    <a class="cop5" href="{:U('index/Index/selectRegister')}">爱健美注册</a>	                
+                </div>
+            </div>	
+        </div>
+        <div class="head">
+            <div class="most_top">
+                <ul class="top_ms clearfix">
+                    <li><a class="login">登录 </a>|</li>
+                    <li><a href="account.html">注册 </a></li>
+                </ul>
+                <ul class="after_ms">
+                    <li class="person_massage">
+                        <div>
+                            <img alt="no" />
+                            <span>kon</span>
+                        </div>
+                    </li>
+                    <li class="more"><a href="">帐号<span class="triangle"></span> </a>
+                        <ul class="account">
+                            <li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
+                            <li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
+                        </ul>
+                    </li>
+                    <li class="special_buy">
+                        <a class="car_buy">购物车</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="header">
+                <div class="h_bg">
+                    <a href="/index.php?app=index"><div class="logo_1">logo</div></a>
+                    <ul class="nav">
+                        <li class="nav_current"><i class="ag_current"></i><a href="index.html"><span class="home">首页</span></a></li>
+                        <li><i class="ag_current"></i><a href='#'><span class="store">商店</span></a></li>
+                        <li><i class="ag_current"></i><a href="plan.html">健身计划</a></li>
+                        <li><i class="ag_current"></i><a href="training.html">锻炼</a>
+                        </li>
+                        <li><i class="ag_current"></i><a href="nutri.html">营养</a>
+                        </li>
+                        <li><i class="ag_current"></i><a href="add.html">辅助品</a></li>
+                        <li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
+                        <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+	</div>
 	<div class="wrapper">
-		<div id="header">
-				<ul class="top">
-					<li><a id="login">登陆 </a>|</li>
-					<li><a href="account.html">注册 </a>|</li>
-					<li class="more"><a href="#">消息<span class="triangle"></span> </a>|
-							<ul class="message">
-								<li><a href="letter.html">查看私信</a></li>
-								<li><a href="comment.html">查看评论</a></li>
-								<li><a href="mention.html">查看@我</a></li>
-								<li><a href="fans.html">查看粉丝</a></li>
-								<li><a href="inform.html">查看通知</a></li>
-								<li><a href="order.html">查看预约</a></li>
-							</ul>
-						</li>
-						<li class="more"><a href="">帐号<span class="triangle"></span> </a>
-							<ul class="account">
-								<li><a href="information.html">个人资料</a></li>
-								<li><a href="receive.html">收货地址</a></li>
-								<li><a href="mod_face.html">修改头像</a></li>
-								<li><a href="bind.html">绑定帐号</a></li>
-								<li><a href="">退出帐号</a></li>
-							</ul>
-						</li>
-				</ul>
-				<form class="search">
-					<fieldset>
-						<legend>搜索</legend>
-						<label for="search_title">搜索：</label>
-						<input type="text" id="search_title" class="search_txt"/>
-						<button class="search_btn hide_text" type="submit"></button>
-					</fieldset>
-				</form>
-				<div class="logo">
-						<a href="http://www.aijianmei.com">
-							<img src="images/logo.png" alt="aijianmei" />
-						</a>
-					</div>
-				<ul id="nav">
-					<li class="home"><a href="index.html"><span>首页</span></a></li>
-					<li class="store"><a href="store.html"><span>商店</span></a></li>
-					<li><a href="plan.html">健身计划</a></li>
-					<li><a href="training.html">锻炼</a></li>
-					<li class="now_position"><a href="nutri.html">营养</a></li>
-					<li><a href="add.html">补充</a></li>
-					<li class="forum"><a href="activity.html">论坛</a></li>
-					<li><a href="pal.html">交友互动</a></li>
-				</ul>
-				<span class="position">爱健美/营养</span>
-			</div>
 
 		<div id="banner">
 			<div class="lay_banner">
@@ -187,80 +178,171 @@
 			<div class="right_sider">
 				<div class="part_top clearfix">
 					<div class="lay_top clearfix">
-						<div>
-							<h1 class="public_title">最热文章</h1>
-							<ul>
-								<li class="nubble show_enter">
+						<h1 class="public_title">最近锻炼文章</h1>
+						<div class="new_video">
+							<ul class="lay_new_video clearfix">
+								<li class="tr_classify show_enter">
 									<a href="article.html">
 										<span class="enter_icon"></span>
-										<img src="images/add/111.jpg" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
+										<img src="images/training/musclebuilding.png" alt=""></a>
+									<a href="#" class="plan_article_tl">增加肌肉</a>
+									<p class="summary">大量的锻炼，为建设肌肉的质量和力量！
+									</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
 								</li>
-								<li class="nubble show_enter">
+								<li class="tr_classify show_enter">
 									<a href="article.html">
 										<span class="enter_icon"></span>
-										<img src="images/add/112.png" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
+										<img src="images/training/fatloss.png" alt=""></a>
+									<a href="#" class="plan_article_tl">脂肪损失</a>
+									<p class="summary">找到合适的锻炼，同时保持精益肌肉燃烧脂肪！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
 								</li>
-								<li class="nubble show_enter">
+								<li class="tr_classify show_enter">
 									<a href="article.html">
 										<span class="enter_icon"></span>
-										<img src="images/add/113.jpg" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
+										<img src="images/training/strength.png" alt=""></a>
+									<a href="#" class="plan_article_tl">力量锻炼</a>
+									<p class="summary">训练设计的纯实力！ 5X5，温德勒，西部和更多！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
 								</li>
-								<li class="nubble defferent show_enter">
+								<li class="tr_classify show_enter">
 									<a href="article.html">
 										<span class="enter_icon"></span>
-										<img src="images/add/114.jpg" alt="no" class="rt_picture" /></a>
-									<p>add muscle</p>
-									<p>add muscle</p>
+										<img src="images/training/home.png" alt=""></a>
+									<a href="#" class="plan_article_tl">家庭锻炼</a>
+									<p class="summary">你并不需要一间健身房，看到了巨大的成果。这些以家庭为基础的锻炼！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
+								</li>
+								<li class="tr_classify show_enter">
+									<a href="article.html">
+										<span class="enter_icon"></span>
+										<img src="images/training/women.png" alt=""></a>
+									<a href="#" class="plan_article_tl">女性</a>
+									<p class="summary">锻炼程序专为女生和她们的目标而设定！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
+								</li>
+								<li class="tr_classify show_enter">
+									<a href="article.html">
+										<span class="enter_icon"></span>
+										<img src="images/training/sports.png" alt=""></a>
+									<a href="#" class="plan_article_tl">体育运动</a>
+									<p class="summary">通过提高你的表现，获得你的竞争对手优势！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
+								</li>
+								<li class="tr_classify show_enter">
+									<a href="article.html">
+										<span class="enter_icon"></span>
+										<img src="images/training/bodyweight.png" alt=""></a>
+									<a href="#" class="plan_article_tl">体重</a>
+									<p class="summary">建立这些体重只有锻炼的肌肉和力量！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
+								</li>
+								<li class="tr_classify show_enter">
+									<a href="article.html">
+										<span class="enter_icon"></span>
+										<img src="images/training/beginner.png" alt=""></a>
+									<a href="#" class="plan_article_tl">初学者</a>
+									<p class="summary">刚刚起步的？这些训练将让你在正确的道路上获得成功！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
 								</li>
 							</ul>
 						</div>
 					</div>
-
-				</div>	
+				</div>
 
 				<div class="part_top clearfix">
 					<div class="lay_top clearfix">
-						<div>
-							<h1 class="public_title">最近文章</h1>
-							<ul>
-									<li class="nubble show_enter">
-										<a href="article.html">
-											<span class="enter_icon"></span>
-											<img src="images/add/111.jpg" alt="no" class="rt_picture" /></a>
-										<p>add muscle</p>
-										<p>add muscle</p>
-									</li>
-									<li class="nubble show_enter">
-										<a href="article.html">
-											<span class="enter_icon"></span>
-											<img src="images/add/112.png" alt="no" class="rt_picture" /></a>
-										<p>add muscle</p>
-										<p>add muscle</p>
-									</li>
-									<li class="nubble show_enter">
-										<a href="article.html">
-											<span class="enter_icon"></span>
-											<img src="images/add/113.jpg" alt="no" class="rt_picture" /></a>
-										<p>add muscle</p>
-										<p>add muscle</p>
-									</li>
-									<li class="nubble defferent show_enter">
-										<a href="article.html">
-											<span class="enter_icon"></span>
-											<img src="images/add/114.jpg" alt="no" class="rt_picture" /></a>
-										<p>add muscle</p>
-										<p>add muscle</p>
-									</li>
+						<h1 class="public_title">最近锻炼文章</h1>
+						<div class="new_video">
+							<ul class="lay_new_video clearfix">
+								<li class="tr_classify show_enter">
+									<a href="article.html">
+										<span class="enter_icon"></span>
+										<img src="images/training/musclebuilding.png" alt=""></a>
+									<a href="#" class="plan_article_tl">增加肌肉</a>
+									<p class="summary">大量的锻炼，为建设肌肉的质量和力量！
+									</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
+								</li>
+								<li class="tr_classify show_enter">
+									<a href="article.html">
+										<span class="enter_icon"></span>
+										<img src="images/training/fatloss.png" alt=""></a>
+									<a href="#" class="plan_article_tl">脂肪损失</a>
+									<p class="summary">找到合适的锻炼，同时保持精益肌肉燃烧脂肪！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
+								</li>
+								<li class="tr_classify show_enter">
+									<a href="article.html">
+										<span class="enter_icon"></span>
+										<img src="images/training/strength.png" alt=""></a>
+									<a href="#" class="plan_article_tl">力量锻炼</a>
+									<p class="summary">训练设计的纯实力！ 5X5，温德勒，西部和更多！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
+								</li>
+								<li class="tr_classify show_enter">
+									<a href="article.html">
+										<span class="enter_icon"></span>
+										<img src="images/training/home.png" alt=""></a>
+									<a href="#" class="plan_article_tl">家庭锻炼</a>
+									<p class="summary">你并不需要一间健身房，看到了巨大的成果。这些以家庭为基础的锻炼！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
+								</li>
+								<li class="tr_classify show_enter">
+									<a href="article.html">
+										<span class="enter_icon"></span>
+										<img src="images/training/women.png" alt=""></a>
+									<a href="#" class="plan_article_tl">女性</a>
+									<p class="summary">锻炼程序专为女生和她们的目标而设定！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
+								</li>
+								<li class="tr_classify show_enter">
+									<a href="article.html">
+										<span class="enter_icon"></span>
+										<img src="images/training/sports.png" alt=""></a>
+									<a href="#" class="plan_article_tl">体育运动</a>
+									<p class="summary">通过提高你的表现，获得你的竞争对手优势！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
+								</li>
+								<li class="tr_classify show_enter">
+									<a href="article.html">
+										<span class="enter_icon"></span>
+										<img src="images/training/bodyweight.png" alt=""></a>
+									<a href="#" class="plan_article_tl">体重</a>
+									<p class="summary">建立这些体重只有锻炼的肌肉和力量！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
+								</li>
+								<li class="tr_classify show_enter">
+									<a href="article.html">
+										<span class="enter_icon"></span>
+										<img src="images/training/beginner.png" alt=""></a>
+									<a href="#" class="plan_article_tl">初学者</a>
+									<p class="summary">刚刚起步的？这些训练将让你在正确的道路上获得成功！</p>
+									<span class="t_play_time">点击:<span> 131</span></span>
+									<span class="comment_time">评论: <span>0</span></span>
+								</li>
 							</ul>
 						</div>
 					</div>
-				</div>	
+				</div>
+
+							
 				<div class="part_top clearfix">
 					<div class="lay_top clearfix">
 						<h1 class="public_title">全部</h1>
@@ -398,11 +480,5 @@
 	</div>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/public.js"></script>
-	<script type="text/javascript" src="js/add.js"></script>
-	<script type="text/javascript">
-		$(".tit a").click(function(){
-			$(this).addClass("curr_tit").siblings().removeClass("curr_tit");
-		})
-	</script>
 </body>
 </html>
