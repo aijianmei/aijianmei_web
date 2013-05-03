@@ -62,6 +62,10 @@
 					padding: 0 7px;
 					border-left: 1px solid #CCC;
 				}
+				.click_share iframe{
+					height:25px!important;
+					vertical-align: top;
+				}
 				.web_expend_1 a,.web_expend_2 a{
 
 					display: inline-block;
