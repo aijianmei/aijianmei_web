@@ -1,54 +1,50 @@
 function gbcount(message,total,used,remain) 
 {
-	var max; 
-	max = total.value; 
-	if (message.value.length > max) { 
-		message.value = message.value.substring(0,max); 
-		used.value = max; 
-		remain.value = 0; 
-		alert("留言不能超过 300 个字!"); 
-	} 
-	else 
-	{ 
-		used.value = message.value.length; 
-		remain.value = max - used.value; 
-	} 
+    var max; 
+    max = total.value; 
+    if (message.value.length > max) { 
+        message.value = message.value.substring(0,max); 
+        used.value = max; 
+        remain.value = 0; 
+        alert("留言不能超过 300 个字!"); 
+    } 
+    else 
+    { 
+        used.value = message.value.length; 
+        remain.value = max - used.value; 
+    } 
 }
-/*author kontem video like ajax start*/
+
 function recordlike(){
-		var vid=$("#videoid").val();
-		$.ajax({
-			type: "POST",
-			url: "ajax.php",
-			dataType:"json",
-			data: "act=recordlike&data=ford&vid="+vid,
-			success: function(data)
-			{
-				if(data==1){
-				var video_num_like=$("#video_num_like").val();
-				video_num_like=video_num_like*1+1;
-				$(".num_like").html(video_num_like);
-				}
-				else{
-				alert("你已经赞过了�?);
-				}
-			}
-		});
+ var vid=$("#videoid").val();
+    $.ajax({
+        type: "POST",
+        url: "ajax.php",
+        dataType:"json",
+        data: "act=recordlike&data=ford&vid="+vid,
+        success: function(data){
+            var video_num_like=$("#video_num_like").html();
+            video_num_like=video_num_like+1;
+            
+            alert(data);
+        }
+    });
 }
-/*}}}end*/
+
+
 $(function(){
     var sWidth = $("#banner").width(), //获取焦点图的宽度（显示面积）
-        len = $("#banner .ul_1 li").length, //获取焦点图个�?
+        len = $("#banner .ul_1 li").length, //获取焦点图个数
         index = 0,
         tab; 
 
-    //下一页切�?
+    //下一页切换
     $(".ps_right").click(function(){
         index++;
         if(index == len) {index = 0;}
         move(index);
     })
-    //上一页切�?
+    //上一页切换
     $(".ps_left").click(function(){
         index--;
         if(index == -1) {index = len - 1;}
@@ -83,7 +79,7 @@ $(function(){
         $("#banner .ul_2").css("width","860px")
     }
 
-    //透明效果  版图修改过这些地�?
+    //透明效果  版图修改过这些地方
     $(".lay_banner").hover(
         function(){
             $('.massage').css("opacity","0.8")
@@ -149,7 +145,7 @@ $(function(){
             }
         }
     });
-    //顶部top部分，鼠标滑过显示更多内�?   
+    //顶部top部分，鼠标滑过显示更多内容    
 
     $(".more").mouseover(function(){
         $(this).children($("ul")).show();
@@ -159,7 +155,7 @@ $(function(){
             $(".more>ul").hide();
         })      
     })
-    //导航栏样�?
+    //导航栏样式
     $("#nav>li").click(function(){
         $(this).addClass("now_position").siblings().removeClass("now_position");
     })
@@ -231,6 +227,68 @@ $(function(){
                             obj.className = 'header'
                         }       
                     }
+                },
+                opacity : function(obj,filter,speed){
+                    var newdom = new getdom,
+                        obj = newdom.getElementsByClass(obj)[0],
+                        ob_opacity = newdom.GetCurrentStyle(obj,'opacity') ? newdom.GetCurrentStyle(obj,'opacity') : 1,
+                        obj_opacity = [ob_opacity[0],ob_opacity[1], ob_opacity[2]].join(""),
+                        obj_filter = newdom.GetCurrentStyle(obj,'filter'),//获取filter的值，表现形式为alpha(opacity=10);
+                        value = obj_filter.replace(/[^0-9]/ig,"");//使用正则表达式转换为数字字符串（80）
+                    obj.style.opacity = obj_opacity;
+                    var change_opacity = function(){
+                        if(obj_opacity > filter){
+                            var time = function(){
+                                setTimeout(function(){
+                                    if(obj_opacity > filter){
+                                        obj_opacity = (obj_opacity * 10 - 1)/10;
+                                        obj.style.opacity = (parseFloat(obj.style.opacity) * 10 - 1)/10;
+                                        if(document.all){
+                                            value = parseFloat(value) - 10;
+                                            obj.style.filter = 'alpha(opacity = '+value+')';
+                                        }
+                                        time();
+                                    }
+                                },speed)
+                            };
+                            time();
+                        }
+                        else{
+                            var time = function(){
+                                setTimeout(function(){
+                                    if(filter > obj_opacity){
+                                        filter = (filter * 10 - 1)/10;
+                                        obj.style.opacity = (parseFloat(obj.style.opacity) * 10 + 1)/10;
+                                        if(document.all){
+                                            value = parseFloat(value) + 10;//将字符串转化为数字，使用的是parsefloat
+                                            obj.style.filter = 'alpha(opacity = '+value+')';
+                                        }
+                                        time();
+                                    }
+                                },speed)
+                            };
+                            time();
+                        }
+                    }
+                    change_opacity();
+                },
+                chang_top : function(obj,T,length){  
+                    var i = 0;
+                    obj.style.top = aijianmei.newdom.GetCurrentStyle(obj,'top');
+                    var move = setInterval(function(){
+                        if(i < length){
+                            i = i + 10;
+                            if(T){  
+                                obj.style.top = parseFloat(obj.style.top) - 10 + 'px';
+                            }
+                            else{
+                                obj.style.top = parseFloat(obj.style.top) + 10 + 'px';
+                            }
+                        }
+                        else{
+                            clearInterval(move)
+                        }
+                    },1)        
                 }
             }
             var init = function(){
@@ -249,7 +307,7 @@ $(function(){
                     'borderwidth':obj.choiceborderwidth ? obj.choiceborderwidth : '3px'
                 }
 
-                //获取对象索引�?
+                //获取对象索引号
                 var getindex = function(obj){
                     for(var i = 0;i < classname.length;i++){
                         switch(obj){
@@ -260,7 +318,7 @@ $(function(){
                     }
                 }
                 var getborder = function(num){
-                    for(var i = 0;i <�?lassname.length;i++){
+                    for(var i = 0;i <　classname.length;i++){
                         if(i == num){
                             classname[num].style.borderColor = defaule.color;
                             classname[num].style.borderWidth = defaule.borderwidth;
@@ -270,7 +328,7 @@ $(function(){
                         
                 }
                 var clearborder = function(num){
-                    for(var i = 0;i <�?lassname.length;i++){
+                    for(var i = 0;i <　classname.length;i++){
                         if(i == num){
                             classname[num].style.borderColor = '';
                             classname[num].style.borderWidth = '';
@@ -279,7 +337,7 @@ $(function(){
                         
                 }
 
-                for(var i = 0;i <�?lassname.length;i++){
+                for(var i = 0;i <　classname.length;i++){
                     classname[i].onmouseover = function(){
                         var index = getindex(this);
                             getborder(index)
@@ -291,7 +349,7 @@ $(function(){
                 }
                     
             }
-            //改变obj的背景原�?
+            //改变obj的背景原色
             var changecolor = function(obj,color,childcolor){
                     var newgetdom = new getdom,
                         target = newgetdom.getElementsByClass(obj);
@@ -317,7 +375,7 @@ $(function(){
                         }
                             
             }
-            //为需要添加提示内容的函数，�?用需要添加的对象obj;
+            //为需要添加提示内容的函数，选用需要添加的对象obj;
             var addtitle = function(obj){
                 var newdom = new getdom,
                     Obj = newdom.getElementsByClass(obj)[0],
@@ -344,7 +402,7 @@ $(function(){
                             }
                         }
                         handlewidth();
-                        //获取data-original-title的内�?
+                        //获取data-original-title的内容
                         var datatitle = function(){
                             var div = document.createElement('div');
                                 textnode = document.createTextNode(text);
@@ -352,7 +410,7 @@ $(function(){
                             title.appendChild(div);
                         }
                         datatitle()
-                        //确定obj的位置，并是提示对齐被提示内�?
+                        //确定obj的位置，并是提示对齐被提示内容
                         var textalign = function(){
                             var left = Obj.offsetLeft,
                                 top = Obj.offsetTop,
@@ -391,7 +449,7 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
         $(this).children().children(".v_enter").css('background','')
     })
 });
-//添加目录动�?�?--------------------------------------
+//添加目录动态快---------------------------------------
            $('.nav_cf').mouseover(function(){
                 var index = $(".nav_cf").index(this);
                 $('.title_hint').css('opacity','1').eq(index).css('opacity','0');
@@ -420,7 +478,7 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
         $(this).html("");
     })
 
-//公共部分！！！�?择页面，上下页切�?
+//公共部分！！！选择页面，上下页切换
     $(".page a").hover(
         function(){
             $(this).css("border-color","#21ace3")
@@ -429,7 +487,7 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
             $(this).css("border-color","")
         }
     )
-//动�?改变背景图片，用在那些背景鼠标过去按钮原色变化的对象�?
+//动态改变背景图片，用在那些背景鼠标过去按钮原色变化的对象上
             var move = function(obj,url,num){
                 var newdom = new getdom,
                     id = newdom.getElementsByClass(obj),
@@ -456,7 +514,7 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
                     }
                 }
             }
-            // move('background','images/wm2.png','-220px')第一个是对象class属�?，第二个是地�?��第三个是雪碧图的Y�?
+            // move('background','images/wm2.png','-220px')第一个是对象class属性，第二个是地址，第三个是雪碧图的Y值
 
 
 
@@ -489,7 +547,7 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
 
 
 
-            //对象fade，添加一个功能，屏蔽按钮，显示产品即将推�?
+            //对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
             var fade = {
                 newdom : new getdom,
                 init : function(obj){
@@ -522,7 +580,7 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
                         div_2 = document.createElement('div');
                     div_1.className = 'fade_in';
                     div_2.className = 'modal';
-                    div_2.innerHTML = '<div class="modal_header"><a class="closed">×</a><h3>我们正在�?���?/h3></div><p class="modal_body">即将推出，敬请期�?..</p>';
+                    div_2.innerHTML = '<div class="modal_header"><a class="closed">×</a><h3>我们正在检测中</h3></div><p class="modal_body">即将推出，敬请期待...</p>';
                     body.appendChild(div_1);
                     body.appendChild(div_2);
                 },
@@ -602,7 +660,7 @@ $(function(){
     var content_width= $('.wrapper').width();     //容器宽度
     var topbtn_width= $('#goTopBtn').width(); //按钮宽度
     //alert([win_width - content_width]/2);   
-    //距离主体部分的右侧距�?
+    //距离主体部分的右侧距离
     var topbtn_posi = ([win_width - content_width ]/2 - topbtn_width - 50);
     $('#goTopBtn').css({'right':topbtn_posi});
 
@@ -610,7 +668,7 @@ $(function(){
 }); 
  
  
- 			var aijianmei = {
+            var aijianmei = {
                 newdom : new getdom,
                 p_fixed : function(obj){
                     window.onscroll = function(){
@@ -624,24 +682,24 @@ $(function(){
                     }
                 },
                 change_num : function(obj,show){
-	            	var obj = aijianmei.newdom.getElementsByClass(obj),
-	            		len = obj.length,
-	            		show_num = aijianmei.newdom.getElementsByClass(show);
-	            	for(var i = 0;i < len;i++){
-	            		obj[i].index = i;
-	            		if(obj[i]){
-	            			obj[i].onkeyup = function(){
-	                			show_num[this.index].innerHTML = this.value.length;
-	                		}
-	                		obj[i].onkeydown = function(){
-	                			show_num[this.index].innerHTML = this.value.length;
-	                		}
-	            		} 		
-	            	}
-	            }
+                    var obj = aijianmei.newdom.getElementsByClass(obj),
+                        len = obj.length,
+                        show_num = aijianmei.newdom.getElementsByClass(show);
+                    for(var i = 0;i < len;i++){
+                        obj[i].index = i;
+                        if(obj[i]){
+                            obj[i].onkeyup = function(){
+                                show_num[this.index].innerHTML = this.value.length;
+                            }
+                            obj[i].onkeydown = function(){
+                                show_num[this.index].innerHTML = this.value.length;
+                            }
+                        }       
+                    }
+                }
             }
             function change_number(obj_1,obj_2){
-            	aijianmei.change_num(obj_1,obj_2);
+                aijianmei.change_num(obj_1,obj_2);
             }
             //change_number('comment_inp','lay_word_num')
             var init = function(){
@@ -650,7 +708,7 @@ $(function(){
                 aijianmei.p_fixed(header);
             }
             init();
-	
+    
 
 
 
