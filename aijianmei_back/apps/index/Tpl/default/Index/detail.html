@@ -33,7 +33,7 @@
 								summary:'',/*分享摘要(可选)*/
 								title:'<?php echo $article['title'];?>',/*分享标题(可选)*/
 								site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
-								pics:'', /*分享图片的路径(可选)*/
+								pics:'<?php echo $aimgsrc;?>', /*分享图片的路径(可选)*/
 								style:'102',
 								width:68,
 								height:21
@@ -60,44 +60,11 @@
                      <div class="article">
                     {$article['content']|htmlspecialchars_decode}
                     </div>
-
-                    <!--<div class="web_expend_2">
-                        <span class="read_time">
-                        </span>
-                        <input type="hidden" id="articleid" value="<?php echo $_GET['id'];?>" uid="<?php echo getMid();?>" tname="v">
-                        <a class="sprite_8" aid="{$article['id']}" act="like"><span class="praise" id="sprite_8_num">{$article['like']}</span></a>
-                        <a class="sprite_9" aid="{$article['id']}" act="unlike"><span class="praise" id="sprite_9_num">{$article['unlike']}</span></a>
-
-                        <span class="relay">转发到</span>
-                        <include file="../Public/share" />
-     
-                    </div>
-                    <wb:like appkey="5Q8YPj"></wb:like>
-					<form>
-                    <div class="border_comment">
-                        <span class="word_num">
-						<span class="word_num"><span class="lay_word_num">0</span>/300</span>
-						</span>
-                        <php>if(getMid()){</php>
-                        <php>echo getUserName(getMid())</php>
-                        <php>}else {</php>
-                        <span><a href="javascript:void(0);" class="login">登录</a></span>|
-                        <span><a href="{:U('index/Index/selectRegister')}">注册</a></span>
-                        <php>}</php>
-                        <div class="textarea">
-                        <textarea class="comment_inp" name="comment" id="commentbox"  onKeyDown="change_number('comment_inp','lay_word_num');" onKeyUp="change_number('comment_inp','lay_word_num');"  maxlength=300>有什么感想，来说说吧</textarea>
-                        <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
-                        <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
-                        </div>
-						</form>
-                        <a class="comment" id="<php>if(!getMid()) echo 'not_login';</php>" href="javascript:void(0)" onclick="addDetaiCommont();" >发表评论</a>
-                    </div>-->
 					       <div class="share_part">
 							<span class="wrap_like">
 								<a class="sprite_8 click_like" aid="{$article['id']}" act="like"></a>
 								<span class="praise num_like" id="sprite_8_num" style="margin-left:1px;">{$article['like']}</span>
 							</span>
-
                             <span class="click_share">
                                 我要分享:
                                 <!--<a class="share_obj_1">腾讯</a>-->
@@ -110,7 +77,7 @@
 								summary:'',/*分享摘要(可选)*/
 								title:'<?php echo $article['title'];?>',/*分享标题(可选)*/
 								site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
-								pics:'', /*分享图片的路径(可选)*/
+								pics:'<?php echo $aimgsrc;?>', /*分享图片的路径(可选)*/
 								style:'102',
 								width:68,
 								height:24
@@ -153,8 +120,6 @@
                             </span>		
                             <span class="free_choice">
                                 <span>共{$pager['page']}页</span>
-                                <!--<span class="concrete_page">到 <input type="text" /> 页</span>
-                                <span class="sure_button">确定</span>-->
                             </span>			
                         </div>
                         <php> }</php>
@@ -175,7 +140,6 @@
                                         <php>echo date('Y-m-d H:i:s', $c['create_time'])</php>
                                     </span>
                                     <span>来自<em>爱健美网</em></span>
-                                    
                                 </p>
                             </div>
                             <php>}</php>
@@ -188,7 +152,7 @@
             <div class="content_right">
                 <div>
                     <div class="sider_m">
-                        <h4 class="sider_t">关于作者</h4>
+                        <h4 class="sider_t">关注我们</h4>
                         <div>
                             <div class="author_info">
                                 <iframe width="100%" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=100&skin=1&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=2692984661&verifier=3c08c88d&dpc=1"></iframe>
@@ -198,7 +162,7 @@
                                 <wb:follow-button uid="2692984661" type="red_4" >关注</wb:follow-button>
                             </div>
                             <div class="clearfix">
-                                <img src="../Public/images/weima.jpg" class="two_code">
+                                <img src="../Public/images/weima.jpg" class="two_code" alt="微信二维码">
                                 <div class="ms_code">
                                     <p><span></span>扫描微信二维码</p>
                                     <p>随时获取新资讯</p>
@@ -206,15 +170,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--
-                    <div class="sider_m">
-                        <h4 class="sider_t">推荐商品</h4>
-                        <a href="#"><img class="recommend_prod" src="../Public/images/store_5/sd5_16.jpg" alt="no" border="0" /></a>
-                        
-                        <a href="{$promote['link']}"><img class="recommend_prod" src="{$promote['image']}" alt="no" border="0" /></a>
-                    
-                    </div>
-                    -->
                     <div class="sider_m">
                         <h4 class="sider_t">精华推荐</h4>
                         <php>foreach($promote_article as $p) {</php>
@@ -222,10 +177,6 @@
                             <a href="index-Index-articleDetail-{$p['id']}.html" class="recommend_pic"><img src="/public/images/article/{$p['img']}" width="90" height="60" alt="no" border="0" /></a><div class="intro"><h3><a href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}">{$p['title']}</a></h3><span class="t_play_time">点击:<span> </span>{$p['reader_count']}</span><span class="comment_time">评论: <span>{$p['CommNumber']}</span></span></div>
                         </div>
                         <php>}</php>
-                        <!-- <div class="recommend">
-                            <a><img src="../Public/images/article/2.png" alt="no" border="0" /></a>
-                            <p class="intro">新闻百科：为什么大陆同胞赴美不用、、、</p>
-                        </div> -->
                     </div>
                 </div>
             </div>
