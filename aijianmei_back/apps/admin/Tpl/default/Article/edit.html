@@ -1,8 +1,8 @@
 <include file="../Public/_header" />
-
-<script src="../addons/libs/ckeditor/ckeditor.js"></script>
-<script src="../addons/libs/ckeditor/sample.js"></script>
-<link rel="stylesheet" href="../addons/libs/ckeditor/sample.css">
+<script src="ckeditor/ckeditor.js"></script>
+<script src="ckeditor/sample.js"></script>
+<link rel="stylesheet" href="ckeditor/sample.css">
+<script type="text/javascript" src="ckfinder/ckfinder.js"></script>
 
 <div class="so_main">
   <div id="editTpl_div">
@@ -83,15 +83,19 @@
         <dd>
 			<textarea cols="80" id="content" name="content" rows="10">{$article['content']}</textarea>
 		<script>
-
 			CKEDITOR.replace( 'content', {
 				fullPage: true,
 				allowedContent: true,
 				extraPlugins: 'wysiwygarea',
-				language : 'zh-cn'
-			});
-
-		</script>
+				language : 'zh-cn',
+				filebrowserBrowseUrl : 'ckfinder/ckfinder.html',
+				filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?type=Images',
+				filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?type=Flash',
+				filebrowserUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+				filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+				filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+				});
+	</script>
         </dd>
     </dl>
     

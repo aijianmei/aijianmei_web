@@ -1,11 +1,11 @@
 <include file="../Public/header" />						
                 <div id="banner">
                     <ul>
-                        <li><a href="/index.php?app=index&mod=Index&act=articleDetail&id=60"><img src="../Public/images/banner/index_1.jpg" alt=""/></a></li>
-                        <li><a href="/index.php?app=index&mod=Index&act=articleDetail&id=34"><img src="../Public/images/banner/index_2.jpg" alt="" /></a></li>
+                        <li><a href="/index-Index-articleDetail-60.html"><img src="../Public/images/banner/index_1.jpg" alt=""/></a></li>
+                        <li><a href="/index-Index-articleDetail-34.html"><img src="../Public/images/banner/index_2.jpg" alt="" /></a></li>
                         <!--<li><a href="#"><img src="../Public/images/banner/index_3.jpg" alt="" /></a></li>
                         <li><a href="#"><img src="../Public/images/banner/index_4.jpg" alt="" /></a></li>-->
-                        <li><a href="/index.php?app=index&mod=Index&act=articleDetail&id=93"><img src="../Public/images/banner/index_5.jpg" alt="" /></a></li>
+                        <li><a href="/index-Index-articleDetail-93.html"><img src="../Public/images/banner/index_5.jpg" alt="" /></a></li>
                     </ul>
                     <div class="btn">
                         <span class="current"></span>
@@ -22,61 +22,61 @@
                             <h1 class="public_title">天天锻炼</h1>
                             <div class="part clearfix">
                                 <div class="classify">
-                                    <a href="/index.php?app=index&mod=Index&act=info&type=1" class="show_enter"/>
+                                    <a href="/index-Index-info-1.html" class="show_enter"/>
                                         <span class="enter_icon" style="display: none;"></span>
-                                        <img src="../Public/images/mr_01.jpg" />
+                                        <img src="../Public/images/mr_01.jpg" alt="上班族健身"/>
                                         <p>上班族健身</p>
                                         <i></i>
                                     </a>
                                     <ul class="expend">
                                     <?php foreach($shangban as $d) { ?>
                                         <li>
-                                            <a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo $d['id']?>" ><?php echo $d['title']?></a>
+                                            <a href="index-Index-articleDetail-<?php echo $d['id']?>.html" ><?php echo $d['title']?></a>
                                         </li>
                                     <?php } ?>
                                 </ul>
                                 </div>
                                 <div class="classify">
-                                    <a href="/index.php?app=index&mod=Index&act=info&type=2" class="show_enter">
+                                    <a href="/index-Index-info-2.html" class="show_enter">
                                             <span class="enter_icon" style="display: none;"></span>
-                                            <img src="../Public/images/mr_02.jpg" />
+                                            <img src="../Public/images/mr_02.jpg" alt="日常健身"/>
                                             <p>日常健身</p>
                                             <i></i>
                                         </a>
                                     <ul class="expend">
                                     <?php foreach($richang as $d) {  ?>
                                             <li>
-                                                    <a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo $d['id']?>"><?php echo $d['title']?></a>
+                                                    <a href="index-Index-articleDetail-<?php echo $d['id']?>.html"><?php echo $d['title']?></a>
                                             </li>
                                     <?php } ?>
                                     </ul>
                                 </div>
                                 <div class="classify">
-                                    <a href="/index.php?app=index&mod=Index&act=info&type=3" class="show_enter">
+                                    <a href="/index-Index-info-3.html" class="show_enter">
                                             <span class="enter_icon" style="display: none;"></span>
-                                            <img src="../Public/images/mr_03.jpg" />
+                                            <img src="../Public/images/mr_03.jpg" alt="运动员"/>
                                             <p>运动员</p>
                                             <i></i>
                                         </a>
                                     <ul class="expend">
                                     <?php foreach($zhuanye as $d) {  ?>
                                             <li>
-                                                    <a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo $d['id']?>"><?php echo $d['title']?></a>
+                                                    <a href="index-Index-articleDetail-<?php echo $d['id']?>.html"><?php echo $d['title']?></a>
                                             </li>
                                     <?php } ?>
                                     </ul>
                                 </div>
                                 <div class="classify spe">
-                                    <a href="/index.php?app=index&mod=Index&act=info&type=4" class="show_enter">
+                                    <a href="/index-Index-info-4.html" class="show_enter">
                                     <span class="enter_icon" style="display: none;"></span>
-                                    <img src="../Public/images/mr_04.jpg" />
+                                    <img src="../Public/images/mr_04.jpg" alt="健身运动员"/>
                                     <p>健身运动员</p>
                                     <i></i>
                                 </a>
                                     <ul class="expend">
                                             <?php foreach($jianmei as $d) {  ?>
                                             <li>
-                                                    <a href="/index.php?app=index&mod=Index&act=articleDetail&id=<?php echo $d['id']?>"><?php echo $d['title']?></a>
+                                                    <a href="index-Index-articleDetail-<?php echo $d['id']?>.html"><?php echo $d['title']?></a>
                                             </li>
                                     <?php } ?>
                                     </ul>
@@ -122,7 +122,7 @@
                             <?php foreach($hotvideos as $key => $value) {  ?>
                                 <li class="tr_classify">
                                     <div class="lay_pic_share">
-                                        <a href="{:U('index/Train/videoDetail', array('id'=>$value['id']))}" class="show_enter">
+                                        <a href="/index-Train-videoDetail-{$value['id']}.html" class="show_enter">
                                             <span class="v_enter"></span>
                                             <img src="<?php echo $value['logo'];?>" alt="<?php echo $value['title'];?>">
                                         </a>
@@ -132,9 +132,9 @@
                                     </div>
                                     </div>
                                     <div class="lay_tr">
-                                        <a href="{:U('index/Train/videoDetail', array('id'=>$value['id']))}" class="plan_article_tl" alt="<?php echo $value['title'];?>" title="<?php echo $value['title'];?>"><?php echo $value['title'];?></a>
+                                        <a href="/index-Train-videoDetail-{$value['id']}.html" class="plan_article_tl" alt="<?php echo $value['title'];?>" title="<?php echo $value['title'];?>"><?php echo $value['title'];?></a>
                                         <p class="summary" alt="<?php echo $value['brief'];?>" title="<?php echo $value['brief'];?>"><?php echo msubstr($value['brief'],0,78) ?></p>
-                                        <a class="expand_more" href="{:U('index/Train/videoDetail', array('id'=>$value['id']))}">点击阅读》</a>
+                                        <a class="expand_more" href="/index-Train-videoDetail-{$value['id']}.html">点击阅读》</a>
                                         <div class="function_more clearfix">
                                             <span class="t_play_time">点击:<span><?php echo $value['click'];?></span></span>
                                             <span class="comment_time">评论:<span><?php echo $value['recommons'];?></span></span>
