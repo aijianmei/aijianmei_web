@@ -73,7 +73,7 @@
 								})();
 								</script>
 								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
-                                <a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=<?php echo $video['htmlurl'];?>&title=<?php echo $video['title'];?>&content=utf-8&pic=<?php echo $video['logo']?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a>
+                                <a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&ralateUid=2692984661&url=<?php echo $video['htmlurl'];?>&title=<?php echo $video['title'];?>&content=utf-8&pic=<?php echo $video['logo']?>" title="分享到新浪微博" target="_blank">微博</a>
                             </span>
                         </div>
 						<wb:like appkey="5Q8YPj"></wb:like>  
@@ -107,7 +107,7 @@
                                     <span class="concrete_choice">
 										<?php printf($pager['backstr'],'class="prev"');?>
 										<?php printf($pager['thestr'],'class="current_page"');?>
-										<?php printf($pager['backstr'],'class="next"');?>
+										<?php printf($pager['nextstr'],'class="next"');?>
                                     </span>
                                     <span class="free_choice">
                                         <span>共{$pager[page]}页</span>

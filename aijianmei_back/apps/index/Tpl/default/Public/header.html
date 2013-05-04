@@ -11,11 +11,12 @@
             <link rel="stylesheet" href="../Public/css/public.css" />
             <link rel="stylesheet" href="../Public/css/{$cssFile}.css" />
 			<php>if($_act==1){</php>
-			<meta content="webpage" property="og:type"/>
-			<meta content="http://www.aijianmei.com/index-Index-articleDetail-{$_GET[id]}.html" property="og:url"/>
-			<meta content="{$article['title']}" property="og:title"/>
-			<meta content="{$article['brief']}" property="og:description"/>
-			<meta content="http://www.aijianmei.com/public/images/article/{$article['img']}" property="og:image"/>
+			<!--必填-->
+			<meta property="og:type" content="article" />
+			<meta property="og:url" content="http://www.aijianmei.com/index-Index-articleDetail-{$_GET[id]}.html" />
+			<meta property="og:title" content="{$article['title']}" />
+			<meta property="og:description" content="{$article['brief']}" />
+			<meta property="og:image" content="http://www.aijianmei.com/public/images/article/{$article['img']}" />
 			<php>}</php>
 			<php>if($metatype==1){</php>
 			<meta property="og:type" content="video" />
@@ -59,7 +60,7 @@
                                 <a href="#" class="checkChange" id="reloadcode">换一换</a>-->
                             </div>
                             <button type="submit" class="submit_btn">登录</button>
-                            <!--<a href="index.php?app=home&mod=Public&act=sendPassword" class="forget">忘记密码</a>-->
+                            <a href="/index.php?app=index&mod=User&act=setinfo" class="forget">忘记密码</a>
                         </form>
                     </div>
                     <div class="other_account clearfix">

@@ -16,7 +16,9 @@ class UserAction extends Action {
 				redirect(U('index/User/setinfo'));
 			}
 		}
+		if($_GET['sendact']=='resend'){$_POST['email']=$_SESSION['is_PortMailname'];}
 		$_SESSION['is_PortMail']=1;
+		$_SESSION['is_PortMailname']=$_POST['email'];
 		$codeurl=md5("aijianmei".$_POST['email']);
 		$toemail=$_POST['email'];
 		$check_sql="select * from ai_returncode_log where codeurl='".$codeurl."' and uname='".$_POST['email']."' and out_time>".time();
@@ -38,7 +40,7 @@ class UserAction extends Action {
 					(如果无法点击该URL链接地址，请将它复制并粘帖到浏览器的地址输入框，然后单击回车即可。该链接使用后将立即失效。)</br>
 					注意:请您在收到邮件1个小时内('.$out_time_str.'前)使用，否则该链接将会失效。</br>
 					爱健美网 '.SITE_URL;
-			$info = $service->send_email($toemail, $subject, $content);
+			@$info = $service->send_email($toemail, $subject, $content);
 		}
 		else{
 			$out_time=$checkArr[0]['out_time'];
@@ -55,9 +57,12 @@ class UserAction extends Action {
 					(如果无法点击该URL链接地址，请将它复制并粘帖到浏览器的地址输入框，然后单击回车即可。该链接使用后将立即失效。)</br>
 					注意:请您在收到邮件1个小时内('.$out_time_str.'前)使用，否则该链接将会失效。</br>
 					爱健美网 '.SITE_URL;
-			$info = $service->send_email($toemail, $subject, $content);
+			@$info = $service->send_email($toemail, $subject, $content);
 		}
-        if($_POST['sendact']=='resend'){echo $info;exit;}
+        if($_POST['sendact']=='resend'){
+			echo json_encode($info);
+			exit;
+		}
 		$this->assign('is_send', $info);
 		$this->assign('email', addslashes($_POST['email']));
 		$this->display('GetPwd_Second');
@@ -65,6 +70,7 @@ class UserAction extends Action {
 	
 	public function getmailcode()
 	{
+		$is_passver=0;
 		if(md5("aijianmei".$_GET['uname'])==$_GET['acitve']){
 			$getLogSql="select * from ai_returncode_log where uname='".addslashes($_GET['uname'])."' and out_time>".time();
 			$getLogInfo=M('')->query($getLogSql);
@@ -78,9 +84,15 @@ class UserAction extends Action {
 		$this->display('GetPwd_Third');
 	}
 	
-	public function updateUinfo(){
+	public function updateUinfo()
+	{	
 		if($_SESSION['psonkey']==md5($_POST['email'])){
-			$sql="";
+			$sql="UPDATE  `aijianmei`.`ai_user` SET  `password` = '".md5($_POST['email'])."' WHERE  `ai_user`.`email` ='".$_POST['email']."'";
+			//Array ( [password] => 123456 [repassword] => 123456 [email] => kontem@sina.cn )
+			M('')->query($sql);
+			$dsql="DELETE FROM `aijianmei`.`ai_returncode_log` WHERE `ai_returncode_log`.`uname` = '".$_POST['email']."'";
+			M('')->query($dsql);
+			unset($_SESSION['psonkey']);
 		}else{
 			redirect(U('index/User/setinfo'));
 		}
@@ -181,9 +193,9 @@ class UserAction extends Action {
 	}
 	$_SESSION['deslogin']=0;
 	//print_r($_SESSION);
-	if($_SESSION['loginBef_url']!=''&&$_SESSION['shoprefer_url']==''){
-		//redirect($_SESSION['refer_url']);
-		redirect(U('index/Index/index'));
+	if($_SESSION['refer_url']!=''&&$_SESSION['shoprefer_url']==''){
+		redirect($_SESSION['refer_url']);
+		//redirect(U('index/Index/index'));
 	}
 	elseif($_SESSION['shoprefer_url']!=''){
 		$reurl=$_SESSION['shoprefer_url'];unset($_SESSION['shoprefer_url']);

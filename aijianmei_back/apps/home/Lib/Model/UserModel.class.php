@@ -321,6 +321,7 @@ class UserModel extends Model {
 		}
 
 		$userInfo = S('S_userInfo_'.$uid);
+		$userInfo=null;
 		//获取用户基本信息缓存
 		if(empty($userInfo)) {
 			//姓名
