@@ -1,10 +1,20 @@
 <include file="../Public/_header" />
-
+<!--编译器js start-->
 <script src="ckeditor/ckeditor.js"></script>
 <script src="ckeditor/sample.js"></script>
 <link rel="stylesheet" href="ckeditor/sample.css">
 <script type="text/javascript" src="ckfinder/ckfinder.js"></script>
-
+<!--编译器js end-->
+<link rel="stylesheet" href="widgets/datepicker/ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="widgets/datepicker/ui.js"></script>
+<script>
+$(function() {
+	$( "#datepicker" ).datepicker();
+	$( "#datepicker" ).datepicker( "option", "dateFormat","yy-mm-dd" );
+	$( "#datepicker" ).datepicker( "setDate", '<?php echo $article['gotime'];?>' );
+}); 
+</script>
 <div class="so_main">
   <div id="editTpl_div">
   	<div class="page_tit"><eq name="type" value="edit">编辑<else/>添加</eq>天天锻炼</div>
@@ -34,6 +44,13 @@
 		<dt>图片：</dt>
 		<dd>
 			<input type="file" name="img" />
+		</dd>
+	</dl>
+	
+	<dl class="lineD">
+		<dt>日期：</dt>
+		<dd>
+			<input id="datepicker" size="30" type="text" value="" name="gotime"/>
 		</dd>
 	</dl>
 
@@ -66,9 +83,9 @@
     </dl> -->
     
     <dl class="lineD">
-    	<dt>关键词（多个关键词用逗号分隔）：</dt>
+    	<dt>关键词(关键词用逗号分隔)：</dt>
     	<dd>
-    		<input name="keyword" type="text" value="{$article['keyword']}" size="40" />
+    		<input name="keyword" type="text" value="{$article['keyword']}" size="100" />
     	</dd>
     </dl>
     
@@ -155,10 +172,5 @@ function addVideoPanel() {
 }
 </script>
 
-<script>
-$(document).ready(function(){
-	loadEditor("content");
-  
-});
-</script>
+
 <include file="../Public/_footer" />

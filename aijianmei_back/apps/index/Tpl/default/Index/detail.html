@@ -47,7 +47,6 @@
 								</script>
 								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
                                 <a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=http://www.aijianmei.com/index-Index-articleDetail-<?php echo $_GET['id'];?>.html&title=<?php echo $article['title'];?>&content=utf-8&pic=<?php echo $aimgsrc;?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a>
-
 							</span>
                         <script type="text/javascript">
                         
@@ -63,7 +62,7 @@
                     </div>
 					       <div class="share_part">
 							<span class="wrap_like">
-								<input type="hidden" value="<?php echo getMid();?>" id="articleid">
+								<input type="hidden" id="articleid" value="<?php echo $_GET['id'];?>" uid="<?php echo getMid();?>" tname="v">
 								<a class="sprite_8 click_like" aid="{$article['id']}" act="like"></a>
 								<span class="praise num_like" id="sprite_8_num" style="margin-left:1px;">{$article['like']}</span>
 							</span>

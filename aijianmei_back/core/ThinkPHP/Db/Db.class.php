@@ -726,7 +726,7 @@ class Db extends Think
             }
         }
         $sql   =  'INSERT INTO '.$this->parseTable($options['table']).' ('.implode(',', $fields).') VALUES ('.implode(',', $values).')';
-        echo $sql   .= $this->parseLock(isset($options['lock'])?$options['lock']:false);
+        $sql   .= $this->parseLock(isset($options['lock'])?$options['lock']:false);
         return $this->execute($sql);
     }
 

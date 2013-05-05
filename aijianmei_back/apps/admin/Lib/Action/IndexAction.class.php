@@ -137,7 +137,8 @@ class IndexAction extends AdministratorAction {
             ),
             '天天锻炼'     => array(
                 '添加'    => U('admin/Article/addDaily'),
-                '管理'    => U('admin/Article/daily'),	
+                '管理'    => U('admin/Article/daily'),
+				'批量导入'    => U('admin/Article/bulkImport'),				
             ),
             '推荐商品'     => array(
                 '添加'    => U('admin/Article/addPromote'),
