@@ -58,10 +58,6 @@
 				margin-left: 20px;
 				font-size: 18px;
 			}
-				.web_expend_1 span{
-					padding: 0 7px;
-					border-left: 1px solid #CCC;
-				}
 				.click_share iframe{
 					height:25px!important;
 					vertical-align: top;
@@ -420,12 +416,6 @@
 	height:25px;
 	text-indent: -9999em;
 	background: url(../images/wm3.png) no-repeat;
-}
-.click_share .share_obj_1{
-	background-position: 0 -935px;
-}
-.click_share .share_obj_2{
-	background-position: 0 -966px;
 }
 .click_share .share_obj_1{
 	background-position: 0 -935px;
