@@ -259,7 +259,10 @@ a:hover{
 			background: #2274A3;
 		}
 		.cont_tab_ct{
-
+			display: none;
+		}
+		.cont_tab_block{
+			display: block;
 		}
 		/*tr_tab_ct_1-----------*/
 			.cont_module{
@@ -425,14 +428,14 @@ a:hover{
 	/*lb_search-----------*/
 	.lb_search{
 		position: relative;
+		height:28px;
 		border: 1px solid #51ACE3;
 		background: white;
 	}
 	.lb_search #text{
-		height: 28px;
+		height: 18px;
 		width: 191px;
-		padding:0 15px;
-		height: 27px\9;
+		padding:5px 15px;
 	}
 	.lb_search #button{
 		position: absolute;
@@ -473,12 +476,14 @@ a:hover{
 		padding: 2px 4px;
 		border-radius: 2px;
 		opacity: 0.6;
+		filter:alpha(opacity=60);
 		cursor: pointer;
 		box-shadow: 0 4px 3px -3px rgba(0,0,0,0.1);
 		-webkit-transition: opacity 0.2s ease-in-out;
 	}
 	.identifying a:hover {
 		opacity: 1;
+		filter:alpha(opacity=100);
 	}
 	/*recoment_good---------*/
 	.recomment_good{
@@ -500,7 +505,7 @@ a:hover{
 		position: relative;
 		display: block;
 		padding: 10px;
-		border: 1px solid #ccc;
+		border: 1px solid #ececec;
 	}
 	.re_angle{
 		position: absolute;
