@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<style type="text/css">
+	body,div{
+		margin:0;
+		padding: 0;
+	}
+		#show_place{
+			margin-bottom: 10px;
+		}
+		.part{
+			width:300px;
+			height:100px;
+			background: #21ace3;
+			margin:10px 0;
+			text-align: center;
+			color:black;
+		}
+	</style>
+	</head>
+	<body>
+		<div id="show_place">show here</div>
+		<input type="text" name="text" id="text" /><input type="button" id="button" value="sent" />
+		<div id="part" class="part"><h3>title</h3><p>ajax加载块</p></div>
+		<div id="part_1" class="part"><h3>title</h3><p>ajax加载块</p></div>
+		<div id="part_1" class="part"><h3>title</h3><p>ajax加载块</p></div>
+		<div id="part_2" class="part"><h3>title</h3><p>ajax加载块</p></div>
+		<div id="part_3" class="part"><h3>title</h3><p>ajax加载块</p></div>
+		<div id="part_4" class="part"><h3>title</h3><p>ajax加载块</p></div>
+		<div id="part_5" class="part"><h3>title</h3><p>ajax加载块</p></div>
+		<!-- <div style="position:fixed;bottom:0;right:0;">
+			<p><label for="wheelDelta">滚动值:(IE/Opera)</label><input type="text" id="wheelDelta" /></p>
+			<p><label for="detail">滚动值:(Firefox)</label><input type="text" id="detail" /></p>
+		<div> -->
+		<script src="jquery.js"></script>
+		<script>
+		$(document).ready(function(){
+			var show_place = document.getElementById('show_place'),
+				part = document.getElementById('part');
+					// var fn = function(e){
+					// 	var direct = 10;
+					// 	var show_place = document.getElementById('show_place'),
+					// 		part = document.getElementById('part');
+					// 		e = e || window.event;
+					// 		var t1 = document.getElementById("wheelDelta");
+					// 		var t2 = document.getElementById("detail");
+					// 		if(e.wheelDelta){//IE/Opera/Chrome
+					// 			t1.value = e.wheelDelta;
+					// 			if(e.wheelDelta >= 120){
+					// 				part.style.height = parseFloat(part.style.height) - direct + 'px';
+					// 			}
+					// 			else{
+					// 				part.style.height = parseFloat(part.style.height) + direct + 'px';
+					// 			}
+					// 		}
+					// 		else if(e.detail){//Firefox
+					// 			t2.value = e.detail;
+					// 		}
+					// 	return false;
+					// }
+					// if(document.addEventListener){
+					// 	part.addEventListener('DOMMouseScroll',fn,false);
+					// }
+					// part.onmousewheel = fn;
+					// window.onload = function(){
+					// 	document.getElementById('text').value = '';
+					// }
+			window.onscroll = function(){
+				var body = document.getElementsByTagName('body')[0];
+				// console.log(part.offsetHeight,body.scrollTop,document.documentElement.clientHeight);
+				var scrollTop = document.body.scrollTop || document.pageYOffse || document.documentElement.scrollTop;
+				// alert(document.body.clientHeight);
+				// alert(scrollTop);
+				// alert(document.documentElement.clientHeight);
+				if(scrollTop >= body.clientHeight - document.documentElement.clientHeight + 10){
+					// body.style.background = 'black'
+					$.ajax({
+		 			type : 'get',//可选get
+			 			url : "text.php?ajax=yes",
+			 			 dataType:'json',//从php返回的值以 JSON方式
+			 			// dataType : 'text',//申明类型，不然有错
+			 	 		success : function(data){		
+			 	 			for(var count = 0;count <= 9;count++){
+			 	 				var title = data[0],
+				 	 				content = data[1],
+				 	 				div = document.createElement('div'),
+				 	 				p = document.createElement('p'),
+				 	 				h3 = document.createElement('h3');
+				 	 			div.className = 'part';
+				 	 			// p.innerHTML = content;
+				 	 			// h3.innerHTML = title;
+				 	 			// div.appendChild(h3);
+				 	 			// div.appendChild(p);
+				 	 			div.innerHTML = '<h3>' + title[count] + '</h3><p>' + content + '</p>' 
+				 	 			body.appendChild(div);
+			 	 			}
+			    		// 	document.getElementById('show_place').innerHTML = data;
+			  			},
+			  			error : function(){
+			  				alert("error"); 
+			  			}
+			  		});
+				}
+				else{
+					body.style.background = 'white'
+				}
+			}
+			$("#button").click(function(){
+				var name = document.getElementById('text').value;
+		 		$.ajax({
+		 			type : 'get',//可选get
+		 			url : "text.php?name=" + name + "&num=1",
+		 			// dataType : 'text',//申明类型，不然有错
+		 	 		success : function(data){
+		    			document.getElementById('show_place').innerHTML = data;
+		    			// $('#show_place').html(data);
+		  			},
+		  			error : function(){
+		  				alert("error"); 
+		  			}
+		  		});
+			});
+		});
+		</script>
+	</body>
+</html>

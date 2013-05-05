@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<style type="text/css">
+	</style>
+	</head>
+	<body>
+		<h1>注册用户</h1>
+		<form>
+			<div>
+				<label>用户名:</label>
+				<input type="text" class="text" />
+			</div>
+			<input type="button" class="button" value="注册" />
+		</form>
+		<div class="content"></div>
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(".button").click(function(){
+					var text = $(".text").val();
+					if(text == ""){
+						alert("请填写用户名");
+						$(".text").focus();
+						return false;
+					}
+					else{
+						$.ajax({
+				 			type : 'get',//可选get
+				 			url : "checkname.php?usename=" + text,
+				 			 // dataType:'json',//从php返回的值以 JSON方式
+				 			// dataType : 'text',//申明类型，不然有错
+				 	 		success : function(data){		
+					 	 		$(".content").html(data);
+							}
+						})
+					}
+				})
+			})
+		</script>
+	</body>
+</html>
