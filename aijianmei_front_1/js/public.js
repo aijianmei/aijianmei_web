@@ -165,6 +165,7 @@ var aijianmei = {
 	addtitle : function(obj){
 		var Obj = aijianmei.getobj(obj,1),
 			len = Obj.length,
+			handlewidth = 45,
 			title = aijianmei.getobj('title_tip'),
 			title_content = aijianmei.getobj('title_content');
 		var handle = function(e){
@@ -176,18 +177,25 @@ var aijianmei = {
 			}
 			else{
 				//确定提示内容的宽度，适当调整
-				var handlewidth = function(e){
+				var handlewidth = function(){
 					if(text.length < 5){
 						title.style.width = '80px';
+						handlewidth = 25;
 					}
-					else if(text.length < 9){
-						title.style.width = '120px'
+					else if(text.length <11){
+						title.style.width = '150px';
+						handlewidth = 25;
 					}
-					else if(text.length < 13){
-						title.style.width = '160px'
+					else if(text.length < 14){
+						title.style.width = '160px';
+						handlewidth = 45;
 					}
 					else{
-						title.style.width = '200px'
+						title.style.width = '200px';
+						handlewidth = 45;
+					}
+					if(text.length > 26){
+						handlewidth = 60;
 					}
 				}
 				handlewidth();
@@ -209,18 +217,18 @@ var aijianmei = {
 						half = parseFloat(titlewidth)/2;
 						// console.log(_target.parentNode.offsetLeft)
 						title.style.left = align - half + 'px';
-						title.style.top = top - 44 + 'px';
+						title.style.top = top - handlewidth + 'px';
 				} 
 				textalign();
 				title.style.display = 'block';
 			}
 		}
 		var remove = function(){
-			title_content.removeChild(title_content.lastChild);
+			title_content.removeChild(title_content.firstChild);
 			title.style.display = 'none';
 		}
 		for(var i = 0;i < len;i++){
-			if(Obj[i]){
+			if(Obj[i] && window.XMLHttpRequest){
 				addevent(Obj[i],"mouseover",handle);
 				addevent(Obj[i],"mouseout",remove);
 			}	

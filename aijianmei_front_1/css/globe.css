@@ -117,10 +117,11 @@ a:hover{
 		background:url(../images/store.png) no-repeat;
 	}
 	.nav a{
-		display: inline-block;
+		display: block;
 		padding: 0 8px;
 		color: white;
 		font-size: 23px;
+		word-break:keep-all;/*solue with ie6*/
 	}
 	.nav_current a{
 		background: url(../images/dh_02.jpg) repeat-x;
@@ -137,7 +138,7 @@ a:hover{
 		overflow: hidden;
 		border-style: solid;
 		border-width: 5px;
-		border-color: transparent transparent white transparent;
+		border-color: #2A94D0 #2A94D0 white;
 	}
 	.nav li:hover a{
 		background: url(../images/dh_02.jpg) repeat-x;
@@ -201,182 +202,182 @@ a:hover{
 
 /*website training beginning*************************/
 
-/*content_1******************************************************************/
+	/*content_1******************************************************************/
 
 
-	/*banner all*/
-		.banner{
-			position: relative;
-		}
-		.lay_banner{
-			position: relative;
-			width: 650px;
-			height: 280px;
-			overflow: hidden;
-		}
-		.lay_banner ul,.lay_banner .bn_choice_point{
-			position: absolute;
-			left:0px;
-			list-style: none;
-			margin: 0;
-			padding: 0;
-			
-		}
-		.bn_contain_pic{
-			width: 2600px;
-			height: 100px;
-		}
-		.bn_contain_pic li{
-			float: left;
-			width: 650px;
-			height: 280px;			
-		}
-		.bn_contain_pic a{
-			display: block;
-		}
-		.bn_contain_pic img{
-			width: 650px;
-			height: 280px;	
-		}
-		/*choice_way beginning*/
-		.bn_choice_way span{
-			position: absolute;
-			top:38%;
-			display: inline-block;
-			width: 39px;
-			height:270px;
-			z-index: 10;
-		}
-		.bn_prex{
-			left:5px;
-			background: url(../images/turn_left.png) no-repeat;
-		}
-		.bn_next{
-			right:5px;
-			background: url(../images/turn_right.png) no-repeat;
-		}
-		/*choice_way*/
-		/*choice_point beginning*/
-		.bn_choice_point{
-			width:650px;
-			padding: 10px 0;
-			text-align: center;
-		}
-		.bn_choice_point span{
-			display:inline-block;
-			width:10px;
-			height:10px;
-			background: url(../images/dian.png) no-repeat;
-		}
-		/*choice_point */	
-
-
-	/*tr_content*/
-		.tr_nav{
-			width: 100%;
-			background: #56A9E4;
-		}
-		.tr_nav li{
-			float:left;
-			display: inline-block;
-			height:34px;
-			padding: 0 16px;
-			line-height: 34px;
-			cursor: pointer;
-			color: white;
-			font-size: 18px;
-		}
-		.tr_nav .tr_current{
-			background: #2274A3;
-		}
-		.cont_tab_ct{
-			display: none;
-		}
-		.cont_tab_block{
-			display: block;
-		}
-		/*tr_tab_ct_1-----------*/
-			.cont_module{
-				margin: 25px 0;
+		/*banner all*/
+			.banner{
+				position: relative;
 			}
-			/*cont_side_1---------*/
-			.cont_side_1{
+			.lay_banner{
+				position: relative;
+				width: 650px;
+				height: 280px;
+				overflow: hidden;
+			}
+			.lay_banner ul,.lay_banner .bn_choice_point{
+				position: absolute;
+				left:0px;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				
+			}
+			.bn_contain_pic{
+				width: 2600px;
+				height: 100px;
+			}
+			.bn_contain_pic li{
 				float: left;
-				margin-right: 10px;
+				width: 650px;
+				height: 280px;			
 			}
-			.cont_side_1 img{
-
+			.bn_contain_pic a{
+				display: block;
 			}
-			/*cont_side_2-----------*/
-			.cont_side_2{
-				float: left;
-				width: 425px;
+			.bn_contain_pic img{
+				width: 650px;
+				height: 280px;	
 			}
-			.cont_title{
-				font-size: 24px;
-			}
-			/*cont_tip*/
-			.cont_tip{
+			/*choice_way beginning*/
+			.bn_choice_way span{
+				position: absolute;
+				top:38%;
 				display: inline-block;
-				margin: 10px 0;
-				color: #21ace3;
+				width: 39px;
+				height:270px;
+				z-index: 10;
 			}
-			.cont_tip .cont_comefrom{
-				margin-right: 5px;
+			.bn_prex{
+				left:5px;
+				background: url(../images/turn_left.png) no-repeat;
 			}
-			.cont_side_2 p{
-				letter-spacing: 0.25em;
+			.bn_next{
+				right:5px;
+				background: url(../images/turn_right.png) no-repeat;
 			}
-			.cont_read_more{
-				float: right;
-				margin-bottom: 10px;
-				color: #21ace3;
+			/*choice_way*/
+			/*choice_point beginning*/
+			.bn_choice_point{
+				width:650px;
+				padding: 10px 0;
+				text-align: center;
 			}
-			/*cont_share------------*/
-			.cont_share{
-				clear: both;
+			.bn_choice_point span{
+				display:inline-block;
+				width:10px;
+				height:10px;
+				background: url(../images/dian.png) no-repeat;
 			}
-			.cont_click{
-			 	background: url("../images/wm3.png") no-repeat 0 -463px;
-			    display: inline-block;
-			    float: left;
-			    height: 18px;
-			    padding-left: 27px;
+			/*choice_point */	
+
+
+		/*tr_content*/
+			.tr_nav{
+				width: 100%;
+				background: #56A9E4;
 			}
-			.cont_rec{
-				background: url("../images/wm3.png") no-repeat 0 -438px;
-			    display: inline-block;
-			    float: right;
-			    height: 18px;
-			    padding-left: 27px;
+			.tr_nav li{
+				float:left;
+				display: inline-block;
+				height:34px;
+				padding: 0 16px;
+				line-height: 34px;
+				cursor: pointer;
+				color: white;
+				font-size: 18px;
 			}
-/*content_2******************************************************************/
-	.same_part{
-		width:278px;
-		padding: 10px;
-		margin-bottom: 10px;
-		border: 1px solid white;
-		background: #F2F2F2;
-	}
-	.same_module{
-		margin-bottom: 10px;
-		background: white;
-	}
-	.sm_title{
-		height: 38px;
-		line-height: 38px;
-		padding-left: 10px;
-		background: #F1F1F1;
-	}
-	/*pm------*/
-	.pm_pic{
-		float:left;
-	}
-	.pm_pic img{
-		width:55px;
-		height:55px;
-	}
-	/*person message 登录 注册--------------------*/
+			.tr_nav .tr_current{
+				background: #2274A3;
+			}
+			.cont_tab_ct{
+				display: none;
+			}
+			.cont_tab_block{
+				display: block;
+			}
+			/*tr_tab_ct_1-----------*/
+				.cont_module{
+					margin: 25px 0;
+				}
+				/*cont_side_1---------*/
+				.cont_side_1{
+					float: left;
+					margin-right: 10px;
+				}
+				.cont_side_1 img{
+
+				}
+				/*cont_side_2-----------*/
+				.cont_side_2{
+					float: left;
+					width: 425px;
+				}
+				.cont_title{
+					font-size: 24px;
+				}
+				/*cont_tip*/
+				.cont_tip{
+					display: inline-block;
+					margin: 10px 0;
+					color: #21ace3;
+				}
+				.cont_tip .cont_comefrom{
+					margin-right: 5px;
+				}
+				.cont_side_2 p{
+					letter-spacing: 0.25em;
+				}
+				.cont_read_more{
+					float: right;
+					margin-bottom: 10px;
+					color: #21ace3;
+				}
+				/*cont_share------------*/
+				.cont_share{
+					clear: both;
+				}
+				.cont_click{
+				 	background: url("../images/wm3.png") no-repeat 0 -463px;
+				    display: inline-block;
+				    float: left;
+				    height: 18px;
+				    padding-left: 27px;
+				}
+				.cont_rec{
+					background: url("../images/wm3.png") no-repeat 0 -438px;
+				    display: inline-block;
+				    float: right;
+				    height: 18px;
+				    padding-left: 27px;
+				}
+	/*content_2******************************************************************/
+		.same_part{
+			width:278px;
+			padding: 10px;
+			margin-bottom: 10px;
+			border: 1px solid white;
+			background: #F2F2F2;
+		}
+		.same_module{
+			margin-bottom: 10px;
+			background: white;
+		}
+		.sm_title{
+			height: 38px;
+			line-height: 38px;
+			padding-left: 10px;
+			background: #F1F1F1;
+		}
+		/*pm------*/
+		.pm_pic{
+			float:left;
+		}
+		.pm_pic img{
+			width:55px;
+			height:55px;
+		}
+		/*person message 登录 注册--------------------*/
 		.most_top{
 			float:right;
 			height:30px;
@@ -453,104 +454,110 @@ a:hover{
 			line-height: 17px;
 			background: url(../images/car_buy.png) no-repeat;
 		}
-	.pm_signature{
-		margin: 15px 0;
-	}
-	/*lb_search-----------*/
-	.lb_search{
-		position: relative;
-		height:28px;
-		border: 1px solid #51ACE3;
-		background: white;
-	}
-	.lb_search #text{
-		height: 18px;
-		width: 191px;
-		padding:5px 15px;
-	}
-	.lb_search #button{
-		position: absolute;
-		right:0;
-		top:0;
-		width:55px;
-		height:28px;
-		background: url(../images/04.jpg) no-repeat;
-	}
-	/*two_code-----------*/
-	.two_code img{
-		float:left;
-		width:100px;
-		margin-right: 20px;
-	}
-	.two_code span{
-		display: inline-block;
-		margin-top: 40px;
+		.pm_signature{
+			margin: 15px 0;
+		}
+		/*lb_search-----------*/
+		.lb_search{
+			position: relative;
+			height:28px;
+			border: 1px solid #51ACE3;
+			background: white;
+		}
+		.lb_search #text{
+			height: 18px;
+			width: 191px;
+			padding:5px 15px;
+		}
+		.lb_search #button{
+			position: absolute;
+			right:0;
+			top:0;
+			width:55px;
+			height:28px;
+			background: url(../images/04.jpg) no-repeat;
+		}
+		/*two_code-----------*/
+		.two_code img{
+			float:left;
+			width:100px;
+			margin-right: 20px;
+		}
+		.two_code span{
+			display: inline-block;
+			margin-top: 40px;
 
-	}
-	/*identifying--------------*/
-	.identifying{
-		font-family: '微软雅黑';
-		list-style: none;
-		padding: 20px 10px;
-	}
-	.identifying li{
-		float: left;
-		margin-bottom: 6px;
-		margin-right: 6px;
-	}
-	.identifying a{
-		background-color: #0664B0;
-		color: #FFF;
-		height:20px;
-		font-size: 14px;
-		display: inline-block;
-		padding: 2px 4px;
-		border-radius: 2px;
-		opacity: 0.6;
-		filter:alpha(opacity=60);
-		cursor: pointer;
-		box-shadow: 0 4px 3px -3px rgba(0,0,0,0.1);
-		-webkit-transition: opacity 0.2s ease-in-out;
-	}
-	.identifying a:hover {
-		opacity: 1;
-		filter:alpha(opacity=100);
-	}
-	/*recoment_good---------*/
-	.recomment_good{
-		padding: 20px 10px;
-	}
-	.re_host{
-		float: left;
-		margin-right: 10px;
-	}
-	.re_part{
-		float: left;
-		width: 223px;
-	}
-	.re_name{
-		display: block;
-		margin-bottom: 10px;
-	}
-	.re_content{
-		position: relative;
-		display: block;
-		padding: 10px;
-		border: 1px solid #ececec;
-	}
-	.re_angle{
-		position: absolute;
-		display: inline-block;
-		width: 10px;
-		height: 13px;
-		top: 7px;
-		left: -6px;
-		background: url(../images/re_angle.jpg) no-repeat;
-	}
-	/*recomment_read_more*/
-	.recomment_read_more{
-		float:right;
-		color:#21ace3;
-		margin:0 10px 10px 0;
-	}
+		}
+		/*identifying--------------*/
+		.identifying{
+			font-family: '微软雅黑';
+			list-style: none;
+			padding: 20px 10px;
+		}
+		.identifying li{
+			float: left;
+			margin-bottom: 6px;
+			margin-right: 6px;
+			word-break:keep-all;/*solue with ie6*/
+		}
+		.identifying a{
+			background-color: #0664B0;
+			color: #FFF;
+			height:20px;
+			font-size: 14px;
+			display: inline-block;
+			padding: 2px 4px;
+			border-radius: 2px;
+			opacity: 0.6;
+			filter:alpha(opacity=60);
+			cursor: pointer;
+			box-shadow: 0 4px 3px -3px rgba(0,0,0,0.1);
+			-webkit-transition: opacity 0.2s ease-in-out;
+		}
+		.identifying a:hover {
+			opacity: 1;
+			filter:alpha(opacity=100);
+		}
+		/*recoment_good---------*/
+		.recomment_good{
+			padding: 20px 10px;
+		}
+		.re_host{
+			float: left;
+			margin-right: 10px;
+		}
+		.re_part{
+			float: left;
+			width: 223px;
+		}
+		.re_name{
+			display: block;
+			margin-bottom: 10px;
+		}
+		.re_content{
+			position: relative;
+			display: block;
+			padding: 10px;
+			border: 1px solid #ececec;
+		}
+		.re_angle{
+			position: absolute;
+			display: inline-block;
+			width: 10px;
+			height: 13px;
+			top: 7px;
+			left: -6px;
+			background: url(../images/re_angle.jpg) no-repeat;
+		}
+		/*recomment_read_more*/
+		.recomment_read_more{
+			float:right;
+			color:#21ace3;
+			margin:0 10px 10px 0;
+		}
 /*website training ending*************************/
+
+/*website plan begin*************************/
+
+
+/*website plan ending*************************/
