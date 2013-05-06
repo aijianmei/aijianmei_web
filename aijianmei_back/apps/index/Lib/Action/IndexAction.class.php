@@ -226,18 +226,17 @@ function show_banner($type){
 				}
 				$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
 				$get_usernameInfo = M('')->query($get_usernameSql);
-				$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+				$getUidSql='select user_id,user_name,email,password from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
 				$uid = M('')->query($getUidSql);
 				$_SESSION['user_id']   = $uid[0]['user_id'];
 				$_SESSION['user_name'] = $uid[0]['user_name'];
 				$_SESSION['email']     = $uid[0]['email'];
 				$_SESSION['ways']++;
-				$time = time() - 3600;
 				if($_SESSION['mid']>0){
 					$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
 				}
-				@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
-				@setcookie("ECS[password]", '', $time, '/');
+				@setcookie("ECS[user_id]",  $_SESSION['user_id'],time()+3600*24*30);  //set cookie         
+				@setcookie("ECS[password]", $uid[0]['password'], time()+3600*24*30);
 				if($_SESSION['refer_url']!=''&&$_SESSION['shoprefer_url']==''){
 					$reurl=$_SESSION['refer_url'];
 					unset($_SESSION['refer_url']);
@@ -325,18 +324,17 @@ function show_banner($type){
 			}
 			$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
 			$get_usernameInfo = M('')->query($get_usernameSql);
-			$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+			$getUidSql='select user_id,user_name,email,password from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
 			$uid = M('')->query($getUidSql);
 			$_SESSION['user_id']   = $uid[0]['user_id'];
 			$_SESSION['user_name'] = $uid[0]['user_name'];
 			$_SESSION['email']     = $uid[0]['email'];
 			$_SESSION['ways']++;
-			$time = time() - 3600;
 			if($_SESSION['mid']>0){
 				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
 			}
-			@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
-			@setcookie("ECS[password]", '', $time, '/');
+			@setcookie("ECS[user_id]",  $_SESSION['user_id'],time()+3600*24*30);  //set cookie         
+			@setcookie("ECS[password]", $uid[0]['password'],time()+3600*24*30);
 			if($_SESSION['refer_url']!=''){
 				$reurl=$_SESSION['refer_url'];
 				unset($_SESSION['refer_url']);
@@ -397,7 +395,7 @@ function show_banner($type){
 		$this->assign('_current', 'index');
         $this->display();
     }
-    
+
     public function setmail()
     {
         $this->assign('cssFile', 'register');

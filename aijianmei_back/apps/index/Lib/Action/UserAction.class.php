@@ -87,11 +87,14 @@ class UserAction extends Action {
 	public function updateUinfo()
 	{	
 		if($_SESSION['psonkey']==md5($_POST['email'])){
-			$sql="UPDATE  `aijianmei`.`ai_user` SET  `password` = '".md5($_POST['email'])."' WHERE  `ai_user`.`email` ='".$_POST['email']."'";
+			$sql="UPDATE  `aijianmei`.`ai_user` SET  `password` = '".md5($_POST['password'])."' WHERE  `ai_user`.`email` ='".$_POST['email']."'";
 			//Array ( [password] => 123456 [repassword] => 123456 [email] => kontem@sina.cn )
 			M('')->query($sql);
 			$dsql="DELETE FROM `aijianmei`.`ai_returncode_log` WHERE `ai_returncode_log`.`uname` = '".$_POST['email']."'";
 			M('')->query($dsql);
+			$uidsql="select * from ai_user where email ='".$_POST['email']."'";
+			$uid=M('')->query($uidsql);
+			S('S_userInfo_'. $uid[0]['uid'],null);
 			unset($_SESSION['psonkey']);
 		}else{
 			redirect(U('index/User/setinfo'));
@@ -161,19 +164,18 @@ class UserAction extends Action {
 			
 			$get_usernameSql="select * from ai_user where email='".$_POST['email']."'";
 			$get_usernameInfo = M('')->query($get_usernameSql);
-			$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+			$getUidSql='select user_id,user_name,email,password from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
 			$uid = M('')->query($getUidSql);
 			if($uid){
 				$_SESSION['user_id']   = $uid[0]['user_id'];
 				$_SESSION['user_name'] = $uid[0]['user_name'];
 				$_SESSION['email']     = $uid[0]['email'];
 				$_SESSION['ways']++;
-				$time = time() - 3600;
 				if($_SESSION['mid']>0){
 					$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
 				}
-				@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
-				@setcookie("ECS[password]", '', $time, '/');
+				@setcookie("ECS[user_id]",  $_SESSION['user_id'], time()+3600*24*30);
+				@setcookie("ECS[password]", $uid[0]['password'], time()+3600*24*30);
 			}
 		}
 		$_SESSION['deslogin']=0;

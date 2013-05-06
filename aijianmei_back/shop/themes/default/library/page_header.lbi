@@ -73,15 +73,15 @@
             <div class="h_bg">
                 <a href="/index.php?app=index"><div class="logo_1">logo</div></a>
                 <ul class="nav">
-                    <li><i class="ag_current"></i><a href="/index.php?app=index"><span class="home">首页</span></a></li>
+                    <li><i class="ag_current"></i><a href="/index.html"><span class="home">首页</span></a></li>
                     <li  class="nav_current"><i class="ag_current"></i><a href='/shop'><span class="store">商店</span></a></li>
-                    <li><i class="ag_current"></i><a href="/index.php?app=index&mod=Plan">健身计划</a></li>
-                    <li><i class="ag_current"></i><a href="/index.php?app=index&mod=Train">锻炼</a>
+                    <li><i class="ag_current"></i><a href="/Plan.html">健身计划</a></li>
+                    <li><i class="ag_current"></i><a href="/Train.html">锻炼</a>
                     </li>
-                    <li><i class="ag_current"></i><a href="/index.php?app=index&mod=Nutri">营养</a>
+                    <li><i class="ag_current"></i><a href="/Nutri.html">营养</a>
 
                     </li>
-                    <li><i class="ag_current"></i><a href="/index.php?app=index&mod=Append">辅助品</a></li>
+                    <li><i class="ag_current"></i><a href="/Append.html">辅助品</a></li>
                     <li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
                     <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>
                 </ul>

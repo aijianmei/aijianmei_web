@@ -326,14 +326,13 @@ class PublicAction extends Action{
         if($result) {
 			@setcookie("LOGGED_AIUSER", $_POST['email'], time()+3600*24*30);
 			@setcookie('LOGGED_AICOD', md5("aijianmeipwd".$_POST['password']), time()+3600*24*30);			
-		
             if(UC_SYNC && $result['reg_from_ucenter']){
                 //从UCenter导入ThinkSNS，跳转至帐号修改页
                 $refer_url = U('home/Public/userinfo');
             }elseif ( $_SESSION['refer_url'] != '' ) {
                 //跳转至登录前输入的url
                 $refer_url	=	$_SESSION['refer_url'];
-                unset($_SESSION['refer_url']);
+                //unset($_SESSION['refer_url']);
             }else {
                 $refer_url = U('home/User/index');
             }
@@ -346,12 +345,12 @@ class PublicAction extends Action{
             $_SESSION['user_name'] = $uid[0]['user_name'];
             $_SESSION['email']     = $uid[0]['email'];
 			$_SESSION['ways']++;
-            $time = time() - 3600;
+
 			if($_SESSION['mid']>0){
 				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
 			}
-            @setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
-            @setcookie("ECS[password]", '', $time, '/');
+			@setcookie("ECS[user_id]",  $getShopUinfo[0]['user_id'], time()+3600*24*30);
+			@setcookie("ECS[password]", md5($_POST['password']), time()+3600*24*30);
             //print_r($_SESSION);
             /*ecshop login by kontem at 20130412 end*/
             // 登录商城
@@ -359,11 +358,12 @@ class PublicAction extends Action{
 			//print_r($_SESSION);exit;
 	if($_SESSION['refer_url']!=''&&$_SESSION['shoprefer_url']==''){
 		$reurl=$_SESSION['refer_url'];unset($_SESSION['refer_url']);
-		redirect($_SESSION['refer_url']);
+		redirect($reurl);
 		//redirect(U('index/Index/index'));
 	}
 	elseif($_SESSION['shoprefer_url']!=''){
-		$reurl=$_SESSION['shoprefer_url'];unset($_SESSION['shoprefer_url']);
+		$reurl=$_SESSION['shoprefer_url'];
+		unset($_SESSION['shoprefer_url']);
 		redirect($reurl);
 		//redirect(U('index/Index/index'));
 	}
