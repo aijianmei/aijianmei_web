@@ -142,6 +142,7 @@ function show_banner($type){
 
     public function index() 
     {
+		ob_start();
         if (!empty($_GET['token'])) {
             require_once $_SERVER['DOCUMENT_ROOT'].'/Denglu.php';
             $api = new Denglu('44031dena3J8cuBsQeX40lcpjSsPM3', '85015440v4NfCVj6aTNfZAg0idQv03', 'utf-8');
@@ -238,7 +239,8 @@ function show_banner($type){
 				setcookie("LOGGED_AIUSER", $checkEmailArr[0]['email'], time()+3600*24*30);
 				setcookie('LOGGED_AICOD', md5("aijianmeipwd".$get_usernameInfo[0]['password']), time()+3600*24*30);		
 				setcookie("ECS[user_id]",  $_SESSION['user_id'],time()+3600*24*30);  //set cookie         
-				setcookie("ECS[password]", $uid[0]['password'],time()+3600*24*30);	
+				setcookie("ECS[password]", $uid[0]['password'],time()+3600*24*30);
+				ob_get_clean();				
 				//print_r($_COOKIE);
 				if($_SESSION['refer_url']!=''&&$_SESSION['shoprefer_url']==''){
 					$reurl=$_SESSION['refer_url'];
@@ -452,6 +454,7 @@ function show_banner($type){
         $article = M('article')->where($map)->find();
 		preg_match_all("/src\s*=\s*[\"|\']?\s*([^\"\'\s]*)/i",str_ireplace("\\","",$article['content']),$out);
 		$aimgsrc=$out[1][0];
+		$article['dateStrng']=_returnNdate($article['create_time']);
         $this->assign('article', $article); 
         $this->assign('aimgsrc', $aimgsrc); 
         
