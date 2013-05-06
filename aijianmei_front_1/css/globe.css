@@ -163,8 +163,39 @@ a:hover{
 		float:left;
 		width:300px;
 	}
-
-
+	.title_tip{
+		position: absolute;
+		display: none;
+	}
+	.title_tip .title_content{
+		line-height: 18px;
+		padding: 4px;
+		text-align: center;
+		background: #3584BF;
+		color: white;
+		opacity: 0.9;
+		filter: alpha(opacity=90);
+		border-radius: 6px;
+		font-family: "Helvetica Neue",Helvetica,STheiti,微软雅黑,宋体,Arial,Tahoma,sans-serif,serif;
+	}
+	.title_tip .angle{
+		height:5px;
+		width: 5px;
+		margin: 0 auto;
+	}
+	.title_tip .angle span{
+		display: block;
+		overflow: hidden;
+		width: 0;
+		height: 0;
+		font-size: 0;
+		line-height: 0;
+		border-color:#3584BF transparent transparent transparent;
+		border-style: solid;
+		border-width: 5px;
+		opacity: 0.9;
+		filter: alpha(opacity=90);
+	}
 /*website wrapper ending*************************/
 
 
@@ -217,11 +248,11 @@ a:hover{
 			z-index: 10;
 		}
 		.bn_prex{
-			left:0;
+			left:5px;
 			background: url(../images/turn_left.png) no-repeat;
 		}
 		.bn_next{
-			right:0;
+			right:5px;
 			background: url(../images/turn_right.png) no-repeat;
 		}
 		/*choice_way*/
@@ -290,8 +321,8 @@ a:hover{
 				margin: 10px 0;
 				color: #21ace3;
 			}
-			.cont_tip span{
-
+			.cont_tip .cont_comefrom{
+				margin-right: 5px;
 			}
 			.cont_side_2 p{
 				letter-spacing: 0.25em;
@@ -306,7 +337,7 @@ a:hover{
 				clear: both;
 			}
 			.cont_click{
-			 	background: url("../images/wm3.png") no-repeat 0 -415px;
+			 	background: url("../images/wm3.png") no-repeat 0 -463px;
 			    display: inline-block;
 			    float: left;
 			    height: 18px;
@@ -515,5 +546,11 @@ a:hover{
 		top: 7px;
 		left: -6px;
 		background: url(../images/re_angle.jpg) no-repeat;
+	}
+	/*recomment_read_more*/
+	.recomment_read_more{
+		float:right;
+		color:#21ace3;
+		margin:0 10px 10px 0;
 	}
 /*website training ending*************************/

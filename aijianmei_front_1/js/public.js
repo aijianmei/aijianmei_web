@@ -161,6 +161,70 @@ var aijianmei = {
 			}
 		}
 		change_opacity();
+	},
+	addtitle : function(obj){
+		var Obj = aijianmei.getobj(obj,1),
+			len = Obj.length,
+			title = aijianmei.getobj('title_tip'),
+			title_content = aijianmei.getobj('title_content');
+		var handle = function(e){
+			var _e = window.event ? window.event : e || arguments[0],
+    			_target = _e.target ? _e.target : _e.srcElement,
+    			text = _target.getAttribute('data-original-title');
+			if(window.ActiveXObject){
+				_target.setAttribute('title',text)
+			}
+			else{
+				//确定提示内容的宽度，适当调整
+				var handlewidth = function(e){
+					if(text.length < 5){
+						title.style.width = '80px';
+					}
+					else if(text.length < 9){
+						title.style.width = '120px'
+					}
+					else if(text.length < 13){
+						title.style.width = '160px'
+					}
+					else{
+						title.style.width = '200px'
+					}
+				}
+				handlewidth();
+				//获取data-original-title的内容
+				var datatitle = function(){
+					var div = document.createElement('div');
+						textnode = document.createTextNode(text);
+					div.appendChild(textnode);
+					title_content.appendChild(div);
+				}
+				datatitle()
+				//确定obj的位置，并是提示对齐被提示内容
+				var textalign = function(){
+					var left = _target.offsetLeft,
+						top = _target.offsetTop,
+						width = _target.offsetWidth,
+						titlewidth = title.style.width,
+						align = left + width/2,
+						half = parseFloat(titlewidth)/2;
+						// console.log(_target.parentNode.offsetLeft)
+						title.style.left = align - half + 'px';
+						title.style.top = top - 44 + 'px';
+				} 
+				textalign();
+				title.style.display = 'block';
+			}
+		}
+		var remove = function(){
+			title_content.removeChild(title_content.lastChild);
+			title.style.display = 'none';
+		}
+		for(var i = 0;i < len;i++){
+			if(Obj[i]){
+				addevent(Obj[i],"mouseover",handle);
+				addevent(Obj[i],"mouseout",remove);
+			}	
+		}	
 	}
 }
 var init = function(){
