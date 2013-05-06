@@ -260,6 +260,7 @@ class ArticleAction extends AdministratorAction {
 			$data['htmlurl'] = t($_POST['htmlurl']);
 			$data['wapurl'] = t($_POST['wapurl']);
             $data['brief'] = t($_POST['brief']);
+			$data['keyword'] = t($_POST['keyword']);
             $data['create_time'] = time();
             if(!empty($data['link']) &&
                !empty($data['title'])) {
@@ -268,11 +269,14 @@ class ArticleAction extends AdministratorAction {
                     unset($data['create_time']);
                     unset($data['uid']);
                     M('video')->save($data);
+					//redirect(U('index/User/loginUserInfo'));
+					redirect('/index.php?app=admin&mod=Article&act=editVideo&id='.$data['id']);
                 }else {
                     M('video')->add($data);
+					redirect('/index.php?app=admin&mod=Article&act=video');
                 }
                 
-                //$this->redirect('/index.php?app=admin&mod=Article&act=video');
+                //$this->redirect('/index.php?app=admin&mod=Article&act=editVideo&id=19');
             }
         }
         $id = intval($_GET['id']);
