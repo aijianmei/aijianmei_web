@@ -88,8 +88,9 @@ class UserAction extends Action {
 	{	
 		if($_SESSION['psonkey']==md5($_POST['email'])){
 			$sql="UPDATE  `aijianmei`.`ai_user` SET  `password` = '".md5($_POST['password'])."' WHERE  `ai_user`.`email` ='".$_POST['email']."'";
-			//Array ( [password] => 123456 [repassword] => 123456 [email] => kontem@sina.cn )
 			M('')->query($sql);
+			$shopupsql="UPDATE ecs_users SET  password = '".md5($_POST['password'])."' WHERE  email ='".$_POST['email']."'";
+			M('')->query($shopupsql);
 			$dsql="DELETE FROM `aijianmei`.`ai_returncode_log` WHERE `ai_returncode_log`.`uname` = '".$_POST['email']."'";
 			M('')->query($dsql);
 			$uidsql="select * from ai_user where email ='".$_POST['email']."'";

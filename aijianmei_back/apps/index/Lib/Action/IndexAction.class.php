@@ -235,8 +235,11 @@ function show_banner($type){
 				if($_SESSION['mid']>0){
 					$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
 				}
-				@setcookie("ECS[user_id]",  $_SESSION['user_id'],time()+3600*24*30);  //set cookie         
-				@setcookie("ECS[password]", $uid[0]['password'], time()+3600*24*30);
+				setcookie("LOGGED_AIUSER", $checkEmailArr[0]['email'], time()+3600*24*30);
+				setcookie('LOGGED_AICOD', md5("aijianmeipwd".$get_usernameInfo[0]['password']), time()+3600*24*30);		
+				setcookie("ECS[user_id]",  $_SESSION['user_id'],time()+3600*24*30);  //set cookie         
+				setcookie("ECS[password]", $uid[0]['password'],time()+3600*24*30);	
+				//print_r($_COOKIE);
 				if($_SESSION['refer_url']!=''&&$_SESSION['shoprefer_url']==''){
 					$reurl=$_SESSION['refer_url'];
 					unset($_SESSION['refer_url']);
@@ -333,6 +336,8 @@ function show_banner($type){
 			if($_SESSION['mid']>0){
 				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
 			}
+			@setcookie("LOGGED_AIUSER", $checkEmailArr[0]['email'], time()+3600*24*30);
+			@setcookie('LOGGED_AICOD', md5("aijianmeipwd".$get_usernameInfo[0]['password']), time()+3600*24*30);		
 			@setcookie("ECS[user_id]",  $_SESSION['user_id'],time()+3600*24*30);  //set cookie         
 			@setcookie("ECS[password]", $uid[0]['password'],time()+3600*24*30);
 			if($_SESSION['refer_url']!=''){
@@ -395,7 +400,6 @@ function show_banner($type){
 		$this->assign('_current', 'index');
         $this->display();
     }
-
     public function setmail()
     {
         $this->assign('cssFile', 'register');
