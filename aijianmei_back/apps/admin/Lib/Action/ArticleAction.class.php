@@ -1,5 +1,84 @@
 <?php 
 class ArticleAction extends AdministratorAction {
+	public function bulkImport(){
+		//替换数组 转化为对应标识
+		$channelArr=array(
+			'上班族健身'=>'1',
+			'日常健身'=>'2',
+			'专业运动员'=>'3',
+			'健美运动员'=>'4',);
+		$action=$_POST['action'];
+		$path='exceluploadlist/';
+		//$path='/data/home/htdocs/exceluploadlist/';
+		if(!empty($action)&&$action=='UploadExcelFile')
+		{
+			$UFileName=$_FILES['UploadFile']['name'];
+			$FilePre_arr=explode(".",$UFileName);
+			$FilePre=$FilePre_arr[1];
+			if($_FILES['UploadFile']['tmp_name'])
+			{
+				$Tmp_FileName=$path.$_FILES['UploadFile']['name'];
+				if(move_uploaded_file($_FILES['UploadFile']['tmp_name'],$Tmp_FileName))
+				{
+					$error_string='上传成功!\\n';
+					//$Tmp_FileName='test.xls';
+					$exceldata=$this->ReadExcelInfo($Tmp_FileName,2);
+					$is_pass=0;
+					//$exceldata[2][3]=strtotime($exceldata[2][3]);
+					//print_r($exceldata);exit;
+					if($is_pass!=1)
+					{
+						$succcount=0;
+						foreach($exceldata as $key => $value)
+						{
+							$insertdata['uid'] = $this->mid;
+							$insertdata['title'] = t($value[0]);
+							$insertdata['channel'] = intval($channelArr[$value[1]]);
+							$insertdata['content'] = t($value[4]);
+							$insertdata['keyword'] = t($value[5]);
+							//$data['videos']  = t($_POST['videos']);
+							$insertdata['create_time'] = time();
+							$insertdata['gotime'] = strtotime($value[3]);
+							$insertdata['img']=null;
+							$newfilename=$_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$value[2];
+							$insertdata['img'] = $newfilename;
+							$vid = M('daily')->add($insertdata);
+							if($vid>0){$succcount++;}
+							/*video part start*/
+							$vdata['daily_id'] = $vid;
+							$vdata['link'] = $value[6];
+							$vdata['htmlurl'] = $value[7];
+							$vdata['wapurl'] = $value[8];
+							$vdata['title'] = $value[9];
+							$vdata['intro'] = $value[10];
+							$vdata['create_time'] = time();
+							M('daily_video')->add($vdata);
+							/*video part end*/
+						}
+					}
+				}
+				else
+				{
+					$error_string='上传失败!\\n';
+				}	
+			}
+		
+		}
+		$this->assign('succcount', $succcount);
+		$list=$this->listDir($path);
+		$listRes=array();
+		foreach($list as $k=>$v){
+			if($v){
+			$listRes[$k]['name']=$v;
+			$listRes[$k]['ctime']=date("Y-m-d",filectime($path.$v));
+			$listRes[$k]['url']=$path.$v;
+			}
+		}
+		$this->assign('listRes', $listRes);
+		$this->display();
+	}
+
+
     public function add()
     {
         if(isset($_POST['title'])) {
@@ -242,9 +321,10 @@ class ArticleAction extends AdministratorAction {
             $data['title'] = t($_POST['title']);
             $data['channel'] = intval($_POST['channel']);
             $data['content'] = t($_POST['content']);
+			$data['keyword'] = t($_POST['keyword']);
             //$data['videos']  = t($_POST['videos']);
             $data['create_time'] = time();
-            
+			$data['gotime'] = strtotime($_POST['gotime']);
             if(isset($_FILES['img']['name'])) {
 				$newfilename=$_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'];
                 @move_uploaded_file($_FILES['img']['tmp_name'], $newfilename);
@@ -292,8 +372,8 @@ class ArticleAction extends AdministratorAction {
         $id = intval($_GET['id']);
         $article = M('daily')->where(array('id'=>$id))->find();
         $videos = M('daily_video')->where(array('daily_id'=>$id))->findAll();
+		$article['gotime']=date("Y-m-d",$article['gotime']);
         $this->assign('article', $article);
-		//print_r($videos);
         $this->assign('video', $videos);
         $this->assign('type', 'edit');
         $this->display('addDaily');
@@ -307,7 +387,11 @@ class ArticleAction extends AdministratorAction {
     
     public function daily()
     {
-        $daily = M('daily')->findAll();
+        $daily = M('daily')->order('create_time desc')->findAll();
+		foreach($daily as $k=>$value){
+			$daily[$k]['create_time']=date("Y-m-d",$value['create_time']);
+			$daily[$k]['gotime']=$value['gotime']!=null?date("Y-m-d",$value['gotime']):'未填写';
+		}
         $this->assign('daily', $daily);
         $this->display();
     }
@@ -372,146 +456,77 @@ class ArticleAction extends AdministratorAction {
         $map['id'] = array('in', t($_POST['ids']));
         echo M($table)->where($map)->delete() ? '1' : '0';
     }
-    
-    
-    function imageWaterMark($groundImage,$waterPos=0,$waterImage="",$waterText="",$textFont=5,$textColor="#FF0000") 
-{ 
-     $isWaterImage = FALSE; 
-     $formatMsg = "暂不支持该文件格式，请用图片处理软件将图片转换为GIF、JPG、PNG格式。";
-     //读取水印文件 
-     if(!empty($waterImage) && file_exists($waterImage)) 
-     { 
-         $isWaterImage = TRUE; 
-         $water_info = getimagesize($waterImage); 
-         $water_w     = $water_info[0];//取得水印图片的宽 
-         $water_h     = $water_info[1];//取得水印图片的高
-         switch($water_info[2])//取得水印图片的格式 
-         { 
-             case 1:$water_im = imagecreatefromgif($waterImage);break; 
-             case 2:$water_im = imagecreatefromjpeg($waterImage);break; 
-             case 3:$water_im = imagecreatefrompng($waterImage);break; 
-             default:die($formatMsg); 
-         } 
-     }
-     //读取背景图片 
-     if(!empty($groundImage) && file_exists($groundImage)) 
-     { 
-         $ground_info = getimagesize($groundImage); 
-         $ground_w     = $ground_info[0];//取得背景图片的宽 
-         $ground_h     = $ground_info[1];//取得背景图片的高
-         switch($ground_info[2])//取得背景图片的格式 
-         { 
-             case 1:$ground_im = imagecreatefromgif($groundImage);break; 
-             case 2:$ground_im = imagecreatefromjpeg($groundImage);break; 
-             case 3:$ground_im = imagecreatefrompng($groundImage);break; 
-             default:die($formatMsg); 
-         } 
-     } 
-     else 
-     { 
-         die("需要加水印的图片不存在！"); 
-     }
-     //水印位置 
-     if($isWaterImage)//图片水印 
-     { 
-         $w = $water_w; 
-         $h = $water_h; 
-         $label = "图片的"; 
-     } 
-     else//文字水印 
-     { 
-         $temp = imagettfbbox(ceil($textFont*2.5),0,"./cour.ttf",$waterText);//取得使用 TrueType 字体的文本的范围 
-         $w = $temp[2] - $temp[6]; 
-         $h = $temp[3] - $temp[7]; 
-         unset($temp); 
-         $label = "文字区域"; 
-     } 
-     if( ($ground_w<$w) || ($ground_h<$h) ) 
-     { 
-         echo "需要加水印的图片的长度或宽度比水印".$label."还小，无法生成水印！"; 
-         return; 
-     } 
-     switch($waterPos) 
-     { 
-         case 0://随机 
-             $posX = rand(0,($ground_w - $w)); 
-             $posY = rand(0,($ground_h - $h)); 
-             break; 
-         case 1://1为顶端居左 
-             $posX = 0; 
-             $posY = 0; 
-             break; 
-         case 2://2为顶端居中 
-             $posX = ($ground_w - $w) / 2; 
-             $posY = 0; 
-             break; 
-         case 3://3为顶端居右 
-             $posX = $ground_w - $w; 
-             $posY = 0; 
-             break; 
-         case 4://4为中部居左 
-             $posX = 0; 
-             $posY = ($ground_h - $h) / 2; 
-             break; 
-         case 5://5为中部居中 
-             $posX = ($ground_w - $w) / 2; 
-             $posY = ($ground_h - $h) / 2; 
-             break; 
-         case 6://6为中部居右 
-             $posX = $ground_w - $w; 
-             $posY = ($ground_h - $h) / 2; 
-             break; 
-         case 7://7为底端居左 
-             $posX = 0; 
-             $posY = $ground_h - $h; 
-             break; 
-         case 8://8为底端居中 
-             $posX = ($ground_w - $w) / 2; 
-             $posY = $ground_h - $h; 
-             break; 
-         case 9://9为底端居右 
-             $posX = $ground_w - $w; 
-             $posY = $ground_h - $h; 
-             break; 
-         default://随机 
-             $posX = rand(0,($ground_w - $w)); 
-             $posY = rand(0,($ground_h - $h)); 
-             break;     
-     }
-     //设定图像的混色模式 
-     //imagealphablending($ground_im, true);
-     if($isWaterImage)//图片水印 
-     { 
-         imagecopy($ground_im, $water_im, $posX, $posY, 0, 0, $water_w,$water_h);//拷贝水印到目标文件         
-     } 
-     else//文字水印 
-     { 
-         if( !empty($textColor) && (strlen($textColor)==7) ) 
-         { 
-             $R = hexdec(substr($textColor,1,2)); 
-             $G = hexdec(substr($textColor,3,2)); 
-             $B = hexdec(substr($textColor,5)); 
-         } 
-         else 
-         { 
-             die("水印文字颜色格式不正确！"); 
-         } 
-         imagestring ( $ground_im, $textFont, $posX, $posY, $waterText, imagecolorallocate($ground_im, $R, $G, $B));         
-     }
-     //生成水印后的图片 
-     @unlink($groundImage); 
-     switch($ground_info[2])//取得背景图片的格式 
-     { 
-         case 1:imagegif($ground_im,$groundImage);break; 
-         case 2:imagejpeg($ground_im,$groundImage);break; 
-         case 3:imagepng($ground_im,$groundImage);break; 
-         default:die($errorMsg); 
-     }
-     //释放内存 
-     if(isset($water_info)) unset($water_info); 
-     if(isset($water_im)) imagedestroy($water_im); 
-     unset($ground_info); 
-     imagedestroy($ground_im); 
+   
+/*
+ * 读取Excel 数据方法类
+ * author kontem at 20130504
+ * @param string $FilePath     文件路径
+ * @param string $StartLine    起始行数
+ * @param string $EndLine      结束行数
+ * @return array               Data 多维数组
+ */
+function ReadExcelInfo($FilePath,$StartLine=0,$EndLine=0)
+{
+	require_once 'libpack/PHPExcel/PHPExcel/IOFactory.php';
+	$objPHPExcel = PHPExcel_IOFactory::load($FilePath);
+	$objWorksheet = $objPHPExcel->getActiveSheet();
+	$StartLine=!empty($StartLine)?$StartLine:0;
+	
+	$k=1;
+	foreach ($objWorksheet->getRowIterator() as $row) {
+		$cellIterator = $row->getCellIterator();
+		$cellIterator->setIterateOnlyExistingCells(false);
+		$cellIterator->setIterateOnlyExistingCells(true);
+		$plainText=null;
+		foreach ($cellIterator as $cell) {
+			$plainText = ($cell->getValue() instanceof PHPExcel_RichText) ?$cell->getValue()->getPlainText() : $cell->getValue();
+			if($cell->getDataType()==PHPExcel_Cell_DataType::TYPE_NUMERIC){   
+				$cellstyleformat=$cell->getParent()->getStyle( $cell->getCoordinate() )->getNumberFormat();   
+				$formatcode=$cellstyleformat->getFormatCode();   
+				if (preg_match('/^(\[\$[A-Z]*-[0-9A-F]*\])*[hmsdy]/i', $formatcode)) {   
+					$plainText=gmdate("Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($plainText));   
+					}else{   
+					$plainText=PHPExcel_Style_NumberFormat::toFormattedString($plainText,$formatcode);   
+				}
+			}
+			$data[$k][]=$plainText;
+		}
+		$k++;
+	}
+	if($EndLine<0){$EndLine=$k+$EndLine;}
+	foreach($data as $key=>$value)
+	{
+		if($key < $StartLine){unset($data[$key]);}
+		if($key > $EndLine&&$EndLine!=0){unset($data[$key]);}
+	}
+	return $data;
 }
+	function listDir($dir)
+	{
+		global $resdir;
+	    if(is_dir($dir))
+	    {
+	        if ($dh = opendir($dir))
+	        {
+	            while (($file = readdir($dh)) !== false)
+	            {
+	                if((is_dir($dir."/".$file)) && $file!="." && $file!="..")
+	                {
+	                     //$this->listDir($dir."/".$file."/");
+	                }
+	                else
+	                {
+	                    if($file!="." && $file!="..")
+	                    {
+							
+	                        if(!in_array($file,$resdir)) $resdir[]=$file;
+	                    }
+	                }
+	            }
+	            closedir($dh);
+	        }
+	    }
+		return $resdir;
+	}
 }
 ?>
