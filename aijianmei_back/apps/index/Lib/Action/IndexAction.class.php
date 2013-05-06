@@ -142,6 +142,7 @@ function show_banner($type){
 
     public function index() 
     {
+		ob_start();
         if (!empty($_GET['token'])) {
             require_once $_SERVER['DOCUMENT_ROOT'].'/Denglu.php';
             $api = new Denglu('44031dena3J8cuBsQeX40lcpjSsPM3', '85015440v4NfCVj6aTNfZAg0idQv03', 'utf-8');
@@ -166,6 +167,7 @@ function show_banner($type){
                     $data['location'] = $userInfo['location'];
                     $data['is_active'] = 1;
                     $data['ctime'] = time();
+					$data['is_email']=0;
                     
                     //print_r($data);
                     
@@ -191,9 +193,7 @@ function show_banner($type){
                     
                     M('others')->add($other);
                 }
-                
-                
-                //redirect(U('index/Index/index'));
+	
             }catch (DengluException $e) {
                 echo $e->geterrorDescription();
             }
@@ -202,7 +202,7 @@ function show_banner($type){
         if(!empty($_REQUEST['code'])) {
             require_once $_SERVER['DOCUMENT_ROOT'].'/saetv2.ex.class.php';
             $sina = new SaeTOAuthV2('3622140445', 'f94d063d06365972215c62acaadf95c3');
-            $token = $sina->getAccessToken('code', array('code'=>$_REQUEST['code'], 'redirect_uri'=>'http://dev.aijianmei.com/index.php'));
+            $token = $sina->getAccessToken('code', array('code'=>$_REQUEST['code'], 'redirect_uri'=>'http://www.aijianmei.com/index.php'));
             $client = new SaeTClientV2('3622140445', 'f94d063d06365972215c62acaadf95c3', $token['access_token']);
 
             $uid_get = $client->get_uid();
@@ -218,7 +218,44 @@ function show_banner($type){
             $setMailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
             $setMail = M('')->query($setMailSql);
             if($logId) {
-                service('Passport')->loginLocal($logId[0]['uid']);	
+                service('Passport')->loginLocal($logId[0]['uid']);
+				$_SESSION['sinalogin']=1;
+				$checkEmailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
+				$checkEmailArr=M('')->query($checkEmailSql);
+				if(empty($checkEmailArr[0]['email'])){
+					redirect(U('index/User/loginUserInfo'));
+				}
+				$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
+				$get_usernameInfo = M('')->query($get_usernameSql);
+				$getUidSql='select user_id,user_name,email,password from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+				$uid = M('')->query($getUidSql);
+				$_SESSION['user_id']   = $uid[0]['user_id'];
+				$_SESSION['user_name'] = $uid[0]['user_name'];
+				$_SESSION['email']     = $uid[0]['email'];
+				$_SESSION['ways']++;
+				if($_SESSION['mid']>0){
+					$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
+				}
+				setcookie("LOGGED_AIUSER", $checkEmailArr[0]['email'], time()+3600*24*30);
+				setcookie('LOGGED_AICOD', md5("aijianmeipwd".$get_usernameInfo[0]['password']), time()+3600*24*30);		
+				setcookie("ECS[user_id]",  $_SESSION['user_id'],time()+3600*24*30);  //set cookie         
+				setcookie("ECS[password]", $uid[0]['password'],time()+3600*24*30);
+				ob_get_clean();				
+				//print_r($_COOKIE);
+				if($_SESSION['refer_url']!=''&&$_SESSION['shoprefer_url']==''){
+					$reurl=$_SESSION['refer_url'];
+					unset($_SESSION['refer_url']);
+					redirect($reurl);
+					//print_r($_SESSION);exit;
+					//redirect(U('index/Index/index'));
+				}
+				elseif($_SESSION['shoprefer_url']!=''){
+					$reurl=$_SESSION['shoprefer_url'];
+					unset($_SESSION['shoprefer_url']);
+					redirect($reurl);
+				}else{
+					redirect(U('index/Index/index'));
+				}
             }else {
                 $data['email'] = '';
                 $data['password'] = '';
@@ -238,7 +275,7 @@ function show_banner($type){
                 //var_dump($uid);
                 //$uid = M('user')->add($data);				
                 service('Passport')->loginLocal($uid);
-
+				$_SESSION['mid']=$uid;
                 $other['uid'] = $uid;
                 $other['mediaID'] = '3';
                 $other['friendsCount'] = $user_message['friends_count'];
@@ -264,16 +301,60 @@ function show_banner($type){
                  "'.$other['domain'].'", "'.$other['followersCount'].'", "'.$other['statusesCount'].'", "'.$other['personID'].'")';
                 //mysql_query($other_sql);
                 M('')->query($other_sql);
-
-                //M('others')->add($other);	
+				//redirect(U('index/User/loginUserInfo'));
+                //M('others')->add($other);
+				$_SESSION['sinalogin']=1;
+				redirect(U('index/User/loginUserInfo'));
             }
-
         }
         if($_POST['email']!=''&&$_POST['emailact']=='upemail'){
             $umailsql="update ai_others set email='".trim($_POST['email'])."' where uid='".addslashes($_POST['emailuid'])."'";
             M('')->query($umailsql);
         }
         
+        
+        if(!empty($_GET['apiType'])&&$_GET['apiType']=='renren'){
+            //print_r($_GET);
+            //print_r($_SERVER);
+        }
+        if(!empty($_GET['qquid'])&&$_GET['qqapi']=='login'){
+            service('Passport')->loginLocal($_GET['qquid']);
+			$_GET['qquid']=addslashes($_GET['qquid']);
+			$checkEmailSql="select email from ai_user where uid='".$_GET['qquid']."'";
+			$checkEmailArr=M('')->query($checkEmailSql);
+			if(empty($checkEmailArr[0]['email'])){
+				$_SESSION['sinalogin']=1;
+				redirect(U('index/User/loginUserInfo'));
+				//redirect(U('home/Account/index',array('esg'=>'needemail')));
+			}
+			$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
+			$get_usernameInfo = M('')->query($get_usernameSql);
+			$getUidSql='select user_id,user_name,email,password from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+			$uid = M('')->query($getUidSql);
+			$_SESSION['user_id']   = $uid[0]['user_id'];
+			$_SESSION['user_name'] = $uid[0]['user_name'];
+			$_SESSION['email']     = $uid[0]['email'];
+			$_SESSION['ways']++;
+			if($_SESSION['mid']>0){
+				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
+			}
+			@setcookie("LOGGED_AIUSER", $checkEmailArr[0]['email'], time()+3600*24*30);
+			@setcookie('LOGGED_AICOD', md5("aijianmeipwd".$get_usernameInfo[0]['password']), time()+3600*24*30);		
+			@setcookie("ECS[user_id]",  $_SESSION['user_id'],time()+3600*24*30);  //set cookie         
+			@setcookie("ECS[password]", $uid[0]['password'],time()+3600*24*30);
+			if($_SESSION['refer_url']!=''){
+				$reurl=$_SESSION['refer_url'];
+				unset($_SESSION['refer_url']);
+				redirect($reurl);
+			}
+			elseif($_SESSION['shoprefer_url']!=''){
+				$reurl=$_SESSION['shoprefer_url'];
+				unset($_SESSION['shoprefer_url']);
+				redirect($reurl);
+			}else{
+				redirect(U('index/Index/index'));
+			}
+        }
         $this->setTitle('index');
         $this->assign('uid',$this->mid);
         $this->assign('cssFile','index');
@@ -309,17 +390,18 @@ function show_banner($type){
         }
         $this->assign('hotvideos', $hotvideos);
         /*首页添加最新4篇文章*/
-        $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id";
-        $sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by a.create_time desc limit 0,4";
+        $sql = "select a.* from ai_article a group by a.id order by a.create_time desc limit 0,4";
         $hotArticles = M('')->query($sql);
         foreach ($hotArticles as $key => $value) {
             $hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
         }
         $this->assign('hotArticles', $hotArticles);
         //add by kon at 20130410 end
+		
+		//header current add by kon at 20130415
+		$this->assign('_current', 'index');
         $this->display();
     }
-    
     public function setmail()
     {
         $this->assign('cssFile', 'register');
@@ -370,13 +452,13 @@ function show_banner($type){
         $id = (int) $_GET['id'];
         $map['id'] = $id;
         $article = M('article')->where($map)->find();
+		preg_match_all("/src\s*=\s*[\"|\']?\s*([^\"\'\s]*)/i",str_ireplace("\\","",$article['content']),$out);
+		$aimgsrc=$out[1][0];
+		$article['dateStrng']=_returnNdate($article['create_time']);
         $this->assign('article', $article); 
-        
+        $this->assign('aimgsrc', $aimgsrc); 
         
         $commentCounts = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->count();
-        $style['pre'] = 'prev';
-        $style['next'] = 'next';
-        $style['current'] = 'current_page';
         $pager = api('Pager');
         $pager->setCounts($commentCounts);
         $pager->setList($pagenums);
@@ -413,21 +495,24 @@ function show_banner($type){
         $channel=$result['channel'];
         $tree_category_id=$result['category_id'];
         switch($channel){
-            case 1: {$tree_channel="健身计划 ";$tree_channel_en="Plan";}break;
-            case 2:{$tree_channel="锻炼 ";$tree_channel_en="Train";}break;
-            case 3:{$tree_channel="营养 ";$tree_channel_en="Nutri";}break;
-            case 4:{$tree_channel="辅助品 ";$tree_channel_en="Append";}break;
+            case 1: {$tree_channel="健身计划 ";$tree_channel_en="Plan";$_current='plan';}break;
+            case 2:{$tree_channel="锻炼 ";$tree_channel_en="Train";$_current='train';}break;
+            case 3:{$tree_channel="营养 ";$tree_channel_en="Nutri";$_current='nutri';}break;
+            case 4:{$tree_channel="辅助品 ";$tree_channel_en="Append";$_current='append';}break;
         }
         $tree_parent=$result['parent'];		
         $tree_name=$result['name'];
         $result=mysql_query("select name from ai_article_category where id=".$tree_parent);
         $tree_parentName=mysql_fetch_array($result);
-        $this->assign("first",$tree_channel);
-        $this->assign("second",$tree_parentName['name']);
-        $this->assign("third",$tree_name);
+        $this->assign("first",trim($tree_channel));
+        $this->assign("second",trim($tree_parentName['name']));
+        $this->assign("third",trim($tree_name));
         $this->assign("tree_parent",$tree_parent);
         $this->assign("tree_channel_en",$tree_channel_en);
+        $this->assign('headertitle', $article['title']);
         $this->assign("tree_category_id",$tree_category_id);
+		$this->assign('_current', $_current);
+		$this->assign('_act', 1);
         $this->display('detail');
     }
     
@@ -542,11 +627,11 @@ function show_banner($type){
     {
         static $nums=7;
         $type = (int) $_GET['type'];
-        $page = (int) $_GET['pg']?(int) $_GET['pg']:0;
+        $page = (int) $_GET['pg']?(int) $_GET['pg']:1;
         //$info=D('Article')->getDaily($type) old part
         $info_countnums = count(D('Article')->getDaily($type));
         //the new part by kontem 2013-03-29
-        $info = D('Article')->getDailyLimit($type,$page,$nums);
+        $info = D('Article')->getDailyLimit($type,($page-1)*$nums,$nums);
         $cate = M('article_category')->where(array('type'=>'2'))->findAll();
         $this->assign('info', $info);
         $this->assign('cssFile', 'every');
@@ -559,6 +644,7 @@ function show_banner($type){
             case 4:{$tree_channel="健身运动员 ";$tree_channel_en=4;}break;
         }
         $this->assign("first",$tree_channel);
+        
         //banner 滚动图片列表
         $this->show_banner($type);
         //-------END--------
@@ -569,6 +655,8 @@ function show_banner($type){
         $from = ($pager->pg -1) * $pager->countlist;		
         $pagerArray = (array)$pager;
         $this->assign('pager', $pagerArray);
+        $this->assign('headertitle', $tree_channel);
+		$this->assign('_current', 'plan');
         $this->display();
     }
     
@@ -600,9 +688,11 @@ function show_banner($type){
         foreach ($videos as $k=>$v) {
             if (!empty($v['link'])) {
                 $videos[$k]['img'] = D('Article')->getVideoImgById($v['id']);
+				$data = json_decode($this->getVideoData($v['link']));
+				$videos[$k]['logo'] = $data->data[0]->logo;
             }
         }
-        
+		//print_r($videos);
         $commentsCount = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->count();
         $pager = api('Pager');
         $pager->setCounts($commentsCount);
@@ -611,12 +701,19 @@ function show_banner($type){
         $from = ($pager->pg-1) * $pager->countlist;
         $pagerArray = (array)$pager;
         $this->assign('pager', $pagerArray);
-        
-        $comments = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->limit("$from,$pager->countlist")->findAll();
+        $comments = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->order('`create_time` DESC')->limit("$from,$pager->countlist")->findAll();
         foreach($comments as $k=>$c) {
             $comments[$k] = $c;
             $comments[$k]['userInfo'] = getUserInfo($c['uid']);
         }
+		
+		$comments = $this->arr2tree($comments);
+		$comhtml=$this->tree2html($comments);
+		$this->assign('comhtml', $comhtml);
+		//print_r($comments);
+		//tree2html($tree);  
+		//print_r($tree); 
+		
         //print_r($daily);
         $this->assign('commentsCount', $commentsCount);
         $this->assign('daily', $daily);
@@ -664,6 +761,9 @@ function show_banner($type){
         $this->assign("tree_channel_en",$tree_channel_en);
         $this->assign("tree_category_id",$tree_category_id);
         $this->assign('parent', $_GET['type']);
+        $this->assign('headertitle', trim($daily['title']));
+		$this->assign('_current', 'plan');
+		$this->assign('metatype', '1');
         $this->display();
     }
     
@@ -826,11 +926,11 @@ function show_banner($type){
     public function doRegister()
     {
         // 验证码
-        /* $verify_option = $this->_isVerifyOn('register');
-        if ($verify_option && (md5(strtoupper($_POST['verify'])) != $_SESSION['verify'])){
+        // /* $verify_option = $this->_isVerifyOn('register');*/
+        if ((md5(strtoupper($_POST['verifyStr'])) != $_SESSION['verify'])){
             $this->error(L('error_security_code'));
             exit;
-        } */
+        } 
         
         // 参数合法性检查
         $required_field = array(
@@ -861,18 +961,48 @@ function show_banner($type){
         $data['is_init']  = '1';
         $data['sex']      = $_POST['sex'];
         $data['province'] = $_POST['province'];
-        $data['city']     = $_POST['province'];
+        $data['city']     = $_POST['city'];
         $data['address']  = $_POST['address'];
         $data['goal']     = $_POST['goal'];
         $data['im']       = $_POST['begin'];
-        
+		$data['im']       = $_POST['begin'];
+        include_once('shopApi.php');
+        $sdata=$data;
+        $sdata['password']=$_POST['password'];
+        _postCurlRegister($sdata);
         $uid = M('user')->add($data);
         $data['uid'] = $uid;
         M('user_attr')->add($data);
         service('Passport')->loginLocal($uid);
-        service('Shop')->register($data['uname'], $data['email'], $data['password']);
-        
-        redirect(U('home/Account/index'));
+		
+		$get_usernameSql="select * from ai_user where email='".$_POST['email']."'";
+		$get_usernameInfo = M('')->query($get_usernameSql);
+		$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+		$uid = M('')->query($getUidSql);
+		$_SESSION['user_id']   = $uid[0]['user_id'];
+		$_SESSION['user_name'] = $uid[0]['user_name'];
+		$_SESSION['email']     = $uid[0]['email'];
+		$_SESSION['ways']++;
+		$time = time() - 3600;
+		if($_SESSION['mid']>0){
+			$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
+		}
+		@setcookie("ECS[user_id]",  $_SESSION['user_id'], $time, '/');  //set cookie         
+		@setcookie("ECS[password]", '', $time, '/');
+				if($_SESSION['refer_url']!=''){
+					$reurl=$_SESSION['refer_url'];
+					unset($_SESSION['refer_url']);
+					redirect($reurl);
+				}
+				elseif($_SESSION['shoprefer_url']!=''){
+					$reurl=$_SESSION['shoprefer_url'];
+					unset($_SESSION['shoprefer_url']);
+					redirect($reurl);
+				}else{
+					redirect(U('index/Index/index'));
+				}
+		//redirect(U('home/Account/index'));
+		redirect(U('index/User/loginUserInfo'));
     }
     
     public function doRegisterCoach()
@@ -1220,5 +1350,48 @@ function show_banner($type){
         $json = file_get_contents($url);
         return $json;
     }
+
+    public function footer()
+    {
+        $id = intval($_GET['id']);
+        $content = D('Article')->getFooterContent($id);
+        if ($content === FALSE) $content = D('Article')->getFooterContent(1);
+        $this->assign('content',$content);
+		$this->assign('hid',$id);
+        $this->assign('cssFile','about_us');
+        $this->display('foot');
+    }
+	
+	function arr2tree($tree, $rootId = 0)
+	{
+		$return = array();  
+		foreach($tree as $leaf) {  
+			if($leaf['topParent'] == $rootId){
+				foreach($tree as $subleaf){
+					if($subleaf['topParent'] == $leaf['id']){
+						$leaf['children'] = $this->arr2tree($tree, $leaf['id']);
+						break;
+					}
+				}
+				$return[] = $leaf;
+			}
+		}
+		return $return;  
+	}
+	
+	function tree2html($tree) {
+	/*<div class="target_content">
+		<span class="staircase">1楼</span>
+			<a class="name">huifei</a>
+			<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
+</div>*/
+    foreach($tree as $leaf) {  
+        $htmlStr.='<div class="target_content"><a class="name">' .$leaf['userInfo']['uname']."</a>";  
+        if(!empty($leaf['children']))$htmlStr.=$this->tree2html($leaf['children']);  
+        $htmlStr.='<p>'.$leaf['content'].'</p>';  
+    }  
+    return  $htmlStr.='</div>';  
+}
+
 }
 ?>

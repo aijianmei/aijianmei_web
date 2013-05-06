@@ -13,11 +13,11 @@
         <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
         <label for="checkbox"></label>
     </th>
-    <th class="line_l">ID</th>
+    <th class="line_l" width="5%">ID</th>
     <th class="line_l">标题</th>
-    <th class="line_l">图片</th>
-    <th class="line_l">内容</th>
-   
+    <th class="line_l" width="25%">关键字</th>
+	<th class="line_l">上线时间</th>
+    <th class="line_l">创建时间</th>
     <th class="line_l">操作</th>
   </tr>
   <volist id="vo" name="daily">
@@ -25,8 +25,9 @@
         <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
         <td>{$vo.id}</td>
         <td>{$vo.title}</td>
-        <td>{$vo.img}</td>
-        <td>{$vo.content}</td>
+        <td>{$vo.keyword}</td>
+		<td>{$vo.gotime}</td>
+        <td>{$vo.create_time}</td>
         
         <td>
         	<a target="blank" href="{:U('index/Index/daily', array('id'=>$vo['id']))}">查看详情</a>

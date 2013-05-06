@@ -1,16 +1,28 @@
 <include file="../Public/header" />
 <div id="content">
             <div>
-                <span>
-                <span>您所在的位置:</span>
-                <a href="/index.php?app=index">爱健�?/a>->
-                <a href="/index.php?app=index&mod=Train">锻炼</a>->
-                <a href="/index.php?app=index&mod=Train&act=videoList&id=53">肌肉�?/a>->
-                <a href="#">{$video['title']}</a>
-                </span>
+                <p class="position">
+                    <span>您所在的位置:</span>
+                    <a href="/index.php?app=index">爱健美</a>->
+                    <a href="/index.php?app=index&mod=Train&act=videoList&id=53">肌肉组</a>->
+                    <a href="#">{$video['title']}</a>
+                </p>
+                <!--<p class="ms_from">爱健美团队  发表于<span>14小时前</span></p>-->
                 <div class="video_content clearfix">
-                    <div class="v_area">                        
-                        <embed src="{$video['link']}" quality="high" width="634" height="450" align="middle" allownetworking="all" allowscriptaccess="always" type="application/x-shockwave-flash" allowfullscreen="true">
+                    <div class="v_area">
+						<php>if(!$video['wapurl']){</php>
+                        <object width="634" height="450">
+                            <param value="{$video['link']}" name="movie">
+                            <param value="true" name="allowFullScreen">
+                            <param value="never" name="allowscriptaccess">
+                            <param value="internal" name="allownetworking">
+                            <param value="transparent" name="wmode">                     
+                            <embed src="{$video['link']}" quality="high" width="634" height="450" align="middle" allownetworking="all" allowscriptaccess="always" type="application/x-shockwave-flash" allowfullscreen="true" wmode="transparent">
+                            <param value="" name="flashvars">
+                        </object>
+						<php>}else{</php>
+						<iframe height=450 width=634 src="{$video['wapurl']}" frameborder=0 allowfullscreen></iframe>
+						<php>}</php>
                     </div>
                     <div class="v_re">
                         <h3 class="tabclass">视频信息</h3>
@@ -29,50 +41,96 @@
             </div>
             <div class="v_bottom clearfix">
                     <div class="bottom_part_left">
-                            <div class="web_expend_2">
-                                <a class="sprite_8"><span class="praise">{$video['like']}</span></a>
-                                <a class="sprite_9"><span class="praise">{$video['unlike']}</span></a>
-                                <span class="relay">转发�?/span>
-                                <include file="../Public/share" />				
-                            </div>
-                            <div class="border_comment">
-                                <span class="word_num">0/300</span>
-                                <span><a href="index.php?app=home&mod=Public&act=login">登录</a></span>|
-                                <span><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a></span>
+                        <div class="share_part">
+						<input type="hidden" name="videoid" value="{$video['id']}" id="videoid">
+						<input type="hidden" name="video_num_like" value="{$video['like']}" id="video_num_like">
+                            <span class="wrap_like">
+                                <a class="click_like" onclick="recordlike();"></a>
+                                <span class="num_like" >{$video['like']}</span>
+                            </span>
+                            <span class="click_share">
+                                我要分享:
+                                <!--<a class="share_obj_1">腾讯</a>-->
+								<script type="text/javascript">
+								(function(){
+								var p = {
+								url:location.href,
+								showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+								desc:'',/*默认分享理由(可选)*/
+								summary:'',/*分享摘要(可选)*/
+								title:'<?php echo $video['title'];?>',/*分享标题(可选)*/
+								site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+								pics:'<?php echo $video['logo']?>', /*分享图片的路径(可选)*/
+								style:'102',
+								width:68,
+								height:24
+								};
+								var s = [];
+								for(var i in p){
+								s.push(i + '=' + encodeURIComponent(p[i]||''));
+								}
+								document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+								})();
+								</script>
+								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+                                <a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&ralateUid=2692984661&url=<?php echo $video['htmlurl'];?>&title=<?php echo $video['title'];?>&content=utf-8&pic=<?php echo $video['logo']?>" title="分享到新浪微博" target="_blank">微博</a>
+                            </span>
+                        </div>
+						<wb:like appkey="5Q8YPj"></wb:like>  
+						<php>if(!getMid()){</php><div class="login_resgister">
+							<p>
+								还没有<a href="javascript:void(0)" class="login">登录</a>不能发表评论哦！还没有帐号吗？也可以现在就<a href="/index.php?app=index&mod=Index&act=selectRegister">注册</a>
+							</p>
+                            </div><php>}</php>
+							<div class="border_comment" style="margin-top:10px;">
+							<form>
+								<span class="word_num">
+								<span class="word_num"><span class="lay_word_num">0</span>/300</span>
+								</span>
+                                <php>if(getMid()){</php>
+                                <php>echo getUserName(getMid())</php>
+                                <php>}else {</php>
+                                <span>&nbsp;&nbsp;</span>
+                                <span>&nbsp;&nbsp;</span>
+                                <php>}</php>
                                 <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
                                 <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
-                                <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox">有什么感想，来说说吧</textarea></div>
+                                <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox"  onKeyDown="change_number('comment_inp','lay_word_num');" onKeyUp="change_number('comment_inp','lay_word_num');"  maxlength=300>有什么感想，来说说吧</textarea></div>
                                 <a class="comment" onclick="addVideoCommont();">发表评论</a>
+								</form>
                             </div>
                             <div class="check_comment">
-                                <a class="comment_1">全部评论(<?php echo $cRecomnums;?>)</a>
+                                <p class="comment_1">全部评论(<?php echo $cRecomnums;?>)</p>
                             </div>
                             <div class="cm_content tab_2">
-                                <div class="cm_top">
-                                    <span class="page_1">
-                                        <span class="lay_page">
-                                        <?php printf($pager['thestr'],'class="choice_page"');?>
-                                        </span>
-                                        <?php printf($pager['backstr'],'class="pre_page"');?>
-                                        <?php printf($pager['nextstr'],'class="next_page"');?>
+                                <div class="page clearfix">
+                                    <span class="concrete_choice">
+										<?php printf($pager['backstr'],'class="prev"');?>
+										<?php printf($pager['thestr'],'class="current_page"');?>
+										<?php printf($pager['nextstr'],'class="next"');?>
                                     </span>
-                                    <span>�??php echo $_GET['pg'];?>�?/span>
+                                    <span class="free_choice">
+                                        <span>共{$pager[page]}页</span>
+                                        <span class="concrete_page">
+                                            到第
+                                            <input type="text">
+                                            页
+                                        </span>
+                                        <span class="sure_button" onclick="">确定</span>
+                                    </span>
                                 </div>
                                 <div class="cm_bottom" id="recomment_fdiv">
-                                    <h5 class="title_5" >推荐精华</h5>
                                     <php> foreach($RecommentsList as $v){ </php>
                                     <div class="target clearfix">
-                                        <div class="target_pic"><img src="<?php echo $v['img'];?>" alt="no" /><span class="care">关注</span></div>
+                                        <div class="target_pic"><img src="<?php echo $v['img'];?>" alt="<?php echo $v['username'];?>" /></div>
                                         <div class="cm_left">
                                             <a class="name"><?php echo $v['username'];?></a>
-                                            <p><?php echo $v['connect'];?></p>
+                                            <p><?php echo $v['content'];?></p>
                                             <p class="bottom_ms">
                                                 <span class="to">
-                                                    <a>转发<span>(0)</span></a>
-                                                    <a>回复<span>(0)</span></a>
                                                 </span>
                                                 <span><?php echo $v['create_time'];?></span>
-                                                <span>来自<em>爱健�?/em></span>
+                                                <span>来自<em>爱健美</em></span>
                                             </p>
                                         </div>
                                     </div>
@@ -85,13 +143,13 @@
                             <h4 class="sider_t">精华推荐</h4>
                             <?php foreach($otherVideo as $v) { ?>
                                 <div class="recommend clearfix">
-                                    <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}" class="recommend_pic"><img width="90" height="60px" src="{$v['logo']}" alt="no" /></a>
+                                    <a href="/index-Train-videoDetail-{$v['id']}.html" class="recommend_pic"><img width="90" height="60px" src="{$v['logo']}" alt="no" /></a>
                                     <div class="intro">
-                                        <h3><a>{$v['title']}</a></h3>
+                                        <h3><a href="/index-Train-videoDetail-{$v['id']}.html">{$v['title']}</a></h3>
                                         <span class="t_play_time">点击:<span> </span>{$v['click']}</span><span class="comment_time">评论: <span>{$v['CommNumber']}</span></span>
                                     </div>
                                 </div>
-                                <?php }?>
+                            <?php }?>
                         </div>
                     </div>
             </div>
@@ -105,14 +163,36 @@
             type: "POST",
             url: "ajax.php",
             dataType:"json",
-            data: "act=addVideoCommont&data=ford&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&connect="+$("#commentbox").val(),
+            data: "act=addVideoCommont&data=ford&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&content="+$("#commentbox").val(),
             success: function(data){
-             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">关注</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.connect+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em></em></span></p></div></div';
-             $("#recomment_fdiv").append(innerHtml);
+             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">关注</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.content+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em></em></span></p></div></div';
+                         $("#commentbox").val('');          
+            $("#recomment_fdiv").prepend(innerHtml);
+            $("#empty_content").html('');
              
             }
             });
         }
-        
+		
+		function recordlike(){
+		var vid=$("#videoid").val();
+		$.ajax({
+			type: "POST",
+			url: "ajax.php",
+			dataType:"json",
+			data: "act=recordlike&data=ford&vid="+vid,
+			success: function(data)
+			{
+				if(data==1){
+				var video_num_like=$("#video_num_like").val();
+				video_num_like=video_num_like*1+1;
+				$(".num_like").html(video_num_like);
+				}
+				else{
+				alert("你已经赞过了！");
+				}
+			}
+		});
+		}
         </script>
 <include file="../Public/footer" />

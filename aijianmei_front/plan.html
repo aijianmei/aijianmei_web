@@ -1,393 +1,311 @@
 ﻿<!DOCTYPE html>
-	<html>
-		<head>
-			<meta charset="utf-8"/>
-			<title>爱健美</title>
-			<link rel="stylesheet" href="css/public.css" />
-			<link rel="stylesheet" href="css/plan.css" />
-		</head>
-		<body>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>爱健美</title>
+	<link rel="stylesheet" href="css/public.css" />
+</head>
+<body>
+	<div class="header_wrapper">
 		<div class="body"></div>
-			<div class="sheet">
-				<div class="log">
-					<button class="close_btn"></button>
-					<h3>登陆爱健美</h3>
-					<div class="ai_account">
-						<form action="">
-							<h4 class="tit">使用注册邮箱登陆</h4>
-							<div class="text_input">
-								<label for="mail">爱健美注册邮箱</label>
-								<input type="text" id="mail"/>
-								<span class="tip">请输入正确的邮箱地址</span>
+        <div class="sheet">
+            <div class="log">
+                <button class="close_btn"></button>
+                <h3>登录爱健美</h3>
+                <div class="ai_account">
+                    <form action="/index.php?app=home&mod=Public&act=doLogin" method="post">
+                        <h4 class="tit">使用注册邮箱登录</h4>
+                        <div class="text_input">
+                            <label for="mail">爱健美注册邮箱</label>
+                            <input type="text" id="mail" name="email" />
+                            <span class="tip">请输入正确的邮箱地址</span>
+                        </div>
+                        <div class="text_input">
+                            <label for="psd">密码</label>
+                            <input type="password" id="psd" name="password" />
+                            <span class="tip">密码长度为6~16个的数字或者字母</span>
+                        </div>
+                        <div class="checkCode">
+                        </div>
+                        <button type="submit" class="submit_btn">登录</button>
+                    </form>
+                </div>
+                <div class="other_account clearfix">
+                    <h4 class="tit">使用合作网站账号登录</h4>
+                    <div class="accounts">
+	                    <a class="copsina" style="width:128px;height:32px;" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a>
+	                    <a class="copqq" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100328471 &redirect_uri=www.aijianmei.com/qqlogin.php&scope=" style="width:128px;height:32px;"></a>
+                      </div>
+                    <span class="clearfix">未注册过爱健美也可以直接登录哦</span>
+                    <a class="cop5" href="{:U('index/Index/selectRegister')}">爱健美注册</a>	                
+                </div>
+            </div>	
+        </div>
+        <div class="head">
+            <div class="most_top">
+                <ul class="top_ms clearfix">
+                    <li><a class="login">登录 </a>|</li>
+                    <li><a href="account.html">注册 </a></li>
+                </ul>
+                <ul class="after_ms">
+                    <li class="person_massage">
+                        <div>
+                            <img alt="no" />
+                            <span>kon</span>
+                        </div>
+                    </li>
+                    <li class="more"><a href="">帐号<span class="triangle"></span> </a>
+                        <ul class="account">
+                            <li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
+                            <li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
+                        </ul>
+                    </li>
+                    <li class="special_buy">
+                        <a class="car_buy">购物车</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="header">
+                <div class="h_bg">
+                    <a href="/index.php?app=index"><div class="logo_1">logo</div></a>
+                    <ul class="nav">
+                        <li class="nav_current"><i class="ag_current"></i><a href="index.html"><span class="home">首页</span></a></li>
+                        <li><i class="ag_current"></i><a href='#'><span class="store">商店</span></a></li>
+                        <li><i class="ag_current"></i><a href="plan.html">健身计划</a></li>
+                        <li><i class="ag_current"></i><a href="training.html">锻炼</a>
+                        </li>
+                        <li><i class="ag_current"></i><a href="nutri.html">营养</a>
+                        </li>
+                        <li><i class="ag_current"></i><a href="add.html">辅助品</a></li>
+                        <li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
+                        <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+	</div>
+	<div class="wrapper">
+		<div id="banner">
+			<div class="lay_banner">
+				<ul class="ul_1 clearfix">
+					<li class="change_1">
+						<a>
+							<img src="images/01.jpg" alt="no" class="pic_1" />
+							<div class="massage" style="display:inline-block;">
+								<h1 class="title">此张大图名称</h1>
+								<p>大图介绍：阿萨德合肥卡萨帝豪</p>
+								<img src="images/4.png" alt="no" class="png" />
 							</div>
-							<div class="text_input">
-								<label for="psd">密码</label>
-								<input type="password" id="psd"/>
-								<span class="tip">密码长度为6~16个的数字或者字母</span>
+						</a>
+					</li>
+					<li class="change_1">
+						<a>
+							<img src="images/02.jpg" alt="no" class="pic_2" />
+							<div class="massage" style="display:inline-block;">
+								<h1 class="title">此张大图名称</h1>
+								<p>大图介绍：阿萨德合肥卡萨帝豪</p>
+								<img src="images/4.png" alt="no" class="png" />
 							</div>
-							<button type="submit" class="submit_btn">登陆</button>
-							<a href="retrieve.html" class="forget">忘记密码</a>
-						</form>
-					</div>
-					<div class="other_account clearfix">
-						<h4 class="tit">使用合作网站账号登陆</h4>
-						<div class="accounts">
-							<a class="cop1" href="#"></a>
-							<a class="cop2" href=""></a>
-							<a class="cop3" href=""></a>
-							<a class="cop4" href=""></a>
-							<a class="cop5" href=""></a>
-							<a class="cop6" href=""></a>
-						</div>
-						<span class="clearfix">未注册过爱健美也可以直接登陆哦</span>
-						
-					</div>
-				</div>	
-			</div><!-- End sheet -->
-		<div class="wrapper">
-			<div id="header">
-				<ul class="top">
-					<li><a id="login">登陆 </a>|</li>
-					<li><a href="account.html">注册 </a>|</li>
-					<li class="more"><a href="#">消息<span class="triangle"></span> </a>|
-							<ul class="message">
-								<li><a href="letter.html">查看私信</a></li>
-								<li><a href="comment.html">查看评论</a></li>
-								<li><a href="mention.html">查看@我</a></li>
-								<li><a href="fans.html">查看粉丝</a></li>
-								<li><a href="inform.html">查看通知</a></li>
-								<li><a href="order.html">查看预约</a></li>
-							</ul>
-						</li>
-						<li class="more"><a href="">帐号<span class="triangle"></span> </a>
-							<ul class="account">
-								<li><a href="information.html">个人资料</a></li>
-								<li><a href="receive.html">收货地址</a></li>
-								<li><a href="mod_face.html">修改头像</a></li>
-								<li><a href="bind.html">绑定帐号</a></li>
-								<li><a href="">退出帐号</a></li>
-							</ul>
-						</li>
+						</a>
+					</li>
+					<li class="change_1">
+						<a>
+							<img src="images/07.jpg" alt="no" class="pic_3" />
+							<div class="massage" style="display:inline-block;">
+								<h1 class="title">此张大图名称</h1>
+								<p>大图介绍：阿萨德合肥卡萨帝豪</p>
+								<img src="images/4.png" alt="no" class="png" />
+							</div>
+						</a>
+					</li>
+					<li class="change_1">
+						<a>
+							<img src="images/16.jpg" alt="no" class="pic_4" />
+							<div class="massage" style="display:inline-block;">
+								<h1 class="title">此张大图名称</h1>
+								<p>大图介绍：阿萨德合肥卡萨帝豪</p>
+								<img src="images/4.png" alt="no" class="png" />
+							</div>
+						</a>
+					</li>
 				</ul>
-				<form class="search">
-					<fieldset>
-						<legend>搜索</legend>
-						<label for="search_title">搜索：</label>
-						<input type="text" id="search_title" class="search_txt"/>
-						<button class="search_btn hide_text" type="submit"></button>
-					</fieldset>
-				</form>
-				<div class="logo">
-					<a href="index.html">
-						<img src="images/logo.png" alt="aijianmei" />
-					</a>
+			</div>
+			<div class="choice_area">
+				<ul class="ul_2 clearfix">
+					<li class="first_choice">
+						<img src="images/010.jpg" alt="" class="relative_pic" />
+					</li>
+					<li>
+						<img src="images/020.jpg" alt="" class="relative_pic" />
+					</li>
+					<li>
+						<img src="images/110.jpg" alt="" class="relative_pic" />
+					</li>
+					<li>
+						<img src="images/160.jpg" alt="" class="relative_pic" />
+					</li>
+				</ul>
+				<a class="ps_left"></a>
+				<a class="ps_right"></a>
+			</div>
+		</div>	<!--Banner End -->
+		<div id="content" class="clearfix">
+			<div class="sider_all">
+				<div class="lay_sider">
+					<div class="subsider">
+						<span class="border_line"></span>
+						<h3 class="video_all">全部</h3>
+						<span class="border_line"></span>
+						<ul>
+							<li class="each_video all">
+								训练基础知识
+							</li>
+							<li class="each_video">
+								<a href="nutri_1.html">心</a>
+							</li>
+							<li class="each_video">
+								<a href="nutri_1.html">暖/降温</a>
+							</li>
+							<li class="each_video">
+								<a href="nutri_1.html">主体类型</a>
+							</li>
+							<li class="each_video">
+								<a href="nutri_1.html">伸展</a>
+							</li>
+							<li class="each_video">
+								<a href="nutri_1.html">重复与组数</a>
+							</li>
+							<span class="border_line"></span>
+						</ul>
+					</div>
 				</div>
-				<ul id="nav">
-					<li class="home"><a href="index.html"><span>首页</span></a></li>
-					<li class="store"><a href="store.html"><span>商店</span></a></li>
-					<li class="now_position"><a href="plan.html">健身计划</a></li>
+			</div>
+			<div class="right_sider">
+				<div class="part_top clearfix">
+					<span class="corner_left"></span>
+					<div class="lay_top clearfix">
+						<h1 class="public_title">天天锻炼</h1>
+						<div class="train clearfix">
+							<div class="sort_1">
+								<dl>
+									<dt><a href="/index.php?app=index&mod=Index&act=info&type=1" class="show_enter"><span class="enter_icon" style="display: none;"></span><img class="show_pic_1" src="http://localhost/apps/index/Tpl/default/Public/images/mr_01.jpg" alt="" /><i></i></a></dt>
+									<dd class="sort_title"><a href="/index.php?app=index&mod=Index&act=info&type=1">上班族健身</a>
+									</dd>
+									<dd>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=74">体重训练：锻练</a>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=72">体重训练：营养</a>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=70">体重训练：辅助品</a>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=69">体重训练：生活方式</a>
+																				
+									</dd>
+								</dl>
+							</div>
+							<div class="sort_1">
+								<dl>
+									<dt><a href="/index.php?app=index&mod=Index&act=info&type=2" class="show_enter"><span class="enter_icon" style="display: none;"></span><img class="show_pic_1" src="http://localhost/apps/index/Tpl/default/Public/images/mr_02.jpg" alt="" /><i></i></a></dt>
+									<dd class="sort_title"><a href="/index.php?app=index&mod=Index&act=info&type=2">日常健身</a>
+									</dd>
+									<dd>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=79">日常健身：锻炼</a>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=78">日常健身：营养</a>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=77">日常健身：辅助品</a>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=76">日常健身：生活方式</a>
+																				
+									</dd>
+								</dl>
+							</div>
+							<div class="sort_1">
+								<dl>
+									<dt><a href="/index.php?app=index&mod=Index&act=info&type=3" class="show_enter"><span class="enter_icon" style="display: none;"></span><img class="show_pic_1" src="http://localhost/apps/index/Tpl/default/Public/images/mr_03.jpg" alt="" /><i></i></a></dt>
+									<dd class="sort_title"><a href="/index.php?app=index&mod=Index&act=info&type=3">运动员</a>
+									</dd>
+									<dd>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=90">运动员：锻炼</a>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=89">运动员：营养</a>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=88">运动员：辅助品</a>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=87">运动员：生活方式</a>
+																				
+									</dd>
+								</dl>
+							</div>
+							<div class="sort_1">
+								<dl>
+									<dt><a href="/index.php?app=index&mod=Index&act=info&type=4" class="show_enter"><span class="enter_icon" style="display: none;"></span><img class="show_pic_1" src="http://localhost/apps/index/Tpl/default/Public/images/mr_04.jpg" alt="" /><i></i></a></dt>
+									<dd class="sort_title"><a href="/index.php?app=index&mod=Index&act=info&type=4">健身运动员</a>
+									</dd>
+									<dd>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=91">健身运动员：锻炼</a>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=84">健身运动员：营养</a>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=82">健身运动员：辅助品</a>
+										<a class="sub_sort"  href="/index.php?app=index&mod=Index&act=articleDetail&id=75">健身运动员：生活方式</a>
+																				
+									</dd>
+								</dl>
+							</div>
+						</div>
+					</div>
+					<span class="corner_bottom"></span>
+				</div>
+			</div>				
+
+		</div>
+		<div id="footer">
+			<div class="f_list">
+				<h4>发现爱健美</h4>
+				<ul id="app">	
+					<li><a href="store.html">爱健美商店</a></li>
 					<li><a href="training.html">锻炼</a></li>
+					<li><a href="html">健身计划</a></li>
 					<li><a href="nutri.html">营养</a></li>
 					<li><a href="add.html">补充</a></li>
-					<li class="forum"><a href="activity.html">论坛</a></li>
 					<li><a href="pal.html">交友互动</a></li>
+				</ul>
+			</div>
+			<div class="f_list">
+				<h4>获取帮助</h4>
+				<ul id="article">						
+					<li><a href="help.html">新手指南</a></li>
+					<li><a href="direct.html">社区指导原则</a></li>
+					<li><a href="feedback.html">意见反馈</a></li>
+				</ul>
+			</div>
+			<div class="f_list">
+				<h4>关于我们</h4>
+				<ul id="video">						
+					<li><a href="about_us.html">关于爱健美</a></li>
+					<li><a href="contact.html">联系我们</a></li>
+					<li><a href="join.html">加入爱健美</a></li>
+					<li><a href="ad.html">广告投放与品牌推广</a></li>
+					<li><a href="privacy.html">隐私政策</a></li>
+				</ul>
+			</div>
+			<div class="f_list">
+				<h4>更多</h4>
+				<ul id="teach">					
+					<li><a href="app.html">下载IOS客户端</a></li>
+					<li><a href="app.html">下载Android客户端</a></li>
+					<li><a href="#">友情链接</a></li>
+				</ul>
+			</div>
+			<div class="f_list login" >
+				<h4>关注我们</h4>
+				<ul id="about">
+					<li class="sina"><a href="http://weibo.com/aijianmei?topnav=1&wvr=5" target="_blank">新浪微博</a></li>
+					<li class="tencent"><a href="http://t.qq.com/aijianmeiweibo" target="_blank">腾讯微博</a></li>
+					<li class="netease"><a href="http://t.163.com/aijianmei" target="_blank">网易微博</a></li>
+					<li class="public"><a href="#" target="_blank">公共主页</a></li>
+					<li class="qZone"><a href="http://user.qzone.qq.com/2816973844/main#home" target="_blank">QQ空间</a></li>
+					<li class="douban"><a href="#" target="_blank">豆瓣</a></li>
 				</ul>		
 			</div>
-			<div id="banner">
-				<div class="lay_banner">
-					<ul class="ul_1 clearfix">
-						<li class="change_1">
-							<a>
-								<img src="images/01.jpg" alt="no" class="pic_1" />
-								<div class="massage" style="display:inline-block;">
-									<h1 class="title">此张大图名称</h1>
-									<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-									<img src="images/4.png" alt="no" class="png" />
-								</div>
-							</a>
-						</li>
-						<li class="change_1">
-							<a>
-								<img src="images/02.jpg" alt="no" class="pic_2" />
-								<div class="massage" style="display:inline-block;">
-									<h1 class="title">此张大图名称</h1>
-									<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-									<img src="images/4.png" alt="no" class="png" />
-								</div>
-							</a>
-						</li>
-						<li class="change_1">
-							<a>
-								<img src="images/07.jpg" alt="no" class="pic_3" />
-								<div class="massage" style="display:inline-block;">
-									<h1 class="title">此张大图名称</h1>
-									<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-									<img src="images/4.png" alt="no" class="png" />
-								</div>
-							</a>
-						</li>
-						<li class="change_1">
-							<a>
-								<img src="images/16.jpg" alt="no" class="pic_4" />
-								<div class="massage" style="display:inline-block;">
-									<h1 class="title">此张大图名称</h1>
-									<p>大图介绍：阿萨德合肥卡萨帝豪</p>
-									<img src="images/4.png" alt="no" class="png" />
-								</div>
-							</a>
-						</li>
-					</ul>
-				</div>
-				<div class="choice_area">
-					<ul class="ul_2 clearfix">
-						<li class="first_choice">
-							<img src="images/010.jpg" alt="" class="relative_pic" />
-						</li>
-						<li>
-							<img src="images/020.jpg" alt="" class="relative_pic" />
-						</li>
-						<li>
-							<img src="images/110.jpg" alt="" class="relative_pic" />
-						</li>
-						<li>
-							<img src="images/160.jpg" alt="" class="relative_pic" />
-						</li>
-					</ul>
-					<a class="ps_left"></a>
-					<a class="ps_right"></a>
-				</div>
-			</div>	<!--Banner End -->
-			<div id="content" class="clearfix">
-				<div class="sider_all">
-					<div class="lay_sider">
-						<div class="subsider">
-							<ul class="bar" id="sort">
-								<span class="border_line"></span>
-								<h3 class="video_all">计划</h3>
-								<span class="border_line"></span>
-								<li id="loss" class="each_video"><a href="plan_loss.html">脂肪损失</a></li>
-								<li id="build" class="each_video"><a href="plan_build.html">肌肉建设</a></li>
-								<li class="each_video"><a href="plan_exer.html">寻找教练</a></li>
-								<li class="each_video"><a href="plan_gym.html">寻找健身房</a></li>
-								<span class="border_line"></span>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="right_sider">
-					<div class="part_top clearfix">
-						<div class="lay_top clearfix">
-							<h1 class="public_title">天天锻炼</h1>
-							<div class="train clearfix">
-								<div class="sort">
-									<dl>
-										<dt><a class="show_enter" href=""><span class="enter_icon"></span><img class="show_pic" src="images/mr_01.jpg" alt="" /></a></dt>
-										<dd class="sort_title"><a href="">上班族健身</a></dd>
-										<dd>
-											<a class="sub_sort"  href="">选项1</a>
-											<a class="sub_sort"  href="">选项2</a>
-											<a class="sub_sort"  href="">选项3</a>
-											<a  class="sub_sort" href="">选项4</a>
-										</dd>
-									</dl>
-								</div>
-								<div class="sort">
-									<dl>
-										<dt><a class="show_enter" href=""><span class="enter_icon"></span><img class="show_pic" src="images/mr_02.jpg" alt="" /></a></dt>
-										<dd class="sort_title"><a href="">日常健身</a></dd>
-										<dd>
-											<a class="sub_sort" href="">选项1</a>
-											<a class="sub_sort"  href="">选项2</a>
-											<a class="sub_sort"  href="">选项3</a>
-											<a  class="sub_sort" href="">选项4</a>
-										</dd>
-									</dl>
-								</div>
-								<div class="sort">
-									<dl>
-										<dt><a class="show_enter" href=""><span class="enter_icon"></span><img class="show_pic" src="images/mr_03.jpg" alt="" /></a></dt>
-										<dd class="sort_title"><a href="">专业运动员</a></dd>
-										<dd>
-											<a class="sub_sort"  href="">选项1</a>
-											<a class="sub_sort"  href="">选项2</a>
-											<a  class="sub_sort" href="">选项3</a>
-											<a  class="sub_sort" href="">选项4</a>
-										</dd>
-									</dl>
-								</div>
-								<div class="sort">
-									<dl>
-										<dt><a class="show_enter" href=""><span class="enter_icon"></span><img class="show_pic" src="images/mr_04.jpg" alt="" /></a></dt>
-										<dd class="sort_title"><a href="">健美运动员</a></dd>
-										<dd>
-											<a class="sub_sort"  href="">选项1</a>
-											<a class="sub_sort"  href="">选项2</a>
-											<a  class="sub_sort" href="">选项3</a>
-											<a  class="sub_sort" href="">选项4</a>
-										</dd>
-									</dl>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="part_top clearfix">
-						<div class="lay_top clearfix">
-							<h1 class="public_title">3个简单步骤，找到你的计划</h1>
-							<div class="step">
-								<div id="choice">
-									<div class="intro">
-										<span class="befo">开始</span>
-										<span class="befo_intro">给我们的信息，我们爱健美的专家会给您一个完整的健身方案</span>
-									</div>
-									<div class="steps_wrap">
-										<ul class="steps_ul">
-											<li class="steps_list1 current">
-												<div class="gender opt">1性别</div>
-												<div class="options select">
-													<span class="yours">你的性别</span>
-													<a class="male"><span>男士</span></a>
-													<a class="female"><span>女士</span></a>
-												</div>	
-											</li>						
-											<li class="steps_list2">
-												<div class="goal opt">2目标</div>
-												<div class="m_opt options" id="male">
-													<span class="yours">你的目标</span>
-													<a class="m_loss"><span>减肥</span></a>
-													<a class="m_build"><span>锻炼</span></a>
-												</div>
-												<div class="f_opt options" id="female">
-													<span class="yours">你的目标</span>
-													<a class="f_loss"><span>减肥</span></a>
-													<a class="f_build"><span>锻炼</span></a>
-												</div>
-											</li>					
-											<li class="steps_list3">
-												<div class="age opt">3年龄</div>
-												<div class="m_loss_opt options" id="m_loss">
-													<span class="yours">你的年龄</span>
-													<a class="m_teen" href="http://www.aijianmei.com"><span>青少年</span></a>
-													<a class="m_adult" href="#"><span>20-39</span></a>
-													<a class="m_older" href="#"><span>40+</span></a>
-												</div>
-												<div class="m_build_opt options" id="m_build">
-													<span class="yours">你的年龄</span>
-													<a class="m_teen" href="#"><span>青少年</span></a>
-													<a class="m_adult" href="#"><span>20-39</span></a>
-													<a class="m_older" href="#"><span>40+</span></a>
-												</div>
-												<div class="f_loss_opt options" id="f_loss">
-													<span class="yours">你的年龄</span>
-													<a class="f_teen" href="#"><span>青少年</span></a>
-													<a class="f_adult" href="#"><span>20-39</span></a>
-													<a class="f_older" href="#"><span>40+</span></a>
-												</div>
-												<div class="f_build_opt options" id="f_build">
-													<span class="yours">你的年龄</span>
-													<a class="f_teen" href="#"><span>青少年</span></a>
-													<a class="f_adult" href="#"><span>20-39</span></a>
-													<a class="f_older" href="#"><span>40+</span></a>
-												</div>							
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div><!--End step-->
+		</div><!--Footer End-->
+		<div id="lower_footer">
+			<span>广州加伦信息科技有限公司- 粤ICP备12085654号</span>
+			<a href="http://www.aijianmei.com">www.aijianmei.com</a>
+		</div>
+		</div>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/public.js"></script>
+</body>
 
-
-							<div id="show_hide">
-								<div class="exer">
-									<div class="lay clearfix">		
-										<h1 class="public_title">寻找教练</h1>
-										<a href="plan_exer.html"><img src="images/plan/teach.jpg" alt="" /></a>
-									</div>
-								</div>
-								<div class="gym">
-									<div class="lay clearfix">
-										<h1 class="public_title">寻找健身房</h1>
-										<a href="plan_gym.html"><img src="images/plan/gym.jpg" alt="" /></a>
-										</div>
-								</div>
-							</div>
-
-
-
-					<div class="part_top clearfix">
-						<div class="lay_top clearfix">
-								<h1 class="public_title">成功案例</h1>
-								<div class="example">
-									<a href=""><img src="images/plan/eg.jpg" alt="" /></a>
-									<a href=""><img src="images/plan/eg.jpg" alt="" /></a>
-									<a href=""><img src="images/plan/eg.jpg" alt="" /></a>
-								</div>
-						</div>
-					</div>
-				</div><!--End content-->
-			</div>
-			<div id="footer">
-				<div class="f_list">
-					<h4>发现爱健美</h4>
-					<ul id="app">	
-						<li><a href="store.html">爱健美商店</a></li>
-						<li><a href="training.html">锻炼</a></li>
-						<li><a href="html">健身计划</a></li>
-						<li><a href="nutri.html">营养</a></li>
-						<li><a href="add.html">补充</a></li>
-						<li><a href="pal.html">交友互动</a></li>
-					</ul>
-				</div>
-				<div class="f_list">
-					<h4>获取帮助</h4>
-					<ul id="article">						
-						<li><a href="help.html">新手指南</a></li>
-						<li><a href="direct.html">社区指导原则</a></li>
-						<li><a href="feedback.html">意见反馈</a></li>
-					</ul>
-				</div>
-				<div class="f_list">
-					<h4>关于我们</h4>
-					<ul id="video">						
-						<li><a href="about_us.html">关于爱健美</a></li>
-						<li><a href="contact.html">联系我们</a></li>
-						<li><a href="join.html">加入爱健美</a></li>
-						<li><a href="ad.html">广告投放与品牌推广</a></li>
-						<li><a href="privacy.html">隐私政策</a></li>
-					</ul>
-				</div>
-				<div class="f_list">
-					<h4>更多</h4>
-					<ul id="teach">					
-						<li><a href="app.html">下载IOS客户端</a></li>
-						<li><a href="app.html">下载Android客户端</a></li>
-						<li><a href="#">友情链接</a></li>
-					</ul>
-				</div>
-				<div class="f_list login" >
-					<h4>关注我们</h4>
-					<ul id="about">
-						<li class="sina"><a href="http://weibo.com/aijianmei?topnav=1&wvr=5" target="_blank">新浪微博</a></li>
-						<li class="tencent"><a href="http://t.qq.com/aijianmeiweibo" target="_blank">腾讯微博</a></li>
-						<li class="netease"><a href="http://t.163.com/aijianmei" target="_blank">网易微博</a></li>
-						<li class="public"><a href="#" target="_blank">公共主页</a></li>
-						<li class="qZone"><a href="http://user.qzone.qq.com/2816973844/main#home" target="_blank">QQ空间</a></li>
-						<li class="douban"><a href="#" target="_blank">豆瓣</a></li>
-					</ul>		
-				</div>
-			</div><!--Footer End-->
-			<div id="lower_footer">
-				<span>广州加伦信息科技有限公司- 粤ICP备12085654号</span>
-				<a href="http://www.aijianmei.com">www.aijianmei.com</a>
-			</div>
-			</div>
-			<script type="text/javascript" src="js/jquery.js"></script>
-			<script type="text/javascript" src="js/public.js"></script>
-			<script type="text/javascript" src="js/plan.js"></script>
-			<script type="text/javascript">
-				fade.init('store');
-				fade.init('forum')
-			</script>
-		</body>
-		
-	</html>
+</html>

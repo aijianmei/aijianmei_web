@@ -52,7 +52,7 @@ class PublicAction extends Action{
 
     public function login()
     {
-
+		redirect(U('index/Index/index'));
         if (service('Passport')->isLogged())
             redirect(U('home/User/index'));
 
@@ -293,6 +293,7 @@ class PublicAction extends Action{
 
     public function doLogin() {
         // 检查验证码
+		
         $opt_verify = $this->_isVerifyOn('login');
         if ($opt_verify && (md5(strtoupper($_POST['verify']))!=$_SESSION['verify'])) {
             $this->error(L('error_security_code'));
@@ -309,7 +310,9 @@ class PublicAction extends Action{
         if(!$password){
             $this->error(L('please_input_password'));
         }
-        $result = service('Passport')->loginLocal($username,$password,intval($_POST['remember']));
+		$_POST['remember']=1;
+        //$result = service('Passport')->loginLocal($username,$password,intval($_POST['remember']));
+		$result = service('Passport')->loginLocal($username,$password,1);
         $lastError = service('Passport')->getLastError(); 
         //检查是否激活
         if (!$result && $lastError =='用户未激活') {
@@ -321,21 +324,55 @@ class PublicAction extends Action{
         Addons::hook('public_after_dologin',$result);
 
         if($result) {
+			@setcookie("LOGGED_AIUSER", $_POST['email'], time()+3600*24*30);
+			@setcookie('LOGGED_AICOD', md5("aijianmeipwd".md5($_POST['password'])), time()+3600*24*30);			
             if(UC_SYNC && $result['reg_from_ucenter']){
                 //从UCenter导入ThinkSNS，跳转至帐号修改页
                 $refer_url = U('home/Public/userinfo');
             }elseif ( $_SESSION['refer_url'] != '' ) {
                 //跳转至登录前输入的url
                 $refer_url	=	$_SESSION['refer_url'];
-                unset($_SESSION['refer_url']);
+                //unset($_SESSION['refer_url']);
             }else {
                 $refer_url = U('home/User/index');
             }
-			// 登录商城
-			service('Shop')->login($_SESSION['mid']);
-            $this->assign('jumpUrl',$refer_url);
-            $this->assign('waitSecond',5);
-            $this->success($username.L('login_success').$result['login']);
+             /*ecshoplogin by kontem at 20130412 start*/
+            $get_usernameSql="select * from ai_user where email='".$_POST['email']."' and password='".md5($_POST['password'])."'";
+            $get_usernameInfo = M('')->query($get_usernameSql);
+			$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+            $uid = M('')->query($getUidSql);
+            $_SESSION['user_id']   = $uid[0]['user_id'];
+            $_SESSION['user_name'] = $uid[0]['user_name'];
+            $_SESSION['email']     = $uid[0]['email'];
+			$_SESSION['ways']++;
+
+			if($_SESSION['mid']>0){
+				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
+			}
+			@setcookie("ECS[user_id]",  $getShopUinfo[0]['user_id'], time()+3600*24*30);
+			@setcookie("ECS[password]", md5($_POST['password']), time()+3600*24*30);
+            //print_r($_SESSION);
+            /*ecshop login by kontem at 20130412 end*/
+            // 登录商城
+            //service('Shop')->login($_SESSION['mid']);
+			//print_r($_SESSION);exit;
+	if($_SESSION['refer_url']!=''&&$_SESSION['shoprefer_url']==''){
+		$reurl=$_SESSION['refer_url'];unset($_SESSION['refer_url']);
+		redirect($reurl);
+		//redirect(U('index/Index/index'));
+	}
+	elseif($_SESSION['shoprefer_url']!=''){
+		$reurl=$_SESSION['shoprefer_url'];
+		unset($_SESSION['shoprefer_url']);
+		redirect($reurl);
+		//redirect(U('index/Index/index'));
+	}
+	else{
+		redirect(U('index/Index/index'));
+	}
+            //$this->assign('jumpUrl',$refer_url);
+            //$this->assign('waitSecond',3);
+            //$this->success($username.L('login_success').$result['login']);
         }else {
             $this->error($lastError);
         }
@@ -380,12 +417,23 @@ class PublicAction extends Action{
     }
 
     public function logout() {
+		$deluname=$_SESSION['userInfo']['uname'];
+		
+		$time = time() - 3600;
+        setcookie("ECS[user_id]",  '', $time, '/');            
+        setcookie("ECS[password]", '', $time, '/');
+		@setcookie("LOGGED_AIUSER",'', $time);
+		@setcookie('LOGGED_AICOD','', $time);		
+		if(!empty($deluname))
+		{
+			$getSkeyArr=M('')->query("select sesskey FROM ecs_sessions WHERE user_name = '".$deluname."'");
+			M('')->query("DELETE FROM ecs_sessions_data WHERE sesskey = '".$getSkeyArr[0]['sesskey']."'");
+			M('')->query("DELETE FROM ecs_sessions WHERE sesskey = '".$getSkeyArr[0]['sesskey']."'");
+		}
         service('Passport')->logoutLocal();
-        
         Addons::hook('public_after_logout');
-
         $this->assign('jumpUrl',U('index/Index/index'));
-        $this->assign('waitSecond',5);
+        $this->assign('waitSecond',3);
         $this->success(L('exit_success'). ( (UC_SYNC)?uc_user_synlogout():'' ) );
     }
 

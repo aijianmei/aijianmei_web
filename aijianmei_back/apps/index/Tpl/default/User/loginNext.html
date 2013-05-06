@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+    <html xmlns:wb=“http://open.weibo.com/wb”>
+        <head>
+            <meta charset="utf-8"/>
+			<meta name="baidu_union_verify" content="c43c00cab8564dcf9a25e3a5c666410b">
+			<meta property="qc:admins" content="142030514561121165516375" />
+            <title><?php if(!empty($headertitle)){echo $headertitle;}else{echo '爱健美首页 - 推广健身文化，传播健康理念';}?></title>
+			<meta name="keywords" content="爱健美，爱健美网，增肌、增重、减肥、瘦身、肌肉锻炼、健身营养、健身补充营养、健身运动、女性健身">
+			<meta name="description" content="爱健美网，你可以在这里制定合适的健身计划， 观看专业的健身锻炼视频，学习专业的健身方法，了解健身运动前后的饮食营养补充，以及认识喜欢健身、运动的朋友哦！">
+			<link rel="stylesheet" href="../Public/css/login.css" />
+			<script type="text/javascript" src="../Public/js/jquery.js"></script>
+			<script type="text/javascript" src="../Public/js/login.js"></script>
+</head>
+<script type="text/javascript">
+function saveSubmit(){
+$("#saveform").submit();
+}
+</script>
+<body>
+<div class="header_logo">
+<a href="/"><img src="../Public/images/logo.png" border="0"></a>
+</div>
+<div id="wrap">
+<div class="container clearfix">
+	<h1 class="want">在爱健美，你想要的是？</h1>
+	<div class="category">
+		<a class="item" atid="1">
+			<div class="cover c1">
+				<span>增肌</span>
+				<div class="check"></div>
+				<span></span>
+			</div>
+		</a>
+		<a class="item item2"  atid="2">
+			<div class="cover c2">
+				<span>增重</span>
+				<div class="check"></div>
+				<span></span>
+			</div>
+		</a>
+		<a class="item"  atid="3">
+			<div class="cover c3">
+				<span>减肥瘦身</span>
+				<div class="check"></div>
+				<span></span>
+			</div>
+		</a>
+		<a  class="item item4"  atid="4">
+			<div class="cover c4">
+				<span>了解健康营养饮食</span>
+				<div class="check"></div>
+				<span></span>
+			</div>
+		</a>
+		<a class="item"  atid="5">
+			<div class="cover c5">
+				<span>认识健身好友</span>
+				<div class="check"></div>
+				<span></span>
+			</div>
+		</a>
+	</div>
+</div>
+<form action="index.php?app=index&mod=User&act=upUserInfo" id="saveform" method="post">
+<input type="hidden" name="acttype" id="acttype" value="save">
+<input type="hidden" name="CheckVal1" id="CheckVal1" value="0">
+<input type="hidden" name="CheckVal2" id="CheckVal2" value="0">
+<input type="hidden" name="CheckVal3" id="CheckVal3" value="0">
+<input type="hidden" name="CheckVal4" id="CheckVal4" value="0">
+<input type="hidden" name="CheckVal5" id="CheckVal5" value="0">
+</form>
+<div class="login_bt login_next"><a class="loginbutton"  onclick="saveSubmit();">下一步</a></div>
+	<div id="fonter">
+		<p class="company_intro">广州加伦信息科技有限公司- 粤ICP备12085654号</p>
+		<a href="http://www.aijianmei.com" class="linktomain">www.aijianmei.com</a>
+	</div>
+</div>
+</body>
+</html>

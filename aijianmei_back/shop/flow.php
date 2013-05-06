@@ -180,6 +180,7 @@ elseif ($_REQUEST['step'] == 'link_buy')
 }
 elseif ($_REQUEST['step'] == 'login')
 {
+	die("403");
     include_once('languages/'. $_CFG['lang']. '/user.php');
 
     /*
@@ -465,7 +466,8 @@ elseif ($_REQUEST['step'] == 'checkout')
     if (empty($_SESSION['direct_shopping']) && $_SESSION['user_id'] == 0)
     {
         /* 用户没有登录且没有选定匿名购物，转向到登录页面 */
-        ecs_header("Location: flow.php?step=login\n");
+		header("HTTP/1.1 403 Forbidden");
+        //ecs_header("Location: flow.php?step=login\n");
         exit;
     }
 

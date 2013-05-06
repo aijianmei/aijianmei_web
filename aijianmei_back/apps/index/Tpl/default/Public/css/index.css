@@ -58,7 +58,7 @@
 			position:absolute;
 			top:178px;
 			cursor:pointer;
-			z-index:1000;
+			z-index:10;
 		}
 		#banner .pre{
 			left:20px;
@@ -102,30 +102,108 @@
 		position: relative;
 		float: left;
 		width: 475px;
-		margin-left: 10px;
+		margin:0 0 10px 10px;
 	}
-	.lay_top_1{
+	.lay_top_1,.lay_top_2{
 		width: 473px;
 		background: #FFF;
 		border: 1px solid #E0E0E0;
 		border-top: none;
 	}
+	.lay_top_2 .tr_classify{
+		width: 430px;
+	}
 	.tr_classify{
-		width:203px;
-		margin:0 15px 10px 0;
+		width:440px;
+		margin:0;
+		margin-bottom: 5px;
 	}
 	.hot_video,.new_video{
-		margin: 10px 14px;
+		margin: 10px;
 	}
-	.lay_hot_video,.lay_new_video{
-		margin-right: -15px;
+	.lay_top_1 img{
+		height: 110px;
+		width: 170px;
 	}
-	.new_video img,.hot_video img{
-		height: 140px;
-		width: 203px;
+	.lay_top_2 img{
+		height:100px;
+		width:178px;
+	}
+	.lay_top_2 .tr_classify{
+		padding: 10px;
+	}
+	.lay_top_2 .t_play_time {
+		background: url(../images/wm3.png) 0 -416px no-repeat;
 	}
 	.part{
 		margin:10px 15px;
+	}
+	.show_enter{
+		position: relative;		
+	}
+	.lay_top_2 .show_share iframe{
+		margin-top: 22px;
+	}
+	.show_share iframe{
+		display:block;
+		margin: 12px 0;
+		height: 32px;
+		opacity: 0.5;
+		transition: opacity .6s ease-in-out;
+		-webkit-transition: opacity .6s ease-in-out;
+	}
+	.show_share iframe:hover{
+		opacity: 1;
+	}
+	/*.show_share{
+		opacity: 0.5;
+		filter: alpha(opacity=50);
+		transition: opacity .6s ease-in-out;
+		-webkit-transition: opacity .6s ease-in-out;
+	}
+	.show_share:hover{
+		opacity: 1;
+	}*/
+	.expand_more{
+		float: right;
+		line-height: 24px;
+		color:#21ace3;
+	}
+	.function_more{
+		padding: 6px 0;
+		margin-top: 25px;
+		border-top: 1px solid #e5e5e5;
+		border-bottom: 1px solid #e5e5e5;
+	}
+	.lay_top_2 .lay_tr{
+		width: 240px;
+	}
+	.lay_pic_share{
+		float:left;
+		margin-right: 10px;
+		height:165px;
+	}
+	.lay_top_2 .lay_pic_share{
+		height:154px;
+	}
+	.lay_tr{
+		float: left;
+		width: 260px;
+	}
+	.summary{
+		height:65px;
+	}
+	.v_enter {
+		width: 70px;
+		height: 70px;
+		background: url(../images/wm3.png) no-repeat 0 -490px;
+		position: absolute;
+		left: 53px;
+		top: 15px;
+		z-index: 8;
+	}
+	.plan_article_tl{
+		padding: 0;
 	}
 	.classify{
 		float: left;
@@ -154,6 +232,23 @@
 		}
 		.expend li a{
 
+		}
+
+
+		/*outside load_more 2013/4/23*/
+		.anymore {
+		    border: 1px solid #CCCCCC;
+		    box-shadow: 0 0 8px #CCCCCC;
+		    clear: both;
+		    font-size: 20px;
+		    line-height: 30px;
+		    margin: 10px;
+		    text-align: center;
+		     text-align: center;
+		}
+		.anymore a{
+			color:#21ace3;
+			font-family: '微软雅黑','黑体','Arial';
 		}
 
 

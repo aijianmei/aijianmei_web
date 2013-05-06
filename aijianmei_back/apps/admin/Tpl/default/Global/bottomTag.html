@@ -1,0 +1,66 @@
+<include file="../Public/_header" />
+<div class="so_main">
+  <div class="page_tit">底部标签配置</div>
+  
+  <div class="form2">
+    <form method="post" action="{:U('admin/Global/doButtomTag')}" enctype="multipart/form-data">
+    <dl class="lineD">
+      <dt>英文标签：</dt>
+      <dd>
+        <font style="margin-right:220px;">中文名称</font> <font>URL地址</font>
+        <span></span>
+      </dd>  
+    </dl>
+    <php> foreach($buttomTag as $key =>$value){</php>
+    <dl class="lineD">
+      <dt><?php echo $key;?></dt>
+      <dd>
+      <input name="<?php echo $value['id'];?>[]" type="text" value=<?php echo $value['name'];?> size="20">
+        <input name="<?php echo $value['id'];?>[]" type="text" value=<?php echo $value['url'];?> size="60">
+        <span><a href="javascrpit:void(0)" onclick="delbuttominfo(<?php echo $value['id'];?>);">删除</a></span>
+      </dd>  
+    </dl>
+    <?php }?>
+     <dl class="lineD">
+      <dt style="color:red">新增：</dt>
+      <dd>
+        
+        <span style="color:red">请输入新增信息</span>
+      </dd>  
+    </dl>
+     <dl class="lineD">
+      <dt>中文名称：</dt>
+      <dd>
+        <input name="newTagName" type="text" size="60" id="{$key}">
+        <span><font color="red" >(*必填）</font></span>
+      </dd>  
+    </dl>
+     <dl class="lineD">
+        <dt>url地址：</dt>
+        <dd><input name="newTagUrl" type="text" size="60" />
+        <span><font color="red" >(*必填）</font></span></dd>
+    </dl>
+    <dl class="lineD">
+        <dt>英文标签：</dt>
+        <dd><input name="newTag" type="text" size="60" />
+        <span><font color="red" >(*必填）</font></span></dd>
+    </dl>
+    <div class="page_btm">
+      <input type="submit" class="btn_b" value="确定" />
+    </div>
+    </form>
+  </div>
+</div>
+<form id="delform" name="delform" method="post" action="{:U('admin/Global/doButtomTag')}">
+<input name="delid" id="delid" type="hidden">
+<input name="actcode" id="actcode" value="delbuttominfo" type="hidden">
+<input type="submit" name="submit" id="delsub" style="display:none;"/>
+</form>
+<script>
+function delbuttominfo(id){
+    var a = document.getElementById('delid');
+    a.value=id;
+    document.getElementById['delform'].submit();
+}
+</script>
+<include file="../Public/_footer" />

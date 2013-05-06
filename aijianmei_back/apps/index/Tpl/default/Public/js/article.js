@@ -3,7 +3,7 @@ $(function(){
     //praise
     $(".sprite_8").click(function(){
         if($("#articleid").attr("uid")>0){
-            var time = parseInt($(this).children().text());
+            var time = parseInt($("#sprite_8_num").text());
             time++;
             $.ajax({
             type: "POST",

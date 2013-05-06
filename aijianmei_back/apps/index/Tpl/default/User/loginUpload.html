@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+    <html xmlns:wb=“http://open.weibo.com/wb”>
+        <head>
+            <meta charset="utf-8"/>
+			<meta name="baidu_union_verify" content="c43c00cab8564dcf9a25e3a5c666410b">
+			<meta property="qc:admins" content="142030514561121165516375" />
+            <title><?php if(!empty($headertitle)){echo $headertitle;}else{echo '爱健美 - 推广健身文化，传播健康理念';}?></title>
+			<meta name="keywords" content="爱健美，爱健美网，增肌、增重、减肥、瘦身、肌肉锻炼、健身营养、健身补充营养、健身运动、女性健身">
+			<meta name="description" content="爱健美网，你可以在这里制定合适的健身计划， 观看专业的健身锻炼视频，学习专业的健身方法，了解健身运动前后的饮食营养补充，以及认识喜欢健身、运动的朋友哦！">
+			<link rel="stylesheet" href="../Public/css/login.css" />
+			<script type="text/javascript" src="../Public/js/jquery.js"></script>
+			<script type="text/javascript" src="../Public/js/login.js"></script>
+</head>
+<style>
+     #exec_target{display:none;width:0;height:0;}
+     #feedback{width:1200px;margin:0 auto;}
+     #feedback img{float:left;width:300px;height:300px;}    
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#Filedata").change(function(){
+		if($("#Filedata").val() != '') $("#selectForm").submit();
+	});
+	$("#exec_target").load(function(){
+		var data = $(window.frames['exec_target'].document.body).find("textarea").html();
+		if(data != null){
+		$("#feedback").empty();
+			$("#feedback").append(data.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+			$("#feedback").attr("class","face");
+			$("#Filedata").val('');
+			$("#oldimg").remove();
+		}
+	});
+});
+$(document).ready(function(){
+	$("#labup").click(function(){
+		$("#Filedata").click();
+	});
+});
+</script>
+<body>
+<div class="header_logo">
+<a href="index.html"><img src="../Public/images/logo.png" border="0"></a>
+</div>
+<div id="wrap">
+	<div class="container">
+		<h1 class="uploadT"><php>if(!$imgurl){ echo '你还没有上传头像哦，上传一个吧。';}else{echo '';}</php></h1>
+		<div class="uploadArea">
+		<img <php>if($imgurl){echo 'src="'.$imgurl.'"';}else{echo 'src="../Public/images/login/uploadImg.jpg"';}</php> alt="Your Face" class="face" id="oldimg"/>
+			<iframe id="exec_target" name="exec_target"></iframe>
+			<div id="feedback"></div>
+			<form id="selectForm" method="post" action="/index.php?app=index&mod=User&act=ShowImg" target="exec_target" enctype="multipart/form-data">
+	<input type="file" name="Filedata" id="Filedata" accept="image/gif, image/jpeg ,image/jpg" style="display:none;">
+	<label class="localUp" id="labup">本地上传</label>
+</form>
+		</div>
+		
+	</div>
+	<div class="login_bt loginUpload_next"><a href="/index.php?app=index&mod=User&act=setUserInfo" class="loginbutton">下一步</a></div>
+	<div id="fonter">
+		<p class="company_intro">广州加伦信息科技有限公司- 粤ICP备12085654号</p>
+		<a href="http://www.aijianmei.com" class="linktomain">www.aijianmei.com</a>
+	</div>
+</div>
+</body>
+</html>

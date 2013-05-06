@@ -1,0 +1,42 @@
+<include file="../Public/header" />						
+<link rel="stylesheet" href="../Public/css/retrieve.css" />
+<script type='text/javascript'>
+function sendcodeform(){
+	var pasd=$("#password").val();
+	var repasd=$("#repassword").val();
+	if(repasd!=pasd&&pasd.length<6){
+		alert("密码错误");
+		return false;
+	}
+	$("#content").submit();
+}
+</script>
+				<form id="content" class=" clearfix" method="post" action="/index.php?app=index&mod=User&act=updateUinfo">
+					<h1 class="title">找回密码</h1>
+					<div class="form_cm">
+						<ol class="title_1 clearfix">
+							<li><a href="retrieve.html">填写绑定邮箱</a></li>
+							<li><a href="retrieve_2.html">接受密码找回邮件</a></li>
+							<li class="reset"><a href="retrieve_4.html" class="current">重置密码</a></li>
+						</ol>
+						<ul class="submit_cm">
+							<li>
+								<label for="text_1">重置密码：</label>
+								<input type="password" id="text_1" class="text" name="password"/>
+								<span class="prompt_1"></span>
+							</li>
+							<li>
+								<label for="text_2">确认密码：</label>
+								<input type="password" id="text_2" class="text" name="repassword"/>
+								<span class="prompt_2"></span>
+							</li>
+							<li>
+							<input type="hidden" value="{$email}" id="text_2" class="text" name="email"/>
+								<a class="submit" onclick="sendcodeform();">
+									提交
+								</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+<include file="../Public/footer" />

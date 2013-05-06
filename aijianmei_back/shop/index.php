@@ -12,7 +12,7 @@
  * $Author: liubo $
  * $Id: index.php 17217 2011-01-19 06:29:08Z liubo $
 */
-
+@session_start();
 define('IN_ECS', true);
 
 require(dirname(__FILE__) . '/includes/init.php');
@@ -94,7 +94,6 @@ if ($act == 'cat_rec')
 /*------------------------------------------------------ */
 /* 缓存编号 */
 $cache_id = sprintf('%X', crc32($_SESSION['user_rank'] . '-' . $_CFG['lang']));
-
 if (!$smarty->is_cached('index.dwt', $cache_id))
 {
     assign_template();

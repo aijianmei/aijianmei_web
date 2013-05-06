@@ -41,6 +41,21 @@ class AccountAction extends Action
         $data['userInfo']         = $this->pUser->getUserInfo();
         $data['userTag']          = D('UserTag')->getUserTagList($this->mid);
         $data['userFavTag']       = D('UserTag')->getFavTageList($this->mid);
+		$checkMailsql="select email from ai_user where uid='".$this->mid."'";
+		$checkMailArr=M('')->query($checkMailsql);
+		//print_r($checkMailArr);
+		$checkMailType=0;
+		if($checkMailArr[0]['email'])
+		{
+			$checkMailType=1;
+		}
+		if($_GET['esg']=='needemail'&&$checkMailType!=1){
+			$showMessage=1;
+			$esgNotice='尊敬的用户，为了方便联系请填写有效的联系方式';
+			$this->assign('showMessage',$showMessage);
+			$this->assign('esgNotice',$esgNotice);
+		}
+		$this->assign('checkMailType',$checkMailType);
         $this->assign( $data );
         $this->setTitle(L('setting').' - '.L('personal_profile'));
         $this->display();
@@ -50,7 +65,7 @@ class AccountAction extends Action
     function update(){
         S('S_userInfo_'.$_SESSION['userInfo']['uid'],null);
         $nickname = $_REQUEST['nickname'];
-
+		
         //检查禁止注册的用户昵称
         $audit = model('Xdata')->lget('audit');
         if($audit['banuid']==1){
@@ -62,7 +77,22 @@ class AccountAction extends Action
                 }
             }
         }
-
+		if($_REQUEST['email']){
+			$checkSameMailSql="select uid from ai_user where email='".trim($_REQUEST['email'])."' and uid!='".$this->mid."'";
+			$checkSameMail=M('')->query($checkSameMailSql);
+			if(empty($checkSameMail[0]['uid']))
+			{
+				$upSql="UPDATE ai_user SET email = '".$_REQUEST['email']."' WHERE uid ='".$this->mid."'";
+				M('')->query($upSql);
+			}
+			else
+			{
+				exit(json_encode(array('message'=>'邮箱地址已被使用','boolen'=>0)));
+			}
+		}
+		else{
+			exit(json_encode(array('message'=>'请输入邮箱地址','boolen'=>0)));
+		}
         exit( json_encode($this->pUser->upDate( t($_REQUEST['dotype']) )) );
     }
 

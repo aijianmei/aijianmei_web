@@ -6,11 +6,11 @@
 	<link rel="stylesheet" href="css/login.css" />
 </head>
 <body>
-<div id="wrap">
-	<div id="header">
-		<div class="logo">
+		<div class="header_logo">
 			<a href="index.html"><img src="images/logo.png" border="0"></a>
 		</div>
+<div id="wrap">
+	<div id="header">
 		<span type="button" class="returnbutton"></span>
 	</div>
 	<div id="content">
@@ -23,35 +23,46 @@
 				<ul>
 					<li>
 						<input type="text" id="login"class="input login_email" value="">
-						<label class="label_1 forinput">登录邮箱地址</label>
+						<label class="label_1 forinput">昵称</label>
 					</li>
 					<li>
 						<input type="password" id="password" class="input password" value >
-						<label class="label_2 forinput">密码</label>
+						<label class="label_2 forinput">登录邮箱地址</label>
+					</li>
+					<li class="sel_area">
+						<span>所在地区： </span>
+						<select name="area" id="">
+							<option value="provice">广东省</option>
+							<option value="provice">广西省</option>
+						</select>
+						<select name="area" id="">
+							<option value="city">广州</option>
+							<option value="city">汕头</option>
+						</select>
+					</li>
+					<li>
+						<span>性别：</span>
+						<input type="radio" name="sex" id="male"/><label for="male" class="m">男</label>
+						<input type="radio" name="sex" id="female"/><label for="female">女</label>
 					</li>
 				</ul>
-				<div class="choice_1">
-					<div class="lay_choice">
-						<input type="checkbox" name="" checked="checked">
-						<span>添加爱健美为标签</span>
-					</div>
-				</div>
+
 				<div class="choice_2">
 					<div class="lay_choice">
 						<input type="checkbox" class="protect_box" checked="checked">
 						<span>我已阅读协议<a class="linktoprotect">《爱健美服务使用协议》</a></span>
 					</div>
 				</div>
-				<div class="login_bt"><a href="index.html" class="loginbutton">登录</a></div>
+				<div class="login_bt"><a href="loginNext.html" class="loginbutton">下一步</a></div>
 			</form>
 		</div>
 	</div>
 	<div id="fonter">
-		<p class="company_intro">爱健美科技有限公司-京ICP验证030173号</p>
-		<a class="linktomain">www.aijianmei.com</a>
+		<p class="company_intro">广州加伦信息科技有限公司- 粤ICP备12085654号</p>
+		<a href="http://www.aijianmei.com" class="linktomain">www.aijianmei.com</a>
 	</div>
 </div>
-	<script type=text/javascript src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>

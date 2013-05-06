@@ -1,15 +1,8 @@
 <include file="../Public/_header" />
-
-<!-- 编辑器样式文件 -->
-<link href="__PUBLIC__/js/editor/editor/theme/base-min.css" rel="stylesheet"/>
-<!--[if lt IE 8]>
-<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-sprite-min.css" rel="stylesheet"/>
-<![endif]-->
-<!--[if gte IE 8]><!-->
-<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-min-datauri.css" rel="stylesheet"/>
-<!--<![endif]-->
-
-<include file="__THEME__/editor" />
+<script src="ckeditor/ckeditor.js"></script>
+<script src="ckeditor/sample.js"></script>
+<link rel="stylesheet" href="ckeditor/sample.css">
+<script type="text/javascript" src="ckfinder/ckfinder.js"></script>
 
 <div class="so_main">
   <div id="editTpl_div">
@@ -72,10 +65,24 @@
         </dd>
     </dl>
 
-    <dl class="lineD">
+	    <dl class="lineD">
         <dt>内容：</dt>
         <dd>
-            <textarea name="content" id="content" style="width:650px;height:200px">{$article['content']}</textarea>
+			<textarea cols="80" id="content" name="content" rows="10">{$article['content']}</textarea>
+		<script>
+			CKEDITOR.replace( 'content', {
+				fullPage: true,
+				allowedContent: true,
+				extraPlugins: 'wysiwygarea',
+				language : 'zh-cn',
+				filebrowserBrowseUrl : 'ckfinder/ckfinder.html',
+				filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?type=Images',
+				filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?type=Flash',
+				filebrowserUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+				filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+				filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+				});
+	</script>
         </dd>
     </dl>
     

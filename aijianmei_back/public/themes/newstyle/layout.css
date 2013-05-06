@@ -3,16 +3,8 @@
  * Design By zhaojie
  * Ver: thinksns 2.2
  */
- /*TS两栏切换三栏头部样式加载*/
-.logo_holder{width:760px;height:37px;float:left}
-.logo_holder .nav{float:left}
- /*TS两栏切换三栏头部样式加载 End*/
-.no_l{margin-left:0;_width:auto} /*为去左边的200PX加的样式*/
-.no_bg{background:none}
-.user_app a{color:#507FA5}
-.user_app a:hover{text-decoration:none;}
-.user_app .user_follow strong{font-size:12px;font-family:Arial, Helvetica, sans-serif;color:#fff}
-.user_app .userinfo .user_name p{line-height:20px;margin:0;color:#507FA5;width:70px;white-space:nowrap;padding:0 5px 0 0;overflow:hidden;}
+
+
  body {font:12px Arial,Helvetica,sans-serif,Simsun;text-align:center;color:#666}
 .page_home{background:#BEE3FD url(images/body_bg.jpg) no-repeat center top;_padding:0;}
 .wrap{padding:57px 0 0 0;}
@@ -93,55 +85,9 @@ div[class="mainbox_C no_r myop"]{padding:0}
 .footer .menu{float:right}
 .box_templete .templete_enter{position:absolute;right:0;top:0;background:url(images/icon_enter.png) right top no-repeat;display:block;width:30px;height:30px}
 .box_templete .templete_enter:hover{background-position:right -30px}
-.header_bg {z-index:9999;position:fixed;width:100%;min-width:1000px;left:0;top:0;_margin:0 0 20px 0}
-.header {height:40px;text-align:left;margin:0 auto;position:relative}
-.header .logo{float:left;width:150px;}
-.header .logo a{height: 40px;width: 150px;display: block;text-decoration: none}
-.header .logo a:hover{display: block;text-decoration: none}
-/*左导航*/
-.header .nav {padding-left:10px}
-.header .nav-left{padding-left:20px;margin-top:6px}
-.header .nav ul{list-style-type:none;margin: 0px;height:37px}
-.header .nav ul li{font-size:14px;color:#fff;float:left;position:relative;display:block;margin:0 5px 0 0;list-style-type: none;z-index:999}
-.header .nav-left  ul li{font-size:14px;color:#fff;float:left;position:relative;display:block;margin:0 15px 0 0;font-weight:bold;list-style-type: none;z-index:999}
-.header .nav .person a{font-size:12px}
-
-/*右导航*/
-.header .person {padding-left:10px;float:right}
-.header .person{list-style-type:none;margin: 0px;height:37px}
-.header .per-info{list-style-type:none;margin-right: 300px;margin-top:6px;font-weight:bold}
-.header .person li{font-size:12px;color:#fff;float:left;position:relative;display:block;margin:0;list-style-type: none;z-index:9}
 
 
-/*导航链接样式*/
-.header .nav ul li a.application{line-height:16px;padding:12px 8px;_padding:12px 5px;display: block;color:#fff;overflow:hidden;}
-.header .nav ul li a.li-bg{line-height:20px;padding:12px 8px;_padding:12px 5px;display: block;color:#494949;overflow:hidden;font-size:14px}
-.header .person li a.application{line-height:16px;padding:12px 8px;_padding:12px 5px;display: block;color:#fff}
-.header .person li a.li-bg{line-height:19px;padding:12px 8px;_padding:12px 5px;display: block;color:#494949;font-size:14px}
-.header .nav ul li.hover a.application{padding:11px 8px 11px;_padding:12px 5px 10px;color:#143149}
-.header .nav ul li.hover a.application:hover{padding:11px 8px 11px;_padding:12px 5px 10px;text-decoration:none}
-.header .person li.hover a.application{padding:10px 8px 14px;_padding:12px 5px 12px;color:#143149}
-.header .person li.hover a.application:hover{padding:10px 8px 14px;_padding:12px 5px 12px; text-decoration:none}
 
-/*导航下拉共用箭头小图标*/
-.header .nav ul li .ico_arrow,.header .person li .ico_arrow{background:url(images/ico_arrow_1.gif) no-repeat 0 0;*background:url(images/ico_arrow_1.gif) no-repeat 0 -2px;_background:url(images/ico_arrow_1.gif) no-repeat 0 0;width:13px;height:12px;display:inline-block}
-.header .nav ul li .arrow-bg,.header .person li .arrow-bg{background:url(images/ico_arrow_hover.gif) no-repeat 0 0;*background:url(images/ico_arrow_1.gif) no-repeat 0 -2px;_background:url(images/ico_arrow_1.gif) no-repeat 0 0;width:13px;height:12px;display:inline-block}
-.header .nav ul li.hover .ico_arrow,.header .person li.hover .ico_arrow{background-image:url(images/ico_arrow_hover.gif);background-repeat:no-repeat;width:13px;height:12px;display:inline-block}
-.header .nav ul li .ico_new,.header .person li .ico_new{position:absolute;top:-10px;right:0px;z-index:10}
-
-/*导航当前状态样式*/
-
-.header .nav ul li a.fb14,.header .person li a.fb14{color:#ECF9FF;white-space:nowrap;line-height:17px;padding:12px 10px 10px;display: block;*padding:12px 10px 9px}
-.header .nav ul li a.fb14:hover,.header .person li a.fb14:hover{background-color:#143149;text-decoration:none;white-space:nowrap;display: block;padding:12px 10px 10px;*padding:12px 10px 9px;}
-.header .nav ul li a.nav-bg,.header .person li a.nav-bg{color:#494949;white-space:nowrap;line-height:16px;padding:14px 10px 10px;display: block;font-size:14px}
-.header .nav ul li a.info-bg,.header .person li a.info-bg{color:#B85B00;white-space:nowrap;line-height:16px;padding:13px 10px 10px;display: block;font-size:14px;font-weight:bold}
-.header .nav ul li a.nav-bg:hover,.header .person li a.nav-bg:hover{background-color:#dbdbdb;text-decoration:none;white-space:nowrap;display: block;padding:12px 10px 9px}
-.header .nav ul li a.info-bg:hover,.header .person li a.info-bg:hover{background-color:#dbdbdb;text-decoration:none;white-space:nowrap;display: block;padding:12px 10px 9px}
-.header .nav ul li.on,.header .person li.on {background-color:#143149}
-.header .nav ul li.on a.fb14,.header .person li.on a.fb14{color:#fff}
-.header .nav ul li.hover a.fb14,.header .person li.hover a.fb14{color:#193E5C}
-.header .person li a.username{width:60px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;height:40px;line-height:40px;padding:0 10px}
-.header .person li a.username:hover{padding:0 10px;}
 
 /*导航搜索区*/
 .soso{float:right;height:24px;border:1px solid #2F769B;background-color:#fff;width:199px;position:relative;top:5px;box-shadow: 0 1px 0 0 #F0F0F0 inset}
@@ -151,13 +97,6 @@ div[class="mainbox_C no_r myop"]{padding:0}
 .so_text{width:173px;*width:170px;border:0 none;background-color:#fff;color:#999;-moz-border-radius: 1px;-khtml-border-radius: 1px;-webkit-border-radius: 1px;border-radius: 1px;margin: 3px;outline: 0 none}
 .line-text{border:0;height:20px;width:180px}
 
-/*新消息列表*/
-.header .person li.hover .dropmenu .message{color:#999;clear:both;border-bottom:1px solid #ccc;width:170px;padding:0;margin:0;}
-.header .person li.hover .dropmenu-right .message{color:#999;clear:both;border-bottom:1px solid #ccc;width:170px;padding:0}
-.header .person li.hover .dropmenu .message_list_new{border-bottom:1px solid #ccc;overflow:hidden;*zoom:1;*width:170px}
-.header .person li.hover .dropmenu .message_list_new li{color: #666;padding: 0 10px;float:none;overflow:hidden;zoom:1;}
-.header .person li.hover .dropmenu .message_list_new li a{display: inline;padding: 0 7px;color:#3B5998;}
-.header .person li.hover .dropmenu .message_list_new li a:hover{background:none;text-decoration:underline;display:inline}
 
 
 /*.header .person li.hover .dropmenu-right.message_list_new{border-bottom:1px solid #ccc;overflow:hidden;*zoom:1;*width:170px}
@@ -257,7 +196,7 @@ div[class="mainbox_C no_r myop"]{padding:0}
 .feeds_sift_hover, .feeds_sift{position:relative;display:inline-block;z-index:9;_padding:8px 0;_display:block;_float:left;color:#666}
 .feeds_sift .feeds_sift_box{display: none;position:absolute;left:0;top: 20px}
 .feeds_sift_hover .feeds_sift_box{display:block;position:absolute;left:0;white-space: nowrap; top: 24px}
-.more{border-color:#666 transparent transparent;border-style:solid dashed dashed;border-width: 4px 4px 0;display: inline-block;font-size: 0;height:0;margin:2px;left:3px;   line-height: 0;width: 0;cursor:pointer;}	
+
 .feeds_sift a.ico,.feeds_sift_hover a.ico,.feeds_sift_hover a.ico:hover{background: url(images/feeds_sift_ico.gif) no-repeat center center;width:13px;height:13px;overflow:hidden;display:block;padding:3px;}
 .feeds_sift_hover a.ico,.feeds_sift_hover a.ico:hover{background: url(images/feeds_sift_ico.gif) no-repeat center center;width:13px;height:13px;overflow:hidden;display:block;padding:2px;border:1px solid #ccc}
 .feeds_sift_box{position: absolute;border:1px solid #CCC;background-color:#FFF;padding:2px;top:30px}
@@ -489,7 +428,7 @@ a.faceicon1:link, a.faceicon1:visited{display:block;float:left;height:17px;margi
 .feed_c_btm a:link,.feed_c_btm a:visited{color:#333}
 .feed_list .feed_quote{margin:7px 5px 10px 0;position:relative;*z-index:9}
 .feed_quote .list_shareFile{width:420px;}
-.feed_quote a:hover{text-decoration:none;}
+
 .feed_list .feed_quote .q_ico_arrow{background-position: -80px -4px;height:10px;width:19px;left:53px;overflow:hidden;position:absolute;top:-9px}
 .feed_list .feed_quote .q_ico_arrow2{background-position: -103px -4px;height:8px;width:15px;right:10px;overflow:hidden;position:absolute;top:-7px}
 .feed_list .feed_quote .q_tit{_height:none;height: 5px;background-position:right 0;overflow:hidden;display:none}

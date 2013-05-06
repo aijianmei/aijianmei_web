@@ -111,6 +111,7 @@ if ($action == 'default')
 /* 显示会员注册界面 */
 if ($action == 'register')
 {
+die("403");
     if ((!isset($back_act)||empty($back_act)) && isset($GLOBALS['_SERVER']['HTTP_REFERER']))
     {
         $back_act = strpos($GLOBALS['_SERVER']['HTTP_REFERER'], 'user.php') ? './index.php' : $GLOBALS['_SERVER']['HTTP_REFERER'];
@@ -150,7 +151,6 @@ elseif ($action == 'act_register')
     else
     {
         include_once(ROOT_PATH . 'includes/lib_passport.php');
-		include_once(ROOT_PATH . 'includes/lib_aijianmei.php');
 
         $username = isset($_POST['username']) ? trim($_POST['username']) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
@@ -204,8 +204,7 @@ elseif ($action == 'act_register')
         }
 
         if (register($username, $password, $email, $other) !== false)
-        {			
-			
+        {
             /*把新注册用户的扩展信息插入数据库*/
             $sql = 'SELECT id FROM ' . $ecs->table('reg_fields') . ' WHERE type = 0 AND display = 1 ORDER BY dis_order, id';   //读出所有自定义扩展字段的id
             $fields_arr = $db->getAll($sql);
@@ -239,10 +238,6 @@ elseif ($action == 'act_register')
             {
                 send_regiter_hash($_SESSION['user_id']);
             }
-			
-			/*把注册用户信息插入爱健美主站*/
-			aijianmei_register($username, $password, $email, $other);
-			
             $ucdata = empty($user->ucdata)? "" : $user->ucdata;
             show_message(sprintf($_LANG['register_success'], $username . $ucdata), array($_LANG['back_up_page'], $_LANG['profile_lnk']), array($back_act, 'user.php'), 'info');
         }
@@ -277,12 +272,11 @@ elseif ($action == 'validate_email')
 elseif ($action == 'is_registered')
 {
     include_once(ROOT_PATH . 'includes/lib_passport.php');
-	include_once(ROOT_PATH . 'includes/lib_aijianmei.php');
 
     $username = trim($_GET['username']);
     $username = json_str_iconv($username);
 
-    if ($user->check_user($username) || admin_registered($username) || aijianmei_registered($username))
+    if ($user->check_user($username) || admin_registered($username))
     {
         echo 'false';
     }
@@ -295,11 +289,8 @@ elseif ($action == 'is_registered')
 /* 验证用户邮箱地址是否被注册 */
 elseif($action == 'check_email')
 {
-	include_once(ROOT_PATH . 'includes/lib_passport.php');
-	include_once(ROOT_PATH . 'includes/lib_aijianmei.php');
-	
     $email = trim($_GET['email']);
-    if ($user->check_email($email) || aijianmei_email($email))
+    if ($user->check_email($email))
     {
         echo 'false';
     }
@@ -311,6 +302,7 @@ elseif($action == 'check_email')
 /* 用户登录界面 */
 elseif ($action == 'login')
 {
+die("403");
     if (empty($back_act))
     {
         if (empty($back_act) && isset($GLOBALS['_SERVER']['HTTP_REFERER']))
@@ -343,7 +335,6 @@ elseif ($action == 'act_login')
     $password = isset($_POST['password']) ? trim($_POST['password']) : '';
     $back_act = isset($_POST['back_act']) ? trim($_POST['back_act']) : '';
 
-
     $captcha = intval($_CFG['captcha']);
     if (($captcha & CAPTCHA_LOGIN) && (!($captcha & CAPTCHA_LOGIN_FAIL) || (($captcha & CAPTCHA_LOGIN_FAIL) && $_SESSION['login_fail'] > 2)) && gd_version() > 0)
     {
@@ -351,7 +342,6 @@ elseif ($action == 'act_login')
         {
             show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
         }
-
         /* 检查验证码 */
         include_once('includes/cls_captcha.php');
 
@@ -362,28 +352,15 @@ elseif ($action == 'act_login')
             show_message($_LANG['invalid_captcha'], $_LANG['relogin_lnk'], 'user.php', 'error');
         }
     }
-	
-	include_once(ROOT_PATH . 'includes/lib_passport.php');
-	include_once(ROOT_PATH.'/includes/lib_aijianmei.php');
+
     if ($user->login($username, $password,isset($_POST['remember'])))
     {
-		// 登录爱健美主站
-		aijianmei_login($username, $password);
-		
         update_user_info();
         recalculate_price();
 
         $ucdata = isset($user->ucdata)? $user->ucdata : '';
         show_message($_LANG['login_success'] . $ucdata , array($_LANG['back_up_page'], $_LANG['profile_lnk']), array($back_act,'user.php'), 'info');
-		
-    }elseif(can_login_aijianmei($username, $password)) {
-		$email = get_aijianmei_email($username);
-		register($username, $password, $email);
-		aijianmei_login($username, $password);
-		
-		$ucdata = isset($user->ucdata)? $user->ucdata : '';
-        show_message($_LANG['login_success'] . $ucdata , array($_LANG['back_up_page'], $_LANG['profile_lnk']), array($back_act,'user.php'), 'info');
-	}
+    }
     else
     {
         $_SESSION['login_fail'] ++ ;
@@ -452,18 +429,11 @@ elseif ($action == 'signin')
 /* 退出会员中心 */
 elseif ($action == 'logout')
 {
-	include_once(ROOT_PATH.'/includes/lib_aijianmei.php');
-	
     if ((!isset($back_act)|| empty($back_act)) && isset($GLOBALS['_SERVER']['HTTP_REFERER']))
     {
         $back_act = strpos($GLOBALS['_SERVER']['HTTP_REFERER'], 'user.php') ? './index.php' : $GLOBALS['_SERVER']['HTTP_REFERER'];
     }
-
     $user->logout();
-	
-	/* 退出爱健美主站 */
-	aijianmei_logout();
-	
     $ucdata = empty($user->ucdata)? "" : $user->ucdata;
     show_message($_LANG['logout'] . $ucdata, array($_LANG['back_up_page'], $_LANG['back_home_lnk']), array($back_act, 'index.php'), 'info');
 }
@@ -784,11 +754,11 @@ elseif ($action == 'act_edit_password')
 
     if (($user_info && (!empty($code) && md5($user_info['user_id'] . $_CFG['hash_code'] . $user_info['reg_time']) == $code)) || ($_SESSION['user_id']>0 && $_SESSION['user_id'] == $user_id && $user->check_user($_SESSION['user_name'], $old_password)))
     {
-		
+        
         if ($user->edit_user(array('username'=> (empty($code) ? $_SESSION['user_name'] : $user_info['user_name']), 'old_password'=>$old_password, 'password'=>$new_password), empty($code) ? 0 : 1))
         {
-			$sql="UPDATE ".$ecs->table('users'). "SET `ec_salt`='0' WHERE user_id= '".$user_id."'";
-			$db->query($sql);
+            $sql="UPDATE ".$ecs->table('users'). "SET `ec_salt`='0' WHERE user_id= '".$user_id."'";
+            $db->query($sql);
             $user->logout();
             show_message($_LANG['edit_password_success'], $_LANG['relogin_lnk'], 'user.php?act=login', 'info');
         }

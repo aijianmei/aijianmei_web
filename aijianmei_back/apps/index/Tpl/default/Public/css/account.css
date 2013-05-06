@@ -1,14 +1,13 @@
-#wrap{
-	width:980px;
-	margin:0 auto;
-}
 /***********************header开始*************************/
-	#header{position: relative;
-			height: 120px;}
-		.logo{margin: 0 auto;
-			width: 241px;
-			height: 120px;}
-		.logo a{outline: 0px;}
+		.header_logo{
+		 	background: url("../images/dh_01.jpg") 0 0 transparent;
+		    height: 79px;
+		    text-align: center;
+		}
+		.header_logo a{
+			display:inline-block;
+			outline: 0px;
+		}
 		.returnbutton{
 			position: absolute;
 			display: inline-block;
@@ -22,7 +21,10 @@
 			background: url(../images/wm1.png) 0px -280px no-repeat;
 		}
 /***********************content开始*************************/
-	#content{background: url(../images/border.png) no-repeat}
+	#content{
+		width:980px;
+		margin:0 auto;
+	}
 		.content_tip{
 			padding-top: 25px;
 			text-align: center;

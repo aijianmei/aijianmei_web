@@ -25,12 +25,21 @@
                   <form action="{:U('home/Account/update')}" method="post" dotype="ajax" class="form_validator" type="base" id="regform" oncomplete="false">
                     <input type="hidden" name="dotype" value="upbase">
                     <dl class="set_basic">
+					<php>if($showMessage==1){</php>
+						<p style="margin-left:80px;color:red;"><php>echo $esgNotice</php></p>
+						<php>}</php>
                         <dd>
                             <label>昵称：</label>
                             <div class="left">
                               <div class="left mr5"><input name="nickname" maxLength="110" type="text" class="text" value="{$userInfo.detail.uname}" /><br />
                               2-10位个中英文、数字、下划线和中划线<br />
-                              修改昵称会造成已发布微博中@你的昵称失效
+                              </div>
+                            </div>
+                        </dd>
+						<dd <php>if($checkMailType!=0){</php>style="display:none;"<php>}</php>>
+                            <label>联系邮箱：</label>
+                            <div class="left">
+                              <div class="left mr5"><input name="email" maxLength="110" type="text" class="text" style="width:160px;" value="{$userInfo.detail.email}" /><br />
                               </div>
                             </div>
                         </dd>

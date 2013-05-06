@@ -250,9 +250,6 @@ button{
 			border:1px solid transparent;
 			
 		}
-		.more a:hover{
-			border-color:#ccc;
-		}
 		.more .on{
 			background:#fff;
 			border:1px solid #ccc;
@@ -266,6 +263,7 @@ button{
 			position: absolute;
 			right: 56px;
 			border:1px solid #ccc;
+			border-top:0;
 			top:20px;
 			z-index:100;
 			display:none;

@@ -32,15 +32,12 @@
                         <h1 class="public_title">最精彩的营养文章</h1>
                         <div class="part_content">
                             <div class="tr_top clearfix">
-                            <a href="/index.php?app=index&mod=Index&act=articleDetail&id=41
-                            " class="store.html"><img src="../Public/images/nutri/01_1.jpg" alt="no" class="supple_pic" /></a>
+                            <a href="/index-Index-articleDetail-41.html" class="store.html"><img src="../Public/images/nutri/01_1.jpg" alt="no" class="supple_pic" /></a>
                             <div class="lay_detail">
-                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id=41
-                                    " class="detail"  data-original-title="内容">初学者运动前的营养指导</a>
+                                <a href="/index-Index-articleDetail-41.html" class="detail"  data-original-title="内容">初学者运动前的营养指导</a>
                                 <div class="title_tip"><div class="angle"></div></div>
                                 <p class="read_content">一个健康好看的身型不是从你进入健身房那一刻才开始形成的。在运动前摄取合适的营养可以帮助你最大化地获得效果。下面我会教你如何在健身前吸收营养，让你甩掉脂肪和增加肌肉。</p>
-                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id=41
-                                    " class="read_art">点击阅读</a>
+                                <a href="/index-Index-articleDetail-41.html" class="read_art">点击阅读</a>
                             </div>
                         </div>
                         <ul class="clearfix">
@@ -77,19 +74,19 @@
                     <div class="lay_top clearfix">
                         <h1 class="public_title">最佳营养文章</h1>
                         <div class="new_video">
-                            <ul class="lay_new_video clearfix">
-                            <php>foreach($hotArticles as $a) {</php>
-                                <li class="tr_classify">
-                                    <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-                                    <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
-                                    <p class="summary">{$a['brief']}
-                                    </p>
-                                    <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
-                                    <span class="comment_time">评论: <span>{$a['recomnums']}</span></span>
-                                </li>
-                            <php>}</php>
-                            </ul>
-                        </div>
+                        <ul class="lay_new_video clearfix">
+                        <php>foreach($hotArticles as $a) {</php>
+                            <li class="tr_classify">
+                                <a href="/index-Index-articleDetail-{$a['id']}.html" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+                                <a href="/index-Index-articleDetail-{$a['id']}.html" class="plan_article_tl">{$a['title']}</a>
+                                <p class="summary">{$a['brief']}
+                                </p>
+                                <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
+                                <span class="comment_time">评论: <span>{$a['recomnums']}</span></span>
+                            </li>
+                        <php>}</php>
+                        </ul>
+                    </div>
                     </div>
                 </div>
 
@@ -101,9 +98,9 @@
                         <ul class="lay_new_video clearfix">
                         <php>foreach($lastArticles as $a) {</php>
                             <li class="tr_classify">
-                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter">
+                                <a href="/index-Index-articleDetail-{$a['id']}.html" class="show_enter">
                                     <span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+                                <a href="/index-Index-articleDetail-{$a['id']}.html" class="plan_article_tl">{$a['title']}</a>
                                 <p class="summary">{$a['brief']}
                                 </p>
                                 <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>

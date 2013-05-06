@@ -80,6 +80,6 @@ p a{color:#006acd; text-decoration:underline;}
 <!--{/if}-->
 <!--友情链接 end-->
 <div class="blank"></div>
-<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+<div id="lower_footer"><span>广州加伦信息科技有限公司- 粤ICP备12085654号</span><a href="/index.php?app=index">www.aijianmei.com</a></div>
 </body>
 </html>

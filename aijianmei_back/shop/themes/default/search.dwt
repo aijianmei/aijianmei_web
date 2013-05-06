@@ -15,6 +15,49 @@
 </head>
 <body>
 <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+<div class="shop_search clearfix">
+<div id="search"  class="clearfix">
+  <div class="keys f_l">
+   <script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+            alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+    {if $searchkeywords}
+   {$lang.hot_search} ：
+   {foreach from=$searchkeywords item=val}
+   <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+   {/foreach}
+   {/if}
+  </div>
+  <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="f_r"  style="_position:relative; top:5px;">
+   <select name="category" id="category" class="B_input">
+      <option value="0">{$lang.all_category}</option>
+      {$category_list}
+    </select>
+   <input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}" class="B_input" style="width:110px;"/>
+   <input name="imageField" type="submit" value="" class="go" style="cursor:pointer;" />
+   <a href="search.php?act=advanced_search">{$lang.advanced_search}</a>
+   </form>
+</div>
+</div>
+<!--search end-->
+
+
 <!--当前位置 start-->
 <div class="block box">
  <div id="ur_here">
@@ -351,6 +394,7 @@
 <!--{/if}-->
 <!--友情链接 end-->
 <div class="blank"></div>
-<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+<div id="lower_footer"><span>广州加伦信息科技有限公司- 粤ICP备12085654号</span><a href="/index.php?app=index">www.aijianmei.com</a></div>
+</div>
 </body>
 </html>

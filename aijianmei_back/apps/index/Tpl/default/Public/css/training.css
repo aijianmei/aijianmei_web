@@ -238,33 +238,6 @@
 	#footer{background: url(../images/training/workout_54.jpg)}
 
 
-/*添加返回顶部按钮*/
-.goTopBtn {
-	position:fixed;
-	_position:absolute;
-	display:none;
-	text-align:center;
-	line-height:30px;
-	width:60px;
-	bottom:35px;
-	height:60px;
-	font-size:12px;
-	cursor:pointer;
-	background: url(../images/01.png) no-repeat;
-}
-.goTopBtn:hover{
-	background: url(../images/go1.png) no-repeat;
-}
-.goTopBtn a{
-	/*display: block;
-	line-height: 18px;
-	width: 20px;
-	padding: 6px 0 0 4px;
-	font-size: 14px;
-	font-weight: bold;
-	color: white;*/
-}
-
 
 
 /*以上是锻炼页面跟子页面的共同部分，以下是锻炼子页面（training_1）的css部分*/
@@ -359,7 +332,6 @@ margin-bottom: 20px;
 		}
 /******* 视频 *************/
 	.video{
-		display:inline-block;
 		margin:0 15px;
 	}
 	.all .all_ul{
@@ -377,9 +349,8 @@ margin-bottom: 20px;
 			font-size: 14px;
 		}
 		.opt_length{
-			float: left;
+			display: inline-block;
 			width: 530px;
-			max-height: 100px
 		}
 		.select a {
 			color: #21aec3;

@@ -12,11 +12,20 @@
  * $Author: liubo $
  * $Id: init.php 17217 2011-01-19 06:29:08Z liubo $
 */
-
+@session_start();
 if (!defined('IN_ECS'))
 {
     die('Hacking attempt');
 }
+
+$aijianmeiUserInfo=null;
+if(@$_SESSION['mid']>0&&!empty($_SESSION['userInfo'])){
+    $aijianmeiUserInfo=$_SESSION;
+}
+else{
+    $_SESSION=NULL;
+}
+
 
 error_reporting(E_ALL);
 
@@ -139,7 +148,6 @@ if (is_spider())
              $user = & init_users();
         }
     }
-	
     $_SESSION = array();
     $_SESSION['user_id']     = 0;
     $_SESSION['user_name']   = '';
@@ -148,37 +156,10 @@ if (is_spider())
     $_SESSION['discount']    = 1.00;
 }
 
-
-// 主站已登录
-session_start();
-//print_r($_SESSION);
-if(isset($_SESSION['user_id']) && $_SESSION['user_id']>0) {
-    if (!defined('INIT_NO_USERS')) {
-        define('INIT_NO_USERS', true);
-    }
-
-
-    /* 初始化session */
-    /*include(ROOT_PATH . 'includes/cls_session.php');
-    
-
-    $sess = new cls_session($db, $ecs->table('sessions'), $ecs->table('sessions_data'));
-
-    define('SESS_ID', $sess->get_session_id());
-
-
-    $sess->update_session(array('admin_id'=>0, 'user_id'=>$_SESSION['user_id'], 'user_name'=>$_SESSION['user_name'], 'user_rank'=>0, 'discount'=>0, 'email'=>0));
-    */
-    $user = & init_users();
-
-}
-
-
 if (!defined('INIT_NO_USERS'))
 {
     /* 初始化session */
     include(ROOT_PATH . 'includes/cls_session.php');
-	
 
     $sess = new cls_session($db, $ecs->table('sessions'), $ecs->table('sessions_data'));
 
@@ -228,10 +209,15 @@ if (!defined('INIT_NO_SMARTY'))
 
 if (!defined('INIT_NO_USERS'))
 {
-	
-    /* 会员信息 */
-    $user =& init_users();
 
+    /* 会员信息 */
+    if(!empty($aijianmeiUserInfo)){
+        $_SESSION=array_merge($_SESSION,$aijianmeiUserInfo);
+    }
+    
+    $aijianmeiUserInfo=null;
+    $user =& init_users();
+    
     if (!isset($_SESSION['user_id']))
     {
         /* 获取投放站点的名称 */
@@ -308,6 +294,7 @@ if (!defined('INIT_NO_USERS'))
     {
         $smarty->assign('ecs_session', $_SESSION);
     }
+    //print_r($_SESSION);
 }
 
 if ((DEBUG_MODE & 1) == 1)
@@ -323,6 +310,27 @@ if ((DEBUG_MODE & 4) == 4)
     include(ROOT_PATH . 'includes/lib.debug.php');
 }
 
+//print_r($_SESSION);
+$_SESSION['refer_url'] = '';
+$_SESSION['shoprefer_url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+define('SITE_PATH','http://www.kon_aijianmei.com');
+define('SITE_URL','http://www.kon_aijianmei.com');
+define('THEME_URL','http://www.kon_aijianmei.com/public');
+//$sql="select * from ai";
+//$res = $GLOBALS['db']->query($sql);
+if($_SESSION['mid']>0){
+	$_SESSION['user_img']=getUserFace($_SESSION['mid'],'s');
+}
+//print_r($_SESSION);
+if (isset($smarty))
+{
+$smarty->assign('aijianmeiurl','http://www.kon_aijianmei.com');
+define('_BUTTOMROOT',dirname(dirname(dirname(__FILE__))));
+$_buttomTagInfo=unserialize(include(_BUTTOMROOT."/buttomTagInfo.php"));
+$smarty->assign('_buttomTagInfo',$_buttomTagInfo);
+$smarty->assign('ecs_session', $_SESSION);
+}
+//print_r($_SESSION);
 /* 判断是否支持 Gzip 模式 */
 if (!defined('INIT_NO_SMARTY') && gzip_enabled())
 {
@@ -332,5 +340,33 @@ else
 {
     ob_start();
 }
+
+function getUserFace($uid,$size){
+	$size = ($size)?$size:'m';
+	if($size=='m'){
+		$type = 'middle';
+	}elseif ($size=='s'){
+		$type = 'small';
+	}else{
+		$type = 'big';
+	}
+		$apiImg = $GLOBALS['db']->getAll("select profileImageUrl from ai_others where uid='".$uid."'");
+        if($apiImg){
+            $userface=$apiImg[0]['profileImageUrl'];
+            return $userface;
+        }
+        
+	$uid_to_path = '/' . $uid;
+	//$userface = SITE_PATH.'/data/uploads/avatar' . $uid_to_path . '/' . $type. '.jpg';
+
+	$userface =dirname(dirname(dirname(__FILE__))).'/data/uploads/avatar' . $uid_to_path . '/' . $type. '.jpg';
+	if(is_file($userface)){
+		return SITE_URL.'/data/uploads/avatar' . $uid_to_path . '/' . $type . '.jpg';
+	}else{
+		return THEME_URL."/images/user_pic_{$type}.gif";
+	}
+}
+
+
 
 ?>

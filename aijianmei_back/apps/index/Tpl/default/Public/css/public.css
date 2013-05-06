@@ -33,10 +33,11 @@ button{
 .body{
 	display:none;
 	position:fixed;
+	top: 0;
 	left:0;
 	width:100%;
 	height:100%;
-	z-index:99;	
+	z-index:1002;	
 	opacity: 0.7;
 	filter:alpha(opacity=70);
 	background: black;
@@ -44,10 +45,11 @@ button{
 /******** 登陆 *******/
 .sheet{
 	position:fixed;	
-	z-index:100;
+	z-index:1003;
 	width:100%;
 	margin-top:120px;
 	display:none;
+	*margin-left:150px;
 }
 /********* 直接登陆爱健美 *******/
 	.sheet .log{
@@ -172,9 +174,15 @@ button{
 		.accounts .cop1{
 			background:url(../images/login.png) no-repeat 0 -167px;
 		}
+		.accounts .copsina{
+			background:url(../images/sina_login.png);
+		}
 		/*.accounts .cop1:hover{
 			background:url(../images/login.png) no-repeat 0 -41px;
 		}*/
+		.accounts .copqq{
+			background:url(../images/Connect_logo_1.png);
+		}
 		.accounts .cop2{
 			background:url(../images/login.png) no-repeat 0 -41px;
 		}
@@ -203,6 +211,7 @@ button{
 .wrapper{
 	width:980px;
 	margin:0 auto;
+	padding-top: 10px;
 	background:#f7f7f7;
 	box-shadow: 0 0 5px 0 silver;
 }
@@ -233,112 +242,121 @@ button{
 		vertical-align: middle;
 	}
 /******** Header **********/
-	#header{
-		height:125px;
-		position:relative;
-	}
-	/***** Top navigation *****/
-		.top{
-			position:absolute;
-			right:130px;
+	/*top 登录 注册--------------------*/
+		.most_top{
+			width: 960px;
+			margin:10px auto;
+			height:30px;
 		}
-		.top li{
-			position: relative;
-			float:left;
-			margin:2px;
+		.top_ms{
+			float: right;
+			height: 30px;
+			min-width: 103px;
+			background: #21ace3;
+			color: white;
 		}
-		#my_cart{
-			position: relative;
-
+		.top_ms li{
+			float: left;
+			line-height: 30px;
 		}
-		.cart{
-			position: absolute;
-			width: 30px;
-			height: 14px;
-			left: -30px;
+		.top_ms a{
 			display: inline-block;
-			background: url("../images/cart0.png") no-repeat;
+			min-width: 48px;
+			padding: 0 5px;
+			text-align: center;
+			color: white;
 		}
-		#login{
-			cursor:pointer;
+		.after_ms{
+			float: right;
+			height: 28px;
+			border:1px solid #c4c4c4;
+			background: url(../images/dh_03.jpg) repeat-x;
+		}
+		.after_ms > li{
+			position: relative;
+			float: left;
+			padding: 2px 10px 2px 2px;
+			height: 24px;
+			line-height: 24px;
+			border-right: 1px solid #c4c4c3;
+			text-align: center;
+		}
+		.person_massage img{
+			display: inline;
+			width: 25px;
+			height: 25px;
+		}
+		.person_massage span{
+			display: inline;
+			min-width: 30px;
+			vertical-align: top;
 		}
 		.more a{
-			display:inline-block;
-			width:45px;
-			padding-bottom:3px;
-			border:1px solid transparent;
-			
+			display: inline-block;
+			width: 45px;
 		}
-		.more a:hover{
-			border-color:#ccc;
-		}
-		.more a:hover .triangle{
-			-webkit-transform: translate(0,0) rotate(180deg);
-		}
-		.more .on{
-			position: relative;
-			z-index: 101;
-			background:#fff;
-			border:1px solid #ccc;
-			border-bottom:none;
-		}
-		.on .triangle{
-			border-color:#BCBCBC #fff #fff #fff;
-		}
-		.top .message, .top .account{
+		.more .account{
 			background: white;
 			position: absolute;
-			right: 60px;
-			border:1px solid #ccc;
-			top:18px;
-			z-index:100;
-			display:none;
+			right: -1px;
+			border: 1px solid #ccc;
+			top: 28px;
+			z-index: 1004;
+			display: none;
 		}
-		.top .account{
-			right:0;
+		.account li{
+			float: none;
+			width: 80px;
+			height: 20px;
+			margin: 5px;
 		}
-		.top .message li ,.top .account li{
-			float:none;
-			width:80px;
-			height:20px;
-			margin:5px;
+		.account a{
+			display: block;
+			line-height: 20px;
+			width: 80px;
+			font-size: 12px;
 		}
-		.top .message li a,.top .account li a{
-			display:block;
-			line-height:20px;
-			width:80px;
-			font-size:12px;
+		.after_ms .special_buy{
+			border-right:none;
 		}
-		.top .message li a:hover,.top .account li a:hover{
-			background:#21ace3;
-			color:white;
+		.car_buy{
+			display: inline-block;
+			padding-left: 34px;
+			line-height: 17px;
+			background: url(../images/car_buy.png) no-repeat;
 		}
-	/******** 顶部搜索框 ******/	
-		form.search fieldset{ 
-			position:absolute; 
-			right:0px; 
-			top:0px; 
-			border:0;
-			margin: 3px 20px 2px 0;
-		}
-			.search label,.search legend{ 
-				display:none;
-				border:0
-			}
-			.search input{ 
-				float:left; 
-				width:88px; 
-				height:17px; 
-				background:url(../images/input.jpg)no-repeat;
-			}
-			.search button{ 
-				float:left; 
-				width:23px; 
-				height:17px; 
-				background:url(../images/search.jpg) no-repeat;
-			}				
-		
-	/******* Logo ******/
+/*outside 2013/4/15*/
+	div.p_fixed{
+		position: fixed;
+		top: 0;
+		left:0;
+		z-index: 1200;
+		height: 78px;
+		top:0;
+		left: 0;
+		z-index: 1000;
+	}
+	.header{
+		position: relative;
+		left: 0;
+		z-index: 1001;
+		height: 79px;
+		width: 100%;
+		background: url(../images/dh_01.jpg) repeat-x;
+	}
+	.h_bg{
+		margin: 0 auto;
+		width: 960px;
+		height: 72px;
+		text-align: center;
+		line-height: 72px;
+	}
+	.logo_1{
+		float: left;
+		width: 265px;
+		text-indent: -999em;
+		background: url(../images/wm3.png) 0 -651px no-repeat;
+	}
 		.logo{
 			width:230px;
 			margin: 30px 0 0 20px;
@@ -348,63 +366,56 @@ button{
 				display:block;
 			}
 	/******** Navigation ************/
-		#nav{
-			width:685px;
-			height:36px;
-			background:url(../images/nav.png) no-repeat ;
-			float:right;
-			margin:60px 30px 0 0;
-			_margin-right:15px;
+		.nav{
+			float: left;
+			width: 695px;
 		}
-		#nav li{
-			width:85px;
-			height:36px;
-			float:left;
-			text-align:center;
+		.nav li{
+			position: relative;
+			float: left;
+			height: 72px;
+			margin:0 1px;
 		}
-		#nav a{
-			color:#fff;
-			font-size:16px;
-			display:inline-block;
-			_display:block;
-			line-height:36px;
-			text-align:center;
-			width:85px;
-		}
-		#nav a:hover{
-			background:#428AB2;
-		}
-	/******** "首页"样式 **********/
-		#nav .home a:hover{
-			background:none;
-		}
-		.home span,.store span{
-			display:inline-block;
-			width:85px;
-			height:36px;
-			margin-left: 10px;
-		}
-		
-		#nav .home{
-			border-radius: 4px 0 0 4px;
-			width:90px;
-		}
-		#nav .home a span{
-			background:url(../images/home.png) no-repeat left;
-		}
-		#nav .store span{
-			background:url(../images/store.png) no-repeat left;
-
-		}
-	/********** 显示当前位置 ***********/
-		.position{
+		.home,.store{
 			display: inline-block;
-			position: absolute;
-			right: 31px;
-			bottom: 9px;
-			color: #989898;
+			padding-left: 34px;
+			margin-top: 18px;
+			height: 54px;
+			line-height: 37px;
 		}
-		
+		.home{
+			background:url(../images/home.png) no-repeat;
+		}
+		.store{
+			background:url(../images/store.png) no-repeat;
+		}
+		.nav a{
+			display: inline-block;
+			padding: 0 8px;
+			color: white;
+			font-size: 23px;
+		}
+		.nav_current a{
+			background: url(../images/dh_02.jpg) repeat-x;
+		}
+		.nav_current .ag_current{
+			position: absolute;
+			bottom: 0;
+			left: 46%;
+			display: inline-block;
+			width: 0;
+			height: 0;
+			line-height: 0;
+			font-size: 0;
+			overflow: hidden;
+			border-style: solid;
+			border-width: 5px;
+			border-color: transparent transparent white transparent;
+		}
+		.nav li:hover a{
+			background: url(../images/dh_02.jpg) repeat-x;
+		}
+	
 /*********** Banner ***********/		
 		#banner{
 			margin:0 auto;
@@ -455,11 +466,6 @@ button{
 					font-size: 15px;
 					color: white;
 					margin-right: 16px;
-				}
-				.massage .png{
-					position: absolute;
-					right: 18px;
-					bottom: 25px;
 				}
 		.choice_area{
 			position:relative;
@@ -547,6 +553,9 @@ button{
 			#footer .login{
 				margin:40px 0 0 0;
 			}
+			#footer .Login{
+				margin:40px 0 0 0;
+			}
 				.sina{
 					background:url(../images/icon_result.png) 0 -78px no-repeat;
 				}
@@ -556,7 +565,7 @@ button{
 				.netease{
 					background:url(../images/icon_result.png) 0 -52px no-repeat;
 				}
-				#footer  .login .public{
+				#footer  .Login .public{
 					background:url(../images/icon_result.png) 0 -104px no-repeat;
 				}
 				.qZone{
@@ -587,14 +596,30 @@ button{
 }
 /****** 翻页 *****/
 .page{
+	height: 24px;
+	line-height: 24px;
+	margin: 10px auto;
+	text-align: center;
+}
+.concrete_choice span{
+	display:inline-block;
+	margin:0 -1px;
+	min-width:20px;
+	height:20px;
+	border: 2px solid transparent;
+	line-height: 20px;
+	color:#333;
+	cursor: pointer;
+}
+.page{
 	width: 450px;
-	margin:10px auto;
+	margin: 10px auto;
 	text-align: center;
 }
 .page a{
 	display:inline-block;
 	margin:0 2px;
-	min-width:20px;
+	width:20px;
 	height:20px;
 	border: 2px solid rgb(236, 236, 236);
 	line-height: 20px;
@@ -607,13 +632,31 @@ button{
 	background:#21ace3;
 	color:white;
 }
+
+
+
 .concrete_choice{
-	float:left;
+	display: inline-block;
+	vertical-align: top;
+}
+.concrete_choice span{
+	width:50px;
+}
+.page .current_page{
+	background:#21ace3;
+	color:white;
+	border: 2px solid transparent;
+	cursor: default;
+}
+.page a:hover,.concrete_choice span:hover{
+	border-color: #21ace3;
+}
+/*outside*/
+.free_choice{
+	display: inline-block;
 }
 .free_choice span{
 	float:left;
-	height: 24px;
-	line-height: 24px;
 	margin:0 6px;
 }
 .concrete_page input{
@@ -629,6 +672,7 @@ button{
 	font-weight: bold;
 	color: white;
 	background: url(../images/icon_result.png) 0 -225px no-repeat;
+	cursor:pointer;
 }
 	/*底部汇总导航栏*/
 		.title_4{
@@ -721,7 +765,7 @@ button{
 				height: 35px;
 				padding-top: 8px;
 				font-size: 14px;
-				color: #56888F;
+				color: #21ace3;
 				font-weight: 700;
 			}
 			.new_video img,.hot_video img{
@@ -796,7 +840,7 @@ button{
 		font-weight: 700;
 		color:white;
 	}
-	.all{
+	/*.all{
 		font-size: 15px;
 		color:black;
 		font-weight: 600;
@@ -824,11 +868,11 @@ button{
 		width: 70px;
 		text-align: center;
 		cursor: pointer;
-	}
-	.right_training{
+	}*/
+	/*.right_training{
 		float:left;
 		width:703px;
-	}
+	}*/
 	/*添加提示内容块的样式*/
 		.title_tip{
 			position: absolute;
@@ -865,7 +909,7 @@ button{
 		right: 0px;
 		top: 0px;
 		bottom: 0px;
-		z-index: 1000;
+		z-index: 1010;
 		opacity: 0;
 		filter: alpha(opacity=0);
 		background: #000;
@@ -875,7 +919,7 @@ button{
 		position: fixed;
 		left: 50%;
 		top: -100px;
-		z-index: 1001;
+		z-index: 1020;
 		width: 850px;
 		height: 100px;
 		margin-left: -425px;
@@ -931,10 +975,23 @@ span.enter_icon{
 	right: 5px;
 	top: 5px;
 	display: none;
-	z-index: 100;
+	z-index: 9;
 }
 /*商店价格红色显示*/
 .item_attr_detail .S_price{
 	float: none;
 	color: red;
+}
+.goTopBtn {
+	position:fixed;
+	_position:absolute;
+	display:none; 
+	text-align:center; 
+	line-height:30px; 
+	width:60px; 
+	bottom:35px; 
+	height:60px; 
+	font-size:12px; 
+	cursor:pointer;
+	background: url(../images/btn_top.gif) no-repeat;
 }

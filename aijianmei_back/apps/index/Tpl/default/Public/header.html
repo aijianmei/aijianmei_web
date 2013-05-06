@@ -2,16 +2,40 @@
     <html xmlns:wb=“http://open.weibo.com/wb”>
         <head>
             <meta charset="utf-8"/>
-            <title><php>if(!empty($article['title'])||!empty($daily['title'])){</php>{$daily['title']}{$article['title']}<php>}else{</php>爱健美<php>}</php></title>
+			<meta name="baidu_union_verify" content="c43c00cab8564dcf9a25e3a5c666410b">
+			<meta property="qc:admins" content="142030514561121165516375" />
+            <title><?php if(!empty($headertitle)){echo $headertitle;}else{echo '爱健美首页 - 推广健身文化，传播健康理念';}?></title>
+			<meta name="keywords" content="爱健美，爱健美网，健身，健美，增肌、增重、减肥、瘦身、肌肉锻炼、健身营养、健身补充营养、健身运动、女性健身">
+			<meta name="description" content="爱健美网，你可以在这里制定合适的健身计划， 观看专业的健身锻炼视频，学习专业的健身方法，了解健身运动前后的饮食营养补充，以及认识喜欢健身、运动的朋友哦！">
             <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21432667"></script>
             <link rel="stylesheet" href="../Public/css/public.css" />
-            <link rel="stylesheet" href="../Public/css/{$cssFile}.css" />	
-            <!-- <link rel="stylesheet" href="../Public/css/jquery-ui.css" />  -->
-            <!--  <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>	-->
-
-        </head>
-<body>
-        <div class="body"></div>
+            <link rel="stylesheet" href="../Public/css/{$cssFile}.css" />
+			<php>if($_act==1){</php>
+			<!--必填-->
+			<meta property="og:type" content="article" />
+			<meta property="og:url" content="http://www.aijianmei.com/index-Index-articleDetail-{$_GET[id]}.html" />
+			<meta property="og:title" content="{$article['title']}" />
+			<meta property="og:description" content="{$article['brief']}" />
+			<meta property="og:image" content="http://www.aijianmei.com/public/images/article/{$article['img']}" />
+			<php>}</php>
+			<php>if($metatype==1){</php>
+			<meta property="og:type" content="video" />
+			<meta property="og:url" content="http://www.aijianmei.com/index-Index-daily-{$_GET[id]}-{$_GET[type]}.html" />
+			<meta property="og:title" content="{$videos[0][title]}" />
+			<meta property="og:description" content="爱健美视频|{$videos[0][title]}" />
+			<meta property="og:image" content="{$videos[0][logo]}" />
+			<php>}</php>
+			<php>if($_TrainVType==1){</php>
+			<meta property="og:type" content="video" />
+			<meta property="og:url" content="http://www.aijianmei.com/index-Index-daily-{$_GET[id]}-{$_GET[type]}.html" />
+			<meta property="og:title" content="{$video[title]}" />
+			<meta property="og:description" content="{$videos[brief]}" />
+			<meta property="og:image" content="{$video[logo]}" />
+			<php>}</php>
+			<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454" type="text/javascript" charset="utf-8"></script>	
+		</head>
+<body class="">
+<div class="body"></div>
         <div class="sheet">
                 <div class="log">
                     <button class="close_btn"></button>
@@ -36,36 +60,18 @@
                                 <a href="#" class="checkChange" id="reloadcode">换一换</a>-->
                             </div>
                             <button type="submit" class="submit_btn">登录</button>
-                            <a href="index.php?app=home&mod=Public&act=sendPassword" class="forget">忘记密码</a>
+                            <a href="/index.php?app=index&mod=User&act=setinfo" class="forget">忘记密码</a>
                         </form>
                     </div>
                     <div class="other_account clearfix">
                         <h4 class="tit">使用合作网站账号登录</h4>
                         <div class="accounts">
-                        <!--<script src="//mat1.gtimg.com/app/openjs/openjs.js"></script>
-                        <script defer="defer">
-
-                            T.init({
-                                appkey:100669978
-                            });
-
-                            function login() {
-
-                                T.login(function (loginStatus) {
-                                    alert(loginStatus.nick);
-                                },function (loginError) {
-                                    alert(loginError.message);
-                                });
-
-                            }
-
-                        </script>-->
                         <!--<script id='denglu_login_js' type='text/javascript' charset='utf-8'></script>-->
                         <!-- http://open.denglu.cc/transfer/qzone?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F -->
                         <!-- a class="cop1" href="http://open.denglu.cc/transfer/renren?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F"></a> -->
-                        <a class="cop1" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://dev.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1">微博帐号</a>
-                        <!--<a class="cop2" href="javascript:void(0)" onclick="login()">腾讯微博</a>-->
-                        <!--<a class="cop3" href="https://graph.renren.com/oauth/authorize?client_id=229477&redirect_uri=http://dev.aijianmei.com&response_type=token">人人帐号</a>-->
+                    <a class="copsina" style="width:128px;height:32px;" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a>
+                    <a class="copqq" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100328471 &redirect_uri=www.aijianmei.com/qqlogin.php&scope=" style="width:128px;height:32px;"></a>
+                        <!--<a class="cop3" href="https://graph.renren.com/oauth/authorize?client_id=229477&redirect_uri=http://www.aijianmei.com/index.php?apiType=renren&response_type=token">人人帐号</a>-->
                         <!--<a class="cop4" href="http://open.denglu.cc/transfer/douban?appid=50068&redirect_uri=http%3A%2F%2Fdev.aijianmei.com%2F">豆瓣帐号</a>-->
                          <!--<script type='text/javascript' charset='utf-8'>
                             (function() {
@@ -82,61 +88,57 @@
                     </div>
                 </div>	
             </div><!-- End sheet -->
-
-            <div class="wrapper">
-                <div id="header">
-                    <ul class="top">
-                        <li class="my_cart"><a id="my_cart"><span class="cart"></span>购物车(0) </a>|</li>
-                    <php>if(getMid()) {</php>
-                    <li><span>欢迎你，<php>echo getUserName(getMid())</php></span>
-                    <php>} else {</php>
+            <div class="head">
+                <div class="most_top">
+				<php>if(!getMid()) {</php>
+                    <ul class="top_ms clearfix">
                         <li><a href="javascript:;" class="login">登录 </a>|</li>
-                        <li><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a>|</li>
-                    <php>}</php>
-                        <!--<li class="more"><a href="#">消息<span class="triangle"></span> </a>|
-                            <ul class="message">
-                                <li><a href="/index.php?app=home&mod=message&act=index">查看私信</a></li>
-                                <li><a href="/index.php?app=home&mod=user&act=comments">查看评论</a></li>
-                                <li><a href="/index.php?app=home&mod=user&act=atme">查看@我</a></li>
-                                <li><a href="/index.php?app=home&mod=space&act=follow&type=follower&uid={$uid}">查看粉丝</a></li>
-                                <li><a href="/index.php?app=home&mod=message&act=notify">查看通知</a></li>
-                                <!--<li><a href="order.html">查看预约</a></li>
-                            </ul>
-
-                        </li>-->
+                        <li><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a></li>
+                    </ul>
+					<php>} else {</php>
+                    <ul class="after_ms">
+                        <li class="person_massage">
+                            <div>
+                                <img src="<php>echo getUserFace(getMid(),'s')</php>" alt="no" />
+                                <span><php>echo getUserName(getMid())</php></span>
+                            </div>
+                        </li>
                         <li class="more"><a href="">帐号<span class="triangle"></span> </a>
                             <ul class="account">
                                 <li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
+								<!--<li><a href="/index.php?app=index&mod=User&act=loginUserInfo">个人资料</a></li>-->
                                 <!--<li><a href="/index.php?app=home&mod=Account&act=address">收货地址</a></li>
                                 <li><a href="mod_face.html">修改头像</a></li>
                                 <li><a href="/index.php?app=home&mod=Account&act=bind">绑定帐号</a></li>-->
                                 <li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
                             </ul>
                         </li>
+                        <li class="special_buy">
+                            <a class="car_buy">购物车</a>
+                        </li>
                     </ul>
-                    <form class="search">
-                        <fieldset>
-                            <legend>搜索</legend>
-                            <label for="search_title">搜索：</label>
-                            <input type="text" id="search_title" class="search_txt"/>
-                            <button class="search_btn hide_text" type="submit"></button>
-                        </fieldset>
-                    </form>
-                    <div class="logo">
-                        <a href="/index.php?app=index">
-                            <img src="../Public/images/logo.png" alt="aijianmei" />
-                        </a>
-                    </div>
-                    <ul id="nav">
-                        <li class="home"><a href="/index.php?app=index"><span>首页</span></a></li>
-                        <li class="store"><a href='#'><span>商店</span></a></li>
-                        <li><a href="/index.php?app=index&mod=Plan">健身计划</a></li>
-                        <li><a href="/index.php?app=index&mod=Train">锻炼</a></li>
-                        <li><a href="/index.php?app=index&mod=Nutri">营养</a></li>
-                        <li><a href="/index.php?app=index&mod=Append">辅助品</a></li>
-                        <li class="forum"><a href="#">论坛</a></li>
-                        <li class="friends"><a href="#">交友互动</a></li>
-                        <!--<li><a href="<php>if(getMid()){</php>{:U('home/User/index')}<php>}else{</php>{:U('home/Index/index')}<php>}</php>">交友互动</a></li>-->
-                        
-                    </ul>
+					<php>}</php>
                 </div>
+                <div class="header">
+                    <div class="h_bg">
+                        <a href="/index.php?app=index"><div class="logo_1">logo</div></a>
+                        <ul class="nav">
+                            <li <php>if($_current=='index'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/index.html"><span class="home">首页</span></a></li>
+                            <li><i class="ag_current"></i><a href='#'><span class="store">商店</span></a></li>
+                            <li <php>if($_current=='plan'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/Plan.html">健身计划</a></li>
+                            <li <php>if($_current=='train'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/Train.html">锻炼</a>
+                               <!--  <ul class="conceal_part">
+                                    <li><a></a></li>
+                                </ul> -->
+                            </li>
+                            <li <php>if($_current=='nutri'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/Nutri.html">营养</a>
+
+                            </li>
+                            <li <php>if($_current=='append'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/Append.html">辅助品</a></li>
+                            <li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
+                            <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper">

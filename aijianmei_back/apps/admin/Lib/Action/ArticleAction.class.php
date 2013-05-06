@@ -1,5 +1,84 @@
 <?php 
 class ArticleAction extends AdministratorAction {
+	public function bulkImport(){
+		//æ›¿æ¢æ•°ç»„ è½¬åŒ–ä¸ºå¯¹åº”æ ‡è¯†
+		$channelArr=array(
+			'ä¸Šç­æ—å¥èº«'=>'1',
+			'æ—¥å¸¸å¥èº«'=>'2',
+			'ä¸“ä¸šè¿åŠ¨å‘˜'=>'3',
+			'å¥ç¾Žè¿åŠ¨å‘˜'=>'4',);
+		$action=$_POST['action'];
+		$path='exceluploadlist/';
+		//$path='/data/home/htdocs/exceluploadlist/';
+		if(!empty($action)&&$action=='UploadExcelFile')
+		{
+			$UFileName=$_FILES['UploadFile']['name'];
+			$FilePre_arr=explode(".",$UFileName);
+			$FilePre=$FilePre_arr[1];
+			if($_FILES['UploadFile']['tmp_name'])
+			{
+				$Tmp_FileName=$path.$_FILES['UploadFile']['name'];
+				if(move_uploaded_file($_FILES['UploadFile']['tmp_name'],$Tmp_FileName))
+				{
+					$error_string='ä¸Šä¼ æˆåŠŸ!\\n';
+					//$Tmp_FileName='test.xls';
+					$exceldata=$this->ReadExcelInfo($Tmp_FileName,2);
+					$is_pass=0;
+					//$exceldata[2][3]=strtotime($exceldata[2][3]);
+					//print_r($exceldata);exit;
+					if($is_pass!=1)
+					{
+						$succcount=0;
+						foreach($exceldata as $key => $value)
+						{
+							$insertdata['uid'] = $this->mid;
+							$insertdata['title'] = t($value[0]);
+							$insertdata['channel'] = intval($channelArr[$value[1]]);
+							$insertdata['content'] = t($value[4]);
+							$insertdata['keyword'] = t($value[5]);
+							//$data['videos']  = t($_POST['videos']);
+							$insertdata['create_time'] = time();
+							$insertdata['gotime'] = strtotime($value[3]);
+							$insertdata['img']=null;
+							$newfilename=$_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$value[2];
+							$insertdata['img'] = $newfilename;
+							$vid = M('daily')->add($insertdata);
+							if($vid>0){$succcount++;}
+							/*video part start*/
+							$vdata['daily_id'] = $vid;
+							$vdata['link'] = $value[6];
+							$vdata['htmlurl'] = $value[7];
+							$vdata['wapurl'] = $value[8];
+							$vdata['title'] = $value[9];
+							$vdata['intro'] = $value[10];
+							$vdata['create_time'] = time();
+							M('daily_video')->add($vdata);
+							/*video part end*/
+						}
+					}
+				}
+				else
+				{
+					$error_string='ä¸Šä¼ å¤±è´¥!\\n';
+				}	
+			}
+		
+		}
+		$this->assign('succcount', $succcount);
+		$list=$this->listDir($path);
+		$listRes=array();
+		foreach($list as $k=>$v){
+			if($v){
+			$listRes[$k]['name']=$v;
+			$listRes[$k]['ctime']=date("Y-m-d",filectime($path.$v));
+			$listRes[$k]['url']=$path.$v;
+			}
+		}
+		$this->assign('listRes', $listRes);
+		$this->display();
+	}
+
+
     public function add()
     {
         if(isset($_POST['title'])) {
@@ -13,7 +92,7 @@ class ArticleAction extends AdministratorAction {
             $data['content']  = t($_POST['content']);
             $data['keyword']  = t($_POST['keyword']);			
             $data['create_time'] = time();
-			$data['iswaterimg']  = t($_POST['iswaterimg']);
+            $data['iswaterimg']  = t($_POST['iswaterimg']);
             
             
             //print_r($_POST);exit;
@@ -21,8 +100,8 @@ class ArticleAction extends AdministratorAction {
                 if(!move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'])) 				{
                     echo 'add error '.'<br />';					
                 }
-				$waterImage='water.png';
-				$this->imageWaterMark($_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'],9,$waterImage);
+                //$waterImage='water.png';
+                //$this->imageWaterMark($_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'],9,$waterImage);
                 $data['img'] = $_FILES['img']['name'];
             }
             if (!empty($data['title']) &&
@@ -85,7 +164,7 @@ class ArticleAction extends AdministratorAction {
                 
         
             if( $_FILES['img']['name']!= NULL) {
-            	if(!move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'])) {
+                if(!move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'])) {
                     echo 'picture upload failed '.'<br />';					
                 }
                 $data['img'] = $_FILES['img']['name'];
@@ -178,10 +257,10 @@ class ArticleAction extends AdministratorAction {
             $data['title'] = t($_POST['title']);
             $data['category_id'] = intval($_POST['category']);
             $data['link'] = t($_POST['source']);
+			$data['htmlurl'] = t($_POST['htmlurl']);
+			$data['wapurl'] = t($_POST['wapurl']);
             $data['brief'] = t($_POST['brief']);
-            $data['create_time'] = time();			
-
-            
+            $data['create_time'] = time();
             if(!empty($data['link']) &&
                !empty($data['title'])) {
                 
@@ -242,11 +321,13 @@ class ArticleAction extends AdministratorAction {
             $data['title'] = t($_POST['title']);
             $data['channel'] = intval($_POST['channel']);
             $data['content'] = t($_POST['content']);
+			$data['keyword'] = t($_POST['keyword']);
             //$data['videos']  = t($_POST['videos']);
             $data['create_time'] = time();
-            
+			$data['gotime'] = strtotime($_POST['gotime']);
             if(isset($_FILES['img']['name'])) {
-                @move_uploaded_file($_FILES['img']['tmp_name'], '/var/www/html/aijianmei/public/article/'.$_FILES['img']['name']);
+				$newfilename=$_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'];
+                @move_uploaded_file($_FILES['img']['tmp_name'], $newfilename);
                 $data['img'] = $_FILES['img']['name'];
             }
             
@@ -260,6 +341,8 @@ class ArticleAction extends AdministratorAction {
                     $vid = M('daily')->add($data);
                 }
                 $videos = $_POST['videos'];
+				$htmlurl= $_POST['htmlurl'];
+				$wapurl = $_POST['wapurl'];
                 $titles = $_POST['v_title'];
                 $intros = $_POST['v_intro'];
                 if(is_array($videos) && is_array($titles) && is_array($intros)) {
@@ -268,6 +351,8 @@ class ArticleAction extends AdministratorAction {
                         if($videos[$i]!=''){
                         $vdata['daily_id'] = $vid;
                         $vdata['link'] = $videos[$i];
+						$vdata['htmlurl'] = $htmlurl[$i];
+						$vdata['wapurl'] = $wapurl[$i];
                         $vdata['title'] = $titles[$i];
                         $vdata['intro'] = $intros[$i];
                         $vdata['create_time'] = time();
@@ -287,8 +372,7 @@ class ArticleAction extends AdministratorAction {
         $id = intval($_GET['id']);
         $article = M('daily')->where(array('id'=>$id))->find();
         $videos = M('daily_video')->where(array('daily_id'=>$id))->findAll();
-        //print_r($article);
-        //print_r($videos);
+		$article['gotime']=date("Y-m-d",$article['gotime']);
         $this->assign('article', $article);
         $this->assign('video', $videos);
         $this->assign('type', 'edit');
@@ -303,7 +387,11 @@ class ArticleAction extends AdministratorAction {
     
     public function daily()
     {
-        $daily = M('daily')->findAll();
+        $daily = M('daily')->order('create_time desc')->findAll();
+		foreach($daily as $k=>$value){
+			$daily[$k]['create_time']=date("Y-m-d",$value['create_time']);
+			$daily[$k]['gotime']=$value['gotime']!=null?date("Y-m-d",$value['gotime']):'æœªå¡«å†™';
+		}
         $this->assign('daily', $daily);
         $this->display();
     }
@@ -368,144 +456,77 @@ class ArticleAction extends AdministratorAction {
         $map['id'] = array('in', t($_POST['ids']));
         echo M($table)->where($map)->delete() ? '1' : '0';
     }
-	function imageWaterMark($groundImage,$waterPos=0,$waterImage="",$waterText="",$textFont=5,$textColor="#FF0000") 
-	{ 
-     $isWaterImage = FALSE; 
-     $formatMsg = "ÔÝ²»Ö§³Ö¸ÃÎÄ¼þ¸ñÊ½£¬ÇëÓÃÍ¼Æ¬´¦ÀíÈí¼þ½«Í¼Æ¬×ª»»ÎªGIF¡¢JPG¡¢PNG¸ñÊ½¡£";
-     //¶ÁÈ¡Ë®Ó¡ÎÄ¼þ 
-     if(!empty($waterImage) && file_exists($waterImage)) 
-     { 
-         $isWaterImage = TRUE; 
-         $water_info = getimagesize($waterImage); 
-         $water_w     = $water_info[0];//È¡µÃË®Ó¡Í¼Æ¬µÄ¿í 
-         $water_h     = $water_info[1];//È¡µÃË®Ó¡Í¼Æ¬µÄ¸ß
-         switch($water_info[2])//È¡µÃË®Ó¡Í¼Æ¬µÄ¸ñÊ½ 
-         { 
-             case 1:$water_im = imagecreatefromgif($waterImage);break; 
-             case 2:$water_im = imagecreatefromjpeg($waterImage);break; 
-             case 3:$water_im = imagecreatefrompng($waterImage);break; 
-             default:die($formatMsg); 
-         } 
-     }
-     //¶ÁÈ¡±³¾°Í¼Æ¬ 
-     if(!empty($groundImage) && file_exists($groundImage)) 
-     { 
-         $ground_info = getimagesize($groundImage); 
-         $ground_w     = $ground_info[0];//È¡µÃ±³¾°Í¼Æ¬µÄ¿í 
-         $ground_h     = $ground_info[1];//È¡µÃ±³¾°Í¼Æ¬µÄ¸ß
-         switch($ground_info[2])//È¡µÃ±³¾°Í¼Æ¬µÄ¸ñÊ½ 
-         { 
-             case 1:$ground_im = imagecreatefromgif($groundImage);break; 
-             case 2:$ground_im = imagecreatefromjpeg($groundImage);break; 
-             case 3:$ground_im = imagecreatefrompng($groundImage);break; 
-             default:die($formatMsg); 
-         } 
-     } 
-     else 
-     { 
-         die("ÐèÒª¼ÓË®Ó¡µÄÍ¼Æ¬²»´æÔÚ£¡"); 
-     }
-     //Ë®Ó¡Î»ÖÃ 
-     if($isWaterImage)//Í¼Æ¬Ë®Ó¡ 
-     { 
-         $w = $water_w; 
-         $h = $water_h; 
-         $label = "Í¼Æ¬µÄ"; 
-     } 
-     else//ÎÄ×ÖË®Ó¡ 
-     { 
-         $temp = imagettfbbox(ceil($textFont*2.5),0,"./cour.ttf",$waterText);//È¡µÃÊ¹ÓÃ TrueType ×ÖÌåµÄÎÄ±¾µÄ·¶Î§ 
-         $w = $temp[2] - $temp[6]; 
-         $h = $temp[3] - $temp[7]; 
-         unset($temp); 
-         $label = "ÎÄ×ÖÇøÓò"; 
-     } 
-     if( ($ground_w<$w) || ($ground_h<$h) ) 
-     { 
-         echo "ÐèÒª¼ÓË®Ó¡µÄÍ¼Æ¬µÄ³¤¶È»ò¿í¶È±ÈË®Ó¡".$label."»¹Ð¡£¬ÎÞ·¨Éú³ÉË®Ó¡£¡"; 
-         return; 
-     } 
-     switch($waterPos) 
-     { 
-         case 0://Ëæ»ú 
-             $posX = rand(0,($ground_w - $w)); 
-             $posY = rand(0,($ground_h - $h)); 
-             break; 
-         case 1://1Îª¶¥¶Ë¾Ó×ó 
-             $posX = 0; 
-             $posY = 0; 
-             break; 
-         case 2://2Îª¶¥¶Ë¾ÓÖÐ 
-             $posX = ($ground_w - $w) / 2; 
-             $posY = 0; 
-             break; 
-         case 3://3Îª¶¥¶Ë¾ÓÓÒ 
-             $posX = $ground_w - $w; 
-             $posY = 0; 
-             break; 
-         case 4://4ÎªÖÐ²¿¾Ó×ó 
-             $posX = 0; 
-             $posY = ($ground_h - $h) / 2; 
-             break; 
-         case 5://5ÎªÖÐ²¿¾ÓÖÐ 
-             $posX = ($ground_w - $w) / 2; 
-             $posY = ($ground_h - $h) / 2; 
-             break; 
-         case 6://6ÎªÖÐ²¿¾ÓÓÒ 
-             $posX = $ground_w - $w; 
-             $posY = ($ground_h - $h) / 2; 
-             break; 
-         case 7://7Îªµ×¶Ë¾Ó×ó 
-             $posX = 0; 
-             $posY = $ground_h - $h; 
-             break; 
-         case 8://8Îªµ×¶Ë¾ÓÖÐ 
-             $posX = ($ground_w - $w) / 2; 
-             $posY = $ground_h - $h; 
-             break; 
-         case 9://9Îªµ×¶Ë¾ÓÓÒ 
-             $posX = $ground_w - $w; 
-             $posY = $ground_h - $h; 
-             break; 
-         default://Ëæ»ú 
-             $posX = rand(0,($ground_w - $w)); 
-             $posY = rand(0,($ground_h - $h)); 
-             break;     
-     }
-     //Éè¶¨Í¼ÏñµÄ»ìÉ«Ä£Ê½ 
-     imagealphablending($ground_im, true);
-     if($isWaterImage)//Í¼Æ¬Ë®Ó¡ 
-     { 
-         imagecopy($ground_im, $water_im, $posX, $posY, 0, 0, $water_w,$water_h);//¿½±´Ë®Ó¡µ½Ä¿±êÎÄ¼þ         
-     } 
-     else//ÎÄ×ÖË®Ó¡ 
-     { 
-         if( !empty($textColor) && (strlen($textColor)==7) ) 
-         { 
-             $R = hexdec(substr($textColor,1,2)); 
-             $G = hexdec(substr($textColor,3,2)); 
-             $B = hexdec(substr($textColor,5)); 
-         } 
-         else 
-         { 
-             die("Ë®Ó¡ÎÄ×ÖÑÕÉ«¸ñÊ½²»ÕýÈ·£¡"); 
-         } 
-         imagestring ( $ground_im, $textFont, $posX, $posY, $waterText, imagecolorallocate($ground_im, $R, $G, $B));         
-     }
-     //Éú³ÉË®Ó¡ºóµÄÍ¼Æ¬ 
-     @unlink($groundImage); 
-     switch($ground_info[2])//È¡µÃ±³¾°Í¼Æ¬µÄ¸ñÊ½ 
-     { 
-         case 1:imagegif($ground_im,$groundImage);break; 
-         case 2:imagejpeg($ground_im,$groundImage);break; 
-         case 3:imagepng($ground_im,$groundImage);break; 
-         default:die($errorMsg); 
-     }
-     //ÊÍ·ÅÄÚ´æ 
-     if(isset($water_info)) unset($water_info); 
-     if(isset($water_im)) imagedestroy($water_im); 
-     unset($ground_info); 
-     imagedestroy($ground_im); 
+   
+/*
+ * è¯»å–Excel æ•°æ®æ–¹æ³•ç±»
+ * author kontem at 20130504
+ * @param string $FilePath     æ–‡ä»¶è·¯å¾„
+ * @param string $StartLine    èµ·å§‹è¡Œæ•°
+ * @param string $EndLine      ç»“æŸè¡Œæ•°
+ * @return array               Data å¤šç»´æ•°ç»„
+ */
+function ReadExcelInfo($FilePath,$StartLine=0,$EndLine=0)
+{
+	require_once 'libpack/PHPExcel/PHPExcel/IOFactory.php';
+	$objPHPExcel = PHPExcel_IOFactory::load($FilePath);
+	$objWorksheet = $objPHPExcel->getActiveSheet();
+	$StartLine=!empty($StartLine)?$StartLine:0;
+	
+	$k=1;
+	foreach ($objWorksheet->getRowIterator() as $row) {
+		$cellIterator = $row->getCellIterator();
+		$cellIterator->setIterateOnlyExistingCells(false);
+		$cellIterator->setIterateOnlyExistingCells(true);
+		$plainText=null;
+		foreach ($cellIterator as $cell) {
+			$plainText = ($cell->getValue() instanceof PHPExcel_RichText) ?$cell->getValue()->getPlainText() : $cell->getValue();
+			if($cell->getDataType()==PHPExcel_Cell_DataType::TYPE_NUMERIC){   
+				$cellstyleformat=$cell->getParent()->getStyle( $cell->getCoordinate() )->getNumberFormat();   
+				$formatcode=$cellstyleformat->getFormatCode();   
+				if (preg_match('/^(\[\$[A-Z]*-[0-9A-F]*\])*[hmsdy]/i', $formatcode)) {   
+					$plainText=gmdate("Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($plainText));   
+					}else{   
+					$plainText=PHPExcel_Style_NumberFormat::toFormattedString($plainText,$formatcode);   
+				}
+			}
+			$data[$k][]=$plainText;
+		}
+		$k++;
+	}
+	if($EndLine<0){$EndLine=$k+$EndLine;}
+	foreach($data as $key=>$value)
+	{
+		if($key < $StartLine){unset($data[$key]);}
+		if($key > $EndLine&&$EndLine!=0){unset($data[$key]);}
+	}
+	return $data;
 }
+	function listDir($dir)
+	{
+		global $resdir;
+	    if(is_dir($dir))
+	    {
+	        if ($dh = opendir($dir))
+	        {
+	            while (($file = readdir($dh)) !== false)
+	            {
+	                if((is_dir($dir."/".$file)) && $file!="." && $file!="..")
+	                {
+	                     //$this->listDir($dir."/".$file."/");
+	                }
+	                else
+	                {
+	                    if($file!="." && $file!="..")
+	                    {
+							
+	                        if(!in_array($file,$resdir)) $resdir[]=$file;
+	                    }
+	                }
+	            }
+	            closedir($dh);
+	        }
+	    }
+		return $resdir;
+	}
 }
 ?>

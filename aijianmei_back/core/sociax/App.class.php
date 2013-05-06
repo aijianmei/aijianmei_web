@@ -645,7 +645,9 @@ class App
                     exit;
                 } else {
                     // 记录登录前的url地址
+                    if(!$_GET['state']){
                     $_SESSION['refer_url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                    }
                     if(APP_NAME !== 'index')
                     	redirect(U('home/Public/login'));
                 }

@@ -35,15 +35,13 @@
                         <h1 class="public_title">辅助品知识</h1>
                         <div class="part_content">
                         <div class="tr_top clearfix">
-                        <a href="/index.php?app=index&mod=Index&act=articleDetail&id=56" class="store.html"><img src="../Public/images/add/Glutamine.jpg" alt="no" class="supple_pic" /></a>
+                        <a href="/index-Index-articleDetail-56.html" class="store.html"><img src="../Public/images/add/Glutamine.jpg" alt="no" class="supple_pic" /></a>
                             <div class="lay_detail">
-                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id=56
-                        "  class="detail" data-original-title="内容">蛋白质的种类和益处的介绍
+                                <a href="/index-Index-articleDetail-56.html"  class="detail" data-original-title="内容">蛋白质的种类和益处的介绍
                         </a>
                                 <div class="title_tip"><div class="angle"></div></div>
                                 <p class="read_content">蛋白质对于保持最佳健康状态和体脂水平来说是至关重要的。对于运动员或者喜欢运动的人来说，提高蛋白质摄取量有助于身体的快速恢复、保养或者肌肉块的增加。</p>
-                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id=56
-                                " class="read_art">点击阅读</a>
+                                <a href="/index-Index-articleDetail-56.html" class="read_art">点击阅读</a>
                             </div>
                         </div>
                         <ul class="clearfix">
@@ -78,13 +76,13 @@
                 <div class="part_top clearfix">
                     <span class="corner_left"></span>
                     <div class="lay_top clearfix">
-                        <h1 class="public_title">最佳营养文章</h1>
+                        <h1 class="public_title">最佳辅助品文章</h1>
                         <div class="new_video">
                         <ul class="lay_new_video clearfix">
                         <php>foreach($hotArticles as $a) {</php>
                             <li class="tr_classify">
-                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+                                <a href="/index-Index-articleDetail-{$a['id']}.html" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+                                <a href="/index-Index-articleDetail-{$a['id']}.html" class="plan_article_tl">{$a['title']}</a>
                                 <p class="summary">{$a['brief']}
                                 </p>
                                 <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
@@ -99,14 +97,14 @@
                 <div class="part_top clearfix">
                     <span class="corner_left"></span>
                     <div class="lay_top clearfix">
-                        <h1 class="public_title">最近营养文章</h1>
+                        <h1 class="public_title">最近辅助品文章</h1>
                         <div class="new_video">
                         <ul class="lay_new_video clearfix">
                         <php>foreach($lastArticles as $a) {</php>
                             <li class="tr_classify">
-                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="show_enter">
+                                <a href="/index-Index-articleDetail-{$a['id']}.html" class="show_enter">
                                     <span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
-                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id={$a['id']}" class="plan_article_tl">{$a['title']}</a>
+                                <a href="/index-Index-articleDetail-{$a['id']}.html" class="plan_article_tl">{$a['title']}</a>
                                 <p class="summary">{$a['brief']}
                                 </p>
                                 <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>

@@ -1,7 +1,7 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
      <div class="box">
-     <div class="box_1">
+     <div class="box_1">dddddddddddddddddddddddddd
       <h3><span class="text">{$lang.goods_tag}</span></h3>
       <div class="boxCenterList clearfix ie6">
        <form name="tagForm" action="javascript:;" onSubmit="return submitTag(this)" id="tagForm">
@@ -68,4 +68,4 @@
       </div>
      </div>
     </div>
-    <div class="blank5"></div>
+    <div class="blank5"></div>-->

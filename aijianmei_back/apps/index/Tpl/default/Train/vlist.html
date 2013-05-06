@@ -28,114 +28,69 @@
                                 <php>}</php>
 
                             <php>}</php>
-                            
+                            <span class="border_line"></span>
                         </ul>
-                        <span class="border_line"></span>
                     </div>
                 </div>
             </div>
-
-
-            <div class="right_sider clearfix">
-
-                <!--<div class="part_top clearfix">
-                    <div class="lay_top clearfix">
-                        <h1 class="public_title">了解锻炼的意义</h1>
-                        <div class="part_content">
-                            <div class="tr_top clearfix">
-                            <a class="store.html"><img src="../Public/images/training/duanlian_23.jpg" alt="no" class="supple_pic" /></a>
-                            <div class="lay_detail">
-                                <a href="article.html" class="detail">锻炼重在技巧</a>
-                                <p>最好的选择，最快的锻炼方式和最优秀的视频教学</p>
-                                <a href="/index.php?app=index&mod=Index&act=articleDetail&id=1" class="read_art">点击阅读</a>
-                            </div>
-                            </div>
-                            <ul class="clearfix" style="margin-right:-15px;">
-                            <li class="classify show_enter">
-                                <a href="/index.php?app=index&mod=Index&act=articleList&id=1" class="lay_cf">
-                                        <span class="enter_icon"></span>
-                                        <img src="../Public/images/training/abs.png" width="220" height="214px" alt="" class="best" />
-                                        <p class="best_classify">最畅销分类一：XX蛋白粉</p>
-                                    
-                                </a>
-                            </li>
-                            <li class="classify show_enter">
-                                <a href="classify.html" class="lay_cf">
-                                        <span class="enter_icon"></span>
-                                        <img src="../Public/images/training/cardio.png" width="220" height="214px" alt="" class="best" />
-                                        <p class="best_classify">最畅销分类一：XX蛋白粉</p>
-                                    
-                                </a>
-                            </li>
-                            <li class="classify show_enter">
-                                <a href="classify.html" class="lay_cf">
-                                        <span class="enter_icon"></span>
-                                        <img src="../Public/images/training/triceps.png" width="220" height="214px" alt="" class="best" />
-                                        <p class="best_classify">最畅销分类一：XX蛋白粉</p>
-                                </a>
-                            </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>-->
+            <div class="right_sider">
                 <div class="part_top">
                     <div class="lay_top">
                         <h1 class="public_title">最热视频</h1>
-                        <div class="content_sw">
-                            <div class="whole_part clearfix">
+                        <div class="content_sw clearfix">
+                                <div class="whole_part">
                                 <php>foreach($hot_video as $v){</php>
-                                <ul class="vdos">
-                                    <li class="pic show_enter">
-                                        <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">
-                                            <span class="v_enter"></span>
-                                            <img src="{$v['logo']}" alt="no" class="rt_picture" />
-                                        </a>
-                                    </li>
-                                    <li class="info">
-                                        <span>视频名称：</span>
-                                        <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">{$v['title']}</a>
-                                    </li>
-                                    <li class="info">
-                                        <span>{$v['brief']}</span>
-                                    </li>
-                                    <li class="info">
-                                        <span class="play_time">播放:<span> {$v['click']}</span></span>
-                                        <span class="comment_time">评论: <span>{$v['recommons']}</span></span>
-                                    </li>
-                                </ul>
-                               <php>}</php>
-                                
-                            </div>
+                                    <ul class="vdos">
+                                        <li class="pic show_enter">
+                                            <a href="/index-Train-videoDetail-{$v['id']}.html">
+                                                <span class="v_enter"></span>
+                                                <img src="{$v['logo']}" alt="no" class="rt_picture" />
+                                            </a>
+                                        </li>
+                                        <li class="info">
+                                            <span>动作：</span>
+                                            <a href="/index-Train-videoDetail-{$v['id']}.html">{$v['title']}</a>
+                                        </li>
+                                        <li class="info">
+                                            <span alt="{$v['brief']}" title="{$v['brief']}"><?php echo msubstr($v['brief'],0,12) ?></span>
+                                        </li>
+                                        <li class="info">
+                                            <span class="play_time">播放:<span> {$v['click']}</span></span>
+                                            <span class="comment_time">评论: <span>{$v['recommons']}</span></span>
+                                        </li>
+                                    </ul>
+                                   <php>}</php>
+                                </div>
                         </div>
                     </div>
                 </div>
                 <div class="part_top">
                     <div class="lay_top">		
                         <h1 class="public_title">最新视频</h1>
-                        <div class="content_sw">
-                                <div class="whole_part clearfix">
-                                    <php>foreach($new_video as $v){</php>
-                                        <ul class="vdos">
-                                            <li class="pic show_enter">
-                                                <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">
-                                                    <span class="v_enter"></span>
-                                                    <img src="{$v['logo']}" alt="no" class="rt_picture" />
-                                                </a>
-                                            </li>
-                                            <li class="info">
-                                                <span>视频名称：</span>
-                                                <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">{$v['title']}</a>
-                                            </li>
-                                            <li class="info">
-                                                <span>{$v['brief']}</span>
-                                            </li>
-                                            <li class="info">
-                                            
-                                                <span class="play_time">播放:<span> {$v['click']}</span></span>
-                                                <span class="comment_time">评论: <span>{$v['recommons']}</span></span>
-                                            </li>
-                                        </ul>
-                                    <php>}</php>
+                        <div class="content_sw clearfix">
+                                <div class="whole_part">
+                                <php>foreach($new_video as $v){</php>
+                                    <ul class="vdos">
+                                        <li class="pic show_enter">
+                                            <a href="/index-Train-videoDetail-{$v['id']}.html">
+                                                <span class="v_enter"></span>
+                                                <img src="{$v['logo']}" alt="no" class="rt_picture" />
+                                            </a>
+                                        </li>
+                                        <li class="info">
+                                            <span>动作：</span>
+                                            <a href="/index-Train-videoDetail-{$v['id']}.html">{$v['title']}</a>
+                                        </li>
+                                        <li class="info">
+                                            <span alt="{$v['brief']}" title="{$v['brief']}"><?php echo msubstr($v['brief'],0,12) ?></span>
+                                        </li>
+                                        <li class="info">
+                                        
+                                            <span class="play_time">播放:<span> {$v['click']}</span></span>
+                                            <span class="comment_time">评论: <span>{$v['recommons']}</span></span>
+                                        </li>
+                                    </ul>
+                                  <php>}</php>
                                     
                                 </div>
                         </div>
@@ -145,24 +100,10 @@
                 <div class="part_top">
                     <div class="lay_top">
                         <h1 class="public_title">视频</h1>
-                        <div class="video clearfix">
-                            <div class="all">
-                                   <ul class="all_ul">
-                                        <!--<li class="select">
-                                            <span class="opt">范围</span>
-                                            <a class="pre">不限</a>
-                                            <a>今日</a>
-                                            <a>本周</a>
-                                            <a>本月</a>
-                                        </li>
+                        <div class="video">
+                                <div class="all">
+                                    <ul class="all_ul">
                                         <li class="select">
-                                            <span class="opt">排序</span>
-                                            <a class="pre">最新发布</a>
-                                            <a>最多播放</a>
-                                            <a>最多评论</a>
-                                            <a>最多收藏</a>
-                                        </li>-->
-                                        <li class="select clearfix">
                                             <span class="opt">部位</span>
                                             <span class="opt_length">
                                                 <a href="{:U('index/Train/videoList', array('id'=>54))}"<php> if($_GET['cd']=='颈部'){</php>style="background-color:#21ace3;color:white;"<php>}</php>>颈部</a>
@@ -181,56 +122,56 @@
                                                 <a href="{:U('index/Train/videoList', array('id'=>67))}"<php> if($_GET['cd']=='臀大肌'){</php>style="background-color:#21ace3;color:white;"<php>}</php>>臀大肌</a>
                                                 <a href="{:U('index/Train/videoList', array('id'=>68))}"
                                                 <php>if($_GET['cd']=='腓肠肌'){</php>style="background-color:#21ace3;color:white;"<php>}</php>>腓肠肌</a>
-                                            </span>
+                                            <span>
                                         </li>
                                     </ul>
-                            </div>
-                            <div class="each clearfix">
-                                <php>foreach($videos as $v){</php>
+                                </div>
+                        <div class="each">
+                        <php>foreach($videos as $v){</php>
                                     <ul class="vdos">
                                         <li class="pic">
-                                            <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}"><img src="{$v['logo']}" width="170" height="96" class="rt_picture" /></a>
+                                            <a href="/index-Train-videoDetail-{$v['id']}.html"><img src="{$v['logo']}" width="170" height="96" /></a>
                                         </li>
                                         <li class="info">
-                                            <span>视频名称：</span>
-                                            <a href="{:U('index/Train/videoDetail', array('id'=>$v['id']))}">{$v['title']}</a>
+                                            <span>动作：</span>
+                                            <a href="/index-Train-videoDetail-{$v['id']}.html">{$v['title']}</a>
                                         </li>
                                         <li class="info">
-                                            <span>{$v['brief']}</span>
+                                            <span alt="{$v['brief']}" title="{$v['brief']}"><?php echo msubstr($v['brief'],0,12) ?></span>
                                         </li>
                                         <li class="info">
                                             <span class="play_time">播放:<span> {$v['click']}</span></span>
                                             <span class="comment_time">评论: <span>{$v['recommons']}</span></span>
                                         </li>
                                     </ul>
-                                <php>}</php>        
-                            </div>
-                            <div class="page clearfix">
-                                <span class="concrete_choice">
-                                    <?php printf($pager['backstr'],'class="prev"');?>
-
-                                    <?php printf($pager['thestr'],'class="current_page"');?>
-
-                                    <?php printf($pager['nextstr'],'class="next"');?>
-
-                                </span>
-                                <span class="free_choice">
-                                    <span>共{$pager[page]}页</span>
-                                    <span class="concrete_page">
-                                        到第
-                                        <input type="text" value="<?php echo $_GET['pg']?>" id="pagenums"/>
-                                        页
-                                    </span>
-                                    <input type="hidden" id="vid" value="<?php echo $_GET['id']?>">
-                                    <span class="sure_button" onclick="returnPageUrl();">确定</span>
+                            <php>}</php>
                                     
-                                </span>
-                            </div>
-                        </div>
                     </div>
-                </div>        
+                    <div class="page clearfix">
+                        <span class="concrete_choice">
+                        <?php printf($pager['backstr'],'class="prev"');?>
+
+                            <?php printf($pager['thestr'],'class="current_page"');?>
+
+                            <?php printf($pager['nextstr'],'class="next"');?>
+
+                        </span>
+                        <span class="free_choice">
+                            <span>共{$pager[page]}页</span>
+                            <span class="concrete_page">
+                                到第
+                                <input type="text" value="<?php echo $_GET['pg']?>" id="pagenums"/>
+                                页
+                            </span>
+                            <input type="hidden" id="vid" value="<?php echo $_GET['id']?>">
+                            <span class="sure_button" onclick="returnPageUrl();">确定</span>
+                            
+                        </span>
+                    </div>
+                </div>
             </div>
-        </div>
+            </div><!--right-->
+    </div>
 <script>
 function returnPageUrl(){
     if($("#pagenums").val()>0&&$("#vid").val()>0){

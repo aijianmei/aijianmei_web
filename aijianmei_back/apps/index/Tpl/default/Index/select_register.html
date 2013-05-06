@@ -8,29 +8,32 @@
     </head> 
 <body>
     <div id="wrap">
-        <div id="header">
-            <div class="logo">
-                <a href="{:U('index/Index/index')}" style="width:960px;text-align:center;"><img src="../Public/images/logo.png" border="0" alt="" style="display:inline-block;"></a>
-            </div>
-            <!--<a href="{:U('index/Index/index')}"><span type="button" class="returnbutton"></span></a>-->
+        <div class="header_logo">
+            <a href="{:U('index/Index/index')}"><img border="0" src="../Public/images/logo.png"></a>
         </div>
+            <!--<a href="{:U('index/Index/index')}"><span type="button" class="returnbutton"></span></a>-->
         <div id="content">
             <p class="content_tip">你可以选择下方合作网站帐号直接登录爱健美，一分钟完成注册</p>
             <div class="choice_login clearfix">
                 <div class="lay_target">
-                    <a class="logo_1 target" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1">
+                    <!-- old part<a class="logo_1 target" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1">
                         <span class="target_login">
                             用新浪微博登陆
                         </span>
-                    </a>
+                    </a>-->
+                    <div class="accounts" style="height:40px;"><a class="copsina" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1" style="width:128px;height:32px;"></a></div>
                 </div>
-                <!--<div class="lay_target">
-                    <a class="logo_2 target">
+                <div class="lay_target">
+                    <!--old part <a class="logo_2" style="background:url(../images/Connect_logo_1.png);">
                         <span class="target_login">
+                        <a class="copqq"  href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100328471
+&redirect_uri=www.aijianmei.com&scope=" style="width:128px;height:32px;"></a>
                             用QQ帐号登陆
                         </span>
-                    </a>
-                </div>-->
+                    </a>-->
+                <div class="accounts" style="height:40px;"><a class="copqq" style="width:128px;height:32px;" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100328471 &redirect_uri=www.aijianmei.com/qqlogin.php&scope="></a></div>
+                </div>
+
                 <!--<div class="lay_target">
                     <a class="logo_3 target" href="https://graph.renren.com/oauth/authorize?client_id=229477&redirect_uri=http://dev.aijianmei.com&response_type=token">
                         <span class="target_login changesize">
@@ -120,7 +123,7 @@
                         </span>
                     </a>
                 </div>-->
-                <p class="local_mas">已经有爱健美帐号？<a href="{:U('home/Public/login')}" class="click_this">请从这里登陆</a></p>
+                <p class="local_mas">已经有爱健美帐号？<a href="#" class="click_this">请从这里登陆</a></p>
             </div>
         </div>
         <div id="footer">

@@ -1293,6 +1293,12 @@ function getUserFace($uid,$size){
 	}else{
 		$type = 'big';
 	}
+        $apiImg= M('')->query("select profileImageUrl from ai_others where uid='".$uid."'");
+        if($apiImg){
+            $userface=$apiImg[0]['profileImageUrl'];
+            return $userface;
+        }
+        
 	$uid_to_path = convertUidToPath($uid);
 	$userface = SITE_PATH.'/data/uploads/avatar' . $uid_to_path . '/' . $type. '.jpg';
 	if(is_file($userface)){
@@ -2683,6 +2689,38 @@ function getRequestUri(){
 	}
 	return $uri;
 }
+
+/*
+make nearly date for title
+name _returnNdate($date) $date type time stamp
+return 1天前（1周内） x小时前 2013-05-06（一周外）;
+*/
+if(!function_exists('_returnNdate')){
+	function _returnNdate($date){
+		$dateStringArr=array(
+			'1'=>'%s小时前',
+			'2'=>'%s天前',
+			'3'=>'%s');
+		$now=time();
+		$weekStamp=604800;
+		$dayStamp=86400;
+		$todayStart=strtotime(date('Y-m-d',time())." 00:00:00");
+		$todayEnd=strtotime(date('Y-m-d',time())." 23:59:59");
+		$etime=$now-$date;
+		if($etime<$dayStamp){
+			$hoursNum=$etime/3600;
+			return str_replace("%s",(~~$hoursNum),$dateStringArr['1']);
+		}elseif($etime<$weekStamp&&$etime>$dayStamp){
+			$daysNum=$etime/(3600*24);
+			return str_replace("%s",(~~$daysNum),$dateStringArr['2']);
+		}
+		else{
+			return str_replace("%s",date("Y-m-d",$date),$dateStringArr['3']);
+		}
+		return ;
+	}
+}
+
 
 // getAppIconUrl
 function getAppIconUrl($icon,$app='gift'){

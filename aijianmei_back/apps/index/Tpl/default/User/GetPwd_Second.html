@@ -1,0 +1,35 @@
+<include file="../Public/header" />		
+<script type='text/javascript'>
+function sendEmail() {
+	var email =$("#email").val();
+	var sendact=$("#sendact").val();
+	$.post('index.php?app=index&mod=User&act=sendemail&sendact=resend', {'email':email,'sendact':sendact}, function(m) {
+	if(m==1) {
+		alert(m);
+	}else {
+		
+	}
+	})
+}
+</script>
+		
+<link rel="stylesheet" href="../Public/css/retrieve.css" />
+	<div id="content" class=" clearfix">
+		<h1 class="title">找回密码</h1>
+			<div class="text_1">
+				<ol class="title_1 clearfix">
+					<li><a>填写绑定邮箱</a></li>
+					<li><a class="current">接受密码找回邮件</a></li>
+					<li><a>重置密码</a></li>
+				</ol>
+			</div>
+			<div class="text_2">
+			<php> if($is_send==1){</php>
+			<p style="color:red;">邮件已经发送，请注意查收！</p>
+			<php> }</php>
+			<!--<a href="/index.php?app=index&mod=User&act=getmailcode" class="next">下一步</a>-->
+			<p>没有收到我们的邮箱？</p>
+			<p>到邮件垃圾箱找找，或者点击这里<a href="/index.php?app=index&mod=User&act=sendemail&sendact=resend" class="again">重新发送找回密码邮件</a></p>
+		</div>
+	</div>
+<include file="../Public/footer" />

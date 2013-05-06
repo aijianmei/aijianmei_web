@@ -14,97 +14,90 @@
         
 	<title>爱健美</title>
 	<link rel="stylesheet" href="css/public.css" />
-	<link rel="stylesheet" href="css/article.css" />
+	<!-- <link rel="stylesheet" href="css/article.css" /> -->
 <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
+	<div class="header_wrapper">
 		<div class="body"></div>
-			<div class="sheet">
-				<div class="log">
-					<button class="close_btn"></button>
-					<h3>登陆爱健美</h3>
-					<div class="ai_account">
-						<form action="">
-							<h4 class="tit">使用注册邮箱登陆</h4>
-							<div class="text_input">
-								<label for="mail">爱健美注册邮箱</label>
-								<input type="text" id="mail"/>
-								<span class="tip">请输入正确的邮箱地址</span>
-							</div>
-							<div class="text_input">
-								<label for="psd">密码</label>
-								<input type="password" id="psd"/>
-								<span class="tip">密码长度为6~16个的数字或者字母</span>
-							</div>
-							<button type="submit" class="submit_btn">登陆</button>
-							<a href="retrieve.html" class="forget">忘记密码</a>
-						</form>
-					</div>
-					<div class="other_account clearfix">
-						<h4 class="tit">使用合作网站账号登陆</h4>
-						<div class="accounts">
-							<a class="cop1" href="#"></a>
-							<a class="cop2" href=""></a>
-							<a class="cop3" href=""></a>
-							<a class="cop4" href=""></a>
-							<a class="cop5" href=""></a>
-							<a class="cop6" href=""></a>
-						</div>
-						<span class="clearfix">未注册过爱健美也可以直接登陆哦</span>
-						
-					</div>
-				</div>	
-			</div><!-- End sheet -->
-			<div class="wrapper">
-				<div id="header">
-					<ul class="top">
-						<li><a id="login">登陆 </a>|</li>
-						<li><a href="account.html">注册 </a>|</li>
-						<li class="more"><a href="#">消息<span class="triangle"></span> </a>|
-							<ul class="message">
-								<li><a href="letter.html">查看私信</a></li>
-								<li><a href="comment.html">查看评论</a></li>
-								<li><a href="mention.html">查看@我</a></li>
-								<li><a href="fans.html">查看粉丝</a></li>
-								<li><a href="inform.html">查看通知</a></li>
-								<li><a href="order.html">查看预约</a></li>
-							</ul>
-						</li>
-						<li class="more"><a href="">帐号<span class="triangle"></span> </a>
-							<ul class="account">
-								<li><a href="information.html">个人资料</a></li>
-								<li><a href="receive.html">收货地址</a></li>
-								<li><a href="mod_face.html">修改头像</a></li>
-								<li><a href="bind.html">绑定帐号</a></li>
-								<li><a href="">退出帐号</a></li>
-							</ul>
-						</li>
-					</ul>
-					<form class="search">
-						<fieldset>
-							<legend>搜索</legend>
-							<label for="search_title">搜索：</label>
-							<input type="text" id="search_title" class="search_txt"/>
-							<button class="search_btn hide_text" type="submit"></button>
-						</fieldset>
-					</form>
-					<div class="logo">
-						<a href="http://www.aijianmei.com">
-							<img src="images/logo.png" alt="aijianmei" />
-						</a>
-					</div>
-					<ul id="nav">
-						<li class="home"><a href="index.html"><span>首页</span></a></li>
-						<li class="store"><a href="store.html"><span>商店</span></a></li>
-						<li><a href="plan.html">健身计划</a></li>
-						<li><a href="training.html">锻炼</a></li>
-						<li><a href="nutri.html">营养</a></li>
-						<li><a href="add.html">补充</a></li>
-						<li class="forum"><a href="activity.html">论坛</a></li>
-						<li><a href="pal.html">交友互动</a></li>
-					</ul>
-				</div>
-		<div id="content">
+        <div class="sheet">
+            <div class="log">
+                <button class="close_btn"></button>
+                <h3>登录爱健美</h3>
+                <div class="ai_account">
+                    <form action="/index.php?app=home&mod=Public&act=doLogin" method="post">
+                        <h4 class="tit">使用注册邮箱登录</h4>
+                        <div class="text_input">
+                            <label for="mail">爱健美注册邮箱</label>
+                            <input type="text" id="mail" name="email" />
+                            <span class="tip">请输入正确的邮箱地址</span>
+                        </div>
+                        <div class="text_input">
+                            <label for="psd">密码</label>
+                            <input type="password" id="psd" name="password" />
+                            <span class="tip">密码长度为6~16个的数字或者字母</span>
+                        </div>
+                        <div class="checkCode">
+                        </div>
+                        <button type="submit" class="submit_btn">登录</button>
+                    </form>
+                </div>
+                <div class="other_account clearfix">
+                    <h4 class="tit">使用合作网站账号登录</h4>
+                    <div class="accounts">
+	                    <a class="copsina" style="width:128px;height:32px;" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a>
+	                    <a class="copqq" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100328471 &redirect_uri=www.aijianmei.com/qqlogin.php&scope=" style="width:128px;height:32px;"></a>
+                      </div>
+                    <span class="clearfix">未注册过爱健美也可以直接登录哦</span>
+                    <a class="cop5" href="{:U('index/Index/selectRegister')}">爱健美注册</a>	                
+                </div>
+            </div>	
+        </div>
+        <div class="head">
+            <div class="most_top">
+                <ul class="top_ms clearfix">
+                    <li><a class="login">登录 </a>|</li>
+                    <li><a href="account.html">注册 </a></li>
+                </ul>
+                <ul class="after_ms">
+                    <li class="person_massage">
+                        <div>
+                            <img alt="no" />
+                            <span>kon</span>
+                        </div>
+                    </li>
+                    <li class="more"><a href="">帐号<span class="triangle"></span> </a>
+                        <ul class="account">
+                            <li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
+                            <li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
+                        </ul>
+                    </li>
+                    <li class="special_buy">
+                        <a class="car_buy">购物车</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="header">
+                <div class="h_bg">
+                    <a href="/index.php?app=index"><div class="logo_1">logo</div></a>
+                    <ul class="nav">
+                        <li class="nav_current"><i class="ag_current"></i><a href="index.html"><span class="home">首页</span></a></li>
+                        <li><i class="ag_current"></i><a href='#'><span class="store">商店</span></a></li>
+                        <li><i class="ag_current"></i><a href="plan.html">健身计划</a></li>
+                        <li><i class="ag_current"></i><a href="training.html">锻炼</a>
+                        </li>
+                        <li><i class="ag_current"></i><a href="nutri.html">营养</a>
+                        </li>
+                        <li><i class="ag_current"></i><a href="add.html">辅助品</a></li>
+                        <li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
+                        <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+	</div>
+	<div class="wrapper">
+		<div id="content" class="clearfix">
 			<div class="content_left clearfix">
 				<h2 class="title_1">爱健美文章/锻炼/锻炼文章/文章名字</h2>
 				<div class="essay_ct">
@@ -152,7 +145,31 @@
 							内胆固醇合成酶的活性，还可减少胆固醇的吸收。
 						</p>
 					</div>
-					<div class="web_expend_2">
+			<!-- 					outside begin 2013/4/2 -->
+						<div class="share_part">
+							<span class="wrap_like">
+								<a class="click_like"></a>
+								<span class="num_like">111</span>
+							</span>
+							<span class="click_share">
+								我要分享:
+								<a class="share_obj_1">腾讯</a>
+								<a class="share_obj_2">微博</a>
+							</span>
+						</div>
+						<div class="login_resgister">
+							<p>
+								还没有<a>登录</a>不能发表评论哦！还没有帐号吗？也可以现在就<a>注册</a>
+							</p>
+						</div>
+						<wb:like appkey="5Q8YPj"></wb:like>
+						<div class="border_comment">
+							<span class="word_num">0/300</span><div class="textarea"><textarea class="comment_inp" name="comment">有什么感想，来说说吧</textarea></div>
+							<a class="comment">发表评论</a>
+						</div>
+
+			<!-- 					outside end 2013/5/2 -->
+					<!-- <div class="web_expend_2">
 						<span class="read_time">
 							<a style="height:16px;width:52px;line-height:16px;background:0;">
 								<span>阅读</span>
@@ -174,16 +191,8 @@
 						<a class="collect">收藏</a>
 						
 						
-					</div>
-					<wb:like appkey="5Q8YPj"></wb:like>
-					<div class="border_comment">
-						<span class="word_num">0/300</span>
-						<span>登录</span>|
-						<span>注册</span>
-						
-						<div class="textarea"><textarea class="comment_inp" name="comment">有什么感想，来说说吧</textarea></div>
-						<a class="comment" id="not_login">发表评论</a>
-					</div>
+					</div> -->
+					
 					<div class="check_comment">
 						<a class="comment_1">全部评论(0)</a>
 					</div>
@@ -209,25 +218,78 @@
 						</div>
 						<div class="cm_bottom">
 							<h5 class="title_5">推荐精华</h5>
-							<div class="target">
+							<div class="target clearfix">
 								<div class="target_pic">
 									<img src="images/article/9.png" alt="no" />
-									<span class="care">关注</span>
 								</div>
-								<a class="name">huifei</a>
-								<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
-								<p class="bottom_ms">
-									<span class="to">
-										<a class="sprite_8 tosprite_8"><span class="praise">100</span></a>
-										<a>转发<span>(0)</span></a>
-										<a>回复<span>(0)</span></a>
-									</span>	
-									<span>22个小时前</span>
-									<span>来自<em></em></span>
-									
-								</p>
+								<div class="target_content">
+									<span class="staircase">1楼</span>
+									<a class="name">huifei</a>
+									<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
+									<p class="bottom_ms">
+										<span class="to">
+											<a class="fover">支持[0]</a>
+											<a class="write_back">回复</a>
+										</span>	
+										<span>22个小时前</span>
+										<span>来自<em></em></span>	
+									</p>
+								</div>
+							</div>
+							<div class="target clearfix">
+								<div class="target_pic">
+									<img src="images/article/9.png" alt="no" />
+								</div>
+								<div class="target_content">
+									<span class="staircase">2楼</span>
+									<a class="name">huifei</a>
+									<div class="lay_target clearfix">
+										<div class="target_content">
+											<span class="staircase">1楼</span>
+											<a class="name">huifei</a>
+											<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
+										</div>
+									</div>
+									<p>asdfasdfasd</p>
+									<p class="bottom_ms">
+										<span class="to">
+											<a class="fover">支持[0]</a>
+											<a class="write_back">回复</a>
+										</span>	
+										<span>22个小时前</span>
+										<span>来自<em></em></span>	
+									</p>
+								</div>
+							</div>
+							<div class="target clearfix">
+								<div class="target_pic">
+									<img src="images/article/9.png" alt="no" />
+								</div>
+								<div class="target_content">
+									<span class="staircase">3楼</span><a class="name">huifei</a>
+									<p>高兴是人类最原始的最求，只能让大家高兴，管他是那个国家的。中国人为什么总被排挤在潮流之外，其实都是中国人自己造成的，当别人都在高兴的时候，中国人则是在旁边指指点点，这不好，那不好，好像只有这样才能显出自己的高人一等。</p>
+									<p class="bottom_ms">
+										<span class="to">
+											<a class="fover">支持[0]</a>
+											<a class="write_back">回复</a>
+										</span>	
+										<span>22个小时前</span>
+										<span>来自<em></em></span>	
+									</p>
+									<!-- <div class="post_area">
+										<span class="btn_back">x</span>
+										<div class="part_back">
+											<textarea class="pop_content"></textarea>
+											<div class="part_sure">
+												<span class="rule">登录(请登录发言，并遵守相关规定)</span>
+												<input type="button" value="回复" class="sure_back" />
+											</div>
+										</div>
+									</div> -->
+								</div>
 							</div>
 						</div>	
+
 					</div>
 				</div>
 			</div>
@@ -295,8 +357,9 @@
 				</div>
 			</div>
 		</div>
-		<div id="footer">
-		</div>
+	</div>
+	<div id="footer">
+	</div>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/public.js"></script>
 	<script type="text/javascript">
@@ -306,6 +369,50 @@
 				time++;
 				$(this).children().html(time)
 			})
+			var aijianmei = {
+				newdom : new getdom,
+				removechlid : function(obj_1,obj_2){
+					obj_1.removeChild(obj_1.lastChild);
+					obj_2.className = "write_back";
+				},
+				circle : function(obj,obj_1,obj_2){
+					var len = obj.length;
+					for(var i = 0;i < len;i++){
+						obj[i].onclick = function(){
+							aijianmei.removechlid(obj_1,obj_2);
+						}
+					}
+				},
+				answer : function(obj,text){
+					target_content = obj.parentNode.parentNode.parentNode;
+					if(obj.className != 'write_back write_click'){
+						var div = document.createElement('div');
+						div.innerHTML = text;
+						target_content.appendChild(div);
+						obj.className = "write_back write_click";
+						if(aijianmei.newdom.getElementsByClass('btn_back')){
+							var btn_back = aijianmei.newdom.getElementsByClass('btn_back');
+							aijianmei.circle(btn_back,target_content,obj)
+						}
+					}
+					else{
+						aijianmei.removechlid(target_content,obj);	
+					}				
+				}
+			}
+			var init = function(){
+				var newdom = new getdom,
+					write_back = newdom.getElementsByClass('write_back'),
+					len = write_back.length,
+					content = '<div class="post_area"><a class="btn_back">x</a><div class="part_back"><textarea class="pop_content"></textarea><div class="part_sure"><span class="rule">登录(请登录发言，并遵守相关规定)</span><input type="button" value="回复" class="sure_back" /></div></div></div>';
+					for(var i = 0;i < len;i++){
+						write_back[i].index = i;
+						write_back[i].onclick = function(){
+							aijianmei.answer(this,content);
+						}
+					}	
+			}
+			init()
 	</script>
 </body>
 </html>

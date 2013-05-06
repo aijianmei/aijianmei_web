@@ -60,7 +60,7 @@ class IndexAction extends AdministratorAction {
 
         //内容
         $menu['content'] 	=   array(
-            '内容管理'		=>  array(
+            '内容管理'		=>  array(                
                 '广告管理'	=>	U('admin/Content/ad'),
                 '模板管理'	=>	U('admin/Content/template'),
                 '附件管理'	=>	U('admin/Content/attach'),
@@ -70,6 +70,7 @@ class IndexAction extends AdministratorAction {
                 '动态管理'	=>	U('admin/Content/feed'),
                 '举报管理'	=>	U('admin/Content/denounce'),
                 '管理日志'   =>	U('admin/Content/adminLog'),
+                '底部内容管理'        =>      U('admin/Content/footer'),
                 '用户反馈管理'	=>	U('admin/Content/feedback'),
             ),
         );
@@ -136,7 +137,8 @@ class IndexAction extends AdministratorAction {
             ),
             '天天锻炼'     => array(
                 '添加'    => U('admin/Article/addDaily'),
-                '管理'    => U('admin/Article/daily'),	
+                '管理'    => U('admin/Article/daily'),
+				'批量导入'    => U('admin/Article/bulkImport'),				
             ),
             '推荐商品'     => array(
                 '添加'    => U('admin/Article/addPromote'),

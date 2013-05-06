@@ -1,50 +1,97 @@
-<div id="footer">
-					<div class="f_list">
-						<h4>发现爱健美</h4>
-						<ul id="app">	
-							<li><a href="store.html">爱健美商店</a></li>
-							<li><a href="training.html">锻炼</a></li>
-							<li><a href="plan.html">健身计划</a></li>
-							<li><a href="nutri.html">营养</a></li>
-							<li><a href="add.html">补充</a></li>
-							<li><a href="pal.html">交友互动</a></li>
-						</ul>
-					</div>
-					<div class="f_list">
-						<h4>获取帮助</h4>
-						<ul id="article">						
-							<li><a href="help.html">新手指南</a></li>
-							<li><a href="direct.html">社区指导原则</a></li>
-							<li><a href="feedback.html">意见反馈</a></li>
-						</ul>
-					</div>
-					<div class="f_list">
-						<h4>关于我们</h4>
-						<ul id="video">						
-							<li><a href="about_us.html">关于爱健美</a></li>
-							<li><a href="contact.html">联系我们</a></li>
-							<li><a href="join.html">加入爱健美</a></li>
-							<li><a href="ad.html">广告投放与品牌推广</a></li>
-							<li><a href="privacy.html">隐私政策</a></li>
-						</ul>
-					</div>
-					<div class="f_list">
-						<h4>更多</h4>
-						<ul id="teach">					
-							<li><a href="app.html">下载IOS客户端</a></li>
-							<li><a href="app.html">下载Android客户端</a></li>
-							<li><a href="links.html">友情链接</a></li>
-						</ul>
-					</div>
-					<div class="f_list login" >
-						<h4>关注我们</h4>
-						<ul id="about">
-							<li class="sina"><a href="http://weibo.com/aijianmei?topnav=1&wvr=5" target="_blank">新浪微博</a></li>
-							<li class="tencent"><a href="http://t.qq.com/aijianmeiweibo" target="_blank">腾讯微博</a></li>
-							<li class="netease"><a href="http://t.163.com/aijianmei" target="_blank">网易微博</a></li>
-							<li class="public"><a href="#" target="_blank">公共主页</a></li>
-							<li class="qZone"><a href="http://user.qzone.qq.com/2816973844/main#home" target="_blank">QQ空间</a></li>
-							<li class="douban"><a href="#" target="_blank">豆瓣</a></li>
-						</ul>		
-					</div>
-				</div>
+                <div id="footer">
+                    <div class="f_list">
+                        <h4>发现爱健美</h4>
+                        <ul id="app">	
+                            <li><a href="<?php echo $_buttomTagInfo['aijianmei_shop']['url']?>"><?php echo $_buttomTagInfo['aijianmei_shop']['name']?></a></li>
+                            <li><a href="<?php echo $_buttomTagInfo['train']['url']?>"><?php echo $_buttomTagInfo['train']['name']?></a></li>
+                            <li><a href="<?php echo $_buttomTagInfo['plan']['url']?>"><?php echo $_buttomTagInfo['plan']['name']?></a></li>
+                            <li><a href="<?php echo $_buttomTagInfo['nutri']['url']?>"><?php echo $_buttomTagInfo['nutri']['name']?></a></li>
+                            <li><a href="<?php echo $_buttomTagInfo['append']['url']?>"><?php echo $_buttomTagInfo['append']['name']?></a></li>
+                            <li><a href="<?php echo $_buttomTagInfo['mkfriend']['url']?>"><?php echo $_buttomTagInfo['mkfriend']['name']?></a></li>
+                        </ul>
+                    </div>
+                    <div class="f_list">
+                        <h4>获取帮助</h4>
+                        <ul id="article">
+                            <li><a href="<?php echo $_buttomTagInfo['guide']['url']?>"><?php echo $_buttomTagInfo['guide']['name']?></a></li>
+                            <li><a href="<?php echo $_buttomTagInfo['direct']['url']?>"><?php echo $_buttomTagInfo['direct']['name']?></a></li>
+                            <li><a href="<?php echo $_buttomTagInfo['feedback']['url']?>"><?php echo $_buttomTagInfo['feedback']['name']?></a></li>
+                        </ul>
+                    </div>
+                    <div class="f_list">
+                        <h4>关于我们</h4>
+                        <ul id="video">
+                        <li><a href="<?php echo $_buttomTagInfo['about_us']['url']?>"><?php echo $_buttomTagInfo['about_us']['name']?></a></li>
+                            <li><a href="<?php echo $_buttomTagInfo['contact']['url']?>"><?php echo $_buttomTagInfo['contact']['name']?></a></li>
+                            <li><a href="<?php echo $_buttomTagInfo['join']['url']?>"><?php echo $_buttomTagInfo['join']['name']?></a></li>
+                            <li><a href="<?php echo $_buttomTagInfo['ad']['url']?>"><?php echo $_buttomTagInfo['ad']['name']?></a></li>
+                            <li><a href="<?php echo $_buttomTagInfo['privacy']['url']?>"><?php echo $_buttomTagInfo['privacy']['name']?></a></li>
+                        </ul>
+                    </div>
+                    <div class="f_list">
+                        <h4>更多</h4>
+                        <ul id="teach">
+                            <li><a href="#"><?php echo $_buttomTagInfo['IOSClient']['name']?></a></li>
+                            <li><a href="#"><?php echo $_buttomTagInfo['AndroidClient']['name']?></a></li>
+                            <li><a href="#"><?php echo $_buttomTagInfo['friendlyConn']['name']?></a></li>
+                        </ul>
+                    </div>
+                    <div class="f_list Login" >
+                        <h4>关注我们</h4>
+                        <ul id="about">
+                            <li class="sina"><a href="http://weibo.com/aijianmei?topnav=1&wvr=5" target="_blank">新浪微博</a></li>
+                            <li class="tencent"><a href="http://t.qq.com/aijianmeiweibo" target="_blank">腾讯微博</a></li>
+                            <!--<li class="netease"><a href="http://t.163.com/aijianmei" target="_blank">网易微博</a></li>-->
+                            <li class="public"><a href="#" target="_blank">公共主页</a></li>
+                            <!--<li class="qZone"><a href="http://user.qzone.qq.com/2816973844/main#home" target="_blank">QQ空间</a></li>-->
+                            <li class="douban"><a href="#" target="_blank">豆瓣</a></li>
+                        </ul>		
+                    </div>
+                </div><!--Footer End-->
+                <div id="lower_footer">
+                    <span>广州加伦信息科技有限公司- 粤ICP备12085654号</span>
+                    <a href="/index.php?app=index">www.aijianmei.com</a>
+                </div>
+            </div>
+<!-- 添加返回顶部按钮 -->
+    <!-- 返回顶部按钮 -->
+            
+            <script type="text/javascript">
+                var USER = {
+                        'id' : <php>echo $uid ? $uid : '0'</php>,
+                        'name' : '',
+                }
+            </script>
+
+            <script type="text/javascript" src="../Public/js/jquery.js"></script>
+            <script type="text/javascript" src="../Public/js/public.js"></script>
+            <script type="text/javascript" src="../Public/js/{$cssFile}.js"></script>
+            <script type='text/javascript' charset='utf-8'>//验证码刷新             $(function(){
+                $("#safecode,#reloadcode").click(function(event)
+                {
+                    $("#safecode").load("/public/captcha.php" + "?timestamp=" + (new Date()).getTime(),{},function(responseText, textStatus, XMLHttpRequest)
+                    {
+                        $("#safecode").attr("src","/public/captcha.php");
+                    });
+                });
+            })
+			</script>
+			<div style="display:none;">
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb52abe7bcc4737395810d9ba53b40287' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-39980483-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</div>
+</body>
+</html>

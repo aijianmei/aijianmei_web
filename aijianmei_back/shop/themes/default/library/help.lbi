@@ -13,34 +13,297 @@
     
    <div class="clearfix">
 <dl>
-  <dt class="dt1"><a href="article_cat-6.html" title="购物指南" rel="nofollow">购物指南</a></dt>
-    <dd><a href="help.php?id=11" title="新手需知" rel="nofollow">新手需知</a></dd>
-    <dd><a href="help.php?id=62" title="订单状态" rel="nofollow">订单状态</a></dd>
-    <dd><a href="help.php?id=65" title="购物流程" rel="nofollow">购物流程</a></dd>
+  <dt class="dt1"><a href="{$_buttomTagInfo.shopguide.url}" title="{$_buttomTagInfo.shopguide.name}" rel="nofollow">{$_buttomTagInfo.shopguide.name}</a></dt>
+    <dd><a href="{$_buttomTagInfo.shop_need_know.url}" title="{$_buttomTagInfo.shop_need_know.name}" rel="nofollow">{$_buttomTagInfo.shop_need_know.name}</a></dd>
+    <dd><a href="{$_buttomTagInfo.orderinfo.url}" title="{$_buttomTagInfo.orderinfo.name}" rel="nofollow">{$_buttomTagInfo.orderinfo.name}</a></dd>
+    <dd><a href="{$_buttomTagInfo.shopprocess.url}" title="{$_buttomTagInfo.shopprocess.name}" rel="nofollow">{$_buttomTagInfo.shopprocess.name}</a></dd>
   </dl>
 <dl>
-  <dt class="dt2"><a href="article_cat-7.html" title="快递发货" rel="nofollow">快递发货</a></dt>
-    <dd><a href="help.php?id=12" title="配送范围 " rel="nofollow">配送范围</a></dd>
-    <dd><a href="help.php?id=13" title="配送方式 " rel="nofollow">配送方式</a></dd>
-    <dd><a href="help.php?id=14" title="收货验收" rel="nofollow">收货验收</a></dd>
+  <dt class="dt2"><a href="{$_buttomTagInfo.expressdelivery.url}" title="{$_buttomTagInfo.expressdelivery.name}" rel="nofollow">{$_buttomTagInfo.expressdelivery.name}</a></dt>
+    <dd><a href="{$_buttomTagInfo.shoprange.url}" title="{$_buttomTagInfo.shoprange.name} " rel="nofollow">{$_buttomTagInfo.shoprange.name}</a></dd>
+    <dd><a href="{$_buttomTagInfo.shipmethos.url}" title="{$_buttomTagInfo.shipmethos.name} " rel="nofollow">{$_buttomTagInfo.shipmethos.name}</a></dd>
+    <dd><a href="{$_buttomTagInfo.acceptance.url}" title="{$_buttomTagInfo.acceptance.name}" rel="nofollow">{$_buttomTagInfo.acceptance.name}</a></dd>
   </dl>
 <dl>
-  <dt class="dt3"><a href="article_cat-8.html" title="如何支付" rel="nofollow">如何支付</a></dt>
-    <dd><a href="help.php?id=15" title="网银支付 " rel="nofollow">网银支付</a></dd>
-    <dd><a href="help.php?id=16" title="支付宝支付" rel="nofollow">支付宝支付</a></dd>
-    <dd><a href="help.php?id=53" title="预存款支付" rel="nofollow">预存款支付</a></dd>
+  <dt class="dt3"><a href="{$_buttomTagInfo.howtopay.url}" title="{$_buttomTagInfo.howtopay.name}" rel="nofollow">{$_buttomTagInfo.howtopay.name}</a></dt>
+    <dd><a href="{$_buttomTagInfo.onlinebankingpay.url}" title="{$_buttomTagInfo.onlinebankingpay.name} " rel="nofollow">{$_buttomTagInfo.onlinebankingpay.name}</a></dd>
+    <dd><a href="{$_buttomTagInfo.alipay.url}" title="{$_buttomTagInfo.alipay.name}" rel="nofollow">{$_buttomTagInfo.alipay.name}</a></dd>
+    <dd><a href="{$_buttomTagInfo.prepayment.url}" title="{$_buttomTagInfo.prepayment.name}" rel="nofollow">{$_buttomTagInfo.prepayment.name}</a></dd>
   </dl>
 <dl>
-  <dt class="dt4"><a href="article_cat-9.html" title="售后服务" rel="nofollow">售后服务</a></dt>
-    <dd><a href="help.php?id=18" title="退换货流程" rel="nofollow">退换货流程</a></dd>
-    <dd><a href="help.php?id=19" title="退换货政策 " rel="nofollow">退换货政策</a></dd>
-    <dd><a href="help.php?id=20" title="退款说明" rel="nofollow">退款说明</a></dd>
+  <dt class="dt4"><a href="{$_buttomTagInfo.salesservice.url}" title="{$_buttomTagInfo.salesservice.name}" rel="nofollow">{$_buttomTagInfo.salesservice.name}</a></dt>
+    <dd><a href="{$_buttomTagInfo.returnprocess.url}" title="{$_buttomTagInfo.returnprocess.name}" rel="nofollow">{$_buttomTagInfo.returnprocess.name}</a></dd>
+    <dd><a href="{$_buttomTagInfo.returnpolicy.url}" title="{$_buttomTagInfo.returnpolicy.name} " rel="nofollow">{$_buttomTagInfo.returnpolicy.name}</a></dd>
+    <dd><a href="{$_buttomTagInfo.refundinstructions.url}" title="{$_buttomTagInfo.refundinstructions.name}" rel="nofollow">{$_buttomTagInfo.refundinstructions.name}</a></dd>
   </dl>
 <dl>
-  <dt class="dt5"><a href="article_cat-10.html" title="常见问题" rel="nofollow">常见问题</a></dt>
-    <dd><a href="help.php?id=21" title="投诉建议" rel="nofollow">投诉建议</a></dd>
-    <dd><a href="help.php?id=22" title="服务条款" rel="nofollow">服务条款</a></dd>
-    <dd><a href="help.php?id=66" title="非会员购物指南" rel="nofollow">非会员购物指南</a></dd>
+  <dt class="dt5"><a href="{$_buttomTagInfo.askedquestions.url}" title="{$_buttomTagInfo.askedquestions.name}" rel="nofollow">{$_buttomTagInfo.askedquestions.name}</a></dt>
+    <dd><a href="{$_buttomTagInfo.about.url}" title="{$_buttomTagInfo.about.name}" rel="nofollow">{$_buttomTagInfo.about.name}</a></dd>
+    <dd><a href="{$_buttomTagInfo.termsservice.url}" title="{$_buttomTagInfo.termsservice.name}" rel="nofollow">{$_buttomTagInfo.termsservice.name}</a></dd>
+    <dd><a href="{$_buttomTagInfo.shoppingguide.url}" title="{$_buttomTagInfo.shoppingguide.name}" rel="nofollow">{$_buttomTagInfo.shoppingguide.name}</a></dd>
   </dl>
 </div>
 </div>
+<script type="text/javascript">
+            //添加事件监听
+            var addevent = function(element,type,handle){
+                if(element.addEventListener){
+                    element.addEventListener(type,handle,false)
+                }
+                else if(element.attachEvent){
+                    element.attachEvent("on" + type,handle)
+                } 
+                else {
+                    element["on" + type] = handler;
+                    this.AddEvent = function(element, type, handler)
+                    {
+                        element["on" + type] = handler;
+                    };
+                }
+            }
+            //获取dom元素
+            var getdom = function(){
+                this.$ = function(id){
+                    return document.getElementById(id);
+                }
+
+                this.getElementsByClass = function(searchClass,node,tag) {
+                    var classElements = new Array();
+                    if ( node == null )
+                            node = document;
+                    if ( tag == null )
+                            tag = '*';
+                    var els = node.getElementsByTagName(tag);
+                    var elsLen = els.length;
+                    var pattern = new RegExp("(^|\\s)"+searchClass+"(\\s|$)");
+                    for (i = 0, j = 0; i < elsLen; i++) {
+                            if ( pattern.test(els[i].className) ) {
+                                    classElements[j] = els[i];
+                                    j++;
+                            }
+                    }
+                    return classElements;
+                }
+                this.GetCurrentStyle = function(obj, prop){
+                    if (obj.currentStyle){ //IE
+                        return obj.currentStyle[prop];
+                    }
+                    else if (window.getComputedStyle){ //非IE
+                        propprop = prop.replace (/([A-Z])/g, "-$1");
+                        propprop = prop.toLowerCase ();
+                        return document.defaultView.getComputedStyle(obj,null)[propprop];
+                    }
+                    return null;
+                }
+            }   
+
+            var aijianmei = {
+                newdom : new getdom,
+                getclass : function(obj,T){
+                  if(T){
+                    return aijianmei.newdom.getElementsByClass(obj);
+                  }
+                  else{
+                    return aijianmei.newdom.getElementsByClass(obj)[0];
+                  }
+                },
+                p_fixed : function(obj){
+                    if(navigator.userAgent.indexOf("MSIE")>0){
+                        obj.className = 'header'
+                    }
+                    else{
+                        window.onscroll = function(){
+                            var top = document.body.scrollTop || window.pageYOffset;
+                            if(top >= 50){
+                                obj.className = 'header p_fixed';
+                            }
+                            else{
+                                obj.className = 'header'
+                            }       
+                        }
+                    }
+                },
+                hover_1 : function(){
+                  var account = aijianmei.getclass('account');
+                  account.style.display = 'block'
+                },
+                hover_2 : function(){
+                  var account = aijianmei.getclass('account');
+                  account.style.display = 'none'
+                }
+            }
+            var init = function(){
+                var newdom = new getdom,
+                    header = newdom.getElementsByClass('header')[0],
+                    login = newdom.getElementsByClass("login"),
+                    body = newdom.getElementsByClass('body')[0],
+                    sheet = newdom.getElementsByClass('sheet')[0],
+                    close_btn = newdom.getElementsByClass('close_btn')[0],
+                    more = newdom.getElementsByClass('more')[0],
+                    label_1 = newdom.getElementsByClass('label_1')[0],
+                    label_2 = newdom.getElementsByClass('label_2')[0],
+                    len = login.length,
+                    mail = document.getElementById('mail'),
+                    psd = document.getElementById('psd');
+                aijianmei.p_fixed(header);
+                if(more){
+                  addevent(more,'mouseover',aijianmei.hover_1);
+                  addevent(more,'mouseout',aijianmei.hover_2)
+                }
+                  
+                for(var i = 0;i < len;i++){
+                    login[i].onclick = function(){
+                        body.style.display = 'block';
+                        sheet.style.display = 'block';
+                        if(mail.value != ""){
+                          label_1.style.display = 'none';
+                          label_2.style.display = 'none'
+                        }
+                        mail.onfocus = function(){
+                          label_1.style.display = 'none';
+                        }
+                        mail.onblur = function(){
+                          if(this.value == ''){
+                            label_1.style.display = 'block';
+                          }
+                          else{
+                            var e_reg = new RegExp(),
+                                e_reg = /^\w+((_-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|_-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/,
+                                v_mail = mail.value;
+                            if(e_reg.test(v_mail) == false){
+                                newdom.getElementsByClass('tip')[0].style.display = 'inline';
+                            }
+                            else{
+                                newdom.getElementsByClass('tip')[0].style.display = 'none';
+                            }
+                          }
+                        }
+                        psd.onfocus = function(){
+                          label_2.style.display = 'none';
+                        }
+                        psd.onblur = function(){
+                          if(this.value == ''){
+                            label_2.style.display = 'block'
+                          }
+                          else{
+                            var p_reg = new RegExp(),
+                                p_reg = /[0-9A-Za-z]{6,16}/,
+                                v_psd = psd.value;
+                            if(p_reg.test(v_psd) == false){
+                                newdom.getElementsByClass('tip')[1].style.display = 'inline';
+                            }
+                            else{
+                                newdom.getElementsByClass('tip')[1].style.display = 'none';
+                            }
+                          }
+                        }
+                    }
+                }
+                close_btn.onclick = function(){
+                    sheet.style.display = 'none';
+                    body.style.display = 'none';
+                }
+            }
+            init();
+            //对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
+            var fade = {
+                newdom : new getdom,
+                init : function(obj){
+                    var Obj = fade.newdom.getElementsByClass(obj)[0] || document.getElementsByTagName(obj)[0] || document.getElementById(obj);
+                    Obj.onclick = function(event){
+                        var _e = event ? event : window.event;
+                        if(_e.preventDefault){
+                            _e.preventDefault();
+                        }
+                        else{
+                            _e.returnValue = false;
+                        }
+                        fade.handlecontent();
+                        fade.changestyle('1');
+                        this.style.background = '';
+                        var closed = fade.newdom.getElementsByClass('closed')[0],
+                            fade_in = fade.newdom.getElementsByClass('fade_in')[0];
+                        var click_back = function(){
+                            fade.changestyle('0');
+                            // fade_in.removeAttribute('class')
+                            fade_in.className = ''
+                        }
+                        addevent(closed,'click',click_back);
+                        addevent(fade_in,'click',click_back);
+                    }
+                },
+                handlecontent : function(){
+                    var body = document.getElementsByTagName('body')[0],
+                        div_1 = document.createElement('div'),
+                        div_2 = document.createElement('div');
+                    div_1.className = 'fade_in';
+                    div_2.className = 'modal';
+                    div_2.innerHTML = '<div class="modal_header"><a class="closed">×</a><h3>我们正在检测中</h3></div><p class="modal_body">即将推出，敬请期待...</p>';
+                    body.appendChild(div_1);
+                    body.appendChild(div_2);
+                },
+                changestyle : function(T){
+                    var fade_in = fade.newdom.getElementsByClass('fade_in')[0],
+                        modal = fade.newdom.getElementsByClass('modal')[0];
+                    if(isFirefox=navigator.userAgent.indexOf("Firefox")>0){
+                      if(T == '1'){
+                          var i = 0,
+                              top = fade.newdom.GetCurrentStyle(modal,'top');
+                          var round = function(){
+                              setTimeout(function(){
+                                  i = i + 0.05;
+                                  fade_in.style.opacity = i;
+                                  top = parseFloat(top) + 20;
+                                  modal.style.top = top + 'px';
+                                  if(top < 200){
+                                      round()
+                                  }
+                              },1);
+                          }
+                          round()
+                      }
+                      else{
+                          var i = 0.75,
+                              top = fade.newdom.GetCurrentStyle(modal,'top');
+                          var round = function(){
+                              setTimeout(function(){
+                                  i = i - 0.05;
+                                  fade_in.style.opacity = i;
+                                  top = parseFloat(top) - 20;
+                                  modal.style.top = top + 'px';
+                                  if(top > -120){
+                                      round()
+                                  }
+                              },10);
+                          }
+                          round()
+                      }   
+                    }
+                    else{
+                      if(T == '1'){
+                        fade_in.style.opacity = 0.8;
+                        modal.style.top = '200px'
+                      }
+                      else{
+                        fade_in.style.opacity = -0.05;
+                        modal.style.top = '-120px'
+                      }
+
+                    }
+                }
+            };
+            var newdom = new getdom;
+
+            if(newdom.getElementsByClass('forum')[0]){
+                fade.init('forum');
+            }
+            if(newdom.getElementsByClass('friends')[0]){
+                fade.init('friends');
+            }
+            if(newdom.getElementsByClass('my_cart')[0]){
+                fade.init('my_cart');
+            }
+            if(document.getElementById('teach')){
+                fade.init('teach');
+            }
+</script>

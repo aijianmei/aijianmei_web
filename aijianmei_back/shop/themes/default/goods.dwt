@@ -40,6 +40,49 @@ function reg(str){
 </head>
 <body>
 <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="block clearfix">
+</div>
+<!--search start-->
+<div class="shop_search clearfix">
+<div id="search"  class="clearfix">
+  <div class="keys f_l">
+   <script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+            alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+    {if $searchkeywords}
+   {$lang.hot_search} ：
+   {foreach from=$searchkeywords item=val}
+   <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+   {/foreach}
+   {/if}
+  </div>
+  <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="f_r"  style="_position:relative; top:5px;">
+   <select name="category" id="category" class="B_input">
+      <option value="0">{$lang.all_category}</option>
+      {$category_list}
+    </select>
+   <input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}" class="B_input" style="width:110px;"/>
+   <input name="imageField" type="submit" value="" class="go" style="cursor:pointer;" />
+   <a href="search.php?act=advanced_search">{$lang.advanced_search}</a>
+   </form>
+</div>
+</div>
+<!--search end-->
 <!--当前位置 start-->
 <div class="block box">
  <div id="ur_here">
@@ -84,13 +127,13 @@ function reg(str){
 <div class="blank5"></div>
 
  <!-- #EndLibraryItem -->
-<!-- #BeginLibraryItem "/library/goods_related.lbi" -->
+<!-- #BeginLibraryItem " --><!-- /library/goods_related. --><!-- lbi --><!-- " -->
 
 <!-- {if $related_goods} -->
 <div class="box">
      <div class="box_1">
-      <h3><span>{$lang.releate_goods}</span></h3>
-      <div class="boxCenterList clearfix">
+      <!-- <h3><span>{$lang.releate_goods}</span></h3>
+      <div class="boxCenterList clearfix"> -->
       <!--{foreach from=$related_goods item=releated_goods_data}-->
         <ul class="clearfix">
           <li class="goodsimg"><a href="{$releated_goods_data.url}"><img src="{$releated_goods_data.goods_thumb}" alt="{$releated_goods_data.goods_name}" class="B_blue" /></a></li>
@@ -216,12 +259,6 @@ function reg(str){
      <div class="clearfix">
       <p class="f_l">{$goods.goods_style_name}</p>
       <p class="f_r">
-      {if $prev_good}
-      <a href="{$prev_good.url}"><img alt="prev" src="./images/up.gif" /></a>
-      {/if}
-      {if $next_good}
-      <a href="{$next_good.url}"><img alt="next" src="./images/down.gif" /></a>
-      {/if}
       </p>
       </div>
       <ul>
@@ -262,18 +299,6 @@ function reg(str){
       </li>
       <li class="clearfix">
        <dd>
-       <!-- {if $goods.goods_brand neq "" and $cfg.show_brand} 显示商品品牌-->
-       <strong>{$lang.goods_brand}</strong><a href="{$goods.goods_brand_url}" >{$goods.goods_brand}</a>
-       <!--{/if}-->
-       </dd>
-       <dd class="ddR">
-       <!-- {if $cfg.show_goodsweight} 商品重量-->
-       <strong>{$lang.goods_weight}</strong>{$goods.goods_weight}
-       <!-- {/if} -->
-       </dd>
-      </li>
-      <li class="clearfix">
-       <dd>
        <!-- {if $cfg.show_addtime} 上架时间-->
       <strong>{$lang.add_time}</strong>{$goods.add_time}
       <!-- {/if} -->
@@ -296,7 +321,7 @@ function reg(str){
        </dd>
        <dd style="width:48%; padding-left:7px;">
        <strong>{$lang.goods_rank}</strong>
-      <img src="images/stars{$goods.comment_rank}.gif" alt="comment rank {$goods.comment_rank}" />
+        <img src="images/stars{$goods.comment_rank}.gif" alt="comment rank {$goods.comment_rank}" />
        </dd>
       </li>
 
@@ -328,12 +353,12 @@ function reg(str){
       <!--{/if}-->
       <li class="clearfix">
        <dd>
-       <strong>{$lang.amount}：</strong><font id="ECS_GOODS_AMOUNT" class="shop"></font>
+       <strong>支持服务:全国包邮</strong>
        </dd>
        <dd class="ddR">
-       <!-- {if $goods.give_integral > 0} 购买此商品赠送积分-->
-        <strong>{$lang.goods_give_integral}</strong><font class="f4">{$goods.give_integral} {$points_name}</font>
-        <!-- {/if} -->
+       <!-- {if $cfg.show_goodsweight} 商品重量-->
+       <strong>{$lang.goods_weight}</strong>{$goods.goods_weight}
+       <!-- {/if} -->
        </dd>
       </li>
       <!-- {if $goods.bonus_money} 红包-->
@@ -348,7 +373,7 @@ function reg(str){
        </dd>
        <dd class="ddR">
        <!-- {if $cfg.use_integral} 购买此商品可使用积分-->
-       <strong>{$lang.goods_integral}</strong><font class="f4">{$goods.integral} {$points_name}</font>
+       <!-- <strong>{$lang.goods_integral}</strong><font class="f4">{$goods.integral} {$points_name}</font> -->
        <!-- {/if} -->
        </dd>
       </li>
@@ -393,7 +418,7 @@ function reg(str){
       <a href="javascript:addToCart({$goods.goods_id})"><img src="images/bnt_cat.gif" /></a>
       <a href="javascript:collect({$goods.goods_id})"><img src="images/bnt_colles.gif" /></a>
       <!-- {if $affiliate.on} -->
-      <a href="user.php?act=affiliate&goodsid={$goods.goods_id}"><img src='images/bnt_recommend.gif'></a>
+      <!-- <a href="user.php?act=affiliate&goodsid={$goods.goods_id}"><img src='images/bnt_recommend.gif'></a> -->
       <!-- {/if} -->
       </li>
       </ul>
@@ -402,6 +427,31 @@ function reg(str){
    </div>
    <div class="blank"></div>
    <!--商品详情end-->
+
+
+<!-- outside  购买记录 ------------------------------------------------------------>
+
+<!-- #BeginLibraryItem "/library/bought_note_guide.lbi" -->
+
+{insert_scripts files='transport.js,utils.js'}
+<div id="ECS_BOUGHT">{* ECSHOP 提醒您：动态载入bought_notes.lbi，显示当前商品的购买记录 *}{insert name='bought_notes' id=$id}</div>
+ <!-- #EndLibraryItem -->
+
+
+<!--  outside  用户评论 ----------------------------------------------------------->
+
+
+
+<!-- #BeginLibraryItem "/library/comments.lbi" -->
+
+{insert_scripts files='transport.js,utils.js'}
+<div id="ECS_COMMENT"> {* ECSHOP 提醒您：动态载入comments_list.lbi，显示评论列表和评论表单 *}{insert name='comments' type=$type id=$id}</div>
+
+ <!-- #EndLibraryItem -->
+
+
+
+   <!-- outside  商品属性，--------------------------------------------------begin- -->
    <!--商品描述，商品属性 START-->
      <div class="box">
      <div class="box_1">
@@ -471,6 +521,12 @@ function reg(str){
     </script>
   <div class="blank"></div>
   <!--商品描述，商品属性 END-->
+
+  <!-- outside 商品属性 ------------------------------------------------ end -->
+
+
+
+
   <!-- TemplateBeginEditable name="右边可编辑区域" -->
 <!-- #BeginLibraryItem "/library/goods_tags.lbi" -->
 
@@ -478,7 +534,7 @@ function reg(str){
      <div class="box">
      <div class="box_1">
       <h3><span class="text">{$lang.goods_tag}</span></h3>
-      <div class="boxCenterList clearfix ie6">
+      <div class="boxCenterList clearfix ie6">asdfasdf
        <form name="tagForm" action="javascript:;" onSubmit="return submitTag(this)" id="tagForm">
         <p id="ECS_TAGS" style="margin-bottom:5px;">
           <!-- 标记{foreach from=$tags item=tag}-->
@@ -570,17 +626,10 @@ function reg(str){
     <div class="blank5"></div>
     <!-- {/if} -->
  <!-- #EndLibraryItem -->
-<!-- #BeginLibraryItem "/library/bought_note_guide.lbi" -->
 
-{insert_scripts files='transport.js,utils.js'}
-<div id="ECS_BOUGHT">{* ECSHOP 提醒您：动态载入bought_notes.lbi，显示当前商品的购买记录 *}{insert name='bought_notes' id=$id}</div>
- <!-- #EndLibraryItem -->
-<!-- #BeginLibraryItem "/library/comments.lbi" -->
 
-{insert_scripts files='transport.js,utils.js'}
-<div id="ECS_COMMENT"> {* ECSHOP 提醒您：动态载入comments_list.lbi，显示评论列表和评论表单 *}{insert name='comments' type=$type id=$id}</div>
 
- <!-- #EndLibraryItem -->
+
 <!-- TemplateEndEditable -->
   </div>
   <!--right end-->
@@ -615,7 +664,8 @@ function reg(str){
 <!--{/if}-->
 <!--友情链接 end-->
 <div class="blank"></div>
-<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+<div id="lower_footer"><span>广州加伦信息科技有限公司- 粤ICP备12085654号</span><a href="/index.php?app=index">www.aijianmei.com</a></div>
+</div>
 </body>
 <script type="text/javascript">
 var goods_id = {$goods_id};
@@ -663,6 +713,9 @@ function changePriceResponse(res)
       document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
   }
 }
+<!-- {/literal} -->
+</script>
+</html>
 <!-- {/literal} -->
 </script>
 </html>

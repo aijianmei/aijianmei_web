@@ -23,25 +23,6 @@
                             <li class="each_video">
                                 <a href="{:U('index/Index/info', array('type'=>4))}">健身运动员</a>
                             </li>
-                            <!--
-                            <li class="each_video">
-                                <a href="{:U('index/Plan/index')}">找到一个计划</a>
-                            </li>
-                            <li class="each_video">
-                                <a href="{:U('index/Plan/plan_loss')}">脂肪损失</a>
-                            </li>
-                            <li class="each_video">
-                                <a href="{:U('index/Plan/plan_build')}">肌肉建设</a>
-                            </li>
-                            <li class="each_video">
-                                <a href="{:U('index/Plan/coach')}">寻找教练</a>
-                            </li>
-                            <li class="each_video">
-                                <a href="{:U('index/Plan/gym')}">寻找健身房</a>
-                            </li>
-                            <li class="each_video">
-                                <a href="{:U('index/Train/index')}">每日锻炼</a>
-                            </li>-->
                         </ul>
                     </div>
                 </div>
@@ -59,26 +40,41 @@
                     <p class="show_time"><php>echo date('Y-m-d', $i['article']['ctime'])</php></p>	
                     <div class="package clearfix">			
                         <div class="part_1">
-                            <h3 class="nowaday">{$i['article']['title']}</h3><br /><br />
+                            <h3 class="nowaday">{$i['article']['title']}</h3>
                             {$i['article']['content']|htmlspecialchars_decode}
                             <!--<div class="show_pic">
                                 <a><img src="/public/images/article/{$i['article']['img']}" alt="no" /></a>
                                 <a>enlarge image</a>
                             </div>-->
                             <div class="vidio">
-                                <h2>锻炼视频示范</h2>
                                 <ul class="video_list">
                                 <php>foreach($i['video'] as $v) {</php>
                                     <span>{$v['title']}</span>
                                     <li style="position:relative;">
-                                        <a href="javascript:void(0)">
+                                        <!-- <a href="javascript:void(0)"> -->
                                             <!--<img src="{$v['img']}" width="150" />-->
-                                            <php>if(!empty($v['link'])){</php>
-                                            <embed src="{$v['link']}" quality="high" width="400" height="300" align="middle" autostart="false" loop="false" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
+                                          <php>if(!empty($v['link'])){</php>
+										    <php>if(!empty($v['wapurl'])){</php>
+											<iframe height=300 width=400 src="{$v['wapurl']}" frameborder=0 allowfullscreen></iframe>
+											<php>}else{</php>
+											<object width="400" height="300">
+                                                <param value="{$v['link']}" name="movie">
+                                                <param value="true" name="allowFullScreen">
+                                                <param value="never" name="allowscriptaccess">
+                                                <param value="internal" name="allownetworking">
+                                                <param value="transparent" name="wmode">                     
+                                                <embed src="{$v['link']}" quality="high" width="400" height="300" align="middle" allownetworking="all" allowscriptaccess="always" type="application/x-shockwave-flash" allowfullscreen="true" wmode="transparent">
+                                                <param value="" name="flashvars">
+                                            </object>
+											<php>}</php>
                                          <php>}else{</php>
+										 <php>if(!empty($i['article']['img'])){</php>
+											<img src="/public/images/article/{$i['article']['img']}">
+										 <php>}else{</php>
                                          <img src="apps/index/Tpl/default/Public/images/Mark_v.jpg">
+										 <php>}</php>
                                          <php>}</php>
-                                        </a>										
+                                        <!-- </a> -->										
                                     </li>
                                 <php>}</php>
                                     <!-- <li>
@@ -95,42 +91,14 @@
                                 <span>发布时间  <span><php>echo date('Y-m-d H:i:s',$i['article']['ctime'])</php></span></span>
                                 <a class="video_commit">评论(<php>echo count($i['comments'])</php>)</a>
                             </div>
-                            <a href="{:U('index/Index/daily', array('id'=>$i['article']['id'], 'type'=>$_GET['type']))}" class="checking">查看</a>
+                            <a href="/index-Index-daily-{$i['article']['id']}-{$_GET['type']}.html" class="checking">查看</a>
                         </div>
                         <div class="part_2 clearfix">
                             <div class="expand_1">
                                 <span class="relay">转发到</span>
                                 <include file="../Public/share" />
-                                <!-- JiaThis Button BEGIN -->
-                                <!--<div class="jiathis_style">
-                                    <a class="jiathis_button_qzone"></a>
-                                    <a class="jiathis_button_tsina"></a>
-                                    <a class="jiathis_button_tqq"></a>
-                                    <a class="jiathis_button_renren"></a>
-                                    <a class="jiathis_button_kaixin001"></a>
-                                    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-                                </div>
-                                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1359878070244822" charset="utf-8"></script>-->
-                                <!-- JiaThis Button END -->
-                                <!-- <a class="sprite_1"></a>
-                                <a class="sprite_2"></a>
-                                <a class="sprite_3"></a>
-                                <a class="sprite_4"></a>
-                                <a class="sprite_5"></a>
-                                <a class="sprite_6"></a> -->
                             </div>
                             <div class="expand_2">
-                                <span class="read_time">
-                                    <a style="height:16px;width:56px;line-height:16px;background:0;">
-                                        <span>阅读</span>
-                                        <span>{$i['article']['read_count']}</span>
-                                        <span class="triangle"></span>
-                                    </a>
-                                    <div class="page_times" style="postion:absolute;display:none;right:0px;width:50px; background:white;line-height:20px;border:1px solid #ccc;">
-                                        <!--<p>页面1</p>
-                                        <p>页面1</p>-->	
-                                    </div>
-                                </span>
                                 <a class="sprite_8" href="javascript:void(0)" onclick="like({$i['article']['id']})"><span class="praise" id="like">{$i['article']['like']}</span></a>
                                 <a class="sprite_9" href="javascript:void(0)" onclick="unlike({$i['article']['id']})"><span class="praise" id="unlike">{$i['article']['unlike']}</span></a>			
                             </div>
@@ -149,13 +117,11 @@
                                                         <div class="target clearfix">
                                                             <div class="target_pic">
                                                                 <img src="{$c['userInfo']['face']}" alt="no" />
-                                                                <span class="care">关注</span>
                                                             </div>
                                                             <div class="target_ct">
                                                                 <a class="name">{$c['userInfo']['uname']}</a>
                                                                 <p>{$c['content']}</p>
-                                                                <p class="bottom_ms">
-                                                            
+                                                                <p class="bottom_ms">                                                           
                                                                     <span><php>echo date('Y-m-d H:i:s', $c['create_time'])</php></span>
                                                                     <span>来自<em>爱健美网</em></span>
                                                                 </p>
@@ -173,20 +139,22 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="{:U('index/Index/daily', array('id'=>$i['article']['id'],'type'=>'1'))}" class="check_more">查看所有评论</a>
+                                <a href="/index-Index-daily-{$i['article']['id']}-{$_GET['type']}.html" class="check_more">查看所有评论</a>
                             </div>
+							<form>
                             <div class="border_comment">
-                                <span class="word_num">0/300</span>
+                                <span class="word_num"><input disabled maxLength="4" name="used" size="2" value="0" class="inputtext">/<input disabled maxLength="4" name="total" size="2" value="300" class="inputtext"></span>
                                 <php>if(getMid()){</php>
                                 <php>echo getUserName(getMid())</php>
                                 <php>}else {</php>
-                                <span><a href="{:U('home/Public/login')}">登录</a></span>|
+                                <span><a href="#" class="login">登录</a></span>|
                                 <span><a href="{:U('index/Index/selectRegister')}">注册</a></span>
                                 <php>}</php>
                                 
-                                <div class="textarea"><textarea class="comment_inp" name="comment" id="comment_{$i['article']['id']}">有什么感想，来说说吧</textarea></div>
+                                <div class="textarea"><textarea class="comment_inp" name="comment" id="comment_{$i['article']['id']}" onKeyDown="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);" onKeyUp="gbcount(this.form.comment,this.form.total,this.form.used,this.form.remain);">有什么感想，来说说吧</textarea></div>
                                 <a class="comment" href="javascript:void(0)" onclick="addVideoCommont(comment_{$i['article']['id']}.value, {$i['article']['id']}, 'Daily')" aid="{$i['article']['id']}">发表评论</a>
                             </div>
+							</form>
                         </div>
                     </div>
                 </div>
@@ -194,17 +162,10 @@
                 <div class="page">
                             <span class="page_1">
                                 <span class="lay_page">
-                                    <!-- <a class="choice_page">1</a>
-                                    <a>2</a>
-                                    <a>3</a>
-                                    <a>4</a>
-                                    <a>5</a> -->
-                                    {$pager['backstr']}
-                                    {$pager['thestr']}
-                                    {$pager['nextstr']}
+								<?php printf($pager['backstr'],'class="prev"');?>
+                                <?php printf($pager['thestr'],'class="current_page"');?>
+                                <?php printf($pager['nextstr'],'class="next"');?>
                                 </span>
-                                <!-- <a class="pre_page">上一页</a>
-                                <a class="next_page">下一页</a> -->
                             </span>
                             <span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
                             
@@ -212,6 +173,7 @@
 
         </div>
         <script type="text/javascript">
+
         function like(id) {
             if(USER.id<=0) {
                 alert('请先登录');
@@ -267,7 +229,7 @@
                 if(temp[0]==name) return unescape(temp[1]);	
             }
         }
-		function addVideoCommont(cid,pid){
+        function addVideoCommont(cid,pid){
             if($("#commentUid").val()==''){alert("请先登录");return false;}
             if($("#"+cid).val()==''){return false;}
             $.ajax({
@@ -277,7 +239,7 @@
             data: "act=addVideoCommont&data=ford&pid="+pid+"&uid="+$("#commentUid").val()+"&content="+cid+"&ptype=1",
             success: function(data){
             alert("添加评论成功！");
-			 var innerHtml='<li class="cm_bottom"><div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">关注</span><div class="target_ct"><a class="name">'+data.username+'</a><p>'+data.connect+'</p><p class="bottom_ms"><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div></li>';
+             var innerHtml='<li class="cm_bottom"><div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><div class="target_ct"><a class="name">'+data.username+'</a><p>'+data.content+'</p><p class="bottom_ms"><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div></li>';
             $("#commentbox").val('');          
             $("#ppbox_"+pid).prepend(innerHtml);
             $("#appbox_"+pid).html('');

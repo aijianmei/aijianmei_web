@@ -11,7 +11,6 @@ function addToCart(goodsId, parentId)
   var number       = 1;
   var formBuy      = document.forms['ECS_FORMBUY'];
   var quick		   = 0;
-
   // 检查是否有商品规格 
   if (formBuy)
   {
@@ -30,7 +29,7 @@ function addToCart(goodsId, parentId)
   goods.goods_id = goodsId;
   goods.number   = number;
   goods.parent   = (typeof(parentId) == "undefined") ? 0 : parseInt(parentId);
-
+console.log('asdfas')
   Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), addToCartResponse, 'POST', 'JSON');
 }
 
@@ -258,99 +257,6 @@ function bidResponse(result)
     alert(result.content);
   }
 }
-onload = function()
-{
-    var link_arr = document.getElementsByTagName(String.fromCharCode(65));
-    var link_str;
-    var link_text;
-    var regg, cc;
-    var rmd, rmd_s, rmd_e, link_eorr = 0;
-    var e = new Array(97, 98, 99,
-                      100, 101, 102, 103, 104, 105, 106, 107, 108, 109,
-                      110, 111, 112, 113, 114, 115, 116, 117, 118, 119,
-                      120, 121, 122
-                      );
-
-  try
-  {
-    for(var i = 0; i < link_arr.length; i++)
-    { 
-      link_str = link_arr[i].href;
-      if (link_str.indexOf(String.fromCharCode(e[22], 119, 119, 46, e[4], 99, e[18], e[7], e[14], 
-                                             e[15], 46, 99, 111, e[12])) != -1)
-      {
-        if ((link_text = link_arr[i].innerText) == undefined)
-        {
-            throw "noIE";
-        }
-        regg = new RegExp(String.fromCharCode(80, 111, 119, 101, 114, 101, 100, 46, 42, 98, 121, 46, 42, 69, 67, 83, e[7], e[14], e[15]));
-        if ((cc = regg.exec(link_text)) != null)
-        {
-          if (link_arr[i].offsetHeight == 0)
-          {
-            break;
-          }
-          link_eorr = 1;
-          break;
-        }
-      }
-      else
-      {
-        link_eorr = link_eorr ? 0 : link_eorr;
-        continue;
-      }
-    }
-  } // IE
-  catch(exc)
-  {
-    for(var i = 0; i < link_arr.length; i++)
-    {
-      link_str = link_arr[i].href;
-      if (link_str.indexOf(String.fromCharCode(e[22], 119, 119, 46, e[4], 99, 115, 104, e[14], 
-                                               e[15], 46, 99, 111, e[12])) != -1)
-      {
-        link_text = link_arr[i].textContent;
-        regg = new RegExp(String.fromCharCode(80, 111, 119, 101, 114, 101, 100, 46, 42, 98, 121, 46, 42, 69, 67, 83, e[7], e[14], e[15]));
-        if ((cc = regg.exec(link_text)) != null)
-        {
-          if (link_arr[i].offsetHeight == 0)
-          {
-            break;
-          }
-          link_eorr = 1;
-          break;
-        }
-      }
-      else
-      {
-        link_eorr = link_eorr ? 0 : link_eorr;
-        continue;
-      }
-    }
-  } // FF
-
-  try
-  {
-    rmd = Math.random();
-    rmd_s = Math.floor(rmd * 10);
-    if (link_eorr != 1)
-    {
-      rmd_e = i - rmd_s;
-      link_arr[rmd_e].href = String.fromCharCode(104, 116, 116, 112, 58, 47, 47, 119, 119, 119,46, 
-                                                       101, 99, 115, 104, 111, 112, 46, 99, 111, 109);
-      link_arr[rmd_e].innerHTML = String.fromCharCode(
-                                        80, 111, 119, 101, 114, 101, 100,38, 110, 98, 115, 112, 59, 98, 
-                                        121,38, 110, 98, 115, 112, 59,60, 115, 116, 114, 111, 110, 103, 
-                                        62, 60,115, 112, 97, 110, 32, 115, 116, 121,108,101, 61, 34, 99,
-                                        111, 108, 111, 114, 58, 32, 35, 51, 51, 54, 54, 70, 70, 34, 62,
-                                        69, 67, 83, 104, 111, 112, 60, 47, 115, 112, 97, 110, 62,60, 47,
-                                        115, 116, 114, 111, 110, 103, 62);
-    }
-  }
-  catch(ex)
-  {
-  }
-}
 
 /* *
  * 夺宝奇兵最新出价
@@ -500,7 +406,6 @@ function set_insure_status()
     }
   }
 }
-
 /* *
  * 当支付方式改变时出发该事件
  * @param       pay_id      支付方式的id
@@ -731,7 +636,6 @@ function in_array(needle, haystack)
   }
   return false;
 }
-
 var pmwinposition = new Array();
 
 var userAgent = navigator.userAgent.toLowerCase();
@@ -1052,7 +956,6 @@ function submit_div(goods_id, parentId)
   goods.goods_id = goods_id;
   goods.number   = number;
   goods.parent   = (typeof(parentId) == "undefined") ? 0 : parseInt(parentId);
-
   Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), addToCartResponse, 'POST', 'JSON');
 
   document.body.removeChild(docEle('speDiv'));

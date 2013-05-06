@@ -1,503 +1,647 @@
 ﻿<!DOCTYPE html>
-	<html>
-		<head>
-			<meta charset="utf-8"/>
-			<title>爱健美</title>
-			<link rel="stylesheet" href="css/public.css" />
-			<link rel="stylesheet" href="css/index.css" />
-			<script language="javascript">
-				function reloadcode(){
-				document.getElementById('safecode').src = 'fristphp.php?' + Math.random(); //fristphp.php为图片生成代码
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>爱健美</title>
+<link rel="stylesheet" href="css/public.css" />
+<link rel="stylesheet" href="css/index.css" />
+<script language="javascript">
+function reloadcode(){
+document.getElementById('safecode').src = 'fristphp.php?' + Math.random(); //fristphp.php为图片生成代码
 
-				}
-			</script>
-		</head>
-		<body>
-			<div class="body"></div>
-			<div class="sheet">
-				<div class="log">
-					<button class="close_btn"></button>
-					<h3>登录爱健美</h3>
-					<div class="ai_account">
-						<form action="">
-							<h4 class="tit">使用注册邮箱登录</h4>
-							<div class="text_input">
-								<label for="mail">爱健美注册邮箱</label>
-								<input type="text" id="mail"/>
-								<span class="tip">请输入正确的邮箱地址</span>
+}
+</script>
+</head>
+<body>
+	<div class="header_wrapper">
+		<div class="body"></div>
+        <div class="sheet">
+            <div class="log">
+                <button class="close_btn"></button>
+                <h3>登录爱健美</h3>
+                <div class="ai_account">
+                    <form action="/index.php?app=home&mod=Public&act=doLogin" method="post">
+                        <h4 class="tit">使用注册邮箱登录</h4>
+                        <div class="text_input">
+                            <label for="mail">爱健美注册邮箱</label>
+                            <input type="text" id="mail" name="email" />
+                            <span class="tip">请输入正确的邮箱地址</span>
+                        </div>
+                        <div class="text_input">
+                            <label for="psd">密码</label>
+                            <input type="password" id="psd" name="password" />
+                            <span class="tip">密码长度为6~16个的数字或者字母</span>
+                        </div>
+                        <div class="checkCode">
+                        </div>
+                        <button type="submit" class="submit_btn">登录</button>
+                    </form>
+                </div>
+                <div class="other_account clearfix">
+                    <h4 class="tit">使用合作网站账号登录</h4>
+                    <div class="accounts">
+	                    <a class="copsina" style="width:128px;height:32px;" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a>
+	                    <a class="copqq" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100328471 &redirect_uri=www.aijianmei.com/qqlogin.php&scope=" style="width:128px;height:32px;"></a>
+                      </div>
+                    <span class="clearfix">未注册过爱健美也可以直接登录哦</span>
+                    <a class="cop5" href="{:U('index/Index/selectRegister')}">爱健美注册</a>	                
+                </div>
+            </div>	
+        </div>
+        <div class="head">
+            <div class="most_top">
+                <ul class="top_ms clearfix">
+                    <li><a class="login">登录 </a>|</li>
+                    <li><a href="account.html">注册 </a></li>
+                </ul>
+                <ul class="after_ms">
+                    <li class="person_massage">
+                        <div>
+                            <img alt="no" />
+                            <span>kon</span>
+                        </div>
+                    </li>
+                    <li class="more"><a href="">帐号<span class="triangle"></span> </a>
+                        <ul class="account">
+                            <li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
+                            <li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
+                        </ul>
+                    </li>
+                    <li class="special_buy">
+                        <a class="car_buy">购物车</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="header">
+                <div class="h_bg">
+                    <a href="/index.php?app=index"><div class="logo_1">logo</div></a>
+                    <ul class="nav">
+                        <li class="nav_current"><i class="ag_current"></i><a href="index.html"><span class="home">首页</span></a></li>
+                        <li><i class="ag_current"></i><a href='#'><span class="store">商店</span></a></li>
+                        <li><i class="ag_current"></i><a href="plan.html">健身计划</a></li>
+                        <li><i class="ag_current"></i><a href="training.html">锻炼</a>
+                        </li>
+                        <li><i class="ag_current"></i><a href="nutri.html">营养</a>
+                        </li>
+                        <li><i class="ag_current"></i><a href="add.html">辅助品</a></li>
+                        <li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
+                        <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+	</div>
+	<div class="wrapper">
+		<div id="banner">
+			<ul>
+				<li><a href="#"><img src="images/i_1.jpg" alt="" /></a></li>
+				<li><a href="#"><img src="images/i_2.jpg" alt=""/></a></li>
+				<li><a href="#"><img src="images/i_3.jpg" alt="" /></a></li>
+				<li><a href="#"><img src="images/i_4.jpg" alt="" /></a></li>
+				<li><a href="#"><img src="images/i_5.jpg" alt="" /></a></li>
+			</ul>
+		</div>
+
+		<div id="content">
+			<div class="part_top clearfix">
+				<div class="lay_top clearfix">
+					<h1 class="public_title">天天锻炼</h1>
+
+					<!-- outside begin 2013/4/25 ---------------------------------------->
+					<div class="part clearfix">
+						<div class="classify">
+							<div class="show_img">
+								<a class="show_enter" href="every.html">
+									<img src="images/mr_02.jpg" />
+									<i class="bg_opc"></i>
+									<div class="ms_hidden_part">
+										<h3>初级-基础训练</h3>
+										<p>上班族与学生</p>
+										<p>给想拥有健康的你</p>
+									</div>
+									<i class="bg_opc_2"></i>
+								</a>
 							</div>
-							<div class="text_input">
-								<label for="psd">密码</label>
-								<input type="password" id="psd"/>
-								<span class="tip">密码长度为6~16个的数字或者字母</span>
-							</div>
-							<div class="checkCode">
-								<span>验证码：</span>
-								<input type="text" name="code" class="checkBox"/>
-								<img src="fristphp.php" id="safecode" class="checkImg" alt="看不清，换一张"/>
-								<a href="javascript:reloadcode();" class="checkChange">换一换</a>
-							</div>
-							
-							<button type="submit" class="submit_btn">登录</button>
-							<a href="retrieve.html" class="forget">忘记密码</a>
-						</form>
-					</div>
-					<div class="other_account clearfix">
-						<h4 class="tit">使用合作网站账号登陆</h4>
-						<div class="accounts">
-							<a class="cop1" href="#">微博帐号</a>
-							<a class="cop2" href="">QQ帐号</a>
-							<a class="cop3" href="">人人帐号</a>
-							<a class="cop4" href="">豆瓣帐号</a>
+							<ul class="expend">
+								<li>
+									<a>2.文字</a>
+								</li>
+								<li>
+									<a>3.文字</a>
+								</li>
+								<li>
+									<a>4.文字</a>
+								</li>
+								<li>
+									<a>5.文字</a>
+								</li>
+							</ul>
 						</div>
-						<span class="clearfix">未注册过爱健美也可以直接登陆哦</span>
-						<a class="cop5" href="">爱健美注册</a>
-					</div>
-				</div>	
-			</div><!-- End sheet -->
-			<div class="wrapper">
-				<div id="header">
-					<ul class="top">
-						<li><a id="my_cart"><span class="cart"></span>购物车(0) </a>|</li>
-						<li><a id="login">登陆 </a>|</li>
-						<li><a href="account.html">注册 </a>|</li>
-						<li class="more"><a href="#">消息<span class="triangle"></span> </a>|
-							<ul class="message">
-								<li><a href="letter.html">查看私信</a></li>
-								<li><a href="comment.html">查看评论</a></li>
-								<li><a href="mention.html">查看@我</a></li>
-								<li><a href="fans.html">查看粉丝</a></li>
-								<li><a href="inform.html">查看通知</a></li>
-								<li><a href="order.html">查看预约</a></li>
+						<div class="classify">
+							<div class="show_img">
+								<a class="show_enter" href="every.html">
+									<img src="images/mr_03.jpg" />
+									<i class="bg_opc"></i>
+									<div class="ms_hidden_part">
+										<h3>初级-基础训练</h3>
+										<p>上班族与学生</p>
+										<p>给想拥有健康的你</p>
+									</div>
+									<i class="bg_opc_2"></i>
+								</a>
+							</div>
+							<ul class="expend">
+								<li>
+									<a>2.文字</a>
+								</li>
+								<li>
+									<a>3.文字</a>
+								</li>
+								<li>
+									<a>4.文字</a>
+								</li>
+								<li>
+									<a>5.文字</a>
+								</li>
 							</ul>
-						</li>
-						<li class="more"><a href="">帐号<span class="triangle"></span> </a>
-							<ul class="account">
-								<li><a href="information.html">个人资料</a></li>
-								<li><a href="receive.html">收货地址</a></li>
-								<li><a href="mod_face.html">修改头像</a></li>
-								<li><a href="bind.html">绑定帐号</a></li>
-								<li><a href="">退出帐号</a></li>
-							</ul>
-						</li>
-					</ul>
-					<form class="search">
-						<fieldset>
-							<legend>搜索</legend>
-							<label for="search_title">搜索：</label>
-							<input type="text" id="search_title" class="search_txt"/>
-							<button class="search_btn hide_text" type="submit"></button>
-						</fieldset>
-					</form>
-					<div class="logo">
-						<a href="index.hmtl">
-							<img src="images/logo.png" alt="aijianmei" />
-						</a>
-					</div>
-					<ul id="nav">
-						<li class="home now_position"><a href="index.html"><span>首页</span></a></li>
-						<li class="store waiting"><a href="store.html"><span>商店</span></a></li>
-						<li><a href="plan.html">健身计划</a></li>
-						<li><a href="training.html">锻炼</a></li>
-						<li><a href="nutri.html">营养</a></li>
-						<li><a href="add.html">补充</a></li>
-						<li class="forum"><a href="activity.html">论坛</a></li>
-						<li class="last"><a href="pal.html">交友互动</a></li>
-					</ul>
-				</div>
-				
-				<div id="banner">
-					<ul>
-						<li><a href="#"><img src="images/i_1.jpg" alt="" /></a></li>
-						<li><a href="#"><img src="images/i_2.jpg" alt=""/></a></li>
-						<li><a href="#"><img src="images/i_3.jpg" alt="" /></a></li>
-						<li><a href="#"><img src="images/i_4.jpg" alt="" /></a></li>
-						<li><a href="#"><img src="images/i_5.jpg" alt="" /></a></li>
-					</ul>
-				</div>
-
-				<div id="content">
-					<div class="part_top clearfix">
-						<div class="lay_top clearfix">
-							<h1 class="public_title">天天锻炼</h1>
-							<div class="part clearfix">
-								<div class="classify">						
-									<a class="show_enter" href="every.html">
-										<span class="enter_icon"></span>
-										<img src="images/mr_01.jpg" />
-										<p>上班族健身</p>
-									</a>
-									<ul class="expend">
-										<li>
-											<a>2.文字</a>
-										</li>
-										<li>
-											<a>3.文字</a>
-										</li>
-										<li>
-											<a>4.文字</a>
-										</li>
-										<li>
-											<a>5.文字</a>
-										</li>
-									</ul>
-								</div>
-								<div class="classify">
-									<a class="show_enter" href="every.html">
-										<span class="enter_icon"></span>
-										<img src="images/mr_02.jpg" />
-										<p>日常健身</p></a>
-									<ul class="expend">
-										<li>
-											<a>2.文字</a>
-										</li>
-										<li>
-											<a>3.文字</a>
-										</li>
-										<li>
-											<a>4.文字</a>
-										</li>
-										<li>
-											<a>5.文字</a>
-										</li>
-									</ul>
-								</div>
-								<div class="classify">
-									<a class="show_enter" href="every.html">
-										<span class="enter_icon"></span>
-										<img src="images/mr_03.jpg" />
-										<p>专业运动员</p></a>
-									<ul class="expend">
-										<li>
-											<a>2.文字</a>
-										</li>
-										<li>
-											<a>3.文字</a>
-										</li>
-										<li>
-											<a>4.文字</a>
-										</li>
-										<li>
-											<a>5.文字</a>
-										</li>
-									</ul>
-								</div>
-								<div class="classify spe">
-									<a class="show_enter" href="every.html">
-									<span class="enter_icon"></span>
+						</div>
+						<div class="classify spe">
+							<div class="show_img">
+								<a class="show_enter" href="every.html">
 									<img src="images/mr_04.jpg" />
-									<p>健美运动员</p></a>
-									<ul class="expend">
-										<li>
-											<a>2.文字</a>
-										</li>
-										<li>
-											<a>3.文字</a>
-										</li>
-										<li>
-											<a>4.文字</a>
-										</li>
-										<li>
-											<a>5.文字</a>
-										</li>
-									</ul>
-								</div>
+									<i class="bg_opc"></i>
+									<div class="ms_hidden_part">
+										<h3>初级-基础训练</h3>
+										<p>上班族与学生</p>
+										<p>给想拥有健康的你</p>
+									</div>
+									<i class="bg_opc_2"></i>
+								</a>
 							</div>
+							<ul class="expend">
+								<li>
+									<a>2.文字</a>
+								</li>
+								<li>
+									<a>3.文字</a>
+								</li>
+								<li>
+									<a>4.文字</a>
+								</li>
+								<li>
+									<a>5.文字</a>
+								</li>
+							</ul>
 						</div>
 					</div>
-					<div class="part_top clearfix">
-						<div class="lay_top clearfix">
-							<h1 class="public_title">网站精选</span></h1>
-							<div class="part clearfix">
-								<div class="classify">
-									<a class="show_enter" href="app.html">
-										<span class="enter_icon"></span>
-										<img src="images/APP.jpg" class="mod" />
-										<p>我们的APP</p>
-									</a>
-								</div>
-								<div class="classify">
-									<a  class="show_enter" href="article.html">
-										<span class="enter_icon"></span>
-										<img src="images/5.png" class="mod" />
-										<p>最新文章</p>
-									</a>
-								</div>
-								<div class="classify">
-									<a class="show_enter" href="video.html">
-										<span class="enter_icon"></span>
-										<img src="images/eg.jpg" class="mod" />
-										<p>最新视频</p>
-									</a>
-								</div>
-								<div class="classify spe">
-									<a class="show_enter" href="teach.html">
-										<span class="enter_icon"></span>
-										<img src="images/jl.jpg" class="mod" />
-										<p>最新教练</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="footer">
-					<div class="f_list">
-						<h4>发现爱健美</h4>
-						<ul id="app">	
-							<li><a href="store.html">爱健美商店</a></li>
-							<li><a href="training.html">锻炼</a></li>
-							<li><a href="plan.html">健身计划</a></li>
-							<li><a href="nutri.html">营养</a></li>
-							<li><a href="add.html">补充</a></li>
-							<li><a href="pal.html">交友互动</a></li>
-						</ul>
-					</div>
-					<div class="f_list">
-						<h4>获取帮助</h4>
-						<ul id="article">						
-							<li><a href="help.html">新手指南</a></li>
-							<li><a href="direct.html">社区指导原则</a></li>
-							<li><a href="feedback.html">意见反馈</a></li>
-						</ul>
-					</div>
-					<div class="f_list">
-						<h4>关于我们</h4>
-						<ul id="video">						
-							<li><a href="about_us.html">关于爱健美</a></li>
-							<li><a href="contact.html">联系我们</a></li>
-							<li><a href="join.html">加入爱健美</a></li>
-							<li><a href="ad.html">广告投放与品牌推广</a></li>
-							<li><a href="privacy.html">隐私政策</a></li>
-						</ul>
-					</div>
-					<div class="f_list">
-						<h4>更多</h4>
-						<ul id="teach">					
-							<li><a href="app.html">下载IOS客户端</a></li>
-							<li><a href="app.html">下载Android客户端</a></li>
-							<li><a href="links.html">友情链接</a></li>
-						</ul>
-					</div>
-					<div class="f_list login" >
-						<h4>关注我们</h4>
-						<ul id="about">
-							<li class="sina"><a href="http://weibo.com/aijianmei?topnav=1&wvr=5" target="_blank">新浪微博</a></li>
-							<li class="tencent"><a href="http://t.qq.com/aijianmeiweibo" target="_blank">腾讯微博</a></li>
-							<li class="netease"><a href="http://t.163.com/aijianmei" target="_blank">网易微博</a></li>
-							<li class="public"><a href="#" target="_blank">公共主页</a></li>
-							<li class="qZone"><a href="http://user.qzone.qq.com/2816973844/main#home" target="_blank">QQ空间</a></li>
-							<li class="douban"><a href="#" target="_blank">豆瓣</a></li>
-						</ul>		
-					</div>
-				</div><!--Footer End-->
-				<div id="lower_footer">
-					<span>广州加伦信息科技有限公司- 粤ICP备12085654号</span>
-					<a href="intro.html">www.aijianmei.com</a>
+					<!-- outside end 2013/4/25 ---------------------------------------->
 				</div>
 			</div>
-			<script type="text/javascript" src="js/jquery.js"></script>
-			<script type="text/javascript" src="js/public.js"></script>
-			<script type="text/javascript">
-				$(function() {
+			<!-- <div class="part_top clearfix">
+				<div class="lay_top clearfix">
+					<h1 class="public_title">网站精选</span></h1>
+					<div class="part clearfix">
+						<div class="classify">
+							<a class="show_enter" href="app.html">
+								<span class="enter_icon"></span>
+								<img src="images/APP.jpg" class="mod" />
+								<p>我们的APP</p>
+							</a>
+						</div>
+						<div class="classify">
+							<a  class="show_enter" href="article.html">
+								<span class="enter_icon"></span>
+								<img src="images/5.png" class="mod" />
+								<p>最新文章</p>
+							</a>
+						</div>
+						<div class="classify">
+							<a class="show_enter" href="video.html">
+								<span class="enter_icon"></span>
+								<img src="images/eg.jpg" class="mod" />
+								<p>最新视频</p>
+							</a>
+						</div>
+						<div class="classify spe">
+							<a class="show_enter" href="teach.html">
+								<span class="enter_icon"></span>
+								<img src="images/jl.jpg" class="mod" />
+								<p>最新教练</p>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div> -->
+		</div>
+		<div id="footer">
+			<div class="f_list">
+				<h4>发现爱健美</h4>
+				<ul id="app">	
+					<li><a href="store.html">爱健美商店</a></li>
+					<li><a href="training.html">锻炼</a></li>
+					<li><a href="plan.html">健身计划</a></li>
+					<li><a href="nutri.html">营养</a></li>
+					<li><a href="add.html">补充</a></li>
+					<li><a href="pal.html">交友互动</a></li>
+				</ul>
+			</div>
+			<div class="f_list">
+				<h4>获取帮助</h4>
+				<ul id="article">						
+					<li><a href="help.html">新手指南</a></li>
+					<li><a href="direct.html">社区指导原则</a></li>
+					<li><a href="feedback.html">意见反馈</a></li>
+				</ul>
+			</div>
+			<div class="f_list">
+				<h4>关于我们</h4>
+				<ul id="video">						
+					<li><a href="about_us.html">关于爱健美</a></li>
+					<li><a href="contact.html">联系我们</a></li>
+					<li><a href="join.html">加入爱健美</a></li>
+					<li><a href="ad.html">广告投放与品牌推广</a></li>
+					<li><a href="privacy.html">隐私政策</a></li>
+				</ul>
+			</div>
+			<div class="f_list">
+				<h4>更多</h4>
+				<ul id="teach">					
+					<li><a href="app.html">下载IOS客户端</a></li>
+					<li><a href="app.html">下载Android客户端</a></li>
+					<li><a href="links.html">友情链接</a></li>
+				</ul>
+			</div>
+			<div class="f_list login" >
+				<h4>关注我们</h4>
+				<ul id="about">
+					<li class="sina"><a href="http://weibo.com/aijianmei?topnav=1&wvr=5" target="_blank">新浪微博</a></li>
+					<li class="tencent"><a href="http://t.qq.com/aijianmeiweibo" target="_blank">腾讯微博</a></li>
+					<li class="netease"><a href="http://t.163.com/aijianmei" target="_blank">网易微博</a></li>
+					<li class="public"><a href="#" target="_blank">公共主页</a></li>
+					<li class="qZone"><a href="http://user.qzone.qq.com/2816973844/main#home" target="_blank">QQ空间</a></li>
+					<li class="douban"><a href="#" target="_blank">豆瓣</a></li>
+				</ul>		
+			</div>
+		</div><!--Footer End-->
+		<div id="lower_footer">
+			<span>广州加伦信息科技有限公司- 粤ICP备12085654号</span>
+			<a href="intro.html">www.aijianmei.com</a>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/public.js"></script>
+	<script type="text/javascript">
+		var addevent = function(element,type,handle){
+            if(element.addEventListener){
+                element.addEventListener(type,handle,false)
+            }
+            else if(element.attachEvent){
+                element.attachEvent("on" + type,handle)
+            } 
+            else {
+                element["on" + type] = handler;
+                this.AddEvent = function(element, type, handler)
+                {
+                    element["on" + type] = handler;
+                };
+            }
+        }
+        //获取dom元素
+        var getdom = function(){
+            this.$ = function(id){
+                return document.getElementById(id);
+            }
+
+            this.getElementsByClass = function(searchClass,node,tag) {
+                var classElements = new Array();
+                if ( node == null )
+                        node = document;
+                if ( tag == null )
+                        tag = '*';
+                var els = node.getElementsByTagName(tag);
+                var elsLen = els.length;
+                var pattern = new RegExp("(^|\\s)"+searchClass+"(\\s|$)");
+                for (i = 0, j = 0; i < elsLen; i++) {
+                        if ( pattern.test(els[i].className) ) {
+                                classElements[j] = els[i];
+                                j++;
+                        }
+                }
+                return classElements;
+            }
+            this.GetCurrentStyle = function(obj, prop){
+                if (obj.currentStyle){ //IE
+                    return obj.currentStyle[prop];
+                }
+                else if (window.getComputedStyle){ //非IE
+                    propprop = prop.replace (/([A-Z])/g, "-$1");
+                    propprop = prop.toLowerCase ();
+                    return document.defaultView.getComputedStyle(obj,null)[propprop];
+                }
+                return null;
+            }
+        }   
+
+        var aijianmei = {
+            newdom : new getdom,
+            p_fixed : function(obj){
+                window.onscroll = function(){
+                    var top = document.body.scrollTop || window.pageYOffset || document.documentElement.scrollTop;
+                    if(top >= 50){
+                        obj.className = 'header p_fixed';
+                    }
+                    else{
+                        obj.className = 'header'
+                    }       
+                }
+            },
+            opacity : function(obj,filter,speed){
+                var newdom = new getdom,
+                    obj = newdom.getElementsByClass(obj)[0],
+                    ob_opacity = newdom.GetCurrentStyle(obj,'opacity') ? newdom.GetCurrentStyle(obj,'opacity') : 1,
+                    obj_opacity = [ob_opacity[0],ob_opacity[1], ob_opacity[2]].join(""),
+                    obj_filter = newdom.GetCurrentStyle(obj,'filter'),//获取filter的值，表现形式为alpha(opacity=10);
+                    value = obj_filter.replace(/[^0-9]/ig,"");//使用正则表达式转换为数字字符串（80）
+                obj.style.opacity = obj_opacity;
+                var change_opacity = function(){
+                    if(obj_opacity > filter){
+                        var time = function(){
+                            setTimeout(function(){
+                                if(obj_opacity > filter){
+                                    obj_opacity = (obj_opacity * 10 - 1)/10;
+                                    obj.style.opacity = (parseFloat(obj.style.opacity) * 10 - 1)/10;
+                                    if(document.all){
+                                        value = parseFloat(value) - 10;
+                                        obj.style.filter = 'alpha(opacity = '+value+')';
+                                    }
+                                    time();
+                                }
+                            },speed)
+                        };
+                        time();
+                    }
+                    else{
+                        var time = function(){
+                            setTimeout(function(){
+                                if(filter > obj_opacity){
+                                    filter = (filter * 10 - 1)/10;
+                                    obj.style.opacity = (parseFloat(obj.style.opacity) * 10 + 1)/10;
+                                    if(document.all){
+                                        value = parseFloat(value) + 10;//将字符串转化为数字，使用的是parsefloat
+                                        obj.style.filter = 'alpha(opacity = '+value+')';
+                                    }
+                                    time();
+                                }
+                            },speed)
+                        };
+                        time();
+                    }
+                }
+                change_opacity();
+            },
+            chang_top : function(obj,T,length){  
+                var i = 0;
+                obj.style.top = aijianmei.newdom.GetCurrentStyle(obj,'top');
+                var move = setInterval(function(){
+            		if(i < length){
+                        i = i + 10;
+                		if(T){	
+                			obj.style.top = parseFloat(obj.style.top) - 10 + 'px';
+                		}
+                        else{
+                            obj.style.top = parseFloat(obj.style.top) + 10 + 'px';
+                        }
+                    }
+                    else{
+                    	clearInterval(move)
+                    }
+            	},1)  	    
+            }
+        }
+
+        var init_1 = function(){
+            var newdom = new getdom,
+            	show_enter = newdom.getElementsByClass('show_enter'),
+            	ms_hidden_part = newdom.getElementsByClass('ms_hidden_part'),
+            	bg_opc = newdom.getElementsByClass('bg_opc'),
+            	bg_opc_2 = newdom.getElementsByClass('bg_opc_2'),
+            	len = show_enter.length;
+            	for(var i = 0;i < len;i++){
+            		show_enter[i].index = i;
+            		show_enter[i].onmouseover = function(){
+            			aijianmei.chang_top(bg_opc_2[this.index],1,150);
+            			aijianmei.chang_top(bg_opc[this.index],1,150);
+            			aijianmei.chang_top(ms_hidden_part[this.index],1,150);
+            		}	
+                	show_enter[i].onmouseout = function(){
+                		aijianmei.chang_top(bg_opc_2[this.index],0,150)
+                		aijianmei.chang_top(bg_opc[this.index],0,150)
+                		aijianmei.chang_top(ms_hidden_part[this.index],0,150)
+                	}	
+                }	                	
+        }
+        init_1();
+    </script>
+	<script type="text/javascript">
+		$(function() {
 
 
-				//大图自动切换，左右切换，选择切换
+		//大图自动切换，左右切换，选择切换
 
 
-					var sWidth = $("#banner").width(); //获取焦点图的宽度（显示面积）
+			var sWidth = $("#banner").width(); //获取焦点图的宽度（显示面积）
 
 
-					var len = $("#banner ul li").length; //获取焦点图个数
+			var len = $("#banner ul li").length; //获取焦点图个数
 
 
-					var index = 0;
+			var index = 0;
 
 
-					var picTimer;
+			var picTimer;
 
 
-					
+			
 
-				//cjxlkkads
-					//添加按钮,上一页、下一页两个按钮
+		//cjxlkkads
+			//添加按钮,上一页、下一页两个按钮
 
 
-					var btn = "<div class='btn'>";
+			var btn = "<div class='btn'>";
 
 
-					for(var i=0; i < len; i++) {
+			for(var i=0; i < len; i++) {
 
 
-						btn += "<span></span>";
+				btn += "<span></span>";
 
 
-					}
+			}
 
 
-					btn += "</div><div class='preNext pre'></div><div class='preNext next'></div>";
+			btn += "</div><div class='preNext pre'></div><div class='preNext next'></div>";
 
 
-					
+			
 
 
-					$("#banner").append(btn);
+			$("#banner").append(btn);
 
 
-					
+			
 
 
 
 
 
-					//为小按钮添加鼠标点击事件，以显示相应的内容
+			//为小按钮添加鼠标点击事件，以显示相应的内容
 
 
-					$("#banner .btn span").css("background","url(images/dian.png)").click(function() {
+			$("#banner .btn span").css("background","url(images/dian.png)").click(function() {
 
 
-						index = $("#banner .btn span").index(this);
+				index = $("#banner .btn span").index(this);
 
 
-						showPics(index);
+				showPics(index);
 
 
-					}).eq(0).trigger("click");
+			}).eq(0).trigger("click");
 
 
 
 
 
-					//上一页、下一页按钮透明度处理
+			//上一页、下一页按钮透明度处理
 
 
-					$("#banner .preNext").css("opacity",0).hover(function() {
+			$("#banner .preNext").css("opacity",0).hover(function() {
 
 
-						$(this).stop(true,false).animate({"opacity":"0.5"},300);
+				$(this).stop(true,false).animate({"opacity":"0.5"},300);
 
 
-					},function() {
+			},function() {
 
 
-						$(this).stop(true,false).animate({"opacity":"0"},300);
+				$(this).stop(true,false).animate({"opacity":"0"},300);
 
 
-					});
+			});
 
 
 
 
 
-					//上一页按钮
+			//上一页按钮
 
 
-					$("#banner .pre").click(function() {
+			$("#banner .pre").click(function() {
 
 
-						index -= 1;
+				index -= 1;
 
 
-						if(index == -1) {index = len - 1;}
+				if(index == -1) {index = len - 1;}
 
 
-						showPics(index);
+				showPics(index);
 
 
-					});
+			});
 
 
 
 
 
-					//下一页按钮
+			//下一页按钮
 
 
-					$("#banner .next").click(function() {
+			$("#banner .next").click(function() {
 
 
-						index += 1;
+				index += 1;
 
 
-						if(index == len) {index = 0;}
+				if(index == len) {index = 0;}
 
 
-						showPics(index);
+				showPics(index);
 
 
-					});
+			});
 
 
 
 
 
-					//左右滚动，外围ul元素的宽度
+			//左右滚动，外围ul元素的宽度
 
 
-					$("#banner ul").css("width",sWidth * (len));
+			$("#banner ul").css("width",sWidth * (len));
 
 
-					
+			
 
 
-					//鼠标滑上焦点图时停止自动播放，滑出时开始自动播放
+			//鼠标滑上焦点图时停止自动播放，滑出时开始自动播放
 
 
-					$("#banner").hover(function() {
+			$("#banner").hover(function() {
 
 
-						clearInterval(picTimer);
+				clearInterval(picTimer);
 
 
-					},function() {
+			},function() {
 
 
-						picTimer = setInterval(function() {
+				picTimer = setInterval(function() {
 
 
-							showPics(index);
+					showPics(index);
 
 
-							index++;
+					index++;
 
 
-							if(index == len) {index = 0;}
+					if(index == len) {index = 0;}
 
 
-						},3000);
+				},3000);
 
 
-					}).trigger("mouseleave");
+			}).trigger("mouseleave");
 
 
-					
+			
 
 
-					//显示图片函数，根据接收的index值显示相应的内容
+			//显示图片函数，根据接收的index值显示相应的内容
 
 
-					function showPics(index) { //普通切换
+			function showPics(index) { //普通切换
 
 
-						var nowLeft = -index*sWidth; //根据index值计算ul元素的left值
+				var nowLeft = -index*sWidth; //根据index值计算ul元素的left值
 
 
-						$("#banner ul").stop(true,false).animate({"left":nowLeft},300); //通过animate()调整ul元素滚动到计算出的position
+				$("#banner ul").stop(true,false).animate({"left":nowLeft},300); //通过animate()调整ul元素滚动到计算出的position
 
 
-						$("#banner .btn span").css("background","url(images/dian.png)")
+				$("#banner .btn span").css("background","url(images/dian.png)")
 
 
-											 .eq(index).css("background","url(images/landian.png)"); //为当前的按钮切换到选中的效果
+									 .eq(index).css("background","url(images/landian.png)"); //为当前的按钮切换到选中的效果
 
 
-					}
+			}
 
 
 
 
 
-				});
-			</script>
-		</body>
-	</html>
+		});
+	</script>
+</body>
+</html>
