@@ -37,7 +37,7 @@
                 </span></h2>
                 <php>foreach($info as $i) {</php>
                 <div class="module_1">
-                    <p class="show_time"><php>echo date('Y-m-d', $i['article']['ctime'])</php></p>	
+                    <p class="show_time"><php>echo date('Y-m-d', $i['article']['gotime'])</php></p>	
                     <div class="package clearfix">			
                         <div class="part_1">
                             <h3 class="nowaday">{$i['article']['title']}</h3>
@@ -49,7 +49,7 @@
                             <div class="vidio">
                                 <ul class="video_list">
                                 <php>foreach($i['video'] as $v) {</php>
-                                    <span>{$v['title']}</span>
+                                    <span><php>if($v['title']!='null'){echo $v['title'];}</php></span>
                                     <li style="position:relative;">
                                         <!-- <a href="javascript:void(0)"> -->
                                             <!--<img src="{$v['img']}" width="150" />-->

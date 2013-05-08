@@ -22,6 +22,7 @@ class IndexAction extends AdministratorAction {
             'apps'			=>	'应用',
             'extension'		=>	'插件',
             'article'       =>  '文章',
+			'pageinfo'      =>  '页面',
         );
     }
 
@@ -38,6 +39,14 @@ class IndexAction extends AdministratorAction {
                 '数据备份'    =>  U('admin/Tool/backup'),
                 'CNZZ统计'   =>  U('admin/Tool/cnzz'),
             ),
+        );
+		$menu['pageinfo'] 	=   array(
+				'导航'		=>	array(
+                '首页导航'	=>	U('admin/Nav/homepage'),
+				),
+				'广告模块'	=>	array(
+                '页面Banner管理'	=>	U('admin/Nav/adv'),
+				),
         );
 
         //全局

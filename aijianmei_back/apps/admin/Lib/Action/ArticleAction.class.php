@@ -31,6 +31,7 @@ class ArticleAction extends AdministratorAction {
 						$succcount=0;
 						foreach($exceldata as $key => $value)
 						{
+							sleep(1);
 							$insertdata['uid'] = $this->mid;
 							$insertdata['title'] = t($value[0]);
 							$insertdata['channel'] = intval($channelArr[$value[1]]);
@@ -40,11 +41,14 @@ class ArticleAction extends AdministratorAction {
 							$insertdata['create_time'] = time();
 							$insertdata['gotime'] = strtotime($value[3]);
 							$insertdata['img']=null;
-							$newfilename=$_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$value[2];
+							$newfilename=null;
+							$newfilename=$value[2];
 							$insertdata['img'] = $newfilename;
 							$vid = M('daily')->add($insertdata);
+							//print_r($insertdata);
 							if($vid>0){$succcount++;}
 							/*video part start*/
+							$vdata=null;
 							$vdata['daily_id'] = $vid;
 							$vdata['link'] = $value[6];
 							$vdata['htmlurl'] = $value[7];

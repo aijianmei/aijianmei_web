@@ -683,14 +683,19 @@ function show_banner($type){
         M('')->query($upReaderCountSql);
         
         $daily = M('daily')->where(array('id'=>$id))->find();
+		$daily['dateStrng']=_returnNdate($daily['create_time']);
+		//print_r($daily);
         $videos = M('daily_video')->where(array('daily_id'=>$id))->findAll();
         
         foreach ($videos as $k=>$v) {
-            if (!empty($v['link'])) {
+            if (!empty($v['link'])&&$v['link']!='null') {
                 $videos[$k]['img'] = D('Article')->getVideoImgById($v['id']);
 				$data = json_decode($this->getVideoData($v['link']));
 				$videos[$k]['logo'] = $data->data[0]->logo;
             }
+			else{
+				unset($videos[$k]);
+			}
         }
 		//print_r($videos);
         $commentsCount = M('comments')->where(array('parent_type'=>'4', 'parent_id'=>$id))->count();
@@ -710,7 +715,7 @@ function show_banner($type){
 		$comments = $this->arr2tree($comments);
 		$comhtml=$this->tree2html($comments);
 		$this->assign('comhtml', $comhtml);
-		//print_r($comments);
+		print_r($comments);
 		//tree2html($tree);  
 		//print_r($tree); 
 		

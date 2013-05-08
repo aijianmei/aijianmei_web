@@ -13,7 +13,7 @@ class ArticleModel extends Model {
 */
     public function getDailyLimit($channel,$limit,$nums)
     {
-        $sql = "select d.id,d.title,d.img,d.content,d.create_time,d.like,d.unlike,d.read_count,v.id as vid,v.title as vtitle,v.link,v.wapurl,v.intro from ai_daily as d
+        $sql = "select d.id,d.title,d.img,d.content,d.create_time,d.gotime,d.like,d.unlike,d.read_count,v.id as vid,v.title as vtitle,v.link,v.wapurl,v.intro from ai_daily as d
                 left join ai_daily_video  as v on v.daily_id=d.id 
                 where d.channel=".$channel." ORDER BY d.create_time DESC  limit ".$limit.",".$nums." ";
         
@@ -26,10 +26,10 @@ class ArticleModel extends Model {
         foreach ($result as $r) {
             $info = $parser->getVideoInfo($r['link']);
             if($daily[$r['id']]) {
-                $daily[$r['id']]['video'][] = array('id'=>$r['vid'], 'title'=>$r['vtitle'], 'link'=>$r['link'], 'wapurl'=>$r['wapurl'], 'intro'=>$r['intro'], 'img'=>$info['img'], 'read_count'=>$r['read_count']);
+                $daily[$r['id']]['video'][] = array('id'=>$r['vid'], 'title'=>$r['vtitle'], 'link'=>($r['link']!='null'?$r['link']:''), 'wapurl'=>($r['wapurl']!='null'?$r['wapurl']:''), 'intro'=>$r['intro'], 'img'=>$info['img'], 'read_count'=>$r['read_count']);
             }else {
-                $daily[$r['id']]['article'] = array('id'=>$r['id'], 'title'=>$r['title'], 'img'=>$r['img'], 'content'=>$r['content'], 'ctime'=>$r['create_time'], 'like'=>$r['like'], 'unlike'=>$r['unlike'],'read_count'=>$r['read_count']);
-                $daily[$r['id']]['video'][] = array('id'=>$r['vid'], 'title'=>$r['vtitle'], 'link'=>$r['link'],'wapurl'=>$r['wapurl'], 'intro'=>$r['intro'], 'img'=>$info['img']);
+                $daily[$r['id']]['article'] = array('id'=>$r['id'], 'title'=>$r['title'], 'img'=>$r['img'], 'content'=>$r['content'], 'ctime'=>$r['create_time'],'gotime'=>$r['gotime'], 'like'=>$r['like'], 'unlike'=>$r['unlike'],'read_count'=>$r['read_count']);
+                $daily[$r['id']]['video'][] = array('id'=>$r['vid'], 'title'=>$r['vtitle'], 'link'=>($r['link']!='null'?$r['link']:''),'wapurl'=>($r['wapurl']!='null'?$r['wapurl']:''), 'intro'=>$r['intro'], 'img'=>$info['img']);
             }
             
             $daily[$r['id']]['comments'] = $this->getDailyComments($r['id']);
