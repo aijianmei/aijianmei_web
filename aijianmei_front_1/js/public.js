@@ -120,7 +120,7 @@ var aijianmei = {
     },
     opacity : function(obj,filter,speed){
 		var newdom = new getdom,
-			obj = newdom.getElementsByClass(obj)[0],
+			obj = newdom.getElementsByClass(obj)[0] || obj,
 			ob_opacity = newdom.GetCurrentStyle(obj,'opacity') ? newdom.GetCurrentStyle(obj,'opacity') : 1,
 			obj_opacity = [ob_opacity[0],ob_opacity[1], ob_opacity[2]].join(""),
 			obj_filter = newdom.GetCurrentStyle(obj,'filter'),//获取filter的值，表现形式为alpha(opacity=10);
@@ -251,10 +251,36 @@ var aijianmei = {
             	clearInterval(move)
             }
     	},1)  	    
-    }
+    },
+    get : function(obj){
+		if(obj.children[1]){
+			if(obj.children[1].className == "mn_drop"){
+				obj.children[1].style.visibility = 'visible';
+			}
+		}
+	},
+	out : function(obj){
+		if(obj.children[1]){
+			if(obj.children[1].className == "mn_drop"){
+				obj.children[1].style.visibility = 'hidden';
+			}
+		}
+	}
 }
 var init = function(){
-    var newdom = new getdom;
-    aijianmei.hover('more','account')
+    var newdom = new getdom,
+    	nav_child = newdom.getElementsByClass('nav_child'),
+    	len_1 = nav_child.length;
+	for(var i = 0;i < len_1;i++){
+		if(nav_child[i]){
+			nav_child[i].onmouseover = function(){
+				aijianmei.get(this);		
+			}
+			nav_child[i].onmouseout = function(){
+				aijianmei.out(this);
+			}
+		}		
+	};
+    aijianmei.hover('more','account');
 }
 init();	
