@@ -338,10 +338,25 @@
         <script type="text/javascript">
         	var init = function(){
 			    var newdom = new getdom,
-			    	identifying = newdom.getElementsByClass('identifying')[0];
-			   aijianmei.identifying(identifying);
+			    	day_part = newdom.getElementsByClass('day_part'),
+                	ms_hidden_part = newdom.getElementsByClass('ms_hidden_part'),
+                	bg_opc = newdom.getElementsByClass('bg_opc'),
+                	bg_opc_2 = newdom.getElementsByClass('bg_opc_2'),
+                	len = day_part.length;
+                	for(var i = 0;i < len;i++){
+                		day_part[i].index = i;
+                		day_part[i].onmouseover = function(){
+                			aijianmei.chang_top(bg_opc_2[this.index],1,100);
+                			aijianmei.chang_top(bg_opc[this.index],1,100);
+                			aijianmei.chang_top(ms_hidden_part[this.index],1,100);
+                		}	
+	                	day_part[i].onmouseout = function(){
+	                		aijianmei.chang_top(bg_opc_2[this.index],0,100)
+	                		aijianmei.chang_top(bg_opc[this.index],0,100)
+	                		aijianmei.chang_top(ms_hidden_part[this.index],0,100)
+	                	}	
+	                }	 
 			   aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
-			   aijianmei.addtitle('detail')
 			}
 			init();	
         </script>

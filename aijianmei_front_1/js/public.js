@@ -233,7 +233,25 @@ var aijianmei = {
 				addevent(Obj[i],"mouseout",remove);
 			}	
 		}	
-	}
+	},
+	chang_top : function(obj,T,length){  
+        var i = 0;
+        obj.style.top = aijianmei.newdom.GetCurrentStyle(obj,'top');
+        var move = setInterval(function(){
+    		if(i < length){
+                i = i + 10;
+        		if(T){	
+        			obj.style.top = parseFloat(obj.style.top) - 10 + 'px';
+        		}
+                else{
+                    obj.style.top = parseFloat(obj.style.top) + 10 + 'px';
+                }
+            }
+            else{
+            	clearInterval(move)
+            }
+    	},1)  	    
+    }
 }
 var init = function(){
     var newdom = new getdom;
