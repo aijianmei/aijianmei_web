@@ -250,7 +250,7 @@ var aijianmei = {
             else{
             	clearInterval(move)
             }
-    	},1)  	    
+    	},10)  	    
     },
     get : function(obj){
 		if(obj.children[1]){
