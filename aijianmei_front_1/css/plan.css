@@ -1,0 +1,49 @@
+﻿/*************Plan**************/
+.vission{
+	padding: 0 10px 10px;
+	border-bottom: 1px dashed #DDD;
+	color: #333;
+	font-size: 20px;	
+}
+.plan_sort{
+	border-bottom:1px dashed #DDD;
+}
+.plan_sort .sort_tit{
+	height: 35px;
+	line-height: 35px;
+	background: #21ADE3;
+	margin: 20px 0;
+	padding-left: 10px;
+	color: white;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+	.plan_item{
+		position:relative;
+		margin-bottom:15px;
+	}
+		.plan_item .plan_item_tit{
+			color: #AAC2DE;
+			font-size: 20px;
+			margin-bottom: 5px;
+		}
+		.plan_item .itemImg{
+			border-radius:10px;
+			box-shadow: 1px 2px 5px rgba(0,0,0,0.4);
+		}
+		.plan_cover{
+			position: absolute;
+			bottom: 3px;
+			height: 87px;
+			line-height: 87px;
+			width: 100%;
+			background: black;
+			opacity: 0.5;
+			filter:Alpha(opacity=50);
+			color: white;
+			font-size: 30px;
+			font-weight: bold;
+			text-align: center;
+			border-radius: 0 0 10px 10px;
+		}
+	
