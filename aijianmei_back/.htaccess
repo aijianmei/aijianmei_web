@@ -9,3 +9,4 @@ RewriteRule ^Plan.html index.php?app=index&mod=Plan
 RewriteRule ^Train.html index.php?app=index&mod=Train
 RewriteRule ^Nutri.html index.php?app=index&mod=Nutri
 RewriteRule ^Append.html index.php?app=index&mod=Append
+RewriteRule ^Newtrain.html index.php?app=index&mod=Newtrain
