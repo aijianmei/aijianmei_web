@@ -1,4 +1,5 @@
 RewriteEngine on
+RewriteBase /
 RewriteRule index.html index.php
 RewriteRule ^(.+)-(.+)-(articleDetail)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4
 RewriteRule ^(.+)-(.+)-(daily)-(.+)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4&type=$5
@@ -10,3 +11,4 @@ RewriteRule ^Train.html index.php?app=index&mod=Train
 RewriteRule ^Nutri.html index.php?app=index&mod=Nutri
 RewriteRule ^Append.html index.php?app=index&mod=Append
 RewriteRule ^Newtrain.html index.php?app=index&mod=Newtrain
+RewriteRule ^forum/(.+) forum/$1

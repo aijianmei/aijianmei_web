@@ -428,29 +428,6 @@ function reg(str){
    <div class="blank"></div>
    <!--商品详情end-->
 
-
-<!-- outside  购买记录 ------------------------------------------------------------>
-
-<!-- #BeginLibraryItem "/library/bought_note_guide.lbi" -->
-
-{insert_scripts files='transport.js,utils.js'}
-<div id="ECS_BOUGHT">{* ECSHOP 提醒您：动态载入bought_notes.lbi，显示当前商品的购买记录 *}{insert name='bought_notes' id=$id}</div>
- <!-- #EndLibraryItem -->
-
-
-<!--  outside  用户评论 ----------------------------------------------------------->
-
-
-
-<!-- #BeginLibraryItem "/library/comments.lbi" -->
-
-{insert_scripts files='transport.js,utils.js'}
-<div id="ECS_COMMENT"> {* ECSHOP 提醒您：动态载入comments_list.lbi，显示评论列表和评论表单 *}{insert name='comments' type=$type id=$id}</div>
-
- <!-- #EndLibraryItem -->
-
-
-
    <!-- outside  商品属性，--------------------------------------------------begin- -->
    <!--商品描述，商品属性 START-->
      <div class="box">
@@ -459,6 +436,8 @@ function reg(str){
         <div id="com_b" class="history clearfix">
         <h2>{$lang.goods_brief}</h2>
         <h2 class="h2bg">{$lang.goods_attr}</h2>
+		<h2 class="h2bg">购买记录</h2>
+		<h2 class="h2bg">用户评论</h2>
         <!-- {if $package_goods_list} -->
         <h2 class="h2bg" style="color:red;">{$lang.remark_package}</h2>
         <!-- {/if} -->
@@ -468,6 +447,10 @@ function reg(str){
       <div id="com_h">
        <blockquote>
         {$goods.goods_desc}
+		<div style="clear:both">
+		{insert name='Newbought_notes' id=$id}
+		{insert name='Newcomments' type=$type id=$id}
+		</div>
        </blockquote>
 
      <blockquote>
@@ -485,6 +468,18 @@ function reg(str){
         <!-- {/foreach}-->
       </table>
      </blockquote>
+
+     <blockquote>
+	{insert name='Newbought_notes' id=$id}
+     </blockquote>	 
+	 
+	 
+     <blockquote>
+	{insert name='Newcomments' type=$type id=$id}
+     </blockquote>	 
+	 
+	 
+	 
 
      <!-- {if $package_goods_list} -->
      <blockquote>
@@ -511,6 +506,8 @@ function reg(str){
      </blockquote>
      <!-- {/if} -->
 
+	 
+	 
       </div>
      </div>
     </div>
