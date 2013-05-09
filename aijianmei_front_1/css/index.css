@@ -115,6 +115,7 @@
 				color: white;
 				text-align: center;
 				z-index: 4;
+				zoom:1;
 			}
 			.ms_hidden_part h3{
 				font-size: 22px;
@@ -124,13 +125,14 @@
 			.ms_hidden_part p{
 				line-height: 32px;
 			}
-			.ms_hidden_part .bg_opc_2{
+			.bg_opc_2{
 				position: absolute;
 				display: block;
 				width: 210px;
 				height: 140px;
 				top: 100px;
 				z-index: 6;
+				zoom: 1;
 			}	
 
 
