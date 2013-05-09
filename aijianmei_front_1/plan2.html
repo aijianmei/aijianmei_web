@@ -15,16 +15,56 @@
 		        <div class="h_bg">
 		            <a href="/index.php?app=index"><div class="logo_1">logo</div></a>
 		            <ul class="nav">
-		                <li class="nav_current"><i class="ag_current"></i><a href="index.html"><span class="home">首页</span></a></li>
-		                <li><i class="ag_current"></i><a href='#'><span class="store">商店</span></a></li>
-		                <li><i class="ag_current"></i><a href="plan.html">健身计划</a></li>
-		                <li><i class="ag_current"></i><a href="training.html">锻炼</a>
+		                <li class="nav_child nav_current">
+		                	<a class="nav_a" href="index.html"><span class="home">首页</span></a>
 		                </li>
-		                <li><i class="ag_current"></i><a href="nutri.html">营养</a>
+		                <li class="nav_child">
+							<a class="nav_a" href='#'><span class="store">商店</span></a>
+		                	<ul class="mn_drop">
+		                		<li><a class="mn_first">初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                	</ul>
 		                </li>
-		                <li><i class="ag_current"></i><a href="add.html">辅助品</a></li>
-		                <li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
-		                <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>
+		                <li class="nav_child">
+		                	<a class="nav_a" href="plan.html">健身计划</a>
+		                	<ul class="mn_drop">
+		                		<li><a class="mn_first">初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                	</ul>
+		                </li>
+		                <li class="nav_child">
+		                	<a class="nav_a" href="training.html">锻炼</a>
+		                	<ul class="mn_drop">
+		                		<li><a class="mn_first">初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                	</ul>
+		                </li>
+		                <li class="nav_child">
+		                	<a class="nav_a" href="nutri.html">营养</a>
+		                	<ul class="mn_drop">
+		                		<li><a class="mn_first">初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                	</ul>
+		                </li>
+		                <li class="nav_child">
+		                	<a class="nav_a" href="add.html">辅助品</a>
+		                	<ul class="mn_drop">
+		                		<li><a class="mn_first">初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                		<li><a>初级基础训练</a></li>
+		                	</ul>
+		                </li>
+		                <li class="nav_child"><a class="nav_a" href="#">论坛</a></li>
+		                <li class="nav_child"><a class="nav_a" href="#">交友互动</a></li>
 		            </ul>
 		        </div>
 		    </div>
@@ -74,6 +114,7 @@
     </script>
 	<![endif]-->
 	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/public.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			$("div.plan_item").bind({

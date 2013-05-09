@@ -28,7 +28,7 @@
 			}
 			.bn_contain_pic{
 				width: 2600px;
-				height: 100px;
+				z-index: 10;
 			}
 			.bn_contain_pic li{
 				float: left;
@@ -124,7 +124,11 @@
 			.ms_hidden_part p{
 				line-height: 32px;
 			}
+<<<<<<< HEAD
 			.ms_hidden_part .bg_opc_2{
+=======
+			.bg_opc_2{
+>>>>>>> refs/remotes/origin/MianBranch
 				position: absolute;
 				display: block;
 				width: 210px;
