@@ -28,7 +28,7 @@
 			}
 			.bn_contain_pic{
 				width: 2600px;
-				height: 100px;
+				z-index: 10;
 			}
 			.bn_contain_pic li{
 				float: left;
