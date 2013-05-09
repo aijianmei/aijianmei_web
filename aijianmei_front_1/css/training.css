@@ -412,4 +412,107 @@
 
 /*website training ending*************************/
 
+/*website good beginning*************************/
+
+	/*content_1******************************************************************/
+		/*.content_1{
+			float: left;
+			width:650px;
+			margin-right: 10px;
+		}*/
+
+		/*tr_content*/
+			/*.tr_nav{
+				width: 100%;
+				background: #56A9E4;
+			}
+			.tr_nav li{
+				float:left;
+				display: inline-block;
+				height:34px;
+				padding: 0 16px;
+				line-height: 34px;
+				cursor: pointer;
+				color: white;
+				font-size: 18px;
+			}
+			.tr_nav .tr_current{
+				background: #2274A3;
+			}
+			.cont_tab_ct{
+				display: none;
+			}
+			.cont_tab_block{
+				display: block;
+			}*/
+			/*gd_classifly---------*/
+			.gd_classifly{
+				margin-top: 30px;
+			}
+			.gd_pic{
+				float: left;
+				width: 14%;
+			}
+			.gd_pic img{
+
+			}
+			/*gd_ms--------*/
+			.gd_ms{
+				float: left;
+				width: 86%;
+
+			}
+			.gd_ps{
+				padding: 7px;
+				background:#eee;
+			}
+			.gd_ps .gd_name{
+
+			}
+			.gd_ps .gd_right{
+				float: right;
+			}
+			.gd_ps .gd_icon{
+				display: inline-block;
+				width: 18px;
+				height:11px;
+				background: url(../images/03.jpg) no-repeat;
+			}
+			.gd_ms p{
+				font-size: 14px;
+				line-height: 24px;
+				color: #666;
+			}
+			.gd_ms h6{
+				margin: 10px 0;
+				font-family: inherit;
+				font-weight: bold;
+				color: inherit;
+			}
+
+
+	/*content_2******************************************************************/
+		/*.content_2{
+			float:left;
+			width:300px;
+		}*/
+		/*same_module---------*/
+			/*.same_module{
+				margin-bottom: 10px;
+				background: white;
+			}
+			.sm_title{
+				height: 38px;
+				line-height: 38px;
+				padding-left: 10px;
+				background: #F1F1F1;
+			}*/
+		/*recomment_read_more*/
+		/*.recomment_read_more{
+			float:right;
+			color:#21ace3;
+			margin:0 10px 10px 0;
+		}*/
+/*website good ending*************************/
+
 
