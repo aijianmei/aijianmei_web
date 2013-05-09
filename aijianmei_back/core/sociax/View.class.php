@@ -100,6 +100,7 @@ class View extends Think
     public function display($templateFile='',$charset='',$contentType='text/html')
     {
         $this->assign('_buttomTagInfo',unserialize(include_once("buttomTagInfo.php")));
+		$this->assign('_TopMenuInfo',unserialize(include_once("PublicCache/TopMenuCache.php")));
         $this->fetch($templateFile,$charset,$contentType,true);
     }
 
