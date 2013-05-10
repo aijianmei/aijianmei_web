@@ -1,5 +1,5 @@
 /******register Reset **********/
-body{
+body,ul,p{
 	margin:0;
 	padding:0;
 }
@@ -9,7 +9,7 @@ p,input{
 body{
 	font-size: 14px;
 	font-family: Microsoft YaHei,"微软雅黑",Lucida,Verdana,Hiragino Sans GB,STHeiti,WenQuanYi Micro Hei,SimSun,sans-serif;
-	background:url(../images/bg.jpg) repeat;
+	background:url(../images/bg.jpg) no-repeat;
 }
 ul{
 	list-style:none;
@@ -138,12 +138,54 @@ a:hover{
 
 /*register_3 beginning------------------*/
 	/*re_choice*/
-	.re_choice{
-
+	.rg_choice{
+width:775px;
+margin: 0 auto;
 	}
-	/*re_choice_way	*/
-		.re_choice_way{
+	/*rg_choice_way	*/
+		.rg_choice_way{
 
+		}
+		.rg_choice_lay{
+			float:left;
+			margin: 5px;
+		}
+		.rg_choice_part{
+position: relative;
+display: block;
+width: 145px;
+height: 117px;
+overflow: hidden;
+		}
+		.rg_add_part{
+			background: #21ace3;
+		}
+		.rg_choice_part img{
+width: 145px;
+height:117px;
+		}
+		.rg_way_content{
+position: absolute;
+width: 100%;
+height: 31px;
+top: 86px;
+z-index: 1;
+		}
+		.rg_way_content p{
+font-size: 16px;
+margin: 5px 0;
+text-align: center;
+color: white;
+		}
+		.rg_way_bg{
+position: absolute;
+top: 86px;
+display: block;
+width: 100%;
+height:31px;
+background: black;
+opacity: 0.5;
+filter:alpha(opacity=50);
 		}
 	/*pre_ne_choice*/
 		/*.pre_ne_choice{
