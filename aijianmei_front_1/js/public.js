@@ -234,7 +234,7 @@ var aijianmei = {
 			}	
 		}	
 	},
-	chang_top : function(obj,T,length){  
+	chang_top : function(obj,T,length,speed){  
         var i = 0;
         obj.style.top = aijianmei.newdom.GetCurrentStyle(obj,'top');
         var move = setInterval(function(){
@@ -250,7 +250,7 @@ var aijianmei = {
             else{
             	clearInterval(move)
             }
-    	},10)  	    
+    	},speed)  	    
     },
     get : function(obj){
 		if(obj.children[1]){
@@ -271,14 +271,14 @@ var aijianmei = {
 			login_table= aijianmei.getobj('login_table');
 		login_Bg.style.visibility = 'visible';
 		login_table.style.visibility = 'visible';
-		aijianmei.opacity('login_bg',0.8,10);
-		aijianmei.chang_top(login_table,0,298);
+		aijianmei.opacity('login_bg',0.5,10,10);
+		aijianmei.chang_top(login_table,0,294,10);
 	},
 	removeacTion : function(){
 		var login_Bg = aijianmei.getobj('login_bg'),
 			login_table= aijianmei.getobj('login_table');
 		aijianmei.opacity('login_bg',0,10);
-		aijianmei.chang_top(login_table,1,298);
+		aijianmei.chang_top(login_table,1,294,10);
 		login_Bg.style.visibility = 'hidden';
 		login_table.style.visibility = 'hidden';
 		// if(login_Bg.style.opacity == 0){
