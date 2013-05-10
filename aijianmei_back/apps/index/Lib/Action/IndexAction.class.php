@@ -373,7 +373,8 @@ function show_banner($type){
 				$hotvideos[$k] = $v;
 				$data = json_decode($this->getVideoData($v['link']));
 				$hotvideos[$k]['logo'] = $data->data[0]->logo;
-				$hotvideos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);            
+				$hotvideos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);
+				unset($hotvideos[$key]['content']);				
 			}
 			$this->setDataCache(md5($sql),$hotvideos);
 		}	
@@ -387,6 +388,7 @@ function show_banner($type){
 			$hotArticles = M('')->query($sql);
 			foreach ($hotArticles as $key => $value) {
 				$hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
+				unset($hotArticles[$key]['content']);
 			}
 			$this->setDataCache(md5($sql),$hotArticles);
 		}

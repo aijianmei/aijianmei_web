@@ -1,7 +1,7 @@
 <?php
 session_start();
-error_reporting(E_ALL); //调试、找错时请弃用这一行配置，注释下一行配置
-error_reporting(E_ERROR | E_PARSE | E_STRICT);
+error_reporting(0); //调试、找错时请弃用这一行配置，注释下一行配置
+//error_reporting(E_ERROR | E_PARSE | E_STRICT);
 
 //安装检查开始：如果您已安装过ThinkSNS，可以删除本段代码
 if(is_dir('install/') && !file_exists('install/install.lock')){
