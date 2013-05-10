@@ -1,5 +1,5 @@
 /******register Reset **********/
-body{
+body,ul,p{
 	margin:0;
 	padding:0;
 }
@@ -9,7 +9,7 @@ p,input{
 body{
 	font-size: 14px;
 	font-family: Microsoft YaHei,"微软雅黑",Lucida,Verdana,Hiragino Sans GB,STHeiti,WenQuanYi Micro Hei,SimSun,sans-serif;
-	background:url(../images/bg.jpg) repeat;
+	background:url(../images/bg.jpg) no-repeat;
 }
 ul{
 	list-style:none;
@@ -64,7 +64,7 @@ a:hover{
 			display:inline-block;
 			width:138px;
 			height:138px;
-			margin:-82px 25px 25px 25px;;
+			margin:-82px 25px 0 25px;;
 		}
 		.rg_step_1{
 			background: url(../images/register/011.png) no-repeat;
@@ -84,7 +84,7 @@ a:hover{
 		}
 		.rg_ms{
 			position: relative;
-			margin-bottom: 30px;
+			margin-top: 30px;
 			background:url(../images/register/03.png) no-repeat;
 		}
 		.rg_ms label{
@@ -113,7 +113,7 @@ a:hover{
 		}
 	/*pre_ne_choice*/
 		.pre_ne_choice{
-			margin-bottom: 40px;
+			margin:45px 0;
 		}
 		.pre_ne_choice a{
 			width:150px;
@@ -150,6 +150,85 @@ a:hover{
 			margin-bottom: 40px;
 		}
 		.pre_ne_choice a{
+	/*rg_bottom*/
+		.rg_step_rg3_1{
+			background: url(../images/register/021.png) no-repeat;
+		}
+		.rg_step_rg3_3{
+			background: url(../images/register/061.png) no-repeat;			
+		}
+	/*re_choice*/
+	.rg_choice{
+		width:775px;
+		margin: 25px auto 0 auto;
+	}
+	/*rg_choice_way	*/
+		.rg_choice_way{
+
+		}
+		.rg_choice_lay,.rg_choice_lay_sp{
+			position: relative;
+			float:left;
+			padding: 5px;
+		}
+		.rg_choice_part{
+			position: relative;
+			display: block;
+			width: 145px;
+			height: 117px;
+			overflow: hidden;
+		}
+		.rg_add_part{
+			background: #21ace3;
+		}
+		.rg_choice_part img{
+			width: 145px;
+			height:117px;
+		}
+		.rg_way_content{
+			position: absolute;
+			left: 0;
+			width: 100%;
+			height: 31px;
+			top: 86px;
+			z-index: 10;
+		}
+		.rg_way_content p{
+			font-size: 16px;
+			margin: 5px 0;
+			text-align: center;
+			color: white;
+		}
+		.rg_img_bg{
+			position: absolute;
+			left:0;
+			top: 0;
+			display: block;
+			width: 100%;
+			height:100%;
+			background: white;
+			opacity: 0.5;
+			filter:alpha(opacity=50);
+			z-index: 3;
+		}
+		.rg_way_bg{
+			position: absolute;
+			left:0;
+			top: 86px;
+			display: block;
+			width: 100%;
+			height:31px;
+			background: black;
+			opacity: 0.5;
+			filter:alpha(opacity=50);
+			z-index: 5;
+		}
+	/*pre_ne_choice*/
+		.pre_ne_rg3{
+			margin:40px auto;
+			width: 400px;
+		}
+		/*.pre_ne_choice a{
 			width:150px;
 			height:50px;
 		}

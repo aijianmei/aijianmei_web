@@ -14,12 +14,109 @@
 			<p class="rg_tip">请留下邮箱方便下次登录</p>
 		</div>
 		<div class="rg_bottom">
-			<div class="rg_step"><span class="rg_step_1"></span><span class="rg_step_2"></span><span class="rg_step_3"></span></div>
-			<div class="re_choice">
-				<ul class="re_choice_way">
-					<li></li>
+			<div class="rg_step"><span class="rg_step_rg3_1"></span><span class="rg_step_2"></span><span class="rg_step_rg3_3"></span></div>
+			<div class="rg_choice">
+				<ul class="rg_choice_way clearfix">
+					<li class="rg_choice_lay">
+						<a class="rg_choice_part">
+							<img src="images/register/way_1.jpg">
+							<div class="rg_img_bg"></div>
+							<div class="rg_way_content">
+								<p>增肌</p>			
+							</div>
+							<div class="rg_way_bg"></div>
+						</a>
+					</li>
+					<li class="rg_choice_lay">
+						<a class="rg_choice_part">
+							<img src="images/register/way_2.jpg">
+							<div class="rg_img_bg"></div>
+							<div class="rg_way_content">
+								<p>增肥</p>			
+							</div>
+							<div class="rg_way_bg"></div>
+						</a>
+					</li>
+					<li class="rg_choice_lay">
+						<a class="rg_choice_part">
+							<img src="images/register/way_3.jpg">
+							<div class="rg_img_bg"></div>
+							<div class="rg_way_content">
+								<p>减肥</p>			
+							</div>
+							<div class="rg_way_bg"></div>
+						</a>
+					</li>
+					<li class="rg_choice_lay">
+						<a class="rg_choice_part">
+							<img src="images/register/way_4.jpg">
+							<div class="rg_img_bg"></div>
+							<div class="rg_way_content">
+								<p>营养</p>			
+							</div>
+							<div class="rg_way_bg"></div>
+						</a>
+					</li>
+					<li class="rg_choice_lay">
+						<a class="rg_choice_part">
+							<img src="images/register/way_5.jpg">
+							<div class="rg_img_bg"></div>
+							<div class="rg_way_content">
+								<p>交友</p>			
+							</div>
+							<div class="rg_way_bg"></div>
+						</a>
+					</li>
+					<li class="rg_choice_lay">
+						<a class="rg_choice_part">
+							<img src="images/register/way_6.jpg">
+							<div class="rg_img_bg"></div>
+							<div class="rg_way_content">
+								<p>放松</p>			
+							</div>
+							<div class="rg_way_bg"></div>
+						</a>
+					</li>
+					<li class="rg_choice_lay">
+						<a class="rg_choice_part">
+							<img src="images/register/way_7.jpg">
+							<div class="rg_img_bg"></div>
+							<div class="rg_way_content">
+								<p>增肌</p>			
+							</div>
+							<div class="rg_way_bg"></div>
+						</a>
+					</li>
+					<li class="rg_choice_lay">
+						<a class="rg_choice_part">
+							<img src="images/register/way_8.jpg">
+							<div class="rg_img_bg"></div>
+							<div class="rg_way_content">
+								<p>增肌</p>			
+							</div>
+							<div class="rg_way_bg"></div>
+						</a>
+					</li>
+					<li class="rg_choice_lay">
+						<a class="rg_choice_part">
+							<img src="images/register/way_9.jpg">
+							<div class="rg_img_bg"></div>
+							<div class="rg_way_content">
+								<p>增肌</p>			
+							</div>
+							<div class="rg_way_bg"></div>
+						</a>
+					</li>
+					<li class="rg_choice_lay_sp">
+						<a class="rg_choice_part rg_add_part">
+							<div class="rg_way_content">
+								<p>我来填</p>			
+							</div>
+							<div class="rg_way_bg"></div>
+						</a>
+					</li>
 				</ul>
-				<div class="pre_ne_choice clearfix">
+				<div class="pre_ne_choice pre_ne_rg3 clearfix">
 					<a class="pre_choice"></a>
 					<a class="next_choice"></a>
 				</div>
@@ -27,4 +124,29 @@
 		</div>
 	</body>
 	<script type="text/javascript" src="js/public.js"></script>
+	<script type="text/javascript">
+		var init = function(){
+			var newdom = new getdom,
+				rg_choice_way = newdom.getElementsByClass("rg_choice_way")[0],
+				rg_choice_lay = newdom.getElementsByClass("rg_choice_lay"),
+				rg_way_content = newdom.getElementsByClass('rg_way_content'),
+				rg_way_bg = newdom.getElementsByClass('rg_way_bg'),
+				rg_img_bg = newdom.getElementsByClass('rg_img_bg'),
+				len_choice = rg_choice_lay.length;
+			for(var i = 0;i < len_choice;i++){
+				rg_choice_lay[i].index = i;
+				rg_choice_lay[i].onmouseover = function(){
+					aijianmei.chang_top(rg_way_content[this.index],0,31,50);
+					aijianmei.chang_top(rg_way_bg[this.index],0,31,50);
+					rg_img_bg[this.index].style.opacity = 0;
+				}
+				rg_choice_lay[i].onmouseout = function(){
+					aijianmei.chang_top(rg_way_content[this.index],1,31,50);
+					aijianmei.chang_top(rg_way_bg[this.index],1,31,50);
+					rg_img_bg[this.index].style.opacity = 0.5;
+				}
+			}		
+		}
+		init();
+	</script>
 </html>

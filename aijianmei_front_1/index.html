@@ -422,14 +422,14 @@
                 	for(var i = 0;i < len;i++){
                 		day_part[i].index = i;
                 		day_part[i].onmouseover = function(){
-                			aijianmei.chang_top(bg_opc_2[this.index],1,100);
-                			aijianmei.chang_top(bg_opc[this.index],1,100);
-                			aijianmei.chang_top(ms_hidden_part[this.index],1,100);
+                			aijianmei.chang_top(bg_opc_2[this.index],1,100,10);
+                			aijianmei.chang_top(bg_opc[this.index],1,100,10);
+                			aijianmei.chang_top(ms_hidden_part[this.index],1,100,10);
                 		}	
 	                	day_part[i].onmouseout = function(){
-	                		aijianmei.chang_top(bg_opc_2[this.index],0,100)
-	                		aijianmei.chang_top(bg_opc[this.index],0,100)
-	                		aijianmei.chang_top(ms_hidden_part[this.index],0,100)
+	                		aijianmei.chang_top(bg_opc_2[this.index],0,100,10)
+	                		aijianmei.chang_top(bg_opc[this.index],0,100,10)
+	                		aijianmei.chang_top(ms_hidden_part[this.index],0,100,10)
 	                	}	
 	                }	 
 			   aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
