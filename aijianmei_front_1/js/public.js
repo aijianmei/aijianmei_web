@@ -265,12 +265,46 @@ var aijianmei = {
 				obj.children[1].style.visibility = 'hidden';
 			}
 		}
+	},
+	acTion : function(){
+		var login_Bg = aijianmei.getobj('login_bg'),
+			login_table= aijianmei.getobj('login_table');
+		login_Bg.style.visibility = 'visible';
+		login_table.style.visibility = 'visible';
+		aijianmei.opacity('login_bg',0.8,10);
+		aijianmei.chang_top(login_table,0,298);
+	},
+	removeacTion : function(){
+		var login_Bg = aijianmei.getobj('login_bg'),
+			login_table= aijianmei.getobj('login_table');
+		aijianmei.opacity('login_bg',0,10);
+		aijianmei.chang_top(login_table,1,298);
+		login_Bg.style.visibility = 'hidden';
+		login_table.style.visibility = 'hidden';
+		// if(login_Bg.style.opacity == 0){
+		// 	login_Bg.style.visibility = 'hidden';
+		// 	login_table.style.visibility = 'hidden';
+		// }		
 	}
 }
 var init = function(){
     var newdom = new getdom,
     	nav_child = newdom.getElementsByClass('nav_child'),
-    	len_1 = nav_child.length;
+    	len_1 = nav_child.length,
+    	login = newdom.getElementsByClass('login'),
+    	len_login = login.length,
+    	lg_back = newdom.getElementsByClass('lg_back')[0];
+    // for login beginning	
+    for(var i = 0;i < len_login;i++){
+    	if(login[i]){
+    		addevent(login[i],'click',aijianmei.acTion);
+    	}
+    }
+    if(lg_back){
+    	addevent(lg_back,'click',aijianmei.removeacTion);
+    } 
+    //for login ending
+
 	for(var i = 0;i < len_1;i++){
 		if(nav_child[i]){
 			nav_child[i].onmouseover = function(){

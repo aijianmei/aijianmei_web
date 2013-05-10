@@ -462,6 +462,7 @@
 				width: 86%;
 
 			}
+
 			.gd_ps{
 				padding: 7px;
 				background:#eee;
@@ -475,7 +476,8 @@
 			.gd_ps .gd_icon{
 				display: inline-block;
 				width: 18px;
-				height:11px;
+				height: 14px;
+				vertical-align: middle;
 				background: url(../images/03.jpg) no-repeat;
 			}
 			.gd_ms p{
@@ -489,7 +491,25 @@
 				font-weight: bold;
 				color: inherit;
 			}
+			/*write_classifly----*/
+			.write_classifly{
+				margin-top: 30px;
+			}
+			.write_pic{
+				float: left;
+				width: 14%;
+			}
+			.write_pic img{
 
+			}
+			/*write_ms--------*/
+			.write_ms{
+				float: left;
+				width: 86%;
+
+			}
+
+			
 
 	/*content_2******************************************************************/
 		/*.content_2{

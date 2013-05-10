@@ -19,8 +19,11 @@
 }
 
 /*public.css-------------ending*/
-
-
+/*index.css-----------------------*/
+.day_classifly li{
+	position: relative;
+	overflow: hidden;
+}
 /*training hack begin-------------------*/
 
 

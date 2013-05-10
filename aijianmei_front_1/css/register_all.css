@@ -1,0 +1,170 @@
+/******register Reset **********/
+body{
+	margin:0;
+	padding:0;
+}
+p,input{
+	margin:0;
+}
+body{
+	font-size: 14px;
+	font-family: Microsoft YaHei,"微软雅黑",Lucida,Verdana,Hiragino Sans GB,STHeiti,WenQuanYi Micro Hei,SimSun,sans-serif;
+	background:url(../images/bg.jpg) repeat;
+}
+ul{
+	list-style:none;
+}
+a:hover{
+	color:#47AEE8;
+}
+/******* clearfix ********/
+.clearfix:after{
+	content:"";
+	clear:both;
+	display:block;
+	height:0;
+	visibility:hidden;
+	line-height:0;
+}
+.clearfix{
+	zoom:1;
+}
+
+/*pubilc module----------*/
+	/*rg_top*/
+		.rg_top{
+			background: url(../images/register/rg_bg.jpg) repeat-x;
+		}
+		.rg_logo{
+			padding:50px 0;
+			text-align: center;
+		}
+		.rg_logo img{
+
+		}
+		.rg_tip{
+			width: 360px;
+			height: 43px;
+			line-height: 43px;
+			padding-bottom: 106px;
+			margin: 0 auto;
+			font-size: 20px;
+			text-align: center;
+			background: url(../images/register/02.png) no-repeat;
+			color: white;
+		}
+	/*rg_bottom*/
+		.rg_bottom{
+
+		}
+		.rg_step{
+			text-align: center;
+		}
+		.rg_step span{
+			display:inline-block;
+			width:138px;
+			height:138px;
+			margin:-82px 25px 25px 25px;;
+		}
+		.rg_step_1{
+			background: url(../images/register/011.png) no-repeat;
+		}
+		.rg_step_2{
+			background: url(../images/register/031.png) no-repeat;			
+		}
+		.rg_step_3{
+			background: url(../images/register/051.png) no-repeat;			
+		}
+/*register_1 beginning------------------*/
+
+	/*rg_form*/
+		.rg_form{
+			width: 400px;
+			margin: 0 auto;
+		}
+		.rg_ms{
+			position: relative;
+			margin-bottom: 30px;
+			background:url(../images/register/03.png) no-repeat;
+		}
+		.rg_ms label{
+			position: absolute;
+			top: 14px;
+			left: 10px;
+			font-size: 14px;
+			color: #e9e9e9;
+		}
+		.rg_text{
+			width: 95%;
+			margin: 15px 10px;
+			font-size: 14px;
+			color: #e9e9e9;
+			outline: 0;
+			border: 0;
+			background: 0;
+		}
+		.rg_ms .rg_text_tip{
+			position: absolute;
+			display: block;
+			width: 150px;
+			left: 410px;
+			top: 14px;
+			color: #21ace3;
+		}
+	/*pre_ne_choice*/
+		.pre_ne_choice{
+			margin-bottom: 40px;
+		}
+		.pre_ne_choice a{
+			width:150px;
+			height:50px;
+		}
+		.pre_ne_choice .pre_choice{
+			float:left;
+			background: url(../images/register/04.png) no-repeat;
+		}
+		.pre_choice:hover{
+			background: url(../images/register/05.png) no-repeat;
+		}
+		.pre_ne_choice .next_choice{
+			float:right;
+			background: url(../images/register/06.png) no-repeat;
+		}
+		.next_choice:hover{
+			background: url(../images/register/07.png) no-repeat;	
+		}
+/*register_1 end------------------*/
+
+
+/*register_3 beginning------------------*/
+	/*re_choice*/
+	.re_choice{
+
+	}
+	/*re_choice_way	*/
+		.re_choice_way{
+
+		}
+	/*pre_ne_choice*/
+		/*.pre_ne_choice{
+			margin-bottom: 40px;
+		}
+		.pre_ne_choice a{
+			width:150px;
+			height:50px;
+		}
+		.pre_ne_choice .pre_choice{
+			float:left;
+			background: url(../images/register/04.png) no-repeat;
+		}
+		.pre_choice:hover{
+			background: url(../images/register/05.png) no-repeat;
+		}
+		.pre_ne_choice .next_choice{
+			float:right;
+			background: url(../images/register/06.png) no-repeat;
+		}
+		.next_choice:hover{
+			background: url(../images/register/07.png) no-repeat;	
+		}*/
+/*register_3 end------------------*/
