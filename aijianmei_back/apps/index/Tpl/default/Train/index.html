@@ -34,7 +34,7 @@
                         <h1 class="public_title">了解锻炼的意义</h1>
                         <div class="part_content">
                             <div class="tr_top clearfix">
-                            <a href="/index-Index-articleDetail-53.html" class="store.html"><img src="../Public/images/training/workout.jpg" alt="no" class="supple_pic" /></a>
+                            <a href="/index-Index-articleDetail-53.html" class="store.html"><img src="../Public/images/training/workout.jpg" alt="健身的基本要素" class="supple_pic" /></a>
                             <div class="lay_detail">
                                 <a href="/index-Index-articleDetail-53.html" class="detail" data-original-title="内容">健身的基本要素</a>
                                 <div class="title_tip"><div class="angle"></div></div>
@@ -46,14 +46,14 @@
                             <li class="classify" >
                                 <a href="/index.php?app=index&mod=Train&act=articleList&id=51" class="lay_cf show_enter">
                                 <span class="enter_icon"></span>		
-                                        <img src="../Public/images/training/training01.jpg" width="220" height="214px" alt="" class="best" />
+                                        <img src="../Public/images/training/training01.jpg" width="220" height="214px" alt="锻炼方法" class="best" />
                                         <p class="best_classify">锻炼方法</p>									
                                 </a>
                             </li>
                             <li class="classify">
                                 <a href="/index.php?app=index&mod=Train&act=articleList&id=38" class="lay_cf show_enter">
                                     <span class="enter_icon"></span>
-                                        <img src="../Public/images/training/training02.jpg" width="220" height="214px" alt="" class="best" />
+                                        <img src="../Public/images/training/training02.jpg" width="220" height="214px" alt="基础知识" class="best" />
                                         <p class="best_classify">基础知识</p>
                                     
                                 </a>
@@ -61,7 +61,7 @@
                             <li class="classify last_classify" >
                                 <a href="/index.php?app=index&mod=Train&act=articleList&id=47" class="lay_cf show_enter">
                                 <span class="enter_icon"></span>
-                                        <img src="../Public/images/training/training03.jpg" width="220" height="214px" alt="" class="best" />
+                                        <img src="../Public/images/training/training03.jpg" width="220" height="214px" alt="特定锻炼计划" class="best" />
                                         <p class="best_classify">特定锻炼计划</p>
                                 </a>
                             </li>
@@ -78,7 +78,7 @@
                         <ul class="lay_new_video clearfix">
                             <php>foreach($hotArticles as $a) {</php>
                             <li class="tr_classify ">
-                                <a href="/index-Index-articleDetail-{$a['id']}.html" class="show_enter"><span class="enter_icon"></span><img src="../public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+                                <a href="/index-Index-articleDetail-{$a['id']}.html" class="show_enter"><span class="enter_icon"></span><img src="../public/images/article/{$a['img']}" width="165px" height="134px" alt="{$a['title']}"></a>
                                 <a href="/index-Index-articleDetail-{$a['id']}.html" class="plan_article_tl">{$a['title']}</a>
                                 <p class="summary">
 								<?php echo msubstr($a['brief'],0,36) ?>
@@ -98,7 +98,7 @@
                             <ul class="lay_hot_video clearfix">
                                 <php>foreach($lastArticles as $a) {</php>
                                     <li class="tr_classify">
-                                        <a href="/index-Index-articleDetail-{$a['id']}.html" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+                                        <a href="/index-Index-articleDetail-{$a['id']}.html" class="show_enter"><span class="enter_icon"></span><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt="{$a['title']}"></a>
                                         <a href="/index-Index-articleDetail-{$a['id']}.html" class="plan_article_tl">{$a['title']}</a>
                                         <p class="summary">
 										<?php echo msubstr($a['brief'],0,36) ?>
