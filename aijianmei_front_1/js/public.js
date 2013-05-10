@@ -271,7 +271,7 @@ var aijianmei = {
 			login_table= aijianmei.getobj('login_table');
 		login_Bg.style.visibility = 'visible';
 		login_table.style.visibility = 'visible';
-		aijianmei.opacity('login_bg',0.5,10,10);
+		aijianmei.opacity('login_bg',0.5,10);
 		aijianmei.chang_top(login_table,0,294,10);
 	},
 	removeacTion : function(){
