@@ -66,7 +66,7 @@ function sendMemcacheCommand($server,$port,$command){
 }
 
 //清文件缓存
-$dirs	=	array('./_runtime/');
+$dirs	=	array('./_runtime/','./DBCache/');
 
 //清理缓存
 foreach($dirs as $value) {
@@ -77,7 +77,7 @@ foreach($dirs as $value) {
 }
 
 @mkdir('_runtime',0777,true);
-
+@mkdir('DBCache',0777,true);
 function rmdirr($dirname) {
 	if (!file_exists($dirname)) {
 		return false;
