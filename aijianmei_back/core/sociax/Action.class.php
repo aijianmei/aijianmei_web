@@ -81,7 +81,21 @@ abstract class Action extends Think
 	protected function api($name) {
 	     return api($name);
 	}
-
+		public function getDataCache($key)
+	{
+		$cachefile="DBCache/$key.php";
+		if(is_file($cachefile))
+		{
+			$data=null;
+			$data=unserialize(include($cachefile));
+			return $data;
+		}
+		return '';
+	}
+	public function setDataCache($key,$data)
+	{
+		file_put_contents("DBCache/$key.php","<?php\n\r return '".serialize($data)."';");
+	}
    /**
      +----------------------------------------------------------
      * 初始化当前应用信息
@@ -147,11 +161,11 @@ abstract class Action extends Think
 		$this->assign('isSystemAdmin' , $isSystemAdmin );
 
 		// 检查是否用户初始化
-		if (!$ts['user']['is_init'] && !canAccess()) {
-			$this->assign('jumpUrl', U('home/Public/userinfo'));
-			$this->error('请先完善个人资料');
-			exit;
-		}
+		// if (!$ts['user']['is_init'] && !canAccess()) {
+			// $this->assign('jumpUrl', U('home/Public/userinfo'));
+			// $this->error('请先完善个人资料');
+			// exit;
+		// }
 	}
 
 	protected function initUserApp() {

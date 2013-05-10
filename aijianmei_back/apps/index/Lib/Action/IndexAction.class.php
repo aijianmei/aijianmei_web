@@ -359,48 +359,339 @@ function show_banner($type){
         $this->assign('uid',$this->mid);
         $this->assign('cssFile','index');
         
-        $daily = M('daily')->findAll();
-        
-        $shangban = M('article')->where(array('category_id'=>'43'))->limit('0,4')->order('id desc')->findAll();
-        $this->assign('shangban', $shangban);
-        
-        $richang =  M('article')->where(array('category_id'=>'44'))->limit('0,4')->order('id desc')->findAll();
-        $this->assign('richang', $richang);
-        
-        $zhuanye =  M('article')->where(array('category_id'=>'45'))->limit('0,4')->order('id desc')->findAll();
-        $this->assign('zhuanye', $zhuanye);
-        
-        $jianmei =  M('article')->where(array('category_id'=>'46'))->limit('0,4')->order('id desc')->findAll();
-        $this->assign('jianmei', $jianmei);
-        $this->assign('daily', $daily);
-        if(isset($setMail)&&$setMail[0]['email']==''){
-            //redirect(U('index/Index/setmail'));
-        }
+
         //add by kon at 20130410 start
         /*首页添加最新4篇文章视频*/
         
         $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
         $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit 0,4";
-        $hot_video = M('')->query($sql);
-        foreach($hot_video as $k=>$v) {
-            $hotvideos[$k] = $v;
-            $data = json_decode($this->getVideoData($v['link']));
-            $hotvideos[$k]['logo'] = $data->data[0]->logo;
-            $hotvideos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);            
-        }
-        $this->assign('hotvideos', $hotvideos);
+		$hotvideos=null;
+		$hotvideos=$this->getDataCache(md5($sql));
+		if(!$hotvideos){
+			$hot_video = M('')->query($sql);
+			foreach($hot_video as $k=>$v) {
+				$hotvideos[$k] = $v;
+				$data = json_decode($this->getVideoData($v['link']));
+				$hotvideos[$k]['logo'] = $data->data[0]->logo;
+				$hotvideos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);            
+			}
+			$this->setDataCache(md5($sql),$hotvideos);
+		}	
+		$this->assign('hotvideos', $hotvideos);
+		
         /*首页添加最新4篇文章*/
         $sql = "select a.* from ai_article a group by a.id order by a.create_time desc limit 0,4";
-        $hotArticles = M('')->query($sql);
-        foreach ($hotArticles as $key => $value) {
-            $hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
-        }
+		$hotArticles=null;
+		$hotArticles=$this->getDataCache(md5($sql));
+		if(!$hotArticles){
+			$hotArticles = M('')->query($sql);
+			foreach ($hotArticles as $key => $value) {
+				$hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
+			}
+			$this->setDataCache(md5($sql),$hotArticles);
+		}
         $this->assign('hotArticles', $hotArticles);
         //add by kon at 20130410 end
 		
 		//header current add by kon at 20130415
 		$this->assign('_current', 'index');
         $this->display();
+    }
+	
+	public function newindex() 
+    {
+		ob_start();
+        if (!empty($_GET['token'])) {
+            require_once $_SERVER['DOCUMENT_ROOT'].'/Denglu.php';
+            $api = new Denglu('44031dena3J8cuBsQeX40lcpjSsPM3', '85015440v4NfCVj6aTNfZAg0idQv03', 'utf-8');
+            
+            try {
+                
+                $userInfo = $api->getUserInfoByToken($_GET['token']);
+                //print_r($userInfo);
+                
+                $logId = M('others')->field('uid')->where(array('mediaID'=>$userInfo['mediaID'], 'mediaUserID'=>$userInfo['mediaUserID'], 'personID'=>$userInfo['personID']))->find();
+                //print_r($logId);
+                if($logId) {
+                    service('Passport')->loginLocal($logId['uid']);
+                    service('Shop')->login($logId['uid']); // 同步登录商城
+                }else {
+                    $data['email'] = $userInfo['email'];
+                    $data['password'] = '';
+                    $data['uname'] = $userInfo['screenName'];
+                    //$data['province'] = $userInfo['province'];
+                    //$data['city']  = $userInfo['city'];
+                    $data['sex']   = $userInfo['gender'];
+                    $data['location'] = $userInfo['location'];
+                    $data['is_active'] = 1;
+                    $data['ctime'] = time();
+					$data['is_email']=0;
+                    
+                    //print_r($data);
+                    
+                    $uid = M('user')->add($data);				
+                    service('Passport')->loginLocal($uid);	
+                    
+                    // 同步注册商城
+                    service('Shop')->register($data['uname'], $data['email'], $data['password']);				
+                    
+                    $other['uid'] = $uid;
+                    $other['mediaID'] = $userInfo['mediaID'];
+                    $other['friendsCount'] = $userInfo['friendsCount'];
+                    $other['favouritesCount'] = $userInfo['favouritesCount'];
+                    $other['profileImageUrl'] = $userInfo['profileImageUrl'];
+                    $other['mediaUserID'] = $userInfo['mediaUserID'];
+                    $other['url']  = $userInfo['url'];
+                    $other['homepage'] = $userInfo['homepage'];
+                    $other['description'] = $userInfo['description'];
+                    $other['domain'] = $userInfo['domain'];
+                    $other['followersCount'] = $userInfo['followersCount'];
+                    $other['statusesCount']  = $userInfo['statusesCount'];
+                    $other['personID'] = $userInfo['personID'];
+                    
+                    M('others')->add($other);
+                }
+	
+            }catch (DengluException $e) {
+                echo $e->geterrorDescription();
+            }
+        }
+
+        if(!empty($_REQUEST['code'])) {
+            require_once $_SERVER['DOCUMENT_ROOT'].'/saetv2.ex.class.php';
+            $sina = new SaeTOAuthV2('3622140445', 'f94d063d06365972215c62acaadf95c3');
+            $token = $sina->getAccessToken('code', array('code'=>$_REQUEST['code'], 'redirect_uri'=>'http://www.aijianmei.com/index.php'));
+            $client = new SaeTClientV2('3622140445', 'f94d063d06365972215c62acaadf95c3', $token['access_token']);
+
+            $uid_get = $client->get_uid();
+            $uid = $uid_get['uid'];
+            $user_message = $client->show_user_by_id( $uid);
+            //print_r($user_message);
+
+            //$logId = M('others')->field('uid')->where(array('mediaID'=>'3', 'mediaUserID'=>$user_message['id'], 'personID'=>$user_message['idstr']))->find();
+            $log_sql = 'select uid from ai_others where mediaID=3 and mediaUserID='.$user_message['id'].' and personID='.$user_message['idstr'].'';
+            //echo $log_sql;
+            $logId = M('')->query($log_sql);
+            //var_dump($logId);
+            $setMailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
+            $setMail = M('')->query($setMailSql);
+            if($logId) {
+                service('Passport')->loginLocal($logId[0]['uid']);
+				$_SESSION['sinalogin']=1;
+				$checkEmailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
+				$checkEmailArr=M('')->query($checkEmailSql);
+				if(empty($checkEmailArr[0]['email'])){
+					redirect(U('index/User/loginUserInfo'));
+				}
+				$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
+				$get_usernameInfo = M('')->query($get_usernameSql);
+				$getUidSql='select user_id,user_name,email,password from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+				$uid = M('')->query($getUidSql);
+				$_SESSION['user_id']   = $uid[0]['user_id'];
+				$_SESSION['user_name'] = $uid[0]['user_name'];
+				$_SESSION['email']     = $uid[0]['email'];
+				$_SESSION['ways']++;
+				if($_SESSION['mid']>0){
+					$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
+				}
+				setcookie("LOGGED_AIUSER", $checkEmailArr[0]['email'], time()+3600*24*30);
+				setcookie('LOGGED_AICOD', md5("aijianmeipwd".$get_usernameInfo[0]['password']), time()+3600*24*30);		
+				setcookie("ECS[user_id]",  $_SESSION['user_id'],time()+3600*24*30);  //set cookie         
+				setcookie("ECS[password]", $uid[0]['password'],time()+3600*24*30);
+				ob_get_clean();				
+				//print_r($_COOKIE);
+				if($_SESSION['refer_url']!=''&&$_SESSION['shoprefer_url']==''){
+					$reurl=$_SESSION['refer_url'];
+					unset($_SESSION['refer_url']);
+					redirect($reurl);
+					//print_r($_SESSION);exit;
+					//redirect(U('index/Index/index'));
+				}
+				elseif($_SESSION['shoprefer_url']!=''){
+					$reurl=$_SESSION['shoprefer_url'];
+					unset($_SESSION['shoprefer_url']);
+					redirect($reurl);
+				}else{
+					redirect(U('index/Index/index'));
+				}
+            }else {
+                $data['email'] = '';
+                $data['password'] = '';
+                $data['uname'] = $user_message['screen_name'] ? $user_message['screen_name'] : $user_message['name'];
+                //$data['province'] = $userInfo['province'];
+                //$data['city']  = $userInfo['city'];
+                $data['sex']   = $user_message['gender']=='m' ? 1 : 0;
+                $data['location'] = $user_message['location'];
+                $data['is_active'] = 1;
+                $data['ctime'] = time();
+                
+                //print_r($data);
+                $sql = 'insert into ai_user (`uname`,`sex`,`location`,`is_active`,`ctime`) values ("'.$data['uname'].'","'.$data['sex'].'","'.$data['location'].'","'.$data['is_active'].'","'.$data['ctime'].'")';
+                M('')->query($sql);
+
+                $uid = mysql_insert_id();
+                //var_dump($uid);
+                //$uid = M('user')->add($data);				
+                service('Passport')->loginLocal($uid);
+				$_SESSION['mid']=$uid;
+                $other['uid'] = $uid;
+                $other['mediaID'] = '3';
+                $other['friendsCount'] = $user_message['friends_count'];
+                $other['favouritesCount'] = $user_message['favourites_count'];
+                $other['profileImageUrl'] = $user_message['profile_image_url'];
+                $other['mediaUserID'] = $user_message['id'];
+                $other['url']  = $user_message['url'];
+                $other['homepage'] = $user_message['url'];
+                $other['description'] = $user_message['description'];
+                $other['domain'] = $user_message['domain'];
+                $other['followersCount'] = $user_message['followers_count'];
+                $other['statusesCount']  = $user_message['statuses_count'];
+                $other['personID'] = $user_message['idstr'];
+                
+                //print_r($other);
+                $other_sql = 'INSERT INTO `aijianmei`.`ai_others` 
+                ( `uid`, `mediaID`, `friendsCount`, `favouritesCount`, `profileImageUrl`,
+                 `mediaUserID`, `url`, `homepage`, `description`, `domain`, `followersCount`, 
+                 `statusesCount`, `personID`) VALUES ( 
+                 "'.$other['uid'].'", "'.$other['mediaID'].'", "'.$other['friendsCount'].'", 
+                 "'.$other['favouritesCount'].'", "'.$other['profileImageUrl'].'", "'.$other['mediaUserID'].'", 
+                 "'.$other['url'].'", "'.$other['homepage'].'", "'.$other['description'].'", 
+                 "'.$other['domain'].'", "'.$other['followersCount'].'", "'.$other['statusesCount'].'", "'.$other['personID'].'")';
+                //mysql_query($other_sql);
+                M('')->query($other_sql);
+				//redirect(U('index/User/loginUserInfo'));
+                //M('others')->add($other);
+				$_SESSION['sinalogin']=1;
+				redirect(U('index/User/loginUserInfo'));
+            }
+        }
+        if($_POST['email']!=''&&$_POST['emailact']=='upemail'){
+            $umailsql="update ai_others set email='".trim($_POST['email'])."' where uid='".addslashes($_POST['emailuid'])."'";
+            M('')->query($umailsql);
+        }
+        
+        
+        if(!empty($_GET['apiType'])&&$_GET['apiType']=='renren'){
+            //print_r($_GET);
+            //print_r($_SERVER);
+        }
+        if(!empty($_GET['qquid'])&&$_GET['qqapi']=='login'){
+            service('Passport')->loginLocal($_GET['qquid']);
+			$_GET['qquid']=addslashes($_GET['qquid']);
+			$checkEmailSql="select email from ai_user where uid='".$_GET['qquid']."'";
+			$checkEmailArr=M('')->query($checkEmailSql);
+			if(empty($checkEmailArr[0]['email'])){
+				$_SESSION['sinalogin']=1;
+				redirect(U('index/User/loginUserInfo'));
+				//redirect(U('home/Account/index',array('esg'=>'needemail')));
+			}
+			$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
+			$get_usernameInfo = M('')->query($get_usernameSql);
+			$getUidSql='select user_id,user_name,email,password from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+			$uid = M('')->query($getUidSql);
+			$_SESSION['user_id']   = $uid[0]['user_id'];
+			$_SESSION['user_name'] = $uid[0]['user_name'];
+			$_SESSION['email']     = $uid[0]['email'];
+			$_SESSION['ways']++;
+			if($_SESSION['mid']>0){
+				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
+			}
+			@setcookie("LOGGED_AIUSER", $checkEmailArr[0]['email'], time()+3600*24*30);
+			@setcookie('LOGGED_AICOD', md5("aijianmeipwd".$get_usernameInfo[0]['password']), time()+3600*24*30);		
+			@setcookie("ECS[user_id]",  $_SESSION['user_id'],time()+3600*24*30);  //set cookie         
+			@setcookie("ECS[password]", $uid[0]['password'],time()+3600*24*30);
+			if($_SESSION['refer_url']!=''){
+				$reurl=$_SESSION['refer_url'];
+				unset($_SESSION['refer_url']);
+				redirect($reurl);
+			}
+			elseif($_SESSION['shoprefer_url']!=''){
+				$reurl=$_SESSION['shoprefer_url'];
+				unset($_SESSION['shoprefer_url']);
+				redirect($reurl);
+			}else{
+				redirect(U('index/Index/index'));
+			}
+        }
+        $this->setTitle('index');
+		
+        $this->assign('uid',$this->mid);
+		
+        $this->assign('cssFile','index');
+        
+        //add by kon at 20130410 start
+        /*首页添加最新5篇视频*/
+        
+        $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit 0,5";
+		$newvideos=$hot_video=null;
+		$newvideos=$this->getDataCache(md5($sql));
+		if(!$newvideos){
+			$hot_video = M('')->query($sql);
+			foreach($hot_video as $k=>$v) {
+				$newvideos[$k] = $v;
+				$data = json_decode($this->getVideoData($v['link']));
+				$newvideos[$k]['logo'] = $data->data[0]->logo;
+				$newvideos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);            
+			}
+			$this->setDataCache(md5($sql),$newvideos);
+		}
+        $this->assign('newvideos', $newvideos);
+		
+		/*首页添加最热5篇视频*/
+        $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by click desc limit 0,5";
+		$hotvideos=$hot_video=null;
+		$hotvideos=$this->getDataCache(md5($sql));
+		if(!$hotvideos){
+			$hot_video = M('')->query($sql);
+			foreach($hot_video as $k=>$v) {
+				$hotvideos[$k] = $v;
+				$data = json_decode($this->getVideoData($v['link']));
+				$hotvideos[$k]['logo'] = $data->data[0]->logo;
+				$hotvideos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);            
+			}
+			$this->setDataCache(md5($sql),$hotvideos);
+		}
+        $this->assign('hotvideos', $hotvideos);
+		
+		
+		
+        /*首页添加最新5篇文章*/
+		//getDataCache($key)
+		//setDataCache($key,$data)
+		
+        $sql = "select a.* from ai_article a group by a.id order by a.create_time desc limit 0,5";
+		$newArticles=null;
+		$newArticles=$this->getDataCache(md5($sql));
+		if(!$newArticles){
+			$newArticles = M('')->query($sql);
+			foreach ($newArticles as $key => $value) {
+				$newArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
+			}
+			$this->setDataCache(md5($sql),$newArticles);
+		}
+        $this->assign('newArticles', $newArticles);
+		
+		/*首页添加最热5篇文章*/
+		
+        $sql = "select a.* from ai_article a group by a.id order by a.reader_count desc limit 0,5";
+		$hotArticles=null;
+		$hotArticles=$this->getDataCache(md5($sql));
+		if(!$hotArticles){
+			$hotArticles = M('')->query($sql);
+			foreach ($hotArticles as $key => $value) {
+				$hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
+			}
+			$this->setDataCache(md5($sql),$hotArticles);
+		}
+        $this->assign('hotArticles', $hotArticles);
+        //add by kon at 20130410 end
+		
+		//header current add by kon at 20130415
+		$this->assign('_current', 'index');
+        //$this->display();
+		$this->display('newindex');
     }
     public function setmail()
     {
@@ -715,7 +1006,7 @@ function show_banner($type){
 		$comments = $this->arr2tree($comments);
 		$comhtml=$this->tree2html($comments);
 		$this->assign('comhtml', $comhtml);
-		print_r($comments);
+		//print_r($comments);
 		//tree2html($tree);  
 		//print_r($tree); 
 		
