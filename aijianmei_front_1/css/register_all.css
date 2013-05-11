@@ -35,9 +35,13 @@ a:hover{
 		.rg_top{
 			background: url(../images/register/rg_bg.jpg) repeat-x;
 		}
+		.rg_top_lay{
+			background: url(../images/register/rg_log.png) no-repeat;
+		}
 		.rg_logo{
 			padding:50px 0;
 			text-align: center;
+			
 		}
 		.rg_logo img{
 
@@ -75,6 +79,9 @@ a:hover{
 		.rg_step_3{
 			background: url(../images/register/051.png) no-repeat;			
 		}
+
+
+
 /*register_1 beginning------------------*/
 
 	/*rg_form*/
@@ -136,26 +143,68 @@ a:hover{
 /*register_1 end------------------*/
 
 
-/*register_3 beginning------------------*/
-	/*re_choice*/
-	.re_choice{
-
-	}
-	/*re_choice_way	*/
-		.re_choice_way{
-
-		}
-	/*pre_ne_choice*/
-		/*.pre_ne_choice{
-			margin-bottom: 40px;
-		}
-		.pre_ne_choice a{
+/*register_2 beginning------------------*/
 	/*rg_bottom*/
 		.rg_step_rg3_1{
 			background: url(../images/register/021.png) no-repeat;
 		}
 		.rg_step_rg3_3{
 			background: url(../images/register/061.png) no-repeat;			
+		}
+	/*rg_picture----*/
+		.rg_picture{
+			width: 525px;
+			margin: 25px auto 0 auto;
+		}
+		.rg_picture_part{
+			
+		}
+	/*rg_choice_area*/
+		.rg_choice_area{
+			float: left;
+			margin-right: 75px;
+		}
+		.rg_choice_area img{
+			width: 300px;
+			height: 300px;
+		}
+	/*rg_show_pic*/
+		.rg_show_pic{
+			float: right;
+			width: 150px;
+		}
+		.rg_pic_keep{
+			display: inline-block;
+			height: 40px;
+			width: 100%;
+			margin-top: 25px;
+			line-height: 40px;
+			text-align: center;
+			font-size: 20px;
+			color: white;
+			background: #20ABE2;
+		}
+		.rg_pic_keep:hover{
+			color: white;
+		}
+		.rg_upload{
+
+		}
+	/*pre_ne_choice*/
+		.pre_ne_rg2{
+			margin:40px auto;
+			width: 400px;
+		}
+/*register_2 end------------------*/
+	
+
+/*register_3 beginning------------------*/
+	/*rg_bottom*/
+		.rg_step_rg3_1{
+			background: url(../images/register/021.png) no-repeat;
+		}
+		.rg_step_rg3_2{
+			background: url(../images/register/041.png) no-repeat;			
 		}
 	/*re_choice*/
 	.rg_choice{
@@ -240,7 +289,8 @@ a:hover{
 			background: url(../images/register/05.png) no-repeat;
 		}
 		.pre_ne_choice .next_choice{
-			float:right;
+			float:right
+			;
 			background: url(../images/register/06.png) no-repeat;
 		}
 		.next_choice:hover{
