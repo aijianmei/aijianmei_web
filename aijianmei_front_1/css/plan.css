@@ -5,9 +5,7 @@
 	color: #333;
 	font-size: 20px;	
 }
-.plan_sort{
-	border-bottom:1px dashed #DDD;
-}
+
 .plan_sort .sort_tit{
 	height: 35px;
 	line-height: 35px;
@@ -81,8 +79,21 @@
 	}
 /**视频列表区域**/
 .video_list{
-	border-bottom: 1px dashed #DDD;
 	padding: 20px 0;
+}
+.row_line{
+	width: 950px;
+	background: url(../images/rowl.jpg) repeat-x;
+	height: 2px;
+	border:0;
+}
+.col_line{
+	height:600px;
+	width:2px;
+	float: left;
+	margin-left: 20px;
+	background: url(../images/col.jpg) repeat-y;
+	border:0;
 }
 /**左边视频**/
 .video_main{
@@ -139,6 +150,9 @@
 			text-align: center;
 			margin-right: 20px;
 		}
+		.sina_zan{
+			margin-top: 50px;
+		}
 		.like{
 			width: 70px;
 			height: 25px;
@@ -188,6 +202,9 @@
 		}
 		.make_com{
 			position:relative;
+		}
+		.make_com .login{
+			background:none;
 		}
 		.accout{
 			float: right;

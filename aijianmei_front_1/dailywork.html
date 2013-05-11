@@ -103,6 +103,7 @@
 						</ul>
 					</div>					
 				</div><!--End plan_sort-->
+				<hr class="row_line" />
 				<div class="video_list clearfix">
 					<div class="video_main">
 						<span class="video_date">2013-04-09</span>
@@ -129,6 +130,7 @@
 							</div>
 						</div><!--End Video-->
 					</div><!--End video_main Left-->
+					<hr class="col_line" />
 					<div class="video_comment">
 						<div class="share_area clearfix">
 							<p class="share">我要分享：</p>
@@ -139,7 +141,7 @@
 						</div>
 						<div class="com_area ">
 							<h3 class="comment_num">精彩评论（4）</h3>
-							<ul class="coms" id="scrollbar1">
+							<ul class="coms">
 								<li class="comments clearfix">
 									<a href="" class="user_info">
 										<img src="images/gd_pic.jpg" alt="" class="com_face" />	 
@@ -170,13 +172,14 @@
 								<button class="login">登陆</button> |
 								<button class="register"><a href="">注册</a></button>
 								<span class="accout">0/300</span>
-								<textarea name="" id="user" cols="30" rows="10"></textarea>
+								<textarea name="" id="user"></textarea>
 								<label for="user">有什么感想，来说说吧</label>
 								<button class="done"></button>
 							</div>
 						</div>
 					</div>
 				</div><!--End videoList-->
+				<hr class="row_line" />
 				<div class="video_list clearfix">
 					<div class="video_main">
 						<span class="video_date">2013-04-09</span>
@@ -203,6 +206,7 @@
 							</div>
 						</div><!--End Video-->
 					</div><!--End video_main Left-->
+					<hr class="col_line" />
 					<div class="video_comment">
 						<div class="share_area clearfix">
 							<p class="share">我要分享：</p>
@@ -244,13 +248,14 @@
 								<button class="login">登陆</button> |
 								<button class="register"><a href="">注册</a></button>
 								<span class="accout">0/300</span>
-								<textarea name="" id="user" cols="30" rows="10"></textarea>
+								<textarea name="" id="user"></textarea>
 								<label for="user">有什么感想，来说说吧</label>
 								<button class="done"></button>
 							</div>
 						</div>
 					</div>
 				</div><!--End videoList-->
+				<hr class="row_line" />
 			</div><!--End Area-->
 		</div><!--End Wrapper-->
 	</body>
@@ -261,21 +266,7 @@
     </script>
 	<![endif]-->
 	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/public.js"></script>
-	<script type="text/javascript" src="js/scrollbar.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$("div.plan_item").bind({
-				mouseleave: function(){
-					$(this).find(".plan_cover").slideDown(300);
-				},
-				mouseenter: function(){
-					$(this).find("div.plan_cover").slideUp(300);
-				}
-			});
-			$('#scrollbar1').tinyscrollbar();
-		});	
-		
-	</script>
-	
+	<script type="text/javascript" src="js/public.js"></script>	
+	<script type="text/javascript" src="js/plan.js"></script>
+
 </html>
