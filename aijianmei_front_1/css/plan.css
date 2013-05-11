@@ -162,11 +162,12 @@
 			background:#00B7FE;
 		}
 		.comment_num{
-			background: #98DFF8;
+			background: #98DDF8;
 			height: 36px;
 			line-height: 36px;
 			color: white;
 			padding-left: 20px;
+			border-radius: 4px 4px 0 0;
 		}
 		.coms{
 			border: 1px solid #EAEAEA;
