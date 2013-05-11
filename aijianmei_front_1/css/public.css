@@ -59,110 +59,110 @@ button{
 
 /*website top beginning*************************/
 
-	/*outside 2013/4/15*/
-	.head{
-		height: 79px;
-	}
-	.header{
-		position: fixed;
-		left: 0;
-		top:0;
-		z-index: 1001;
-		height: 79px;
-		width: 100%;
-		background: url(../images/dh_01.jpg) repeat-x;
-	}
-	.h_bg{
-		margin: 0 auto;
-		width: 960px;
-		height: 72px;
-		text-align: center;
-		line-height: 72px;
-	}
-	.logo_1{
-		float: left;
-		width: 265px;
-		text-indent: -999em;
-		background: url(../images/wm3.png) 0 -651px no-repeat;
-	}
-	.logo{
-		width:230px;
-		margin: 30px 0 0 20px;
-		float:left;
-	}
-	.logo a{
-		display:block;
-	}
+	/*outside head_top*/
+		.head{
+			height: 79px;
+		}
+		.header{
+			position: fixed;
+			left: 0;
+			top:0;
+			z-index: 1001;
+			height: 79px;
+			width: 100%;
+			background: url(../images/dh_01.jpg) repeat-x;
+		}
+		.h_bg{
+			margin: 0 auto;
+			width: 960px;
+			height: 72px;
+			text-align: center;
+			line-height: 72px;
+		}
+		.logo_1{
+			float: left;
+			width: 265px;
+			text-indent: -999em;
+			background: url(../images/wm3.png) 0 -651px no-repeat;
+		}
+		.logo{
+			width:230px;
+			margin: 30px 0 0 20px;
+			float:left;
+		}
+		.logo a{
+			display:block;
+		}
 	/******** Navigation ************/
-	.nav{
-		float: left;
-		width: 695px;
-	}
-	.nav .nav_child{
-		position: relative;
-		float: left;
-		height: 72px;
-		margin:0 1px;
-	}
-	.home,.store{
-		display: inline-block;
-		padding-left: 34px;
-		margin-top: 18px;
-		height: 54px;
-		line-height: 37px;
-	}
-	.home{
-		background:url(../images/home.png) no-repeat;
-	}
-	.store{
-		background:url(../images/store.png) no-repeat;
-	}
-	.nav .nav_a{
-		display: block;
-		padding: 0 8px;
-		color: white;
-		font-size: 23px;
-		word-break:keep-all;/*solue with ie6*/
-	}
-	.nav_current .nav_a{
-		background: url(../images/dh_02.jpg) repeat-x;
-	}
-	.nav .nav_child:hover .nav_a{
-		background: url(../images/dh_02.jpg) repeat-x;
-	}
+		.nav{
+			float: left;
+			width: 695px;
+		}
+		.nav .nav_child{
+			position: relative;
+			float: left;
+			height: 72px;
+			margin:0 1px;
+		}
+		.home,.store{
+			display: inline-block;
+			padding-left: 34px;
+			margin-top: 18px;
+			height: 54px;
+			line-height: 37px;
+		}
+		.home{
+			background:url(../images/home.png) no-repeat;
+		}
+		.store{
+			background:url(../images/store.png) no-repeat;
+		}
+		.nav .nav_a{
+			display: block;
+			padding: 0 8px;
+			color: white;
+			font-size: 23px;
+			word-break:keep-all;/*solue with ie6*/
+		}
+		.nav_current .nav_a{
+			background: url(../images/dh_02.jpg) repeat-x;
+		}
+		.nav .nav_child:hover .nav_a{
+			background: url(../images/dh_02.jpg) repeat-x;
+		}
 	/*menu down nav------*/
-	.mn_drop{
-		position: absolute;
-		visibility: hidden;
-		width: 145px;
-		background: #e9e9e9;
-		opacity: 0;
-		z-index: 1000;
-		/*-webkit-transition:opacity .8s;
-		transition:opacity .8s;*/
-	}
-	.nav .nav_child:hover .mn_drop{
-		opacity: 1;
-	}
-	.mn_drop li{
-		margin-bottom: 1px;
-		line-height: 14px;
-		background: #fff;
-	}
-	.mn_drop .mn_first{
-		margin-top: 0;
-	}
-	.mn_drop a{
-		display: inline-block;
-		width: 100%;
-		margin-top: 1px;
-		padding: 7px 0;
-		background: #f7f7f7;
-		color: #21ace3;
-	}
-	.mn_drop a:hover{
-		background: #fff;
-	}
+		.mn_drop{
+			position: absolute;
+			visibility: hidden;
+			width: 145px;
+			background: #e9e9e9;
+			opacity: 0;
+			z-index: 1000;
+			/*-webkit-transition:opacity .8s;
+			transition:opacity .8s;*/
+		}
+		.nav .nav_child:hover .mn_drop{
+			opacity: 1;
+		}
+		.mn_drop li{
+			margin-bottom: 1px;
+			line-height: 14px;
+			background: #fff;
+		}
+		.mn_drop .mn_first{
+			margin-top: 0;
+		}
+		.mn_drop a{
+			display: inline-block;
+			width: 100%;
+			margin-top: 1px;
+			padding: 7px 0;
+			background: #f7f7f7;
+			color: #21ace3;
+		}
+		.mn_drop a:hover{
+			background: #fff;
+		}
 /*website top ending*************************/
 /*wrapper---*/
 .wrapper{
@@ -176,18 +176,18 @@ button{
 
 /*login beginning----------*/
 	/*login_bg*/
-	.login_bg{
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: black;
-		opacity: 0;
-		filter:alpha(opacity=0);
-		z-index: 900;
-		visibility: hidden;
-	}
+		.login_bg{
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: black;
+			opacity: 0;
+			filter:alpha(opacity=0);
+			z-index: 900;
+			visibility: hidden;
+		}
 	/*login_bg end*/
 
 
@@ -254,19 +254,19 @@ button{
 			height:34px;
 		}
 		.lg_wrap_choice .lg_coop_1{
-			background: url(../images/117.jpg) no-repeat;
+			background: url(../images/wb01.png) no-repeat;
 		}
 		.lg_wrap_choice .lg_coop_2{
-			background: url(../images/115.jpg) no-repeat;		
+			background: url(../images/QQ01.png) no-repeat;		
 		}
 		.lg_aijianmei{
 			margin:10px 0;
 		}
 		.lg_aijianmei a{
 		display: inline-block;
-			width:124px;
+			width:111px;
 			height:34px;	
-			background: url(../images/03.png) no-repeat;
+			background: url(../images/ai01.png) no-repeat;
 		}
 	/*lg_our*/
 		.lg_our{
@@ -392,3 +392,61 @@ button{
 		display: block;
 	}
 
+/*mousescroll beginning*/
+
+	.scroll_login{
+		position: fixed;
+		bottom: 0;
+		height: 70px;
+		line-height: 70px;
+		width: 100%;
+		background: rgba(0,0,0,.6);
+		z-index: 800;
+	}
+/*scroll_content*/
+	.scroll_content{
+		width: 980px;
+		height: 100%;
+		margin: 0 auto;
+	}
+	.scroll_tip{
+		float:left;
+		margin-right:60px;
+		font-size: 16px;
+		color:white;
+	}
+	.scroll_choice{
+		float: left;
+		padding: 5px;
+		margin-top: 8px;
+		background: rgba(0,0,0,.3);
+	}
+	.scroll_choice li{
+		float:left;
+		padding: 5px;
+	}
+	.scroll_choice a{
+		display:block;
+		width:111px;
+		height:34px;
+	}
+	.scroll_choice_1{
+		background: url(../images/wb01.png) no-repeat;
+	}
+	.scroll_choice_1:hover{
+		background: url(../images/wb02.png) no-repeat;
+	}
+	.scroll_choice_2{
+		background: url(../images/QQ01.png) no-repeat;	
+	}
+	.scroll_choice_2:hover{
+		background: url(../images/QQ02.png) no-repeat;
+	}
+	.scroll_choice_3{
+		background: url(../images/ai01.png) no-repeat;	
+	}
+	.scroll_choice_3:hover{
+		background: url(../images/ai03.png) no-repeat;
+	}
+
+/*mousescroll ending*/
