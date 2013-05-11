@@ -35,10 +35,13 @@ a:hover{
 		.rg_top{
 			background: url(../images/register/rg_bg.jpg) repeat-x;
 		}
+		.rg_top_lay{
+			background: url(../images/register/rg_log.png) no-repeat;
+		}
 		.rg_logo{
 			padding:50px 0;
 			text-align: center;
-			background: url(../images/register/rg_log.jpg) no-repeat;
+			
 		}
 		.rg_logo img{
 
@@ -150,36 +153,36 @@ a:hover{
 		}
 	/*rg_picture----*/
 		.rg_picture{
-
+			width: 525px;
+			margin: 25px auto 0 auto;
 		}
 		.rg_picture_part{
-width: 525px;
-margin: 25px auto 0 auto;
+			
 		}
 	/*rg_choice_area*/
 		.rg_choice_area{
-float: left;
-margin-right: 75px;
+			float: left;
+			margin-right: 75px;
 		}
 		.rg_choice_area img{
-width: 300px;
-height: 300px;
+			width: 300px;
+			height: 300px;
 		}
 	/*rg_show_pic*/
 		.rg_show_pic{
-float: right;
-width: 150px;
+			float: right;
+			width: 150px;
 		}
 		.rg_pic_keep{
-display: inline-block;
-height: 40px;
-width: 100%;
-margin-top: 25px;
-line-height: 40px;
-text-align: center;
-font-size: 20px;
-color: white;
-background: #20ABE2;
+			display: inline-block;
+			height: 40px;
+			width: 100%;
+			margin-top: 25px;
+			line-height: 40px;
+			text-align: center;
+			font-size: 20px;
+			color: white;
+			background: #20ABE2;
 		}
 		.rg_pic_keep:hover{
 			color: white;
