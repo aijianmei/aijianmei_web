@@ -171,81 +171,138 @@
 				border-style: solid;
 				border-width: 5px;
 			}
+			/*cont_tab_ct-----*/
 			.cont_tab_ct{
 				display: none;
 			}
 			.cont_tab_block{
 				display: block;
 			}
-			/*tr_tab_ct_1-----------*/
+			/*tr_tab_ct_1 for article-----------*/
 				.cont_module{
 					margin: 25px 0;
 				}
 				/*cont_side_1---------*/
-				.cont_side_1{
-					float: left;
-					margin-right: 10px;
-				}
-				.cont_side_1 img{
-
-				}
+					.cont_side_1{
+						float: left;
+						margin-right: 10px;
+					}
+					.cont_side_1 img{
+						width:213px;
+						height:146px;
+					}
 				/*cont_side_2-----------*/
-				.cont_side_2{
-					float: left;
-					width: 425px;
-				}
-				.cont_title{
-					font-size: 20px;
-					line-height: 20px;
-					font-family: inherit;
-				}
-				.cont_title a{
-					color:#000;
-				}
-				.cont_title a:hover{
-					color:#21ace3;
-				}
+					.cont_side_2{
+						float: left;
+						width: 425px;
+					}
+					.cont_title{
+						font-size: 20px;
+						line-height: 20px;
+						font-family: inherit;
+					}
+					.cont_title a{
+						color:#000;
+					}
+					.cont_title a:hover{
+						color:#21ace3;
+					}
 				/*cont_tip*/
-				.cont_tip{
-					display: inline-block;
-					margin: 10px 0;
-					color: #21ace3;
-				}
-				.cont_tip .cont_pb_time{
-					margin-left: 4px;
-					color:#999;
-				}
-				.cont_tip .cont_comefrom{
-					margin-right: 5px;
-				}
-				.cont_side_2 p{
-					font-size: 14px;
-					line-height: 24px;
-					color: #666;
-				}
-				.cont_read_more{
-					float: right;
-					margin-bottom: 10px;
-					color: #21ace3;
-				}
+					.cont_tip{
+						display: inline-block;
+						margin: 10px 0;
+						color: #21ace3;
+					}
+					.cont_tip .cont_pb_time{
+						margin-left: 4px;
+						color:#999;
+					}
+					.cont_tip .cont_comefrom{
+						margin-right: 5px;
+					}
+					.cont_side_2 p{
+						font-size: 14px;
+						line-height: 24px;
+						color: #666;
+					}
+					.cont_read_more{
+						float: right;
+						color: #21ace3;
+					}
 				/*cont_share------------*/
-				.cont_share{
-					clear: both;
-				}
-				.cont_click{
-				 	background: url("../images/wm3.png") no-repeat 0 -463px;
-				    display: inline-block;
-				    float: left;
-				    height: 18px;
-				    padding-left: 27px;
-				}
-				.cont_rec{
-					background: url("../images/wm3.png") no-repeat 0 -438px;
-				    display: inline-block;
-				    float: right;
-				    height: 18px;
-				    padding-left: 27px;
-				}
+					.cont_share{
+						clear: both;
+						margin-top: 30px;
+					}
+					.cont_click{
+					 	background: url("../images/wm3.png") no-repeat 0 -463px;
+					    display: inline-block;
+					    float: left;
+					    height: 18px;
+					    padding-left: 27px;
+					}
+					.cont_rec{
+						background: url("../images/wm3.png") no-repeat 0 -438px;
+					    display: inline-block;
+					    float: right;
+					    height: 18px;
+					    padding-left: 27px;
+					}
+
+			/*tr_tab_ct_1 for video-----------*/
+				/*cont_vd_1---------*/
+					.cont_vd_1{
+						float: left;
+						margin-right: 10px;
+					}
+					.cont_vd_1 img{
+						width:213px;
+						height:146px;
+					}
+				/*cont_vd_2-----------*/
+					.cont_vd_2{
+						float: left;
+						width: 425px;
+					}
+					.cont_vd_dt{
+						height: 70px;
+						margin: 10px 0;
+					}
+					.cont_vd_title a{
+						color:#000;
+					}
+					.cont_vd_title a:hover{
+						color:#21ace3;
+					}
+					.cont_vd_see{
+						display: inline-block;
+						width: 109px;
+						height: 38px;
+						background: url(../images/gk01.png) no-repeat;
+					}
+					.cont_vd_see:hover{
+						background: url(../images/gk02.png) no-repeat;
+					}
+					/*cont_vd_share------------*/
+						.cont_vd_share{
+							clear: both;
+							margin-top: 30px;
+						}
+						.cont_vd_click{
+						 	background: url("../images/wm3.png") no-repeat 0 -413px;
+						    display: inline-block;
+						    float: left;
+						    height: 18px;
+						    padding-left: 27px;
+						}
+						.cont_vd_rec{
+							background: url("../images/wm3.png") no-repeat 0 -438px;
+						    display: inline-block;
+						    float: right;
+						    height: 18px;
+						    padding-left: 27px;
+						}
+
 	/*content_2******************************************************************/
 		.content_2{
 			float:left;
