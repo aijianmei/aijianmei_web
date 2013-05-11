@@ -44,19 +44,19 @@
 			/*choice_way beginning*/
 			.bn_choice_way span{
 				position: absolute;
-				top:38%;
 				display: inline-block;
-				width: 39px;
+				width: 320px;
 				height:270px;
 				z-index: 10;
+				cursor: pointer;
 			}
 			.bn_prex{
 				left:5px;
-				background: url(../images/turn_left.png) no-repeat;
+				background: url(../images/turn_left.png) 0 100px no-repeat;
 			}
 			.bn_next{
 				right:5px;
-				background: url(../images/turn_right.png) no-repeat;
+				background: url(../images/turn_right.png) 282px 100px no-repeat;
 			}
 			/*choice_way*/
 			/*choice_point beginning*/
@@ -80,6 +80,7 @@
 				background: #56A9E4;
 			}
 			.tr_nav li{
+				position: relative;
 				float:left;
 				display: inline-block;
 				height:34px;
@@ -89,8 +90,24 @@
 				color: white;
 				font-size: 18px;
 			}
-			.tr_nav .tr_current{
-				background: #2274A3;
+			.tr_nav .tr_current{	
+				margin: 1px;
+				color: #56A9E4;
+				background: white;
+			}
+			.tr_nav .tr_current span{
+				position: absolute;
+				top: 24px;
+				left: 46%;
+				padding: 0;
+				overflow: hidden;
+				width: 0;
+				height: 0;
+				font-size: 0;
+				line-height: 0;
+				border-color: transparent transparent #56A9E4 transparent;
+				border-style: solid;
+				border-width: 5px;
 			}
 			.cont_tab_ct{
 				display: none;
@@ -117,8 +134,7 @@
 				}
 				.cont_title{
 					font-size: 20px;
-					line-height: 32px;
-					font-weight: normal;
+					line-height: 20px;
 					font-family: inherit;
 				}
 				.cont_title a{
@@ -132,6 +148,10 @@
 					display: inline-block;
 					margin: 10px 0;
 					color: #21ace3;
+				}
+				.cont_tip .cont_pb_time{
+					margin-left: 4px;
+					color:#999;
 				}
 				.cont_tip .cont_comefrom{
 					margin-right: 5px;
@@ -288,6 +308,7 @@
 			height: 18px;
 			width: 191px;
 			margin:5px 15px;
+			outline: 0;
 		}
 		.lb_search #button{
 			position: absolute;
