@@ -174,3 +174,71 @@ button{
 	overflow: hidden;
 	background: #f7f7f7;
 }
+/*****footer*****/
+	#footer{
+		height: 195px;
+		background: url(../images/border.png) no-repeat center top;
+		clear: both;
+	}
+	#footer a:hover{
+		color:#47AEE8;
+	}
+	.f_list{
+		float: left;
+		margin: 15px 30px;
+		_margin-left: 15px;
+		padding: 0 15px;
+	}
+	#footer .Login{
+		margin: 15px 0 0 0;
+	}
+	#footer h4{
+		color: #656565;
+		font-size: 14px;
+		margin: 5px 0;
+		display: inline-block;
+		_display: inline;
+	}
+	.f_list ul li a{
+		font-size: 12px;
+		color: #989898;
+		display: inline-block;
+		_display: inline;
+		margin: 2px 0;
+	}
+	#about{
+		width: 190px;
+	}
+	.f_list #about li {
+		float: left;
+		width: 84px;
+	}
+.sina {
+	background: url(../images/icon_result.png) 0 -78px no-repeat;
+}
+#about a {
+	margin-left: 20px;
+}
+.tencent {
+	background: url(../images/icon_result.png) 0 -130px no-repeat;
+}
+#footer .Login .public {
+	background: url(../images/icon_result.png) 0 -104px no-repeat;
+}
+#about .public a {
+	margin-left: 29px;
+}
+.douban {
+	background: url(../images/icon_result.png) 0 0 no-repeat;
+}
+	#lower_footer{
+		height: 90px;
+		background: url(../images/border.png) no-repeat center top;
+		text-align: center;
+		font-size: 16px;
+		padding: 30px;
+		color: #656565;
+	}
+	#lower_footer span, #lower_footer a {
+		display: block;
+	}
