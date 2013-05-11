@@ -79,7 +79,49 @@ class TrainAction extends Action {
 		$this->assign('_current', 'train');
         $this->display();
     }
-    
+    public function newindex()
+    {
+        $this->assign('cssFile', 'training');
+        $map['channel'] = '2';
+        $cate = M('article_category')->where($map)->findAll();
+        foreach($cate as $c)
+            if($c['parent'] == NULL) $parent[$c['id']] = $c;
+        foreach($cate as $c) {
+            if($c['parent'] != NULL) $parent[$c['parent']]['children'][] = $c;
+            $cate_id[] = $c['id'];
+        }
+        
+        $articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
+        foreach ($articles as $key => $value) {
+            $articles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
+        }
+        $this->assign('articles', $articles);
+        $this->assign('categories', $parent);
+        //$this->display();
+        
+        //assign hotArticles
+        $order = 'reader_count';
+        $hotArticles = D('Article')->getTrainArticles($order);
+        foreach ($hotArticles as $key => $value) {
+            $hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
+        }
+        //print_r( $hotArticles);
+        $this->assign('hotArticles', $hotArticles);
+        
+        //assign lastArticles		
+        $order = 'create_time';
+        $lastArticles = D('Article')->getTrainArticles($order);
+        foreach ($lastArticles as $key => $value) {
+            $lastArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
+        }
+        $this->assign('lastArticles', $lastArticles);
+
+        $this->show_banner();//显示banner
+        $this->assign('headertitle', '锻炼');
+		//header current add by kon at 20130415
+		$this->assign('_current', 'train');
+        $this->display('train_index');
+    }    
     public function articleList()
     {
         $id = intval($_GET['id']);

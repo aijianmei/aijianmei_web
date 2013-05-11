@@ -69,8 +69,6 @@ class ArticleModel extends Model {
     public function getTrainArticles($order,$id=null)
     {
         if($id) {
-            
-            
             $orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND a.category_id in ($id)";
             $sql = "select a.* from ai_article a where id in ($orderTableSql) or category_id=$id group by a.id  order by ".$order." desc limit 0,8";
         }else {
