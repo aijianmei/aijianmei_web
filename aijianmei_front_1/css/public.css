@@ -28,7 +28,9 @@ a{
 a:hover{
 	color:#47AEE8;
 }
-
+button{
+	cursor:pointer;
+}
 
 /******* clearfix ********/
 .clearfix:after{

@@ -96,6 +96,7 @@
 						</div>
 					</div>
 				</div><!--End plan_sort-->
+				<hr class="row_line" />
 				<div class="plan_sort">
 					<p class="sort_tit">目的</p>
 					<div class="plan_item">
@@ -113,6 +114,7 @@
 						</div>
 					</div>
 				</div><!--End plan_sort-->
+				<hr class="row_line" />
 				<div class="plan_sort">
 					<p class="sort_tit">性别</p>
 					<div class="plan_item">
@@ -130,21 +132,11 @@
 						</div>
 					</div>
 				</div><!--End plan_sort-->
+				<hr class="row_line" />
 			</div>
 		</div><!--End Wrapper-->
 	</body>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/public.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$("div.plan_item").bind({
-				mouseleave: function(){
-					$(this).find(".plan_cover").slideDown(300);
-				},
-				mouseenter: function(){
-					$(this).find("div.plan_cover").slideUp(300);
-				}
-			})
-		})	
-	</script>
+	<script type="text/javascript" src="js/plan.js"></script>
 </html>
