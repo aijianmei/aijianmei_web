@@ -47,16 +47,13 @@ button{
 
 /****** Triangle ******/
 .triangle{
-	padding:0;
+	display: inline-block;
 	overflow:hidden;
 	width:0;
 	height:0;
-	font-size:0;
-	line-height:0;
 	border-color:#BCBCBC #f7f7f7 #f7f7f7 #f7f7f7;
-	border-style:solid;
+	border-style:solid dotted dotted;
 	border-width:5px;
-	margin-top:-2px;
 	vertical-align: middle;
 }
 

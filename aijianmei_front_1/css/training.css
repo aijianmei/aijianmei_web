@@ -95,18 +95,16 @@
 				color: #56A9E4;
 				background: white;
 			}
-			.tr_nav .tr_current span{
+			.tr_nav .tr_current span{/*do this for ie6*/
 				position: absolute;
 				top: 24px;
 				left: 46%;
-				padding: 0;
+				display: inline-block;
 				overflow: hidden;
 				width: 0;
 				height: 0;
-				font-size: 0;
-				line-height: 0;
 				border-color: transparent transparent #56A9E4 transparent;
-				border-style: solid;
+				border-style:dotted dotted solid dotted;/*ie6 importance*/
 				border-width: 5px;
 			}
 			.cont_tab_ct{
@@ -350,6 +348,7 @@
 			padding: 2px 4px;
 			border-radius: 2px;
 			opacity: 0.6;
+			word-break: keep-all;/*for ie6 the word keep-all*/
 			filter:alpha(opacity=60);
 			cursor: pointer;
 			box-shadow: 0 4px 3px -3px rgba(0,0,0,0.1);

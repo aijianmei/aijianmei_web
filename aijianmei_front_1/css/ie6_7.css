@@ -17,13 +17,21 @@
 .nav li a:hover{
 	_color:white;
 }
-
+.tr_nav{
+	padding-bottom: 1px;
+}
+.nav .nav_child{
+	_z-index:1;
+}
 /*public.css-------------ending*/
 /*index.css-----------------------*/
 .day_classifly li{
 	position: relative;
 	overflow: hidden;
 }
+.content_1{
+	_margin-right:7px;
+} 
 /*training hack begin-------------------*/
 
 
