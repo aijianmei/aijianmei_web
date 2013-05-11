@@ -83,7 +83,9 @@ function rmdirr($dirname) {
 		return false;
 	}
 	if (is_file($dirname) || is_link($dirname)) {
-		return unlink($dirname);
+		if($dirname!='./DBCache/\index.html'){
+			return unlink($dirname);
+		}
 	}
 	$dir = dir($dirname);
 	if($dir){
