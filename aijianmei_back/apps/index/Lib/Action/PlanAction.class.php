@@ -61,7 +61,8 @@ class PlanAction extends Action {
         $this->assign('headertitle', '健身计划');
 		//header current add by kon at 20130415
 		$this->assign('_current', 'plan');
-        $this->display();
+        //$this->display();
+		$this->display('newplan');
     }
     
     public function plan_loss()
