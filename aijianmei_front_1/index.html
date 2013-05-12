@@ -503,9 +503,24 @@
 			  	aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
 			   	aijianmei.scrolltop('scroll_login',1000,['login']);
 			   aijianmei.hover('cont_vd_link','cont_vd_bg');
-			   // alert(document.documentElement.clientHeight);
 			}
 			init();	
+			//右侧滚动条下拿add by kontem 20130512 start
+			var is_ajax_scroll=true;//执行权值 全局预定义
+			$(window).scroll(function() {  
+			//获取网页的完整高庿fix)  
+				totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());   
+				if (($(document).height() <= (totalheight+100))&&is_ajax_scroll===true) {  // 说明滚动条已达底郿
+					is_ajax_scroll=false;
+					$(".cont_tab_ct").each(function(i){
+						//alert($(this).children().html());
+						$(this).append($(this).children().html());//复制子对象内宿fordemo
+					});
+					alert(1);//调用对应ajax
+				}
+			}); 
+
+		//}}}end
         </script>
 	</body>
 </html>
