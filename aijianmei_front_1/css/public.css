@@ -326,7 +326,9 @@ button{
 
 /*****footer*****/
 	#footer{
+		width:980px;
 		height: 195px;
+		margin:0 auto;
 		background: url(../images/border.png) no-repeat center top;
 		clear: both;
 	}
@@ -396,8 +398,9 @@ button{
 /*mousescroll beginning*/
 
 	.scroll_login{
+		display: none;
 		position: fixed;
-		bottom: 0;
+		bottom: -70px;
 		height: 70px;
 		line-height: 70px;
 		width: 100%;
@@ -421,6 +424,7 @@ button{
 			padding: 5px;
 			margin-top: 8px;
 			background: rgba(0,0,0,.3);
+			border-radius:5px;
 		}
 		.scroll_choice li{
 			float:left;
