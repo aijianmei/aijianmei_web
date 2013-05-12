@@ -318,11 +318,12 @@ var aijianmei = {
 		var obj = aijianmei.getobj(obj),
 			arr_len = arr.length,
 			T = 1;
-		obj.style.bottom = aijianmei.newdom.GetCurrentStyle(obj,'bottom');
+		// obj.style.bottom = aijianmei.newdom.GetCurrentStyle(obj,'bottom');
 		if(T){
 			window.onscroll = function(){
 				var scrollTop = document.body.scrollTop || document.pageYOffse || document.documentElement.scrollTop;
-				if(scrollTop == height && parseFloat(obj.style.bottom) < 0){
+				if(scrollTop >= height && T == 1){
+					T = 0;
 					obj.style.display = 'block';
 					aijianmei.chang_bottom(obj,0,70,10);
 				}
