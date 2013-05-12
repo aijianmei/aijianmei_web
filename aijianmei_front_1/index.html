@@ -209,7 +209,7 @@
 					<div class="cont_tab_ct">
 						<div class="cont_module clearfix">
 							<div class="cont_vd_1">
-								<a><img src="images/training/cont_pic.jpg"></a>
+								<a class="cont_vd_link"><img src="images/training/cont_pic.jpg"><span class="cont_vd_bg"></span></a>
 							</div>
 							<div class="cont_vd_2">
 								<h3 class="cont_vd_title"><a>好多肌肉,多的张到头发上去了</a></h3>
@@ -477,7 +477,7 @@
 				}
 			});
 		</script>
-        <script type="text/javascript" src="js/public.js"></script>
+		<script type="text/javascript" src="js/public.js"></script>
         <script type="text/javascript">
         	var init = function(){
 			    var newdom = new getdom,
@@ -501,7 +501,7 @@
 	                }	 
 			  	aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
 			   	aijianmei.scrolltop('scroll_login',1000,['login','2']);
-			   
+			   aijianmei.hover('cont_vd_link','cont_vd_bg')
 			}
 			init();	
         </script>
