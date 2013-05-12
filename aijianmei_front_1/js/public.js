@@ -105,18 +105,28 @@ var aijianmei = {
     	}
     },
     hover : function(obj_1,obj_2){
-    	var obj = aijianmei.getobj(obj_1),
-    		show_obj = aijianmei.getobj(obj_2);
-    	var show = function(){
-    		show_obj.style.display = "block";
-    	}
-    	var hidden = function(){
-    		show_obj.style.display = "none";
-    	}
-    	if(obj){
-    		addevent(obj,'mouseover',show);
-    		addevent(obj,'mouseout',hidden)
-    	}
+    	var obj = aijianmei.getobj(obj_1,1),
+    		show_obj = aijianmei.getobj(obj_2,1),
+    		obj_len = obj.length;
+    	// var show = function(i){
+    		
+    	// }
+    	// var hidden = function(i){
+    		
+    	// }
+    	for(var i = 0;i < obj_len;i++){
+    		obj[i].index = i;
+    		if(obj[i]){
+    			obj[i].onmouseover = function(){
+    				show_obj[this.index].style.display = "block";
+    			}
+    			obj[i].onmouseout = function(){
+    				show_obj[this.index].style.display = "none";
+    			}
+	    		// addevent(obj[i],'mouseover',show);
+	    		// addevent(obj[i],'mouseout',hidden)
+	    	}
+    	} 	
     },
     opacity : function(obj,filter,speed){
 		var newdom = new getdom,
