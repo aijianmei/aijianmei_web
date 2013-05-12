@@ -38,6 +38,8 @@ class TrainAction extends Action {
 
     public function index()
     {
+		$pg=$_GET['pg']?$_GET['pg']:1;
+		$nums=5;
         $this->assign('cssFile', 'training');
         $map['channel'] = '2';
         $cate = M('article_category')->where($map)->findAll();
@@ -58,26 +60,23 @@ class TrainAction extends Action {
         
         //assign hotArticles
         $order = 'reader_count';
-        $hotArticles = D('Article')->getTrainArticles($order);
-        foreach ($hotArticles as $key => $value) {
-            $hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
-        }
+		//$hotArticles = D('Article')->getTrainArticles($order);
+        $hotArticles = D('Article')->getTrainArticlesList($order,'',($pg-1)*$nums,$nums);
         //print_r( $hotArticles);
         $this->assign('hotArticles', $hotArticles);
         
         //assign lastArticles		
         $order = 'create_time';
-        $lastArticles = D('Article')->getTrainArticles($order);
-        foreach ($lastArticles as $key => $value) {
-            $lastArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
-        }
+		//$lastArticles = D('Article')->getTrainArticles($order);
+        $lastArticles = D('Article')->getTrainArticlesList($order,'',($pg-1)*$nums,$nums);
         $this->assign('lastArticles', $lastArticles);
 
         $this->show_banner();//显示banner
         $this->assign('headertitle', '锻炼');
 		//header current add by kon at 20130415
 		$this->assign('_current', 'train');
-        $this->display();
+        //$this->display();
+		$this->display('train_index');
     }
     public function newindex()
     {

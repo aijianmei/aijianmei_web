@@ -927,6 +927,7 @@ function show_banner($type){
         $info = D('Article')->getDailyLimit($type,($page-1)*$nums,$nums);
         $cate = M('article_category')->where(array('type'=>'2'))->findAll();
         $this->assign('info', $info);
+		//print_r($info);
         $this->assign('cssFile', 'every');
         //目录树
         $channel=$type;
@@ -950,7 +951,9 @@ function show_banner($type){
         $this->assign('pager', $pagerArray);
         $this->assign('headertitle', $tree_channel);
 		$this->assign('_current', 'plan');
-        $this->display();
+		$this->assign('cssFile','plan');
+        //$this->display();
+		$this->display('dailywork');
     }
     
     public function daily()
