@@ -404,7 +404,7 @@ button{
 		height: 70px;
 		line-height: 70px;
 		width: 100%;
-		background: rgba(0,0,0,.6);
+		background: #626262;
 		z-index: 800;
 	}
 	/*scroll_content*/
@@ -423,7 +423,7 @@ button{
 			float: left;
 			padding: 5px;
 			margin-top: 8px;
-			background: rgba(0,0,0,.3);
+			background: #444444;
 			border-radius:5px;
 		}
 		.scroll_choice li{
@@ -453,5 +453,7 @@ button{
 		.scroll_choice_3:hover{
 			background: url(../images/ai03.png) no-repeat;
 		}
-
+		.scroll_back{
+			
+		}
 /*mousescroll ending*/
