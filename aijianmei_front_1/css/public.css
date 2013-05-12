@@ -173,6 +173,7 @@ button{
 	background: #f7f7f7;
 }
 
+
 /*login beginning----------*/
 	/*login_bg*/
 		.login_bg{
@@ -322,6 +323,76 @@ button{
 		}
 /*login ending----------*/
 
+
+/*****footer*****/
+	#footer{
+		height: 195px;
+		background: url(../images/border.png) no-repeat center top;
+		clear: both;
+	}
+	#footer a:hover{
+		color:#47AEE8;
+	}
+	.f_list{
+		float: left;
+		margin: 15px 30px;
+		_margin-left: 15px;
+		padding: 0 15px;
+	}
+	#footer .Login{
+		margin: 15px 0 0 0;
+	}
+	#footer h4{
+		color: #656565;
+		font-size: 14px;
+		margin: 5px 0;
+		display: inline-block;
+		_display: inline;
+	}
+	.f_list ul li a{
+		font-size: 12px;
+		color: #989898;
+		display: inline-block;
+		_display: inline;
+		margin: 2px 0;
+	}
+	#about{
+		width: 190px;
+	}
+	.f_list #about li {
+		float: left;
+		width: 84px;
+	}
+	.sina {
+		background: url(../images/icon_result.png) 0 -78px no-repeat;
+	}
+	#about a {
+		margin-left: 20px;
+	}
+	.tencent {
+		background: url(../images/icon_result.png) 0 -130px no-repeat;
+	}
+	#footer .Login .public {
+		background: url(../images/icon_result.png) 0 -104px no-repeat;
+	}
+	#about .public a {
+		margin-left: 29px;
+	}
+	.douban {
+		background: url(../images/icon_result.png) 0 0 no-repeat;
+	}
+	#lower_footer{
+		height: 90px;
+		background: url(../images/border.png) no-repeat center top;
+		text-align: center;
+		font-size: 16px;
+		padding: 30px;
+		color: #656565;
+	}
+	#lower_footer span, #lower_footer a {
+		display: block;
+	}
+
 /*mousescroll beginning*/
 
 	.scroll_login{
@@ -333,50 +404,50 @@ button{
 		background: rgba(0,0,0,.6);
 		z-index: 800;
 	}
-/*scroll_content*/
-	.scroll_content{
-		width: 980px;
-		height: 100%;
-		margin: 0 auto;
-	}
-	.scroll_tip{
-		float:left;
-		margin-right:60px;
-		font-size: 16px;
-		color:white;
-	}
-	.scroll_choice{
-		float: left;
-		padding: 5px;
-		margin-top: 8px;
-		background: rgba(0,0,0,.3);
-	}
-	.scroll_choice li{
-		float:left;
-		padding: 5px;
-	}
-	.scroll_choice a{
-		display:block;
-		width:111px;
-		height:34px;
-	}
-	.scroll_choice_1{
-		background: url(../images/wb01.png) no-repeat;
-	}
-	.scroll_choice_1:hover{
-		background: url(../images/wb02.png) no-repeat;
-	}
-	.scroll_choice_2{
-		background: url(../images/QQ01.png) no-repeat;	
-	}
-	.scroll_choice_2:hover{
-		background: url(../images/QQ02.png) no-repeat;
-	}
-	.scroll_choice_3{
-		background: url(../images/ai01.png) no-repeat;	
-	}
-	.scroll_choice_3:hover{
-		background: url(../images/ai03.png) no-repeat;
-	}
+	/*scroll_content*/
+		.scroll_content{
+			width: 980px;
+			height: 100%;
+			margin: 0 auto;
+		}
+		.scroll_tip{
+			float:left;
+			margin-right:60px;
+			font-size: 16px;
+			color:white;
+		}
+		.scroll_choice{
+			float: left;
+			padding: 5px;
+			margin-top: 8px;
+			background: rgba(0,0,0,.3);
+		}
+		.scroll_choice li{
+			float:left;
+			padding: 5px;
+		}
+		.scroll_choice a{
+			display:block;
+			width:111px;
+			height:34px;
+		}
+		.scroll_choice_1{
+			background: url(../images/wb01.png) no-repeat;
+		}
+		.scroll_choice_1:hover{
+			background: url(../images/wb02.png) no-repeat;
+		}
+		.scroll_choice_2{
+			background: url(../images/QQ01.png) no-repeat;	
+		}
+		.scroll_choice_2:hover{
+			background: url(../images/QQ02.png) no-repeat;
+		}
+		.scroll_choice_3{
+			background: url(../images/ai01.png) no-repeat;	
+		}
+		.scroll_choice_3:hover{
+			background: url(../images/ai03.png) no-repeat;
+		}
 
 /*mousescroll ending*/
