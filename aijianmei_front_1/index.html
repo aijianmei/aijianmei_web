@@ -512,7 +512,7 @@
 				if (($(document).height() <= (totalheight+100))&&is_ajax_scroll===true) {  // 说明滚动条已达底郿
 					is_ajax_scroll=false;
 					$(".cont_tab_ct").each(function(i){
-						alert($(this).children().html());
+						//alert($(this).children().html());
 						$(this).append($(this).children().html());//复制子对象内宿fordemo
 					});
 					alert(1);//调用对应ajax
