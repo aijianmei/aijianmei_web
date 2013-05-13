@@ -183,7 +183,9 @@
 			}
 			/*tr_tab_ct_1 for article-----------*/
 				.cont_module{
-					margin: 25px 0;
+					padding: 25px 0;
+					border-bottom: 1px solid #dfdfdf;
+					border-top: 1px solid white;
 				}
 				/*cont_side_1---------*/
 					.cont_side_1{
