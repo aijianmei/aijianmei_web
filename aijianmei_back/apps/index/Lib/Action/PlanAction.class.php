@@ -39,31 +39,24 @@ class PlanAction extends Action {
 	public function index() 
 	{
 		$this->assign('cssFile', 'plan');
-		$daily = M('daily')->findAll();
-		foreach ($daily as $d) {
-			$article[$d['channel']][] = $d;
-		}
-		$this->assign('article', $article);
 		
-		$shangban = M('article')->where(array('category_id'=>'43'))->limit('0,4')->order('id desc')->findAll();
-		$this->assign('shangban', $shangban);
-		
-		$richang =  M('article')->where(array('category_id'=>'44'))->limit('0,4')->order('id desc')->findAll();
-		$this->assign('richang', $richang);
-		
-		$zhuanye =  M('article')->where(array('category_id'=>'45'))->limit('0,4')->order('id desc')->findAll();
-		$this->assign('zhuanye', $zhuanye);
-		
-		$jianmei =  M('article')->where(array('category_id'=>'46'))->limit('0,4')->order('id desc')->findAll();
-		$this->assign('jianmei', $jianmei);
-
-        $this->show_banner();//banner 滚动图片列表
         $this->assign('headertitle', '健身计划');
 		//header current add by kon at 20130415
 		$this->assign('_current', 'plan');
+		$this->assign('cssFile','plan');
         //$this->display();
+		
 		$this->display('newplan');
     }
+	public function chooseplan(){
+		$this->assign('cssFile', 'plan');
+		
+        $this->assign('headertitle', '健身计划');
+		//header current add by kon at 20130415
+		$this->assign('_current', 'plan');
+		$this->assign('cssFile','plan');
+		$this->display('chooseplan');
+	}
     
     public function plan_loss()
     {

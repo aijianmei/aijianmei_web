@@ -13,7 +13,6 @@ $_actAllowArr=array(
 'indexmore'=>'pagenum',
 'backEditVideoUrl'=>'data',
 'recordlike'=>'data',);
-
 /*ajax */
  if(!empty($_REQUEST['act'])){
      foreach($_REQUEST as $key => $value){
@@ -31,7 +30,7 @@ $_actAllowArr=array(
 
 //addcslashes 
 function MooAddslashes($value) {
-return $value = is_array($value) ? array_map('MooAddslashes', $value) : addslashes($value);
+	return $value = is_array($value) ? array_map('MooAddslashes', $value) : addslashes($value);
 }
 
 
@@ -194,7 +193,8 @@ function addVideoCommont($data=null){
     
     global $_dbConfig;
     $pid=$_POST['pid']?$_POST['pid']:'';
-    $uid=$_POST['uid']?$_POST['uid']:exit();
+    $uid=$_SESSION['mid'];
+	if(!($uid>0)){die();}
     $content=$_POST['content']?trim($_POST['content']):exit();
     $db = mysql_connect($_dbConfig['DB_HOST'], $_dbConfig['DB_USER'], $_dbConfig['DB_PWD']);
     mysql_select_db('aijianmei', $db);
