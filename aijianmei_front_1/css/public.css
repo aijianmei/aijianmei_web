@@ -443,7 +443,8 @@ button{
 		height: 70px;
 		line-height: 70px;
 		width: 100%;
-		background: #626262;
+		background:rgba(0,0,0,.6);
+		background: #626262\9;
 		z-index: 800;
 	}
 	/*scroll_content*/
@@ -493,6 +494,9 @@ button{
 			background: url(../images/ai03.png) no-repeat;
 		}
 		.scroll_back{
+			position: absolute;
+			top: 0;
+			right: 15px;
 			font-style: normal;
 			font-size: 50px;
 			color: white;
