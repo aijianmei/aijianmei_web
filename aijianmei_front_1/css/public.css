@@ -454,6 +454,10 @@ button{
 			background: url(../images/ai03.png) no-repeat;
 		}
 		.scroll_back{
-			
+			font-style: normal;
+			font-size: 50px;
+			color: white;
+			float: right;
+			cursor: pointer;
 		}
 /*mousescroll ending*/
