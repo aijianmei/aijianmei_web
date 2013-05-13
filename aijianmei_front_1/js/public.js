@@ -16,7 +16,7 @@ var addevent = function(element,type,handle){
 }
 //获取dom元素
 var getdom = function(){
-	this.$ = function(id){
+	this.Id = function(id){
 		return document.getElementById(id);
 	}
 
@@ -92,7 +92,7 @@ var aijianmei = {
     		for(var i = 0;i < child_len;i++){
     			if(obj_child[i] == _target){
     				obj_child[i].className = class_1;
-    				tab_content[i].className = obj_2 + class_2;
+    				tab_content[i].className = obj_2 + " " + class_2;
     			}
     			else{
     				obj_child[i].className = '';
@@ -339,6 +339,31 @@ var aijianmei = {
 				}
 			}
 		}		
+	},
+	form_jugde : function(jugde_1,jugde_2){
+		var id_jd_1 = aijianmei.newdom.Id(jugde_1),
+			id_jd_2 = aijianmei.newdom.Id(jugde_2),
+			jd_1 = aijianmei.getobj(jugde_1),
+			jd_2 = aijianmei.getobj(jugde_2);
+		window.onload = function(){
+			// if(id_jd_1).value ==
+		}
+		id_jd_1.onfocus = function(){
+			jd_1.style.display = 'none';
+		}
+		id_jd_1.onblur = function(){
+			if(id_jd_1.value == ""){
+				jd_1.style.display = 'block';
+			}
+		}
+		id_jd_2.onfocus = function(){
+			jd_2.style.display = 'none';
+		}
+		id_jd_2.onblur = function(){
+			if(id_jd_2.value == ""){
+				jd_2.style.display = 'block';
+			}
+		}
 	}
 }
 var init = function(){

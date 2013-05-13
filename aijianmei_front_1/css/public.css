@@ -322,7 +322,7 @@ button{
 			margin:15px 0;
 			background: url(../images/02.png) no-repeat;
 		}
-		.lg_text{
+		#lg_text,#lg_password{
 			width: 90%;
 			margin: 9px 10px;
 			font-size: 14px;

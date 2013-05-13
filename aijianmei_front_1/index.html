@@ -414,12 +414,12 @@
         				<p>使用注册邮箱登录</p>
         				<form>
         					<div class="lg_input">
-        						<label for="lg_text">邮箱</label>
-        						<input type="text" class="lg_text" id="lg_text" />
+        						<label class="lg_text" for="lg_text">邮箱</label>
+        						<input type="text" id="lg_text" />
         					</div>
         					<div class="lg_input">
-        						<label for="lg_password">密码</label>
-        						<input type="password" class="lg_text" id="lg_password" />
+        						<label class="lg_password"  for="lg_password">密码</label>
+        						<input type="password" id="lg_password" />
         					</div>
         					<div class="lg_sure">
 	        					<a class="lg_fix"></a>
@@ -538,6 +538,7 @@
 			  	aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
 			   	aijianmei.scrolltop('scroll_login',1000,['login','scroll_back']);
 			   	aijianmei.hover('cont_vd_link','cont_vd_bg');
+			   	aijianmei.form_jugde('lg_text','lg_password');
 			}
 			init();	
 			//右侧滚动条下拿add by kontem 20130512 start

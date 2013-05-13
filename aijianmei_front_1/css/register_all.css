@@ -188,7 +188,14 @@ a:hover{
 			color: white;
 		}
 		.rg_upload{
-
+			display: inline-block;
+			height: 35px;
+			width: 100%;
+			margin-top: 25px;
+			background: url(../images/register/bdsc01.png) no-repeat;
+		}
+		.rg_upload:hover{
+			background: url(../images/register/bdsc02.png) no-repeat;
 		}
 	/*pre_ne_choice*/
 		.pre_ne_rg2{
