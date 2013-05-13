@@ -15,8 +15,11 @@ class ArticleModel extends Model {
     {
         $sql = "select d.id,d.title,d.img,d.content,d.create_time,d.gotime,d.like,d.unlike,d.read_count,v.id as vid,v.title as vtitle,v.link,v.wapurl,v.intro from ai_daily as d
                 left join ai_daily_video  as v on v.daily_id=d.id 
-                where d.channel=".$channel." ORDER BY d.create_time DESC  limit ".$limit.",".$nums." ";
-        
+                where d.channel=".$channel." and d.gotime<".time()." ORDER BY d.create_time DESC  limit ".$limit.",".$nums." ";
+		$cacheid=md5($sql);
+        $daily=$this->getDataCache($cacheid);
+		if(!$daily){
+		
         $result = M('')->query($sql);
         
         $parser = api('UrlParser');		
@@ -34,15 +37,16 @@ class ArticleModel extends Model {
             
             $daily[$r['id']]['comments'] = $this->getDailyComments($r['id']);
         }
-        
+        $this->setDataCache($cacheid,$daily);
         return $daily;
+		}
     }
     
     public function getDaily($channel)
     {
         $sql = "select d.id,d.title,d.img,d.content,d.create_time,d.like,d.unlike,v.id as vid,v.title as vtitle,v.link,v.intro from ai_daily as d
                 left join ai_daily_video  as v on v.daily_id=d.id 
-                where d.channel=".$channel." ORDER BY d.create_time DESC";
+                where d.channel=".$channel." and d.gotime<".time()." ORDER BY d.create_time DESC";
         
         $result = M('')->query($sql);
         
@@ -80,7 +84,27 @@ class ArticleModel extends Model {
     
         return $result;
     }
-    
+    public function getTrainArticlesList($order,$id=null,$limit,$nums)
+    {
+        if($id) {
+            $orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND a.category_id in ($id)";
+            $sql = "select a.* from ai_article a where id in ($orderTableSql) or category_id=$id group by a.id  order by ".$order." desc limit 0,8";
+        }else {
+            $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+            $sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by a.".$order." desc limit ".$limit.",".$nums."";
+        }
+        $cacheid=md5($sql);
+		$result=null;
+		$result=$this->getDataCache($cacheid);
+		if(!$result){
+			$result = M('')->query($sql);
+			foreach ($result as $key => $value) {
+				$result[$key]['CommNumber']=$this->getCountRecommentsById($value['id']);
+			}
+			$this->setDataCache($cacheid,$result);
+		}
+        return $result;
+    }    
     public function getTrainVideo($order,$id=null)
     {
         if($id) {
@@ -141,7 +165,8 @@ class ArticleModel extends Model {
     
     protected function getDailyComments($id)
     {
-        $sql = "select * from ai_comments where parent_type='4' and parent_id=".$id;
+        //$sql = "select * from ai_comments where parent_type='4' and parent_id=".$id;
+		$sql = "select * from ai_video_comments where pid=".$id;
         $result = M('')->query($sql);
         
         foreach ($result as $r) {

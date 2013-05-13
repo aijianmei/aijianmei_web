@@ -103,6 +103,13 @@ class UserAction extends Action {
 		//print_r($_SESSION['psonkey']);
 		$this->display('GetPwd_Fourth');
 	}
+	public function register(){
+		$this->display('register_1');
+	}
+	public function doregister()
+	{
+		$this->display('register_2');
+	}
 	
 	public function loginUserInfo()
 	{
@@ -133,7 +140,7 @@ class UserAction extends Action {
 			}
 		}
 		else{
-			redirect(U('index/Index/index'));
+			//redirect(U('index/Index/index'));
 		}
 		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
         foreach($area as $a) {

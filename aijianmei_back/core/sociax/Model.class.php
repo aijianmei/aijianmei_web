@@ -1490,5 +1490,20 @@ class Model extends Think
 		}
 		return $error;
     }
+			public function getDataCache($key)
+	{
+		$cachefile="DBCache/$key.php";
+		if(is_file($cachefile))
+		{
+			$data=null;
+			$data=unserialize(include($cachefile));
+			return $data;
+		}
+		return '';
+	}
+	public function setDataCache($key,$data)
+	{
+		file_put_contents("DBCache/$key.php","<?php\n\r return '".serialize($data)."';");
+	}
 };
 ?>
