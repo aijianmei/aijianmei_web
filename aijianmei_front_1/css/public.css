@@ -173,6 +173,45 @@ button{
 	background: #f7f7f7;
 }
 
+/*pg_page begin*/
+
+.pg_page{
+	height: 24px;
+	line-height: 24px;
+	margin: 10px auto;
+	text-align: center;
+}
+.pg_page a,.pg_concrete_choice span{
+	display:inline-block;
+	margin:0 -1px;
+	min-width:20px;
+	height:20px;
+	border: 2px solid transparent;
+	line-height: 20px;
+	color:#333;
+	cursor: pointer;
+}
+.pg_concrete_choice{
+	display: inline-block;
+	vertical-align: top;
+}
+.pg_concrete_choice span{
+	width:50px;
+}
+.pg_page .pg_current_page{
+	background:#21ace3;
+	color:white;
+	border: 2px solid transparent;
+	cursor: default;
+}
+.pg_page a:hover,.pg_concrete_choice span:hover{
+	border-color: #21ace3;
+}
+
+
+/*pg_page ending*/
+
+
 
 /*login beginning----------*/
 	/*login_bg*/
@@ -461,3 +500,6 @@ button{
 			cursor: pointer;
 		}
 /*mousescroll ending*/
+
+
+
