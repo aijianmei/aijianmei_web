@@ -141,7 +141,7 @@
 					<ul class="tr_nav clearfix">
 						<li class="tr_current">最新视频<span></span></li>
 						<li>最热视频<span></span></li>
-						<li>最新文章最热视频<span></span></li>
+						<li>最新文章<span></span></li>
 						<li>最热文章<span></span></li>
 					</ul>
 					<div class="cont_tab_ct cont_tab_block">
@@ -468,7 +468,7 @@
 						showPics(index);
 						index++;
 						if(index == len) {index = 0;}
-					},3000);
+					},5000);
 				}).trigger("mouseleave");
 				//显示图片函数，根据接收的index值显示相应的内容
 				function showPics(index) { //普通切换
@@ -501,7 +501,7 @@
 	                	}	
 	                }	 
 			  	aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
-			   	aijianmei.scrolltop('scroll_login',1000,['login']);
+			   	aijianmei.scrolltop('scroll_login',1000,['login','scroll_back']);
 			   aijianmei.hover('cont_vd_link','cont_vd_bg');
 			}
 			init();	
@@ -516,7 +516,7 @@
 						//alert($(this).children().html());
 						$(this).append($(this).children().html());//复制子对象内宿fordemo
 					});
-					alert(1);//调用对应ajax
+					// alert(1);//调用对应ajax
 				}
 			}); 
 
