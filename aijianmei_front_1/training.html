@@ -330,10 +330,28 @@
 					showPics(index);
 				}).eq(0).trigger("click");
 				//上一页、下一页按钮透明度处理
-				$(".banner .bn_click").css("opacity",0).hover(function() {
+				// $(".banner .bn_click").css("opacity",0).hover(function() {
+				// 	$(this).stop(true,false).animate({"opacity":"0.7"},300);
+				// },function() {
+				// 	$(this).stop(true,false).animate({"opacity":"0"},300);
+				// });
+				var bn_wd = $('.banner').width();
+				$('.banner img').mousemove(function(){
+					if(event.offsetX >= bn_wd/2){
+						$(".banner .bn_prex").stop(true,false).animate({"opacity":"0"},100);
+						$(".banner .bn_next").stop(true,false).animate({"opacity":"0.7"},100);
+					}
+					if(event.offsetX < bn_wd/2){
+						$(".banner .bn_next").stop(true,false).animate({"opacity":"0"},100);
+						$(".banner .bn_prex").stop(true,false).animate({"opacity":"0.7"},100);
+					}
+					// console.log(event.offsetX,event.offsetY)
+				})
+				$('.banner').mouseout(function(){
+					$(".banner .bn_click").stop(true,false).animate({"opacity":"0"},300);
+				})
+				$(".banner .bn_click").mouseover(function() {
 					$(this).stop(true,false).animate({"opacity":"0.7"},300);
-				},function() {
-					$(this).stop(true,false).animate({"opacity":"0"},300);
 				});
 				//上一页按钮
 				$(".banner .bn_prex").click(function() {

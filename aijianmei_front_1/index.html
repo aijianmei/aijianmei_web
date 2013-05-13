@@ -97,6 +97,7 @@
 						<span></span>
 					</div>
 				</div>
+				<!-- day_pl begin -->
 				<div class="day_pl">
 					<ul class="day_classifly clearfix">
 						<li>
@@ -137,6 +138,7 @@
 						</li>
 					</ul>
 				</div>
+				<!-- day_pl end -->
 				<div class="tr_content">
 					<ul class="tr_nav clearfix">
 						<li class="tr_current">最新视频<span></span></li>
@@ -373,6 +375,7 @@
             <span>广州加伦信息科技有限公司- 粤ICP备12085654号</span>
             <a href="/index.php?app=index">www.aijianmei.com</a>
         </div>
+        <!-- login_table begin-->
         <div class="login_bg"></div>
         <div class="login_table">
         	<i class="lg_back">×</i>
@@ -408,6 +411,7 @@
         			</div>
         		</div>
         	</div>
+        <!-- login_table end-->
         </div>
         <div class="scroll_login">
         	<div class="scroll_content">
@@ -441,10 +445,23 @@
 					showPics(index);
 				}).eq(0).trigger("click");
 				//上一页、下一页按钮透明度处理
-				$(".banner .bn_click").css("opacity",0).hover(function() {
+				var bn_wd = $('.banner').width();
+				$('.banner img').mousemove(function(){
+					if(event.offsetX >= bn_wd/2){
+						$(".banner .bn_prex").stop(true,false).animate({"opacity":"0"},100);
+						$(".banner .bn_next").stop(true,false).animate({"opacity":"0.7"},100);
+					}
+					if(event.offsetX < bn_wd/2){
+						$(".banner .bn_next").stop(true,false).animate({"opacity":"0"},100);
+						$(".banner .bn_prex").stop(true,false).animate({"opacity":"0.7"},100);
+					}
+					// console.log(event.offsetX,event.offsetY)
+				})
+				$('.banner').mouseout(function(){
+					$(".banner .bn_click").stop(true,false).animate({"opacity":"0"},300);
+				})
+				$(".banner .bn_click").mouseover(function() {
 					$(this).stop(true,false).animate({"opacity":"0.7"},300);
-				},function() {
-					$(this).stop(true,false).animate({"opacity":"0"},300);
 				});
 				//上一页按钮
 				$(".banner .bn_prex").click(function() {
@@ -502,13 +519,13 @@
 	                }	 
 			  	aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
 			   	aijianmei.scrolltop('scroll_login',1000,['login','scroll_back']);
-			   aijianmei.hover('cont_vd_link','cont_vd_bg');
+			   	aijianmei.hover('cont_vd_link','cont_vd_bg');
 			}
 			init();	
 			//右侧滚动条下拿add by kontem 20130512 start
 			var is_ajax_scroll=true;//执行权值 全局预定义
 			$(window).scroll(function() {  
-			//获取网页的完整高庿fix)  
+				//获取网页的完整高庿fix)  
 				totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());   
 				if (($(document).height() <= (totalheight+100))&&is_ajax_scroll===true) {  // 说明滚动条已达底郿
 					is_ajax_scroll=false;
@@ -520,7 +537,7 @@
 				}
 			}); 
 
-		//}}}end
+			//}}}end
         </script>
 	</body>
 </html>

@@ -45,18 +45,20 @@
 			.bn_choice_way span{
 				position: absolute;
 				display: inline-block;
-				width: 320px;
-				height:270px;
+				width: 40px;
+				height:80px;
 				z-index: 10;
 				cursor: pointer;
 			}
 			.bn_prex{
 				left:5px;
-				background: url(../images/turn_left.png) 0 100px no-repeat;
+				top:100px;
+				background: url(../images/turn_left.png) no-repeat;
 			}
 			.bn_next{
 				right:5px;
-				background: url(../images/turn_right.png) 282px 100px no-repeat;
+				top:100px;
+				background: url(../images/turn_right.png) no-repeat;
 			}
 			/*choice_way*/
 			/*choice_point beginning*/
