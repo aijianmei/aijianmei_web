@@ -38,9 +38,7 @@
 		}
 		.part_1 span{
 
-			display: inline-block;
-			height: 28px;
-			line-height: 28px;			
+			display: inline-block;		
 		}
 		.nowaday{
 			margin:10px 0;
@@ -55,8 +53,8 @@
 		.video{
 
 		}
-		.video_list{
-
+		.video_list span{
+			margin-bottom:10px;
 		}
 		.video_list li{
 			float:left;

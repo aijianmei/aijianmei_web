@@ -29,7 +29,7 @@
 					</div>
 					<div class="rg_ms">
 						<label class="password_again" for="password_again">确认密码</label><input type="password" id="password_again" />
-						<span class="rg_passwd_tip"></span>
+						<span class="rg_passwd_again"></span>
 					</div>
 				</form>
 				<div class="pre_ne_choice clearfix">
@@ -45,7 +45,7 @@
 		var newdom = new getdom,
 			rg_text_tip = newdom.getElementsByClass('rg_text_tip')[0],
 			rg_password_tip = newdom.getElementsByClass('rg_password_tip')[0],
-			rg_passwd_tip = newdom.getElementsByClass('rg_passwd_tip')[0];
+			rg_passwd_again = newdom.getElementsByClass('rg_passwd_tip')[0];
 		function fm_jugde(jugde_1,jugde_2,jugde_3){
 			var judge_1 = /^[^ ]{6,16}$/,
 				judge_2 = /^\d{1,8}$/,
@@ -73,8 +73,8 @@
 							rg_password_tip.innerHTML = '请输入密码';
 						}
 						if(this.index == 2 && passwd.value == ""){
-							rg_passwd_tip.style.color = '#21ace3';
-							rg_passwd_tip.innerHTML = '密码为空,请先输入密码';
+							rg_passwd_again.style.color = '#c00000';
+							rg_passwd_again.innerHTML = '密码为空,请先输入密码';
 						}
 					}
 					id_jd[i].onblur = function(){
