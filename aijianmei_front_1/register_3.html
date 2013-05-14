@@ -19,112 +19,105 @@
 			<div class="rg_step"><span class="rg_step_rg3_1"></span><span class="rg_step_2"></span><span class="rg_step_rg3_3"></span></div>
 			<div class="rg_choice">
 				<ul class="rg_choice_way clearfix">
-					<li class="rg_choice_lay">
-						<a class="rg_choice_part">
+					<li class="rg_choice_lay tab">
+						<span href="index.html" class="rg_choice_part">
 							<img src="images/register/way_1.jpg">
 							<div class="rg_img_bg"></div>
 							<div class="rg_way_content">
 								<p>增肌</p>			
 							</div>
 							<div class="rg_way_bg"></div>
-						</a>
+						</span>
 					</li>
-					<li class="rg_choice_lay">
-						<a class="rg_choice_part">
+					<li class="rg_choice_lay tab">
+						<span class="rg_choice_part">
 							<img src="images/register/way_2.jpg">
 							<div class="rg_img_bg"></div>
 							<div class="rg_way_content">
 								<p>增肥</p>			
 							</div>
 							<div class="rg_way_bg"></div>
-						</a>
+						</span>
 					</li>
-					<li class="rg_choice_lay">
-						<a class="rg_choice_part">
+					<li class="rg_choice_lay tab">
+						<span class="rg_choice_part">
 							<img src="images/register/way_3.jpg">
 							<div class="rg_img_bg"></div>
 							<div class="rg_way_content">
 								<p>减肥</p>			
 							</div>
 							<div class="rg_way_bg"></div>
-						</a>
+						</span>
 					</li>
-					<li class="rg_choice_lay">
-						<a class="rg_choice_part">
+					<li class="rg_choice_lay tab">
+						<span class="rg_choice_part">
 							<img src="images/register/way_4.jpg">
 							<div class="rg_img_bg"></div>
 							<div class="rg_way_content">
 								<p>营养</p>			
 							</div>
 							<div class="rg_way_bg"></div>
-						</a>
+						</span>
 					</li>
-					<li class="rg_choice_lay">
-						<a class="rg_choice_part">
+					<li class="rg_choice_lay tab">
+						<span class="rg_choice_part">
 							<img src="images/register/way_5.jpg">
 							<div class="rg_img_bg"></div>
 							<div class="rg_way_content">
 								<p>交友</p>			
 							</div>
 							<div class="rg_way_bg"></div>
-						</a>
+						</span>
 					</li>
-					<li class="rg_choice_lay">
-						<a class="rg_choice_part">
+					<li class="rg_choice_lay tab">
+						<span class="rg_choice_part">
 							<img src="images/register/way_6.jpg">
 							<div class="rg_img_bg"></div>
 							<div class="rg_way_content">
 								<p>放松</p>			
 							</div>
 							<div class="rg_way_bg"></div>
-						</a>
+						</span>
 					</li>
-					<li class="rg_choice_lay">
-						<a class="rg_choice_part">
+					<li class="rg_choice_lay tab">
+						<span class="rg_choice_part">
 							<img src="images/register/way_7.jpg">
 							<div class="rg_img_bg"></div>
 							<div class="rg_way_content">
 								<p>增肌</p>			
 							</div>
 							<div class="rg_way_bg"></div>
-						</a>
+						</span>
 					</li>
-					<li class="rg_choice_lay">
-						<a class="rg_choice_part">
+					<li class="rg_choice_lay tab">
+						<span class="rg_choice_part">
 							<img src="images/register/way_8.jpg">
 							<div class="rg_img_bg"></div>
 							<div class="rg_way_content">
 								<p>增肌</p>			
 							</div>
 							<div class="rg_way_bg"></div>
-						</a>
+						</span>
 					</li>
-					<li class="rg_choice_lay">
-						<a class="rg_choice_part">
+					<li class="rg_choice_lay tab">
+						<span class="rg_choice_part">
 							<img src="images/register/way_9.jpg">
 							<div class="rg_img_bg"></div>
 							<div class="rg_way_content">
 								<p>增肌</p>			
 							</div>
 							<div class="rg_way_bg"></div>
-						</a>
+						</span>
 					</li>
-					<li class="rg_choice_lay_sp">
-						<a class="rg_choice_part rg_add_part">
+					<li class="rg_choice_lay_sp tab">
+						<span class="rg_choice_part rg_add_part">
 							<div class="rg_way_content">
-								<p>我来填</p>			
+								<p class="rg_way_text">我来填</p>	
+								<input type="text" class="rg_way_input" maxlength="4" />		
 							</div>
 							<div class="rg_way_bg"></div>
-						</a>
+						</span>
 					</li>
-					<!-- <li class="rg_choice_lay_sp">
-						<a class="rg_choice_part rg_add_part">
-							<div class="rg_way_content">
-								<p>我来填</p>			
-							</div>
-							<div class="rg_way_bg"></div>
-						</a>
-					</li> -->
 				</ul>
 				<div class="pre_ne_choice pre_ne_rg3 clearfix">
 					<a href="register_2.html" class="pre_choice"></a>
@@ -140,9 +133,11 @@
 				rg_choice_way = newdom.getElementsByClass("rg_choice_way")[0],
 				rg_choice_lay = newdom.getElementsByClass("rg_choice_lay"),
 				rg_way_content = newdom.getElementsByClass('rg_way_content'),
+				rg_ct_len = rg_way_content.length,
+				len_choice = rg_choice_lay.length,
 				rg_way_bg = newdom.getElementsByClass('rg_way_bg'),
 				rg_img_bg = newdom.getElementsByClass('rg_img_bg'),
-				len_choice = rg_choice_lay.length;
+				rg_choice_lay_sp = rg_choice_way.children[rg_ct_len-1];//get lastchild;
 			for(var i = 0;i < len_choice;i++){
 				rg_choice_lay[i].index = i;
 				rg_choice_lay[i].onmouseover = function(){
@@ -155,8 +150,52 @@
 					aijianmei.chang_top(rg_way_bg[this.index],1,31,50);
 					rg_img_bg[this.index].style.opacity = 0.5;
 				}
+				rg_choice_lay[i].onclick = function(){
+					aijianmei.chang_top(rg_way_content[this.index],0,31,50);
+					aijianmei.chang_top(rg_way_bg[this.index],0,31,50);
+					rg_img_bg[this.index].style.display = 'none';
+				}
 			}		
+			// rg_choice_lay_sp
+			if(rg_choice_lay_sp){
+				addevent(rg_choice_lay_sp,'mouseover',move)
+			}
+			function move(){
+				var rg_way_text = this.getElementsByTagName('p')[0],
+					rg_way_input = this.getElementsByTagName('input')[0],
+					rg_way_a = this.getElementsByTagName('span')[0];
+				rg_way_input.focus();
+				rg_way_text.style.display = "none";
+				rg_way_input.style.display = "block";
+				rg_way_input.onblur = function(){
+					if(rg_way_input.value == ""){
+						rg_way_input.style.display = "none";
+						rg_way_text.style.display = "block";
+					}
+					else{
+						rg_way_a.innerHTML = rg_way_input.value;
+						var li = document.createElement('li');
+						li.className = 'rg_choice_lay_sp tab';
+						li.innerHTML = '<span class="rg_choice_part rg_add_part"><div class="rg_way_content"><p class="rg_way_text">我来填</p><input type="text" class="rg_way_input" maxlength="4" /></div><div class="rg_way_bg"></div></span>';
+						rg_choice_way.appendChild(li);
+						//remove event of rg_choice_lay_sp 
+						remove_event(rg_choice_lay_sp,'mouseover',move)
+						//build new rg_choice_lay_sp
+						var tab = newdom.getElementsByClass('tab'),
+							tab_len = tab.length;
+							rg_choice_lay_sp = rg_choice_way.children[tab_len-1];
+						//get new obj add mouseover
+						addevent(rg_choice_lay_sp,'mouseover',move);
+					}
+				}
+			}
+			// document.onclick = function(){
+			// 	tab = newdom.getElementsByClass('tab');
+			// 	rg_ct_len = tab.length;
+			// 	console.log(rg_ct_len);
+			// }
 		}
+
 		init();
 	</script>
 </html>

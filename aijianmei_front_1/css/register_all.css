@@ -6,6 +6,9 @@ body,ul,p{
 p,input{
 	margin:0;
 }
+input{
+	outline: 0;
+}
 body{
 	font-size: 14px;
 	font-family: Microsoft YaHei,"微软雅黑",Lucida,Verdana,Hiragino Sans GB,STHeiti,WenQuanYi Micro Hei,SimSun,sans-serif;
@@ -249,11 +252,29 @@ a:hover{
 			top: 86px;
 			z-index: 10;
 		}
+		.rg_choice_lay_sp .rg_add_part{
+			width: 125px;
+			text-align: center;
+			line-height: 117px;
+			padding: 0 10px;
+			font-size: 20px;
+			word-break: break-all;
+			color: white
+		}
 		.rg_way_content p{
 			font-size: 16px;
 			margin: 5px 0;
+			line-height: 22px;
 			text-align: center;
 			color: white;
+		}
+		.rg_way_content input{
+			display: none;
+			width: 121px;
+			margin: 5px 7px;
+			padding: 3px 5px;
+			border: 0;
+			border-radius: 4px;
 		}
 		.rg_img_bg{
 			position: absolute;

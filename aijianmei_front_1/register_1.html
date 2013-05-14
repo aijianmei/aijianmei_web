@@ -45,7 +45,7 @@
 		var newdom = new getdom,
 			rg_text_tip = newdom.getElementsByClass('rg_text_tip')[0],
 			rg_password_tip = newdom.getElementsByClass('rg_password_tip')[0],
-			rg_passwd_again = newdom.getElementsByClass('rg_passwd_tip')[0];
+			rg_passwd_again = newdom.getElementsByClass('rg_passwd_again')[0];
 		function fm_jugde(jugde_1,jugde_2,jugde_3){
 			var judge_1 = /^[^ ]{6,16}$/,
 				judge_2 = /^\d{1,8}$/,
@@ -80,8 +80,14 @@
 					id_jd[i].onblur = function(){
 						if(id_jd[this.index].value == ""){
 							jd[this.index].style.display = 'block';
-							rg_password_tip.style.color = '#c00000';
-							rg_password_tip.innerHTML = '密码不能为空';
+							if(this.index == 1){
+								rg_password_tip.style.color = '#c00000';
+								rg_password_tip.innerHTML = '密码不能为空';
+							}
+							if(this.index == 2){
+								rg_passwd_again.style.color = '#c00000';
+								rg_passwd_again.innerHTML = '请再次输入密码';
+							}	
 						}
 						else{
 							if(this.index == 1){
@@ -101,6 +107,14 @@
 							// else{
 							// 	rg_password_tip.innerHTML = '您的密码很安全';
 							// }
+							if(this.index == 2 && password.value != password_again.value){
+								rg_passwd_again.style.color = '#c00000';
+								rg_passwd_again.innerHTML = '两次密码输入不一致';
+							}
+							if(this.index == 2 && password.value == password_again.value){
+								rg_passwd_again.style.color = '#21ace3';
+								rg_passwd_again.innerHTML = '密码一致';
+							}
 						}
 					}
 				}		

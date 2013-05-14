@@ -14,6 +14,21 @@ var addevent = function(element,type,handle){
         };
     }
 }
+var remove_event = function(element,type,handle){
+	if(element.removeEventListener){
+		element.removeEventListener(type,handle,false)
+	}
+	else if(element.detachEvent){
+		element.detachEvent("on" + type,handle)
+	} 
+	else {
+        element["on" + type] = handler;
+        this.AddEvent = function(element, type, handler)
+        {
+            element["on" + type] = handler;
+        };
+    }
+}
 //获取dom元素
 var getdom = function(){
 	this.Id = function(id){
