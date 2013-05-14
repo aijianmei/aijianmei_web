@@ -44,7 +44,8 @@
 	<script type="text/javascript">
 		var newdom = new getdom,
 			rg_text_tip = newdom.getElementsByClass('rg_text_tip')[0],
-			rg_password_tip = newdom.getElementsByClass('rg_password_tip')[0];
+			rg_password_tip = newdom.getElementsByClass('rg_password_tip')[0],
+			rg_passwd_tip = newdom.getElementsByClass('rg_passwd_tip')[0];
 		function fm_jugde(jugde_1,jugde_2,jugde_3){
 			var judge_1 = /^[^ ]{6,16}$/,
 				judge_2 = /^\d{1,8}$/,
@@ -67,26 +68,39 @@
 					id_jd[i].index = i;
 					id_jd[i].onfocus = function(){
 						jd[this.index].style.display = 'none';
+						if(this.index == 1){
+							rg_password_tip.style.color = '#21ace3';
+							rg_password_tip.innerHTML = '请输入密码';
+						}
+						if(this.index == 2 && passwd.value == ""){
+							rg_passwd_tip.style.color = '#21ace3';
+							rg_passwd_tip.innerHTML = '密码为空,请先输入密码';
+						}
 					}
 					id_jd[i].onblur = function(){
 						if(id_jd[this.index].value == ""){
 							jd[this.index].style.display = 'block';
+							rg_password_tip.style.color = '#c00000';
+							rg_password_tip.innerHTML = '密码不能为空';
 						}
 						else{
 							if(this.index == 1){
 								if(passwd.value.length < 6 || passwd.value.length > 16 || judge_1.test(passwd.value) == false || judge_2.test(passwd.value) == true){
+									rg_password_tip.style.color = '#c00000';
 									rg_password_tip.innerHTML = '您的密码格式不正确';
 								}
 							}
 							if(passwd.value.length >= '9' && passwd.value.length <= '16' && judge_3.test(passwd.value) == true){
+								rg_password_tip.style.color = '#21ace3';
 								rg_password_tip.innerHTML = '您的密码格式正确';
 							}
 							if(passwd.value.length >= '6' && passwd.value.length <= '16' && judge_4.test(passwd.value) == true || judge_5.test(passwd.value) == true){
+								rg_password_tip.style.color = '#21ace3';
 								rg_password_tip.innerHTML = '您的密码可以再复杂一点';
 							}
-							else{
-								rg_password_tip.innerHTML = '您的密码很安全';
-							}
+							// else{
+							// 	rg_password_tip.innerHTML = '您的密码很安全';
+							// }
 						}
 					}
 				}		

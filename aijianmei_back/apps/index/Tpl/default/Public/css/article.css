@@ -139,7 +139,9 @@
 				.article p{
 					text-indent: 27px;
 				}
-
+				.article strong a{
+					color:#21ACE3;
+				}
 				.check_comment{
 					height: 32px;
 					border-top: 4px solid #D1D1D1;
