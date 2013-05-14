@@ -128,6 +128,7 @@ var aijianmei = {
 	    	}
     	} 	
     },
+    // opacity make obj transparency you want.filter is transparency.
     opacity : function(obj,filter,speed){
 		var newdom = new getdom,
 			obj = newdom.getElementsByClass(obj)[0] || obj,
@@ -244,6 +245,7 @@ var aijianmei = {
 			}	
 		}	
 	},
+	// chang_top if you want to make the top of obj go up or down slowly.T choice to up or down,length choice distance you want
 	chang_top : function(obj,T,length,speed){  
         var i = 0;
         obj.style.top = aijianmei.newdom.GetCurrentStyle(obj,'top');
@@ -301,6 +303,17 @@ var aijianmei = {
 		login_table.style.visibility = 'visible';
 		aijianmei.opacity('login_bg',0.5,10);
 		aijianmei.chang_top(login_table,0,294,10);
+		// for input
+		var lg_text = aijianmei.newdom.Id('lg_text'),
+			lg_password_id = aijianmei.newdom.Id('lg_password'),
+			lg_password_class = aijianmei.getobj('lg_password');
+		if(lg_text){
+			lg_text.focus()
+		}
+		if(lg_password_id.value != ''){
+			lg_password_class.style.display = 'none';
+		}
+		// for input end
 	},
 	removeacTion : function(){
 		var login_Bg = aijianmei.getobj('login_bg'),
@@ -314,6 +327,7 @@ var aijianmei = {
 		// 	login_table.style.visibility = 'hidden';
 		// }		
 	},
+	// scrolltop : when you roll your mouse,if its height is equal to height,obj appear,if you click one of arr,obj disappear 
 	scrolltop : function(obj,height,arr){
 		var obj = aijianmei.getobj(obj),
 			arr_len = arr.length,
@@ -340,29 +354,27 @@ var aijianmei = {
 			}
 		}		
 	},
-	form_jugde : function(jugde_1,jugde_2){
-		var id_jd_1 = aijianmei.newdom.Id(jugde_1),
-			id_jd_2 = aijianmei.newdom.Id(jugde_2),
-			jd_1 = aijianmei.getobj(jugde_1),
-			jd_2 = aijianmei.getobj(jugde_2);
-		window.onload = function(){
-			// if(id_jd_1).value ==
+	form_jugde : function(jugde_1,jugde_2,jugde_3){
+		var id_jd = [],
+			jd = [],
+			argument_len = arguments.length;
+		for(var i = 0;i < argument_len;i++){
+			id_jd[i] = aijianmei.newdom.Id(arguments[i]);
+			jd[i] = aijianmei.getobj(arguments[i]);
 		}
-		id_jd_1.onfocus = function(){
-			jd_1.style.display = 'none';
-		}
-		id_jd_1.onblur = function(){
-			if(id_jd_1.value == ""){
-				jd_1.style.display = 'block';
-			}
-		}
-		id_jd_2.onfocus = function(){
-			jd_2.style.display = 'none';
-		}
-		id_jd_2.onblur = function(){
-			if(id_jd_2.value == ""){
-				jd_2.style.display = 'block';
-			}
+		jd_len = id_jd.length;
+		for(var i = 0;i < jd_len;i++){
+			if(id_jd[i]){
+				id_jd[i].index = i;
+				id_jd[i].onfocus = function(){
+					jd[this.index].style.display = 'none';
+				}
+				id_jd[i].onblur = function(){
+					if(id_jd[this.index].value == ""){
+						jd[this.index].style.display = 'block';
+					}
+				}
+			}		
 		}
 	}
 }

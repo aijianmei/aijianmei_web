@@ -20,15 +20,15 @@
 			<div class="rg_form">
 				<form>
 					<div class="rg_ms">
-						<label for="text">邮箱</label><input type="text" class="rg_text" id="text" />
+						<label class="text" for="text">邮箱</label><input type="text" id="text" />
 						<span class="rg_text_tip">该邮箱可注册</span>
 					</div>
 					<div class="rg_ms">
-						<label for="password">密码</label><input type="password" class="rg_text" id="password" />
+						<label class="password" for="password">密码</label><input type="password" id="password" />
 						<span></span>
 					</div>
 					<div class="rg_ms">
-						<label for="password_again">确认密码</label><input type="password" class="rg_text" id="password_again" />
+						<label class="password_again" for="password_again">确认密码</label><input type="password" id="password_again" />
 						<span></span>
 					</div>
 				</form>
@@ -41,4 +41,11 @@
 		</div>
 	</body>
 	<script type="text/javascript" src="js/public.js"></script>
+	<script type="text/javascript">
+		var newdom = new getdom;
+		var password_again = document.getElementById('password_again');
+		password_again.onblur = function(){
+			alert('asdf')
+		}
+	</script>
 </html>
