@@ -368,6 +368,10 @@
 			float: left;
 			margin-right: 10px;
 		}
+		.re_host img{
+			width: 45px;
+			height:45px;
+		}
 		.re_part{
 			float: left;
 			width: 223px;

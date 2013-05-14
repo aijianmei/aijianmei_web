@@ -110,10 +110,10 @@ a:hover{
 			border: 0;
 			background: 0;
 		}
-		.rg_ms .rg_text_tip{
+		.rg_text_tip,.rg_password_tip,.rg_passwd_again{
 			position: absolute;
 			display: block;
-			width: 150px;
+			width: 250px;
 			left: 410px;
 			top: 14px;
 			color: #21ace3;
