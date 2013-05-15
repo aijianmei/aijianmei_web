@@ -435,7 +435,6 @@
 			opacity: 0.9;
 			filter: alpha(opacity=90);
 		}
-
 /*website training ending*************************/
 
 /*website good beginning*************************/
@@ -825,6 +824,119 @@
 			color:#21ace3;
 			margin:0 10px 10px 0;
 		}*/
-
 /*website tag ending*************************/
+
+/*website search begin*************************/
+
+	/*content_1******************************************************************/
+		/*.content_1{
+			float: left;
+			width:650px;
+			margin-right: 10px;
+		}*/	
+			/*.cont_tab_block*/
+				/*.cont_tab_block{
+					display: block;
+				}*/
+				.search_tip{
+					padding: 6px 0 6px 10px;
+					background: #21ace3;
+					font-size: 17px;
+					color: white;
+				}
+			/*tr_tab_ct-----------*/
+
+				/*.cont_module{
+					margin: 25px 0;
+				}*/
+				/*cont_side_1---------*/
+				/*.cont_side_1{
+					float: left;
+					margin-right: 10px;
+				}
+				.cont_side_1 img{
+
+				}*/
+				/*cont_side_2-----------*/
+				/*.cont_side_2{
+					float: left;
+					width: 425px;
+				}
+				.cont_title{
+					font-size: 20px;
+					line-height: 20px;
+					font-family: inherit;
+				}
+				.cont_title a{
+					color:#000;
+				}
+				.cont_title a:hover{
+					color:#21ace3;
+				}*/
+				/*cont_tip*/
+				/*.cont_tip{
+					display: inline-block;
+					margin: 10px 0;
+					color: #21ace3;
+				}
+				.cont_tip .cont_pb_time{
+					margin-left: 4px;
+					color:#999;
+				}
+				.cont_tip .cont_comefrom{
+					margin-right: 5px;
+				}
+				.cont_side_2 p{
+					font-size: 14px;
+					line-height: 24px;
+					color: #666;
+				}
+				.cont_read_more{
+					float: right;
+					margin-bottom: 10px;
+					color: #21ace3;
+				}*/
+				/*cont_share------------*/
+				/*.cont_share{
+					clear: both;
+				}
+				.cont_click{
+				 	background: url("../images/wm3.png") no-repeat 0 -463px;
+				    display: inline-block;
+				    float: left;
+				    height: 18px;
+				    padding-left: 27px;
+				}
+				.cont_rec{
+					background: url("../images/wm3.png") no-repeat 0 -438px;
+				    display: inline-block;
+				    float: right;
+				    height: 18px;
+				    padding-left: 27px;
+				}*/
+
+	/*content_2******************************************************************/
+		/*.content_2{
+			float:left;
+			width:300px;
+		}*/
+		/*same_module---------*/
+			/*.same_module{
+				margin-bottom: 10px;
+				background: white;
+			}
+			.sm_title{
+				height: 38px;
+				line-height: 38px;
+				padding-left: 10px;
+				background: #F1F1F1;
+			}*/
+		/*recomment_read_more*/
+		/*.recomment_read_more{
+			float:right;
+			color:#21ace3;
+			margin:0 10px 10px 0;
+		}*/
+
+/*website search end*************************/
 
