@@ -50,8 +50,8 @@
 				width: 40px;
 				height:80px;
 				z-index: 10;
-				opacity: 0;
-				filter:alpha(opacity=0);
+				opacity: 0.5;
+				filter:alpha(opacity=50);
 				cursor: pointer;
 			}
 			.bn_prex{

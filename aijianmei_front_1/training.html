@@ -348,24 +348,23 @@
 				// },function() {
 				// 	$(this).stop(true,false).animate({"opacity":"0"},300);
 				// });
-				var bn_wd = $('.banner').width();
-				$('.banner img').mousemove(function(){
-					if(event.offsetX >= bn_wd/2){
-						$(".banner .bn_prex").stop(true,false).animate({"opacity":"0"},100);
-						$(".banner .bn_next").stop(true,false).animate({"opacity":"0.7"},100);
-					}
-					if(event.offsetX < bn_wd/2){
-						$(".banner .bn_next").stop(true,false).animate({"opacity":"0"},100);
-						$(".banner .bn_prex").stop(true,false).animate({"opacity":"0.7"},100);
-					}
-					// console.log(event.offsetX,event.offsetY)
-				})
-				$('.banner').mouseout(function(){
-					$(".banner .bn_click").stop(true,false).animate({"opacity":"0"},300);
-				})
-				$(".banner .bn_click").mouseover(function() {
-					$(this).stop(true,false).animate({"opacity":"0.7"},300);
-				});
+				// var bn_wd = $('.banner').width();
+				// $('.banner img').mousemove(function(){
+				// 	if(event.offsetX >= bn_wd/2){
+				// 		$(".banner .bn_prex").stop(true,false).animate({"opacity":"0"},100);
+				// 		$(".banner .bn_next").stop(true,false).animate({"opacity":"0.7"},100);
+				// 	}
+				// 	if(event.offsetX < bn_wd/2){
+				// 		$(".banner .bn_next").stop(true,false).animate({"opacity":"0"},100);
+				// 		$(".banner .bn_prex").stop(true,false).animate({"opacity":"0.7"},100);
+				// 	}
+				// })
+				// $('.banner').mouseout(function(){
+				// 	$(".banner .bn_click").stop(true,false).animate({"opacity":"0"},300);
+				// })
+				// $(".banner .bn_click").mouseover(function() {
+				// 	$(this).stop(true,false).animate({"opacity":"0.7"},300);
+				// });
 				//上一页按钮
 				$(".banner .bn_prex").click(function() {
 					index -= 1;

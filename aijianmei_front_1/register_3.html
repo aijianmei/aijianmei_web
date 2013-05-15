@@ -161,9 +161,19 @@
 				addevent(rg_choice_lay_sp,'mouseover',move)
 			}
 			function move(){
-				var rg_way_text = this.getElementsByTagName('p')[0],
-					rg_way_input = this.getElementsByTagName('input')[0],
-					rg_way_a = this.getElementsByTagName('span')[0];
+				var that = this;
+				if(document.all){
+					var parent = window.event.srcElement;
+					while(parent.className != 'rg_choice_lay_sp tab'){
+						parent = parent.parentNode;
+					}
+					if(parent.className == 'rg_choice_lay_sp tab'){ 
+						that = parent;
+					}
+				}
+				var rg_way_text = that.getElementsByTagName('p')[0],
+					rg_way_input = that.getElementsByTagName('input')[0],
+					rg_way_a = that.getElementsByTagName('span')[0];
 				rg_way_input.focus();
 				rg_way_text.style.display = "none";
 				rg_way_input.style.display = "block";
