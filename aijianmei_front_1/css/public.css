@@ -293,10 +293,17 @@ button{
 			height:34px;
 		}
 		.lg_wrap_choice .lg_coop_1{
-			background: url(../images/wb01.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -84px;
+		}
+		.lg_wrap_choice .lg_coop_1:hover{
+			background:url(../images/button_icon.png) no-repeat 0 -126px;
 		}
 		.lg_wrap_choice .lg_coop_2{
-			background: url(../images/QQ01.png) no-repeat;		
+			background:url(../images/button_icon.png) no-repeat 0 -168px;	
+		}
+		.lg_wrap_choice .lg_coop_2:hover{
+			.background:url(../images/button_icon.png) no-repeat 0 -210px;	
+		}		
 		}
 		.lg_aijianmei{
 			margin:10px 0;
@@ -305,7 +312,10 @@ button{
 		display: inline-block;
 			width:111px;
 			height:34px;	
-			background: url(../images/ai01.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 0;
+		}
+		.lg_aijianmei a:hover{
+			background:url(../images/button_icon.png) no-repeat 0 -42px;
 		}
 	/*lg_our*/
 		.lg_our{
@@ -476,22 +486,22 @@ button{
 			height:34px;
 		}
 		.scroll_choice_1{
-			background: url(../images/wb01.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -84px;
 		}
 		.scroll_choice_1:hover{
-			background: url(../images/wb02.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -126px;
 		}
 		.scroll_choice_2{
-			background: url(../images/QQ01.png) no-repeat;	
+			background:url(../images/button_icon.png) no-repeat 0 -168px;
 		}
 		.scroll_choice_2:hover{
-			background: url(../images/QQ02.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -210px;
 		}
 		.scroll_choice_3{
-			background: url(../images/ai01.png) no-repeat;	
+			background:url(../images/button_icon.png) no-repeat 0 0;
 		}
 		.scroll_choice_3:hover{
-			background: url(../images/ai03.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -42px;
 		}
 		.scroll_back{
 			position: absolute;
