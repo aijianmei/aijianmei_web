@@ -195,10 +195,10 @@ a:hover{
 			height: 35px;
 			width: 100%;
 			margin-top: 25px;
-			background: url(../images/register/bdsc01.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -252px;
 		}
 		.rg_upload:hover{
-			background: url(../images/register/bdsc02.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -297px;
 		}
 	/*pre_ne_choice*/
 		.pre_ne_rg2{

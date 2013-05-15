@@ -318,7 +318,11 @@
 			top:0;
 			width:55px;
 			height:28px;
-			background: url(../images/04.jpg) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -740px;
+			cursor:pointer;
+		}
+		.lb_search #button:hover{
+			background:url(../images/button_icon.png) no-repeat 0 -778px;
 		}
 		/*two_code-----------*/
 		.two_code img{
