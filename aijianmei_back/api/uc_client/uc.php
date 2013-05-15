@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 error_reporting(0);
 //为了更好的兼容UC,把uc.php挪到api根目录下. 原uc_client中的保留. 只是与这个文件的SITE_PATH路径有点差异而已
 define('SITE_PATH', dirname(dirname(getcwd())));
@@ -10,7 +10,7 @@ require_once SITE_PATH . '/api/uc_client/core.php';
 require_once SITE_PATH.'/api/uc_client/common.php';
 
 
-define('IN_DISCUZ', TRUE);
+define('IN_DISCUZ', FALSE);
 
 define('UC_CLIENT_VERSION', '1.5.0');	//note UCenter 版本标识
 define('UC_CLIENT_RELEASE', '20081031');
