@@ -98,20 +98,20 @@
 							}
 							if(passwd.value.length >= '9' && passwd.value.length <= '16' && judge_3.test(passwd.value) == true){
 								rg_password_tip.style.color = '#21ace3';
-								rg_password_tip.innerHTML = '您的密码格式正确';
+								rg_password_tip.innerHTML = '您的密码可以再复杂一点';
 							}
 							if(passwd.value.length >= '6' && passwd.value.length <= '16' && judge_4.test(passwd.value) == true || judge_5.test(passwd.value) == true){
 								rg_password_tip.style.color = '#21ace3';
-								rg_password_tip.innerHTML = '您的密码可以再复杂一点';
+								rg_password_tip.innerHTML = '您的密码很安全';
 							}
 							// else{
 							// 	rg_password_tip.innerHTML = '您的密码很安全';
 							// }
-							if(this.index == 2 && password.value != password_again.value){
+							if(this.index == 2 && passwd.value != passwd_again.value){
 								rg_passwd_again.style.color = '#c00000';
 								rg_passwd_again.innerHTML = '两次密码输入不一致';
 							}
-							if(this.index == 2 && password.value == password_again.value){
+							if(this.index == 2 && passwd.value == passwd_again.value){
 								rg_passwd_again.style.color = '#21ace3';
 								rg_passwd_again.innerHTML = '密码一致';
 							}
