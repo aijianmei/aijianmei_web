@@ -101,22 +101,20 @@ var aijianmei = {
     		tab_content = aijianmei.getobj(obj_2,1),
     		obj_child = tab_obj.children,
     		child_len = obj_child.length;
-    	var tab_move = function(e){
-    		var _e = window.event ? window.event : e || arguments[0],
-    			_target = _e.target ? _e.target : _e.srcElement;
-    		for(var i = 0;i < child_len;i++){
-    			if(obj_child[i] == _target){
-    				obj_child[i].className = class_1;
-    				tab_content[i].className = obj_2 + " " + class_2;
-    			}
-    			else{
-    				obj_child[i].className = '';
-    				tab_content[i].className = obj_2;
-    			}
+    	for(var i = 0;i < child_len;i++){
+    		obj_child[i].index = i;
+    		obj_child[i].onclick = function(){
+    			for(var i = 0;i < child_len;i++){
+	    			if(this.index == i){
+	    				obj_child[i].className = class_1;
+	    				tab_content[i].className = obj_2 + " " + class_2;
+	    			}
+	    			else{
+	    				obj_child[i].className = '';
+	    				tab_content[i].className = obj_2;
+	    			}
+	    		}
     		}
-    	}
-    	if(tab_obj){
-    		addevent(tab_obj,'click',tab_move);
     	}
     },
     hover : function(obj_1,obj_2){
