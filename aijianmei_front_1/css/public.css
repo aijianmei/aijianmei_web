@@ -302,9 +302,8 @@ button{
 			background:url(../images/button_icon.png) no-repeat 0 -168px;	
 		}
 		.lg_wrap_choice .lg_coop_2:hover{
-			.background:url(../images/button_icon.png) no-repeat 0 -210px;	
+			background:url(../images/button_icon.png) no-repeat 0 -210px;	
 		}		
-		}
 		.lg_aijianmei{
 			margin:10px 0;
 		}
