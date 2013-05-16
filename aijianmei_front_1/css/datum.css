@@ -101,3 +101,35 @@ border-radius: 3px;
 .dt_update_1:hover{
 	color:white;
 }
+/*dt_tag***************/
+.dt_tag{
+	width: 642px;
+	padding: 5px;
+margin-bottom: 25px;
+background-color: #ffffff;
+border: 1px solid #ccc;
+}
+.dt_surt{
+float: left;
+padding: 1px 6px;
+margin:0 5px 3px 0;
+background: #21ace3;
+color: white;
+}
+.dt_sure_remove{
+
+}
+/*dt_tag_input*/
+.dt_tag_input{
+	float:left;
+position: relative;
+margin:0 5px 3px 0;
+}
+.dt_tag_input label{
+position: absolute;
+top:0;
+left:4px;
+}
+#tag{
+	padding: 2px;
+}
