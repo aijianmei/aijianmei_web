@@ -91,13 +91,13 @@
         			<div class="dt_revise clearfix">
         				<label>性别</label>
         				<div class="dt_content">
-        					<input type="radio" id="male" name="sex" />男
+        					<input type="radio" id="male" name="sex" checked="checked" />男
         					<input type="radio" id="female" name="sex" />女
         				</div>
         			</div>
         			<div class="dt_revise clearfix">
         				<label>体重</label>
-        				<div class="dt_content">
+        				<div class="dt_content dt_weight">
         					<a>小于40kg</a>
         					<a>40-55kg</a>
         					<a>55-70kg</a>
@@ -108,24 +108,24 @@
         			</div>
         			<div class="dt_revise clearfix">
         				<label>身高</label>
-        				<div class="dt_content">
-        					<a>小于40kg</a>
-        					<a>40-55kg</a>
-        					<a>55-70kg</a>
-        					<a>70-85kg</a>
-        					<a>85-100kg</a>
-        					<a>大于100kg</a>
+        				<div class="dt_content dt_height">
+        					<a>小于140cm</a>
+        					<a>140-155cm</a>
+        					<a>155-170cm</a>
+        					<a>170-185cm</a>
+        					<a>185-200cm</a>
+        					<a>大于200cm</a>
         				</div>
         			</div>
         			<div class="dt_revise clearfix">
         				<label>年龄</label>
-        				<div class="dt_content">
-        					<a>小于40kg</a>
-        					<a>40-55kg</a>
-        					<a>55-70kg</a>
-        					<a>70-85kg</a>
-        					<a>85-100kg</a>
-        					<a>大于100kg</a>
+        				<div class="dt_content dt_year">
+        					<a>小于10岁</a>
+        					<a>10-25岁</a>
+        					<a>25-40岁</a>
+        					<a>40-55岁</a>
+        					<a>55-70岁</a>
+        					<a>大于70岁</a>
         				</div>
         			</div>
         			<div class="dt_revise clearfix">
@@ -162,7 +162,7 @@
         			<div class="dt_revise clearfix">
         				<label for="introduce">个人介绍</label>
         				<div class="dt_content dt_content_tx">
-        					<textarea class="dt_type2_input" cols="40" id="introduce" rows="6"></textarea>
+        					<textarea class="dt_type2_input" style="resize:none" cols="40" id="introduce" rows="6"></textarea>
         				</div>
         			</div>
         			<div class="dt_tag clearfix">
@@ -225,8 +225,6 @@
 	        	</fieldset>
         	</form>
         </div>
-        <script type="text/javascript" src="js/public.js"></script>
-        <script type="text/javascript">
-        </script>
+        <script type="text/javascript" src="js/datum.js"></script>
 	</body>
 </html>
