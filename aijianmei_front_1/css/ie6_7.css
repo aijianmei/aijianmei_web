@@ -44,3 +44,11 @@
 }
 
 /*training hack end-------------------*/
+
+/*register_1 begin------------------*/
+
+#text,#password,#password_again{
+padding: 0 10px;
+}
+
+/*register_1 end------------------*/

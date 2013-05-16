@@ -254,7 +254,9 @@ var aijianmei = {
 		for(var i = 0;i < len;i++){
 			if(Obj[i] && window.XMLHttpRequest){
 				addevent(Obj[i],"mouseover",handle);
-				addevent(Obj[i],"mouseout",remove);
+				if(!document.all){
+					addevent(Obj[i],"mouseout",remove);
+				}	
 			}	
 		}	
 	},

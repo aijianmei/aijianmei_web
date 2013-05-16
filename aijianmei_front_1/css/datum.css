@@ -1,0 +1,103 @@
+/*pubilc.css0000000000000000000000*/
+
+
+
+
+/*datum.css************************/
+
+
+.dt_fit{
+	margin-left: 150px;
+font-size: 22px;
+color: #2076bc;
+font-weight: lighter;
+}
+.dt_fit .dt_ms_detail,.dt_part .dt_ms_detail{
+font-size: 16px;
+color: rgba(0,0,0,0.4);
+font-weight: normal;
+}
+/*dt_part***************/
+.dt_part{
+margin-left: 150px;
+}
+.dt_part legend{
+
+display: block;
+width: 80%;
+padding: 0;
+margin-bottom: 40px;
+font-size: 16px;
+font-weight: bold;
+line-height: 40px;
+color: #333333;
+border: 0;
+border-bottom: 1px solid #e5e5e5;
+}
+/*public  dt_revise*****************/
+.dt_revise{
+margin-bottom: 25px;
+}
+.dt_revise label{
+float: left;
+width: 140px;
+padding-top: 5px;
+text-align: right;
+margin:0 20px 5px 0;
+font-size: 14px;
+font-weight: normal;
+line-height: 20px;
+}
+.dt_content{
+height:30px;
+line-height: 30px;
+margin-left:160px;
+}
+/*input_type*******************/
+.dt_input{
+		display: inline-block;
+height: 20px;
+padding: 4px 6px;
+font-size: 14px;
+line-height: 20px;
+color: #555555;
+background-color: #ffffff;
+border: 1px solid #ccc;
+}
+.dt_type1_input{
+width: 200px;
+}
+.dt_type2_input{
+	padding: 4px 6px;
+	width:480px;
+}
+/*sex*/
+#female{
+	margin-left: 50px;
+}
+/*strong height year*/
+.dt_content a{
+display: inline-block;
+padding: 0 5px;
+background: #21ace3;
+color: white;
+border-radius: 3px;	
+}
+/*dt_content_tx*/
+.dt_content_tx{
+	height:102px;
+}
+/*dt_update*/
+.dt_update_1{
+display: inline-block;
+height: 30px;
+line-height: 30px;
+padding: 0 5px;
+margin:0 0 40px 160px;
+background: #21ace3;
+color: white;
+border-radius: 3px;
+}
+.dt_update_1:hover{
+	color:white;
+}
