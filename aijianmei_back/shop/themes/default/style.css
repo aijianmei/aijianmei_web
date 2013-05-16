@@ -734,8 +734,8 @@ visibility:hidden;
   .blank{height:8px; line-height:8px; clear:both; visibility:hidden;}
   .blank5{height:5px; line-height:5px;/* _margin:-3px 0;*/ clear:both; visibility:hidden;}
   /*布局*/
-  .AreaL{width:140px; float:left; margin-right:10px;}
-  .AreaR{width:790px; float:left;}
+  .AreaL{width:210px; float:left; margin-right:10px;}
+  .AreaR{width:940px; float:left;}
 
 /* ====================
      导航部分
@@ -947,10 +947,11 @@ float: left;
    /* ====================
      商品详情页面部分模块
 ==================== */
-   #goodsInfo{background:#f2f2f2; padding:8px; _height:1%;}
-   #goodsInfo .imgInfo{width:230px; float:left; margin-right:10px; overflow:hidden;}
+   #goodsInfo{background:white; padding:8px; _height:1%;}
+   #goodsInfo .imgInfo{width:358px; float:left; margin-right:10px; overflow:hidden;}
    #goodsInfo .imgInfo .thumb{width:230px; height:230px; display:block;}/*商品详情图片*/
-   #goodsInfo span{width:4px; height:48px; background:url(images/bg.gif) no-repeat 0 -527px; float:left;}
+   #goodsInfo .imgInfo img{width:358px;height:358px;}
+     #goodsInfo span{width:4px; height:48px; background:url(images/bg.gif) no-repeat 0 -527px; float:left;}
    #goodsInfo span.spanR{width:4px; height:48px; background:url(images/bg.gif) no-repeat -5px -527px; float:right;}
    #goodsInfo .gallery{width:204px; float:left; margin-left:10px; _margin-left:5px; overflow:hidden;}
    #goodsInfo .gallery ul{width:auto;}

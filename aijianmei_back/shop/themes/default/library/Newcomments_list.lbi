@@ -110,7 +110,7 @@
         <tr>
           <td align="right" valign="top">{$lang.comment_content}：</td>
           <td>
-          <textarea name="content" class="inputBorder" style="height:50px; width:620px;"></textarea>
+          <textarea name="content" class="inputBorder" style="height:50px; width:600px;"></textarea>
           <input type="hidden" name="cmt_type" value="{$comment_type}" />
           <input type="hidden" name="id" value="{$id}" />
           </td>
@@ -123,7 +123,7 @@
           <img src="captcha.php?{$rand}" alt="captcha" onClick="this.src='captcha.php?'+Math.random()" class="captcha">
           </div>
           <!-- {/if} -->
-          <input name="" type="submit"  value="" class="f_r" style="border:none; background:url(../images/commentsBnt.gif); width:75px; height:21px; margin-right:8px;">
+          <input name="" type="submit"  value="" class="f_r" style="border:none; background:url(../images/commentsBnt.gif); width:75px; height:21px; margin-right:26px;">
           </td>
         </tr>
       </table>
