@@ -47,6 +47,9 @@ class IndexAction extends AdministratorAction {
 				'广告模块'	=>	array(
                 '页面Banner管理'	=>	U('admin/Nav/adv'),
 				),
+				'关键字管理'	=>	array(
+                '生成关键字缓存'	=>	U('admin/Nav/keywordcp'),
+				),
         );
 
         //全局
@@ -136,6 +139,9 @@ class IndexAction extends AdministratorAction {
                 '添加新文章' => U('admin/Article/add'),
                 '浏览'    => U('admin/Article/broswe'),
             ),	
+			'评论管理'        => array(
+                '评论管理' => U('admin/Article/comment'),
+            ),
             '分类'     => array(
                 '新建分类' => U('admin/Article/addCategory'),
                 '所有分类' => U('admin/Article/category'),	

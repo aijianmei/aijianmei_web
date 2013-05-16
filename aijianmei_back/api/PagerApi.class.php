@@ -51,10 +51,10 @@ class PagerApi extends Api {
          */
         public function styleInit($style=array())
         {
-                $this->style['pre']=isset($style['pre'])?$style['pre']:'prev';
+                $this->style['pre']=isset($style['pre'])?$style['pre']:'pg_prev';
                 $this->style['num']=isset($style['num'])?$style['num']:'';
-                $this->style['next']=isset($style['next'])?$style['next']:'next';
-                $this->style['current']=isset($style['current'])?$style['current']:'current_page';
+                $this->style['next']=isset($style['next'])?$style['next']:'pg_next';
+                $this->style['current']=isset($style['current'])?$style['current']:'pg_current_page';
         }
 
         //----------------------------------------------------------------------

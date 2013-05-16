@@ -115,6 +115,7 @@ class Page extends Think
 
     // 分页显示定制
     protected $config   =   array('header'=>'条记录','prev'=>'上一页','next'=>'下一页','first'=>'第一页','last'=>'最后一页');
+	protected $currentCss='pg_current_page';
 
     /**
      +----------------------------------------------------------
@@ -216,7 +217,7 @@ class Page extends Think
 				$linkPage .= "<a href='".$url."&".C('VAR_PAGE')."=$i'>".$i."</a>";
 			}
 		}
-		$linkPage .= " <span class='current'>".$this->nowPage."</span>";
+		$linkPage .= " <span class='pg_current_page'>".$this->nowPage."</span>";
 		if($rightPages>0){
 			for($i=$this->nowPage+1;$i<=$this->nowPage+$rightPages;$i++){
 				$linkPage .= "<a href='".$url."&".C('VAR_PAGE')."=$i'>".$i."</a>";
@@ -350,7 +351,7 @@ class Page extends Think
 				$linkPage .= "<a href='".$url."&".C('VAR_PAGE')."=$i'>".$i."</a>";
 			}
 		}
-		$linkPage .= " <span class='current'>".$this->nowPage."</span>";
+		$linkPage .= " <span class='".$this->currentCss."'>".$this->nowPage."</span>";
 		if($rightPages>0){
 			for($i=$this->nowPage+1;$i<=$this->nowPage+$rightPages;$i++){
 				$linkPage .= "<a href='".$url."&".C('VAR_PAGE')."=$i'>".$i."</a>";

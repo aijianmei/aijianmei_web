@@ -38,130 +38,142 @@ class AppendAction extends Action {
          $this->assign('name_2',$name_2);
          $this->assign('name_3',$name_3);
          $this->assign('name_4',$name_4);
+		 
+		//new banner add
+		 $bannerinfo=array(
+		'1'=>array(
+			'name'=>'为什么你现在就需要蛋白质营养品',
+			'img'=>'../Public/images/banner/append_1.jpg',
+			'url'=>'/index-Index-articleDetail-60.html'
+			),
+		'2'=>array(
+			'name'=>'蛋白质的种类和益处的介绍',
+			'img'=>'../Public/images/banner/append_2.jpg',
+			'url'=>"/index-Index-articleDetail-92.html"),
+		'3'=>array(
+			'name'=>'肌肉生长你所需的6种营养辅助品',
+			'img'=>'../Public/images/banner/append_3.jpg',
+			'url'=>"/index-Index-articleDetail-56.html"),
+		'4'=>array(
+			'name'=>'肌氨酸',
+			'img'=>'../Public/images/banner/append_4.jpg',
+			'url'=>"/index-Index-articleDetail-57.html"),
+		);
+		 $this->assign('_bannerInfo',$bannerinfo);
+		 //}}}end
+		 
+		 
         //-------END--------
 
         }
 
     public function index()
     {
-        
+		$pg=$_GET['pg']?$_GET['pg']:1;
+		$nums=5;
         $map['channel'] = '4';
-        $cate = M('article_category')->where($map)->findAll();
-        foreach($cate as $c) 
-            if($c['parent'] == NULL) $parent[$c['id']] = $c;
-        foreach($cate as $c) {
-            if($c['parent'] != NULL) $parent[$c['parent']]['children'][] = $c;
-            $cate_id[] = $c['id'];
-        }
-        $cate_id=(!empty($_GET['id'])&&$_GET['id']!=39)?$_GET['id']:$cate_id;
-        $Articlesid=D('Article')->getArticlesid($cate_id);
-        //$articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
-        $articles = M('article')->where(array('id'=>array('in', implode(',', $Articlesid))))->order('id desc')->limit(8)->findAll();
-        foreach($articles as $key => $value){
-            $articles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
-        }
-        $this->assign('articles', $articles);
-        $this->assign('categories', $cate);
-        $this->assign('parent_categories', $parent);
-        
-        $map['category_id'] = array('in', implode(',', $cate_id));
-        $articles = M('article')->where($map)->findAll();
-        //print_r($articles);
-        $hotArticles = D('Article')->getAppendArticles('click',$_GET['id']==39?'':$_GET['id']);
-        foreach($hotArticles as $key => $value){
-            $hotArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
-        }
+		if($_GET['pg']>0){
+			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
+			$pglimit=intval($_GET['pg']);
+		}else{
+			$pg=1;
+		}
+		
+		
+        //assign hotArticles
+		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =4";
+		$countsql = "select count(*) as cnums from ai_article a ,($orderTableSql) t where a.id=t.aid";
+		$countInfo=$this->getDataCache(md5($countsql));
+		if(!$countInfo){
+			$countInfo = M('')->query($countsql);
+			$this->setDataCache(md5($countsql),$countInfo);
+		}
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Append&act=index&ctype=2&pg=');
+		$pagerArray = $pagerData['html'];
+		
+		$order = 'reader_count';
+		//$hotArticles = D('Article')->getTrainArticles($order);
+        $hotArticles = D('Article')->getArticlesListType($order,'',($pg-1)*$nums,$nums,4);
+        //print_r( $hotArticles);
+		$this->assign('hotArticlespage', $pagerArray);
         $this->assign('hotArticles', $hotArticles);
         
-        $lastArticles = D('Article')->getAppendArticles('create_time',$_GET['id']==39?'':$_GET['id']);
-        foreach($lastArticles as $key => $value){
-            $lastArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
-        }
+		
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Append&act=index&ctype=1&pg=');
+		$pagerArray = $pagerData['html'];
+        //assign lastArticles		
+        $order = 'create_time';
+		//$lastArticles = D('Article')->getTrainArticles($order);
+        $lastArticles = D('Article')->getArticlesListType($order,'',($pg-1)*$nums,$nums,4);
+		$this->assign('lastArticlespage', $pagerArray);
         $this->assign('lastArticles', $lastArticles);
-        $this->assign('articles', $articles);
         $this->assign('cssFile', 'training');
         $this->show_banner();//banner 滚动图片列表
         $this->assign('headertitle', '辅助品');
 		//header current add by kon at 20130415
 		$this->assign('_current', 'append');
-        $this->display();
+		//header current add by kon at 20130415
+        //$this->display();
+		$keywordInfo=unserialize(include_once("PublicCache/keywordInfo.php"));
+		$this->assign('_CommentList',unserialize(include_once("PublicCache/CommentListCache.php")));
+		$this->assign('_KeyWordList',$keywordInfo['nutri']);
+        //$this->display();
+		$this->display('append_index');
     }
     
     public function articleList()
     {
-        $order = isset($_GET['order']) ? t($_GET['order']) : 'create_time';
-        $id = intval($_GET['id']);
-        $ordercon= $_GET['ordercon']?$_GET['ordercon']:'id';
-        $timecon = $_GET['timecon']?$_GET['timecon']:'';
-        $cate = M('article_category')->where(array('channel'=>'4'))->findAll();
-        //print_r($cate);
-        foreach($cate as $c) {
-            if($c['parent']==NULL) $realCate[$c['id']] = $c;
-            else $realCate[$c['parent']]['children'][] = $c;;
-            $cate_id[] = $c['id'];
-        }
-        $map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
-        // 查询满足要求的总记录数
-        $articleCount = M('article')->where(array('category_id'=>$id))->count();
-        $pager = api('Pager');	// 实例化分页类 
-        $pager->setCounts($articleCount); //传入总记录数
-        //$pager->setStyle($style);
-        $pager->setList(7);	// 设置每页显示的记录数
-        $pager->makePage();		//生成数字分页
-        $pageArray = (array)$pager;
-        $this->assign('pager', $pageArray);
-        
-        $from = ($pager->pg-1) * $pager->countlist;
-        $Articlesid=D('Article')->getArticlesid($id);
-         $categoryStr=is_array($map['category_id'])? $map['category_id'][1]:$map['category_id'];
-        if($ordercon!='recomnums'){
-            if($timecon){
-                $dataArr=getDateInfo($timecon);
-                $timeStr="and  create_time >='".$dataArr['start']."' and create_time <='".$dataArr['end']."'";
-            }
-            $comtmpsql="select * from ai_article where category_id in ($categoryStr) $timeStr order by $ordercon desc limit $from,$pager->countlist ";
-            $articles=M('')->query($comtmpsql);
-        }
-        else{
-            //$map['category_id']=array('in', '29,30,31');
-            $comtmpsql="SELECT a. * , COUNT( b.id ) AS cnums FROM ai_article a LEFT JOIN ai_comments b ON a.id = b.parent_id
-        WHERE a.category_id IN ($categoryStr) GROUP BY b.parent_id UNION SELECT * , 0 AS cnums FROM ai_article a WHERE category_id IN ($categoryStr) AND id NOT IN (SELECT parent_id FROM ai_comments)";
-            $timeStr=null;
-            if($timecon){
-                $dataArr=getDateInfo($timecon);
-                $timeStr="where  t.create_time >='".$dataArr['start']."' and t.create_time <='".$dataArr['end']."'";
-            }
-            $comtmpsql="select * from ($comtmpsql) t $timeStr order by t.cnums desc limit $from,$pager->countlist ";
-            $articles=M('')->query($comtmpsql);
-        }
-        $this->assign('articles', $articles);
-        $this->assign('categories', $realCate);
-        //print_r($articles);
+        $pg=$_GET['pg']?$_GET['pg']:1;
+		$nums=5;
         $this->assign('cssFile', 'training');
         
-        $hotArticles = D('Article')->getAppendArticles('click', $id);
-        foreach($hotArticles as $key => $value){
-            $hotArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
-        }
+		$id = intval($_GET['id']);
+        //$this->display();
+		
+		if($_GET['pg']>0){
+			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
+			$pglimit=intval($_GET['pg']);
+		}else{
+			$pg=1;
+		}
+
+        //assign hotArticles
+		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND a.category_id in ($id)";
+		$countsql = "select count(*) as cnums from ai_article a ,($orderTableSql) t where a.id=t.aid";
+		$countInfo=$this->getDataCache(md5($countsql));
+		if(!$countInfo){
+			$countInfo = M('')->query($countsql);
+			$this->setDataCache(md5($countsql),$countInfo);
+		}
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Append&act=articleList&id=$id&ctype=2&pg=");
+		$pagerArray = $pagerData['html'];
+		
+		$order = 'reader_count';
+		//$hotArticles = D('Article')->getTrainArticles($order);
+        $hotArticles = D('Article')->getArticlesListType($order,$id,($pg-1)*$nums,$nums,4);
+        //print_r( $hotArticles);
+		$this->assign('hotArticlespage', $pagerArray);
         $this->assign('hotArticles', $hotArticles);
-        //foreach($hotArticles as $a) echo $a['title'];
-        $a['title']=substr($a['title'],0,10)."...";		
-        $lastArticles = D('Article')->getAppendArticles('create_time', $id);
-        foreach($lastArticles as $key => $value){
-            $lastArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
-        }
+        
+		
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Append&act=articleList&id=$id&ctype=1&pg=");
+		$pagerArray = $pagerData['html'];
+        //assign lastArticles		
+        $order = 'create_time';
+		//$lastArticles = D('Article')->getTrainArticles($order);
+        $lastArticles = D('Article')->getArticlesListType($order,$id,($pg-1)*$nums,$nums,4);
+		$this->assign('lastArticlespage', $pagerArray);
         $this->assign('lastArticles', $lastArticles);
-        $this->show_banner();//banner 滚动图片列表
-                foreach($realCate as $k =>$v){
-            foreach($v['children'] as $k1=>$v1){
-                if($id==$v1['id'])
-                {
-                    $this->assign('headertitle', $v1['name']);
-                }
-            }
-        }
+				//print_r($lastArticles);
+        $this->show_banner();//显示banner
+		//header current add by kon at 20130415
+        //$this->display();
+		$keywordInfo=unserialize(include_once("PublicCache/keywordInfo.php"));
+		$this->assign('_CommentList',unserialize(include_once("PublicCache/CommentListCache.php")));
+		$this->assign('_KeyWordList',$keywordInfo['append']);
+		$this->assign('headertitle', '辅助品');
 		$this->assign('_current', 'append');
-        $this->display('list');
+        $this->display('append_list');
     }
     //get append video list
     public function videoList()
@@ -223,5 +235,72 @@ class AppendAction extends Action {
         $this->assign('cssFile', 'v');
         $this->display('video');
     }
+	function pageHtml($count,$nums,$pg=null,$url=null)
+{
+		$pager=null;
+		$listnum=ceil($count/$nums);
+		if($pg==1||!$pg){
+			$pre='<a>上一页</a>';
+		}else
+		{
+			$pre='<a href="'.$url.($pg-1).'">上一页</a>';
+		}
+		if($pg==$listnum){
+			$next='<a>下一页</a>';
+		}else
+		{
+			$next='<a href="'.$url.($pg+1).'">下一页</a>';
+		}
+		for($i=1;$i<=$listnum;$i++){
+			if($i==$pg){
+				$cuCss='class="pg_current_page"';
+			}else{
+				$cuCss='';
+			}
+			if(!$pg){
+				if($i==1){
+					$cuCss='class="pg_current_page"';
+				}
+			}
+			$pageArr[$i]='<a '.$cuCss.' href="'.$url.$i.'">'.$i.'</a>';
+		}
+		if($listnum>10){
+			if($pg>5&&($listnum-$pg)>5){
+				$snum=$pg-5;
+				$enum=$pg+5;
+			}
+			if($pg<5&&($listnum-$pg)>5){
+				$snum=1;
+				$enum=10;
+			}
+			if($pg>5&&($listnum-$pg)<5){
+				$snum=$pg-5-(5-($listnum-$pg))+1;
+				$enum=$listnum;
+			}
+			if($pg==5){
+				$snum=1;
+				$enum=10;
+			}
+			foreach($pageArr as $k=>$v)
+			{
+				if($k<$snum||$k>$enum){
+					unset($pageArr[$k]);
+				}else{
+					$pagehtml.=$v;
+				}
+			}
+		}else{
+
+			foreach($pageArr as $k =>$v)
+			{
+				$pagehtml.=$v;
+			}
+		}
+		
+		$html['backstr']=$pre;
+		$html['nextstr']=$next;
+		$html['thestr']=$pagehtml;
+		return array('html'=>$html);
+}
 }
 ?>

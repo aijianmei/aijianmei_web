@@ -31,7 +31,7 @@ class ArticleAction extends AdministratorAction {
 						$succcount=0;
 						foreach($exceldata as $key => $value)
 						{
-							sleep(1);
+							//sleep(1);
 							$insertdata['uid'] = $this->mid;
 							$insertdata['title'] = t($value[0]);
 							$insertdata['channel'] = intval($channelArr[$value[1]]);
@@ -204,7 +204,7 @@ class ArticleAction extends AdministratorAction {
 
             M('')->query('update ai_article set is_promote='.$data['is_promote'].' where id='.$data['id']);
         }
-        $articles = D('Article')->getArticles();
+		$articles = D('Article')->getArticles();
         $this->assign('article', $articles);
         $this->display();
     }
@@ -242,7 +242,95 @@ class ArticleAction extends AdministratorAction {
         $this->assign('categories', $cate);
         $this->display();
     }
-    
+	public function comment()
+    {
+		$comType=array(
+			'1'=>'文章',
+			'2'=>'锻炼视频',
+			'3'=>'评论回复',
+			'4'=>'天天锻炼',
+		);
+		$this->assign('_comType', $comType);
+		$nums=25;
+		$action=$_GET['comact']?$_GET['comact']:'';
+		if($action=='ingood'){
+			$cid=$_GET['cid']?intval($_GET['cid']):die();
+			if($cid>0)
+			{
+				$upsql="UPDATE  ai_comments SET  ingood =  '1' WHERE  id=$cid";
+				M('')->query($upsql);
+				$this->setCommentListCache();
+			}
+		}
+		if($action=='degood'){
+			$cid=$_GET['cid']?intval($_GET['cid']):die();
+			if($cid>0)
+			{
+				$upsql="UPDATE  ai_comments SET  ingood =  '0' WHERE  id=$cid";
+				M('')->query($upsql);
+				$this->setCommentListCache();
+			}
+		}
+		$type=$_GET['type']?$_GET['type']:1;
+		$sql="select * from ai_comments where parent_type='".$type."'";
+		$comlistscount=M('')->query($sql);
+		$pager = api('Pager');
+        $pager->setCounts(count($comlistscount));
+        $pager->setList($nums);
+        $pager->makePage();
+        $from = ($pager->pg -1) * $pager->countlist;
+		$sql="select * from ai_comments where parent_type='".$type."' limit $from,$nums";
+		$comlists=M('')->query($sql);		
+        $pagerArray = (array)$pager;
+		$res=M('')->query($sql);
+		//print_r($comlists);
+        $this->assign('comlists', $comlists);
+		$this->assign('type', $type);
+		$this->assign('pager', $pagerArray);
+        $this->display('comment');
+    }
+	public function setCommentListCache(){
+		$filename='CommentListCache';
+		$data=null;
+		$comSql="select * from ai_comments where ingood=1 order by create_time desc limit 10";
+		$comlists=M('')->query($comSql);
+		foreach($comlists as $key=>$value){
+			switch($value['parent_type']){
+				case 1:
+					$sql=$titleinfo=$title=null;
+					$sql="select title from ai_article where id='".$value['parent_id']."'";
+					$titleinfo=M('')->query($sql);
+					$title=$titleinfo[0]['title'];
+					$comlists[$key]['comtotitle']=$title;
+				break;
+				case 2:
+					$sql=$titleinfo=$title=null;
+					$sql="select title from ai_video where id='".$value['parent_id']."'";
+					$titleinfo=M('')->query($sql);
+					$title=$titleinfo[0]['title'];
+					$comlists[$key]['comtotitle']=$title;
+				break;			
+				case 4:
+					$sql=$titleinfo=$title=null;
+					$sql="select title from ai_daily where id='".$value['parent_id']."'";
+					$titleinfo=M('')->query($sql);
+					$title=$titleinfo[0]['title'];
+					$comlists[$key]['comtotitle']=$title;
+				break;			
+			}
+			$comlists[$key]['userSname']=getUserName($value['uid'],'zh',12);
+			$comlists[$key]['userLname']=getUserName($value['uid']); 			
+			$comlists[$key]['userimg']=getUserFace($value['uid'],'s');
+		}
+		file_put_contents("PublicCache/$filename.php","<?php\n\r return '".serialize($comlists)."';");	
+	}
+	
+	
+	
+	public function doDeletecomment()
+    {
+        $this->delete('article_category');
+    }
     public function doDeleteCate()
     {
         $this->delete('article_category');

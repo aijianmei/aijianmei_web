@@ -88,7 +88,7 @@ class ArticleModel extends Model {
     {
         if($id) {
             $orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND a.category_id in ($id)";
-            $sql = "select a.* from ai_article a where id in ($orderTableSql) or category_id=$id group by a.id  order by ".$order." desc limit 0,8";
+            $sql = "select a.* from ai_article a where id in ($orderTableSql) or category_id=$id group by a.id  order by ".$order." desc limit ".$limit.",".$nums."";
         }else {
             $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
             $sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by a.".$order." desc limit ".$limit.",".$nums."";
@@ -104,7 +104,28 @@ class ArticleModel extends Model {
 			$this->setDataCache($cacheid,$result);
 		}
         return $result;
-    }    
+    }
+    public function getArticlesListType($order,$id=null,$limit,$nums,$type=null)
+    {
+        if($id) {
+            $orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND a.category_id in ($id)";
+            $sql = "select a.* from ai_article a where id in ($orderTableSql) or category_id=$id group by a.id  order by ".$order." desc limit ".$limit.",".$nums."";
+        }else {
+            $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =$type";
+            $sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by a.".$order." desc limit ".$limit.",".$nums."";
+        }
+        $cacheid=md5($sql);
+		$result=null;
+		$result=$this->getDataCache($cacheid);
+		if(!$result){
+			$result = M('')->query($sql);
+			foreach ($result as $key => $value) {
+				$result[$key]['CommNumber']=$this->getCountRecommentsById($value['id']);
+			}
+			$this->setDataCache($cacheid,$result);
+		}
+        return $result;
+    }	
     public function getTrainVideo($order,$id=null)
     {
         if($id) {
@@ -116,6 +137,30 @@ class ArticleModel extends Model {
         
         $result = M('')->query($sql);
     
+        return $result;	
+    }
+    public function getTrainVideoList($order,$id=null,$limit,$nums)
+    {
+        if($id) {
+            $sql = "select v.* from ai_video v where v.category_id=".$id."  order by ".$order." desc limit ".$limit.",".$nums."";
+
+        }else {
+            $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+            $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by $order desc limit ".$limit.",".$nums."";
+        }
+		$cacheid=md5($sql);
+		$result=null;
+		$result=$this->getDataCache($cacheid);
+		if(!$result){
+			$result = M('')->query($sql);
+			foreach ($result as $key => $value) {
+				$data =null;
+				$data = json_decode($this->getVideoData($value['link']));
+				$result[$key]['logo'] = $data->data[0]->logo;
+				$result[$key]['CommNumber']=$this->getVideoCountRecommentsById($value['id']);
+			}
+			$this->setDataCache($cacheid,$result);
+		}
         return $result;	
     }
     
@@ -165,8 +210,8 @@ class ArticleModel extends Model {
     
     protected function getDailyComments($id)
     {
-        //$sql = "select * from ai_comments where parent_type='4' and parent_id=".$id;
-		$sql = "select * from ai_video_comments where pid=".$id;
+        $sql = "select * from ai_comments where parent_type='4' and parent_id=".$id;
+		//$sql = "select * from ai_video_comments where pid=".$id;
         $result = M('')->query($sql);
         
         foreach ($result as $r) {
@@ -256,5 +301,13 @@ class ArticleModel extends Model {
         if (empty($query)) return FALSE;
         return $query[0]['content'];
     }
+	public function getVideoData($link)
+	{
+        $id = str_replace('http://player.youku.com/player.php/sid/', '', $link);
+        $id = str_replace('/v.swf', '', $id);
+        $url = 'http://v.youku.com/player/getPlayList/VideoIDS/'.$id.'/version/5/source/out?onData=%5Btype%20Function%5D&n=3';
+        $json = file_get_contents($url);
+        return $json;
+	}
 }
 ?>

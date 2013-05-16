@@ -140,7 +140,7 @@ function show_banner($type){
 
     }
 
-    public function index() 
+    public function newindex() 
     {
 		ob_start();
         if (!empty($_GET['token'])) {
@@ -400,8 +400,24 @@ function show_banner($type){
         $this->display();
     }
 	
-	public function newindex() 
+	public function index() 
     {
+		$bannerinfo=array(
+		'1'=>array(
+			'name'=>'为什么你现在就需要蛋白质营养品',
+			'img'=>'../Public/images/banner/index_1.jpg',
+			'url'=>'/index-Index-articleDetail-60.html'
+			),
+		'2'=>array(
+			'name'=>'7个肌肉养成的营养规则',
+			'img'=>'../Public/images/banner/index_2.jpg',
+			'url'=>"/index-Index-articleDetail-34.html"),
+		'3'=>array(
+			'name'=>'如何选择正确的每日健身计划',
+			'img'=>'../Public/images/banner/index_5.jpg',
+			'url'=>"/index-Index-articleDetail-93.html")
+		);
+		$this->assign('_bannerInfo',$bannerinfo);	
 		ob_start();
         if (!empty($_GET['token'])) {
             require_once $_SERVER['DOCUMENT_ROOT'].'/Denglu.php';
@@ -620,12 +636,30 @@ function show_banner($type){
         $this->assign('uid',$this->mid);
 		
         $this->assign('cssFile','index');
-        
+        //$pg=
+		$nums=5;
         //add by kon at 20130410 start
         /*首页添加最新5篇视频*/
-        
-        $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
-        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit 0,5";
+		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+		
+		$countsql = "select count(*) as cnums from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc";
+		$countInfo=$this->getDataCache(md5($countsql));
+		if(!$countInfo){
+			$countInfo = M('')->query($countsql);
+			$this->setDataCache(md5($countsql),$countInfo);
+		}
+		//分页
+		if($_GET['pg']>0){
+			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
+			$pglimit=intval($_GET['pg']);
+		}else{
+			$pg=1;
+		}
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=index&act=index&ctype=3&pg=');
+		$pagerArray = $pagerData['html'];
+
+		//print_r($pagerArray);
+        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit ".($pg-1)*$nums.",$nums";
 		$newvideos=$hot_video=null;
 		$newvideos=$this->getDataCache(md5($sql));
 		if(!$newvideos){
@@ -638,11 +672,23 @@ function show_banner($type){
 			}
 			$this->setDataCache(md5($sql),$newvideos);
 		}
+		$this->assign('newvideosPage', $pagerArray);
         $this->assign('newvideos', $newvideos);
 		
 		/*首页添加最热5篇视频*/
-        $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
-        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by click desc limit 0,5";
+		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+		$countsql = "select count(*) as cnums from ai_video v,($orderTableSql) t where v.category_id=t.aid ";
+		$countInfo=$this->getDataCache(md5($countsql));
+		if(!$countInfo){
+			$countInfo = M('')->query($countsql);
+			$this->setDataCache(md5($countsql),$countInfo);
+		}
+		
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pg,'/index.php?app=index&mod=index&act=index&ctype=4&pg=');
+		$pagerArray = $pagerData['html'];
+		
+        
+        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by click desc limit ".($pg-1)*$nums.",$nums";
 		$hotvideos=$hot_video=null;
 		$hotvideos=$this->getDataCache(md5($sql));
 		if(!$hotvideos){
@@ -655,6 +701,7 @@ function show_banner($type){
 			}
 			$this->setDataCache(md5($sql),$hotvideos);
 		}
+		$this->assign('hotvideosPage', $pagerArray);
         $this->assign('hotvideos', $hotvideos);
 		
 		
@@ -662,8 +709,16 @@ function show_banner($type){
         /*首页添加最新5篇文章*/
 		//getDataCache($key)
 		//setDataCache($key,$data)
+		$countsql="select count(*) as cnums from ai_article";
+		$countInfo=$this->getDataCache(md5($countsql));
+		if(!$countInfo){
+			$countInfo = M('')->query($countsql);
+			$this->setDataCache(md5($countsql),$countInfo);
+		}
 		
-        $sql = "select a.* from ai_article a group by a.id order by a.create_time desc limit 0,5";
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=index&act=index&ctype=1&pg=');
+		$pagerArray = $pagerData['html'];
+        $sql = "select a.* from ai_article a group by a.id order by a.create_time desc limit ".($pg-1)*$nums.",$nums";
 		$newArticles=null;
 		$newArticles=$this->getDataCache(md5($sql));
 		if(!$newArticles){
@@ -673,11 +728,24 @@ function show_banner($type){
 			}
 			$this->setDataCache(md5($sql),$newArticles);
 		}
+		//print_r($pagerArray);
+		$this->assign('newArticlespage', $pagerArray);
         $this->assign('newArticles', $newArticles);
 		
 		/*首页添加最热5篇文章*/
 		
-        $sql = "select a.* from ai_article a group by a.id order by a.reader_count desc limit 0,5";
+		$countsql="select count(*) as cnums from ai_article";
+		$countInfo=$this->getDataCache(md5($countsql));
+		if(!$countInfo){
+			$countInfo = M('')->query($countsql);
+			$this->setDataCache(md5($countsql),$countInfo);
+		}
+		
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=index&act=index&ctype=2&pg=');
+		$pagerArray = $pagerData['html'];
+		
+		
+        $sql = "select a.* from ai_article a group by a.id order by a.reader_count desc limit ".($pg-1)*$nums.",$nums";
 		$hotArticles=null;
 		$hotArticles=$this->getDataCache(md5($sql));
 		if(!$hotArticles){
@@ -687,10 +755,12 @@ function show_banner($type){
 			}
 			$this->setDataCache(md5($sql),$hotArticles);
 		}
+		$this->assign('hotArticlespage', $pagerArray);
         $this->assign('hotArticles', $hotArticles);
         //add by kon at 20130410 end
 		
 		//header current add by kon at 20130415
+		//print_r($_SESSION);
 		$this->assign('_current', 'index');
         //$this->display();
 		$this->display('newindex');
@@ -1694,5 +1764,73 @@ function show_banner($type){
     return  $htmlStr.='</div>';  
 }
 
+
+function pageHtml($count,$nums,$pg=null,$url=null)
+{
+		$pager=null;
+		$listnum=ceil($count/$nums);
+		if($pg==1||!$pg){
+			$pre='<a>上一页</a>';
+		}else
+		{
+			$pre='<a href="'.$url.($pg-1).'">上一页</a>';
+		}
+		if($pg==$listnum){
+			$next='<a>下一页</a>';
+		}else
+		{
+			$next='<a href="'.$url.($pg+1).'">下一页</a>';
+		}
+		for($i=1;$i<=$listnum;$i++){
+			if($i==$pg){
+				$cuCss='class="pg_current_page"';
+			}else{
+				$cuCss='';
+			}
+			if(!$pg){
+				if($i==1){
+					$cuCss='class="pg_current_page"';
+				}
+			}
+			$pageArr[$i]='<a '.$cuCss.' href="'.$url.$i.'">'.$i.'</a>';
+		}
+		if($listnum>10){
+			if($pg>5&&($listnum-$pg)>5){
+				$snum=$pg-5;
+				$enum=$pg+5;
+			}
+			if($pg<5&&($listnum-$pg)>5){
+				$snum=1;
+				$enum=10;
+			}
+			if($pg>5&&($listnum-$pg)<5){
+				$snum=$pg-5-(5-($listnum-$pg))+1;
+				$enum=$listnum;
+			}
+			if($pg==5){
+				$snum=1;
+				$enum=10;
+			}
+			foreach($pageArr as $k=>$v)
+			{
+				if($k<$snum||$k>$enum){
+					unset($pageArr[$k]);
+				}else{
+					$pagehtml.=$v;
+				}
+			}
+		}else{
+
+			foreach($pageArr as $k =>$v)
+			{
+				$pagehtml.=$v;
+			}
+		}
+		
+		$html['backstr']=$pre;
+		$html['nextstr']=$next;
+		$html['thestr']=$pagehtml;
+		return array('html'=>$html);
+}
 }
 ?>

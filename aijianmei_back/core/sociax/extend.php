@@ -1063,13 +1063,21 @@ function dateFormat($sTime, $format = null) {
 function getMid(){
 	return intval($_SESSION['mid']);
 }
-
+function getUserDes($uid){
+	$sql="select description from ai_others where uid='".$uid."'";
+	$res=M('')->query($sql);
+	if($res){
+		return $res[0]['description'];
+	}
+}
 //获取用户姓名
-function getUserName($uid,$lang='zh') {
+function getUserName($uid,$lang='zh',$length=null) {
 	global $ts;
 	if ($uid == $ts['user']['uid'] || $uid == $ts['user']['uname'])
+	{
+		if($length){$ts['user']['uname']=msubstr($ts['user']['uname'], 0, $length);}
 		return $ts['user']['uname'];
-
+	}
 	static $_MapName = array();
 	if(!isset($_MapName[$uid])){
 		if(is_numeric($uid)){
@@ -1077,8 +1085,10 @@ function getUserName($uid,$lang='zh') {
 		}else{
 			$userinfo = D('User', 'home')->getUserByIdentifier($uid, 'uname');
 		}
+		if($length){$userinfo['uname']=msubstr($userinfo['uname'], 0, $length);}
 		$_MapName[$uid] = $userinfo['uname'];
 	}
+	
 	return htmlspecialchars($_MapName[$uid]);
 }
 

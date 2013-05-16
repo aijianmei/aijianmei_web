@@ -17,6 +17,29 @@ class TrainAction extends Action {
          $describe_2="怎样是最好的训练方法呢？如果你的目标是多增加肌肉，那就按照下面这些基本训练方法，踏上获得强壮体型之路。";
          $describe_3="没有什么比带一个健身伙伴更能增加健身的高强度啊！一个了解你训练方式而且陪在你身边的健身伙伴是不可或缺的。";
          $describe_4="老实说，我们当中的很多人并没有时间一个星期去几次健身房，然后每次花个45分钟来健身。我有一个好消息给你们……";
+		 //new banner add
+		 $bannerinfo=array(
+		'1'=>array(
+			'name'=>'身体的三种不同类型',
+			'img'=>'../Public/images/banner/training_1.jpg',
+			'url'=>'/index-Index-articleDetail-46.html'
+			),
+		'2'=>array(
+			'name'=>'锻炼肌肉的基本要素',
+			'img'=>'../Public/images/banner/index_2.jpg',
+			'url'=>"/index-Index-articleDetail-52.html"),
+		'3'=>array(
+			'name'=>'完美的健身伙伴',
+			'img'=>'../Public/images/banner/index_3.jpg',
+			'url'=>"/index-Index-articleDetail-50.html"),
+		'4'=>array(
+			'name'=>'8个开始体重训练的原因',
+			'img'=>'../Public/images/banner/index_4.jpg',
+			'url'=>"/index-Index-articleDetail-96.html"),
+		);
+		 $this->assign('_bannerInfo',$bannerinfo);
+		 //}}}end
+		 
          $this->assign('change_1',$change_1);
          $this->assign('change_2',$change_2);
          $this->assign('change_3',$change_3);
@@ -57,25 +80,81 @@ class TrainAction extends Action {
         $this->assign('articles', $articles);
         $this->assign('categories', $parent);
         //$this->display();
-        
+		
+		if($_GET['pg']>0){
+			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
+			$pglimit=intval($_GET['pg']);
+		}else{
+			$pg=1;
+		}
+		
+		
         //assign hotArticles
-        $order = 'reader_count';
+		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+		$countsql = "select count(*) as cnums from ai_article a ,($orderTableSql) t where a.id=t.aid";
+		$countInfo=$this->getDataCache(md5($countsql));
+		if(!$countInfo){
+			$countInfo = M('')->query($countsql);
+			$this->setDataCache(md5($countsql),$countInfo);
+		}
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=2&pg=');
+		$pagerArray = $pagerData['html'];
+		
+		$order = 'reader_count';
 		//$hotArticles = D('Article')->getTrainArticles($order);
         $hotArticles = D('Article')->getTrainArticlesList($order,'',($pg-1)*$nums,$nums);
         //print_r( $hotArticles);
+		$this->assign('hotArticlespage', $pagerArray);
         $this->assign('hotArticles', $hotArticles);
         
+		
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=1&pg=');
+		$pagerArray = $pagerData['html'];
         //assign lastArticles		
         $order = 'create_time';
 		//$lastArticles = D('Article')->getTrainArticles($order);
         $lastArticles = D('Article')->getTrainArticlesList($order,'',($pg-1)*$nums,$nums);
+		$this->assign('lastArticlespage', $pagerArray);
         $this->assign('lastArticles', $lastArticles);
-
+		
+		
+		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+		$countsql = "select count(*) as cnums from ai_video v,($orderTableSql) t where v.category_id=t.aid";
+		$countInfo=$this->getDataCache(md5($countsql));
+		if(!$countInfo){
+			$countInfo = M('')->query($countsql);
+			$this->setDataCache(md5($countsql),$countInfo);
+		}
+		
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=3&pg=');
+		$pagerArray = $pagerData['html'];
+		
+		$order = 'create_time';
+		//$lastArticles = D('Article')->getTrainArticles($order);
+        $lastVideoList = D('Article')->getTrainVideoList($order,'',($pg-1)*$nums,$nums);
+		$this->assign('lastVideoListpage', $pagerArray);
+        $this->assign('lastVideoList', $lastVideoList);
+		//print_r($lastVideoList);
+		//print_r($lastVideoList);
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=4&pg=');
+		$pagerArray = $pagerData['html'];
+		$order = 'click';
+		//$lastArticles = D('Article')->getTrainArticles($order);
+        $hotVideoList = D('Article')->getTrainVideoList($order,'',($pg-1)*$nums,$nums);
+		$this->assign('hotVideoListpage', $pagerArray);
+        $this->assign('hotVideoList', $hotVideoList);
+		
+		
+		
+		//print_r($lastArticles);
         $this->show_banner();//显示banner
         $this->assign('headertitle', '锻炼');
 		//header current add by kon at 20130415
 		$this->assign('_current', 'train');
         //$this->display();
+		$keywordInfo=unserialize(include_once("PublicCache/keywordInfo.php"));
+		$this->assign('_CommentList',unserialize(include_once("PublicCache/CommentListCache.php")));
+		$this->assign('_KeyWordList',$keywordInfo['train']);
 		$this->display('train_index');
     }
     public function newindex()
@@ -123,167 +202,176 @@ class TrainAction extends Action {
     }    
     public function articleList()
     {
-        $id = intval($_GET['id']);
-        $ordercon= $_GET['ordercon']?$_GET['ordercon']:'id';
-        $timecon = $_GET['timecon']?$_GET['timecon']:'';
-        $this->assign('cssFile', 'video');
+		$id = intval($_GET['id']);
+		$pg=$_GET['pg']?$_GET['pg']:1;
+		$nums=5;
         $this->assign('cssFile', 'training');
-        $cate = M('article_category')->where(array('channel'=>'2', 'type'=>'1'))->findAll();
-        
+        $map['channel'] = '2';
+        /*$cate = M('article_category')->where($map)->findAll();
+        foreach($cate as $c)
+            if($c['parent'] == NULL) $parent[$c['id']] = $c;
         foreach($cate as $c) {
-            if($c['parent']==NULL) $realCate[$c['id']] = $c;
-            else $realCate[$c['parent']]['children'][] = $c;
+            if($c['parent'] != NULL) $parent[$c['parent']]['children'][] = $c;
             $cate_id[] = $c['id'];
         }
         
-        //get hotArticles
-        $order = 'reader_count';
-        $hotArticles = D('Article')->getTrainArticles($order, $id);
-        foreach($hotArticles as $key => $value){
-            $hotArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
+        $articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
+        foreach ($articles as $key => $value) {
+            $articles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
         }
-        $this->assign('hotArticles', $hotArticles);
-        //get lastArticles		
-        $order = 'create_time';
-        $hotArticles = D('Article')->getTrainArticles($order, $id);
-        foreach($hotArticles as $key => $value){
-            $hotArticles[$key]['recomnums']=D('Article')->getCountRecommentsById($value['id']);
-        }
-        $this->assign('lastArticles', $hotArticles);
-        $this->assign('categories', $realCate);
-        $map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
-        
-        $sqlcount="select aid as id from ai_article_category_group where category_id=$id union select id from ai_article where category_id=$id";
-        $countArr = M('')->query($sqlcount);
-        $count = count($countArr);
-        $pager = api('Pager');
-        $pager->setCounts($count);
-        //$pager->styleInit($style);
-        $pager->setList(7);
-        $pager->makePage();
-        $from = ($pager->pg-1) * $pager->countlist;
-        //print_r($map);
-        $categoryStr=is_array($map['category_id'])? $map['category_id'][1]:$map['category_id'];
-        if($ordercon!='recomnums'){
-            if($timecon){
-                $dataArr=getDateInfo($timecon);
-                $timeStr="and create_time >='".$dataArr['start']."' and create_time <='".$dataArr['end']."'";
-            }
-            $comtmpsql="select * from ai_article where category_id in ($categoryStr)  $timeStr order by $ordercon desc limit $from,$pager->countlist ";
-            $articles=M('')->query($comtmpsql);
-        }
-        else{
-            //$map['category_id']=array('in', '29,30,31');
-            $comtmpsql="SELECT a. * , COUNT( b.id ) AS cnums FROM ai_article a LEFT JOIN ai_comments b ON a.id = b.parent_id
-        WHERE a.category_id IN ($categoryStr) GROUP BY b.parent_id UNION SELECT * , 0 AS cnums FROM ai_article a WHERE category_id IN ($categoryStr) AND id NOT IN (SELECT parent_id FROM ai_comments)";
-            $timeStr=null;
-            if($timecon){
-                $dataArr=getDateInfo($timecon);
-                $timeStr="where  t.create_time >='".$dataArr['start']."' and t.create_time <='".$dataArr['end']."'";
-            }
-            $comtmpsql="select * from ($comtmpsql) t $timeStr order by t.cnums desc limit $from,$pager->countlist ";
-            $articles=M('')->query($comtmpsql);
-        }
-        //print_r($articles);
-
-        //M('')->query($articlesSql);
-        $pageArray = (array)$pager;
-        $articlesSQl="select * from ai_article where id in ($sqlcount) or category_id=$id group by id order by create_time limit $from,$pager->countlist";
-        $articles = M('')->query($articlesSQl);
-        //$articles = M('article')->where($map)->limit("$from,$pager->countlist")->findAll();
-        $this->assign('pager', $pageArray);
         $this->assign('articles', $articles);
+        $this->assign('categories', $parent);
+        //$this->display();*/
+		
+		if($_GET['pg']>0){
+			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
+			$pglimit=intval($_GET['pg']);
+		}else{
+			$pg=1;
+		}
+		
+		$order = 'reader_count';
+        //assign hotArticles
+		$orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND a.category_id in ($id)";
+        $countsql = "select count(*) as cnums  from ai_article a where id in ($orderTableSql) or category_id=$id  order by ".$order." desc";
+		
+		//$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+		//$countsql = "select count(*) as cnums from ai_article a ,($orderTableSql) t where a.id=t.aid";
+		$countInfo=$this->getDataCache(md5($countsql));
+		if(!$countInfo){
+			$countInfo = M('')->query($countsql);
+			$this->setDataCache(md5($countsql),$countInfo);
+		}
+		///index.php?app=index&mod=Train&act=articleList&id=$id
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Train&act=articleList&id=$id&ctype=2&pg=");
+		$pagerArray = $pagerData['html'];
+		
+		$order = 'reader_count';
+		//$hotArticles = D('Article')->getTrainArticles($order);
+        $hotArticles = D('Article')->getTrainArticlesList($order,$id,($pg-1)*$nums,$nums);
+        //print_r( $hotArticles);
+		$this->assign('hotArticlespage', $pagerArray);
+        $this->assign('hotArticles', $hotArticles);
+        
+		
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Train&act=articleList&id=$id&ctype=1&pg=");
+		$pagerArray = $pagerData['html'];
+        //assign lastArticles		
+        $order = 'create_time';
+		//$lastArticles = D('Article')->getTrainArticles($order);
+        $lastArticles = D('Article')->getTrainArticlesList($order,$id,($pg-1)*$nums,$nums);
+		$this->assign('lastArticlespage', $pagerArray);
+        $this->assign('lastArticles', $lastArticles);
+		
+		
+		/*$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+		$countsql = "select count(*) as cnums from ai_video v,($orderTableSql) t where v.category_id=t.aid";
+		$countInfo=$this->getDataCache(md5($countsql));
+		if(!$countInfo){
+			$countInfo = M('')->query($countsql);
+			$this->setDataCache(md5($countsql),$countInfo);
+		}
+		
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=3&pg=');
+		$pagerArray = $pagerData['html'];
+		
+		$order = 'create_time';
+		//$lastArticles = D('Article')->getTrainArticles($order);
+        $lastVideoList = D('Article')->getTrainVideoList($order,'',($pg-1)*$nums,$nums);
+		$this->assign('lastVideoListpage', $pagerArray);
+        $this->assign('lastVideoList', $lastVideoList);
+		//print_r($lastVideoList);
+		//print_r($lastVideoList);
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=4&pg=');
+		$pagerArray = $pagerData['html'];
+		$order = 'click';
+		//$lastArticles = D('Article')->getTrainArticles($order);
+        $hotVideoList = D('Article')->getTrainVideoList($order,'',($pg-1)*$nums,$nums);
+		$this->assign('hotVideoListpage', $pagerArray);
+        $this->assign('hotVideoList', $hotVideoList);*/
+		
+		
+		
+		//print_r($lastArticles);
         $this->show_banner();//显示banner
-        foreach($realCate as $k =>$v){
-            foreach($v['children'] as $k1=>$v1){
-                if($v1['id']==$id)
-                {
-                    
-                    $this->assign('headertitle', $v1['name']);
-                }
-            }
-        }
+        $this->assign('headertitle', '锻炼');
+		//header current add by kon at 20130415
 		$this->assign('_current', 'train');
-        $this->display('list');
+        //$this->display();
+		$keywordInfo=unserialize(include_once("PublicCache/keywordInfo.php"));
+		$this->assign('_CommentList',unserialize(include_once("PublicCache/CommentListCache.php")));
+		$this->assign('_KeyWordList',$keywordInfo['train']);
+        $this->display('train_list');
     }
     
     public function videoList()
     {
-        $id = intval($_GET['id']);
-        $this->assign('cssFile', 'video');
+      		$id = intval($_GET['id']);
+		$pg=$_GET['pg']?$_GET['pg']:1;
+		$nums=5;
         $this->assign('cssFile', 'training');
-        $cate = M('article_category')->where(array('channel'=>'2', 'type'=>'1'))->findAll();
+        $map['channel'] = '2';
+        $cate = M('article_category')->where($map)->findAll();
+        foreach($cate as $c)
+            if($c['parent'] == NULL) $parent[$c['id']] = $c;
         foreach($cate as $c) {
-            if($c['parent']==NULL) $realCate[$c['id']] = $c;
-            else $realCate[$c['parent']]['children'][] = $c;
+            if($c['parent'] != NULL) $parent[$c['parent']]['children'][] = $c;
             $cate_id[] = $c['id'];
         }
-        $this->assign('categories', $realCate);
-        $map['category_id'] = $id ? $id : array('in', implode(',', $cate_id));
-        $articles = M('article')->where($map)->findAll();
+        
+        $articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
+        foreach ($articles as $key => $value) {
+            $articles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
+        }
         $this->assign('articles', $articles);
-        
-        //get hotArticles
-        $order = 'click';
-        $hotArticles = D('Article')->getTrainArticles($order);
-        foreach($hotArticles as $key => $value){
-            $hotArticles[$key]['recommons']=D('Article')->getVideoCountRecommentsById($value['id']);
-        }
-        $this->assign('hotArticles', $hotArticles);
-        //get lastArticles		
-        $order = 'create_time';
-        $lastArticles = D('Article')->getTrainArticles($order);
-        foreach($lastArticles as $key => $value){
-            $lastArticles[$key]['recommons']=D('Article')->getVideoCountRecommentsById($value['id']);
-        }
-        $this->assign('lastArticles', lastArticles);
-        //最热视频
-        $hot_video = D('Article')->getTrainVideo('click', $id);
-        foreach($hot_video as $k=>$v) {
-            $hotvideos[$k] = $v;
-            $data = json_decode($this->getVideoData($v['link']));
-            $hotvideos[$k]['logo'] = $data->data[0]->logo;
-            $hotvideos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);            
-        }
-        //print_r($videos);
-        $this->assign('hot_video', $hotvideos);
-        
-        //最新视频
-        $new_video = D('Article')->getTrainVideo('create_time', $id);
-        foreach($new_video as $k=>$v) {
-            $newvideos[$k] = $v;
-            $data = json_decode($this->getVideoData($v['link']));
-            $newvideos[$k]['logo'] = $data->data[0]->logo;
-            $newvideos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);            
-        }
-        $this->assign('new_video', $newvideos);
-        
-        // all video
-        
-        $pagenums=8;
-        $page = (int) $_GET['pg']?(int) $_GET['pg']:0; 
-        //$videos = D('Article')->getTrainVideo('id', $id);
-        $sql = "select * from ai_video where category_id=".$id." order by id desc";
-        $videosCountArr = M('')->query($sql);
-        $counnums=count($videosCountArr);
-        $pager = api('Pager');
-        $pager->setCounts($counnums);
-        $pager->setList($pagenums);
-        $pager->makePage();
-        $from = ($pager->pg -1) * $pager->countlist;		
-        $pagerArray = (array)$pager;
-        $this->assign('pager', $pagerArray);
-        $videos = M('')->query("select * from ai_video where category_id=".$id." order by id desc limit $from,$pager->countlist");
-        foreach($videos as $k=>$v) {
-            $videos[$k] = $v;
-            $data = json_decode($this->getVideoData($v['link']));
-            $videos[$k]['logo'] = $data->data[0]->logo;
-            $videos[$k]['recommons']=D('Article')->getVideoCountRecommentsById($v['id']);            
-        }
-        $this->assign('videos', $videos);
+        $this->assign('categories', $parent);
+        //$this->display();
+		
+		if($_GET['pg']>0){
+			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
+			$pglimit=intval($_GET['pg']);
+		}else{
+			$pg=1;
+		}
+		
+		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+		$countsql = "select count(*) as cnums from ai_article a ,($orderTableSql) t where a.id=t.aid";
+		$countInfo=$this->getDataCache(md5($countsql));
+		if(!$countInfo){
+			$countInfo = M('')->query($countsql);
+			$this->setDataCache(md5($countsql),$countInfo);
+		}
+		
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Train&act=videoList&id=$id&ctype=3&pg=");
+		$pagerArray = $pagerData['html'];
+		print_r($pagerArray);
+		$order = 'create_time';
+		//$lastArticles = D('Article')->getTrainArticles($order);
+        $lastVideoList = D('Article')->getTrainVideoList($order,'',($pg-1)*$nums,$nums);
+		$this->assign('lastVideoListpage', $pagerArray);
+        $this->assign('lastVideoList', $lastVideoList);
+		//print_r($lastVideoList);
+		//print_r($lastVideoList);
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Train&act=videoList&id=$id&ctype=4&pg=");
+		$pagerArray = $pagerData['html'];
+		$order = 'click';
+		//$lastArticles = D('Article')->getTrainArticles($order);
+        $hotVideoList = D('Article')->getTrainVideoList($order,'',($pg-1)*$nums,$nums);
+		$this->assign('hotVideoListpage', $pagerArray);
+        $this->assign('hotVideoList', $hotVideoList);
+		
+		
+		
+		//print_r($lastArticles);
         $this->show_banner();//显示banner
+        $this->assign('headertitle', '锻炼');
+		//header current add by kon at 20130415
 		$this->assign('_current', 'train');
-        $this->display('vlist');
+        //$this->display();
+		$keywordInfo=unserialize(include_once("PublicCache/keywordInfo.php"));
+		$this->assign('_CommentList',unserialize(include_once("PublicCache/CommentListCache.php")));
+		$this->assign('_KeyWordList',$keywordInfo['train']);
+        $this->display('train_vlist');
     }
     
     public function videoDetail()
@@ -360,5 +448,72 @@ class TrainAction extends Action {
         $json = file_get_contents($url);
         return $json;
     }
+	function pageHtml($count,$nums,$pg=null,$url=null)
+{
+		$pager=null;
+		$listnum=ceil($count/$nums);
+		if($pg==1||!$pg){
+			$pre='<a>上一页</a>';
+		}else
+		{
+			$pre='<a href="'.$url.($pg-1).'">上一页</a>';
+		}
+		if($pg==$listnum){
+			$next='<a>下一页</a>';
+		}else
+		{
+			$next='<a href="'.$url.($pg+1).'">下一页</a>';
+		}
+		for($i=1;$i<=$listnum;$i++){
+			if($i==$pg){
+				$cuCss='class="pg_current_page"';
+			}else{
+				$cuCss='';
+			}
+			if(!$pg){
+				if($i==1){
+					$cuCss='class="pg_current_page"';
+				}
+			}
+			$pageArr[$i]='<a '.$cuCss.' href="'.$url.$i.'">'.$i.'</a>';
+		}
+		if($listnum>10){
+			if($pg>5&&($listnum-$pg)>5){
+				$snum=$pg-5;
+				$enum=$pg+5;
+			}
+			if($pg<5&&($listnum-$pg)>5){
+				$snum=1;
+				$enum=10;
+			}
+			if($pg>5&&($listnum-$pg)<5){
+				$snum=$pg-5-(5-($listnum-$pg))+1;
+				$enum=$listnum;
+			}
+			if($pg==5){
+				$snum=1;
+				$enum=10;
+			}
+			foreach($pageArr as $k=>$v)
+			{
+				if($k<$snum||$k>$enum){
+					unset($pageArr[$k]);
+				}else{
+					$pagehtml.=$v;
+				}
+			}
+		}else{
+
+			foreach($pageArr as $k =>$v)
+			{
+				$pagehtml.=$v;
+			}
+		}
+		
+		$html['backstr']=$pre;
+		$html['nextstr']=$next;
+		$html['thestr']=$pagehtml;
+		return array('html'=>$html);
+}
 }
 ?>

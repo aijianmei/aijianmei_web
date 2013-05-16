@@ -12,7 +12,9 @@ $_actAllowArr=array(
 'senLike'=>'data',
 'indexmore'=>'pagenum',
 'backEditVideoUrl'=>'data',
-'recordlike'=>'data',);
+'recordlike'=>'data',
+'ajaxInMore'=>'data',
+'ajaxTrainMore'=>'data');
 /*ajax */
  if(!empty($_REQUEST['act'])){
      foreach($_REQUEST as $key => $value){
@@ -25,8 +27,6 @@ $_actAllowArr=array(
         $_GET[$key]=MooAddslashes($value);
     }
 }
-
-
 
 //addcslashes 
 function MooAddslashes($value) {
@@ -41,6 +41,222 @@ if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
     }
     exit;
 }
+
+function ajaxInMore($data){
+	ob_end_clean();
+	$nums=5;
+	$type=intval($_POST['type']);
+	$page=intval($_POST['pg']);
+	$mtype=intval($_POST['mtype'])?intval($_POST['mtype']):2;
+	$lid=intval($_POST['lid'])?intval($_POST['lid']):0;
+	$froms=$page+$page-1;
+	if($type==1||$type==2){
+		$order=($type==1)?'create_time':'reader_count';
+		//$sql = "select a.* from ai_article a group by a.id order by a.".$order." desc limit ".$froms*$nums.",$nums";
+		if($lid>0){$cateStr='AND a.category_id in ('.$lid.')';}else{$cateStr='';}
+		$orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id $cateStr";
+		$sql = "select a.* from ai_article a where id in ($orderTableSql) or category_id=$id group by a.id  order by ".$order." desc limit ".$froms*$nums.",$nums";
+		$result=null;
+		$result=getDataCache(md5($sql));
+		
+		if(!$result){
+			$result=C_mysqlQuery($sql);
+			while($row=mysql_fetch_assoc($result)){
+				$resultTmp[]=$row;
+			}
+			$result=null;
+			$result=$resultTmp;
+			foreach ($result as $key => $value) {
+				$result[$key]['CommNumber']=getCountRecommentsById($value['id'],$type);
+			}
+			setDataCache(md5($sql),$result);
+		}
+		foreach($result as $k =>$value){
+		$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="index-Index-articleDetail-'.$value['id'].'.html"><img alt="'.$value['title'].'" style="width:215px;height:145px;" src="../public/images/article/'.$value['img'].'"></a>
+								<div class="show_share" style="margin-left:40px;">
+									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-'.$value['id'].'.html" pic="http://www.aijianmei.com/public/images/article/'.$value['img'].'" title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+								</div>
+							</div>
+							<div class="cont_side_2">
+								<h3 class="cont_title"><a href="index-Index-articleDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
+								<span class="cont_tip">
+								<span class="cont_comefrom">爱健美团队</span>发表于
+								<span class="cont_pb_time">'.date("Y-m-d",$value['create_time']).'</span></span>
+								<p>'.$value['brief'].'</p>
+								<a class="cont_read_more" href="index-Index-articleDetail-'.$value['id'].'.html">阅读全文></a>
+								<div class="cont_share">
+									<span class="cont_click">点击数:<span>'.$value['reader_count'].'</span></span>
+                                    <span class="cont_rec">评论数:<span>'.$value['CommNumber'].'</span></span>
+								</div>
+							</div>
+						</div>';
+		}
+		echo $returnHtml;
+		exit;
+	}
+	if($type==3||$type==4){
+		$order=($type==1)?'create_time':'reader_count';
+		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+		$sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by click desc limit ".$froms*$nums.",$nums";
+		$result=null;
+		$result=getDataCache(md5($sql));
+		if(!$result){
+			$result=C_mysqlQuery($sql);
+			while($row=mysql_fetch_assoc($result)){
+				$resultTmp[]=$row;
+			}
+			$result=$resultTmp;
+			//print_r($result);
+			foreach($result as $k=>$v) {
+				
+				$result[$k] = $v;
+				$data = json_decode(getVideoData($v['link']));
+				$result[$k]['logo'] = $data->data[0]->logo;
+				$result[$k]['recommons']=getVideoCountRecommentsById($v['id']);            
+			}
+			//print_r($result);
+			setDataCache(md5($sql),$result);
+		}
+		//print_r($result);
+		$returnHtml=null;
+		foreach($result as $k =>$value){
+			$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="/index-Train-videoDetail-'.$value['id'].'.html">
+			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"></a><div class="show_share" style="margin-left:40px;">
+			<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="'.$value['htmlurl'].'?>" pic="'.$value['logo'].'"  title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30">
+			</wb:share-button></div></div><div class="cont_side_2"><h3 class="cont_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
+								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span>'.date("Y-m-d",$value['create_time']).'</span></span>
+								<p>'.$value['brief'].'</p>
+								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html"></a>
+								<div class="cont_share">
+									<span class="cont_vd_click">点击数:<span>'.$value['click'].'</span></span>
+                                    <span class="cont_rec">评论数:<span>'.$value['recommons'].'</span></span>
+								</div>
+							</div>
+						</div>';
+		}
+		echo $returnHtml;
+		exit;
+	}
+	exit;
+}
+
+function ajaxTrainMore($data){
+	ob_end_clean();
+	$nums=5;
+	$type=intval($_POST['type']);
+	$page=intval($_POST['pg']);
+	$mtype=intval($_POST['mtype'])?intval($_POST['mtype']):2;
+	$froms=$page+$page-1;
+	if($type==1||$type==2){
+		$order=($type==1)?'create_time':'reader_count';
+		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =$mtype";
+		$sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by a.".$order." desc limit ".$froms*$nums.",$nums";
+		$result=null;
+		$result=getDataCache(md5($sql));
+		if(!$result){
+			$result=C_mysqlQuery($sql);
+			while($row=mysql_fetch_assoc($result)){
+				$resultTmp[]=$row;
+			}
+			$result=null;
+			$result=$resultTmp;
+			foreach ($result as $key => $value) {
+				$result[$key]['CommNumber']=getCountRecommentsById($value['id'],$type);
+			}
+			setDataCache(md5($sql),$result);
+		}
+		foreach($result as $k =>$value){
+		$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="index-Index-articleDetail-'.$value['id'].'.html"><img alt="'.$value['title'].'" style="width:215px;height:145px;" src="../public/images/article/'.$value['img'].'"></a>
+								<div class="show_share" style="margin-left:40px;">
+									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-'.$value['id'].'.html" pic="http://www.aijianmei.com/public/images/article/'.$value['img'].'" title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+								</div>
+							</div>
+							<div class="cont_side_2">
+								<h3 class="cont_title"><a href="index-Index-articleDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
+								<span class="cont_tip">
+								<span class="cont_comefrom">爱健美团队</span>发表于
+								<span class="cont_pb_time">'.date("Y-m-d",$value['create_time']).'</span></span>
+								<p>'.$value['brief'].'</p>
+								<a class="cont_read_more" href="index-Index-articleDetail-'.$value['id'].'.html">阅读全文></a>
+								<div class="cont_share">
+									<span class="cont_click">点击数:<span>'.$value['reader_count'].'</span></span>
+                                    <span class="cont_rec">评论数:<span>'.$value['CommNumber'].'</span></span>
+								</div>
+							</div>
+						</div>';
+		}
+		echo $returnHtml;
+		exit;
+	}
+	if($type==3||$type==4){
+		$order=($type==1)?'create_time':'reader_count';
+		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =$mtype";
+		$sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by click desc limit ".$froms*$nums.",$nums";
+		$result=null;
+		$result=getDataCache(md5($sql));
+		if(!$result){
+			$result=C_mysqlQuery($sql);
+			while($row=mysql_fetch_assoc($result)){
+				$resultTmp[]=$row;
+			}
+			$result=$resultTmp;
+			//print_r($result);
+			foreach($result as $k=>$v) {
+				
+				$result[$k] = $v;
+				$data = json_decode(getVideoData($v['link']));
+				$result[$k]['logo'] = $data->data[0]->logo;
+				$result[$k]['recommons']=getVideoCountRecommentsById($v['id']);            
+			}
+			//print_r($result);
+			setDataCache(md5($sql),$result);
+		}
+		//print_r($result);
+		$returnHtml=null;
+		foreach($result as $k =>$value){
+			$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="/index-Train-videoDetail-'.$value['id'].'.html">
+			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"></a><div class="show_share" style="margin-left:40px;">
+			<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="'.$value['htmlurl'].'?>" pic="'.$value['logo'].'"  title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30">
+			</wb:share-button></div></div><div class="cont_side_2"><h3 class="cont_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
+								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span>'.date("Y-m-d",$value['create_time']).'</span></span>
+								<p>'.$value['brief'].'</p>
+								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html"></a>
+								<div class="cont_share">
+									<span class="cont_vd_click">点击数:<span>'.$value['click'].'</span></span>
+                                    <span class="cont_rec">评论数:<span>'.$value['recommons'].'</span></span>
+								</div>
+							</div>
+						</div>';
+		}
+		echo $returnHtml;
+		exit;
+	}
+	exit;
+}
+
+
+
+
+
+function getCountRecommentsById($id,$type)
+{
+	$sql=null;$numsArr=null;
+	$sql="select count(*) as nums from ai_comments where parent_id=".$id." and parent_type=".$type."";
+	//$numsArr= M('')->query($sql);
+	$numsArr=C_mysqlQuery($sql);
+	$numsArr=mysql_fetch_assoc($numsArr);
+	return !empty($numsArr['nums'])?$numsArr['nums']:0;
+}
+function getVideoCountRecommentsById($id)
+{
+	$sql=null;$numsArr=null;
+	$sql="select count(*) as nums from ai_video_comments where pid=".$id;
+	$numsArr=C_mysqlQuery($sql);
+	$numsArr=mysql_fetch_assoc($numsArr);
+	return !empty($numsArr['nums'])?$numsArr['nums']:0;
+    }
+
+
 
 /*
  *function name recordlike()
@@ -200,7 +416,8 @@ function addVideoCommont($data=null){
     mysql_select_db('aijianmei', $db);
     mysql_query("set names 'utf8'");
     //$sql="INSERT INTO ai_video_comments (uid,connect,pid,create_time) VALUES ('".$uid."','".trim($connect)."','".$pid."',".time().")";
-    $sql="INSERT INTO ai_video_comments (uid,content,pid,create_time) VALUES ('".$uid."','".$content."','".$pid."',".time().")";
+    //$sql="INSERT INTO ai_video_comments (uid,content,pid,create_time) VALUES ('".$uid."','".$content."','".$pid."',".time().")";
+	$sql="INSERT INTO ai_comments (uid,content,parent_id,parent_type,create_time,source,topParent) VALUES ('".$uid."','".$content."','".$pid."',4,".time().",'','0')";
     $res = mysql_query($sql, $db);
     $data=null;
     if($res) {
@@ -339,5 +556,46 @@ function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=true)
 		if($suffix) return $slice."...";
 		return $slice;
 }
-
+function getDataCache($key)
+	{
+		$cachefile="DBCache/$key.php";
+		if(is_file($cachefile))
+		{
+			$data=null;
+			$data=unserialize(include($cachefile));
+			return $data;
+		}
+		return '';
+	}
+function setDataCache($key,$data)
+	{
+		file_put_contents("DBCache/$key.php","<?php\n\r return '".serialize($data)."';");
+	}
+function getArticlesListType($order,$id=null,$limit,$nums,$type=null)
+    {
+        if($id) {
+            $orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND a.category_id in ($id)";
+            $sql = "select a.* from ai_article a where id in ($orderTableSql) or category_id=$id group by a.id  order by ".$order." desc limit ".$limit.",".$nums."";
+        }else {
+            $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =$type";
+            $sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by a.".$order." desc limit ".$limit.",".$nums."";
+        }
+        $cacheid=md5($sql);
+		$result=null;
+		$result=getDataCache($cacheid);
+		if(!$result){
+			$result=C_mysqlQuery($sql);
+			while($row=mysql_fetch_assoc($result)){
+				$result_tmp[]=$row;
+			}
+			$result=$result_tmp;
+			//$result = M('')->query($sql);
+			foreach ($result as $key => $value) {
+				$result[$key]['CommNumber']=getCountRecommentsById($value['id']);
+			}
+			setDataCache($cacheid,$result);
+		}
+        return $result;
+    }	
+	
 ?>
