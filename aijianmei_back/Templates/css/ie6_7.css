@@ -1,0 +1,46 @@
+/*public.css-------------beginning*/
+.after_ms .person_ms,.after_ms .more,.after_ms .special_buy{
+	_position: relative;
+	_float: left;
+	_padding: 2px 10px 2px 2px;
+	_height: 24px;
+	_line-height: 24px;
+	_border-right: 1px solid #c4c4c3;
+	_text-align: center;
+}
+.more .account{
+	_right:-2px;
+}
+.nav li{
+	_display: inline;
+}
+.nav li a:hover{
+	_color:white;
+}
+.tr_nav{
+	padding-bottom: 1px;
+}
+.nav .nav_child{
+	_z-index:1;
+}
+/*public.css-------------ending*/
+/*index.css-----------------------*/
+.day_classifly li{
+	position: relative;
+	overflow: hidden;
+}
+.content_1{
+	_margin-right:7px;
+} 
+/*training hack begin-------------------*/
+
+
+.lb_search #text{
+	height:17px\9;
+	_height:16px;
+}
+.bn_choice_point span{
+	margin:0 5px;
+}
+
+/*training hack end-------------------*/

@@ -1,0 +1,116 @@
+<include file="Templates/header.html" />
+        <!-- outside wrapper -->
+        <!-- outside wrapper -->
+        <div class="wrapper clearfix">
+        	<div class="content_1">
+        		<div class="tr_content">
+					<ul class="tr_nav clearfix">
+						<li class="tr_current">精彩评论<span></span></li>
+						<!--<li>你来精评<span></span></li>-->
+					</ul>
+					<div class="cont_tab_ct cont_tab_block">
+					<php>foreach($comlists as $key => $value){</php>
+						<div class="gd_classifly clearfix">
+							<div class="gd_pic"><img src="{$value['userimg']}" alt="{$value['userLname']}"></div>
+							<div class="gd_ms">
+								<div class="gd_ps clearfix">
+									<div class="gd_right">
+										<a><i class="gd_icon"></i><span>5人喜欢</span></a>
+									</div>
+									<a class="gd_name">{$value['userLname']}</a>
+								</div>
+								<p>{$value['content']}</p>
+								<h6>
+									<span><php>echo _returnNdate($value['create_time']);</php></span>
+									发表于
+									《<a href="{$value.tourl}">{$value['comtotitle']}</a>》
+								</h6>
+							</div>
+						</div>
+						<php>}</php>
+						<!--<div class="gd_classifly clearfix">
+							<div class="gd_pic"><img src="Templates/images/training/gd_pic.jpg"></div>
+							<div class="gd_ms">
+								<div class="gd_ps clearfix">
+									<div class="gd_right">
+										<a><i class="gd_icon"></i><span>5人喜欢</span></a>
+									</div>
+									<a class="gd_name">奥赛</a>
+								</div>
+								<p>kon有一块，这是本公司最惊人的内幕。</p>
+								<h6>
+									<span>9个小时前</span>
+									发表于
+									《<a>健身的吃肥肉法</a>》
+								</h6>
+							</div>
+						</div>
+						<div class="gd_classifly clearfix">
+							<div class="gd_pic"><img src="Templates/images/training/gd_pic.jpg"></div>
+							<div class="gd_ms">
+								<div class="gd_ps clearfix">
+									<div class="gd_right">
+										<a><i class="gd_icon"></i><span>5人喜欢</span></a>
+									</div>
+									<a class="gd_name">奥赛</a>
+								</div>
+								<p>kon有一块肌肉，这是本公司最惊人的内幕。kon有一块肌肉，这是本公司最惊人的块肌肉，这是本公司最惊人的内幕。</p>
+								<h6>
+									<span>9个小时前</span>
+									发表于
+									《<a>健身的吃肥肉法</a>》
+								</h6>
+							</div>
+						</div>-->
+						<div class="pg_page clearfix" id="ajaxpage_3">
+						<span class="pg_concrete_choice">
+								{$comlistspage['backstr']}
+								{$comlistspage['thestr']}
+								{$comlistspage['nextstr']}
+						</span>
+						</div>
+					</div>
+					<div class="cont_tab_ct">
+						<div class="write_classifly clearfix">
+							<div class="write_pic"><img src="Templates/images/training/gd_pic.jpg"></div>
+							<div class="write_ms">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+        	</div>
+        	<div class="content_2">
+        		<include file="Templates/userinfo.html" />
+	        	<div class="same_module">
+	        		<h3 class="sm_title">锻炼关键词搜索</h3>
+					<include file="Templates/keywordList.html" />
+	        	</div>
+	        	<!--<div class="same_module">
+	        		<h3 class="sm_title">你来猜评</h3>
+	        		<div class="identifying">
+	        			<img src="images/training/01.jpg" />
+	        		</div>
+	        		<div class="identifying">
+	        			<img src="images/training/01.jpg" />
+	        		</div>
+	        		<div class="identifying">
+	        			<img src="images/training/01.jpg" />
+	        		</div>
+	        		<a class="recomment_read_more">更多精彩评论></a>
+	        	</div>-->
+
+        	</div>
+        </div>
+        <script type="text/javascript" src="Templates/js/public.js"></script>
+        <script type="text/javascript">
+        	var init = function(){
+			    var newdom = new getdom,
+			    	identifying = newdom.getElementsByClass('identifying')[0];
+			   aijianmei.identifying(identifying);
+			   aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
+			}
+			init();	
+        </script>
+	</body>
+</html>

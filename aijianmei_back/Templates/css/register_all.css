@@ -1,0 +1,327 @@
+/******register Reset **********/
+body,ul,p{
+	margin:0;
+	padding:0;
+}
+p,input{
+	margin:0;
+}
+input{
+	outline: 0;
+}
+body{
+	font-size: 14px;
+	font-family: Microsoft YaHei,"微软雅黑",Lucida,Verdana,Hiragino Sans GB,STHeiti,WenQuanYi Micro Hei,SimSun,sans-serif;
+	background:url(../images/bg.jpg) no-repeat;
+}
+ul{
+	list-style:none;
+}
+a:hover{
+	color:#47AEE8;
+}
+/******* clearfix ********/
+.clearfix:after{
+	content:"";
+	clear:both;
+	display:block;
+	height:0;
+	visibility:hidden;
+	line-height:0;
+}
+.clearfix{
+	zoom:1;
+}
+
+/*pubilc module----------*/
+	/*rg_top*/
+		.rg_top{
+			background: url(../images/register/rg_bg.jpg) repeat-x;
+		}
+		.rg_top_lay{
+			background: url(../images/register/rg_log.png) no-repeat;
+		}
+		.rg_logo{
+			padding:50px 0;
+			text-align: center;
+			
+		}
+		.rg_logo img{
+
+		}
+		.rg_tip{
+			width: 360px;
+			height: 43px;
+			line-height: 43px;
+			padding-bottom: 106px;
+			margin: 0 auto;
+			font-size: 20px;
+			text-align: center;
+			background: url(../images/register/02.png) no-repeat;
+			color: white;
+		}
+	/*rg_bottom*/
+		.rg_bottom{
+
+		}
+		.rg_step{
+			text-align: center;
+		}
+		.rg_step span{
+			display:inline-block;
+			width:138px;
+			height:138px;
+			margin:-82px 25px 0 25px;;
+		}
+		.rg_step_1{
+			background: url(../images/register/011.png) no-repeat;
+		}
+		.rg_step_2{
+			background: url(../images/register/031.png) no-repeat;			
+		}
+		.rg_step_3{
+			background: url(../images/register/051.png) no-repeat;			
+		}
+
+
+
+/*register_1 beginning------------------*/
+
+	/*rg_form*/
+		.rg_form{
+			width: 400px;
+			margin: 0 auto;
+		}
+		.rg_ms{
+			position: relative;
+			margin-top: 30px;
+			background:url(../images/register/03.png) no-repeat;
+		}
+		.rg_ms label{
+			position: absolute;
+			top: 14px;
+			left: 10px;
+			font-size: 14px;
+			color: #e9e9e9;
+		}
+		#text,#password,#password_again{
+			width: 95%;
+			margin: 15px 10px;
+			font-size: 14px;
+			color: #e9e9e9;
+			outline: 0;
+			border: 0;
+			background: 0;
+		}
+		.rg_text_tip,.rg_password_tip,.rg_passwd_again{
+			position: absolute;
+			display: block;
+			width: 250px;
+			left: 410px;
+			top: 14px;
+			color: #21ace3;
+		}
+	/*pre_ne_choice*/
+		.pre_ne_choice{
+			margin:45px 0;
+		}
+		.pre_ne_choice a{
+			width:150px;
+			height:50px;
+		}
+		.pre_ne_choice .pre_choice{
+			float:left;
+			background: url(../images/register/04.png) no-repeat;
+		}
+		.pre_choice:hover{
+			background: url(../images/register/05.png) no-repeat;
+		}
+		.pre_ne_choice .next_choice{
+			float:right;
+			background: url(../images/register/06.png) no-repeat;
+		}
+		.next_choice:hover{
+			background: url(../images/register/07.png) no-repeat;	
+		}
+/*register_1 end------------------*/
+
+
+/*register_2 beginning------------------*/
+	/*rg_bottom*/
+		.rg_step_rg3_1{
+			background: url(../images/register/021.png) no-repeat;
+		}
+		.rg_step_rg3_3{
+			background: url(../images/register/061.png) no-repeat;			
+		}
+	/*rg_picture----*/
+		.rg_picture{
+			width: 525px;
+			margin: 25px auto 0 auto;
+		}
+		.rg_picture_part{
+			
+		}
+	/*rg_choice_area*/
+		.rg_choice_area{
+			float: left;
+			margin-right: 75px;
+		}
+		.rg_choice_area img{
+			width: 300px;
+			height: 300px;
+		}
+	/*rg_show_pic*/
+		.rg_show_pic{
+			float: right;
+			width: 150px;
+		}
+		.rg_pic_keep{
+			display: inline-block;
+			height: 40px;
+			width: 100%;
+			margin-top: 25px;
+			line-height: 40px;
+			text-align: center;
+			font-size: 20px;
+			color: white;
+			background: #20ABE2;
+		}
+		.rg_pic_keep:hover{
+			color: white;
+		}
+		.rg_upload{
+			display: inline-block;
+			height: 35px;
+			width: 100%;
+			margin-top: 25px;
+			background: url(../images/register/bdsc01.png) no-repeat;
+		}
+		.rg_upload:hover{
+			background: url(../images/register/bdsc02.png) no-repeat;
+		}
+	/*pre_ne_choice*/
+		.pre_ne_rg2{
+			margin:40px auto;
+			width: 400px;
+		}
+/*register_2 end------------------*/
+	
+
+/*register_3 beginning------------------*/
+	/*rg_bottom*/
+		.rg_step_rg3_1{
+			background: url(../images/register/021.png) no-repeat;
+		}
+		.rg_step_rg3_2{
+			background: url(../images/register/041.png) no-repeat;			
+		}
+	/*re_choice*/
+	.rg_choice{
+		width:775px;
+		margin: 25px auto 0 auto;
+	}
+	/*rg_choice_way	*/
+		.rg_choice_way{
+
+		}
+		.rg_choice_lay,.rg_choice_lay_sp{
+			position: relative;
+			float:left;
+			padding: 5px;
+		}
+		.rg_choice_part{
+			position: relative;
+			display: block;
+			width: 145px;
+			height: 117px;
+			overflow: hidden;
+		}
+		.rg_add_part{
+			background: #21ace3;
+		}
+		.rg_choice_part img{
+			width: 145px;
+			height:117px;
+		}
+		.rg_way_content{
+			position: absolute;
+			left: 0;
+			width: 100%;
+			height: 31px;
+			top: 86px;
+			z-index: 10;
+		}
+		.rg_choice_lay_sp .rg_add_part{
+			width: 125px;
+			text-align: center;
+			line-height: 117px;
+			padding: 0 10px;
+			font-size: 20px;
+			word-break: break-all;
+			color: white
+		}
+		.rg_way_content p{
+			font-size: 16px;
+			margin: 5px 0;
+			line-height: 22px;
+			text-align: center;
+			color: white;
+		}
+		.rg_way_content input{
+			display: none;
+			width: 121px;
+			margin: 5px 7px;
+			padding: 3px 5px;
+			border: 0;
+			border-radius: 4px;
+		}
+		.rg_img_bg{
+			position: absolute;
+			left:0;
+			top: 0;
+			display: block;
+			width: 100%;
+			height:100%;
+			background: white;
+			opacity: 0.5;
+			filter:alpha(opacity=50);
+			z-index: 3;
+		}
+		.rg_way_bg{
+			position: absolute;
+			left:0;
+			top: 86px;
+			display: block;
+			width: 100%;
+			height:31px;
+			background: black;
+			opacity: 0.5;
+			filter:alpha(opacity=50);
+			z-index: 5;
+		}
+	/*pre_ne_choice*/
+		.pre_ne_rg3{
+			margin:40px auto;
+			width: 400px;
+		}
+		/*.pre_ne_choice a{
+			width:150px;
+			height:50px;
+		}
+		.pre_ne_choice .pre_choice{
+			float:left;
+			background: url(../images/register/04.png) no-repeat;
+		}
+		.pre_choice:hover{
+			background: url(../images/register/05.png) no-repeat;
+		}
+		.pre_ne_choice .next_choice{
+			float:right
+			;
+			background: url(../images/register/06.png) no-repeat;
+		}
+		.next_choice:hover{
+			background: url(../images/register/07.png) no-repeat;	
+		}*/
+/*register_3 end------------------*/

@@ -1,0 +1,63 @@
+<include file="../Public/_header" />
+<div class="so_main">
+  <div class="page_tit">首页导航管理</div>
+  <div class="list" id="adddiv">
+  <form action="" method="post">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th class="line_l">名称</th>
+    <th class="line_l">英文名称</th>
+    <th class="line_l">链接</th>
+	<th class="line_l">排序</th>
+    <th class="line_l" style="width:80px;">类型</th>
+    <th class="line_l" style="width:50px;">状态</th>
+	<th class="line_l">权值</th>
+    <th class="line_l">上一级</th>
+  </tr>
+  <tr>
+  <input type="hidden" name="id" value="{$menu.id}">
+  <td><input type="text" name="menu_name" value="{$menu.menu_name}"></td>
+  <td><input type="text" name="menu_name_en" value="{$menu.menu_name_en}"></td>
+  <td><input type="text" name="link" value="{$menu.link}"></td>
+  <td><input type="text" name="sort" value="{$menu.sort}"></td>
+  <td><select name="type">
+		<option value="0" <?php if($menu['type']==0){echo 'selected="selected"';}?>>顶部导航</option>
+		<option value="1" <?php if($menu['type']==1){echo 'selected="selected"';}?>>底部导航</option>
+		<option value="2" <?php if($menu['type']==2){echo 'selected="selected"';}?>>独立页面</option>
+		</select></td>
+  <td><select name="status">
+  <option value="1" <?php if($menu['status']==1){echo 'selected="selected"';}?>>开启</option>
+  <option value="0" <?php if($menu['status']==0){echo 'selected="selected"';}?>>关闭</option>
+  </select></td>
+  <td><input type="text" name="selected_flag" style="clear:both;" value="{$menu.selected_flag}"></td>
+  <td><select name="partent_id">
+  <option value="0">顶级页面</option>
+    <volist id="fvo" name="FmenusInfo">
+	<option value="{$fvo.id}" <?php if($menu['partent_id']>0&&$menu['partent_id']==$fvo['id']){echo 'selected="selected"';}?>>{$fvo.menu_name}</option>
+	 </volist>
+  </select></td>
+  </tr>
+	<tr>
+	<td colspan="7"><input type="submit" name="" value="保存"></td>
+	</tr>
+  </table>
+  <input type="hidden" name="nav_action" value="edit">
+  </form>
+  </div>
+<script>
+function changeshowval(obj){
+	$(obj).val('')
+}
+function saveeditbox(kid){
+	//alert(1);
+	//$(obj).attr('nid');
+	//$("#span_"+kid).attr("onclick","showeditbox(this);");
+	//alert($(obj).parent().attr('nid','001'));
+	//$(obj).parent().attr('onclick',"showeditbox(this)");
+	$("#span_"+kid).html($("#input_".kid).val());
+	
+}
+</script>
+
+
+<include file="../Public/_footer" />

@@ -1,0 +1,318 @@
+<include file="Templates/header.html" />
+        <!-- outside wrapper -->
+        <div class="wrapper clearfix">
+        	<div class="content_1">
+				<include file="Templates/banner.html" />
+
+				<div class="day_pl">
+					<ul class="day_classifly clearfix">
+						<li>
+							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=1">
+								<img src="Templates/images/mr_02.jpg" alt="初阶-基础锻炼"/>
+								<i class="bg_opc"></i>
+								<div class="ms_hidden_part">
+									<h3>初阶-基础锻炼</h3>
+									<p>上班族与学生</p>
+									<p>给想拥有健康的你！</p>
+								</div>
+								<i class="bg_opc_2"></i>
+							</a>
+						</li>
+						<li>
+							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=2">
+								<img src="Templates/images/mr_03.jpg" alt="进阶-运动员锻炼"/>
+								<i class="bg_opc"></i>
+								<div class="ms_hidden_part">
+									<h3>进阶-运动员锻炼</h3>
+									<p>专业运动员与运动爱好者</p>
+									<p>强化你的运动细胞！</p>
+								</div>
+								<i class="bg_opc_2"></i>
+							</a>
+						</li>
+						<li>
+							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=3">
+								<img src="Templates/images/mr_03.jpg" alt="高阶-肌肉锻炼"/>
+								<i class="bg_opc"></i>
+								<div class="ms_hidden_part">
+									<h3>高阶-肌肉锻炼</h3>
+									<p>更强更多肌肉,</p>
+									<p>塑造属于你的完美肌肉曲线！</p>
+								</div>
+								<i class="bg_opc_2"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="tr_content">
+					<ul class="tr_nav clearfix">
+						<li class="tr_current">最新文章</li>
+						<li>最热文章</li>
+						<li>最新视频</li>
+						<li>最热视频</li>
+					</ul>
+					<div class="cont_tab_ct cont_tab_block">
+						<php>foreach($newArticles as $key=>$value){</php>
+						<div class="cont_module clearfix">
+							<div class="cont_side_1">
+								<a href="index-Index-articleDetail-{$value['id']}.html"><img alt="{$value['title']}" style="width:215px;height:145px;" src="../public/images/article/{$value['img']}"></a>
+								<div class="show_share" style="margin-left:40px;">
+									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-{$value['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php echo $value['img'];?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+								</div>
+							</div>
+							<div class="cont_side_2">
+								<h3 class="cont_title"><a href="index-Index-articleDetail-{$value['id']}.html">{$value['title']}</a></h3>
+								<span class="cont_tip">
+								<span class="cont_comefrom">爱健美团队</span>发表于
+								<span class="cont_pb_time"><?php echo date("Y-m-d",$value['create_time']);?></span></span>
+								<p>{$value['brief']}</p>
+								<a class="cont_read_more" href="index-Index-articleDetail-{$value['id']}.html">阅读全文></a>
+								<div class="cont_share">
+									<span class="cont_click">点击数:<span>{$value['reader_count']}</span></span>
+                                    <span class="cont_rec">评论数:<span>{$value['CommNumber']}</span></span>
+								</div>
+							</div>
+						</div>
+						<php>}</php>
+						<div id="ajax_ct1"></div>
+						<div class="pg_page clearfix" id="ajaxpage_0" style="display:none;">
+						<span class="pg_concrete_choice">
+								{$newArticlespage['backstr']}
+								{$newArticlespage['thestr']}
+								{$newArticlespage['nextstr']}
+						</span>
+						</div>
+					</div>
+					<div class="cont_tab_ct">
+						<php>foreach($hotArticles as $key=>$value){</php>
+						<div class="cont_module clearfix">
+							<div class="cont_side_1">
+								<a href="index-Index-articleDetail-{$value['id']}.html"><img alt="{$value['title']}" style="width:215px;height:145px;" src="../public/images/article/{$value['img']}"></a>
+								<div class="show_share" style="margin-left:40px;">
+									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-{$value['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php echo $value['img'];?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+								</div>
+							</div>
+							<div class="cont_side_2">
+								<h3 class="cont_title"><a href="index-Index-articleDetail-{$value['id']}.html">{$value['title']}</a></h3>
+								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span><?php echo date("Y-m-d",$value['create_time']);?></span></span>
+								<p>{$value['brief']}</p>
+								<a class="cont_read_more" href="index-Index-articleDetail-{$value['id']}.html">阅读全文></a>
+								<div class="cont_share">
+									<span class="cont_click">点击数:<span>{$value['reader_count']}</span></span>
+                                    <span class="cont_rec">评论数:<span>{$value['CommNumber']}</span></span>
+								</div>
+							</div>
+						</div>
+						<php>}</php>
+						<div id="ajax_ct2"></div>
+						<div class="pg_page clearfix" id="ajaxpage_1" style="display:none;">
+						<span class="pg_concrete_choice">
+								{$hotArticlespage['backstr']}
+								{$hotArticlespage['thestr']}
+								{$hotArticlespage['nextstr']}
+						</span>
+						</div>
+					</div>
+					<div class="cont_tab_ct">
+						<php>foreach($newvideos as $key=>$value){</php>
+						<div class="cont_module clearfix">
+							<div class="cont_side_1">
+								<a href="/index-Train-videoDetail-{$value['id']}.html"><img style="width:215px;height:145px;" alt="{$value['title']}" src="{$value['logo']}"></a>
+								<div class="show_share" style="margin-left:40px;">
+								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $value['htmlurl'];?>" pic="<?php echo $value['logo'];?>"  title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button></div>
+							</div>
+							<div class="cont_side_2">
+								<h3 class="cont_title"><a href="/index-Train-videoDetail-{$value['id']}.html">{$value['title']}</a></h3>
+								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span><?php echo date("Y-m-d",$value['create_time']);?></span></span>
+								<p>{$value['brief']}</p>
+								<a class="cont_vd_see" href="/index-Train-videoDetail-{$value['id']}.html"></a>
+								<div class="cont_share">
+									<span class="cont_vd_click">点击数:<span><?php echo $value['click'];?></span></span>
+                                    <span class="cont_rec">评论数:<span><?php echo $value['recommons'];?></span></span>
+								</div>
+							</div>
+						</div>
+						<php>}</php>
+						<div id="ajax_ct3"></div>
+						<div class="pg_page clearfix" id="ajaxpage_2" style="display:none;">
+						<span class="pg_concrete_choice">
+								{$newvideosPage['backstr']}
+								{$newvideosPage['thestr']}
+								{$newvideosPage['nextstr']}
+						</span>
+						</div>
+					</div>
+					<div class="cont_tab_ct">
+						<php>foreach($hotvideos as $key=>$value){</php>
+						<div class="cont_module clearfix">
+							<div class="cont_side_1">
+								<a href="/index-Train-videoDetail-{$value['id']}.html"><img style="width:215px;height:145px;" alt="{$value['title']}" src="{$value['logo']}"></a>
+								<div class="show_share" style="margin-left:40px;"><wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $value['htmlurl'];?>" pic="<?php echo $value['logo'];?>"  title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button></div>
+							</div>
+							<div class="cont_side_2">
+								<h3 class="cont_title"><a href="/index-Train-videoDetail-{$value['id']}.html">{$value['title']}</a></h3>
+								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span><?php echo date("Y-m-d",$value['create_time']);?></span></span>
+								<p>{$value['brief']}</p>
+								<a class="cont_vd_see" href="/index-Train-videoDetail-{$value['id']}.html"></a>
+								<div class="cont_share">
+									<span class="cont_vd_click">点击数:<span><?php echo $value['click'];?></span></span>
+                                    <span class="cont_rec">评论数:<span><?php echo $value['recommons'];?></span></span>
+								</div>
+							</div>
+						</div>
+						<php>}</php>
+						<div id="ajax_ct4"></div>
+						<div class="pg_page clearfix" id="ajaxpage_3" style="display:none;">
+						<span class="pg_concrete_choice">
+								{$hotvideosPage['backstr']}
+								{$hotvideosPage['thestr']}
+								{$hotvideosPage['nextstr']}
+						</span>
+						</div>
+					</div>
+				</div>
+        	</div>
+        	<div class="content_2">
+				<include file="Templates/userinfo.html" />
+	        	<div class="same_ad">
+	        		<a href="/shop"><img src="Templates/images/ad1.jpg" /></a>
+	        	</div>
+        	</div>
+        </div>
+<include file="Templates/footer.html" />
+<include file="Templates/loginpart.html" />
+		<input type="hidden" id="scroinfo" h="" sh="" top="">
+        <script type="text/javascript" src="Templates/js/jquery.js"></script>
+        <script type="text/javascript">
+			$(function() {
+
+				//大图自动切换，左右切换，选择切换
+				var sWidth = $(".banner").width(); //获取焦点图的宽度（显示面积）
+				var len = $(".banner .bn_contain_pic li").length; //获取焦点图个数
+				var index = 0;
+				var picTimer;
+				//添加按钮,上一页、下一页两个按钮
+				// var btn = "<div class='btn'>";
+				// 	for(var i=0; i < len; i++) {
+				// 		btn += "<span></span>";
+				// 	}
+				// 	btn += "</div><div class='preNext pre'></div><div class='preNext next'></div>";
+				// $(".banner").append(btn);
+				//为小按钮添加鼠标点击事件，以显示相应的内容
+				$(".banner .bn_choice_point span").css("background","url(Templates/images/dian.png)").click(function() {
+					index = $(".banner .bn_choice_point span").index(this);
+					showPics(index);
+				}).eq(0).trigger("click");
+				//上一页、下一页按钮透明度处理
+				var bn_wd = $('.banner').width();
+				$('.banner img').mousemove(function(){
+					if(event.offsetX >= bn_wd/2){
+						$(".banner .bn_prex").stop(true,false).animate({"opacity":"0"},100);
+						$(".banner .bn_next").stop(true,false).animate({"opacity":"0.7"},100);
+					}
+					if(event.offsetX < bn_wd/2){
+						$(".banner .bn_next").stop(true,false).animate({"opacity":"0"},100);
+						$(".banner .bn_prex").stop(true,false).animate({"opacity":"0.7"},100);
+					}
+					// console.log(event.offsetX,event.offsetY)
+				});
+				$('.banner').mouseout(function(){
+					$(".banner .bn_click").stop(true,false).animate({"opacity":"0"},300);
+				})
+				$(".banner .bn_click").mouseover(function() {
+					$(this).stop(true,false).animate({"opacity":"0.7"},300);
+				});
+				//上一页按钮
+				$(".banner .bn_prex").click(function() {
+					index -= 1;
+					if(index == -1) {index = len - 1;}
+					showPics(index);
+				});
+				//下一页按钮
+				$(".banner .bn_next").click(function() {
+					index += 1;
+					if(index == len) {index = 0;}
+					showPics(index);
+				});
+				//左右滚动，外围ul元素的宽度
+				$(".banner .bn_contain_pic").css("width",sWidth * (len));
+				//鼠标滑上焦点图时停止自动播放，滑出时开始自动播放
+				$(".banner").hover(function() {
+					clearInterval(picTimer);
+				},function() {
+					picTimer = setInterval(function() {
+						showPics(index);
+						index++;
+						if(index == len) {index = 0;}
+					},5000);
+				}).trigger("mouseleave");
+				//显示图片函数，根据接收的index值显示相应的内容
+				function showPics(index) { //普通切换
+					var nowLeft = -index*sWidth; //根据index值计算ul元素的left值
+					$(".banner .bn_contain_pic").stop(true,false).animate({"left":nowLeft},300); //通过animate()调整ul元素滚动到计算出的position
+					$(".banner .bn_choice_point span").css("background","url(Templates/images/dian.png)").eq(index).css("background","url(Templates/images/landian.png)"); //为当前的按钮切换到选中的效果
+				}
+			});
+		</script>
+        <script type="text/javascript" src="Templates/js/public.js"></script>
+        <script type="text/javascript">
+        	var init = function(){
+			    var newdom = new getdom,
+			    	day_part = newdom.getElementsByClass('day_part'),
+                	ms_hidden_part = newdom.getElementsByClass('ms_hidden_part'),
+                	bg_opc = newdom.getElementsByClass('bg_opc'),
+                	bg_opc_2 = newdom.getElementsByClass('bg_opc_2'),
+                	len = day_part.length;
+                	for(var i = 0;i < len;i++){
+                		day_part[i].index = i;
+                		day_part[i].onmouseover = function(){
+                			aijianmei.chang_top(bg_opc_2[this.index],1,100,10);
+                			aijianmei.chang_top(bg_opc[this.index],1,100,10);
+                			aijianmei.chang_top(ms_hidden_part[this.index],1,100,10);
+                		}	
+	                	day_part[i].onmouseout = function(){
+	                		aijianmei.chang_top(bg_opc_2[this.index],0,100,10)
+	                		aijianmei.chang_top(bg_opc[this.index],0,100,10)
+	                		aijianmei.chang_top(ms_hidden_part[this.index],0,100,10)
+	                	}	
+	                }	 
+					aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
+					aijianmei.scrolltop('scroll_login',1000,['login','scroll_back']);
+					aijianmei.hover('cont_vd_link','cont_vd_bg');
+			}
+			init();	
+			//右侧滚动条下拿add by kontem 20130512 start
+			var is_ajax_scroll=true;//执行权值 全局预定义
+			$(window).scroll(function() {  
+			//获取网页的完整高庿fix)  
+				totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());   
+				if (($(document).height() <= (totalheight+100))&&is_ajax_scroll===true) {  // 说明滚动条已达底郿
+					is_ajax_scroll=false;
+
+					$("#ajaxpage_"+ajaxListKey).show();
+					//alert(ajaxListKey);//调用对应ajax
+					var returnHtml=null;
+					returnHtml=ajaxInMore(ajaxListKey);
+					
+				}
+			}); 
+			function ajaxInMore(type)
+			{
+				var type=ajaxListKey?(ajaxListKey*1+1):(type*1+1);
+				var page=<?php if($_GET['pg']){echo $_GET['pg'];}else{echo 1;}?>;
+				$.post("ajax.php?act=ajaxInMore",{type:type,data:'',pg:page},function(res){
+    			if(res) {
+					$("#ajax_ct"+type).append(res);
+    			}else {
+    				//ui.error('删除失败');
+    			}
+				});
+			}
+			$(function() {
+				var ctypekey=<?php if($_GET['ctype']){echo $_GET['ctype'];}else{echo 1;}?>;
+				$(".tr_nav").children('li').eq((ctypekey*1-1)).trigger('click');
+			});
+		//}}}end			
+        </script>
+	</body>
+</html>

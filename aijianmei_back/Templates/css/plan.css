@@ -1,0 +1,259 @@
+﻿/*************Plan**************/
+.vission{
+	padding: 0 10px 10px;
+	border-bottom: 1px dashed #DDD;
+	color: #333;
+	font-size: 20px;	
+}
+
+.plan_sort .sort_tit{
+	height: 35px;
+	line-height: 35px;
+	background: #21ADE3;
+	margin: 20px 0;
+	padding-left: 10px;
+	color: white;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+	.plan_item{
+		position:relative;
+		margin-bottom:15px;
+	}
+		.plan_item .plan_item_tit{
+			color: #AAC2DE;
+			font-size: 20px;
+			margin-bottom: 5px;
+		}
+		.plan_item .itemImg{
+			border-radius:10px;
+			box-shadow: 1px 2px 5px rgba(0,0,0,0.4);
+		}
+		.plan_cover{
+			position: absolute;
+			bottom: 3px;
+			height: 87px;
+			line-height: 87px;
+			width: 100%;
+			background: black;
+			opacity: 0.5;
+			filter:Alpha(opacity=50);
+			color: white;
+			font-size: 30px;
+			font-weight: bold;
+			text-align: center;
+			border-radius: 0 0 10px 10px;
+			right:0;
+			z-index:1000;
+		}
+/**********计划二级页面样式*************/
+
+	.plan_choice .choice_item{
+		float:left;
+		margin-bottom:15px;
+	}
+	.plan_choice .mid{
+		margin:0 15px 15px;
+		_margin-left:7px;
+	}
+	.plan_choice .choice_sort{
+		width:310px;
+		height:170px;
+	}
+	
+/************天天锻炼页面样式*************/
+.daily_choice .article_item{
+	float:left;
+	margin-bottom:12px;
+}
+.daily_choice .a_item2{
+	margin:0 12px 12px;
+	_margin-left:6px;
+}
+.daily_choice .a_item3{
+	margin-right:12px;
+}
+	.daily_choice .article_img{
+		width:230px;
+		height:130px;
+	}
+/**视频列表区域**/
+.video_list{
+	padding: 20px 0;
+}
+.row_line{
+	width: 950px;
+	background: url(../images/rowl.jpg) repeat-x;
+	height: 2px;
+	border:0;
+}
+.col_line{
+	height:600px;
+	width:2px;
+	float: left;
+	margin-left: 20px;
+	background: url(../images/col.jpg) repeat-y;
+	border:0;
+}
+/**左边视频**/
+.video_main{
+	float:left;
+	width:570px;
+	position:relative;
+}	
+	.video_date{
+		position: absolute;
+		top: 20px;
+		color: #23ACDE;		
+	}
+	.view{
+		position: absolute;
+		right: 0px;
+		top:20px;
+		height: 23px;
+		width: 36px;
+		background:url(../images/more.png) no-repeat;
+	}
+	.video_tit{
+		color: #23ACDE;
+		text-align: center;
+		margin-top: 15px;
+	}
+	.video_cont{
+		margin: 30px 0 30px 10px;
+		text-indent: 2em;
+		color: #666;
+	}	
+	.video{
+		position:relative;
+		text-align: center;
+	}
+/**右边评论**/
+	.video_comment{
+		float:right;
+		width:350px;
+		position:relative;
+		margin-top: 15px;
+	}
+	.share_area{
+		height: 100px;
+		padding: 10px 0;
+	}
+		.share{
+			float:left;
+		}
+		.tecent_share,  .sina_share{
+			width: 100px;
+			height: 23px;
+			background: gray;
+			float: left;
+			text-align: center;
+			margin-right: 20px;
+		}
+		.sina_zan{
+			margin-top: 50px;
+		}
+		.like{
+			width: 70px;
+			height: 25px;
+			position: absolute;
+			right: 0;
+			top: 40px;
+			background:#00B7FE;
+		}
+		.comment_num{
+			background: #98DDF8;
+			height: 36px;
+			line-height: 36px;
+			color: white;
+			padding-left: 20px;
+			border-radius: 4px 4px 0 0;
+		}
+		.coms{
+			border: 1px solid #EAEAEA;
+			height: 250px;
+			overflow-y: auto;
+		}
+		.comments{
+			padding:10px;
+		}
+		.user_info{
+			float:left;
+		}
+			.com_face{
+				width:30px;
+				height:30px;
+				float: left;
+				padding-right: 10px;
+			}
+			.com_name{
+				vertical-align:top;
+			}
+		.com_cont{
+			padding-left: 40px;
+			line-height: 22px;
+		}
+		.com_all{
+			width: 93px;
+			height: 23px;
+			display: block;
+			background:url(../images/all.png) no-repeat;
+			float: right;
+			margin-top: 15px;
+		}
+		.make_com{
+			position:relative;
+		}
+		.make_com .login{
+			background:none;
+		}
+		.accout{
+			float: right;
+			padding-right: 20px;			
+		}
+		#user{
+			padding: 5px;
+			border: 1px solid #CCC;
+			word-wrap: break-word;
+			line-height: 18px;
+			overflow-y: auto;
+			overflow-x: hidden;
+			outline: none;
+			background: white;
+			width: 335px;
+			height: 90px;
+			resize: none;
+			margin: 5px 0;
+		}
+		.make_com label{
+			position: absolute;
+			left: 10px;
+			top: 25px;
+
+		}
+		.done{
+			float: right;
+			width: 80px;
+			height: 30px;
+			background:url(../images/send.png) no-repeat ;
+			cursor:pointer;
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

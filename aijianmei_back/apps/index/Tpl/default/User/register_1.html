@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:wb=“http://open.weibo.com/wb”>
+	<head>
+	<meta charset="utf-8"/>
+	<title>爱健美首页 - 推广健身文化，传播健康理念</title>
+	<meta name="keywords" content="爱健美，爱健美网，健身，健美，增肌、增重、减肥、瘦身、肌肉锻炼、健身营养、健身补充营养、健身运动、女性健身">
+	<meta name="description" content="爱健美网，你可以在这里制定合适的健身计划， 观看专业的健身锻炼视频，学习专业的健身方法，了解健身运动前后的饮食营养补充，以及认识喜欢健身、运动的朋友哦！">
+	<link rel="stylesheet" href="Templates/css/register_all.css">
+	<!--[if (IE 6)|(IE 7)]>
+	<link rel="stylesheet" href="css/ie6_7.css">
+	<![endif]-->
+	</head>
+	<body>
+		<div class="rg_top">
+			<div class="rg_top_lay">
+				<div class="rg_logo"><img src="Templates/images/register/rg_logo.png" /></div>
+				<p class="rg_tip">请留下邮箱方便下次登录</p>
+			</div>
+		</div>
+		<div class="rg_bottom">
+			<div class="rg_step"><span class="rg_step_1"></span><span class="rg_step_2"></span><span class="rg_step_3"></span></div>
+			<div class="rg_form">
+				<form id="regform" action="/index.php?app=index&mod=User&act=doregister" method="post">
+					<div class="rg_ms">
+						<label for="text">邮箱</label><input type="text" style="margin:2px 0px 2px 10px;font-size: 22px; height:48px;" class="rg_text" id="email" name="email" onblur="regCheckMail();"/>
+						<span class="rg_text_tip" id="rg_text_tip"></span>
+					</div>
+					<div class="rg_ms">
+						<label for="password">密码</label><input style="margin:2px 0px 2px 10px;font-size: 22px; height:52px;" type="password" class="rg_text" id="password" name="password" onblur="regCheckPassword();"/>
+						<span class="rg_text_tip" id="pwd_text_tip"></span>
+					</div>
+					<div class="rg_ms">
+						<label for="password_again">确认密码</label><input style="margin:2px 0px 2px 10px;font-size: 22px; height:52px;" type="password" class="rg_text" id="password_again" name="repassword" onblur="regCheckPassword();"/>
+						<span class="rg_text_tip" id="repwd_text_tip"></span>
+					</div>
+				</form>
+				<div class="pre_ne_choice clearfix">
+					<!--<a class="pre_choice"></a>-->
+					<!-- <a class="pre_choice"></a> -->
+					<a onclick="regformsub();" class="next_choice" style="margin-right:130px;"></a>
+					<input type="hidden" id="partemail" value="0">
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="Templates/js/public.js"></script>
+	<script type="text/javascript" src="Templates/js/jquery.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$("#email").val('');$("#password").val('');$("#password_again").val('');
+		$("#email").click(function() {
+			//alert($(this).parent().find('label').html());
+			//regCheckMail();
+			$(this).parent().find('label').html('');
+		});
+		$("#password").click(function() {
+			regCheckMail();
+			$(this).parent().find('label').html('');
+		});
+		$("#password_again").click(function() {
+			regCheckMail();
+			regCheckPassword();
+			$(this).parent().find('label').html('');
+		});
+	});
+	function regCheckMail(){
+		if($("#partemail").val()>0){return true;};
+		var email =$("#email").val();
+		var reyx= /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+		if(email==''){
+			$("#partemail").val(0);
+			$("#email").focus();
+			$("#rg_text_tip").html("请填写有效的邮箱地址");
+			return false;
+		}
+		if(reyx.test(email)){
+		$.post('ajax.php?act=check_email', {'email':email}, function(m) {
+			if(m==1) {
+				$("#partemail").val(0);
+				$("#email").focus();
+				$("#rg_text_tip").html("该邮箱已经注册！");
+				return false;
+			}else {
+				$("#partemail").val(1);
+				$("#rg_text_tip").html("该邮箱可注册");
+				//$("#saveform").submit();
+			}
+		});
+		}
+	}
+	function regCheckPassword(){
+		var pwd=$("#password").val();
+		var repwd=$("#password_again").val();
+		if(!isPasswd(pwd)){
+			//$("#password").focus();
+			$("#pwd_text_tip").html('只能输入6-20个字母、数字、下划线');
+			return false;
+		}else{
+			$("#pwd_text_tip").html('');
+		}
+		if(!isPasswd(repwd)){
+			//$("#password_again").focus();
+			$("#repwd_text_tip").html('只能输入6-20个字母、数字、下划线');
+			return false;
+		}else{
+			$("#repwd_text_tip").html('');
+		}
+		if(repwd!==pwd)
+		{
+			//$("#password_again").focus();
+			$("#repwd_text_tip").html('密码不一致');
+			return false;
+		}
+	
+	}
+	function isPasswd(s) 
+	{ 
+		var patrn=/^[0-9a-zA-Z]*$/g; 
+		if (!patrn.exec(s))
+		{
+			return false;
+		}else{
+			return true;
+		}
+	}
+	function regformsub(){
+		var pwd=$("#password").val();
+		var repwd=$("#password_again").val();
+		if($("#partemail").val()!=1){
+			$("#email").focus();
+			$("#rg_text_tip").html("请填写有效的邮箱地址");
+			return false;
+		}
+		if(isPasswd(repwd)&&isPasswd(pwd)&&repwd==pwd){
+			alert(1);
+			$("#regform").submit();
+			return true;
+		}
+		else{
+			$("#repwd_text_tip").html('密码不一致');
+			return false;
+		}
+	}
+	</script>
+</html>

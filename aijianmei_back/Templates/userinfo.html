@@ -1,0 +1,51 @@
+        		<div class="same_part">
+	        		<div class="pm clearfix">
+	        			<div class="pm_pic">
+						<php>if(!getMid()){</php><img src="Templates/images/login_pic.jpg"><php>}else{</php>
+						<img src="<php>echo getUserFace(getMid(),'s')</php>">
+						<php>}</php>
+						</div>
+	        			<div class="most_top">
+						<php>if(!getMid()) {</php>
+			                <ul class="top_ms clearfix">
+			                    <li><a class="login">登录 </a>|</li>
+			                    <li><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a></li>
+			                </ul>
+							<php>} else {</php>
+			                <ul class="after_ms">
+			                    <li class="person_ms">
+			                        <span title="<php>echo getUserName(getMid())</php>"><php>echo getUserName(getMid(),'zh',6)</php></span>
+			                    </li>
+			                    <li class="more"><a href="">帐号<span class="triangle"></span> </a>
+			                        <ul class="account">
+			                            <li><a href="/index.php?app=home&mod=Account&act=index">个人资料</a></li>
+			                            <li><a href="/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
+			                        </ul>
+			                    </li>
+			                    <li class="special_buy">
+			                        <a class="car_buy">购物车</a>
+			                    </li>
+			                </ul>
+							<php>}</php>
+            			</div>
+	        		</div>
+	        		<p class="pm_signature"><php>echo getUserDes(getMid());</php></p>
+	        		<form class="lb_search" >
+	        			<input type="text" id="searchwords"/>
+	        			<input type="button" id="button" onclick="gosearch();">
+	        		</form>
+					<script>
+					function gosearch()
+					{
+						var sw=document.getElementById('searchwords').value;
+						var htmlurl="http://www.aijianmei.com/search_"+sw+".html";
+						window.location.href=htmlurl;
+					}
+					</script>
+	        	</div>
+	        	<div class="same_part">
+	        		<div class="two_code clearfix">
+	        			<img src="Templates/images/weima.jpg" />
+	        			<span>扫描二维码,获取新咨询</span>
+	        		</div>
+	        	</div>

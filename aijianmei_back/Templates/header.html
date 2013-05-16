@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:wb=“http://open.weibo.com/wb”>
+	<head>
+	<meta charset="utf-8"/>
+	<meta name="baidu_union_verify" content="c43c00cab8564dcf9a25e3a5c666410b">
+	<meta property="qc:admins" content="142030514561121165516375" />
+	<title><?php if(!empty($headertitle)){echo $headertitle;}else{echo '爱健美首页 - 推广健身文化，传播健康理念';}?></title>
+	<meta name="keywords" content="爱健美，爱健美网，健身，健美，增肌、增重、减肥、瘦身、肌肉锻炼、健身营养、健身补充营养、健身运动、女性健身">
+	<meta name="description" content="爱健美网，你可以在这里制定合适的健身计划， 观看专业的健身锻炼视频，学习专业的健身方法，了解健身运动前后的饮食营养补充，以及认识喜欢健身、运动的朋友哦！">
+	<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21432667"></script>
+	<php>if($_act==1){</php>
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="http://www.aijianmei.com/index-Index-articleDetail-{$_GET[id]}.html" />
+	<meta property="og:title" content="{$article['title']}" />
+	<meta property="og:description" content="{$article['brief']}" />
+	<meta property="og:image" content="http://www.aijianmei.com/public/images/article/{$article['img']}" />
+	<php>}</php>
+	<php>if($metatype==1){</php>
+	<meta property="og:type" content="video" />
+	<meta property="og:url" content="http://www.aijianmei.com/index-Index-daily-{$_GET[id]}-{$_GET[type]}.html" />
+	<meta property="og:title" content="{$videos[0][title]}" />
+	<meta property="og:description" content="爱健美视频|{$videos[0][title]}" />
+	<meta property="og:image" content="{$videos[0][logo]}" />
+	<php>}</php>
+	<php>if($_TrainVType==1){</php>
+	<meta property="og:type" content="video" />
+	<meta property="og:url" content="http://www.aijianmei.com/index-Index-daily-{$_GET[id]}-{$_GET[type]}.html" />
+	<meta property="og:title" content="{$video[title]}" />
+	<meta property="og:description" content="{$videos[brief]}" />
+	<meta property="og:image" content="{$video[logo]}" />
+	<php>}</php>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454" type="text/javascript" charset="utf-8"></script>
+
+	<link rel="stylesheet" href="Templates/css/public.css">
+	<link rel="stylesheet" href="Templates/css/{$cssFile}.css">
+	<!--[if (IE 6)|(IE 7)]>
+	<link rel="stylesheet" href="css/ie6_7.css">
+	<![endif]-->
+	<!--[if IE 6]>
+        <script type="text/javascript" src="script/DD_belatedPNG.js">
+        </script><script language="javascript" type="text/javascript">
+       		DD_belatedPNG.fix(".pngFix,.pngFix:hover");
+        </script>
+	<![endif]-->
+	</head>
+<body>
+	<div class="head">
+		    <div class="header">
+		        <div class="h_bg">
+		            <a href="/index.php?app=index"><div class="logo_1">logo</div></a>
+		            <ul class="nav">
+					<php> foreach($_TopMenuInfo as $k =>$v){</php>
+		                <li class="nav_child <php>if($v['selected_flag']==$_current){</php>nav_current<php>}</php>">
+		                	<a class="nav_a" href="{$v[link]}"><php>if($v['selected_flag']=='index'){</php><span class="home"><php>}</php><php> if($v['selected_flag']=='shop'){</php><span class="store"><php> }</php>{$v[menu_name]}<php> if($v['selected_flag']=='index'||$v['selected_flag']=='shop'){</php></span><php> }</php></a>
+							<ul class="mn_drop">
+							<php>foreach($v['child'] as $k=>$v){</php>
+								<li><a href="{$v['link']}" <php>if($k==0){</php>class="mn_first"<php>}</php>>{$v['menu_name']}</a></li>
+						<php>}</php>
+						</ul>
+						</li>
+					<php> }</php>
+		            </ul>
+		        </div>
+		    </div>
+   		</div>

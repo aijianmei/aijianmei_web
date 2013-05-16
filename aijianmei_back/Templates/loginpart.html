@@ -1,0 +1,51 @@
+<div class="login_bg"></div>
+        <div class="login_table">
+        	<i class="lg_back">×</i>
+        	<h4>登录爱健美</h4>
+        	<div class="lg_border"><span></span></div>
+        	<div class="lg_part clearfix">
+        		<div class="lg_coop">
+        			<h3>使用合作网站帐号登录</h3>
+        			<ul class="lg_wrap_choice clearfix">
+        				<li><a class="lg_coop_1" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a></li>
+        				<li><a class="lg_coop_2" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100328471 &redirect_uri=www.aijianmei.com/qqlogin.php&scope="></a></li>
+        			</ul>
+        			<p>也可以选择马上注册</p>
+        			<div class="lg_aijianmei"><a></a></div>
+        		</div>
+        		<div class="lg_our">
+        			<div class="lg_our_lay">
+        				<p>使用注册邮箱登录</p>
+        				<form action="/index.php?app=home&mod=Public&act=doLogin" method="post">
+        					<div class="lg_input">
+        						<label for="lg_text">邮箱</label>
+        						<input type="text" class="lg_text" id="lg_text" name="email" />
+        					</div>
+        					<div class="lg_input">
+        						<label for="lg_password">密码</label>
+        						<input type="password" class="lg_text" id="lg_password" name="password" />
+        					</div>
+        					<div class="lg_sure">
+							<input class="lg_fix" type="submit" value="">
+        					<a class="lg_forget" href="/index.php?app=index&mod=User&act=setinfo">忘记密码?</a>
+	        				</div>
+        				</form>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+		<php>if(!getMid()){</php>
+		<!-- scroll_login begin -->
+        <div class="scroll_login">
+        	<div class="scroll_content">
+	        	<span class="scroll_tip">您还没有登录爱健美哦,这里可以登录</span>
+	        	<ul class="scroll_choice clearfix">
+	        		<li><a class="scroll_choice_1" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a></li>
+	        		<li><a class="scroll_choice_2" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100328471 &redirect_uri=www.aijianmei.com/qqlogin.php&scope="></a></li>
+	        		<li><a class="scroll_choice_3 login"></a></li>
+	        	</ul>
+        	</div>
+        	<i class="scroll_back">×</i>
+        </div>
+        <!-- scroll_login end -->
+		<php>}</php>

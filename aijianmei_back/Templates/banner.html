@@ -1,0 +1,18 @@
+    			<div class="banner">
+					<div class="lay_banner">
+						<ul class="bn_contain_pic">
+						<php>foreach ($_bannerInfo as $key => $value){</php>
+							<li><a href="{$value['url']}"><img src="{$value['img']}" alt="{$value['name']}"></a></li>
+							<php>}</php>
+						</ul>
+						<div class="bn_choice_way">
+							<span class="bn_prex bn_click"></span>
+							<span class="bn_next bn_click"></span>
+						</div>
+					</div>
+					<div class="bn_choice_point">
+					<php>foreach ($_bannerInfo as $key){</php>
+						<span></span>
+					<php>}</php>
+					</div>
+				</div>

@@ -1,0 +1,20 @@
+	        	<div class="same_module clearfix">
+	        		<h3 class="sm_title">精彩评论</h3>
+					<php>foreach($_CommentList as $key=>$value){</php>
+	        		<div class="recomment_good clearfix">
+	        			<a class="re_host"  href="/goodcomment.html"><img src="{$value.userimg}" style="height:45px;width:45px;" alt="{$value.userLname}"></a>
+	        			<div class="re_part">
+	        				<a class="re_name" title="{$value.userLname}" href="/goodcomment.html">{$value.userSname}</a>
+	        				<a class="re_content detail" data-original-title="{$value.comtotitle}" href="/goodcomment.html">{$value.content}<i class="re_angle"></i></a>
+	        			</div>
+	        		</div>
+					<php>}</php>
+	        		<!--<div class="recomment_good clearfix">
+	        			<a class="re_host"><img src="Templates/images/training/person_message.jpg"></a>
+	        			<div class="re_part">
+	        				<a class="re_name">outside</a>
+	        				<a class="re_content detail" data-original-title="提示内容提示内容提示内容提示内容提示内容提示内容提示ss">我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁,我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁<i class="re_angle"></i></a>
+	        			</div>
+	        		</div>-->
+	        		<a class="recomment_read_more" href="/goodcomment.html">更多精彩评论></a>
+	        	</div>

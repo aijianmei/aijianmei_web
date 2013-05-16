@@ -1,0 +1,66 @@
+<include file="Templates/header.html" />
+        <!-- outside wrapper -->
+        <div class="wrapper clearfix">
+        	<div class="content_1">
+				<div class="tr_content">
+					<p class="search_tip">根据您的关键词"{$keyword}"本站共有<span>{$cnums}</span>个相应资源</p>
+					<div class="cont_tab_block">
+						<php>foreach($searchInfo as $key =>$value){</php>
+						<div class="cont_module clearfix">
+							<div class="cont_side_1">
+								<a href="{$value.url}"><img src="{$value.img}" style="width:215px;height:145px;" alt="{$value.title}"></a>
+								<div class="show_share" style="margin-left:40px;">
+								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" 
+								url="{$value.shareurl}" 
+								pic="{$value.img}"  title="{$value.title}" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+								</div>
+							</div>
+							<div class="cont_side_2">
+								<h3 class="cont_title"><a href="{$value.url}">{$value.title}</a></h3>
+								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span class="cont_pb_time"><php>echo date('Y-m-d',$value['create_time']);</php></span></span>
+								<p>{$value.brief}</p>
+								<a class="cont_read_more" href="{$value.url}">阅读全文></a>
+								<div class="cont_share">
+									<span class="cont_click">点击数:<span>{$value.click}</span></span>
+                                    <span class="cont_rec">评论数:<span>{$value.commentCount}</span></span>
+								</div>
+							</div>
+						</div>
+						<php>}</php>
+
+						<div class="pg_page clearfix">
+							<span class="pg_concrete_choice">
+								{$searchpage['backstr']}
+								{$searchpage['thestr']}
+								{$searchpage['nextstr']}
+							</span>
+						</div>
+					</div>
+				</div>
+        	</div>
+        	<div class="content_2">
+        		<include file="Templates/userinfo.html" />
+	        	<div class="same_module">
+	        		<h3 class="sm_title">关键词搜索</h3>
+	        		<include file="Templates/keywordList.html" />
+	        	</div>
+	        	<include file="Templates/commentList.html" />
+        	</div>
+        </div>
+<include file="Templates/footer.html" />
+<include file="Templates/loginpart.html" />
+		<input type="hidden" id="scroinfo" h="" sh="" top="">
+		<div class="title_tip"><div class="title_content"></div><div class="angle"><span></span></div></div>
+        <script type="text/javascript" src="Templates/js/public.js"></script>
+        <script type="text/javascript">
+        	var init = function(){
+			    var newdom = new getdom,
+			    	identifying = newdom.getElementsByClass('identifying')[0];
+			   aijianmei.identifying(identifying);
+			   aijianmei.addtitle('detail');
+			   aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
+			}
+			init();	
+        </script>
+	</body>
+</html>

@@ -1,0 +1,171 @@
+<include file="../Public/_header" />
+
+<script type="text/javascript">
+function showmoreimg(){
+	$("#imgdiv").append('<tr><td>*图片标题<input type="text" name="img_title[]" value=""></td><td>图片链接<input type="text" name="img_url[]" value=""></td><td>图片排序<input type="text" name="img_sort[]" value=""></td><td><input type="file" name="imgsrc[]" value=""></td></tr>');
+}
+function subformadd(){
+	$("#advaddform").submit();
+}
+</script>
+<div class="so_main">
+  <div class="page_tit">首页导航管理</div>
+  <div class="list" id="adddiv" style="display:none;">
+  <form action="/index.php?app=admin&mod=Nav&act=adv&actimg=addinfo" method="post" id="advaddform" enctype="multipart/form-data">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="imgdiv">
+  <tr>
+    <th class="line_l" width="25%">名称</th>
+    <th class="line_l" width="25%">类型</th>
+    <th class="line_l" width="25%">状态</th>
+    <th class="line_l" width="25%">所属模块</th>
+  </tr>
+  <tr>
+  <td>*<input type="text" name="nav_name" value=""></td>
+  <td><select name="type"><option value="1">轮滚图片</option></select><a onclick="showmoreimg();">更多图片</a></td>
+  <td><select name="status"><option value="1">开启</option><option value="0">关闭</option></select></td>
+  <td><select name="menu_id">
+  <option value="0">请选择</option>
+    <volist id="fvo" name="FmenusInfo">
+	<option value="{$fvo.id}">{$fvo.menu_name}</option>
+	 </volist>
+  </select></td>
+  <tr>
+	<td>*图片标题<input type="text" name="img_title[]" value=""></td>
+	<td>图片链接<input type="text" name="img_url[]" value=""></td>
+	<td>图片排序<input type="text" name="img_sort[]" value="0"></td>
+	<td><input type="file" name="imgsrc[]" value=""></td>
+  </tr>
+
+	</form>
+  </table>
+    </tr>
+	<td colspan="4"><input type="button" onclick="subformadd();" name="" value="保存"><input type="button" name="" value="关闭窗口" onclick="showadddiv();"></td>
+	</tr>
+  </div>
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$html}</div>
+	<a href="javascript:void(0);" class="btn_a" onclick="showadddiv();"><span>新增</span></a>
+	<a href="javascript:void(0);" class="btn_a" onclick="deleteLog();"><span>删除选中记录</span></a>
+  </div>
+  <div class="list">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+      <th style="width:30px;">
+		<input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+    	<label for="checkbox"></label>
+	</th>
+    <th class="line_l" width="20%">名称</th>
+    <th class="line_l" width="20%">类型</th>
+	<th class="line_l" width="20%">图片数</th>
+    <th class="line_l" width="20%">状态</th>
+    <th class="line_l" width="20%">所属模块</th>
+	<th class="line_l" width="20%">操作</th>
+  </tr>
+  <volist id="vo" name="nav_listInfo">
+	    <tr>
+		<td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+  <td>{$vo.nav_name}</td>
+  <td><?php echo $_ImgType[$vo['type']];?></td>
+   <td>{$vo.imgcount}</td>
+  <td><?php echo $_MenusStu[$vo['status']];?></td>
+  
+  <td>{$vo.menu_name}</td>
+  <td><a href="/index.php?app=admin&mod=Nav&act=editadv&id={$vo.id}">编辑</a></td>
+	<tr>
+  </volist>
+  </table>
+  </div>
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$html}</div>
+	<a href="javascript:void(0);" class="btn_a" onclick="deleteLog();"><span>删除选中记录</span></a>
+  </div>
+<script>
+function showadddiv()
+{
+	var check_show=$("#adddiv").attr("style");
+	if(check_show=='display:none;'){
+		$("#adddiv").removeAttr("style");
+	}else
+	{
+		$("#adddiv").attr("style","display:none;");
+	}
+}
+function changeshowval(obj){
+	$(obj).val('')
+}
+function saveeditbox(kid){
+	//alert(1);
+	//$(obj).attr('nid');
+	//$("#span_"+kid).attr("onclick","showeditbox(this);");
+	//alert($(obj).parent().attr('nid','001'));
+	//$(obj).parent().attr('onclick',"showeditbox(this)");
+	$("#span_"+kid).html($("#input_".kid).val());
+	
+}
+</script>
+<script>
+//鼠标移动表格效果
+$(document).ready(function(){
+	$("tr[overstyle='on']").hover(
+	  function () {
+	    $(this).addClass("bg_hover");
+	  },
+	  function () {
+	    $(this).removeClass("bg_hover");
+	  }
+	);
+});
+
+function checkon(o){
+	if( o.checked == true ){
+		$(o).parents('tr').addClass('bg_on') ;
+	}else{
+		$(o).parents('tr').removeClass('bg_on') ;
+	}
+}
+
+function checkAll(o){
+	if( o.checked == true ){
+		$('input[name="checkbox"]').attr('checked','true');
+		$('tr[overstyle="on"]').addClass("bg_on");
+	}else{
+		$('input[name="checkbox"]').removeAttr('checked');
+		$('tr[overstyle="on"]').removeClass("bg_on");
+	}
+}
+
+//获取已选择用户的ID数组
+function getChecked() {
+	var uids = new Array();
+	$.each($('table input:checked'), function(i, n){
+		uids.push( $(n).val() );
+	});
+	return uids;
+}
+
+
+//删除日志
+function deleteLog(login_record_id) {
+	login_record_id = login_record_id ? login_record_id : getChecked();
+	login_record_id = login_record_id.toString();
+	if(login_record_id == ''){
+		ui.error('请选择日志');
+		return;
+	}
+	if(!confirm('删除成功后将无法恢复，确认继续？')) return false;
+	// if(login_record_id == '' || !confirm('您是否要删除此数据？')) return false;
+	$.post("{:U('admin/Nav/donavDel')}", {login_record_id:login_record_id}, function(res){
+		if(res == '1') {
+			login_record_id = login_record_id.split(',');
+			for(i = 0; i < login_record_id.length; i++) {
+				$('#login_record_'+login_record_id[i]).remove();
+			}
+			ui.success('操作成功');
+		}else {
+			ui.error('操作失败');
+		}
+	});
+}
+</script>
+
+<include file="../Public/_footer" />

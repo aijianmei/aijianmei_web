@@ -1,0 +1,180 @@
+﻿<include file="Templates/header.html" />
+        <div class="wrapper">
+			<p class="vission">推广健身文化，传播健康理念。爱健美为你打造最完美的健美计划！</p>
+			<div class="area">
+				<div class="plan_sort">
+					<div class="plan_item">
+						<h2 class="plan_item_tit">针对男性的健身计划</h2>
+						<div>
+							<a href=""><img src="Templates/images/plan/a.jpg" alt="针对男性的健身计划" class="itemImg"/></a>
+							<div class="plan_cover"><span>针对男性的健身计划</span></div>
+						</div>
+					</div>
+					<div class="daily_choice">
+						<ul class="clearfix">
+							<li class="article_item"><a href=""><img src="Templates/images/plan/1.jpg" alt="饮食调节" class="article_img"/></a></li>
+							<li class="article_item a_item2"><a href=""><img src="Templates/images/plan/2.jpg" alt="强身健体" class="article_img"/></a></li>
+							<li class="article_item a_item3"><a href=""><img src="Templates/images/plan/3.jpg" alt="健身塑性" class="article_img"/></a></li>
+							<li class="article_item"><a href=""><img src="Templates/images/plan/1.jpg" alt="健身塑性" class="article_img"/></a></li>
+						</ul>
+					</div>					
+				</div><!--End plan_sort-->
+				<php>foreach($info as $i) {</php>
+				<hr class="row_line" />
+				<div class="video_list clearfix">
+					<div class="video_main">
+						<span class="video_date"><php>echo date('Y-m-d', $i['article']['gotime'])</php></span>
+						<a href="/index-Index-daily-{$i['article']['id']}-{$_GET['type']}.html" class="view"></a>
+						<h2 class="video_tit">{$i['article']['title']}</h2>
+						<p class="video_cont">{$i['article']['content']|htmlspecialchars_decode}</p>
+						<div class="video">
+							<div class="abfocus_box" style="height:400px;margin-bottom:5px;">
+                                <php>foreach($i['video'] as $v) {</php>
+                                          <php>if(!empty($v['link'])){</php>
+										    <php>if(!empty($v['wapurl'])){</php>
+											<iframe width="520" height="386" src="{$v['wapurl']}" frameborder=0 allowfullscreen></iframe>
+											<php>}else{</php>
+											<object width="520" height="386">
+                                                <param value="{$v['link']}" name="movie">
+                                                <param value="true" name="allowFullScreen">
+                                                <param value="never" name="allowscriptaccess">
+                                                <param value="internal" name="allownetworking">
+                                                <param value="transparent" name="wmode">                     
+                                                <embed src="{$v['link']}" quality="high" width="520" height="386" align="middle" allownetworking="all" allowscriptaccess="always" type="application/x-shockwave-flash" allowfullscreen="true" wmode="transparent">
+                                                <param value="" name="flashvars">
+                                            </object>
+											<php>}</php>
+                                         <php>}else{</php>
+										 <php>if(!empty($i['article']['img'])){</php>
+											<img src="/public/images/article/{$i['article']['img']}">
+										 <php>}else{</php>
+                                         <img src="apps/index/Tpl/default/Public/images/Mark_v.jpg">
+										 <php>}</php>
+                                         <php>}</php>
+                                        <!-- </a> -->										
+                                    </li>
+                                <php>}</php>
+							</div>
+						</div><!--End Video-->
+					</div><!--End video_main Left-->
+					<hr class="col_line" />
+					<div class="video_comment">
+						<div class="share_area clearfix">
+							<p class="share">我要分享：</p>
+							<div class="tecent_share"><script type="text/javascript">
+								(function(){
+								var p = {
+								url:location.href,
+								showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+								desc:'',/*默认分享理由(可选)*/
+								summary:'',/*分享摘要(可选)*/
+								title:'<?php echo $i['article']['title'];?>',/*分享标题(可选)*/
+								site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+								pics:'<?php echo $i['article']['img'];?>', /*分享图片的路径(可选)*/
+								style:'102',
+								width:68,
+								height:21
+								};
+								var s = [];
+								for(var i in p){
+								s.push(i + '=' + encodeURIComponent(p[i]||''));
+								}
+								document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+								})();
+								</script>
+								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script></div>
+							<div class="sina_share"><a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=<?php echo $i['video']['wapurl']?$i['video']['wapurl']:$i['video']['link'];?>
+						&title=<?php echo $i['article']['title'];?>&content=utf-8&pic=<?php echo $i['article']['img'];?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">分享到新浪微博
+					</a></div>
+							<!--<div class="sina_zan"><wb:like></wb:like></div>-->
+							<button class="like">喜欢</button>
+						</div>
+						<div class="com_area ">
+							<h3 class="comment_num">精彩评论（<php>echo count($i['comments'])</php>）</h3>
+							<ul class="coms" id="ppbox_{$i['article']['id']}">
+							<php>if (empty($i['comments'])){</php><span id="appbox_{$i['article']['id']}">当前没有人评论哦</span><php>}</php>
+							<php>foreach($i['comments'] as $c) {</php>
+								<li class="comments clearfix">
+									<a class="user_info">
+										<img src="{$c['userInfo']['face']}" alt="{$c['userInfo']['uname']}" class="com_face" />	 
+									</a>
+									<p class="com_cont">
+										<a href=""><span class="com_name">{$c['userInfo']['uname']}</span> </a>
+										: {$c['content']}</p>
+								</li>
+							<php>}</php>
+							</ul>
+							
+							<div class="clearfix"><a href="/index-Index-daily-{$i['article']['id']}-{$_GET['type']}.html" class="com_all"></a></div>
+							<div class="make_com">
+								<php>if(getMid()){</php>
+                                <php>echo getUserName(getMid())</php>
+                                <php>}else {</php>
+								<button class="login">登陆</button> |
+								<button class="register"><a href="">注册</a></button>
+								<php>}</php>
+								<span class="accout">0/300</span>
+								<textarea name="" id="comment_{$i['article']['id']}" class="commentboxCss"></textarea>
+								<label for="comment_{$i['article']['id']}">有什么感想，来说说吧</label>
+								<button class="done" onclick="addVideoCommont(comment_{$i['article']['id']}.value, {$i['article']['id']}, 'Daily')" aid="{$i['article']['id']}"></button>
+							</div>
+						</div>
+					</div>
+				</div><!--End videoList-->
+				<php>}</php>
+				<input type="hidden" id="commentUid" value="<?php echo $_SESSION['mid'];?>">
+				<div class="page">
+                            <span class="page_1">
+                                <span class="lay_page">
+								<?php printf($pager['backstr'],'class="prev"');?>
+                                <?php printf($pager['thestr'],'class="current_page"');?>
+                                <?php printf($pager['nextstr'],'class="next"');?>
+                                </span>
+                            </span>
+                            <span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
+                            
+                        </div>
+			</div><!--End Area-->
+		</div><!--End Wrapper-->
+		<include file="Templates/footer.html" />
+		<include file="Templates/loginpart.html" />
+		<script>
+		function addVideoCommont(cid,pid){
+			if($("#commentUid").val()==''){
+				alert("请先登录");return false;
+			}
+            if($("#"+cid).val()==''){
+				return false;
+			}
+            $.ajax({
+            type: "POST",
+            url: "ajax.php",
+            dataType:"json",
+            data: "act=addVideoCommont&data=ford&pid="+pid+"&uid="+$("#commentUid").val()+"&content="+cid+"&ptype=4",
+            success: function(data){
+            alert("添加评论成功！");
+            //var innerHtml='<li class="cm_bottom"><div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><div class="target_ct"><a class="name">'+data.username+'</a><p>'+data.content+'</p><p class="bottom_ms"><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div></li>';
+			 
+			var innerHtml='<li class="comments clearfix"><a class="user_info"><img src="'+data.img+'" alt="'+data.username+'" class="com_face" /></a><p class="com_cont"><a href=""><span class="com_name">'+data.username+'</span> </a>: '+data.content+'</p></li>';
+			 
+			 
+            //$("#commentbox").val('');          
+            $("#ppbox_"+pid).prepend(innerHtml);
+            //$("#appbox_"+pid).html('');
+             
+            }
+            });
+        }
+		</script>
+	</body>
+	<!--[if IE 6]>
+    <script type="text/javascript" src="js/DD_belatedPNG.js"></script>
+    <script language="javascript" type="text/javascript">
+        DD_belatedPNG.fix(".pngFix,.pngFix:hover");
+    </script>
+	<![endif]-->
+	<script type="text/javascript" src="Templates/js/jquery.js"></script>
+	<script type="text/javascript" src="Templates/js/public.js"></script>	
+	<script type="text/javascript" src="Templates/js/plan.js"></script>
+
+</html>
