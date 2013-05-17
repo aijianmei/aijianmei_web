@@ -326,6 +326,14 @@ if (!$smarty->is_cached('category.dwt', $cache_id))
     }
 
     assign_template('c', array($cat_id));
+ $smarty->assign('flash_theme',     $_CFG['flash_theme']);  // Flash轮播图片模板
+	$smarty->assign('index_ad',     $_CFG['index_ad']);
+    if ($_CFG['index_ad'] == 'cus')
+    {
+        $sql = 'SELECT ad_type, content, url FROM ' . $ecs->table("ad_custom") . ' WHERE ad_status = 1';
+        $ad = $db->getRow($sql, true);
+        $smarty->assign('ad', $ad);
+    }
 
     $position = assign_ur_here($cat_id, $brand_name);
     $smarty->assign('page_title',       $position['title']);    // 页面标题

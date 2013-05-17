@@ -27,64 +27,7 @@
       <!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
        </div>
    </div>
-<!--/*      <div class="lay_banner">
-      <ul class="ul_1 clearfix">
-        <li class="change_1">
-          <a>
-            <img src="../images/1.jpg" alt="no" class="pic_1" />
-            <div class="massage" style="display:inline-block;">
-              <h1 class="title">此张大图名称</h1>
-              <p>大图介绍：阿萨德合肥卡萨帝豪</p>
-            </div>
-          </a>
-        </li>
-        <li class="change_1">
-          <a>
-            <img src="../images/2.jpg" alt="no" class="pic_1" />
-            <div class="massage" style="display:inline-block;">
-              <h1 class="title">此张大图名称</h1>
-              <p>大图介绍：阿萨德合肥卡萨帝豪</p>
-            </div>
-          </a>
-        </li>
-        <li class="change_1">
-          <a>
-            <img src="../images/4.jpg" alt="no" class="pic_1" />
-            <div class="massage" style="display:inline-block;">
-              <h1 class="title">此张大图名称</h1>
-              <p>大图介绍：阿萨德合肥卡萨帝豪</p>
-            </div>
-          </a>
-        </li>
-        <li class="change_1">
-          <a>
-            <img src="../images/5.jpg" alt="no" class="pic_1" />
-            <div class="massage" style="display:inline-block;">
-              <h1 class="title">此张大图名称</h1>
-              <p>大图介绍：阿萨德合肥卡萨帝豪</p>
-            </div>
-          </a>
-        </li>
-      </ul>
-      </div>
-      <div class="choice_area">
-      <ul class="ul_2 clearfix">
-        <li class="first_choice">
-          <img src="../images/1.jpg" alt="" class="relative_pic" />
-        </li>
-        <li>
-          <img src="../images/2.jpg" alt="" class="relative_pic" />
-        </li>
-        <li>
-          <img src="../images/4.jpg" alt="" class="relative_pic" />
-        </li>
-        <li>
-          <img src="../images/5.jpg" alt="" class="relative_pic" />
-        </li>
-      </ul>
-      <a class="ps_left"></a>
-      <a class="ps_right"></a>
-      </div>*/-->
+
     </div>  <!--Banner End -->
 </div>
 <!--search start-->
@@ -624,4 +567,4 @@ function check_email()
 </div>
 </body>
 </html>
->
+>>

@@ -2,6 +2,19 @@
 $data = array (
   0 => 
   array (
+    'cat_id' => '6',
+    'cat_name' => '目标',
+    'measure_unit' => '',
+    'parent_id' => '0',
+    'is_show' => '1',
+    'show_in_nav' => '0',
+    'grade' => '0',
+    'sort_order' => '50',
+    'has_children' => '6',
+    'goods_num' => '3',
+  ),
+  1 => 
+  array (
     'cat_id' => '7',
     'cat_name' => '用品分类',
     'measure_unit' => '',
@@ -13,7 +26,7 @@ $data = array (
     'has_children' => '7',
     'goods_num' => 0,
   ),
-  1 => 
+  2 => 
   array (
     'cat_id' => '8',
     'cat_name' => '品牌',
@@ -26,20 +39,20 @@ $data = array (
     'has_children' => '3',
     'goods_num' => 0,
   ),
-  2 => 
+  3 => 
   array (
-    'cat_id' => '6',
-    'cat_name' => '目标',
+    'cat_id' => '10',
+    'cat_name' => '运动技能提高',
     'measure_unit' => '',
-    'parent_id' => '0',
+    'parent_id' => '6',
     'is_show' => '1',
     'show_in_nav' => '0',
     'grade' => '0',
     'sort_order' => '50',
-    'has_children' => '6',
-    'goods_num' => '3',
+    'has_children' => '0',
+    'goods_num' => 7,
   ),
-  3 => 
+  4 => 
   array (
     'cat_id' => '1',
     'cat_name' => '增加肌肉',
@@ -52,7 +65,7 @@ $data = array (
     'has_children' => '0',
     'goods_num' => '2',
   ),
-  4 => 
+  5 => 
   array (
     'cat_id' => '11',
     'cat_name' => '提高能力',
@@ -65,7 +78,7 @@ $data = array (
     'has_children' => '0',
     'goods_num' => 3,
   ),
-  5 => 
+  6 => 
   array (
     'cat_id' => '2',
     'cat_name' => '减少体脂',
@@ -78,7 +91,7 @@ $data = array (
     'has_children' => '0',
     'goods_num' => 0,
   ),
-  6 => 
+  7 => 
   array (
     'cat_id' => '12',
     'cat_name' => '健康与养生',
@@ -91,7 +104,7 @@ $data = array (
     'has_children' => '0',
     'goods_num' => 0,
   ),
-  7 => 
+  8 => 
   array (
     'cat_id' => '13',
     'cat_name' => '提升耐力',
@@ -103,19 +116,6 @@ $data = array (
     'sort_order' => '50',
     'has_children' => '0',
     'goods_num' => 0,
-  ),
-  8 => 
-  array (
-    'cat_id' => '10',
-    'cat_name' => '运动技能提高',
-    'measure_unit' => '',
-    'parent_id' => '6',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => 7,
   ),
   9 => 
   array (
@@ -210,8 +210,8 @@ $data = array (
   ),
   16 => 
   array (
-    'cat_id' => '9',
-    'cat_name' => '欧普特蒙',
+    'cat_id' => '23',
+    'cat_name' => 'BSN',
     'measure_unit' => '',
     'parent_id' => '8',
     'is_show' => '1',
@@ -223,8 +223,8 @@ $data = array (
   ),
   17 => 
   array (
-    'cat_id' => '23',
-    'cat_name' => 'BSN',
+    'cat_id' => '9',
+    'cat_name' => '欧普特蒙',
     'measure_unit' => '',
     'parent_id' => '8',
     'is_show' => '1',
