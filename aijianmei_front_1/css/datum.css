@@ -104,6 +104,37 @@ border-radius: 3px;
 	margin-left: 10px;
 vertical-align: top;
 }
+/*weight*/
+.dt_weight{
+}
+.dt_choice_weight{
+	display: none;
+position: absolute;
+left: 0;
+top:-260px;
+width: 100%;
+z-index: 10;
+}
+.dt_choice_weight a{
+	display: block;
+padding: 0;
+height: 20px;
+line-height: 20px;
+text-align: center;
+font-size: 13px;
+border-radius: 0;
+border-bottom: 1px solid #ccc;
+border-top: 1px solid white;
+background: #EFEFEF;
+color: #bebebe;
+}
+.dt_choice_weight a:hover{
+	background: #21ace3;
+	color:white;
+}
+.dt_weight_edit{
+display: none;
+}
 /*height*/
 .dt_height{
 }
@@ -192,7 +223,7 @@ margin-bottom: 25px;
 background-color: #ffffff;
 border: 1px solid #ccc;
 }
-.dt_surt{
+.dt_sure{
 float: left;
 padding: 1px 6px;
 margin:0 5px 3px 0;
@@ -200,7 +231,7 @@ background: #21ace3;
 color: white;
 }
 .dt_sure_remove{
-
+cursor: pointer;
 }
 /*dt_tag_input*/
 .dt_tag_input{
@@ -212,7 +243,9 @@ margin:0 5px 3px 0;
 position: absolute;
 top:0;
 left:4px;
+color:#ccc;
 }
 #tag{
 	padding: 2px;
+	outline: 0;
 }
