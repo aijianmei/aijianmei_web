@@ -79,10 +79,92 @@ width: 200px;
 .dt_content a{
 	position: relative;
 display: inline-block;
+height: 30px;
+min-width: 30px;
 padding: 0 5px;
 background: #21ace3;
 color: white;
 border-radius: 3px;	
+}
+.dt_edit{
+height: 30px;
+line-height: 30px;
+margin-left: 160px;
+}
+.dt_edit span{
+display: inline-block;
+height: 30px;
+min-width: 30px;
+padding: 0 5px;
+background: #21ace3;
+color: white;
+border-radius: 3px;
+}
+.dt_edit a{
+	margin-left: 10px;
+vertical-align: top;
+}
+/*height*/
+.dt_height{
+}
+.dt_choice_height{
+	display: none;
+position: absolute;
+left: 0;
+top:-128px;
+width: 100%;
+z-index: 10;
+}
+.dt_choice_height a{
+	display: block;
+padding: 0;
+height: 20px;
+line-height: 20px;
+text-align: center;
+font-size: 13px;
+border-radius: 0;
+border-bottom: 1px solid #ccc;
+border-top: 1px solid white;
+background: #EFEFEF;
+color: #bebebe;
+}
+.dt_choice_height a:hover{
+	background: #21ace3;
+	color:white;
+}
+.dt_height_edit{
+display: none;
+}
+/*year*/
+.dt_year{
+}
+.dt_choice_year{
+	display: none;
+position: absolute;
+left: 0;
+top:-128px;
+width: 100%;
+z-index: 10;
+}
+.dt_choice_year a{
+	display: block;
+padding: 0;
+height: 20px;
+line-height: 20px;
+text-align: center;
+font-size: 13px;
+border-radius: 0;
+border-bottom: 1px solid #ccc;
+border-top: 1px solid white;
+background: #EFEFEF;
+color: #bebebe;
+}
+.dt_choice_year a:hover{
+	background: #21ace3;
+	color:white;
+}
+.dt_year_edit{
+display: none;
 }
 /*dt_content_tx*/
 .dt_content_tx{
