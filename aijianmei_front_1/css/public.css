@@ -180,38 +180,38 @@ button{
 
 /*pg_page begin*/
 
-.pg_page{
-	height: 24px;
-	line-height: 24px;
-	margin: 10px auto;
-	text-align: center;
-}
-.pg_page a,.pg_concrete_choice span{
-	display:inline-block;
-	margin:0 -1px;
-	min-width:20px;
-	height:20px;
-	border: 2px solid transparent;
-	line-height: 20px;
-	color:#333;
-	cursor: pointer;
-}
-.pg_concrete_choice{
-	display: inline-block;
-	vertical-align: top;
-}
-.pg_concrete_choice span{
-	width:50px;
-}
-.pg_page .pg_current_page{
-	background:#21ace3;
-	color:white;
-	border: 2px solid transparent;
-	cursor: default;
-}
-.pg_page a:hover,.pg_concrete_choice span:hover{
-	border-color: #21ace3;
-}
+	.pg_page{
+		height: 24px;
+		line-height: 24px;
+		margin: 10px auto;
+		text-align: center;
+	}
+	.pg_page a,.pg_concrete_choice span{
+		display:inline-block;
+		margin:0 -1px;
+		min-width:20px;
+		height:20px;
+		border: 2px solid transparent;
+		line-height: 20px;
+		color:#333;
+		cursor: pointer;
+	}
+	.pg_concrete_choice{
+		display: inline-block;
+		vertical-align: top;
+	}
+	.pg_concrete_choice span{
+		width:50px;
+	}
+	.pg_page .pg_current_page{
+		background:#21ace3;
+		color:white;
+		border: 2px solid transparent;
+		cursor: default;
+	}
+	.pg_page a:hover,.pg_concrete_choice span:hover{
+		border-color: #21ace3;
+	}
 
 
 /*pg_page ending*/
@@ -523,4 +523,50 @@ button{
 /*mousescroll ending*/
 
 
+/*fade_modal begin****/
 
+	.fade_in{
+		position: fixed;
+		left: 0px;
+		right: 0px;
+		top: 0px;
+		bottom: 0px;
+		z-index: 1010;
+		opacity: 0;
+		filter: alpha(opacity=0);
+		background: #000;
+		filter: alpha(opacity=80)	9;
+	}
+	.modal{
+		position: fixed;
+		left: 50%;
+		top: -100px;
+		z-index: 1020;
+		width: 850px;
+		height: 100px;
+		margin-left: -425px;
+		background: white;
+		border-radius: 6px;
+	}
+	.modal_header{
+		border-bottom: 1px solid #eee;
+	}
+	.modal_header .closed{
+		float: right;
+		margin: 6px 14px 0 0;
+		font-size: 30px;
+		font-weight: 700;
+	}
+	.modal_header h3{
+		line-height: 30px;
+		padding: 10px 16px;
+		font-size: 19px;
+		color: black;
+	}
+	.modal_body{
+		text-align: left;
+		max-height: 800px;
+		padding: 15px;
+		overflow-y: auto;
+	}
+/*fade_modal begin****/
