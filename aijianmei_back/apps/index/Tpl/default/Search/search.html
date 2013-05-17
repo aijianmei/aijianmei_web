@@ -18,7 +18,7 @@
 							<div class="cont_side_2">
 								<h3 class="cont_title"><a href="{$value.url}">{$value.title}</a></h3>
 								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span class="cont_pb_time"><php>echo date('Y-m-d',$value['create_time']);</php></span></span>
-								<p>{$value.brief}</p>
+								<p>{$value.brief|htmlspecialchars_decode}</p>
 								<a class="cont_read_more" href="{$value.url}">阅读全文></a>
 								<div class="cont_share">
 									<span class="cont_click">点击数:<span>{$value.click}</span></span>
@@ -59,6 +59,7 @@
 			   aijianmei.identifying(identifying);
 			   aijianmei.addtitle('detail');
 			   aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
+			   aijianmei.form_jugde('lg_text','lg_password');
 			}
 			init();	
         </script>

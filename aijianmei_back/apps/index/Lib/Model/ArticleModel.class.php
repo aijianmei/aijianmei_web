@@ -26,8 +26,11 @@ class ArticleModel extends Model {
         //$info = $parser->getVideoInfo('http://v.youku.com/v_playlist/f12280371o1p0.html');
         //var_dump($info);
         
-        foreach ($result as $r) {
-            $info = $parser->getVideoInfo($r['link']);
+			foreach ($result as $r) {
+            //$info = $parser->getVideoInfo($r['link']);
+			//$infogetVideoData($link)
+			$data = json_decode($this->getVideoData($r['link']));
+			$info['img'] = $data->data[0]->logo;
             if($daily[$r['id']]) {
                 $daily[$r['id']]['video'][] = array('id'=>$r['vid'], 'title'=>$r['vtitle'], 'link'=>($r['link']!='null'?$r['link']:''), 'wapurl'=>($r['wapurl']!='null'?$r['wapurl']:''), 'intro'=>$r['intro'], 'img'=>$info['img'], 'read_count'=>$r['read_count']);
             }else {
@@ -36,10 +39,11 @@ class ArticleModel extends Model {
             }
             
             $daily[$r['id']]['comments'] = $this->getDailyComments($r['id']);
-        }
+			}
         $this->setDataCache($cacheid,$daily);
-        return $daily;
+        
 		}
+		return $daily;
     }
     
     public function getDaily($channel)

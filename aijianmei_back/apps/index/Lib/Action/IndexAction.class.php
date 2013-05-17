@@ -997,18 +997,41 @@ function show_banner($type){
         $info = D('Article')->getDailyLimit($type,($page-1)*$nums,$nums);
         $cate = M('article_category')->where(array('type'=>'2'))->findAll();
         $this->assign('info', $info);
+
 		//print_r($info);
         $this->assign('cssFile', 'every');
         //目录树
         $channel=$type;
         switch($channel){
-            case 1: {$tree_channel="上班族健身 ";$tree_channel_en=1;}break;
-            case 2:{$tree_channel="日常健身 ";$tree_channel_en=2;}break;
-            case 3:{$tree_channel="运动员 ";$tree_channel_en=3;}break;
-            case 4:{$tree_channel="健身运动员 ";$tree_channel_en=4;}break;
+            case 2: {
+				$tree_channel="上班族健身 ";
+				$tree_channel_en=1;
+				$bannerTopInfo['title']='初阶-基础锻炼';
+				$bannerTopInfo['img']='cj.png';
+				$bannerTopInfo['aimg_1']='2-1.jpg';$bannerTopInfo['aid_1']=79;
+				$bannerTopInfo['aimg_2']='2-2.jpg';$bannerTopInfo['aid_2']=78;
+				$bannerTopInfo['aimg_3']='2-3.jpg';$bannerTopInfo['aid_3']=77;
+				$bannerTopInfo['aimg_4']='2-4.jpg';$bannerTopInfo['aid_4']=76;
+				}break;
+            case 3:{$tree_channel="日常健身 ";$tree_channel_en=2;
+				$bannerTopInfo['title']='中阶-运动员锻炼';
+				$bannerTopInfo['img']='zj.png';
+				$bannerTopInfo['aimg_1']='3-1.jpg';$bannerTopInfo['aid_1']=90;
+				$bannerTopInfo['aimg_2']='3-2.jpg';$bannerTopInfo['aid_2']=89;
+				$bannerTopInfo['aimg_3']='3-3.jpg';$bannerTopInfo['aid_3']=88;
+				$bannerTopInfo['aimg_4']='3-4.jpg';$bannerTopInfo['aid_4']=87;
+			}break;
+            case 4:{$tree_channel="运动员 ";$tree_channel_en=3;
+				$bannerTopInfo['title']='高阶-肌肉锻炼';
+				$bannerTopInfo['img']='gj.png';
+				$bannerTopInfo['aimg_1']='4-1.jpg';$bannerTopInfo['aid_1']=91;
+				$bannerTopInfo['aimg_2']='4-2.jpg';$bannerTopInfo['aid_2']=84;
+				$bannerTopInfo['aimg_3']='4-3.jpg';$bannerTopInfo['aid_3']=82;
+				$bannerTopInfo['aimg_4']='4-4.jpg';$bannerTopInfo['aid_4']=75;
+			}break;
         }
         $this->assign("first",$tree_channel);
-        
+        $this->assign("bannerTopInfo",$bannerTopInfo);
         //banner 滚动图片列表
         $this->show_banner($type);
         //-------END--------

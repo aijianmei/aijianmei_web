@@ -116,7 +116,7 @@ class AppendAction extends Action {
         //$this->display();
 		$keywordInfo=unserialize(include_once("PublicCache/keywordInfo.php"));
 		$this->assign('_CommentList',unserialize(include_once("PublicCache/CommentListCache.php")));
-		$this->assign('_KeyWordList',$keywordInfo['nutri']);
+		$this->assign('_KeyWordList',$keywordInfo['append']);
         //$this->display();
 		$this->display('append_index');
     }

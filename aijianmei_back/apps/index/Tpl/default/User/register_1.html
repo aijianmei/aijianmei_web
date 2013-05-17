@@ -2,7 +2,7 @@
 <html xmlns:wb=“http://open.weibo.com/wb”>
 	<head>
 	<meta charset="utf-8"/>
-	<title>爱健美首页 - 推广健身文化，传播健康理念</title>
+	<title>爱健美 - 推广健身文化，传播健康理念</title>
 	<meta name="keywords" content="爱健美，爱健美网，健身，健美，增肌、增重、减肥、瘦身、肌肉锻炼、健身营养、健身补充营养、健身运动、女性健身">
 	<meta name="description" content="爱健美网，你可以在这里制定合适的健身计划， 观看专业的健身锻炼视频，学习专业的健身方法，了解健身运动前后的饮食营养补充，以及认识喜欢健身、运动的朋友哦！">
 	<link rel="stylesheet" href="Templates/css/register_all.css">
@@ -22,15 +22,15 @@
 			<div class="rg_form">
 				<form id="regform" action="/index.php?app=index&mod=User&act=doregister" method="post">
 					<div class="rg_ms">
-						<label for="text">邮箱</label><input type="text" style="margin:2px 0px 2px 10px;font-size: 22px; height:48px;" class="rg_text" id="email" name="email" onblur="regCheckMail();"/>
+						<label for="text">邮箱</label><input type="text" style="margin:2px 0px 2px 10px;font-size: 22px; height:48px;" class="inputCss" id="email" name="email" onblur="regCheckMail();"/>
 						<span class="rg_text_tip" id="rg_text_tip"></span>
 					</div>
 					<div class="rg_ms">
-						<label for="password">密码</label><input style="margin:2px 0px 2px 10px;font-size: 22px; height:52px;" type="password" class="rg_text" id="password" name="password" onblur="regCheckPassword();"/>
+						<label for="password">密码</label><input style="margin:2px 0px 2px 10px;font-size: 22px; height:52px;" type="password" class="inputCss" id="password" name="password" onblur="regCheckPassword();"/>
 						<span class="rg_text_tip" id="pwd_text_tip"></span>
 					</div>
 					<div class="rg_ms">
-						<label for="password_again">确认密码</label><input style="margin:2px 0px 2px 10px;font-size: 22px; height:52px;" type="password" class="rg_text" id="password_again" name="repassword" onblur="regCheckPassword();"/>
+						<label for="password_again">确认密码</label><input style="margin:2px 0px 2px 10px;font-size: 22px; height:52px;" type="password" class="inputCss" id="password_again" name="repassword" onblur="regCheckPassword();"/>
 						<span class="rg_text_tip" id="repwd_text_tip"></span>
 					</div>
 				</form>
@@ -131,13 +131,16 @@
 			$("#rg_text_tip").html("请填写有效的邮箱地址");
 			return false;
 		}
-		if(isPasswd(repwd)&&isPasswd(pwd)&&repwd==pwd){
-			alert(1);
+		if(isPasswd(repwd)&&isPasswd(pwd)&&repwd==pwd&&pwd.length>5){
 			$("#regform").submit();
 			return true;
 		}
 		else{
-			$("#repwd_text_tip").html('密码不一致');
+			if(pwd.length<6){
+				$("#repwd_text_tip").html('长度必须大于6');
+			}else{
+				$("#repwd_text_tip").html('密码不一致');
+				}
 			return false;
 		}
 	}

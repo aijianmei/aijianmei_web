@@ -4,18 +4,18 @@
 			<div class="area">
 				<div class="plan_sort">
 					<div class="plan_item">
-						<h2 class="plan_item_tit">针对男性的健身计划</h2>
+						<h2 class="plan_item_tit">{$bannerTopInfo['title']}</h2>
 						<div>
-							<a href=""><img src="Templates/images/plan/a.jpg" alt="针对男性的健身计划" class="itemImg"/></a>
-							<div class="plan_cover"><span>针对男性的健身计划</span></div>
+							<a href="#"><img src="Templates/images/plan/{$bannerTopInfo['img']}" alt="{$bannerTopInfo['title']}" class="itemImg"/></a>
+							<div class="plan_cover"><span>{$bannerTopInfo['title']}</span></div>
 						</div>
 					</div>
 					<div class="daily_choice">
 						<ul class="clearfix">
-							<li class="article_item"><a href=""><img src="Templates/images/plan/1.jpg" alt="饮食调节" class="article_img"/></a></li>
-							<li class="article_item a_item2"><a href=""><img src="Templates/images/plan/2.jpg" alt="强身健体" class="article_img"/></a></li>
-							<li class="article_item a_item3"><a href=""><img src="Templates/images/plan/3.jpg" alt="健身塑性" class="article_img"/></a></li>
-							<li class="article_item"><a href=""><img src="Templates/images/plan/1.jpg" alt="健身塑性" class="article_img"/></a></li>
+							<li class="article_item"><a href="/index-Index-articleDetail-{$bannerTopInfo['aid_1']}.html"><img src="Templates/images/plan/{$bannerTopInfo['aimg_1']}" alt="饮食调节" class="article_img"/></a></li>
+							<li class="article_item a_item2"><a href="/index-Index-articleDetail-{$bannerTopInfo['aid_2']}.html"><img src="Templates/images/plan/{$bannerTopInfo['aimg_2']}" alt="强身健体" class="article_img"/></a></li>
+							<li class="article_item a_item3"><a href="/index-Index-articleDetail-{$bannerTopInfo['aid_3']}.html"><img src="Templates/images/plan/{$bannerTopInfo['aimg_3']}" alt="健身塑性" class="article_img"/></a></li>
+							<li class="article_item"><a href="/index-Index-articleDetail-{$bannerTopInfo['aid_4']}.html"><img src="Templates/images/plan/{$bannerTopInfo['aimg_4']}" alt="健身塑性" class="article_img"/></a></li>
 						</ul>
 					</div>					
 				</div><!--End plan_sort-->
@@ -61,33 +61,37 @@
 					<div class="video_comment">
 						<div class="share_area clearfix">
 							<p class="share">我要分享：</p>
-							<div class="tecent_share"><script type="text/javascript">
-								(function(){
-								var p = {
-								url:location.href,
-								showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
-								desc:'',/*默认分享理由(可选)*/
-								summary:'',/*分享摘要(可选)*/
-								title:'<?php echo $i['article']['title'];?>',/*分享标题(可选)*/
-								site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
-								pics:'<?php echo $i['article']['img'];?>', /*分享图片的路径(可选)*/
-								style:'102',
-								width:68,
-								height:21
-								};
-								var s = [];
-								for(var i in p){
-								s.push(i + '=' + encodeURIComponent(p[i]||''));
-								}
-								document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
-								})();
+							<div class="tencent_share">
+								<script type="text/javascript">
+
+									(function(){
+										var p = {
+										url:location.href,
+										showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+										desc:'',/*默认分享理由(可选)*/
+										summary:'',/*分享摘要(可选)*/
+										title:'<?php echo $i['article']['title'];?>',/*分享标题(可选)*/
+										site:'',/*分享来源 如：腾讯网(可选)*/
+										pics:'<?php echo $i['video'][0]['img'];?>', /*分享图片的路径(可选)*/
+										style:'102',
+										width:88,
+										height:30
+										};
+										var s = [];
+										for(var i in p){
+										s.push(i + '=' + encodeURIComponent(p[i]||''));
+										}
+										document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+									})();
 								</script>
-								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script></div>
-							<div class="sina_share"><a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=<?php echo $i['video']['wapurl']?$i['video']['wapurl']:$i['video']['link'];?>
-						&title=<?php echo $i['article']['title'];?>&content=utf-8&pic=<?php echo $i['article']['img'];?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">分享到新浪微博
-					</a></div>
-							<!--<div class="sina_zan"><wb:like></wb:like></div>-->
-							<button class="like">喜欢</button>
+								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+							</div>
+							<div class="sina_share">
+								<a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=<?php echo $i['video'][0]['wapurl']?$i['video'][0]['wapurl']:$i['video'][0]['link'];?>
+						&title=<?php echo $i['article']['title'];?>&content=utf-8&pic=<?php echo $i['video'][0]['img'];?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank" title="分享到新浪微博" target="_blank"></a>
+							</div>
+							<button class="like <?php if(!getMid()){echo 'login';}?>" onclick="setlike('{$i['article']['id']}');"></button>
+							<span class="like_num" id="likenum_{$i['article']['id']}" nums="{$i['article']['like']}">{$i['article']['like']}</span>
 						</div>
 						<div class="com_area ">
 							<h3 class="comment_num">精彩评论（<php>echo count($i['comments'])</php>）</h3>
@@ -114,8 +118,8 @@
 								<button class="register"><a href="">注册</a></button>
 								<php>}</php>
 								<span class="accout">0/300</span>
-								<textarea name="" id="comment_{$i['article']['id']}" class="commentboxCss"></textarea>
-								<label for="comment_{$i['article']['id']}">有什么感想，来说说吧</label>
+								<textarea name="" id="comment_{$i['article']['id']}" class="commentboxCss"  cols=47 rows=5 onclick="cleanlabel({$i['article']['id']});"></textarea>
+								<label for="comment_{$i['article']['id']}" id="lable_{$i['article']['id']}">有什么感想，来说说吧</label>
 								<button class="done" onclick="addVideoCommont(comment_{$i['article']['id']}.value, {$i['article']['id']}, 'Daily')" aid="{$i['article']['id']}"></button>
 							</div>
 						</div>
@@ -123,22 +127,41 @@
 				</div><!--End videoList-->
 				<php>}</php>
 				<input type="hidden" id="commentUid" value="<?php echo $_SESSION['mid'];?>">
-				<div class="page">
-                            <span class="page_1">
-                                <span class="lay_page">
-								<?php printf($pager['backstr'],'class="prev"');?>
-                                <?php printf($pager['thestr'],'class="current_page"');?>
-                                <?php printf($pager['nextstr'],'class="next"');?>
-                                </span>
-                            </span>
-                            <span>第{$pager['pg']}页</span>  <span>共{$pager['countall']}条</span>
-                            
-                        </div>
+
+<div class="pg_page clearfix" id="ajaxpage_3" style="display:none;">
+						<span class="pg_concrete_choice">
+								{$pager['backstr']}
+								{$pager['thestr']}
+								{$pager['nextstr']}
+						</span>
+						</div>
 			</div><!--End Area-->
 		</div><!--End Wrapper-->
 		<include file="Templates/footer.html" />
 		<include file="Templates/loginpart.html" />
 		<script>
+		function cleanlabel(lid){
+			$("#lable_"+lid).html('');
+		}
+		function setlike(id){
+			$.ajax({
+            type: "POST",
+            url: "ajax.php",
+            dataType:"json",
+            data: "act=sedaylike&data=ford&did="+id,
+            success: function(data){
+				if(data.result==1){
+				var nums=$('#likenum_'+id).attr("nums");
+				$('#likenum_'+id).html(nums*1+1);
+				}
+				if(data.result==3){
+					alert('你已经投过票了');
+				}
+            }
+            });
+		
+		}
+		
 		function addVideoCommont(cid,pid){
 			if($("#commentUid").val()==''){
 				alert("请先登录");return false;

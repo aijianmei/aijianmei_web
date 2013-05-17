@@ -24,6 +24,8 @@
 			<meta property="og:title" content="{$videos[0][title]}" />
 			<meta property="og:description" content="爱健美视频|{$videos[0][title]}" />
 			<meta property="og:image" content="{$videos[0][logo]}" />
+			<meta name="weibo:video:embed_code" content="src='<?php echo $videos[0]['link'];?>' quality='high' width='620' height='450' align='middle' autostart='false' loop='false' allowScriptAccess='always' allowFullScreen='true' mode='transparent' type='application/x-shockwave-flash'" />
+			
 			<php>}</php>
 			<php>if($_TrainVType==1){</php>
 			<meta property="og:type" content="video" />

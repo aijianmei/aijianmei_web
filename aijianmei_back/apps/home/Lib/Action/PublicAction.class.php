@@ -325,14 +325,15 @@ class PublicAction extends Action{
 
         if($result) {
 			@setcookie("LOGGED_AIUSER", $_POST['email'], time()+3600*24*30);
-			@setcookie('LOGGED_AICOD', md5("aijianmeipwd".md5($_POST['password'])), time()+3600*24*30);			
+			@setcookie('LOGGED_AICOD', md5("aijianmeipwd".$_POST['password']), time()+3600*24*30);			
+		
             if(UC_SYNC && $result['reg_from_ucenter']){
                 //从UCenter导入ThinkSNS，跳转至帐号修改页
                 $refer_url = U('home/Public/userinfo');
             }elseif ( $_SESSION['refer_url'] != '' ) {
                 //跳转至登录前输入的url
                 $refer_url	=	$_SESSION['refer_url'];
-                //unset($_SESSION['refer_url']);
+                unset($_SESSION['refer_url']);
             }else {
                 $refer_url = U('home/User/index');
             }

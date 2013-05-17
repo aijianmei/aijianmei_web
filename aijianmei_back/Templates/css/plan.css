@@ -1,4 +1,5 @@
 ﻿/*************Plan**************/
+/**计划一级页面样式**/
 .vission{
 	padding: 0 10px 10px;
 	border-bottom: 1px dashed #DDD;
@@ -46,6 +47,18 @@
 			right:0;
 			z-index:1000;
 		}
+		.plan_item .cover_cont{
+			height: 87px;
+			line-height: 87px;
+			bottom: 3px;
+			width: 960px;
+			position: absolute;
+			text-align: center;
+			color: white;
+			z-index: 1000;
+			font-size: 30px;
+			font-weight: bold;
+		}
 /**********计划二级页面样式*************/
 
 	.plan_choice .choice_item{
@@ -62,6 +75,27 @@
 	}
 	
 /************天天锻炼页面样式*************/
+.article_item{
+	position:relative;
+	margin-bottom:15px;
+}
+.article_item .plan_cover{
+	height:30px;
+	line-height:30px;
+	border-radius:0;
+	font-size: 18px;
+}
+.article_item .cover_cont{
+	position: absolute;
+	width: 230px;
+	height: 30px;
+	line-height: 30px;
+	bottom:3px;
+	text-align: center;
+	color: white;
+	z-index: 1000;
+}
+
 .daily_choice .article_item{
 	float:left;
 	margin-bottom:12px;
@@ -106,13 +140,17 @@
 		top: 20px;
 		color: #23ACDE;		
 	}
+	/**查看按钮样式**/
 	.view{
 		position: absolute;
 		right: 0px;
 		top:20px;
 		height: 23px;
-		width: 36px;
-		background:url(../images/more.png) no-repeat;
+		width: 46px;
+		background:url(../images/dwbtn.png) no-repeat 0 0;
+	}
+	.view:hover{
+		background:url(../images/dwbtn.png) no-repeat 0 -33px;
 	}
 	.video_tit{
 		color: #23ACDE;
@@ -136,30 +174,45 @@
 		margin-top: 15px;
 	}
 	.share_area{
-		height: 100px;
-		padding: 10px 0;
+		height: 90px;
 	}
 		.share{
 			float:left;
 		}
-		.tecent_share,  .sina_share{
-			width: 100px;
-			height: 23px;
-			background: gray;
+		.tencent_share,  .sina_share{
 			float: left;
 			text-align: center;
-			margin-right: 20px;
 		}
-		.sina_zan{
-			margin-top: 50px;
+		.sina_share .share_obj_2{
+			display:block;
+			width:67px;
+			height:21px;
+			background:url(../images/shareButton_21.png) no-repeat;
+			
 		}
 		.like{
-			width: 70px;
-			height: 25px;
+			width: 58px;
+			height: 23px;
 			position: absolute;
-			right: 0;
+			left:0;
 			top: 40px;
-			background:#00B7FE;
+			background:url(../images/dwbtn.png) no-repeat 0 -172px;
+		}
+		.like:hover{
+			background:url(../images/dwbtn.png) no-repeat 0 -205px;
+		}
+		.like_num{
+			position: absolute;
+			left:60px;
+			top: 40px;			
+			width: 30px;
+			height: 21px;
+			line-height: 21px;
+			text-align: center;
+			border: 1px solid #22A6D4;
+			border-radius: 4px;
+			color: #3DA6CE;
+			font-weight: bold;			
 		}
 		.comment_num{
 			background: #98DDF8;
@@ -194,12 +247,15 @@
 			line-height: 22px;
 		}
 		.com_all{
-			width: 93px;
+			width: 103px;
 			height: 23px;
 			display: block;
-			background:url(../images/all.png) no-repeat;
+			background:url(../images/dwbtn.png) no-repeat 0 -66px;
 			float: right;
 			margin-top: 15px;
+		}
+		.com_all:hover{
+			background:url(../images/dwbtn.png) no-repeat 0 -99px;
 		}
 		.make_com{
 			position:relative;
@@ -235,7 +291,7 @@
 			float: right;
 			width: 80px;
 			height: 30px;
-			background:url(../images/send.png) no-repeat ;
+			background:url(../images/dwbtn.png) no-repeat 0 -132px;
 			cursor:pointer;
 		}
 

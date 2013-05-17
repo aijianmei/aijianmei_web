@@ -108,7 +108,70 @@ class UserAction extends Action {
 	}
 	public function doregister()
 	{
+		$_SESSION['allowbackreg']=$_SESSION['allowbackmid']=null;
+		if($_SESSION['sinalogin']==1){$_SESSION['deslogin']=1;}
+		$userEmail=addslashes($_POST['email']);
+		$password=addslashes($_POST['password']);
+		$repassword=addslashes($_POST['repassword']);
+		$checksql="select * from ai_user where email='".$userEmail."'";
+		$check=M('')->query($checksql);
+		if(!$check&&($password==$repassword)){
+			//第三方注册 start
+			if($_SESSION['mid']>0&&$_SESSION['sinalogin']==1){
+				$upsql=$mid=null;
+				$mid=intval($_SESSION['mid']);
+				$upsql="UPDATE ai_user SET email = '".$userEmail."',password='".md5($password)."' WHERE uid =$mid";
+				M('')->query($upsql);
+				$getSimgSql="select * from ai_others where uid='".$_SESSION['mid']."'";
+				$ImgArr=M('')->query($getSimgSql);
+				$this->assign('imgurl',$ImgArr[0]['profileImageUrl']);
+				$_SESSION['otherlogin']=1;
+				$getuidname="select * from ai_user where uid='".$mid."'";
+				$getuidinfo=M('')->query($getuidname);
+				
+				include_once('shopApi.php');
+				$sdata=null;
+				$sdata['uname']=addslashes($getuidinfo[0]['uname']);
+				$sdata['password']=addslashes($password);
+				$sdata['email']   =addslashes($userEmail);
+				_postCurlRegister($sdata);	
+			}
+			else
+			{
+				$_SESSION['deslogin']=1;
+				$insertSql="INSERT INTO ai_user (email,password,ctime,is_active,is_init,identity)VALUES ('".$userEmail."','".md5($password)."','".time()."','1','1','1')";
+				M('')->query($insertSql);
+				$getuidsql="select uid from ai_user where email='".$userEmail."' and password='".md5($password)."'";
+				$uidinfo=M('')->query($getuidsql);
+				$mid=$uidinfo[0]['uid'];
+				//service('Passport')->loginLocal($uidinfo[0]['uid']);
+			}
+			$_SESSION['allowbackreg']=1;
+			$_SESSION['allowbackmid']=$mid;
+		}
 		$this->display('register_2');
+	}
+	
+	public function setchannelinfo(){
+		if($_SESSION['allowbackreg']==1){
+			$mid=$_SESSION['allowbackmid'];
+			if($mid>0&&addslashes($_GET['psd'])=='sub'){
+				$keyTmp=array();
+				foreach($_POST['sk'] as $k=>$v){
+					if(!in_array($v,$keyTmp)){
+						$keyTmp[]=$v;
+					}	
+				}
+				$checksql="select * from ai_user_keywords where uid='".$mid."'";
+				$checkinfo=M('')->query($checksql);
+				if(!$checkinfo){
+					$insertSql="insert into ai_user_keywords (uid,keyword)values('".$mid."','".serialize($keyTmp)."')";
+					M('')->query($insertSql);
+				}
+				redirect(U('index/index/index'));
+			}
+		}
+		$this->display('register_3');
 	}
 	
 	public function loginUserInfo()
@@ -223,14 +286,18 @@ class UserAction extends Action {
 	 // {
 		// move_uploaded_file($_FILES['upload_file']['tmp_name'],$_FILES['upload_file']['name']);
 	 // }
+	
 	$fdata=$this->upload();
     //输出图片文件<img>标签
 
-    echo "<textarea><img style='width:150px;height:150px;' src='".$fdata['data']['picurl']."'/></textarea>";
+    echo "<textarea><img src='".$fdata['data']['picurl']."'/></textarea>";
+	echo "<textarea><img style='width:150px;height:150px;' src='".$fdata['data']['picurl']."'/></textarea>";
 	exit;
 	}
+
 	
 	function upload(){
+		if($_SESSION['allowbackmid']){$this->uid=$_SESSION['allowbackmid'];}
         $pic_id = time();//使用时间来模拟图片的ID.           
         $pic_path = $this->getSavePath().'/original.jpg';
         $pic_abs_path = __UPLOAD__.'/avatar'.convertUidToPath($this->uid).'/original.jpg';

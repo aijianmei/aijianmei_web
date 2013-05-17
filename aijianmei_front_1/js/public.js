@@ -1,3 +1,4 @@
+var ajaxListKey=0;
 //添加事件监听
 var addevent = function(element,type,handle){
 	if(element.addEventListener){
@@ -108,6 +109,8 @@ var aijianmei = {
 	    			if(this.index == i){
 	    				obj_child[i].className = class_1;
 	    				tab_content[i].className = obj_2 + " " + class_2;
+					ajaxListKey=i;
+					is_ajax_scroll=true;
 	    			}
 	    			else{
 	    				obj_child[i].className = '';

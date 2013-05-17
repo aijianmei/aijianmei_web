@@ -1,5 +1,27 @@
 /****** Reset **********/
-body,ul,button,input,h2,p,li{
+.cont_vd_bg {
+    background: url("../images/cont_vd.png") no-repeat scroll 0 0 transparent;
+    display: none;
+    height: 146px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 214px;
+}
+.cont_vd_1 {
+    float: left;
+    margin-right: 10px;
+    position: relative;
+}
+
+.cont_vd_link {
+    display: block;
+}
+.cont_vd_2 {
+    float: left;
+    width: 425px;
+}
+body,ul,button,input,h1,h2,p,li{
 	margin:0;
 	padding:0;
 }
@@ -8,6 +30,11 @@ p,h3{
 }
 img,button,input{
 	border:0;
+}
+fieldset{
+	margin:0;
+	padding: 0;
+	border: 0;
 }
 img{
 	outline:0;
@@ -31,7 +58,14 @@ a:hover{
 button{
 	cursor:pointer;
 }
-
+.cont_vd_see {
+    background: url("../images/button_icon.png") no-repeat scroll 0 -474px transparent;
+    display: inline-block;
+    height: 38px;
+    width: 109px;
+}
+.show_share{margin-top: 10px;opacity: 0.5;filter: alpha(opacity=50);}
+.show_share:hover{opacity:1;}
 /******* clearfix ********/
 .clearfix:after{
 	content:"";
@@ -191,6 +225,19 @@ button{
 	color:#333;
 	cursor: pointer;
 }
+		.lb_search #searchwords{
+			height: 18px;
+			width: 191px;
+			margin:5px 15px;
+			outline: 0;
+		}
+						.cont_vd_click{
+						 	background: url("../images/wm3.png") no-repeat 0 -413px;
+						    display: inline-block;
+						    float: left;
+						    height: 18px;
+						    padding-left: 27px;
+						}
 .pg_concrete_choice{
 	display: inline-block;
 	vertical-align: top;
@@ -293,11 +340,20 @@ button{
 			height:34px;
 		}
 		.lg_wrap_choice .lg_coop_1{
-			background: url(../images/wb01.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -84px;
+		}
+		.lg_wrap_choice .lg_coop_1:hover{
+			background:url(../images/button_icon.png) no-repeat 0 -126px;
 		}
 		.lg_wrap_choice .lg_coop_2{
-			background: url(../images/QQ01.png) no-repeat;		
+			background:url(../images/button_icon.png) no-repeat 0 -168px;	
 		}
+		.lg_wrap_choice .lg_coop_2:hover{
+			background:url(../images/button_icon.png) no-repeat 0 -210px;	
+		}		
+		.lg_wrap_choice .lg_coop_2:hover{
+			background:url(../images/button_icon.png) no-repeat 0 -210px;	
+		}		
 		.lg_aijianmei{
 			margin:10px 0;
 		}
@@ -305,7 +361,10 @@ button{
 		display: inline-block;
 			width:111px;
 			height:34px;	
-			background: url(../images/ai01.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 0;
+		}
+		.lg_aijianmei a:hover{
+			background:url(../images/button_icon.png) no-repeat 0 -42px;
 		}
 	/*lg_our*/
 		.lg_our{
@@ -476,22 +535,22 @@ button{
 			height:34px;
 		}
 		.scroll_choice_1{
-			background: url(../images/wb01.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -84px;
 		}
 		.scroll_choice_1:hover{
-			background: url(../images/wb02.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -126px;
 		}
 		.scroll_choice_2{
-			background: url(../images/QQ01.png) no-repeat;	
+			background:url(../images/button_icon.png) no-repeat 0 -168px;
 		}
 		.scroll_choice_2:hover{
-			background: url(../images/QQ02.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -210px;
 		}
 		.scroll_choice_3{
-			background: url(../images/ai01.png) no-repeat;	
+			background:url(../images/button_icon.png) no-repeat 0 0;
 		}
 		.scroll_choice_3:hover{
-			background: url(../images/ai03.png) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -42px;
 		}
 		.scroll_back{
 			position: absolute;

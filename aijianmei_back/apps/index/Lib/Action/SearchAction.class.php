@@ -33,6 +33,10 @@ class SearchAction extends Action {
 				if($value['1']>1){
 					$searchInfo[$key]['img']=$this->getVideoDataImg($value['img']);
 				}
+				else
+				{
+					$searchInfo[$key]['img']='/public/images/article/'.$value['img'];
+				}
 				if($value['1']==1){
 					$searchInfo[$key]['url']='/index-Index-articleDetail-'.$value['id'].'.html';
 					$searchInfo[$key]['shareurl']='http://www.aijianmei.com/index-Index-articleDetail-'.$value['id'].'.html';
@@ -48,6 +52,9 @@ class SearchAction extends Action {
 					$channelinfo=M('')->query($getCsql);
 					$searchInfo[$key]['url']='/index-Index-daily-'.$value['id'].'-'.$channelinfo[0]['channel'].'.html';
 					$searchInfo[$key]['shareurl']=($channelinfo[0]['htmlurl']!='')?$channelinfo[0]['htmlurl']:$channelinfo[0]['link'];
+					if(!$searchInfo[$key]['img']){
+						$searchInfo[$key]['img']='apps/index/Tpl/default/Public/images/'.$value['img'];
+					}
 				}
 			}
 			$this->setDataCache(md5($limitsql),$searchInfo);

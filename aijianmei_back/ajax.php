@@ -14,7 +14,8 @@ $_actAllowArr=array(
 'backEditVideoUrl'=>'data',
 'recordlike'=>'data',
 'ajaxInMore'=>'data',
-'ajaxTrainMore'=>'data');
+'ajaxTrainMore'=>'data',
+'sedaylike'=>'data');
 /*ajax */
  if(!empty($_REQUEST['act'])){
      foreach($_REQUEST as $key => $value){
@@ -120,12 +121,14 @@ function ajaxInMore($data){
 		//print_r($result);
 		$returnHtml=null;
 		foreach($result as $k =>$value){
-			$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="/index-Train-videoDetail-'.$value['id'].'.html">
-			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"></a><div class="show_share" style="margin-left:40px;">
+			$returnHtml.='<div class="cont_module clearfix"><div class="cont_vd_1"><a  class="cont_vd_link"  href="/index-Train-videoDetail-'.$value['id'].'.html">
+			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"><span class="cont_vd_bg" style="display: none;"></span></a><div class="show_share" style="margin-left:40px;">
 			<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="'.$value['htmlurl'].'?>" pic="'.$value['logo'].'"  title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30">
-			</wb:share-button></div></div><div class="cont_side_2"><h3 class="cont_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
-								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span>'.date("Y-m-d",$value['create_time']).'</span></span>
-								<p>'.$value['brief'].'</p>
+			</wb:share-button></div></div><div class="cont_vd_2"><h3 class="cont_vd_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
+								<div class="cont_vd_dt">
+									<p>标签:<span>'.$value['keyword'].'</span></p>
+									<p>简介:<span>'.msubstr($value['brief'],0,54).'</span></p>
+								</div>
 								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html"></a>
 								<div class="cont_share">
 									<span class="cont_vd_click">点击数:<span>'.$value['click'].'</span></span>
@@ -214,12 +217,14 @@ function ajaxTrainMore($data){
 		//print_r($result);
 		$returnHtml=null;
 		foreach($result as $k =>$value){
-			$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="/index-Train-videoDetail-'.$value['id'].'.html">
-			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"></a><div class="show_share" style="margin-left:40px;">
+			$returnHtml.='<div class="cont_module clearfix"><div class="cont_vd_1"><a class="cont_vd_link"  href="/index-Train-videoDetail-'.$value['id'].'.html">
+			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"><span class="cont_vd_bg" style="display: none;"></span></a><div class="show_share" style="margin-left:40px;">
 			<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="'.$value['htmlurl'].'?>" pic="'.$value['logo'].'"  title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30">
-			</wb:share-button></div></div><div class="cont_side_2"><h3 class="cont_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
-								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span>'.date("Y-m-d",$value['create_time']).'</span></span>
-								<p>'.$value['brief'].'</p>
+			</wb:share-button></div></div><div class="cont_vd_2"><h3 class="cont_vd_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
+								<div class="cont_vd_dt">
+									<p>标签:<span>'.$value['keyword'].'</span></p>
+									<p>简介:<span>'.msubstr($value['brief'],0,54).'</span></p>
+								</div>
 								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html"></a>
 								<div class="cont_share">
 									<span class="cont_vd_click">点击数:<span>'.$value['click'].'</span></span>
@@ -290,6 +295,30 @@ function recordlike($data){
 		exit();
 	}
 }
+
+function sedaylike($data){
+	if($_SESSION['mid']>0){
+			$mid=$_SESSION['mid'];
+			$articleid=addslashes($_POST['did']);
+			$checksql="select * from ai_daily_vote where uid=$mid and article_id=$articleid";
+			$checksinfo=C_mysqlQuery($checksql);
+			$checksinfo=mysql_fetch_assoc($checksinfo);
+			if(!$checksinfo){
+				$usql="update ai_daily set `like`=`like`+1 where id=$articleid";
+				C_mysqlQuery($usql);
+				$insql='insert into ai_daily_vote (`uid`,`article_id`) values ("'.$mid.'","'.$articleid.'")';
+				C_mysqlQuery($insql);
+				echo json_encode(array('result'=>1,'sql'=>$insql));
+			}else
+			{
+				echo json_encode(array('result'=>3));
+			}
+	}else{
+		echo json_encode(array('result'=>2));
+	}
+	exit;
+}
+
 
 
 

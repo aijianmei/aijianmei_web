@@ -119,6 +119,7 @@
 			}
 			/*tr_tab_ct_1-----------*/
 				.cont_module{
+					border-bottom: 1px solid #DFDFDF;
 					margin: 25px 0;
 				}
 				/*cont_side_1---------*/
@@ -258,9 +259,12 @@
 			text-align: center;
 		}
 		.person_ms span{
-			display: inline;
-			min-width: 30px;
+			display: inline-block;
+			width: 50px;
 			vertical-align: top;
+			text-overflow : ellipsis; 
+			white-space : nowrap; 
+			overflow : hidden;
 		}
 		.more a{
 			display: inline-block;
@@ -318,7 +322,11 @@
 			top:0;
 			width:55px;
 			height:28px;
-			background: url(../images/04.jpg) no-repeat;
+			background:url(../images/button_icon.png) no-repeat 0 -740px;
+			cursor:pointer;
+		}
+		.lb_search #button:hover{
+			background:url(../images/button_icon.png) no-repeat 0 -778px;
 		}
 		/*two_code-----------*/
 		.two_code img{

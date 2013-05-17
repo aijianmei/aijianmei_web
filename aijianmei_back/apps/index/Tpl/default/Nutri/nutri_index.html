@@ -5,8 +5,8 @@
     			<include file="Templates/banner.html" />
 				<div class="tr_content">
 					<ul class="tr_nav clearfix">
-						<li class="tr_current">最新文章</li>
-						<li>最热文章</li>
+						<li class="tr_current">最新文章<span></span></li>
+						<li>最热文章<span></span></li>
 					</ul>
 					<div class="cont_tab_ct cont_tab_block">
 					<php>foreach($lastArticles as $a) {</php>
@@ -169,6 +169,7 @@
 			   aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
 			   aijianmei.addtitle('detail');
 			   aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
+			   aijianmei.form_jugde('lg_text','lg_password');
 			}
 			init();	
 			//右侧滚动条下拿add by kontem 20130512 start
