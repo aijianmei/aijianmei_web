@@ -7,7 +7,7 @@
 				<div class="day_pl">
 					<ul class="day_classifly clearfix">
 						<li>
-							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=1">
+							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=2">
 								<img src="Templates/images/cj.jpg" alt="初阶-基础锻炼"/>
 								<i class="bg_opc"></i>
 								<div class="ms_hidden_part">
@@ -19,7 +19,7 @@
 							</a>
 						</li>
 						<li>
-							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=2">
+							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=3">
 								<img src="Templates/images/zj.jpg" alt="中阶-运动员锻炼"/>
 								<i class="bg_opc"></i>
 								<div class="ms_hidden_part">
@@ -31,7 +31,7 @@
 							</a>
 						</li>
 						<li>
-							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=3">
+							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=4">
 								<img src="Templates/images/gj.jpg" alt="高阶-肌肉锻炼"/>
 								<i class="bg_opc"></i>
 								<div class="ms_hidden_part">
@@ -56,7 +56,7 @@
 						<div class="cont_module clearfix">
 							<div class="cont_side_1">
 								<a href="index-Index-articleDetail-{$value['id']}.html"><img alt="{$value['title']}" style="width:215px;height:145px;" src="../public/images/article/{$value['img']}"></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-{$value['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php echo $value['img'];?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
@@ -88,7 +88,7 @@
 						<div class="cont_module clearfix">
 							<div class="cont_side_1">
 								<a href="index-Index-articleDetail-{$value['id']}.html"><img alt="{$value['title']}" style="width:215px;height:145px;" src="../public/images/article/{$value['img']}"></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-{$value['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php echo $value['img'];?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
@@ -118,7 +118,7 @@
 						<div class="cont_module clearfix">
 							<div class="cont_vd_1">
 								<a  class="cont_vd_link" href="/index-Train-videoDetail-{$value['id']}.html"><img style="width:215px;height:145px;" alt="{$value['title']}" src="{$value['logo']}"><span class="cont_vd_bg" style="display: none;"></span></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $value['htmlurl'];?>" pic="<?php echo $value['logo'];?>"  title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button></div>
 							</div>
 							<div class="cont_vd_2">
@@ -149,7 +149,7 @@
 						<div class="cont_module clearfix">
 							<div class="cont_vd_1">
 								<a  class="cont_vd_link" href="/index-Train-videoDetail-{$value['id']}.html"><img style="width:215px;height:145px;" alt="{$value['title']}" src="{$value['logo']}"><span class="cont_vd_bg" style="display: none;"></span></a>
-								<div class="show_share" style="margin-left:40px;"><wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $value['htmlurl'];?>" pic="<?php echo $value['logo'];?>"  title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button></div>
+								<div class="show_share clearfix" style="margin-left:40px;"><wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $value['htmlurl'];?>" pic="<?php echo $value['logo'];?>"  title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button></div>
 							</div>
 							<div class="cont_vd_2">
 								<h3 class="cont_vd_title"><a href="/index-Train-videoDetail-{$value['id']}.html">{$value['title']}</a></h3>
@@ -309,6 +309,7 @@
     			if(res) {
 					$("#ajax_ct"+type).append(res);
 					aijianmei.hover('cont_vd_link','cont_vd_bg');
+					$.getScript("http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454");
     			}else {
     				//ui.error('删除失败');
     			}

@@ -1303,8 +1303,8 @@ function getUserFace($uid,$size){
 	}else{
 		$type = 'big';
 	}
-        $apiImg= M('')->query("select profileImageUrl from ai_others where uid='".$uid."'");
-        if($apiImg){
+    $apiImg= M('')->query("select profileImageUrl from ai_others where uid='".$uid."' and profileImageUrl!=''");
+    if(!empty($apiImg)){
             $userface=$apiImg[0]['profileImageUrl'];
             return $userface;
         }

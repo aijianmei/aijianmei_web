@@ -126,7 +126,7 @@ class NutriAction extends Action {
 		$keywordInfo=unserialize(include_once("PublicCache/keywordInfo.php"));
 		$this->assign('_CommentList',unserialize(include_once("PublicCache/CommentListCache.php")));
 		$this->assign('_KeyWordList',$keywordInfo['nutri']);
-         $this->assign('headertitle', '营养');
+        $this->assign('headertitle', '营养');
 		 //header current add by kon at 20130415
 		$this->assign('_current', 'nutri');
         $this->display('nutri_index');
@@ -186,7 +186,8 @@ class NutriAction extends Action {
 		$keywordInfo=unserialize(include_once("PublicCache/keywordInfo.php"));
 		$this->assign('_CommentList',unserialize(include_once("PublicCache/CommentListCache.php")));
 		$this->assign('_KeyWordList',$keywordInfo['nutri']);
-         $this->assign('headertitle', '营养');
+		$keymenu=array('29'=>'增肌','28'=>'减脂','31'=>'一般饮食知识');
+         $this->assign('headertitle', $keymenu[$id]);
 		 //header current add by kon at 20130415
 		$this->assign('_current', 'nutri');
         $this->display('nutri_list');

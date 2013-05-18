@@ -56,7 +56,7 @@ function ajaxInMore($data){
 		//$sql = "select a.* from ai_article a group by a.id order by a.".$order." desc limit ".$froms*$nums.",$nums";
 		if($lid>0){$cateStr='AND a.category_id in ('.$lid.')';}else{$cateStr='';}
 		$orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id $cateStr";
-		$sql = "select a.* from ai_article a where id in ($orderTableSql) or category_id=$id group by a.id  order by ".$order." desc limit ".$froms*$nums.",$nums";
+		$sql = "select a.* from ai_article a where id in ($orderTableSql) group by a.id  order by ".$order." desc limit ".$froms*$nums.",$nums";
 		$result=null;
 		$result=getDataCache(md5($sql));
 		
@@ -74,7 +74,7 @@ function ajaxInMore($data){
 		}
 		foreach($result as $k =>$value){
 		$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="index-Index-articleDetail-'.$value['id'].'.html"><img alt="'.$value['title'].'" style="width:215px;height:145px;" src="../public/images/article/'.$value['img'].'"></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-'.$value['id'].'.html" pic="http://www.aijianmei.com/public/images/article/'.$value['img'].'" title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
@@ -122,7 +122,7 @@ function ajaxInMore($data){
 		$returnHtml=null;
 		foreach($result as $k =>$value){
 			$returnHtml.='<div class="cont_module clearfix"><div class="cont_vd_1"><a  class="cont_vd_link"  href="/index-Train-videoDetail-'.$value['id'].'.html">
-			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"><span class="cont_vd_bg" style="display: none;"></span></a><div class="show_share" style="margin-left:40px;">
+			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"><span class="cont_vd_bg" style="display: none;"></span></a><div class="show_share clearfix" style="margin-left:40px;">
 			<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="'.$value['htmlurl'].'?>" pic="'.$value['logo'].'"  title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30">
 			</wb:share-button></div></div><div class="cont_vd_2"><h3 class="cont_vd_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
 								<div class="cont_vd_dt">
@@ -170,7 +170,7 @@ function ajaxTrainMore($data){
 		}
 		foreach($result as $k =>$value){
 		$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="index-Index-articleDetail-'.$value['id'].'.html"><img alt="'.$value['title'].'" style="width:215px;height:145px;" src="../public/images/article/'.$value['img'].'"></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-'.$value['id'].'.html" pic="http://www.aijianmei.com/public/images/article/'.$value['img'].'" title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
@@ -218,7 +218,7 @@ function ajaxTrainMore($data){
 		$returnHtml=null;
 		foreach($result as $k =>$value){
 			$returnHtml.='<div class="cont_module clearfix"><div class="cont_vd_1"><a class="cont_vd_link"  href="/index-Train-videoDetail-'.$value['id'].'.html">
-			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"><span class="cont_vd_bg" style="display: none;"></span></a><div class="show_share" style="margin-left:40px;">
+			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"><span class="cont_vd_bg" style="display: none;"></span></a><div class="show_share clearfix" style="margin-left:40px;">
 			<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="'.$value['htmlurl'].'?>" pic="'.$value['logo'].'"  title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30">
 			</wb:share-button></div></div><div class="cont_vd_2"><h3 class="cont_vd_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
 								<div class="cont_vd_dt">

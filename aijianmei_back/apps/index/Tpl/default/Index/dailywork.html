@@ -8,14 +8,35 @@
 						<div>
 							<a href="#"><img src="Templates/images/plan/{$bannerTopInfo['img']}" alt="{$bannerTopInfo['title']}" class="itemImg"/></a>
 							<div class="plan_cover"><span>{$bannerTopInfo['title']}</span></div>
+							<span class="cover_cont">{$bannerTopInfo['title']}</span>
 						</div>
 					</div>
 					<div class="daily_choice">
 						<ul class="clearfix">
-							<li class="article_item"><a href="/index-Index-articleDetail-{$bannerTopInfo['aid_1']}.html"><img src="Templates/images/plan/{$bannerTopInfo['aimg_1']}" alt="饮食调节" class="article_img"/></a></li>
-							<li class="article_item a_item2"><a href="/index-Index-articleDetail-{$bannerTopInfo['aid_2']}.html"><img src="Templates/images/plan/{$bannerTopInfo['aimg_2']}" alt="强身健体" class="article_img"/></a></li>
-							<li class="article_item a_item3"><a href="/index-Index-articleDetail-{$bannerTopInfo['aid_3']}.html"><img src="Templates/images/plan/{$bannerTopInfo['aimg_3']}" alt="健身塑性" class="article_img"/></a></li>
-							<li class="article_item"><a href="/index-Index-articleDetail-{$bannerTopInfo['aid_4']}.html"><img src="Templates/images/plan/{$bannerTopInfo['aimg_4']}" alt="健身塑性" class="article_img"/></a></li>
+							<li class="article_item">
+							<a href="/index-Index-articleDetail-{$bannerTopInfo['aid_1']}.html">
+							<img src="Templates/images/plan/{$bannerTopInfo['aimg_1']}" alt="{$bannerTopInfo['aimg_title1']}" class="article_img"/></a>
+							<div class="plan_cover"></div>
+								<span class="cover_cont">{$bannerTopInfo['aimg_title1']}</span>
+							</li>
+							<li class="article_item a_item2">
+							<a href="/index-Index-articleDetail-{$bannerTopInfo['aid_2']}.html">
+							<img src="Templates/images/plan/{$bannerTopInfo['aimg_2']}" alt="{$bannerTopInfo['aimg_title2']}" class="article_img"/></a>
+							<div class="plan_cover"></div>
+								<span class="cover_cont">{$bannerTopInfo['aimg_title2']}</span>
+							</li>
+							<li class="article_item a_item3">
+							<a href="/index-Index-articleDetail-{$bannerTopInfo['aid_3']}.html">
+							<img src="Templates/images/plan/{$bannerTopInfo['aimg_3']}" alt="{$bannerTopInfo['aimg_title3']}" class="article_img"/></a>
+							<div class="plan_cover"></div>
+								<span class="cover_cont">{$bannerTopInfo['aimg_title3']}</span>
+							</li>
+							<li class="article_item">
+							<a href="/index-Index-articleDetail-{$bannerTopInfo['aid_4']}.html">
+							<img src="Templates/images/plan/{$bannerTopInfo['aimg_4']}" alt="{$bannerTopInfo['aimg_title4']}" class="article_img"/></a>
+							<div class="plan_cover"></div>
+								<span class="cover_cont">{$bannerTopInfo['aimg_title4']}</span>
+							</li>
 						</ul>
 					</div>					
 				</div><!--End plan_sort-->
@@ -118,7 +139,7 @@
 								<button class="register"><a href="">注册</a></button>
 								<php>}</php>
 								<span class="accout">0/300</span>
-								<textarea name="" id="comment_{$i['article']['id']}" class="commentboxCss"  cols=47 rows=5 onclick="cleanlabel({$i['article']['id']});"></textarea>
+								<textarea name="" id="comment_{$i['article']['id']}" class="commentboxCss"  cols=47 rows=5 ></textarea>
 								<label for="comment_{$i['article']['id']}" id="lable_{$i['article']['id']}">有什么感想，来说说吧</label>
 								<button class="done" onclick="addVideoCommont(comment_{$i['article']['id']}.value, {$i['article']['id']}, 'Daily')" aid="{$i['article']['id']}"></button>
 							</div>
@@ -128,7 +149,7 @@
 				<php>}</php>
 				<input type="hidden" id="commentUid" value="<?php echo $_SESSION['mid'];?>">
 
-<div class="pg_page clearfix" id="ajaxpage_3" style="display:none;">
+					<div class="pg_page clearfix" id="ajaxpage_3" style="display:none;">
 						<span class="pg_concrete_choice">
 								{$pager['backstr']}
 								{$pager['thestr']}
@@ -140,9 +161,7 @@
 		<include file="Templates/footer.html" />
 		<include file="Templates/loginpart.html" />
 		<script>
-		function cleanlabel(lid){
-			$("#lable_"+lid).html('');
-		}
+
 		function setlike(id){
 			$.ajax({
             type: "POST",
@@ -153,6 +172,7 @@
 				if(data.result==1){
 				var nums=$('#likenum_'+id).attr("nums");
 				$('#likenum_'+id).html(nums*1+1);
+				$('#appbox_'+id).html('');
 				}
 				if(data.result==3){
 					alert('你已经投过票了');

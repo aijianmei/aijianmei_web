@@ -139,20 +139,27 @@ class UserAction extends Action {
 			else
 			{
 				$_SESSION['deslogin']=1;
+				$_SESSION['locallogin']=1;
 				$insertSql="INSERT INTO ai_user (email,password,ctime,is_active,is_init,identity)VALUES ('".$userEmail."','".md5($password)."','".time()."','1','1','1')";
 				M('')->query($insertSql);
 				$getuidsql="select uid from ai_user where email='".$userEmail."' and password='".md5($password)."'";
 				$uidinfo=M('')->query($getuidsql);
 				$mid=$uidinfo[0]['uid'];
-				//service('Passport')->loginLocal($uidinfo[0]['uid']);
+				$_SESSION['locallogin_password']=$password;
+				//service('Passport')->login($uidinfo[0]['uid']);
 			}
 			$_SESSION['allowbackreg']=1;
 			$_SESSION['allowbackmid']=$mid;
+			$_SESSION['loginIcpkey']=md5('aijianmei'.$mid);
 		}
 		$this->display('register_2');
 	}
 	
 	public function setchannelinfo(){
+		if($_SESSION['loginIcpkey']!=md5('aijianmei'.$_SESSION['allowbackmid'])){
+			$_SESSION=null;
+			redirect(U('index/index/index'));
+		}
 		if($_SESSION['allowbackreg']==1){
 			$mid=$_SESSION['allowbackmid'];
 			if($mid>0&&addslashes($_GET['psd'])=='sub'){
@@ -168,11 +175,316 @@ class UserAction extends Action {
 					$insertSql="insert into ai_user_keywords (uid,keyword)values('".$mid."','".serialize($keyTmp)."')";
 					M('')->query($insertSql);
 				}
-				redirect(U('index/index/index'));
+				if($_SESSION['otherlogin']==1){
+					if($_SESSION['refer_url']!=''){
+						redirect($_SESSION['refer_url']);
+					}else{
+						redirect(U('index/index/index'));
+					}
+				}else{
+					redirect(U('index/user/fishuserinfo'));
+				}
 			}
 		}
 		$this->display('register_3');
 	}
+	
+	public function fishuserinfo(){
+		//注册流程权值判断
+		if($_SESSION['loginIcpkey']!=md5('aijianmei'.$_SESSION['allowbackmid'])){
+			$_SESSION=null;
+			redirect(U('index/index/index'));
+		}
+		$username=$description=$domain=$userArea=$usercity=null;
+		$imgurl=null;
+		if($_SESSION['locallogin']==1){
+			$mid=$_SESSION['allowbackmid'];
+			$getUserNameSql="select * from ai_user where uid='".$mid."'";
+			$UserNameInfo=M('')->query($getUserNameSql);
+			$username=$UserNameInfo[0]['uname'];
+			$usersex=$UserNameInfo[0]['sex'];
+			$userinfo['province']=$UserNameInfo[0]['province'];
+			$userinfo['city']=$UserNameInfo[0]['city'];
+			$getUserKeywordSql="select * from ai_user_keywords where uid='".$mid."'";
+			$getUserKeyword=M('')->query($getUserKeywordSql);
+			$getUserKeyword=unserialize($getUserKeyword[0]['keyword']);
+			
+			$otherinfoSql="select * from ai_others where uid='".$mid."'";
+			$otherinfo=M('')->query($otherinfoSql);
+			$description=$otherinfo[0]['description'];
+			$domain=$otherinfo[0]['domain'];
+			$cemail=$otherinfo[0]['cemail'];
+			$ctell=$otherinfo[0]['ctell'];
+			
+			$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
+			if(is_file($filename)) $imgurl=$filename;
+			$this->assign('UserKeyword',$getUserKeyword);
+		}elseif($_SESSION['otherlogin']==1){
+			$mid=$_SESSION['allowbackmid'];
+			$getUserNameSql="select * from ai_user where uid='".$_SESSION['mid']."'";
+			$UserNameInfo=M('')->query($getUserNameSql);
+			$username=$UserNameInfo[0]['uname'];
+			$usersex=$UserNameInfo[0]['sex'];
+			$userinfo['province']=$UserNameInfo[0]['province'];
+			$userinfo['city']=$UserNameInfo[0]['city'];
+			$getSimgSql="select * from ai_others where uid='".$_SESSION['mid']."'";
+			$ImgArr=M('')->query($getSimgSql);
+			$imgurl=$ImgArr[0]['profileImageUrl'];
+			$description=$ImgArr[0]['description'];
+			$domain=$ImgArr[0]['domain'];
+			$cemail=$otherinfo[0]['cemail'];
+			$ctell=$otherinfo[0]['ctell'];
+			$locationInfo=$ImgArr[0]['location'];
+			$userLocationInfo=explode(' ',$locationInfo);
+			$userArea=$userLocationInfo[0];
+			$usercity=$userLocationInfo[1];
+		}
+		
+		//地区选择
+		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
+        foreach($area as $a) {
+            $child[$a['area_id']] = M('area')->where(array('pid'=>$a['area_id']))->order('`area_id` ASC')->findAll();	
+        }
+        $this->assign('children', $child);
+        $this->assign('area', $area);
+		//}}
+		$this->assign('ctell',$ctell);
+		$this->assign('cemail',$cemail);
+		$this->assign('usersex',$usersex);
+		$this->assign('userinfo',$userinfo);
+		$this->assign('userArea',$userArea);
+		$this->assign('usercity',$usercity);
+		$this->assign('domain',$domain);
+		$this->assign('description',$description);
+		$this->assign('imgurl',$imgurl);
+		$this->assign('username',$username);
+		$this->assign('cssFile','datum');
+		$this->display('datum');
+	}
+	public function edituserinfo(){
+		if(!$_SESSION['mid']){
+			if($_SESSION['loginIcpkey']!=md5('aijianmei'.$_SESSION['allowbackmid'])){
+				$_SESSION=null;
+				redirect(U('index/index/index'));
+			}
+			$mid=$_SESSION['allowbackmid'];
+		}else{
+			$mid=$_SESSION['mid'];
+		}
+		$username=$description=$domain=$userArea=$usercity=null;
+		$imgurl=null;
+		if($mid>0){
+			//$mid=$_SESSION['allowbackmid'];
+			$getUserNameSql="select * from ai_user where uid='".$mid."'";
+			$UserNameInfo=M('')->query($getUserNameSql);
+			$username=$UserNameInfo[0]['uname'];
+			$usersex=$UserNameInfo[0]['sex'];
+			$userinfo['province']=$UserNameInfo[0]['province'];
+			$userinfo['city']=$UserNameInfo[0]['city'];
+			$getUserKeywordSql="select * from ai_user_keywords where uid='".$mid."'";
+			$getUserKeyword=M('')->query($getUserKeywordSql);
+			$getUserKeyword=unserialize($getUserKeyword[0]['keyword']);
+			
+			$otherinfoSql="select * from ai_others where uid='".$mid."'";
+			$otherinfo=M('')->query($otherinfoSql);
+			$description=$otherinfo[0]['description'];
+			$domain=$otherinfo[0]['domain'];
+			$cemail=$otherinfo[0]['cemail'];
+			$ctell=$otherinfo[0]['ctell'];
+			
+			$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
+			if(is_file($filename)) $imgurl=$filename;
+			$this->assign('UserKeyword',$getUserKeyword);
+		}
+		
+		//地区选择
+		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
+        foreach($area as $a) {
+            $child[$a['area_id']] = M('area')->where(array('pid'=>$a['area_id']))->order('`area_id` ASC')->findAll();	
+        }
+        $this->assign('children', $child);
+        $this->assign('area', $area);
+		//}}
+		$this->assign('ctell',$ctell);
+		$this->assign('cemail',$cemail);
+		$this->assign('usersex',$usersex);
+		$this->assign('userinfo',$userinfo);
+		$this->assign('userArea',$userArea);
+		$this->assign('usercity',$usercity);
+		$this->assign('domain',$domain);
+		$this->assign('description',$description);
+		$this->assign('imgurl',$imgurl);
+		$this->assign('username',$username);
+		$this->assign('cssFile','datum');
+		$this->display('edit_userinfo');
+	}
+	public function saveuserinfo(){
+		//print_r($_POST);
+		//注册流程权值判断
+		if(!$_SESSION['mid']){
+			if($_SESSION['loginIcpkey']!=md5('aijianmei'.$_SESSION['allowbackmid'])){
+				$_SESSION=null;
+				redirect(U('index/index/index'));
+			}
+			$mid=$_SESSION['allowbackmid'];
+		}else{
+			$mid=$_SESSION['mid'];
+		}
+		$username=$_POST['username'];
+		if($mid>0&&$username!=''&&$_GET['args']=='uinfo'){
+			if($_SESSION['otherlogin']==1||$_SESSION['locallogin']==1){
+			$upsql=null;
+			$upsql="UPDATE ai_user SET uname = '".$username."',sex='".$_POST['sex']."',province='".$_POST['province']."',city='".$_POST['city']."' WHERE uid =$mid";
+			M('')->query($upsql);
+			
+			$keyTmp=array();
+				foreach($_POST['keyword'] as $k=>$v){
+					if(!in_array($v,$keyTmp)){
+						$keyTmp[]=$v;
+					}	
+				}
+			$upsql=null;
+			$upsql="UPDATE ai_user_keywords SET keyword = '".serialize($keyTmp)."' WHERE uid =$mid";
+			M('')->query($upsql);
+			
+			$sql="select uname,email from ai_user where uid =$mid";
+			$shopinserinfo=M('')->query($sql);
+			
+			include_once('shopApi.php');
+			$sdata=null;
+			$sdata['uname']=addslashes($shopinserinfo[0]['uname']);
+			$sdata['password']=addslashes($_SESSION['locallogin_password']);
+			$sdata['email']   =addslashes($shopinserinfo[0]['email']);
+			
+			_postCurlRegister($sdata);
+			service('Passport')->loginLocal($sdata['uname'],$sdata['password'],1);
+			
+			$checkotherinfosql="select * from ai_others where uid=$mid";
+			$res=M('')->query($checkotherinfosql);
+			if(!$res){
+				$insertsql=null;
+				$other['uid'] = $mid;
+				$other['mediaID'] = '3';
+				$other['friendsCount'] = 0;
+				$other['favouritesCount'] =0;
+				$other['profileImageUrl'] = '';
+				$other['mediaUserID'] = '';
+				$other['url']  = '';
+				$other['homepage'] = '';
+				$other['description'] = $_POST['description'];
+				$other['domain'] = $_POST['sina_domain'];
+				$other['followersCount'] = 0;
+				$other['statusesCount']  = 0;
+				$other['personID'] = 0;
+				foreach($other as $key => $value){
+					$insertstr.=empty($insertstr)?$key:','.$key;
+					$valuestr.=empty($valuestr)?"'".$value."'":",'".$value."'";
+				}
+				$insertsql = "INSERT INTO `aijianmei`.`ai_others` ($insertstr) VALUES ($valuestr)";
+				M('')->query($insertsql);
+			}
+			else{
+				$upsql=null;
+				$upsql="UPDATE ai_others SET description = '".$_POST['description']."',domain='".$_POST['sina_domain']."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}
+			}
+		}elseif($mid>0&&$_GET['args']=='uppwd'){
+			if($_POST['password']==$_POST['repassword']){
+				$upsql="update ai_user SET password = '".md5($_POST['password'])."' WHERE password ='".md5($_POST['oldpassword'])."'";
+				M('')->query($upsql);
+			}
+		}elseif($mid>0&&$_GET['args']=='upconnect'){
+			if(!empty($_POST['cemail'])&&!empty($_POST['ctell'])){
+				$upsql=null;
+				$upsql="update ai_others SET cemail = '".$_POST['cemail']."',ctell = '".$_POST['ctell']."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}
+		}
+
+		//service('Passport')->login($mid);
+		
+		redirect(U('index/Index/index'));
+	}
+public function saveedituserinfo(){
+		//print_r($_POST);
+		//注册流程权值判断
+		$mid=$_SESSION['mid'];
+		$username=$_POST['username'];
+		if($mid>0&&$username!=''&&$_GET['args']=='uinfo'){
+			if($mid>0){
+			$upsql=null;
+			$upsql="UPDATE ai_user SET uname = '".$username."',sex='".$_POST['sex']."',province='".$_POST['province']."',city='".$_POST['city']."' WHERE uid =$mid";
+			M('')->query($upsql);
+			$keyTmp=array();
+				foreach($_POST['keyword'] as $k=>$v){
+					if(!in_array($v,$keyTmp)){
+						$keyTmp[]=$v;
+					}	
+				}
+			$upsql=null;
+			$upsql="UPDATE ai_user_keywords SET keyword = '".serialize($keyTmp)."' WHERE uid =$mid";
+			M('')->query($upsql);
+			
+			$sql="select uname,email from ai_user where uid =$mid";
+			$shopinserinfo=M('')->query($sql);
+			
+			include_once('shopApi.php');
+			$sdata=null;
+			$sdata['uname']=addslashes($shopinserinfo[0]['uname']);
+			$sdata['password']=addslashes($_SESSION['locallogin_password']);
+			$sdata['email']   =addslashes($shopinserinfo[0]['email']);
+			
+			_postCurlRegister($sdata);
+			service('Passport')->loginLocal($sdata['uname'],$sdata['password'],1);
+			
+			$checkotherinfosql="select * from ai_others where uid=$mid";
+			$res=M('')->query($checkotherinfosql);
+			if(!$res){
+				$insertsql=null;
+				$other['uid'] = $mid;
+				$other['mediaID'] = '3';
+				$other['friendsCount'] = 0;
+				$other['favouritesCount'] =0;
+				$other['profileImageUrl'] = '';
+				$other['mediaUserID'] = '';
+				$other['url']  = '';
+				$other['homepage'] = '';
+				$other['description'] = $_POST['description'];
+				$other['domain'] = $_POST['sina_domain'];
+				$other['followersCount'] = 0;
+				$other['statusesCount']  = 0;
+				$other['personID'] = 0;
+				foreach($other as $key => $value){
+					$insertstr.=empty($insertstr)?$key:','.$key;
+					$valuestr.=empty($valuestr)?"'".$value."'":",'".$value."'";
+				}
+				$insertsql = "INSERT INTO `aijianmei`.`ai_others` ($insertstr) VALUES ($valuestr)";
+				M('')->query($insertsql);
+			}
+			else{
+				$upsql=null;
+				$upsql="UPDATE ai_others SET description = '".$_POST['description']."',domain='".$_POST['sina_domain']."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}
+			}
+		}elseif($mid>0&&$_GET['args']=='uppwd'){
+			if($_POST['password']==$_POST['repassword']){
+				$upsql="update ai_user SET password = '".md5($_POST['password'])."' WHERE password ='".md5($_POST['oldpassword'])."'";
+				M('')->query($upsql);
+			}
+		}elseif($mid>0&&$_GET['args']=='upconnect'){
+			if(!empty($_POST['cemail'])&&!empty($_POST['ctell'])){
+				$upsql=null;
+				$upsql="update ai_others SET cemail = '".$_POST['cemail']."',ctell = '".$_POST['ctell']."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}
+		}
+
+		//service('Passport')->login($mid);
+		
+		redirect(U('index/Index/index'));
+	}	
 	
 	public function loginUserInfo()
 	{
@@ -294,7 +606,21 @@ class UserAction extends Action {
 	echo "<textarea><img style='width:150px;height:150px;' src='".$fdata['data']['picurl']."'/></textarea>";
 	exit;
 	}
+	public function newShowImg(){
 
+     //不存在当前上传文件则上传
+     // if(!file_exists($_FILES['upload_file']['name'])) 
+	 // {
+		// move_uploaded_file($_FILES['upload_file']['tmp_name'],$_FILES['upload_file']['name']);
+	 // }
+	
+	$fdata=$this->newupload();
+    //输出图片文件<img>标签
+
+    echo "<textarea><img src='".$fdata['data']['picurl']."'/></textarea>";
+	echo "<textarea><img class='dt_choice_img' style='width:45px;height:45px;' src='".$fdata['data']['spicurl']."'/></textarea>";
+	exit;
+	}
 	
 	function upload(){
 		if($_SESSION['allowbackmid']){$this->uid=$_SESSION['allowbackmid'];}
@@ -390,6 +716,100 @@ class UserAction extends Action {
         }
         return $return;
     }
+function newupload(){
+		if($_SESSION['allowbackmid']){$this->uid=$_SESSION['allowbackmid'];}
+        $pic_id = time();//使用时间来模拟图片的ID.           
+        $pic_path = $this->getSavePath().'/original.jpg';
+        $pic_abs_path = __UPLOAD__.'/avatar'.convertUidToPath($this->uid).'/original.jpg';
+        //保存上传图片.
+        if(empty($_FILES['Filedata'])) {
+        	$return['message'] = L('photo_upload_failed');
+        	$return['code']    = '0';
+        }else{
+        	$validExts = array('image/jpg', 'image/jpeg', 'image/png', 'image/gif','image/pjpeg','image/x-png');
+        	if(!in_array(strtolower($_FILES['Filedata']['type']), $validExts)) {
+        		@unlink($_FILES['Filedata']['tmp_name']);
+        		$return['message'] = '仅允许上传jpg,jpeg,png,gif格式图片';
+        		$return['code'] = 0;
+        		return json_encode($return);
+        	}
+        	
+	        $file = @$_FILES['Filedata']['tmp_name'];
+	        file_exists($pic_path) && @unlink($pic_path);
+	        if(@copy($_FILES['Filedata']['tmp_name'], $pic_path) || @move_uploaded_file($_FILES['Filedata']['tmp_name'], $pic_path)) 
+	        {
+	        	@unlink($_FILES['Filedata']['tmp_name']);
+	        	/*list($width, $height, $type, $attr) = getimagesize($pic_path);
+	        	if($width < 10 || $height < 10 || $width > 3000 || $height > 3000 || $type == 4) {
+	        		@unlink($pic_path);
+	        		return -2;
+	        	}*/
+	        	include( SITE_PATH.'/addons/libs/Image.class.php' );
+	        	Image::thumb( $pic_path, $pic_path , '' , 300 , 300 );
+	        	list($sr_w, $sr_h, $sr_type, $sr_attr) = @getimagesize($pic_path);
+	        	
+	        	$return['data']['picurl'] = 'data/uploads/avatar'.convertUidToPath($this->uid).'/original.jpg';
+				$return['data']['spicurl'] = 'data/uploads/avatar'.convertUidToPath($this->uid).'/middle.jpg';
+	        	$return['data']['picwidth'] = $sr_w;
+	        	$return['data']['picheight'] = $sr_h;
+	        	$return['code']    = '1';
+				// 获取源图的扩展名宽高
+			$src=$return['data']['picurl'];
+		list($sr_w, $sr_h, $sr_type, $sr_attr) = @getimagesize($src);
+		if($sr_type){
+			//获取后缀名
+			$ext = image_type_to_extension($sr_type,false);
+		} else {
+			echo "-1";
+			exit;
+		}
+		
+		$big_w = '150';
+		$big_h = '150';
+		
+		$middle_w = '50';
+		$middle_h = '50';
+		
+		$small_w  = '30';
+		$small_h  = '30';
+		
+		$face_path      =   SITE_PATH.'/data/uploads/avatar'.convertUidToPath($this->uid);
+		$big_name	    =	$face_path.'/big.jpg';		// 大图
+		$middle_name	=	$face_path.'/middle.jpg';		// 中图
+		$small_name		=	$face_path.'/small.jpg';
+		
+		$func	=	($ext != 'jpg')?'imagecreatefrom'.$ext:'imagecreatefromjpeg';
+		$img_r	=	call_user_func($func,$src);
+		
+		$dst_r	=	ImageCreateTrueColor( $big_w, $big_h );
+		$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
+		ImageFilledRectangle( $dst_r, 0, 0, $big_w, $big_h, $back );
+		ImageCopyResampled( $dst_r, $img_r, 0, 0, 0, 0, $big_w, $big_h, $sr_w, $sr_h );
 	
+		ImagePNG($dst_r,$big_name);  // 生成大图
+
+		// 开始切割大方块头像成中等方块头像
+		$sdst_r	=	ImageCreateTrueColor( $middle_w, $middle_h );
+		ImageCopyResampled( $sdst_r, $dst_r, 0, 0, 0, 0, $middle_w, $middle_h, $big_w, $big_w );
+		ImagePNG($sdst_r,$middle_name);  // 生成中图
+		
+		
+		// 开始切割大方块头像成中等方块头像
+		$sdst_s	=	ImageCreateTrueColor( $small_w, $small_h );
+		ImageCopyResampled( $sdst_s, $dst_r, 0, 0, 0, 0, $small_w, $small_h, $big_w, $big_w );
+		ImagePNG($sdst_s,$small_name);  // 生成中图
+		
+		ImageDestroy($dst_r);
+		ImageDestroy($sdst_r);
+		ImageDestroy($sdst_s);
+		ImageDestroy($img_r);
+	        } else {
+	        	@unlink($_FILES['Filedata']['tmp_name']);
+	        	$return['message'] = L('photo_upload_failed');
+	        	$return['code']    = '0';
+	        }	
+        }
+        return $return;
+    }	
 }
 ?>

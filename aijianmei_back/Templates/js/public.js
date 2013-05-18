@@ -427,3 +427,94 @@ var init = function(){
     aijianmei.hover('more','account');
 }
 init();	
+
+
+
+
+
+
+//对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
+var fade = {
+    newdom : new getdom,
+    init : function(obj){
+        var Obj = fade.newdom.getElementsByClass(obj)[0] || document.getElementsByTagName(obj)[0] || document.getElementById(obj);
+        Obj.onclick = function(event){
+            var _e = event ? event : window.event;
+            if(_e.preventDefault){
+                _e.preventDefault();
+            }
+            else{
+                _e.returnValue = false;
+            }
+            fade.handlecontent();
+            fade.changestyle('1');
+            this.style.background = '';
+            var closed = fade.newdom.getElementsByClass('closed')[0],
+                fade_in = fade.newdom.getElementsByClass('fade_in')[0];
+            var click_back = function(){
+                fade.changestyle('0');
+                // fade_in.removeAttribute('class')
+                fade_in.className = ''
+            }
+            addevent(closed,'click',click_back);
+            addevent(fade_in,'click',click_back);
+        }
+    },
+    handlecontent : function(){
+        var body = document.getElementsByTagName('body')[0],
+            div_1 = document.createElement('div'),
+            div_2 = document.createElement('div');
+        div_1.className = 'fade_in';
+        div_2.className = 'modal';
+        div_2.innerHTML = '<div class="modal_header"><a class="closed">×</a><h3>我们正在检测中</h3></div><p class="modal_body">即将推出，敬请期待...</p>';
+        body.appendChild(div_1);
+        body.appendChild(div_2);
+    },
+    changestyle : function(T){
+        var fade_in = fade.newdom.getElementsByClass('fade_in')[0],
+            modal = fade.newdom.getElementsByClass('modal')[0];
+        if(T == '1'){
+            var i = 0,
+                top = fade.newdom.GetCurrentStyle(modal,'top');
+            var round = function(){
+                setTimeout(function(){
+                    i = i + 0.05;
+                    fade_in.style.opacity = i;
+                    top = parseFloat(top) + 20;
+                    modal.style.top = top + 'px';
+                    if(top < 200){
+                        round()
+                    }
+                },1);
+            }
+            round()
+        }
+        else{
+            var i = 0.75,
+                top = fade.newdom.GetCurrentStyle(modal,'top');
+            var round = function(){
+                setTimeout(function(){
+                    i = i - 0.05;
+                    fade_in.style.opacity = i;
+                    top = parseFloat(top) - 20;
+                    modal.style.top = top + 'px';
+                    if(top > -120){
+                        round()
+                    }
+                },10);
+            }
+            round()
+        }   
+    }
+};
+var newdom = new getdom;
+
+if(newdom.getElementsByClass('store')[0]){
+    fade.init('store');
+}
+if(newdom.getElementsByClass('forum')[0]){
+    fade.init('forum');
+}
+if(newdom.getElementsByClass('friends')[0]){
+    fade.init('friends');
+}

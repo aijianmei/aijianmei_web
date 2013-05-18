@@ -26,15 +26,15 @@ class TrainAction extends Action {
 			),
 		'2'=>array(
 			'name'=>'锻炼肌肉的基本要素',
-			'img'=>'../Public/images/banner/index_2.jpg',
+			'img'=>'../Public/images/banner/training_2.jpg',
 			'url'=>"/index-Index-articleDetail-52.html"),
 		'3'=>array(
 			'name'=>'完美的健身伙伴',
-			'img'=>'../Public/images/banner/index_3.jpg',
+			'img'=>'../Public/images/banner/training_3.jpg',
 			'url'=>"/index-Index-articleDetail-50.html"),
 		'4'=>array(
 			'name'=>'8个开始体重训练的原因',
-			'img'=>'../Public/images/banner/index_4.jpg',
+			'img'=>'../Public/images/banner/training_4.jpg',
 			'url'=>"/index-Index-articleDetail-96.html"),
 		);
 		 $this->assign('_bannerInfo',$bannerinfo);
@@ -294,7 +294,8 @@ class TrainAction extends Action {
 		
 		//print_r($lastArticles);
         $this->show_banner();//显示banner
-        $this->assign('headertitle', '锻炼');
+		$keymenu=array('51'=>'锻炼方法','38'=>'基础知识','47'=>'特定锻炼视频');
+        $this->assign('headertitle', $keymenu[$id]);
 		//header current add by kon at 20130415
 		$this->assign('_current', 'train');
         //$this->display();
@@ -344,7 +345,7 @@ class TrainAction extends Action {
 		
 		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Train&act=videoList&id=$id&ctype=3&pg=");
 		$pagerArray = $pagerData['html'];
-		print_r($pagerArray);
+		//print_r($pagerArray);
 		$order = 'create_time';
 		//$lastArticles = D('Article')->getTrainArticles($order);
         $lastVideoList = D('Article')->getTrainVideoList($order,'',($pg-1)*$nums,$nums);
@@ -364,7 +365,7 @@ class TrainAction extends Action {
 		
 		//print_r($lastArticles);
         $this->show_banner();//显示banner
-        $this->assign('headertitle', '锻炼');
+        $this->assign('headertitle', '锻炼视频');
 		//header current add by kon at 20130415
 		$this->assign('_current', 'train');
         //$this->display();

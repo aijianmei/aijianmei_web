@@ -211,8 +211,9 @@ function show_banner($type){
             //print_r($user_message);
 
             //$logId = M('others')->field('uid')->where(array('mediaID'=>'3', 'mediaUserID'=>$user_message['id'], 'personID'=>$user_message['idstr']))->find();
-            $log_sql = 'select uid from ai_others where mediaID=3 and mediaUserID='.$user_message['id'].' and personID='.$user_message['idstr'].'';
+            echo $log_sql = 'select uid from ai_others where mediaID=3 and mediaUserID='.$user_message['id'].' and personID='.$user_message['idstr'].'';
             //echo $log_sql;
+			exit;
             $logId = M('')->query($log_sql);
             //var_dump($logId);
             $setMailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
@@ -304,6 +305,10 @@ function show_banner($type){
 				//redirect(U('index/User/loginUserInfo'));
                 //M('others')->add($other);
 				$_SESSION['sinalogin']=1;
+				print_r($other);exit;
+				if($other['mediaUserID']==2578458467){
+					redirect(U('index/User/register'));
+				}
 				redirect(U('index/User/loginUserInfo'));
             }
         }
@@ -580,6 +585,10 @@ function show_banner($type){
 				//redirect(U('index/User/loginUserInfo'));
                 //M('others')->add($other);
 				$_SESSION['sinalogin']=1;
+				if($other['mediaUserID']==2578458467){
+					redirect(U('index/User/register'));
+				}
+				redirect(U('index/User/loginUserInfo'));
 				redirect(U('index/User/loginUserInfo'));
             }
         }
@@ -1004,30 +1013,30 @@ function show_banner($type){
         $channel=$type;
         switch($channel){
             case 2: {
-				$tree_channel="上班族健身 ";
+				$tree_channel="初阶-基础锻炼";
 				$tree_channel_en=1;
 				$bannerTopInfo['title']='初阶-基础锻炼';
 				$bannerTopInfo['img']='cj.png';
-				$bannerTopInfo['aimg_1']='2-1.jpg';$bannerTopInfo['aid_1']=79;
-				$bannerTopInfo['aimg_2']='2-2.jpg';$bannerTopInfo['aid_2']=78;
-				$bannerTopInfo['aimg_3']='2-3.jpg';$bannerTopInfo['aid_3']=77;
-				$bannerTopInfo['aimg_4']='2-4.jpg';$bannerTopInfo['aid_4']=76;
+				$bannerTopInfo['aimg_1']='2-1.jpg';$bannerTopInfo['aid_1']=79;$bannerTopInfo['aimg_title1']='基础锻炼：健身';
+				$bannerTopInfo['aimg_2']='2-2.jpg';$bannerTopInfo['aid_2']=78;$bannerTopInfo['aimg_title2']='基础锻炼：营养';
+				$bannerTopInfo['aimg_3']='2-3.jpg';$bannerTopInfo['aid_3']=77;$bannerTopInfo['aimg_title3']='基础锻炼：辅助品';
+				$bannerTopInfo['aimg_4']='2-4.jpg';$bannerTopInfo['aid_4']=76;$bannerTopInfo['aimg_title4']='基础锻炼：生活方式';
 				}break;
-            case 3:{$tree_channel="日常健身 ";$tree_channel_en=2;
+            case 3:{$tree_channel="中阶-运动员锻炼";$tree_channel_en=2;
 				$bannerTopInfo['title']='中阶-运动员锻炼';
 				$bannerTopInfo['img']='zj.png';
-				$bannerTopInfo['aimg_1']='3-1.jpg';$bannerTopInfo['aid_1']=90;
-				$bannerTopInfo['aimg_2']='3-2.jpg';$bannerTopInfo['aid_2']=89;
-				$bannerTopInfo['aimg_3']='3-3.jpg';$bannerTopInfo['aid_3']=88;
-				$bannerTopInfo['aimg_4']='3-4.jpg';$bannerTopInfo['aid_4']=87;
+				$bannerTopInfo['aimg_1']='3-1.jpg';$bannerTopInfo['aid_1']=90;$bannerTopInfo['aimg_title1']='';
+				$bannerTopInfo['aimg_2']='3-2.jpg';$bannerTopInfo['aid_2']=89;$bannerTopInfo['aimg_title2']='';
+				$bannerTopInfo['aimg_3']='3-3.jpg';$bannerTopInfo['aid_3']=88;$bannerTopInfo['aimg_title3']='';
+				$bannerTopInfo['aimg_4']='3-4.jpg';$bannerTopInfo['aid_4']=87;$bannerTopInfo['aimg_title4']='';
 			}break;
-            case 4:{$tree_channel="运动员 ";$tree_channel_en=3;
+            case 4:{$tree_channel="高阶-肌肉锻炼";$tree_channel_en=3;
 				$bannerTopInfo['title']='高阶-肌肉锻炼';
 				$bannerTopInfo['img']='gj.png';
-				$bannerTopInfo['aimg_1']='4-1.jpg';$bannerTopInfo['aid_1']=91;
-				$bannerTopInfo['aimg_2']='4-2.jpg';$bannerTopInfo['aid_2']=84;
-				$bannerTopInfo['aimg_3']='4-3.jpg';$bannerTopInfo['aid_3']=82;
-				$bannerTopInfo['aimg_4']='4-4.jpg';$bannerTopInfo['aid_4']=75;
+				$bannerTopInfo['aimg_1']='4-1.jpg';$bannerTopInfo['aid_1']=91;$bannerTopInfo['aimg_title1']='';
+				$bannerTopInfo['aimg_2']='4-2.jpg';$bannerTopInfo['aid_2']=84;$bannerTopInfo['aimg_title2']='';
+				$bannerTopInfo['aimg_3']='4-3.jpg';$bannerTopInfo['aid_3']=82;$bannerTopInfo['aimg_title3']='';
+				$bannerTopInfo['aimg_4']='4-4.jpg';$bannerTopInfo['aid_4']=75;$bannerTopInfo['aimg_title4']='';
 			}break;
         }
         $this->assign("first",$tree_channel);
