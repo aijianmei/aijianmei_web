@@ -390,18 +390,20 @@
 			margin-bottom: 10px;
 		}
 		.re_content{
-			position: relative;
-			display: block;
 			padding: 10px;
 			border: 1px solid #ececec;
+		}
+		.detail{
+			position: relative;
+			display: inline-block;
 		}
 		.re_angle{
 			position: absolute;
 			display: inline-block;
 			width: 10px;
 			height: 13px;
-			top: 7px;
-			left: -6px;
+			top: -5px;
+			left: -16px;
 			background: url(../images/re_angle.jpg) no-repeat;
 		}
 		/*recomment_read_more*/
