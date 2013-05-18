@@ -151,9 +151,16 @@
 					rg_img_bg[this.index].style.opacity = 0.5;
 				}
 				rg_choice_lay[i].onclick = function(){
-					aijianmei.chang_top(rg_way_content[this.index],0,31,50);
-					aijianmei.chang_top(rg_way_bg[this.index],0,31,50);
-					rg_img_bg[this.index].style.display = 'none';
+					if(rg_img_bg[this.index].style.display != "none"){
+						aijianmei.chang_top(rg_way_content[this.index],0,31,50);
+						aijianmei.chang_top(rg_way_bg[this.index],0,31,50);
+						rg_img_bg[this.index].style.display = 'none';
+					}
+					else{
+						aijianmei.chang_top(rg_way_content[this.index],1,31,50);
+						aijianmei.chang_top(rg_way_bg[this.index],1,31,50);
+						rg_img_bg[this.index].style.display = 'block';
+					}	
 				}
 			}		
 			// rg_choice_lay_sp
