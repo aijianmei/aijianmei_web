@@ -3,8 +3,6 @@ class SearchAction extends Action {
     public function dosearch()
     {
 		$nums=10;
-		echo 111;
-		print_r($_GET);exit;
 		$keyword=addslashes($_GET['skword']);
 		if($_GET['pg']>0){
 			$pg=intval($_GET['pg']);
@@ -18,7 +16,7 @@ class SearchAction extends Action {
 		//视频
 		$videoSql="select id,title,brief,create_time,link AS img,click,2 from ai_video where category_id in (".$cateSql.") or keyword like '%".$keyword."%' or title like '%".$keyword."%'";
 		//天天锻炼
-		$dailySql="select a.id,a.title,a.content as brief,a.create_time,b.link as img,read_count as click,4 from ai_daily a left join ai_daily_video b on a.id=b.daily_id where keyword like '%".$keyword."%' or title like '%".$keyword."%'";
+		$dailySql="select a.id,a.title,a.content as brief,a.create_time,b.link as img,read_count as click,4 from ai_daily a left join ai_daily_video b on a.id=b.daily_id where a.keyword like '%".$keyword."%' or a.title like '%".$keyword."%'";
 		
 		$allsql="select count(*) as cnums from ($arlSql union all $videoSql union all $dailySql) as t";
 		$countinfo=$this->getDataCache(md5($allsql));

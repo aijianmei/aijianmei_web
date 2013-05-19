@@ -585,11 +585,8 @@ function show_banner($type){
 				//redirect(U('index/User/loginUserInfo'));
                 //M('others')->add($other);
 				$_SESSION['sinalogin']=1;
-				if($other['mediaUserID']==2578458467){
-					redirect(U('index/User/register'));
-				}
-				redirect(U('index/User/loginUserInfo'));
-				redirect(U('index/User/loginUserInfo'));
+				redirect(U('index/User/register'));
+				//redirect(U('index/User/loginUserInfo'));
             }
         }
         if($_POST['email']!=''&&$_POST['emailact']=='upemail'){
@@ -609,7 +606,8 @@ function show_banner($type){
 			$checkEmailArr=M('')->query($checkEmailSql);
 			if(empty($checkEmailArr[0]['email'])){
 				$_SESSION['sinalogin']=1;
-				redirect(U('index/User/loginUserInfo'));
+				redirect(U('index/User/register'));
+				//redirect(U('index/User/loginUserInfo'));
 				//redirect(U('home/Account/index',array('esg'=>'needemail')));
 			}
 			$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
@@ -1025,18 +1023,18 @@ function show_banner($type){
             case 3:{$tree_channel="中阶-运动员锻炼";$tree_channel_en=2;
 				$bannerTopInfo['title']='中阶-运动员锻炼';
 				$bannerTopInfo['img']='zj.png';
-				$bannerTopInfo['aimg_1']='3-1.jpg';$bannerTopInfo['aid_1']=90;$bannerTopInfo['aimg_title1']='';
-				$bannerTopInfo['aimg_2']='3-2.jpg';$bannerTopInfo['aid_2']=89;$bannerTopInfo['aimg_title2']='';
-				$bannerTopInfo['aimg_3']='3-3.jpg';$bannerTopInfo['aid_3']=88;$bannerTopInfo['aimg_title3']='';
-				$bannerTopInfo['aimg_4']='3-4.jpg';$bannerTopInfo['aid_4']=87;$bannerTopInfo['aimg_title4']='';
+				$bannerTopInfo['aimg_1']='3-1.jpg';$bannerTopInfo['aid_1']=90;$bannerTopInfo['aimg_title1']='中阶锻炼：健身';
+				$bannerTopInfo['aimg_2']='3-2.jpg';$bannerTopInfo['aid_2']=89;$bannerTopInfo['aimg_title2']='中阶锻炼：营养';
+				$bannerTopInfo['aimg_3']='3-3.jpg';$bannerTopInfo['aid_3']=88;$bannerTopInfo['aimg_title3']='中阶锻炼：辅助品';
+				$bannerTopInfo['aimg_4']='3-4.jpg';$bannerTopInfo['aid_4']=87;$bannerTopInfo['aimg_title4']='中阶锻炼：生活方式';
 			}break;
             case 4:{$tree_channel="高阶-肌肉锻炼";$tree_channel_en=3;
 				$bannerTopInfo['title']='高阶-肌肉锻炼';
 				$bannerTopInfo['img']='gj.png';
-				$bannerTopInfo['aimg_1']='4-1.jpg';$bannerTopInfo['aid_1']=91;$bannerTopInfo['aimg_title1']='';
-				$bannerTopInfo['aimg_2']='4-2.jpg';$bannerTopInfo['aid_2']=84;$bannerTopInfo['aimg_title2']='';
-				$bannerTopInfo['aimg_3']='4-3.jpg';$bannerTopInfo['aid_3']=82;$bannerTopInfo['aimg_title3']='';
-				$bannerTopInfo['aimg_4']='4-4.jpg';$bannerTopInfo['aid_4']=75;$bannerTopInfo['aimg_title4']='';
+				$bannerTopInfo['aimg_1']='4-1.jpg';$bannerTopInfo['aid_1']=91;$bannerTopInfo['aimg_title1']='高阶锻炼：健身';
+				$bannerTopInfo['aimg_2']='4-2.jpg';$bannerTopInfo['aid_2']=84;$bannerTopInfo['aimg_title2']='高阶锻炼：营养';
+				$bannerTopInfo['aimg_3']='4-3.jpg';$bannerTopInfo['aid_3']=82;$bannerTopInfo['aimg_title3']='高阶锻炼：辅助品';
+				$bannerTopInfo['aimg_4']='4-4.jpg';$bannerTopInfo['aid_4']=75;$bannerTopInfo['aimg_title4']='高阶锻炼：生活方式';
 			}break;
         }
         $this->assign("first",$tree_channel);

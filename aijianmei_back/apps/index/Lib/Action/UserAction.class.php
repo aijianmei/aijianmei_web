@@ -176,11 +176,13 @@ class UserAction extends Action {
 					M('')->query($insertSql);
 				}
 				if($_SESSION['otherlogin']==1){
-					if($_SESSION['refer_url']!=''){
-						redirect($_SESSION['refer_url']);
-					}else{
-						redirect(U('index/index/index'));
-					}
+					service('Passport')->loginLocal($mid);
+					redirect(U('index/index/index'));
+					// if($_SESSION['refer_url']!=''){
+						// redirect($_SESSION['refer_url']);
+					// }else{
+						// redirect(U('index/index/index'));
+					// }
 				}else{
 					redirect(U('index/user/fishuserinfo'));
 				}
