@@ -115,6 +115,9 @@ var aijianmei = {
         }
     }
 }
+var default_year = false,
+    default_height = false,
+    default_weight = false;
 var init = function(){
     var newdom = new getdom,
         nav_child = newdom.getElementsByClass('nav_child'),
@@ -226,6 +229,7 @@ var init = function(){
         dt_year.style.display = "none";
         dt_year_edit.style.display = "block";
         act_change(dt_year,dt_year_edit,dt_year_change);
+        default_year = _target.index;
     }
     var choice_height_this = function(e){
         var _e = window.event ? window.event : e || arguments[0],
@@ -234,6 +238,7 @@ var init = function(){
         dt_height.style.display = "none";
         dt_height_edit.style.display = "block";
         act_change(dt_height,dt_height_edit,dt_height_change);
+        default_height = _target.index;
     }
     var choice_weight_this = function(e){
         var _e = window.event ? window.event : e || arguments[0],
@@ -242,30 +247,72 @@ var init = function(){
         dt_weight.style.display = "none";
         dt_weight_edit.style.display = "block";
         act_change(dt_weight,dt_weight_edit,dt_weight_change);
+        default_weight = _target.index;
     }
     //year
+    a_dt_year[0].index = 100;
+    a_dt_year[len_dt_year - 1].index = 200;
     for(var i = 0;i < len_year_target;i++){
+        dt_year_target[i].index = i;
         if(dt_year_target[i]){
             addevent(dt_year_target[i],'click',choice_year_this);
             addevent(a_dt_year[0],'click',choice_year_this);
-            addevent(a_dt_year[0],'click',choice_year_this);
             addevent(a_dt_year[len_dt_year - 1],'click',choice_year_this);
+            if(default_year){
+                if(default_year == 100){
+                    a_dt_year[0].click();
+                }
+                else if(default_year == 200){
+                    a_dt_year[len_dt_year - 1].click();
+                }
+                else{
+                    dt_year_target[default_year].click();
+                }
+            }
         }   
     }
     //height
+    a_dt_height[0].index = 100;
+    a_dt_height[len_dt_height - 1].index = 200;
     for(var i = 0;i < len_height_target;i++){
+        dt_height_target[i].index = i;
         if(dt_height_target[i]){
             addevent(dt_height_target[i],'click',choice_height_this);
             addevent(a_dt_height[0],'click',choice_height_this);
             addevent(a_dt_height[len_dt_height - 1],'click',choice_height_this);
+            if(default_height){
+                if(default_height == 100){
+                    a_dt_height[0].click();
+                }
+                else if(default_height == 200){
+                    a_dt_height[len_dt_height - 1].click();
+                }
+                else{
+                    dt_height_target[default_height].click();
+                }
+            }
         }   
     }
     //weight
+    a_dt_weight[0].index = 100;
+    a_dt_weight[len_dt_weight - 1].index = 200;
     for(var i = 0;i < len_weight_target;i++){
+        dt_weight_target[i].index = i;
         if(dt_weight_target[i]){
             addevent(dt_weight_target[i],'click',choice_weight_this);
             addevent(a_dt_weight[0],'click',choice_weight_this);
             addevent(a_dt_weight[len_dt_weight - 1],'click',choice_weight_this);
+            if(default_weight){
+                if(default_weight == 100){
+                    a_dt_weight[0].click();
+                }
+                else if(default_weight == 200){
+                    a_dt_weight[len_dt_weight - 1].click();
+                }
+                else{
+                    dt_weight_target[default_weight].click();
+                }
+            }
         }   
     }
 
