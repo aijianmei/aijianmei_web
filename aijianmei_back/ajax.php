@@ -43,6 +43,18 @@ if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
     exit;
 }
 
+function checkUserName(){
+	$type=intval($_POST['type']);
+	$mid=$_SESSION['mid'];
+	if($mid>0){
+		
+	}
+}
+
+
+
+
+
 function ajaxInMore($data){
 	ob_end_clean();
 	$nums=5;
@@ -85,7 +97,7 @@ function ajaxInMore($data){
 								<span class="cont_pb_time">'.date("Y-m-d",$value['create_time']).'</span></span>
 								<p>'.$value['brief'].'</p>
 								<a class="cont_read_more" href="index-Index-articleDetail-'.$value['id'].'.html">阅读全文></a>
-								<div class="cont_share">
+								<div class="cont_share clearfix">
 									<span class="cont_click">点击数:<span>'.$value['reader_count'].'</span></span>
                                     <span class="cont_rec">评论数:<span>'.$value['CommNumber'].'</span></span>
 								</div>
@@ -130,7 +142,7 @@ function ajaxInMore($data){
 									<p>简介:<span>'.msubstr($value['brief'],0,54).'</span></p>
 								</div>
 								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html"></a>
-								<div class="cont_share">
+								<div class="cont_share clearfix">
 									<span class="cont_vd_click">点击数:<span>'.$value['click'].'</span></span>
                                     <span class="cont_rec">评论数:<span>'.$value['recommons'].'</span></span>
 								</div>
@@ -181,7 +193,7 @@ function ajaxTrainMore($data){
 								<span class="cont_pb_time">'.date("Y-m-d",$value['create_time']).'</span></span>
 								<p>'.$value['brief'].'</p>
 								<a class="cont_read_more" href="index-Index-articleDetail-'.$value['id'].'.html">阅读全文></a>
-								<div class="cont_share">
+								<div class="cont_share clearfix">
 									<span class="cont_click">点击数:<span>'.$value['reader_count'].'</span></span>
                                     <span class="cont_rec">评论数:<span>'.$value['CommNumber'].'</span></span>
 								</div>
@@ -226,7 +238,7 @@ function ajaxTrainMore($data){
 									<p>简介:<span>'.msubstr($value['brief'],0,54).'</span></p>
 								</div>
 								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html"></a>
-								<div class="cont_share">
+								<div class="cont_share clearfix">
 									<span class="cont_vd_click">点击数:<span>'.$value['click'].'</span></span>
                                     <span class="cont_rec">评论数:<span>'.$value['recommons'].'</span></span>
 								</div>

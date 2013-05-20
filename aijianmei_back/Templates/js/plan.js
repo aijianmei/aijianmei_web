@@ -17,7 +17,9 @@
 			//console.log("sfsadf");
 		},
 		focusout: function(){
+			if($(this).val()==''){
 			$(this).next().show();
+			}
 		}
 	});
 });

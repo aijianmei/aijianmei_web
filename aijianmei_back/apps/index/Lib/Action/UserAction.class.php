@@ -366,7 +366,7 @@ class UserAction extends Action {
 				,age = '".$_POST['dt_year_finish']."' WHERE uid =$mid";
 				M('')->query($upsql);
 			}else{
-				echo $insertSql="INSERT INTO  `aijianmei`.`ai_user_health_info` (`uid` ,`body_weight` ,`height` ,`age`)
+				$insertSql="INSERT INTO  `aijianmei`.`ai_user_health_info` (`uid` ,`body_weight` ,`height` ,`age`)
 				VALUES ($mid, '".$_POST['dt_weight_finish']."','".$_POST['dt_height_finish']."','".$_POST['dt_year_finish']."')";
 				M('')->query($insertSql);
 			}

@@ -1303,17 +1303,18 @@ function getUserFace($uid,$size){
 	}else{
 		$type = 'big';
 	}
-    $apiImg= M('')->query("select profileImageUrl from ai_others where uid='".$uid."' and profileImageUrl!=''");
-    if(!empty($apiImg)){
-            $userface=$apiImg[0]['profileImageUrl'];
-            return $userface;
-        }
+
         
 	$uid_to_path = convertUidToPath($uid);
 	$userface = SITE_PATH.'/data/uploads/avatar' . $uid_to_path . '/' . $type. '.jpg';
 	if(is_file($userface)){
 		return SITE_URL.'/data/uploads/avatar' . $uid_to_path . '/' . $type . '.jpg';
 	}else{
+		$apiImg= M('')->query("select profileImageUrl from ai_others where uid='".$uid."' and profileImageUrl!=''");
+		if(!empty($apiImg)){
+            $userface=$apiImg[0]['profileImageUrl'];
+            return $userface;
+		}
 		return THEME_URL."/images/user_pic_{$type}.gif";
 	}
 }

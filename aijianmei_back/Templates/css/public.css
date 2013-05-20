@@ -222,7 +222,7 @@ button{
 }
 .pg_page a,.pg_concrete_choice span{
 	display:inline-block;
-	margin:0 -1px;
+	margin:0 1px;
 	min-width:20px;
 	height:20px;
 	border: 2px solid transparent;

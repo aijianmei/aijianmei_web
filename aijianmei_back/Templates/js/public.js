@@ -192,7 +192,7 @@ var aijianmei = {
 	addtitle : function(obj){
 		var Obj = aijianmei.getobj(obj,1),
 			len = Obj.length,
-			handlewidth = 45,
+			handlewidth = 55,
 			title = aijianmei.getobj('title_tip'),
 			title_content = aijianmei.getobj('title_content');
 		var handle = function(e){
@@ -207,22 +207,22 @@ var aijianmei = {
 				var handlewidth = function(){
 					if(text.length < 5){
 						title.style.width = '80px';
-						handlewidth = 25;
+						handlewidth = 35;
 					}
 					else if(text.length <11){
 						title.style.width = '150px';
-						handlewidth = 25;
+						handlewidth = 35;
 					}
 					else if(text.length < 14){
 						title.style.width = '160px';
-						handlewidth = 45;
+						handlewidth = 55;
 					}
 					else{
 						title.style.width = '200px';
-						handlewidth = 45;
+						handlewidth = 55;
 					}
 					if(text.length > 26){
-						handlewidth = 60;
+						handlewidth = 70;
 					}
 				}
 				handlewidth();
