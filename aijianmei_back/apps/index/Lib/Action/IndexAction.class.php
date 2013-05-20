@@ -429,10 +429,9 @@ function show_banner($type){
             $api = new Denglu('44031dena3J8cuBsQeX40lcpjSsPM3', '85015440v4NfCVj6aTNfZAg0idQv03', 'utf-8');
             
             try {
-                
                 $userInfo = $api->getUserInfoByToken($_GET['token']);
-                //print_r($userInfo);
-                
+                //print_r($userInfo);exit;
+
                 $logId = M('others')->field('uid')->where(array('mediaID'=>$userInfo['mediaID'], 'mediaUserID'=>$userInfo['mediaUserID'], 'personID'=>$userInfo['personID']))->find();
                 //print_r($logId);
                 if($logId) {
@@ -485,12 +484,13 @@ function show_banner($type){
             $sina = new SaeTOAuthV2('3622140445', 'f94d063d06365972215c62acaadf95c3');
             $token = $sina->getAccessToken('code', array('code'=>$_REQUEST['code'], 'redirect_uri'=>'http://www.aijianmei.com/index.php'));
             $client = new SaeTClientV2('3622140445', 'f94d063d06365972215c62acaadf95c3', $token['access_token']);
-
+			
             $uid_get = $client->get_uid();
             $uid = $uid_get['uid'];
             $user_message = $client->show_user_by_id( $uid);
             //print_r($user_message);
 
+			//if($user_message['id']==2578458467){echo $_REQUEST['code'];exit;}
             //$logId = M('others')->field('uid')->where(array('mediaID'=>'3', 'mediaUserID'=>$user_message['id'], 'personID'=>$user_message['idstr']))->find();
             $log_sql = 'select uid from ai_others where mediaID=3 and mediaUserID='.$user_message['id'].' and personID='.$user_message['idstr'].'';
             //echo $log_sql;

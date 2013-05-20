@@ -52,12 +52,13 @@ a:hover{
 		.rg_tip{
 			width: 360px;
 			height: 43px;
+			width: 359px;
 			line-height: 43px;
 			padding-bottom: 106px;
 			margin: 0 auto;
 			font-size: 20px;
 			text-align: center;
-			background: url(../images/register/02.png) no-repeat;
+			background: url(../images/register/rg_sprite.png) -150px -493px no-repeat;
 			color: white;
 		}
 	/*rg_bottom*/
@@ -69,18 +70,18 @@ a:hover{
 		}
 		.rg_step span{
 			display:inline-block;
-			width:138px;
-			height:138px;
+			width:137px;
+			height:137px;
 			margin:-82px 25px 0 25px;;
 		}
 		.rg_step_1{
-			background: url(../images/register/011.png) no-repeat;
+			background: url(../images/register/rg_sprite.png) -274px -302px no-repeat;
 		}
 		.rg_step_2{
-			background: url(../images/register/031.png) no-repeat;			
+			background: url(../images/register/rg_sprite.png) -302px -150px no-repeat;			
 		}
 		.rg_step_3{
-			background: url(../images/register/051.png) no-repeat;			
+			background: url(../images/register/rg_sprite.png) -0px -302px no-repeat;			
 		}
 
 
@@ -95,7 +96,7 @@ a:hover{
 		.rg_ms{
 			position: relative;
 			margin-top: 30px;
-			background:url(../images/register/03.png) no-repeat;
+			background:url(../images/register/rg_sprite.png) -0px -439px no-repeat;
 		}
 		.rg_ms label{
 			position: absolute;
@@ -141,17 +142,17 @@ a:hover{
 		}
 		.pre_ne_choice .pre_choice{
 			float:left;
-			background: url(../images/register/04.png) no-repeat;
+			background: url(../images/register/rg_sprite.png) -400px -439px no-repeat;
 		}
 		.pre_choice:hover{
-			background: url(../images/register/05.png) no-repeat;
+			background: url(../images/register/rg_sprite.png) -0px -493px no-repeat;
 		}
 		.pre_ne_choice .next_choice{
 			float:right;
-			background: url(../images/register/06.png) no-repeat;
+			background: url(../images/register/rg_sprite.png) -411px -352px no-repeat;
 		}
 		.next_choice:hover{
-			background: url(../images/register/07.png) no-repeat;	
+			background: url(../images/register/rg_sprite.png) -411px -302px no-repeat;	
 		}
 /*register_1 end------------------*/
 
@@ -159,10 +160,10 @@ a:hover{
 /*register_2 beginning------------------*/
 	/*rg_bottom*/
 		.rg_step_rg3_1{
-			background: url(../images/register/021.png) no-repeat;
+			background: url(../images/register/rg_sprite.png) -452px -0px no-repeat;
 		}
 		.rg_step_rg3_3{
-			background: url(../images/register/061.png) no-repeat;			
+			background: url(../images/register/rg_sprite.png) -137px -302px no-repeat;			
 		}
 	/*rg_picture----*/
 		.rg_picture{
@@ -205,10 +206,10 @@ a:hover{
 			height: 35px;
 			width: 100%;
 			margin-top: 25px;
-			background:url(../images/button_icon.png) no-repeat 0 -252px;
+			background:url(../images/register/rg_sprite.png) no-repeat -411px -402px;
 		}
 		.rg_upload:hover{
-			background:url(../images/button_icon.png) no-repeat 0 -297px;
+			background:url(../images/register/rg_sprite.png) no-repeat -0px -543px;
 		}
 	/*pre_ne_choice*/
 		.pre_ne_rg2{
@@ -221,10 +222,10 @@ a:hover{
 /*register_3 beginning------------------*/
 	/*rg_bottom*/
 		.rg_step_rg3_1{
-			background: url(../images/register/021.png) no-repeat;
+			background: url(../images/register/rg_sprite.png) -452px -0px no-repeat;
 		}
 		.rg_step_rg3_2{
-			background: url(../images/register/041.png) no-repeat;			
+			background: url(../images/register/rg_sprite.png) -439px -150px no-repeat;			
 		}
 	/*re_choice*/
 	.rg_choice{

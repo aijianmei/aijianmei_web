@@ -223,13 +223,13 @@ class UserAction extends Action {
 			$this->assign('UserKeyword',$getUserKeyword);
 		}elseif($_SESSION['otherlogin']==1){
 			$mid=$_SESSION['allowbackmid'];
-			$getUserNameSql="select * from ai_user where uid='".$_SESSION['mid']."'";
+			$getUserNameSql="select * from ai_user where uid='".$mid."'";
 			$UserNameInfo=M('')->query($getUserNameSql);
 			$username=$UserNameInfo[0]['uname'];
 			$usersex=$UserNameInfo[0]['sex'];
 			$userinfo['province']=$UserNameInfo[0]['province'];
 			$userinfo['city']=$UserNameInfo[0]['city'];
-			$getSimgSql="select * from ai_others where uid='".$_SESSION['mid']."'";
+			$getSimgSql="select * from ai_others where uid='".$mid."'";
 			$ImgArr=M('')->query($getSimgSql);
 			$imgurl=$ImgArr[0]['profileImageUrl'];
 			$description=$ImgArr[0]['description'];
@@ -295,7 +295,14 @@ class UserAction extends Action {
 			$ctell=$otherinfo[0]['ctell'];
 			
 			$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
-			if(is_file($filename)) $imgurl=$filename;
+			if(is_file($filename)){$imgurl=$filename;}else{
+			$imgurl=$otherinfo[0]['profileImageUrl'];
+			}
+			
+			$healthinfoSql="select * from ai_user_health_info where uid='".$mid."'";
+			$healthinfo=M('')->query($healthinfoSql);
+			$this->assign('healthinfo',$healthinfo[0]);
+			
 			$this->assign('UserKeyword',$getUserKeyword);
 		}
 		
@@ -307,6 +314,7 @@ class UserAction extends Action {
         $this->assign('children', $child);
         $this->assign('area', $area);
 		//}}
+		
 		$this->assign('ctell',$ctell);
 		$this->assign('cemail',$cemail);
 		$this->assign('usersex',$usersex);
@@ -348,6 +356,20 @@ class UserAction extends Action {
 			$upsql=null;
 			$upsql="UPDATE ai_user_keywords SET keyword = '".serialize($keyTmp)."' WHERE uid =$mid";
 			M('')->query($upsql);
+			$checksql=null;
+			$checksql="select * from ai_user_health_info where uid =$mid";
+			$cres=M('')->query($checksql);
+			if($cres){
+				$upsql=null;
+				$upsql="UPDATE ai_user_health_info SET body_weight = '".$_POST['dt_weight_finish']."'
+				,height = '".$_POST['dt_height_finish']."'
+				,age = '".$_POST['dt_year_finish']."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}else{
+				echo $insertSql="INSERT INTO  `aijianmei`.`ai_user_health_info` (`uid` ,`body_weight` ,`height` ,`age`)
+				VALUES ($mid, '".$_POST['dt_weight_finish']."','".$_POST['dt_height_finish']."','".$_POST['dt_year_finish']."')";
+				M('')->query($insertSql);
+			}
 			
 			$sql="select uname,email from ai_user where uid =$mid";
 			$shopinserinfo=M('')->query($sql);
@@ -427,6 +449,22 @@ public function saveedituserinfo(){
 			$upsql=null;
 			$upsql="UPDATE ai_user_keywords SET keyword = '".serialize($keyTmp)."' WHERE uid =$mid";
 			M('')->query($upsql);
+
+			$checksql=null;
+			$checksql="select * from ai_user_health_info where uid =$mid";
+			$cres=M('')->query($checksql);
+			if($cres){
+				$upsql=null;
+				$upsql="UPDATE ai_user_health_info SET body_weight = '".$_POST['dt_weight_finish']."'
+				,height = '".$_POST['dt_height_finish']."'
+				,age = '".$_POST['dt_year_finish']."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}else{
+				echo $insertSql="INSERT INTO  `aijianmei`.`ai_user_health_info` (`uid` ,`body_weight` ,`height` ,`age`)
+				VALUES ($mid, '".$_POST['dt_weight_finish']."','".$_POST['dt_height_finish']."','".$_POST['dt_year_finish']."')";
+				M('')->query($insertSql);
+			}
+			
 			
 			$sql="select uname,email from ai_user where uid =$mid";
 			$shopinserinfo=M('')->query($sql);
