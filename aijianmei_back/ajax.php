@@ -46,10 +46,8 @@ if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
 
 function checkUserName(){
 	$username=intval($_POST['username']);
-	$mid=$_SESSION['mid'];
-	if($mid>0){
-		$sql="select * from ai_user where uname='".$username."'";
-		$result=C_mysqlQuery($sql);
+	$sql="select * from ai_user where uname='".$username."'";
+	$result=C_mysqlQuery($sql);
 		while($row=mysql_fetch_assoc($result)){
 			$resultTmp[]=$row;
 		}
@@ -58,7 +56,6 @@ function checkUserName(){
 		}else{
 			echo 1;
 		}
-	}
 	exit;
 }
 
