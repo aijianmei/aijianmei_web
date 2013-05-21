@@ -28,18 +28,31 @@ $data = array (
   ),
   2 => 
   array (
-    'cat_id' => '8',
-    'cat_name' => '品牌',
+    'cat_id' => '1',
+    'cat_name' => '增加肌肉',
     'measure_unit' => '',
-    'parent_id' => '0',
+    'parent_id' => '6',
     'is_show' => '1',
     'show_in_nav' => '0',
     'grade' => '0',
     'sort_order' => '50',
-    'has_children' => '3',
-    'goods_num' => 0,
+    'has_children' => '0',
+    'goods_num' => '2',
   ),
   3 => 
+  array (
+    'cat_id' => '13',
+    'cat_name' => '提升耐力',
+    'measure_unit' => '',
+    'parent_id' => '6',
+    'is_show' => '1',
+    'show_in_nav' => '0',
+    'grade' => '0',
+    'sort_order' => '50',
+    'has_children' => '0',
+    'goods_num' => 0,
+  ),
+  4 => 
   array (
     'cat_id' => '10',
     'cat_name' => '运动技能提高',
@@ -52,33 +65,7 @@ $data = array (
     'has_children' => '0',
     'goods_num' => 7,
   ),
-  4 => 
-  array (
-    'cat_id' => '1',
-    'cat_name' => '增加肌肉',
-    'measure_unit' => '',
-    'parent_id' => '6',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => '2',
-  ),
   5 => 
-  array (
-    'cat_id' => '11',
-    'cat_name' => '提高能力',
-    'measure_unit' => '',
-    'parent_id' => '6',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => 3,
-  ),
-  6 => 
   array (
     'cat_id' => '2',
     'cat_name' => '减少体脂',
@@ -90,6 +77,19 @@ $data = array (
     'sort_order' => '50',
     'has_children' => '0',
     'goods_num' => 0,
+  ),
+  6 => 
+  array (
+    'cat_id' => '11',
+    'cat_name' => '提高能力',
+    'measure_unit' => '',
+    'parent_id' => '6',
+    'is_show' => '1',
+    'show_in_nav' => '0',
+    'grade' => '0',
+    'sort_order' => '50',
+    'has_children' => '0',
+    'goods_num' => 3,
   ),
   7 => 
   array (
@@ -106,19 +106,6 @@ $data = array (
   ),
   8 => 
   array (
-    'cat_id' => '13',
-    'cat_name' => '提升耐力',
-    'measure_unit' => '',
-    'parent_id' => '6',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => 0,
-  ),
-  9 => 
-  array (
     'cat_id' => '20',
     'cat_name' => '健身附属品',
     'measure_unit' => '',
@@ -130,7 +117,33 @@ $data = array (
     'has_children' => '0',
     'goods_num' => 0,
   ),
+  9 => 
+  array (
+    'cat_id' => '16',
+    'cat_name' => '蛋白质',
+    'measure_unit' => '',
+    'parent_id' => '7',
+    'is_show' => '1',
+    'show_in_nav' => '0',
+    'grade' => '0',
+    'sort_order' => '50',
+    'has_children' => '0',
+    'goods_num' => 0,
+  ),
   10 => 
+  array (
+    'cat_id' => '21',
+    'cat_name' => '健身设备',
+    'measure_unit' => '',
+    'parent_id' => '7',
+    'is_show' => '1',
+    'show_in_nav' => '0',
+    'grade' => '0',
+    'sort_order' => '50',
+    'has_children' => '0',
+    'goods_num' => 0,
+  ),
+  11 => 
   array (
     'cat_id' => '17',
     'cat_name' => '维他命',
@@ -143,23 +156,10 @@ $data = array (
     'has_children' => '0',
     'goods_num' => 0,
   ),
-  11 => 
+  12 => 
   array (
     'cat_id' => '14',
     'cat_name' => '运动营养品',
-    'measure_unit' => '',
-    'parent_id' => '7',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => 0,
-  ),
-  12 => 
-  array (
-    'cat_id' => '21',
-    'cat_name' => '健身设备',
     'measure_unit' => '',
     'parent_id' => '7',
     'is_show' => '1',
@@ -188,58 +188,6 @@ $data = array (
     'cat_name' => '饮食和体重',
     'measure_unit' => '',
     'parent_id' => '7',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => 0,
-  ),
-  15 => 
-  array (
-    'cat_id' => '16',
-    'cat_name' => '蛋白质',
-    'measure_unit' => '',
-    'parent_id' => '7',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => 0,
-  ),
-  16 => 
-  array (
-    'cat_id' => '23',
-    'cat_name' => 'BSN',
-    'measure_unit' => '',
-    'parent_id' => '8',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => 0,
-  ),
-  17 => 
-  array (
-    'cat_id' => '9',
-    'cat_name' => '欧普特蒙',
-    'measure_unit' => '',
-    'parent_id' => '8',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => 0,
-  ),
-  18 => 
-  array (
-    'cat_id' => '22',
-    'cat_name' => '肌肉科技',
-    'measure_unit' => '',
-    'parent_id' => '8',
     'is_show' => '1',
     'show_in_nav' => '0',
     'grade' => '0',

@@ -94,7 +94,7 @@ function reg(str){
 <div class="block clearfix">
 
   <!--right start-->
-  <div class="AreaR">
+
    <!--商品详情start-->
    <div id="goodsInfo" class="clearfix">
      <!--商品图片和相册 start-->
@@ -276,8 +276,9 @@ function reg(str){
       <!-- {/foreach} -->
       <!-- {* 结束循环可选属性 *} -->
       <li class="padd">
-      <a href="javascript:addToCart({$goods.goods_id})"><img src="images/bnt_cat.gif" /></a>
-      <a href="javascript:collect({$goods.goods_id})"><img src="images/bnt_colles.gif" /></a>
+      <a href="javascript:bool=1;addToCart({$goods.goods_id})"><img src="images/btn_buy.png" alt="直接购买"/></a>
+      <a href="javascript:bool=2;addToCart({$goods.goods_id})"><img src="images/btn_cart.png" /></a>
+      <!--<a href="javascript:collect({$goods.goods_id})"><img src="images/btn_cart.png" /></a>-->
       <!-- {if $affiliate.on} -->
       <!-- <a href="user.php?act=affiliate&goodsid={$goods.goods_id}"><img src='images/bnt_recommend.gif'></a> -->
       <!-- {/if} -->
@@ -609,7 +610,7 @@ function reg(str){
 
 
 <!-- TemplateEndEditable -->
-  </div>
+
   <!--right end-->
 </div>
 <div class="blank5"></div>

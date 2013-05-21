@@ -119,7 +119,8 @@ if ($_REQUEST['step'] == 'add_to_cart')
     }
 
     /* 更新：如果是一步购物，先清空购物车 */
-    if ($_CFG['one_step_buy'] == '1')
+    //if ($_CFG['one_step_buy'] == '1')
+	if($_POST['bool']==1)
     {
         clear_cart();
     }

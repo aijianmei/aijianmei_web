@@ -30,7 +30,8 @@ function addToCart(goodsId, parentId)
   goods.number   = number;
   goods.parent   = (typeof(parentId) == "undefined") ? 0 : parseInt(parentId);
 console.log('asdfas')
-  Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), addToCartResponse, 'POST', 'JSON');
+  //Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), addToCartResponse, 'POST', 'JSON');
+  Ajax.call('flow.php?step=add_to_cart', 'bool='+bool+'&goods=' + goods.toJSONString(), addToCartResponse, 'POST', 'JSON'); 
 }
 
 /**
@@ -86,6 +87,7 @@ function addToCartResponse(result)
   {
     var cartInfo = document.getElementById('ECS_CARTINFO');
     var cart_url = 'flow.php?step=cart';
+	if(bool == 1){cart_url = 'flow.php?step=checkout';}
     if (cartInfo)
     {
       cartInfo.innerHTML = result.content;
