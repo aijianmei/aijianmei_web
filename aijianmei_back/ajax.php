@@ -15,7 +15,8 @@ $_actAllowArr=array(
 'recordlike'=>'data',
 'ajaxInMore'=>'data',
 'ajaxTrainMore'=>'data',
-'sedaylike'=>'data');
+'sedaylike'=>'data',
+'checkUserName'=>'data');
 /*ajax */
  if(!empty($_REQUEST['act'])){
      foreach($_REQUEST as $key => $value){
@@ -44,11 +45,21 @@ if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
 }
 
 function checkUserName(){
-	$type=intval($_POST['type']);
+	$username=intval($_POST['username']);
 	$mid=$_SESSION['mid'];
 	if($mid>0){
-		
+		$sql="select * from ai_user where uname='".$username."'";
+		$result=C_mysqlQuery($sql);
+		while($row=mysql_fetch_assoc($result)){
+			$resultTmp[]=$row;
+		}
+		if($resultTmp){
+			echo 2;
+		}else{
+			echo 1;
+		}
 	}
+	exit;
 }
 
 

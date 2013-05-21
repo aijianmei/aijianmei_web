@@ -52,6 +52,7 @@
 			line-height: 87px;
 			bottom: 3px;
 			width: 960px;
+			left:0;
 			position: absolute;
 			text-align: center;
 			color: white;
@@ -91,6 +92,7 @@
 	height: 30px;
 	line-height: 30px;
 	bottom:3px;
+	left:0;
 	text-align: center;
 	color: white;
 	z-index: 1000;

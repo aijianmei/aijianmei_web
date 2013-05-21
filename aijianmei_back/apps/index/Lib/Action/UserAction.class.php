@@ -273,6 +273,17 @@ class UserAction extends Action {
 		}else{
 			$mid=$_SESSION['mid'];
 		}
+		//地区选择
+		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
+        foreach($area as $a) {
+            $child[$a['area_id']] = M('area')->where(array('pid'=>$a['area_id']))->order('`area_id` ASC')->findAll();	
+        }
+		//$areaAll = M('area')->order('`area_id` ASC')->findAll();
+        $this->assign('children', $child);
+        $this->assign('area', $area);
+		//}}
+		
+		
 		$username=$description=$domain=$userArea=$usercity=null;
 		$imgurl=null;
 		if($mid>0){
@@ -281,8 +292,22 @@ class UserAction extends Action {
 			$UserNameInfo=M('')->query($getUserNameSql);
 			$username=$UserNameInfo[0]['uname'];
 			$usersex=$UserNameInfo[0]['sex'];
+			if($UserNameInfo[0]['location']!=''&&$UserNameInfo[0]['province']==0&&$UserNameInfo[0]['city']==0){
+				$locationArr=$UserNameInfo[0]['location'];
+				$locationInfo=explode(' ',$UserNameInfo[0]['location']);
+				
+				$sql="select * from ai_area where title like '%".$locationInfo[0]."%'";
+				$provinceinfo=M('')->query($sql);
+				$UserNameInfo[0]['province']=$provinceinfo[0]['area_id'];				
+				
+				$sql="select * from ai_area where title like '%".$locationInfo[1]."%'";
+				$cityinfo=M('')->query($sql);
+				$UserNameInfo[0]['city']=$cityinfo[0]['area_id'];
+			}
+			
 			$userinfo['province']=$UserNameInfo[0]['province'];
 			$userinfo['city']=$UserNameInfo[0]['city'];
+
 			$getUserKeywordSql="select * from ai_user_keywords where uid='".$mid."'";
 			$getUserKeyword=M('')->query($getUserKeywordSql);
 			$getUserKeyword=unserialize($getUserKeyword[0]['keyword']);
@@ -306,14 +331,7 @@ class UserAction extends Action {
 			$this->assign('UserKeyword',$getUserKeyword);
 		}
 		
-		//地区选择
-		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
-        foreach($area as $a) {
-            $child[$a['area_id']] = M('area')->where(array('pid'=>$a['area_id']))->order('`area_id` ASC')->findAll();	
-        }
-        $this->assign('children', $child);
-        $this->assign('area', $area);
-		//}}
+
 		
 		$this->assign('ctell',$ctell);
 		$this->assign('cemail',$cemail);
@@ -437,9 +455,14 @@ public function saveedituserinfo(){
 		$username=$_POST['username'];
 		if($mid>0&&$username!=''&&$_GET['args']=='uinfo'){
 			if($mid>0){
+			$oldusernameinfo=M('user')->where(array('uid'=>$mid))->find();
+			//print_r($oldusernameinfo);exit;
 			$upsql=null;
-			$upsql="UPDATE ai_user SET uname = '".$username."',sex='".$_POST['sex']."',province='".$_POST['province']."',city='".$_POST['city']."' WHERE uid =$mid";
+			$upsql="UPDATE ai_user SET uname = '".$username."',sex='".$_POST['sex']."',province='".$_POST['province']."',city='".$_POST['cityvalue']."' WHERE uid =$mid";
 			M('')->query($upsql);
+			$upsql="UPDATE ecs_users SET user_name = '".$username."' WHERE user_name ='".$oldusernameinfo['uname']."'";
+			M('')->query($upsql);
+
 			$keyTmp=array();
 				foreach($_POST['keyword'] as $k=>$v){
 					if(!in_array($v,$keyTmp)){
@@ -523,7 +546,7 @@ public function saveedituserinfo(){
 
 		//service('Passport')->login($mid);
 		
-		redirect(U('index/Index/index'));
+		redirect(U('index/User/edituserinfo'));
 	}	
 	
 	public function loginUserInfo()
