@@ -54,7 +54,7 @@
                 </li>
                 <li class="more"><a href="">帐号<span class="triangle"></span> </a>
                     <ul class="account">
-                        <li><a href="{$aijianmeiurl}/index.php?app=home&mod=Account&act=index">个人资料</a></li>
+                        <li><a href="{$aijianmeiurl}/index.php?app=index&mod=User&act=edituserinfo">个人资料</a></li>
                         <li><a href="{$aijianmeiurl}/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
                     </ul>
                 </li>

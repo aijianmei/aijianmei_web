@@ -15,7 +15,8 @@ $_actAllowArr=array(
 'recordlike'=>'data',
 'ajaxInMore'=>'data',
 'ajaxTrainMore'=>'data',
-'sedaylike'=>'data');
+'sedaylike'=>'data',
+'checkUserName'=>'data');
 /*ajax */
  if(!empty($_REQUEST['act'])){
      foreach($_REQUEST as $key => $value){
@@ -43,6 +44,25 @@ if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
     exit;
 }
 
+function checkUserName(){
+	$username=intval($_POST['username']);
+	$sql="select * from ai_user where uname='".$username."'";
+	$result=C_mysqlQuery($sql);
+		while($row=mysql_fetch_assoc($result)){
+			$resultTmp[]=$row;
+		}
+		if($resultTmp){
+			echo 2;
+		}else{
+			echo 1;
+		}
+	exit;
+}
+
+
+
+
+
 function ajaxInMore($data){
 	ob_end_clean();
 	$nums=5;
@@ -56,7 +76,7 @@ function ajaxInMore($data){
 		//$sql = "select a.* from ai_article a group by a.id order by a.".$order." desc limit ".$froms*$nums.",$nums";
 		if($lid>0){$cateStr='AND a.category_id in ('.$lid.')';}else{$cateStr='';}
 		$orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id $cateStr";
-		$sql = "select a.* from ai_article a where id in ($orderTableSql) or category_id=$id group by a.id  order by ".$order." desc limit ".$froms*$nums.",$nums";
+		$sql = "select a.* from ai_article a where id in ($orderTableSql) group by a.id  order by ".$order." desc limit ".$froms*$nums.",$nums";
 		$result=null;
 		$result=getDataCache(md5($sql));
 		
@@ -74,7 +94,7 @@ function ajaxInMore($data){
 		}
 		foreach($result as $k =>$value){
 		$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="index-Index-articleDetail-'.$value['id'].'.html"><img alt="'.$value['title'].'" style="width:215px;height:145px;" src="../public/images/article/'.$value['img'].'"></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-'.$value['id'].'.html" pic="http://www.aijianmei.com/public/images/article/'.$value['img'].'" title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
@@ -85,7 +105,7 @@ function ajaxInMore($data){
 								<span class="cont_pb_time">'.date("Y-m-d",$value['create_time']).'</span></span>
 								<p>'.$value['brief'].'</p>
 								<a class="cont_read_more" href="index-Index-articleDetail-'.$value['id'].'.html">阅读全文></a>
-								<div class="cont_share">
+								<div class="cont_share clearfix">
 									<span class="cont_click">点击数:<span>'.$value['reader_count'].'</span></span>
                                     <span class="cont_rec">评论数:<span>'.$value['CommNumber'].'</span></span>
 								</div>
@@ -122,7 +142,7 @@ function ajaxInMore($data){
 		$returnHtml=null;
 		foreach($result as $k =>$value){
 			$returnHtml.='<div class="cont_module clearfix"><div class="cont_vd_1"><a  class="cont_vd_link"  href="/index-Train-videoDetail-'.$value['id'].'.html">
-			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"><span class="cont_vd_bg" style="display: none;"></span></a><div class="show_share" style="margin-left:40px;">
+			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"><span class="cont_vd_bg" style="display: none;"></span></a><div class="show_share clearfix" style="margin-left:40px;">
 			<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="'.$value['htmlurl'].'?>" pic="'.$value['logo'].'"  title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30">
 			</wb:share-button></div></div><div class="cont_vd_2"><h3 class="cont_vd_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
 								<div class="cont_vd_dt">
@@ -130,7 +150,7 @@ function ajaxInMore($data){
 									<p>简介:<span>'.msubstr($value['brief'],0,54).'</span></p>
 								</div>
 								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html"></a>
-								<div class="cont_share">
+								<div class="cont_share clearfix">
 									<span class="cont_vd_click">点击数:<span>'.$value['click'].'</span></span>
                                     <span class="cont_rec">评论数:<span>'.$value['recommons'].'</span></span>
 								</div>
@@ -170,7 +190,7 @@ function ajaxTrainMore($data){
 		}
 		foreach($result as $k =>$value){
 		$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="index-Index-articleDetail-'.$value['id'].'.html"><img alt="'.$value['title'].'" style="width:215px;height:145px;" src="../public/images/article/'.$value['img'].'"></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-'.$value['id'].'.html" pic="http://www.aijianmei.com/public/images/article/'.$value['img'].'" title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
@@ -181,7 +201,7 @@ function ajaxTrainMore($data){
 								<span class="cont_pb_time">'.date("Y-m-d",$value['create_time']).'</span></span>
 								<p>'.$value['brief'].'</p>
 								<a class="cont_read_more" href="index-Index-articleDetail-'.$value['id'].'.html">阅读全文></a>
-								<div class="cont_share">
+								<div class="cont_share clearfix">
 									<span class="cont_click">点击数:<span>'.$value['reader_count'].'</span></span>
                                     <span class="cont_rec">评论数:<span>'.$value['CommNumber'].'</span></span>
 								</div>
@@ -192,9 +212,9 @@ function ajaxTrainMore($data){
 		exit;
 	}
 	if($type==3||$type==4){
-		$order=($type==1)?'create_time':'reader_count';
+		$order=($type==1)?'create_time':'click';
 		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =$mtype";
-		$sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by click desc limit ".$froms*$nums.",$nums";
+		$sql = "select * from ai_video  order by $order desc limit ".$froms*$nums.",$nums";
 		$result=null;
 		$result=getDataCache(md5($sql));
 		if(!$result){
@@ -218,7 +238,7 @@ function ajaxTrainMore($data){
 		$returnHtml=null;
 		foreach($result as $k =>$value){
 			$returnHtml.='<div class="cont_module clearfix"><div class="cont_vd_1"><a class="cont_vd_link"  href="/index-Train-videoDetail-'.$value['id'].'.html">
-			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"><span class="cont_vd_bg" style="display: none;"></span></a><div class="show_share" style="margin-left:40px;">
+			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"><span class="cont_vd_bg" style="display: none;"></span></a><div class="show_share clearfix" style="margin-left:40px;">
 			<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="'.$value['htmlurl'].'?>" pic="'.$value['logo'].'"  title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30">
 			</wb:share-button></div></div><div class="cont_vd_2"><h3 class="cont_vd_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
 								<div class="cont_vd_dt">
@@ -226,7 +246,7 @@ function ajaxTrainMore($data){
 									<p>简介:<span>'.msubstr($value['brief'],0,54).'</span></p>
 								</div>
 								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html"></a>
-								<div class="cont_share">
+								<div class="cont_share clearfix">
 									<span class="cont_vd_click">点击数:<span>'.$value['click'].'</span></span>
                                     <span class="cont_rec">评论数:<span>'.$value['recommons'].'</span></span>
 								</div>

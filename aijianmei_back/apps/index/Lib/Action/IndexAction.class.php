@@ -211,8 +211,9 @@ function show_banner($type){
             //print_r($user_message);
 
             //$logId = M('others')->field('uid')->where(array('mediaID'=>'3', 'mediaUserID'=>$user_message['id'], 'personID'=>$user_message['idstr']))->find();
-            $log_sql = 'select uid from ai_others where mediaID=3 and mediaUserID='.$user_message['id'].' and personID='.$user_message['idstr'].'';
+            echo $log_sql = 'select uid from ai_others where mediaID=3 and mediaUserID='.$user_message['id'].' and personID='.$user_message['idstr'].'';
             //echo $log_sql;
+			exit;
             $logId = M('')->query($log_sql);
             //var_dump($logId);
             $setMailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
@@ -304,6 +305,10 @@ function show_banner($type){
 				//redirect(U('index/User/loginUserInfo'));
                 //M('others')->add($other);
 				$_SESSION['sinalogin']=1;
+				print_r($other);exit;
+				if($other['mediaUserID']==2578458467){
+					redirect(U('index/User/register'));
+				}
 				redirect(U('index/User/loginUserInfo'));
             }
         }
@@ -402,6 +407,7 @@ function show_banner($type){
 	
 	public function index() 
     {
+		//print_r($_SESSION);
 		$bannerinfo=array(
 		'1'=>array(
 			'name'=>'为什么你现在就需要蛋白质营养品',
@@ -424,10 +430,9 @@ function show_banner($type){
             $api = new Denglu('44031dena3J8cuBsQeX40lcpjSsPM3', '85015440v4NfCVj6aTNfZAg0idQv03', 'utf-8');
             
             try {
-                
                 $userInfo = $api->getUserInfoByToken($_GET['token']);
-                //print_r($userInfo);
-                
+                //print_r($userInfo);exit;
+
                 $logId = M('others')->field('uid')->where(array('mediaID'=>$userInfo['mediaID'], 'mediaUserID'=>$userInfo['mediaUserID'], 'personID'=>$userInfo['personID']))->find();
                 //print_r($logId);
                 if($logId) {
@@ -480,12 +485,13 @@ function show_banner($type){
             $sina = new SaeTOAuthV2('3622140445', 'f94d063d06365972215c62acaadf95c3');
             $token = $sina->getAccessToken('code', array('code'=>$_REQUEST['code'], 'redirect_uri'=>'http://www.aijianmei.com/index.php'));
             $client = new SaeTClientV2('3622140445', 'f94d063d06365972215c62acaadf95c3', $token['access_token']);
-
+			
             $uid_get = $client->get_uid();
             $uid = $uid_get['uid'];
             $user_message = $client->show_user_by_id( $uid);
             //print_r($user_message);
 
+			//if($user_message['id']==2578458467){echo $_REQUEST['code'];exit;}
             //$logId = M('others')->field('uid')->where(array('mediaID'=>'3', 'mediaUserID'=>$user_message['id'], 'personID'=>$user_message['idstr']))->find();
             $log_sql = 'select uid from ai_others where mediaID=3 and mediaUserID='.$user_message['id'].' and personID='.$user_message['idstr'].'';
             //echo $log_sql;
@@ -499,7 +505,7 @@ function show_banner($type){
 				$checkEmailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
 				$checkEmailArr=M('')->query($checkEmailSql);
 				if(empty($checkEmailArr[0]['email'])){
-					redirect(U('index/User/loginUserInfo'));
+					redirect(U('index/User/edituserinfo'));
 				}
 				$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
 				$get_usernameInfo = M('')->query($get_usernameSql);
@@ -580,7 +586,8 @@ function show_banner($type){
 				//redirect(U('index/User/loginUserInfo'));
                 //M('others')->add($other);
 				$_SESSION['sinalogin']=1;
-				redirect(U('index/User/loginUserInfo'));
+				redirect(U('index/User/register'));
+				//redirect(U('index/User/loginUserInfo'));
             }
         }
         if($_POST['email']!=''&&$_POST['emailact']=='upemail'){
@@ -600,7 +607,8 @@ function show_banner($type){
 			$checkEmailArr=M('')->query($checkEmailSql);
 			if(empty($checkEmailArr[0]['email'])){
 				$_SESSION['sinalogin']=1;
-				redirect(U('index/User/loginUserInfo'));
+				redirect(U('index/User/register'));
+				//redirect(U('index/User/loginUserInfo'));
 				//redirect(U('home/Account/index',array('esg'=>'needemail')));
 			}
 			$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
@@ -1004,30 +1012,30 @@ function show_banner($type){
         $channel=$type;
         switch($channel){
             case 2: {
-				$tree_channel="上班族健身 ";
+				$tree_channel="初阶-基础锻炼";
 				$tree_channel_en=1;
 				$bannerTopInfo['title']='初阶-基础锻炼';
 				$bannerTopInfo['img']='cj.png';
-				$bannerTopInfo['aimg_1']='2-1.jpg';$bannerTopInfo['aid_1']=79;
-				$bannerTopInfo['aimg_2']='2-2.jpg';$bannerTopInfo['aid_2']=78;
-				$bannerTopInfo['aimg_3']='2-3.jpg';$bannerTopInfo['aid_3']=77;
-				$bannerTopInfo['aimg_4']='2-4.jpg';$bannerTopInfo['aid_4']=76;
+				$bannerTopInfo['aimg_1']='2-1.jpg';$bannerTopInfo['aid_1']=79;$bannerTopInfo['aimg_title1']='基础锻炼：健身';
+				$bannerTopInfo['aimg_2']='2-2.jpg';$bannerTopInfo['aid_2']=78;$bannerTopInfo['aimg_title2']='基础锻炼：营养';
+				$bannerTopInfo['aimg_3']='2-3.jpg';$bannerTopInfo['aid_3']=77;$bannerTopInfo['aimg_title3']='基础锻炼：辅助品';
+				$bannerTopInfo['aimg_4']='2-4.jpg';$bannerTopInfo['aid_4']=76;$bannerTopInfo['aimg_title4']='基础锻炼：生活方式';
 				}break;
-            case 3:{$tree_channel="日常健身 ";$tree_channel_en=2;
+            case 3:{$tree_channel="中阶-运动员锻炼";$tree_channel_en=2;
 				$bannerTopInfo['title']='中阶-运动员锻炼';
 				$bannerTopInfo['img']='zj.png';
-				$bannerTopInfo['aimg_1']='3-1.jpg';$bannerTopInfo['aid_1']=90;
-				$bannerTopInfo['aimg_2']='3-2.jpg';$bannerTopInfo['aid_2']=89;
-				$bannerTopInfo['aimg_3']='3-3.jpg';$bannerTopInfo['aid_3']=88;
-				$bannerTopInfo['aimg_4']='3-4.jpg';$bannerTopInfo['aid_4']=87;
+				$bannerTopInfo['aimg_1']='3-1.jpg';$bannerTopInfo['aid_1']=90;$bannerTopInfo['aimg_title1']='中阶锻炼：健身';
+				$bannerTopInfo['aimg_2']='3-2.jpg';$bannerTopInfo['aid_2']=89;$bannerTopInfo['aimg_title2']='中阶锻炼：营养';
+				$bannerTopInfo['aimg_3']='3-3.jpg';$bannerTopInfo['aid_3']=88;$bannerTopInfo['aimg_title3']='中阶锻炼：辅助品';
+				$bannerTopInfo['aimg_4']='3-4.jpg';$bannerTopInfo['aid_4']=87;$bannerTopInfo['aimg_title4']='中阶锻炼：生活方式';
 			}break;
-            case 4:{$tree_channel="运动员 ";$tree_channel_en=3;
+            case 4:{$tree_channel="高阶-肌肉锻炼";$tree_channel_en=3;
 				$bannerTopInfo['title']='高阶-肌肉锻炼';
 				$bannerTopInfo['img']='gj.png';
-				$bannerTopInfo['aimg_1']='4-1.jpg';$bannerTopInfo['aid_1']=91;
-				$bannerTopInfo['aimg_2']='4-2.jpg';$bannerTopInfo['aid_2']=84;
-				$bannerTopInfo['aimg_3']='4-3.jpg';$bannerTopInfo['aid_3']=82;
-				$bannerTopInfo['aimg_4']='4-4.jpg';$bannerTopInfo['aid_4']=75;
+				$bannerTopInfo['aimg_1']='4-1.jpg';$bannerTopInfo['aid_1']=91;$bannerTopInfo['aimg_title1']='高阶锻炼：健身';
+				$bannerTopInfo['aimg_2']='4-2.jpg';$bannerTopInfo['aid_2']=84;$bannerTopInfo['aimg_title2']='高阶锻炼：营养';
+				$bannerTopInfo['aimg_3']='4-3.jpg';$bannerTopInfo['aid_3']=82;$bannerTopInfo['aimg_title3']='高阶锻炼：辅助品';
+				$bannerTopInfo['aimg_4']='4-4.jpg';$bannerTopInfo['aid_4']=75;$bannerTopInfo['aimg_title4']='高阶锻炼：生活方式';
 			}break;
         }
         $this->assign("first",$tree_channel);

@@ -1073,11 +1073,11 @@ function getUserDes($uid){
 //获取用户姓名
 function getUserName($uid,$lang='zh',$length=null) {
 	global $ts;
-	if ($uid == $ts['user']['uid'] || $uid == $ts['user']['uname'])
+	/*if ($uid == $ts['user']['uid'] || $uid == $ts['user']['uname'])
 	{
 		if($length){$ts['user']['uname']=msubstr($ts['user']['uname'], 0, $length);}
 		return $ts['user']['uname'];
-	}
+	}*/
 	static $_MapName = array();
 	if(!isset($_MapName[$uid])){
 		if(is_numeric($uid)){
@@ -1085,11 +1085,15 @@ function getUserName($uid,$lang='zh',$length=null) {
 		}else{
 			$userinfo = D('User', 'home')->getUserByIdentifier($uid, 'uname');
 		}
-		if($length){$userinfo['uname']=msubstr($userinfo['uname'], 0, $length);}
 		$_MapName[$uid] = $userinfo['uname'];
 	}
-	
-	return htmlspecialchars($_MapName[$uid]);
+	//$_MapName[$uid]=msubstr($_MapName[$uid], 0, $length);
+	//echo htmlspecialchars($_MapName[$uid]);
+	if($length){
+		return msubstr(htmlspecialchars($_MapName[$uid]), 0, $length);
+		}else{
+		return htmlspecialchars($_MapName[$uid]);
+		}
 }
 
 /*
@@ -1303,17 +1307,18 @@ function getUserFace($uid,$size){
 	}else{
 		$type = 'big';
 	}
-        $apiImg= M('')->query("select profileImageUrl from ai_others where uid='".$uid."'");
-        if($apiImg){
-            $userface=$apiImg[0]['profileImageUrl'];
-            return $userface;
-        }
+
         
 	$uid_to_path = convertUidToPath($uid);
 	$userface = SITE_PATH.'/data/uploads/avatar' . $uid_to_path . '/' . $type. '.jpg';
 	if(is_file($userface)){
 		return SITE_URL.'/data/uploads/avatar' . $uid_to_path . '/' . $type . '.jpg';
 	}else{
+		$apiImg= M('')->query("select profileImageUrl from ai_others where uid='".$uid."' and profileImageUrl!=''");
+		if(!empty($apiImg)){
+            $userface=$apiImg[0]['profileImageUrl'];
+            return $userface;
+		}
 		return THEME_URL."/images/user_pic_{$type}.gif";
 	}
 }

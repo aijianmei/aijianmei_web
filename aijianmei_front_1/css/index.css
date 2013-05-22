@@ -31,6 +31,7 @@
 				z-index: 10;
 			}
 			.bn_contain_pic li{
+				position: relative;
 				float: left;
 				width: 650px;
 				height: 280px;			
@@ -42,13 +43,33 @@
 				width: 650px;
 				height: 280px;	
 			}
+			/*bn_bg_part*/
+			.bn_bg_part{
+				position: absolute;
+				top:200px;
+				width: 100%;
+				height: 100%;
+				background: rgba(0,0,0,.6);
+				background: #626262\9;
+				filter:alpha(opacity=90);
+			}
+			.bn_text{
+				display: inline-block;
+				margin-top: 20px;
+				font-size: 25px;
+				text-align: center;
+				color: white;
+			}
+			.bn_text:hover{
+				color:white;
+			}
 			/*choice_way beginning*/
 			.bn_choice_way span{
 				position: absolute;
 				top:100px;
 				display: inline-block;
-				width: 40px;
-				height:80px;
+				width: 38px;
+				height:79px;
 				z-index: 10;
 				opacity: 0.5;
 				filter:alpha(opacity=50);
@@ -56,11 +77,11 @@
 			}
 			.bn_prex{
 				left:5px;
-				background: url(../images/turn_left.png) no-repeat;
+				background: url(../images/sprite.png) -214px 0 no-repeat;
 			}
 			.bn_next{
 				right:5px;
-				background: url(../images/turn_right.png) no-repeat;
+				background: url(../images/sprite.png) 0 -147px no-repeat;
 			}
 			/*choice_way*/
 			/*choice_point beginning*/
@@ -274,8 +295,8 @@
 						top: 0;
 						left: 0;
 						width:214px;
-						height:146px;
-						background: url(../images/cont_vd.png) no-repeat;
+						height:147px;
+						background: url(../images/sprite.png) 0 0 no-repeat;
 					}
 				/*cont_vd_2-----------*/
 					.cont_vd_2{
@@ -296,10 +317,10 @@
 						display: inline-block;
 						width: 109px;
 						height: 38px;
-						background:url(../images/button_icon.png) no-repeat 0 -474px;
+						background:url(../images/sprite.png) no-repeat -252px -0px;
 					}
 					.cont_vd_see:hover{
-						background:url(../images/button_icon.png) no-repeat 0 -521px;
+						background:url(../images/sprite.png) no-repeat -252px -37px;
 					}
 					/*cont_vd_share------------*/
 						.cont_vd_share{
@@ -452,11 +473,11 @@
 			top:0;
 			width:55px;
 			height:28px;
-			background:url(../images/button_icon.png) no-repeat 0 -740px;
+			background:url(../images/sprite.png) -335px -266px no-repeat;
 			cursor:pointer;
 		}
 		.lb_search #button:hover{
-			background:url(../images/button_icon.png) no-repeat 0 -778px;
+			background:url(../images/sprite.png) -277px -266px no-repeat;
 		}
 		/*two_code-----------*/
 		.two_code img{

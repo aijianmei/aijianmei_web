@@ -14,7 +14,7 @@
 						<div class="cont_module clearfix">
 							<div class="cont_vd_1">
 								<a class="cont_vd_link" href="/index-Train-videoDetail-{$v['id']}.html"><img style="width:215px;height:145px;" alt="{$v['title']}" src="{$v['logo']}"></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $v['htmlurl'];?>" pic="<?php echo $v['logo'];?>"  title="<?php echo $v['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
@@ -46,7 +46,7 @@
 						<div class="cont_module clearfix">
 							<div class="cont_vd_1">
 								<a class="cont_vd_link"  href="/index-Train-videoDetail-{$v['id']}.html"><img style="width:215px;height:145px;" alt="{$v['title']}" src="{$v['logo']}"></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $v['htmlurl'];?>" pic="<?php echo $v['logo'];?>"  title="<?php echo $v['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
@@ -78,7 +78,7 @@
         	<div class="content_2">
         		<include file="Templates/userinfo.html" />
 	        	<div class="same_module">
-	        		<h3 class="sm_title">关键词搜索</h3>
+	        		<h3 class="sm_title">{$headertitle}关键词搜索</h3>
 					<include file="Templates/keywordList.html" />
 	        	</div>
 				<include file="Templates/commentList.html" />
@@ -167,7 +167,7 @@
 		</script>
         <script type="text/javascript" src="Templates/js/public.js"></script>
         <script type="text/javascript">
-			ajaxListKey=2;
+			ajaxListKey=0;
         	var init = function(){
 			    var newdom = new getdom,
 			    	identifying = newdom.getElementsByClass('identifying')[0];
@@ -201,8 +201,9 @@
 				$.post("ajax.php?act=ajaxTrainMore",{type:type,data:'',pg:page,mtype:2},function(res){
     			if(res) {
 					type=type-2;
-					$("#ajax_ct"+type).append(res);
+					$("#ajax_ct"+ajaxListKey).append(res);
 					aijianmei.hover('cont_vd_link','cont_vd_bg');
+					$.getScript("http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454");
     			}else {
     				//ui.error('删除失败');
     			}

@@ -1,4 +1,4 @@
-﻿<include file="Templates/header.html" />
+<include file="Templates/header.html" />
         <div class="wrapper">
 			<p class="vission">推广健身文化，传播健康理念。爱健美为你打造最完美的健美计划！</p>
 			<div class="area">
@@ -6,16 +6,37 @@
 					<div class="plan_item">
 						<h2 class="plan_item_tit">{$bannerTopInfo['title']}</h2>
 						<div>
-							<a href="#"><img src="Templates/images/plan/{$bannerTopInfo['img']}" alt="{$bannerTopInfo['title']}" class="itemImg"/></a>
-							<div class="plan_cover"><span>{$bannerTopInfo['title']}</span></div>
+							<img src="Templates/images/plan/{$bannerTopInfo['img']}" alt="{$bannerTopInfo['title']}" class="itemImg"/>
+							<!--<div class="plan_cover"><span>{$bannerTopInfo['title']}</span></div>
+							<span class="cover_cont">{$bannerTopInfo['title']}</span>-->
 						</div>
 					</div>
 					<div class="daily_choice">
 						<ul class="clearfix">
-							<li class="article_item"><a href="/index-Index-articleDetail-{$bannerTopInfo['aid_1']}.html"><img src="Templates/images/plan/{$bannerTopInfo['aimg_1']}" alt="饮食调节" class="article_img"/></a></li>
-							<li class="article_item a_item2"><a href="/index-Index-articleDetail-{$bannerTopInfo['aid_2']}.html"><img src="Templates/images/plan/{$bannerTopInfo['aimg_2']}" alt="强身健体" class="article_img"/></a></li>
-							<li class="article_item a_item3"><a href="/index-Index-articleDetail-{$bannerTopInfo['aid_3']}.html"><img src="Templates/images/plan/{$bannerTopInfo['aimg_3']}" alt="健身塑性" class="article_img"/></a></li>
-							<li class="article_item"><a href="/index-Index-articleDetail-{$bannerTopInfo['aid_4']}.html"><img src="Templates/images/plan/{$bannerTopInfo['aimg_4']}" alt="健身塑性" class="article_img"/></a></li>
+							<li class="article_item">
+							<a href="/index-Index-articleDetail-{$bannerTopInfo['aid_1']}.html">
+							<img src="Templates/images/plan/{$bannerTopInfo['aimg_1']}" alt="{$bannerTopInfo['aimg_title1']}" class="article_img"/></a>
+							<div class="plan_cover"></div>
+								<span class="cover_cont">{$bannerTopInfo['aimg_title1']}</span>
+							</li>
+							<li class="article_item a_item2">
+							<a href="/index-Index-articleDetail-{$bannerTopInfo['aid_2']}.html">
+							<img src="Templates/images/plan/{$bannerTopInfo['aimg_2']}" alt="{$bannerTopInfo['aimg_title2']}" class="article_img"/></a>
+							<div class="plan_cover"></div>
+								<span class="cover_cont">{$bannerTopInfo['aimg_title2']}</span>
+							</li>
+							<li class="article_item a_item3">
+							<a href="/index-Index-articleDetail-{$bannerTopInfo['aid_3']}.html">
+							<img src="Templates/images/plan/{$bannerTopInfo['aimg_3']}" alt="{$bannerTopInfo['aimg_title3']}" class="article_img"/></a>
+							<div class="plan_cover"></div>
+								<span class="cover_cont">{$bannerTopInfo['aimg_title3']}</span>
+							</li>
+							<li class="article_item">
+							<a href="/index-Index-articleDetail-{$bannerTopInfo['aid_4']}.html">
+							<img src="Templates/images/plan/{$bannerTopInfo['aimg_4']}" alt="{$bannerTopInfo['aimg_title4']}" class="article_img"/></a>
+							<div class="plan_cover"></div>
+								<span class="cover_cont">{$bannerTopInfo['aimg_title4']}</span>
+							</li>
 						</ul>
 					</div>					
 				</div><!--End plan_sort-->
@@ -28,7 +49,7 @@
 						<h2 class="video_tit">{$i['article']['title']}</h2>
 						<p class="video_cont">{$i['article']['content']|htmlspecialchars_decode}</p>
 						<div class="video">
-							<div class="abfocus_box" style="height:400px;margin-bottom:5px;">
+							<div class="abfocus_box">
                                 <php>foreach($i['video'] as $v) {</php>
                                           <php>if(!empty($v['link'])){</php>
 										    <php>if(!empty($v['wapurl'])){</php>
@@ -48,7 +69,7 @@
 										 <php>if(!empty($i['article']['img'])){</php>
 											<img src="/public/images/article/{$i['article']['img']}">
 										 <php>}else{</php>
-                                         <img src="apps/index/Tpl/default/Public/images/Mark_v.jpg">
+                                         <!--<img src="apps/index/Tpl/default/Public/images/Mark_v.jpg">-->
 										 <php>}</php>
                                          <php>}</php>
                                         <!-- </a> -->										
@@ -117,8 +138,8 @@
 								<button class="login">登陆</button> |
 								<button class="register"><a href="">注册</a></button>
 								<php>}</php>
-								<span class="accout">0/300</span>
-								<textarea name="" id="comment_{$i['article']['id']}" class="commentboxCss"  cols=47 rows=5 onclick="cleanlabel({$i['article']['id']});"></textarea>
+								<span class="accout"><span class="show_number">0</span>/300</span>
+								<textarea name="" id="comment_{$i['article']['id']}" class="text_user"  cols=47 rows=5 maxlength="300"></textarea>
 								<label for="comment_{$i['article']['id']}" id="lable_{$i['article']['id']}">有什么感想，来说说吧</label>
 								<button class="done" onclick="addVideoCommont(comment_{$i['article']['id']}.value, {$i['article']['id']}, 'Daily')" aid="{$i['article']['id']}"></button>
 							</div>
@@ -128,7 +149,7 @@
 				<php>}</php>
 				<input type="hidden" id="commentUid" value="<?php echo $_SESSION['mid'];?>">
 
-<div class="pg_page clearfix" id="ajaxpage_3" style="display:none;">
+					<div class="pg_page clearfix" id="ajaxpage_3" style="display:none;">
 						<span class="pg_concrete_choice">
 								{$pager['backstr']}
 								{$pager['thestr']}
@@ -140,9 +161,7 @@
 		<include file="Templates/footer.html" />
 		<include file="Templates/loginpart.html" />
 		<script>
-		function cleanlabel(lid){
-			$("#lable_"+lid).html('');
-		}
+
 		function setlike(id){
 			$.ajax({
             type: "POST",
@@ -153,6 +172,7 @@
 				if(data.result==1){
 				var nums=$('#likenum_'+id).attr("nums");
 				$('#likenum_'+id).html(nums*1+1);
+				$('#appbox_'+id).html('');
 				}
 				if(data.result==3){
 					alert('你已经投过票了');
@@ -183,7 +203,7 @@
 			 
             //$("#commentbox").val('');          
             $("#ppbox_"+pid).prepend(innerHtml);
-            //$("#appbox_"+pid).html('');
+            $("#appbox_"+pid).html('');
              
             }
             });
@@ -199,5 +219,7 @@
 	<script type="text/javascript" src="Templates/js/jquery.js"></script>
 	<script type="text/javascript" src="Templates/js/public.js"></script>	
 	<script type="text/javascript" src="Templates/js/plan.js"></script>
-
+	<script type="text/javascript">
+		change_num('text_user','show_number')
+	</script>
 </html>

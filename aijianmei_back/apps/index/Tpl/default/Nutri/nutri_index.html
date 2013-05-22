@@ -13,7 +13,7 @@
 						<div class="cont_module clearfix">
 							<div class="cont_side_1">
 								<a href="/index-Index-articleDetail-{$a['id']}.html"><img alt="{$a['title']}" style="height:145px;width:215px;" src="{$SITE_URL}/public/images/article/{$a['img']}"></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/{$a['img']}"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
@@ -43,13 +43,13 @@
 						<div class="cont_module clearfix">
 							<div class="cont_side_1">
 								<a href="/index-Index-articleDetail-{$a['id']}.html"><img alt="{$a['title']}" style="height:145px;width:215px;" src="{$SITE_URL}/public/images/article/{$a['img']}"></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/{$a['img']}"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">
 								<h3 class="cont_title"><a href="/index-Index-articleDetail-{$a['id']}.html">{$a['title']}</a></h3>
-								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span><php> date("Y-m-d",$a['create-time'])</php></span></span>
+								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span><php>echo  date("Y-m-d",$a['create_time']);</php></span></span>
 								<p>{$a['brief']}</p>
 								<a class="cont_read_more" href="/index-Index-articleDetail-{$a['id']}.html">阅读全文></a>
 								<div class="cont_share">
@@ -74,7 +74,7 @@
         	<div class="content_2">
         		<include file="Templates/userinfo.html" />
 	        	<div class="same_module">
-	        		<h3 class="sm_title">关键词搜索</h3>
+	        		<h3 class="sm_title">{$headertitle}关键词搜索</h3>
 					<include file="Templates/keywordList.html" />
 	        	</div>
 				<include file="Templates/commentList.html" />
@@ -194,6 +194,7 @@
 				$.post("ajax.php?act=ajaxTrainMore",{type:type,data:'',pg:page,mtype:3,lid:lid},function(res){
     			if(res) {
 					$("#ajax_ct"+type).append(res);
+					$.getScript("http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454");
     			}else {
     				//ui.error('删除失败');
     			}

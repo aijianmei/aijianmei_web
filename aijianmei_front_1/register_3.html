@@ -24,7 +24,7 @@
 							<img src="images/register/way_1.jpg">
 							<div class="rg_img_bg"></div>
 							<div class="rg_way_content">
-								<p>增肌</p>			
+								<p>吃得更营养</p>			
 							</div>
 							<div class="rg_way_bg"></div>
 						</span>
@@ -34,7 +34,7 @@
 							<img src="images/register/way_2.jpg">
 							<div class="rg_img_bg"></div>
 							<div class="rg_way_content">
-								<p>增肥</p>			
+								<p>增肌更有型</p>			
 							</div>
 							<div class="rg_way_bg"></div>
 						</span>
@@ -44,7 +44,7 @@
 							<img src="images/register/way_3.jpg">
 							<div class="rg_img_bg"></div>
 							<div class="rg_way_content">
-								<p>减肥</p>			
+								<p>减肥一身轻</p>			
 							</div>
 							<div class="rg_way_bg"></div>
 						</span>
@@ -151,9 +151,16 @@
 					rg_img_bg[this.index].style.opacity = 0.5;
 				}
 				rg_choice_lay[i].onclick = function(){
-					aijianmei.chang_top(rg_way_content[this.index],0,31,50);
-					aijianmei.chang_top(rg_way_bg[this.index],0,31,50);
-					rg_img_bg[this.index].style.display = 'none';
+					if(rg_img_bg[this.index].style.display != "none"){
+						aijianmei.chang_top(rg_way_content[this.index],0,31,50);
+						aijianmei.chang_top(rg_way_bg[this.index],0,31,50);
+						rg_img_bg[this.index].style.display = 'none';
+					}
+					else{
+						aijianmei.chang_top(rg_way_content[this.index],1,31,50);
+						aijianmei.chang_top(rg_way_bg[this.index],1,31,50);
+						rg_img_bg[this.index].style.display = 'block';
+					}	
 				}
 			}		
 			// rg_choice_lay_sp

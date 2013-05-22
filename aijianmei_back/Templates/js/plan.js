@@ -11,13 +11,15 @@
 		}
 	});
 	//textarea 
-	$("textarea#user").bind({
+	$("textarea.commentboxCss").bind({
 		focusin: function(){
 			$(this).next().hide();
-			console.log("sfsadf");
+			//console.log("sfsadf");
 		},
 		focusout: function(){
+			if($(this).val()==''){
 			$(this).next().show();
+			}
 		}
 	});
 });

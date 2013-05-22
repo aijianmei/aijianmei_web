@@ -213,8 +213,8 @@
 							<div class="make_com">
 								<button class="login">登陆</button> |
 								<button class="register"><a href="">注册</a></button>
-								<span class="accout">0/300</span>
-								<textarea name="" id="user"></textarea>
+								<span class="accout"><span class="show_number">0</span>/300</span>
+								<textarea name="" class="text_user" id="user" maxlength="300"></textarea>
 								<label for="user">有什么感想，来说说吧</label>
 								<button class="done"></button>
 							</div>
@@ -314,8 +314,8 @@
 							<div class="make_com">
 								<button class="login">登陆</button> |
 								<button class="register"><a href="">注册</a></button>
-								<span class="accout">0/300</span>
-								<textarea name="" id="user"></textarea>
+								<span class="accout"><span class="show_number">0</span>/300</span>
+								<textarea name="" class="text_user" id="user" maxlength="300"></textarea>
 								<label for="user">有什么感想，来说说吧</label>
 								<button class="done"></button>
 							</div>
@@ -335,5 +335,7 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/public.js"></script>	
 	<script type="text/javascript" src="js/plan.js"></script>
-
+	<script type="text/javascript">
+		change_num('text_user','show_number')
+	</script>
 </html>

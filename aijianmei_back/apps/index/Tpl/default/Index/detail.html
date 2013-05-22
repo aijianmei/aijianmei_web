@@ -104,7 +104,7 @@
                         <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
 							<span class="word_num"><span class="lay_word_num">0</span>/300</span>
 							<div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox"  onKeyDown="change_number('comment_inp','lay_word_num');" onKeyUp="change_number('comment_inp','lay_word_num');"  maxlength=300>有什么感想，来说说吧</textarea></div>
-							<a class="comment">发表评论</a>
+							<a class="comment" onclick="addDetaiCommont();">发表评论</a>
 						</div>
                     <div class="check_comment">
                         <a class="comment_1">全部评论(<?php echo $commentCounts;?>)</a>
@@ -192,7 +192,7 @@
             data: "act=addDetaiCommont&data=ford&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&content="+$("#commentbox").val()+"&ptype=1",
             success: function(data){
             alert("添加评论成功！");
-             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /><span class="care">关注</span></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.connect+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div'; 
+             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.connect+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div'; 
             $("#commentbox").val('');          
             $("#recomment_fdiv").prepend(innerHtml);
             $("#empty_content").html('');

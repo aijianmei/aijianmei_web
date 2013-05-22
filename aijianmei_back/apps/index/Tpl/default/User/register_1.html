@@ -14,7 +14,7 @@
 		<div class="rg_top">
 			<div class="rg_top_lay">
 				<div class="rg_logo"><img src="Templates/images/register/rg_logo.png" /></div>
-				<p class="rg_tip">请留下邮箱方便下次登录</p>
+				<p class="rg_tip">欢迎到“爱健美”注册页面</p>
 			</div>
 		</div>
 		<div class="rg_bottom">
@@ -22,15 +22,15 @@
 			<div class="rg_form">
 				<form id="regform" action="/index.php?app=index&mod=User&act=doregister" method="post">
 					<div class="rg_ms">
-						<label for="text">邮箱</label><input type="text" style="margin:2px 0px 2px 10px;font-size: 22px; height:48px;" class="inputCss" id="email" name="email" onblur="regCheckMail();"/>
+						<label for="text" id="emaillabel">邮箱</label><input type="text"  class="inputCss" id="email" name="email" onblur="regCheckMail();" onfocus="clearlable('emaillabel');"/>
 						<span class="rg_text_tip" id="rg_text_tip"></span>
 					</div>
 					<div class="rg_ms">
-						<label for="password">密码</label><input style="margin:2px 0px 2px 10px;font-size: 22px; height:52px;" type="password" class="inputCss" id="password" name="password" onblur="regCheckPassword();"/>
+						<label for="password" id="passwordlabel">密码</label><input  type="password" class="inputCss" id="password" name="password" onblur="regCheckPassword();" onfocus="clearlable('passwordlabel');"/>
 						<span class="rg_text_tip" id="pwd_text_tip"></span>
 					</div>
 					<div class="rg_ms">
-						<label for="password_again">确认密码</label><input style="margin:2px 0px 2px 10px;font-size: 22px; height:52px;" type="password" class="inputCss" id="password_again" name="repassword" onblur="regCheckPassword();"/>
+						<label for="password_again" id="repasswordlabel">确认密码</label><input  type="password" class="inputCss" id="password_again" name="repassword" onblur="regCheckPassword();" onfocus="clearlable('repasswordlabel');"/>
 						<span class="rg_text_tip" id="repwd_text_tip"></span>
 					</div>
 				</form>
@@ -63,6 +63,11 @@
 			$(this).parent().find('label').html('');
 		});
 	});
+	function clearlable(key){
+		$("#"+key).html('');
+	}
+	
+	
 	function regCheckMail(){
 		if($("#partemail").val()>0){return true;};
 		var email =$("#email").val();

@@ -15,7 +15,7 @@
 						<div class="cont_module clearfix">
 							<div class="cont_side_1">
 								<a href="/index-Index-articleDetail-{$a['id']}.html"><img alt="{$a['title']}" style="height:145px;width:215px;" src="{$SITE_URL}/public/images/article/{$a['img']}"></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/{$a['img']}"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
@@ -45,7 +45,7 @@
 						<div class="cont_module clearfix">
 							<div class="cont_side_1">
 								<a href="/index-Index-articleDetail-{$a['id']}.html"><img alt="{$a['title']}" style="height:145px;width:215px;" src="{$SITE_URL}/public/images/article/{$a['img']}"></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/{$a['img']}"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
@@ -75,7 +75,7 @@
 						<div class="cont_module clearfix">
 							<div class="cont_vd_1">
 								<a  class="cont_vd_link"  href="/index-Train-videoDetail-{$v['id']}.html"><img style="width:215px;height:145px;" alt="{$v['title']}" src="{$v['logo']}"><span class="cont_vd_bg" style="display: none;"></span></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $v['htmlurl'];?>" pic="<?php echo $v['logo'];?>"  title="<?php echo $v['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
@@ -107,12 +107,12 @@
 						<div class="cont_module clearfix">
 							<div class="cont_vd_1">
 								<a  class="cont_vd_link"  href="/index-Train-videoDetail-{$v['id']}.html"><img style="width:215px;height:145px;" alt="{$v['title']}" src="{$v['logo']}"><span class="cont_vd_bg" style="display: none;"></span></a>
-								<div class="show_share" style="margin-left:40px;">
+								<div class="show_share clearfix" style="margin-left:40px;">
 								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $v['htmlurl'];?>" pic="<?php echo $v['logo'];?>"  title="<?php echo $v['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_vd_2">
-								<h3 class="cont_title"><a href="/index-Train-videoDetail-{$v['id']}.html">{$v['title']}</a></h3>
+								<h3 class="cont_vd_title"><a href="/index-Train-videoDetail-{$v['id']}.html">{$v['title']}</a></h3>
 								<div class="cont_vd_dt">
 									<p>标签:<span>{$v['keyword']}</span></p>
 									<p>简介:<span><php> echo msubstr($v['brief'],0,54);</php></span></p>
@@ -139,7 +139,7 @@
         	<div class="content_2">
         		<include file="Templates/userinfo.html" />
 	        	<div class="same_module">
-	        		<h3 class="sm_title">关键词搜索</h3>
+	        		<h3 class="sm_title">{$headertitle}关键词搜索</h3>
 					<include file="Templates/keywordList.html" />
 	        	</div>
 				<include file="Templates/commentList.html" />
@@ -260,6 +260,7 @@
     			if(res) {
 					$("#ajax_ct"+type).append(res);
 					aijianmei.hover('cont_vd_link','cont_vd_bg');
+					$.getScript("http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454");
     			}else {
     				//ui.error('删除失败');
     			}

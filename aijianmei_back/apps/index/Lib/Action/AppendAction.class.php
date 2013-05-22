@@ -171,7 +171,8 @@ class AppendAction extends Action {
 		$keywordInfo=unserialize(include_once("PublicCache/keywordInfo.php"));
 		$this->assign('_CommentList',unserialize(include_once("PublicCache/CommentListCache.php")));
 		$this->assign('_KeyWordList',$keywordInfo['append']);
-		$this->assign('headertitle', '辅助品');
+		$keymenu=array('48'=>'辅助品知识','49'=>'减脂辅助品','50'=>'增肌辅助品');
+		$this->assign('headertitle', $keymenu[$id]);
 		$this->assign('_current', 'append');
         $this->display('append_list');
     }

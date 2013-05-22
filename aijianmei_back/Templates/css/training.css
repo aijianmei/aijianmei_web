@@ -45,8 +45,9 @@
 			.bn_choice_way span{
 				position: absolute;
 				display: inline-block;
-				width: 40px;
-				height:80px;
+				top:100px;
+				width: 38px;
+				height:79px;
 				z-index: 10;
 				opacity: 0.5;
 				filter:alpha(opacity=50);
@@ -54,13 +55,11 @@
 			}
 			.bn_prex{
 				left:5px;
-				top:100px;
-				background: url(../images/turn_left.png) no-repeat;
+				background: url(../images/sprite.png) -214px 0 no-repeat;
 			}
 			.bn_next{
 				right:5px;
-				top:100px;
-				background: url(../images/turn_right.png) no-repeat;
+				background: url(../images/sprite.png) 0 -147px no-repeat;
 			}
 			/*choice_way*/
 			/*choice_point beginning*/
@@ -212,6 +211,13 @@
 			padding-left: 10px;
 			background: #F1F1F1;
 		}
+		.sm_title_sp{
+			display: inline-block;
+			font-size: 20px;
+			margin-right: 3px;
+			color: #2076bc;
+			font-weight: lighter;
+		}
 		/*pm------*/
 		.pm_pic{
 			float:left;
@@ -322,11 +328,12 @@
 			top:0;
 			width:55px;
 			height:28px;
-			background:url(../images/button_icon.png) no-repeat 0 -740px;
+			text-indent: -999px;
+			background:url(../images/sprite.png) -335px -266px no-repeat;
 			cursor:pointer;
 		}
 		.lb_search #button:hover{
-			background:url(../images/button_icon.png) no-repeat 0 -778px;
+			background:url(../images/sprite.png) -277px -266px no-repeat;
 		}
 		/*two_code-----------*/
 		.two_code img{
@@ -391,19 +398,21 @@
 			margin-bottom: 10px;
 		}
 		.re_content{
-			position: relative;
-			display: block;
 			padding: 10px;
 			border: 1px solid #ececec;
+		}
+		.detail{
+			position: relative;
+			display: inline-block;
 		}
 		.re_angle{
 			position: absolute;
 			display: inline-block;
-			width: 10px;
-			height: 13px;
-			top: 7px;
-			left: -6px;
-			background: url(../images/re_angle.jpg) no-repeat;
+			width: 6px;
+			height: 10px;
+			top: -5px;
+			left: -16px;
+			background: url(../images/sprite.png) -390px -36px no-repeat;
 		}
 		/*recomment_read_more*/
 		.recomment_read_more{
