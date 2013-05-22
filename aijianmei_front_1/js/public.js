@@ -429,6 +429,24 @@ var init = function(){
 init();	
 
 
+//for textarea write down text,show of obj show number
+function change_num(obj,show){
+	var newdom = new getdom,
+		obj = newdom.getElementsByClass(obj),
+	    len = obj.length,
+	    show_num = newdom.getElementsByClass(show);
+	for(var i = 0;i < len;i++){
+	    obj[i].index = i;
+	    if(obj[i]){
+	        obj[i].onkeyup = function(){
+	            show_num[this.index].innerHTML = this.value.length;
+	        }
+	        obj[i].onkeydown = function(){
+	            show_num[this.index].innerHTML = this.value.length;
+	        }
+	    }       
+	}
+}
 
 
 
