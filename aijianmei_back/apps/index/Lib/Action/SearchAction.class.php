@@ -34,8 +34,10 @@ class SearchAction extends Action {
 					$searchInfo[$key]['img']=$this->getVideoDataImg($value['img']);
 				}
 				else
-				{
-					$searchInfo[$key]['img']='/public/images/article/'.$value['img'];
+				{	
+					if($value['img']!=''){
+						$searchInfo[$key]['img']='/public/images/article/'.$value['img'];
+					}
 				}
 				if($value['1']==1){
 					$searchInfo[$key]['url']='/index-Index-articleDetail-'.$value['id'].'.html';
@@ -48,12 +50,12 @@ class SearchAction extends Action {
 					$searchInfo[$key]['shareurl']=($channelinfo[0]['htmlurl']!='')?$channelinfo[0]['htmlurl']:$channelinfo[0]['link'];
 				}
 				if($value['1']==4){
-					$getCsql="select channel,link,htmlurl from ai_daily where id='".$value['id']."'";
+					$getCsql="select a.channel,a.img,b.link,b.htmlurl from ai_daily a left join ai_daily_video b on a.id=b.daily_id where a.id='".$value['id']."'";
 					$channelinfo=M('')->query($getCsql);
 					$searchInfo[$key]['url']='/index-Index-daily-'.$value['id'].'-'.$channelinfo[0]['channel'].'.html';
 					$searchInfo[$key]['shareurl']=($channelinfo[0]['htmlurl']!='')?$channelinfo[0]['htmlurl']:$channelinfo[0]['link'];
-					if(!$searchInfo[$key]['img']){
-						$searchInfo[$key]['img']='apps/index/Tpl/default/Public/images/'.$value['img'];
+					if($channelinfo[0]['img']!=''&&$channelinfo[0]['link']=='null'){
+						$searchInfo[$key]['img']='/public/images/article/'.$channelinfo[0]['img'];
 					}
 				}
 			}

@@ -407,6 +407,7 @@ function show_banner($type){
 	
 	public function index() 
     {
+		//print_r($_SESSION);
 		$bannerinfo=array(
 		'1'=>array(
 			'name'=>'为什么你现在就需要蛋白质营养品',

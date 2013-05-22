@@ -307,7 +307,7 @@ class TrainAction extends Action {
     
     public function videoList()
     {
-      		$id = intval($_GET['id']);
+		$id = intval($_GET['id']);
 		$pg=$_GET['pg']?$_GET['pg']:1;
 		$nums=5;
         $this->assign('cssFile', 'training');
@@ -335,15 +335,15 @@ class TrainAction extends Action {
 			$pg=1;
 		}
 		
-		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
-		$countsql = "select count(*) as cnums from ai_article a ,($orderTableSql) t where a.id=t.aid";
+		//$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+		$countsql = "select count(*) as cnums from ai_video ";
 		$countInfo=$this->getDataCache(md5($countsql));
 		if(!$countInfo){
 			$countInfo = M('')->query($countsql);
 			$this->setDataCache(md5($countsql),$countInfo);
 		}
 		
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Train&act=videoList&id=$id&ctype=3&pg=");
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Train&act=videoList&id=$id&ctype=1&pg=");
 		$pagerArray = $pagerData['html'];
 		//print_r($pagerArray);
 		$order = 'create_time';
@@ -353,7 +353,7 @@ class TrainAction extends Action {
         $this->assign('lastVideoList', $lastVideoList);
 		//print_r($lastVideoList);
 		//print_r($lastVideoList);
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Train&act=videoList&id=$id&ctype=4&pg=");
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Train&act=videoList&id=$id&ctype=2&pg=");
 		$pagerArray = $pagerData['html'];
 		$order = 'click';
 		//$lastArticles = D('Article')->getTrainArticles($order);

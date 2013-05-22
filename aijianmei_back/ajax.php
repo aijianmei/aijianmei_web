@@ -212,9 +212,9 @@ function ajaxTrainMore($data){
 		exit;
 	}
 	if($type==3||$type==4){
-		$order=($type==1)?'create_time':'reader_count';
+		$order=($type==1)?'create_time':'click';
 		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =$mtype";
-		$sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by click desc limit ".$froms*$nums.",$nums";
+		$sql = "select * from ai_video  order by $order desc limit ".$froms*$nums.",$nums";
 		$result=null;
 		$result=getDataCache(md5($sql));
 		if(!$result){

@@ -177,7 +177,7 @@ class UserAction extends Action {
 				}
 				if($_SESSION['otherlogin']==1){
 					service('Passport')->loginLocal($mid);
-					redirect(U('index/index/index'));
+					redirect(U('index/user/edituserinfo'));
 					// if($_SESSION['refer_url']!=''){
 						// redirect($_SESSION['refer_url']);
 					// }else{
@@ -326,6 +326,7 @@ class UserAction extends Action {
 			
 			$healthinfoSql="select * from ai_user_health_info where uid='".$mid."'";
 			$healthinfo=M('')->query($healthinfoSql);
+			
 			$this->assign('healthinfo',$healthinfo[0]);
 			
 			$this->assign('UserKeyword',$getUserKeyword);

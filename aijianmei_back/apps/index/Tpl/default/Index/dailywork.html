@@ -49,7 +49,7 @@
 						<h2 class="video_tit">{$i['article']['title']}</h2>
 						<p class="video_cont">{$i['article']['content']|htmlspecialchars_decode}</p>
 						<div class="video">
-							<div class="abfocus_box" style="height:400px;margin-bottom:5px;">
+							<div class="abfocus_box">
                                 <php>foreach($i['video'] as $v) {</php>
                                           <php>if(!empty($v['link'])){</php>
 										    <php>if(!empty($v['wapurl'])){</php>
@@ -69,7 +69,7 @@
 										 <php>if(!empty($i['article']['img'])){</php>
 											<img src="/public/images/article/{$i['article']['img']}">
 										 <php>}else{</php>
-                                         <img src="apps/index/Tpl/default/Public/images/Mark_v.jpg">
+                                         <!--<img src="apps/index/Tpl/default/Public/images/Mark_v.jpg">-->
 										 <php>}</php>
                                          <php>}</php>
                                         <!-- </a> -->										

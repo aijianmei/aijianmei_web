@@ -167,7 +167,7 @@
 		</script>
         <script type="text/javascript" src="Templates/js/public.js"></script>
         <script type="text/javascript">
-			ajaxListKey=2;
+			ajaxListKey=0;
         	var init = function(){
 			    var newdom = new getdom,
 			    	identifying = newdom.getElementsByClass('identifying')[0];
@@ -201,7 +201,7 @@
 				$.post("ajax.php?act=ajaxTrainMore",{type:type,data:'',pg:page,mtype:2},function(res){
     			if(res) {
 					type=type-2;
-					$("#ajax_ct"+type).append(res);
+					$("#ajax_ct"+ajaxListKey).append(res);
 					aijianmei.hover('cont_vd_link','cont_vd_bg');
 					$.getScript("http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=239725454");
     			}else {

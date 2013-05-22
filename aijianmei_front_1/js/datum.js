@@ -115,9 +115,6 @@ var aijianmei = {
         }
     }
 }
-var default_year = false,
-    default_height = false,
-    default_weight = false;
 var init = function(){
     var newdom = new getdom,
         nav_child = newdom.getElementsByClass('nav_child'),

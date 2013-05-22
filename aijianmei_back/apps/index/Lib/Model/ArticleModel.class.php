@@ -15,7 +15,7 @@ class ArticleModel extends Model {
     {
         $sql = "select d.id,d.title,d.img,d.content,d.create_time,d.gotime,d.like,d.unlike,d.read_count,v.id as vid,v.title as vtitle,v.link,v.wapurl,v.intro from ai_daily as d
                 left join ai_daily_video  as v on v.daily_id=d.id 
-                where d.channel=".$channel." and d.gotime<".time()." ORDER BY d.create_time DESC  limit ".$limit.",".$nums." ";
+                where d.channel=".$channel." and d.gotime<".time()." ORDER BY d.gotime DESC  limit ".$limit.",".$nums." ";
 		$cacheid=md5($sql);
         $daily=$this->getDataCache($cacheid);
 		if(!$daily){
@@ -147,10 +147,10 @@ class ArticleModel extends Model {
     {
         if($id) {
             $sql = "select v.* from ai_video v where v.category_id=".$id."  order by ".$order." desc limit ".$limit.",".$nums."";
-
+		//1
         }else {
             $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
-            $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by $order desc limit ".$limit.",".$nums."";
+            $sql = "select v.* from ai_video v order by $order desc limit ".$limit.",".$nums."";
         }
 		$cacheid=md5($sql);
 		$result=null;
