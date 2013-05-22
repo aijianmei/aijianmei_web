@@ -478,12 +478,14 @@ public function saveedituserinfo(){
 			$cres=M('')->query($checksql);
 			if($cres){
 				$upsql=null;
-				$upsql="UPDATE ai_user_health_info SET body_weight = '".$_POST['dt_weight_finish']."'
-				,height = '".$_POST['dt_height_finish']."'
-				,age = '".$_POST['dt_year_finish']."' WHERE uid =$mid";
-				M('')->query($upsql);
+				if($_POST['dt_weight_finish']!=''||$_POST['dt_height_finish']!=''||$_POST['dt_year_finish']!=''){
+					$upsql="UPDATE ai_user_health_info SET body_weight = '".$_POST['dt_weight_finish']."'
+					,height = '".$_POST['dt_height_finish']."'
+					,age = '".$_POST['dt_year_finish']."' WHERE uid =$mid";
+					M('')->query($upsql);
+				}
 			}else{
-				echo $insertSql="INSERT INTO  `aijianmei`.`ai_user_health_info` (`uid` ,`body_weight` ,`height` ,`age`)
+				$insertSql="INSERT INTO  `aijianmei`.`ai_user_health_info` (`uid` ,`body_weight` ,`height` ,`age`)
 				VALUES ($mid, '".$_POST['dt_weight_finish']."','".$_POST['dt_height_finish']."','".$_POST['dt_year_finish']."')";
 				M('')->query($insertSql);
 			}

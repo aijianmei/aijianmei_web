@@ -504,7 +504,7 @@ function show_banner($type){
 				$checkEmailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
 				$checkEmailArr=M('')->query($checkEmailSql);
 				if(empty($checkEmailArr[0]['email'])){
-					redirect(U('index/User/loginUserInfo'));
+					redirect(U('index/User/edituserinfo'));
 				}
 				$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
 				$get_usernameInfo = M('')->query($get_usernameSql);

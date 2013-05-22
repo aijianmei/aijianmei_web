@@ -115,7 +115,6 @@ var aijianmei = {
         }
     }
 }
-
 var init = function(){
     var newdom = new getdom,
         nav_child = newdom.getElementsByClass('nav_child'),
@@ -223,29 +222,92 @@ var init = function(){
     var choice_year_this = function(e){
         var _e = window.event ? window.event : e || arguments[0],
             _target = _e.target ? _e.target : _e.srcElement;
-        dt_year_finish.innerHTML = _target.innerHTML;
+        //dt_year_finish.innerHTML = _target.innerHTML;
+		//alert(_target.innerHTML);
+		if(_target.innerHTML=='大于或等于70岁'||_target.innerHTML=='小于10岁'){
+			
+			if(!default_year){
+				$("#dt_year_finish").remove();
+				dt_year_finish.innerHTML="<input onkeyup=\"if (!(/^[0-9]*$/g.test(this.value))){this.value='';alert('请输入正确的数字')};\" type='text' name='dt_year_finish' value='' id='dt_year_finish' style='width:40px;'>岁";
+			}else{
+				//alert(default_year);
+				dt_year_finish.innerHTML=default_year;
+				$("#dt_year_finish").val(default_year);
+				default_year=false;
+			}
+			$("#dt_year_finish").focus();
+		}else{
+			 dt_year_finish.innerHTML = _target.innerHTML;
+			$("#dt_year_finish").val(_target.innerHTML);
+		}
         dt_year.style.display = "none";
         dt_year_edit.style.display = "block";
         act_change(dt_year,dt_year_edit,dt_year_change);
-        default_year = _target.index;
+        //default_year = _target.index;
     }
     var choice_height_this = function(e){
         var _e = window.event ? window.event : e || arguments[0],
             _target = _e.target ? _e.target : _e.srcElement;
-        dt_height_finish.innerHTML = _target.innerHTML;
+        //dt_height_finish.innerHTML = _target.innerHTML;
+		//$("#dt_height_finish").val(_target.innerHTML);
+		
+		if(_target.innerHTML=='小于140cm'||_target.innerHTML=='大于或等于200cm'){
+			
+			//dt_height_finish.innerHTML='<input type="text" name="dt_height_finish" value="" id="dt_height_finish" style="width:40px;">cm';
+			
+			if(!default_height){
+				$("#dt_height_finish").remove();
+				dt_height_finish.innerHTML="<input onkeyup=\"if (!(/^[0-9]*$/g.test(this.value))){this.value='';alert('请输入正确的数字')};\" type='text' name='dt_height_finish' value='' id='dt_height_finish' style='width:40px;'>cm";
+			}else{
+				//alert(default_year);
+				dt_height_finish.innerHTML=default_height;
+				$("#dt_height_finish").val(default_height);
+				default_height=false;
+			}
+
+			$("#dt_height_finish").focus();
+		}else{
+			 dt_height_finish.innerHTML = _target.innerHTML;
+			$("#dt_height_finish").val(_target.innerHTML);
+		}
+		
+		
+		
         dt_height.style.display = "none";
         dt_height_edit.style.display = "block";
         act_change(dt_height,dt_height_edit,dt_height_change);
-        default_height = _target.index;
+        //default_height = _target.index;
     }
     var choice_weight_this = function(e){
         var _e = window.event ? window.event : e || arguments[0],
             _target = _e.target ? _e.target : _e.srcElement;
-        dt_weight_finish.innerHTML = _target.innerHTML;
+        //dt_weight_finish.innerHTML = _target.innerHTML;
+		//$("#dt_weight_finish").val(_target.innerHTML);
+		
+		if(_target.innerHTML=='小于40kg'||_target.innerHTML=='大于或等于100kg'){
+			//
+			//dt_weight_finish.innerHTML='<input type="text" name="dt_weight_finish" value="" id="dt_weight_finish" style="width:40px;">kg';
+			
+			if(!default_weight){
+				$("#dt_weight_finish").remove();
+				dt_weight_finish.innerHTML="<input onkeyup=\"if (!(/^[0-9]*$/g.test(this.value))){this.value='';alert('请输入正确的数字')};\"  type='text' name='dt_weight_finish' value='' id='dt_weight_finish' style='width:40px;'>kg";
+			}else{
+				//alert(default_year);
+				dt_weight_finish.innerHTML=default_weight;
+				$("#dt_weight_finish").val(default_weight);
+				default_weight=false;
+			}
+			$("#dt_weight_finish").focus();
+		}else{
+			 dt_weight_finish.innerHTML = _target.innerHTML;
+			$("#dt_weight_finish").val(_target.innerHTML);
+		}
+		
+		
         dt_weight.style.display = "none";
         dt_weight_edit.style.display = "block";
         act_change(dt_weight,dt_weight_edit,dt_weight_change);
-        default_weight = _target.index;
+        //default_weight = _target.index;
     }
     //year
     a_dt_year[0].index = 100;
@@ -257,7 +319,7 @@ var init = function(){
             addevent(a_dt_year[0],'click',choice_year_this);
             addevent(a_dt_year[len_dt_year - 1],'click',choice_year_this);
             if(default_year){
-                if(default_year == 100){
+                /*if(default_year == 100){
                     a_dt_year[0].click();
                 }
                 else if(default_year == 200){
@@ -265,7 +327,12 @@ var init = function(){
                 }
                 else{
                     dt_year_target[default_year].click();
-                }
+                }*/
+				if(dt_year_target[i].innerHTML==default_year){
+					dt_year_target[i].click();
+				}else{
+					a_dt_year[len_dt_year - 1].click();
+				}
             }
         }   
     }
@@ -279,7 +346,7 @@ var init = function(){
             addevent(a_dt_height[0],'click',choice_height_this);
             addevent(a_dt_height[len_dt_height - 1],'click',choice_height_this);
             if(default_height){
-                if(default_height == 100){
+                /*if(default_height == 100){
                     a_dt_height[0].click();
                 }
                 else if(default_height == 200){
@@ -287,7 +354,12 @@ var init = function(){
                 }
                 else{
                     dt_height_target[default_height].click();
-                }
+                }*/
+				if(dt_height_target[i].innerHTML==default_height){
+					dt_height_target[i].click();
+				}else{
+					a_dt_height[len_dt_height - 1].click();
+				}
             }
         }   
     }
@@ -299,17 +371,24 @@ var init = function(){
         if(dt_weight_target[i]){
             addevent(dt_weight_target[i],'click',choice_weight_this);
             addevent(a_dt_weight[0],'click',choice_weight_this);
+			//alert(a_dt_weight[len_dt_weight - 1]);
             addevent(a_dt_weight[len_dt_weight - 1],'click',choice_weight_this);
             if(default_weight){
-                if(default_weight == 100){
-                    a_dt_weight[0].click();
-                }
-                else if(default_weight == 200){
-                    a_dt_weight[len_dt_weight - 1].click();
-                }
-                else{
-                    dt_weight_target[default_weight].click();
-                }
+                // if(default_weight == 100){
+                    // a_dt_weight[0].click();
+                // }
+                // else if(default_weight == 200){
+                    // a_dt_weight[len_dt_weight - 1].click();
+                // }
+                // else{
+                    // dt_weight_target[default_weight].click();
+                // }
+				//alert(dt_weight_target[i].innerHTML);
+				if(dt_weight_target[i].innerHTML==default_weight){
+					dt_weight_target[i].click();
+				}else{
+					a_dt_weight[len_dt_weight - 1].click();
+				}
             }
         }   
     }
@@ -325,6 +404,9 @@ var init = function(){
     //     text = '<span class="dt_sure_content">伟勉</span><span class="dt_sure_remove">×</span>>';
     // div.className = 'dt_sure';
     // div.innerHTML = text;
+	
+	
+	
     tag_id.onfocus = function(){
         tag_class.style.display = "none";
     }
@@ -336,6 +418,7 @@ var init = function(){
             div.className = 'dt_sure';
             div.innerHTML = text;
             dt_wrap_sure.appendChild(div);
+			$("#keywordlist").append('<input type="hidden" name="keyword[]" value="'+tag_id.value+'">');
         }
             
 
@@ -346,8 +429,10 @@ var init = function(){
         var dt_sure_remove = newdom.getElementsByClass('dt_sure_remove');
         if(dt_sure_remove){
             var len_dt_remove = dt_sure_remove.length;
+			alert(len_dt_remove);
             for(var i = 0;i < len_dt_remove;i++){
                 dt_sure_remove[i].onclick = function(){
+				//alert(i);
                     // this.parentNode.style.display = 'none';
                     dt_wrap_sure.removeChild(this.parentNode)
                 }
