@@ -158,34 +158,16 @@ function reg(str){
       <!-- {/if} -->
        </dd>
       </li>
-      <li class="clearfix">
-       <dd>
-       <!-- {if $cfg.show_addtime} 上架时间-->
-      <strong>{$lang.add_time}</strong>{$goods.add_time}
-      <!-- {/if} -->
-       </dd>
-       <dd class="ddR">
-       <!--点击数-->
-       <strong>{$lang.goods_click_count}：</strong>{$goods.click_count}
-       </dd>
-      </li>
+    
       <li class="clearfix">
        <dd class="ddL">
        <!-- {if $cfg.show_marketprice} 市场价格-->
-       <strong>{$lang.market_price}</strong><font class="market">{$goods.market_price}</font><br />
        <!-- {/if} -->
        <!--本店售价-->
-       <strong>{$lang.shop_price}</strong><font class="shop" id="ECS_SHOPPRICE">{$goods.shop_price_formated}</font><br />
-       <!-- {foreach from=$rank_prices item=rank_price key=key} 会员等级对应的价格-->
-       <strong>{$rank_price.rank_name}：</strong><font class="shop" id="ECS_RANKPRICE_{$key}">{$rank_price.price}</font><br />
-       <!--{/foreach}-->
+       <strong>{$lang.shop_price}</strong><font class="shop" id="ECS_SHOPPRICE">{$goods.shop_price_formated}</font>(<strong>{$lang.market_price}</strong><font class="market">{$goods.market_price}</font>)<br />
+      
        </dd>
-       <dd style="width:48%; padding-left:7px;">
-       <strong>{$lang.goods_rank}</strong>
-        <img src="images/stars{$goods.comment_rank}.gif" alt="comment rank {$goods.comment_rank}" />
-       </dd>
-      </li>
-
+       </li>
       <!--{if $volume_price_list } -->
       <li class="padd">
        <font class="f1">{$lang.volume_price}：</font><br />
@@ -206,26 +188,26 @@ function reg(str){
 
       <!--{if $goods.is_promote and $goods.gmt_end_time } 促销-->
       {insert_scripts files='lefttime.js'}
-      <li class="padd loop" style="margin-bottom:5px; border-bottom:1px dashed #ccc;">
+      <li class="padd loop" style="margin-bottom:5px;">
       <strong>{$lang.promote_price}</strong><font class="shop">{$goods.promote_price}</font><br />
-      <strong>{$lang.residual_time}</strong>
-      <font class="f4" id="leftTime">{$lang.please_waiting}</font><br />
+      <!--<strong>{$lang.residual_time}</strong>
+      <font class="f4" id="leftTime">{$lang.please_waiting}</font><br />-->
       </li>
-      <!--{/if}-->
+      <!--月销量-->
       <li class="clearfix">
-       <dd>
-       <strong>支持服务:全国包邮</strong>
-       </dd>
-       <dd class="ddR">
-       <!-- {if $cfg.show_goodsweight} 商品重量-->
-       <strong>{$lang.goods_weight}</strong>{$goods.goods_weight}
-       <!-- {/if} -->
+      <dd style="width:50%;">
+      	<strong>月销量: </strong>
+        <font style="color:#FE596A;font-weight:bold"> 1234 件</font>
+      </dd>
+       <dd style="width:48%; padding-left:7px;">
+       <strong>{$lang.goods_rank}</strong>
+        <img src="images/stars{$goods.comment_rank}.png" alt="comment rank {$goods.comment_rank}" />
        </dd>
       </li>
-      <!-- {if $goods.bonus_money} 红包-->
-      <li class="padd loop" style="margin-bottom:5px; border-bottom:1px dashed #ccc;">
+
+      <!--<li class="padd loop" style="margin-bottom:5px; border-bottom:1px dashed #ccc;">
       <strong>{$lang.goods_bonus}</strong><font class="shop">{$goods.bonus_money}</font><br />
-      </li>
+      </li>-->
       <!-- {/if} -->
       <li class="clearfix">
        <dd>

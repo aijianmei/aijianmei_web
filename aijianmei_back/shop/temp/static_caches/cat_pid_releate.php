@@ -2,19 +2,6 @@
 $data = array (
   0 => 
   array (
-    'cat_id' => '6',
-    'cat_name' => '目标',
-    'measure_unit' => '',
-    'parent_id' => '0',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '6',
-    'goods_num' => '3',
-  ),
-  1 => 
-  array (
     'cat_id' => '7',
     'cat_name' => '用品分类',
     'measure_unit' => '',
@@ -25,6 +12,19 @@ $data = array (
     'sort_order' => '50',
     'has_children' => '7',
     'goods_num' => 0,
+  ),
+  1 => 
+  array (
+    'cat_id' => '6',
+    'cat_name' => '目标',
+    'measure_unit' => '',
+    'parent_id' => '0',
+    'is_show' => '1',
+    'show_in_nav' => '0',
+    'grade' => '0',
+    'sort_order' => '50',
+    'has_children' => '6',
+    'goods_num' => '3',
   ),
   2 => 
   array (
