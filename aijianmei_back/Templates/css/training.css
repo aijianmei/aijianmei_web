@@ -211,6 +211,13 @@
 			padding-left: 10px;
 			background: #F1F1F1;
 		}
+		.sm_title_sp{
+			display: inline-block;
+			font-size: 20px;
+			margin-right: 3px;
+			color: #2076bc;
+			font-weight: lighter;
+		}
 		/*pm------*/
 		.pm_pic{
 			float:left;

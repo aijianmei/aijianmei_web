@@ -427,12 +427,24 @@ var init = function(){
     aijianmei.hover('more','account');
 }
 init();	
-
-
-
-
-
-
+//for textarea write down text,show of obj show number
+function change_num(obj,show){
+	var newdom = new getdom,
+		obj = newdom.getElementsByClass(obj),
+	    len = obj.length,
+	    show_num = newdom.getElementsByClass(show);
+	for(var i = 0;i < len;i++){
+	    obj[i].index = i;
+	    if(obj[i]){
+	        obj[i].onkeyup = function(){
+	            show_num[this.index].innerHTML = this.value.length;
+	        }
+	        obj[i].onkeydown = function(){
+	            show_num[this.index].innerHTML = this.value.length;
+	        }
+	    }       
+	}
+}
 //对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
 var fade = {
     newdom : new getdom,
