@@ -1,0 +1,347 @@
+<include file="Templates/header.html" />
+        <!-- outside wrapper -->
+        <div class="wrapper clearfix">
+        	<h1 class="dt_fit">设置 <span class="dt_ms_detail">修改个人资料和密码</span></h1>
+        	<form class="dt_part" id="userinfo" action="/index.php?app=index&mod=user&act=saveedituserinfo&args=uinfo" method="post">
+        		<fieldset>
+	        		<legend>个人资料设置</legend>
+					<div class="dt_wrap_revise">
+        			<div class="dt_revise name clearfix">
+        				<label for="box_1">名字</label>
+        				<div class="dt_content">
+        					<input type="text" id="username" class="dt_input dt_type1_input" name="username" value="{$username}" onblur="checkUser();"/>
+							<span id="user_msg" style="color:red;"></span>
+        				</div>
+        			</div>
+					<iframe id="exec_target" name="exec_target"></iframe>
+        			<div class="dt_revise file clearfix">
+        				<label for="picture">头像</label>
+        				<div class="dt_content">
+						<a class="rg_upload" id="labup">选择文件</a>
+        				</div>
+						<div id="feedback2"></div>
+        				<img id="feedimg" <php>if(!$imgurl){</php>src="Templates/images/login_pic.jpg"<php>}else{</php>src="{$imgurl}"<php>}</php> class="dt_choice_img" />
+        			</div>
+        			<div class="dt_revise clearfix">
+        				<label>性别</label>
+        				<div class="dt_content">
+        					<input type="radio" id="male" name="sex" <php>if($usersex==1){</php>checked="checked"<php>}</php> value="1"/>男
+        					<input type="radio" id="female" name="sex" <php>if($usersex==0){</php>checked="checked"<php>}</php> value="0"/>女
+        				</div>
+        			</div>
+        			<div class="dt_revise clearfix">
+        				<label>体重</label>
+        				<div class="dt_content dt_weight">
+        					<a>小于40kg</a>
+        					<a>40-54.5kg<div class="dt_choice_weight"></div></a>
+        					<a>55-69.5kg<div class="dt_choice_weight"></div></a>
+        					<a>70-84.5kg<div class="dt_choice_weight"></div></a>
+        					<a>85-99.5kg<div class="dt_choice_weight"></div></a>
+        					<a>大于或等于100kg</a>
+        				</div>
+        				<div class="dt_edit dt_weight_edit" >
+        					<span class="dt_weight_finish"></span>
+							<input type="hidden" id="dt_weight_finish" name="dt_weight_finish" value="">
+        					<a class="dt_weight_change">更改</a>
+        				</div>
+        			</div>
+        			<div class="dt_revise clearfix">
+        				<label>身高</label>
+        				<div class="dt_content dt_height">
+        					<a>小于140cm</a>
+        					<a>140-154cm<div class="dt_choice_height"></div></a>
+        					<a>155-169cm<div class="dt_choice_height"></div></a>
+        					<a>170-184cm<div class="dt_choice_height"></div></a>
+        					<a>185-199cm<div class="dt_choice_height"></div></a>
+        					<a>大于或等于200cm</a>
+        				</div>
+        				<div class="dt_edit dt_height_edit">
+        					<span class="dt_height_finish"></span>
+							<input type="hidden" id="dt_height_finish" name="dt_height_finish" value="">
+        					<a class="dt_height_change">更改</a>
+        				</div>
+        			</div>
+        			<div class="dt_revise clearfix">
+        				<label>年龄</label>
+        				<div class="dt_content dt_year">
+        					<a>小于10岁</a>
+        					<a>10-24岁<div class="dt_choice_year"></div></a>
+        					<a>25-39岁<div class="dt_choice_year"></div></a>
+        					<a>40-54岁<div class="dt_choice_year"></div></a>
+        					<a>55-69岁<div class="dt_choice_year"></div></a>
+        					<a>大于或等于70岁</a>
+        				</div>
+        				<div class="dt_edit dt_year_edit">
+        					<span class="dt_year_finish"></span>
+							<input type="hidden" id="dt_year_finish" name="dt_year_finish" value="">
+        					<a class="dt_year_change">更改</a>
+        				</div>
+        			</div>
+        			<div class="dt_revise clearfix">
+        				<label>城市</label>
+        				<div class="dt_content">
+                            <select class="choice_province" size="value" name="province" id="province_1">
+                            <php>foreach($area as $a) {</php>
+                            <option value="{$a['area_id']}" <php>if($a['area_id']==$userinfo['province']){echo 'selected="selected"';}</php>>{$a['title']}</option>
+                            <php>}</php>
+                            </select>
+                        <php>foreach($children as $k=>$child) {</php>
+                            <select class="choice_province parent" onChange="setcityval(this.options[this.selectedIndex].value)" size="value" name="city" id="{$k}"  <php>if($k!=$userinfo['province']){echo 'style="display:none;"';}</php>>
+                                    <php>foreach($child as $c){</php>
+                                        <option value="{$c['area_id']}" onclick="setcityval({$c['area_id']});" <php>if($c['area_id']==$userinfo['city']){echo 'selected="selected"';}</php>>{$c['title']}</option>
+                                    <php>}</php> 
+                            </select>
+                            <php>}</php>
+							<input type="hidden" name="cityvalue" id="cityvalue" value="">
+        				</div>
+        			</div>
+        			<div class="dt_revise clearfix">
+        				<label for="weibo">新浪微博</label>
+        				<div class="dt_content">
+        					<span></span>
+        					<input type="text" id="weibo" class="dt_input dt_type1_input" value="{$username}" name="sina_username">
+        				</div>
+        			</div>
+        			<div class="dt_revise clearfix">
+        				<label for="sign">签名</label>
+        				<div class="dt_content">
+        					<input type="text" id="sign" class="dt_input dt_type2_input" value="{$domain}" name="sina_domain">
+        				</div>
+        			</div>
+        			<div class="dt_revise clearfix">
+        				<label for="introduce">个人介绍</label>
+        				<div class="dt_content dt_content_tx">
+        					<textarea class="dt_type2_input" style="resize:none" cols="40" id="introduce" rows="6" name="description">{$description}</textarea>
+        				</div>
+        			</div>
+        			<div class="dt_tag clearfix">
+        				<div class="dt_wrap_sure">
+						<php>foreach($UserKeyword as $key => $value){</php>
+	        				<div class="dt_sure">
+	        					<span class="dt_sure_content">{$value}</span>
+	        					<span class="dt_sure_remove">×</span>
+	        				</div>
+						<php>}</php>
+	        			</div>
+						<div id="keywordlist">
+						<php>foreach($UserKeyword as $key => $value){</php>
+						<input type="hidden" name="keyword[]" value="{$value}">
+						<php>}</php>
+						</div>
+        				<div class="dt_tag_input">
+        					<label for="tag" class="tag">点击添加标签</label>
+        					<input id="tag" value="">
+        				</div>
+        			</div>
+        			<a class="dt_update_1" id="upuserinfo" onclick="formsubBykey('userinfo');">更新资料</a>
+					</div>
+	        	</fieldset>
+        	</form>
+        	<form class="dt_part"  id="pwdinfo" action="/index.php?app=index&mod=user&act=saveedituserinfo&args=uppwd" method="post">
+        		<fieldset>
+	        		<legend>修改密码</legend>
+					<div class="dt_wrap_revise">
+        			<div class="dt_revise clearfix">
+        				<label for="old_pw">旧密码</label>
+        				<div class="dt_content">
+        					<input type="password" id="old_pw" class="dt_input dt_type1_input" name="oldpassword"/>
+							<span id="old_pw_msg"></span>
+        				</div>
+        			</div>
+        			<div class="dt_revise clearfix">
+        				<label for="pw">新密码</label>
+        				<div class="dt_content">
+        					<input type="password" id="pw" class="dt_input dt_type1_input"  name="password"/>
+							<span id="pw_msg"></span>
+        				</div>
+        			</div>
+        			<div class="dt_revise clearfix">
+        				<label for="sure_pw">确定密码</label>
+        				<div class="dt_content">
+        					<input type="password" id="sure_pw" class="dt_input dt_type1_input"  name="repassword"/>
+							<span id="sure_pw_msg"></span>
+        				</div>
+        			</div>
+        			<a class="dt_update_1" onclick="formsubBykey('pwdinfo');">修改密码</a>
+					</div>
+	        	</fieldset>
+        	</form>
+        	<form class="dt_part"   id="connectinfo" action="/index.php?app=index&mod=user&act=saveedituserinfo&args=upconnect" method="post">
+        		<fieldset>
+	        		<legend>联系方式<span class="dt_ms_detail">(以下信息严格保密,未经您许可不会泄漏给第三方)</span></legend>
+					<div class="dt_wrap_revise">
+        			<div class="dt_revise clearfix">
+        				<label for="tele">手机</label>
+        				<div class="dt_content">
+        					<input type="text" id="tele" class="dt_input dt_type1_input" name="ctell" value="{$ctell}" onblur="checkPhone(this.value);"/>
+							<span id="ctell_msg"></span>
+        				</div>
+        			</div>
+        			<div class="dt_revise clearfix">
+        				<label for="email">联系邮箱</label>
+        				<div class="dt_content">
+        					<input type="text" id="email" class="dt_input dt_type1_input" name="cemail" value="{$cemail}" onblur="isMail();"/>
+							<span id="cemail_msg"></span>
+        				</div>
+        			</div>
+        			<a class="dt_update_1"  onclick="formsubBykey('connectinfo');">更新资料</a>
+					</div>
+	        	</fieldset>
+        	</form>
+						<form id="selectForm" method="post" action="/index.php?app=index&mod=User&act=newShowImg" target="exec_target" enctype="multipart/form-data">
+						<input type="file" name="Filedata" id="Filedata" accept="image/gif, image/jpeg ,image/jpg" value="选择文件" style="display:none;">
+						</form>
+        </div>
+		<script type="text/javascript" src="Templates/js/jquery.js"></script>
+<style>
+     #exec_target{display:none;width:0;height:0;}
+</style>
+<script type="text/javascript">
+function checkUser(){
+	var username =$("#username").val();
+	if(checkusernameString(username)==''){
+		$("#user_msg").html('只能输入大小写英文字母、汉字、数字、下划线');
+		return false;
+	}
+	//alert(username);
+	if(username!=''){
+			$.post('ajax.php?act=checkUserName', {'data':'','username':username}, function(m) {
+				if(m==1) {
+					$("#user_msg").attr('style',"color:green;");
+					$("#user_msg").html("名称可用");
+				}else {
+					$("#username").val('');
+					$("#user_msg").html("名称不可用");
+				}
+			})
+	}
+	return true;
+}
+function checkusernameString(str){ 
+   return str.match(/^([u4e00-u9fa5]|[ufe30-uffa0]|[a-za-z0-9_])*$/);
+}
+
+$(document).ready(function(){
+	$("#Filedata").change(function(){
+		if($("#Filedata").val() != '') $("#selectForm").submit();
+	});
+	$("#exec_target").load(function(){
+		var data = $(window.frames['exec_target'].document.body).find("textarea").eq(0).html();
+		var data2 = $(window.frames['exec_target'].document.body).find("textarea").eq(1).html();
+		if(data != null){
+		$("#feedback").empty();
+			$("#feedback2").empty();
+			//$("#feedback").append(data.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+			$("#feedback2").append(data2.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+			//$("#feedback").attr("class","face");
+			$("#Filedata").val('');
+			//$("#dimg1").remove();
+			$("#feedimg").remove();
+		}
+	});
+});
+$(document).ready(function(){
+	$("#labup").click(function(){
+		$("#Filedata").click();
+	});
+});
+function formsubBykey(key){
+	if(key=='userinfo'){
+		var username=$("#username").val();
+		if(username==''){
+			$("#username").focus();
+			$("#user_msg").html('请输入用户名');
+			return false;
+		}
+	}
+	if(key=='pwdinfo')
+	{
+		var oldpassword=$("#old_pw").val();
+		var pw=$("#pw").val();
+		var repw=$("#sure_pw").val();
+		if(!isPasswd(pw)||!isPasswd(repw)||!isPasswd(oldpassword)){
+			return false;
+		}
+		if(oldpassword==''||pw==''||repw==''){			
+			return false;
+		}
+	}
+	if(key=='connectinfo'){
+		if(checkPhone()&&isMail()){
+			
+		}else{
+			return false;
+		}
+	}
+	$("#"+key).submit();
+}
+function checkPhone()   
+{
+  var phone=$("#tele").val();
+  //验证电话号码手机号码，包含至今所有号段   
+  var ab=/^(13[0-9]|15[0|3|6|7|8|9]|18[8|9])\d{8}$/;
+  if(ab.test(phone) == false)
+  {
+    //alert("请正确填写手机号码!");
+	$("#tele").focus();
+	$("#ctell_msg").attr('style','color:red;');
+	$("#ctell_msg").html('请填写有效的手机号码');
+    return false;
+  }else{
+	$("#ctell_msg").attr('style','color:green;');
+	$("#ctell_msg").html('');
+	return true;
+  }
+  //alert("手机号码正确");
+}
+function isMail(){
+	var email=$("#email").val();
+	var reyx= /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+	if(reyx.test(email)){
+		$("#cemail_msg").html('');
+		return true;
+	}
+	else{
+		$("#email").focus();
+		$("#cemail_msg").attr('style','color:red;');
+		$("#cemail_msg").html('邮箱格式错误!');
+		return false;
+	}
+}
+function isPasswd(s) 
+{
+	var patrn=/^[0-9a-zA-Z]*$/g; 
+	if (!patrn.exec(s))
+	{
+		return false;
+	}else{
+		return true;
+	}
+}
+</script>
+<script type="text/javascript">
+var IsCanOpen=0;
+function setcityval(val){
+	$("#cityvalue").val(val);
+}
+function getCity(parent, child) {
+	var pid = $("#"+parent).val();
+}
+
+	$("#province_1").change(function() {
+	var pid = $("#province_1").val();
+	$(".parent").hide();
+	$(".parent[id="+pid+"]").show();
+	$(".parent[id="+pid+"]").attr("name","city");
+	$(".parent[id!="+pid+"]").attr("name","ncity");
+	});
+	$("#province_2").change(function() {
+		getCity("province_2", "city_2");
+	});
+var default_year = <?php if($healthinfo['age']!=''){echo "'".$healthinfo['age']."岁'";}else{echo "false";}?>,
+    default_height = <?php if($healthinfo['height']!=''){echo "'".$healthinfo['height']."cm'";}else{echo "false";}?>,
+    default_weight = <?php if($healthinfo['body_weight']!=''){echo "'".$healthinfo['body_weight']."kg'";}else{echo "false";}?>;
+</script>
+<script type="text/javascript" src="Templates/js/datum.js"></script>
+</body>
+</html>

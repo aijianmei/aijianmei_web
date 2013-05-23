@@ -227,18 +227,18 @@ var init = function(){
 		if(_target.innerHTML=='大于或等于70岁'||_target.innerHTML=='小于10岁'){
 			
 			if(!default_year){
-				$("#dt_year_finish").remove();
+				//$("#dt_year_finish").remove();
 				dt_year_finish.innerHTML="<input onkeyup=\"if (!(/^[0-9]*$/g.test(this.value))){this.value='';alert('请输入正确的数字')};\" type='text' name='dt_year_finish' value='' id='dt_year_finish' style='width:40px;'>岁";
 			}else{
 				//alert(default_year);
 				dt_year_finish.innerHTML=default_year;
-				$("#dt_year_finish").val(default_year);
+				//$("#dt_year_finish").val(default_year);
 				default_year=false;
 			}
-			$("#dt_year_finish").focus();
+			//$("#dt_year_finish").focus();
 		}else{
 			 dt_year_finish.innerHTML = _target.innerHTML;
-			$("#dt_year_finish").val(_target.innerHTML);
+			//$("#dt_year_finish").val(_target.innerHTML);
 		}
         dt_year.style.display = "none";
         dt_year_edit.style.display = "block";
@@ -256,12 +256,12 @@ var init = function(){
 			//dt_height_finish.innerHTML='<input type="text" name="dt_height_finish" value="" id="dt_height_finish" style="width:40px;">cm';
 			
 			if(!default_height){
-				$("#dt_height_finish").remove();
+				//$("#dt_height_finish").remove();
 				dt_height_finish.innerHTML="<input onkeyup=\"if (!(/^[0-9]*$/g.test(this.value))){this.value='';alert('请输入正确的数字')};\" type='text' name='dt_height_finish' value='' id='dt_height_finish' style='width:40px;'>cm";
 			}else{
 				//alert(default_year);
 				dt_height_finish.innerHTML=default_height;
-				$("#dt_height_finish").val(default_height);
+				//$("#dt_height_finish").val(default_height);
 				default_height=false;
 			}
 
@@ -289,18 +289,18 @@ var init = function(){
 			//dt_weight_finish.innerHTML='<input type="text" name="dt_weight_finish" value="" id="dt_weight_finish" style="width:40px;">kg';
 			
 			if(!default_weight){
-				$("#dt_weight_finish").remove();
+				//$("#dt_weight_finish").remove();
 				dt_weight_finish.innerHTML="<input onkeyup=\"if (!(/^[0-9]*$/g.test(this.value))){this.value='';alert('请输入正确的数字')};\"  type='text' name='dt_weight_finish' value='' id='dt_weight_finish' style='width:40px;'>kg";
 			}else{
 				//alert(default_year);
 				dt_weight_finish.innerHTML=default_weight;
-				$("#dt_weight_finish").val(default_weight);
+				//$("#dt_weight_finish").val(default_weight);
 				default_weight=false;
 			}
-			$("#dt_weight_finish").focus();
+			//$("#dt_weight_finish").focus();
 		}else{
 			 dt_weight_finish.innerHTML = _target.innerHTML;
-			$("#dt_weight_finish").val(_target.innerHTML);
+			//$("#dt_weight_finish").val(_target.innerHTML);
 		}
 		
 		
@@ -419,7 +419,7 @@ var init = function(){
             div.className = 'dt_sure';
             div.innerHTML = text;
             dt_wrap_sure.appendChild(div);
-			$("#keywordlist").append('<input type="hidden" name="keyword[]" value="'+tag_id.value+'">');
+			//$("#keywordlist").append('<input type="hidden" name="keyword[]" value="'+tag_id.value+'">');
         }
             
 
