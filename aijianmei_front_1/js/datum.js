@@ -399,7 +399,8 @@ var init = function(){
     var tag_id = newdom.Id('tag'),
         tag_class= newdom.getElementsByClass('tag')[0],
         dt_wrap_sure = newdom.getElementsByClass('dt_wrap_sure')[0],
-        text = 'underfined';
+        text = 'underfined',
+        dt_sure_remove = newdom.getElementsByClass('dt_sure_remove');
     //     div = document.createElement('div'),
     //     text = '<span class="dt_sure_content">伟勉</span><span class="dt_sure_remove">×</span>>';
     // div.className = 'dt_sure';
@@ -426,7 +427,7 @@ var init = function(){
         tag_class.style.display = "block";
 
         // dt_sure_remove add click event
-        var dt_sure_remove = newdom.getElementsByClass('dt_sure_remove');
+        dt_sure_remove = newdom.getElementsByClass('dt_sure_remove');
         if(dt_sure_remove){
             var len_dt_remove = dt_sure_remove.length;
 			alert(len_dt_remove);
@@ -436,6 +437,16 @@ var init = function(){
                     // this.parentNode.style.display = 'none';
                     dt_wrap_sure.removeChild(this.parentNode)
                 }
+            }
+        }
+    }
+    // dt_sure_remove add click event
+    if(dt_sure_remove){
+        var len_dt_remove = dt_sure_remove.length;
+        for(var i = 0;i < len_dt_remove;i++){
+            dt_sure_remove[i].onclick = function(){
+                // this.parentNode.style.display = 'none';
+                dt_wrap_sure.removeChild(this.parentNode)
             }
         }
     }

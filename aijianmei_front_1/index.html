@@ -77,23 +77,31 @@
 					<div class="lay_banner">
 						<ul class="bn_contain_pic">
 							<li>
-								<a><img src="images/training/tr_1.jpg">
-								</a>
-								<div class="bn_bg_part">
-									<a class="bn_text">提示内容,要什么有什么</a>
-								</div>
+								<a>
+									<img src="images/training/tr_1.jpg">
+									<div class="bn_bg_part">
+										<p class="bn_text">提示内容,要什么有什么1</p>
+									</div>
+									<div class="bn_bg_transparent"></div>
+								</a>	
 							</li>
 							<li>
-								<a><img src="images/training/tr_1.jpg"></a>
-								<div class="bn_bg_part">
-									<a class="bn_text">提示内容,要什么有什么</a>
-								</div>
+								<a>
+									<img src="images/training/tr_1.jpg">
+									<div class="bn_bg_part">
+										<p class="bn_text">提示内容,要什么有什么2</p>
+									</div>
+									<div class="bn_bg_transparent"></div>
+								</a>	
 							</li>
 							<li>
-								<a><img src="images/training/tr_1.jpg"></a>
-								<div class="bn_bg_part">
-									<a class="bn_text">提示内容,要什么有什么</a>
-								</div>
+								<a>
+									<img src="images/training/tr_1.jpg">
+									<div class="bn_bg_part">
+										<p class="bn_text">提示内容,要什么有什么3</p>
+									</div>
+									<div class="bn_bg_transparent"></div>
+								</a>	
 							</li>
 						</ul>
 						<div class="bn_choice_way">
@@ -535,8 +543,28 @@
 			    	day_part = newdom.getElementsByClass('day_part'),
                 	ms_hidden_part = newdom.getElementsByClass('ms_hidden_part'),
                 	bg_opc = newdom.getElementsByClass('bg_opc'),
+                	bn_li = newdom.getElementsByClass('bn_contain_pic')[0].getElementsByTagName('a'),
+                	bn_bg_part = newdom.getElementsByClass('bn_bg_part'),
+                	bn_bg_transparent = newdom.getElementsByClass('bn_bg_transparent'),
+                	len_bn_part = bn_bg_part.length,
                 	bg_opc_2 = newdom.getElementsByClass('bg_opc_2'),
                 	len = day_part.length;
+
+                	//for banner show background with title
+                	for(var i = 0;i < len_bn_part;i++){
+                		bn_li[i].index = i;
+                		bn_li[i].onmouseover = function(){
+                			aijianmei.chang_top(bn_bg_part[this.index],1,80,50);
+                			aijianmei.chang_top(bn_bg_transparent[this.index],1,280,1)
+                		};
+                		bn_li[i].onmouseout = function(){
+                			console.log('asdf')
+                			aijianmei.chang_top(bn_bg_part[this.index],0,80,50);
+                			aijianmei.chang_top(bn_bg_transparent[this.index],0,280,1)
+                		}
+                	}
+
+                	//for day part show up background with title
                 	for(var i = 0;i < len;i++){
                 		day_part[i].index = i;
                 		day_part[i].onmouseover = function(){
@@ -556,6 +584,7 @@
 			   	aijianmei.form_jugde('lg_text','lg_password');
 			}
 			init();	
+
 			//右侧滚动条下拿add by kontem 20130512 start
 			// var is_ajax_scroll=true;//执行权值 全局预定义
 			// $(window).scroll(function() {  

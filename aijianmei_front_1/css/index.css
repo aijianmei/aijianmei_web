@@ -31,30 +31,39 @@
 				z-index: 10;
 			}
 			.bn_contain_pic li{
-				position: relative;
 				float: left;
 				width: 650px;
 				height: 280px;			
 			}
 			.bn_contain_pic a{
+				position: relative;
 				display: block;
 			}
 			.bn_contain_pic img{
 				width: 650px;
 				height: 280px;	
 			}
-			/*bn_bg_part*/
+			/*bn_bg_part bn_bg_transparent*/
 			.bn_bg_part{
 				position: absolute;
-				top:200px;
+				top:280px;
+				left: 0;
 				width: 100%;
 				height: 100%;
 				background: rgba(0,0,0,.6);
 				background: #626262\9;
 				filter:alpha(opacity=90);
+				z-index: 2;
+			}
+			.bn_bg_transparent{
+				position: absolute;
+				top:280px;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 4;
 			}
 			.bn_text{
-				display: inline-block;
 				margin-top: 20px;
 				font-size: 25px;
 				text-align: center;
