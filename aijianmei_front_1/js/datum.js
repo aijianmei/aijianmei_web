@@ -195,6 +195,8 @@ var init = function(){
         dt_year_finish = newdom.getElementsByClass("dt_year_finish")[0],
         dt_year_change = newdom.getElementsByClass("dt_year_change")[0],
         dt_year_target = newdom.getElementsByClass('dt_year_target'),
+        dt_year_input = newdom.getElementsByClass("dt_year_input")[0],
+        dt_year_write = newdom.getElementsByClass("dt_year_write")[0],
         //for height
         dt_height_target = newdom.getElementsByClass('dt_height_target'),
         len_height_target = dt_height_target.length,
@@ -202,13 +204,17 @@ var init = function(){
         dt_height_edit = newdom.getElementsByClass("dt_height_edit")[0],
         dt_height_finish = newdom.getElementsByClass("dt_height_finish")[0],
         dt_height_change = newdom.getElementsByClass("dt_height_change")[0],
+        dt_height_input = newdom.getElementsByClass("dt_height_input")[0],
+        dt_height_write = newdom.getElementsByClass("dt_height_write")[0],
          //for weight
         dt_weight_target = newdom.getElementsByClass('dt_weight_target'),
         len_weight_target = dt_weight_target.length,
         dt_weight = newdom.getElementsByClass("dt_weight")[0],
         dt_weight_edit = newdom.getElementsByClass("dt_weight_edit")[0],
         dt_weight_finish = newdom.getElementsByClass("dt_weight_finish")[0],
-        dt_weight_change = newdom.getElementsByClass("dt_weight_change")[0];
+        dt_weight_change = newdom.getElementsByClass("dt_weight_change")[0],
+        dt_weight_input = newdom.getElementsByClass("dt_weight_input")[0],
+        dt_weight_write = newdom.getElementsByClass("dt_weight_write")[0];
     //act_change add click event
     var act_change = function(obj_1,obj_2,obj){
         if(obj){
@@ -218,7 +224,8 @@ var init = function(){
             }
         }    
     }       
-    //choice_this    
+    //choice_this 
+    //year_this&&year_input   
     var choice_year_this = function(e){
         var _e = window.event ? window.event : e || arguments[0],
             _target = _e.target ? _e.target : _e.srcElement;
@@ -245,6 +252,31 @@ var init = function(){
         act_change(dt_year,dt_year_edit,dt_year_change);
         //default_year = _target.index;
     }
+    var choice_year_input = function(e){
+        var _e = window.event ? window.event : e || arguments[0],
+            _target = _e.target ? _e.target : _e.srcElement;
+        dt_year_write.value = "";
+        dt_year.style.display = "none";
+        dt_year_input.style.display = "block";
+
+        //for dt_year_write
+        dt_year_write.focus();
+        dt_year_write.onblur = function(){
+            if(dt_year_write.value != ""){
+                dt_year_finish.innerHTML = this.value + '岁';
+                dt_year_edit.style.display = "block";
+                dt_year_input.style.display = "none";
+                act_change(dt_year,dt_year_edit,dt_year_change);
+                default_year = _target.index;
+                // console.log(default_weight)
+            }   
+            else{
+               dt_year.style.display = "block";
+               dt_year_input.style.display = "none"; 
+            }
+        }
+    }
+    //height_this&&height_input
     var choice_height_this = function(e){
         var _e = window.event ? window.event : e || arguments[0],
             _target = _e.target ? _e.target : _e.srcElement;
@@ -278,6 +310,31 @@ var init = function(){
         act_change(dt_height,dt_height_edit,dt_height_change);
         //default_height = _target.index;
     }
+    var choice_height_input = function(e){
+        var _e = window.event ? window.event : e || arguments[0],
+            _target = _e.target ? _e.target : _e.srcElement;
+        dt_height_write.value = "";
+        dt_height.style.display = "none";
+        dt_height_input.style.display = "block";
+
+        //for dt_height_write
+        dt_height_write.focus();
+        dt_height_write.onblur = function(){
+            if(dt_height_write.value != ""){
+                dt_height_finish.innerHTML = this.value + 'cm';
+                dt_height_edit.style.display = "block";
+                dt_height_input.style.display = "none";
+                act_change(dt_height,dt_height_edit,dt_height_change);
+                default_height = _target.index;
+                // console.log(default_weight)
+            }  
+            else{
+               dt_height.style.display = "block";
+               dt_height_input.style.display = "none"; 
+            } 
+        }
+    }
+    //weight_this&&weight_input
     var choice_weight_this = function(e){
         var _e = window.event ? window.event : e || arguments[0],
             _target = _e.target ? _e.target : _e.srcElement;
@@ -309,15 +366,39 @@ var init = function(){
         act_change(dt_weight,dt_weight_edit,dt_weight_change);
         //default_weight = _target.index;
     }
+    var choice_weight_input = function(e){
+        var _e = window.event ? window.event : e || arguments[0],
+            _target = _e.target ? _e.target : _e.srcElement;
+        dt_weight_write.value = "";
+        dt_weight.style.display = "none";
+        dt_weight_input.style.display = "block";
+
+        //for dt_weight_write
+        dt_weight_write.focus();
+        dt_weight_write.onblur = function(){
+            if(dt_weight_write.value != ""){
+                dt_weight_finish.innerHTML = this.value + 'kg';
+                dt_weight_edit.style.display = "block";
+                dt_weight_input.style.display = "none";
+                act_change(dt_weight,dt_weight_edit,dt_weight_change);
+                default_weight = _target.index;
+                // console.log(default_weight)
+            }  
+            else{
+               dt_weight.style.display = "block";
+               dt_weight_input.style.display = "none"; 
+            } 
+        }
+    }
     //year
     a_dt_year[0].index = 100;
     a_dt_year[len_dt_year - 1].index = 200;
+    addevent(a_dt_year[0],'click',choice_year_input);
+    addevent(a_dt_year[len_dt_year - 1],'click',choice_year_input);
     for(var i = 0;i < len_year_target;i++){
         dt_year_target[i].index = i;
         if(dt_year_target[i]){
             addevent(dt_year_target[i],'click',choice_year_this);
-            addevent(a_dt_year[0],'click',choice_year_this);
-            addevent(a_dt_year[len_dt_year - 1],'click',choice_year_this);
             if(default_year){
                 /*if(default_year == 100){
                     a_dt_year[0].click();
@@ -339,12 +420,12 @@ var init = function(){
     //height
     a_dt_height[0].index = 100;
     a_dt_height[len_dt_height - 1].index = 200;
+    addevent(a_dt_height[0],'click',choice_height_input);
+    addevent(a_dt_height[len_dt_height - 1],'click',choice_height_input);
     for(var i = 0;i < len_height_target;i++){
         dt_height_target[i].index = i;
         if(dt_height_target[i]){
             addevent(dt_height_target[i],'click',choice_height_this);
-            addevent(a_dt_height[0],'click',choice_height_this);
-            addevent(a_dt_height[len_dt_height - 1],'click',choice_height_this);
             if(default_height){
                 /*if(default_height == 100){
                     a_dt_height[0].click();
@@ -366,13 +447,12 @@ var init = function(){
     //weight
     a_dt_weight[0].index = 100;
     a_dt_weight[len_dt_weight - 1].index = 200;
+    addevent(a_dt_weight[0],'click',choice_weight_input);
+    addevent(a_dt_weight[len_dt_weight - 1],'click',choice_weight_input);
     for(var i = 0;i < len_weight_target;i++){
         dt_weight_target[i].index = i;
         if(dt_weight_target[i]){
             addevent(dt_weight_target[i],'click',choice_weight_this);
-            addevent(a_dt_weight[0],'click',choice_weight_this);
-			//alert(a_dt_weight[len_dt_weight - 1]);
-            addevent(a_dt_weight[len_dt_weight - 1],'click',choice_weight_this);
             if(default_weight){
                 // if(default_weight == 100){
                     // a_dt_weight[0].click();
@@ -393,7 +473,15 @@ var init = function(){
         }   
     }
 
-
+    //for keycode enter to dt_weight_height_year_input
+    document.onkeydown = function(event){//回车事件触发onblur
+        if(event.keyCode == 13){
+            var activename = document.activeElement.id; // 当前获取焦点的对象
+            if(activename == 'tag' || 'dt_year_write' || 'dt_height_write' || 'dt_weight_write'){
+                document.getElementById(activename).blur();
+            }
+        }
+    };
 
     // add tag
     var tag_id = newdom.Id('tag'),
