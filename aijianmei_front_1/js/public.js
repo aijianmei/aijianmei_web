@@ -242,7 +242,6 @@ var aijianmei = {
 						titlewidth = title.style.width,
 						align = left + width/2,
 						half = parseFloat(titlewidth)/2;
-						// console.log(_target.parentNode.offsetLeft)
 						title.style.left = align - half + 'px';
 						title.style.top = top - handlewidth + 'px';
 				} 

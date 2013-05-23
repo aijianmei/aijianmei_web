@@ -115,7 +115,6 @@ var aijianmei = {
         }
     }
 }
-
 var init = function(){
     var newdom = new getdom,
         nav_child = newdom.getElementsByClass('nav_child'),
@@ -252,7 +251,6 @@ var init = function(){
                 dt_year_input.style.display = "none";
                 act_change(dt_year,dt_year_edit,dt_year_change);
                 default_year = _target.index;
-                // console.log(default_weight)
             }   
             else{
                dt_year.style.display = "block";
@@ -286,7 +284,6 @@ var init = function(){
                 dt_height_input.style.display = "none";
                 act_change(dt_height,dt_height_edit,dt_height_change);
                 default_height = _target.index;
-                // console.log(default_weight)
             }  
             else{
                dt_height.style.display = "block";
@@ -320,7 +317,6 @@ var init = function(){
                 dt_weight_input.style.display = "none";
                 act_change(dt_weight,dt_weight_edit,dt_weight_change);
                 default_weight = _target.index;
-                // console.log(default_weight)
             }  
             else{
                dt_weight.style.display = "block";
