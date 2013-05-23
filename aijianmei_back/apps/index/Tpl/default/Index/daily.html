@@ -63,7 +63,7 @@
                                     <php> if(empty($videos)&&$daily['img']=='') {</php>
                                     <img src="apps/index/Tpl/default/Public/images/Mark_v.jpg">
                                     <php> }else{
-									if($daily['img']){
+									if($daily['img']&&$daily['img']!='null'){
 									</php>
 									<img src="/public/images/article/{$daily['img']}">
 									<php> }}</php>

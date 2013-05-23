@@ -489,11 +489,13 @@
 
 /*arm.html借用article的css，一下是arm私人部分*/
 	.essay_ct .web_expend_1{
+		margin-bottom: 20px;
 		margin-top: 18px;
 		border-bottom: none;
 	}
 	.web_expend_1 .show_time{
 		border-left: none;
+		margin-bottom: 20px;
 		font-weight: 600;
 	}
 	.show_module{
