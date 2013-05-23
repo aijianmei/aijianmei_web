@@ -121,6 +121,23 @@
 		margin-left: 10px;
 		vertical-align: top;
 	}
+	/*dt_weight,height,year_input*/
+	.dt_weight_input,.dt_height_input,.dt_year_input{
+		display: none;
+		background: url(../images/dt_input.png) no-repeat;
+	}
+	.dt_weight_write,.dt_height_write,.dt_year_write{
+		width: 67px;
+		padding: 5px 7px;
+		margin-right: 5px;
+		background: 0;
+		outline: 0;
+	}
+	.dt_weight_keep,.dt_height_keep,.dt_year_keep{
+		display: inline;
+		margin-left: 10px;
+		vertical-align: top;
+	}
 /*weight*/
 	.dt_weight{
 	}
