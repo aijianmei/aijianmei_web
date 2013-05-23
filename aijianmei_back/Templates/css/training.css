@@ -118,7 +118,6 @@
 			}
 			/*tr_tab_ct_1-----------*/
 				.cont_module{
-					border-bottom: 1px solid #DFDFDF;
 					margin: 25px 0;
 				}
 				/*cont_side_1---------*/
@@ -347,6 +346,7 @@
 		
 
 		}
+
 		/*identifying--------------*/
 		.identifying{
 			font-family: '微软雅黑';
