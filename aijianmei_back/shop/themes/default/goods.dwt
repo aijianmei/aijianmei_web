@@ -188,8 +188,8 @@ function reg(str){
 	  	  <!--配送-->
       <li class="clearfix">
       <dd style="width:50%;">
-      	<strong>配送: </strong>
-        <font style="font-weight:bold">全国包邮</font>
+      	<strong style="font-weight:normal">配送: </strong>
+        <font>全国包邮</font>
       </dd>
 	  </li>
 	  <!--月销量-->
