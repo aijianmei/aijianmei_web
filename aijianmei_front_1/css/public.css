@@ -221,6 +221,7 @@ button{
 /*login beginning----------*/
 	/*login_bg*/
 		.login_bg{
+			display: none;
 			position: fixed;
 			top: 0;
 			left: 0;
@@ -230,12 +231,12 @@ button{
 			opacity: 0;
 			filter:alpha(opacity=0);
 			z-index: 900;
-			visibility: hidden;
 		}
 	/*login_bg end*/
 
 
 	.login_table{
+		display: none;
 		position: fixed;
 		top: -222px;/*78px*/
 		left: 50%;
@@ -244,7 +245,6 @@ button{
 		margin-left: -385px;
 		background: url(../images/04.png) no-repeat;
 		z-index: 910;
-		visibility: hidden;
 	}
 	/*login h4*/
 	.login_table h4{

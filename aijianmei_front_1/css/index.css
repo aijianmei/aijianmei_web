@@ -85,11 +85,11 @@
 				cursor: pointer;
 			}
 			.bn_prex{
-				left:5px;
+				left:0;
 				background: url(../images/sprite.png) -214px 0 no-repeat;
 			}
 			.bn_next{
-				right:5px;
+				right:0;
 				background: url(../images/sprite.png) 0 -147px no-repeat;
 			}
 			/*choice_way*/
