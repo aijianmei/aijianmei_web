@@ -292,6 +292,7 @@ class UserAction extends Action {
 			$UserNameInfo=M('')->query($getUserNameSql);
 			$username=$UserNameInfo[0]['uname'];
 			$usersex=$UserNameInfo[0]['sex'];
+			$upic_type=$UserNameInfo[0]['upic_type'];
 			if($UserNameInfo[0]['location']!=''&&$UserNameInfo[0]['province']==0&&$UserNameInfo[0]['city']==0){
 				$locationArr=$UserNameInfo[0]['location'];
 				$locationInfo=explode(' ',$UserNameInfo[0]['location']);
@@ -311,17 +312,30 @@ class UserAction extends Action {
 			$getUserKeywordSql="select * from ai_user_keywords where uid='".$mid."'";
 			$getUserKeyword=M('')->query($getUserKeywordSql);
 			$getUserKeyword=unserialize($getUserKeyword[0]['keyword']);
-			
+
 			$otherinfoSql="select * from ai_others where uid='".$mid."'";
 			$otherinfo=M('')->query($otherinfoSql);
 			$description=$otherinfo[0]['description'];
 			$domain=$otherinfo[0]['domain'];
 			$cemail=$otherinfo[0]['cemail'];
 			$ctell=$otherinfo[0]['ctell'];
-			
+			if(!empty($UserNameInfo[0]['qqopenid'])){
+				$user_type='3';
+				$qqimg=$otherinfo[0]['profileImageUrl'];
+				$this->assign('qqimg',$qqimg);
+			}elseif(!empty($otherinfo[0]['profileImageUrl'])){
+				$user_type='2';
+				$sinaimg=$otherinfo[0]['profileImageUrl'];
+				$this->assign('sinaimg',$sinaimg);
+			}else{
+
+				$user_type='1';
+			}
+			$this->assign('user_type',$user_type);
 			$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
-			if(is_file($filename)){$imgurl=$filename;}else{
-			$imgurl=$otherinfo[0]['profileImageUrl'];
+			$this->assign('localimg',$filename);
+			if(is_file($filename)&&$UserNameInfo[0]['upic_type']==1){$imgurl=$filename;}else{
+				$imgurl=$otherinfo[0]['profileImageUrl'];
 			}
 			
 			$healthinfoSql="select * from ai_user_health_info where uid='".$mid."'";
@@ -333,7 +347,7 @@ class UserAction extends Action {
 		}
 		
 
-		
+		$this->assign('upic_type',$upic_type);
 		$this->assign('ctell',$ctell);
 		$this->assign('cemail',$cemail);
 		$this->assign('usersex',$usersex);
@@ -459,7 +473,7 @@ public function saveedituserinfo(){
 			$oldusernameinfo=M('user')->where(array('uid'=>$mid))->find();
 			//print_r($oldusernameinfo);exit;
 			$upsql=null;
-			$upsql="UPDATE ai_user SET uname = '".$username."',sex='".$_POST['sex']."',province='".$_POST['province']."',city='".$_POST['cityvalue']."' WHERE uid =$mid";
+			$upsql="UPDATE ai_user SET uname = '".$username."',sex='".$_POST['sex']."',province='".$_POST['province']."',city='".$_POST['cityvalue']."',upic_type='".$_POST['upic_type']."' WHERE uid =$mid";
 			M('')->query($upsql);
 			$upsql="UPDATE ecs_users SET user_name = '".$username."' WHERE user_name ='".$oldusernameinfo['uname']."'";
 			M('')->query($upsql);
@@ -470,9 +484,18 @@ public function saveedituserinfo(){
 						$keyTmp[]=$v;
 					}	
 				}
-			$upsql=null;
-			$upsql="UPDATE ai_user_keywords SET keyword = '".serialize($keyTmp)."' WHERE uid =$mid";
-			M('')->query($upsql);
+			
+			$checkkeywordSql="select * from ai_user_keywords WHERE uid =$mid";
+			$cres=M('')->query($checkkeywordSql);
+			if($cres){
+				$upsql=null;
+				$upsql="UPDATE ai_user_keywords SET keyword = '".serialize($keyTmp)."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}else{
+				$upsql=null;
+				$upsql="INSERT INTO  ai_user_keywords (uid,keyword)values('".$mid."','".serialize($keyTmp)."')";
+				M('')->query($upsql);
+			}
 
 			$checksql=null;
 			$checksql="select * from ai_user_health_info where uid =$mid";

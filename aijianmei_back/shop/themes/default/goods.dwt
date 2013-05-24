@@ -276,7 +276,7 @@ function reg(str){
    <div class="blank"></div>
    
   <!--left start-->
-  <div class="AreaL">
+  <div class="AreaL" style="width:240px;">
     <!-- TemplateBeginEditable name="左边区域" -->
 <!-- #BeginLibraryItem "/library/cart.lbi" -->
 

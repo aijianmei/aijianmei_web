@@ -1307,11 +1307,11 @@ function getUserFace($uid,$size){
 	}else{
 		$type = 'big';
 	}
-
+	$imgtpye= M('')->query("select upic_type from ai_user where uid='".$uid."'");
         
 	$uid_to_path = convertUidToPath($uid);
 	$userface = SITE_PATH.'/data/uploads/avatar' . $uid_to_path . '/' . $type. '.jpg';
-	if(is_file($userface)){
+	if(is_file($userface)&&$imgtpye[0]['upic_type']==1){
 		return SITE_URL.'/data/uploads/avatar' . $uid_to_path . '/' . $type . '.jpg';
 	}else{
 		$apiImg= M('')->query("select profileImageUrl from ai_others where uid='".$uid."' and profileImageUrl!=''");

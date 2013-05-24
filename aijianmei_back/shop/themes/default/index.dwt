@@ -411,7 +411,7 @@ function check_email()
   <!--{foreach from=$hot_goods item=goods}-->
   <div class="goodsItem">
          <span class="hot"></span>
-           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br/>
+           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
            <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
            <font class="f1">
            <!-- {if $goods.promote_price neq ""} -->
@@ -567,4 +567,3 @@ function check_email()
 </div>
 </body>
 </html>
->>>
