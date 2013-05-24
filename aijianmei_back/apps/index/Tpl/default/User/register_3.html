@@ -25,6 +25,7 @@
 						<span href="index.html" class="rg_choice_part">
 							<img src="Templates/images/register/way_1.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>吃得更营养</p>			
 							</div>
@@ -35,6 +36,7 @@
 						<span class="rg_choice_part">
 							<img src="Templates/images/register/way_2.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>增肌更有型</p>			
 							</div>
@@ -45,6 +47,7 @@
 						<span class="rg_choice_part">
 							<img src="Templates/images/register/way_3.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>减肥一身轻</p>			
 							</div>
@@ -55,6 +58,7 @@
 						<span class="rg_choice_part">
 							<img src="Templates/images/register/way_4.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>滚啊坏心情</p>			
 							</div>
@@ -65,6 +69,7 @@
 						<span class="rg_choice_part">
 							<img src="Templates/images/register/way_5.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>压力排出去</p>			
 							</div>
@@ -75,6 +80,7 @@
 						<span class="rg_choice_part">
 							<img src="Templates/images/register/way_6.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>桃花朵朵开</p>			
 							</div>
@@ -85,6 +91,7 @@
 						<span class="rg_choice_part">
 							<img src="Templates/images/register/way_7.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>找健身伙伴</p>			
 							</div>
@@ -95,6 +102,7 @@
 						<span class="rg_choice_part">
 							<img src="Templates/images/register/way_8.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>睡眠更香甜</p>			
 							</div>
@@ -105,6 +113,7 @@
 						<span class="rg_choice_part">
 							<img src="Templates/images/register/way_9.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>生活更阳光</p>			
 							</div>
@@ -115,7 +124,7 @@
 						<span class="rg_choice_part rg_add_part">
 							<div class="rg_way_content">
 								<p class="rg_way_text">我来填</p>	
-								<input type="text" class="rg_way_input" maxlength="4" />		
+								<input type="text" class="rg_way_input" maxlength="6"  onkeyup="if(!checktxt(this.value)){this.value='';alert('请输入正确的字符');};"/>		
 							</div>
 							<div class="rg_way_bg"></div>
 						</span>
@@ -130,9 +139,19 @@
 			</div>
 		</div>
 	</body>
-	<script type="text/javascript" src="Templates/js/public.js"></script>
 	<script type="text/javascript" src="Templates/js/jquery.js"></script>
+	<script type="text/javascript" src="Templates/js/public.js"></script>
+	
 	<script type="text/javascript">
+	function checktxt(str){
+		var txt=new RegExp("[ ,\\`,\\~,\\!,\\@,\#,\\$,\\%,\\^,\\+,\\*,\\&,\\\\,\\/,\\?,\\|,\\:,\\.,\\<,\\>,\\{,\\},\\(,\\),\\'',\\;,\\=,\"]");
+		//特殊字符正则表达式
+		if (txt.test(str)) {
+			return false;
+		}else{
+			return true;
+		}
+	}
 	function upkeysub(){
 		$("#postkeyform").submit();
 	}
@@ -145,6 +164,7 @@
 				len_choice = rg_choice_lay.length,
 				rg_way_bg = newdom.getElementsByClass('rg_way_bg'),
 				rg_img_bg = newdom.getElementsByClass('rg_img_bg'),
+				rg_img_hack = newdom.getElementsByClass('rg_img_hack'),
 				rg_choice_lay_sp = rg_choice_way.children[rg_ct_len-1];//get lastchild;
 			for(var i = 0;i < len_choice;i++){
 				rg_choice_lay[i].index = i;
@@ -159,10 +179,20 @@
 					rg_img_bg[this.index].style.opacity = 0.5;
 				}
 				rg_choice_lay[i].onclick = function(){
-					$("#postkeyform").append('<input type="hidden" value="'+$(".rg_way_content").eq(this.index).find('p').html()+'" name="sk[]">');
-					aijianmei.chang_top(rg_way_content[this.index],0,31,50);
-					aijianmei.chang_top(rg_way_bg[this.index],0,31,50);
-					rg_img_bg[this.index].style.display = 'none';
+					if(rg_img_bg[this.index].style.display != "none"){
+						aijianmei.chang_top(rg_way_content[this.index],0,31,50);
+						aijianmei.chang_top(rg_way_bg[this.index],0,31,50);
+						rg_img_bg[this.index].style.display = 'none';
+						rg_img_hack[this.index].style.display = 'block';
+						$("#postkeyform").append('<input type="hidden" value="'+rg_way_content[this.index].getElementsByTagName('p')[0].innerHTML+'" name="sk[]">');
+					}
+					else{
+						$("#postkeyform").find('input[value='+rg_way_content[this.index].getElementsByTagName('p')[0].innerHTML+']').remove();
+						aijianmei.chang_top(rg_way_content[this.index],1,31,50);
+						aijianmei.chang_top(rg_way_bg[this.index],1,31,50);
+						rg_img_bg[this.index].style.display = 'block';
+						rg_img_hack[this.index].style.display = 'none';
+					}	
 				}
 			}		
 			// rg_choice_lay_sp
@@ -196,7 +226,7 @@
 						$("#postkeyform").append('<input type="hidden" value="'+rg_way_input.value+'" name="sk[]">');
 						var li = document.createElement('li');
 						li.className = 'rg_choice_lay_sp tab';
-						li.innerHTML = '<span class="rg_choice_part rg_add_part"><div class="rg_way_content"><p class="rg_way_text">我来填</p><input type="text" class="rg_way_input" maxlength="4" /></div><div class="rg_way_bg"></div></span>';
+						li.innerHTML = "<span class='rg_choice_part rg_add_part'><div class='rg_way_content'><p class='rg_way_text'>我来填</p><input type='text' class='rg_way_input' maxlength='6' onkeyup=\"if(!checktxt(this.value)){this.value='';alert('请输入正确的字符');};\"></div><div class='rg_way_bg'></div></span>";
 						rg_choice_way.appendChild(li);
 						//remove event of rg_choice_lay_sp 
 						remove_event(rg_choice_lay_sp,'mouseover',move)

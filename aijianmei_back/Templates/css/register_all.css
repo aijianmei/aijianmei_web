@@ -286,7 +286,7 @@ a:hover{
 			border: 0;
 			border-radius: 4px;
 		}
-		.rg_img_bg{
+		.rg_img_bg,.rg_img_hack{
 			position: absolute;
 			left:0;
 			top: 0;
@@ -297,6 +297,12 @@ a:hover{
 			opacity: 0.5;
 			filter:alpha(opacity=50);
 			z-index: 3;
+		}
+		.rg_img_hack{
+			display: none;
+			opacity: 1;
+			filter:alpha(opacity=100);
+			background: url(../images/register/gou_01.png) no-repeat;
 		}
 		.rg_way_bg{
 			position: absolute;
