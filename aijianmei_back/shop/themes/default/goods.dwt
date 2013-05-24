@@ -188,6 +188,7 @@ function reg(str){
 	  	  <!--配送-->
       <li class="clearfix">
       <dd style="width:50%;">
+
       	<strong style="font-weight:normal">配送: </strong>
         <font>全国包邮</font>
       </dd>
@@ -197,6 +198,7 @@ function reg(str){
       <dd style="width:50%;">
 
       	<strong style="font-weight:normal">月销量: </strong>
+
         <font style="color:#FE596A;font-weight:bold"> 1234 件</font>
 
       </dd>
@@ -260,7 +262,9 @@ function reg(str){
       <!-- {/foreach} -->
       <!-- {* 结束循环可选属性 *} -->
       <li class="padd">
-      <a <!--{if $ecs_session.user_id>0}-->href="javascript:bool=1;addToCart({$goods.goods_id})"<!--{else}-->class="login"<!--{/if}-->><img src="images/btn_buy.png" alt="直接购买"/></a>
+
+      <a href="javascript:bool=1;addToCart({$goods.goods_id})" style="margin-right:40px"><img src="images/btn_buy.png" alt="直接购买"/></a>
+
       <a href="javascript:bool=2;addToCart({$goods.goods_id})"><img src="images/btn_cart.png" /></a>
       <!--<a href="javascript:collect({$goods.goods_id})"><img src="images/btn_cart.png" /></a>-->
       <!-- {if $affiliate.on} -->
