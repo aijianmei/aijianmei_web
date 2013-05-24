@@ -5,10 +5,14 @@
                 <span>您所在的位置:</span>
                 <a href="/index.php?app=index">爱健美</a>->
                 <a href="/index.php?app=index&mod={$tree_channel_en}">{$first}</a>->
-				<php>if($second!=$first){</php>
-				<a href="/index.php?app=index&mod={$tree_channel_en}&act=articleList&id={$tree_parent}">{$second}</a>->
+				<php>if($second!=$first&&$second!=''){</php>
+					<a href="/index.php?app=index&mod={$tree_channel_en}&act=articleList&id={$tree_parent}">{$second}</a>->
 				<php>}</php>
-                <a href="/index.php?app=index&mod={$tree_channel_en}&act=articleList&id={$tree_category_id}">{$third}</a>->
+				<php>if($channel!=1){</php>
+					<a href="/index.php?app=index&mod={$tree_channel_en}&act=articleList&id={$tree_category_id}">{$third}</a>->
+				<php>}else{</php>
+					<a href="/index.php?app=index&mod=Index&act=info&type={$planlistid}">{$third}</a>->
+				<php>}</php>
                 <a href="index.php?app=index&mod=Index&act=articleDetail&id={$article['id']}">{$article['title']}</a>
                 </span>
 

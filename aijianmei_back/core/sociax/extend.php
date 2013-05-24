@@ -1087,13 +1087,20 @@ function getUserName($uid,$lang='zh',$length=null) {
 		}
 		$_MapName[$uid] = $userinfo['uname'];
 	}
+	
+	$username=M('')->query("select uname from ai_user where uid=$uid");
 	//$_MapName[$uid]=msubstr($_MapName[$uid], 0, $length);
 	//echo htmlspecialchars($_MapName[$uid]);
 	if($length){
+		return msubstr($username[0]['uname'], 0, $length);
+	}else{
+		return $username[0]['uname'];
+	}
+	/*if($length){
 		return msubstr(htmlspecialchars($_MapName[$uid]), 0, $length);
 		}else{
 		return htmlspecialchars($_MapName[$uid]);
-		}
+		}*/
 }
 
 /*

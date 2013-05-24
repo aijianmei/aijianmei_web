@@ -931,7 +931,7 @@ padding: 0 20px;
 
    /*相关商品*/
    .boxCenterList ul{margin-bottom:5px;}
-   .boxCenterList li{float:left; width:160px;}
+   .boxCenterList li{float:left; width:123px;}
    .boxCenterList li.goodsimg{width:48px; margin-right:10px;}
    .boxCenterList li.goodsimg img{width:48px; height:48px; display:block;}
    /*相关文章(其它带有小三角点的文字列表共用)*/

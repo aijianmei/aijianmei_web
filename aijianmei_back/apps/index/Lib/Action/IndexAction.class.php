@@ -788,38 +788,9 @@ function show_banner($type){
     public function articleDetail()
     {	
         $pagenums=7;
-        $o = $_GET['o'];
-        if($o=='like') {
-            if($this->mid) {				
-                $is_vote = M('article_vote')->where(array('uid'=>$this->mid, 'article_id'=>$_GET['id']))->find();
-                if(!empty($is_vote)) {
-                    echo '<script type="text/javascript">alert("已经投票");</script>';
-                }else {
-                    M('')->query('update ai_article set `like`=`like`+1 where id='.$_GET['id']);
-                    $data['uid'] = $this->mid;
-                    $data['article_id'] = $_GET['id'];
-                    M('')->query('insert into ai_article_vote (`uid`,`article_id`) values ("'.$this->mid.'","'.$_GET['id'].'"');
-                }				
-            }else {
-                
-            }
-        }elseif($o=='unlike') {
-            if($this->mid) {
-                $is_vote = M('article_vote')->where(array('uid'=>$this->mid, 'article_id'=>$_GET['id']))->find();
-                if(!empty($is_vote)) {
-                    echo '<script type="text/javascript">alert("已经投票");</script>';
-                }else {
-                    M('')->query('update ai_article set `unlike`=`unlike`+1  where id='.$_GET['id']);
-                    M('article_vote')->add(array('uid'=>$this->mid, 'article_id'=>$_GET['id']));
-                }
-            }else {
-                
-            }
-        }
         $string="update ai_article set reader_count=reader_count+1 where id=".$_GET['id'];
         M('')->query($string);
-        global $ts;
-            
+  
         $id = (int) $_GET['id'];
         $map['id'] = $id;
         $article = M('article')->where($map)->find();
@@ -871,17 +842,28 @@ function show_banner($type){
             case 3:{$tree_channel="营养 ";$tree_channel_en="Nutri";$_current='nutri';}break;
             case 4:{$tree_channel="辅助品 ";$tree_channel_en="Append";$_current='append';}break;
         }
-        $tree_parent=$result['parent'];		
+        $tree_parent=$result['parent'];			
         $tree_name=$result['name'];
         $result=mysql_query("select name from ai_article_category where id=".$tree_parent);
-        $tree_parentName=mysql_fetch_array($result);
+        $tree_parentName=mysql_fetch_assoc($result);
         $this->assign("first",trim($tree_channel));
         $this->assign("second",trim($tree_parentName['name']));
+		if($channel==1){
+			if($tree_name=='天天锻炼-基础锻炼'){
+				$planlistid=2;
+			}elseif($tree_name=='天天锻炼-运动员锻炼'){
+				$planlistid=3;
+			}elseif($tree_name=='天天锻炼-肌肉锻炼'){
+				$planlistid=4;
+			}
+			$this->assign("planlistid",$planlistid);
+		}
         $this->assign("third",trim($tree_name));
         $this->assign("tree_parent",$tree_parent);
         $this->assign("tree_channel_en",$tree_channel_en);
         $this->assign('headertitle', $article['title']);
         $this->assign("tree_category_id",$tree_category_id);
+		$this->assign('channel', $channel);
 		$this->assign('_current', $_current);
 		$this->assign('_act', 1);
         $this->display('detail');

@@ -508,11 +508,16 @@ function addDetaiCommont($data=null){
         $data['username']=$_SESSION['userInfo']['uname'];
         $data['connect']=$content;
         $data['create_time']=date("Y-m-d H:i:s",time());
+		
+		$check_type="select upic_type from ai_user where uid=$uid";
+		$checkres=mysql_query($imgsql, $check_type);
+        $check_typeinfo = mysql_fetch_array($checkres);
+		
         $imgsql="select profileImageUrl from ai_others where uid='".$uid."'";
         $imgsArr=mysql_query($imgsql, $db);
         $row = mysql_fetch_array($imgsArr);
         $data['img'] =$row['profileImageUrl'];
-        if(empty($data['img'])){
+        if(empty($data['img'])&&$check_typeinfo['upic_type']==1){
             $data['img']="data/uploads/avatar/".$uid."/middle.jpg";
             if(!is_file($data['img']))
             {
