@@ -8,7 +8,11 @@
     <div id="category_tree">
       <!--{foreach from=$categories item=cat}-->
        <dl>
+       <!--{if $cat.cat_id}-->
        <dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
+       <!--{else}-->
+       <dd><a href="{$cat.url}">{$cat.name|escape:html}</a></dd>
+       <!--{/if}-->
        <!--{foreach from=$cat.cat_id item=child}-->
        <dd><a href="{$child.url}">{$child.name|escape:html}</a></dd>
          <!--{foreach from=$child.cat_id item=childer}-->

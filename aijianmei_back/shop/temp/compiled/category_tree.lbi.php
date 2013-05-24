@@ -9,7 +9,11 @@
     foreach ($_from AS $this->_var['cat']):
 ?>
        <dl>
+       <?php if ($this->_var['cat']['cat_id']): ?>
        <dt><a href="<?php echo $this->_var['cat']['url']; ?>"><?php echo htmlspecialchars($this->_var['cat']['name']); ?></a></dt>
+       <?php else: ?>
+       <dd><a href="<?php echo $this->_var['cat']['url']; ?>"><?php echo htmlspecialchars($this->_var['cat']['name']); ?></a></dd>
+       <?php endif; ?>
        <?php $_from = $this->_var['cat']['cat_id']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'child');if (count($_from)):
     foreach ($_from AS $this->_var['child']):
 ?>

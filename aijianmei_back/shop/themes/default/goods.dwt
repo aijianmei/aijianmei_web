@@ -164,7 +164,7 @@ function reg(str){
        <!-- {if $cfg.show_marketprice} 市场价格-->
        <!-- {/if} -->
        <!--本店售价-->
-       <strong>{$lang.shop_price}</strong><font class="shop" id="ECS_SHOPPRICE">{$goods.shop_price_formated}</font>(<strong>{$lang.market_price}</strong><font class="market">{$goods.market_price}</font>)<br />
+       <strong style="font-weight:normal">{$lang.shop_price}</strong><font class="shop" id="ECS_SHOPPRICE">{$goods.shop_price_formated}</font>(<strong style="font-weight:normal">{$lang.market_price}</strong><font class="market">{$goods.market_price}</font>)<br />
       
        </dd>
        </li>
@@ -189,18 +189,18 @@ function reg(str){
       <!--{if $goods.is_promote and $goods.gmt_end_time } 促销-->
       {insert_scripts files='lefttime.js'}
       <li class="padd loop" style="margin-bottom:5px;">
-      <strong>{$lang.promote_price}</strong><font class="shop">{$goods.promote_price}</font><br />
+      <strong style="font-weight:normal">{$lang.promote_price}</strong><font class="shop">{$goods.promote_price}</font><br />
       <!--<strong>{$lang.residual_time}</strong>
       <font class="f4" id="leftTime">{$lang.please_waiting}</font><br />-->
       </li>
       <!--月销量-->
       <li class="clearfix">
       <dd style="width:50%;">
-      	<strong>月销量: </strong>
+      	<strong style="font-weight:normal">月销量: </strong>
         <font style="color:#FE596A;font-weight:bold"> 1234 件</font>
       </dd>
        <dd style="width:48%; padding-left:7px;">
-       <strong>{$lang.goods_rank}</strong>
+       <strong style="font-weight:normal">{$lang.goods_rank}</strong>
         <img src="images/stars{$goods.comment_rank}.png" alt="comment rank {$goods.comment_rank}" />
        </dd>
       </li>
@@ -211,7 +211,7 @@ function reg(str){
       <!-- {/if} -->
       <li class="clearfix">
        <dd>
-       <strong>{$lang.number}：</strong>
+       <strong style="font-weight:normal">{$lang.number}：</strong>
         <input name="number" type="text" id="number" value="1" size="4" onblur="changePrice()" style="border:1px solid #ccc; "/>
        </dd>
        <dd class="ddR">
@@ -228,7 +228,7 @@ function reg(str){
       <!-- {* 开始循环所有可选属性 *} -->
       <!-- {foreach from=$specification item=spec key=spec_key} -->
       <li class="padd loop">
-      <strong>{$spec.name}:</strong><br />
+      <strong style="font-weight:normal">{$spec.name}:</strong><br />
         <!-- {* 判断属性是复选还是单选 *} -->
                     <!-- {if $spec.attr_type eq 1} -->
                       <!-- {if $cfg.goodsattr_style eq 1} -->
