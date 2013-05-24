@@ -146,17 +146,6 @@ function reg(str){
        <strong>{$lang.goods_sn}</strong>{$goods.goods_sn}
        <!-- {/if} -->
        </dd>
-       <dd class="ddR">
-       <!-- {if $goods.goods_number neq "" and $cfg.show_goodsnumber} 商品库存-->
-        <!-- {if $goods.goods_number eq 0} -->
-          <strong>{$lang.goods_number}</strong>
-          <font color='red'>{$lang.stock_up}</font>
-        <!-- {else} -->
-          <strong>{$lang.goods_number}</strong>
-          {$goods.goods_number} {$goods.measure_unit}
-        <!-- {/if} -->
-      <!-- {/if} -->
-       </dd>
       </li>
     
       <li class="clearfix">
@@ -193,11 +182,21 @@ function reg(str){
       <!--<strong>{$lang.residual_time}</strong>
       <font class="f4" id="leftTime">{$lang.please_waiting}</font><br />-->
       </li>
-      <!--月销量-->
+
+
+      <!-- {/if} -->
+	  	  <!--配送-->
+      <li class="clearfix">
+      <dd style="width:50%;">
+      	<strong>配送: </strong>
+        <font style="font-weight:bold">全国包邮</font>
+      </dd>
+	  </li>
+	  <!--月销量-->
       <li class="clearfix">
       <dd style="width:50%;">
       	<strong>月销量: </strong>
-        <font style="color:#FE596A;font-weight:bold"> 1234 件</font>
+        <font style="color:#FE596A;font-weight:bold">{$goods.buy_num}件</font>
       </dd>
        <dd style="width:48%; padding-left:7px;">
        <strong>{$lang.goods_rank}</strong>
@@ -208,11 +207,16 @@ function reg(str){
       <!--<li class="padd loop" style="margin-bottom:5px; border-bottom:1px dashed #ccc;">
       <strong>{$lang.goods_bonus}</strong><font class="shop">{$goods.bonus_money}</font><br />
       </li>-->
-      <!-- {/if} -->
       <li class="clearfix">
        <dd>
        <strong>{$lang.number}：</strong>
-        <input name="number" type="text" id="number" value="1" size="4" onblur="changePrice()" style="border:1px solid #ccc; "/>
+        <input name="number" type="text" id="number" value="1" size="4" onblur="changePrice()" style="border:1px solid #ccc; "/> (库存<!-- {if $goods.goods_number neq "" and $cfg.show_goodsnumber} 商品库存-->
+        <!-- {if $goods.goods_number eq 0} -->
+          <font color='red'>{$lang.stock_up}</font>
+        <!-- {else} -->
+          {$goods.goods_number} {$goods.measure_unit}
+        <!-- {/if} -->
+      <!-- {/if} -->件)
        </dd>
        <dd class="ddR">
        <!-- {if $cfg.use_integral} 购买此商品可使用积分-->
@@ -258,7 +262,7 @@ function reg(str){
       <!-- {/foreach} -->
       <!-- {* 结束循环可选属性 *} -->
       <li class="padd">
-      <a href="javascript:bool=1;addToCart({$goods.goods_id})"><img src="images/btn_buy.png" alt="直接购买"/></a>
+      <a <!--{if $ecs_session.user_id>0}-->href="javascript:bool=1;addToCart({$goods.goods_id})"<!--{else}-->class="login"<!--{/if}-->><img src="images/btn_buy.png" alt="直接购买"/></a>
       <a href="javascript:bool=2;addToCart({$goods.goods_id})"><img src="images/btn_cart.png" /></a>
       <!--<a href="javascript:collect({$goods.goods_id})"><img src="images/btn_cart.png" /></a>-->
       <!-- {if $affiliate.on} -->

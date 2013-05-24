@@ -315,6 +315,7 @@ function get_recommend_goods($type = '', $cats = '')
             $goods[$idx]['name']         = $row['goods_name'];
             $goods[$idx]['brief']        = $row['goods_brief'];
             $goods[$idx]['brand_name']   = isset($goods_data['brand'][$row['goods_id']]) ? $goods_data['brand'][$row['goods_id']] : '';
+			$goods[$idx]['buy_num']		 = ec_buysum($row['goods_id']);
             $goods[$idx]['goods_style_name']   = add_style($row['goods_name'],$row['goods_name_style']);
 
             $goods[$idx]['short_name']   = $GLOBALS['_CFG']['goods_name_length'] > 0 ?
@@ -561,7 +562,9 @@ function get_goods_info($goods_id)
 
         $row['promote_price_org'] =  $promote_price;
         $row['promote_price'] =  price_format($promote_price);
-
+			
+		/*显示商品销量*/
+		$row['buy_num']   = ec_buysum($row['goods_id']); 
         /* 修正重量显示 */
         $row['goods_weight']  = (intval($row['goods_weight']) > 0) ?
             $row['goods_weight'] . $GLOBALS['_LANG']['kilogram'] :
@@ -1490,5 +1493,31 @@ function get_products_info($goods_id, $spec_goods_attr_id)
         $return_array = $GLOBALS['db']->getRow($sql);
     }
     return $return_array;
+}
+
+
+function ec_buysum($goods_id)
+{
+   
+    $LMonth=strtotime("last month"); //前一个月
+    $nowTime=time(); //当前时间
+    $sql="select sum(goods_number) from " . $GLOBALS['ecs']->table('order_goods') . " AS g ,".$GLOBALS['ecs']->table('order_info') . " AS o WHERE o.order_id=g.order_id and g.goods_id = ".$goods_id." and o.pay_status=2 and o.add_time >= ".$LMonth." and o.add_time <= ".$nowTime." group by g.goods_id";
+
+    if (($GLOBALS['db']->getOne($sql)) == ""){
+            return "0";
+        }else{
+       return $GLOBALS['db']->getOne($sql);
+    }
+   
+}
+
+function ec_allbuysum($goods_id)
+{
+    $sql = "select sum(goods_number) from " . $GLOBALS['ecs']->table('order_goods') . " AS g ,".$GLOBALS['ecs']->table('order_info') . " AS o WHERE o.order_id=g.order_id and g.goods_id = " . $goods_id . " and o.order_status=5 " ;
+    if (($GLOBALS['db']->getOne($sql)) == ""){
+        return "0";
+    }else{
+           return $GLOBALS['db']->getOne($sql);
+    }
 }
 ?>

@@ -968,7 +968,7 @@ padding: 0 20px;
    #goodsInfo .textInfo p{font-size:26px; font-weight:bold; padding:0 5px 5px 8px;}
    #goodsInfo .textInfo li{ padding:0px 8px; _height:1%;}
    #goodsInfo .textInfo li.padd{padding:7px 0px 7px 8px;}
-   #goodsInfo .textInfo li dd{width:50%; float:left; padding:15px 0px;}
+   #goodsInfo .textInfo li dd{width:50%; float:left; padding:12px 0px;}
    #goodsInfo .textInfo li .ddL{width:100%;}
    #goodsInfo .textInfo li dd.ddR{ width:48%; padding-left:8px;}
    #goodsInfo .textInfo a{color:#006bce; text-decoration:underline;}
