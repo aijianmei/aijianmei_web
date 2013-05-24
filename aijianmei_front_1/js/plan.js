@@ -14,7 +14,6 @@
 	$("textarea#user").bind({
 		focusin: function(){
 			$(this).next().hide();
-			console.log("sfsadf");
 		},
 		focusout: function(){
 			$(this).next().show();
