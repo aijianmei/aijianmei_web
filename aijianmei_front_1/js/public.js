@@ -450,8 +450,6 @@ var init = function(){
     aijianmei.hover('more','account');
 }
 init();	
-
-
 //for textarea write down text,show of obj show number
 function change_num(obj,show){
 	var newdom = new getdom,
@@ -470,10 +468,6 @@ function change_num(obj,show){
 	    }       
 	}
 }
-
-
-
-
 //对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
 var fade = {
     newdom : new getdom,
@@ -555,4 +549,7 @@ if(newdom.getElementsByClass('store')[0]){
 }
 if(newdom.getElementsByClass('forum')[0]){
     fade.init('forum');
+}
+if(newdom.getElementsByClass('friends')[0]){
+    fade.init('friends');
 }

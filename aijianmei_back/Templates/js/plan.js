@@ -14,7 +14,6 @@
 	$("textarea.commentboxCss").bind({
 		focusin: function(){
 			$(this).next().hide();
-			//console.log("sfsadf");
 		},
 		focusout: function(){
 			if($(this).val()==''){

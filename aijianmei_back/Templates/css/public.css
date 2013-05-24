@@ -13,7 +13,6 @@
 			margin: 15px 0;
 		}
 
-
 /****** Reset **********/
 .cont_vd_bg {
     background: url("../images/cont_vd.png") no-repeat scroll 0 0 transparent;
@@ -284,6 +283,7 @@ button{
 /*login beginning----------*/
 	/*login_bg*/
 		.login_bg{
+			display: none;
 			position: fixed;
 			top: 0;
 			left: 0;
@@ -293,12 +293,12 @@ button{
 			opacity: 0;
 			filter:alpha(opacity=0);
 			z-index: 900;
-			visibility: hidden;
 		}
 	/*login_bg end*/
 
 
 	.login_table{
+		display: none;
 		position: fixed;
 		top: -222px;/*78px*/
 		left: 50%;
@@ -307,7 +307,6 @@ button{
 		margin-left: -385px;
 		background: url(../images/04.png) no-repeat;
 		z-index: 910;
-		visibility: hidden;
 	}
 	/*login h4*/
 	.login_table h4{
@@ -633,3 +632,28 @@ button{
 		overflow-y: auto;
 	}
 /*fade_modal begin****/
+			/*bn_bg_part bn_bg_transparent start*/
+			.bn_bg_part{
+				display: none;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 80px;
+				line-height: 80px;
+				background: rgba(0,0,0,.6);
+				background: #626262\9;
+				filter:alpha(opacity=90);
+				z-index: 2;
+			}
+			.bn_text{
+				font-size: 25px;
+				text-align: center;
+				color: white;
+			}
+			.bn_text:hover{
+				color:white;
+			}
+			/*}}}}end*/
+
+

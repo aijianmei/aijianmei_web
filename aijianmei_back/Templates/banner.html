@@ -2,7 +2,14 @@
 					<div class="lay_banner">
 						<ul class="bn_contain_pic">
 						<php>foreach ($_bannerInfo as $key => $value){</php>
-							<li><a href="{$value['url']}"><img src="{$value['img']}" alt="{$value['name']}"></a></li>
+							<li>
+								<a href="{$value['url']}">
+								<img src="{$value['img']}" alt="{$value['name']}">
+								<div class="bn_bg_part">
+										<p class="bn_text">{$value['name']}</p>
+								</div>
+								</a>
+							</li>
 							<php>}</php>
 						</ul>
 						<div class="bn_choice_way">

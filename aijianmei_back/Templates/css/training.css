@@ -36,6 +36,7 @@
 			}
 			.bn_contain_pic a{
 				display: block;
+				position: relative;
 			}
 			.bn_contain_pic img{
 				width: 650px;

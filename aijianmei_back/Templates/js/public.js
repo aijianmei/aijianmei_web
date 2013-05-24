@@ -154,37 +154,58 @@ var aijianmei = {
 			value = obj_filter.replace(/[^0-9]/ig,"");//使用正则表达式转换为数字字符串（80）
 		obj.style.opacity = obj_opacity;
 		var change_opacity = function(){
-			if(obj_opacity > filter){
-				var time = function(){
-					setTimeout(function(){
-						if(obj_opacity > filter){
-							obj_opacity = (obj_opacity * 10 - 1)/10;
-							obj.style.opacity = (parseFloat(obj.style.opacity) * 10 - 1)/10;
-							if(document.all){
+			if(document.all){
+				if(value/100 > filter){
+					var time = function(){
+						setTimeout(function(){
+							if(value/100 > filter){
 								value = parseFloat(value) - 10;
 								obj.style.filter = 'alpha(opacity = '+value+')';
+
+								time();
 							}
-							time();
-						}
-					},speed)
-				};
-				time();
-			}
-			else{
-				var time = function(){
-					setTimeout(function(){
-						if(filter > obj_opacity){
-							filter = (filter * 10 - 1)/10;
-							obj.style.opacity = (parseFloat(obj.style.opacity) * 10 + 1)/10;
-							if(document.all){
+						},speed);
+					}
+					time();
+				}
+				else{
+					var time = function(){
+						setTimeout(function(){
+							if(filter > value/100){
 								value = parseFloat(value) + 10;//将字符串转化为数字，使用的是parsefloat
 								obj.style.filter = 'alpha(opacity = '+value+')';
+								time();
 							}
-							time();
-						}
-					},speed)
-				};
-				time();
+						},speed)
+					};
+					time();
+				}
+			}
+			else{
+				if(obj_opacity > filter){
+					var time = function(){
+						setTimeout(function(){
+							if(obj_opacity > filter){
+								obj_opacity = (obj_opacity * 10 - 1)/10;
+								obj.style.opacity = (parseFloat(obj.style.opacity) * 10 - 1)/10;
+								time();
+							}
+						},speed)
+					};
+					time();
+				}
+				else{
+					var time = function(){
+						setTimeout(function(){
+							if(filter > obj_opacity){
+								filter = (filter * 10 - 1)/10;
+								obj.style.opacity = (parseFloat(obj.style.opacity) * 10 + 1)/10;
+								time();
+							}
+						},speed)
+					};
+					time();
+				}
 			}
 		}
 		change_opacity();
@@ -242,7 +263,6 @@ var aijianmei = {
 						titlewidth = title.style.width,
 						align = left + width/2,
 						half = parseFloat(titlewidth)/2;
-						// console.log(_target.parentNode.offsetLeft)
 						title.style.left = align - half + 'px';
 						title.style.top = top - handlewidth + 'px';
 				} 
@@ -317,8 +337,8 @@ var aijianmei = {
 	acTion : function(){
 		var login_Bg = aijianmei.getobj('login_bg'),
 			login_table= aijianmei.getobj('login_table');
-		login_Bg.style.visibility = 'visible';
-		login_table.style.visibility = 'visible';
+		login_Bg.style.display = 'block';
+		login_table.style.display = 'block';
 		aijianmei.opacity('login_bg',0.5,10);
 		aijianmei.chang_top(login_table,0,294,10);
 		// for input
@@ -336,10 +356,13 @@ var aijianmei = {
 	removeacTion : function(){
 		var login_Bg = aijianmei.getobj('login_bg'),
 			login_table= aijianmei.getobj('login_table');
-		aijianmei.opacity('login_bg',0,10);
-		aijianmei.chang_top(login_table,1,294,10);
-		login_Bg.style.visibility = 'hidden';
-		login_table.style.visibility = 'hidden';
+		login_table.style.top = "-222px";
+		login_Bg.style.opacity = 0;
+		login_Bg.style.filter = 'alpha(opacity=0)'
+		// aijianmei.opacity('login_bg',0,10);
+		// aijianmei.chang_top(login_table,1,294,10);
+		login_Bg.style.display = 'none';
+		login_table.style.display = 'none';
 		// if(login_Bg.style.opacity == 0){
 		// 	login_Bg.style.visibility = 'hidden';
 		// 	login_table.style.visibility = 'hidden';
@@ -530,3 +553,16 @@ if(newdom.getElementsByClass('forum')[0]){
 if(newdom.getElementsByClass('friends')[0]){
     fade.init('friends');
 }
+
+
+$(function() {
+
+	$(".bn_contain_pic li").bind({
+	mouseleave: function(){
+	$(this).find(".bn_bg_part").slideUp(300);
+	},
+	mouseenter: function(){
+	$(this).find(".bn_bg_part").slideDown(300);	
+	}
+	});
+});
