@@ -23,6 +23,7 @@
 						<span href="index.html" class="rg_choice_part">
 							<img src="images/register/way_1.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>吃得更营养</p>			
 							</div>
@@ -33,6 +34,7 @@
 						<span class="rg_choice_part">
 							<img src="images/register/way_2.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>增肌更有型</p>			
 							</div>
@@ -43,6 +45,7 @@
 						<span class="rg_choice_part">
 							<img src="images/register/way_3.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>减肥一身轻</p>			
 							</div>
@@ -53,6 +56,7 @@
 						<span class="rg_choice_part">
 							<img src="images/register/way_4.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>营养</p>			
 							</div>
@@ -63,6 +67,7 @@
 						<span class="rg_choice_part">
 							<img src="images/register/way_5.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>交友</p>			
 							</div>
@@ -73,6 +78,7 @@
 						<span class="rg_choice_part">
 							<img src="images/register/way_6.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>放松</p>			
 							</div>
@@ -83,6 +89,7 @@
 						<span class="rg_choice_part">
 							<img src="images/register/way_7.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>增肌</p>			
 							</div>
@@ -93,6 +100,7 @@
 						<span class="rg_choice_part">
 							<img src="images/register/way_8.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>增肌</p>			
 							</div>
@@ -103,6 +111,7 @@
 						<span class="rg_choice_part">
 							<img src="images/register/way_9.jpg">
 							<div class="rg_img_bg"></div>
+							<div class="rg_img_hack"></div>
 							<div class="rg_way_content">
 								<p>增肌</p>			
 							</div>
@@ -137,6 +146,7 @@
 				len_choice = rg_choice_lay.length,
 				rg_way_bg = newdom.getElementsByClass('rg_way_bg'),
 				rg_img_bg = newdom.getElementsByClass('rg_img_bg'),
+				rg_img_hack = newdom.getElementsByClass('rg_img_hack'),
 				rg_choice_lay_sp = rg_choice_way.children[rg_ct_len-1];//get lastchild;
 			for(var i = 0;i < len_choice;i++){
 				rg_choice_lay[i].index = i;
@@ -155,11 +165,13 @@
 						aijianmei.chang_top(rg_way_content[this.index],0,31,50);
 						aijianmei.chang_top(rg_way_bg[this.index],0,31,50);
 						rg_img_bg[this.index].style.display = 'none';
+						rg_img_hack[this.index].style.display = 'block';
 					}
 					else{
 						aijianmei.chang_top(rg_way_content[this.index],1,31,50);
 						aijianmei.chang_top(rg_way_bg[this.index],1,31,50);
 						rg_img_bg[this.index].style.display = 'block';
+						rg_img_hack[this.index].style.display = 'none';
 					}	
 				}
 			}		
