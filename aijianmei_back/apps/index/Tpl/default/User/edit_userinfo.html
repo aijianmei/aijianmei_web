@@ -307,14 +307,9 @@ function changeUserImg(key){
 function formsubBykey(key){
 	if(key=='userinfo'){
 		var username=$("#username").val();
-		var dt_year_finish=$("#dt_year_finish").val();
 		if(username==''){
 			$("#username").focus();
 			$("#user_msg").html('请输入用户名');
-			return false;
-		}
-		if(dt_year_finish==''){
-			$("#dt_year_finish").focus();
 			return false;
 		}
 	}

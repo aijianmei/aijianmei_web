@@ -407,7 +407,6 @@ function show_banner($type){
 	
 	public function index() 
     {
-		//print_r($_SESSION);
 		$bannerinfo=array(
 		'1'=>array(
 			'name'=>'为什么你现在就需要蛋白质营养品',
@@ -797,6 +796,7 @@ function show_banner($type){
 		preg_match_all("/src\s*=\s*[\"|\']?\s*([^\"\'\s]*)/i",str_ireplace("\\","",$article['content']),$out);
 		$aimgsrc=$out[1][0];
 		$article['dateStrng']=_returnNdate($article['create_time']);
+		
         $this->assign('article', $article); 
         $this->assign('aimgsrc', $aimgsrc); 
         
@@ -816,6 +816,10 @@ function show_banner($type){
             $result[$key]['user'] = getUserInfo($value['uid']);
         }
         $this->assign('commentCounts', $commentCounts?$commentCounts:0);
+		$article['commentCount']=$commentCounts;
+		$article['content']='xxxxxassd';
+		$article['img']='http://www.aijianmei.com/public/images/article/'.$article['img'];
+		echo json_encode($article);
         $this->assign('comments', $result);
         $this->assign('hotComments', $hotArticlecomments);
         
@@ -1153,6 +1157,8 @@ function show_banner($type){
     
     public function selectRegister()
     {
+		$_SESSION['regrefer_url']='';
+		$_SESSION['regrefer_url'] = $_SERVER["HTTP_REFERER"];
         $this->display('select_register');
     }
     

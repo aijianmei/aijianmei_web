@@ -104,11 +104,14 @@ class UserAction extends Action {
 		$this->display('GetPwd_Fourth');
 	}
 	public function register(){
+		if($_SESSION['regrefer_url']==''&& $_SERVER["REQUEST_URI"]='/index.php?app=index&mod=User&act=register'){
+			$_SESSION['regrefer_url'] = $_SERVER["HTTP_REFERER"];
+		}
 		$this->display('register_1');
 	}
 	public function doregister()
 	{
-		$_SESSION['allowbackreg']=$_SESSION['allowbackmid']=null;
+		//$_SESSION['allowbackreg']=$_SESSION['allowbackmid']=null;
 		if($_SESSION['sinalogin']==1){$_SESSION['deslogin']=1;}
 		$userEmail=addslashes($_POST['email']);
 		$password=addslashes($_POST['password']);
@@ -218,7 +221,29 @@ class UserAction extends Action {
 			$cemail=$otherinfo[0]['cemail'];
 			$ctell=$otherinfo[0]['ctell'];
 			
+			if(!empty($UserNameInfo[0]['qqopenid'])){
+				$user_type='3';
+				$qqimg=$otherinfo[0]['profileImageUrl'];
+				$this->assign('qqimg',$qqimg);
+			}elseif(!empty($otherinfo[0]['profileImageUrl'])){
+				$user_type='2';
+				$sinaimg=$otherinfo[0]['profileImageUrl'];
+				$this->assign('sinaimg',$sinaimg);
+			}else{
+
+				$user_type='1';
+			}
+			$this->assign('user_type',$user_type);
+			$filename='data/uploads/avatar/'.$mid.'/middle.png';
+			$this->assign('localimg',$filename);
+			if(is_file($filename)&&$UserNameInfo[0]['upic_type']==1){$imgurl=$filename;}else{
+				$imgurl=$otherinfo[0]['profileImageUrl'];
+			}
+			
+			$this->assign('user_type',1);
+			//$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
 			$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
+			$this->assign('localimg',$filename);
 			if(is_file($filename)) $imgurl=$filename;
 			$this->assign('UserKeyword',$getUserKeyword);
 		}elseif($_SESSION['otherlogin']==1){
@@ -377,7 +402,8 @@ class UserAction extends Action {
 		if($mid>0&&$username!=''&&$_GET['args']=='uinfo'){
 			if($_SESSION['otherlogin']==1||$_SESSION['locallogin']==1){
 			$upsql=null;
-			$upsql="UPDATE ai_user SET uname = '".$username."',sex='".$_POST['sex']."',province='".$_POST['province']."',city='".$_POST['city']."' WHERE uid =$mid";
+			//$upsql="UPDATE ai_user SET uname = '".$username."',sex='".$_POST['sex']."',province='".$_POST['province']."',city='".$_POST['city']."' WHERE uid =$mid";
+			$upsql="UPDATE ai_user SET uname = '".$username."',sex=".$_POST['sex'].",province=".$_POST['province'].",city='".$_POST['cityvalue']."',upic_type='1' WHERE uid =$mid";
 			M('')->query($upsql);
 			
 			$keyTmp=array();
@@ -386,18 +412,28 @@ class UserAction extends Action {
 						$keyTmp[]=$v;
 					}	
 				}
-			$upsql=null;
-			$upsql="UPDATE ai_user_keywords SET keyword = '".serialize($keyTmp)."' WHERE uid =$mid";
-			M('')->query($upsql);
+			$checkkeywordSql="select * from ai_user_keywords WHERE uid =$mid";
+			$cres=M('')->query($checkkeywordSql);
+			if($cres){
+				$upsql=null;
+				$upsql="UPDATE ai_user_keywords SET keyword = '".serialize($keyTmp)."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}else{
+				$upsql=null;
+				$upsql="INSERT INTO  ai_user_keywords (uid,keyword)values('".$mid."','".serialize($keyTmp)."')";
+				M('')->query($upsql);
+			}
 			$checksql=null;
 			$checksql="select * from ai_user_health_info where uid =$mid";
 			$cres=M('')->query($checksql);
 			if($cres){
 				$upsql=null;
-				$upsql="UPDATE ai_user_health_info SET body_weight = '".$_POST['dt_weight_finish']."'
-				,height = '".$_POST['dt_height_finish']."'
-				,age = '".$_POST['dt_year_finish']."' WHERE uid =$mid";
-				M('')->query($upsql);
+				if($_POST['dt_weight_finish']!=''||$_POST['dt_height_finish']!=''||$_POST['dt_year_finish']!=''){
+					$upsql="UPDATE ai_user_health_info SET body_weight = '".$_POST['dt_weight_finish']."'
+					,height = '".$_POST['dt_height_finish']."'
+					,age = '".$_POST['dt_year_finish']."' WHERE uid =$mid";
+					M('')->query($upsql);
+				}
 			}else{
 				$insertSql="INSERT INTO  `aijianmei`.`ai_user_health_info` (`uid` ,`body_weight` ,`height` ,`age`)
 				VALUES ($mid, '".$_POST['dt_weight_finish']."','".$_POST['dt_height_finish']."','".$_POST['dt_year_finish']."')";
@@ -458,7 +494,11 @@ class UserAction extends Action {
 				M('')->query($upsql);
 			}
 		}
-
+		if($_SESSION['regrefer_url']!=''){
+			$_SESSION['deslogin']=0;
+			$_SESSION['regrefer_msg']='恭喜你成功注册“爱健美”';
+			redirect(U('index/Public/Transit'));
+		} 
 		//service('Passport')->login($mid);
 		
 		redirect(U('index/Index/index'));
@@ -473,7 +513,7 @@ public function saveedituserinfo(){
 			$oldusernameinfo=M('user')->where(array('uid'=>$mid))->find();
 			//print_r($oldusernameinfo);exit;
 			$upsql=null;
-			$upsql="UPDATE ai_user SET uname = '".$username."',sex='".$_POST['sex']."',province='".$_POST['province']."',city='".$_POST['cityvalue']."',upic_type='".$_POST['upic_type']."' WHERE uid =$mid";
+			$upsql="UPDATE ai_user SET uname = '".$username."',sex=".$_POST['sex'].",province=".$_POST['province'].",city='".$_POST['cityvalue']."',upic_type='".$_POST['upic_type']."' WHERE uid =$mid";
 			M('')->query($upsql);
 			$upsql="UPDATE ecs_users SET user_name = '".$username."' WHERE user_name ='".$oldusernameinfo['uname']."'";
 			M('')->query($upsql);
@@ -524,7 +564,7 @@ public function saveedituserinfo(){
 			$sdata['password']=addslashes($_SESSION['locallogin_password']);
 			$sdata['email']   =addslashes($shopinserinfo[0]['email']);
 			
-			_postCurlRegister($sdata);
+			//_postCurlRegister($sdata);
 			service('Passport')->loginLocal($sdata['uname'],$sdata['password'],1);
 			
 			$checkotherinfosql="select * from ai_others where uid=$mid";
@@ -702,12 +742,14 @@ public function saveedituserinfo(){
 	 // {
 		// move_uploaded_file($_FILES['upload_file']['tmp_name'],$_FILES['upload_file']['name']);
 	 // }
-	
-	$fdata=$this->newupload();
+	$fdata=$this->uploadImageFile(150,'big');
+	//$fdata=$this->uploadImageFile(50,'middle');
+	//$this->uploadImageFile(30,'small');
+	//$fdata=$this->newupload();
     //输出图片文件<img>标签
 
-    echo "<textarea><img src='".$fdata['data']['picurl']."'/></textarea>";
-	echo "<textarea><img class='dt_choice_img' style='width:45px;height:45px;' src='".$fdata['data']['spicurl']."'/></textarea>";
+    //echo "<textarea><img src='".$fdata['data']['picurl']."'/></textarea>";
+	echo "<textarea><img src='".$fdata.'?'.rand()."' /></textarea>";
 	exit;
 	}
 	
@@ -899,6 +941,95 @@ function newupload(){
 	        }	
         }
         return $return;
-    }	
+    }
+
+
+function uploadImageFile($size,$name) {
+	if($_SESSION['allowbackmid']){$this->uid=$_SESSION['allowbackmid'];}
+	//echo $pic_path = $this->getSavePath().'/original.jpg';
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		$iWidth = $iHeight = $size; // 输出大小
+		$iJpgQuality = 100;
+		if ($_FILES) {
+		// if no errors and size less than 250kb
+			if (! $_FILES['image_file']['error']) {
+				if (is_uploaded_file($_FILES['image_file']['tmp_name'])) {
+				//$sTempFileName =  md5(time().rand());
+				$sTempFileName =  SITE_PATH.'/data/uploads/avatar/'.$this->uid.'/'.$name;
+				// move uploaded file into cache folder
+				mkdir(SITE_PATH.'/data/uploads/avatar/'.$this->uid.'/',0777);
+				$original='data/uploads/avatar/'.$this->uid.'/original.jpg';
+				move_uploaded_file($_FILES['image_file']['tmp_name'],SITE_PATH.'/'.$original);
+				copy('/data/uploads/avatar/'.$this->uid.'/original.jpg', '/data/uploads/avatar/'.$this->uid.'/'.$name);
+				//change file permission to 644
+				chmod($original, 0777);
+				//@chmod($sTempFileName, 0777);
+					if (file_exists($original) && filesize($original) > 0) {
+						$aSize = getimagesize($original); // try to obtain image info
+						if (!$aSize) {
+							@unlink($original);
+							return;
+						}
+						// check for image type
+						switch($aSize[2]) {
+							case IMAGETYPE_JPEG:
+							$sExt = '.jpg';
+							// create a new image from file
+							$vImg = @imagecreatefromjpeg($original);
+							break;
+							case IMAGETYPE_PNG:
+							$sExt = '.png';
+							// create a new image from file
+							$vImg = @imagecreatefrompng($original);
+							break;
+							default:
+							@unlink($sTempFileName);
+							return;
+						}
+						$sExt = '.jpg';
+						// create a new true color image
+						// $vDstImg = @imagecreatetruecolor( $iWidth, $iHeight );
+						//copy and resize part of an image with resampling
+						// imagecopyresampled($vDstImg, $vImg, 0, 0, (int)$_POST['x1'], (int)$_POST['y1'], $iWidth, $iHeight, (int)$_POST['w'], (int)$_POST['h']);
+						//define a result image filename
+						// echo $sResultFileName = $sTempFileName . $sExt;
+						//output image to file
+						// imagejpeg($vDstImg, $sResultFileName, $iJpgQuality);
+						
+						
+						$face_path      =   SITE_PATH.'/data/uploads/avatar'.convertUidToPath($this->uid);
+						$big_name	    =	$face_path.'/big.jpg';		// 大图
+						$middle_name	=	$face_path.'/middle.jpg';		// 中图
+						$small_name		=	$face_path.'/small.jpg';
+						
+						
+						$dst_r	=	ImageCreateTrueColor( 150, 150);
+						//$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
+						ImageCopyResampled($vDstImg, $vImg, 0, 0, (int)$_POST['x1'], (int)$_POST['y1'], 150, 150, (int)$_POST['w'], (int)$_POST['h']);
+						ImagePNG($dst_r,$big_name);  // 生成大图
+						
+						$dst_r	=	ImageCreateTrueColor( 50, 50 );
+						//$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
+						ImageCopyResampled($vDstImg, $vImg, 0, 0, (int)$_POST['x1'], (int)$_POST['y1'], 50, 50, (int)$_POST['w'], (int)$_POST['h']);
+						ImagePNG($dst_r,$middle_name);  // 生成大图
+						
+						
+						$dst_r	=	ImageCreateTrueColor( 30, 30 );
+						//$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
+						ImageCopyResampled($vDstImg, $vImg, 0, 0, (int)$_POST['x1'], (int)$_POST['y1'],30, 30, (int)$_POST['w'], (int)$_POST['h']);
+						ImagePNG($dst_r,$small_name);  // 生成大图
+						
+						
+						@unlink($sTempFileName);
+						@chmod($big_name, 0777);
+						@chmod($small_name, 0777);
+						@chmod($middle_name, 0777);
+						return '/data/uploads/avatar'.convertUidToPath($this->uid).'/big.jpg';
+					}
+				}
+			}
+		}
+	}
+}
 }
 ?>

@@ -645,7 +645,7 @@ class App
                     exit;
                 } else {
                     // 记录登录前的url地址
-                    if(!$_GET['state']){
+                    if(!$_GET['state']&&!$_GET['code']){
                     $_SESSION['refer_url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                     }
                     if(APP_NAME !== 'index')

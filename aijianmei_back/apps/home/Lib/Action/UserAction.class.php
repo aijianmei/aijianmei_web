@@ -1,1067 +1,1103 @@
-<?php
+<?php 
 class UserAction extends Action {
-
-    const INDEX_TYPE_WEIBO = 0;
-    const INDEX_TYPE_GROUP = 1;
-    const INDEX_TYPE_ALL   = 2;
-
-    function _initialize() {
-        $data ['followTopic'] = D ( 'Follow', 'weibo' )->getTopicList ( $this->mid );
-        global $ts;
-        //SamPeng 2011.12.15重构整个方法
-        $this->assign('install_app',$ts['install_apps']);
-        $this->assign ( $data );
-        $banner = M('ad')->findAll();
-        foreach ($banner as &$value) {
-            $content = $value['content'];
-            $status = unserialize($content);
-            if($status != false) {
-                $value['content'] = unserialize($content);
-            }
-        }
-        $this->assign('banner',$banner);
-        $count = $banner;
+    function getSavePath(){
+        $savePath = SITE_PATH.'/data/uploads/avatar'.convertUidToPath($this->uid);
+        if( !file_exists( $savePath ) ) mk_dir( $savePath  );
+        return $savePath;
     }
-    protected function _empty()
-    {
-        $this->display('addons');
-    }
-
-    //个人首页
-    function index() {
-        Session::pause();
-        global $ts;
-
-        //SamPeng 2011.12.15重构整个方法
-        $install_app = $ts['install_apps'];
-
-        $index_type = intval( $_GET ['type'] );  //0=我关注的、1=群组微博、2=正在发生
-        $weibo_type = h( $_GET ['weibo_type'] ); //orignal=原创、0=微博、1=图片微博、2=视频
-        //$weibo_config = model ( 'Xdata' )->lget ( 'weibo' );
-
-        //判断是动态还是微博,兼容1.6的代码
-
-        //if (($show_feed = $weibo_config['openDynamic'] && intval($_COOKIE['feed']))) {
-        //  $data = $this->__getDynamic($index_type); //显示动态
-        //  $data['show_feed'] = $show_feed;
-        //} else {
-            $data = $this->__getWeiboList($install_app, $index_type, $weibo_type); //显示微博列表
-            $data['type'] = $index_type;
-            $data['weibo_type'] = $weibo_type;
-        //}
-
-        $this->__assignTabSwitch($index_type);
-
-        $this->__setAnnouncement();
-
-        if(!empty($weibo_type)) {
-            $this->assign('typeClass',"on");
-            $this->assign('view','block');
-        }else{
-            $this->assign('typeClass','off');
-            $this->assign('view','none');
-        }
-        
-        $userInfo = getUserInfo($this->mid);
-        $this->assign('userInfo', $userInfo);
-        
-        $groups = M('friend_group')->where(array('uid'=>$this->mid))->findAll();
-        $this->assign('groups', $groups);
-        
-        $active_members = M('user')->limit('0,6')->findAll();
-        $this->assign('active_members', $active_members);
-		
-		$new_members = M('user')->limit('0,20')->order('ctime desc')->findAll();
-		$this->assign('new_members', $new_members);
-        
-        $videos = M('video')->limit('0,3')->order('create_time desc')->findAll();
-        $this->assign('videos', $videos);
-        
-        $articles = M('article')->limit('0,3')->order('create_time desc')->findAll();
-        $this->assign('articles', $articles);
-
-        $this->assign ( $data );
-        $this->setTitle (L('my_index'));
-        $this->assign('cssFile', 'pal');
-        //print_r($data);
-        $this->display ();
-    }
-    
-    public function publishWeibo()
-    {
-    	$pWeibo = D('Weibo');
-    	$data['content'] =  $_POST['content'];
-    	if($_POST['weibo_content_type']=='1') { // 通知
-    		$start_date = $_POST['start_date'];
-    		$start_time = $_POST['start_time'];
-    		$end_time   = $_POST['end_time'];
-    		$content_type = $_POST['dialog'];
-    		$data['content'] = $_POST['content'].'在'.$start_date.$start_time.'到'.$end_time.'做'.$content_type;
-    	}elseif($_POST['weibo_content_type']=='2') { // 预约
-    		$start_date = $_POST['start_date'];
-    		$start_time = $_POST['start_time'];
-    		$end_time   = $_POST['end_time'];
-    		$content_type = $_POST['dialog'];
-    		$data['content'] = $_POST['content'].'在'.$start_date.$start_time.'到'.$end_time.'做'.$content_type;
-    	}
-    	$id = $pWeibo ->publish( $this->mid , $data, 0 ,intval( $_POST['publish_type']) , $_POST['publish_type_data']);
-    	if( $id ){
-    		//锁定发布
-    		lockSubmit();
-    	
-    		//发布成功后，检测后台是否开启了自动举报功能
-    		$weibo_option = model('Xdata')->lget('weibo');
-    		if( $weibo_option['openAutoDenounce'] ){
-    			if( checkKeyWord( $data['content'] )){
-    				model('Denounce')->autoDenounce($id,$this->mid,$data['content']);
-    				echo '0';exit;
-    			}
-    		}
-    	
-    		//添加积分
-    		X('Credit')->setUserCredit($this->mid,'add_weibo');
-    	
-    		//输出微博内容
-    		$data = $pWeibo->getOneLocation( $id );
-    	
-    		$this->assign('data',$data);
-    		redirect(U('home/User/index'));
-    		//$this->display();
-    	}
-    }
-    
-    public function personal()
-    {
-    	$this->_canViewSpace();
-    	
-    	$menu['weibo'] = L('weibo');
-    	Addons::hook('home_space_tab', array('uid' => $this->uid, 'menu' => & $menu));
-    	$this->assign('space_menu', $menu);
-    	
-    	$data['user'] = D('User')->getUserByIdentifier($this->uid);
-    	//判断用户是否存在
-    	if(!$data['user']['uid']){
-    		$this->assign('jumpUrl', $_SERVER['HTTP_REFERER']);
-    		$this->error('用户不存在或已被删除！');
-    	}
-    	
-    	$data['type'] = $_GET['type'] ? h($_GET['type']) : 'weibo';
-    	if ('weibo' === $data['type']) {
-    		$weiboType = $data['weibo_type'] = h($_GET['weibo_type']);
-    		$data['list'] = D('Operate','weibo')->getSpaceList($this->uid, $weiboType);
-    		//微博menu组装
-    		$data['weibo_menu'] = array(
-    				''  => L('all'),
-    				'original' => L('original'),
-    		);
-    		Addons::hook('home_index_weibo_tab', array(&$data['weibo_menu']));
-    		if(!empty($weiboType)) {
-    			$this->assign('typeClass',"on");
-    			$this->assign('view','block');
-    		}else{
-    			$this->assign('typeClass','off');
-    			$this->assign('view','none');
-    		}
-    	}
-    	
-    	//print_r($data);
-    	$this->assign('data',$data);
-    	$this->setTitle($data['user']['uname'] . '的空间');
-    	$mid = $this->mid;
-    	//$userInfo = getUserInfo($mid);
-    	//$this->assign('userInfo', $userInfo);
-    	$this->assign('cssFile', 'pal');    	
-    	$this->display();
-    }
-    
-    public function myinfo()
-    {
-    	$this->_canViewSpace();
-    	
-    	if(isset($_POST['nickname'])) {
-    		$info['uid']      = $this->mid;
-    		$info['nickname'] = $_POST['nickname'];
-    		$info['realname'] = $_POST['realname'];
-    		$info['province'] = $_POST['province'];
-    		$info['city']     = $_POST['city'];
-    		$info['sex']   = $_POST['gender'];
-    		$info['status']   = $_POST['status'];
-    		$info['intro']    = $_POST['intro'];
-    		
-    		M('user')->save($info);
-    		M('user')->save($info);
-    	}
-    	 
-    	$menu['weibo'] = L('weibo');
-    	Addons::hook('home_space_tab', array('uid' => $this->uid, 'menu' => & $menu));
-    	$this->assign('space_menu', $menu);
-    	 
-    	$data['user'] = D('User')->getUserByIdentifier($this->uid);
-    	//判断用户是否存在
-    	if(!$data['user']['uid']){
-    		$this->assign('jumpUrl', $_SERVER['HTTP_REFERER']);
-    		$this->error('用户不存在或已被删除！');
-    	}
-    	 
-    	$data['type'] = $_GET['type'] ? h($_GET['type']) : 'weibo';
-    	if ('weibo' === $data['type']) {
-    		$weiboType = $data['weibo_type'] = h($_GET['weibo_type']);
-    		$data['list'] = D('Operate','weibo')->getSpaceList($this->uid, $weiboType);
-    		//微博menu组装
-    		$data['weibo_menu'] = array(
-    				''  => L('all'),
-    				'original' => L('original'),
-    		);
-    		Addons::hook('home_index_weibo_tab', array(&$data['weibo_menu']));
-    		if(!empty($weiboType)) {
-    			$this->assign('typeClass',"on");
-    			$this->assign('view','block');
-    		}else{
-    			$this->assign('typeClass','off');
-    			$this->assign('view','none');
-    		}
-    	}
-    	
-    	
-    	 
-    	//print_r($data);
-    	$this->assign('data',$data);
-    	$this->display();
-    }
-    
-    public function album()
-    {
-    	$data['user'] = D('User')->getUserByIdentifier($this->uid);
-    	//判断用户是否存在
-    	if(!$data['user']['uid']){
-    		$this->assign('jumpUrl', $_SERVER['HTTP_REFERER']);
-    		$this->error('用户不存在或已被删除！');
-    	}
-    	
-    	$data['type'] = $_GET['type'] ? h($_GET['type']) : 'weibo';
-    	if ('weibo' === $data['type']) {
-    		$weiboType = $data['weibo_type'] = h($_GET['weibo_type']);
-    		$data['list'] = D('Operate','weibo')->getSpaceList($this->uid, $weiboType);
-    		//微博menu组装
-    		$data['weibo_menu'] = array(
-    				''  => L('all'),
-    				'original' => L('original'),
-    		);
-    		Addons::hook('home_index_weibo_tab', array(&$data['weibo_menu']));
-    		if(!empty($weiboType)) {
-    			$this->assign('typeClass',"on");
-    			$this->assign('view','block');
-    		}else{
-    			$this->assign('typeClass','off');
-    			$this->assign('view','none');
-    		}
-    	}
-    	$this->assign('data',$data);
-    	$this->display();
-    }
-    
-    public function albumList()
-    {
-    	$data['user'] = D('User')->getUserByIdentifier($this->uid);
-    	//判断用户是否存在
-    	if(!$data['user']['uid']){
-    		$this->assign('jumpUrl', $_SERVER['HTTP_REFERER']);
-    		$this->error('用户不存在或已被删除！');
-    	}
-    	 
-    	$data['type'] = $_GET['type'] ? h($_GET['type']) : 'weibo';
-    	if ('weibo' === $data['type']) {
-    		$weiboType = $data['weibo_type'] = h($_GET['weibo_type']);
-    		$data['list'] = D('Operate','weibo')->getSpaceList($this->uid, $weiboType);
-    		//微博menu组装
-    		$data['weibo_menu'] = array(
-    				''  => L('all'),
-    				'original' => L('original'),
-    		);
-    		Addons::hook('home_index_weibo_tab', array(&$data['weibo_menu']));
-    		if(!empty($weiboType)) {
-    			$this->assign('typeClass',"on");
-    			$this->assign('view','block');
-    		}else{
-    			$this->assign('typeClass','off');
-    			$this->assign('view','none');
-    		}
-    	}
-    	$this->assign('data',$data);
-    	$this->display('album_list');
-    }
-    
-    public function photo()
-    {
-    	$data['user'] = D('User')->getUserByIdentifier($this->uid);
-    	//判断用户是否存在
-    	if(!$data['user']['uid']){
-    		$this->assign('jumpUrl', $_SERVER['HTTP_REFERER']);
-    		$this->error('用户不存在或已被删除！');
-    	}
-    	
-    	$data['type'] = $_GET['type'] ? h($_GET['type']) : 'weibo';
-    	if ('weibo' === $data['type']) {
-    		$weiboType = $data['weibo_type'] = h($_GET['weibo_type']);
-    		$data['list'] = D('Operate','weibo')->getSpaceList($this->uid, $weiboType);
-    		//微博menu组装
-    		$data['weibo_menu'] = array(
-    				''  => L('all'),
-    				'original' => L('original'),
-    		);
-    		Addons::hook('home_index_weibo_tab', array(&$data['weibo_menu']));
-    		if(!empty($weiboType)) {
-    			$this->assign('typeClass',"on");
-    			$this->assign('view','block');
-    		}else{
-    			$this->assign('typeClass','off');
-    			$this->assign('view','none');
-    		}
-    	}
-    	$this->assign('data',$data);
-    	$this->display();
-    }
-    
-    public function modFace()
-    {
-    	$data['user'] = D('User')->getUserByIdentifier($this->uid);
-    	//判断用户是否存在
-    	if(!$data['user']['uid']){
-    		$this->assign('jumpUrl', $_SERVER['HTTP_REFERER']);
-    		$this->error('用户不存在或已被删除！');
-    	}
-    	
-    	$data['type'] = $_GET['type'] ? h($_GET['type']) : 'weibo';
-    	if ('weibo' === $data['type']) {
-    		$weiboType = $data['weibo_type'] = h($_GET['weibo_type']);
-    		$data['list'] = D('Operate','weibo')->getSpaceList($this->uid, $weiboType);
-    		//微博menu组装
-    		$data['weibo_menu'] = array(
-    				''  => L('all'),
-    				'original' => L('original'),
-    		);
-    		Addons::hook('home_index_weibo_tab', array(&$data['weibo_menu']));
-    		if(!empty($weiboType)) {
-    			$this->assign('typeClass',"on");
-    			$this->assign('view','block');
-    		}else{
-    			$this->assign('typeClass','off');
-    			$this->assign('view','none');
-    		}
-    	}
-    	$this->assign('data',$data);
-    	$this->display('mod_face');
-    }
-    
-    public function bind()
-    {
-    	$data['user'] = D('User')->getUserByIdentifier($this->uid);
-    	//判断用户是否存在
-    	if(!$data['user']['uid']){
-    		$this->assign('jumpUrl', $_SERVER['HTTP_REFERER']);
-    		$this->error('用户不存在或已被删除！');
-    	}
-    	 
-    	$data['type'] = $_GET['type'] ? h($_GET['type']) : 'weibo';
-    	if ('weibo' === $data['type']) {
-    		$weiboType = $data['weibo_type'] = h($_GET['weibo_type']);
-    		$data['list'] = D('Operate','weibo')->getSpaceList($this->uid, $weiboType);
-    		//微博menu组装
-    		$data['weibo_menu'] = array(
-    				''  => L('all'),
-    				'original' => L('original'),
-    		);
-    		Addons::hook('home_index_weibo_tab', array(&$data['weibo_menu']));
-    		if(!empty($weiboType)) {
-    			$this->assign('typeClass',"on");
-    			$this->assign('view','block');
-    		}else{
-    			$this->assign('typeClass','off');
-    			$this->assign('view','none');
-    		}
-    	}
-    	$this->assign('data',$data);
-    	$this->display();
-    }
-    
-    public function address()
-    {
-    	if (isset($_POST['shipping_name'])) {
-    		$shipping['uid']           = $this->mid;
-    		$shipping['shipping_name'] = $_POST['shipping_name'];
-    		$shipping['location']      = $_POST['p_prov'].'-'.$_POST['p_city'];
-    		$shipping['address']       = $_POST['address'];
-    		$shipping['zip']           = $_POST['zip'];
-    		$shipping['phone']         = $_POST['phone'];
-    		$shipping['shipping_time'] = $_POST['time'];
-    		
-    		if($_POST['aid']>0) {
-    			$shipping['id'] = $_POST['aid'];
-    			M('shipping_address')->save($shipping);
-    		}else {
-    			M('shipping_address')->add($shipping);
-    		}
-    		
-    	}
-    	$shipping_address = M('shipping_address')->where(array('uid'=>$this->mid))->find();
-    	$this->assign('shipping_address', $shipping_address);
-    	//print_r($shipping_address);
-    	$data['user'] = D('User')->getUserByIdentifier($this->uid);
-    	//判断用户是否存在
-    	if(!$data['user']['uid']){
-    		$this->assign('jumpUrl', $_SERVER['HTTP_REFERER']);
-    		$this->error('用户不存在或已被删除！');
-    	}
-    	 
-    	$data['type'] = $_GET['type'] ? h($_GET['type']) : 'weibo';
-    	if ('weibo' === $data['type']) {
-    		$weiboType = $data['weibo_type'] = h($_GET['weibo_type']);
-    		$data['list'] = D('Operate','weibo')->getSpaceList($this->uid, $weiboType);
-    		//微博menu组装
-    		$data['weibo_menu'] = array(
-    				''  => L('all'),
-    				'original' => L('original'),
-    		);
-    		Addons::hook('home_index_weibo_tab', array(&$data['weibo_menu']));
-    		if(!empty($weiboType)) {
-    			$this->assign('typeClass',"on");
-    			$this->assign('view','block');
-    		}else{
-    			$this->assign('typeClass','off');
-    			$this->assign('view','none');
-    		}
-    	}
-    	$this->assign('data',$data);
-    	$this->display();
-    }
-
-    private function __assignTabSwitch ($index_type)
-    {
-        //判断当前使用哪一个tab
-        switch ($index_type) {
-            case self::INDEX_TYPE_WEIBO:
-                $this->assign('weibo_tab', 'on');
-                break;
-            case self::INDEX_TYPE_GROUP:
-                $this->assign('group_tab', 'on');
-                break;
-            case self::INDEX_TYPE_ALL:
-                $this->assign('all_tab', 'on');
-                break;
-            default:
-                $this->assign('weibo_tab','on');
-        }
-    }
-
-    //提到我的
-    public function atme() {
-        model ( 'UserCount' )->setZero ( $this->mid, 'atme' );
-        $data ['list'] = D ( 'Operate', 'weibo' )->getAtme ( $this->mid );
-        // 同步的设置
-        $bind = M ( 'login' )->where ( 'uid=' . $this->mid )->findAll ();
-        foreach ( $bind as $v ) {
-            $data ['login_bind'] [$v ['type']] = $v ['is_sync'];
-        }
-
-        $this->assign ( $data );
-        $this->setTitle ( L('at_me_weibo') );
-        $this->assign('cssFile', 'pal');
-        $this->display ( 'index' );
-    }
-
-    //我的收藏
-    function collection() {
-        $data ['list'] = D ( 'Operate', 'weibo' )->getCollection ( $this->mid );
-
-        // 同步的设置
-        $bind = M ( 'login' )->where ( 'uid=' . $this->mid )->findAll ();
-        foreach ( $bind as $v ) {
-            $data ['login_bind'] [$v ['type']] = $v ['is_sync'];
-        }
-
-        $this->assign ( $data );
-        $this->setTitle (L('my_fav'));
-        $this->display ( 'index' );
-    }
-
-    //评论列表
-    function comments() {
-        $data ['type'] = ($_GET ['type'] == 'send') ? 'send' : 'receive';
-        $data ['from_app'] = ($_GET ['from_app'] == 'other') ? 'other' : 'weibo';
-
-        // 优先展示微博，优先展示有未读from_app
-        if (model ( 'UserCount' )->getUnreadCount ( $this->mid, 'comment' ) <= 0 && model ( 'GlobalComment' )->getUnreadCount ( $this->mid ) > 0)
-            $data ['from_app'] = 'other';
-
-        if ($data ['from_app'] == 'weibo') {
-            $data ['type'] == 'receive' && model ( 'UserCount' )->setZero ( $this->mid, 'comment' );
-
-            //$data['person'] = (in_array( $_GET['person'] , array('all','follow','other')) )?$_GET['person']:'all';
-            $data ['person'] = 'all';
-            $data ['list'] = D ( 'Comment', 'weibo' )->getCommentList ( $data ['type'], $data ['person'], $this->mid );
-        } else {
-            $dao = model ( 'GlobalComment' );
-            $data ['type'] == 'receive' && $dao->setUnreadCountToZero ( $this->mid );
-
-            $data ['person'] = 'all';
-            $data ['list'] = $dao->getCommentList ( $data ['type'], $this->mid );
-
-            /*
-             * 缓存评论发表者, 被回复的用户,
-             */
-            $ids = getSubBeKeyArray ( $data ['list'] ['data'], 'appuid,uid,to_uid' );
-            D ( 'User', 'home' )->setUserObjectCache ( array_unique ( array_merge ( $ids ['appuid'], $ids ['uid'], $ids ['to_uid'] ) ) );
-
-            foreach ( $data ['list'] ['data'] as $k => $v )
-                $data ['list'] ['data'] [$k] ['data'] = unserialize ( $v ['data'] );
-        }
-
-        $this->assign ( 'userCount', X ( 'Notify' )->getCount ( $this->mid ) );
-
-        $this->assign ( $data );
-        $this->setTitle ( $data ['type'] == 'receive' ? L('receive_comment') : L('send_comment') );
-        $this->display ();
-    }
-
-    private function __getSearchKey() {
-        $key = '';
-        // 为使搜索条件在分页时也有效，将搜索条件记录到SESSION中
-        if (isset ( $_REQUEST ['k'] ) && ! empty ( $_REQUEST ['k'] )) {
-            if ($_GET ['k']) {
-                $key = html_entity_decode ( urldecode ( $_GET ['k'] ), ENT_QUOTES );
-            } elseif ($_POST ['k']) {
-                $key = $_POST ['k'];
-            }
-            // 关键字不能超过200个字符
-            if (mb_strlen ( $key, 'UTF8' ) > 200)
-                $key = mb_substr ( $key, 0, 200, 'UTF8' );
-            $_SESSION ['home_user_search_key'] = serialize ( $key );
-
-        } else if (is_numeric ( $_GET [C ( 'VAR_PAGE' )] )) {
-            $key = unserialize ( $_SESSION ['home_user_search_key'] );
-
-        } else {
-            //unset($_SESSION['home_user_search_key']);
-        }
-		$key = str_replace(array('%','\'','"','<','>'),'',$key);
-        return trim ( $key );
-    }
-
-    private function __checkSearchPopedom() {   
-        //游客搜索限制
-        if ($this->mid <= 0 && intval ( model ( 'Xdata' )->get ( 'siteopt:site_anonymous_search' ) ) <= 0)
-            redirect ( U ( 'home/User/index' ) );
-
-        //搜索间隔限制,不能频繁使用不相同的关键词去搜索
-        $lock_key = 'search_lock_'.ACTION_NAME.'_'.t($_GET['type']);
-        $max_search_time = intval($GLOBALS['ts']['site']['max_search_time']);
-        if($max_search_time >0 && isset($_SESSION[$lock_key]) && ($_SESSION[$lock_key]+$max_search_time) > time() && intval($_GET['p'])<=1){
-            send_http_header('utf8');
-            $this->error('不要频繁搜索,请'.$max_search_time.'秒后再试!');
-        }else{
-            $_SESSION[$lock_key] = time();
-        }
-    }
-
-    // 专题页
-    public function topics()
-    {
-        //$this->__checkSearchPopedom ();
-        $data['search_key'] = $this->__getSearchKey ();
-        Session::pause();
-        // 专题信息
-        if (false == $data['topics'] = D('Topics', 'weibo')->getTopics($data['search_key'], $_GET['id'], $_GET['domain'], 1)) {
-            if (null == $data['search_key']) {
-                $this->error(L('special_not_exist'));
-            }
-            $data['topics']['name'] = t($data['search_key']);
-        }
-
-        $data['search_key'] = $data['search_key'] ? $data['search_key'] : html_entity_decode($data['topics']['name'], ENT_QUOTES);
-        $data['search_key_id'] = $data['topics']['topic_id'] ? $data['topics']['topic_id'] : D('Topic', 'weibo')->getTopicId($data['search_key']);
-
-        $data['followState'] = D ('Follow', 'weibo')->getTopicState ($this->mid, $data['search_key']);
-        // 其他关注该话题的人
-        $data['other_following'] = D('Follow', 'weibo')->field('uid')
-                                    ->where("uid<>{$this->mid} AND fid={$data['search_key_id']} AND type=1")
-                                    ->limit(9)->findAll();
-        // 微博列表
-        $data['type'] = h ( $_GET ['type'] );
-        $data['list'] = D ( 'Operate', 'weibo' )->doSearchWithTopic ( "#{$data['topics']['name']}#", $data ['type']);
-//      $data['list'] = D ( 'Operate', 'weibo' )->doSearch ( "#{$data['topics']['name']}#", $data ['type'] );
-//      $data['list']['count'] = D ( 'Operate', 'weibo' )->where("content LIKE '%#{$data['topics']['name']}#%' AND isdel=0")->count();
-        // 微博Tab
-
-        $data['weibo_menu'] = array(
-                                ''  => L('all'),
-                                'original' => L('original'),
-                              );
-        Addons::hook('home_index_weibo_tab', array(&$data['weibo_menu']));
-
-        $this->setTitle ( L('special').$data ['search_key']);
-        $data['search_key'] = h(t($data['search_key']));
-        $this->assign ( $data );
-        $this->display();
-    }
-
-    // 查找话题
-    public function search() {
-
-        $this->__checkSearchPopedom ();
-        $data ['search_key'] = $this->__getSearchKey ();
-        Session::pause();
-        $data ['followState'] = D ( 'Follow', 'weibo' )->getTopicState ( $this->mid, $data ['search_key'] );
-        $data ['type'] = t ( $_REQUEST ['type'] );
-        $data ['list'] = D ( 'Operate', 'weibo' )->doSearch ( $data ['search_key'], $data ['type'] );
-        $data ['followTopic'] = D ( 'Follow', 'weibo' )->getTopicList ( $this->mid );
-        $data ['search_key_id'] = D ( 'Topic', 'weibo' )->getTopicId ( $data ['search_key'] );
-        $data ['search_key'] = h ( t ( $data ['search_key'] ) );
-        // 微博Tab
-        $data['weibo_menu'] = array(
-                                        ''  => L('all'),
-                                'original' => L('original'),
-                              );
-        Addons::hook('home_index_weibo_tab', array(&$data['weibo_menu']));
-        $data['weibo_menu'] = array(''  => L('all'), 'location' => L('local'), 'follow' => L('attention')) + $data['weibo_menu'];
-        Addons::hook('home_search_weibo_tab', array(&$data['weibo_menu']));
-
-        $this->assign ( $data );
-        $this->setTitle ( L('search_weibo').$data['search_key'] );
-        $this->display ();
-    }
-
-    //查找用户
-    public function searchuser() {
-        $this->__checkSearchPopedom ();
-        $data ['search_key'] = $this->__getSearchKey ();
-        Session::pause();
-        $data ['list'] = D ( 'Follow', 'weibo' )->doSearchUser ( $data ['search_key'] );
-        $data ['followTopic'] = D ( 'Follow', 'weibo' )->getTopicList ( $this->mid );
-        $data ['search_key'] = h ( t ( $data ['search_key'] ) );
-        $this->assign ( $data );
-        $this->setTitle ( L('search_people').$data['search_key'] );
-        $this->display ();
-    }
-
-    //查找我关注的
-    public function searchTips()
-    {
-        if ($this->mid <= 0)
-            redirect ( U ( 'home/User/index' ) );
-
-        $key = str_replace('_', '\_', h ( $_GET ['key'] ));
-        $db_prefix  =  C('DB_PREFIX');
-         Session::pause();
-        //$list = M ( 'user' )->field('uname')->where ( "uname LIKE '%{$key}%'" )->order ( "LOCATE('{$key}', uname) ASC" )->limit ( 10 )->findAll();
-        $list = M('')->field('u.*')->field('u.uname')
-                     ->table("{$db_prefix}weibo_follow AS f LEFT JOIN {$db_prefix}user AS u ON f.uid={$this->mid} AND f.fid=u.uid")
-                     ->where("u.uname LIKE '%{$key}%'")
-                     ->order ( "LOCATE('{$key}', u.uname) ASC" )
-                     ->limit ( 10 )->findAll();
-        if ($list) {
-            exit ( json_encode ( $list ) );
-        } else {
-            echo '';
-        }
-    }
-
-    //查找Tag
-    public function searchtag() {
-        $this->__checkSearchPopedom ();
-        $data ['search_key'] = $this->__getSearchKey ();
-         Session::pause();
-        $data ['list'] = D ( 'UserTag' )->doSearchTag ( $data ['search_key'] );
-        $data ['followTopic'] = D ( 'Follow', 'weibo' )->getTopicList ( $this->mid );
-        $data ['search_key'] = h ( t ( $data ['search_key'] ) );
-        $this->assign ( $data );
-        $this->setTitle ( L('search_tag').$data ['search_key']);
-        $this->display ();
-    }
-
-	//找人 -  2011-11-28 优化 解决推荐用户中还有已关注用户问题
-    function findfriend() {
-        Session::pause();
-        $type_array = array ('followers', 'hot', 'understanding', 'newjoin' );
-        $data ['type'] = in_array ( $_GET ['type'], $type_array ) ? $_GET ['type'] : 'newjoin';
-        $user_model = D ( 'User', 'home' );
-
-        $db_prefix = C ( 'DB_PREFIX' );
-        switch ($data ['type']) {
-            case 'followers' :
-                $data ['list'] = M ("weibo_follow")->where("fid!=$this->mid AND fid not in ( select fid from ".C('DB_PREFIX')."weibo_follow where uid=$this->mid) ")
-											->field('fid as uid,count(uid) as count')
-											->group("fid")
-											->order('`count` DESC')
-											->limit(10)
-											->findAll();
-                //$data ['list'] = D ( 'Follow', 'weibo' )->getTopFollowerUser ();
-
-                $uids = getSubByKey ( $data ['list'], 'uid' );
-
-                $user_model = D ( 'User', 'home' );
-                $user_count_model = model ( 'UserCount' );
-                $user_model->setUserObjectCache ( $uids );
-                $user_count_model->setUserFollowerCount ( $uids );
-                foreach ( $data ['list'] as $key => $value ) {
-                    $data ['list'] [$key] = $user_model->getUserByIdentifier ( $value ['uid'] );
-                    $data ['list'] [$key] ['follower'] = $user_count_model->getUserFollowerCount ( $value ['uid'] );
-                }
-                break;
-
-            case 'hot' :
-
-				$data ['list'] = M ("weibo")->where("a.uid!=$this->mid AND a.uid not in ( select fid from ".C('DB_PREFIX')."weibo_follow as b where b.uid=$this->mid) ")
-											->field('a.uid,count(a.weibo_id) as weibo_num')
-											->table(C('DB_PREFIX').'weibo as a')
-											->group("uid")
-											->order('weibo_num DESC')
-											->limit(10)
-											->findAll();
-
-				//$data ['list'] = M ("weibo")->query ( "SELECT uid,count(weibo_id) as weibo_num FROM {$db_prefix}weibo GROUP BY uid ORDER by weibo_num DESC LIMIT 10" );
-
-				$uids = getSubByKey ( $data ['list'], 'uid' );
-
-                $user_model = D ( 'User', 'home' );
-                $user_count_model = model ( 'UserCount' );
-                $user_model->setUserObjectCache ( $uids );
-                $user_count_model->setUserFollowerCount ( $uids );
-                foreach ( $data ['list'] as $key => $value ) {
-                    $data ['list'] [$key] = $user_model->getUserByIdentifier ( $value ['uid'] );
-                    $data ['list'] [$key] ['follower'] = $user_count_model->getUserFollowerCount ( $value ['uid'] );
-                    $data ['list'] [$key] ['weibo_num'] = $value ['weibo_num'];
-                }
-                break;
-
-            case 'understanding' :
-                $data ['list'] = model ( 'Friend' )->getRelatedUser ( $this->mid, $max = 10 );
-                $uids = getSubByKey ( $data ['list'], 'uid' );
-
-                $user_model = D ( 'User', 'home' );
-                $user_count_model = model ( 'UserCount' );
-                $user_model->setUserObjectCache ( $uids );
-                $user_count_model->setUserFollowerCount ( $uids );
-                foreach ( $data ['list'] as $key => $value ) {
-                    $data ['list'] [$key] = $user_model->getUserByIdentifier ( $value ['uid'] );
-                    $data ['list'] [$key] ['follower'] = $user_count_model->getUserFollowerCount ( $value ['uid'] );
-                }
-                break;
-
-            case 'newjoin' :
-                $data ['list'] = M ("user")->where("a.is_active=1 AND a.is_init=1 AND a.uid!={$this->mid} AND a.uid not in (SELECT fid FROM ".C('DB_PREFIX')."weibo_follow as b WHERE b.uid={$this->mid}) ")
-											->field('a.uid,a.uname,a.domain,a.location,a.ctime')
-											->table(C('DB_PREFIX').'user as a')
-											->order('a.uid DESC')
-											->limit(10)
-											->findAll();
-
-                D ( 'User', 'home' )->setUserObjectCache ( $data ['list'] );
-                $dao = model ( 'UserCount' );
-                $dao->setUserFollowerCount ( getSubByKey ( $data ['list'], 'uid' ) );
-                foreach ( $data ['list'] as $key => $value )
-                    $data ['list'] [$key] ['follower'] = $dao->getUserFollowerCount ( $value ['uid'] );
-                break;
-        }
-
-        // 粉丝榜
-        $data ['topfollow'] = D ( 'Follow', 'weibo' )->getTopFollowerUser ();
-        D ( 'User', 'home' )->setUserObjectCache ( getSubByKey ( $data ['topfollow'], 'uid' ) );
-
-        $this->assign ( $data );
-        $this->setTitle ( L('find_people') );
-        $this->display ();
-    }
-
-    //表情
-    function emotions() {
-         Session::pause();
-        exit ( json_encode ( model ( 'Expression' )->getAllExpression () ) );
-    }
-
-    //获取统计数据
-    function countNew() {
-         Session::pause();
-        exit ( json_encode ( X ( 'Notify' )->getCount ( $this->mid ) ) );
-    }
-
-    // 删除动态
-    public function doDeleteMini() {
-        echo X ( 'Feed' )->deleteOneFeed ( $this->mid, intval ( $_POST ['id'] ) ) ? '1' : '0';
-    }
-
-    public function closeAnnouncement() {
-        $announcement_ctime = model ( 'Xdata' )->getField ( 'mtime', '`list`="announcement"' );
-        $announcement_ctime = strtotime ( $announcement_ctime );
-        cookie ( "announcement_closed_{$this->mid}", $announcement_ctime );
-    }
-
-    private function __getLoginBind()
-    {
-        $bind = M ( 'login' )->where ( 'uid=' . $this->mid )->findAll ();
-        $result = array();
-        foreach ( $bind as $v ) {
-            $result[$v ['type']] = $v ['is_sync'];
-        }
-        return $result;
-    }
-
-    private function __getDynamic($type)
-    {
-        $data['list'] = X ( 'Feed' )->get ( $this->mid );
-        return $data;
-    }
-
-    private function __setAnnouncement ()
-    {
-        // 公告
-        if (($announcement = F ( '_home_user_action_announcement' )) === false) {
-            $announcement = model ( 'Xdata' )->where ( '`list`="announcement"' )->findAll ();
-            foreach ( $announcement as $v ) {
-                $announcement [$v ['key']] = unserialize ( $v ['value'] );
-            }
-            $announcement ['ctime'] = strtotime ( $announcement ['0'] ['mtime'] );
-
-            F ( '_home_user_action_announcement', $announcement );
-        }
-
-        if (cookie ( "announcement_closed_{$this->mid}" ) != $announcement ['ctime'])
-            $this->assign ( 'announcement', $announcement );
-    }
-
-
-
-    private function __getWeiboList($install_app,$index_type,$weibo_type)
-    {
-        global $ts;
-        
-        // 关注的分组列表
-        $myFollowData = $this->__paramUserFollowGroup($index_type);
-        $data  = $myFollowData;
-        
-        $data['indexType']   = $index_type;
-        $temp = $ts['my_group_list'];
-        $group_list = array();
-        foreach($temp as $value){
-            if($value['openWeibo']){
-                $group_list[] = $value;
-            }
-        }
-        $data['group_list']  = $group_list;
-
-        $data['gid']         = intval($_GET['gid']);
-
-        $data['hasGroupWeibo']  = $this->__hasGroupWeibo($group_list);
-
-        if($index_type == self::INDEX_TYPE_WEIBO){
-            $data['weibo_menu'] = array(
-                    ''  => L('all'),
-                    'original' => L('original'),
-            );
-            Addons::hook('home_index_weibo_tab', array(&$data['weibo_menu']));
-        }
-
-        switch ($index_type) {
-            case self::INDEX_TYPE_WEIBO:
-                $data ['list'] = D('Operate', 'weibo')->getHomeList ( $this->mid, $weibo_type, '', '', $data ['follow_gid'] );
-                break;
-            case self::INDEX_TYPE_GROUP:
-                $data ['list'] = D('WeiboOperate','group')->getHomeList($this->mid, $data['gid'], '', '');
-                break;
-            case self::INDEX_TYPE_ALL:
-                $order = 'weibo_id DESC';
-                $data['list']  = D('Operate','weibo')->doSearchTopic("",$order,$this->mid);
-                break;
-            default:
-                $data ['list'] = D('Operate', 'weibo')->getHomeList ( $this->mid, $weibo_type, '', '', $data ['follow_gid'] );
-        }
-
-		if($data['list']['data']){
-			// 最新一条微博的Id (countNew时使用)
-			$_last_weibo = reset($data ['list'] ['data']);
-			$data ['lastId'] = $_last_weibo['weibo_id'];
-			$_since_weibo = end($data ['list'] ['data']);
-			$data['sinceId'] = $_since_weibo['weibo_id'];
+	public function setinfo()
+	{
+		$this->display('GetPwd_First');
+	}
+	public function sendemail()
+	{
+		if ((md5(strtoupper($_POST['verifyStr'])) != $_SESSION['verify'])&&$_SESSION['is_PortMail']!=1){
+			if($_POST['sendact']!='resend'){
+				redirect(U('index/User/setinfo'));
+			}
 		}
-        return $data;
-    }
+		if($_GET['sendact']=='resend'){$_POST['email']=$_SESSION['is_PortMailname'];}
+		$_SESSION['is_PortMail']=1;
+		$_SESSION['is_PortMailname']=$_POST['email'];
+		$codeurl=md5("aijianmei".$_POST['email']);
+		$toemail=$_POST['email'];
+		$check_sql="select * from ai_returncode_log where codeurl='".$codeurl."' and uname='".$_POST['email']."' and out_time>".time();
+		$checkArr=M('')->query($check_sql);		
+		if(!$checkArr[0]['id']){
+			$_baseUrl=SITE_URL."/index.php?app=index&mod=User&act=getmailcode&uname=".$_POST['email']."&acitve=";
+			$_baseUrl.=$codeurl;
+			$out_time=time()+3600;
+			$out_time_str=date("Y-m-d H:i:s",$out_time);
+			$insertSql="INSERT INTO ai_returncode_log (codeurl,uname,out_time,create_time)VALUES ('".$codeurl."','".$_POST['email']."','".$out_time."','".time()."')";
+			M('')->query($insertSql);
+			$service = service('Mail');
+			$subject = '重置密码邮件|爱健美网';
+			$content = '
+			亲爱的用户：您好！</br>
+					您收到这封这封电子邮件是因为您申请了一个新的密码。假如这不是您本人所申请, 请不用理会这封电子邮件, 但是如果您持续收到这类的信件骚扰, 请您尽快联络管理员。
+					要使用新的密码, 请使用以下链接启用密码。</br>
+					<a href="'.$_baseUrl.'">'.$_baseUrl.'</a>
+					(如果无法点击该URL链接地址，请将它复制并粘帖到浏览器的地址输入框，然后单击回车即可。该链接使用后将立即失效。)</br>
+					注意:请您在收到邮件1个小时内('.$out_time_str.'前)使用，否则该链接将会失效。</br>
+					爱健美网 '.SITE_URL;
+			@$info = $service->send_email($toemail, $subject, $content);
+		}
+		else{
+			$out_time=$checkArr[0]['out_time'];
+			$out_time_str=date("Y-m-d H:i:s",$out_time);
+			$_baseUrl=SITE_URL."/index.php?app=index&mod=User&act=getmailcode&uname=".$_POST['email']."&acitve=";
+			$_baseUrl.=$codeurl;
+			$service = service('Mail');
+			$subject = '重置密码邮件|爱健美网';
+			$content = '
+					亲爱的用户：您好！</br>
+					您收到这封这封电子邮件是因为您申请了一个新的密码。假如这不是您本人所申请, 请不用理会这封电子邮件, 但是如果您持续收到这类的信件骚扰, 请您尽快联络管理员。
+					要使用新的密码, 请使用以下链接启用密码。</br>
+					<a href="'.$_baseUrl.'">'.$_baseUrl.'</a>
+					(如果无法点击该URL链接地址，请将它复制并粘帖到浏览器的地址输入框，然后单击回车即可。该链接使用后将立即失效。)</br>
+					注意:请您在收到邮件1个小时内('.$out_time_str.'前)使用，否则该链接将会失效。</br>
+					爱健美网 '.SITE_URL;
+			@$info = $service->send_email($toemail, $subject, $content);
+		}
+        if($_POST['sendact']=='resend'){
+			echo json_encode($info);
+			exit;
+		}
+		$this->assign('is_send', $info);
+		$this->assign('email', addslashes($_POST['email']));
+		$this->display('GetPwd_Second');
+	}
+	
+	public function getmailcode()
+	{
+		$is_passver=0;
+		if(md5("aijianmei".$_GET['uname'])==$_GET['acitve']){
+			$getLogSql="select * from ai_returncode_log where uname='".addslashes($_GET['uname'])."' and out_time>".time();
+			$getLogInfo=M('')->query($getLogSql);
+			if($getLogInfo[0]['id']>0){
+				$is_passver=1;
+				$_SESSION['psonkey']=md5($_GET['uname']);
+			}
+		}
+		if($is_passver!=1){redirect(U('index/User/setinfo'));}
+		$this->assign('email',$_GET['uname']);
+		$this->display('GetPwd_Third');
+	}
+	
+	public function updateUinfo()
+	{	
+		if($_SESSION['psonkey']==md5($_POST['email'])){
+			$sql="UPDATE  `aijianmei`.`ai_user` SET  `password` = '".md5($_POST['password'])."' WHERE  `ai_user`.`email` ='".$_POST['email']."'";
+			M('')->query($sql);
+			$shopupsql="UPDATE ecs_users SET  password = '".md5($_POST['password'])."' WHERE  email ='".$_POST['email']."'";
+			M('')->query($shopupsql);
+			$dsql="DELETE FROM `aijianmei`.`ai_returncode_log` WHERE `ai_returncode_log`.`uname` = '".$_POST['email']."'";
+			M('')->query($dsql);
+			$uidsql="select * from ai_user where email ='".$_POST['email']."'";
+			$uid=M('')->query($uidsql);
+			S('S_userInfo_'. $uid[0]['uid'],null);
+			unset($_SESSION['psonkey']);
+		}else{
+			redirect(U('index/User/setinfo'));
+		}
+		//print_r($_SESSION['psonkey']);
+		$this->display('GetPwd_Fourth');
+	}
+	public function register(){
+		if($_SESSION['regrefer_url']==''&& $_SERVER["REQUEST_URI"]='/index.php?app=index&mod=User&act=register'){
+			$_SESSION['regrefer_url'] = $_SERVER["HTTP_REFERER"];
+		}
+		$this->display('register_1');
+	}
+	public function doregister()
+	{
+		//$_SESSION['allowbackreg']=$_SESSION['allowbackmid']=null;
+		if($_SESSION['sinalogin']==1){$_SESSION['deslogin']=1;}
+		$userEmail=addslashes($_POST['email']);
+		$password=addslashes($_POST['password']);
+		$repassword=addslashes($_POST['repassword']);
+		$checksql="select * from ai_user where email='".$userEmail."'";
+		$check=M('')->query($checksql);
+		if(!$check&&($password==$repassword)){
+			//第三方注册 start
+			if($_SESSION['mid']>0&&$_SESSION['sinalogin']==1){
+				$upsql=$mid=null;
+				$mid=intval($_SESSION['mid']);
+				$upsql="UPDATE ai_user SET email = '".$userEmail."',password='".md5($password)."' WHERE uid =$mid";
+				M('')->query($upsql);
+				$getSimgSql="select * from ai_others where uid='".$_SESSION['mid']."'";
+				$ImgArr=M('')->query($getSimgSql);
+				$this->assign('imgurl',$ImgArr[0]['profileImageUrl']);
+				$_SESSION['otherlogin']=1;
+				$getuidname="select * from ai_user where uid='".$mid."'";
+				$getuidinfo=M('')->query($getuidname);
+				
+				include_once('shopApi.php');
+				$sdata=null;
+				$sdata['uname']=addslashes($getuidinfo[0]['uname']);
+				$sdata['password']=addslashes($password);
+				$sdata['email']   =addslashes($userEmail);
+				_postCurlRegister($sdata);	
+			}
+			else
+			{
+				$_SESSION['deslogin']=1;
+				$_SESSION['locallogin']=1;
+				$insertSql="INSERT INTO ai_user (email,password,ctime,is_active,is_init,identity)VALUES ('".$userEmail."','".md5($password)."','".time()."','1','1','1')";
+				M('')->query($insertSql);
+				$getuidsql="select uid from ai_user where email='".$userEmail."' and password='".md5($password)."'";
+				$uidinfo=M('')->query($getuidsql);
+				$mid=$uidinfo[0]['uid'];
+				$_SESSION['locallogin_password']=$password;
+				//service('Passport')->login($uidinfo[0]['uid']);
+			}
+			$_SESSION['allowbackreg']=1;
+			$_SESSION['allowbackmid']=$mid;
+			$_SESSION['loginIcpkey']=md5('aijianmei'.$mid);
+		}
+		$this->display('register_2');
+	}
+	
+	public function setchannelinfo(){
+		if($_SESSION['loginIcpkey']!=md5('aijianmei'.$_SESSION['allowbackmid'])){
+			$_SESSION=null;
+			redirect(U('index/index/index'));
+		}
+		if($_SESSION['allowbackreg']==1){
+			$mid=$_SESSION['allowbackmid'];
+			if($mid>0&&addslashes($_GET['psd'])=='sub'){
+				$keyTmp=array();
+				foreach($_POST['sk'] as $k=>$v){
+					if(!in_array($v,$keyTmp)){
+						$keyTmp[]=$v;
+					}	
+				}
+				$checksql="select * from ai_user_keywords where uid='".$mid."'";
+				$checkinfo=M('')->query($checksql);
+				if(!$checkinfo){
+					$insertSql="insert into ai_user_keywords (uid,keyword)values('".$mid."','".serialize($keyTmp)."')";
+					M('')->query($insertSql);
+				}
+				if($_SESSION['otherlogin']==1){
+					service('Passport')->loginLocal($mid);
+					redirect(U('index/user/edituserinfo'));
+					// if($_SESSION['refer_url']!=''){
+						// redirect($_SESSION['refer_url']);
+					// }else{
+						// redirect(U('index/index/index'));
+					// }
+				}else{
+					redirect(U('index/user/fishuserinfo'));
+				}
+			}
+		}
+		$this->display('register_3');
+	}
+	
+	public function fishuserinfo(){
+		//注册流程权值判断
+		if($_SESSION['loginIcpkey']!=md5('aijianmei'.$_SESSION['allowbackmid'])){
+			$_SESSION=null;
+			redirect(U('index/index/index'));
+		}
+		$username=$description=$domain=$userArea=$usercity=null;
+		$imgurl=null;
+		if($_SESSION['locallogin']==1){
+			$mid=$_SESSION['allowbackmid'];
+			$getUserNameSql="select * from ai_user where uid='".$mid."'";
+			$UserNameInfo=M('')->query($getUserNameSql);
+			$username=$UserNameInfo[0]['uname'];
+			$usersex=$UserNameInfo[0]['sex'];
+			$userinfo['province']=$UserNameInfo[0]['province'];
+			$userinfo['city']=$UserNameInfo[0]['city'];
+			$getUserKeywordSql="select * from ai_user_keywords where uid='".$mid."'";
+			$getUserKeyword=M('')->query($getUserKeywordSql);
+			$getUserKeyword=unserialize($getUserKeyword[0]['keyword']);
+			
+			$otherinfoSql="select * from ai_others where uid='".$mid."'";
+			$otherinfo=M('')->query($otherinfoSql);
+			$description=$otherinfo[0]['description'];
+			$domain=$otherinfo[0]['domain'];
+			$cemail=$otherinfo[0]['cemail'];
+			$ctell=$otherinfo[0]['ctell'];
+			
+			if(!empty($UserNameInfo[0]['qqopenid'])){
+				$user_type='3';
+				$qqimg=$otherinfo[0]['profileImageUrl'];
+				$this->assign('qqimg',$qqimg);
+			}elseif(!empty($otherinfo[0]['profileImageUrl'])){
+				$user_type='2';
+				$sinaimg=$otherinfo[0]['profileImageUrl'];
+				$this->assign('sinaimg',$sinaimg);
+			}else{
 
+				$user_type='1';
+			}
+			$this->assign('user_type',$user_type);
+			$filename='data/uploads/avatar/'.$mid.'/middle.png';
+			$this->assign('localimg',$filename);
+			if(is_file($filename)&&$UserNameInfo[0]['upic_type']==1){$imgurl=$filename;}else{
+				$imgurl=$otherinfo[0]['profileImageUrl'];
+			}
+			
+			$this->assign('user_type',1);
+			//$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
+			$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
+			$this->assign('localimg',$filename);
+			if(is_file($filename)) $imgurl=$filename;
+			$this->assign('UserKeyword',$getUserKeyword);
+		}elseif($_SESSION['otherlogin']==1){
+			$mid=$_SESSION['allowbackmid'];
+			$getUserNameSql="select * from ai_user where uid='".$mid."'";
+			$UserNameInfo=M('')->query($getUserNameSql);
+			$username=$UserNameInfo[0]['uname'];
+			$usersex=$UserNameInfo[0]['sex'];
+			$userinfo['province']=$UserNameInfo[0]['province'];
+			$userinfo['city']=$UserNameInfo[0]['city'];
+			$getSimgSql="select * from ai_others where uid='".$mid."'";
+			$ImgArr=M('')->query($getSimgSql);
+			$imgurl=$ImgArr[0]['profileImageUrl'];
+			$description=$ImgArr[0]['description'];
+			$domain=$ImgArr[0]['domain'];
+			$cemail=$otherinfo[0]['cemail'];
+			$ctell=$otherinfo[0]['ctell'];
+			$locationInfo=$ImgArr[0]['location'];
+			$userLocationInfo=explode(' ',$locationInfo);
+			$userArea=$userLocationInfo[0];
+			$usercity=$userLocationInfo[1];
+		}
+		
+		//地区选择
+		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
+        foreach($area as $a) {
+            $child[$a['area_id']] = M('area')->where(array('pid'=>$a['area_id']))->order('`area_id` ASC')->findAll();	
+        }
+        $this->assign('children', $child);
+        $this->assign('area', $area);
+		//}}
+		$this->assign('ctell',$ctell);
+		$this->assign('cemail',$cemail);
+		$this->assign('usersex',$usersex);
+		$this->assign('userinfo',$userinfo);
+		$this->assign('userArea',$userArea);
+		$this->assign('usercity',$usercity);
+		$this->assign('domain',$domain);
+		$this->assign('description',$description);
+		$this->assign('imgurl',$imgurl);
+		$this->assign('username',$username);
+		$this->assign('cssFile','datum');
+		$this->display('datum');
+	}
+	public function edituserinfo(){
+		if(!$_SESSION['mid']){
+			if($_SESSION['loginIcpkey']!=md5('aijianmei'.$_SESSION['allowbackmid'])){
+				$_SESSION=null;
+				redirect(U('index/index/index'));
+			}
+			$mid=$_SESSION['allowbackmid'];
+		}else{
+			$mid=$_SESSION['mid'];
+		}
+		//地区选择
+		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
+        foreach($area as $a) {
+            $child[$a['area_id']] = M('area')->where(array('pid'=>$a['area_id']))->order('`area_id` ASC')->findAll();	
+        }
+		//$areaAll = M('area')->order('`area_id` ASC')->findAll();
+        $this->assign('children', $child);
+        $this->assign('area', $area);
+		//}}
+		
+		
+		$username=$description=$domain=$userArea=$usercity=null;
+		$imgurl=null;
+		if($mid>0){
+			//$mid=$_SESSION['allowbackmid'];
+			$getUserNameSql="select * from ai_user where uid='".$mid."'";
+			$UserNameInfo=M('')->query($getUserNameSql);
+			$username=$UserNameInfo[0]['uname'];
+			$usersex=$UserNameInfo[0]['sex'];
+			$upic_type=$UserNameInfo[0]['upic_type'];
+			if($UserNameInfo[0]['location']!=''&&$UserNameInfo[0]['province']==0&&$UserNameInfo[0]['city']==0){
+				$locationArr=$UserNameInfo[0]['location'];
+				$locationInfo=explode(' ',$UserNameInfo[0]['location']);
+				
+				$sql="select * from ai_area where title like '%".$locationInfo[0]."%'";
+				$provinceinfo=M('')->query($sql);
+				$UserNameInfo[0]['province']=$provinceinfo[0]['area_id'];				
+				
+				$sql="select * from ai_area where title like '%".$locationInfo[1]."%'";
+				$cityinfo=M('')->query($sql);
+				$UserNameInfo[0]['city']=$cityinfo[0]['area_id'];
+			}
+			
+			$userinfo['province']=$UserNameInfo[0]['province'];
+			$userinfo['city']=$UserNameInfo[0]['city'];
 
-    private function __paramUserFollowGroup($type){
-        $data ['follow_gid'] = is_numeric ( $_GET ['follow_gid'] ) ? $_GET ['follow_gid'] : 'all';
-        $group_list = D ( 'FollowGroup', 'weibo' )->getGroupList ( $this->uid );
-        //兼容旧风格包的逻辑生成两个数组
-        $split_result = $this->__splitFollowGroup($group_list, $data['follow_gid']);
-        $data['group_list_1'] = $split_result['group_list_1'];
-        $data['group_list_2'] = $split_result['group_list_2'];
+			$getUserKeywordSql="select * from ai_user_keywords where uid='".$mid."'";
+			$getUserKeyword=M('')->query($getUserKeywordSql);
+			$getUserKeyword=unserialize($getUserKeyword[0]['keyword']);
 
-        $firstGroup =  array('follow_group_id'=>'all','title'=>L('following_my'));
-        if($data['follow_gid'] == 'all'){
-            $data['group_now']    = $firstGroup;
+			$otherinfoSql="select * from ai_others where uid='".$mid."'";
+			$otherinfo=M('')->query($otherinfoSql);
+			$description=$otherinfo[0]['description'];
+			$domain=$otherinfo[0]['domain'];
+			$cemail=$otherinfo[0]['cemail'];
+			$ctell=$otherinfo[0]['ctell'];
+			if(!empty($UserNameInfo[0]['qqopenid'])){
+				$user_type='3';
+				$qqimg=$otherinfo[0]['profileImageUrl'];
+				$this->assign('qqimg',$qqimg);
+			}elseif(!empty($otherinfo[0]['profileImageUrl'])){
+				$user_type='2';
+				$sinaimg=$otherinfo[0]['profileImageUrl'];
+				$this->assign('sinaimg',$sinaimg);
+			}else{
+
+				$user_type='1';
+			}
+			$this->assign('user_type',$user_type);
+			$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
+			$this->assign('localimg',$filename);
+			if(is_file($filename)&&$UserNameInfo[0]['upic_type']==1){$imgurl=$filename;}else{
+				$imgurl=$otherinfo[0]['profileImageUrl'];
+			}
+			
+			$healthinfoSql="select * from ai_user_health_info where uid='".$mid."'";
+			$healthinfo=M('')->query($healthinfoSql);
+			
+			$this->assign('healthinfo',$healthinfo[0]);
+			
+			$this->assign('UserKeyword',$getUserKeyword);
+		}
+		
+
+		$this->assign('upic_type',$upic_type);
+		$this->assign('ctell',$ctell);
+		$this->assign('cemail',$cemail);
+		$this->assign('usersex',$usersex);
+		$this->assign('userinfo',$userinfo);
+		$this->assign('userArea',$userArea);
+		$this->assign('usercity',$usercity);
+		$this->assign('domain',$domain);
+		$this->assign('description',$description);
+		$this->assign('imgurl',$imgurl);
+		$this->assign('username',$username);
+		$this->assign('cssFile','datum');
+		$this->display('edit_userinfo');
+	}
+	public function saveuserinfo(){
+		//print_r($_POST);
+		//注册流程权值判断
+		if(!$_SESSION['mid']){
+			if($_SESSION['loginIcpkey']!=md5('aijianmei'.$_SESSION['allowbackmid'])){
+				$_SESSION=null;
+				redirect(U('index/index/index'));
+			}
+			$mid=$_SESSION['allowbackmid'];
+		}else{
+			$mid=$_SESSION['mid'];
+		}
+		$username=$_POST['username'];
+		if($mid>0&&$username!=''&&$_GET['args']=='uinfo'){
+			if($_SESSION['otherlogin']==1||$_SESSION['locallogin']==1){
+			$upsql=null;
+			//$upsql="UPDATE ai_user SET uname = '".$username."',sex='".$_POST['sex']."',province='".$_POST['province']."',city='".$_POST['city']."' WHERE uid =$mid";
+			$upsql="UPDATE ai_user SET uname = '".$username."',sex=".$_POST['sex'].",province=".$_POST['province'].",city='".$_POST['cityvalue']."',upic_type='1' WHERE uid =$mid";
+			M('')->query($upsql);
+			
+			$keyTmp=array();
+				foreach($_POST['keyword'] as $k=>$v){
+					if(!in_array($v,$keyTmp)){
+						$keyTmp[]=$v;
+					}	
+				}
+			$checkkeywordSql="select * from ai_user_keywords WHERE uid =$mid";
+			$cres=M('')->query($checkkeywordSql);
+			if($cres){
+				$upsql=null;
+				$upsql="UPDATE ai_user_keywords SET keyword = '".serialize($keyTmp)."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}else{
+				$upsql=null;
+				$upsql="INSERT INTO  ai_user_keywords (uid,keyword)values('".$mid."','".serialize($keyTmp)."')";
+				M('')->query($upsql);
+			}
+			$checksql=null;
+			$checksql="select * from ai_user_health_info where uid =$mid";
+			$cres=M('')->query($checksql);
+			if($cres){
+				$upsql=null;
+				if($_POST['dt_weight_finish']!=''||$_POST['dt_height_finish']!=''||$_POST['dt_year_finish']!=''){
+					$upsql="UPDATE ai_user_health_info SET body_weight = '".$_POST['dt_weight_finish']."'
+					,height = '".$_POST['dt_height_finish']."'
+					,age = '".$_POST['dt_year_finish']."' WHERE uid =$mid";
+					M('')->query($upsql);
+				}
+			}else{
+				$insertSql="INSERT INTO  `aijianmei`.`ai_user_health_info` (`uid` ,`body_weight` ,`height` ,`age`)
+				VALUES ($mid, '".$_POST['dt_weight_finish']."','".$_POST['dt_height_finish']."','".$_POST['dt_year_finish']."')";
+				M('')->query($insertSql);
+			}
+			
+			$sql="select uname,email from ai_user where uid =$mid";
+			$shopinserinfo=M('')->query($sql);
+			
+			include_once('shopApi.php');
+			$sdata=null;
+			$sdata['uname']=addslashes($shopinserinfo[0]['uname']);
+			$sdata['password']=addslashes($_SESSION['locallogin_password']);
+			$sdata['email']   =addslashes($shopinserinfo[0]['email']);
+			
+			_postCurlRegister($sdata);
+			service('Passport')->loginLocal($sdata['uname'],$sdata['password'],1);
+			
+			$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$sdata['uname'].'"';
+            $uid = M('')->query($getUidSql);
+            $_SESSION['user_id']   = $uid[0]['user_id'];
+            $_SESSION['user_name'] = $uid[0]['user_name'];
+            $_SESSION['email']     = $uid[0]['email'];
+			$_SESSION['ways']++;
+
+			if($_SESSION['mid']>0){
+				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($mid);
+			}
+			@setcookie("ECS[user_id]",  $getShopUinfo[0]['user_id'], time()+3600*24*30);
+			@setcookie("ECS[password]", md5($_POST['password']), time()+3600*24*30);
+			
+			
+			
+			$checkotherinfosql="select * from ai_others where uid=$mid";
+			$res=M('')->query($checkotherinfosql);
+			if(!$res){
+				$insertsql=null;
+				$other['uid'] = $mid;
+				$other['mediaID'] = '3';
+				$other['friendsCount'] = 0;
+				$other['favouritesCount'] =0;
+				$other['profileImageUrl'] = '';
+				$other['mediaUserID'] = '';
+				$other['url']  = '';
+				$other['homepage'] = '';
+				$other['description'] = $_POST['description'];
+				$other['domain'] = $_POST['sina_domain'];
+				$other['followersCount'] = 0;
+				$other['statusesCount']  = 0;
+				$other['personID'] = 0;
+				foreach($other as $key => $value){
+					$insertstr.=empty($insertstr)?$key:','.$key;
+					$valuestr.=empty($valuestr)?"'".$value."'":",'".$value."'";
+				}
+				$insertsql = "INSERT INTO `aijianmei`.`ai_others` ($insertstr) VALUES ($valuestr)";
+				M('')->query($insertsql);
+			}
+			else{
+				$upsql=null;
+				$upsql="UPDATE ai_others SET description = '".$_POST['description']."',domain='".$_POST['sina_domain']."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}
+			}
+		}elseif($mid>0&&$_GET['args']=='uppwd'){
+			if($_POST['password']==$_POST['repassword']){
+				$upsql="update ai_user SET password = '".md5($_POST['password'])."' WHERE password ='".md5($_POST['oldpassword'])."'";
+				M('')->query($upsql);
+			}
+		}elseif($mid>0&&$_GET['args']=='upconnect'){
+			if(!empty($_POST['cemail'])&&!empty($_POST['ctell'])){
+				$upsql=null;
+				$upsql="update ai_others SET cemail = '".$_POST['cemail']."',ctell = '".$_POST['ctell']."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}
+		}
+		if($_SESSION['regrefer_url']!=''){
+			$_SESSION['deslogin']=0;
+			$_SESSION['regrefer_msg']='恭喜你成功注册“爱健美”';
+			redirect(U('index/Public/Transit'));
+		} 
+		//service('Passport')->login($mid);
+		
+		redirect(U('index/Index/index'));
+	}
+public function saveedituserinfo(){
+		//print_r($_POST);
+		//注册流程权值判断
+		$mid=$_SESSION['mid'];
+		$username=$_POST['username'];
+		if($mid>0&&$username!=''&&$_GET['args']=='uinfo'){
+			if($mid>0){
+			$oldusernameinfo=M('user')->where(array('uid'=>$mid))->find();
+			//print_r($oldusernameinfo);exit;
+			$upsql=null;
+			$upsql="UPDATE ai_user SET uname = '".$username."',sex=".$_POST['sex'].",province=".$_POST['province'].",city='".$_POST['cityvalue']."',upic_type='".$_POST['upic_type']."' WHERE uid =$mid";
+			M('')->query($upsql);
+			$upsql="UPDATE ecs_users SET user_name = '".$username."' WHERE user_name ='".$oldusernameinfo['uname']."'";
+			M('')->query($upsql);
+
+			$keyTmp=array();
+				foreach($_POST['keyword'] as $k=>$v){
+					if(!in_array($v,$keyTmp)){
+						$keyTmp[]=$v;
+					}	
+				}
+			
+			$checkkeywordSql="select * from ai_user_keywords WHERE uid =$mid";
+			$cres=M('')->query($checkkeywordSql);
+			if($cres){
+				$upsql=null;
+				$upsql="UPDATE ai_user_keywords SET keyword = '".serialize($keyTmp)."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}else{
+				$upsql=null;
+				$upsql="INSERT INTO  ai_user_keywords (uid,keyword)values('".$mid."','".serialize($keyTmp)."')";
+				M('')->query($upsql);
+			}
+
+			$checksql=null;
+			$checksql="select * from ai_user_health_info where uid =$mid";
+			$cres=M('')->query($checksql);
+			if($cres){
+				$upsql=null;
+				if($_POST['dt_weight_finish']!=''||$_POST['dt_height_finish']!=''||$_POST['dt_year_finish']!=''){
+					$upsql="UPDATE ai_user_health_info SET body_weight = '".$_POST['dt_weight_finish']."'
+					,height = '".$_POST['dt_height_finish']."'
+					,age = '".$_POST['dt_year_finish']."' WHERE uid =$mid";
+					M('')->query($upsql);
+				}
+			}else{
+				$insertSql="INSERT INTO  `aijianmei`.`ai_user_health_info` (`uid` ,`body_weight` ,`height` ,`age`)
+				VALUES ($mid, '".$_POST['dt_weight_finish']."','".$_POST['dt_height_finish']."','".$_POST['dt_year_finish']."')";
+				M('')->query($insertSql);
+			}
+			
+			
+			$sql="select uname,email from ai_user where uid =$mid";
+			$shopinserinfo=M('')->query($sql);
+			
+			include_once('shopApi.php');
+			$sdata=null;
+			$sdata['uname']=addslashes($shopinserinfo[0]['uname']);
+			$sdata['password']=addslashes($_SESSION['locallogin_password']);
+			$sdata['email']   =addslashes($shopinserinfo[0]['email']);
+			
+			//_postCurlRegister($sdata);
+			service('Passport')->loginLocal($sdata['uname'],$sdata['password'],1);
+			
+			$checkotherinfosql="select * from ai_others where uid=$mid";
+			$res=M('')->query($checkotherinfosql);
+			if(!$res){
+				$insertsql=null;
+				$other['uid'] = $mid;
+				$other['mediaID'] = '3';
+				$other['friendsCount'] = 0;
+				$other['favouritesCount'] =0;
+				$other['profileImageUrl'] = '';
+				$other['mediaUserID'] = '';
+				$other['url']  = '';
+				$other['homepage'] = '';
+				$other['description'] = $_POST['description'];
+				$other['domain'] = $_POST['sina_domain'];
+				$other['followersCount'] = 0;
+				$other['statusesCount']  = 0;
+				$other['personID'] = 0;
+				foreach($other as $key => $value){
+					$insertstr.=empty($insertstr)?$key:','.$key;
+					$valuestr.=empty($valuestr)?"'".$value."'":",'".$value."'";
+				}
+				$insertsql = "INSERT INTO `aijianmei`.`ai_others` ($insertstr) VALUES ($valuestr)";
+				M('')->query($insertsql);
+			}
+			else{
+				$upsql=null;
+				$upsql="UPDATE ai_others SET description = '".$_POST['description']."',domain='".$_POST['sina_domain']."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}
+			}
+		}elseif($mid>0&&$_GET['args']=='uppwd'){
+			if($_POST['password']==$_POST['repassword']){
+				$upsql="update ai_user SET password = '".md5($_POST['password'])."' WHERE password ='".md5($_POST['oldpassword'])."'";
+				M('')->query($upsql);
+			}
+		}elseif($mid>0&&$_GET['args']=='upconnect'){
+			if(!empty($_POST['cemail'])&&!empty($_POST['ctell'])){
+				$upsql=null;
+				$upsql="update ai_others SET cemail = '".$_POST['cemail']."',ctell = '".$_POST['ctell']."' WHERE uid =$mid";
+				M('')->query($upsql);
+			}
+		}
+
+		//service('Passport')->login($mid);
+		
+		redirect(U('index/User/edituserinfo'));
+	}	
+	
+	public function loginUserInfo()
+	{
+		if($_SESSION['sinalogin']==1){$_SESSION['deslogin']=1;}
+		$tplName='login';
+		if($_SESSION['mid']>0)
+		{
+			$check_sql="select * from ai_user where uid='".$_SESSION['mid']."'";
+			$resArr=M('')->query($check_sql);
+			$this->assign('userinfo',$resArr[0]);
+			if(!empty($resArr[0]['email'])){
+			 $tplName='loginUpload';
+			 if(is_file(SITE_PATH.'/data/uploads/avatar'.convertUidToPath($this->uid).'/original.jpg')){
+				$imgurl='/data/uploads/avatar'.convertUidToPath($this->uid).'/original.jpg';
+				$this->assign('imgurl', $imgurl);
+			 }
+			 else{
+				$getSimgSql="select * from ai_others where uid='".$_SESSION['mid']."'";
+				$ImgArr=M('')->query($getSimgSql);
+				$this->assign('imgurl',$ImgArr[0]['profileImageUrl']);
+			 }
+			}
+			else{
+			 $getSimgSql="select * from ai_others where uid='".$_SESSION['mid']."'";
+			 $ImgArr=M('')->query($getSimgSql);
+			 $this->assign('imgurl',$ImgArr[0]['profileImageUrl']);
+			 $tplName='login';
+			}
+		}
+		else{
+			//redirect(U('index/Index/index'));
+		}
+		$area = M('area')->where(array('pid'=>'0'))->order('`area_id` ASC')->findAll();
+        foreach($area as $a) {
+            $child[$a['area_id']] = M('area')->where(array('pid'=>$a['area_id']))->order('`area_id` ASC')->findAll();	
+        }
+		$this->assign('refer_url', $_SERVER['HTTP_REFERER']?$_SERVER['HTTP_REFERER']:"/index.php");
+		if($_SESSION['sinalogin']==1){
+			$this->assign('refer_url',"/index.php");
+		}
+		$_SESSION['loginBef_url']=$_SERVER['HTTP_REFERER']?$_SERVER['HTTP_REFERER']:"/index.php";
+        $this->assign('children', $child);
+        $this->assign('area', $area);
+		$this->display($tplName);
+	}
+	public function setUserInfo()
+	{
+		if($_POST['mid']==$_SESSION['mid']&&$_POST['setInfoType']=='others'){
+			$upsql="UPDATE ai_user SET password='".md5($_POST['passwordlib'])."',email='".$_POST['email']."', province='".$_POST['province']."',city='".$_POST['city']."',sex='".$_POST['sex']."',is_init=1 where uid='".$_POST['mid']."'";
+			M('')->query($upsql);
+			$healthArr=M('')->query("select * from ai_user_health where uid='".$_POST['mid']."'");
+			
+			include_once('shopApi.php');
+			$sdata=null;
+			$sdata['uname']=addslashes($_POST['uname']);
+			$sdata['password']=addslashes($_POST['passwordlib']);
+			$sdata['email']   =addslashes($_POST['email']);
+			_postCurlRegister($sdata);
+			$this->assign('healthArr', $healthArr[0]);
+			
+			$get_usernameSql="select * from ai_user where email='".$_POST['email']."'";
+			$get_usernameInfo = M('')->query($get_usernameSql);
+			$getUidSql='select user_id,user_name,email,password from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+			$uid = M('')->query($getUidSql);
+			if($uid){
+				$_SESSION['user_id']   = $uid[0]['user_id'];
+				$_SESSION['user_name'] = $uid[0]['user_name'];
+				$_SESSION['email']     = $uid[0]['email'];
+				$_SESSION['ways']++;
+				if($_SESSION['mid']>0){
+					$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
+				}
+				@setcookie("ECS[user_id]",  $_SESSION['user_id'], time()+3600*24*30);
+				@setcookie("ECS[password]", $uid[0]['password'], time()+3600*24*30);
+			}
+		}
+		$_SESSION['deslogin']=0;
+		$this->display('loginNext');
+	}
+
+	public function upUserInfo()
+	{
+	if(!$_SESSION['mid']){
+		redirect(U('index/Index/index'));
+	}
+	else{
+		$check_sql="";
+		$valStr="'".intval($_POST['CheckVal1'])."','".intval($_POST['CheckVal2'])."','".intval($_POST['CheckVal3'])."','".intval($_POST['CheckVal4'])."','".intval($_POST['CheckVal5'])."'";
+		$insertSql="REPLACE INTO ai_user_health (uid,is_increase_muscle,is_weight_gain,is_lose_weight,is_understand_health,is_fitness_friends) values('".$_SESSION['mid']."',".$valStr.")"; 
+		M('')->query($insertSql);
+	}
+	$_SESSION['deslogin']=0;
+	//print_r($_SESSION);
+	if($_SESSION['refer_url']!=''&&$_SESSION['shoprefer_url']==''){
+		redirect($_SESSION['refer_url']);
+		//redirect(U('index/Index/index'));
+	}
+	elseif($_SESSION['shoprefer_url']!=''){
+		$reurl=$_SESSION['shoprefer_url'];unset($_SESSION['shoprefer_url']);
+		redirect($reurl);
+		//redirect(U('index/Index/index'));
+	}
+	else{
+		redirect(U('index/Index/index'));
+	}
+	}
+	public function ShowImg(){
+
+     //不存在当前上传文件则上传
+     // if(!file_exists($_FILES['upload_file']['name'])) 
+	 // {
+		// move_uploaded_file($_FILES['upload_file']['tmp_name'],$_FILES['upload_file']['name']);
+	 // }
+	
+	$fdata=$this->upload();
+    //输出图片文件<img>标签
+
+    echo "<textarea><img src='".$fdata['data']['picurl']."'/></textarea>";
+	echo "<textarea><img style='width:150px;height:150px;' src='".$fdata['data']['picurl']."'/></textarea>";
+	exit;
+	}
+	public function newShowImg(){
+
+     //不存在当前上传文件则上传
+     // if(!file_exists($_FILES['upload_file']['name'])) 
+	 // {
+		// move_uploaded_file($_FILES['upload_file']['tmp_name'],$_FILES['upload_file']['name']);
+	 // }
+	$fdata=$this->uploadImageFile(150,'big');
+	//$fdata=$this->uploadImageFile(50,'middle');
+	//$this->uploadImageFile(30,'small');
+	//$fdata=$this->newupload();
+    //输出图片文件<img>标签
+
+    //echo "<textarea><img src='".$fdata['data']['picurl']."'/></textarea>";
+	echo "<textarea><img src='".$fdata.'?'.rand()."' /></textarea>";
+	exit;
+	}
+	
+	function upload(){
+		if($_SESSION['allowbackmid']){$this->uid=$_SESSION['allowbackmid'];}
+        $pic_id = time();//使用时间来模拟图片的ID.           
+        $pic_path = $this->getSavePath().'/original.jpg';
+        $pic_abs_path = __UPLOAD__.'/avatar'.convertUidToPath($this->uid).'/original.jpg';
+        //保存上传图片.
+        if(empty($_FILES['Filedata'])) {
+        	$return['message'] = L('photo_upload_failed');
+        	$return['code']    = '0';
         }else{
-            $data['group_now']    = $split_result['now'];
+        	$validExts = array('image/jpg', 'image/jpeg', 'image/png', 'image/gif','image/pjpeg','image/x-png');
+        	if(!in_array(strtolower($_FILES['Filedata']['type']), $validExts)) {
+        		@unlink($_FILES['Filedata']['tmp_name']);
+        		$return['message'] = '仅允许上传jpg,jpeg,png,gif格式图片';
+        		$return['code'] = 0;
+        		return json_encode($return);
+        	}
+        	
+	        $file = @$_FILES['Filedata']['tmp_name'];
+	        file_exists($pic_path) && @unlink($pic_path);
+	        if(@copy($_FILES['Filedata']['tmp_name'], $pic_path) || @move_uploaded_file($_FILES['Filedata']['tmp_name'], $pic_path)) 
+	        {
+	        	@unlink($_FILES['Filedata']['tmp_name']);
+	        	/*list($width, $height, $type, $attr) = getimagesize($pic_path);
+	        	if($width < 10 || $height < 10 || $width > 3000 || $height > 3000 || $type == 4) {
+	        		@unlink($pic_path);
+	        		return -2;
+	        	}*/
+	        	include( SITE_PATH.'/addons/libs/Image.class.php' );
+	        	Image::thumb( $pic_path, $pic_path , '' , 300 , 300 );
+	        	list($sr_w, $sr_h, $sr_type, $sr_attr) = @getimagesize($pic_path);
+	        	
+	        	$return['data']['picurl'] = 'data/uploads/avatar'.convertUidToPath($this->uid).'/original.jpg';
+	        	$return['data']['picwidth'] = $sr_w;
+	        	$return['data']['picheight'] = $sr_h;
+	        	$return['code']    = '1';
+				// 获取源图的扩展名宽高
+			$src=$return['data']['picurl'];
+		list($sr_w, $sr_h, $sr_type, $sr_attr) = @getimagesize($src);
+		if($sr_type){
+			//获取后缀名
+			$ext = image_type_to_extension($sr_type,false);
+		} else {
+			echo "-1";
+			exit;
+		}
+		
+		$big_w = '150';
+		$big_h = '150';
+		
+		$middle_w = '50';
+		$middle_h = '50';
+		
+		$small_w  = '30';
+		$small_h  = '30';
+		
+		$face_path      =   SITE_PATH.'/data/uploads/avatar'.convertUidToPath($this->uid);
+		$big_name	    =	$face_path.'/big.jpg';		// 大图
+		$middle_name	=	$face_path.'/middle.jpg';		// 中图
+		$small_name		=	$face_path.'/small.jpg';
+		
+		$func	=	($ext != 'jpg')?'imagecreatefrom'.$ext:'imagecreatefromjpeg';
+		$img_r	=	call_user_func($func,$src);
+		
+		$dst_r	=	ImageCreateTrueColor( $big_w, $big_h );
+		$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
+		ImageFilledRectangle( $dst_r, 0, 0, $big_w, $big_h, $back );
+		ImageCopyResampled( $dst_r, $img_r, 0, 0, 0, 0, $big_w, $big_h, $sr_w, $sr_h );
+	
+		ImagePNG($dst_r,$big_name);  // 生成大图
+
+		// 开始切割大方块头像成中等方块头像
+		$sdst_r	=	ImageCreateTrueColor( $middle_w, $middle_h );
+		ImageCopyResampled( $sdst_r, $dst_r, 0, 0, 0, 0, $middle_w, $middle_h, $big_w, $big_w );
+		ImagePNG($sdst_r,$middle_name);  // 生成中图
+		
+		
+		// 开始切割大方块头像成中等方块头像
+		$sdst_s	=	ImageCreateTrueColor( $small_w, $small_h );
+		ImageCopyResampled( $sdst_s, $dst_r, 0, 0, 0, 0, $small_w, $small_h, $big_w, $big_w );
+		ImagePNG($sdst_s,$small_name);  // 生成中图
+		
+		ImageDestroy($dst_r);
+		ImageDestroy($sdst_r);
+		ImageDestroy($sdst_s);
+		ImageDestroy($img_r);
+	        } else {
+	        	@unlink($_FILES['Filedata']['tmp_name']);
+	        	$return['message'] = L('photo_upload_failed');
+	        	$return['code']    = '0';
+	        }	
         }
-
-        array_unshift($group_list,$firstGroup);
-
-
-        $data['follow_group_list']   = $group_list;
-        return $data;
+        return $return;
     }
+function newupload(){
+		if($_SESSION['allowbackmid']){$this->uid=$_SESSION['allowbackmid'];}
+        $pic_id = time();//使用时间来模拟图片的ID.           
+        $pic_path = $this->getSavePath().'/original.jpg';
+        $pic_abs_path = __UPLOAD__.'/avatar'.convertUidToPath($this->uid).'/original.jpg';
+        //保存上传图片.
+        if(empty($_FILES['Filedata'])) {
+        	$return['message'] = L('photo_upload_failed');
+        	$return['code']    = '0';
+        }else{
+        	$validExts = array('image/jpg', 'image/jpeg', 'image/png', 'image/gif','image/pjpeg','image/x-png');
+        	if(!in_array(strtolower($_FILES['Filedata']['type']), $validExts)) {
+        		@unlink($_FILES['Filedata']['tmp_name']);
+        		$return['message'] = '仅允许上传jpg,jpeg,png,gif格式图片';
+        		$return['code'] = 0;
+        		return json_encode($return);
+        	}
+        	
+	        $file = @$_FILES['Filedata']['tmp_name'];
+	        file_exists($pic_path) && @unlink($pic_path);
+	        if(@copy($_FILES['Filedata']['tmp_name'], $pic_path) || @move_uploaded_file($_FILES['Filedata']['tmp_name'], $pic_path)) 
+	        {
+	        	@unlink($_FILES['Filedata']['tmp_name']);
+	        	/*list($width, $height, $type, $attr) = getimagesize($pic_path);
+	        	if($width < 10 || $height < 10 || $width > 3000 || $height > 3000 || $type == 4) {
+	        		@unlink($pic_path);
+	        		return -2;
+	        	}*/
+	        	include( SITE_PATH.'/addons/libs/Image.class.php' );
+	        	Image::thumb( $pic_path, $pic_path , '' , 300 , 300 );
+	        	list($sr_w, $sr_h, $sr_type, $sr_attr) = @getimagesize($pic_path);
+	        	
+	        	$return['data']['picurl'] = 'data/uploads/avatar'.convertUidToPath($this->uid).'/original.jpg';
+				$return['data']['spicurl'] = 'data/uploads/avatar'.convertUidToPath($this->uid).'/middle.jpg';
+	        	$return['data']['picwidth'] = $sr_w;
+	        	$return['data']['picheight'] = $sr_h;
+	        	$return['code']    = '1';
+				// 获取源图的扩展名宽高
+			$src=$return['data']['picurl'];
+		list($sr_w, $sr_h, $sr_type, $sr_attr) = @getimagesize($src);
+		if($sr_type){
+			//获取后缀名
+			$ext = image_type_to_extension($sr_type,false);
+		} else {
+			echo "-1";
+			exit;
+		}
+		
+		$big_w = '150';
+		$big_h = '150';
+		
+		$middle_w = '50';
+		$middle_h = '50';
+		
+		$small_w  = '30';
+		$small_h  = '30';
+		
+		$face_path      =   SITE_PATH.'/data/uploads/avatar'.convertUidToPath($this->uid);
+		$big_name	    =	$face_path.'/big.jpg';		// 大图
+		$middle_name	=	$face_path.'/middle.jpg';		// 中图
+		$small_name		=	$face_path.'/small.jpg';
+		
+		$func	=	($ext != 'jpg')?'imagecreatefrom'.$ext:'imagecreatefromjpeg';
+		$img_r	=	call_user_func($func,$src);
+		
+		$dst_r	=	ImageCreateTrueColor( $big_w, $big_h );
+		$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
+		ImageFilledRectangle( $dst_r, 0, 0, $big_w, $big_h, $back );
+		ImageCopyResampled( $dst_r, $img_r, 0, 0, 0, 0, $big_w, $big_h, $sr_w, $sr_h );
+	
+		ImagePNG($dst_r,$big_name);  // 生成大图
 
-
-
-    private function __splitFollowGroup($group_list,$gid)
-    {
-        $res = array();
-        if (! empty ( $group_list )) { // 关注分组
-            $group_count = count ( $group_list );
-            for($i = 0; $i < $group_count; $i ++) {
-                if ($group_list [$i] ['follow_group_id'] != $gid) {
-                    $group_list [$i] ['title'] = $this->__shortForGroupTitle($group_list[$i]['title']);
-                }else{
-                    $res['now'] = $group_list[$i];
-                }
-                if ($i < 2) {
-                    $res ['group_list_1'] [] = $group_list [$i];
-                } else {
-                    if ($group_list [$i] ['follow_group_id'] == $gid) {
-                        $res ['group_list_1'] [2] = $group_list [$i];
-                        continue;
-                    }
-                    $res ['group_list_2'] [] = $group_list [$i];
-                }
-            }
-            if (empty ( $res ['group_list_1'] [2] ) && ! empty ( $res ['group_list_2'] [0] )) {
-                $res ['group_list_1'] [2] = $res ['group_list_2'] [0];
-                unset ( $res ['group_list_2'] [0] );
-            }
+		// 开始切割大方块头像成中等方块头像
+		$sdst_r	=	ImageCreateTrueColor( $middle_w, $middle_h );
+		ImageCopyResampled( $sdst_r, $dst_r, 0, 0, 0, 0, $middle_w, $middle_h, $big_w, $big_w );
+		ImagePNG($sdst_r,$middle_name);  // 生成中图
+		
+		
+		// 开始切割大方块头像成中等方块头像
+		$sdst_s	=	ImageCreateTrueColor( $small_w, $small_h );
+		ImageCopyResampled( $sdst_s, $dst_r, 0, 0, 0, 0, $small_w, $small_h, $big_w, $big_w );
+		ImagePNG($sdst_s,$small_name);  // 生成中图
+		
+		ImageDestroy($dst_r);
+		ImageDestroy($sdst_r);
+		ImageDestroy($sdst_s);
+		ImageDestroy($img_r);
+	        } else {
+	        	@unlink($_FILES['Filedata']['tmp_name']);
+	        	$return['message'] = L('photo_upload_failed');
+	        	$return['code']    = '0';
+	        }	
         }
-        return $res;
+        return $return;
     }
 
 
-    private function __hasGroupWeibo($group_list)
-    {
-        $hasGroupList = $group_list && !empty($group_list);
-        return $hasGroupList;
-    }
+function uploadImageFile($size,$name) {
+	if($_SESSION['allowbackmid']){$this->uid=$_SESSION['allowbackmid'];}
+	//echo $pic_path = $this->getSavePath().'/original.jpg';
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		$iWidth = $iHeight = $size; // 输出大小
+		$iJpgQuality = 100;
+		if ($_FILES) {
+		// if no errors and size less than 250kb
+			if (! $_FILES['image_file']['error']) {
+				if (is_uploaded_file($_FILES['image_file']['tmp_name'])) {
+				//$sTempFileName =  md5(time().rand());
+				$sTempFileName =  SITE_PATH.'/data/uploads/avatar/'.$this->uid.'/'.$name;
+				// move uploaded file into cache folder
+				mkdir(SITE_PATH.'/data/uploads/avatar/'.$this->uid.'/',0777);
+				$original='data/uploads/avatar/'.$this->uid.'/original.jpg';
+				move_uploaded_file($_FILES['image_file']['tmp_name'],SITE_PATH.'/'.$original);
+				//copy('/data/uploads/avatar/'.$this->uid.'/original.jpg', '/data/uploads/avatar/'.$this->uid.'/'.$name);
+				//change file permission to 644
+				chmod($original, 0777);
+				//@chmod($sTempFileName, 0777);
+					if (file_exists($original) && filesize($original) > 0) {
+						$aSize = getimagesize($original); // try to obtain image info
+						if (!$aSize) {
+							@unlink($original);
+							return;
+						}
+						// check for image type
+						switch($aSize[2]) {
+							case IMAGETYPE_JPEG:
+							$sExt = '.jpg';
+							// create a new image from file
+							$vImg = @imagecreatefromjpeg($original);
+							break;
+							case IMAGETYPE_PNG:
+							$sExt = '.png';
+							// create a new image from file
+							$vImg = @imagecreatefrompng($original);
+							break;
+							default:
+							@unlink($sTempFileName);
+							return;
+						}
+						$sExt = '.jpg';
+						// create a new true color image
+						$vDstImg = @imagecreatetruecolor( $iWidth, $iHeight );
+						// copy and resize part of an image with resampling
+						imagecopyresampled($vDstImg, $vImg, 0, 0, (int)$_POST['x1'], (int)$_POST['y1'], $iWidth, $iHeight, (int)$_POST['w'], (int)$_POST['h']);
+						// define a result image filename
+						$sResultFileName = $sTempFileName . $sExt;
+						// output image to file
+						imagejpeg($vDstImg, $sResultFileName, $iJpgQuality);
+						$this->resizeimage($sResultFileName,1/3,SITE_PATH.'/data/uploads/avatar/'.$this->uid.'/middle.jpg');
+						$this->resizeimage($sResultFileName,0.2,SITE_PATH.'/data/uploads/avatar/'.$this->uid.'/small.jpg');
+						/*$face_path      =   SITE_PATH.'/data/uploads/avatar'.convertUidToPath($this->uid);
+						$big_name	    =	$face_path.'/big.jpg';		// 大图
+						$middle_name	=	$face_path.'/middle.jpg';		// 中图
+						$small_name		=	$face_path.'/small.jpg';
+						
+						
+						$dst_r	=	ImageCreateTrueColor( 150, 150);
+						$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
+						ImageCopyResampled($vDstImg, $vImg, 0, 0, (int)$_POST['x1'], (int)$_POST['y1'], 150, 150, (int)$_POST['w'], (int)$_POST['h']);
+						ImagePNG($dst_r,$big_name);  // 生成大图
+						
+						$dst_r	=	ImageCreateTrueColor( 50, 50 );
+						$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
+						ImageCopyResampled($vDstImg, $vImg, 0, 0, (int)$_POST['x1'], (int)$_POST['y1'], 50, 50, (int)$_POST['w'], (int)$_POST['h']);
+						ImagePNG($dst_r,$middle_name);  // 生成大图
+						
+						
+						$dst_r	=	ImageCreateTrueColor( $iWidth, $iHeight );
+						$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
+						ImageCopyResampled($vDstImg, $vImg, 0, 0, (int)$_POST['x1'], (int)$_POST['y1'],30, 30, (int)$_POST['w'], (int)$_POST['h']);
+						ImagePNG($dst_r,$small_name);  // 生成大图
+						
+						*/
+						@unlink($sTempFileName);
+						@chmod($big_name, 0777);
+						@chmod($small_name, 0777);
+						@chmod($middle_name, 0777);
+						return '/data/uploads/avatar'.convertUidToPath($this->uid).'/big.jpg';
+					}
+				}
+			}
+		}
+	}
+}
 
-    private function __shortForGroupTitle($title)
-    {
-        return (strlen ( $title ) + mb_strlen ( $title, 'UTF8' )) / 2 > 8 ? getShort ( $title, 3 ) . '...' : $title;
-    }
 
-    //查询用户操作 - 用于SearchUserWidgets
-    public function dosearch() {
-        $map['email'] = array('LIKE', '%'.$_REQUEST['q'].'%');
-        $field = 'uid, email, uname';
-        $limit = $_REQUEST['limit'];
-        $list = M('user')->field($field)->where($map)->limit($limit)->findAll();
-        $list = empty($list) ? array() : $list;
+function resizeimage($srcfile,$rate=.5, $filename = "" ){
+$size=getimagesize($srcfile);
+switch($size[2]){
+case 1:
+$img=imagecreatefromgif($srcfile);
+break;
+case 2:
+$img=imagecreatefromjpeg($srcfile);
+break;
+case 3:
+$img=imagecreatefrompng($srcfile);
+break;
+default:
+exit;
+}
+//源图片的宽度和高度
+$srcw=imagesx($img);
+$srch=imagesy($img);
+//目的图片的宽度和高度
+if($size[0] <= $rate || $size[1] <= $rate){
+$dstw=$srcw;
+$dsth=$srch;
+}else{
+if($rate <= 1){
+$dstw=floor($srcw*$rate);
+$dsth=floor($srch*$rate);
+}else {
+$dstw=$rate;
+$rate = $rate/$srcw;
+$dsth=floor($srch*$rate);
+}
+}
+//echo "$dstw,$dsth,$srcw,$srch ";
+//新建一个真彩色图像
+$im=imagecreatetruecolor($dstw,$dsth);
+$black=imagecolorallocate($im,255,255,255);
 
-        exit(json_encode($list));
-    }
-
-    // 附件审核管理员 审核页面
-    public function auditAttach() {
-        // 获取审核管理员的人数
-        $data = model('Xdata')->get('audit:attach_auditing');
-        $uids = explode(',', $data['attach_auditing_uid']);
-        $uids = array_unique($uids);
-        $uids = array_filter($uids);
-        $count = count($uids);
-
-        $map['status'] = 0;
-        foreach($uids as $key => $value) {
-            if($value == $this->mid) {
-                $map['_string'] = 'id % '.$count.' = '.$key;
-            }
-        }
-
-        $dao = model('Attach');
-        $attaches = $dao->getAttachByMap($map);
-        $extensions = $dao->enumerateExtension();
-        $this->assign($attaches);
-        $this->assign('extensions', $extensions);
-
-        $this->display();
-    }
-   
-    // 审核附件通过操作
-    public function doauditAttach() {
-        $ids = t($_POST['ids']);
-        $ids = explode(',', $ids);
-        $ids = array_filter($ids);
-        $map['id'] = array('IN', $ids);
-        $save['status'] = 1;
-        $res = M('attach')->where($map)->save($save);
-        // 添加附件记录
-        foreach($ids as $value) {
-            $add['attach_id'] = $value;
-            $add['uid'] = $this->mid;
-            $add['type'] = 1;
-            $add['ctime'] = time();
-            M('audit_attach')->add($add);
-        }
-        echo $res;
-    }
-
-    // 审核附件不通过操作
-    public function dounAuditAttach() {
-        $ids = t($_POST['ids']);
-        $ids = explode(',', $ids);
-        $ids = array_filter($ids);
-        $map['id'] = array('IN', $ids);
-        
-
-        // 将图片覆盖为默认图片
-        $attachInfo = M('attach')->where($map)->findAll();
-        $defaultImage = APPS_PATH.'/admin/Tpl/default/Public/unAudit.jpg';
-        $imageArr = array('jpg', 'gif', 'png', 'jpeg', 'bmp');
-        
-        foreach($attachInfo as $value) {
-
-            $savename = $value['savename'];
-            $targetPath = UPLOAD_PATH.'/'.$value['savepath'];
-
-            rename($targetPath.$savename,$targetPath.'old_'.$savename);
-
-            if(in_array($value['extension'], $imageArr)) {
-                @copy($defaultImage, $targetPath.$savename);
-            }
-
-            //插入数据
-            $dmap = array();
-            $dmap['id'] = $value['id']; 
-            M('attach')->where($dmap)->limit(1)->delete();
-            D('attach_back')->add($value);
-        }
-
-        // 添加附件记录
-        foreach($ids as $value) {
-            $add['attach_id'] = $value;
-            $add['uid'] = $this->mid;
-            $add['type'] = 2;
-            $add['ctime'] = time();
-            M('audit_attach')->add($add);
-        }
-        echo 1;
-    }
-    
-    private function _canViewSpace()
-    {
-    	$user_set = D('UserPrivacy')->getUserSet($this->uid);
-    	if (1 == $user_set['space']) {
-    		// 我关注的人
-    		if ($this->mid && $this->mid != $this->uid && 'unfollow' === getFollowState($this->uid, $this->mid, 0)) {
-    			$this->error('对方不允许访问');
-    		}
-    	} else {
-    		// 所有人（不包括黑名单）
-    		if ($this->mid && $this->mid != $this->uid && isBlackList($this->uid, $this->mid)) {
-    			$this->error('对方不允许访问');
-    		}
-    	}
-    }
+imagefilledrectangle($im,0,0,$dstw,$dsth,$black);
+imagecopyresized($im,$img,0,0,0,0,$dstw,$dsth,$srcw,$srch);
+// 以 JPEG 格式将图像输出到浏览器或文件
+if( $filename ) {
+//图片保存输出
+imagejpeg($im, $filename );
+}else {
+//图片输出到浏览器
+imagejpeg($im);
+}
+//释放图片
+imagedestroy($im);
+imagedestroy($img);
+}
 }
 ?>

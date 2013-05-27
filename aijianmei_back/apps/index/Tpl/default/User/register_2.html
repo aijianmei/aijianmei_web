@@ -5,14 +5,57 @@
 	<title>爱健美 - 推广健身文化，传播健康理念</title>
 	<meta name="keywords" content="爱健美，爱健美网，健身，健美，增肌、增重、减肥、瘦身、肌肉锻炼、健身营养、健身补充营养、健身运动、女性健身">
 	<meta name="description" content="爱健美网，你可以在这里制定合适的健身计划， 观看专业的健身锻炼视频，学习专业的健身方法，了解健身运动前后的饮食营养补充，以及认识喜欢健身、运动的朋友哦！">
+	<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT= "no-cache, must-revalidate"> 
+	<META HTTP-EQUIV="expires" CONTENT= "Wed, 26 Feb 1997 08:21:57 GMT"> 
 	<link rel="stylesheet" href="Templates/css/register_all.css">
 	<script type="text/javascript" src="../Public/js/jquery.js"></script>
+	<!--<link href="Templates/Jcrop/css/main.css" rel="stylesheet" type="text/css" />-->
+	<link href="Templates/Jcrop/css/jquery.Jcrop.min.css" rel="stylesheet" type="text/css" />
 
+        <!-- add scripts -->
+        <script src="Templates/Jcrop/js/jquery.min.js"></script>
+        <script src="Templates/Jcrop/js/jquery.Jcrop.min.js"></script>
+        <script src="Templates/Jcrop/js/script.js"></script>
+    </head>
 	<!--[if (IE 6)|(IE 7)]>
 	<link rel="stylesheet" href="Templates/css/ie6_7.css">
 	<![endif]-->
 	</head>
 	<body>
+		<!--<div class="bbody">
+		
+				<iframe id="exec_target" name="exec_target"></iframe>
+                <form id="upload_form" enctype="multipart/form-data" method="post"  target="exec_target"  action="aaaa.php" onsubmit="return checkForm()">
+                    <input type="hidden" id="x1" name="x1" />
+                    <input type="hidden" id="y1" name="y1" />
+                    <input type="hidden" id="x2" name="x2" />
+                    <input type="hidden" id="y2" name="y2" />
+
+                    <h2>Step1: Please select image file</h2>
+                    <div><input type="file" name="image_file" id="image_file" onchange="fileSelectHandler()" /></div>
+
+                    <div class="error"></div>
+
+                    <div class="step2">
+                        <h2>Step2: Please select a crop region</h2>
+                        <img id="preview" src="deff.jpg"/>
+						<div id="feedback"></div>
+                        <div class="info">
+                            <label>File size</label> <input type="text" id="filesize" name="filesize" />
+                            <label>Type</label> <input type="text" id="filetype" name="filetype" />
+                            <label>Image dimension</label> <input type="text" id="filedim" name="filedim" />
+                            <label>W</label> <input type="text" id="w" name="w" />
+                            <label>H</label> <input type="text" id="h" name="h" />
+                        </div>
+
+                        <input type="submit" value="Upload" />
+                    </div>
+                </form>
+            </div>-->
+	
+	
+	
 		<div class="rg_top">
 			<div class="rg_top_lay">
 				<div class="rg_logo"><img src="Templates/images/register/rg_logo.png" /></div>
@@ -23,23 +66,42 @@
 			<div class="rg_step"><span class="rg_step_rg3_1"></span><span class="rg_step_rg3_2"></span><span class="rg_step_3"></span></div>
 			<div class="rg_picture">
 				<div class="rg_picture_part clearfix">
+					<div id="divpreview" style="float:left;"><img id="preview"></div>
 					<div class="rg_choice_area" >
-					<div id="feedback"></div>
 						<img id="dimg1" src="Templates/images/register/rg2_1.jpg" />
+						
 						<p>仅支持GIP,JPG,PNG</p>
 					</div>
 					<div class="rg_show_pic">
-						<div id="feedback2"></div>
+					<iframe id="exec_target" name="exec_target"></iframe>
+					<form id="upload_form" enctype="multipart/form-data" method="post"  target="exec_target"  action="/index.php?app=index&mod=User&act=newShowImg" onsubmit="return checkForm()">
+                    <input type="hidden" id="x1" name="x1" />
+                    <input type="hidden" id="y1" name="y1" />
+                    <input type="hidden" id="x2" name="x2" />
+                    <input type="hidden" id="y2" name="y2" />
+						<div id="feedback"></div>
 						<img id="dimg2" <php>if(!$imgurl){</php>src="Templates/images/register/rg2_1.jpg"<php>}else{</php>src="{$imgurl}"<php>}</php> />
-						<a class="rg_pic_keep">保存</a>
+						<a class="rg_pic_keep" onclick="subuploadform();">保存</a>
+						<a class="rg_pic_keep" onclick="location.reload();">重置</a>
+						<input type="file" name="image_file" id="image_file" onchange="fileSelectHandler()" style="display:none;"/>
 						
 						<a class="rg_upload" id="labup"></a>
 					</div>
-					<iframe id="exec_target" name="exec_target"></iframe>
+					
 			
-			<form id="selectForm" method="post" action="/index.php?app=index&mod=User&act=ShowImg" target="exec_target" enctype="multipart/form-data">
-			<input type="file" name="Filedata" id="Filedata" accept="image/gif, image/jpeg ,image/jpg" style="display:none;">
-			</form>
+                    <div class="step2">
+                        <!--<img id="preview" src="deff.jpg"/>-->
+                        <div class="info" style="display:none;">
+                            <label>File size</label> <input type="text" id="filesize" name="filesize" />
+                            <label>Type</label> <input type="text" id="filetype" name="filetype" />
+                            <label>Image dimension</label> <input type="text" id="filedim" name="filedim" />
+                            <label>W</label> <input type="text" id="w" name="w" />
+                            <label>H</label> <input type="text" id="h" name="h" />
+                        </div>
+
+                        <!--<input type="submit" value="Upload" />-->
+                    </div>
+                </form>
 					
 				</div>
 				<div class="pre_ne_choice pre_ne_rg2 clearfix">
@@ -54,27 +116,33 @@
      #exec_target{display:none;width:0;height:0;}
 </style>
 <script type="text/javascript">
+function subuploadform(){
+	$("#upload_form").submit();
+}
+
 $(document).ready(function(){
-	$("#Filedata").change(function(){
-		if($("#Filedata").val() != '') $("#selectForm").submit();
+	$("#image_file").change(function(){
+		$("#labup").remove();
+		if($("#image_file").val() != '') $("#upload_form").submit();
 	});
 	$("#exec_target").load(function(){
 		var data = $(window.frames['exec_target'].document.body).find("textarea").eq(0).html();
-		var data2 = $(window.frames['exec_target'].document.body).find("textarea").eq(1).html();
+		//var data2 = $(window.frames['exec_target'].document.body).find("textarea").eq(1).html();
 		if(data != null){
 		$("#feedback").empty();
 			$("#feedback").append(data.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
-			$("#feedback2").append(data2.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+			//$("#feedback2").append(data2.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
 			//$("#feedback").attr("class","face");
-			$("#Filedata").val('');
-			$("#dimg1").remove();
+			//$("#Filedata").val('');
+			//$("#dimg1").remove();
 			$("#dimg2").remove();
+			//$("#labup").remove();
 		}
 	});
 });
 $(document).ready(function(){
 	$("#labup").click(function(){
-		$("#Filedata").click();
+		$("#image_file").click();
 	});
 });
 

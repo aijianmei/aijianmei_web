@@ -15,12 +15,19 @@
         			</div>
 					<iframe id="exec_target" name="exec_target"></iframe>
         			<div class="dt_revise file clearfix">
+						<input type="hidden" name="upic_type" value="{$upic_type}" id="upic_type">
         				<label for="picture">头像</label>
         				<div class="dt_content">
 						<a class="rg_upload" id="labup">选择文件</a>
+						<php>if($user_type==2){</php><a class="rg_upload" id="sina_choosepic" onclick="changeUserImg('sina');" <php>if($upic_type==2){</php>style="display:none;"<php>}</php>>使用新浪头像</a><php>}</php>
+						<php>if($user_type==3){</php><a class="rg_upload" id="qq_choosepic" onclick="changeUserImg('qq');" <php>if($upic_type==3){</php>style="display:none;"<php>}</php>>使用qq头像</a><php>}</php>
+						<a class="rg_upload" id="local_choosepic" onclick="changeUserImg('local');" <php>if($upic_type==1){</php>style="display:none;"<php>}</php>>使用本地头像</a>
         				</div>
 						<div id="feedback2"></div>
         				<img id="feedimg" <php>if(!$imgurl){</php>src="Templates/images/login_pic.jpg"<php>}else{</php>src="{$imgurl}"<php>}</php> class="dt_choice_img" />
+						<php>if($user_type==2){</php><img id="sinaimg" src="{$sinaimg}" class="dt_choice_img" style="display:none;"/><php>}</php>
+						<php>if($user_type==3){</php><img id="qqimg" src="{$qqimg}" class="dt_choice_img" style="display:none;"/><php>}</php>
+						<img id="localimg" src="{$localimg}" class="dt_choice_img" style="display:none;"/>
         			</div>
         			<div class="dt_revise clearfix">
         				<label>性别</label>
@@ -39,10 +46,14 @@
         					<a>85-99.5kg<div class="dt_choice_weight"></div></a>
         					<a>大于或等于100kg</a>
         				</div>
-        				<div class="dt_edit dt_weight_edit">
+        				<div class="dt_edit dt_weight_edit"  id="dt_weight_edit_div">
         					<span class="dt_weight_finish"></span>
 							<input type="hidden" id="dt_weight_finish" name="dt_weight_finish" value="">
-        					<a class="dt_weight_change">更改</a>
+	        					<a class="dt_weight_change">更改</a>
+	        				</div>
+	        				<div class="dt_edit dt_weight_input">
+	        					<input type="text" onblur="changDtDiv('weight');" onkeyup="if (!(/^[0-9]*$/g.test(this.value))||this.value*1==0){this.value='';alert('请输入正确的数字');return false;};" id="dt_weight_write" class="dt_weight_write" maxlength="6" value=""/>kg
+	        					<p class="dt_weight_keep">请您输入您的体重</p>
         				</div>
         			</div>
         			<div class="dt_revise clearfix">
@@ -55,10 +66,14 @@
         					<a>185-199cm<div class="dt_choice_height"></div></a>
         					<a>大于或等于200cm</a>
         				</div>
-        				<div class="dt_edit dt_height_edit">
+        				<div class="dt_edit dt_height_edit" id="dt_height_edit_div">
         					<span class="dt_height_finish"></span>
 							<input type="hidden" id="dt_height_finish" name="dt_height_finish" value="">
-        					<a class="dt_height_change">更改</a>
+	        					<a class="dt_height_change">更改</a>
+	        				</div>
+	        				<div class="dt_edit dt_height_input">
+	        					<input type="text" onblur="changDtDiv('height');" onkeyup="if (!(/^[0-9]*$/g.test(this.value))||this.value*1==0){this.value='';alert('请输入正确的数字');return false;};" id="dt_height_write" class="dt_height_write" maxlength="6" value="" />cm
+	        					<p class="dt_height_keep">请您输入您的身高</p>
         				</div>
         			</div>
         			<div class="dt_revise clearfix">
@@ -71,11 +86,15 @@
         					<a>55-69岁<div class="dt_choice_year"></div></a>
         					<a>大于或等于70岁</a>
         				</div>
-        				<div class="dt_edit dt_year_edit">
+        				<div class="dt_edit dt_year_edit"  id="dt_year_edit_div">
         					<span class="dt_year_finish"></span>
 							<input type="hidden" id="dt_year_finish" name="dt_year_finish" value="">
         					<a class="dt_year_change">更改</a>
         				</div>
+	        				<div class="dt_edit dt_year_input">
+	        					<input type="text" onblur="changDtDiv('year');"  onkeyup="if (!(/^[0-9]*$/g.test(this.value))||this.value*1==0){this.value='';alert('请输入正确的数字')};"  id="dt_year_write" class="dt_year_write" maxlength="6" />岁
+	        					<p class="dt_year_keep">请您输入您的年龄</p>
+						</div>
         			</div>
         			<div class="dt_revise clearfix">
         				<label>城市</label>
@@ -129,8 +148,8 @@
 						<php>}</php>
 						</div>
         				<div class="dt_tag_input">
-        					<label for="tag" class="tag">点击添加标签</label>
-        					<input id="tag" value="">
+        					<label for="tag" class="tag" >点击添加标签</label>
+        					<input id="tag" value="" onkeyup="if(!checktxt(this.value)){this.value='';alert('请输入正确的字符');};">
         				</div>
         			</div>
         			<a class="dt_update_1" id="upuserinfo" onclick="formsubBykey('userinfo');">更新资料</a>
@@ -149,7 +168,7 @@
         				</div>
         			</div>
         			<div class="dt_revise clearfix">
-        				<label for="pw">密码</label>
+        				<label for="pw">新密码</label>
         				<div class="dt_content">
         					<input type="password" id="pw" class="dt_input dt_type1_input"  name="password"/>
 							<span id="pw_msg"></span>
@@ -197,6 +216,16 @@
      #exec_target{display:none;width:0;height:0;}
 </style>
 <script type="text/javascript">
+function checktxt(str){
+	var txt=new RegExp("[ ,\\`,\\~,\\!,\\@,\#,\\$,\\%,\\^,\\+,\\*,\\&,\\\\,\\/,\\?,\\|,\\:,\\.,\\<,\\>,\\{,\\},\\(,\\),\\'',\\;,\\=,\"]");
+   //特殊字符正则表达式
+   if (txt.test(str)) {
+	return false;
+   }else{
+	return true;
+   }
+}
+
 function checkUser(){
 	var username =$("#username").val();
 	if(checkusernameString(username)==''){
@@ -246,14 +275,46 @@ $(document).ready(function(){
 		$("#Filedata").click();
 	});
 });
+function changeUserImg(key){
+	if(key=='local'){
+		$("#sinaimg").hide();
+		$("#qqimg").hide();
+		$("#feedimg").hide();
+		$("#localimg").show();
+		$("#local_choosepic").hide();
+		$("#sina_choosepic").show();
+		$("#qq_choosepic").show();
+		$("#upic_type").val(1);
+	}else if(key=='sina'){
+		$("#sinaimg").show();
+		$("#qqimg").hide();
+		$("#feedimg").hide();
+		$("#local_choosepic").show();
+		$("#"+key+"_choosepic").hide();
+		$("#upic_type").val(2);
+	}else if(key=='qq'){
+		$("#sinaimg").hide();
+		$("#qqimg").show();
+		$("#feedimg").hide();
+		$("#local_choosepic").show();
+		$("#"+key+"_choosepic").hide();
+		$("#upic_type").val(3);
+	}
+}
+
 function formsubBykey(key){
 	if(key=='userinfo'){
 		var username=$("#username").val();
+		//var dt_year_finish=$("#dt_year_finish").val();
 		if(username==''){
 			$("#username").focus();
 			$("#user_msg").html('请输入用户名');
 			return false;
 		}
+		//if(dt_year_finish==''){
+		//	$("#dt_year_finish").focus();
+		//	return false;
+		//}
 	}
 	if(key=='pwdinfo')
 	{
@@ -338,9 +399,12 @@ function getCity(parent, child) {
 	$("#province_2").change(function() {
 	getCity("province_2", "city_2");
 	});
-var default_year = false,
-    default_height = false,
-    default_weight = false;
+var default_year = <?php if($healthinfo['age']!=''){echo "'".$healthinfo['age']."岁'";}else{echo "false";}?>,
+    default_height = <?php if($healthinfo['height']!=''){echo "'".$healthinfo['height']."cm'";}else{echo "false";}?>,
+    default_weight = <?php if($healthinfo['body_weight']!=''){echo "'".$healthinfo['body_weight']."kg'";}else{echo "false";}?>;
+	$(".dt_weight_input").hide();
+	$(".dt_height_input").hide();
+	$(".dt_year_input").hide();
 </script>
 <script type="text/javascript" src="Templates/js/datum.js"></script>
 </body>

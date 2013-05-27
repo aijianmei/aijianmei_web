@@ -212,6 +212,7 @@ if (!defined('INIT_NO_USERS'))
 
     /* 会员信息 */
     if(!empty($aijianmeiUserInfo)){
+		recalculate_price();
         $_SESSION=array_merge($_SESSION,$aijianmeiUserInfo);
     }
     
