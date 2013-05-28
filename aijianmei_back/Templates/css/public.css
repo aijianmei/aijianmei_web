@@ -220,10 +220,14 @@ button{
 /*website top ending*************************/
 /*wrapper---*/
 .wrapper{
-	width:960px;
+	width:980px;
 	margin:0 auto;
-	padding: 10px;
+	padding-bottom: 18px;
 	overflow: hidden;
+	background:url(../images/border.png) no-repeat center bottom;
+}
+.wrapper_bg{
+	padding: 10px;
 	background: #f7f7f7;
 }
 
@@ -232,7 +236,7 @@ button{
 .pg_page{
 	height: 24px;
 	line-height: 24px;
-	margin: 10px auto;
+		margin: 20px auto 10px;
 	text-align: center;
 }
 .pg_page a,.pg_concrete_choice span{
@@ -444,14 +448,17 @@ button{
 
 /*****footer*****/
 	#footer{
-		width:980px;
-		height: 195px;
-		margin:0 auto;
-		background: url(../images/border.png) no-repeat center top;
+		width: 980px;
+		padding-bottom: 18px;
+		margin: 12px auto;
+		background: url(../images/border.png) no-repeat center bottom;
 		clear: both;
 	}
 	#footer a:hover{
 		color:#47AEE8;
+	}
+	.footer_bg{
+		background: #f7f7f7;
 	}
 	.f_list{
 		float: left;
@@ -502,8 +509,6 @@ button{
 		background: url(../images/icon_result.png) 0 0 no-repeat;
 	}
 	#lower_footer{
-		height: 90px;
-		background: url(../images/border.png) no-repeat center top;
 		text-align: center;
 		font-size: 16px;
 		padding: 30px;

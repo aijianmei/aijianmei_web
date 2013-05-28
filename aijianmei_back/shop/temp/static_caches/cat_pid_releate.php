@@ -41,6 +41,19 @@ $data = array (
   ),
   3 => 
   array (
+    'cat_id' => '12',
+    'cat_name' => '健康与养生',
+    'measure_unit' => '',
+    'parent_id' => '6',
+    'is_show' => '1',
+    'show_in_nav' => '0',
+    'grade' => '0',
+    'sort_order' => '50',
+    'has_children' => '0',
+    'goods_num' => 0,
+  ),
+  4 => 
+  array (
     'cat_id' => '13',
     'cat_name' => '提升耐力',
     'measure_unit' => '',
@@ -52,7 +65,7 @@ $data = array (
     'has_children' => '0',
     'goods_num' => 0,
   ),
-  4 => 
+  5 => 
   array (
     'cat_id' => '10',
     'cat_name' => '运动技能提高',
@@ -65,7 +78,7 @@ $data = array (
     'has_children' => '0',
     'goods_num' => 7,
   ),
-  5 => 
+  6 => 
   array (
     'cat_id' => '1',
     'cat_name' => '增加肌肉',
@@ -78,7 +91,7 @@ $data = array (
     'has_children' => '0',
     'goods_num' => '8',
   ),
-  6 => 
+  7 => 
   array (
     'cat_id' => '11',
     'cat_name' => '提高能力',
@@ -91,7 +104,7 @@ $data = array (
     'has_children' => '0',
     'goods_num' => 3,
   ),
-  7 => 
+  8 => 
   array (
     'cat_id' => '2',
     'cat_name' => '减少体脂',
@@ -103,19 +116,6 @@ $data = array (
     'sort_order' => '50',
     'has_children' => '0',
     'goods_num' => 4,
-  ),
-  8 => 
-  array (
-    'cat_id' => '12',
-    'cat_name' => '健康与养生',
-    'measure_unit' => '',
-    'parent_id' => '6',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => 0,
   ),
   9 => 
   array (

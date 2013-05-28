@@ -553,7 +553,12 @@ if(newdom.getElementsByClass('forum')[0]){
 if(newdom.getElementsByClass('friends')[0]){
     fade.init('friends');
 }
-
+if(newdom.getElementsByClass('IOSClient')[0]){
+    fade.init('IOSClient');
+}
+if(newdom.getElementsByClass('AndroidClient')[0]){
+    fade.init('AndroidClient');
+}
 
 $(function() {
 

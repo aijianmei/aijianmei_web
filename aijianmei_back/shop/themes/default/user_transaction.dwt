@@ -102,27 +102,7 @@
                 </tr>
        </table>
     </form>
-     <form name="formPassword" action="user.php" method="post" onSubmit="return editPassword()" >
-     <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
-        <tr>
-          <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.old_password}：</td>
-          <td width="76%" align="left" bgcolor="#FFFFFF"><input name="old_password" type="password" size="25"  class="inputBg" /></td>
-        </tr>
-        <tr>
-          <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.new_password}：</td>
-          <td align="left" bgcolor="#FFFFFF"><input name="new_password" type="password" size="25"  class="inputBg" /></td>
-        </tr>
-        <tr>
-          <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.confirm_password}：</td>
-          <td align="left" bgcolor="#FFFFFF"><input name="comfirm_password" type="password" size="25"  class="inputBg" /></td>
-        </tr>
-        <tr>
-          <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="act" type="hidden" value="act_edit_password" />
-            <input name="submit" type="submit" class="bnt_blue_1" style="border:none;" value="{$lang.confirm_edit}" />
-          </td>
-        </tr>
-      </table>
-    </form>
+
      <!--{/if}-->
      <!--#用户信息界面 end-->
      <!-- {if $action eq 'bonus'} 用户的红包列表 start-->
@@ -1064,7 +1044,15 @@
   <!--right end-->
 </div>
 <div class="blank"></div>
-<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+<div class="block">
+  <div class="box">
+   <div class="helpTitBg clearfix">
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+
+   </div>
+  </div>
+</div>
+<div class="blank"></div>
 </body>
 <script type="text/javascript">
 {foreach from=$lang.clips_js item=item key=key}

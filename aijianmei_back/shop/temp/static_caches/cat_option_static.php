@@ -80,6 +80,22 @@ $data = array (
     'id' => '6',
     'name' => '目标',
   ),
+  12 => 
+  array (
+    'cat_id' => '12',
+    'cat_name' => '健康与养生',
+    'measure_unit' => '',
+    'parent_id' => '6',
+    'is_show' => '1',
+    'show_in_nav' => '0',
+    'grade' => '0',
+    'sort_order' => '50',
+    'has_children' => '0',
+    'goods_num' => 0,
+    'level' => 1,
+    'id' => '12',
+    'name' => '健康与养生',
+  ),
   13 => 
   array (
     'cat_id' => '13',
@@ -159,22 +175,6 @@ $data = array (
     'level' => 1,
     'id' => '2',
     'name' => '减少体脂',
-  ),
-  12 => 
-  array (
-    'cat_id' => '12',
-    'cat_name' => '健康与养生',
-    'measure_unit' => '',
-    'parent_id' => '6',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => 0,
-    'level' => 1,
-    'id' => '12',
-    'name' => '健康与养生',
   ),
   7 => 
   array (

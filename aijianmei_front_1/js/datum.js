@@ -397,19 +397,11 @@ var init = function(){
         if(dt_year_target[i]){
             addevent(dt_year_target[i],'click',choice_year_this);
             if(default_year){
-                /*if(default_year == 100){
-                    a_dt_year[0].click();
-                }
-                else if(default_year == 200){
-                    a_dt_year[len_dt_year - 1].click();
-                }
-                else{
-                    dt_year_target[default_year].click();
-                }*/
 				if(dt_year_target[i].innerHTML==default_year){
 					dt_year_target[i].click();
 				}else{
-					a_dt_year[len_dt_year - 1].click();
+					var newintnum=len_dt_year - 1;
+					a_dt_year[newintnum].click();
 				}
             }
         }   
