@@ -42,20 +42,20 @@ class AppendAction extends Action {
 		//new banner add
 		 $bannerinfo=array(
 		'1'=>array(
-			'name'=>'为什么你现在就需要蛋白质营养品',
+			'name'=>'没有蛋白质就没有“肌肉梦”',
 			'img'=>'../Public/images/banner/append_1.jpg',
 			'url'=>'/index-Index-articleDetail-60.html'
 			),
 		'2'=>array(
-			'name'=>'蛋白质的种类和益处的介绍',
+			'name'=>'增肌必备！六大营养辅助品',
 			'img'=>'../Public/images/banner/append_2.jpg',
 			'url'=>"/index-Index-articleDetail-92.html"),
 		'3'=>array(
-			'name'=>'肌肉生长你所需的6种营养辅助品',
+			'name'=>'也来八卦“蛋白质”',
 			'img'=>'../Public/images/banner/append_3.jpg',
 			'url'=>"/index-Index-articleDetail-56.html"),
 		'4'=>array(
-			'name'=>'肌氨酸',
+			'name'=>'肌肉的发动机：肌氨酸',
 			'img'=>'../Public/images/banner/append_4.jpg',
 			'url'=>"/index-Index-articleDetail-57.html"),
 		);

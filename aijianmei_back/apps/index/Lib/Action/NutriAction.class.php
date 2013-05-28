@@ -37,20 +37,20 @@ class NutriAction extends Action {
          $this->assign('name_4',$name_4);
 		 		 $bannerinfo=array(
 		'1'=>array(
-			'name'=>'6个燃脂的提示',
+			'name'=>'高效“燃脂”，不做胖子',
 			'img'=>'../Public/images/banner/nutri_1.jpg',
 			'url'=>'/index-Index-articleDetail-26.html'
 			),
 		'2'=>array(
-			'name'=>'7个肌肉养成的营养规则',
+			'name'=>'七招营养秘笈，吃出“肌肉”',
 			'img'=>'../Public/images/banner/nutri_2.jpg',
 			'url'=>"/index-Index-articleDetail-34.html"),
 		'3'=>array(
-			'name'=>'初学者运动前的营养指导',
+			'name'=>'新手锻炼前的营养指导',
 			'img'=>'../Public/images/banner/nutri_3.jpg',
 			'url'=>"/index-Index-articleDetail-41.html"),
 		'4'=>array(
-			'name'=>'制定减肥目标',
+			'name'=>'设定目标：我不再做胖子!',
 			'img'=>'../Public/images/banner/nutri_4.jpg',
 			'url'=>"/index-Index-articleDetail-32.html"),
 		);

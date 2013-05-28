@@ -112,35 +112,6 @@ function reg(str){
      <!--相册 END-->
          <div class="blank5"></div>
          <!-- TemplateBeginEditable name="商品相册下广告（宽230px）" -->
-<!-- #BeginLibraryItem "/library/goods_fittings.lbi" -->
-
-<!-- {if $fittings} -->
-<div class="box">
- <div class="box_1">
-  <h3><span>{$lang.accessories_releate}</span></h3>
-  <div class="boxCenterList clearfix">
-    <!--{foreach from=$fittings item=goods}-->
-    <ul class="clearfix">
-      <li class="goodsimg">
-      <a href="{$goods.url}" target="_blank"><img src="{$goods.goods_thumb}" alt="{$goods.name|escape:html}" class="B_blue" /></a>
-      </li>
-      <li>
-      <a href="{$goods.url}" target="_blank" title="{$goods.goods_name|escape:html}">{$goods.short_name|escape:html}</a><br />
-      {$lang.fittings_price}<font class="f1">{$goods.fittings_price}</font><br />
-      </li>
-    </ul>
-    <!--{/foreach}-->
-  </div>
- </div>
-</div>
-<div class="blank5"></div>
-<!-- {/if} -->
-
-
-
-
-
- <!-- #EndLibraryItem -->
 <!-- TemplateEndEditable -->
      </div>
      <!--商品图片和相册 end-->
@@ -182,7 +153,7 @@ function reg(str){
        <!-- {if $cfg.show_marketprice} 市场价格-->
        <!-- {/if} -->
        <!--本店售价-->
-       <strong style="font-weight:normal">{$lang.shop_price}</strong><font class="shop" id="ECS_SHOPPRICE">{$goods.shop_price_formated}</font>(<strong style="font-weight:normal">{$lang.market_price}</strong><font class="market">{$goods.market_price}</font>)<br />
+       <strong>{$lang.shop_price}</strong><font class="shop" id="ECS_SHOPPRICE">{$goods.shop_price_formated}</font>(<strong>{$lang.market_price}</strong><font class="market">{$goods.market_price}</font>)<br />
       
        </dd>
        </li>
@@ -207,7 +178,7 @@ function reg(str){
       <!--{if $goods.is_promote and $goods.gmt_end_time } 促销-->
       {insert_scripts files='lefttime.js'}
       <li class="padd loop" style="margin-bottom:5px;">
-      <strong style="font-weight:normal">{$lang.promote_price}</strong><font class="shop">{$goods.promote_price}</font><br />
+      <strong>{$lang.promote_price}</strong><font class="shop">{$goods.promote_price}</font><br />
       <!--<strong>{$lang.residual_time}</strong>
       <font class="f4" id="leftTime">{$lang.please_waiting}</font><br />-->
       </li>
@@ -217,22 +188,18 @@ function reg(str){
 	  	  <!--配送-->
       <li class="clearfix">
       <dd style="width:50%;">
-
-      	<strong style="font-weight:normal">配送: </strong>
-        <font>全国包邮</font>
+      	<strong>配送: </strong>
+        <font style="font-weight:bold">全国包邮</font>
       </dd>
 	  </li>
 	  <!--月销量-->
       <li class="clearfix">
       <dd style="width:50%;">
-
-      	<strong style="font-weight:normal">月销量: </strong>
-
-        <font style="color:#FE596A;font-weight:bold"> 1234 件</font>
-
+      	<strong>月销量: </strong>
+        <font style="color:#FE596A;font-weight:bold">{$goods.buy_num}件</font>
       </dd>
        <dd style="width:48%; padding-left:7px;">
-       <strong style="font-weight:normal">{$lang.goods_rank}</strong>
+       <strong>{$lang.goods_rank}</strong>
         <img src="images/stars{$goods.comment_rank}.png" alt="comment rank {$goods.comment_rank}" />
        </dd>
       </li>
@@ -242,10 +209,14 @@ function reg(str){
       </li>-->
       <li class="clearfix">
        <dd>
-
-       <strong style="font-weight:normal">{$lang.number}：</strong>
-        <input name="number" type="text" id="number" value="1" size="4" onblur="changePrice()" style="border:1px solid #ccc; "/>
-
+       <strong>{$lang.number}：</strong>
+        <input name="number" type="text" id="number" value="1" size="4" onblur="changePrice()" style="border:1px solid #ccc; "/> (库存<!-- {if $goods.goods_number neq "" and $cfg.show_goodsnumber} 商品库存-->
+        <!-- {if $goods.goods_number eq 0} -->
+          <font color='red'>{$lang.stock_up}</font>
+        <!-- {else} -->
+          {$goods.goods_number} {$goods.measure_unit}
+        <!-- {/if} -->
+      <!-- {/if} -->件)
        </dd>
        <dd class="ddR">
        <!-- {if $cfg.use_integral} 购买此商品可使用积分-->
@@ -261,7 +232,7 @@ function reg(str){
       <!-- {* 开始循环所有可选属性 *} -->
       <!-- {foreach from=$specification item=spec key=spec_key} -->
       <li class="padd loop">
-      <strong style="font-weight:normal">{$spec.name}:</strong><br />
+      <strong>{$spec.name}:</strong><br />
         <!-- {* 判断属性是复选还是单选 *} -->
                     <!-- {if $spec.attr_type eq 1} -->
                       <!-- {if $cfg.goodsattr_style eq 1} -->
@@ -291,9 +262,7 @@ function reg(str){
       <!-- {/foreach} -->
       <!-- {* 结束循环可选属性 *} -->
       <li class="padd">
-
-      <a href="javascript:bool=1;addToCart({$goods.goods_id})" style="margin-right:40px"><img src="images/btn_buy.png" alt="直接购买"/></a>
-
+      <a <!--{if $ecs_session.user_id>0}-->href="javascript:bool=1;addToCart({$goods.goods_id})"<!--{else}-->class="login"<!--{/if}-->><img src="images/btn_buy.png" alt="直接购买"/></a>
       <a href="javascript:bool=2;addToCart({$goods.goods_id})"><img src="images/btn_cart.png" /></a>
       <!--<a href="javascript:collect({$goods.goods_id})"><img src="images/btn_cart.png" /></a>-->
       <!-- {if $affiliate.on} -->
@@ -310,12 +279,70 @@ function reg(str){
   <div class="AreaL" style="width:200px;">
     <!-- TemplateBeginEditable name="左边区域" -->
 <!-- #BeginLibraryItem "/library/cart.lbi" -->
-<!--
+
 {insert_scripts files='transport.js'}
 <div class="cart" id="ECS_CARTINFO">
  {insert name='cart_info'}
 </div>
-<div class="blank5"></div>-->
+
+
+ <!-- #EndLibraryItem -->
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem " --><!-- /library/goods_related. --><!-- lbi --><!-- " -->
+
+<!-- {if $related_goods} -->
+<div class="box">
+     <div class="box_1">
+      <!-- <h3><span>{$lang.releate_goods}</span></h3>
+      <div class="boxCenterList clearfix"> -->
+      <!--{foreach from=$related_goods item=releated_goods_data}-->
+        <ul class="clearfix">
+          <li class="goodsimg"><a href="{$releated_goods_data.url}"><img src="{$releated_goods_data.goods_thumb}" alt="{$releated_goods_data.goods_name}" class="B_blue" /></a></li>
+          <li>
+        <a href="{$releated_goods_data.url}" title="{$releated_goods_data.goods_name}">{$releated_goods_data.short_name}</a><br />
+        <!-- {if $releated_goods_data.promote_price neq 0} -->
+        {$lang.promote_price}<font class="f1">{$releated_goods_data.formated_promote_price}</font>
+        <!-- {else} -->
+        {$lang.shop_price}<font class="f1">{$releated_goods_data.shop_price}</font>
+        <!-- {/if} -->
+          </li>
+        </ul>
+        <!--{/foreach}-->
+      </div>
+     </div>
+    </div>
+<div class="blank5"></div>
+<!-- {/if} -->
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/goods_fittings.lbi" -->
+
+<!-- {if $fittings} -->
+<div class="box">
+ <div class="box_1">
+  <h3><span>{$lang.accessories_releate}</span></h3>
+  <div class="boxCenterList clearfix">
+    <!--{foreach from=$fittings item=goods}-->
+    <ul class="clearfix">
+      <li class="goodsimg">
+      <a href="{$goods.url}" target="_blank"><img src="{$goods.goods_thumb}" alt="{$goods.name|escape:html}" class="B_blue" /></a>
+      </li>
+      <li>
+      <a href="{$goods.url}" target="_blank" title="{$goods.goods_name|escape:html}">{$goods.short_name|escape:html}</a><br />
+      {$lang.fittings_price}<font class="f1">{$goods.fittings_price}</font><br />
+      </li>
+    </ul>
+    <!--{/foreach}-->
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+
+
+
+
 
  <!-- #EndLibraryItem -->
 <!-- #BeginLibraryItem "/library/goods_article.lbi" -->
@@ -467,12 +494,12 @@ function reg(str){
 
   <!-- TemplateBeginEditable name="右边可编辑区域" -->
 <!-- #BeginLibraryItem "/library/goods_tags.lbi" -->
-<!--
+
 
      <div class="box">
-     <div class="box_1">dddddddddddddddddddddddddd
+     <div class="box_1">
       <h3><span class="text">{$lang.goods_tag}</span></h3>
-      <div class="boxCenterList clearfix ie6">
+      <div class="boxCenterList clearfix ie6">asdfasdf
        <form name="tagForm" action="javascript:;" onSubmit="return submitTag(this)" id="tagForm">
         <p id="ECS_TAGS" style="margin-bottom:5px;">
           <!-- 标记{foreach from=$tags item=tag}-->
@@ -537,7 +564,7 @@ function reg(str){
       </div>
      </div>
     </div>
-    <div class="blank5"></div>-->
+    <div class="blank5"></div>
 
  <!-- #EndLibraryItem -->
 <!-- #BeginLibraryItem "/library/bought_goods.lbi" -->
@@ -564,6 +591,10 @@ function reg(str){
     <div class="blank5"></div>
     <!-- {/if} -->
  <!-- #EndLibraryItem -->
+
+
+
+
 <!-- TemplateEndEditable -->
 
   <!--right end-->

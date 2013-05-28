@@ -1769,7 +1769,6 @@ elseif ($_REQUEST['step'] == 'done')
     if ($order['order_amount'] > 0)
     {
         $payment = payment_info($order['pay_id']);
-
         include_once('includes/modules/payment/' . $payment['pay_code'] . '.php');
 
         $pay_obj    = new $payment['pay_code'];

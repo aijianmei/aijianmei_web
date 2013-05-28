@@ -27,14 +27,6 @@
                 <div class="accounts">
             <a class="copsina" style="width:128px;height:32px;" href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=3622140445&redirect_uri=http://www.aijianmei.com/index.php&state=50068_sina_899064&with_offical_account=1"></a>
             <a class="copqq" href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100328471 &redirect_uri=www.aijianmei.com/qqlogin.php&scope=" style="width:128px;height:32px;"></a>
-                 <script type='text/javascript' charset='utf-8'>
-                    (function() {
-                        var _dl_time = new Date().getTime();
-                        var _dl_login = document.getElementById('denglu_login_js');
-                        _dl_login.id = _dl_login.id + '_' + _dl_time;
-                        _dl_login.src = 'http://open.denglu.cc/connect/logincode?appid=44031dena3J8cuBsQeX40lcpjSsPM3&v=1.0.2&widget=1&styletype=1&size=452_132&asyn=true&time=' + _dl_time;
-                    })();
-                </script>
                 </div>
                 <span class="clearfix">未注册过爱健美也可以直接登录哦</span>
                 <a class="cop5" href="<?php echo $this->_var['aijianmeiurl']; ?>/index.php?app=index&mod=Index&act=selectRegister">爱健美注册</a>
@@ -54,7 +46,7 @@
                 </li>
                 <li class="more"><a href="">帐号<span class="triangle"></span> </a>
                     <ul class="account">
-                        <li><a href="<?php echo $this->_var['aijianmeiurl']; ?>/index.php?app=home&mod=Account&act=index">个人资料</a></li>
+                        <li><a href="<?php echo $this->_var['aijianmeiurl']; ?>/index.php?app=index&mod=User&act=edituserinfo">个人资料</a></li>
                         <li><a href="<?php echo $this->_var['aijianmeiurl']; ?>/index.php?app=home&mod=Public&act=logout">退出帐号</a></li>
                     </ul>
                 </li>

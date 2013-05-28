@@ -20,20 +20,20 @@ class TrainAction extends Action {
 		 //new banner add
 		 $bannerinfo=array(
 		'1'=>array(
-			'name'=>'身体的三种不同类型',
+			'name'=>'你不可不知的“身体类型”',
 			'img'=>'../Public/images/banner/training_1.jpg',
 			'url'=>'/index-Index-articleDetail-46.html'
 			),
 		'2'=>array(
-			'name'=>'锻炼肌肉的基本要素',
+			'name'=>'打造“型男”的健身秘诀',
 			'img'=>'../Public/images/banner/training_2.jpg',
 			'url'=>"/index-Index-articleDetail-52.html"),
 		'3'=>array(
-			'name'=>'完美的健身伙伴',
+			'name'=>'最佳拍档！健身更高效！',
 			'img'=>'../Public/images/banner/training_3.jpg',
 			'url'=>"/index-Index-articleDetail-50.html"),
 		'4'=>array(
-			'name'=>'8个开始体重训练的原因',
+			'name'=>'懒人最爱！利用身体重量进行训练的八大好处',
 			'img'=>'../Public/images/banner/training_4.jpg',
 			'url'=>"/index-Index-articleDetail-96.html"),
 		);

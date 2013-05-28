@@ -11,7 +11,7 @@
 		}
 	});
 	//textarea 
-	$("textarea.commentboxCss").bind({
+	$("textarea.text_user").bind({
 		focusin: function(){
 			$(this).next().hide();
 		},

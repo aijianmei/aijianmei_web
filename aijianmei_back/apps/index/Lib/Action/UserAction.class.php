@@ -452,6 +452,21 @@ class UserAction extends Action {
 			_postCurlRegister($sdata);
 			service('Passport')->loginLocal($sdata['uname'],$sdata['password'],1);
 			
+			$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$sdata['uname'].'"';
+            $uid = M('')->query($getUidSql);
+            $_SESSION['user_id']   = $uid[0]['user_id'];
+            $_SESSION['user_name'] = $uid[0]['user_name'];
+            $_SESSION['email']     = $uid[0]['email'];
+			$_SESSION['ways']++;
+
+			if($_SESSION['mid']>0){
+				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($mid);
+			}
+			@setcookie("ECS[user_id]",  $getShopUinfo[0]['user_id'], time()+3600*24*30);
+			@setcookie("ECS[password]", md5($_POST['password']), time()+3600*24*30);
+			
+			
+			
 			$checkotherinfosql="select * from ai_others where uid=$mid";
 			$res=M('')->query($checkotherinfosql);
 			if(!$res){
@@ -960,7 +975,7 @@ function uploadImageFile($size,$name) {
 				mkdir(SITE_PATH.'/data/uploads/avatar/'.$this->uid.'/',0777);
 				$original='data/uploads/avatar/'.$this->uid.'/original.jpg';
 				move_uploaded_file($_FILES['image_file']['tmp_name'],SITE_PATH.'/'.$original);
-				copy('/data/uploads/avatar/'.$this->uid.'/original.jpg', '/data/uploads/avatar/'.$this->uid.'/'.$name);
+				//copy('/data/uploads/avatar/'.$this->uid.'/original.jpg', '/data/uploads/avatar/'.$this->uid.'/'.$name);
 				//change file permission to 644
 				chmod($original, 0777);
 				//@chmod($sTempFileName, 0777);
@@ -988,38 +1003,38 @@ function uploadImageFile($size,$name) {
 						}
 						$sExt = '.jpg';
 						// create a new true color image
-						// $vDstImg = @imagecreatetruecolor( $iWidth, $iHeight );
-						//copy and resize part of an image with resampling
-						// imagecopyresampled($vDstImg, $vImg, 0, 0, (int)$_POST['x1'], (int)$_POST['y1'], $iWidth, $iHeight, (int)$_POST['w'], (int)$_POST['h']);
-						//define a result image filename
-						// echo $sResultFileName = $sTempFileName . $sExt;
-						//output image to file
-						// imagejpeg($vDstImg, $sResultFileName, $iJpgQuality);
-						
-						
-						$face_path      =   SITE_PATH.'/data/uploads/avatar'.convertUidToPath($this->uid);
+						$vDstImg = @imagecreatetruecolor( $iWidth, $iHeight );
+						// copy and resize part of an image with resampling
+						imagecopyresampled($vDstImg, $vImg, 0, 0, (int)$_POST['x1'], (int)$_POST['y1'], $iWidth, $iHeight, (int)$_POST['w'], (int)$_POST['h']);
+						// define a result image filename
+						$sResultFileName = $sTempFileName . $sExt;
+						// output image to file
+						imagejpeg($vDstImg, $sResultFileName, $iJpgQuality);
+						$this->resizeimage($sResultFileName,1/3,SITE_PATH.'/data/uploads/avatar/'.$this->uid.'/middle.jpg');
+						$this->resizeimage($sResultFileName,0.2,SITE_PATH.'/data/uploads/avatar/'.$this->uid.'/small.jpg');
+						/*$face_path      =   SITE_PATH.'/data/uploads/avatar'.convertUidToPath($this->uid);
 						$big_name	    =	$face_path.'/big.jpg';		// 大图
 						$middle_name	=	$face_path.'/middle.jpg';		// 中图
 						$small_name		=	$face_path.'/small.jpg';
 						
 						
 						$dst_r	=	ImageCreateTrueColor( 150, 150);
-						//$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
+						$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
 						ImageCopyResampled($vDstImg, $vImg, 0, 0, (int)$_POST['x1'], (int)$_POST['y1'], 150, 150, (int)$_POST['w'], (int)$_POST['h']);
 						ImagePNG($dst_r,$big_name);  // 生成大图
 						
 						$dst_r	=	ImageCreateTrueColor( 50, 50 );
-						//$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
+						$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
 						ImageCopyResampled($vDstImg, $vImg, 0, 0, (int)$_POST['x1'], (int)$_POST['y1'], 50, 50, (int)$_POST['w'], (int)$_POST['h']);
 						ImagePNG($dst_r,$middle_name);  // 生成大图
 						
 						
-						$dst_r	=	ImageCreateTrueColor( 30, 30 );
-						//$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
+						$dst_r	=	ImageCreateTrueColor( $iWidth, $iHeight );
+						$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
 						ImageCopyResampled($vDstImg, $vImg, 0, 0, (int)$_POST['x1'], (int)$_POST['y1'],30, 30, (int)$_POST['w'], (int)$_POST['h']);
 						ImagePNG($dst_r,$small_name);  // 生成大图
 						
-						
+						*/
 						@unlink($sTempFileName);
 						@chmod($big_name, 0777);
 						@chmod($small_name, 0777);
@@ -1030,6 +1045,59 @@ function uploadImageFile($size,$name) {
 			}
 		}
 	}
+}
+
+
+function resizeimage($srcfile,$rate=.5, $filename = "" ){
+$size=getimagesize($srcfile);
+switch($size[2]){
+case 1:
+$img=imagecreatefromgif($srcfile);
+break;
+case 2:
+$img=imagecreatefromjpeg($srcfile);
+break;
+case 3:
+$img=imagecreatefrompng($srcfile);
+break;
+default:
+exit;
+}
+//源图片的宽度和高度
+$srcw=imagesx($img);
+$srch=imagesy($img);
+//目的图片的宽度和高度
+if($size[0] <= $rate || $size[1] <= $rate){
+$dstw=$srcw;
+$dsth=$srch;
+}else{
+if($rate <= 1){
+$dstw=floor($srcw*$rate);
+$dsth=floor($srch*$rate);
+}else {
+$dstw=$rate;
+$rate = $rate/$srcw;
+$dsth=floor($srch*$rate);
+}
+}
+//echo "$dstw,$dsth,$srcw,$srch ";
+//新建一个真彩色图像
+$im=imagecreatetruecolor($dstw,$dsth);
+$black=imagecolorallocate($im,255,255,255);
+
+imagefilledrectangle($im,0,0,$dstw,$dsth,$black);
+imagecopyresized($im,$img,0,0,0,0,$dstw,$dsth,$srcw,$srch);
+// 以 JPEG 格式将图像输出到浏览器或文件
+if( $filename ) {
+//图片保存输出
+imagejpeg($im, $filename );
+}else {
+//图片输出到浏览器
+imagejpeg($im);
+}
+//释放图片
+imagedestroy($im);
+imagedestroy($img);
 }
 }
 ?>

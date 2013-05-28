@@ -409,16 +409,16 @@ function show_banner($type){
     {
 		$bannerinfo=array(
 		'1'=>array(
-			'name'=>'为什么你现在就需要蛋白质营养品',
+			'name'=>'没有蛋白质就没有“肌肉梦”',
 			'img'=>'../Public/images/banner/index_1.jpg',
 			'url'=>'/index-Index-articleDetail-60.html'
 			),
 		'2'=>array(
-			'name'=>'7个肌肉养成的营养规则',
+			'name'=>'七招营养秘笈，吃出“肌肉”',
 			'img'=>'../Public/images/banner/index_2.jpg',
 			'url'=>"/index-Index-articleDetail-34.html"),
 		'3'=>array(
-			'name'=>'如何选择正确的每日健身计划',
+			'name'=>'爱健美专属：每日健身计划',
 			'img'=>'../Public/images/banner/index_5.jpg',
 			'url'=>"/index-Index-articleDetail-93.html")
 		);
@@ -787,16 +787,44 @@ function show_banner($type){
     public function articleDetail()
     {	
         $pagenums=7;
+        $o = $_GET['o'];
+        if($o=='like') {
+            if($this->mid) {				
+                $is_vote = M('article_vote')->where(array('uid'=>$this->mid, 'article_id'=>$_GET['id']))->find();
+                if(!empty($is_vote)) {
+                    echo '<script type="text/javascript">alert("已经投票");</script>';
+                }else {
+                    M('')->query('update ai_article set `like`=`like`+1 where id='.$_GET['id']);
+                    $data['uid'] = $this->mid;
+                    $data['article_id'] = $_GET['id'];
+                    M('')->query('insert into ai_article_vote (`uid`,`article_id`) values ("'.$this->mid.'","'.$_GET['id'].'"');
+                }				
+            }else {
+                
+            }
+        }elseif($o=='unlike') {
+            if($this->mid) {
+                $is_vote = M('article_vote')->where(array('uid'=>$this->mid, 'article_id'=>$_GET['id']))->find();
+                if(!empty($is_vote)) {
+                    echo '<script type="text/javascript">alert("已经投票");</script>';
+                }else {
+                    M('')->query('update ai_article set `unlike`=`unlike`+1  where id='.$_GET['id']);
+                    M('article_vote')->add(array('uid'=>$this->mid, 'article_id'=>$_GET['id']));
+                }
+            }else {
+                
+            }
+        }
         $string="update ai_article set reader_count=reader_count+1 where id=".$_GET['id'];
         M('')->query($string);
-  
+        global $ts;
+            
         $id = (int) $_GET['id'];
         $map['id'] = $id;
         $article = M('article')->where($map)->find();
 		preg_match_all("/src\s*=\s*[\"|\']?\s*([^\"\'\s]*)/i",str_ireplace("\\","",$article['content']),$out);
 		$aimgsrc=$out[1][0];
 		$article['dateStrng']=_returnNdate($article['create_time']);
-		
         $this->assign('article', $article); 
         $this->assign('aimgsrc', $aimgsrc); 
         
@@ -816,10 +844,6 @@ function show_banner($type){
             $result[$key]['user'] = getUserInfo($value['uid']);
         }
         $this->assign('commentCounts', $commentCounts?$commentCounts:0);
-		$article['commentCount']=$commentCounts;
-		$article['content']='xxxxxassd';
-		$article['img']='http://www.aijianmei.com/public/images/article/'.$article['img'];
-		echo json_encode($article);
         $this->assign('comments', $result);
         $this->assign('hotComments', $hotArticlecomments);
         
@@ -846,7 +870,7 @@ function show_banner($type){
             case 3:{$tree_channel="营养 ";$tree_channel_en="Nutri";$_current='nutri';}break;
             case 4:{$tree_channel="辅助品 ";$tree_channel_en="Append";$_current='append';}break;
         }
-        $tree_parent=$result['parent'];			
+        $tree_parent=$result['parent'];		
         $tree_name=$result['name'];
         $result=mysql_query("select name from ai_article_category where id=".$tree_parent);
         $tree_parentName=mysql_fetch_assoc($result);

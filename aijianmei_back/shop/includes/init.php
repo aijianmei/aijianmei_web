@@ -27,7 +27,7 @@ else{
 }
 
 
-error_reporting(E_ALL);
+error_reporting(0);
 
 if (__FILE__ == '')
 {
@@ -320,12 +320,9 @@ if($_REQUEST['act'] != 'price'&&$_SERVER['SCRIPT_NAME']!='/shop/captcha.php')
 	}
 }
 
-
-
-
-define('SITE_PATH','http://www.kon_aijianmei.com');
-define('SITE_URL','http://www.kon_aijianmei.com');
-define('THEME_URL','http://www.kon_aijianmei.com/public');
+define('SITE_PATH','http://www.aijianmei.com');
+define('SITE_URL','http://www.aijianmei.com');
+define('THEME_URL','http://www.aijianmei.com/public');
 //$sql="select * from ai";
 //$res = $GLOBALS['db']->query($sql);
 if($_SESSION['mid']>0){
@@ -334,7 +331,7 @@ if($_SESSION['mid']>0){
 //print_r($_SESSION);
 if (isset($smarty))
 {
-$smarty->assign('aijianmeiurl','http://www.kon_aijianmei.com');
+$smarty->assign('aijianmeiurl','http://www.aijianmei.com');
 define('_BUTTOMROOT',dirname(dirname(dirname(__FILE__))));
 $_buttomTagInfo=unserialize(include(_BUTTOMROOT."/buttomTagInfo.php"));
 $smarty->assign('_buttomTagInfo',$_buttomTagInfo);
@@ -360,23 +357,24 @@ function getUserFace($uid,$size){
 	}else{
 		$type = 'big';
 	}
-		$apiImg = $GLOBALS['db']->getAll("select profileImageUrl from ai_others where uid='".$uid."'");
-        if($apiImg){
-            $userface=$apiImg[0]['profileImageUrl'];
-            return $userface;
-        }
-        
+	$imgtpye= $GLOBALS['db']->getAll("select upic_type from ai_user where uid='".$uid."'");
+
 	$uid_to_path = '/' . $uid;
 	//$userface = SITE_PATH.'/data/uploads/avatar' . $uid_to_path . '/' . $type. '.jpg';
 
 	$userface =dirname(dirname(dirname(__FILE__))).'/data/uploads/avatar' . $uid_to_path . '/' . $type. '.jpg';
-	if(is_file($userface)){
+	if(is_file($userface)&&$imgtpye[0]['upic_type']==1){
 		return SITE_URL.'/data/uploads/avatar' . $uid_to_path . '/' . $type . '.jpg';
+		
 	}else{
+			$apiImg = $GLOBALS['db']->getAll("select profileImageUrl from ai_others where uid='".$uid."'");
+        if(!empty($apiImg)){
+            $userface=$apiImg[0]['profileImageUrl'];
+            return $userface;
+        }
 		return THEME_URL."/images/user_pic_{$type}.gif";
 	}
 }
-
 
 
 ?>
