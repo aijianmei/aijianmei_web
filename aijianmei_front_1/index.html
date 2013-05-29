@@ -64,8 +64,9 @@
 		                		<li><a>初级基础训练</a></li>
 		                	</ul>
 		                </li>
-		                <li class="nav_child"><a class="nav_a forum" href="#">论坛</a></li>
-		                <li class="nav_child"><a class="nav_a" href="#">交友互动</a></li>
+		                <li class="nav_child"><a class="nav_a" href="#">生活方式</a></li>
+		                <!-- <li class="nav_child"><a class="nav_a forum" href="#">论坛</a></li>
+		                <li class="nav_child"><a class="nav_a" href="#">交友互动</a></li> -->
 		            </ul>
 		        </div>
 		    </div>
@@ -83,6 +84,8 @@
 										<div class="bn_bg_part">
 											<p class="bn_text">提示内容,要什么有什么1</p>
 										</div>
+										<div class="bn_bg">
+										</div>
 									</a>	
 								</li>
 								<li>
@@ -91,6 +94,8 @@
 										<div class="bn_bg_part">
 											<p class="bn_text">提示内容,要什么有什么2</p>
 										</div>
+										<div class="bn_bg">
+										</div>
 									</a>	
 								</li>
 								<li>
@@ -98,6 +103,8 @@
 										<img src="images/training/tr_1.jpg">
 										<div class="bn_bg_part">
 											<p class="bn_text">提示内容,要什么有什么3</p>
+										</div>
+										<div class="bn_bg">
 										</div>
 									</a>	
 								</li>
@@ -542,9 +549,11 @@
 				$(".bn_contain_pic li").bind({
 					mouseleave: function(){
 						$(this).find(".bn_bg_part").slideUp(300);
+						$(this).find(".bn_bg").slideUp(300);
 					},
 					mouseenter: function(){
 						$(this).find(".bn_bg_part").slideDown(300);	
+						$(this).find(".bn_bg").slideDown(300);	
 					}
 				});
 			});
