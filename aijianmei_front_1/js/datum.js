@@ -233,7 +233,8 @@ var init = function(){
         dt_year.style.display = "none";
         dt_year_edit.style.display = "block";
         act_change(dt_year,dt_year_edit,dt_year_change);
-        default_year = _target.index;
+        default_year = _target.innerHTML;
+        console.log(default_year)
     }
     var choice_year_input = function(e){
         var _e = window.event ? window.event : e || arguments[0],
@@ -250,7 +251,7 @@ var init = function(){
                 dt_year_edit.style.display = "block";
                 dt_year_input.style.display = "none";
                 act_change(dt_year,dt_year_edit,dt_year_change);
-                default_year = _target.index;
+                default_year = dt_year_finish.innerHTML;
             }   
             else{
                dt_year.style.display = "block";
@@ -325,26 +326,19 @@ var init = function(){
         }
     }
     //year
-    a_dt_year[0].index = 100;
-    a_dt_year[len_dt_year - 1].index = 200;
     addevent(a_dt_year[0],'click',choice_year_input);
     addevent(a_dt_year[len_dt_year - 1],'click',choice_year_input);
     for(var i = 0;i < len_year_target;i++){
         dt_year_target[i].index = i;
         if(dt_year_target[i]){
             addevent(dt_year_target[i],'click',choice_year_this);
-            if(default_year){
-                if(default_year == 100){
-                    a_dt_year[0].click();
-                }
-                else if(default_year == 200){
-                    a_dt_year[len_dt_year - 1].click();
-                }
-                else{
-                    dt_year_target[default_year].click();
-                }
-            }
         }   
+    }
+    if(default_year){
+        dt_year.style.display = "none";
+        dt_year_edit.style.display = "block";
+        dt_year_finish.innerHTML = default_year;
+        act_change(dt_year,dt_year_edit,dt_year_change);
     }
     //height
     a_dt_height[0].index = 100;
@@ -390,6 +384,16 @@ var init = function(){
             }
         }   
     }
+
+
+
+
+
+
+
+
+
+
 
     //for keycode enter to dt_weight_height_year_input
     document.onkeydown = function(event){//回车事件触发onblur
