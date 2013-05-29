@@ -767,7 +767,21 @@ public function saveedituserinfo(){
 	echo "<textarea><img src='".$fdata.'?'.rand()."' /></textarea>";
 	exit;
 	}
+	public function newShowImg1(){
+
+     //涓嶅瓨鍦ㄥ綋鍓嶄笂浼犳枃浠跺垯涓婁紶
+     // if(!file_exists($_FILES['upload_file']['name'])) 
+	 // {
+		// move_uploaded_file($_FILES['upload_file']['tmp_name'],$_FILES['upload_file']['name']);
+	 // }
 	
+	$fdata=$this->newupload();
+    //杈撳嚭鍥剧墖鏂囦欢<img>鏍囩
+
+    echo "<textarea><img src='".$fdata['data']['picurl']."?".rand()."'/></textarea>";
+	echo "<textarea><img class='dt_choice_img' style='width:45px;height:45px;' src='".$fdata['data']['spicurl']."?".rand()."'/></textarea>";
+	exit;
+	}
 	function upload(){
 		if($_SESSION['allowbackmid']){$this->uid=$_SESSION['allowbackmid'];}
         $pic_id = time();//使用时间来模拟图片的ID.           

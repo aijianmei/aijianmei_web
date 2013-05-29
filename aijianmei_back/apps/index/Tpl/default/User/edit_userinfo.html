@@ -48,7 +48,7 @@
         				</div>
         				<div class="dt_edit dt_weight_edit"  id="dt_weight_edit_div">
         					<span class="dt_weight_finish"></span>
-							<input type="hidden" id="dt_weight_finish" name="dt_weight_finish" value="">
+							<input type="hidden" id="dt_weight_finish" name="dt_weight_finish" value="<?php if($healthinfo['body_weight']!=''){echo $healthinfo['body_weight']."kg";}else{echo "";}?>">
 	        					<a class="dt_weight_change">更改</a>
 	        				</div>
 	        				<div class="dt_edit dt_weight_input">
@@ -68,7 +68,7 @@
         				</div>
         				<div class="dt_edit dt_height_edit" id="dt_height_edit_div">
         					<span class="dt_height_finish"></span>
-							<input type="hidden" id="dt_height_finish" name="dt_height_finish" value="">
+							<input type="hidden" id="dt_height_finish" name="dt_height_finish" value="<?php if($healthinfo['height']!=''){echo $healthinfo['height'].'cm';}else{echo "";}?>">
 	        					<a class="dt_height_change">更改</a>
 	        				</div>
 	        				<div class="dt_edit dt_height_input">
@@ -88,7 +88,7 @@
         				</div>
         				<div class="dt_edit dt_year_edit"  id="dt_year_edit_div">
         					<span class="dt_year_finish"></span>
-							<input type="hidden" id="dt_year_finish" name="dt_year_finish" value="">
+							<input type="hidden" id="dt_year_finish" name="dt_year_finish" value="<?php if($healthinfo['age']!=''){echo $healthinfo['age']."岁";}else{echo "";}?>">
         					<a class="dt_year_change">更改</a>
         				</div>
 	        				<div class="dt_edit dt_year_input">
@@ -207,7 +207,7 @@
 					</div>
 	        	</fieldset>
         	</form>
-						<form id="selectForm" method="post" action="/index.php?app=index&mod=User&act=newShowImg" target="exec_target" enctype="multipart/form-data">
+						<form id="selectForm" method="post" action="/index.php?app=index&mod=User&act=newShowImg1" target="exec_target" enctype="multipart/form-data">
 						<input type="file" name="Filedata" id="Filedata" accept="image/gif, image/jpeg ,image/jpg" value="选择文件" style="display:none;">
 						</form>
         </div>

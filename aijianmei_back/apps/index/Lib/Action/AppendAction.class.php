@@ -76,7 +76,7 @@ class AppendAction extends Action {
 			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
 			$pglimit=intval($_GET['pg']);
 		}else{
-			$pg=1;
+			$pglimit=$pg=1;
 		}
 		
 		
@@ -88,23 +88,23 @@ class AppendAction extends Action {
 			$countInfo = M('')->query($countsql);
 			$this->setDataCache(md5($countsql),$countInfo);
 		}
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Append&act=index&ctype=2&pg=');
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=Append&act=index&ctype=2&pg=');
 		$pagerArray = $pagerData['html'];
 		
 		$order = 'reader_count';
 		//$hotArticles = D('Article')->getTrainArticles($order);
-        $hotArticles = D('Article')->getArticlesListType($order,'',($pg-1)*$nums,$nums,4);
+        $hotArticles = D('Article')->getArticlesListType($order,'',($pglimit-1)*20,$nums,4);
         //print_r( $hotArticles);
 		$this->assign('hotArticlespage', $pagerArray);
         $this->assign('hotArticles', $hotArticles);
         
 		
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Append&act=index&ctype=1&pg=');
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=Append&act=index&ctype=1&pg=');
 		$pagerArray = $pagerData['html'];
         //assign lastArticles		
         $order = 'create_time';
 		//$lastArticles = D('Article')->getTrainArticles($order);
-        $lastArticles = D('Article')->getArticlesListType($order,'',($pg-1)*$nums,$nums,4);
+        $lastArticles = D('Article')->getArticlesListType($order,'',($pglimit-1)*20,$nums,4);
 		$this->assign('lastArticlespage', $pagerArray);
         $this->assign('lastArticles', $lastArticles);
         $this->assign('cssFile', 'training');
@@ -134,7 +134,7 @@ class AppendAction extends Action {
 			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
 			$pglimit=intval($_GET['pg']);
 		}else{
-			$pg=1;
+			$pglimit=$pg=1;
 		}
 
         //assign hotArticles
@@ -145,23 +145,23 @@ class AppendAction extends Action {
 			$countInfo = M('')->query($countsql);
 			$this->setDataCache(md5($countsql),$countInfo);
 		}
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Append&act=articleList&id=$id&ctype=2&pg=");
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,"/index.php?app=index&mod=Append&act=articleList&id=$id&ctype=2&pg=");
 		$pagerArray = $pagerData['html'];
 		
 		$order = 'reader_count';
 		//$hotArticles = D('Article')->getTrainArticles($order);
-        $hotArticles = D('Article')->getArticlesListType($order,$id,($pg-1)*$nums,$nums,4);
+        $hotArticles = D('Article')->getArticlesListType($order,$id,($pglimit-1)*20,$nums,4);
         //print_r( $hotArticles);
 		$this->assign('hotArticlespage', $pagerArray);
         $this->assign('hotArticles', $hotArticles);
         
 		
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Append&act=articleList&id=$id&ctype=1&pg=");
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,"/index.php?app=index&mod=Append&act=articleList&id=$id&ctype=1&pg=");
 		$pagerArray = $pagerData['html'];
         //assign lastArticles		
         $order = 'create_time';
 		//$lastArticles = D('Article')->getTrainArticles($order);
-        $lastArticles = D('Article')->getArticlesListType($order,$id,($pg-1)*$nums,$nums,4);
+        $lastArticles = D('Article')->getArticlesListType($order,$id,($pglimit-1)*20,$nums,4);
 		$this->assign('lastArticlespage', $pagerArray);
         $this->assign('lastArticles', $lastArticles);
 				//print_r($lastArticles);

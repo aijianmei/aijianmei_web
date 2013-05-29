@@ -660,13 +660,13 @@ function show_banner($type){
 			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
 			$pglimit=intval($_GET['pg']);
 		}else{
-			$pg=1;
+			$pglimit=$pg=1;
 		}
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=index&act=index&ctype=3&pg=');
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=index&act=index&ctype=3&pg=');
 		$pagerArray = $pagerData['html'];
 
 		//print_r($pagerArray);
-        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit ".($pg-1)*$nums.",$nums";
+        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit ".(($pglimit-1)*20).",$nums";
 		$newvideos=$hot_video=null;
 		$newvideos=$this->getDataCache(md5($sql));
 		if(!$newvideos){
@@ -691,7 +691,7 @@ function show_banner($type){
 			$this->setDataCache(md5($countsql),$countInfo);
 		}
 		
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pg,'/index.php?app=index&mod=index&act=index&ctype=4&pg=');
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pg,'/index.php?app=index&mod=index&act=index&ctype=4&pg=');
 		$pagerArray = $pagerData['html'];
 		
         
@@ -723,7 +723,7 @@ function show_banner($type){
 			$this->setDataCache(md5($countsql),$countInfo);
 		}
 		
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=index&act=index&ctype=1&pg=');
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=index&act=index&ctype=1&pg=');
 		$pagerArray = $pagerData['html'];
         $sql = "select a.* from ai_article a group by a.id order by a.create_time desc limit ".($pg-1)*$nums.",$nums";
 		$newArticles=null;
@@ -748,7 +748,7 @@ function show_banner($type){
 			$this->setDataCache(md5($countsql),$countInfo);
 		}
 		
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=index&act=index&ctype=2&pg=');
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=index&act=index&ctype=2&pg=');
 		$pagerArray = $pagerData['html'];
 		
 		

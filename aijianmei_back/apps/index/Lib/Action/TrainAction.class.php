@@ -85,7 +85,7 @@ class TrainAction extends Action {
 			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
 			$pglimit=intval($_GET['pg']);
 		}else{
-			$pg=1;
+			$pglimit=$pg=1;
 		}
 		
 		
@@ -97,23 +97,23 @@ class TrainAction extends Action {
 			$countInfo = M('')->query($countsql);
 			$this->setDataCache(md5($countsql),$countInfo);
 		}
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=2&pg=');
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=2&pg=');
 		$pagerArray = $pagerData['html'];
 		
 		$order = 'reader_count';
 		//$hotArticles = D('Article')->getTrainArticles($order);
-        $hotArticles = D('Article')->getTrainArticlesList($order,'',($pg-1)*$nums,$nums);
+        $hotArticles = D('Article')->getTrainArticlesList($order,'',($pglimit-1)*20,$nums);
         //print_r( $hotArticles);
 		$this->assign('hotArticlespage', $pagerArray);
         $this->assign('hotArticles', $hotArticles);
         
 		
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=1&pg=');
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=1&pg=');
 		$pagerArray = $pagerData['html'];
         //assign lastArticles		
         $order = 'create_time';
 		//$lastArticles = D('Article')->getTrainArticles($order);
-        $lastArticles = D('Article')->getTrainArticlesList($order,'',($pg-1)*$nums,$nums);
+        $lastArticles = D('Article')->getTrainArticlesList($order,'',($pglimit-1)*20,$nums);
 		$this->assign('lastArticlespage', $pagerArray);
         $this->assign('lastArticles', $lastArticles);
 		
@@ -126,21 +126,21 @@ class TrainAction extends Action {
 			$this->setDataCache(md5($countsql),$countInfo);
 		}
 		
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=3&pg=');
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=3&pg=');
 		$pagerArray = $pagerData['html'];
 		
 		$order = 'create_time';
 		//$lastArticles = D('Article')->getTrainArticles($order);
-        $lastVideoList = D('Article')->getTrainVideoList($order,'',($pg-1)*$nums,$nums);
+        $lastVideoList = D('Article')->getTrainVideoList($order,'',($pglimit-1)*20,$nums);
 		$this->assign('lastVideoListpage', $pagerArray);
         $this->assign('lastVideoList', $lastVideoList);
 		//print_r($lastVideoList);
 		//print_r($lastVideoList);
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=4&pg=');
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=4&pg=');
 		$pagerArray = $pagerData['html'];
 		$order = 'click';
 		//$lastArticles = D('Article')->getTrainArticles($order);
-        $hotVideoList = D('Article')->getTrainVideoList($order,'',($pg-1)*$nums,$nums);
+        $hotVideoList = D('Article')->getTrainVideoList($order,'',($pglimit-1)*20,$nums);
 		$this->assign('hotVideoListpage', $pagerArray);
         $this->assign('hotVideoList', $hotVideoList);
 		
@@ -227,7 +227,7 @@ class TrainAction extends Action {
 			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
 			$pglimit=intval($_GET['pg']);
 		}else{
-			$pg=1;
+			$pglimit=$pg=1;
 		}
 		
 		$order = 'reader_count';
@@ -248,7 +248,7 @@ class TrainAction extends Action {
 		
 		$order = 'reader_count';
 		//$hotArticles = D('Article')->getTrainArticles($order);
-        $hotArticles = D('Article')->getTrainArticlesList($order,$id,($pg-1)*$nums,$nums);
+        $hotArticles = D('Article')->getTrainArticlesList($order,$id,($pglimit-1)*20,$nums);
         //print_r( $hotArticles);
 		$this->assign('hotArticlespage', $pagerArray);
         $this->assign('hotArticles', $hotArticles);
@@ -259,7 +259,7 @@ class TrainAction extends Action {
         //assign lastArticles		
         $order = 'create_time';
 		//$lastArticles = D('Article')->getTrainArticles($order);
-        $lastArticles = D('Article')->getTrainArticlesList($order,$id,($pg-1)*$nums,$nums);
+        $lastArticles = D('Article')->getTrainArticlesList($order,$id,($pglimit-1)*20,$nums);
 		$this->assign('lastArticlespage', $pagerArray);
         $this->assign('lastArticles', $lastArticles);
 		
@@ -332,7 +332,7 @@ class TrainAction extends Action {
 			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
 			$pglimit=intval($_GET['pg']);
 		}else{
-			$pg=1;
+			$pglimit=$pg=1;
 		}
 		
 		//$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
@@ -348,7 +348,7 @@ class TrainAction extends Action {
 		//print_r($pagerArray);
 		$order = 'create_time';
 		//$lastArticles = D('Article')->getTrainArticles($order);
-        $lastVideoList = D('Article')->getTrainVideoList($order,'',($pg-1)*$nums,$nums);
+        $lastVideoList = D('Article')->getTrainVideoList($order,'',($pglimit-1)*20,$nums);
 		$this->assign('lastVideoListpage', $pagerArray);
         $this->assign('lastVideoList', $lastVideoList);
 		//print_r($lastVideoList);
@@ -357,7 +357,7 @@ class TrainAction extends Action {
 		$pagerArray = $pagerData['html'];
 		$order = 'click';
 		//$lastArticles = D('Article')->getTrainArticles($order);
-        $hotVideoList = D('Article')->getTrainVideoList($order,'',($pg-1)*$nums,$nums);
+        $hotVideoList = D('Article')->getTrainVideoList($order,'',($pglimit-1)*20,$nums);
 		$this->assign('hotVideoListpage', $pagerArray);
         $this->assign('hotVideoList', $hotVideoList);
 		

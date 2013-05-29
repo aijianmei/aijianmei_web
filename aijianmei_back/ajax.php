@@ -65,7 +65,7 @@ function checkUserName(){
 
 function ajaxInMore($data){
 	ob_end_clean();
-	$nums=5;
+	$nums=15;
 	$type=intval($_POST['type']);
 	$page=intval($_POST['pg']);
 	$mtype=intval($_POST['mtype'])?intval($_POST['mtype']):2;
@@ -76,7 +76,7 @@ function ajaxInMore($data){
 		//$sql = "select a.* from ai_article a group by a.id order by a.".$order." desc limit ".$froms*$nums.",$nums";
 		if($lid>0){$cateStr='AND a.category_id in ('.$lid.')';}else{$cateStr='';}
 		$orderTableSql="SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id $cateStr";
-		$sql = "select a.* from ai_article a where id in ($orderTableSql) group by a.id  order by ".$order." desc limit ".$froms*$nums.",$nums";
+		$sql = "select a.* from ai_article a where id in ($orderTableSql) group by a.id  order by ".$order." desc limit ".(($page-1)*20+5).",$nums";
 		$result=null;
 		$result=getDataCache(md5($sql));
 		
@@ -118,7 +118,7 @@ function ajaxInMore($data){
 	if($type==3||$type==4){
 		$order=($type==1)?'create_time':'reader_count';
 		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
-		$sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by click desc limit ".$froms*$nums.",$nums";
+		$sql = "select v.* from ai_video v order by v.click desc limit ".(($page-1)*20+5).",$nums";
 		$result=null;
 		$result=getDataCache(md5($sql));
 		if(!$result){
@@ -165,7 +165,7 @@ function ajaxInMore($data){
 
 function ajaxTrainMore($data){
 	ob_end_clean();
-	$nums=5;
+	$nums=15;
 	$type=intval($_POST['type']);
 	$page=intval($_POST['pg']);
 	$mtype=intval($_POST['mtype'])?intval($_POST['mtype']):2;
@@ -173,7 +173,7 @@ function ajaxTrainMore($data){
 	if($type==1||$type==2){
 		$order=($type==1)?'create_time':'reader_count';
 		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =$mtype";
-		$sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by a.".$order." desc limit ".$froms*$nums.",$nums";
+		$sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by a.".$order." desc limit ".(($page-1)*20+5).",$nums";
 		$result=null;
 		$result=getDataCache(md5($sql));
 		if(!$result){
@@ -214,7 +214,7 @@ function ajaxTrainMore($data){
 	if($type==3||$type==4){
 		$order=($type==1)?'create_time':'click';
 		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =$mtype";
-		$sql = "select * from ai_video  order by $order desc limit ".$froms*$nums.",$nums";
+		$sql = "select * from ai_video  order by $order desc limit ".(($page-1)*20+5).",$nums";
 		$result=null;
 		$result=getDataCache(md5($sql));
 		if(!$result){

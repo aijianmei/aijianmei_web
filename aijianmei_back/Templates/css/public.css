@@ -23,6 +23,10 @@
     top: 0;
     width: 214px;
 }
+					.cont_vd_dt{
+						height: 70px;
+						margin: 10px 0;
+					}
 .cont_vd_1 {
     float: left;
     margin-right: 10px;
@@ -78,12 +82,15 @@ button{
     border-top: 1px solid white;
     padding: 25px 0;
 }
-.cont_vd_see {
-    background: url("../images/button_icon.png") no-repeat scroll 0 -474px transparent;
-    display: inline-block;
-    height: 38px;
-    width: 109px;
-}
+					.cont_vd_see{
+						display: inline-block;
+						width: 109px;
+						height: 38px;
+						background:url(../images/sprite.png) no-repeat -252px -0px;
+					}
+					.cont_vd_see:hover{
+						background:url(../images/sprite.png) no-repeat -252px -37px;
+					}
 .show_share{height:34px;margin-top: 10px;margin-left: 40px!important;opacity: 0.5;filter: alpha(opacity=50);-webkit-transition: opacity .8s;}
 .show_share:hover{opacity:1;}
 /******* clearfix ********/

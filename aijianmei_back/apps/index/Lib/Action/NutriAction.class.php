@@ -84,7 +84,7 @@ class NutriAction extends Action {
 			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
 			$pglimit=intval($_GET['pg']);
 		}else{
-			$pg=1;
+			$pglimit=$pg=1;
 		}
 		
 		
@@ -96,23 +96,23 @@ class NutriAction extends Action {
 			$countInfo = M('')->query($countsql);
 			$this->setDataCache(md5($countsql),$countInfo);
 		}
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Nutri&act=index&ctype=2&pg=');
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=Nutri&act=index&ctype=2&pg=');
 		$pagerArray = $pagerData['html'];
 		
 		$order = 'reader_count';
 		//$hotArticles = D('Article')->getTrainArticles($order);
-        $hotArticles = D('Article')->getArticlesListType($order,'',($pg-1)*$nums,$nums,3);
+        $hotArticles = D('Article')->getArticlesListType($order,'',($pglimit-1)*20,$nums,3);
         //print_r( $hotArticles);
 		$this->assign('hotArticlespage', $pagerArray);
         $this->assign('hotArticles', $hotArticles);
         
 		
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Nutri&act=index&ctype=1&pg=');
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=Nutri&act=index&ctype=1&pg=');
 		$pagerArray = $pagerData['html'];
         //assign lastArticles		
         $order = 'create_time';
 		//$lastArticles = D('Article')->getTrainArticles($order);
-        $lastArticles = D('Article')->getArticlesListType($order,'',($pg-1)*$nums,$nums,3);
+        $lastArticles = D('Article')->getArticlesListType($order,'',($pglimit-1)*20,$nums,3);
 		$this->assign('lastArticlespage', $pagerArray);
         $this->assign('lastArticles', $lastArticles);
 		
@@ -145,7 +145,7 @@ class NutriAction extends Action {
 			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
 			$pglimit=intval($_GET['pg']);
 		}else{
-			$pg=1;
+			$pglimit=$pg=1;
 		}
 
         //assign hotArticles
@@ -156,23 +156,23 @@ class NutriAction extends Action {
 			$countInfo = M('')->query($countsql);
 			$this->setDataCache(md5($countsql),$countInfo);
 		}
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Nutri&act=articleList&id=$id&ctype=2&pg=");
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,"/index.php?app=index&mod=Nutri&act=articleList&id=$id&ctype=2&pg=");
 		$pagerArray = $pagerData['html'];
 		
 		$order = 'reader_count';
 		//$hotArticles = D('Article')->getTrainArticles($order);
-        $hotArticles = D('Article')->getArticlesListType($order,'',($pg-1)*$nums,$nums,3);
+        $hotArticles = D('Article')->getArticlesListType($order,'',($pglimit-1)*20,$nums,3);
         //print_r( $hotArticles);
 		$this->assign('hotArticlespage', $pagerArray);
         $this->assign('hotArticles', $hotArticles);
         
 		
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Nutri&act=articleList&id=$id&ctype=1&pg=");
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,"/index.php?app=index&mod=Nutri&act=articleList&id=$id&ctype=1&pg=");
 		$pagerArray = $pagerData['html'];
         //assign lastArticles		
         $order = 'create_time';
 		//$lastArticles = D('Article')->getTrainArticles($order);
-        $lastArticles = D('Article')->getArticlesListType($order,'',($pg-1)*$nums,$nums,3);
+        $lastArticles = D('Article')->getArticlesListType($order,'',($pglimit-1)*20,$nums,3);
 		$this->assign('lastArticlespage', $pagerArray);
         $this->assign('lastArticles', $lastArticles);
 		
