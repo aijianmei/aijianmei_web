@@ -80,7 +80,7 @@ function ajaxInMore($data){
 		$result=null;
 		$result=getDataCache(md5($sql));
 		
-		if(!$result){
+		if(empty($result)){
 			$result=C_mysqlQuery($sql);
 			while($row=mysql_fetch_assoc($result)){
 				$resultTmp[]=$row;
@@ -117,11 +117,11 @@ function ajaxInMore($data){
 	}
 	if($type==3||$type==4){
 		$order=($type==1)?'create_time':'reader_count';
-		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
+		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =$mtype";
 		$sql = "select v.* from ai_video v order by v.click desc limit ".(($page-1)*20+5).",$nums";
 		$result=null;
 		$result=getDataCache(md5($sql));
-		if(!$result){
+		if(empty($result)){
 			$result=C_mysqlQuery($sql);
 			while($row=mysql_fetch_assoc($result)){
 				$resultTmp[]=$row;
@@ -176,7 +176,7 @@ function ajaxTrainMore($data){
 		$sql = "select a.* from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by a.".$order." desc limit ".(($page-1)*20+5).",$nums";
 		$result=null;
 		$result=getDataCache(md5($sql));
-		if(!$result){
+		if(empty($result)){
 			$result=C_mysqlQuery($sql);
 			while($row=mysql_fetch_assoc($result)){
 				$resultTmp[]=$row;
@@ -217,7 +217,7 @@ function ajaxTrainMore($data){
 		$sql = "select * from ai_video  order by $order desc limit ".(($page-1)*20+5).",$nums";
 		$result=null;
 		$result=getDataCache(md5($sql));
-		if(!$result){
+		if(empty($result)){
 			$result=C_mysqlQuery($sql);
 			while($row=mysql_fetch_assoc($result)){
 				$resultTmp[]=$row;
@@ -616,7 +616,7 @@ function getDataCache($key)
 		if(is_file($cachefile))
 		{
 			$data=null;
-			$data=unserialize(include($cachefile));
+			$data=mb_unserialize(include($cachefile));
 			return $data;
 		}
 		return '';
@@ -625,6 +625,15 @@ function setDataCache($key,$data)
 	{
 		file_put_contents("DBCache/$key.php","<?php\n\r return '".serialize($data)."';");
 	}
+	
+function mb_unserialize($serial_str) {
+    $serial_str= preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $serial_str );
+    $serial_str= str_replace("\r", "", $serial_str);      
+    return unserialize($serial_str);
+}	
+	
+	
+	
 function getArticlesListType($order,$id=null,$limit,$nums,$type=null)
     {
         if($id) {

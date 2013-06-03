@@ -63,7 +63,7 @@ class NutriAction extends Action {
         $pg=$_GET['pg']?$_GET['pg']:1;
 		$nums=5;
         $this->assign('cssFile', 'training');
-        $map['channel'] = '2';
+        $map['channel'] = '3';
         $cate = M('article_category')->where($map)->findAll();
         foreach($cate as $c)
             if($c['parent'] == NULL) $parent[$c['id']] = $c;

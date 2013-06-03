@@ -261,10 +261,11 @@ class ArticleModel extends Model {
         
         return $result;
     }
-    public function getCountRecommentsById($id)
+    public function getCountRecommentsById($id,$parent_type=null)
     {
         $sql=null;$numsArr=null;
-        $sql="select count(*) as nums from ai_comments where parent_id=".$id;
+		$parent_type=$parent_type?$parent_type:1;
+        $sql="select count(*) as nums from ai_comments where parent_id=".$id." and parent_type=$parent_type";
         $numsArr= M('')->query($sql);
         return !empty($numsArr[0]['nums'])?$numsArr[0]['nums']:0;
     }

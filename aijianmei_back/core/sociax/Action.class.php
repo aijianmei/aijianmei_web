@@ -81,7 +81,8 @@ abstract class Action extends Think
 	protected function api($name) {
 	     return api($name);
 	}
-		public function getDataCache($key)
+	/* add by kontem at 20130530 修正序列化数组 长度计算出错导致读取false的问题 start*/
+	public function getDataCache($key)
 	{
 		$cachefile="DBCache/$key.php";
 		if(is_file($cachefile))
@@ -96,6 +97,12 @@ abstract class Action extends Think
 	{
 		file_put_contents("DBCache/$key.php","<?php\n\r return '".serialize($data)."';");
 	}
+	public function mb_unserialize($serial_str) {
+		$serial_str= preg_replace('!s:(\d+):"(.*?)";!se', "'s:'.strlen('$2').':\"$2\";'", $serial_str );
+		$serial_str= str_replace("\r", "", $serial_str);      
+		return unserialize($serial_str);
+	}
+	/*}}}end*/
    /**
      +----------------------------------------------------------
      * 初始化当前应用信息

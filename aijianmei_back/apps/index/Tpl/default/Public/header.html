@@ -2,6 +2,7 @@
     <html xmlns:wb=“http://open.weibo.com/wb”>
         <head>
             <meta charset="utf-8"/>
+			<meta name="baidu-site-verification" content="oINvrp113S" />
 			<meta name="baidu_union_verify" content="c43c00cab8564dcf9a25e3a5c666410b">
 			<meta property="qc:admins" content="142030514561121165516375" />
             <title><?php if(!empty($headertitle)){echo $headertitle;}else{echo '爱健美首页 - 推广健身文化，传播健康理念';}?></title>
@@ -116,7 +117,7 @@
                             </ul>
                         </li>
                         <li class="special_buy">
-                            <a class="car_buy">购物车</a>
+                            <a class="car_buy <php>if(!getMid()){</php>login<php>}</php>" <php>if(getMid()){</php>href="/shop/flow.php"<php>}</php>>购物车</a>
                         </li>
                     </ul>
 					<php>}</php>
@@ -126,7 +127,7 @@
                         <a href="/index.php?app=index"><div class="logo_1">logo</div></a>
                         <ul class="nav">
                             <li <php>if($_current=='index'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/index.html"><span class="home">首页</span></a></li>
-                            <li><i class="ag_current"></i><a href='#'><span class="store">商店</span></a></li>
+                            <li><i class="ag_current"></i><a href='/shop/'><span class="store">商店</span></a></li>
                             <li <php>if($_current=='plan'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/Plan.html">健身计划</a></li>
                             <li <php>if($_current=='train'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/Train.html">锻炼</a>
                                <!--  <ul class="conceal_part">
@@ -137,8 +138,9 @@
 
                             </li>
                             <li <php>if($_current=='append'){</php> class="nav_current"<php>}</php>><i class="ag_current"></i><a href="/Append.html">辅助品</a></li>
-                            <li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
-                            <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>
+                            <!--<li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
+                            <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>-->
+							<li ><i class="ag_current"></i><a href="/Lifestyle.html">生活方式</a></li>
                         </ul>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 <include file="Templates/header.html" />
-        <!-- outside wrapper -->
-        <div class="wrapper clearfix">
+    <div class="wrapper">
+		<div class="wrapper_bg clearfix">
         	<div class="content_1">
 				<div class="tr_content">
 					<p class="search_tip">根据您的关键词"{$keyword}"本站共有<span>{$cnums}</span>个相应资源</p>
@@ -46,10 +46,12 @@
 	        	<include file="Templates/commentList.html" />
         	</div>
         </div>
+	</div>
 <include file="Templates/footer.html" />
 <include file="Templates/loginpart.html" />
 		<input type="hidden" id="scroinfo" h="" sh="" top="">
 		<div class="title_tip"><div class="title_content"></div><div class="angle"><span></span></div></div>
+
         <script type="text/javascript" src="Templates/js/public.js"></script>
         <script type="text/javascript">
         	var init = function(){

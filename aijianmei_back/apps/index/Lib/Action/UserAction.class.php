@@ -451,7 +451,6 @@ class UserAction extends Action {
 			
 			_postCurlRegister($sdata);
 			service('Passport')->loginLocal($sdata['uname'],$sdata['password'],1);
-			
 			$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$sdata['uname'].'"';
             $uid = M('')->query($getUidSql);
             $_SESSION['user_id']   = $uid[0]['user_id'];
@@ -509,6 +508,7 @@ class UserAction extends Action {
 				M('')->query($upsql);
 			}
 		}
+		$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($mid);
 		if($_SESSION['regrefer_url']!=''){
 			$_SESSION['deslogin']=0;
 			$_SESSION['regrefer_msg']='恭喜你成功注册“爱健美”';
@@ -624,7 +624,7 @@ public function saveedituserinfo(){
 				M('')->query($upsql);
 			}
 		}
-
+		$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($mid);
 		//service('Passport')->login($mid);
 		
 		redirect(U('index/User/edituserinfo'));

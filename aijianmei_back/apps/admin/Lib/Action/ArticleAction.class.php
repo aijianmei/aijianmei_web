@@ -279,7 +279,7 @@ class ArticleAction extends AdministratorAction {
         $pager->setList($nums);
         $pager->makePage();
         $from = ($pager->pg -1) * $pager->countlist;
-		$sql="select * from ai_comments where parent_type='".$type."' limit $from,$nums";
+		$sql="select * from ai_comments where parent_type='".$type."' order by id desc limit $from,$nums";
 		$comlists=M('')->query($sql);		
         $pagerArray = (array)$pager;
 		$res=M('')->query($sql);
@@ -329,7 +329,13 @@ class ArticleAction extends AdministratorAction {
 	
 	public function doDeletecomment()
     {
-        $this->delete('article_category');
+        if( empty($_POST['ids']) ) {
+            echo 0;
+            exit ;
+        }
+        $map['id'] = array('in', t($_POST['ids']));
+        echo M('comments')->where($map)->delete() ? '1' : '0';
+        //$this->delete('article_category');
     }
     public function doDeleteCate()
     {

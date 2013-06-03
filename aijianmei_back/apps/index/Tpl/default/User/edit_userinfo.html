@@ -18,15 +18,15 @@
 						<input type="hidden" name="upic_type" value="{$upic_type}" id="upic_type">
         				<label for="picture">头像</label>
         				<div class="dt_content">
-						<a class="rg_upload" id="labup">选择文件</a>
-						<php>if($user_type==2){</php><a class="rg_upload" id="sina_choosepic" onclick="changeUserImg('sina');" <php>if($upic_type==2){</php>style="display:none;"<php>}</php>>使用新浪头像</a><php>}</php>
-						<php>if($user_type==3){</php><a class="rg_upload" id="qq_choosepic" onclick="changeUserImg('qq');" <php>if($upic_type==3){</php>style="display:none;"<php>}</php>>使用qq头像</a><php>}</php>
-						<a class="rg_upload" id="local_choosepic" onclick="changeUserImg('local');" <php>if($upic_type==1){</php>style="display:none;"<php>}</php>>使用本地头像</a>
+						<a class="rg_upload" id="labup" style="float:left;">选择文件</a>
+						<php>if($user_type==2||$user_type==3){</php><span class="rg_upload_css" id="other_choosepic" onclick="changeUserImg('other');" <php>if($upic_type==2||$upic_type==2){</php>style="display:none;"<php>}</php>
+						>使用<php>if($user_type==2){</php>新浪<php>}</php><php>if($user_type==3){</php>qq<php>}</php>头像</span><php>}</php>
+						<span class="rg_upload_css" id="local_choosepic" onclick="changeUserImg('local');" <php>if($upic_type==1){</php>style="display:none;"<php>}</php>>使用本地头像</span>
         				</div>
 						<div id="feedback2"></div>
         				<img id="feedimg" <php>if(!$imgurl){</php>src="Templates/images/login_pic.jpg"<php>}else{</php>src="{$imgurl}"<php>}</php> class="dt_choice_img" />
-						<php>if($user_type==2){</php><img id="sinaimg" src="{$sinaimg}" class="dt_choice_img" style="display:none;"/><php>}</php>
-						<php>if($user_type==3){</php><img id="qqimg" src="{$qqimg}" class="dt_choice_img" style="display:none;"/><php>}</php>
+						<php>if($user_type==2){</php><img id="otherimg" src="{$sinaimg}" class="dt_choice_img" style="display:none;"/><php>}</php>
+						<php>if($user_type==3){</php><img id="otherimg" src="{$qqimg}"   class="dt_choice_img" style="display:none;"/><php>}</php>
 						<img id="localimg" src="{$localimg}" class="dt_choice_img" style="display:none;"/>
         			</div>
         			<div class="dt_revise clearfix">
@@ -216,6 +216,7 @@
      #exec_target{display:none;width:0;height:0;}
 </style>
 <script type="text/javascript">
+var changeFlag=false;
 function checktxt(str){
 	var txt=new RegExp("[ ,\\`,\\~,\\!,\\@,\#,\\$,\\%,\\^,\\+,\\*,\\&,\\\\,\\/,\\?,\\|,\\:,\\.,\\<,\\>,\\{,\\},\\(,\\),\\'',\\;,\\=,\"]");
    //特殊字符正则表达式
@@ -279,32 +280,24 @@ $(document).ready(function(){
 });
 function changeUserImg(key){
 	if(key=='local'){
-		$("#sinaimg").hide();
-		$("#qqimg").hide();
-		$("#feedimg").hide();
-		$("#localimg").show();
-		$("#local_choosepic").hide();
-		$("#sina_choosepic").show();
-		$("#qq_choosepic").show();
+		$("#otherimg").attr("style","display:none;");
+		$("#feedimg").attr("style","display:none;");
+		$("#localimg").attr("style","display:block;");
+		$("#local_choosepic").attr("style","display:none;");
+		$("#other_choosepic").attr("style","display:block;");
 		$("#upic_type").val(1);
-	}else if(key=='sina'){
-		$("#sinaimg").show();
-		$("#qqimg").hide();
-		$("#feedimg").hide();
-		$("#local_choosepic").show();
-		$("#"+key+"_choosepic").hide();
-		$("#upic_type").val(2);
-	}else if(key=='qq'){
-		$("#sinaimg").hide();
-		$("#qqimg").show();
-		$("#feedimg").hide();
-		$("#local_choosepic").show();
-		$("#"+key+"_choosepic").hide();
-		$("#upic_type").val(3);
+	}else if(key=='other'){
+		$("#otherimg").attr("style","display:block;");
+		$("#feedimg").attr("style","display:none;");
+		$("#localimg").attr("style","display:none;");
+		$("#local_choosepic").attr("style","display:block;");
+		$("#other_choosepic").attr("style","display:none;");
+		$("#upic_type").val(<?php echo $user_type;?>);
 	}
 }
 
 function formsubBykey(key){
+	changeFlag=false;
 	if(key=='userinfo'){
 		var username=$("#username").val();
 		if(username==''){
@@ -342,7 +335,6 @@ function checkPhone()
   if(ab.test(phone) == false)
   {
     //alert("请正确填写手机号码!");
-	$("#tele").focus();
 	$("#ctell_msg").attr('style','color:red;');
 	$("#ctell_msg").html('请填写有效的手机号码');
     return false;
@@ -361,7 +353,6 @@ function isMail(){
 		return true;
 	}
 	else{
-		$("#email").focus();
 		$("#cemail_msg").attr('style','color:red;');
 		$("#cemail_msg").html('邮箱格式错误!');
 		return false;
@@ -397,6 +388,7 @@ function getCity(parent, child) {
 	$("#province_2").change(function() {
 		getCity("province_2", "city_2");
 	});
+
 var default_year = <?php if($healthinfo['age']!=''){echo "'".$healthinfo['age']."岁'";}else{echo "false";}?>,
     default_height = <?php if($healthinfo['height']!=''){echo "'".$healthinfo['height']."cm'";}else{echo "false";}?>,
     default_weight = <?php if($healthinfo['body_weight']!=''){echo "'".$healthinfo['body_weight']."kg'";}else{echo "false";}?>;
@@ -405,5 +397,49 @@ var default_year = <?php if($healthinfo['age']!=''){echo "'".$healthinfo['age'].
 	$(".dt_year_input").hide();
 </script>
 <script type="text/javascript" src="Templates/js/datum.js"></script>
+<script type="text/javascript">
+/*
+		//标识文本框值是否改变，为true，标识已变 
+$(document).ready(function(){
+		     //文本框值改变即触发     
+$("input[type='text']").change(function(){
+			var formid = $(this).closest('form').attr('id');
+				 changeFlag=true;     
+			});
+$("input[type='password']").change(function(){
+				 changeFlag=true;     
+			});
+$("input[name=dt_weight_finish]").change(function(){
+				 changeFlag=true;     
+			});
+$("input[name=dt_height_finish]").change(function(){
+				 changeFlag=true;     
+			});
+$("input[name=dt_year_finish]").change(function(){
+				 changeFlag=true;     
+			});
+			$("select").change(function(){
+				 changeFlag=true;     
+			}); 
+			//文本域改变即触发
+			$("textarea").change(function(){
+				 changeFlag=true;     
+			}); 
+		});
+if (typeof window.addEventListener === 'undefined') {
+    window.addEventListener = function(e, callback) {
+        return window.attachEvent('on' + e, callback);
+    }
+}
+
+window.addEventListener('beforeunload', function() {
+    		 	 if(changeFlag ==true){
+				 
+				return '页面值已经修改，是否要保存？';
+		 	 }
+});		
+
+*/
+</script>
 </body>
 </html>

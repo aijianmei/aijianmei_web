@@ -2,7 +2,7 @@
 
 
 function _postCurlRegister($data){
-    $url = 'http://www.aijianmei.com/shop/user.php';
+    $url = 'http://www.kon_aijianmei.com/shop/user.php';
     $post_data = array(
     'password' => $data['password'],
     'username' => $data['uname'],

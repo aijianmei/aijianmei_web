@@ -61,7 +61,7 @@ class SearchAction extends Action {
 			}
 			$this->setDataCache(md5($limitsql),$searchInfo);
 		}
-		echo json_encode($searchInfo[0]);
+		//print_r($searchInfo);
 		$pageArr=$this->pageHtml($countinfo[0]['cnums'],$nums,$pg,'search_'.$keyword.'_l','.html');
 		$this->assign('searchpage', $pageArr['html']);
 		$this->assign('cnums', $countinfo[0]['cnums']);

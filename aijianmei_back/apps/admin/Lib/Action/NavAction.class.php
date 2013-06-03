@@ -194,7 +194,7 @@ class NavAction extends Action {
 	{
 		$menusInfo=$fileName=null;
 		$fileName='TopMenuCache.php';
-		$menusInfo = M('nav_menu')->where('partent_id=0')->order('sort asc')->findAll(); //顶级导航信息
+		$menusInfo = M('nav_menu')->where('partent_id=0 and status=1 ')->order('sort asc')->findAll(); //顶级导航信息
 		foreach($menusInfo as $key => $value)
 		{
 			$CmenusInfo=null;

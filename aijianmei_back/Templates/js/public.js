@@ -571,3 +571,172 @@ $(function() {
 	}
 	});
 });
+
+
+function FormChangedListener(elems){
+	//私有属性
+	var _elements = elems,
+		_cancel = false,
+		_this = this,
+		_inited = false,
+		_initTotalNum = 0;
+	//内部私有方法
+	function _bind(elems){
+		if(!elems) elems = _elements;
+		if(!validElements(_elements)) return;
+		try{
+			_cancel = false;
+			$(document).ready(function(){
+				$(elems).each(function(){
+					if($(this).attr("type").toLowerCase()=="checkbox" || $(this).attr("type").toLowerCase()=="radio"){
+						$(this).data("init_value",this.checked);
+						$(this).data("need_check",true);
+					}else{
+						$(this).data("init_value",$(this).val());
+						$(this).data("need_check",true);
+					}
+				});
+			});
+		}catch(e){
+			//do nothing 出错时，不影响正常业务流程
+		}
+	};
+	//私有
+	function _beforeunload(){
+		window.onbeforeunload = function(){
+			try{
+				var checkResult = _check();
+				if(checkResult!==true){
+					return checkResult;
+				}
+			}catch(e){
+				//do nothing 出错时，不影响正常业务流程
+			}
+		};
+	};
+	//私有
+	function _check(){
+		if(_cancel==true) return true;
+		var isChanged = false;
+		if(_initTotalNum != (_elements.length||0)){
+			isChanged=true;
+		}else{
+			var allElems = $("input,select,textarea");//所有的表单元素
+			$(_elements).each(function(){
+				if($.inArray(this,allElems)==-1){
+					isChanged =true;//如果元素被从dom中删除了，也需要提示
+					return false;
+				}
+				if($(this).data("need_check")==true){
+					var _value = $(this).data("init_value");
+					if(typeof _value=="undefined" || _value==null) _value="";
+					if($(this).attr("type").toLowerCase()=="checkbox" || $(this).attr("type").toLowerCase()=="radio"){
+						if(this.checked !=_value) isChanged =true;
+					}else {
+						if($(this).val()!=_value) isChanged =true;
+					}
+				}
+				if(isChanged==true) return false;
+			});
+		}
+		if(isChanged==true) return "您修改的内容还没有保存，确认离开吗？";
+		else return true;
+	}
+	function validElements(elems){
+		if(elems==null || typeof elems=='undefined') return false;
+		if(elems.length && elems.length<=0) return false;
+		return true;
+	}
+	//公有方法
+	//bind事件
+	this.bind = function(){
+		if(_inited==true){
+			throw new Error("use rebind,please!");
+			return ;
+		}
+		try{
+			_cancel = false;
+			$(document).ready(function(){
+				_bind();
+				_beforeunload();
+				_inited = true;
+				_initTotalNum = _elements.length || 0;
+			});
+		}catch(e){
+			//do nothing 出错时，不影响正常业务流程
+		}
+	};
+	//添加需要监听的元素
+	this.add = function(elems){
+		if(!validElements(_elements)) _elements = elems;
+		else _elements = _elements.add(elems);
+		if(_inited==true){
+			_bind(elems);
+		}
+	};
+	this.remove = function(elems){
+		if(!validElements(_elements)) return false;
+		//从监听元素列表中去掉这些元素
+		_elements = _elements.filter(function(){
+			if($.inArray(this,elems)!=-1){
+				$(this).removeData("need_check");
+				_initTotalNum--;//调用remove需要把比较基准的元素数量相应减少
+				return false;
+			}else{
+				return true;
+			}
+		});
+		/*
+		$(elems).each(function(){
+			$(this).data("need_check",false);
+			$(this).removeAttr("formListenerSeq");
+		});
+		*/
+	}
+	//取消监听事件
+	this.cancel = function(){
+		_cancel = true;
+	};
+	//重新设置比较基准值为当前元素的值
+	this.rebind = function(){
+		if(_inited==false){
+			throw new Error("use bind to init first!");
+			return ;
+		}
+		if(!validElements(_elements)) return;
+		var allElems = $("input,select,textarea");
+		//rebind时，去掉列表中已经从dom删除的元素
+		_elements = _elements.filter(function(){
+			if($.inArray(this,allElems)==-1){
+				return false;
+			}else{
+				return true;
+			}
+		});
+		_inited = false;
+		this.bind();
+	};
+	//重新打开监听器
+	this.active = function(){
+		_cancel = false;
+	}
+	//开放获取监听列表元素的方法
+	this.getElements = function(){
+		return _elements;
+	};
+	//获取监听器是否失效
+	this.isCancel = function(){
+		return _cancel;
+	};
+	//获取比较基线的对象数量
+	this.getBaseLineNum = function(){
+		return _initTotalNum;
+	};
+	//公开手动检查是否有元素更改的方法
+	this.isChanged = function(){
+		if(_check()===true) return false;
+		else return true;
+	}
+}
+
+

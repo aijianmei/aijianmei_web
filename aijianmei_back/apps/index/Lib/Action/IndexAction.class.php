@@ -409,18 +409,18 @@ function show_banner($type){
     {
 		$bannerinfo=array(
 		'1'=>array(
-			'name'=>'没有蛋白质就没有“肌肉梦”',
+			'name'=>'新手变身"肌肉型男"必看',
 			'img'=>'../Public/images/banner/index_1.jpg',
-			'url'=>'/index-Index-articleDetail-60.html'
+			'url'=>'/index-Index-articleDetail-52.html'
 			),
 		'2'=>array(
-			'name'=>'七招营养秘笈，吃出“肌肉”',
-			'img'=>'../Public/images/banner/index_2.jpg',
-			'url'=>"/index-Index-articleDetail-34.html"),
-		'3'=>array(
 			'name'=>'爱健美专属：每日健身计划',
-			'img'=>'../Public/images/banner/index_5.jpg',
-			'url'=>"/index-Index-articleDetail-93.html")
+			'img'=>'../Public/images/banner/index_2.jpg',
+			'url'=>"/index-Index-articleDetail-93.html"),
+		'3'=>array(
+			'name'=>'七招营养秘笈，吃出“肌肉”',
+			'img'=>'../Public/images/banner/index_3.jpg',
+			'url'=>"/index-Index-articleDetail-34.html")
 		);
 		$this->assign('_bannerInfo',$bannerinfo);	
 		ob_start();
@@ -837,7 +837,7 @@ function show_banner($type){
         $pagerArray = (array)$pager;
         $this->assign('pager', $pagerArray);
         //$articleComments = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'1'))->limit("$from,$pager->countlist")->findAll();
-        $sql="select * from ai_comments where parent_id=$id order by create_time desc limit $from,$pager->countlist";
+        $sql="select * from ai_comments where parent_id=$id and parent_type=1 order by create_time desc limit $from,$pager->countlist";
         $result=null;
         $result=M('article')->query($sql);
         foreach($result as $key=> $value){
@@ -869,6 +869,7 @@ function show_banner($type){
             case 2:{$tree_channel="锻炼 ";$tree_channel_en="Train";$_current='train';}break;
             case 3:{$tree_channel="营养 ";$tree_channel_en="Nutri";$_current='nutri';}break;
             case 4:{$tree_channel="辅助品 ";$tree_channel_en="Append";$_current='append';}break;
+			case 5:{$tree_channel="生活方式 ";$tree_channel_en="Lifestyle";$_current='lifestyle';}break;
         }
         $tree_parent=$result['parent'];		
         $tree_name=$result['name'];
