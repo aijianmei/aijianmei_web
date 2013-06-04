@@ -1,4 +1,7 @@
 RewriteEngine on
+ RewriteCond %{HTTP_HOST} ^aijianmei.com [NC]
+ RewriteRule ^(.*)$ http://www.aijianmei.com/$1 [L,R=301]
+
 RewriteBase /
 RewriteRule index.html index.php
 RewriteRule ^(.+)-(.+)-(articleDetail)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4

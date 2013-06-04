@@ -644,7 +644,7 @@ button{
 		overflow-y: auto;
 	}
 /*fade_modal begin****/
-			/*bn_bg_part bn_bg_transparent start*/
+/*bn_bg_part bn_bg_transparent*/
 			.bn_bg_part{
 				display: none;
 				position: absolute;
@@ -653,10 +653,19 @@ button{
 				width: 100%;
 				height: 80px;
 				line-height: 80px;
-				background: rgba(0,0,0,.6);
-				background: #626262\9;
-				filter:alpha(opacity=90);
 				z-index: 2;
+			}
+			.bn_bg{
+				display: none;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 80px;
+				background: black;
+				opacity: 0.5;
+				filter:alpha(opacity=50);
+				z-index: 1;
 			}
 			.bn_text{
 				font-size: 25px;

@@ -395,6 +395,10 @@ function reg(str){
   </div>
   <!--left end-->   
 
+
+<!--配件套餐形式--> 
+<!-- #BeginLibraryItem "/library/goods_newfittings.lbi" --><!-- #EndLibraryItem -->
+
    <!--商品详情end-->
    <!-- outside  商品属性，--------------------------------------------------begin- -->
    <!--商品描述，商品属性 START-->

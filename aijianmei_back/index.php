@@ -26,7 +26,6 @@ if(@$_SESSION['needSetcookie']!=''){
 	setcookie("ECS[password]",$_SESSION['needSetcookie']['ECS[password]'],time()+3600*24*30,"/");
 	unset($_SESSION['needSetcookie']);
 }
-
 //载入核心文件
 require(SITE_PATH.'/core/sociax.php');
 //实例化一个网站应用实例

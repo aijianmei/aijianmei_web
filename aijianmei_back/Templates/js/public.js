@@ -570,6 +570,17 @@ $(function() {
 	$(this).find(".bn_bg_part").slideDown(300);	
 	}
 	});
+	
+	$(".bn_contain_pic li").bind({
+		mouseleave: function(){
+		$(this).find(".bn_bg_part").slideUp(300);
+		$(this).find(".bn_bg").slideUp(300);
+	},
+	mouseenter: function(){
+		$(this).find(".bn_bg_part").slideDown(300);	
+		$(this).find(".bn_bg").slideDown(300);	
+		}
+	});
 });
 
 

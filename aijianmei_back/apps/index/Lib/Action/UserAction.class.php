@@ -104,8 +104,8 @@ class UserAction extends Action {
 		$this->display('GetPwd_Fourth');
 	}
 	public function register(){
-		if($_SESSION['regrefer_url']==''&& $_SERVER["REQUEST_URI"]='/index.php?app=index&mod=User&act=register'){
-			$_SESSION['regrefer_url'] = $_SERVER["HTTP_REFERER"];
+		if($_SESSION['regrefer_url']==''&& $_SESSION['refer_url']!=''){
+			$_SESSION['regrefer_url'] = $_SESSION['refer_url'];
 		}
 		$this->display('register_1');
 	}

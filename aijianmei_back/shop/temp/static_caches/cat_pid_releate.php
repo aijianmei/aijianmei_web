@@ -119,6 +119,32 @@ $data = array (
   ),
   9 => 
   array (
+    'cat_id' => '18',
+    'cat_name' => '个人护理',
+    'measure_unit' => '',
+    'parent_id' => '7',
+    'is_show' => '1',
+    'show_in_nav' => '0',
+    'grade' => '0',
+    'sort_order' => '50',
+    'has_children' => '0',
+    'goods_num' => 0,
+  ),
+  10 => 
+  array (
+    'cat_id' => '15',
+    'cat_name' => '饮食和体重',
+    'measure_unit' => '',
+    'parent_id' => '7',
+    'is_show' => '1',
+    'show_in_nav' => '0',
+    'grade' => '0',
+    'sort_order' => '50',
+    'has_children' => '0',
+    'goods_num' => 0,
+  ),
+  11 => 
+  array (
     'cat_id' => '16',
     'cat_name' => '蛋白质',
     'measure_unit' => '',
@@ -130,7 +156,7 @@ $data = array (
     'has_children' => '0',
     'goods_num' => 0,
   ),
-  10 => 
+  12 => 
   array (
     'cat_id' => '20',
     'cat_name' => '健身附属品',
@@ -143,7 +169,7 @@ $data = array (
     'has_children' => '0',
     'goods_num' => 0,
   ),
-  11 => 
+  13 => 
   array (
     'cat_id' => '17',
     'cat_name' => '维他命',
@@ -156,7 +182,7 @@ $data = array (
     'has_children' => '0',
     'goods_num' => 0,
   ),
-  12 => 
+  14 => 
   array (
     'cat_id' => '14',
     'cat_name' => '运动营养品',
@@ -169,36 +195,10 @@ $data = array (
     'has_children' => '0',
     'goods_num' => 0,
   ),
-  13 => 
+  15 => 
   array (
     'cat_id' => '21',
     'cat_name' => '健身设备',
-    'measure_unit' => '',
-    'parent_id' => '7',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => 0,
-  ),
-  14 => 
-  array (
-    'cat_id' => '18',
-    'cat_name' => '个人护理',
-    'measure_unit' => '',
-    'parent_id' => '7',
-    'is_show' => '1',
-    'show_in_nav' => '0',
-    'grade' => '0',
-    'sort_order' => '50',
-    'has_children' => '0',
-    'goods_num' => 0,
-  ),
-  15 => 
-  array (
-    'cat_id' => '15',
-    'cat_name' => '饮食和体重',
     'measure_unit' => '',
     'parent_id' => '7',
     'is_show' => '1',
