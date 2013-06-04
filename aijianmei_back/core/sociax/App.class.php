@@ -12,7 +12,7 @@
 
 /**
  +------------------------------------------------------------------------------
- * ThinkPHP 应用程序�?执行应用过程管理
+ * ThinkPHP 应用程序类 执行应用过程管理
  +------------------------------------------------------------------------------
  * @category   Think
  * @package  Think
@@ -22,11 +22,11 @@
  +------------------------------------------------------------------------------
  */
 class App
-{//类定义开�?
+{//类定义开始
 
     /**
      +----------------------------------------------------------
-     * 应用程序初始�?
+     * 应用程序初始化
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
@@ -35,13 +35,13 @@ class App
      */
     static public function init()
     {
-        // 设定错误和异常处�?
+        // 设定错误和异常处理
         set_error_handler(array('App','appError'));
         set_exception_handler(array('App','appException'));
 
         //[RUNTIME]
-        // �?��项目是否编译�?
-        // 在部署模式下会自动在第一次执行的时�?编译项目
+        // 检查项目是否编译过
+        // 在部署模式下会自动在第一次执行的时候编译项目
         if (defined('RUNTIME_MODEL')) {
             // 运行模式无需载入项目编译缓存
         } else if (is_file(RUNTIME_PATH.'/~app.php') && (!is_file(CONFIG_PATH.'config.php') || filemtime(RUNTIME_PATH.'/~app.php')>filemtime(CONFIG_PATH.'config.php'))) {
@@ -49,7 +49,7 @@ class App
             C(include RUNTIME_PATH.'/~app.php');
 			//载入基本配置
         } else {
-            // 预编译项�?
+            // 预编译项目
             App::build();
         }
         //[/RUNTIME]
@@ -60,7 +60,7 @@ class App
             define('ACTION_NAME', App::getAction()); // Action操作
 
         // If already slashed, strip.
-        if (get_magic_quotes_gpc()) {//get_magic_quotes_gpc取得 PHP 环境变量 magic_quotes_gpc 的�?
+        if (get_magic_quotes_gpc()) {//get_magic_quotes_gpc取得 PHP 环境变量 magic_quotes_gpc 的值
             $_GET    = stripslashes_deep( $_GET    );
             $_POST   = stripslashes_deep( $_POST   );
             $_COOKIE = stripslashes_deep( $_COOKIE );
@@ -88,11 +88,11 @@ class App
         // 站点设置
         App::checkSiteOption();
 
-        // 加载�?��插件
+        // 加载所有插件
         if (C('APP_PLUGIN_ON'))
             Addons::loadAllValidAddons();
 
-        // 项目�?��标签
+        // 项目开始标签
         if (C('APP_PLUGIN_ON'))
             tag('app_begin');
 
@@ -105,35 +105,35 @@ class App
             spl_autoload_register(array('Think', 'autoload'));
 
         /*
-         * 应用调度过滤�?
-         * 如果没有加载任何URL调度�? 默认只支�?QUERY_STRING 方式
+         * 应用调度过滤器
+         * 如果没有加载任何URL调度器, 默认只支持 QUERY_STRING 方式
          */
         if (C('URL_DISPATCH_ON'))
             Dispatcher::dispatch();
 
         /*
          * PHP_FILE 由内置的Dispacher定义
-         * 如果不使用该插件，需要重新定�?
+         * 如果不使用该插件，需要重新定义
          */
         if (!defined('PHP_FILE'))
             define('PHP_FILE',_PHP_FILE_);
 
-        // 取得模块和操作名�?
-        // 可以在Dispatcher中定义获取规�?
+        // 取得模块和操作名称
+        // 可以在Dispatcher中定义获取规则
 
-        // 使用手持设备�? 对home的访问默认跳转至移动�? 除非用户指定访问普�?版�?
+        // 使用手持设备时, 对home的访问默认跳转至移动版, 除非用户指定访问普通版。
         if (APP_NAME == 'home' && $_SESSION['wap_to_normal'] != '1' && cookie('wap_to_normal') != '1' && $_REQUEST['wap_to_normal'] != '1') {
             if (MODULE_NAME == 'Public' && ACTION_NAME == 'tryOtherLogin')
             	;
             else if (MODULE_NAME == 'Widget' && ACTION_NAME == 'addonsRequest')
                 ;
-            //else if (isiPhone() || isAndroid()) // iOS和Android跳转�?G�?
+            //else if (isiPhone() || isAndroid()) // iOS和Android跳转至3G版
             //   U('w3g/Index/index', '', true);
-            else if (isMobile() && !isiPad()) // 其他手机跳转至WAP�?
+            else if (isMobile() && !isiPad()) // 其他手机跳转至WAP版
                 U('wap/Index/index', '', true);
         }
 
-        // �?��应用是否安装 (Admin和默认应用不�?��安装)
+        // 检查应用是否安装 (Admin和默认应用不需要安装)
         if (MODULE_NAME != 'Admin' && !in_array(APP_NAME, C('DEFAULT_APPS')) && !model('App')->isAppNameActive(APP_NAME))
             throw_exception(L('_APP_INACTIVE_').APP_NAME);
 
@@ -145,19 +145,19 @@ class App
         if (is_file(CONFIG_PATH.strtolower(MODULE_NAME).'_config.php'))
             C(include CONFIG_PATH.strtolower(MODULE_NAME).'_config.php');
 
-		//Ucenter初始�?
+		//Ucenter初始化
 		App::initUcenter();
         // 用户认证
         App::checkUser();
-        // 语言�?��
+        // 语言检查
         App::checkLanguage();
-        // 模板�?��
+        // 模板检查
         App::checkTemplate();
-        // �?��静�?缓存
+        // 开启静态缓存
         if (C('HTML_CACHE_ON'))
             HtmlCache::readHTMLCache();
 
-        // 项目初始化标�?
+        // 项目初始化标签
         if (C('APP_PLUGIN_ON'))
             tag('app_init');
 
@@ -191,7 +191,7 @@ class App
         if(is_file(SITE_PATH.'/access.inc.php'))
             C(include SITE_PATH.'/access.inc.php');
 
-        // 加载敏感词过滤配置文�?
+        // 加载敏感词过滤配置文件
         if(is_file(SITE_PATH.'/badwords.inc.php'))
             C(include SITE_PATH.'/badwords.inc.php');
 
@@ -201,7 +201,7 @@ class App
 
         $runtime = RUNTIME_ALLINONE;
         $common   = '';
-        //是否调试模式. ALL_IN_ONE模式�? 调试模式无效
+        //是否调试模式. ALL_IN_ONE模式时, 调试模式无效
         $debug  =  C('APP_DEBUG') && !$runtime;
 
         // 加载项目公共文件
@@ -214,7 +214,7 @@ class App
         if(is_file(CONFIG_PATH.'app.php')) {
             $list   =  include CONFIG_PATH.'app.php';
             foreach ($list as $file){
-                // 加载并编译文�?
+                // 加载并编译文件
                 require $file;
                 if(!$debug) $common   .= compile($file,$runtime);
             }
@@ -226,26 +226,26 @@ class App
                 C('_'.$val.'_',array_change_key_case(include CONFIG_PATH.$val.'.php'));
         }
 
-        // 如果是调试模式加载调试模式配置文�?
+        // 如果是调试模式加载调试模式配置文件
         if($debug) {
-            // 加载系统默认的开发模式配置文�?
+            // 加载系统默认的开发模式配置文件
             C(include THINK_PATH.'/Common/debug.php');
 
-            // 加载站点的开发模式配�?
+            // 加载站点的开发模式配置
             if (is_file(SITE_PATH . '/debug.php'))
                 C(include SITE_PATH . '/debug.php');
 
-            // 加载应用的开发模式配�?
+            // 加载应用的开发模式配置
             if(is_file(CONFIG_PATH.'debug.php'))
                 C(include CONFIG_PATH.'debug.php');
         }else{
             // 部署模式下面生成编译文件
             // 下次直接加载项目编译文件
             if(RUNTIME_ALLINONE) {
-                // 获取用户自定义变�?
+                // 获取用户自定义变量
                 $defs = get_defined_constants(TRUE);
 
-			//sociax:2010-1-12 修改核心，删除几个编译后被重复定义的常量�?
+			//sociax:2010-1-12 修改核心，删除几个编译后被重复定义的常量。
 			unset( $defs['user']['HTTP_SESSION_STARTED'],
                 $defs['user']['HTTP_SESSION_CONTINUED'],
                 $defs['user']['SITE_DATA_PATH'],
@@ -277,7 +277,7 @@ class App
 
     /**
      +----------------------------------------------------------
-     * 获得实际的模块名�?
+     * 获得实际的模块名称
      +----------------------------------------------------------
      * @access private
      +----------------------------------------------------------
@@ -293,7 +293,7 @@ class App
         if (C('URL_CASE_INSENSITIVE')) {
             // URL地址不区分大小写
             define('P_MODULE_NAME',ucfirst($module));
-            // 智能识别方式 index.php/user_type/index/ 识别�?UserTypeAction 模块
+            // 智能识别方式 index.php/user_type/index/ 识别到 UserTypeAction 模块
             $module = ucfirst(parse_name(P_MODULE_NAME,1));
         }
         unset($_POST[$var],$_GET[$var]);
@@ -302,7 +302,7 @@ class App
 
     /**
      +----------------------------------------------------------
-     * 获得实际的操作名�?
+     * 获得实际的操作名称
      +----------------------------------------------------------
      * @access private
      +----------------------------------------------------------
@@ -321,8 +321,8 @@ class App
 
     /**
      +----------------------------------------------------------
-     * 语言�?��
-     * �?��浏览器支持语�?��并自动加载语�?��
+     * 语言检查
+     * 检查浏览器支持语言，并自动加载语言包
      +----------------------------------------------------------
      * @access private
      +----------------------------------------------------------
@@ -332,20 +332,20 @@ class App
     static private function checkLanguage()
     {
         $langSet = C('DEFAULT_LANG');
-        // 不开启语�?��功能，仅仅加载框架语�?��件直接返�?
+        // 不开启语言包功能，仅仅加载框架语言文件直接返回
         if (!C('LANG_SWITCH_ON')){
             L(include THINK_PATH.'/Lang/'.$langSet.'.php');
             return;
         }
-        // 启用了语�?��功能
+        // 启用了语言包功能
         // 根据是否启用自动侦测设置获取语言选择
         if (C('LANG_AUTO_DETECT')){
-            if(isset($_GET[C('VAR_LANGUAGE')])){// �?��浏览器支持语�?
+            if(isset($_GET[C('VAR_LANGUAGE')])){// 检测浏览器支持语言
                 $langSet = $_GET[C('VAR_LANGUAGE')];// url中设置了语言变量
                 cookie('think_language',$langSet,3600);
-            }elseif(cookie('think_language'))// 获取上次用户的�?�?
+            }elseif(cookie('think_language'))// 获取上次用户的选择
                 $langSet = cookie('think_language');
-            elseif(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){// 自动侦测浏览器语�?
+            elseif(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){// 自动侦测浏览器语言
                 preg_match('/^([a-z\-]+)/i', $_SERVER['HTTP_ACCEPT_LANGUAGE'], $matches);
                 $langSet = $matches[1];
                 cookie('think_language',$langSet,3600);
@@ -359,38 +359,38 @@ class App
 
         // 定义当前语言
         define('LANG_SET', $langSet);
-        // 定义数据库SQL查询的当前语�?
+        // 定义数据库SQL查询的当前语言
         $sqlLangSet = array(
             'en' => 'en',
             'zh-cn' => 'cn',
         );
         define('SQL_LANG_SET', $sqlLangSet[$langSet]);
 
-        // 加载框架语言�?
+        // 加载框架语言包
         if(is_file(THINK_PATH.'/Lang/'.$langSet.'.php'))
             L(include THINK_PATH.'/Lang/'.$langSet.'.php');
 
-		// 加载全局语言�?
-		// Xiao Chuan修改，不�?��加载额外的包。只要加载common包即�?
+		// 加载全局语言包
+		// Xiao Chuan修改，不需要加载额外的包。只要加载common包即可
 		if(is_file(SITE_PATH.'/public/Lang/'.$langSet.'/common.php')){
 			L(include SITE_PATH.'/public/Lang/'.$langSet.'/common.php');
 		}
 
-        //加载错误语言�?
+        //加载错误语言包
 
         if (is_file(LANG_PATH.$langSet.'/error.php'))
             L(include LANG_PATH.$langSet.'/error.php');
-        // 读取项目公共语言�?
+        // 读取项目公共语言包
         if (is_file(LANG_PATH.$langSet.'/common.php'))
             L(include LANG_PATH.$langSet.'/common.php');
-        // 读取当前模块语言�?
+        // 读取当前模块语言包
         if (is_file(LANG_PATH.$langSet.'/'.strtolower(MODULE_NAME).'.php'))
             L(include LANG_PATH.$langSet.'/'.strtolower(MODULE_NAME).'.php');
     }
 
     /**
      +----------------------------------------------------------
-     * 模板�?��，如果不存在使用默认�?
+     * 模板检查，如果不存在使用默认。
      * 2011/9/13 新增功能：如果主题包目录下存在模板则覆盖默认模板
      +----------------------------------------------------------
      * @access private
@@ -414,7 +414,7 @@ class App
         //网站公共文件目录
         define('WEB_PUBLIC_PATH', SITE_URL.'/public');
 
-        //当前风格�?
+        //当前风格包
         global $ts;
         $template    =    ($ts['site']['site_theme'])?$ts['site']['site_theme']:'newstyle';
         define('THEME_PATH'    ,    SITE_PATH."/public/themes/{$template}");
@@ -423,7 +423,7 @@ class App
         define('__THEME__'    ,    WEB_PUBLIC_PATH."/themes/{$template}");
 
 
-        //如果在风格包中存在相关的模板�?则使用风格包中模�?
+        //如果在风格包中存在相关的模板包.则使用风格包中模板.
         if(file_exists(THEME_TEMPLATE_PATH.'/'.MODULE_NAME.'/'.ACTION_NAME.C('TMPL_TEMPLATE_SUFFIX'))){
             //当前模版路径
             C('TEMPLATE_PATH', THEME_TEMPLATE_PATH);
@@ -461,7 +461,7 @@ class App
     static private function checkSiteOption(){
         global $ts;
         
-        //初始化站点配置信息，在站点配置中：表情，网站头信息，网站的应用列表，应用权限�?
+        //初始化站点配置信息，在站点配置中：表情，网站头信息，网站的应用列表，应用权限等
         $ts['site'] = model('Xdata')->lget('siteopt');
 
         //刷新频率 - 不对后台进行判断
@@ -470,15 +470,15 @@ class App
         //     $refresh_key = md5($_SERVER['REQUEST_URI']);
         //     if(isset($_SESSION['refresh'][$refresh_key]) && ($_SESSION['refresh'][$refresh_key]+$ts['site']['max_refresh_time']) > time()){
         //         send_http_header('utf8');
-        //         die('不要频繁刷新,请稍候再�?');
+        //         die('不要频繁刷新,请稍候再试!');
         //     }else{
         //         $_SESSION['refresh'][$refresh_key] = time();
         //     }
         // }
 
-        // �?��网站关闭
+        // 检测网站关闭
         if (1 == $ts['site']['site_closed']) {
-            // 管理员登�?管理员�?�?验证码相�?不受站点关闭的控�?
+            // 管理员登录/管理员退出/验证码相关 不受站点关闭的控制
             $home_public_action = array(
                 'adminlogin','doAdminLogin','logoutAdmin',
                 'verify', 'code', 'isVerifyAvailableLogin'
@@ -487,7 +487,7 @@ class App
                 return ;
 
             }else if (APP_NAME == 'admin') {
-                // 管理后台不受站点关闭的控�?
+                // 管理后台不受站点关闭的控制
                 return ;
 
             }else {
@@ -498,22 +498,22 @@ class App
             }
         }
 
-        //�?��IP禁止
+        //检查IP禁止
 		$audit = model('Xdata')->lget('audit');
 		if($audit['banip']==1){
 			$client_ip = get_client_ip();
-			//IP白名单过�?
+			//IP白名单过滤
 			$banned_ips = $audit['ipwhitelist'];
 			if(!empty($banned_ips)){
 				$in_white_list = false;
 				$banned_ips = explode('|',$banned_ips);
 				foreach($banned_ips as $v){
-					//带星号的IP地址段比�?
+					//带星号的IP地址段比较
 					if(strpos($v,'*')>0){
 						$start_ip = ip2long(str_replace('*','1',$v));
 						$stop_ip = ip2long(str_replace('*','255',$v));
 						$client_ip = ip2long($client_ip);
-						//判断当前是否不在白名单网�?
+						//判断当前是否不在白名单网段
 						if($client_ip>=$start_ip && $client_ip<=$stop_ip){
 							$in_white_list = true;
 						}
@@ -530,13 +530,13 @@ class App
 					exit;
 				}
 			}
-			//IP黑名单过�?
+			//IP黑名单过滤
 			$banned_ips = $audit['ipblacklist'];
 			if(!empty($banned_ips)){
 				$in_black_list = false;
 				$banned_ips = explode('|',$banned_ips);
 				foreach($banned_ips as $v){
-					//带星号的IP地址段比�?
+					//带星号的IP地址段比较
 					if(strpos($v,'*')>0){
 						$start_ip = ip2long(str_replace('*','1',$v));
 						$stop_ip = ip2long(str_replace('*','255',$v));
@@ -551,7 +551,7 @@ class App
 						$in_black_list = true;
 					}
 				}
-				//在白名单�?
+				//在白名单中
 				if($in_black_list){
 					$template = $ts['site']['site_theme'] ? $ts['site']['site_theme'] : 'classic';
 					include SITE_PATH."/public/themes/{$template}/ipbanned.html";
@@ -560,7 +560,7 @@ class App
 			}
 		}
 
-		//�?��是否启用rewrite
+		//检查是否启用rewrite
 		if(isset($ts['site']['site_rewrite_on'])){
 			C('URL_ROUTER_ON',($ts['site']['site_rewrite_on']==1));
 		}
@@ -572,10 +572,10 @@ class App
         //全站微博、评论字数限制，默认140
         $ts['site']['length'] = $ts['site']['length'] > 0 ? $ts['site']['length'] : 140;
         
-        //全站微博、评论频�?
+        //全站微博、评论频率
         $ts['site']['max_post_time'] = $ts['site']['max_post_time'] > 0 ? $ts['site']['max_post_time'] : 5;
         
-        //�?��关注用户�?
+        //最大关注用户数
         $ts['site']['max_following'] = $ts['site']['max_following'] > 0 ? $ts['site']['max_following'] : 1000;
         $GLOBALS['max_following'] = $ts['site']['max_following'];
         
@@ -587,7 +587,7 @@ class App
 
     /**
      +----------------------------------------------------------
-     * Ucenter初始�?
+     * Ucenter初始化
      +----------------------------------------------------------
      * @access private
      +----------------------------------------------------------
@@ -596,7 +596,7 @@ class App
      */
 	static private function initUcenter()
 	{
-		// 获取UCenter的应用列�?
+		// 获取UCenter的应用列表
 		$filename = SITE_PATH . '/api/uc_client/uc_sync.php';
 
 		if (file_exists($filename)) {
@@ -622,19 +622,19 @@ class App
     static private function checkUser() {
         global $ts;
 
-        // �?��
+        // 邀请
         if ($_GET['validationcode'] && $_GET['validationid'] && ACTION_NAME!='resendEmail')
             service('Validation')->dispatchValidation();
         // 验证登录
-        if (!service('Passport')->isLogged()) { // 未登�?
+        if (!service('Passport')->isLogged()) { // 未登录
             //后台判断
             if ( MODULE_NAME == 'Admin'  )
                     redirect(U('home/Public/adminlogin'));
-            // �?��
+            // 邀请
             if (APP_NAME == 'home' && MODULE_NAME == 'Index' && ACTION_NAME=='index' && isset($_REQUEST['invite']))
                 redirect(SITE_URL.'/index.php?app=home&mod=Public&act=register&invite='.$_REQUEST['invite']);
 
-            // 是否�?��游客访问
+            // 是否开启游客访问
             if (APP_NAME == 'home' && MODULE_NAME == 'Space' && !$ts['site']['site_anonymous']) {
             	redirect(U('home/Public/login'));
             }
@@ -659,16 +659,16 @@ class App
                     	redirect(U('home/Public/login'));
                 }
             }
-        } else { // 已登�?
+        } else { // 已登录
             // 设为在线
             setOnline($_SESSION['mid']);
 
-            // �?��用户权限. 管理后台的权限由它自己控�?
+            // 检查用户权限. 管理后台的权限由它自己控制.
             if (!service('SystemPopedom')->hasPopedom()) {
                 if (APP_NAME == 'admin')
-                    redirect(U('home/Public/adminlogin'), 5, '您无权查�?);
+                    redirect(U('home/Public/adminlogin'), 5, '您无权查看');
                 else
-                    redirect(U('home'), 5, '您无权查�?);
+                    redirect(U('home'), 5, '您无权查看');
             }
         }
 
@@ -688,12 +688,12 @@ class App
      */
     static public function exec()
     {
-        // 是否�?��标签扩展
+        // 是否开启标签扩展
         $tagOn   =  C('APP_PLUGIN_ON');
         // 项目运行标签
         if($tagOn)  tag('app_run');
 
-        //创建Action控制器实�?
+        //创建Action控制器实例
         $module  =  A(MODULE_NAME);
         if(!$module) {
             // 是否存在扩展模块
@@ -708,11 +708,11 @@ class App
                 $module = A("Empty");
             }
             if(!$module)
-                // 模块不存�?抛出异常
+                // 模块不存在 抛出异常
                 throw_exception(L('_MODULE_NOT_EXIST_').MODULE_NAME);
         }
 
-        //获取当前操作�?
+        //获取当前操作名
         $action = ACTION_NAME;
 
         //执行当前操作
@@ -749,7 +749,7 @@ class App
 
     /**
      +----------------------------------------------------------
-     * 运行应用实例 入口文件使用的快捷方�?
+     * 运行应用实例 入口文件使用的快捷方法
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
@@ -758,7 +758,7 @@ class App
      */
     static public function run() {
         App::init();
-        // 记录应用初始化时�?
+        // 记录应用初始化时间
         if(C('SHOW_RUN_TIME'))  $GLOBALS['_initTime'] = microtime(TRUE);
 
         if(APP_NAME=='api'){
@@ -784,19 +784,19 @@ class App
      */
     static public function testStart() {
         //[RUNTIME]
-        // �?��项目是否编译�?
-        // 在部署模式下会自动在第一次执行的时�?编译项目
+        // 检查项目是否编译过
+        // 在部署模式下会自动在第一次执行的时候编译项目
         if (defined('RUNTIME_MODEL')) {
             // 运行模式无需载入项目编译缓存
         } else if (is_file(RUNTIME_PATH.'/~app.php') && (!is_file(CONFIG_PATH.'config.php') || filemtime(RUNTIME_PATH.'/~app.php')>filemtime(CONFIG_PATH.'config.php'))) {
             // 直接读取编译后的项目文件
             C(include RUNTIME_PATH.'/~app.php');
         } else {
-            // 预编译项�?
+            // 预编译项目
             App::build();
         }
         //[/RUNTIME]
-        //加载�?��插件
+        //加载所有插件
         if (!defined('MODULE_NAME'))
             define('MODULE_NAME', App::getModule()); // Module名称
         if (!defined('ACTION_NAME'))
@@ -828,7 +828,7 @@ class App
 
     /**
      +----------------------------------------------------------
-     * 自定义异常处�?
+     * 自定义异常处理
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
@@ -842,7 +842,7 @@ class App
 
     /**
      +----------------------------------------------------------
-     * 自定义错误处�?
+     * 自定义错误处理
      +----------------------------------------------------------
      * @access public
      +----------------------------------------------------------
@@ -860,7 +860,7 @@ class App
           case E_ERROR:
           case E_USER_ERROR:
             if(C('LOG_RECORD')){
-                $errorStr = "[$errno] $errstr ".basename($errfile)." �?$errline �?";
+                $errorStr = "[$errno] $errstr ".basename($errfile)." 第 $errline 行.";
                 Log::write($errorStr,Log::ERR);
             }
             halt($errorStr);
@@ -870,7 +870,7 @@ class App
           case E_USER_NOTICE:
           default:
             if(C('LOG_RECORD')) {
-                $errorStr = "[$errno] $errstr ".basename($errfile)." �?$errline �?";
+                $errorStr = "[$errno] $errstr ".basename($errfile)." 第 $errline 行.";
                 Log::record($errorStr,Log::NOTICE);
             }
             break;
@@ -897,5 +897,5 @@ class App
         return false;
     }
 
-};//类定义结�?
+};//类定义结束
 ?>
