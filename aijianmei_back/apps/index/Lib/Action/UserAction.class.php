@@ -230,7 +230,6 @@ class UserAction extends Action {
 				$sinaimg=$otherinfo[0]['profileImageUrl'];
 				$this->assign('sinaimg',$sinaimg);
 			}else{
-
 				$user_type='1';
 			}
 			$this->assign('user_type',$user_type);
@@ -239,8 +238,7 @@ class UserAction extends Action {
 			if(is_file($filename)&&$UserNameInfo[0]['upic_type']==1){$imgurl=$filename;}else{
 				$imgurl=$otherinfo[0]['profileImageUrl'];
 			}
-			
-			$this->assign('user_type',1);
+
 			//$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
 			$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
 			$this->assign('localimg',$filename);
@@ -353,15 +351,32 @@ class UserAction extends Action {
 				$sinaimg=$otherinfo[0]['profileImageUrl'];
 				$this->assign('sinaimg',$sinaimg);
 			}else{
-
 				$user_type='1';
 			}
 			$this->assign('user_type',$user_type);
 			$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
+			if(!is_file(dirname(__FILE__).$filename)){$filename='Templates/images/login_pic.jpg';}
+			
 			$this->assign('localimg',$filename);
-			if(is_file($filename)&&$UserNameInfo[0]['upic_type']==1){$imgurl=$filename;}else{
-				$imgurl=$otherinfo[0]['profileImageUrl'];
+			if($UserNameInfo[0]['upic_type']==1){
+					$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
+					if(is_file($filename)){
+						$imgurl=$filename;
+					}else{
+						$imgurl='Templates/images/login_pic.jpg';
+						}
+				}else{
+					  $imgurl=$otherinfo[0]['profileImageUrl'];
 			}
+			
+			
+			if(is_file('data/uploads/avatar/'.$mid.'/middle.jpg')){
+				$this->assign('localimg','data/uploads/avatar/'.$mid.'/middle.jpg');
+			}else{
+				$this->assign('localimg','Templates/images/login_pic.jpg');
+			}
+			
+			
 			
 			$healthinfoSql="select * from ai_user_health_info where uid='".$mid."'";
 			$healthinfo=M('')->query($healthinfoSql);
@@ -751,7 +766,8 @@ public function saveedituserinfo(){
 	exit;
 	}
 	public function newShowImg(){
-
+	$sql="UPDATE ai_user SET upic_type = '1' WHERE uid ='".$_SESSION['allowbackmid']."'";
+	M('')->query($sql);
      //不存在当前上传文件则上传
      // if(!file_exists($_FILES['upload_file']['name'])) 
 	 // {

@@ -447,7 +447,7 @@ function show_banner($type){
                     $data['location'] = $userInfo['location'];
                     $data['is_active'] = 1;
                     $data['ctime'] = time();
-					$data['is_email']=0;
+										$data['is_email']=0;
                     
                     //print_r($data);
                     
@@ -549,7 +549,7 @@ function show_banner($type){
                 $data['ctime'] = time();
                 
                 //print_r($data);
-                $sql = 'insert into ai_user (`uname`,`sex`,`location`,`is_active`,`ctime`) values ("'.$data['uname'].'","'.$data['sex'].'","'.$data['location'].'","'.$data['is_active'].'","'.$data['ctime'].'")';
+                $sql = 'insert into ai_user (`uname`,`sex`,`location`,`is_active`,`ctime`,`upic_type`) values ("'.$data['uname'].'","'.$data['sex'].'","'.$data['location'].'","'.$data['is_active'].'","'.$data['ctime'].'",2)';
                 M('')->query($sql);
 
                 $uid = mysql_insert_id();
@@ -695,7 +695,7 @@ function show_banner($type){
 		$pagerArray = $pagerData['html'];
 		
         
-        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by click desc limit ".($pg-1)*$nums.",$nums";
+    $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by click desc limit ".($pg-1)*$nums.",$nums";
 		$hotvideos=$hot_video=null;
 		$hotvideos=$this->getDataCache(md5($sql));
 		if(!$hotvideos){
@@ -713,7 +713,7 @@ function show_banner($type){
 		
 		
 		
-        /*首页添加最新5篇文章*/
+    /*首页添加最新5篇文章*/
 		//getDataCache($key)
 		//setDataCache($key,$data)
 		$countsql="select count(*) as cnums from ai_article";

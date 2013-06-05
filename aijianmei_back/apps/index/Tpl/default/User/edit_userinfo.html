@@ -4,7 +4,7 @@
         	<h1 class="dt_fit">设置 <span class="dt_ms_detail">修改个人资料和密码</span></h1>
         	<form class="dt_part" id="userinfo" action="/index.php?app=index&mod=user&act=saveedituserinfo&args=uinfo" method="post">
         		<fieldset>
-	        		<legend>个人资料设置</legend>
+	        		<legend>个人资料设置</legend><span id="img_status"></span>
 					<div class="dt_wrap_revise">
         			<div class="dt_revise name clearfix">
         				<label for="box_1">名字</label>
@@ -22,9 +22,9 @@
 						<php>if($user_type==2||$user_type==3){</php><span class="rg_upload_css" id="other_choosepic" onclick="changeUserImg('other');" <php>if($upic_type==2||$upic_type==2){</php>style="display:none;"<php>}</php>
 						>使用<php>if($user_type==2){</php>新浪<php>}</php><php>if($user_type==3){</php>qq<php>}</php>头像</span><php>}</php>
 						<span class="rg_upload_css" id="local_choosepic" onclick="changeUserImg('local');" <php>if($upic_type==1){</php>style="display:none;"<php>}</php>>使用本地头像</span>
-        				</div>
+        		</div>
 						<div id="feedback2"></div>
-        				<img id="feedimg" <php>if(!$imgurl){</php>src="Templates/images/login_pic.jpg"<php>}else{</php>src="{$imgurl}"<php>}</php> class="dt_choice_img" />
+        				<img id="feedimg" <php>if($imgurl==''){</php>src="Templates/images/login_pic.jpg"<php>}else{</php>src="{$imgurl}"<php>}</php> class="dt_choice_img" />
 						<php>if($user_type==2){</php><img id="otherimg" src="{$sinaimg}" class="dt_choice_img" style="display:none;"/><php>}</php>
 						<php>if($user_type==3){</php><img id="otherimg" src="{$qqimg}"   class="dt_choice_img" style="display:none;"/><php>}</php>
 						<img id="localimg" src="{$localimg}" class="dt_choice_img" style="display:none;"/>
@@ -152,7 +152,7 @@
         					<input id="tag" value="" onkeyup="if(!checktxt(this.value)){this.value='';alert('请输入正确的字符');};">
         				</div>
         			</div>
-        			<a class="dt_update_1" id="upuserinfo" onclick="formsubBykey('userinfo');">更新资料</a>
+        			<a class="dt_update_1" id="userinfo_mark" name="userinfo_mark" onclick="formsubBykey('userinfo');">更新资料</a><span id="userinfo_msg"></span>
 					</div>
 	        	</fieldset>
         	</form>
@@ -181,7 +181,7 @@
 							<span id="sure_pw_msg"></span>
         				</div>
         			</div>
-        			<a class="dt_update_1" onclick="formsubBykey('pwdinfo');">修改密码</a>
+        			<a class="dt_update_1" name="pwdinfo_mark" id="pwdinfo_mark" onclick="formsubBykey('pwdinfo');">修改密码</a><span id="pwdinfo_msg"></span>
 					</div>
 	        	</fieldset>
         	</form>
@@ -203,7 +203,7 @@
 							<span id="cemail_msg"></span>
         				</div>
         			</div>
-        			<a class="dt_update_1"  onclick="formsubBykey('connectinfo');">更新资料</a>
+        			<a class="dt_update_1" id="connectinfo_mark" name="connectinfo_mark"  onclick="formsubBykey('connectinfo');">更新资料</a><span id="connectinfo_msg"></span>
 					</div>
 	        	</fieldset>
         	</form>
@@ -217,6 +217,14 @@
 </style>
 <script type="text/javascript">
 var changeFlag=false;
+var formid=null;
+
+var changeFormMsg = {
+"userinfo_msg" : "请确定完善个人信息并点击更新资料",
+"pwdinfo_msg" : "请确定填写密码信息正确后点击修改密码",
+"connectinfo_msg" : "请完善联系方式并点击更新资料"
+}
+
 function checktxt(str){
 	var txt=new RegExp("[ ,\\`,\\~,\\!,\\@,\#,\\$,\\%,\\^,\\+,\\*,\\&,\\\\,\\/,\\?,\\|,\\:,\\.,\\<,\\>,\\{,\\},\\(,\\),\\'',\\;,\\=,\"]");
    //特殊字符正则表达式
@@ -253,23 +261,23 @@ function checkusernameString(str){
 
 $(document).ready(function(){
 	$("#Filedata").change(function(){
-		if($("#Filedata").val() != '') $("#selectForm").submit();
+		if($("#Filedata").val() != ''){
+			$("#img_status").html("图片上传中.......");
+			$("#selectForm").submit();
+		}
 	});
 	$("#exec_target").load(function(){
-		//var data = $(window.frames['exec_target'].document.body).find("textarea").eq(0).html();
 		var data2 = $(window.frames['exec_target'].document.body).find("textarea").eq(1).html();
 		if(data2 != null){
-			//$("#feedback").empty();
 			$("#feedback2").empty();
-			//$("#feedback").append(data.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
 			$("#feedback2").append(data2.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
-			//$("#feedback").attr("class","face");
+			$("#localimg").attr("src",$("#feedback2").find("img").attr("src"));
 			$("#Filedata").val('');
-			//$("#dimg1").remove();
 			$("#feedimg").remove();
 			$("#qqimg").hide();
 			$("#sinaimg").hide();
-		
+			changeUserImg('local');
+			$("#img_status").html("图片上传完毕");
 		}
 	});
 });
@@ -279,6 +287,8 @@ $(document).ready(function(){
 	});
 });
 function changeUserImg(key){
+	formid = "userinfo";
+	changeFlag=true;
 	if(key=='local'){
 		$("#otherimg").attr("style","display:none;");
 		$("#feedimg").attr("style","display:none;");
@@ -297,7 +307,7 @@ function changeUserImg(key){
 }
 
 function formsubBykey(key){
-	changeFlag=false;
+	
 	if(key=='userinfo'){
 		var username=$("#username").val();
 		if(username==''){
@@ -325,6 +335,7 @@ function formsubBykey(key){
 			return false;
 		}
 	}
+	changeFlag=false;
 	$("#"+key).submit();
 }
 function checkPhone()   
@@ -378,6 +389,12 @@ function getCity(parent, child) {
 	var pid = $("#"+parent).val();
 }
 
+$(".dt_sure_remove").click(function(){
+		 formid = "userinfo";
+		 changeFlag=true;    
+});
+
+
 	$("#province_1").change(function() {
 	var pid = $("#province_1").val();
 	$(".parent").hide();
@@ -396,36 +413,54 @@ var default_year = <?php if($healthinfo['age']!=''){echo "'".$healthinfo['age'].
 	$(".dt_height_input").hide();
 	$(".dt_year_input").hide();
 </script>
-<script type="text/javascript" src="Templates/js/datum.js"></script>
 <script type="text/javascript">
-/*
 		//标识文本框值是否改变，为true，标识已变 
-$(document).ready(function(){
-		     //文本框值改变即触发     
-$("input[type='text']").change(function(){
-			var formid = $(this).closest('form').attr('id');
-				 changeFlag=true;     
-			});
-$("input[type='password']").change(function(){
-				 changeFlag=true;     
-			});
-$("input[name=dt_weight_finish]").change(function(){
-				 changeFlag=true;     
-			});
-$("input[name=dt_height_finish]").change(function(){
-				 changeFlag=true;     
-			});
-$("input[name=dt_year_finish]").change(function(){
-				 changeFlag=true;     
-			});
-			$("select").change(function(){
-				 changeFlag=true;     
-			}); 
-			//文本域改变即触发
-			$("textarea").change(function(){
-				 changeFlag=true;     
-			}); 
-		});
+$(document).ready(function() {
+	//文本框值改变即触发     
+	$("input[type='password'],input[type='text']").change(function(){
+			formid = $(this).closest('form').attr('id');
+			changeFlag=true;     
+	});
+
+	$("input[class=dt_weight_write],input[class=dt_height_write],input[class=dt_year_write]").change(function(){
+		 formid = "upuserinfo";
+		 changeFlag=true;    
+	});
+	$("a[class=dt_weight_target],a[class=dt_height_target],a[class=dt_year_target]").click(function(){
+		 	formid = "upuserinfo";
+		 	changeFlag=true;    
+	});
+	$("input[name=ctell],input[name=cemail]").change(function(){
+		formid = $(this).closest('form').attr('id');
+		changeFlag=true;     
+	});
+	$("select,textarea").change(function(){
+			formid = $(this).closest('form').attr('id');
+	 		changeFlag=true;     
+});
+
+});
+/*$(document).ready(function() {
+    changeFlag = false; 
+    window.onbeforeunload = askConfirm;
+
+});
+
+function askConfirm() {
+	if(changeFlag == true){
+		if(-[1,]){
+		var topNum=($("#"+formid+"_mark").offset().top)*1-300;
+		$("html,body").animate({scrollTop: topNum}, 1000);
+		
+		$("#"+formid+"_msg").attr("style","color:red;margin-left:10px;");
+		$("#"+formid+"_msg").html(changeFormMsg[formid+"_msg"]);}
+		return '页面值已经修改，是否要保存？';
+	}
+}*/
+
+
+
+
 if (typeof window.addEventListener === 'undefined') {
     window.addEventListener = function(e, callback) {
         return window.attachEvent('on' + e, callback);
@@ -433,13 +468,18 @@ if (typeof window.addEventListener === 'undefined') {
 }
 
 window.addEventListener('beforeunload', function() {
-    		 	 if(changeFlag ==true){
-				 
-				return '页面值已经修改，是否要保存？';
-		 	 }
-});		
 
-*/
+	if(changeFlag){
+		//return formid+"2132asd"+changeFlag;
+		var topNum=($("#"+formid+"_mark").offset().top)*1-300;
+		$("html,body").animate({scrollTop: topNum}, 1000);
+		$("#"+formid+"_msg").attr("style","color:red;margin-left:10px;");
+		$("#"+formid+"_msg").html(changeFormMsg[formid+"_msg"]);
+		return '页面值已经修改，是否要保存？';
+	}
+});	
+
 </script>
+<script type="text/javascript" src="Templates/js/datum.js"></script>
 </body>
 </html>

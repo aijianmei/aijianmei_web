@@ -74,7 +74,7 @@
 		var email =$("#email").val();
 		var reyx= /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
 		if(email==''){
-			$("#partemail").val(0);
+			$("#partemail").val('');
 			$("#email").focus();
 			$("#rg_text_tip").html("请填写有效的邮箱地址");
 			return false;
@@ -92,6 +92,11 @@
 				//$("#saveform").submit();
 			}
 		});
+		}else{
+			$("#partemail").val('');
+			$("#email").focus();
+			$("#rg_text_tip").html("请填写有效的邮箱地址");
+			return false;
 		}
 	}
 	function regCheckPassword(){

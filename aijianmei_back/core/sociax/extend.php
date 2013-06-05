@@ -1305,7 +1305,7 @@ function isBlackList($uid, $fid) {
 		return THEME_URL."/images/user_pic_$type.gif";
 	}
 }*/
-function getUserFace($uid,$size){
+function getUserFace($uid,$size=null){
 	$size = ($size)?$size:'m';
 	if($size=='m'){
 		$type = 'middle';
@@ -1318,8 +1318,13 @@ function getUserFace($uid,$size){
         
 	$uid_to_path = convertUidToPath($uid);
 	$userface = SITE_PATH.'/data/uploads/avatar' . $uid_to_path . '/' . $type. '.jpg';
-	if(is_file($userface)&&$imgtpye[0]['upic_type']==1){
-		return SITE_URL.'/data/uploads/avatar' . $uid_to_path . '/' . $type . '.jpg';
+	if($imgtpye[0]['upic_type']==1){
+		if(is_file($userface)){
+			return SITE_URL.'/data/uploads/avatar' . $uid_to_path . '/' . $type . '.jpg';
+		}
+		else{
+			return "Templates/images/login_pic.jpg";
+		}
 	}else{
 		$apiImg= M('')->query("select profileImageUrl from ai_others where uid='".$uid."' and profileImageUrl!=''");
 		if(!empty($apiImg)){
