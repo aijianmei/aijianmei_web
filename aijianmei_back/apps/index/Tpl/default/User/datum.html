@@ -21,13 +21,13 @@
 						<a class="rg_upload" id="labup">选择文件</a>
 						<php>if($user_type==2){</php><a class="rg_upload" id="sina_choosepic" onclick="changeUserImg('sina');" <php>if($upic_type==2){</php>style="display:none;"<php>}</php>>使用新浪头像</a><php>}</php>
 						<php>if($user_type==3){</php><a class="rg_upload" id="qq_choosepic" onclick="changeUserImg('qq');" <php>if($upic_type==3){</php>style="display:none;"<php>}</php>>使用qq头像</a><php>}</php>
-						<a class="rg_upload" id="local_choosepic" onclick="changeUserImg('local');" <php>if($upic_type==1){</php>style="display:none;"<php>}</php>>使用本地头像</a>
+						<php>if($user_type!=1){</php><a class="rg_upload" id="local_choosepic" onclick="changeUserImg('local');" <php>if($upic_type==1){</php>style="display:none;"<php>}</php>>使用本地头像</a><php>}</php>
         				</div>
 						<div id="feedback2"></div>
         				<img id="feedimg" <php>if(!$imgurl){</php>src="Templates/images/login_pic.jpg"<php>}else{</php>src="{$imgurl}"<php>}</php> class="dt_choice_img" />
 						<php>if($user_type==2){</php><img id="sinaimg" src="{$sinaimg}" class="dt_choice_img" style="display:none;"/><php>}</php>
 						<php>if($user_type==3){</php><img id="qqimg" src="{$qqimg}" class="dt_choice_img" style="display:none;"/><php>}</php>
-						<img id="localimg" src="{$localimg}" class="dt_choice_img" style="display:none;"/>
+						<php>if(is_file($localimg)){</php><img id="localimg" src="{$localimg}" class="dt_choice_img" style="display:none;"/><php>}else{</php><img id="localimg" src="{$localimg}" class="dt_choice_img" style="display:none;"/><php>}</php>
         			</div>
         			<div class="dt_revise clearfix">
         				<label>性别</label>
@@ -207,7 +207,7 @@
 					</div>
 	        	</fieldset>
         	</form>
-						<form id="selectForm" method="post" action="/index.php?app=index&mod=User&act=newShowImg" target="exec_target" enctype="multipart/form-data">
+						<form id="selectForm" method="post" action="/index.php?app=index&mod=User&act=newShowImg1" target="exec_target" enctype="multipart/form-data">
 						<input type="file" name="Filedata" id="Filedata" accept="image/gif, image/jpeg ,image/jpg" value="选择文件" style="display:none;">
 						</form>
         </div>
@@ -254,7 +254,7 @@ function checkusernameString(str){
 
 $(document).ready(function(){
 	$("#Filedata").change(function(){
-		if($("#Filedata").val() != '') $("#selectForm").submit();
+		$("#selectForm").submit();
 	});
 	$("#exec_target").load(function(){
 		var data = $(window.frames['exec_target'].document.body).find("textarea").eq(0).html();
