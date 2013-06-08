@@ -315,6 +315,7 @@
 		.lb_search{
 			position: relative;
 			height:28px;
+			margin: 15px 10px;
 			border: 1px solid #51ACE3;
 			background: white;
 		}
@@ -351,7 +352,23 @@
 		}
 
 		/*identifying--------------*/
+		.ident_wrap{
+			margin:0 10px;
+			border: 1px solid #009bd8;
+		}
+		#ident_title_1,#ident_title_2,#ident_title_3{
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			background: #00b7ff;
+			border-top: 1px solid #a6e6ff;
+			border-bottom: 1px solid #009bd8;
+			color: white;
+			font-size: 16px;
+			cursor: pointer;
+		}
 		.identifying{
+			display: none;
 			font-family: '微软雅黑';
 			list-style: none;
 			padding: 20px 10px;

@@ -124,9 +124,9 @@ button{
 		}
 		.nav .nav_a{
 			display: block;
-			padding: 0 8px;
+			padding: 0 11px;
 			color: white;
-			font-size: 23px;
+			font-size: 24px;
 			word-break:keep-all;/*solue with ie6*/
 		}
 		.nav_current .nav_a{
