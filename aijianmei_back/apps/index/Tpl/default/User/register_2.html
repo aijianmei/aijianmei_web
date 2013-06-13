@@ -23,39 +23,6 @@
 	<![endif]-->
 	</head>
 	<body>
-		<!--<div class="bbody">
-		
-				<iframe id="exec_target" name="exec_target"></iframe>
-                <form id="upload_form" enctype="multipart/form-data" method="post"  target="exec_target"  action="aaaa.php" onsubmit="return checkForm()">
-                    <input type="hidden" id="x1" name="x1" />
-                    <input type="hidden" id="y1" name="y1" />
-                    <input type="hidden" id="x2" name="x2" />
-                    <input type="hidden" id="y2" name="y2" />
-
-                    <h2>Step1: Please select image file</h2>
-                    <div><input type="file" name="image_file" id="image_file" onchange="fileSelectHandler()" /></div>
-
-                    <div class="error"></div>
-
-                    <div class="step2">
-                        <h2>Step2: Please select a crop region</h2>
-                        <img id="preview" src="deff.jpg"/>
-						<div id="feedback"></div>
-                        <div class="info">
-                            <label>File size</label> <input type="text" id="filesize" name="filesize" />
-                            <label>Type</label> <input type="text" id="filetype" name="filetype" />
-                            <label>Image dimension</label> <input type="text" id="filedim" name="filedim" />
-                            <label>W</label> <input type="text" id="w" name="w" />
-                            <label>H</label> <input type="text" id="h" name="h" />
-                        </div>
-
-                        <input type="submit" value="Upload" />
-                    </div>
-                </form>
-            </div>-->
-	
-	
-	
 		<div class="rg_top">
 			<div class="rg_top_lay">
 				<div class="rg_logo"><img src="Templates/images/register/rg_logo.png" /></div>
@@ -109,6 +76,10 @@
 				</div>
 			</div>
 		</div>
+				<div class="load" id="imgloading" style="display:none;">
+				<img src="Templates/images/loading.gif" alt="Loading" /><br />
+				<span class="tip">正在上传图片</span>
+			</div>
 	</body>
 	<script type="text/javascript" src="Templates/js/public.js"></script>
 <style>
@@ -122,7 +93,10 @@ function subuploadform(){
 $(document).ready(function(){
 	$("#image_file").change(function(){
 		$("#labup").remove();
-		if($("#image_file").val() != '') $("#upload_form").submit();
+		if($("#image_file").val() != ''){
+			//$("#imgloading").show();
+			$("#upload_form").submit();
+		}
 	});
 	$("#exec_target").load(function(){
 		var data = $(window.frames['exec_target'].document.body).find("textarea").eq(0).html();
@@ -135,6 +109,7 @@ $(document).ready(function(){
 			//$("#Filedata").val('');
 			//$("#dimg1").remove();
 			$("#dimg2").remove();
+			//$("#imgloading").hide();
 			//$("#labup").remove();
 		}
 	});

@@ -184,7 +184,7 @@
 				.cont_rec{
 					background: url("../images/wm3.png") no-repeat 0 -438px;
 				    display: inline-block;
-				    float: right;
+				    float: left;
 				    height: 18px;
 				    padding-left: 27px;
 				}

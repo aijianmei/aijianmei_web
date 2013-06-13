@@ -1,5 +1,9 @@
 <include file="Templates/header.html" />
         <!-- outside wrapper -->
+		<div class="load" id="imgloading" style="display:none;">
+				<img src="Templates/images/loading.gif" alt="Loading" /><br />
+				<span class="tip">正在上传图片</span>
+			</div>
         <div class="wrapper clearfix">
         	<h1 class="dt_fit">设置 <span class="dt_ms_detail">修改个人资料和密码</span></h1>
         	<form class="dt_part" id="userinfo" action="/index.php?app=index&mod=user&act=saveedituserinfo&args=uinfo" method="post">
@@ -7,7 +11,7 @@
 	        		<legend>个人资料设置</legend><span id="img_status"></span>
 					<div class="dt_wrap_revise">
         			<div class="dt_revise name clearfix">
-        				<label for="box_1">名字</label>
+        				<label for="box_1"><abbr title="required" style="color:red;margin-right:6px;">*</abbr>名字</label>
         				<div class="dt_content">
         					<input type="text" id="username" class="dt_input dt_type1_input" name="username" value="{$username}" onblur="checkUser();"/>
 							<span id="user_msg" style="color:red;"></span>
@@ -161,21 +165,21 @@
 	        		<legend>修改密码</legend>
 					<div class="dt_wrap_revise">
         			<div class="dt_revise clearfix">
-        				<label for="old_pw">旧密码</label>
+        				<label for="old_pw"><abbr title="required" style="color:red;margin-right:6px;">*</abbr>旧密码</label>
         				<div class="dt_content">
         					<input type="password" id="old_pw" class="dt_input dt_type1_input" name="oldpassword"/>
 							<span id="old_pw_msg"></span>
         				</div>
         			</div>
         			<div class="dt_revise clearfix">
-        				<label for="pw">新密码</label>
+        				<label for="pw"><abbr title="required" style="color:red;margin-right:6px;">*</abbr>新密码</label>
         				<div class="dt_content">
         					<input type="password" id="pw" class="dt_input dt_type1_input"  name="password"/>
 							<span id="pw_msg"></span>
         				</div>
         			</div>
         			<div class="dt_revise clearfix">
-        				<label for="sure_pw">确定密码</label>
+        				<label for="sure_pw"><abbr title="required" style="color:red;margin-right:6px;">*</abbr>确定密码</label>
         				<div class="dt_content">
         					<input type="password" id="sure_pw" class="dt_input dt_type1_input"  name="repassword"/>
 							<span id="sure_pw_msg"></span>
@@ -190,14 +194,14 @@
 	        		<legend>联系方式<span class="dt_ms_detail">(以下信息严格保密,未经您许可不会泄漏给第三方)</span></legend>
 					<div class="dt_wrap_revise">
         			<div class="dt_revise clearfix">
-        				<label for="tele">手机</label>
+        				<label for="tele"><abbr title="required" style="color:red;margin-right:6px;">*</abbr>手机</label>
         				<div class="dt_content">
         					<input type="text" id="tele" class="dt_input dt_type1_input" name="ctell" value="{$ctell}" onblur="checkPhone(this.value);"/>
 							<span id="ctell_msg"></span>
         				</div>
         			</div>
         			<div class="dt_revise clearfix">
-        				<label for="email">联系邮箱</label>
+        				<label for="email"><abbr title="required" style="color:red;margin-right:6px;">*</abbr>联系邮箱</label>
         				<div class="dt_content">
         					<input type="text" id="email" class="dt_input dt_type1_input" name="cemail" value="{$cemail}" onblur="isMail();"/>
 							<span id="cemail_msg"></span>
@@ -211,6 +215,7 @@
 						<input type="file" name="Filedata" id="Filedata" accept="image/gif, image/jpeg ,image/jpg" value="选择文件" style="display:none;">
 						</form>
         </div>
+
 		<script type="text/javascript" src="Templates/js/jquery.js"></script>
 <style>
      #exec_target{display:none;width:0;height:0;}
@@ -262,7 +267,7 @@ function checkusernameString(str){
 $(document).ready(function(){
 	$("#Filedata").change(function(){
 		if($("#Filedata").val() != ''){
-			$("#img_status").html("图片上传中.......");
+			$("#imgloading").show();
 			$("#selectForm").submit();
 		}
 	});
@@ -277,7 +282,7 @@ $(document).ready(function(){
 			$("#qqimg").hide();
 			$("#sinaimg").hide();
 			changeUserImg('local');
-			$("#img_status").html("图片上传完毕");
+			$("#imgloading").hide();
 		}
 	});
 });
@@ -406,9 +411,9 @@ $(".dt_sure_remove").click(function(){
 		getCity("province_2", "city_2");
 	});
 
-var default_year = <?php if($healthinfo['age']!=''){echo "'".$healthinfo['age']."岁'";}else{echo "false";}?>,
-    default_height = <?php if($healthinfo['height']!=''){echo "'".$healthinfo['height']."cm'";}else{echo "false";}?>,
-    default_weight = <?php if($healthinfo['body_weight']!=''){echo "'".$healthinfo['body_weight']."kg'";}else{echo "false";}?>;
+var default_year = <?php if($healthinfo['age']!=''&&$healthinfo['age']>0){echo "'".$healthinfo['age']."岁'";}else{echo "false";}?>,
+    default_height = <?php if($healthinfo['height']!=''&&$healthinfo['height']>0){echo "'".$healthinfo['height']."cm'";}else{echo "false";}?>,
+    default_weight = <?php if($healthinfo['body_weight']!=''&&$healthinfo['body_weight']>0){echo "'".$healthinfo['body_weight']."kg'";}else{echo "false";}?>;
 	$(".dt_weight_input").hide();
 	$(".dt_height_input").hide();
 	$(".dt_year_input").hide();

@@ -1,4 +1,15 @@
 /******register Reset **********/
+				.load{
+position: fixed;
+left: 50%;
+top: 40%;
+z-index: 1001;
+height: 79px;
+font-size:14px;
+font-weight:bold;
+color: #656565;
+line-height:30px;
+}
 body,ul,p{
 	margin:0;
 	padding:0;

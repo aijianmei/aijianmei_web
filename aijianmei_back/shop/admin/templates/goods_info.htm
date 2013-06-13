@@ -369,8 +369,9 @@
               </select>
             </td>
             <td align="center">
+            	<p>套餐组<br /><input name="group_goods_id" type="text" size="6" /></p>
               <p>{$lang.price}<br /><input name="price2" type="text" size="6" /></p>
-              <p><input type="button" value=">" onclick="sz2.addItem(false, 'add_group_goods', goodsId, this.form.elements['price2'].value)" class="button" /></p>
+              <p><input type="button" value=">" onclick="sz2.addItem(false, 'add_group_goods', goodsId, this.form.elements['price2'].value, this.form.elements['group_goods_id'].value)" class="button" /></p>
               <p><input type="button" value="<" onclick="sz2.dropItem(false, 'drop_group_goods', goodsId, elements['is_single'][0].checked)" class="button" /></p>
               <p><input type="button" value="<<" onclick="sz2.dropItem(true, 'drop_group_goods', goodsId, elements['is_single'][0].checked)" class="button" /></p>
             </td>

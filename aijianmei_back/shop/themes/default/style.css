@@ -45,7 +45,7 @@ img,button,input{
   border:0;
 }
 img{
-  display: block;
+  /*display: block;*/
   outline:0;
 }
 body{

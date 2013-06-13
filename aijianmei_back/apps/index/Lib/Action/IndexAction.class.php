@@ -492,12 +492,25 @@ function show_banner($type){
 
 			//if($user_message['id']==2578458467){echo $_REQUEST['code'];exit;}
             //$logId = M('others')->field('uid')->where(array('mediaID'=>'3', 'mediaUserID'=>$user_message['id'], 'personID'=>$user_message['idstr']))->find();
-            $log_sql = 'select uid from ai_others where mediaID=3 and mediaUserID='.$user_message['id'].' and personID='.$user_message['idstr'].'';
+			
+			
+			
+            $log_sql = 'select id,uid from ai_others where mediaID=3 and mediaUserID='.$user_message['id'].' and personID='.$user_message['idstr'].'';
             //echo $log_sql;
             $logId = M('')->query($log_sql);
             //var_dump($logId);
-            $setMailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
+            $setMailSql="select password,email,uname from ai_user where uid='".$logId[0]['uid']."'";
             $setMail = M('')->query($setMailSql);
+			if($setMail[0]['password']==null||$setMail[0]['email']==null){
+				$sql=null;
+				$sql="delete from ai_others where id='".$logId[0]['id']."'";
+				M('')->query($sql);
+				$sql="delete from ai_user where uid='".$logId[0]['uid']."'";
+				M('')->query($sql);
+				$sql="delete from ecs_users where user_name='".$$setMail[0]['uname']."'";
+				M('')->query($sql);
+				$logId=null;
+			}
             if($logId) {
                 service('Passport')->loginLocal($logId[0]['uid']);
 				$_SESSION['sinalogin']=1;
@@ -731,6 +744,7 @@ function show_banner($type){
 		if(!$newArticles){
 			$newArticles = M('')->query($sql);
 			foreach ($newArticles as $key => $value) {
+				unset($newArticles[$key]['content']);
 				$newArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
 			}
 			$this->setDataCache(md5($sql),$newArticles);
@@ -758,6 +772,7 @@ function show_banner($type){
 		if(!$hotArticles){
 			$hotArticles = M('')->query($sql);
 			foreach ($hotArticles as $key => $value) {
+				unset($hotArticles[$key]['content']);
 				$hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
 			}
 			$this->setDataCache(md5($sql),$hotArticles);

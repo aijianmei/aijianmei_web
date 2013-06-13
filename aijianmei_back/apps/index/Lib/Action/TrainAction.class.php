@@ -33,9 +33,9 @@ class TrainAction extends Action {
 			'img'=>'../Public/images/banner/training_3.jpg',
 			'url'=>"/index-Index-articleDetail-50.html"),
 		'4'=>array(
-			'name'=>'懒人最爱！利用身体重量进行训练的八大好处',
+			'name'=>'健身小科普：了解“体脂率”',
 			'img'=>'../Public/images/banner/training_4.jpg',
-			'url'=>"/index-Index-articleDetail-96.html"),
+			'url'=>"/index-Index-articleDetail-115.html"),
 		);
 		 $this->assign('_bannerInfo',$bannerinfo);
 		 //}}}end
@@ -243,7 +243,7 @@ class TrainAction extends Action {
 			$this->setDataCache(md5($countsql),$countInfo);
 		}
 		///index.php?app=index&mod=Train&act=articleList&id=$id
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Train&act=articleList&id=$id&ctype=2&pg=");
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,"/index.php?app=index&mod=Train&act=articleList&id=$id&ctype=2&pg=");
 		$pagerArray = $pagerData['html'];
 		
 		$order = 'reader_count';
@@ -254,7 +254,7 @@ class TrainAction extends Action {
         $this->assign('hotArticles', $hotArticles);
         
 		
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Train&act=articleList&id=$id&ctype=1&pg=");
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,"/index.php?app=index&mod=Train&act=articleList&id=$id&ctype=1&pg=");
 		$pagerArray = $pagerData['html'];
         //assign lastArticles		
         $order = 'create_time';
@@ -263,36 +263,7 @@ class TrainAction extends Action {
 		$this->assign('lastArticlespage', $pagerArray);
         $this->assign('lastArticles', $lastArticles);
 		
-		
-		/*$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
-		$countsql = "select count(*) as cnums from ai_video v,($orderTableSql) t where v.category_id=t.aid";
-		$countInfo=$this->getDataCache(md5($countsql));
-		if(!$countInfo){
-			$countInfo = M('')->query($countsql);
-			$this->setDataCache(md5($countsql),$countInfo);
-		}
-		
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=3&pg=');
-		$pagerArray = $pagerData['html'];
-		
-		$order = 'create_time';
-		//$lastArticles = D('Article')->getTrainArticles($order);
-        $lastVideoList = D('Article')->getTrainVideoList($order,'',($pg-1)*$nums,$nums);
-		$this->assign('lastVideoListpage', $pagerArray);
-        $this->assign('lastVideoList', $lastVideoList);
-		//print_r($lastVideoList);
-		//print_r($lastVideoList);
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=4&pg=');
-		$pagerArray = $pagerData['html'];
-		$order = 'click';
-		//$lastArticles = D('Article')->getTrainArticles($order);
-        $hotVideoList = D('Article')->getTrainVideoList($order,'',($pg-1)*$nums,$nums);
-		$this->assign('hotVideoListpage', $pagerArray);
-        $this->assign('hotVideoList', $hotVideoList);*/
-		
-		
-		
-		//print_r($lastArticles);
+	
         $this->show_banner();//显示banner
 		$keymenu=array('51'=>'锻炼方法','38'=>'基础知识','47'=>'特定锻炼视频');
         $this->assign('headertitle', $keymenu[$id]);
@@ -310,23 +281,17 @@ class TrainAction extends Action {
 		$id = intval($_GET['id']);
 		$pg=$_GET['pg']?$_GET['pg']:1;
 		$nums=5;
-        $this->assign('cssFile', 'training');
-        $map['channel'] = '2';
-        $cate = M('article_category')->where($map)->findAll();
-        foreach($cate as $c)
-            if($c['parent'] == NULL) $parent[$c['id']] = $c;
+		$this->assign('cssFile', 'training');
+		$map['channel'] = '2';
+		$cate = M('article_category')->where($map)->findAll();
+		foreach($cate as $c){
+			if($c['parent'] == NULL) $parent[$c['id']] = $c;
         foreach($cate as $c) {
             if($c['parent'] != NULL) $parent[$c['parent']]['children'][] = $c;
+            
             $cate_id[] = $c['id'];
         }
-        
-        $articles = M('article')->where(array('category_id'=>array('in', implode(',', $cate_id))))->order('id desc')->limit(8)->findAll();
-        foreach ($articles as $key => $value) {
-            $articles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
-        }
-        $this->assign('articles', $articles);
-        $this->assign('categories', $parent);
-        //$this->display();
+    }
 		
 		if($_GET['pg']>0){
 			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
@@ -343,7 +308,7 @@ class TrainAction extends Action {
 			$this->setDataCache(md5($countsql),$countInfo);
 		}
 		
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Train&act=videoList&id=$id&ctype=1&pg=");
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,"/index.php?app=index&mod=Train&act=videoList&id=$id&ctype=1&pg=");
 		$pagerArray = $pagerData['html'];
 		//print_r($pagerArray);
 		$order = 'create_time';
@@ -353,19 +318,19 @@ class TrainAction extends Action {
         $this->assign('lastVideoList', $lastVideoList);
 		//print_r($lastVideoList);
 		//print_r($lastVideoList);
-		$pagerData=$this->pageHtml($countInfo[0]['cnums'],10,$pglimit,"/index.php?app=index&mod=Train&act=videoList&id=$id&ctype=2&pg=");
+		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,"/index.php?app=index&mod=Train&act=videoList&id=$id&ctype=2&pg=");
 		$pagerArray = $pagerData['html'];
 		$order = 'click';
 		//$lastArticles = D('Article')->getTrainArticles($order);
-        $hotVideoList = D('Article')->getTrainVideoList($order,'',($pglimit-1)*20,$nums);
+		$hotVideoList = D('Article')->getTrainVideoList($order,'',($pglimit-1)*20,$nums);
 		$this->assign('hotVideoListpage', $pagerArray);
         $this->assign('hotVideoList', $hotVideoList);
 		
 		
 		
 		//print_r($lastArticles);
-        $this->show_banner();//显示banner
-        $this->assign('headertitle', '锻炼视频');
+		$this->show_banner();//显示banner
+		$this->assign('headertitle', '锻炼视频');
 		//header current add by kon at 20130415
 		$this->assign('_current', 'train');
         //$this->display();
@@ -386,9 +351,9 @@ class TrainAction extends Action {
         
         $video['create_time']=date("Y-m-d H:i:s",$video['create_time']);
         $otherVideo=D('Article')->getVideoCategory($table,$video['category_id'],2);
-		$videoLogoData=null;
+				$videoLogoData=null;
         $videoLogoData=json_decode($this->getVideoData($video['link']));
-		$video['logo'] = $videoLogoData->data[0]->logo;
+				$video['logo'] = $videoLogoData->data[0]->logo;
         foreach($otherVideo as $k=>$v){
             $data = json_decode($this->getVideoData($v['link']));
             $otherVideo[$k]['CommNumber']=D('Article')->getVideoCountRecommentsById($v['id']);
@@ -396,7 +361,7 @@ class TrainAction extends Action {
             $otherVideo[$k]['CommNumber']=$otherVideo[$k]['CommNumber']?$otherVideo[$k]['CommNumber']:0;
         }
 
-        $getRecommentsSql="select * from ai_video_comments where pid=$id";
+        $getRecommentsSql="select * from ai_comments where parent_id=$id and parent_type=2";
         $Recomments=M('')->query($getRecommentsSql);
         $cRecomnums=count($Recomments);
         $pager = api('Pager');
@@ -410,28 +375,15 @@ class TrainAction extends Action {
         $this->assign('pager', $pagerArray);
         $cRecomnums=$cRecomnums?$cRecomnums:0;
         $this->assign('cRecomnums', $cRecomnums);
-        $recommecntListSql="select a.*,b.uname as username from ai_video_comments a left join ai_user b on a.uid=b.uid where a.pid=$id order by a.create_time desc limit $pnum , $nums";
+        $recommecntListSql="select a.*,b.uname as username from ai_comments a left join ai_user b on a.uid=b.uid where a.parent_id=$id and a.parent_type=2 order by a.create_time desc limit $pnum , $nums";
         $RecommentsList=M('')->query($recommecntListSql);
         foreach($RecommentsList as $key => $value){
-            $getimgsql="select profileImageUrl from ai_others where uid='".$value['uid']."'";
-            $getimgArr=M('')->query($getimgsql);
-            if($getimgArr['profileImageUrl'])
-            {
-                $RecommentsList[$key]['img']=$getimgArr['profileImageUrl'];
-            }
-            else{
-                if(is_file("data/uploads/avatar/".$value['uid']."/middle.jpg")){
-                    $RecommentsList[$key]['img']="/data/uploads/avatar/".$value['uid']."/middle.jpg";
-                }
-                else{
-                    $RecommentsList[$key]['img']="public/themes/newstyle/images/user_pic_middle.gif";
-                }
-            }
+            $RecommentsList[$key]['img']=getUserFace($value['uid'],'m');
             $RecommentsList[$key]['create_time']=date("Y-m-d H:i:s",$RecommentsList[$key]['create_time']);
         }
         $this->assign('RecommentsList', $RecommentsList);
-        $sql = "select * from ai_".$table." where category_id=$Category order by id desc limit 0,$nums";
-        $result = M('')->query($sql);
+//        $sql = "select * from ai_".$table." where category_id=$Category order by id desc limit 0,$nums";
+//        $result = M('')->query($sql);
         $this->assign('otherVideo', $otherVideo);
         //print_r($_SESSION);
         $this->assign('video', $video);

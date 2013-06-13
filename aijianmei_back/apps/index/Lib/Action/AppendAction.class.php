@@ -47,9 +47,9 @@ class AppendAction extends Action {
 			'url'=>'/index-Index-articleDetail-60.html'
 			),
 		'2'=>array(
-			'name'=>'增肌必备！六大营养辅助品',
+			'name'=>'七招营养秘笈，吃出“肌肉”',
 			'img'=>'../Public/images/banner/append_2.jpg',
-			'url'=>"/index-Index-articleDetail-92.html"),
+			'url'=>"/index-Index-articleDetail-34.html"),
 		'3'=>array(
 			'name'=>'也来八卦“蛋白质”',
 			'img'=>'../Public/images/banner/append_3.jpg',

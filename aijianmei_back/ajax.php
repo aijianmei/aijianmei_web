@@ -106,7 +106,6 @@ function ajaxInMore($data){
 								<p>'.$value['brief'].'</p>
 								<a class="cont_read_more" href="index-Index-articleDetail-'.$value['id'].'.html">阅读全文></a>
 								<div class="cont_share clearfix">
-									<span class="cont_click">点击数:<span>'.$value['reader_count'].'</span></span>
                                     <span class="cont_rec">评论数:<span>'.$value['CommNumber'].'</span></span>
 								</div>
 							</div>
@@ -151,7 +150,6 @@ function ajaxInMore($data){
 								</div>
 								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html"></a>
 								<div class="cont_share clearfix">
-									<span class="cont_vd_click">点击数:<span>'.$value['click'].'</span></span>
                                     <span class="cont_rec">评论数:<span>'.$value['recommons'].'</span></span>
 								</div>
 							</div>
@@ -202,7 +200,6 @@ function ajaxTrainMore($data){
 								<p>'.$value['brief'].'</p>
 								<a class="cont_read_more" href="index-Index-articleDetail-'.$value['id'].'.html">阅读全文></a>
 								<div class="cont_share clearfix">
-									<span class="cont_click">点击数:<span>'.$value['reader_count'].'</span></span>
                                     <span class="cont_rec">评论数:<span>'.$value['CommNumber'].'</span></span>
 								</div>
 							</div>
@@ -247,7 +244,6 @@ function ajaxTrainMore($data){
 								</div>
 								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html"></a>
 								<div class="cont_share clearfix">
-									<span class="cont_vd_click">点击数:<span>'.$value['click'].'</span></span>
                                     <span class="cont_rec">评论数:<span>'.$value['recommons'].'</span></span>
 								</div>
 							</div>
@@ -300,9 +296,9 @@ function recordlike($data){
 	$checkLikeSql=null;
 	$checkLikeSql="select * from  ai_video_vote where uid=$mid and vid=$videoid";
 	$checkLikeInfo=array();
-    $checkLikeInfo=C_mysqlQuery($checkLikeSql);
-    $checkLikeInfo = mysql_fetch_assoc($checkLikeInfo);
-	if($checkLikeInfo){
+	$checkLikeInfo=C_mysqlQuery($checkLikeSql);
+	$checkLikeInfo = mysql_fetch_assoc($checkLikeInfo);
+	if($checkLikeInfo['uid']>0){
 		echo json_encode(2);
 		exit();
 	}
@@ -459,21 +455,22 @@ function addVideoCommont($data=null){
     global $_dbConfig;
     $pid=$_POST['pid']?$_POST['pid']:'';
     $uid=$_SESSION['mid'];
-	if(!($uid>0)){die();}
+    $ptype=$_POST['ptype'];
+		if(!($uid>0)){die();}
     $content=$_POST['content']?trim($_POST['content']):exit();
     $db = mysql_connect($_dbConfig['DB_HOST'], $_dbConfig['DB_USER'], $_dbConfig['DB_PWD']);
     mysql_select_db('aijianmei', $db);
     mysql_query("set names 'utf8'");
     //$sql="INSERT INTO ai_video_comments (uid,connect,pid,create_time) VALUES ('".$uid."','".trim($connect)."','".$pid."',".time().")";
     //$sql="INSERT INTO ai_video_comments (uid,content,pid,create_time) VALUES ('".$uid."','".$content."','".$pid."',".time().")";
-	$sql="INSERT INTO ai_comments (uid,content,parent_id,parent_type,create_time,source,topParent) VALUES ('".$uid."','".$content."','".$pid."',4,".time().",'','0')";
+		$sql="INSERT INTO ai_comments (uid,content,parent_id,parent_type,create_time,source,topParent) VALUES ('".$uid."','".$content."','".$pid."',".$ptype.",".time().",'','0')";
     $res = mysql_query($sql, $db);
     $data=null;
     if($res) {
         $data['username']=$_SESSION['userInfo']['uname'];
         $data['content']=$content;
         $data['create_time']=date("Y-m-d H:i:s",time());
-        $imgsql="select profileImageUrl from ai_others where uid='".$uid."'";
+        /*$imgsql="select profileImageUrl from ai_others where uid='".$uid."'";
         $imgsArr=mysql_query($imgsql, $db);
         $row = mysql_fetch_array($imgsArr);
         $data['img'] =$row['profileImageUrl'];
@@ -483,7 +480,8 @@ function addVideoCommont($data=null){
             {
                 $data['img']="public/themes/newstyle/images/user_pic_middle.gif";
             }
-        }
+        }*/
+         $data['img']=getUserFace($uid,'m');
         echo json_encode($data);
     }else {
         echo json_encode(0);
@@ -509,7 +507,7 @@ function addDetaiCommont($data=null){
         $data['connect']=$content;
         $data['create_time']=date("Y-m-d H:i:s",time());
 		
-		$check_type="select upic_type from ai_user where uid=$uid";
+		/*$check_type="select upic_type from ai_user where uid=$uid";
 		$checkres=mysql_query($imgsql, $check_type);
         $check_typeinfo = mysql_fetch_array($checkres);
 		
@@ -523,7 +521,8 @@ function addDetaiCommont($data=null){
             {
                 $data['img']="public/themes/newstyle/images/user_pic_middle.gif";
             }
-        }
+        }*/
+        $data['img']=getUserFace($uid,'m');
         echo json_encode($data);
     }else {
         echo json_encode(0);
@@ -661,4 +660,34 @@ function getArticlesListType($order,$id=null,$limit,$nums,$type=null)
         return $result;
     }	
 	
-?>
+function getUserFace($uid,$size=null){
+	$size = ($size)?$size:'m';
+	if($size=='m'){
+		$type = 'middle';
+	}elseif ($size=='s'){
+		$type = 'small';
+	}else{
+		$type = 'big';
+	}
+	$imgtpyesql= C_mysqlQuery("select upic_type from ai_user where uid='".$uid."'");
+	$imgtpye=mysql_fetch_assoc($imgtpyesql);
+        
+	$uid_to_path = '/'.$uid;
+	$userface = 'data/uploads/avatar' . $uid_to_path . '/' . $type. '.jpg';
+	if($imgtpye['upic_type']==1){
+		if(is_file($userface)){
+			return 'data/uploads/avatar' . $uid_to_path . '/' . $type . '.jpg';
+		}
+		else{
+			return "Templates/images/login_pic.jpg";
+		}
+	}else{
+		$apiImg= C_mysqlQuery("select profileImageUrl from ai_others where uid='".$uid."' and profileImageUrl!=''");
+		$apiImg=mysql_fetch_assoc($apiImg);	
+		if(!empty($apiImg)){
+            $userface=$apiImg['profileImageUrl'];
+            return $userface;
+		}
+		return "/images/user_pic_{$type}.gif";
+	}
+}

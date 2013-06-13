@@ -124,6 +124,7 @@ class ArticleModel extends Model {
 		if(!$result){
 			$result = M('')->query($sql);
 			foreach ($result as $key => $value) {
+				unset($result[$key]['content']);
 				$result[$key]['CommNumber']=$this->getCountRecommentsById($value['id']);
 			}
 			$this->setDataCache($cacheid,$result);
@@ -150,7 +151,7 @@ class ArticleModel extends Model {
 		//1
         }else {
             $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
-            $sql = "select v.* from ai_video v order by $order desc limit ".$limit.",".$nums."";
+           	$sql = "select v.* from ai_video v order by $order desc limit ".$limit.",".$nums."";
         }
 		$cacheid=md5($sql);
 		$result=null;
@@ -278,7 +279,7 @@ class ArticleModel extends Model {
     public function getVideoCountRecommentsById($id)
     {
         $sql=null;$numsArr=null;
-        $sql="select count(*) as nums from ai_video_comments where pid=".$id;
+        $sql="select count(*) as nums from ai_comments where parent_id=".$id." and parent_type=2";
         $numsArr= M('')->query($sql);
         return !empty($numsArr[0]['nums'])?$numsArr[0]['nums']:0;
     }

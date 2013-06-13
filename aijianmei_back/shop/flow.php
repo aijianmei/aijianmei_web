@@ -53,8 +53,11 @@ $smarty->assign('data_dir',    DATA_DIR);       // 数据目录
 if ($_REQUEST['step'] == 'add_to_cart')
 {
     include_once('includes/cls_json.php');
+
+
     $_POST['goods']=strip_tags(urldecode($_POST['goods']));
     $_POST['goods'] = json_str_iconv($_POST['goods']);
+ 		$tmpGoodsIdArr=explode("_", strip_tags(urldecode($_POST['goods']['goods_id'])));
 
     if (!empty($_REQUEST['goods_id']) && empty($_POST['goods']))
     {
@@ -77,6 +80,10 @@ if ($_REQUEST['step'] == 'add_to_cart')
 
     $goods = $json->decode($_POST['goods']);
 
+		$tmpGoodsIdArr=explode("_", stripslashes($goods->goods_id));
+		
+
+		
     /* 检查：如果商品有规格，而post的数据没有规格，把商品的规格属性通过JSON传到前台 */
     if (empty($goods->spec) AND empty($goods->quick))
     {
@@ -113,7 +120,6 @@ if ($_REQUEST['step'] == 'add_to_cart')
             $result['goods_id'] = $goods->goods_id;
             $result['parent'] = $goods->parent;
             $result['message'] = $spe_array;
-
             die($json->encode($result));
         }
     }
@@ -134,6 +140,40 @@ if ($_REQUEST['step'] == 'add_to_cart')
     /* 更新：购物车 */
     else
     {
+    		if(is_array($tmpGoodsIdArr)&& count($tmpGoodsIdArr) >1){
+        	foreach ($tmpGoodsIdArr as $value) {
+        		// 更新：添加到购物车
+        		$goods->goods_id=$value;
+        		if (addto_cart($goods->goods_id, $goods->number, $goods->spec, $goods->parent))
+        		{
+        			if ($_CFG['cart_confirm'] > 2)
+        			{
+        				$result['message'] = '';
+        			}
+        			else
+        			{
+        				$result['message'] = $_CFG['cart_confirm'] == 1 ? $_LANG['addto_cart_success_1'] : $_LANG['addto_cart_success_2'];
+        			}
+        			
+        			$result['content'] = insert_cart_info();
+        			$result['one_step_buy'] = $_CFG['one_step_buy'];
+        		}
+        		else
+        		{
+        			$result['message']  = $err->last_message();
+        			$result['error']    = $err->error_no;
+        			$result['goods_id'] = stripslashes($goods->goods_id);
+        			if (is_array($goods->spec))
+        			{
+        				$result['product_spec'] = implode(',', $goods->spec);
+        			}
+        			else
+        			{
+                $result['product_spec'] = $goods->spec;
+              }
+            } 
+        	} 
+        }else{
         // 更新：添加到购物车
         if (addto_cart($goods->goods_id, $goods->number, $goods->spec, $goods->parent))
         {
@@ -163,9 +203,12 @@ if ($_REQUEST['step'] == 'add_to_cart')
                 $result['product_spec'] = $goods->spec;
             }
         }
+        
+      }
     }
 
     $result['confirm_type'] = !empty($_CFG['cart_confirm']) ? $_CFG['cart_confirm'] : 2;
+
     die($json->encode($result));
 }
 elseif ($_REQUEST['step'] == 'link_buy')

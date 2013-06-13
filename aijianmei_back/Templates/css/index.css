@@ -284,7 +284,7 @@
 					.cont_rec{
 						background: url("../images/wm3.png") no-repeat 0 -438px;
 					    display: inline-block;
-					    float: right;
+					    float: left;
 					    height: 18px;
 					    padding-left: 27px;
 					}
@@ -461,7 +461,8 @@
 		}
 		.car_buy{
 			display: inline-block;
-			padding-left: 34px;
+			padding-left: 17px;
+			text-indent: -999px;
 			line-height: 17px;
 			background: url(../images/car_buy.png) no-repeat;
 		}
