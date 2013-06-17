@@ -328,6 +328,7 @@ function create_html_editor($input_name, $input_value = '')
  */
 function get_goods_list($filter)
 {
+		unset($filter->exclude);
     $filter->keyword = json_str_iconv($filter->keyword);
     $where = get_where_sql($filter); // 取得过滤条件
 

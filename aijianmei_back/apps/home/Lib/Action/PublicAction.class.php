@@ -340,7 +340,7 @@ class PublicAction extends Action{
              /*ecshoplogin by kontem at 20130412 start*/
             $get_usernameSql="select * from ai_user where email='".$_POST['email']."' and password='".md5($_POST['password'])."'";
             $get_usernameInfo = M('')->query($get_usernameSql);
-			$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+						$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
             $uid = M('')->query($getUidSql);
             $_SESSION['user_id']   = $uid[0]['user_id'];
             $_SESSION['user_name'] = $uid[0]['user_name'];
@@ -350,8 +350,10 @@ class PublicAction extends Action{
 			if($_SESSION['mid']>0){
 				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
 			}
-			@setcookie("ECS[user_id]",  $getShopUinfo[0]['user_id'], time()+3600*24*30);
+
+			@setcookie("ECS[user_id]",  $uid[0]['user_id'], time()+3600*24*30);
 			@setcookie("ECS[password]", md5($_POST['password']), time()+3600*24*30);
+
             //print_r($_SESSION);
             /*ecshop login by kontem at 20130412 end*/
             // 登录商城

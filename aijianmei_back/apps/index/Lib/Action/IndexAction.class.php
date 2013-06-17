@@ -1022,7 +1022,7 @@ function show_banner($type){
 
     public function info()
     {
-        static $nums=7;
+        static $nums=2;
         $type = (int) $_GET['type'];
         $page = (int) $_GET['pg']?(int) $_GET['pg']:1;
         //$info=D('Article')->getDaily($type) old part

@@ -11,7 +11,7 @@
 	        		<legend>个人资料设置</legend><span id="img_status"></span>
 					<div class="dt_wrap_revise">
         			<div class="dt_revise name clearfix">
-        				<label for="box_1"><abbr title="required" style="color:red;margin-right:6px;">*</abbr>名字</label>
+        				<label for="box_1"><span title="required" style="color:red;margin-right:6px;">*</span>名字</label>
         				<div class="dt_content">
         					<input type="text" id="username" class="dt_input dt_type1_input" name="username" value="{$username}" onblur="checkUser();"/>
 							<span id="user_msg" style="color:red;"></span>
@@ -165,21 +165,21 @@
 	        		<legend>修改密码</legend>
 					<div class="dt_wrap_revise">
         			<div class="dt_revise clearfix">
-        				<label for="old_pw"><abbr title="required" style="color:red;margin-right:6px;">*</abbr>旧密码</label>
+        				<label for="old_pw"><span title="required" style="color:red;margin-right:6px;">*</span>旧密码</label>
         				<div class="dt_content">
         					<input type="password" id="old_pw" class="dt_input dt_type1_input" name="oldpassword"/>
 							<span id="old_pw_msg"></span>
         				</div>
         			</div>
         			<div class="dt_revise clearfix">
-        				<label for="pw"><abbr title="required" style="color:red;margin-right:6px;">*</abbr>新密码</label>
+        				<label for="pw"><span title="required" style="color:red;margin-right:6px;">*</span>新密码</label>
         				<div class="dt_content">
         					<input type="password" id="pw" class="dt_input dt_type1_input"  name="password"/>
 							<span id="pw_msg"></span>
         				</div>
         			</div>
         			<div class="dt_revise clearfix">
-        				<label for="sure_pw"><abbr title="required" style="color:red;margin-right:6px;">*</abbr>确定密码</label>
+        				<label for="sure_pw"><span title="required" style="color:red;margin-right:6px;">*</span>确定密码</label>
         				<div class="dt_content">
         					<input type="password" id="sure_pw" class="dt_input dt_type1_input"  name="repassword"/>
 							<span id="sure_pw_msg"></span>
@@ -194,14 +194,14 @@
 	        		<legend>联系方式<span class="dt_ms_detail">(以下信息严格保密,未经您许可不会泄漏给第三方)</span></legend>
 					<div class="dt_wrap_revise">
         			<div class="dt_revise clearfix">
-        				<label for="tele"><abbr title="required" style="color:red;margin-right:6px;">*</abbr>手机</label>
+        				<label for="tele"><span title="required" style="color:red;margin-right:6px;">*</span>手机</label>
         				<div class="dt_content">
         					<input type="text" id="tele" class="dt_input dt_type1_input" name="ctell" value="{$ctell}" onblur="checkPhone(this.value);"/>
 							<span id="ctell_msg"></span>
         				</div>
         			</div>
         			<div class="dt_revise clearfix">
-        				<label for="email"><abbr title="required" style="color:red;margin-right:6px;">*</abbr>联系邮箱</label>
+        				<label for="email"><span title="required" style="color:red;margin-right:6px;">*</span>联系邮箱</label>
         				<div class="dt_content">
         					<input type="text" id="email" class="dt_input dt_type1_input" name="cemail" value="{$cemail}" onblur="isMail();"/>
 							<span id="cemail_msg"></span>

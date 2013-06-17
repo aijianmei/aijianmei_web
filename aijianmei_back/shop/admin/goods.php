@@ -1851,7 +1851,7 @@ elseif ($_REQUEST['act'] == 'get_goods_list')
     $json = new JSON;
 
     $filters = $json->decode($_GET['JSON']);
-
+		//var_dump($filters);
     $arr = get_goods_list($filters);
     $opt = array();
 

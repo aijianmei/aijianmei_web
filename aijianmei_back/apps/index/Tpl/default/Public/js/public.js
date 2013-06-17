@@ -461,7 +461,11 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
 
 //textarea focus()
     $(".comment_inp").click(function(){
-        $(this).html("");
+
+    	if($(this).val()=='有什么感想，来说说吧'){
+    		//alert($(this).val());
+    		$(this).html("");
+    	}
     })
 
 //公共部分！！！选择页面，上下页切换

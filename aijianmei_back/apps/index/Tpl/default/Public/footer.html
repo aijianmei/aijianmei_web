@@ -69,7 +69,8 @@
             <script type="text/javascript" src="../Public/js/jquery.js"></script>
             <script type="text/javascript" src="../Public/js/public.js"></script>
             <script type="text/javascript" src="../Public/js/{$cssFile}.js"></script>
-            <script type='text/javascript' charset='utf-8'>//验证码刷新             $(function(){
+            <script type='text/javascript' charset='utf-8'>//验证码刷新
+            $(function(){
                 $("#safecode,#reloadcode").click(function(event)
                 {
                     $("#safecode").load("/public/captcha.php" + "?timestamp=" + (new Date()).getTime(),{},function(responseText, textStatus, XMLHttpRequest)

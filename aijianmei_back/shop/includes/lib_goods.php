@@ -1514,9 +1514,9 @@ function ec_buysum($goods_id)
     $sql="select sum(goods_number) from " . $GLOBALS['ecs']->table('order_goods') . " AS g ,".$GLOBALS['ecs']->table('order_info') . " AS o WHERE o.order_id=g.order_id and g.goods_id = ".$goods_id." and o.pay_status=2 and o.add_time >= ".$LMonth." and o.add_time <= ".$nowTime." group by g.goods_id";
 
     if (($GLOBALS['db']->getOne($sql)) == ""){
-         return 30;
+         return 30+$goods_id;
         }else{
-       return 30+($GLOBALS['db']->getOne($sql));
+       return 30+$goods_id+($GLOBALS['db']->getOne($sql));
     }
    
 }

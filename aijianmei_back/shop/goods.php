@@ -242,8 +242,27 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
         //print_r($fittings);
         $newfittings=new_attr_fittings($fittings);
         //var_dump($newfittings);
+        foreach ($newfittings as $key=>&$value) {
+         	 // loop through values 
+         	// $goods_id
+         	$child_id_tmp=array();
+         	$child_id_tmp=explode("_",$value['child_id']);
+         	if(in_array($goods_id,$child_id_tmp)){
+         		 foreach ($child_id_tmp as $key1 => $value1) {
+         		 		if($goods_id==$value1){
+         		 			unset($child_id_tmp[$key1]);
+         		 		}
+         		 }
+         		array_unshift($child_id_tmp,$goods_id); 
+         	}
+         	$value['child_id']=implode("_", $child_id_tmp);
+        } 
+
+        
+        //var_dump($newfittings);
         $smarty->assign('fittings',            $fittings);
         $smarty->assign('newfittings',            $newfittings);                   // 配件
+        $smarty->assign('newfittingscount',            count($newfittings));                   // 配件
         $smarty->assign('rank_prices',         get_user_rank_prices($goods_id, $shop_price));    // 会员等级价格
         $smarty->assign('pictures',            get_goods_gallery($goods_id));                    // 商品相册
         $smarty->assign('bought_goods',        get_also_bought($goods_id));                      // 购买了该商品的用户还购买了哪些商品
@@ -549,10 +568,12 @@ function  new_attr_fittings($fittings){
 	foreach ($fittings as &$value) {
 	 	 $fittingsNew[$value['group_id']]['info'][]=$value;
 	 	 $fittingsNew[$value['group_id']]['parent_id']=$value['parent_id'];
+	 	 $fittingsNew[$value['group_id']]['group_id']=$value['group_id'];
+	 	 $fittingsNew[$value['group_id']]['fittingscount']+=1;
 	 	 $fittingsNew[$value['group_id']]['child_id'].=empty($fittingsNew[$value['group_id']]['child_id'])? $value['goods_id']:"_".$value['goods_id'];
-	 	 $fittingsNew[$value['group_id']]['allshop_price']+=empty($fittingsNew[$value['group_id']]['allshop_price'])? $value['fittings_price_num']+$value['parent_shop_price']:$value['fittings_price_num'];
+	 	 $fittingsNew[$value['group_id']]['allshop_price']+=empty($fittingsNew[$value['group_id']]['allshop_price'])? $value['fittings_price_num']:$value['fittings_price_num'];
 	 	 
-	 	 $fittingsNew[$value['group_id']]['sum_price']+=empty($fittingsNew[$value['group_id']]['sum_price'])? $value['shop_price_num']+$value['parent_shop_price']:$value['shop_price_num'];
+	 	 $fittingsNew[$value['group_id']]['sum_price']+=empty($fittingsNew[$value['group_id']]['sum_price'])? $value['shop_price_num']:$value['shop_price_num'];
 	}
 	foreach ($fittings as &$value) {
 

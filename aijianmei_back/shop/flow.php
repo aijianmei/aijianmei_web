@@ -53,11 +53,9 @@ $smarty->assign('data_dir',    DATA_DIR);       // 数据目录
 if ($_REQUEST['step'] == 'add_to_cart')
 {
     include_once('includes/cls_json.php');
-
-
     $_POST['goods']=strip_tags(urldecode($_POST['goods']));
     $_POST['goods'] = json_str_iconv($_POST['goods']);
- 		$tmpGoodsIdArr=explode("_", strip_tags(urldecode($_POST['goods']['goods_id'])));
+
 
     if (!empty($_REQUEST['goods_id']) && empty($_POST['goods']))
     {
@@ -81,9 +79,7 @@ if ($_REQUEST['step'] == 'add_to_cart')
     $goods = $json->decode($_POST['goods']);
 
 		$tmpGoodsIdArr=explode("_", stripslashes($goods->goods_id));
-		
-
-		
+	
     /* 检查：如果商品有规格，而post的数据没有规格，把商品的规格属性通过JSON传到前台 */
     if (empty($goods->spec) AND empty($goods->quick))
     {
@@ -126,7 +122,7 @@ if ($_REQUEST['step'] == 'add_to_cart')
 
     /* 更新：如果是一步购物，先清空购物车 */
     //if ($_CFG['one_step_buy'] == '1')
-	if($_POST['bool']==1)
+		if($_POST['bool']==1)
     {
         clear_cart();
     }
@@ -143,6 +139,7 @@ if ($_REQUEST['step'] == 'add_to_cart')
     		if(is_array($tmpGoodsIdArr)&& count($tmpGoodsIdArr) >1){
         	foreach ($tmpGoodsIdArr as $value) {
         		// 更新：添加到购物车
+
         		$goods->goods_id=$value;
         		if (addto_cart($goods->goods_id, $goods->number, $goods->spec, $goods->parent))
         		{
@@ -208,7 +205,6 @@ if ($_REQUEST['step'] == 'add_to_cart')
     }
 
     $result['confirm_type'] = !empty($_CFG['cart_confirm']) ? $_CFG['cart_confirm'] : 2;
-
     die($json->encode($result));
 }
 elseif ($_REQUEST['step'] == 'link_buy')
@@ -2122,6 +2118,99 @@ elseif ($_REQUEST['step'] == 'add_package_to_cart')
     $result['confirm_type'] = !empty($_CFG['cart_confirm']) ? $_CFG['cart_confirm'] : 2;
     die($json->encode($result));
 }
+/*------------------------------------------------------ */
+//-- 添加商品到购物车
+/*------------------------------------------------------ */
+elseif ($_REQUEST['step'] == 'newadd_to_cart')
+{
+    include_once('includes/cls_json.php');
+
+    $_POST['goods']=strip_tags(urldecode($_POST['goods']));
+    $_POST['goods'] = json_str_iconv($_POST['goods']);
+
+
+    if (!empty($_REQUEST['goods_id']) && empty($_POST['goods']))
+    {
+        if (!is_numeric($_REQUEST['goods_id']) || intval($_REQUEST['goods_id']) <= 0)
+        {
+            ecs_header("Location:./\n");
+        }
+        $goods_id = intval($_REQUEST['goods_id']);
+        exit;
+    }
+
+    $result = array('error' => 0, 'message' => '', 'content' => '', 'goods_id' => '');
+    $json  = new JSON;
+
+    if (empty($_POST['goods']))
+    {
+        $result['error'] = 1;
+        die($json->encode($result));
+    }
+
+    $goods = $json->decode($_POST['goods']);
+
+		$tmpGoodsIdArr=explode("_", stripslashes($goods->goods_id));
+	
+
+    /* 更新：如果是一步购物，先清空购物车 */
+    //if ($_CFG['one_step_buy'] == '1')
+		if($_POST['bool']==1)
+    {
+        clear_cart();
+    }
+
+    /* 检查：商品数量是否合法 */
+    if (!is_numeric($goods->number) || intval($goods->number) <= 0)
+    {
+        $result['error']   = 1;
+        $result['message'] = $_LANG['invalid_number'];
+    }
+    /* 更新：购物车 */
+    else
+    {
+
+    		if(is_array($tmpGoodsIdArr)&& count($tmpGoodsIdArr) >1){
+        	foreach ($tmpGoodsIdArr as $value) {
+        		// 更新：添加到购物车
+
+        		$goods->goods_id=$value;
+        		if (newaddto_cart($goods->goods_id, $goods->number, $goods->spec, $goods->parent,$goods->group_id))
+        		{
+        			if ($_CFG['cart_confirm'] > 2)
+        			{
+        				$result['message'] = '';
+        			}
+        			else
+        			{
+        				$result['message'] = $_CFG['cart_confirm'] == 1 ? $_LANG['addto_cart_success_1'] : $_LANG['addto_cart_success_2'];
+        			}
+        			
+        			$result['content'] = insert_cart_info();
+        			$result['one_step_buy'] = $_CFG['one_step_buy'];
+        		}
+        		else
+        		{
+
+        			$result['message']  = $err->last_message();
+        			$result['error']    = $err->error_no;
+        			$result['goods_id'] = stripslashes($goods->goods_id);
+        			if (is_array($goods->spec))
+        			{
+        				$result['product_spec'] = implode(',', $goods->spec);
+        			}
+        			else
+        			{
+                $result['product_spec'] = $goods->spec;
+              }
+            } 
+        	} 
+        }
+    }
+
+    $result['confirm_type'] = !empty($_CFG['cart_confirm']) ? $_CFG['cart_confirm'] : 2;
+    die($json->encode($result));
+}
 else
 {
     /* 标记购物流程为普通商品 */
@@ -2463,12 +2552,34 @@ function flow_drop_cart_goods($id)
         //如果不是普通商品，只删除该商品即可
         else
         {
-            $sql = "DELETE FROM " . $GLOBALS['ecs']->table('cart') .
+           $sql = "DELETE FROM " . $GLOBALS['ecs']->table('cart') .
                     " WHERE session_id = '" . SESS_ID . "' " .
                     "AND rec_id = '$id' LIMIT 1";
+
         }
 
         $GLOBALS['db']->query($sql);
+
+        if($row['parent_id']>0){
+        		$getFittingsGoodsListSql=null;
+        		$groupIdSql="select group_id from ". $GLOBALS['ecs']->table('group_goods') ." where goods_price='".$row['goods_price']."' 
+        		and parent_id='".$row['parent_id']."' and goods_id='".$row['goods_id']."'";
+        		$getFittingsGoodsListSql="SELECT goods_id FROM " . $GLOBALS['ecs']->table('group_goods') .
+        		" WHERE group_id in (".$groupIdSql.") and parent_id='".$row['parent_id']."' and goods_id!='".$row['goods_id']."'";
+
+        		$FittingsGoodsList=$GLOBALS['db']->getAll($getFittingsGoodsListSql);
+        		//print_r($FittingsGoodsList);
+        		foreach ($FittingsGoodsList as $key => $value) {
+        		 	  if($value['goods_id']>0){
+        		 	  	$sql = "DELETE FROM " . $GLOBALS['ecs']->table('cart') .
+                    " WHERE session_id = '" . SESS_ID . "' and goods_id='".$value['goods_id']."'" .
+                    "AND rec_id != '$id' LIMIT 1";
+        		 	  	 $GLOBALS['db']->query($sql);
+        		 	  	 //echo "</br>";
+        		 	  }
+        		}    
+        }
+  
     }
 
     flow_clear_cart_alone();

@@ -184,71 +184,7 @@
     <div class="blank5"></div>
   <!-- {/if} -->
 
-  <!-- {if $fittings_list} 商品配件 -->
-  {insert_scripts files='transport.js'}
-  <script type="text/javascript" charset="utf-8">
-  function fittings_to_flow(goodsId,parentId)
-  {
-    var goods        = new Object();
-    var spec_arr     = new Array();
-    var number       = 1;
-    goods.spec     = spec_arr;
-    goods.goods_id = goodsId;
-    goods.number   = number;
-    goods.parent   = parentId;
-    Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), fittings_to_flow_response, 'POST', 'JSON');
-  }
-  function fittings_to_flow_response(result)
-  {
-    if (result.error > 0)
-    {
-      // 如果需要缺货登记，跳转
-      if (result.error == 2)
-      {
-        if (confirm(result.message))
-        {
-          location.href = 'user.php?act=add_booking&id=' + result.goods_id;
-        }
-      }
-      else if (result.error == 6)
-      {
-        openSpeDiv(result.message, result.goods_id, result.parent);
-      }
-      else
-      {
-        alert(result.message);
-      }
-    }
-    else
-    {
-      location.href = 'flow.php';
-    }
-  }
-  </script>
-  <div class="block" >
-    <div class="flowBox">
-    <h6><span>{$lang.goods_fittings}</span></h6>
-    <form action="flow.php" method="post">
-        <div class="flowGoodsFittings clearfix">
-          <!-- {foreach from=$fittings_list item=fittings} -->
-            <ul class="clearfix">
-              <li class="goodsimg">
-                <a href="{$fittings.url}" target="_blank"><img src="{$fittings.goods_thumb}" alt="{$fittings.name|escape:html}" class="B_blue" /></a>
-              </li>
-              <li>
-                <a href="{$fittings.url}" target="_blank" title="{$fittings.goods_name|escape:html}" class="f6">{$fittings.short_name|escape:html}</a><br />
-                {$lang.fittings_price}<font class="f1">{$fittings.fittings_price}</font><br />
-                {$lang.parent_name}{$fittings.parent_short_name}<br />
-                <a href="javascript:fittings_to_flow({$fittings.goods_id},{$fittings.parent_id})"><img src="images/bnt_buy.gif" alt="{$lang.collect_to_flow}" /></a>
-              </li>
-            </ul>
-          <!-- {/foreach} 循环商品配件结束 -->
-        </div>
-    </form>
-    </div>
-  </div>
-  <div class="blank5"></div>
-  <!-- {/if} -->
+  
 
   <!-- {if $favourable_list} 优惠活动 -->
   <div class="block">

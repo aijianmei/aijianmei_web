@@ -1271,6 +1271,159 @@ function addto_cart($goods_id, $num = 1, $spec = array(), $parent = 0)
     return true;
 }
 
+
+/**
+ * 添加商品到购物车 new
+ *
+ * @access  public
+ * @param   integer $goods_id   商品编号
+ * @param   integer $num        商品数量
+ * @param   array   $spec       规格值对应的id数组
+ * @param   integer $parent     基本件
+ * @return  boolean
+ */
+function newaddto_cart($goods_id, $num = 1, $spec = array(), $parent = 0,$group_id=0)
+{
+    $GLOBALS['err']->clean();
+    //if($parent==$goods_id){$parent=0;}
+    $_parent_id = $parent;
+
+    /* 取得商品信息 */
+    $sql = "SELECT g.goods_name, g.goods_sn, g.is_on_sale, g.is_real, ".
+                "g.market_price, g.shop_price AS org_price, g.promote_price, g.promote_start_date, ".
+                "g.promote_end_date, g.goods_weight, g.integral, g.extension_code, ".
+                "g.goods_number, g.is_alone_sale, g.is_shipping,".
+                "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price ".
+            " FROM " .$GLOBALS['ecs']->table('goods'). " AS g ".
+            " LEFT JOIN " . $GLOBALS['ecs']->table('member_price') . " AS mp ".
+                    "ON mp.goods_id = g.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
+            " WHERE g.goods_id = '$goods_id'" .
+            " AND g.is_delete = 0";
+    $goods = $GLOBALS['db']->getRow($sql);
+
+    if (empty($goods))
+    {
+        $GLOBALS['err']->add($GLOBALS['_LANG']['goods_not_exists'], ERR_NOT_EXISTS);
+
+        return false;
+    }
+
+    /* 如果是作为配件添加到购物车的，需要先检查购物车里面是否已经有基本件 */
+    /*if ($parent > 0)
+    {
+        $sql = "SELECT COUNT(*) FROM " . $GLOBALS['ecs']->table('cart') .
+                " WHERE goods_id='$parent' AND session_id='" . SESS_ID . "' AND extension_code <> 'package_buy'";
+        if ($GLOBALS['db']->getOne($sql) == 0)
+        {
+            $GLOBALS['err']->add($GLOBALS['_LANG']['no_basic_goods'], ERR_NO_BASIC_GOODS);
+
+            return false;
+        }
+    }*/
+
+    /* 是否正在销售 */
+    if ($goods['is_on_sale'] == 0)
+    {
+        $GLOBALS['err']->add($GLOBALS['_LANG']['not_on_sale'], ERR_NOT_ON_SALE);
+
+        return false;
+    }
+
+    /* 不是配件时检查是否允许单独销售 */
+    if (empty($parent) && $goods['is_alone_sale'] == 0)
+    {
+        $GLOBALS['err']->add($GLOBALS['_LANG']['cannt_alone_sale'], ERR_CANNT_ALONE_SALE);
+
+        return false;
+    }
+
+    /* 如果商品有规格则取规格商品信息 配件除外 */
+    $sql = "SELECT * FROM " .$GLOBALS['ecs']->table('products'). " WHERE goods_id = '$goods_id' LIMIT 0, 1";
+    $prod = $GLOBALS['db']->getRow($sql);
+
+    if (is_spec($spec) && !empty($prod))
+    {
+        $product_info = get_products_info($goods_id, $spec);
+    }
+    if (empty($product_info))
+    {
+        $product_info = array('product_number' => '', 'product_id' => 0);
+    }
+
+    /* 检查：库存 */
+    if ($GLOBALS['_CFG']['use_storage'] == 1)
+    {
+        //检查：商品购买数量是否大于总库存
+        if ($num > $goods['goods_number'])
+        {
+            $GLOBALS['err']->add(sprintf($GLOBALS['_LANG']['shortage'], $goods['goods_number']), ERR_OUT_OF_STOCK);
+
+            return false;
+        }
+
+        //商品存在规格 是货品 检查该货品库存
+        if (is_spec($spec) && !empty($prod))
+        {
+            if (!empty($spec))
+            {
+                /* 取规格的货品库存 */
+                if ($num > $product_info['product_number'])
+                {
+                    $GLOBALS['err']->add(sprintf($GLOBALS['_LANG']['shortage'], $product_info['product_number']), ERR_OUT_OF_STOCK);
+    
+                    return false;
+                }
+            }
+        }       
+    }
+
+    /* 计算商品的促销价格 */
+    $spec_price             = spec_price($spec);
+    $goods_price            = get_final_price($goods_id, $num, true, $spec);
+    $goods['market_price'] += $spec_price;
+    $goods_attr             = get_goods_attr_info($spec);
+    $goods_attr_id          = join(',', $spec);
+
+    /* 初始化要插入购物车的基本件数据 */
+    $parent = array(
+        'user_id'       => $_SESSION['user_id'],
+        'session_id'    => SESS_ID,
+        'goods_id'      => $goods_id,
+        'goods_sn'      => addslashes($goods['goods_sn']),
+        'product_id'    => $product_info['product_id'],
+        'goods_name'    => addslashes($goods['goods_name']),
+        'market_price'  => $goods['market_price'],
+        'goods_attr'    => addslashes($goods_attr),
+        'goods_attr_id' => $goods_attr_id,
+        'is_real'       => $goods['is_real'],
+        'extension_code'=> $goods['extension_code'],
+        'is_gift'       => 0,
+        'is_shipping'   => $goods['is_shipping'],
+        'rec_type'      => CART_GENERAL_GOODS
+    );
+
+				$getshoppriceSql="select * from ".$GLOBALS['ecs']->table('group_goods')." where parent_id=$_parent_id and goods_id=$goods_id and group_id=$group_id";
+				$res=$GLOBALS['db']->getRow($getshoppriceSql);
+
+        /* 作为该基本件的配件插入 */
+        $parent['goods_price']  = $res['goods_price']; //允许该配件优惠价格为0
+        $parent['goods_number'] = 1;
+        $parent['parent_id']    = $_parent_id;
+				
+				//print_r($parent);
+        /* 添加 */
+        $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('cart'), $parent, 'INSERT');
+
+
+
+    /* 把赠品删除 */
+    $sql = "DELETE FROM " . $GLOBALS['ecs']->table('cart') . " WHERE session_id = '" . SESS_ID . "' AND is_gift <> 0";
+    $GLOBALS['db']->query($sql);
+
+    return true;
+}
+
+
 /**
  * 清空购物车
  * @param   int     $type   类型：默认普通商品
