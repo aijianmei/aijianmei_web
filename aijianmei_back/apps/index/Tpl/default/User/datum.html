@@ -152,7 +152,7 @@
         					<input id="tag" value="" onkeyup="if(!checktxt(this.value)){this.value='';alert('请输入正确的字符');};">
         				</div>
         			</div>
-        			<a class="dt_update_1" id="upuserinfo" onclick="formsubBykey('userinfo');">更新资料</a>
+        			<a class="dt_update_1" id="upuserinfo"  onclick="formsubBykey('userinfo');">更新资料</a>
 					</div>
 	        	</fieldset>
         	</form>
@@ -405,6 +405,30 @@ var default_year = <?php if($healthinfo['age']!=''){echo "'".$healthinfo['age'].
 	$(".dt_weight_input").hide();
 	$(".dt_height_input").hide();
 	$(".dt_year_input").hide();
+	
+//离开页面相关动作捕捉处理 start 
+if (typeof window.addEventListener === 'undefined') {
+    window.addEventListener = function(e, callback) {
+        return window.attachEvent('on' + e, callback);
+    }
+}
+
+window.addEventListener('beforeunload', function() {
+	var username= document.getElementById("username");
+	if(!username.value){
+		username.focus();
+		return '请输入用户名完成注册!';
+	}else{
+		var topNum=($("#upuserinfo").offset().top)*1-300;
+		$("html,body").animate({scrollTop: topNum}, 1000);
+		return '页面值已经修改，是否要保存？';	
+	}
+	
+});	
+//离开页面相关动作捕捉处理 end
+	
+	
+	
 </script>
 <script type="text/javascript" src="Templates/js/datum.js"></script>
 </body>

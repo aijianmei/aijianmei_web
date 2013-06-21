@@ -48,7 +48,9 @@ class IndexAction extends AdministratorAction {
                 '页面Banner管理'	=>	U('admin/Nav/adv'),
 				),
 				'关键字管理'	=>	array(
-                '生成关键字缓存'	=>	U('admin/Nav/keywordcp'),
+								'关键字库管理'	=>	U('admin/Nav/keywordmanager'),
+								'关键字库分类管理'	=>	U('admin/Nav/keywordcategorymanager'),
+                '关键字初始化'	=>	U('admin/Nav/keywordcp'),
 				),
         );
 

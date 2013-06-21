@@ -1,3 +1,63 @@
+$(function() {
+					//ident_wrap
+				var identifying_1 = document.getElementById("identifying_1");
+				var identifying_2 = document.getElementById("identifying_2");
+				var identifying_3 = document.getElementById("identifying_3");
+				var delay=function(t,fn){//接收两个参数 t延迟时间秒为单位，fn要执行的函数
+					var _this=this;//请注意还要个免费的this参数可以让这个delay更完美
+					d=setInterval(function(){
+					fn();
+					},t*1000);
+					_this.onmouseout=function(){
+					clearInterval(d);
+					};
+				}
+				//"label[id^=hello]
+				$("div[id^=ident_title]").mouseover(function(){
+						var num=($(this).index())/2;
+
+						var sd=$("div[id^=identifying_]");
+						
+  					$("#identifying_"+(num*1+1)).slideDown("slow");
+						//$("#identifying_"+(num*1+1)).slideDown("slow");
+						//$("div[id^=ident_title_]").eq(num).slideUp("slow");
+				})
+				
+				/*$("#ident_title_1").mouseover(function(){
+					delay.apply(this,[0.2,function(){
+				  		if(identifying_2.style.display == "block"){
+					  		$("#identifying_2").slideUp("slow");
+					  	}
+					  	if(identifying_3.style.display == "block"){
+					  		$("#identifying_3").slideUp("slow");
+					  	}
+					    $("#identifying_1").slideDown("slow");
+				  	}]);
+				})
+				$("#ident_title_2").mouseover(function(){
+					delay.apply(this,[0.2,function(){
+				  		if(identifying_1.style.display == "block"){
+					  		$("#identifying_1").slideUp("slow");
+					  	}
+					  	if(identifying_3.style.display == "block"){
+					  		$("#identifying_3").slideUp("slow");
+					  	}
+					    $("#identifying_2").slideDown("slow");
+				  	}]);
+				})
+				$("#ident_title_3").mouseover(function(){
+					delay.apply(this,[0.2,function(){
+				  		if(identifying_1.style.display == "block"){
+					  		$("#identifying_1").slideUp("slow");
+					  	}
+					  	if(identifying_2.style.display == "block"){
+					  		$("#identifying_2").slideUp("slow");
+					  	}
+					    $("#identifying_3").slideDown("slow");
+				  	}]);
+				})*/
+			});
+
 var ajaxListKey=0;
 //添加事件监听
 var addevent = function(element,type,handle){
@@ -751,3 +811,14 @@ function FormChangedListener(elems){
 }
 
 
+//add by kontem new keywordlist tab 
+var init = function(){
+	var newdom = new getdom
+	aijianmei.identifying(identifying_1);
+	aijianmei.identifying(identifying_2);
+	aijianmei.identifying(identifying_3);
+	aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
+	aijianmei.addtitle('detail');
+	aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
+}
+init();	

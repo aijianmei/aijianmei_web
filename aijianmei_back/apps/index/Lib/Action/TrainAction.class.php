@@ -61,8 +61,8 @@ class TrainAction extends Action {
 
     public function index()
     {
-		$pg=$_GET['pg']?$_GET['pg']:1;
-		$nums=5;
+				$pg=$_GET['pg']?$_GET['pg']:1;
+				$nums=5;
         $this->assign('cssFile', 'training');
         $map['channel'] = '2';
         $cate = M('article_category')->where($map)->findAll();
@@ -88,8 +88,7 @@ class TrainAction extends Action {
 			$pglimit=$pg=1;
 		}
 		
-		
-        //assign hotArticles
+    //assign hotArticles
 		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
 		$countsql = "select count(*) as cnums from ai_article a ,($orderTableSql) t where a.id=t.aid";
 		$countInfo=$this->getDataCache(md5($countsql));
@@ -101,21 +100,17 @@ class TrainAction extends Action {
 		$pagerArray = $pagerData['html'];
 		
 		$order = 'reader_count';
-		//$hotArticles = D('Article')->getTrainArticles($order);
-        $hotArticles = D('Article')->getTrainArticlesList($order,'',($pglimit-1)*20,$nums);
-        //print_r( $hotArticles);
+    $hotArticles = D('Article')->getTrainArticlesList($order,'',($pglimit-1)*20,$nums);
 		$this->assign('hotArticlespage', $pagerArray);
-        $this->assign('hotArticles', $hotArticles);
-        
+    $this->assign('hotArticles', $hotArticles);   
 		
 		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=Train&act=index&ctype=1&pg=');
 		$pagerArray = $pagerData['html'];
-        //assign lastArticles		
-        $order = 'create_time';
-		//$lastArticles = D('Article')->getTrainArticles($order);
-        $lastArticles = D('Article')->getTrainArticlesList($order,'',($pglimit-1)*20,$nums);
+
+    $order = 'create_time';
+    $lastArticles = D('Article')->getTrainArticlesList($order,'',($pglimit-1)*20,$nums);
 		$this->assign('lastArticlespage', $pagerArray);
-        $this->assign('lastArticles', $lastArticles);
+    $this->assign('lastArticles', $lastArticles);
 		
 		
 		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
@@ -142,17 +137,18 @@ class TrainAction extends Action {
 		//$lastArticles = D('Article')->getTrainArticles($order);
         $hotVideoList = D('Article')->getTrainVideoList($order,'',($pglimit-1)*20,$nums);
 		$this->assign('hotVideoListpage', $pagerArray);
-        $this->assign('hotVideoList', $hotVideoList);
+    $this->assign('hotVideoList', $hotVideoList);
 		
 		
 		
 		//print_r($lastArticles);
-        $this->show_banner();//显示banner
-        $this->assign('headertitle', '锻炼');
+    $this->show_banner();//显示banner
+    $this->assign('headertitle', '锻炼');
 		//header current add by kon at 20130415
 		$this->assign('_current', 'train');
         //$this->display();
 		$keywordInfo=unserialize(include_once("PublicCache/keywordInfo.php"));
+		//print_r($keywordInfo['train']);
 		$this->assign('_CommentList',unserialize(include_once("PublicCache/CommentListCache.php")));
 		$this->assign('_KeyWordList',$keywordInfo['train']);
 		$this->display('train_index');

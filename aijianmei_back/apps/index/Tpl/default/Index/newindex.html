@@ -58,7 +58,7 @@
 							<div class="cont_side_1">
 								<a href="index-Index-articleDetail-{$value['id']}.html"><img alt="{$value['title']}" style="width:215px;height:145px;" src="../public/images/article/{$value['img']}"></a>
 								<div class="show_share clearfix" style="margin-left:40px;">
-									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-{$value['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php echo $value['img'];?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+									<wb:share-button count="n" searchPic=false type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-{$value['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php if(!$value['front_cover']){echo $value['img'];}else{echo $value['front_cover'];}?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">
@@ -90,7 +90,7 @@
 							<div class="cont_side_1">
 								<a href="index-Index-articleDetail-{$value['id']}.html"><img alt="{$value['title']}" style="width:215px;height:145px;" src="../public/images/article/{$value['img']}"></a>
 								<div class="show_share clearfix" style="margin-left:40px;">
-									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-{$value['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php echo $value['img'];?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+									<wb:share-button count="n" searchPic=false type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-{$value['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php if(!$value['front_cover']){echo $value['img'];}else{echo $value['front_cover'];}?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">

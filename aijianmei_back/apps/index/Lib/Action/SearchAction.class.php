@@ -80,7 +80,7 @@ class SearchAction extends Action {
 		}else{
 			$pg=1;
 		}
-		$nums=5;
+		$nums=10;
 		$countcomSql="select count(*) as cnums from ai_comments where ingood=1";
 		$countcomArr=M('')->query($countcomSql);
 		$count=$countcomArr?$countcomArr[0]['cnums']:0;

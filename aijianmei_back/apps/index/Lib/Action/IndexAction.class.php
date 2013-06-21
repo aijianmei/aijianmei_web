@@ -679,7 +679,7 @@ function show_banner($type){
 		$pagerArray = $pagerData['html'];
 
 		//print_r($pagerArray);
-        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit ".(($pglimit-1)*20).",$nums";
+		$sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit ".(($pglimit-1)*20).",$nums";
 		$newvideos=$hot_video=null;
 		$newvideos=$this->getDataCache(md5($sql));
 		if(!$newvideos){
@@ -693,7 +693,7 @@ function show_banner($type){
 			$this->setDataCache(md5($sql),$newvideos);
 		}
 		$this->assign('newvideosPage', $pagerArray);
-        $this->assign('newvideos', $newvideos);
+    $this->assign('newvideos', $newvideos);
 		
 		/*首页添加最热5篇视频*/
 		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
@@ -706,8 +706,7 @@ function show_banner($type){
 		
 		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pg,'/index.php?app=index&mod=index&act=index&ctype=4&pg=');
 		$pagerArray = $pagerData['html'];
-		
-        
+		  
     $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by click desc limit ".($pg-1)*$nums.",$nums";
 		$hotvideos=$hot_video=null;
 		$hotvideos=$this->getDataCache(md5($sql));
@@ -722,9 +721,7 @@ function show_banner($type){
 			$this->setDataCache(md5($sql),$hotvideos);
 		}
 		$this->assign('hotvideosPage', $pagerArray);
-        $this->assign('hotvideos', $hotvideos);
-		
-		
+    $this->assign('hotvideos', $hotvideos);
 		
     /*首页添加最新5篇文章*/
 		//getDataCache($key)
@@ -738,20 +735,21 @@ function show_banner($type){
 		
 		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=index&act=index&ctype=1&pg=');
 		$pagerArray = $pagerData['html'];
-        $sql = "select a.* from ai_article a group by a.id order by a.create_time desc limit ".($pg-1)*$nums.",$nums";
+		$sql = "select a.* from ai_article a group by a.id order by a.create_time desc limit ".($pg-1)*$nums.",$nums";
 		$newArticles=null;
 		$newArticles=$this->getDataCache(md5($sql));
 		if(!$newArticles){
 			$newArticles = M('')->query($sql);
 			foreach ($newArticles as $key => $value) {
 				unset($newArticles[$key]['content']);
+				unset($newArticles[$key]['wapcontent']);
 				$newArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
 			}
 			$this->setDataCache(md5($sql),$newArticles);
 		}
-		//print_r($pagerArray);
+		//print_r($newArticles);
 		$this->assign('newArticlespage', $pagerArray);
-        $this->assign('newArticles', $newArticles);
+		$this->assign('newArticles', $newArticles);
 		
 		/*首页添加最热5篇文章*/
 		
@@ -763,22 +761,22 @@ function show_banner($type){
 		}
 		
 		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=index&act=index&ctype=2&pg=');
-		$pagerArray = $pagerData['html'];
+		$pagerArray = $pagerData['html'];		
 		
-		
-        $sql = "select a.* from ai_article a group by a.id order by a.reader_count desc limit ".($pg-1)*$nums.",$nums";
+    $sql = "select a.* from ai_article a group by a.id order by a.reader_count desc limit ".($pg-1)*$nums.",$nums";
 		$hotArticles=null;
 		$hotArticles=$this->getDataCache(md5($sql));
 		if(!$hotArticles){
 			$hotArticles = M('')->query($sql);
 			foreach ($hotArticles as $key => $value) {
 				unset($hotArticles[$key]['content']);
+				unset($newArticles[$key]['wapcontent']);
 				$hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
 			}
 			$this->setDataCache(md5($sql),$hotArticles);
 		}
 		$this->assign('hotArticlespage', $pagerArray);
-        $this->assign('hotArticles', $hotArticles);
+		$this->assign('hotArticles', $hotArticles);
         //add by kon at 20130410 end
 		
 		//header current add by kon at 20130415
@@ -1047,7 +1045,9 @@ function show_banner($type){
 				$bannerTopInfo['aimg_3']='2-3.jpg';$bannerTopInfo['aid_3']=77;$bannerTopInfo['aimg_title3']='基础锻炼：辅助品';
 				$bannerTopInfo['aimg_4']='2-4.jpg';$bannerTopInfo['aid_4']=76;$bannerTopInfo['aimg_title4']='基础锻炼：生活方式';
 				}break;
-            case 3:{$tree_channel="中阶-运动员锻炼";$tree_channel_en=2;
+            case 3:{
+        $tree_channel="中阶-运动员锻炼";
+        $tree_channel_en=2;
 				$bannerTopInfo['title']='中阶-运动员锻炼';
 				$bannerTopInfo['img']='zj.png';
 				$bannerTopInfo['aimg_1']='3-1.jpg';$bannerTopInfo['aid_1']=90;$bannerTopInfo['aimg_title1']='中阶锻炼：健身';
@@ -1055,7 +1055,9 @@ function show_banner($type){
 				$bannerTopInfo['aimg_3']='3-3.jpg';$bannerTopInfo['aid_3']=88;$bannerTopInfo['aimg_title3']='中阶锻炼：辅助品';
 				$bannerTopInfo['aimg_4']='3-4.jpg';$bannerTopInfo['aid_4']=87;$bannerTopInfo['aimg_title4']='中阶锻炼：生活方式';
 			}break;
-            case 4:{$tree_channel="高阶-肌肉锻炼";$tree_channel_en=3;
+            case 4:{
+        $tree_channel="高阶-肌肉锻炼";
+        $tree_channel_en=3;
 				$bannerTopInfo['title']='高阶-肌肉锻炼';
 				$bannerTopInfo['img']='gj.png';
 				$bannerTopInfo['aimg_1']='4-1.jpg';$bannerTopInfo['aid_1']=91;$bannerTopInfo['aimg_title1']='高阶锻炼：健身';

@@ -99,8 +99,14 @@ class View extends Think
      */
     public function display($templateFile='',$charset='',$contentType='text/html')
     {
+    		//模板通过读取文件缓存 预加载相关全局变量
+    		/*
+    		内容 包括相关名称链接等
+    		buttomTagInfo.php 底部导航信息 
+    		TopMenuCache.php 顶部导航信息 	
+    		*/
         $this->assign('_buttomTagInfo',unserialize(include_once("buttomTagInfo.php")));
-		$this->assign('_TopMenuInfo',unserialize(include_once("PublicCache/TopMenuCache.php")));
+				$this->assign('_TopMenuInfo',unserialize(include_once("PublicCache/TopMenuCache.php")));
         $this->fetch($templateFile,$charset,$contentType,true);
     }
 

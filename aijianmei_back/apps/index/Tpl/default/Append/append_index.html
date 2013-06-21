@@ -15,7 +15,7 @@
 							<div class="cont_side_1">
 								<a href="/index-Index-articleDetail-{$a['id']}.html"><img alt="{$a['title']}" style="height:145px;width:215px;" src="{$SITE_URL}/public/images/article/{$a['img']}"></a>
 								<div class="show_share" style="margin-left:40px;">
-								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/{$a['img']}"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php if(!$a['front_cover']){echo $a['img'];}else{echo $a['front_cover'];}?>"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">

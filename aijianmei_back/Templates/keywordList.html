@@ -1,6 +1,25 @@
-	        		<h3 class="sm_title"><span class="sm_title_sp">{$headertitle}</span>关键词搜索</h3>
+	        <!--<h3 class="sm_title"><span class="sm_title_sp">{$headertitle}</span>关键词搜索</h3>
 					<ul class="identifying clearfix">
 					<php>foreach($_KeyWordList as $k =>$v){</php>
 						<li><a href="/search_{$v}.html">{$v}</a></li>
 					<php>}</php>
 					</ul>
+					-->
+					<h3 class="sm_title"><span class="sm_title_sp">锻炼</span>关键词搜索</h3>
+		        		<form class="lb_search">
+		        			<input type"text" id="text" />
+		        			<input type="submit" href="search.html" id="button">
+		        		</form>
+		        		<div class="ident_wrap">
+		        			<php> $keyCnum=1; </php>
+		        			<php> foreach ($_KeyWordList as $key=>$value) { </php>
+												<div id="ident_title_{$keyCnum}">{$key}</div>
+												<ul id="identifying_{$keyCnum}" class="identifying clearfix" <php>if($keyCnum==1){</php>style="display:block;" <php>}</php> >
+		        			 	  <php> foreach ($value as $k1=>$v1) {</php>
+												<li><a href="/search_{$v1['name']}.html">{$v1['name']}</a></li>
+		        			 	 <php>}</php>
+		        			 	 </ul>
+		        			 	 <php>$keyCnum++;</php>
+		        			<php>}</php>
+
+		

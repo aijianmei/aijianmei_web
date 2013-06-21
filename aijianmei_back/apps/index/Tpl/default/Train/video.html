@@ -45,7 +45,7 @@
 						<input type="hidden" name="videoid" value="{$video['id']}" id="videoid">
 						<input type="hidden" name="video_num_like" value="{$video['like']}" id="video_num_like">
                             <span class="wrap_like">
-                                <a class="click_like" onclick="recordlike();"></a>
+                                <a class="click_like <php>if(!getMid()){</php>login<php>}</php>" <php>if(getMid()){</php>onclick="recordlike();"<php>}</php>></a>
                                 <span class="num_like" >{$video['like']}</span>
                             </span>
                             <span class="click_share">

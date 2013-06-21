@@ -95,7 +95,7 @@ function ajaxInMore($data){
 		foreach($result as $k =>$value){
 		$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="index-Index-articleDetail-'.$value['id'].'.html"><img alt="'.$value['title'].'" style="width:215px;height:145px;" src="../public/images/article/'.$value['img'].'"></a>
 								<div class="show_share clearfix" style="margin-left:40px;">
-									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-'.$value['id'].'.html" pic="http://www.aijianmei.com/public/images/article/'.$value['img'].'" title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-'.$value['id'].'.html" pic="http://www.aijianmei.com/public/images/article/'.( $value['front_cover']? $value['front_cover'] :$value['img']).'" title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">
@@ -189,7 +189,7 @@ function ajaxTrainMore($data){
 		foreach($result as $k =>$value){
 		$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="index-Index-articleDetail-'.$value['id'].'.html"><img alt="'.$value['title'].'" style="width:215px;height:145px;" src="../public/images/article/'.$value['img'].'"></a>
 								<div class="show_share clearfix" style="margin-left:40px;">
-									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-'.$value['id'].'.html" pic="http://www.aijianmei.com/public/images/article/'.$value['img'].'" title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-'.$value['id'].'.html" pic="http://www.aijianmei.com/public/images/article/'.( $value['front_cover']? $value['front_cover'] :$value['img']).'" title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">
@@ -298,6 +298,7 @@ function recordlike($data){
 	$checkLikeInfo=array();
 	$checkLikeInfo=C_mysqlQuery($checkLikeSql);
 	$checkLikeInfo = mysql_fetch_assoc($checkLikeInfo);
+	//print_r($checkLikeInfo);
 	if($checkLikeInfo['uid']>0){
 		echo json_encode(2);
 		exit();

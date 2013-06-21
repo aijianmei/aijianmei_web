@@ -293,7 +293,10 @@ class PublicAction extends Action{
 
     public function doLogin() {
         // 检查验证码
-		
+        $sql="delete from ai_others where uid in (select uid from ai_user where uname is null)";
+				M('')->query($sql);
+				$sql="delete from ai_user where uname is null";
+				M('')->query($sql);
         $opt_verify = $this->_isVerifyOn('login');
         if ($opt_verify && (md5(strtoupper($_POST['verify']))!=$_SESSION['verify'])) {
             $this->error(L('error_security_code'));

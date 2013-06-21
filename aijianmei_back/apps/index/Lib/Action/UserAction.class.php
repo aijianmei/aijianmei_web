@@ -104,6 +104,11 @@ class UserAction extends Action {
 		$this->display('GetPwd_Fourth');
 	}
 	public function register(){
+		$sql="delete from ai_others where uid in (select uid from ai_user where uname is null)";
+		M('')->query($sql);
+		$sql="delete from ai_user where uname is null";
+		M('')->query($sql);
+		
 		if($_SESSION['regrefer_url']==''&& $_SESSION['refer_url']!=''){
 			$_SESSION['regrefer_url'] = $_SESSION['refer_url'];
 		}
