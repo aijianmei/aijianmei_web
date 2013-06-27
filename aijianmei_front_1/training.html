@@ -297,15 +297,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="pg_page clearfix">
-								<span class="pg_concrete_choice">
-									<a href="" class="pg_prev">上一页</a>
-									<a href="">1</a>
-									<a href="" class="pg_current_page">2</a>
-									<a href="">3</a>
-									<a href="" class="pg_next">下一页</a>
-								</span>
-							</div>
+							
 						</div>
 						<div class="cont_tab_ct">
 							<div class="cont_module clearfix">
@@ -381,8 +373,8 @@
 		        			<input type="submit" href="search.html" id="button">
 		        		</form>
 		        		<div class="ident_wrap">
-			        		<div id="ident_title_1">关键词类别一</div>
-			        		<ul id="identifying_1" class="identifying clearfix" style="display:block;">
+			        		<div class="ident_title">关键词类别一</div>
+			        		<ul id="identifying_1" class="identifying ident_show clearfix">
 								<li><a href="tag.html">增肌</a></li>
 								<li><a href="tag.html">这些经验队你么</a></li>
 								<li><a href="tag.html">这些经验</a></li>
@@ -396,7 +388,7 @@
 								<li><a href="tag.html">增肌肌</a></li>
 								<li><a href="tag.html">增肌</a></li>
 							</ul>
-							<div id="ident_title_2">关键词类别一</div>
+							<div class="ident_title">关键词类别一</div>
 			        		<ul id="identifying_2" class="identifying clearfix">
 								<li><a href="tag.html">增肌</a></li>
 								<li><a href="tag.html">这些经验队你么</a></li>
@@ -411,7 +403,7 @@
 								<li><a href="tag.html">增肌肌</a></li>
 								<li><a href="tag.html">增肌</a></li>
 							</ul>
-							<div id="ident_title_3">关键词类别一</div>
+							<div class="ident_title">关键词类别一</div>
 			        		<ul id="identifying_3" class="identifying clearfix">
 								<li><a href="tag.html">增肌</a></li>
 								<li><a href="tag.html">这些经验队你么</a></li>
@@ -607,48 +599,38 @@
 				var identifying_1 = document.getElementById("identifying_1");
 				var identifying_2 = document.getElementById("identifying_2");
 				var identifying_3 = document.getElementById("identifying_3");
-				var delay=function(t,fn){//接收两个参数 t延迟时间秒为单位，fn要执行的函数
-					var _this=this;//请注意还要个免费的this参数可以让这个delay更完美
-					d=setInterval(function(){
-					fn();
-					},t*1000);
-					_this.onmouseout=function(){
-					clearInterval(d);
+				var delay=function(t,fn){
+
+					var _this = this;
+
+					d = setTimeout(function(){
+						fn();
+					},t * 1000);
+					_this.onmouseout = function(){
+						clearInterval(d);
 					};
 				}
-				$("#ident_title_1").mouseover(function(){
-					delay.apply(this,[0.2,function(){
-				  		if(identifying_2.style.display == "block"){
-					  		$("#identifying_2").slideUp("slow");
-					  	}
-					  	if(identifying_3.style.display == "block"){
-					  		$("#identifying_3").slideUp("slow");
-					  	}
-					    $("#identifying_1").slideDown("slow");
-				  	}]);
-				})
-				$("#ident_title_2").mouseover(function(){
-					delay.apply(this,[0.2,function(){
-				  		if(identifying_1.style.display == "block"){
-					  		$("#identifying_1").slideUp("slow");
-					  	}
-					  	if(identifying_3.style.display == "block"){
-					  		$("#identifying_3").slideUp("slow");
-					  	}
-					    $("#identifying_2").slideDown("slow");
-				  	}]);
-				})
-				$("#ident_title_3").mouseover(function(){
-					delay.apply(this,[0.2,function(){
-				  		if(identifying_1.style.display == "block"){
-					  		$("#identifying_1").slideUp("slow");
-					  	}
-					  	if(identifying_2.style.display == "block"){
-					  		$("#identifying_2").slideUp("slow");
-					  	}
-					    $("#identifying_3").slideDown("slow");
-				  	}]);
-				})
+				function keywords(){
+					//var
+					var newdom = new getdom,
+						ident_title = newdom.getElementsByClass('ident_title'),
+						tit_len = ident_title.length,
+						identifying = newdom.getElementsByClass('identifying');
+					//circle
+					for(var i = 0;i < tit_len;i++){
+						ident_title[i].index = i;
+					}
+
+					$(".ident_title").mouseover(function(){
+
+						var that = this;
+
+			  			delay.apply(this,[0.3,function(){
+				  			$(".identifying").slideUp("slow").eq(that.index).slideDown("slow");
+				  		}]);
+			  		});
+				}
+				keywords();
 			});
 		</script>
         <script type="text/javascript" src="js/public.js"></script>
@@ -659,7 +641,7 @@
 			   aijianmei.identifying(identifying_2);
 			   aijianmei.identifying(identifying_3);
 			   aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
-			   aijianmei.addtitle('detail');
+			   aijianmei.addident_title('detail');
 			   aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
 			}
 			init();	

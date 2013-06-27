@@ -356,7 +356,7 @@
 			margin:0 10px;
 			border: 1px solid #009bd8;
 		}
-		#ident_title_1,#ident_title_2,#ident_title_3{
+		.ident_title{
 			height: 30px;
 			line-height: 30px;
 			text-align: center;
@@ -372,6 +372,9 @@
 			font-family: '微软雅黑';
 			list-style: none;
 			padding: 20px 10px;
+		}
+		.ident_show{
+			display: block;
 		}
 		.identifying li{
 			float: left;
