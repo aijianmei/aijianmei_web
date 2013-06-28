@@ -374,7 +374,7 @@
 		        		</form>
 		        		<div class="ident_wrap">
 			        		<div class="ident_title">关键词类别一</div>
-			        		<ul id="identifying_1" class="identifying ident_show clearfix">
+			        		<ul class="identifying ident_show clearfix">
 								<li><a href="tag.html">增肌</a></li>
 								<li><a href="tag.html">这些经验队你么</a></li>
 								<li><a href="tag.html">这些经验</a></li>
@@ -389,7 +389,7 @@
 								<li><a href="tag.html">增肌</a></li>
 							</ul>
 							<div class="ident_title">关键词类别一</div>
-			        		<ul id="identifying_2" class="identifying clearfix">
+			        		<ul class="identifying clearfix">
 								<li><a href="tag.html">增肌</a></li>
 								<li><a href="tag.html">这些经验队你么</a></li>
 								<li><a href="tag.html">这些经验</a></li>
@@ -404,7 +404,67 @@
 								<li><a href="tag.html">增肌</a></li>
 							</ul>
 							<div class="ident_title">关键词类别一</div>
-			        		<ul id="identifying_3" class="identifying clearfix">
+			        		<ul class="identifying clearfix">
+								<li><a href="tag.html">增肌</a></li>
+								<li><a href="tag.html">这些经验队你么</a></li>
+								<li><a href="tag.html">这些经验</a></li>
+								<li><a href="tag.html">这些经</a></li>
+								<li><a href="tag.html">增肌</a></li>
+								<li><a href="tag.html">肌</a></li>
+								<li><a href="tag.html">这些经验队你</a></li>
+								<li><a href="tag.html">这些经验队</a></li>
+								<li><a href="tag.html">增肌</a></li>
+								<li><a href="tag.html">增肌增肌增</a></li>
+								<li><a href="tag.html">增肌肌</a></li>
+								<li><a href="tag.html">增肌</a></li>
+							</ul>
+							<div class="ident_title">关键词类别一</div>
+			        		<ul class="identifying clearfix">
+								<li><a href="tag.html">增肌</a></li>
+								<li><a href="tag.html">这些经验队你么</a></li>
+								<li><a href="tag.html">这些经验</a></li>
+								<li><a href="tag.html">这些经</a></li>
+								<li><a href="tag.html">增肌</a></li>
+								<li><a href="tag.html">肌</a></li>
+								<li><a href="tag.html">这些经验队你</a></li>
+								<li><a href="tag.html">这些经验队</a></li>
+								<li><a href="tag.html">增肌</a></li>
+								<li><a href="tag.html">增肌增肌增</a></li>
+								<li><a href="tag.html">增肌肌</a></li>
+								<li><a href="tag.html">增肌</a></li>
+							</ul>
+							<div class="ident_title">关键词类别一</div>
+			        		<ul class="identifying clearfix">
+								<li><a href="tag.html">增肌</a></li>
+								<li><a href="tag.html">这些经验队你么</a></li>
+								<li><a href="tag.html">这些经验</a></li>
+								<li><a href="tag.html">这些经</a></li>
+								<li><a href="tag.html">增肌</a></li>
+								<li><a href="tag.html">肌</a></li>
+								<li><a href="tag.html">这些经验队你</a></li>
+								<li><a href="tag.html">这些经验队</a></li>
+								<li><a href="tag.html">增肌</a></li>
+								<li><a href="tag.html">增肌增肌增</a></li>
+								<li><a href="tag.html">增肌肌</a></li>
+								<li><a href="tag.html">增肌</a></li>
+							</ul>
+							<div class="ident_title">关键词类别一</div>
+			        		<ul class="identifying clearfix">
+								<li><a href="tag.html">增肌</a></li>
+								<li><a href="tag.html">这些经验队你么</a></li>
+								<li><a href="tag.html">这些经验</a></li>
+								<li><a href="tag.html">这些经</a></li>
+								<li><a href="tag.html">增肌</a></li>
+								<li><a href="tag.html">肌</a></li>
+								<li><a href="tag.html">这些经验队你</a></li>
+								<li><a href="tag.html">这些经验队</a></li>
+								<li><a href="tag.html">增肌</a></li>
+								<li><a href="tag.html">增肌增肌增</a></li>
+								<li><a href="tag.html">增肌肌</a></li>
+								<li><a href="tag.html">增肌</a></li>
+							</ul>
+							<div class="ident_title">关键词类别一</div>
+			        		<ul class="identifying clearfix">
 								<li><a href="tag.html">增肌</a></li>
 								<li><a href="tag.html">这些经验队你么</a></li>
 								<li><a href="tag.html">这些经验</a></li>
@@ -596,9 +656,7 @@
 
 
 				//ident_wrap
-				var identifying_1 = document.getElementById("identifying_1");
-				var identifying_2 = document.getElementById("identifying_2");
-				var identifying_3 = document.getElementById("identifying_3");
+				
 				var delay=function(t,fn){
 
 					var _this = this;
@@ -615,7 +673,8 @@
 					var newdom = new getdom,
 						ident_title = newdom.getElementsByClass('ident_title'),
 						tit_len = ident_title.length,
-						identifying = newdom.getElementsByClass('identifying');
+						identifying = newdom.getElementsByClass('identifying'),
+						tempNum = null;
 					//circle
 					for(var i = 0;i < tit_len;i++){
 						ident_title[i].index = i;
@@ -626,7 +685,11 @@
 						var that = this;
 
 			  			delay.apply(this,[0.3,function(){
-				  			$(".identifying").slideUp("slow").eq(that.index).slideDown("slow");
+			  				if(tempNum != that.index){
+								$(".identifying").slideUp("slow").eq(that.index).slideDown("slow");
+								tempNum = that.index;
+			  				}
+				  				
 				  		}]);
 			  		});
 				}
@@ -636,10 +699,16 @@
         <script type="text/javascript" src="js/public.js"></script>
         <script type="text/javascript">
         	var init = function(){
-			    var newdom = new getdom;
-			   aijianmei.identifying(identifying_1);
-			   aijianmei.identifying(identifying_2);
-			   aijianmei.identifying(identifying_3);
+
+			    var newdom = new getdom,
+				    identifying = newdom.getElementsByClass('identifying'),
+				    ident_len = identifying.length;
+
+				//circle
+				for(var i = 0;i < ident_len;i++){
+					aijianmei.identifying(identifying[i]);
+				}   
+
 			   aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
 			   aijianmei.addident_title('detail');
 			   aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
