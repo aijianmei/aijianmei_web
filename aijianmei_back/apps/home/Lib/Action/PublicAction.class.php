@@ -292,6 +292,7 @@ class PublicAction extends Action{
     }
 
     public function doLogin() {
+    		$tmpRefer_url=$_SESSION['refer_url'];
         // 检查验证码
         $sql="delete from ai_others where uid in (select uid from ai_user where uname is null)";
 				M('')->query($sql);
@@ -313,9 +314,9 @@ class PublicAction extends Action{
         if(!$password){
             $this->error(L('please_input_password'));
         }
-		$_POST['remember']=1;
+				$_POST['remember']=1;
         //$result = service('Passport')->loginLocal($username,$password,intval($_POST['remember']));
-		$result = service('Passport')->loginLocal($username,$password,1);
+				$result = service('Passport')->loginLocal($username,$password,1);
         $lastError = service('Passport')->getLastError(); 
         //检查是否激活
         if (!$result && $lastError =='用户未激活') {
@@ -329,7 +330,8 @@ class PublicAction extends Action{
         if($result) {
 			@setcookie("LOGGED_AIUSER", $_POST['email'], time()+3600*24*30);
 			@setcookie('LOGGED_AICOD', md5("aijianmeipwd".$_POST['password']), time()+3600*24*30);			
-		
+
+
             if(UC_SYNC && $result['reg_from_ucenter']){
                 //从UCenter导入ThinkSNS，跳转至帐号修改页
                 $refer_url = U('home/Public/userinfo');
@@ -348,7 +350,7 @@ class PublicAction extends Action{
             $_SESSION['user_id']   = $uid[0]['user_id'];
             $_SESSION['user_name'] = $uid[0]['user_name'];
             $_SESSION['email']     = $uid[0]['email'];
-			$_SESSION['ways']++;
+						$_SESSION['ways']++;
 
 			if($_SESSION['mid']>0){
 				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
@@ -357,23 +359,56 @@ class PublicAction extends Action{
 			@setcookie("ECS[user_id]",  $uid[0]['user_id'], time()+3600*24*30);
 			@setcookie("ECS[password]", md5($_POST['password']), time()+3600*24*30);
 
-            //print_r($_SESSION);
-            /*ecshop login by kontem at 20130412 end*/
-            // 登录商城
-            //service('Shop')->login($_SESSION['mid']);
-			//print_r($_SESSION);exit;
+			
+			/*forum 论坛 登陆api start by kontem at20130626*/
+			$pwUserInfoSql="select * from ai_pwforum.pw_user where username='".$uid[0]['user_name']."' and email='".$uid[0]['email']."'";
+			$pwUserInfo=M('')->query($pwUserInfoSql);
+			//检测用户是否已经有论坛对应的账号
+			if(empty($pwUserInfo[0])){
+			//不存在则调用注册api
+			$post_data=array( 
+				'username' => $uid[0]['user_name'],
+			  'email' => $uid[0]['email'],
+			  'password' =>$_POST['password'],
+			  'repassword' =>$_POST['password'],
+			  );
+			if($uid[0]['user_name']){}
+			$url=AIBASEURL."/forum/pwApi.php?pwact=register";
+			_CurlPost($url,$post_data);//targetUrl postData
+			}
+			$pwUserInfoSql="select * from ai_pwforum.pw_user where username='".$uid[0]['user_name']."' and email='".$uid[0]['email']."'";
+			$pwUserInfo=M('')->query($pwUserInfoSql);
+			$this->pwImgCopy($_SESSION['mid'],$pwUserInfo[0]['uid']);
+			//调用登陆api
+			$url=AIBASEURL."/forum/pwApi.php?pwact=login";
+			$post_data=array(
+				'username' => $uid[0]['user_name'],
+			  'password' =>$_POST['password']
+			 );
+			$_SESSION['pwai_url']=_CurlPost($url,$post_data);
+			/*论坛部分自己回调登陆*/
+			/*forum 论坛 登陆api end*/
+			
+			
+			 $_SESSION['refer_url']=$tmpRefer_url;
 	if($_SESSION['refer_url']!=''&&$_SESSION['shoprefer_url']==''){
 		$reurl=$_SESSION['refer_url'];unset($_SESSION['refer_url']);
+		if($_SESSION['pwrefer_url']!=''){
+			unset($_SESSION['pwrefer_url']);
+			header("Location:$reurl");	
+		}
 		redirect($reurl);
 		//redirect(U('index/Index/index'));
 	}
 	elseif($_SESSION['shoprefer_url']!=''){
+		
 		$reurl=$_SESSION['shoprefer_url'];
 		unset($_SESSION['shoprefer_url']);
 		redirect($reurl);
 		//redirect(U('index/Index/index'));
 	}
 	else{
+
 		redirect(U('index/Index/index'));
 	}
             //$this->assign('jumpUrl',$refer_url);
@@ -437,6 +472,10 @@ class PublicAction extends Action{
 			M('')->query("DELETE FROM ecs_sessions WHERE sesskey = '".$getSkeyArr[0]['sesskey']."'");
 		}
         service('Passport')->logoutLocal();
+        
+				setCookie('ghL_winduser', '',-1,'/');
+        $_SESSION['aipw_ck_winduser']=null;
+        
         Addons::hook('public_after_logout');
         $this->assign('jumpUrl',U('index/Index/index'));
         $this->assign('waitSecond',3);
@@ -1336,7 +1375,49 @@ EOD;
             echo 0;
         }
     }
-
+    function getUserDir($uid) {
+    	$uid = sprintf("%09d", $uid);
+    	return substr($uid, 0, 3) . '/' . substr($uid, 3, 2) . '/' . substr($uid, 5, 2);
+    }
+		
+		public function pwImgCopy($mid,$uid){
+			if($mid<=0){return ;}
+			$tmpFilePath=dirname(dirname(dirname(dirname(dirname(__FILE__)))));
+			$targetImg=$tmpFilePath."/data/uploads/avatar/".$mid."/original.jpg";
+			$pwimg=$tmpFilePath."/forum/windid/attachment/avatar/".$this->getUserDir($uid)."/".$uid.".jpg";
+			$pwSmallimg=$tmpFilePath."/forum/windid/attachment/avatar/".$this->getUserDir($uid)."/".$uid."_small.jpg";
+			$pwmiddleimg=$tmpFilePath."/forum/windid/attachment/avatar/".$this->getUserDir($uid)."/".$uid."_middle.jpg";
+			list($sr_w, $sr_h, $sr_type, $sr_attr) = @getimagesize($targetImg);
+			$func		=	'imagecreatefromjpeg';
+			$img_r	=	call_user_func($func,$targetImg);
+			$big_w=200;
+			$big_h=200;
+			$dst_r	=	ImageCreateTrueColor( $big_w, $big_h );
+			$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
+			ImageFilledRectangle( $dst_r, 0, 0, $big_w, $big_h, $back );
+			ImageCopyResampled( $dst_r, $img_r, 0, 0, 0, 0, $big_w, $big_h, $sr_w, $sr_h );
+	
+			ImagePNG($dst_r,$pwimg);  // 生成大图
+			
+		
+			// 开始切割大方块头像成中等方块头像
+			$pwmiddlesdst_s	=	ImageCreateTrueColor( 120, 120);
+			ImageCopyResampled( $pwmiddlesdst_s, $dst_r, 0, 0, 0, 0, 120, 120, $big_w, $big_w );
+			ImagePNG($pwmiddlesdst_s,$pwmiddleimg);  // 生成中图
+		
+			// 开始切割大方块头像成中等方块头像
+			$pwSmallsdst_s	=	ImageCreateTrueColor( 50, 50);
+			ImageCopyResampled( $pwSmallsdst_s, $dst_r, 0, 0, 0, 0, 50, 50, $big_w, $big_w );
+			ImagePNG($pwSmallsdst_s,$pwSmallimg);  // 生成中图	
+			
+			ImageDestroy($pwsdst_s);
+			ImageDestroy($pwmiddlesdst_s);
+			ImageDestroy($pwSmallsdst_s);
+			
+			
+		}
+		
+		
     public function error404() {
         $this->display('404');
     }

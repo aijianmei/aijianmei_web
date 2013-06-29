@@ -152,7 +152,7 @@
         					<input id="tag" value="" onkeyup="if(!checktxt(this.value)){this.value='';alert('请输入正确的字符');};">
         				</div>
         			</div>
-        			<a class="dt_update_1" id="upuserinfo"  onclick="formsubBykey('userinfo');">更新资料</a>
+        			<a class="dt_update_1" id="upuserinfo" onclick="formsubBykey('userinfo');">更新资料</a>
 					</div>
 	        	</fieldset>
         	</form>
@@ -254,7 +254,7 @@ function checkusernameString(str){
 
 $(document).ready(function(){
 	$("#Filedata").change(function(){
-		$("#selectForm").submit();
+		if($("#Filedata").val() != '') $("#selectForm").submit();
 	});
 	$("#exec_target").load(function(){
 		var data = $(window.frames['exec_target'].document.body).find("textarea").eq(0).html();
@@ -418,10 +418,6 @@ window.addEventListener('beforeunload', function() {
 	if(!username.value){
 		username.focus();
 		return '请输入用户名完成注册!';
-	}else{
-		var topNum=($("#upuserinfo").offset().top)*1-300;
-		$("html,body").animate({scrollTop: topNum}, 1000);
-		return '页面值已经修改，是否要保存？';	
 	}
 	
 });	

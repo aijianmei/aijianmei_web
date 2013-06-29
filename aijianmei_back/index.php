@@ -17,6 +17,7 @@ if(is_dir('install/') && !file_exists('install/install.lock')){
 define('SITE_PATH', getcwd());
 define('RUNTIME_ALLINONE', false);	// 是否开启AllInOne模式 (开启时, NO_CACHE_RUNTIME 和 APP_DEBUG将失效)
 define('NO_CACHE_RUNTIME', true);	// 是否关闭核心文件的编译缓存 (开启AllInOne模式时设置无效, 将自动置为false)
+define("AIBASEURL",'http://' . $_SERVER['HTTP_HOST']);
 $allowregAct=array('newShowImg1','doregister','ShowImg','newShowImg','newupload','upload','setchannelinfo','fishuserinfo','saveuserinfo','uploadImageFile');
 if(@$_SESSION['deslogin']==1&&!in_array($_GET['act'],$allowregAct)){$_SESSION=null;}
 if(@$_SESSION['needSetcookie']!=''){
@@ -32,4 +33,5 @@ require(SITE_PATH.'/core/sociax.php');
 //实例化一个网站应用实例
 $App = new App();
 $App->run();
+//print_r($_SESSION);
 

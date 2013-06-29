@@ -45,16 +45,26 @@ if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
 }
 
 function checkUserName(){
-	$username=intval($_POST['username']);
+	$username=$_POST['username'];
+	$mid=$_SESSION['mid']?$_SESSION['mid']:0;
+	if($mid > 0){$conid=" and uid!=$mid";}
 	$sql="select * from ai_user where uname='".$username."'";
 	$result=C_mysqlQuery($sql);
 		while($row=mysql_fetch_assoc($result)){
 			$resultTmp[]=$row;
 		}
-		if($resultTmp){
-			echo 2;
+		if($mid>0){
+			if(empty($resultTmp)||$mid==$resultTmp[0]['uid']){
+				echo 1;
+			}else{
+				echo 2;
+			}
 		}else{
-			echo 1;
+			if(empty($resultTmp)){
+				echo 1;	
+			}else{
+				echo 2;
+			}	
 		}
 	exit;
 }
@@ -298,7 +308,6 @@ function recordlike($data){
 	$checkLikeInfo=array();
 	$checkLikeInfo=C_mysqlQuery($checkLikeSql);
 	$checkLikeInfo = mysql_fetch_assoc($checkLikeInfo);
-	//print_r($checkLikeInfo);
 	if($checkLikeInfo['uid']>0){
 		echo json_encode(2);
 		exit();

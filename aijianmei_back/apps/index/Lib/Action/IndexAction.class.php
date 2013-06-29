@@ -1020,7 +1020,7 @@ function show_banner($type){
 
     public function info()
     {
-        static $nums=2;
+        static $nums=7;
         $type = (int) $_GET['type'];
         $page = (int) $_GET['pg']?(int) $_GET['pg']:1;
         //$info=D('Article')->getDaily($type) old part
@@ -1045,9 +1045,7 @@ function show_banner($type){
 				$bannerTopInfo['aimg_3']='2-3.jpg';$bannerTopInfo['aid_3']=77;$bannerTopInfo['aimg_title3']='基础锻炼：辅助品';
 				$bannerTopInfo['aimg_4']='2-4.jpg';$bannerTopInfo['aid_4']=76;$bannerTopInfo['aimg_title4']='基础锻炼：生活方式';
 				}break;
-            case 3:{
-        $tree_channel="中阶-运动员锻炼";
-        $tree_channel_en=2;
+            case 3:{$tree_channel="中阶-运动员锻炼";$tree_channel_en=2;
 				$bannerTopInfo['title']='中阶-运动员锻炼';
 				$bannerTopInfo['img']='zj.png';
 				$bannerTopInfo['aimg_1']='3-1.jpg';$bannerTopInfo['aid_1']=90;$bannerTopInfo['aimg_title1']='中阶锻炼：健身';
@@ -1055,9 +1053,7 @@ function show_banner($type){
 				$bannerTopInfo['aimg_3']='3-3.jpg';$bannerTopInfo['aid_3']=88;$bannerTopInfo['aimg_title3']='中阶锻炼：辅助品';
 				$bannerTopInfo['aimg_4']='3-4.jpg';$bannerTopInfo['aid_4']=87;$bannerTopInfo['aimg_title4']='中阶锻炼：生活方式';
 			}break;
-            case 4:{
-        $tree_channel="高阶-肌肉锻炼";
-        $tree_channel_en=3;
+            case 4:{$tree_channel="高阶-肌肉锻炼";$tree_channel_en=3;
 				$bannerTopInfo['title']='高阶-肌肉锻炼';
 				$bannerTopInfo['img']='gj.png';
 				$bannerTopInfo['aimg_1']='4-1.jpg';$bannerTopInfo['aid_1']=91;$bannerTopInfo['aimg_title1']='高阶锻炼：健身';

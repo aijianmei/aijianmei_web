@@ -606,10 +606,10 @@ var newdom = new getdom;
 
 /*if(newdom.getElementsByClass('store')[0]){
     fade.init('store');
-}*/
+}
 if(newdom.getElementsByClass('forum')[0]){
     fade.init('forum');
-}
+}*/
 if(newdom.getElementsByClass('friends')[0]){
     fade.init('friends');
 }

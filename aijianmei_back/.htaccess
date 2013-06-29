@@ -1,9 +1,10 @@
 RewriteEngine on
- RewriteCond %{HTTP_HOST} ^aijianmei.com [NC]
- RewriteRule ^(.*)$ http://www.aijianmei.com/$1 [L,R=301]
+RewriteCond %{HTTP_HOST} ^aijianmei.com [NC]
+RewriteRule ^(.*)$ http://www.aijianmei.com/$1 [L,R=301]
 
 RewriteBase /
 RewriteRule index.html index.php
+RewriteRule ^forum/(.+) forum/$1
 RewriteRule ^(.+)-(.+)-(articleDetail)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4
 RewriteRule ^(.+)-(.+)-(daily)-(.+)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4&type=$5
 RewriteRule ^(.+)-(Train)-(videoDetail)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4
@@ -18,4 +19,3 @@ RewriteRule ^Train.html index.php?app=index&mod=Train
 RewriteRule ^Nutri.html index.php?app=index&mod=Nutri
 RewriteRule ^Append.html index.php?app=index&mod=Append
 RewriteRule ^Lifestyle.html index.php?app=index&mod=Lifestyle
-RewriteRule ^forum/(.+) forum/$1

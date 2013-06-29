@@ -644,7 +644,7 @@ class App
                 if (App::isAjax() || strpos($_SERVER['REQUEST_URI'],"addon") != FALSE) { // Ajax访问禁止匿名的资源时, 不做自动跳转
                     exit;
                 } else {
-					$allowregAct=array('selectRegister','register','doregister','ShowImg','newShowImg','newupload','upload','setchannelinfo','fishuserinfo','saveuserinfo','uploadImageFile');
+					$allowregAct=array('doLogin','selectRegister','register','doregister','ShowImg','newShowImg','newupload','upload','setchannelinfo','fishuserinfo','saveuserinfo','uploadImageFile');
                     // 记录登录前的url地址
                     if(!$_GET['state']&&!$_GET['code']){
 						if(!in_array(ACTION_NAME,$allowregAct)){
