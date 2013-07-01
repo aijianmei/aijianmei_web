@@ -1,16 +1,7 @@
 <?php
 session_start();
-//error_reporting(0); //调试、找错时请弃用这一行配置，注释下一行配置
-error_reporting(E_ERROR | E_PARSE | E_STRICT);
-
-//安装检查开始：如果您已安装过ThinkSNS，可以删除本段代码
-if(is_dir('install/') && !file_exists('install/install.lock')){
-    header("Content-type: text/html; charset=utf-8");
-    die ("<div style='border:2px solid green; background:#f1f1f1; padding:20px;margin:20px;width:800px;font-weight:bold;color:green;text-align:center;'>"
-        ."<h1>系统检测到您尚未安装ThinkSNS系统，<a href='install/install.php'>请点击进入安装页面</a></h1>"
-        ."</div> <br /><br />");
-}
-//安装检查结束
+error_reporting(0); //调试、找错时请弃用这一行配置，注释下一行配置
+//error_reporting(E_ERROR | E_PARSE | E_STRICT);
 
 //print_r($_COOKIE);
 //网站根路径设置

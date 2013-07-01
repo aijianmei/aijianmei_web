@@ -314,9 +314,9 @@ class PublicAction extends Action{
         if(!$password){
             $this->error(L('please_input_password'));
         }
-				$_POST['remember']=1;
+		$_POST['remember']=1;
         //$result = service('Passport')->loginLocal($username,$password,intval($_POST['remember']));
-				$result = service('Passport')->loginLocal($username,$password,1);
+		$result = service('Passport')->loginLocal($username,$password,1);
         $lastError = service('Passport')->getLastError(); 
         //检查是否激活
         if (!$result && $lastError =='用户未激活') {
@@ -330,8 +330,7 @@ class PublicAction extends Action{
         if($result) {
 			@setcookie("LOGGED_AIUSER", $_POST['email'], time()+3600*24*30);
 			@setcookie('LOGGED_AICOD', md5("aijianmeipwd".$_POST['password']), time()+3600*24*30);			
-
-
+		
             if(UC_SYNC && $result['reg_from_ucenter']){
                 //从UCenter导入ThinkSNS，跳转至帐号修改页
                 $refer_url = U('home/Public/userinfo');
@@ -345,17 +344,16 @@ class PublicAction extends Action{
              /*ecshoplogin by kontem at 20130412 start*/
             $get_usernameSql="select * from ai_user where email='".$_POST['email']."' and password='".md5($_POST['password'])."'";
             $get_usernameInfo = M('')->query($get_usernameSql);
-						$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+			$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
             $uid = M('')->query($getUidSql);
             $_SESSION['user_id']   = $uid[0]['user_id'];
             $_SESSION['user_name'] = $uid[0]['user_name'];
             $_SESSION['email']     = $uid[0]['email'];
-						$_SESSION['ways']++;
+			$_SESSION['ways']++;
 
 			if($_SESSION['mid']>0){
 				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
 			}
-
 			@setcookie("ECS[user_id]",  $uid[0]['user_id'], time()+3600*24*30);
 			@setcookie("ECS[password]", md5($_POST['password']), time()+3600*24*30);
 
@@ -372,18 +370,37 @@ class PublicAction extends Action{
 			  'password' =>$_POST['password'],
 			  'repassword' =>$_POST['password'],
 			  );
-			if($uid[0]['user_name']){}
 			$url=AIBASEURL."/forum/pwApi.php?pwact=register";
-			_CurlPost($url,$post_data);//targetUrl postData
+			$out=_CurlPost($url,$post_data);//targetUrl postData
+			
+			$inserTmpSql=null;
+			$inserTmpSql="INSERT INTO  aijianmei.ai_forum_tmp_user (id ,email ,password)
+			VALUES (NULL ,  '".$uid[0]['email']."',  '".$_POST['password']."')";  
+			M('')->query($inserTmpSql);
+			
 			}
 			$pwUserInfoSql="select * from ai_pwforum.pw_user where username='".$uid[0]['user_name']."' and email='".$uid[0]['email']."'";
 			$pwUserInfo=M('')->query($pwUserInfoSql);
 			$this->pwImgCopy($_SESSION['mid'],$pwUserInfo[0]['uid']);
 			//调用登陆api
+			$tmpPassword=M('')->query("select password from ai_forum_tmp_user where email='".$uid[0]['email']."'");
+			if($tmpPassword[0]['password']!=$_POST['password']){
+				//密码与临时表不一致 更新临时表
+				M('')->query("UPDATE  ai_forum_tmp_user SET  password =  '".$_POST['password']."' WHERE  email='".$uid[0]['email']."'");
+				//调用论坛对应的密码修改 api add by kontem 20130701 {{{
+				$url=AIBASEURL."/forum/pwApi.php?pwact=editpassword";
+				$post_data=array(
+					'oldPwd' => $tmpPassword[0]['password'],
+					'newPwd'=>$_POST['password'],
+					'rePwd'=>$_POST['password'],
+				);
+				_CurlPost($url,$post_data);
+				$tmpPassword[0]['password']=$_POST['password'];
+			}
 			$url=AIBASEURL."/forum/pwApi.php?pwact=login";
 			$post_data=array(
 				'username' => $uid[0]['user_name'],
-			  'password' =>$_POST['password']
+			  'password' =>$tmpPassword[0]['password'],
 			 );
 			$_SESSION['pwai_url']=_CurlPost($url,$post_data);
 			/*论坛部分自己回调登陆*/
@@ -401,14 +418,12 @@ class PublicAction extends Action{
 		//redirect(U('index/Index/index'));
 	}
 	elseif($_SESSION['shoprefer_url']!=''){
-		
 		$reurl=$_SESSION['shoprefer_url'];
 		unset($_SESSION['shoprefer_url']);
 		redirect($reurl);
 		//redirect(U('index/Index/index'));
 	}
 	else{
-
 		redirect(U('index/Index/index'));
 	}
             //$this->assign('jumpUrl',$refer_url);
@@ -463,6 +478,7 @@ class PublicAction extends Action{
 		$time = time() - 3600;
         setcookie("ECS[user_id]",  '', $time, '/');            
         setcookie("ECS[password]", '', $time, '/');
+        setCookie('IeT_winduser', '',$time,'/');
 		@setcookie("LOGGED_AIUSER",'', $time);
 		@setcookie('LOGGED_AICOD','', $time);		
 		if(!empty($deluname))
@@ -472,8 +488,9 @@ class PublicAction extends Action{
 			M('')->query("DELETE FROM ecs_sessions WHERE sesskey = '".$getSkeyArr[0]['sesskey']."'");
 		}
         service('Passport')->logoutLocal();
-        
-				setCookie('ghL_winduser', '',-1,'/');
+        $url=AIBASEURL."/forum/pwApi.php?pwact=logout";
+				_CurlPost($url);
+				//setCookie('ghL_winduser', '',-1,'/');
         $_SESSION['aipw_ck_winduser']=null;
         
         Addons::hook('public_after_logout');

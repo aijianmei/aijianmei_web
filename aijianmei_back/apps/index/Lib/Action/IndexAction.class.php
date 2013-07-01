@@ -492,9 +492,6 @@ function show_banner($type){
 
 			//if($user_message['id']==2578458467){echo $_REQUEST['code'];exit;}
             //$logId = M('others')->field('uid')->where(array('mediaID'=>'3', 'mediaUserID'=>$user_message['id'], 'personID'=>$user_message['idstr']))->find();
-			
-			
-			
             $log_sql = 'select id,uid from ai_others where mediaID=3 and mediaUserID='.$user_message['id'].' and personID='.$user_message['idstr'].'';
             //echo $log_sql;
             $logId = M('')->query($log_sql);
@@ -534,6 +531,44 @@ function show_banner($type){
 				setcookie('LOGGED_AICOD', md5("aijianmeipwd".$get_usernameInfo[0]['password']), time()+3600*24*30);		
 				setcookie("ECS[user_id]",  $_SESSION['user_id'],time()+3600*24*30);  //set cookie         
 				setcookie("ECS[password]", $uid[0]['password'],time()+3600*24*30);
+				
+			/*forum 论坛 登陆api start by kontem at20130626*/
+			$pwUserInfoSql="select * from ai_pwforum.pw_user where username='".$uid[0]['user_name']."' and email='".$uid[0]['email']."'";
+			$pwUserInfo=M('')->query($pwUserInfoSql);
+			//检测用户是否已经有论坛对应的账号
+			if(empty($pwUserInfo[0])){
+			//不存在则调用注册api
+			$post_data=array( 
+				'username' => $uid[0]['user_name'],
+			  'email' => $uid[0]['email'],
+			  'password' =>'ai123456',
+			  'repassword' =>'ai123456',
+			  );
+			$inserTmpSql=null;
+			$inserTmpSql="INSERT INTO  aijianmei.ai_forum_tmp_user (id ,email ,password)
+			VALUES (NULL ,  '".$uid[0]['email']."',  'ai123456')";  
+			M('')->query($inserTmpSql);
+			$url=AIBASEURL."/forum/pwApi.php?pwact=register";
+			$out=_CurlPost($url,$post_data);//targetUrl postData
+			}
+			$pwUserInfoSql="select * from ai_pwforum.pw_user where username='".$uid[0]['user_name']."' and email='".$uid[0]['email']."'";
+			$pwUserInfo=M('')->query($pwUserInfoSql);
+			//$this->pwImgCopy($_SESSION['mid'],$pwUserInfo[0]['uid']);
+			//调用登陆api
+			$tmpPassword=M('')->query("select password from ai_forum_tmp_user where email='".$uid[0]['email']."'");
+			$url=AIBASEURL."/forum/pwApi.php?pwact=login";
+			$post_data=array(
+				'username' => $uid[0]['user_name'],
+			  'password' =>$tmpPassword[0]['password'],
+			  'is_sinalogin' =>1,
+			 );
+			if($uid[0]['user_name']=='C_Kontem'){
+			$_SESSION['pwai_url']=_CurlPost($url,$post_data);
+		}
+			/*论坛部分自己回调登陆*/
+			/*forum 论坛 登陆api end*/
+
+				
 				ob_get_clean();				
 				//print_r($_COOKIE);
 				if($_SESSION['refer_url']!=''&&$_SESSION['shoprefer_url']==''){
@@ -679,7 +714,7 @@ function show_banner($type){
 		$pagerArray = $pagerData['html'];
 
 		//print_r($pagerArray);
-		$sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit ".(($pglimit-1)*20).",$nums";
+        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit ".(($pglimit-1)*20).",$nums";
 		$newvideos=$hot_video=null;
 		$newvideos=$this->getDataCache(md5($sql));
 		if(!$newvideos){
@@ -693,7 +728,7 @@ function show_banner($type){
 			$this->setDataCache(md5($sql),$newvideos);
 		}
 		$this->assign('newvideosPage', $pagerArray);
-    $this->assign('newvideos', $newvideos);
+        $this->assign('newvideos', $newvideos);
 		
 		/*首页添加最热5篇视频*/
 		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";
@@ -761,7 +796,7 @@ function show_banner($type){
 		}
 		
 		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,'/index.php?app=index&mod=index&act=index&ctype=2&pg=');
-		$pagerArray = $pagerData['html'];		
+		$pagerArray = $pagerData['html'];
 		
     $sql = "select a.* from ai_article a group by a.id order by a.reader_count desc limit ".($pg-1)*$nums.",$nums";
 		$hotArticles=null;
@@ -776,7 +811,7 @@ function show_banner($type){
 			$this->setDataCache(md5($sql),$hotArticles);
 		}
 		$this->assign('hotArticlespage', $pagerArray);
-		$this->assign('hotArticles', $hotArticles);
+        $this->assign('hotArticles', $hotArticles);
         //add by kon at 20130410 end
 		
 		//header current add by kon at 20130415

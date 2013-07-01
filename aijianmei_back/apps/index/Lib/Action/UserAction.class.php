@@ -156,17 +156,16 @@ class UserAction extends Action {
 			  'password' =>$password,
 			  'repassword' =>$password,
 			  );
-			  
-			$url="http://www.kon_aijianmei.com/forum/pwApi.php?pwact=register";
-			_CurlPost($url,$post_data);//targetUrl postData
+			$inserTmpSql=null;
+			$inserTmpSql="INSERT INTO  aijianmei.ai_forum_tmp_user (id ,email ,password)
+			VALUES (NULL ,  '".$userEmail."',  '".$password."')";  
+			M('')->query($inserTmpSql);
+			$url=AIBASEURL."/forum/pwApi.php?pwact=register";
+			$out=_CurlPost($url,$post_data);//targetUrl postData
 			}
+			$_SESSION['locallogin_password']=$password;
 			//调用登陆api
-			$url="http://www.kon_aijianmei.com/forum/pwApi.php?pwact=login";
-			$post_data=array(
-				'username' => $getuidinfo[0]['uname'],
-			  'password' =>$password
-			 );
-			$_SESSION['pwai_url']=_CurlPost($url,$post_data);
+
 			/*论坛部分自己回调登陆*/
 			/*forum 论坛 登陆api end*/
 			}
@@ -210,13 +209,17 @@ class UserAction extends Action {
 					M('')->query($insertSql);
 				}
 				if($_SESSION['otherlogin']==1){
+					$getUserInfo=M('')->query("select uname from ai_user where uid=$mid");
+					$url=AIBASEURL."/forum/pwApi.php?pwact=login";
+					$post_data=array(
+					'username' => $getUserInfo[0]['uname'],
+					'password' =>$_SESSION['locallogin_password'],
+					);
+					$_SESSION['pwai_url']=_CurlPost($url,$post_data);
+					@setcookie('pwai_url', $_SESSION['pwai_url'], 3600*24);
 					service('Passport')->loginLocal($mid);
-					redirect(U('index/user/edituserinfo'));
-					// if($_SESSION['refer_url']!=''){
-						// redirect($_SESSION['refer_url']);
-					// }else{
-						// redirect(U('index/index/index'));
-					// }
+					//redirect(U('index/user/edituserinfo'));
+					$this->edituserinfo();exit;
 				}else{
 					redirect(U('index/user/fishuserinfo'));
 				}
@@ -318,6 +321,8 @@ class UserAction extends Action {
 		$this->display('datum');
 	}
 	public function edituserinfo(){
+		$_SESSION['pwai_url']=$_SESSION['pwai_url']!=''?$_SESSION['pwai_url']:$_COOKIE['pwai_url'];
+		//print_r($_SESSION);
 		if(!$_SESSION['mid']){
 			if($_SESSION['loginIcpkey']!=md5('aijianmei'.$_SESSION['allowbackmid'])){
 				$_SESSION=null;
@@ -336,8 +341,6 @@ class UserAction extends Action {
         $this->assign('children', $child);
         $this->assign('area', $area);
 		//}}
-		
-		
 		$username=$description=$domain=$userArea=$usercity=null;
 		$imgurl=null;
 		if($mid>0){
@@ -387,7 +390,6 @@ class UserAction extends Action {
 			$this->assign('user_type',$user_type);
 			$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
 			if(!is_file(dirname(__FILE__).$filename)){$filename='Templates/images/login_pic.jpg';}
-			
 			$this->assign('localimg',$filename);
 			if($UserNameInfo[0]['upic_type']==1){
 					$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
@@ -447,13 +449,9 @@ class UserAction extends Action {
 		$username=$_POST['username'];
 		if($mid>0&&$username!=''&&$_GET['args']=='uinfo'){
 			if($_SESSION['otherlogin']==1||$_SESSION['locallogin']==1){
-
 			$upsql=null;
 			//$upsql="UPDATE ai_user SET uname = '".$username."',sex='".$_POST['sex']."',province='".$_POST['province']."',city='".$_POST['city']."' WHERE uid =$mid";
 			$upsql="UPDATE ai_user SET uname = '".$username."',sex=".$_POST['sex'].",province=".$_POST['province'].",city='".$_POST['cityvalue']."',upic_type='1' WHERE uid =$mid";
-			
-			
-			
 			M('')->query($upsql);
 			
 			$keyTmp=array();
@@ -513,12 +511,12 @@ class UserAction extends Action {
 			  'password' =>$_SESSION['locallogin_password'],
 			  'repassword' =>$_SESSION['locallogin_password'],
 			  );
-			print_r();  
-			$url="http://www.kon_aijianmei.com/forum/pwApi.php?pwact=register";
+ 
+			$url=AIBASEURL."/forum/pwApi.php?pwact=register";
 			_CurlPost($url,$post_data);//targetUrl postData
 			}
 			//调用登陆api
-			$url="http://www.kon_aijianmei.com/forum/pwApi.php?pwact=login";
+			$url=AIBASEURL."/forum/pwApi.php?pwact=login";
 			$post_data=array(
 				'username' => $shopinserinfo[0]['uname'],
 			  'password' =>$_SESSION['locallogin_password']
@@ -579,8 +577,9 @@ class UserAction extends Action {
 			}
 		}elseif($mid>0&&$_GET['args']=='uppwd'){
 			if($_POST['password']==$_POST['repassword']){
-				$upsql="update ai_user SET password = '".md5($_POST['password'])."' WHERE password ='".md5($_POST['oldpassword'])."'";
+				$upsql="update ai_user SET password = '".md5($_POST['password'])."' WHERE uid=$mid";
 				M('')->query($upsql);
+
 			}
 		}elseif($mid>0&&$_GET['args']=='upconnect'){
 			if(!empty($_POST['cemail'])&&!empty($_POST['ctell'])){
@@ -608,13 +607,7 @@ public function saveedituserinfo(){
 			if($mid>0){
 			$oldusernameinfo=M('user')->where(array('uid'=>$mid))->find();
 			//print_r($oldusernameinfo);exit;
-
-			
 			$this->updatePWUname($oldusernameinfo['uname'],$oldusernameinfo['email'],$username);
-
-			
-			
-			
 			$upsql=null;
 			$upsql="UPDATE ai_user SET uname = '".$username."',sex=".$_POST['sex'].",province=".$_POST['province'].",city='".$_POST['cityvalue']."',upic_type='".$_POST['upic_type']."' WHERE uid =$mid";
 			M('')->query($upsql);
@@ -627,7 +620,7 @@ public function saveedituserinfo(){
 						$keyTmp[]=$v;
 					}	
 				}
-			
+	
 			$checkkeywordSql="select * from ai_user_keywords WHERE uid =$mid";
 			$cres=M('')->query($checkkeywordSql);
 			if($cres){
@@ -656,7 +649,6 @@ public function saveedituserinfo(){
 				VALUES ($mid, '".$_POST['dt_weight_finish']."','".$_POST['dt_height_finish']."','".$_POST['dt_year_finish']."')";
 				M('')->query($insertSql);
 			}
-			
 			
 			$sql="select uname,email from ai_user where uid =$mid";
 			$shopinserinfo=M('')->query($sql);
@@ -702,8 +694,23 @@ public function saveedituserinfo(){
 			}
 		}elseif($mid>0&&$_GET['args']=='uppwd'){
 			if($_POST['password']==$_POST['repassword']){
-				$upsql="update ai_user SET password = '".md5($_POST['password'])."' WHERE password ='".md5($_POST['oldpassword'])."'";
+
+				$upsql="update ai_user SET password = '".md5($_POST['password'])."' WHERE uid=$mid and password='".md5($_POST['oldpassword'])."'";
 				M('')->query($upsql);
+				$getmail=M('')->query("select email from ai_user where uid=$mid");
+				
+				$tmpPassword=M('')->query("select password from ai_forum_tmp_user where email='".$getmail[0]['email']."'");
+				M('')->query("UPDATE  ai_forum_tmp_user SET  password =  '".$_POST['password']."' WHERE  email='".$getmail[0]['email']."'");
+				//调用论坛对应的密码修改 api add by kontem 20130701 {{{
+				$url=AIBASEURL."/forum/pwApi.php?pwact=editpassword";
+				$post_data=array(
+					'oldPwd' => $tmpPassword[0]['password'],
+					'newPwd'=>$_POST['password'],
+					'rePwd'=>$_POST['password'],
+				);
+				$out=_CurlPost($url,$post_data);
+				//}}} end
+				
 			}
 		}elseif($mid>0&&$_GET['args']=='upconnect'){
 			if(!empty($_POST['cemail'])&&!empty($_POST['ctell'])){
@@ -1027,7 +1034,7 @@ function newupload(){
 		$middle_name	=	$face_path.'/middle.jpg';		// 中图
 		$small_name		=	$face_path.'/small.jpg';
 		
-		$emsql="select email from aijianmei.ai_user where uid='".$this->uid."'";
+		$emsql="select email from aijianmei.ai_user where uid='".($this->uid)."'";
 		$eminfo=M('')->query($emsql);
 		$pwuinfosql="select uid from ai_pwforum.pw_user where email='".$eminfo[0]['email']."'";
 		$pwuinfo=M('')->query($pwuinfosql);
@@ -1041,7 +1048,6 @@ function newupload(){
 		
 		$func	=	($ext != 'jpg')?'imagecreatefrom'.$ext:'imagecreatefromjpeg';
 		$img_r	=	call_user_func($func,$src);
-		
 		
 		$dst_r	=	ImageCreateTrueColor( $big_w, $big_h );
 		$back	=	ImageColorAllocate( $dst_r, 255, 255, 255 );
@@ -1146,7 +1152,6 @@ function uploadImageFile($size,$name) {
 						imagejpeg($vDstImg, $sResultFileName, $iJpgQuality);
 						$this->resizeimage($sResultFileName,1/3,SITE_PATH.'/data/uploads/avatar/'.$this->uid.'/middle.jpg');
 						$this->resizeimage($sResultFileName,0.2,SITE_PATH.'/data/uploads/avatar/'.$this->uid.'/small.jpg');
-
 						/*$face_path      =   SITE_PATH.'/data/uploads/avatar'.convertUidToPath($this->uid);
 						$big_name	    =	$face_path.'/big.jpg';		// 大图
 						$middle_name	=	$face_path.'/middle.jpg';		// 中图

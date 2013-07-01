@@ -1,6 +1,7 @@
 <?php
 session_start();
-error_reporting(E_ERROR | E_PARSE);
+error_reporting(0);
+define("AIPWURL","http://www.kon_aijianmei.com");
 $_SESSION['ai_pwlogin_allow']=null;
 $ai_pwreg=$_REQUEST['ai_pwreg'];
 $ai_pwlogin=$_REQUEST['ai_pwlogin'];
@@ -8,6 +9,7 @@ if($ai_pwreg==1||$ai_pwlogin==1){
 	$_SESSION['ai_pwlreg_allow']=1;
 }
 
+$_SESSION['is_sinalogin']=$_REQUEST['is_sinalogin']==1?1:'';
 
 if($_SESSION['pwai_url']!=''){
 	$_SESSION['ai_pwlreg_allow']=2;
@@ -27,14 +29,11 @@ if(!in_array($_GET['c'],$noremAction)&&$_SESSION['pwai_url']==''){
 }
 
 if($_SESSION['aipw_ck_winduser']!=''){
-	setcookie('ghL_winduser', $_SESSION['aipw_ck_winduser'],31536000);
-	$_COOKIE['ghL_winduser']=$_SESSION['aipw_ck_winduser'];
+	$winkey="IeT_winduser";
+	$_COOKIE[$winkey]=$_SESSION['aipw_ck_winduser'];
+	setcookie($winkey, $_SESSION['aipw_ck_winduser'],31536000);
 	unset($_SESSION['aipw_ck_winduser']);
 }
 
-define("AIPWURL","http://www.kon_aijianmei.com");
 require './src/wekit.php';
 Wekit::run('phpwind');
-//var_dump($_COOKIE);
-//echo $_SESSION['refer_url'];
-//var_dump($_SESSION['refer_url']);
