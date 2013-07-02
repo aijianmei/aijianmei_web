@@ -511,6 +511,8 @@ function show_banner($type){
             if($logId) {
                 service('Passport')->loginLocal($logId[0]['uid']);
 				$_SESSION['sinalogin']=1;
+				$upsql="update `aijianmei`.`ai_others` set profileImageUrl='". $user_message['profile_image_url']."' where uid='".$logId[0]['uid']."'";
+				M('')->query($upsql);
 				$checkEmailSql="select email from ai_user where uid='".$logId[0]['uid']."'";
 				$checkEmailArr=M('')->query($checkEmailSql);
 				if(empty($checkEmailArr[0]['email'])){
@@ -562,9 +564,7 @@ function show_banner($type){
 			  'password' =>$tmpPassword[0]['password'],
 			  'is_sinalogin' =>1,
 			 );
-			if($uid[0]['user_name']=='C_Kontem'){
 			$_SESSION['pwai_url']=_CurlPost($url,$post_data);
-		}
 			/*论坛部分自己回调登陆*/
 			/*forum 论坛 登陆api end*/
 
@@ -641,58 +641,84 @@ function show_banner($type){
             $umailsql="update ai_others set email='".trim($_POST['email'])."' where uid='".addslashes($_POST['emailuid'])."'";
             M('')->query($umailsql);
         }
-        
-        
-        if(!empty($_GET['apiType'])&&$_GET['apiType']=='renren'){
-            //print_r($_GET);
-            //print_r($_SERVER);
-        }
+
         if(!empty($_GET['qquid'])&&$_GET['qqapi']=='login'){
             service('Passport')->loginLocal($_GET['qquid']);
-			$_GET['qquid']=addslashes($_GET['qquid']);
-			$checkEmailSql="select email from ai_user where uid='".$_GET['qquid']."'";
-			$checkEmailArr=M('')->query($checkEmailSql);
-			if(empty($checkEmailArr[0]['email'])){
-				$_SESSION['sinalogin']=1;
-				redirect(U('index/User/register'));
-				//redirect(U('index/User/loginUserInfo'));
-				//redirect(U('home/Account/index',array('esg'=>'needemail')));
-			}
-			$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
-			$get_usernameInfo = M('')->query($get_usernameSql);
-			$getUidSql='select user_id,user_name,email,password from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
-			$uid = M('')->query($getUidSql);
-			$_SESSION['user_id']   = $uid[0]['user_id'];
-			$_SESSION['user_name'] = $uid[0]['user_name'];
-			$_SESSION['email']     = $uid[0]['email'];
-			$_SESSION['ways']++;
-			if($_SESSION['mid']>0){
-				$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
-			}
-			@setcookie("LOGGED_AIUSER", $checkEmailArr[0]['email'], time()+3600*24*30);
-			@setcookie('LOGGED_AICOD', md5("aijianmeipwd".$get_usernameInfo[0]['password']), time()+3600*24*30);		
-			@setcookie("ECS[user_id]",  $_SESSION['user_id'],time()+3600*24*30);  //set cookie         
-			@setcookie("ECS[password]", $uid[0]['password'],time()+3600*24*30);
-			if($_SESSION['refer_url']!=''){
-				$reurl=$_SESSION['refer_url'];
-				unset($_SESSION['refer_url']);
-				redirect($reurl);
-			}
-			elseif($_SESSION['shoprefer_url']!=''){
-				$reurl=$_SESSION['shoprefer_url'];
-				unset($_SESSION['shoprefer_url']);
-				redirect($reurl);
-			}else{
-				redirect(U('index/Index/index'));
-			}
+						$_GET['qquid']=addslashes($_GET['qquid']);
+						$checkEmailSql="select email from ai_user where uid='".$_GET['qquid']."'";
+						$checkEmailArr=M('')->query($checkEmailSql);
+						if(empty($checkEmailArr[0]['email'])){//检测是否有注册邮箱 没有就跳转到注册页面
+							$_SESSION['sinalogin']=1;
+							redirect(U('index/User/register'));
+						}
+						$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
+						$get_usernameInfo = M('')->query($get_usernameSql);
+						$getUidSql='select user_id,user_name,email,password from ecs_users where user_name="'.$get_usernameInfo[0]['uname'].'"';
+						$uid = M('')->query($getUidSql);
+						$_SESSION['user_id']   = $uid[0]['user_id'];
+						$_SESSION['user_name'] = $uid[0]['user_name'];
+						$_SESSION['email']     = $uid[0]['email'];
+						$_SESSION['ways']++;
+						if($_SESSION['mid']>0){
+							$_SESSION['userInfo'] = D('User', 'home')->getUserByIdentifier($_SESSION['mid']);
+						}
+						@setcookie("LOGGED_AIUSER", $checkEmailArr[0]['email'], time()+3600*24*30);
+						@setcookie('LOGGED_AICOD', md5("aijianmeipwd".$get_usernameInfo[0]['password']), time()+3600*24*30);		
+						@setcookie("ECS[user_id]",  $_SESSION['user_id'],time()+3600*24*30);  //set cookie         
+						@setcookie("ECS[password]", $uid[0]['password'],time()+3600*24*30);
+						
+						/*forum 论坛 登陆api start by kontem at20130626*/
+						$pwUserInfoSql="select * from ai_pwforum.pw_user where username='".$uid[0]['user_name']."' and email='".$uid[0]['email']."'";
+						$pwUserInfo=M('')->query($pwUserInfoSql);
+						//检测用户是否已经有论坛对应的账号
+						if(empty($pwUserInfo[0])){
+							//不存在则调用注册api
+							$post_data=array( 
+								'username' => $uid[0]['user_name'],
+			 		 			'email' => $uid[0]['email'],
+			  				'password' =>'ai123456',
+			  				'repassword' =>'ai123456',
+			  			);
+							$inserTmpSql=null;
+							$inserTmpSql="INSERT INTO  aijianmei.ai_forum_tmp_user (id ,email ,password)
+							VALUES (NULL ,  '".$uid[0]['email']."',  'ai123456')";  
+							M('')->query($inserTmpSql);
+							$url=AIBASEURL."/forum/pwApi.php?pwact=register";
+							$out=_CurlPost($url,$post_data);//targetUrl postData
+						}
+						$pwUserInfoSql="select * from ai_pwforum.pw_user where username='".$uid[0]['user_name']."' and email='".$uid[0]['email']."'";
+						$pwUserInfo=M('')->query($pwUserInfoSql);
+						//$this->pwImgCopy($_SESSION['mid'],$pwUserInfo[0]['uid']);
+						//调用登陆api
+						$tmpPassword=M('')->query("select password from ai_forum_tmp_user where email='".$uid[0]['email']."'");
+						$url=AIBASEURL."/forum/pwApi.php?pwact=login";
+						$post_data=array(
+							'username' => $uid[0]['user_name'],
+			  			'password' =>$tmpPassword[0]['password'],
+			 	 			'is_sinalogin' =>1,
+			 			);
+			 			$_SESSION['pwai_url']=_CurlPost($url,$post_data);
+						/*论坛部分自己回调登陆*/
+						/*forum 论坛 登陆api end*/
+						
+						if($_SESSION['refer_url']!=''){
+							$reurl=$_SESSION['refer_url'];
+							unset($_SESSION['refer_url']);
+							redirect($reurl);
+						}
+						elseif($_SESSION['shoprefer_url']!=''){
+							$reurl=$_SESSION['shoprefer_url'];
+							unset($_SESSION['shoprefer_url']);
+							redirect($reurl);
+						}else{
+							redirect(U('index/Index/index'));
+						}
         }
         $this->setTitle('index');
-		
         $this->assign('uid',$this->mid);
-		
         $this->assign('cssFile','index');
         //$pg=
-		$nums=5;
+				$nums=5;
         //add by kon at 20130410 start
         /*首页添加最新5篇视频*/
 		$orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =2";

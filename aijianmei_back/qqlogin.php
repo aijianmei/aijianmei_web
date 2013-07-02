@@ -101,7 +101,7 @@ define('SITE_PATH', getcwd());
         
     }
     else{
-      $upsql="update `aijianmei`.`ai_others` set profileImageUrl='".$userinfo['figureurl_1']."' where uid='".$checkres['uid']."'";
+      $upsql="update `aijianmei`.`ai_others` set profileImageUrl='".$userinfo['figureurl_1']."',mediaUserID='".$user->openid."' where uid='".$checkres['uid']."'";
       mysql_query($upsql, $db);
     }
     $post_data=array(
