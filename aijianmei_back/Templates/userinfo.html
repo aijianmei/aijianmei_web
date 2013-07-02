@@ -30,25 +30,7 @@
             			</div>
 	        		</div>
 	        		<p class="pm_signature"><php>echo getUserDes(getMid());</php></p>
-	        		<form class="lb_search" action="" onsubmit="return gosearch();" id="lb_search_form" method="get">
-	        			<input type="text" id="searchwords"/>
-	        			<input type="submit" id="button" value="">
-	        		</form>
-					<script>
-					function gosearch()
-					{
-						var sw=document.getElementById('searchwords').value;
-						if(sw!=''){
-							var htmlurl="http://www.aijianmei.com/search_"+sw+".html";
-							$("#lb_search_form").attr("action",htmlurl);
-							//window.location.href=htmlurl;
-							return true;
-						}else{
-							return false;							
-						}
 
-					}
-					</script>
 	        	</div>
 	        	<div class="same_part">
 					<div style="margin-bottom:5px;"  class="clearfix">

@@ -14,6 +14,142 @@ class NavAction extends Action {
 		$this->assign('_MenusStu', $_MenusStu);
 		$this->assign('isAdmin', 1);
 	}
+	public function keywordmanager(){
+		$modelArr=array(
+			'plan'=>'健身计划',
+			'train'=>'锻炼',
+			'nutri'=>'营养',
+			'append'=>'辅助品',
+			'lifestyle'=>'生活方式',
+		);
+		$sql=null;
+		$sql="select * from ai_nav_keyword_category where status=1 order by model,sequence";
+		$allcateinfo=M('')->query($sql);
+		foreach ($allcateinfo as &$value) {
+		 	 $value['model']=$modelArr[$value['model']];
+		}
+		$nums=15;
+		$type=$_GET['type']?$_GET['type']:1;
+		$sql="select * from ai_nav_keyword ";
+		$comlistscount=M('')->query($sql);
+		$pager = api('Pager');
+		$pager->setCounts(count($comlistscount));
+		$pager->setList($nums);
+		$pager->makePage();
+		$from = ($pager->pg -1) * $pager->countlist;
+		$pagerArray = (array)$pager;
+
+		$getkeywordSql="select a.id,a.name,a.model,a.sequence,a.status,b.name as categoryid from ai_nav_keyword a left join ai_nav_keyword_category b on a.categoryid=b.id order by a.model limit $from,$nums";
+
+		$keywords=M('')->query($getkeywordSql);
+		foreach ($keywords as $key => &$value) {
+		 	 // loop through values
+		 	 $value['model']=$modelArr[$value['model']]; 
+		} 
+		$this->assign('allcateinfo', $allcateinfo);
+		$this->assign('pager', $pagerArray);
+		$this->assign('keywords', $keywords);
+		$this->display('keywords');
+	}
+	public function editkeywords(){
+		$modelArr=array(
+			'plan'=>'健身计划',
+			'train'=>'锻炼',
+			'nutri'=>'营养',
+			'append'=>'辅助品',
+			'lifestyle'=>'生活方式',
+		);
+		$id=$_GET['id'];
+		if($_POST['nav_action']=='doedit'){
+			$sql="UPDATE  ai_nav_keyword SET name = '".$_POST['name']."',
+			sequence  = '".$_POST['sequence']."',model='".$_POST['model']."',status='".$_POST['status']."',
+			categoryid ='".$_POST['categoryid']."'
+			WHERE  id ='".$_POST['id']."'";
+			M('')->query($sql);	
+		}
+		$sql="select * from ai_nav_keyword where id=$id";
+		$keywordinfo=M('')->query($sql);
+		$allcateinfo=M('')->query("select * from ai_nav_keyword_category");
+		$this->assign('allcateinfo', $allcateinfo);
+		$this->assign('modelArr', $modelArr);
+		$this->assign('keywordinfo', $keywordinfo[0]);
+		$this->display('editkeywords');
+	}
+	public function changecateall(){
+		$sql="UPDATE ai_nav_keyword SET categoryid= '".$_POST['changeCateId']."' where id in (".$_POST['login_record_id'].")";
+		$res=M('')->query($sql);
+		echo 1;
+		return;
+	}
+	
+	public function keywordcategorymanager(){
+		$modelArr=array(
+			'plan'=>'健身计划',
+			'train'=>'锻炼',
+			'nutri'=>'营养',
+			'append'=>'辅助品',
+			'lifestyle'=>'生活方式',
+		);
+
+		if($_POST['cate_action']=='add'){
+			$insertSql=null;
+			$insertSql="INSERT INTO ai_nav_keyword_category (
+			id,name,model,sequence,status)VALUES (NULL,'".$_POST['categoryname']."',
+			'".$_POST['model']."','".$_POST['sequence']."','".$_POST['status']."')";
+			M('')->query($insertSql);
+		}
+		$sql="select * from ai_nav_keyword_category order by model";
+		
+		$categoryList=M('')->query($sql);
+		$this->assign('categoryList', $categoryList);
+		$this->assign('modelArr', $modelArr);
+		$this->display('keywordscategory');
+	}
+	public function editkeywordcategory(){
+		$modelArr=array(
+			'plan'=>'健身计划',
+			'train'=>'锻炼',
+			'nutri'=>'营养',
+			'append'=>'辅助品',
+			'lifestyle'=>'生活方式',
+		);
+		if($_POST['nav_action']=='doedit'){
+			$sql="UPDATE  ai_nav_keyword_category SET name = '".$_POST['name']."',
+			sequence  = '".$_POST['sequence']."',model='".$_POST['model']."',status='".$_POST['status']."'
+			WHERE  id ='".$_POST['id']."'";
+			M('')->query($sql);
+		}
+		
+		$sql="select * from ai_nav_keyword_category where id='".$_GET['id']."'";
+		$cateinfo=M('')->query($sql);
+		$this->assign('cateinfo', $cateinfo[0]);
+		$this->assign('modelArr', $modelArr);
+		$this->display('editkeywordcategory');
+	}
+	public function doDelkeywordscategory(){
+		$res=M('nav_keyword_category')->where("id in(".$_POST['login_record_id'].")")->delete();
+		if($res)
+		{
+			//$this->savemenuinfo();
+			echo 1;
+		}
+		else{
+			echo 0;
+			return;
+		}
+	}
+	public function doDelkeword(){
+		$res=M('nav_keyword')->where("id in(".$_POST['login_record_id'].")")->delete();
+		if($res)
+		{
+			//$this->savemenuinfo();
+			echo 1;
+		}
+		else{
+			echo 0;
+			return;
+		}
+	}
 	
 	public function homepage() {
 		 $action=$_POST['nav_action']?addslashes($_POST['nav_action']):'';
@@ -198,7 +334,7 @@ class NavAction extends Action {
 		foreach($menusInfo as $key => $value)
 		{
 			$CmenusInfo=null;
-			$CmenusInfo=M('nav_menu')->where("partent_id='".$value['id']."'")->order('sort asc')->findAll();
+			$CmenusInfo=M('nav_menu')->where("partent_id='".$value['id']."' and status=1 ")->order('sort asc')->findAll();
 			$menusInfo[$key]['child']=$CmenusInfo;
 		}
 		file_put_contents('PublicCache/'.$fileName,"<?php\n\r return '".serialize($menusInfo)."';");
@@ -209,7 +345,8 @@ class NavAction extends Action {
 			'plan'=>1,
 			'train'=>2,
 			'nutri'=>3,
-			'append'=>4
+			'append'=>4,
+			'lifestyle'=>5,
 		);
 		$keywordinfo=null;
 		foreach($modelArr as $keyname =>$value){
@@ -278,10 +415,48 @@ class NavAction extends Action {
 			}
 			$keywordinfo[$key]=$tmp;
 		}
-		
-		
+		foreach ($keywordinfo as $key=>$value) {
+			foreach ($value as $k=>$v) {
+				$getSql=$res=null;
+				$getSql="select * from ai_nav_keyword where name='".$v."' and model='".$key."'";
+				$res=M('')->query($getSql);
+				if(!$res){
+					$insertSql=null;
+					$insertSql="INSERT INTO  `aijianmei`.`ai_nav_keyword` (
+					id ,name ,categoryid,model,sequence ,status)VALUES (NULL ,  '".$v."',  '0',  '".$key."',  '0',  '1')";
+					M('')->query($insertSql);
+				}
+			} 
+		}
+		$this->saveKeywordCache(); 
+	//var_dump($keywordinfo);
+		/*echo '<form action="/index.php?app=admin&mod=Nav&act=keywordcp&cleanall=1" method="post">
+		请确认初始化所有的关键字吗<input type="submit" value="确定"><input type="hidden" name="cleanall" value="1"></form>';
+		//$fileName='keywordInfo.php';
+		//file_put_contents('PublicCache/'.$fileName,"<?php\n\r return '".serialize($keywordinfo)."';");*/
+	}
+	
+	public function saveKeywordCache(){
+		$sql="select * from ai_nav_keyword where status=1 order by sequence,model";
+		$keywordinfo=M('')->query($sql);
+		//var_dump($keywordinfo);
+		foreach ($keywordinfo as $key => &$value) {
+			 $res=$getcnamesql=null;
+		 	 $getcnamesql="select * from ai_nav_keyword_category where id='".$value['categoryid']."'";
+		 	 $res=M('')->query($getcnamesql);
+		 	 if($res){
+		 	 		$value['cname']=$res[0]['name'];
+		 	 }
+		}
+		$keywordinfoTmp=null;
+		foreach ($keywordinfo as $key=>&$value) {
+				if(!in_array($value['name'],$keywordinfoTmp[$value['model']][$value['cname']]))
+				{
+					$keywordinfoTmp[$value['model']][$value['cname']][]=$value['name'];
+				}
+		} 
 		$fileName='keywordInfo.php';
-		file_put_contents('PublicCache/'.$fileName,"<?php\n\r return '".serialize($keywordinfo)."';");
+		file_put_contents('PublicCache/'.$fileName,"<?php\n\r return '".serialize($keywordinfoTmp)."';");
 	}
 	public function saveImginfo(){
 		$fileName='advImgCache.php';

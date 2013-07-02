@@ -23,7 +23,7 @@
  </select></td>
   <td><select name="categoryid">
   		<php>foreach($allcateinfo as $k => $v){</php>
-  		<option value="{$v['id']}" <?php if($k==$keywordinfo['categoryid']){echo 'selected="selected"';}?>>{$v['name']}</option>
+  		<option value="{$v['id']}" <?php if($k==$keywordinfo['categoryid']){echo 'selected="selected"';}?>>{$modelArr[$v['model']]}_{$v['name']}</option>
   		<php>}</php>
  </select></td>
   <td><select name="status">

@@ -229,11 +229,19 @@
         <script type="text/javascript" src="Templates/js/public.js"></script>
         <script type="text/javascript">
         	var init = function(){
+
 			    var newdom = new getdom,
-			    	identifying = newdom.getElementsByClass('identifying')[0];
-			   aijianmei.identifying(identifying);
+				    identifying = newdom.getElementsByClass('identifying'),
+				    ident_len = identifying.length;
+
+				//circle
+				for(var i = 0;i < ident_len;i++){
+					aijianmei.identifying(identifying[i]);
+				}   
+
+			   //aijianmei.identifying(identifying);
 			   aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
-			   aijianmei.addtitle('detail');
+			   aijianmei.addident_title('detail');
 			   aijianmei.hover('cont_vd_link','cont_vd_bg');
 			   aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
 			   aijianmei.form_jugde('lg_text','lg_password');

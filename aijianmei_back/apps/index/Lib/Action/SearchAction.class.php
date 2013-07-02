@@ -67,11 +67,22 @@ class SearchAction extends Action {
 		$this->assign('cnums', $countinfo[0]['cnums']);
 		$keywordInfo=unserialize(include_once("PublicCache/keywordInfo.php"));
 		$this->assign('_CommentList',unserialize(include_once("PublicCache/CommentListCache.php")));
-		$this->assign('_KeyWordList',array_merge($keywordInfo['train'],$keywordInfo['plan'],$keywordInfo['nutri'],$keywordInfo['append']));
+		
+		foreach ($keywordInfo as $key=>$value) {
+			foreach ($value as $k=>$v) {
+				foreach ($v as $k1=>$v1) {
+					if(!in_array($v1,$keywordInfoTmp[$k])&&$k!=''){
+						$keywordInfoTmp[$k][]=$v1;
+					}
+				} 
+			} 
+		}
+		$this->assign('_KeyWordList',$keywordInfoTmp);
+
 		$this->assign('cssFile', 'training');
 		$this->assign('searchInfo', $searchInfo);
 		$this->assign('keyword', $keyword);
-        $this->display('search');
+		$this->display('search');
 	}
 	public function goodcomment()
 	{
@@ -128,7 +139,18 @@ class SearchAction extends Action {
 		
 		$keywordInfo=unserialize(include_once("PublicCache/keywordInfo.php"));
 		$this->assign('_CommentList',unserialize(include_once("PublicCache/CommentListCache.php")));
-		$this->assign('_KeyWordList',array_merge($keywordInfo['train'],$keywordInfo['plan'],$keywordInfo['nutri'],$keywordInfo['append']));
+		$searchKeyword=array_merge($keywordInfo['train'],$keywordInfo['plan'],$keywordInfo['nutri'],$keywordInfo['append'],$keywordInfo['lifestyle']);
+
+		foreach ($keywordInfo as $key=>$value) {
+			foreach ($value as $k=>$v) {
+				foreach ($v as $k1=>$v1) {
+					if(!in_array($v1,$keywordInfoTmp[$k])&&$k!=''){
+						$keywordInfoTmp[$k][]=$v1;
+					}
+				} 
+			} 
+		}
+		$this->assign('_KeyWordList',$keywordInfoTmp);
 		$this->assign('cssFile', 'training');
 		$this->display('goodcomment');
 	}

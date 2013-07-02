@@ -1,3 +1,47 @@
+			$(function() {
+				//ident_wrap
+				var delay=function(t,fn){
+
+					var _this = this;
+
+					d = setTimeout(function(){
+						fn();
+					},t * 1000);
+					_this.onmouseout = function(){
+						clearInterval(d);
+					};
+				}
+				function keywords(){
+					//var
+					var newdom = new getdom,
+						ident_title = newdom.getElementsByClass('ident_title'),
+						tit_len = ident_title.length,
+						identifying = newdom.getElementsByClass('identifying'),
+						tempNum = 0;
+					//circle
+					for(var i = 0;i < tit_len;i++){
+						ident_title[i].index = i;
+					}
+
+					$(".ident_title").mouseover(function(){
+
+						var that = this;
+
+			  			delay.apply(this,[0.3,function(){
+			  				if(tempNum != that.index){
+								$(".identifying").slideUp("slow").eq(that.index).slideDown("slow");
+								tempNum = that.index;
+			  				}
+				  				
+				  		}]);
+			  		});
+				}
+				keywords();
+			});
+
+
+
+
 $(function() {
 					//ident_wrap
 				var identifying_1 = document.getElementById("identifying_1");
@@ -810,15 +854,15 @@ function FormChangedListener(elems){
 	}
 }
 
-
 //add by kontem new keywordlist tab 
 var init = function(){
-	var newdom = new getdom
-	aijianmei.identifying(identifying_1);
-	aijianmei.identifying(identifying_2);
-	aijianmei.identifying(identifying_3);
-	aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
-	aijianmei.addtitle('detail');
-	aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
+	var newdom = new getdom,
+	identifying = newdom.getElementsByClass('identifying'),
+	ident_len = identifying.length;
+	for(var i = 0;i < ident_len;i++){
+		aijianmei.identifying(identifying[i]);
+	}   
+	aijianmei.addident_title('detail');
 }
 init();	
+//}}}

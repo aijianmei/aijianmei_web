@@ -6,17 +6,32 @@
 					</ul>
 					-->
 					<h3 class="sm_title"><span class="sm_title_sp">锻炼</span>关键词搜索</h3>
-		        		<form class="lb_search">
-		        			<input type"text" id="text" />
-		        			<input type="submit" href="search.html" id="button">
-		        		</form>
+		        		<form class="lb_search" action="" onsubmit="return gosearch();" id="lb_search_form" method="get">
+	        			<input type="text" id="searchwords"/>
+	        			<input type="submit" id="button" value="">
+	        		</form>
+
+		        		<script>
+					function gosearch()
+					{
+						var sw=document.getElementById('searchwords').value;
+						if(sw!=''){
+							var htmlurl="http://www.aijianmei.com/search_"+sw+".html";
+							$("#lb_search_form").attr("action",htmlurl);
+							//window.location.href=htmlurl;
+							return true;
+						}else{
+							return false;							
+						}
+					}
+					</script>
 		        		<div class="ident_wrap">
 		        			<php> $keyCnum=1; </php>
 		        			<php> foreach ($_KeyWordList as $key=>$value) { </php>
-												<div id="ident_title_{$keyCnum}">{$key}</div>
-												<ul id="identifying_{$keyCnum}" class="identifying clearfix" <php>if($keyCnum==1){</php>style="display:block;" <php>}</php> >
+												<div class="ident_title">{$key}</div>
+												<ul class="identifying <php>if($keyCnum==1){</php> ident_show <php>}</php> clearfix">
 		        			 	  <php> foreach ($value as $k1=>$v1) {</php>
-												<li><a href="/search_{$v1['name']}.html">{$v1['name']}</a></li>
+												<li><a href="/search_{$v1}.html">{$v1}</a></li>
 		        			 	 <php>}</php>
 		        			 	 </ul>
 		        			 	 <php>$keyCnum++;</php>

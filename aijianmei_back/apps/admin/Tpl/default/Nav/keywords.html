@@ -122,7 +122,7 @@ function deleteLog(login_record_id) {
 	}
 	if(!confirm('删除成功后将无法恢复，确认继续？')) return false;
 	// if(login_record_id == '' || !confirm('您是否要删除此数据？')) return false;
-	$.post("{:U('admin/Nav/doDel')}", {login_record_id:login_record_id}, function(res){
+	$.post("{:U('admin/Nav/doDelkeword')}", {login_record_id:login_record_id}, function(res){
 		if(res == '1') {
 			login_record_id = login_record_id.split(',');
 			for(i = 0; i < login_record_id.length; i++) {
