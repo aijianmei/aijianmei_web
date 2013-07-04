@@ -72,8 +72,8 @@ left: 12px;
 }
 .ac_part_form .ac_box{
 width: 330px;
-height: 33px;
-padding: 5px 10px;
+height: 17px;
+padding:13px 10px;
 outline: none;
 background: url(../images/account/srk_1.png) no-repeat;
 }
@@ -85,6 +85,19 @@ margin-top: 10px;
 background: url(../images/account/zc_1.png) no-repeat;
 }
 
+
+.ac_tip{
+position: absolute;
+top: 12px;
+left: 360px;
+color:#21ace3;	
+}
+.yes_picture{
+	width: 33px;
+height: 33px;
+margin-top: -5px;
+background: url(../images/account/zq_1.png) no-repeat;
+}
 /**********************
 		ac_third_part
 ***********************/
@@ -105,6 +118,13 @@ border-left: 1px solid #e2eaec;
 	height: 50px;
 	margin-bottom: 30px;
 	background: url(../images/account/01.png) no-repeat;
+}
+.WB_loginButton img{
+	display: inline-block;
+	width: 231px;
+	height: 50px;
+	margin-bottom: 30px;
+	
 }
 .QQ{
 	display: inline-block;
