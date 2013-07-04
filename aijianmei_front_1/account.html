@@ -141,7 +141,8 @@
                         var name_class = newdom.getElementsByClass('name')[0],
                                 email_class = newdom.getElementsByClass('email')[0],
                                 password_class = newdom.getElementsByClass('password')[0],
-                                password_again_class = newdom.getElementsByClass('password_again')[0];
+                                password_again_class = newdom.getElementsByClass('password_again')[0].
+                                ac_account = newdom.getElementsByClass("ac_account")[0];
 
                         //function for label disappear
                         var disappear = function(obj){
@@ -157,7 +158,6 @@
                         }
 
                         //page init
-
                         window.onload = function(){
 
                                 user.focus();
@@ -171,7 +171,6 @@
                                 add_content(tip_name,
                                         "<div>请输入昵称,最多不能超过十位</div>"
                                 )
-
                         }
                         user.onblur = function(){
 
@@ -182,8 +181,7 @@
                                        add_content(tip_name,
                                         '<div class="yes_picture"></div>'
                                         ) 
-                                }
-                                
+                                }     
                         }
 
                         //for email jugde
@@ -235,7 +233,6 @@
 
 
                         //for password_again jugde
-
                         password_again.onfocus = function(){
                                 disappear(password_again_class);
                                 if(password.value == "" || password.value.length < 6){
@@ -245,8 +242,7 @@
                                         add_content(tip_password_again,
                                                 "<div>请再次输入密码</div>"
                                         )
-                                }
-                                        
+                                }                
                         }
                         password_again.onblur = function(){
                                 if(password.value == "" || password.value.length < 6){
@@ -267,8 +263,7 @@
                                                       add_content(tip_password_again,'<div class="yes_picture"></div>')  
                                                 }
                                         }
-                                }
-                                        
+                                }                 
                         }
 
                         aijianmei.form_jugde('lg_text','lg_password');//add classname for input focue and label disappear
