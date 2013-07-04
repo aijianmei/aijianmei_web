@@ -1,0 +1,113 @@
+/**********************
+		header
+***********************/
+
+.account_login{
+float: right;
+}
+.account_login a{
+	color: white;
+}
+.login{
+	display: inline-block;
+width: 66px;
+height: 25px;
+vertical-align: middle;
+background: url(../images/account/dl_1.png) no-repeat;
+ 
+}
+
+/**********************
+		ac_state
+***********************/
+.ac_state{
+margin-top: 11px;
+border-top: 2px solid #0493FC;
+}
+.ac_state .ac_state_lay{
+	margin: 0 120px;
+}
+.ac_state span{
+display: inline-block;
+width: 70px;
+height: 20px;
+padding-top: 20px;
+margin: -9px 80px;
+text-align: center;
+background: url(../images/account/bz_2.jpg) no-repeat 25px 0;
+}
+.ac_state .current_state{
+	background: url(../images/account/bz_1.jpg) no-repeat 25px 0;
+}
+
+
+/**********************
+		ac_content
+***********************/
+
+.ac_content{
+margin: 15px 50px 0;
+}
+
+/**********************
+		ac_part_form
+***********************/
+.ac_part_form{
+float: left;
+width: 599px;
+height: 400px;
+border-right: 1px solid white;
+}
+.ac_part_form h3,.ac_third_part h3{
+padding: 20px 0 30px;
+}
+.ac_part_form .ac_input{
+position: relative;
+margin-bottom: 10px;
+}
+.ac_part_form label{
+position: absolute;
+top: 11px;
+left: 12px;
+}
+.ac_part_form .ac_box{
+width: 330px;
+height: 33px;
+padding: 5px 10px;
+background: url(../images/account/srk_1.png) no-repeat;
+}
+.ac_account{
+display: inline-block;
+width: 152px;
+height: 51px;
+margin-top: 10px;
+background: url(../images/account/zc_1.png) no-repeat;
+}
+
+/**********************
+		ac_third_part
+***********************/
+
+.ac_third_part{
+float: left;
+width: 229px;
+height: 400px;
+padding-left: 30px;
+border-left: 1px solid #e2eaec;
+}
+.ac_methor{
+	margin-top: 45px;
+}
+.weibo{
+	display: inline-block;
+	width: 231px;
+	height: 50px;
+	margin-bottom: 30px;
+	background: url(../images/account/01.png) no-repeat;
+}
+.QQ{
+	display: inline-block;
+	width: 231px;
+	height: 50px;
+	background: url(../images/account/register.png) no-repeat;
+}
