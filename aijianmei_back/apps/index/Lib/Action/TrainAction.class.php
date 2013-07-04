@@ -18,7 +18,20 @@ class TrainAction extends Action {
          $describe_3="没有什么比带一个健身伙伴更能增加健身的高强度啊！一个了解你训练方式而且陪在你身边的健身伙伴是不可或缺的。";
          $describe_4="老实说，我们当中的很多人并没有时间一个星期去几次健身房，然后每次花个45分钟来健身。我有一个好消息给你们……";
 		 //new banner add
-		 $bannerinfo=array(
+		 
+		$bannerinfo=unserialize(include('PublicCache/advImgCache.php'));
+    $bannerinfo=$bannerinfo['train'];
+
+    foreach ($bannerinfo['imginfo'] as $key=>$value) {
+     	 $bannerinfoTmp[$key]['name']=$value['title'];
+     	 $bannerinfoTmp[$key]['img']='../'.$value['img'];
+     	 $bannerinfoTmp[$key]['url']=$value['url'];
+    } 
+
+    $bannerinfo=$bannerinfoTmp;
+
+
+		/*$bannerinfo=array(
 		'1'=>array(
 			'name'=>'你不可不知的“身体类型”',
 			'img'=>'../Public/images/banner/training_1.jpg',
@@ -36,7 +49,7 @@ class TrainAction extends Action {
 			'name'=>'健身小科普：了解“体脂率”',
 			'img'=>'../Public/images/banner/training_4.jpg',
 			'url'=>"/index-Index-articleDetail-115.html"),
-		);
+		);*/
 		 $this->assign('_bannerInfo',$bannerinfo);
 		 //}}}end
 		 

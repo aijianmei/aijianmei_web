@@ -46,6 +46,8 @@ class IndexAction extends AdministratorAction {
 				),
 				'广告模块'	=>	array(
                 '页面Banner管理'	=>	U('admin/Nav/adv'),
+                '首页商品推荐管理'	=>	U('admin/Nav/proIndexAd'),
+                '公告栏管理'	=>	U('admin/Nav/placardManager'),
 				),
 				'关键字管理'	=>	array(
 								'关键字库管理'	=>	U('admin/Nav/keywordmanager'),

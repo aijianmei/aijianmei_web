@@ -103,18 +103,18 @@ function ajaxInMore($data){
 			setDataCache(md5($sql),$result);
 		}
 		foreach($result as $k =>$value){
-		$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="index-Index-articleDetail-'.$value['id'].'.html"><img alt="'.$value['title'].'" style="width:215px;height:145px;" src="../public/images/article/'.$value['img'].'"></a>
+		$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="index-Index-articleDetail-'.$value['id'].'.html" target="_blank"><img alt="'.$value['title'].'" style="width:215px;height:145px;" src="../public/images/article/'.$value['img'].'"></a>
 								<div class="show_share clearfix" style="margin-left:40px;">
 									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-'.$value['id'].'.html" pic="http://www.aijianmei.com/public/images/article/'.( $value['front_cover']? $value['front_cover'] :$value['img']).'" title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">
-								<h3 class="cont_title"><a href="index-Index-articleDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
+								<h3 class="cont_title"><a href="index-Index-articleDetail-'.$value['id'].'.html" target="_blank">'.$value['title'].'</a></h3>
 								<span class="cont_tip">
 								<span class="cont_comefrom">爱健美团队</span>发表于
 								<span class="cont_pb_time">'.date("Y-m-d",$value['create_time']).'</span></span>
 								<p>'.$value['brief'].'</p>
-								<a class="cont_read_more" href="index-Index-articleDetail-'.$value['id'].'.html">阅读全文></a>
+								<a class="cont_read_more" href="index-Index-articleDetail-'.$value['id'].'.html" target="_blank">阅读全文></a>
 								<div class="cont_share clearfix">
                                     <span class="cont_rec">评论数:<span>'.$value['CommNumber'].'</span></span>
 								</div>
@@ -150,15 +150,15 @@ function ajaxInMore($data){
 		//print_r($result);
 		$returnHtml=null;
 		foreach($result as $k =>$value){
-			$returnHtml.='<div class="cont_module clearfix"><div class="cont_vd_1"><a  class="cont_vd_link"  href="/index-Train-videoDetail-'.$value['id'].'.html">
+			$returnHtml.='<div class="cont_module clearfix"><div class="cont_vd_1"><a  class="cont_vd_link"  href="/index-Train-videoDetail-'.$value['id'].'.html" target="_blank">
 			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"><span class="cont_vd_bg" style="display: none;"></span></a><div class="show_share clearfix" style="margin-left:40px;">
 			<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="'.$value['htmlurl'].'?>" pic="'.$value['logo'].'"  title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30">
-			</wb:share-button></div></div><div class="cont_vd_2"><h3 class="cont_vd_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
+			</wb:share-button></div></div><div class="cont_vd_2"><h3 class="cont_vd_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html" target="_blank">'.$value['title'].'</a></h3>
 								<div class="cont_vd_dt">
 									<p>标签:<span>'.$value['keyword'].'</span></p>
 									<p>简介:<span>'.msubstr($value['brief'],0,54).'</span></p>
 								</div>
-								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html"></a>
+								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html" target="_blank"></a>
 								<div class="cont_share clearfix">
                                     <span class="cont_rec">评论数:<span>'.$value['recommons'].'</span></span>
 								</div>
@@ -197,18 +197,18 @@ function ajaxTrainMore($data){
 			setDataCache(md5($sql),$result);
 		}
 		foreach($result as $k =>$value){
-		$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="index-Index-articleDetail-'.$value['id'].'.html"><img alt="'.$value['title'].'" style="width:215px;height:145px;" src="../public/images/article/'.$value['img'].'"></a>
+		$returnHtml.='<div class="cont_module clearfix"><div class="cont_side_1"><a href="index-Index-articleDetail-'.$value['id'].'.html" target="_blank"><img alt="'.$value['title'].'" style="width:215px;height:145px;" src="../public/images/article/'.$value['img'].'"></a>
 								<div class="show_share clearfix" style="margin-left:40px;">
 									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-'.$value['id'].'.html" pic="http://www.aijianmei.com/public/images/article/'.( $value['front_cover']? $value['front_cover'] :$value['img']).'" title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">
-								<h3 class="cont_title"><a href="index-Index-articleDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
+								<h3 class="cont_title"><a href="index-Index-articleDetail-'.$value['id'].'.html" target="_blank">'.$value['title'].'</a></h3>
 								<span class="cont_tip">
 								<span class="cont_comefrom">爱健美团队</span>发表于
 								<span class="cont_pb_time">'.date("Y-m-d",$value['create_time']).'</span></span>
 								<p>'.$value['brief'].'</p>
-								<a class="cont_read_more" href="index-Index-articleDetail-'.$value['id'].'.html">阅读全文></a>
+								<a class="cont_read_more" href="index-Index-articleDetail-'.$value['id'].'.html" target="_blank">阅读全文></a>
 								<div class="cont_share clearfix">
                                     <span class="cont_rec">评论数:<span>'.$value['CommNumber'].'</span></span>
 								</div>
@@ -244,15 +244,15 @@ function ajaxTrainMore($data){
 		//print_r($result);
 		$returnHtml=null;
 		foreach($result as $k =>$value){
-			$returnHtml.='<div class="cont_module clearfix"><div class="cont_vd_1"><a class="cont_vd_link"  href="/index-Train-videoDetail-'.$value['id'].'.html">
+			$returnHtml.='<div class="cont_module clearfix"><div class="cont_vd_1"><a class="cont_vd_link"  href="/index-Train-videoDetail-'.$value['id'].'.html" target="_blank">
 			<img style="width:215px;height:145px;" alt="'.$value['title'].'" src="'.$value['logo'].'"><span class="cont_vd_bg" style="display: none;"></span></a><div class="show_share clearfix" style="margin-left:40px;">
 			<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="'.$value['htmlurl'].'?>" pic="'.$value['logo'].'"  title="'.$value['title'].'" ralateuid="2692984661" width="300" height="30">
-			</wb:share-button></div></div><div class="cont_vd_2"><h3 class="cont_vd_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html">'.$value['title'].'</a></h3>
+			</wb:share-button></div></div><div class="cont_vd_2"><h3 class="cont_vd_title"><a href="/index-Train-videoDetail-'.$value['id'].'.html" target="_blank">'.$value['title'].'</a></h3>
 								<div class="cont_vd_dt">
 									<p>标签:<span>'.$value['keyword'].'</span></p>
 									<p>简介:<span>'.msubstr($value['brief'],0,54).'</span></p>
 								</div>
-								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html"></a>
+								<a class="cont_vd_see" href="/index-Train-videoDetail-'.$value['id'].'.html" target="_blank"></a>
 								<div class="cont_share clearfix">
                                     <span class="cont_rec">评论数:<span>'.$value['recommons'].'</span></span>
 								</div>

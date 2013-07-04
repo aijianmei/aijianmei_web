@@ -17,25 +17,20 @@ function subformadd(){
     <th class="line_l" width="25%">名称</th>
     <th class="line_l" width="25%">类型</th>
     <th class="line_l" width="25%">状态</th>
-    <th class="line_l" width="25%">所属模块</th>
+
   </tr>
   <tr>
   <td>*<input type="text" name="nav_name" value="{$listInfo.nav_name}"></td>
   <td><select name="type"><option value="1">轮滚图片</option></select><a onclick="showmoreimg();">更多图片</a></td>
   <td><select name="status"><option value="1" <php>if($listInfo.status==1){echo 'selectd="selected"';}</php>>开启</option>
   <option value="0" <php>if($listInfo.status==0){echo 'selectd="selected"';}</php>>关闭</option></select></td>
-  <td><select name="menu_id">
-  <option value="0">请选择</option>
-    <volist id="fvo" name="FmenusInfo">
-	<option value="{$fvo.id}" <?php if($listInfo['menu_id']==$fvo['id']){echo 'selected="selected"';}?>>{$fvo.menu_name}</option>
-	 </volist>
-  </select></td>
+  
  <volist id="imgf" name="imgInfo">
   <tr>
-	<td>*图片标题<input type="text" name="img_title[{$imgf.id}]" value="{$imgf.title}"></td>
-	<td>图片链接<input type="text" name="img_url[{$imgf.id}]" value="{$imgf.url}"></td>
+	<td>*图片标题<input type="text" style="width:220px;" name="img_title[{$imgf.id}]" value="<?php echo htmlspecialchars($imgf['title']);?>"></td>
+	<td>图片链接<input type="text" style="width:220px;"name="img_url[{$imgf.id}]" value="{$imgf.url}"></td>
 	<td>图片排序<input type="text" name="img_sort[{$imgf.id}]" value="{$imgf.sort}"></td>
-	<td><img src="{$imgf.img}" style="height:100px; width:250px;">
+	<td><img src="{$imgf.img}?<php>echo rand();</php>" style="height:100px; width:250px;">
 	<input type="file" name="imgsrc[{$imgf.id}]" value="{$imgf.img}">
 	</td>
   </tr>

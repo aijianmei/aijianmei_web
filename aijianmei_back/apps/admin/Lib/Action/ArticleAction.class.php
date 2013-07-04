@@ -109,7 +109,6 @@ class ArticleAction extends AdministratorAction {
                 //$this->imageWaterMark($_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'],9,$waterImage);
                 $data['img'] = $_FILES['img']['name'];
             }
-
             if (!empty($data['title']) &&
                 !empty($data['category_id']) &&
                 !empty($data['content'])) {
@@ -160,7 +159,6 @@ class ArticleAction extends AdministratorAction {
         $id = intval($_GET['id']);
         if($id == 0) die(0);
         $article = M('article')->where(array('id'=>$id))->select();
-        //print_r($article);
         $this->assign('article', $article[0]);
         $cate = $this->getCategories();
         $articleGroup=D('Article')->getArticeGroup($id,$article[0]['category_id']);
@@ -182,7 +180,7 @@ class ArticleAction extends AdministratorAction {
             $data['brief']    = t($_POST['brief']);
             $data['author']   = t($_POST['author']);
             $data['content']  = t($_POST['content']);
-						$data['wapcontent']  = t($_POST['wapcontent']);
+            $data['wapcontent']  = t($_POST['wapcontent']);
             $data['keyword']  = t($_POST['keyword']);
             $data['update_time'] = time();
             //$data['create_time'] = time();

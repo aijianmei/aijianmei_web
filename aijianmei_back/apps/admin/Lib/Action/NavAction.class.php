@@ -235,8 +235,17 @@ class NavAction extends Action {
 	}
 	
 	public function adv(){
+		$modelArr=array(
+			'index'=>'首页',
+			'plan'=>'健身计划',
+			'train'=>'锻炼',
+			'nutri'=>'营养',
+			'append'=>'辅助品',
+			'lifestyle'=>'生活方式',
+		);
+		$this->assign('_modelArr', $modelArr);
 		$_ImgType=array();
-		$_ImgType[1]='顶部导航';
+		$_ImgType[1]='页面轮滚';
 		$this->assign('_ImgType', $_ImgType);
 		
 		$uploadpath="navupload/";
@@ -284,6 +293,15 @@ class NavAction extends Action {
 		$this->display();
 	}
 	public function editadv(){
+		$modelArr=array(
+			'index'=>'首页',
+			'plan'=>'健身计划',
+			'train'=>'锻炼',
+			'nutri'=>'营养',
+			'append'=>'辅助品',
+			'lifestyle'=>'生活方式',
+		);
+		$uploadpath='navupload/';
 		$id=$_GET['id']?addslashes($_GET['id']):'';
 		if($_GET['actimg']=='editinfo'){
 			$uStr=null;
@@ -297,20 +315,29 @@ class NavAction extends Action {
 			$insertId=$id;
 			if($insertId){
 				foreach($_FILES['imgsrc']['tmp_name'] as $k=> $val){
+					$pic_path=$uploadpath.$id."_".$k.'.jpg';
 					if($val&&$_FILES['imgsrc']['type'][$k]=='image/jpeg'){
-						$pic_path=$uploadpath.time().rand(100,999).'.jpg';}
-					if(@copy($val, $pic_path) || @move_uploaded_file($val, $pic_path)) 
-					{
+						@copy($val, $pic_path) || @move_uploaded_file($val, $pic_path);
+					}
+					$checksql="select * from ai_nav_content where id=$k and nid=$insertId";
+					$result=M('')->query($checksql);
+					if(!$result){
 						$filedata=null;
 						$filedata['nid']=intval($insertId);
 						$filedata['title']=$_POST['img_title'][$k];
 						$filedata['url']=$_POST['img_url'][$k];
 						$filedata['img']=$pic_path;
 						$filedata['sort']=$_POST['img_sort'][$k];
-
 						M('nav_content')->where("id in(".$k.")")->delete();
-						
 						M('nav_content')->add($filedata);
+					}else{
+						$updateSql="UPDATE ai_nav_content SET 
+						title = '".$_POST['img_title'][$k]."',
+						url = '".$_POST['img_url'][$k]."',
+						img = '".$pic_path."',
+						sort = '".$_POST['img_sort'][$k]."'
+						 WHERE id =$k";	
+						M('')->query($updateSql);
 					}
 				}
 			}
@@ -321,6 +348,7 @@ class NavAction extends Action {
 		$imgInfo = M('nav_content')->where("nid=$id")->findAll(); //顶级导航信息
 		$FmenusInfo = M('nav_menu')->where('partent_id=0')->findAll(); //顶级导航信息
 		$this->assign('listInfo', $listInfo[0]);
+		$this->assign('_modelArr', $modelArr);
 		$this->assign('imgInfo', $imgInfo);
 		$this->assign('id', $id);
 		$this->assign('FmenusInfo', $FmenusInfo);
@@ -463,10 +491,99 @@ class NavAction extends Action {
 		$advInfoTmp=null;
 		$advInfo = M('nav_list')->findAll(); //顶级导航信息
 		foreach($advInfo as $k =>$v){
-			$advInfoTmp[$v['nav_name']]=$v;
-			$contentinfo=M('nav_content')->where("nid='".$v['id']."'")->findAll();
+			//$advInfoTmp[$v['nav_name']]=$v;
+			//$contentinfo=M('nav_content')->where("nid='".$v['id']."' order by sort asc")->findAll();
+			$contentinfo=M()->query("select * from ai_nav_content where nid ='".$v['id']."' order by sort asc");
 			$advInfoTmp[$v['nav_name']]['imginfo']=$contentinfo;
 		}
 		file_put_contents('PublicCache/'.$fileName,"<?php\n\r return '".serialize($advInfoTmp)."';");
+		//print_r($advInfoTmp);
+	}
+	
+	public function proIndexAd(){
+		$uploadpath='navupload/';
+		if($_POST['nav_action']=='add'){
+			$pic_path=$uploadpath.time().rand().'.jpg';
+			if($_FILES['img']['type']=='image/jpeg'){
+				copy($_FILES['img']['tmp_name'], $pic_path) || move_uploaded_file($_FILES['img']['tmp_name'], $pic_path);
+			}
+			$sql="INSERT INTO ai_nav_product_list (id,name,price,link,img,sequence,status)
+			VALUES(NULL,'".$_POST['name']."','".$_POST['price']."','".$_POST['link']."','".$pic_path."','".$_POST['sequence']."','".$_POST['status']."')";
+			M('')->query($sql);
+		}
+		$getSql="select * from ai_nav_product_list order by sequence";
+		$prolist=M('')->query($getSql);
+		$this->prolistCache();			
+		$this->assign('prolist', $prolist);
+		$this->display();
+	}
+	public function proIndexAdedit(){
+		$uploadpath='navupload/';
+		$id=$_GET['id'];
+		if($_POST['nav_action']=='doedit'){
+			$id=$_POST['eid'];
+			unset($_POST['nav_action']);unset($_POST['eid']);
+			//print_r($_POST);
+			$pic_path=null;
+			if($_FILES['img']['type']=='image/jpeg'){
+				$pic_path=$uploadpath.time().rand().'.jpg';
+				copy($_FILES['img']['tmp_name'], $pic_path) || move_uploaded_file($_FILES['img']['tmp_name'], $pic_path);
+				$sql="UPDATE  ai_nav_product_list SET img ='".$pic_path."' WHERE  id =$id";
+				M('')->query($sql);
+			}
+			$sql="UPDATE  ai_nav_product_list SET 
+			name ='".$_POST['name']."',price ='".$_POST['price']."',
+			link ='".$_POST['link']."',sequence ='".$_POST['sequence']."',status ='".$_POST['status']."'
+			WHERE  id =$id";	
+			M('')->query($sql);
+		}
+		$this->prolistCache();
+		$getSql="select * from ai_nav_product_list where id=$id";
+		$prolist=M('')->query($getSql);			
+		$this->assign('prolist', $prolist[0]);
+		$this->display();
+	}	
+	public function placardManager(){
+		if($_POST['content']!=''){
+			$checkSql="select * from ai_nav_placard";
+			$res=M('')->query($checkSql);
+			if(!$res){
+				$sql="INSERT INTO  `aijianmei`.`ai_nav_placard` (id ,content)
+				VALUES (NULL ,  '".t($_POST['content'])."')";
+				M('')->query($sql);
+			}else{
+				$sql="UPDATE ai_nav_placard SET  content = '".t($_POST['content'])."' WHERE id ='".$res[0]['id']."'";
+				M('')->query($sql);	
+			}		
+		}
+		$getsql="select * from ai_nav_placard";
+		$placardList=M('')->query($getsql);
+		$this->assign('prolist', $placardList[0]);
+		$this->display('placardManager');
+	}
+	public function delByType(){
+		$tableType=$_POST['tabletype'];
+		$tableNameList=array(
+			'nav_product_list'=>'prolistCache',
+		);
+		if(!in_array($tableType,$tableNameList)){echo 0;return;}
+		
+		$res=M($tableType)->where("id in(".$_POST['login_record_id'].")")->delete();
+		if($res)
+		{
+			//$this->saveImginfo();
+			echo 1;
+		}
+		else{
+			echo 0;
+			return;
+		}
+	}
+	public function prolistCache(){
+		$fileName='proListCache.php';
+		$getallsql=$listinfo=null;
+		$getallsql="select * from ai_nav_product_list order by sequence asc";
+		$listinfo=M('')->query($getallsql);
+		file_put_contents('PublicCache/'.$fileName,"<?php\n\r return '".serialize($listinfo)."';");
 	}
 }

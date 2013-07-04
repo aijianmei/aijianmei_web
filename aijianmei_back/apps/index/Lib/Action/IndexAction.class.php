@@ -407,7 +407,17 @@ function show_banner($type){
 	
 	public function index() 
     {
-		$bannerinfo=array(
+    $bannerinfo=unserialize(include('PublicCache/advImgCache.php'));
+    $bannerinfo=$bannerinfo['index'];
+
+    foreach ($bannerinfo['imginfo'] as $key=>$value) {
+     	 $bannerinfoTmp[$key]['name']=$value['title'];
+     	 $bannerinfoTmp[$key]['img']='../'.$value['img'];
+     	 $bannerinfoTmp[$key]['url']=$value['url'];
+    } 
+
+    $bannerinfo=$bannerinfoTmp;
+		/*$bannerinfo=array(
 		'1'=>array(
 			'name'=>'新手变身"肌肉型男"必看',
 			'img'=>'../Public/images/banner/index_1.jpg',
@@ -421,7 +431,7 @@ function show_banner($type){
 			'name'=>'七招营养秘笈，吃出“肌肉”',
 			'img'=>'../Public/images/banner/index_3.jpg',
 			'url'=>"/index-Index-articleDetail-34.html")
-		);
+		);*/
 		$this->assign('_bannerInfo',$bannerinfo);	
 		ob_start();
         if (!empty($_GET['token'])) {
@@ -831,7 +841,7 @@ function show_banner($type){
 			$hotArticles = M('')->query($sql);
 			foreach ($hotArticles as $key => $value) {
 				unset($hotArticles[$key]['content']);
-				unset($newArticles[$key]['wapcontent']);
+				unset($hotArticles[$key]['wapcontent']);
 				$hotArticles[$key]['CommNumber']=D('Article')->getCountRecommentsById($value['id']);
 			}
 			$this->setDataCache(md5($sql),$hotArticles);
@@ -842,6 +852,9 @@ function show_banner($type){
 		
 		//header current add by kon at 20130415
 		//print_r($_SESSION);
+
+		$prolist=unserialize(include('PublicCache/proListCache.php'));
+		$this->assign('prolist', $prolist);
 		$this->assign('_current', 'index');
         //$this->display();
 		$this->display('newindex');

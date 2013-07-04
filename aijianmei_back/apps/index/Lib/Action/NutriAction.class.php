@@ -35,7 +35,20 @@ class NutriAction extends Action {
          $this->assign('name_2',$name_2);
          $this->assign('name_3',$name_3);
          $this->assign('name_4',$name_4);
-		 		 $bannerinfo=array(
+         
+         
+		$bannerinfo=unserialize(include('PublicCache/advImgCache.php'));
+    $bannerinfo=$bannerinfo['nutri'];
+
+    foreach ($bannerinfo['imginfo'] as $key=>$value) {
+     	 $bannerinfoTmp[$key]['name']=$value['title'];
+     	 $bannerinfoTmp[$key]['img']='../'.$value['img'];
+     	 $bannerinfoTmp[$key]['url']=$value['url'];
+    } 
+
+    $bannerinfo=$bannerinfoTmp;         
+     
+		$bannerinfo=array(
 		'1'=>array(
 			'name'=>'高效“燃脂”，不做胖子',
 			'img'=>'../Public/images/banner/nutri_1.jpg',
@@ -54,14 +67,15 @@ class NutriAction extends Action {
 			'img'=>'../Public/images/banner/nutri_4.jpg',
 			'url'=>"/index-Index-articleDetail-32.html"),
 		);
+		
 		 $this->assign('_bannerInfo',$bannerinfo);
         //-------END--------	
 
     }
     public function index()
     {
-        $pg=$_GET['pg']?$_GET['pg']:1;
-		$nums=5;
+    	$pg=$_GET['pg']?$_GET['pg']:1;
+				$nums=5;
         $this->assign('cssFile', 'training');
         $map['channel'] = '3';
         $cate = M('article_category')->where($map)->findAll();
@@ -80,12 +94,12 @@ class NutriAction extends Action {
         $this->assign('categories', $parent);
         //$this->display();
 		
-		if($_GET['pg']>0){
-			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
-			$pglimit=intval($_GET['pg']);
-		}else{
-			$pglimit=$pg=1;
-		}
+			if($_GET['pg']>0){
+				$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
+				$pglimit=intval($_GET['pg']);
+			}else{
+				$pglimit=$pg=1;
+			}
 		
 		
         //assign hotArticles

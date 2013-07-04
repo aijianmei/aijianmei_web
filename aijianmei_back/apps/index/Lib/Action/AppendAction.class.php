@@ -40,7 +40,18 @@ class AppendAction extends Action {
          $this->assign('name_4',$name_4);
 		 
 		//new banner add
-		 $bannerinfo=array(
+		
+		$bannerinfo=unserialize(include('PublicCache/advImgCache.php'));
+    $bannerinfo=$bannerinfo['append'];
+
+    foreach ($bannerinfo['imginfo'] as $key=>$value) {
+     	 $bannerinfoTmp[$key]['name']=$value['title'];
+     	 $bannerinfoTmp[$key]['img']='../'.$value['img'];
+     	 $bannerinfoTmp[$key]['url']=$value['url'];
+    } 
+
+    $bannerinfo=$bannerinfoTmp;       
+		/*$bannerinfo=array(
 		'1'=>array(
 			'name'=>'没有蛋白质就没有“肌肉梦”',
 			'img'=>'../Public/images/banner/append_1.jpg',
@@ -58,7 +69,7 @@ class AppendAction extends Action {
 			'name'=>'肌肉的发动机：肌氨酸',
 			'img'=>'../Public/images/banner/append_4.jpg',
 			'url'=>"/index-Index-articleDetail-57.html"),
-		);
+		);*/
 		 $this->assign('_bannerInfo',$bannerinfo);
 		 //}}}end
 		 

@@ -17,18 +17,20 @@ function subformadd(){
     <th class="line_l" width="25%">名称</th>
     <th class="line_l" width="25%">类型</th>
     <th class="line_l" width="25%">状态</th>
-    <th class="line_l" width="25%">所属模块</th>
   </tr>
   <tr>
-  <td>*<input type="text" name="nav_name" value=""></td>
+  <td>*
+  	<select name="nav_name">
+    <php> foreach($_modelArr as $k => $v){</php>
+	<option value="{$k}">{$v}</option>
+	 <php>}</php>
+  </select>
+  	
+  	
+  	</td>
   <td><select name="type"><option value="1">轮滚图片</option></select><a onclick="showmoreimg();">更多图片</a></td>
   <td><select name="status"><option value="1">开启</option><option value="0">关闭</option></select></td>
-  <td><select name="menu_id">
-  <option value="0">请选择</option>
-    <volist id="fvo" name="FmenusInfo">
-	<option value="{$fvo.id}">{$fvo.menu_name}</option>
-	 </volist>
-  </select></td>
+
   <tr>
 	<td>*图片标题<input type="text" name="img_title[]" value=""></td>
 	<td>图片链接<input type="text" name="img_url[]" value=""></td>
@@ -58,18 +60,17 @@ function subformadd(){
     <th class="line_l" width="20%">类型</th>
 	<th class="line_l" width="20%">图片数</th>
     <th class="line_l" width="20%">状态</th>
-    <th class="line_l" width="20%">所属模块</th>
+
 	<th class="line_l" width="20%">操作</th>
   </tr>
   <volist id="vo" name="nav_listInfo">
 	    <tr>
 		<td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
-  <td>{$vo.nav_name}</td>
+  <td><?php echo $_modelArr[$vo['nav_name']];?></td>
   <td><?php echo $_ImgType[$vo['type']];?></td>
    <td>{$vo.imgcount}</td>
   <td><?php echo $_MenusStu[$vo['status']];?></td>
-  
-  <td>{$vo.menu_name}</td>
+
   <td><a href="/index.php?app=admin&mod=Nav&act=editadv&id={$vo.id}">编辑</a></td>
 	<tr>
   </volist>
