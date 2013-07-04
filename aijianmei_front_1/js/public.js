@@ -468,6 +468,48 @@ function change_num(obj,show){
 	    }       
 	}
 }
+var run_top = function(obj_1,obj_2,obj_3){
+
+	if(obj_3.offsetHeight  - obj_1.scrollTop <= 0){
+
+		obj_1.scrollTop -= obj_3.offsetHeight;
+
+	}
+	else{
+
+		obj_1.scrollTop++;
+
+	}
+
+}
+//paomadeng for recomment
+function run_circle(speed,obj_1,obj_2,obj_3){
+
+	var obj_1 = document.getElementById(obj_1),
+		obj_2 = document.getElementById(obj_2),
+		obj_3 = document.getElementById(obj_3);
+
+	var visibleheight = parseFloat(obj_1.style.height),
+		offsetheight = obj_2.offsetHeight;
+
+	if(offsetheight > visibleheight){//compare offsetheight and wisibleheight
+
+		obj_3.innerHTML = obj_2.innerHTML;
+
+		var time = setInterval(function(){
+			run_top(obj_1,obj_2,obj_3);//rise up --run_top
+		},speed);
+
+		obj_1.onmouseover = function(){//mouse methor
+			clearInterval(time);
+		}
+		obj_1.onmouseout = function(){
+			time = setInterval(function(){
+				run_top(obj_1,obj_2,obj_3);
+			},speed);
+		}
+	}
+}
 //对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
 var fade = {
     newdom : new getdom,

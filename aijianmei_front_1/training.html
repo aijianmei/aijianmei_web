@@ -428,24 +428,29 @@
 		        	</div>
 		        	<div class="same_module clearfix">
 		        		<h3 class="sm_title">精彩评论</h3>
-		        		<div class="recomment_good clearfix">
-		        			<a class="re_host"><img src="images/training/person_message.jpg"></a>
-		        			<div class="re_part">
-		        				<a class="re_name">outside</a>
-		        				<div class="re_content">
-		        					<a class="detail" style="display:inline-block;position:relative;" data-original-title="提示提提提提示提">我嫁我觉评论很优<i class="re_angle"></i></a>
-		        				</div>
-		        			</div>
-		        		</div>
-		        		<div class="recomment_good clearfix">
-		        			<a class="re_host"><img src="images/training/person_message.jpg"></a>
-		        			<div class="re_part">
-		        				<a class="re_name">outside</a>
-		        				<div class="re_content">
-		        					<a class="detail" data-original-title="提示内容提示内容提示内容提示内容提示内容提示内容提示ss">我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁,我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁<i class="re_angle"></i></a>
-		        				</div>
-		        			</div>
-		        		</div>
+		        		<div id="recoment" class="recoment" style="height:400px;overflow:hidden;">
+		        			<div id="circle_one">
+				        		<div class="recomment_good clearfix">
+				        			<a class="re_host"><img src="images/training/person_message.jpg"></a>
+				        			<div class="re_part">
+				        				<a class="re_name">outside</a>
+				        				<div class="re_content">
+				        					<a class="detail" style="display:inline-block;position:relative;" data-original-title="提示提提提提示提">我嫁我觉评论很优<i class="re_angle"></i></a>
+				        				</div>
+				        			</div>
+				        		</div>
+				        		<div class="recomment_good clearfix">
+				        			<a class="re_host"><img src="images/training/person_message.jpg"></a>
+				        			<div class="re_part">
+				        				<a class="re_name">outside</a>
+				        				<div class="re_content">
+				        					<a class="detail" data-original-title="提示内容提示内容提示内容提示内容提示内容提示内容提示ss">我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁,我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁<i class="re_angle"></i></a>
+				        				</div>
+				        			</div>
+				        		</div>
+				        	</div>
+				        	<div id="circle_two"></div>
+			        	</div>
 		        		<a class="recomment_read_more">更多精彩评论></a>
 		        	</div>
 	        	</div>
@@ -512,7 +517,7 @@
         </div>
         <div class="title_tip"><div class="title_content"></div><div class="angle"><span></span></div></div>
 		<!-- scroll_login begin -->
-        <div class="scroll_login">
+        <!-- <div class="scroll_login">
         	<div class="scroll_content">
 	        	<span class="scroll_tip">您还没有登录爱健美哦,这里可以登录</span>
 	        	<ul class="scroll_choice clearfix">
@@ -522,7 +527,7 @@
 	        	</ul>
         	</div>
         	<i class="scroll_back">×</i>
-        </div>
+        </div> -->
         <!-- scroll_login end -->
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript">
@@ -656,8 +661,9 @@
 				}   
 
 			   aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
-			   aijianmei.addident_title('detail');
+			   // aijianmei.addtitle('detail');
 			   aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
+			   run_circle("30",'recoment','circle_one','circle_two');
 			}
 			init();	
         </script>
