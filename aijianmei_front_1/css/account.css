@@ -74,6 +74,7 @@ left: 12px;
 width: 330px;
 height: 33px;
 padding: 5px 10px;
+outline: none;
 background: url(../images/account/srk_1.png) no-repeat;
 }
 .ac_account{

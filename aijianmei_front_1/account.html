@@ -5,6 +5,7 @@
 	<title></title>
 	<link rel="stylesheet" href="css/public.css">
 	<link rel="stylesheet" href="css/account.css">
+        <script type="text/javascript" src="js/public.js"></script>
 	</head>
 	<body>
 		<!-- outside head -->
@@ -16,7 +17,8 @@
                                                 <a>已有帐号？</a>
                                                 <a class="login"></a>
                                         <span>
-                                    
+                                <script>var newdom = new getdom,login = newdom.getElementsByClass('login'),len_login = login.length,lg_back = newdom.getElementsByClass('lg_back')[0];for(var i = 0;i < len_login;i++){if(login[i]){addevent(login[i],'click',aijianmei.acTion);}}if(lg_back){addevent(lg_back,'click',aijianmei.removeacTion);}
+                                </script>    
                                 </div>
                         </div>
 		</div>
@@ -35,21 +37,21 @@
                 				<h3>本站注册</h3>
                 				<form action="">
                 					<div class="ac_input">
-                						<label for="name">昵称...</label>
+                						<label class="name" for="name">昵称...</label>
                 						<input id="name" name="name" class="ac_box">
                 						<div></div>
                 					</div>
                 					<div class="ac_input">
-                						<label for="email">邮箱...</label>
+                						<label class="email" for="email">邮箱...</label>
                 						<input id="email" name="email" class="ac_box">
                 					</div>
                 					<div class="ac_input">
-                						<label for="password">密码...</label>
+                						<label class="password" for="password">密码...</label>
                 						<input id="password" name="password" class="ac_box">
                 					</div>
                 					<div class="ac_input">
-                						<label for="password_agnin">确认密码...</label>
-                						<input id="password_agnin" name="password_agnin" class="ac_box">
+                						<label class="password_again" for="password_again">确认密码...</label>
+                						<input id="password_again" name="password_again" class="ac_box">
                 					</div>
                                                         <a class="ac_account"></a>
                 				</form>
@@ -64,5 +66,58 @@
                 		</div>
         	        </div>
                 </div>
+                <!-- login_table begin-->
+                <div class="login_bg"></div>
+                <div class="login_table">
+                        <i class="lg_back">×</i>
+                        <h4>登录爱健美</h4>
+                        <div class="lg_border"><span></span></div>
+                        <div class="lg_part clearfix">
+                                <div class="lg_coop">
+                                        <h3>使用合作网站帐号登录</h3>
+                                        <ul class="lg_wrap_choice clearfix">
+                                                <li><a class="lg_coop_1"></a></li>
+                                                <li><a class="lg_coop_2"></a></li>
+                                        </ul>
+                                        <p>也可以选择马上注册</p>
+                                        <div class="lg_aijianmei"><a></a></div>
+                                </div>
+                                <div class="lg_our">
+                                        <div class="lg_our_lay">
+                                                <p>使用注册邮箱登录</p>
+                                                <form>
+                                                        <div class="lg_input">
+                                                                <label class="lg_text" for="lg_text">邮箱</label>
+                                                                <input type="text" id="lg_text" />
+                                                        </div>
+                                                        <div class="lg_input">
+                                                                <label class="lg_password"  for="lg_password">密码</label>
+                                                                <input type="password" id="lg_password" />
+                                                        </div>
+                                                        <div class="lg_sure">
+                                                                <a class="lg_fix"></a>
+                                                                <a class="lg_forget">忘记密码?</a>
+                                                        </div>
+                                                </form>
+                                        </div>
+                                </div>
+                        </div> 
+                </div>
+                 <!-- login_table end-->
+                 <script>
+                        var newdom = new getdom,
+                        login = newdom.getElementsByClass('login'),
+                        len_login = login.length,
+                        lg_back = newdom.getElementsByClass('lg_back')[0];
+                        for(var i = 0;i < len_login;i++){
+                                if(login[i]){
+                                        addevent(login[i],'click',aijianmei.acTion);
+                                }
+                        }
+                        if(lg_back){
+                                addevent(lg_back,'click',aijianmei.removeacTion);
+                        }
+                        aijianmei.form_jugde('lg_text','lg_password','name','email','password','password_again');//add classname for input focue and label disappear
+                </script>
 	</body>
 </html>
