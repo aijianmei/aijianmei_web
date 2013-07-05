@@ -34,7 +34,7 @@
                 <div class="ac_content">
                     <div class="ac_local">
                         <h3>本站注册</h3>
-                        <a class="ac_local_bn"></a>
+                        <a class="ac_local_bn" href="account.html"></a>
                     </div>
                     <div class="ac_third">
                         <h3>第三方登录</h3>
@@ -126,9 +126,9 @@
                                 form = document.getElementById("form");
 
                         //temp for account button
-                        var temp_1 = 2,
-                                temp_2 = 3,
-                                temp_3 = 4;
+                        var temp_2 = 2,
+                                temp_3 = 3,
+                                temp_4 = 4;
 
 
                         //get classname
@@ -255,16 +255,16 @@
                                 }
                                 else{
                                         if(temp_2 == 2){
-                                               add_content(tip_email,'<div>妈的,必填</div>') 
+                                               add_content(tip_email,'<div style="color:#C00000;">邮箱不为空</div>') 
                                         }
                                         if(temp_2 == 22){
-                                              add_content(tip_email,'<div>妈的,必填</div>')  
+                                              add_content(tip_email,'<div style="color:#C00000;">邮箱格式错误</div>')  
                                         }
                                         if(temp_3 == 3){
-                                                add_content(tip_password,'<div>妈的,必填</div>')
+                                                add_content(tip_password,'<div style="color:#C00000;">请填写正确格式</div>')
                                         }
                                         if(temp_4 == 4){
-                                                add_content(tip_password_again,'<div>妈的,必填</div>')
+                                                add_content(tip_password_again,'<div style="color:#C00000;">请再次输入密码</div>')
                                         }
                                 }
                         }
