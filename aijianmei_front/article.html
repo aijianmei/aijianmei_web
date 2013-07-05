@@ -311,14 +311,60 @@
 							</div>
 						</div> -->
 					</div>
+		<!-- 2013/7/4 outside repair article page -->
+					<style>
+						.cream_part{margin:11px;}
+						.cream_part .cream_part_lay{margin-right: -11px;}
+						.cream_part li{float: left;margin: 0 11px 15px 0;}
+						.cream_part p{font-size: 16px;text-align: center;color:#000;}
+						.cream_part img{width: 130px;height:85px;margin-bottom: 10px;}
+						.cream_part .change_other{display:inline-block;margin:15px 0 30px;font-size: 20px;color:#0082b6;cursor: pointer;}
+					</style>
 					<div class="sider_m">
 						<h4 class="sider_t">精华推荐</h4>
-						
+						<div class="cream_part clearfix">
+							<ul class="cream_part_lay">
+								<li>
+									<a>
+										<img src="" />
+										<p>推荐文章1</p>
+									</a>
+								</li>
+								<li>
+									<a>
+										<img src="" />
+										<p>推荐文章1</p>
+									</a>
+								</li>
+								<li>
+									<a>
+										<img src="" />
+										<p>推荐文章3</p>
+									</a>
+								</li>
+								<li>
+									<a>
+										<img src="" />
+										<p>推荐文章1</p>
+									</a>
+								</li>
+								<li>
+									<a>
+										<img src="" />
+										<p>推荐文章1</p>
+									</a>
+								</li>
+								<li>
+									<a>
+										<img src="" />
+										<p>推荐文章1</p>
+									</a>
+								</li>
+							</ul>
+							<span id="change_other" class="change_other">换一组</span>
+						</div>
 					</div>
-					<div class="sider_m">
-						<h4 class="sider_t">推荐商品</h4>
-						<a href="store_5.html"><img class="recommend_prod" src="images/article/1.png" alt="no" border="0" /></a>
-					</div>
+		<!-- 2013/7/4 outside repair article page -->
 				</div>
 			</div>
 		</div>
@@ -333,7 +379,31 @@
 				var time = parseInt($(this).children().text());
 				time++;
 				$(this).children().html(time)
+			});
+			//for change other content
+			var temp = true;
+
+			$("#change_other").bind("click",function(){
+				$(".cream_part_lay p").each(function(index){
+ 	 				console.log( index + ": " + $(this).text() );
+ 	 				})
+				// if(temp){
+				// 	$.ajax({
+			 // 			type : 'get',//可选get
+			 // 			url : "message.php?who=" + use_text + "&email=" + email_text + '&content=' + content_text,
+			 // 			dataType : 'json',//申明类型，不然有错
+			 // 	 		success : function(data){
+			 // 	 			$(".cream_part_lay p").each(function(index){
+			 // 	 				console.log( index + ": " + $(this).text() );
+			 // 	 			})
+			 //  			},
+			 //  			error : function(){
+			 //  				alert("error"); 
+			 //  			}
+			 //  		});
+				// }
 			})
+
 			var aijianmei = {
 				newdom : new getdom,
 				removechlid : function(obj_1,obj_2){
