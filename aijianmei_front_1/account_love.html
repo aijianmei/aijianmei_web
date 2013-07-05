@@ -204,7 +204,7 @@
 
             //for keycode enter to dt_weight_height_year_input
             document.onkeydown = function(event){//回车事件触发onblur
-                if(event.keyCode == 13){
+                if(event.keyCode == 13 && !document.all){
                     var activename = document.activeElement.id; // 当前获取焦点的对象
                     if(activename == 'rg_way_input'){
                         document.getElementById(activename).blur();
