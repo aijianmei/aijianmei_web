@@ -862,7 +862,7 @@ var init = function(){
 	for(var i = 0;i < ident_len;i++){
 		aijianmei.identifying(identifying[i]);
 	}   
-	aijianmei.addident_title('detail');
+	aijianmei.addtitle('detail');
 }
 init();	
 //}}}

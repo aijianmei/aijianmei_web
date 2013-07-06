@@ -643,7 +643,10 @@ function show_banner($type){
 				//redirect(U('index/User/loginUserInfo'));
                 //M('others')->add($other);
 				$_SESSION['sinalogin']=1;
-				redirect(U('index/User/register'));
+
+					redirect(U('index/Reg/register'));
+
+				//redirect(U('index/User/register'));
 				//redirect(U('index/User/loginUserInfo'));
             }
         }
@@ -655,11 +658,12 @@ function show_banner($type){
         if(!empty($_GET['qquid'])&&$_GET['qqapi']=='login'){
             service('Passport')->loginLocal($_GET['qquid']);
 						$_GET['qquid']=addslashes($_GET['qquid']);
-						$checkEmailSql="select email from ai_user where uid='".$_GET['qquid']."'";
+						$checkEmailSql="select uname,email from ai_user where uid='".$_GET['qquid']."'";
 						$checkEmailArr=M('')->query($checkEmailSql);
 						if(empty($checkEmailArr[0]['email'])){//检测是否有注册邮箱 没有就跳转到注册页面
 							$_SESSION['sinalogin']=1;
-							redirect(U('index/User/register'));
+								redirect(U('index/Reg/register'));
+							//redirect(U('index/User/register'));
 						}
 						$get_usernameSql="select * from ai_user where email='".$checkEmailArr[0]['email']."'";
 						$get_usernameInfo = M('')->query($get_usernameSql);

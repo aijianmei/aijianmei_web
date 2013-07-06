@@ -29,7 +29,7 @@ if(!in_array($_GET['c'],$noremAction)&&$_SESSION['pwai_url']==''){
 }
 
 if($_SESSION['aipw_ck_winduser']!=''){
-	$winkey="IeT_winduser";
+	$winkey="ghL__winduser";
 	$_COOKIE[$winkey]=$_SESSION['aipw_ck_winduser'];
 	setcookie($winkey, $_SESSION['aipw_ck_winduser'],31536000);
 	unset($_SESSION['aipw_ck_winduser']);

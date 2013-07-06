@@ -16,7 +16,8 @@ $_actAllowArr=array(
 'ajaxInMore'=>'data',
 'ajaxTrainMore'=>'data',
 'sedaylike'=>'data',
-'checkUserName'=>'data');
+'checkUserName'=>'data',
+'getrecomarticles'=>'page',);
 /*ajax */
  if(!empty($_REQUEST['act'])){
      foreach($_REQUEST as $key => $value){
@@ -69,7 +70,25 @@ function checkUserName(){
 	exit;
 }
 
-
+function getrecomarticles(){
+	$page=$_POST['page']?$_POST['page']:1;
+	$from=$page-1;
+	$countSql="select count(*) as num from ai_article where is_promote=1";
+	$result=C_mysqlQuery($countSql);
+	$num=$result[0]['num'];
+	$cpage=ceil($num/6);
+	$sql="select id,title,img from ai_article where is_promote=1 limit $from,6";
+	$result=C_mysqlQuery($sql);
+	while($row=mysql_fetch_assoc($result)){
+			$resultTmp[]=$row;
+	}
+	foreach($resultTmp as $k=>&$value){
+	 	 $value['img']="/public/images/article/".$value['img'];
+	 	 $value['url']="/index-Index-articleDetail-".$value['id'].".html";
+	} 
+	echo json_encode($resultTmp);
+	exit;
+}
 
 
 
@@ -98,6 +117,8 @@ function ajaxInMore($data){
 			$result=null;
 			$result=$resultTmp;
 			foreach ($result as $key => $value) {
+				unset($result[$key]['content']);
+				unset($result[$key]['wapcontent']);
 				$result[$key]['CommNumber']=getCountRecommentsById($value['id'],$type);
 			}
 			setDataCache(md5($sql),$result);
@@ -192,6 +213,8 @@ function ajaxTrainMore($data){
 			$result=null;
 			$result=$resultTmp;
 			foreach ($result as $key => $value) {
+				unset($result[$key]['content']);
+				unset($result[$key]['wapcontent']);
 				$result[$key]['CommNumber']=getCountRecommentsById($value['id'],$type);
 			}
 			setDataCache(md5($sql),$result);

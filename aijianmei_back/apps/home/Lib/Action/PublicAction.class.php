@@ -302,7 +302,6 @@ class PublicAction extends Action{
         if ($opt_verify && (md5(strtoupper($_POST['verify']))!=$_SESSION['verify'])) {
             $this->error(L('error_security_code'));
         }
-
         Addons::hook('public_before_dologin',$_POST);
 
         $username =	$_POST['email'];
@@ -373,18 +372,13 @@ class PublicAction extends Action{
 			$url=AIBASEURL."/forum/pwApi.php?pwact=register";
 			$out=_CurlPost($url,$post_data);//targetUrl postData
 			
-			$inserTmpSql=null;
-			$inserTmpSql="INSERT INTO  aijianmei.ai_forum_tmp_user (id ,email ,password)
-			VALUES (NULL ,  '".$uid[0]['email']."',  '".$_POST['password']."')";  
-			M('')->query($inserTmpSql);
-			
 			}
 			$pwUserInfoSql="select * from ai_pwforum.pw_user where username='".$uid[0]['user_name']."' and email='".$uid[0]['email']."'";
 			$pwUserInfo=M('')->query($pwUserInfoSql);
 			$this->pwImgCopy($_SESSION['mid'],$pwUserInfo[0]['uid']);
 			//调用登陆api
 			$tmpPassword=M('')->query("select password from ai_forum_tmp_user where email='".$uid[0]['email']."'");
-			if($tmpPassword[0]['password']!=$_POST['password']){
+			/*if($tmpPassword[0]['password']!=$_POST['password']){
 				//密码与临时表不一致 更新临时表
 				M('')->query("UPDATE  ai_forum_tmp_user SET  password =  '".$_POST['password']."' WHERE  email='".$uid[0]['email']."'");
 				//调用论坛对应的密码修改 api add by kontem 20130701 {{{
@@ -396,7 +390,12 @@ class PublicAction extends Action{
 				);
 				_CurlPost($url,$post_data);
 				$tmpPassword[0]['password']=$_POST['password'];
-			}
+			}else{
+				$inserTmpSql=null;
+				$inserTmpSql="INSERT INTO  aijianmei.ai_forum_tmp_user (id ,email ,password)
+				VALUES (NULL ,  '".$uid[0]['email']."',  '".$_POST['password']."')";  
+				M('')->query($inserTmpSql);
+			}*/
 			$url=AIBASEURL."/forum/pwApi.php?pwact=login";
 			$post_data=array(
 				'username' => $uid[0]['user_name'],
@@ -490,7 +489,8 @@ class PublicAction extends Action{
         service('Passport')->logoutLocal();
         $url=AIBASEURL."/forum/pwApi.php?pwact=logout";
 				_CurlPost($url);
-				//setCookie('ghL_winduser', '',-1,'/');
+				setCookie('ghL_winduser', '',-1,'/');
+				//setCookie('IeT_winduser', '',-1,'/');
         $_SESSION['aipw_ck_winduser']=null;
         
         Addons::hook('public_after_logout');

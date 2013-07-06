@@ -108,16 +108,21 @@ class UserAction extends Action {
 		M('')->query($sql);
 		$sql="delete from ai_user where uname is null";
 		M('')->query($sql);
-		
 		if($_SESSION['regrefer_url']==''&& $_SESSION['refer_url']!=''){
 			$_SESSION['regrefer_url'] = $_SESSION['refer_url'];
 		}
-		$this->display('register_1');
+		if($_SESSION['sinalogin']==1){
+			$this->display('account_third');
+		}else{
+			$this->display('account');	
+		}
+		
 	}
 	public function doregister()
 	{
 		//$_SESSION['allowbackreg']=$_SESSION['allowbackmid']=null;
 		if($_SESSION['sinalogin']==1){$_SESSION['deslogin']=1;}
+		$userName=addslashes($_POST['email']);
 		$userEmail=addslashes($_POST['email']);
 		$password=addslashes($_POST['password']);
 		$repassword=addslashes($_POST['repassword']);
@@ -185,7 +190,7 @@ class UserAction extends Action {
 			$_SESSION['allowbackmid']=$mid;
 			$_SESSION['loginIcpkey']=md5('aijianmei'.$mid);
 		}
-		$this->display('register_2');
+		$this->display('account_love');
 	}
 	
 	public function setchannelinfo(){

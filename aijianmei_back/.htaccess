@@ -19,3 +19,6 @@ RewriteRule ^Train.html index.php?app=index&mod=Train
 RewriteRule ^Nutri.html index.php?app=index&mod=Nutri
 RewriteRule ^Append.html index.php?app=index&mod=Append
 RewriteRule ^Lifestyle.html index.php?app=index&mod=Lifestyle
+RewriteRule ^register.html index.php?app=index&mod=Reg&act=register
+RewriteRule ^doregister.html index.php?app=index&mod=Reg&act=doregister
+RewriteRule ^setchannelinfo.html index.php?app=index&mod=Reg&act=setchannelinfo
