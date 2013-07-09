@@ -14,6 +14,13 @@ class NavAction extends Action {
 		$this->assign('_MenusStu', $_MenusStu);
 		$this->assign('isAdmin', 1);
 	}
+	public function videoListManager(){
+		
+		
+		
+		$this->display('keywords');
+	}	
+	
 	public function keywordmanager(){
 		$modelArr=array(
 			'plan'=>'健身计划',

@@ -510,6 +510,93 @@ function run_circle(speed,obj_1,obj_2,obj_3){
 		}
 	}
 }
+
+//function for title add tip content
+//参数content 提示的内容   width 提示框的宽度 id_show 提示框的id命名 position 提示框可选择要固定在的位置
+//relative 当选择相对位置定位时，相对于那个div固定 mouseout_classname 触法提示框的a的class
+function add_tip(e,options){
+
+	var content = options.content || null,//get content that  show
+		width = options.width + "px" || '100px';//get width of content
+		position_x = options.position ? options.position[0] : (new get_offset)[0],
+		position_y = options.position ? options.position[1] : (new get_offset)[1];
+
+	var length = e.offsetWidth/2;//get text 1/2 length that need to tip
+
+	var div = document.getElementById(options.id_show),//get show div'id
+		show_p = document.getElementById('show_p'),
+		solid_in = document.getElementById(options.relative);//by id solid_in,sure div position relative options.relative
+
+	//first step jugde if exit div that will show
+	if(!div){
+		var div = document.createElement('div'),
+			p = document.createElement('p'),
+			span = document.createElement("span");
+
+		div.id = 'show_div';
+		div.className = 'show_div';
+		div.style.width = width;
+
+		p.innerHTML = content;
+		p.id = "show_p";
+		p.className = 'show_p';
+		div.appendChild(p);
+
+		span.className = "angle";
+		span.innerHTML = "<span></span>"
+		div.appendChild(span);
+
+		solid_in.appendChild(div);
+	}
+	else{
+		div.style.display = "block"
+		show_p.innerHTML = content;
+		div.style.width = width;
+	}
+	var show_div = document.getElementById('show_div');
+
+	var show_div_height = show_div.offsetHeight + 10;
+
+	//second step function get the pesition_x and position_y of mouse
+	function get_offset(){
+		
+		this.get_offsetX = e.offsetLeft,
+		this.get_offsetY = e.offsetTop;
+
+		return [this.get_offsetX,this.get_offsetY]
+
+	}
+
+	//handle position of div those id is show_div
+	control_position();
+	function control_position(){
+
+		if(show_div){
+			show_div.style.top = position_y - show_div_height + "px";
+			show_div.style.left = position_x - parseFloat(width)/2 + length + "px";
+		}
+
+	}
+
+	//last step mouseout
+	var newdom = new getdom,
+		classname = newdom.getElementsByClass(options.mouseout_classname),
+		len = classname.length;
+
+	for(var i = 0;i < len;i++){
+		if(classname[i]){
+			addevent(classname[i],"mouseout",remove);
+		}
+		
+	}
+
+	function remove(){
+		show_div.style.display = "none"
+	}
+
+}
+
+
 //对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
 var fade = {
     newdom : new getdom,

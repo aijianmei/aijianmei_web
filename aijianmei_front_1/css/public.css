@@ -574,3 +574,40 @@ button{
 		overflow-y: auto;
 	}
 /*fade_modal begin****/
+
+
+/*title_tip----------------*/
+	.show_div{
+		position: absolute;
+		z-index: 10;
+		word-break: break-word;
+	}
+	.show_p{
+		text-align: center;
+		background: #3584BF;
+		color: white;
+		opacity: 0.9;
+		filter: alpha(opacity=90);
+		border-radius: 6px;
+		padding: 6px;
+		margin:0;
+	}
+	.angle{
+		display: block;
+		height: 5px;
+		width: 5px;
+		margin: 0 auto;
+	}
+	.angle span{
+		display: block;
+		overflow: hidden;
+		width: 0;
+		height: 0;
+		font-size: 0;
+		line-height: 0;
+		border-color: #3584BF transparent transparent transparent;
+		border-style: solid;
+		border-width: 5px;
+		opacity: 0.9;
+		filter: alpha(opacity=90);
+	}

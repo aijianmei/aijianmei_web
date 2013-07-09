@@ -54,6 +54,9 @@ class IndexAction extends AdministratorAction {
 								'关键字库分类管理'	=>	U('admin/Nav/keywordcategorymanager'),
                 '关键字初始化'	=>	U('admin/Nav/keywordcp'),
 				),
+				'模块组件管理'	=>	array(
+								'视频列表组件管理'	=>	U('admin/Nav/videoListManager'),
+				),
         );
 
         //全局
