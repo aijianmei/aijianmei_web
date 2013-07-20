@@ -56,7 +56,7 @@
 .recommentListBox .no_result{ float:left; width:100%;text-align: center;background: none repeat scroll 0 0 transparent;border: 2px dashed rgba(0,0,0,0.1);border-radius: 5px 5px 5px 5px;margin-bottom: 20px;padding-bottom: 15px;padding-top: 15px;}
 
 .recommentListBox #countList .pg_page{ float:left; text-align:center; width:100%;}
-#recommentList { float:left;}
+#recommentList { float:left; letter-spacing:1px;}
 #recommentList .articleRecomment{ width:100%; float:left;  border-top:1px solid #fff; border-bottom: 1px solid #dfdfdf;border-top: 1px solid white;}
 #recommentList .articleRecomment .articleRecommentImg{ width:50px; height:100%; float:left; padding-top:15px; padding-left:10px; padding-right:10px;}
 #recommentList .articleRecomment .articleRecommentInfo{ float: left; width:580px; height:15px;}
