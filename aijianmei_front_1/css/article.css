@@ -29,12 +29,12 @@
 .login_resgister p a {background: #21ACE3;color: white;margin: 0 2px;padding: 5px 15px;}
 
 .title_path{height:22px;}
-.title_path a{float:left;position: relative;line-height: 22px;display: inline-block;padding: 0 7px 0 7px;color:#777;background: url(../images/article/dq_02.jpg) repeat-x;}
-.title_path .middleline{display: block;background: url(../images/article/article_icon.png) no-repeat 0 -179px; padding-right:7px;}
-.title_path .frontmiddleline{display: block;background: url(../images/article/article_icon.png) no-repeat 0 -211px; padding-right:7px;}
-.title_path .behindmiddleline{display: block;background: url(../images/article/article_icon.png) no-repeat 0 -147px; padding-right:7px;}
-.title_path .nolastbehindmiddlelinen{display: block;background: url(../images/article/article_icon.png) no-repeat -22px -308px; padding-right:7px;}
-.title_path .bothbehindmiddlelinen{display: block;background: url(../images/article/article_icon.png) no-repeat 0 -308px; padding-right:7px;}
+.title_path a{float:left;position: relative;line-height: 22px;display: inline-block;padding: 0 6px 0 6px;color:#777;background: url(../images/article/dq_02.jpg) repeat-x;}
+.title_path .middleline{display: block;background: url(../images/article/article_icon.png) no-repeat 0 -179px; padding-right:6px;}
+.title_path .frontmiddleline{display: block;background: url(../images/article/article_icon.png) no-repeat 0 -211px; padding-right:6px;}
+.title_path .behindmiddleline{display: block;background: url(../images/article/article_icon.png) no-repeat 0 -147px; padding-right:6px;}
+.title_path .nolastbehindmiddlelinen{display: block;background: url(../images/article/article_icon.png) no-repeat -22px -308px; padding-right:6px;}
+.title_path .bothbehindmiddlelinen{display: block;background: url(../images/article/article_icon.png) no-repeat 0 -308px; padding-right:6px;}
 .title_path .first_path:before{display: none;}
 
 .title_path .current_pt a{display: inline-block;height: 19px;line-height: 18px;margin-top: 2px;padding: 0 9px;}
@@ -59,7 +59,7 @@
 #recommentList { float:left;}
 #recommentList .articleRecomment{ width:100%; float:left;  border-top:1px solid #fff; border-bottom: 1px solid #dfdfdf;border-top: 1px solid white;}
 #recommentList .articleRecomment .articleRecommentImg{ width:50px; height:100%; float:left; padding-top:15px; padding-left:10px; padding-right:10px;}
-#recommentList .articleRecomment .articleRecommentInfo{ float: left; width:580px; height:30px; margin-top:15px;}
+#recommentList .articleRecomment .articleRecommentInfo{ float: left; width:580px; height:15px;}
 #recommentList .articleRecomment .articleRecommentContent{ float:left;width:580px; }	
 #recommentList .articleRecomment .articleRecommentDate{ float:left;width:580px; }
 #recommentList .articleRecomment .articleRecommentInfo .repairRcom{color:#999999; font-size:12px;}
@@ -67,6 +67,9 @@
 #recommentList .articleRecomment .articleRecommentInfo .uname{color:#999999; font-size:12px;}
 #recommentList .fleft{ float:left;}
 #recommentList .fright{ float:right;}
+#recommentList .mr15{ margin-right:15px;}
+#recommentList .mr17{ margin-right:17px;}
+#recommentList .mt15{ margin-top:15px;}
 #recommentList .articleRecomment .articleRecommentContent .RecommentContent{ font-size:16px; color:#333333; margin-top:2px;}
 #recommentList .articleRecomment .articleRecommentDate{color:#999999; font-size:12px; margin-bottom:4px; margin-top:5px;}
 
