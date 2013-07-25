@@ -1,0 +1,285 @@
+/*pubilc.css0000000000000000000000*/
+
+
+
+
+/*datum.css************************/
+
+
+.dt_fit{
+	margin-left: 150px;
+	font-size: 22px;
+	color: #2076bc;
+	font-weight: lighter;
+}
+.dt_fit .dt_ms_detail,.dt_part .dt_ms_detail{
+	font-size: 16px;
+	color: rgba(0,0,0,0.4);
+	font-weight: normal;
+}
+/*dt_part***************/
+.dt_part{
+	margin-left: 150px;
+}
+.dt_part legend{
+
+	display: block;
+	width: 80%;
+	padding: 0;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 40px;
+	color: #333333;
+	border: 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+/*public  dt_wrap_revise*****************/
+	.dt_wrap_revise{
+		padding-top: 40px;
+	}
+	.dt_revise{
+		margin-bottom: 25px;
+	}
+	.dt_revise label{
+		float: left;
+		width: 140px;
+		padding-top: 5px;
+		text-align: right;
+		margin:0 20px 5px 0;
+		font-size: 14px;
+		font-weight: normal;
+		line-height: 20px;
+	}
+	.dt_content{
+		height:30px;
+		line-height: 30px;
+		margin-left:160px;
+	}
+/*file*/
+	.file{
+		position: relative;
+	}
+	.dt_choice_img{
+		position: absolute;
+		right:100px;
+		top: 0;
+		width: 50px;
+		height:50px;
+	}
+/*input_type*******************/
+	.dt_input{
+			display: inline-block;
+		height: 20px;
+		padding: 4px 6px;
+		font-size: 14px;
+		line-height: 20px;
+		color: #555555;
+		background-color: #ffffff;
+		border: 1px solid #ccc;
+	}
+	.dt_type1_input{
+		width: 200px;
+	}
+	.dt_type2_input{
+		padding: 4px 6px;
+		width:480px;
+	}
+/*introduce*/
+	#introduce{
+		height:100px;
+	}
+/*sex*/
+	#female{
+		margin-left: 50px;
+	}
+/*strong height year*/
+	.dt_content a{
+		position: relative;
+		display: inline-block;
+		height: 30px;
+		min-width: 30px;
+		padding: 0 5px;
+		background: #21ace3;
+		color: white;
+		border-radius: 3px;	
+	}
+	.dt_edit{
+		height: 30px;
+		line-height: 30px;
+		margin-left: 160px;
+	}
+	.dt_edit span{
+		display: inline-block;
+		height: 30px;
+		min-width: 30px;
+		padding: 0 5px;
+		background: #21ace3;
+		color: white;
+		border-radius: 3px;
+	}
+	.dt_edit a{
+		margin-left: 10px;
+		vertical-align: top;
+	}
+	/*dt_weight,height,year_input*/
+	.dt_weight_input,.dt_height_input,.dt_year_input{
+		background: url(../images/dt_input.png) no-repeat;
+	}
+	.dt_weight_write,.dt_height_write,.dt_year_write{
+		width: 67px;
+		padding: 5px 7px;
+		margin-right: 5px;
+		background: 0;
+		outline: 0;
+	}
+	.dt_weight_keep,.dt_height_keep,.dt_year_keep{
+		display: inline;
+		margin-left: 10px;
+		vertical-align: top;
+	}
+/*weight*/
+	.dt_weight{
+	}
+	.dt_choice_weight{
+		display: none;
+		position: absolute;
+		left: 0;
+		top:-260px;
+		width: 100%;
+		z-index: 14;
+	}
+	.dt_choice_weight a{
+		display: block;
+		padding: 0;
+		width: 100%;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+		font-size: 13px;
+		border-radius: 0;
+		border-bottom: 1px solid #ccc;
+		border-top: 1px solid white;
+		background: #EFEFEF;
+		color: #bebebe;
+	}
+	.dt_choice_weight a:hover{
+		background: #21ace3;
+		color:white;
+	}
+	.dt_weight_edit{
+		display: none;
+	}
+/*height*/
+	.dt_height{
+	}
+	.dt_choice_height{
+		display: none;
+		position: absolute;
+		left: 0;
+		top:-128px;
+		width: 100%;
+		z-index: 14;
+	}
+	.dt_choice_height a{
+		display: block;
+		padding: 0;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+		font-size: 13px;
+		border-radius: 0;
+		border-bottom: 1px solid #ccc;
+		border-top: 1px solid white;
+		background: #EFEFEF;
+		color: #bebebe;
+	}
+	.dt_choice_height a:hover{
+		background: #21ace3;
+		color:white;
+	}
+	.dt_height_edit{
+		display: none;
+	}
+/*year*/
+	.dt_year{
+	}
+	.dt_choice_year{
+		display: none;
+		position: absolute;
+		left: 0;
+		top:-128px;
+		width: 100%;
+		z-index: 10;
+	}
+	.dt_choice_year a{
+		display: block;
+		padding: 0;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+		font-size: 13px;
+		border-radius: 0;
+		border-bottom: 1px solid #ccc;
+		border-top: 1px solid white;
+		background: #EFEFEF;
+		color: #bebebe;
+	}
+	.dt_choice_year a:hover{
+		background: #21ace3;
+		color:white;
+	}
+	.dt_year_edit{
+		display: none;
+	}
+/*dt_content_tx*/
+	.dt_content_tx{
+		height:102px;
+	}
+/*dt_update*/
+	.dt_update_1{
+		display: inline-block;
+		height: 30px;
+		line-height: 30px;
+		padding: 0 5px;
+		margin:0 0 40px 160px;
+		background: #21ace3;
+		color: white;
+		border-radius: 3px;
+	}
+	.dt_update_1:hover{
+		color:white;
+	}
+/*dt_tag***************/
+	.dt_tag{
+		width: 642px;
+		padding: 5px;
+		margin-bottom: 25px;
+		background-color: #ffffff;
+		border: 1px solid #ccc;
+	}
+	.dt_sure{
+		float: left;
+		padding: 1px 6px;
+		margin:0 5px 3px 0;
+		background: #21ace3;
+		color: white;
+	}
+	.dt_sure_remove{
+		cursor: pointer;
+	}
+	/*dt_tag_input*/
+	.dt_tag_input{
+		float:left;
+		position: relative;
+		margin:0 5px 3px 0;
+	}
+	.dt_tag_input label{
+		position: absolute;
+		top:0;
+		left:4px;
+		color:#ccc;
+	}
+	#tag{
+		padding: 2px;
+		outline: 0;
+	}
