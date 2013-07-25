@@ -3,7 +3,7 @@ class ArticleModel extends Model {
     public function getArticles()
     {
         $sql = "select a.id,a.title,c.name as category,a.author,a.source,a.content,a.create_time,a.keyword,a.is_promote from ai_article as a
-                left join ai_article_category as c on c.id=a.category_id";
+                left join ai_article_category as c on c.id=a.category_id order by a.id desc";
         $articles = M('')->query($sql);
         return $articles;
     }

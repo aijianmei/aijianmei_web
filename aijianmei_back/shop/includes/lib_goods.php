@@ -515,7 +515,6 @@ function get_goods_info($goods_id)
             "WHERE g.goods_id = '$goods_id' AND g.is_delete = 0 " .
             "GROUP BY g.goods_id";
     $row = $GLOBALS['db']->getRow($sql);
-
     if ($row !== false)
     {
         /* 用户评论级别取整 */
@@ -1433,7 +1432,7 @@ function get_goods_fittings($goods_list = array())
     $temp_index = 0;
     $arr        = array();
 
-    $sql = 'SELECT gg.parent_id, ggg.goods_name AS parent_name, gg.goods_id, gg.goods_price, g.goods_name, g.goods_thumb, g.goods_img, g.shop_price AS org_price, ' .
+    $sql = 'SELECT gg.parent_id, ggg.goods_name AS parent_name, gg.goods_id, gg.goods_price,gg.group_id,g.goods_name, g.goods_thumb, g.goods_img, g.shop_price AS org_price, ' .
                 "IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS shop_price ".
             'FROM ' . $GLOBALS['ecs']->table('group_goods') . ' AS gg ' .
             'LEFT JOIN ' . $GLOBALS['ecs']->table('goods') . 'AS g ON g.goods_id = gg.goods_id ' .
@@ -1441,13 +1440,23 @@ function get_goods_fittings($goods_list = array())
                     "ON mp.goods_id = gg.goods_id AND mp.user_rank = '$_SESSION[user_rank]' ".
             "LEFT JOIN " . $GLOBALS['ecs']->table('goods') . " AS ggg ON ggg.goods_id = gg.parent_id ".
             "WHERE gg.parent_id " . db_create_in($goods_list) . " AND g.is_delete = 0 AND g.is_on_sale = 1 ".
-            "ORDER BY gg.parent_id, gg.goods_id";
+            "ORDER BY gg.group_id,gg.parent_id, gg.goods_id";
 
     $res = $GLOBALS['db']->query($sql);
 
     while ($row = $GLOBALS['db']->fetchRow($res))
     {
         $arr[$temp_index]['parent_id']         = $row['parent_id'];//配件的基本件ID
+        if($row['parent_id']>0){
+        	$parent_shop_price_sql="select shop_price,market_price from ".$GLOBALS['ecs']->table('goods')." where goods_id ='".$row['parent_id']."'";
+        	$parent_shop_price_info = $GLOBALS['db']->getRow($parent_shop_price_sql);
+        	$arr[$temp_index]['parent_shop_price']       = $parent_shop_price_info['shop_price'];//套餐价格
+        	$arr[$temp_index]['parent_market_price']		 = $parent_shop_price_info['market_price'];//套餐价格
+        	$arr[$temp_index]['fittings_price_num']      = $row['goods_price'];//配件价格
+        	$arr[$temp_index]['shop_price_num']     		 = $row['shop_price'];//配件价格
+        }
+        
+        
         $arr[$temp_index]['parent_name']       = $row['parent_name'];//配件的基本件的名称
         $arr[$temp_index]['parent_short_name'] = $GLOBALS['_CFG']['goods_name_length'] > 0 ?
             sub_str($row['parent_name'], $GLOBALS['_CFG']['goods_name_length']) : $row['parent_name'];//配件的基本件显示的名称
@@ -1460,6 +1469,7 @@ function get_goods_fittings($goods_list = array())
         $arr[$temp_index]['goods_thumb']       = get_image_path($row['goods_id'], $row['goods_thumb'], true);
         $arr[$temp_index]['goods_img']         = get_image_path($row['goods_id'], $row['goods_img']);
         $arr[$temp_index]['url']               = build_uri('goods', array('gid'=>$row['goods_id']), $row['goods_name']);
+        $arr[$temp_index]['group_id']          = $row['group_id'];//配件组合id
         $temp_index ++;
     }
 
@@ -1504,9 +1514,9 @@ function ec_buysum($goods_id)
     $sql="select sum(goods_number) from " . $GLOBALS['ecs']->table('order_goods') . " AS g ,".$GLOBALS['ecs']->table('order_info') . " AS o WHERE o.order_id=g.order_id and g.goods_id = ".$goods_id." and o.pay_status=2 and o.add_time >= ".$LMonth." and o.add_time <= ".$nowTime." group by g.goods_id";
 
     if (($GLOBALS['db']->getOne($sql)) == ""){
-         return 30;
+         return 30+$goods_id;
         }else{
-       return 30+($GLOBALS['db']->getOne($sql));
+       return 30+$goods_id+($GLOBALS['db']->getOne($sql));
     }
    
 }

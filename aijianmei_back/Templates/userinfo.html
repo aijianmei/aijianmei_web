@@ -9,12 +9,12 @@
 						<php>if(!getMid()) {</php>
 			                <ul class="top_ms clearfix">
 			                    <li><a class="login">登录 </a>|</li>
-			                    <li><a href="/index.php?app=index&mod=Index&act=selectRegister">注册 </a></li>
+			                    <li><a href="/register.html">注册 </a></li>
 			                </ul>
 							<php>} else {</php>
 			                <ul class="after_ms">
 			                    <li class="person_ms">
-			                        <span title="<php>echo getUserName(getMid())</php>"><php>echo getUserName(getMid(),'zh',3)</php></span>
+			                        <span title="<php>echo getUserName(getMid())</php>"><php>echo getUserName(getMid(),'zh',6)</php></span>
 			                    </li>
 			                    <li class="more"><a href="">帐号<span class="triangle"></span> </a>
 			                        <ul class="account">
@@ -30,25 +30,7 @@
             			</div>
 	        		</div>
 	        		<p class="pm_signature"><php>echo getUserDes(getMid());</php></p>
-	        		<form class="lb_search" action="" onsubmit="return gosearch();" id="lb_search_form" method="get">
-	        			<input type="text" id="searchwords"/>
-	        			<input type="submit" id="button" value="">
-	        		</form>
-					<script>
-					function gosearch()
-					{
-						var sw=document.getElementById('searchwords').value;
-						if(sw!=''){
-							var htmlurl="http://www.aijianmei.com/search_"+sw+".html";
-							$("#lb_search_form").attr("action",htmlurl);
-							//window.location.href=htmlurl;
-							return true;
-						}else{
-							return false;							
-						}
 
-					}
-					</script>
 	        	</div>
 	        	<div class="same_part">
 					<div style="margin-bottom:5px;"  class="clearfix">
@@ -56,6 +38,6 @@
 					</div>
 	        		<div class="two_code clearfix">
 	        			<img src="Templates/images/weima.jpg" />
-	        			<span>扫描二维码,获取新咨讯</span>
+	        			<span style="white-space:normal;width:140px;">欢迎扫描订阅！获取最新健身、健康资讯！</span>
 	        		</div>
 	        	</div>

@@ -186,7 +186,8 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
                 $goods['bonus_money'] = price_format($goods['bonus_money']);
             }
         }
-
+				$goods['short_name']        = $GLOBALS['_CFG']['goods_name_length'] > 0 ?
+            sub_str($goods['goods_name'], $GLOBALS['_CFG']['goods_name_length']) : $goods['goods_name'];//配件显示的名称
         $smarty->assign('goods',              $goods);
         $smarty->assign('goods_id',           $goods['goods_id']);
         $smarty->assign('promote_end_time',   $goods['gmt_end_time']);
@@ -232,7 +233,36 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
         $smarty->assign('attribute_linked',    get_same_attribute_goods($properties));           // 相同属性的关联商品
         $smarty->assign('related_goods',       $linked_goods);                                   // 关联商品
         $smarty->assign('goods_article_list',  get_linked_articles($goods_id));                  // 关联文章
-        $smarty->assign('fittings',            get_goods_fittings(array($goods_id)));                   // 配件
+        
+        //get_goods_fittings(array($goods_id))
+        
+       // new_attr_fittings();
+        
+        $fittings=get_goods_fittings(array($goods_id));
+        //print_r($fittings);
+        $newfittings=new_attr_fittings($fittings);
+        //var_dump($newfittings);
+        foreach ($newfittings as $key=>&$value) {
+         	 // loop through values 
+         	// $goods_id
+         	$child_id_tmp=array();
+         	$child_id_tmp=explode("_",$value['child_id']);
+         	if(in_array($goods_id,$child_id_tmp)){
+         		 foreach ($child_id_tmp as $key1 => $value1) {
+         		 		if($goods_id==$value1){
+         		 			unset($child_id_tmp[$key1]);
+         		 		}
+         		 }
+         		array_unshift($child_id_tmp,$goods_id); 
+         	}
+         	$value['child_id']=implode("_", $child_id_tmp);
+        } 
+
+        
+        //var_dump($newfittings);
+        $smarty->assign('fittings',            $fittings);
+        $smarty->assign('newfittings',            $newfittings);                   // 配件
+        $smarty->assign('newfittingscount',            count($newfittings));                   // 配件
         $smarty->assign('rank_prices',         get_user_rank_prices($goods_id, $shop_price));    // 会员等级价格
         $smarty->assign('pictures',            get_goods_gallery($goods_id));                    // 商品相册
         $smarty->assign('bought_goods',        get_also_bought($goods_id));                      // 购买了该商品的用户还购买了哪些商品
@@ -523,6 +553,37 @@ function get_attr_amount($goods_id, $attr)
 
     return $GLOBALS['db']->getOne($sql);
 }
+
+/**
+ * 将商品配件分组对应的套餐
+ *
+ * @param   integer     $goods_id
+ * @param   array       $attr
+ *
+ * @return  void
+ */
+function  new_attr_fittings($fittings){
+	$fittingsNew=array();
+	//var_dump($fittings);
+	foreach ($fittings as &$value) {
+	 	 $fittingsNew[$value['group_id']]['info'][]=$value;
+	 	 $fittingsNew[$value['group_id']]['parent_id']=$value['parent_id'];
+	 	 $fittingsNew[$value['group_id']]['group_id']=$value['group_id'];
+	 	 $fittingsNew[$value['group_id']]['fittingscount']+=1;
+	 	 $fittingsNew[$value['group_id']]['child_id'].=empty($fittingsNew[$value['group_id']]['child_id'])? $value['goods_id']:"_".$value['goods_id'];
+	 	 $fittingsNew[$value['group_id']]['allshop_price']+=empty($fittingsNew[$value['group_id']]['allshop_price'])? $value['fittings_price_num']:$value['fittings_price_num'];
+	 	 
+	 	 $fittingsNew[$value['group_id']]['sum_price']+=empty($fittingsNew[$value['group_id']]['sum_price'])? $value['shop_price_num']:$value['shop_price_num'];
+	}
+	foreach ($fittings as &$value) {
+
+	 	 $fittingsNew[$value['group_id']]['save_price']=abs($fittingsNew[$value['group_id']]['allshop_price']-$fittingsNew[$value['group_id']]['sum_price']);
+	}
+	
+	return $fittingsNew;
+}
+
+
 
 /**
  * 取得跟商品关联的礼包列表

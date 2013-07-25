@@ -14,6 +14,149 @@ class NavAction extends Action {
 		$this->assign('_MenusStu', $_MenusStu);
 		$this->assign('isAdmin', 1);
 	}
+	public function videoListManager(){
+		
+		
+		
+		$this->display('keywords');
+	}	
+	
+	public function keywordmanager(){
+		$modelArr=array(
+			'plan'=>'健身计划',
+			'train'=>'锻炼',
+			'nutri'=>'营养',
+			'append'=>'辅助品',
+			'lifestyle'=>'生活方式',
+		);
+		$sql=null;
+		$sql="select * from ai_nav_keyword_category where status=1 order by model,sequence";
+		$allcateinfo=M('')->query($sql);
+		foreach ($allcateinfo as &$value) {
+		 	 $value['model']=$modelArr[$value['model']];
+		}
+		$nums=15;
+		$type=$_GET['type']?$_GET['type']:1;
+		$sql="select * from ai_nav_keyword ";
+		$comlistscount=M('')->query($sql);
+		$pager = api('Pager');
+		$pager->setCounts(count($comlistscount));
+		$pager->setList($nums);
+		$pager->makePage();
+		$from = ($pager->pg -1) * $pager->countlist;
+		$pagerArray = (array)$pager;
+
+		$getkeywordSql="select a.id,a.name,a.model,a.sequence,a.status,b.name as categoryid from ai_nav_keyword a left join ai_nav_keyword_category b on a.categoryid=b.id order by a.model limit $from,$nums";
+
+		$keywords=M('')->query($getkeywordSql);
+		foreach ($keywords as $key => &$value) {
+		 	 // loop through values
+		 	 $value['model']=$modelArr[$value['model']]; 
+		} 
+		$this->assign('allcateinfo', $allcateinfo);
+		$this->assign('pager', $pagerArray);
+		$this->assign('keywords', $keywords);
+		$this->display('keywords');
+	}
+	public function editkeywords(){
+		$modelArr=array(
+			'plan'=>'健身计划',
+			'train'=>'锻炼',
+			'nutri'=>'营养',
+			'append'=>'辅助品',
+			'lifestyle'=>'生活方式',
+		);
+		$id=$_GET['id'];
+		if($_POST['nav_action']=='doedit'){
+			$sql="UPDATE  ai_nav_keyword SET name = '".$_POST['name']."',
+			sequence  = '".$_POST['sequence']."',model='".$_POST['model']."',status='".$_POST['status']."',
+			categoryid ='".$_POST['categoryid']."'
+			WHERE  id ='".$_POST['id']."'";
+			M('')->query($sql);	
+		}
+		$sql="select * from ai_nav_keyword where id=$id";
+		$keywordinfo=M('')->query($sql);
+		$allcateinfo=M('')->query("select * from ai_nav_keyword_category");
+		$this->assign('allcateinfo', $allcateinfo);
+		$this->assign('modelArr', $modelArr);
+		$this->assign('keywordinfo', $keywordinfo[0]);
+		$this->display('editkeywords');
+	}
+	public function changecateall(){
+		$sql="UPDATE ai_nav_keyword SET categoryid= '".$_POST['changeCateId']."' where id in (".$_POST['login_record_id'].")";
+		$res=M('')->query($sql);
+		echo 1;
+		return;
+	}
+	
+	public function keywordcategorymanager(){
+		$modelArr=array(
+			'plan'=>'健身计划',
+			'train'=>'锻炼',
+			'nutri'=>'营养',
+			'append'=>'辅助品',
+			'lifestyle'=>'生活方式',
+		);
+
+		if($_POST['cate_action']=='add'){
+			$insertSql=null;
+			$insertSql="INSERT INTO ai_nav_keyword_category (
+			id,name,model,sequence,status)VALUES (NULL,'".$_POST['categoryname']."',
+			'".$_POST['model']."','".$_POST['sequence']."','".$_POST['status']."')";
+			M('')->query($insertSql);
+		}
+		$sql="select * from ai_nav_keyword_category order by model";
+		
+		$categoryList=M('')->query($sql);
+		$this->assign('categoryList', $categoryList);
+		$this->assign('modelArr', $modelArr);
+		$this->display('keywordscategory');
+	}
+	public function editkeywordcategory(){
+		$modelArr=array(
+			'plan'=>'健身计划',
+			'train'=>'锻炼',
+			'nutri'=>'营养',
+			'append'=>'辅助品',
+			'lifestyle'=>'生活方式',
+		);
+		if($_POST['nav_action']=='doedit'){
+			$sql="UPDATE  ai_nav_keyword_category SET name = '".$_POST['name']."',
+			sequence  = '".$_POST['sequence']."',model='".$_POST['model']."',status='".$_POST['status']."'
+			WHERE  id ='".$_POST['id']."'";
+			M('')->query($sql);
+		}
+		
+		$sql="select * from ai_nav_keyword_category where id='".$_GET['id']."'";
+		$cateinfo=M('')->query($sql);
+		$this->assign('cateinfo', $cateinfo[0]);
+		$this->assign('modelArr', $modelArr);
+		$this->display('editkeywordcategory');
+	}
+	public function doDelkeywordscategory(){
+		$res=M('nav_keyword_category')->where("id in(".$_POST['login_record_id'].")")->delete();
+		if($res)
+		{
+			//$this->savemenuinfo();
+			echo 1;
+		}
+		else{
+			echo 0;
+			return;
+		}
+	}
+	public function doDelkeword(){
+		$res=M('nav_keyword')->where("id in(".$_POST['login_record_id'].")")->delete();
+		if($res)
+		{
+			//$this->savemenuinfo();
+			echo 1;
+		}
+		else{
+			echo 0;
+			return;
+		}
+	}
 	
 	public function homepage() {
 		 $action=$_POST['nav_action']?addslashes($_POST['nav_action']):'';
@@ -99,8 +242,17 @@ class NavAction extends Action {
 	}
 	
 	public function adv(){
+		$modelArr=array(
+			'index'=>'首页',
+			'plan'=>'健身计划',
+			'train'=>'锻炼',
+			'nutri'=>'营养',
+			'append'=>'辅助品',
+			'lifestyle'=>'生活方式',
+		);
+		$this->assign('_modelArr', $modelArr);
 		$_ImgType=array();
-		$_ImgType[1]='顶部导航';
+		$_ImgType[1]='页面轮滚';
 		$this->assign('_ImgType', $_ImgType);
 		
 		$uploadpath="navupload/";
@@ -148,6 +300,15 @@ class NavAction extends Action {
 		$this->display();
 	}
 	public function editadv(){
+		$modelArr=array(
+			'index'=>'首页',
+			'plan'=>'健身计划',
+			'train'=>'锻炼',
+			'nutri'=>'营养',
+			'append'=>'辅助品',
+			'lifestyle'=>'生活方式',
+		);
+		$uploadpath='navupload/';
 		$id=$_GET['id']?addslashes($_GET['id']):'';
 		if($_GET['actimg']=='editinfo'){
 			$uStr=null;
@@ -161,20 +322,29 @@ class NavAction extends Action {
 			$insertId=$id;
 			if($insertId){
 				foreach($_FILES['imgsrc']['tmp_name'] as $k=> $val){
+					$pic_path=$uploadpath.$id."_".$k.'.jpg';
 					if($val&&$_FILES['imgsrc']['type'][$k]=='image/jpeg'){
-						$pic_path=$uploadpath.time().rand(100,999).'.jpg';}
-					if(@copy($val, $pic_path) || @move_uploaded_file($val, $pic_path)) 
-					{
+						@copy($val, $pic_path) || @move_uploaded_file($val, $pic_path);
+					}
+					$checksql="select * from ai_nav_content where id=$k and nid=$insertId";
+					$result=M('')->query($checksql);
+					if(!$result){
 						$filedata=null;
 						$filedata['nid']=intval($insertId);
 						$filedata['title']=$_POST['img_title'][$k];
 						$filedata['url']=$_POST['img_url'][$k];
 						$filedata['img']=$pic_path;
 						$filedata['sort']=$_POST['img_sort'][$k];
-
 						M('nav_content')->where("id in(".$k.")")->delete();
-						
 						M('nav_content')->add($filedata);
+					}else{
+						$updateSql="UPDATE ai_nav_content SET 
+						title = '".$_POST['img_title'][$k]."',
+						url = '".$_POST['img_url'][$k]."',
+						img = '".$pic_path."',
+						sort = '".$_POST['img_sort'][$k]."'
+						 WHERE id =$k";	
+						M('')->query($updateSql);
 					}
 				}
 			}
@@ -185,6 +355,7 @@ class NavAction extends Action {
 		$imgInfo = M('nav_content')->where("nid=$id")->findAll(); //顶级导航信息
 		$FmenusInfo = M('nav_menu')->where('partent_id=0')->findAll(); //顶级导航信息
 		$this->assign('listInfo', $listInfo[0]);
+		$this->assign('_modelArr', $modelArr);
 		$this->assign('imgInfo', $imgInfo);
 		$this->assign('id', $id);
 		$this->assign('FmenusInfo', $FmenusInfo);
@@ -198,7 +369,7 @@ class NavAction extends Action {
 		foreach($menusInfo as $key => $value)
 		{
 			$CmenusInfo=null;
-			$CmenusInfo=M('nav_menu')->where("partent_id='".$value['id']."'")->order('sort asc')->findAll();
+			$CmenusInfo=M('nav_menu')->where("partent_id='".$value['id']."' and status=1 ")->order('sort asc')->findAll();
 			$menusInfo[$key]['child']=$CmenusInfo;
 		}
 		file_put_contents('PublicCache/'.$fileName,"<?php\n\r return '".serialize($menusInfo)."';");
@@ -209,7 +380,8 @@ class NavAction extends Action {
 			'plan'=>1,
 			'train'=>2,
 			'nutri'=>3,
-			'append'=>4
+			'append'=>4,
+			'lifestyle'=>5,
 		);
 		$keywordinfo=null;
 		foreach($modelArr as $keyname =>$value){
@@ -278,20 +450,147 @@ class NavAction extends Action {
 			}
 			$keywordinfo[$key]=$tmp;
 		}
-		
-		
+		foreach ($keywordinfo as $key=>$value) {
+			foreach ($value as $k=>$v) {
+				$getSql=$res=null;
+				$getSql="select * from ai_nav_keyword where name='".$v."' and model='".$key."'";
+				$res=M('')->query($getSql);
+				if(!$res){
+					$insertSql=null;
+					$insertSql="INSERT INTO  `aijianmei`.`ai_nav_keyword` (
+					id ,name ,categoryid,model,sequence ,status)VALUES (NULL ,  '".$v."',  '0',  '".$key."',  '0',  '1')";
+					M('')->query($insertSql);
+				}
+			} 
+		}
+		$this->saveKeywordCache(); 
+	//var_dump($keywordinfo);
+		/*echo '<form action="/index.php?app=admin&mod=Nav&act=keywordcp&cleanall=1" method="post">
+		请确认初始化所有的关键字吗<input type="submit" value="确定"><input type="hidden" name="cleanall" value="1"></form>';
+		//$fileName='keywordInfo.php';
+		//file_put_contents('PublicCache/'.$fileName,"<?php\n\r return '".serialize($keywordinfo)."';");*/
+	}
+	
+	public function saveKeywordCache(){
+		$sql="select * from ai_nav_keyword where status=1 order by sequence,model";
+		$keywordinfo=M('')->query($sql);
+		//var_dump($keywordinfo);
+		foreach ($keywordinfo as $key => &$value) {
+			 $res=$getcnamesql=null;
+		 	 $getcnamesql="select * from ai_nav_keyword_category where id='".$value['categoryid']."'";
+		 	 $res=M('')->query($getcnamesql);
+		 	 if($res){
+		 	 		$value['cname']=$res[0]['name'];
+		 	 }
+		}
+		$keywordinfoTmp=null;
+		foreach ($keywordinfo as $key=>&$value) {
+				if(!in_array($value['name'],$keywordinfoTmp[$value['model']][$value['cname']]))
+				{
+					$keywordinfoTmp[$value['model']][$value['cname']][]=$value['name'];
+				}
+		} 
 		$fileName='keywordInfo.php';
-		file_put_contents('PublicCache/'.$fileName,"<?php\n\r return '".serialize($keywordinfo)."';");
+		file_put_contents('PublicCache/'.$fileName,"<?php\n\r return '".serialize($keywordinfoTmp)."';");
 	}
 	public function saveImginfo(){
 		$fileName='advImgCache.php';
 		$advInfoTmp=null;
 		$advInfo = M('nav_list')->findAll(); //顶级导航信息
 		foreach($advInfo as $k =>$v){
-			$advInfoTmp[$v['nav_name']]=$v;
-			$contentinfo=M('nav_content')->where("nid='".$v['id']."'")->findAll();
+			//$advInfoTmp[$v['nav_name']]=$v;
+			//$contentinfo=M('nav_content')->where("nid='".$v['id']."' order by sort asc")->findAll();
+			$contentinfo=M()->query("select * from ai_nav_content where nid ='".$v['id']."' order by sort asc");
 			$advInfoTmp[$v['nav_name']]['imginfo']=$contentinfo;
 		}
 		file_put_contents('PublicCache/'.$fileName,"<?php\n\r return '".serialize($advInfoTmp)."';");
+		//print_r($advInfoTmp);
+	}
+	
+	public function proIndexAd(){
+		$uploadpath='navupload/';
+		if($_POST['nav_action']=='add'){
+			$pic_path=$uploadpath.time().rand().'.jpg';
+			if($_FILES['img']['type']=='image/jpeg'){
+				copy($_FILES['img']['tmp_name'], $pic_path) || move_uploaded_file($_FILES['img']['tmp_name'], $pic_path);
+			}
+			$sql="INSERT INTO ai_nav_product_list (id,name,price,link,img,sequence,status)
+			VALUES(NULL,'".$_POST['name']."','".$_POST['price']."','".$_POST['link']."','".$pic_path."','".$_POST['sequence']."','".$_POST['status']."')";
+			M('')->query($sql);
+		}
+		$getSql="select * from ai_nav_product_list order by sequence";
+		$prolist=M('')->query($getSql);
+		$this->prolistCache();			
+		$this->assign('prolist', $prolist);
+		$this->display();
+	}
+	public function proIndexAdedit(){
+		$uploadpath='navupload/';
+		$id=$_GET['id'];
+		if($_POST['nav_action']=='doedit'){
+			$id=$_POST['eid'];
+			unset($_POST['nav_action']);unset($_POST['eid']);
+			//print_r($_POST);
+			$pic_path=null;
+			if($_FILES['img']['type']=='image/jpeg'){
+				$pic_path=$uploadpath.time().rand().'.jpg';
+				copy($_FILES['img']['tmp_name'], $pic_path) || move_uploaded_file($_FILES['img']['tmp_name'], $pic_path);
+				$sql="UPDATE  ai_nav_product_list SET img ='".$pic_path."' WHERE  id =$id";
+				M('')->query($sql);
+			}
+			$sql="UPDATE  ai_nav_product_list SET 
+			name ='".$_POST['name']."',price ='".$_POST['price']."',
+			link ='".$_POST['link']."',sequence ='".$_POST['sequence']."',status ='".$_POST['status']."'
+			WHERE  id =$id";	
+			M('')->query($sql);
+		}
+		$this->prolistCache();
+		$getSql="select * from ai_nav_product_list where id=$id";
+		$prolist=M('')->query($getSql);			
+		$this->assign('prolist', $prolist[0]);
+		$this->display();
+	}	
+	public function placardManager(){
+		if($_POST['content']!=''){
+			$checkSql="select * from ai_nav_placard";
+			$res=M('')->query($checkSql);
+			if(!$res){
+				$sql="INSERT INTO  `aijianmei`.`ai_nav_placard` (id ,content)
+				VALUES (NULL ,  '".t($_POST['content'])."')";
+				M('')->query($sql);
+			}else{
+				$sql="UPDATE ai_nav_placard SET  content = '".t($_POST['content'])."' WHERE id ='".$res[0]['id']."'";
+				M('')->query($sql);	
+			}		
+		}
+		$getsql="select * from ai_nav_placard";
+		$placardList=M('')->query($getsql);
+		$this->assign('prolist', $placardList[0]);
+		$this->display('placardManager');
+	}
+	public function delByType(){
+		$tableType=$_POST['tabletype'];
+		$tableNameList=array(
+			'nav_product_list'=>'prolistCache',
+		);
+		if(!in_array($tableType,$tableNameList)){echo 0;return;}
+		
+		$res=M($tableType)->where("id in(".$_POST['login_record_id'].")")->delete();
+		if($res)
+		{
+			//$this->saveImginfo();
+			echo 1;
+		}
+		else{
+			echo 0;
+			return;
+		}
+	}
+	public function prolistCache(){
+		$fileName='proListCache.php';
+		$getallsql=$listinfo=null;
+		$getallsql="select * from ai_nav_product_list order by sequence asc";
+		$listinfo=M('')->query($getallsql);
+		file_put_contents('PublicCache/'.$fileName,"<?php\n\r return '".serialize($listinfo)."';");
 	}
 }

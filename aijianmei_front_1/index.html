@@ -361,7 +361,48 @@
 		        		</div>
 		        	</div>
 		        	<div class="same_part">
-		        		<img src="images/ad1.jpg" />
+		        		<div class="banner_1">
+							<div class="adv_part">
+								<ul class="adv_pic_part">
+									<li>
+										<a>
+											<img src="images/training/tr_1.jpg">
+											<p>康比特1</p>
+											<p class="adv_price">￥ 320.00</p>
+										</a>	
+									</li>
+									<li>
+										<a>
+											<img src="images/training/tr_1.jpg">
+											<p>康比特2</p>
+											<p class="adv_price">￥ 320.00</p>
+										</a>	
+									</li>
+									<li>
+										<a>
+											<img src="images/training/tr_1.jpg">
+											<p>康比特3</p>
+											<p class="adv_price">￥ 320.00</p>
+										</a>	
+									</li>
+								</ul>
+							</div>
+							<div class="adv_choice">
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>
+						</div>
+		        	</div>
+		        	<div class="same_module">
+		        		<h3 class="sm_title">公告栏</h3>
+		        		<div class="public_tell">
+		        			<p>文明上网自觉自定司法局阿萨德啊发送到法国阿凡哥仨的风格</p>
+		        			<a>查看闲情</a>
+		        			<a>查看闲情</a>
+		        			<a>查看闲情</a>
+		        			<a>查看闲情</a>
+		        		</div>
 		        	</div>
 	        	</div>
 	        </div>
@@ -556,6 +597,34 @@
 						$(this).find(".bn_bg").slideDown(300);	
 					}
 				});
+
+				//大图自动切换，左右切换，选择切换
+				var sWidth_1 = $(".banner_1").width(); //获取焦点图的宽度（显示面积）
+				var len_1 = $(".banner_1 .adv_pic_part li").length; //获取焦点图个数
+				var index_1 = 0;
+				var picTimer_1;
+
+				//左右滚动，外围ul元素的宽度
+				$(".banner_1 .adv_pic_part").css("width",sWidth_1 * (len_1));
+
+				$(".banner_1 .adv_choice span").css("background","url(images/dian.png)").click(function() {
+						index_1 = $(".banner_1 .adv_choice span").index(this);
+						showPics_1(index_1);
+				}).eq(0).trigger("click");
+
+				//鼠标滑上焦点图时停止自动播放，滑出时开始自动播放
+				setInterval(function(){
+						showPics_1(index_1);
+						index_1++;
+						if(index_1 == len_1) {index_1 = 0;}
+					},8000);
+
+				function showPics_1(index) { //普通切换
+					var nowLeft_1 = -index*sWidth_1; //根据index值计算ul元素的left值
+					$(".banner_1 .adv_pic_part").stop(true,false).animate({"left":nowLeft_1},300); //通过animate()调整ul元素滚动到计算出的position
+					$(".banner_1 .adv_choice span").css("background","url(images/dian.png)").eq(index).css("background","url(images/landian.png)"); //为当前的按钮切换到选中的效果
+				}
+
 			});
 		</script>
 		<script type="text/javascript" src="js/public.js"></script>

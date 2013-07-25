@@ -101,7 +101,6 @@ function SelectZone()
     {
       return;
     }
-
     var selOpt  = new Array();
 
     for (var i = 0; i < this.sourceSel.length; i ++ )
@@ -121,10 +120,10 @@ function SelectZone()
           }
         }
 
-        if (!exsits)
-        {
+        //if (!exsits)
+        //{
           selOpt[selOpt.length] = this.sourceSel.options[i].value;
-        }
+        //}
       }
       else
       {

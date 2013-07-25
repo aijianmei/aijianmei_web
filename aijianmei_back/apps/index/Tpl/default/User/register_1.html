@@ -47,6 +47,7 @@
 	<script type="text/javascript" src="Templates/js/public.js"></script>
 
 	<script type="text/javascript">
+var changeFlag=false;		
 	$(function() {
 		$("#email").val('');$("#password").val('');$("#password_again").val('');
 		$("#email").click(function() {
@@ -135,6 +136,7 @@
 		}
 	}
 	function regformsub(){
+		changeFlag=false;	
 		var pwd=$("#password").val();
 		var repwd=$("#password_again").val();
 		if($("#partemail").val()!=1){
@@ -155,5 +157,33 @@
 			return false;
 		}
 	}
+
+	
+//标识文本框值是否改变，为true，标识已变 
+$(document).ready(function() {
+	//文本框值改变即触发     
+	$("input[type='password'],input[type='text']").change(function(){
+			changeFlag=true;     
+	});
+});	
+
+//页面离开提示	
+	
+	if (typeof window.addEventListener === 'undefined') {
+    window.addEventListener = function(e, callback) {
+        return window.attachEvent('on' + e, callback);
+    }
+}
+
+window.addEventListener('beforeunload', function() {
+	if(changeFlag){
+		return '页面值已经修改，是否要保存？';
+	}
+});
+	
+	
+	
+	
+	
 	</script>
 </html>

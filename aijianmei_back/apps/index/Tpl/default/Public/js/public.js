@@ -15,21 +15,7 @@ function gbcount(message,total,used,remain)
     } 
 }
 
-function recordlike(){
- var vid=$("#videoid").val();
-    $.ajax({
-        type: "POST",
-        url: "ajax.php",
-        dataType:"json",
-        data: "act=recordlike&data=ford&vid="+vid,
-        success: function(data){
-            var video_num_like=$("#video_num_like").html();
-            video_num_like=video_num_like+1;
-            
-            alert(data);
-        }
-    });
-}
+
 
 
 $(function(){
@@ -475,7 +461,11 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
 
 //textarea focus()
     $(".comment_inp").click(function(){
-        $(this).html("");
+
+    	if($(this).val()=='有什么感想，来说说吧'){
+    		//alert($(this).val());
+    		$(this).html("");
+    	}
     })
 
 //公共部分！！！选择页面，上下页切换

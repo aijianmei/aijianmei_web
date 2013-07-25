@@ -1,4 +1,4 @@
-	        	<div class="same_module clearfix">
+	        	<!--<div class="same_module clearfix">
 	        		<h3 class="sm_title">精彩评论</h3>
 					<php>foreach($_CommentList as $key=>$value){</php>
 	        		<div class="recomment_good clearfix">
@@ -12,14 +12,30 @@
 						</div>
 	        		</div>
 					<php>}</php>
-	        		<!--<div class="recomment_good clearfix">
-	        			<a class="re_host"><img src="Templates/images/training/person_message.jpg"></a>
-	        			<div class="re_part">
-	        				<a class="re_name">outside</a>
-<div class="re_content">
-	        				<a class="detail" data-original-title="提示内容提示内容提示内容提示内容提示内容提示内容提示ss">我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁,我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁我觉得吧！我的评论很优秀，如果不让我上榜，我终身不嫁<i class="re_angle"></i></a>
-</div>	        			
-						</div>
-	        		</div>-->
 	        		<a class="recomment_read_more" href="/goodcomment.html">更多精彩评论></a>
-	        	</div>
+	        	</div>-->
+	        	<div class="same_module clearfix">
+		        		<h3 class="sm_title">精彩评论</h3>
+		        		<div id="recoment" class="recoment" style="position:relative;height:600px;overflow:hidden;">
+		        			<div id="circle_one">
+		        				<php>foreach($_CommentList as $key=>$value){</php>
+				        		<div class="recomment_good clearfix">
+				        			<a class="re_host"><img src="{$value.userimg}" alt="{$value.userLname}"></a>
+				        			<div class="re_part">
+				        				<a class="re_name" href="/goodcomment.html" title="{$value.userLname}">{$value.userSname}</a>
+				        				<div class="re_content">
+				        					<a class="detail" onmouseover="add_tip(this,{content:'<?php echo $value['comtotitle'];?>',width:'150',id_show:'show_div',relative:'recoment',mouseout_classname:'detail'})">{$value.content}<i class="re_angle"></i></a>
+				        				</div>
+				        			</div>
+				        		</div>
+				        		<php>}</php>
+				        	</div>
+				        	<div id="circle_two"></div>
+			        	</div>
+		        		<a class="recomment_read_more" href="/goodcomment.html">更多精彩评论></a>
+		        	</div>
+	        	
+	        	
+	        	
+	        	
+	        	

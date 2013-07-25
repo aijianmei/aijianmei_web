@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<link rel="stylesheet" href="css/public.css">
+	<link rel="stylesheet" href="css/account.css">
+        <script type="text/javascript" src="js/public.js"></script>
+        
+	</head>
+	<body>
+		<!-- outside head -->
+		<div class="head">
+			<div class="header">
+                <div class="h_bg">
+                    <a href=""><div class="logo_1">logo</div></a>
+                    <span class="account_login">
+                        <a>已有帐号？</a>
+                        <a class="login"></a>
+                    </span>   
+                </div>
+            </div>
+		</div>
+        <!-- outside wrapper -->
+        <div class="wrapper">
+        	<div class="wrapper_bg clearfix">
+        		<div class="ac_state">
+        			<div class="ac_state_lay">
+	        			<span>创建帐号</span>
+	        			<span class="current_state">选择喜爱</span>
+	        			<span>注册成功</span>
+	        		</div>
+        		</div>
+                <div class="rg_choice">
+                    <h2>来爱健美,我希望...</h2>
+                    <ul class="rg_choice_way clearfix">
+                        <li class="rg_choice_lay tab">
+                            <span href="index.html" class="rg_choice_part">
+                                <img src="images/register/way_1.jpg">
+                                <div class="rg_img_bg"></div>
+                                <div class="rg_img_hack"></div>
+                                <div class="rg_way_content">
+                                    <p>吃得更营养</p>            
+                                </div>
+                                <div class="rg_way_bg"></div>
+                            </span>
+                        </li>
+                        <li class="rg_choice_lay tab">
+                            <span class="rg_choice_part">
+                                <img src="images/register/way_2.jpg">
+                                <div class="rg_img_bg"></div>
+                                <div class="rg_img_hack"></div>
+                                <div class="rg_way_content">
+                                    <p>增肌更有型</p>            
+                                </div>
+                                <div class="rg_way_bg"></div>
+                            </span>
+                        </li>
+                        <li class="rg_choice_lay tab">
+                            <span class="rg_choice_part">
+                                <img src="images/register/way_3.jpg">
+                                <div class="rg_img_bg"></div>
+                                <div class="rg_img_hack"></div>
+                                <div class="rg_way_content">
+                                    <p>减肥一身轻</p>            
+                                </div>
+                                <div class="rg_way_bg"></div>
+                            </span>
+                        </li>
+                        <li class="rg_choice_lay tab">
+                            <span class="rg_choice_part">
+                                <img src="images/register/way_4.jpg">
+                                <div class="rg_img_bg"></div>
+                                <div class="rg_img_hack"></div>
+                                <div class="rg_way_content">
+                                    <p>营养</p>           
+                                </div>
+                                <div class="rg_way_bg"></div>
+                            </span>
+                        </li>
+                        <li class="rg_choice_lay tab">
+                            <span class="rg_choice_part">
+                                <img src="images/register/way_5.jpg">
+                                <div class="rg_img_bg"></div>
+                                <div class="rg_img_hack"></div>
+                                <div class="rg_way_content">
+                                    <p>交友</p>           
+                                </div>
+                                <div class="rg_way_bg"></div>
+                            </span>
+                        </li>
+                        <li class="rg_choice_lay tab">
+                            <span class="rg_choice_part">
+                                <img src="images/register/way_6.jpg">
+                                <div class="rg_img_bg"></div>
+                                <div class="rg_img_hack"></div>
+                                <div class="rg_way_content">
+                                    <p>放松</p>           
+                                </div>
+                                <div class="rg_way_bg"></div>
+                            </span>
+                        </li>
+                        <li class="rg_choice_lay tab">
+                            <span class="rg_choice_part">
+                                <img src="images/register/way_7.jpg">
+                                <div class="rg_img_bg"></div>
+                                <div class="rg_img_hack"></div>
+                                <div class="rg_way_content">
+                                    <p>增肌</p>           
+                                </div>
+                                <div class="rg_way_bg"></div>
+                            </span>
+                        </li>
+                        <li class="rg_choice_lay tab">
+                            <span class="rg_choice_part">
+                                <img src="images/register/way_8.jpg">
+                                <div class="rg_img_bg"></div>
+                                <div class="rg_img_hack"></div>
+                                <div class="rg_way_content">
+                                    <p>增肌</p>           
+                                </div>
+                                <div class="rg_way_bg"></div>
+                            </span>
+                        </li>
+                        <li class="rg_choice_lay tab">
+                            <span class="rg_choice_part">
+                                <img src="images/register/way_9.jpg">
+                                <div class="rg_img_bg"></div>
+                                <div class="rg_img_hack"></div>
+                                <div class="rg_way_content">
+                                    <p>增肌</p>           
+                                </div>
+                                <div class="rg_way_bg"></div>
+                            </span>
+                        </li>
+                        <li class="rg_choice_lay_sp tab">
+                            <span class="rg_choice_part rg_add_part">
+                                <div class="rg_way_content">
+                                    <p class="rg_way_text">我来填</p>  
+                                    <input type="text" id="rg_way_input" class="rg_way_input" maxlength="6" onkeyup="if(!checktxt(this.value)){this.value='';alert('请输入正确的字符');};" />        
+                                </div>
+                                <div class="rg_way_bg"></div>
+                            </span>
+                        </li>
+                    </ul>
+                    <a class="ac_complete" onclick="upkeysub();"></a> 
+                </div>
+                   
+	        </div>
+        </div>
+        <form action="" method="post" id="postkeyform"></form>
+        <!-- login_table begin-->
+        <div class="login_bg"></div>
+        <div class="login_table">
+            <i class="lg_back">×</i>
+            <h4>登录爱健美</h4>
+            <div class="lg_border"><span></span></div>
+            <div class="lg_part clearfix">
+                <div class="lg_coop">
+                    <h3>使用合作网站帐号登录</h3>
+                    <ul class="lg_wrap_choice clearfix">
+                        <li><a class="lg_coop_1"></a></li>
+                        <li><a class="lg_coop_2"></a></li>
+                    </ul>
+                    <p>也可以选择马上注册</p>
+                    <div class="lg_aijianmei"><a></a></div>
+                </div>
+                <div class="lg_our">
+                    <div class="lg_our_lay">
+                        <p>使用注册邮箱登录</p>
+                        <form>
+                            <div class="lg_input">
+                                <label class="lg_text" for="lg_text">邮箱</label>
+                                <input type="text" id="lg_text" />
+                            </div>
+                            <div class="lg_input">
+                                <label class="lg_password"  for="lg_password">密码</label>
+                                <input type="password" id="lg_password" />
+                            </div>
+                            <div class="lg_sure">
+                                <a class="lg_fix"></a>
+                                <a class="lg_forget">忘记密码?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div> 
+        </div>
+         <!-- login_table end-->
+         <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript">
+            function checktxt(str){
+                var txt = new RegExp("[ ,\\~,\\!,\\@,\#,\\$,\\%,\\^,\\+,\\*,\\&,\\\\,\\/,\\?,\\|,\\:,\\.,\\<,\\>,\\{,\},\\(,\\),\\;,\\=]");
+                //特殊字符正则表达式
+                if (txt.test(str)) {
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+            function upkeysub(){
+                $("#postkeyform").submit();
+            }
+
+            //for keycode enter to dt_weight_height_year_input
+            document.onkeydown = function(event){//回车事件触发onblur
+                if(event.keyCode == 13 && !document.all){
+                    var activename = document.activeElement.id; // 当前获取焦点的对象
+                    if(activename == 'rg_way_input'){
+                        document.getElementById(activename).blur();
+                    }
+                }
+            };
+
+            var init = function(){
+                var newdom = new getdom,
+                    rg_choice_way = newdom.getElementsByClass("rg_choice_way")[0],
+                    rg_choice_lay = newdom.getElementsByClass("rg_choice_lay"),
+                    rg_way_content = newdom.getElementsByClass('rg_way_content'),
+                    rg_ct_len = rg_way_content.length,
+                    len_choice = rg_choice_lay.length,
+                    rg_way_bg = newdom.getElementsByClass('rg_way_bg'),
+                    rg_img_bg = newdom.getElementsByClass('rg_img_bg'),
+                    rg_img_hack = newdom.getElementsByClass('rg_img_hack'),
+                    rg_choice_lay_sp = rg_choice_way.children[rg_ct_len-1];
+
+
+
+                //for login part (click to show)
+                var login = newdom.getElementsByClass('login'),
+                    len_login = login.length,
+                    lg_back = newdom.getElementsByClass('lg_back')[0];
+                    for(var i = 0;i < len_login;i++){
+                            if(login[i]){
+                                    addevent(login[i],'click',aijianmei.acTion);
+                            }
+                    }
+                    if(lg_back){
+                            addevent(lg_back,'click',aijianmei.removeacTion);
+                    }
+
+
+                //for love choice (code from register_3)
+                for(var i = 0;i < len_choice;i++){
+                    rg_choice_lay[i].index = i;
+                    rg_choice_lay[i].onmouseover = function(){
+                        aijianmei.chang_top(rg_way_content[this.index],0,31,50);
+                        aijianmei.chang_top(rg_way_bg[this.index],0,31,50);
+                        rg_img_bg[this.index].style.opacity = 0;
+                    }
+                    rg_choice_lay[i].onmouseout = function(){
+                        aijianmei.chang_top(rg_way_content[this.index],1,31,50);
+                        aijianmei.chang_top(rg_way_bg[this.index],1,31,50);
+                        rg_img_bg[this.index].style.opacity = 0.5;
+                    }
+                    rg_choice_lay[i].onclick = function(){
+                        if(rg_img_bg[this.index].style.display != "none"){
+                            aijianmei.chang_top(rg_way_content[this.index],0,31,50);
+                            aijianmei.chang_top(rg_way_bg[this.index],0,31,50);
+                            rg_img_bg[this.index].style.display = 'none';
+                            rg_img_hack[this.index].style.display = 'block';
+                            $("#postkeyform").append('<input type="hidden" value="'+rg_way_content[this.index].getElementsByTagName('p')[0].innerHTML+'" name="sk[]">');
+                        }
+                        else{
+                            $("#postkeyform").find('input[value='+rg_way_content[this.index].getElementsByTagName('p')[0].innerHTML+']').remove();
+                            aijianmei.chang_top(rg_way_content[this.index],1,31,50);
+                            aijianmei.chang_top(rg_way_bg[this.index],1,31,50);
+                            rg_img_bg[this.index].style.display = 'block';
+                            rg_img_hack[this.index].style.display = 'none';
+                        }   
+                    }
+                }       
+                // rg_choice_lay_sp
+                if(rg_choice_lay_sp){
+                    addevent(rg_choice_lay_sp,'mouseover',move);
+                    addevent(rg_choice_lay_sp,'mouseout',leave)
+                }
+                function move(){
+                    var that = this;
+                    if(document.all){
+                        var parent = window.event.srcElement;
+                        while(parent.className != 'rg_choice_lay_sp tab'){
+                            parent = parent.parentNode;
+                        }
+                        if(parent.className == 'rg_choice_lay_sp tab'){ 
+                            that = parent;
+                        }
+                    }
+                    var rg_way_text = that.getElementsByTagName('p')[0],
+                        rg_way_input = that.getElementsByTagName('input')[0],
+                        rg_way_a = that.getElementsByTagName('span')[0];
+                    rg_way_input.focus();
+                    rg_way_text.style.display = "none";
+                    rg_way_input.style.display = "block";
+                    rg_way_input.onblur = function(){
+                        if(rg_way_input.value == ""){
+                            rg_way_input.style.display = "none";
+                            rg_way_text.style.display = "block";
+                        }
+                        else{
+                            rg_way_a.innerHTML = rg_way_input.value;
+                            $("#postkeyform").append('<input type="hidden" value="'+rg_way_input.value+'" name="sk[]">');
+                            var li = document.createElement('li');
+                            li.className = 'rg_choice_lay_sp tab';
+                            li.innerHTML = '<span class="rg_choice_part rg_add_part"><div class="rg_way_content"><p class="rg_way_text">我来填</p><input type="text" id="rg_way_input" class="rg_way_input" maxlength="6" /></div><div class="rg_way_bg"></div></span>';
+                            rg_choice_way.appendChild(li);
+                            //remove event of rg_choice_lay_sp 
+                            remove_event(rg_choice_lay_sp,'mouseover',move)
+                            //build new rg_choice_lay_sp
+                            var tab = newdom.getElementsByClass('tab'),
+                                tab_len = tab.length;
+                                rg_choice_lay_sp = rg_choice_way.children[tab_len-1];
+                            //get new obj add mouseover
+                            addevent(rg_choice_lay_sp,'mouseover',move);
+                            addevent(rg_choice_lay_sp,'mouseout',leave);
+                        }
+                    }
+                }
+                function leave(){
+                    var that = this;
+                    if(document.all){
+                        var parent = window.event.srcElement;
+                        while(parent.className != 'rg_choice_lay_sp tab'){
+                            parent = parent.parentNode;
+                        }
+                        if(parent.className == 'rg_choice_lay_sp tab'){ 
+                            that = parent;
+                        }
+                    }
+                     var rg_way_text = that.getElementsByTagName('p')[0],
+                        rg_way_input = that.getElementsByTagName('input')[0];
+                    if(rg_way_input && rg_way_input.value == ""){
+                        rg_way_input.style.display = "none";
+                        rg_way_text.style.display = "block";
+                    }
+                }
+                // document.onclick = function(){
+                //  tab = newdom.getElementsByClass('tab');
+                //  rg_ct_len = tab.length;
+                //  console.log(rg_ct_len);
+                // }
+            }
+
+            init();
+                
+
+
+
+            aijianmei.form_jugde('lg_text','lg_password');//add classname for input focue and label disappear
+        </script>
+	</body>
+</html>

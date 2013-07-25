@@ -40,16 +40,27 @@ class AppendAction extends Action {
          $this->assign('name_4',$name_4);
 		 
 		//new banner add
-		 $bannerinfo=array(
+		
+		$bannerinfo=unserialize(include('PublicCache/advImgCache.php'));
+    $bannerinfo=$bannerinfo['append'];
+
+    foreach ($bannerinfo['imginfo'] as $key=>$value) {
+     	 $bannerinfoTmp[$key]['name']=$value['title'];
+     	 $bannerinfoTmp[$key]['img']='../'.$value['img'];
+     	 $bannerinfoTmp[$key]['url']=$value['url'];
+    } 
+
+    $bannerinfo=$bannerinfoTmp;       
+		/*$bannerinfo=array(
 		'1'=>array(
 			'name'=>'没有蛋白质就没有“肌肉梦”',
 			'img'=>'../Public/images/banner/append_1.jpg',
 			'url'=>'/index-Index-articleDetail-60.html'
 			),
 		'2'=>array(
-			'name'=>'增肌必备！六大营养辅助品',
+			'name'=>'七招营养秘笈，吃出“肌肉”',
 			'img'=>'../Public/images/banner/append_2.jpg',
-			'url'=>"/index-Index-articleDetail-92.html"),
+			'url'=>"/index-Index-articleDetail-34.html"),
 		'3'=>array(
 			'name'=>'也来八卦“蛋白质”',
 			'img'=>'../Public/images/banner/append_3.jpg',
@@ -58,7 +69,7 @@ class AppendAction extends Action {
 			'name'=>'肌肉的发动机：肌氨酸',
 			'img'=>'../Public/images/banner/append_4.jpg',
 			'url'=>"/index-Index-articleDetail-57.html"),
-		);
+		);*/
 		 $this->assign('_bannerInfo',$bannerinfo);
 		 //}}}end
 		 

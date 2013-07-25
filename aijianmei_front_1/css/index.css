@@ -375,7 +375,7 @@
 			height: 38px;
 			line-height: 38px;
 			padding-left: 10px;
-			background: #F1F1F1;
+			background: url(../images/123.jpg) repeat-x;
 		}
 		/*pm------*/
 		.pm_pic{
@@ -384,6 +384,19 @@
 		.pm_pic img{
 			width:55px;
 			height:55px;
+		}
+		/*public_tell*********/
+		.public_tell{
+			padding: 20px 10px;
+			font-size: 18px;
+			line-height: 34px;
+		}
+		.public_tell p{
+			color:#666;
+		}
+		.public_tell a{
+			display: block;
+			color:#0082b6;
 		}
 		/*person message 登录 注册--------------------*/
 		.most_top{
@@ -502,15 +515,65 @@
 		
 
 		}
-		/*same_ad---------------*/
-		.same_ad{
-			padding: 10px;
-			margin-bottom: 10px;
-			background: #F2F2F2;	
-		}
-		.same_ad img{
+		/*adv_banner---------------*/
+			.banner_1{
+				position: relative;
+				width: 280px;
+			}
+			.adv_part{
+				position: relative;
+				width: 280px;
+				height:370px;
+				overflow: hidden;
+			}
+			.adv_part ul{
+				position: absolute;
+				left: 0px;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			.adv_part li{
+				float: left;
+				width: 280px;
+				height: 370px;
+			}
+			.adv_part a{
+				display: block;
+				background: white;
+			}
+			.adv_part img{
+				width: 276px;
+				height: 276px;
+				padding: 2px 2px 0px;
+				margin: 0 auto;
+			}
+			
+			/*adv_pic_part***********/
+			.adv_pic_part{
 
-		}
-
-
+			}
+			.adv_pic_part a p{
+				margin: 10px 0 16px;
+				font-size: 20px;
+				line-height: 22px;
+				color: #333;
+				text-align: center;
+			}
+			.banner_1 .adv_price{
+				padding-bottom: 10px;
+				color:#e20000;
+			}
+			/*adv_choice***********/
+			.adv_choice{
+				width: 280px;
+				padding: 10px 0;
+				text-align: center;
+			}
+			.adv_choice span{
+				display: inline-block;
+				width: 10px;
+				height: 10px;
+				background: url(../images/dian.png) no-repeat;
+			}
 /*website index ending*************************/

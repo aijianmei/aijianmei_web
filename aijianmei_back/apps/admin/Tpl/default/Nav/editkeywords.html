@@ -1,0 +1,57 @@
+<include file="../Public/_header" />
+<div class="so_main">
+  <div class="page_tit">关键字分类编辑</div>
+  <div class="list" id="adddiv">
+  	
+  <form action="" method="post">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th class="line_l">名称</th>
+		<th class="line_l">排序</th>
+		<th class="line_l">所属模块</th>
+    <th class="line_l">所属分类</th>
+    <th class="line_l">状态</th>
+  </tr>
+  <tr>
+  <input type="hidden" name="id" value="{$keywordinfo.id}">
+  <td><input type="text" name="name" value="{$keywordinfo.name}"></td>
+  <td><input type="text" name="sequence" value="{$keywordinfo.sequence}"></td>
+  <td><select name="model">
+  		<php>foreach($modelArr as $k => $v){</php>
+  		<option value="{$k}" <?php if($k==$keywordinfo['model']){echo 'selected="selected"';}?>>{$v}</option>
+  		<php>}</php>
+ </select></td>
+  <td><select name="categoryid">
+  		<php>foreach($allcateinfo as $k => $v){</php>
+  		<option value="{$v['id']}" <?php if($k==$keywordinfo['categoryid']){echo 'selected="selected"';}?>>{$modelArr[$v['model']]}_{$v['name']}</option>
+  		<php>}</php>
+ </select></td>
+  <td><select name="status">
+  <option value="1" <?php if($keywordinfo['status']==1){echo 'selected="selected"';}?>>开启</option>
+  <option value="0" <?php if($keywordinfo['status']==0){echo 'selected="selected"';}?>>关闭</option>
+  </select></td>
+  </tr>
+	<tr>
+	<td colspan="4"><input type="submit" name="" value="保存"></td>
+	</tr>
+  </table>
+  <input type="hidden" name="nav_action" value="doedit">
+  </form>
+  </div>
+<script>
+function changeshowval(obj){
+	$(obj).val('')
+}
+function saveeditbox(kid){
+	//alert(1);
+	//$(obj).attr('nid');
+	//$("#span_"+kid).attr("onclick","showeditbox(this);");
+	//alert($(obj).parent().attr('nid','001'));
+	//$(obj).parent().attr('onclick',"showeditbox(this)");
+	$("#span_"+kid).html($("#input_".kid).val());
+	
+}
+</script>
+
+
+<include file="../Public/_footer" />

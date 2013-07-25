@@ -1851,7 +1851,7 @@ elseif ($_REQUEST['act'] == 'get_goods_list')
     $json = new JSON;
 
     $filters = $json->decode($_GET['JSON']);
-
+		//var_dump($filters);
     $arr = get_goods_list($filters);
     $opt = array();
 
@@ -1979,11 +1979,12 @@ elseif ($_REQUEST['act'] == 'add_group_goods')
     $arguments  = $json->decode($_GET['JSON']);
     $goods_id   = $arguments[0];
     $price      = $arguments[1];
+    $group_id   = $arguments[2];
 
     foreach ($fittings AS $val)
     {
-        $sql = "INSERT INTO " . $ecs->table('group_goods') . " (parent_id, goods_id, goods_price, admin_id) " .
-                "VALUES ('$goods_id', '$val', '$price', '$_SESSION[admin_id]')";
+        $sql = "INSERT INTO " . $ecs->table('group_goods') . " (parent_id, goods_id, goods_price, admin_id,group_id) " .
+                "VALUES ('$goods_id', '$val', '$price', '$_SESSION[admin_id]','$group_id')";
         $db->query($sql, 'SILENT');
     }
 

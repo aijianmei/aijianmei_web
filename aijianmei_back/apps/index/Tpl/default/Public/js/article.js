@@ -51,7 +51,11 @@ $(function(){
 
     //textarea focus()
     $(".comment_inp").click(function(){
-        $(this).html("");
+
+    	if($(this).val()=='有什么感想，来说说吧'){
+    		//alert($(this).val());
+    		$(this).html("");
+    	}
     })
     
     //提示登录

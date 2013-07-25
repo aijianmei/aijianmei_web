@@ -15,19 +15,19 @@
 					<php>foreach($lastArticles as $a) {</php>
 						<div class="cont_module clearfix">
 							<div class="cont_side_1">
-								<a href="/index-Index-articleDetail-{$a['id']}.html"><img alt="{$a['title']}" style="height:145px;width:215px;" src="{$SITE_URL}/public/images/article/{$a['img']}"></a>
+								<a href="/index-Index-articleDetail-{$a['id']}.html" target="_blank"><img alt="{$a['title']}" style="height:145px;width:215px;" src="{$SITE_URL}/public/images/article/{$a['img']}"></a>
 								<div class="show_share clearfix" style="margin-left:40px;">
-								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/{$a['img']}"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php if(!$a['front_cover']){echo $a['img'];}else{echo $a['front_cover'];}?>"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">
-								<h3 class="cont_title"><a href="/index-Index-articleDetail-{$a['id']}.html">{$a['title']}</a></h3>
+								<h3 class="cont_title"><a href="/index-Index-articleDetail-{$a['id']}.html" target="_blank">{$a['title']}</a></h3>
 								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span><php> echo date("Y-m-d",$a['create_time']);</php></span></span>
 								<p>{$a['brief']}</p>
-								<a class="cont_read_more" href="/index-Index-articleDetail-{$a['id']}.html">阅读全文></a>
+								<a class="cont_read_more" href="/index-Index-articleDetail-{$a['id']}.html" target="_blank">阅读全文></a>
 								<div class="cont_share">
-									<span class="cont_click">点击数:<span>{$a['reader_count']}</span></span>
-                                    <span class="cont_rec">评论数:<span>{$a['CommNumber']}</span></span>
+									<!--<span class="cont_click">点击数:<span>{$a['reader_count']}</span></span>-->
+									<span class="cont_rec">评论数:<span>{$a['CommNumber']}</span></span>
 								</div>
 							</div>
 						</div>
@@ -45,18 +45,18 @@
 					<php>foreach($hotArticles as $a) {</php>
 						<div class="cont_module clearfix">
 							<div class="cont_side_1">
-								<a href="/index-Index-articleDetail-{$a['id']}.html"><img alt="{$a['title']}" style="height:145px;width:215px;" src="{$SITE_URL}/public/images/article/{$a['img']}"></a>
+								<a href="/index-Index-articleDetail-{$a['id']}.html" target="_blank"><img alt="{$a['title']}" style="height:145px;width:215px;" src="{$SITE_URL}/public/images/article/{$a['img']}"></a>
 								<div class="show_share clearfix" style="margin-left:40px;">
-								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/{$a['img']}"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php if(!$a['front_cover']){echo $a['img'];}else{echo $a['front_cover'];}?>"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">
-								<h3 class="cont_title"><a href="/index-Index-articleDetail-{$a['id']}.html">{$a['title']}</a></h3>
+								<h3 class="cont_title"><a href="/index-Index-articleDetail-{$a['id']}.html" target="_blank">{$a['title']}</a></h3>
 								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span><php> echo date("Y-m-d",$a['create_time'])</php></span></span>
 								<p>{$a['brief']}</p>
-								<a class="cont_read_more" href="/index-Index-articleDetail-{$a['id']}.html">阅读全文></a>
+								<a class="cont_read_more" href="/index-Index-articleDetail-{$a['id']}.html" target="_blank">阅读全文></a>
 								<div class="cont_share">
-									<span class="cont_click">点击数:<span>{$a['reader_count']}</span></span>
+									<!--<span class="cont_click">点击数:<span>{$a['reader_count']}</span></span>-->
                                     <span class="cont_rec">评论数:<span>{$a['CommNumber']}</span></span>
 								</div>
 							</div>
@@ -75,20 +75,20 @@
 					<php>foreach ($lastVideoList as $k=>$v){</php>
 						<div class="cont_module clearfix">
 							<div class="cont_vd_1">
-								<a  class="cont_vd_link"  href="/index-Train-videoDetail-{$v['id']}.html"><img style="width:215px;height:145px;" alt="{$v['title']}" src="{$v['logo']}"><span class="cont_vd_bg" style="display: none;"></span></a>
+								<a class="cont_vd_link"  href="/index-Train-videoDetail-{$v['id']}.html" target="_blank"><img style="width:215px;height:145px;" alt="{$v['title']}" src="{$v['logo']}"><span class="cont_vd_bg" style="display: none;"></span></a>
 								<div class="show_share clearfix" style="margin-left:40px;">
 								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $v['htmlurl'];?>" pic="<?php echo $v['logo'];?>"  title="<?php echo $v['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_vd_2">
-								<h3 class="cont_vd_title"><a href="/index-Train-videoDetail-{$v['id']}.html">{$v['title']}</a></h3>
+								<h3 class="cont_vd_title"><a href="/index-Train-videoDetail-{$v['id']}.html" target="_blank">{$v['title']}</a></h3>
 								<div class="cont_vd_dt">
 									<p>标签:<span>{$v['keyword']}</span></p>
 									<p>简介:<span><php> echo msubstr($v['brief'],0,54);</php></span></p>
 								</div>
-								<a class="cont_vd_see" href="/index-Train-videoDetail-{$v['id']}.html"></a>
+								<a class="cont_vd_see" href="/index-Train-videoDetail-{$v['id']}.html" target="_blank"></a>
 								<div class="cont_share">
-									<span class="cont_vd_click">点击数:<span>{$v['click']}</span></span>
+									<!--<span class="cont_vd_click">点击数:<span>{$v['click']}</span></span>-->
                                     <span class="cont_rec">评论数:<span>{$v['CommNumber']}</span></span>
 								</div>
 							</div>
@@ -107,21 +107,21 @@
 					<php>foreach ($hotVideoList as $k=>$v){</php>
 						<div class="cont_module clearfix">
 							<div class="cont_vd_1">
-								<a  class="cont_vd_link"  href="/index-Train-videoDetail-{$v['id']}.html"><img style="width:215px;height:145px;" alt="{$v['title']}" src="{$v['logo']}"><span class="cont_vd_bg" style="display: none;"></span></a>
+								<a  class="cont_vd_link"  href="/index-Train-videoDetail-{$v['id']}.html" target="_blank"><img style="width:215px;height:145px;" alt="{$v['title']}" src="{$v['logo']}"><span class="cont_vd_bg" style="display: none;"></span></a>
 								<div class="show_share clearfix" style="margin-left:40px;">
 								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $v['htmlurl'];?>" pic="<?php echo $v['logo'];?>"  title="<?php echo $v['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_vd_2">
-								<h3 class="cont_vd_title"><a href="/index-Train-videoDetail-{$v['id']}.html">{$v['title']}</a></h3>
+								<h3 class="cont_vd_title"><a href="/index-Train-videoDetail-{$v['id']}.html" target="_blank">{$v['title']}</a></h3>
 								<div class="cont_vd_dt">
 									<p>标签:<span>{$v['keyword']}</span></p>
 									<p>简介:<span><php> echo msubstr($v['brief'],0,54);</php></span></p>
 								</div>
-								<a class="cont_vd_see" href="/index-Train-videoDetail-{$v['id']}.html"></a>
+								<a class="cont_vd_see" href="/index-Train-videoDetail-{$v['id']}.html" target="_blank"></a>
 								<div class="cont_share">
-									<span class="cont_vd_click">点击数:<span>{$v['click']}</span></span>
-                                    <span class="cont_rec">评论数:<span>{$v['CommNumber']}</span></span>
+									<!--<span class="cont_vd_click">点击数:<span>{$v['click']}</span></span>-->
+									<span class="cont_rec">评论数:<span>{$v['CommNumber']}</span></span>
 								</div>
 							</div>
 						</div>
@@ -146,10 +146,25 @@
         	</div>
         </div>
 	</div>
+	</div>
 <include file="Templates/footer.html" />
 <include file="Templates/loginpart.html" />
 		<input type="hidden" id="scroinfo" h="" sh="" top="">
-		<div class="title_tip"><div class="title_content"></div><div class="angle"><span></span></div></div>
+		<div class="title_tip">
+			<div class="title_content"></div>
+			<div class="angle"><span></span></div>
+		</div>
+		<div class="scroll_login">
+        	<div class="scroll_content">
+	        	<span class="scroll_tip">您还没有登录爱健美哦,这里可以登录</span>
+	        	<ul class="scroll_choice clearfix">
+	        		<li><a class="scroll_choice_1"></a></li>
+	        		<li><a class="scroll_choice_2"></a></li>
+	        		<li><a class="scroll_choice_3 login"></a></li>
+	        	</ul>
+        	</div>
+        	<i class="scroll_back">×</i>
+    </div>
         <script type="text/javascript" src="Templates/js/jquery.js"></script>
         <script type="text/javascript">
 			$(function() {
@@ -229,11 +244,19 @@
         <script type="text/javascript" src="Templates/js/public.js"></script>
         <script type="text/javascript">
         	var init = function(){
+
 			    var newdom = new getdom,
-			    	identifying = newdom.getElementsByClass('identifying')[0];
-			   aijianmei.identifying(identifying);
+				    identifying = newdom.getElementsByClass('identifying'),
+				    ident_len = identifying.length;
+
+				//circle
+				for(var i = 0;i < ident_len;i++){
+					aijianmei.identifying(identifying[i]);
+				}   
+
+			   //aijianmei.identifying(identifying);
 			   aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
-			   aijianmei.addtitle('detail');
+			   //aijianmei.addident_title('detail');
 			   aijianmei.hover('cont_vd_link','cont_vd_bg');
 			   aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
 			   aijianmei.form_jugde('lg_text','lg_password');

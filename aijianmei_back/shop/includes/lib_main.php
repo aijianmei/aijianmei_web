@@ -1539,6 +1539,7 @@ function parse_rate_value($str, &$operate)
 function recalculate_price()
 {
     /* 取得有可能改变价格的商品：除配件和赠品之外的商品 */
+	if($_SESSION['discount']==0){$_SESSION['discount']=1;}
     $sql = 'SELECT c.rec_id, c.goods_id, c.goods_attr_id, g.promote_price, g.promote_start_date, c.goods_number,'.
                 "g.promote_end_date, IFNULL(mp.user_price, g.shop_price * '$_SESSION[discount]') AS member_price ".
             'FROM ' . $GLOBALS['ecs']->table('cart') . ' AS c '.
@@ -1549,7 +1550,7 @@ function recalculate_price()
             "AND c.rec_type = '" . CART_GENERAL_GOODS . "' AND c.extension_code <> 'package_buy'";
 
             $res = $GLOBALS['db']->getAll($sql);
-
+    //$GLOBALS['db']->query("delete from " .$GLOBALS['ecs']->table('cart'). " where session_id='" . SESS_ID . "'");    
     foreach ($res AS $row)
     {
         $attr_id    = empty($row['goods_attr_id']) ? array() : explode(',', $row['goods_attr_id']);
@@ -1560,7 +1561,7 @@ function recalculate_price()
 
         $goods_sql = "UPDATE " .$GLOBALS['ecs']->table('cart'). " SET goods_price = '$goods_price' ".
                      "WHERE goods_id = '" . $row['goods_id'] . "' AND session_id = '" . SESS_ID . "' AND rec_id = '" . $row['rec_id'] . "'";
-
+                     
         $GLOBALS['db']->query($goods_sql);
     }
 

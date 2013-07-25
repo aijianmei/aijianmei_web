@@ -104,15 +104,25 @@ class UserAction extends Action {
 		$this->display('GetPwd_Fourth');
 	}
 	public function register(){
+		$sql="delete from ai_others where uid in (select uid from ai_user where uname is null)";
+		M('')->query($sql);
+		$sql="delete from ai_user where uname is null";
+		M('')->query($sql);
 		if($_SESSION['regrefer_url']==''&& $_SESSION['refer_url']!=''){
 			$_SESSION['regrefer_url'] = $_SESSION['refer_url'];
 		}
-		$this->display('register_1');
+		if($_SESSION['sinalogin']==1){
+			$this->display('account_third');
+		}else{
+			$this->display('account');	
+		}
+		
 	}
 	public function doregister()
 	{
 		//$_SESSION['allowbackreg']=$_SESSION['allowbackmid']=null;
 		if($_SESSION['sinalogin']==1){$_SESSION['deslogin']=1;}
+		$userName=addslashes($_POST['email']);
 		$userEmail=addslashes($_POST['email']);
 		$password=addslashes($_POST['password']);
 		$repassword=addslashes($_POST['repassword']);
@@ -137,7 +147,32 @@ class UserAction extends Action {
 				$sdata['uname']=addslashes($getuidinfo[0]['uname']);
 				$sdata['password']=addslashes($password);
 				$sdata['email']   =addslashes($userEmail);
-				_postCurlRegister($sdata);	
+				_postCurlRegister($sdata);
+				
+			/*forum 论坛 登陆api start by kontem at20130626*/
+			$pwUserInfoSql="select * from ai_pwforum.pw_user where username='".$uid[0]['user_name']."' and email='".$uid[0]['email']."'";
+			$pwUserInfo=M('')->query($pwUserInfoSql);
+			//检测用户是否已经有论坛对应的账号
+			if(empty($pwUserInfo[0])){
+			//不存在则调用注册api
+			$post_data=array( 
+				'username' => $getuidinfo[0]['uname'],
+			  'email' => $userEmail,
+			  'password' =>$password,
+			  'repassword' =>$password,
+			  );
+			$inserTmpSql=null;
+			$inserTmpSql="INSERT INTO  aijianmei.ai_forum_tmp_user (id ,email ,password)
+			VALUES (NULL ,  '".$userEmail."',  '".$password."')";  
+			M('')->query($inserTmpSql);
+			$url=AIBASEURL."/forum/pwApi.php?pwact=register";
+			$out=_CurlPost($url,$post_data);//targetUrl postData
+			}
+			$_SESSION['locallogin_password']=$password;
+			//调用登陆api
+
+			/*论坛部分自己回调登陆*/
+			/*forum 论坛 登陆api end*/
 			}
 			else
 			{
@@ -155,7 +190,7 @@ class UserAction extends Action {
 			$_SESSION['allowbackmid']=$mid;
 			$_SESSION['loginIcpkey']=md5('aijianmei'.$mid);
 		}
-		$this->display('register_2');
+		$this->display('account_love');
 	}
 	
 	public function setchannelinfo(){
@@ -179,13 +214,17 @@ class UserAction extends Action {
 					M('')->query($insertSql);
 				}
 				if($_SESSION['otherlogin']==1){
+					$getUserInfo=M('')->query("select uname from ai_user where uid=$mid");
+					$url=AIBASEURL."/forum/pwApi.php?pwact=login";
+					$post_data=array(
+					'username' => $getUserInfo[0]['uname'],
+					'password' =>$_SESSION['locallogin_password'],
+					);
+					$_SESSION['pwai_url']=_CurlPost($url,$post_data);
+					@setcookie('pwai_url', $_SESSION['pwai_url'], 3600*24);
 					service('Passport')->loginLocal($mid);
-					redirect(U('index/user/edituserinfo'));
-					// if($_SESSION['refer_url']!=''){
-						// redirect($_SESSION['refer_url']);
-					// }else{
-						// redirect(U('index/index/index'));
-					// }
+					//redirect(U('index/user/edituserinfo'));
+					$this->edituserinfo();exit;
 				}else{
 					redirect(U('index/user/fishuserinfo'));
 				}
@@ -287,6 +326,8 @@ class UserAction extends Action {
 		$this->display('datum');
 	}
 	public function edituserinfo(){
+		$_SESSION['pwai_url']=$_SESSION['pwai_url']!=''?$_SESSION['pwai_url']:$_COOKIE['pwai_url'];
+		//print_r($_SESSION);
 		if(!$_SESSION['mid']){
 			if($_SESSION['loginIcpkey']!=md5('aijianmei'.$_SESSION['allowbackmid'])){
 				$_SESSION=null;
@@ -305,8 +346,6 @@ class UserAction extends Action {
         $this->assign('children', $child);
         $this->assign('area', $area);
 		//}}
-		
-		
 		$username=$description=$domain=$userArea=$usercity=null;
 		$imgurl=null;
 		if($mid>0){
@@ -356,7 +395,6 @@ class UserAction extends Action {
 			$this->assign('user_type',$user_type);
 			$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
 			if(!is_file(dirname(__FILE__).$filename)){$filename='Templates/images/login_pic.jpg';}
-			
 			$this->assign('localimg',$filename);
 			if($UserNameInfo[0]['upic_type']==1){
 					$filename='data/uploads/avatar/'.$mid.'/middle.jpg';
@@ -465,6 +503,37 @@ class UserAction extends Action {
 			$sdata['email']   =addslashes($shopinserinfo[0]['email']);
 			
 			_postCurlRegister($sdata);
+			
+			/*forum 论坛 登陆api start by kontem at20130626*/
+			$pwUserInfoSql="select * from ai_pwforum.pw_user where username='".$uid[0]['user_name']."' and email='".$uid[0]['email']."'";
+			$pwUserInfo=M('')->query($pwUserInfoSql);
+			//检测用户是否已经有论坛对应的账号
+			if(empty($pwUserInfo[0])){
+			//不存在则调用注册api
+			$post_data=array( 
+				'username' => $shopinserinfo[0]['uname'],
+			  'email' => $shopinserinfo[0]['email'],
+			  'password' =>$_SESSION['locallogin_password'],
+			  'repassword' =>$_SESSION['locallogin_password'],
+			  );
+ 
+			$url=AIBASEURL."/forum/pwApi.php?pwact=register";
+			_CurlPost($url,$post_data);//targetUrl postData
+			}
+			//调用登陆api
+			$url=AIBASEURL."/forum/pwApi.php?pwact=login";
+			$post_data=array(
+				'username' => $shopinserinfo[0]['uname'],
+			  'password' =>$_SESSION['locallogin_password']
+			 );
+			$_SESSION['pwai_url']=_CurlPost($url,$post_data);
+			/*论坛部分自己回调登陆*/
+			/*forum 论坛 登陆api end*/
+			
+			
+			
+			
+			
 			service('Passport')->loginLocal($sdata['uname'],$sdata['password'],1);
 			$getUidSql='select user_id,user_name,email from ecs_users where user_name="'.$sdata['uname'].'"';
             $uid = M('')->query($getUidSql);
@@ -513,8 +582,9 @@ class UserAction extends Action {
 			}
 		}elseif($mid>0&&$_GET['args']=='uppwd'){
 			if($_POST['password']==$_POST['repassword']){
-				$upsql="update ai_user SET password = '".md5($_POST['password'])."' WHERE password ='".md5($_POST['oldpassword'])."'";
+				$upsql="update ai_user SET password = '".md5($_POST['password'])."' WHERE uid=$mid";
 				M('')->query($upsql);
+
 			}
 		}elseif($mid>0&&$_GET['args']=='upconnect'){
 			if(!empty($_POST['cemail'])&&!empty($_POST['ctell'])){
@@ -542,6 +612,7 @@ public function saveedituserinfo(){
 			if($mid>0){
 			$oldusernameinfo=M('user')->where(array('uid'=>$mid))->find();
 			//print_r($oldusernameinfo);exit;
+			$this->updatePWUname($oldusernameinfo['uname'],$oldusernameinfo['email'],$username);
 			$upsql=null;
 			$upsql="UPDATE ai_user SET uname = '".$username."',sex=".$_POST['sex'].",province=".$_POST['province'].",city='".$_POST['cityvalue']."',upic_type='".$_POST['upic_type']."' WHERE uid =$mid";
 			M('')->query($upsql);
@@ -554,7 +625,7 @@ public function saveedituserinfo(){
 						$keyTmp[]=$v;
 					}	
 				}
-			
+	
 			$checkkeywordSql="select * from ai_user_keywords WHERE uid =$mid";
 			$cres=M('')->query($checkkeywordSql);
 			if($cres){
@@ -583,7 +654,6 @@ public function saveedituserinfo(){
 				VALUES ($mid, '".$_POST['dt_weight_finish']."','".$_POST['dt_height_finish']."','".$_POST['dt_year_finish']."')";
 				M('')->query($insertSql);
 			}
-			
 			
 			$sql="select uname,email from ai_user where uid =$mid";
 			$shopinserinfo=M('')->query($sql);
@@ -629,8 +699,23 @@ public function saveedituserinfo(){
 			}
 		}elseif($mid>0&&$_GET['args']=='uppwd'){
 			if($_POST['password']==$_POST['repassword']){
-				$upsql="update ai_user SET password = '".md5($_POST['password'])."' WHERE password ='".md5($_POST['oldpassword'])."'";
+
+				$upsql="update ai_user SET password = '".md5($_POST['password'])."' WHERE uid=$mid and password='".md5($_POST['oldpassword'])."'";
 				M('')->query($upsql);
+				$getmail=M('')->query("select email from ai_user where uid=$mid");
+				
+				$tmpPassword=M('')->query("select password from ai_forum_tmp_user where email='".$getmail[0]['email']."'");
+				M('')->query("UPDATE  ai_forum_tmp_user SET  password =  '".$_POST['password']."' WHERE  email='".$getmail[0]['email']."'");
+				//调用论坛对应的密码修改 api add by kontem 20130701 {{{
+				$url=AIBASEURL."/forum/pwApi.php?pwact=editpassword";
+				$post_data=array(
+					'oldPwd' => $tmpPassword[0]['password'],
+					'newPwd'=>$_POST['password'],
+					'rePwd'=>$_POST['password'],
+				);
+				$out=_CurlPost($url,$post_data);
+				//}}} end
+				
 			}
 		}elseif($mid>0&&$_GET['args']=='upconnect'){
 			if(!empty($_POST['cemail'])&&!empty($_POST['ctell'])){
@@ -954,6 +1039,18 @@ function newupload(){
 		$middle_name	=	$face_path.'/middle.jpg';		// 中图
 		$small_name		=	$face_path.'/small.jpg';
 		
+		$emsql="select email from aijianmei.ai_user where uid='".($this->uid)."'";
+		$eminfo=M('')->query($emsql);
+		$pwuinfosql="select uid from ai_pwforum.pw_user where email='".$eminfo[0]['email']."'";
+		$pwuinfo=M('')->query($pwuinfosql);
+		//$file = $uid . (in_array($size, array('middle', 'small')) ? '_' . $size : '') . '.jpg';
+		//return Wekit::C('site', 'avatarUrl') . '/avatar/' . $this->getUserDir($uid) . '/' . $file;
+		
+
+		$pwimg=SITE_PATH."/forum/windid/attachment/avatar/".$this->getUserDir($pwuinfo[0]['uid'])."/".$pwuinfo[0]['uid'].".jpg";
+		$pwSmallimg=SITE_PATH."/forum/windid/attachment/avatar/".$this->getUserDir($pwuinfo[0]['uid'])."/".$pwuinfo[0]['uid']."_small.jpg";
+		$pwmiddleimg=SITE_PATH."/forum/windid/attachment/avatar/".$this->getUserDir($pwuinfo[0]['uid'])."/".$pwuinfo[0]['uid']."_middle.jpg";
+		
 		$func	=	($ext != 'jpg')?'imagecreatefrom'.$ext:'imagecreatefromjpeg';
 		$img_r	=	call_user_func($func,$src);
 		
@@ -975,9 +1072,27 @@ function newupload(){
 		ImageCopyResampled( $sdst_s, $dst_r, 0, 0, 0, 0, $small_w, $small_h, $big_w, $big_w );
 		ImagePNG($sdst_s,$small_name);  // 生成中图
 		
+		// 开始切割大方块头像成中等方块头像
+		$pwsdst_s	=	ImageCreateTrueColor( 200, 200);
+		ImageCopyResampled( $pwsdst_s, $dst_r, 0, 0, 0, 0, 200, 200, $big_w, $big_w );
+		ImagePNG($pwsdst_s,$pwimg);  // 生成中图
+		
+		// 开始切割大方块头像成中等方块头像
+		$pwmiddlesdst_s	=	ImageCreateTrueColor( 120, 120);
+		ImageCopyResampled( $pwmiddlesdst_s, $dst_r, 0, 0, 0, 0, 120, 120, $big_w, $big_w );
+		ImagePNG($pwmiddlesdst_s,$pwmiddleimg);  // 生成中图
+		
+		// 开始切割大方块头像成中等方块头像
+		$pwSmallsdst_s	=	ImageCreateTrueColor( 50, 50);
+		ImageCopyResampled( $pwSmallsdst_s, $dst_r, 0, 0, 0, 0, 50, 50, $big_w, $big_w );
+		ImagePNG($pwSmallsdst_s,$pwSmallimg);  // 生成中图		
+		
 		ImageDestroy($dst_r);
 		ImageDestroy($sdst_r);
 		ImageDestroy($sdst_s);
+		ImageDestroy($pwsdst_s);
+		ImageDestroy($pwmiddlesdst_s);
+		ImageDestroy($pwSmallsdst_s);
 		ImageDestroy($img_r);
 	        } else {
 	        	@unlink($_FILES['Filedata']['tmp_name']);
@@ -1076,6 +1191,35 @@ function uploadImageFile($size,$name) {
 		}
 	}
 }
+	function getUserDir($uid) {
+		$uid = sprintf("%09d", $uid);
+		return substr($uid, 0, 3) . '/' . substr($uid, 3, 2) . '/' . substr($uid, 5, 2);
+	}
+
+//论坛pw 更改用户名
+function updatePWUname($ouname,$email,$newname){
+	$sql="select * from ai_pwforum.pw_user where username =  '".$newname."'  and email='".$email."'";
+	$olduserinfo=M('')->query($sql);
+	//用户表更新
+	$sql="UPDATE  ai_pwforum.pw_user SET  username =  '".$newname."' WHERE username='".$ouname."' and email='".$email."'";
+	M('')->query($sql);
+	//wind表更新
+	$sql="UPDATE  ai_pwforum.pw_windid_user SET  username =  '".$newname."' WHERE username='".$ouname."' and email='".$email."'";
+	M('')->query($sql);
+	//bbs threads 更新
+	$sql="UPDATE  ai_pwforum.pw_bbs_forum_statistics SET lastpost_username='".$newname."' WHERE lastpost_username='".$ouname."'";
+	M('')->query($sql);
+	//bbs 
+	$sql="UPDATE  `ai_pwforum`.`pw_bbs_posts` SET  `created_username` ='".$newname."' WHERE  created_username ='".$ouname."'";
+	M('')->query($sql);
+	
+	$sql="UPDATE `ai_pwforum`.`pw_bbs_threads` SET created_username ='".$newname."' WHERE  created_username ='".$ouname."'";
+	M('')->query($sql);
+	
+	$sql="UPDATE `ai_pwforum`.`pw_bbs_threads` SET lastpost_username='".$newname."' WHERE lastpost_username='".$ouname."'";
+	M('')->query($sql);
+}
+
 
 
 function resizeimage($srcfile,$rate=.5, $filename = "" ){

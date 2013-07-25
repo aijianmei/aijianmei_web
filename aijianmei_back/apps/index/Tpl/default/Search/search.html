@@ -21,8 +21,7 @@
 								<p>{$value.brief|htmlspecialchars_decode}</p>
 								<a class="cont_read_more" href="{$value.url}">阅读全文></a>
 								<div class="cont_share">
-									<span class="cont_click">点击数:<span>{$value.click}</span></span>
-                                    <span class="cont_rec">评论数:<span>{$value.commentCount}</span></span>
+									<span class="cont_rec">评论数:<span>{$value.commentCount}</span></span>
 								</div>
 							</div>
 						</div>
@@ -47,11 +46,12 @@
         	</div>
         </div>
 	</div>
+</div>
 <include file="Templates/footer.html" />
 <include file="Templates/loginpart.html" />
 		<input type="hidden" id="scroinfo" h="" sh="" top="">
 		<div class="title_tip"><div class="title_content"></div><div class="angle"><span></span></div></div>
-
+				<script type="text/javascript" src="Templates/js/jquery.js"></script>
         <script type="text/javascript" src="Templates/js/public.js"></script>
         <script type="text/javascript">
         	var init = function(){

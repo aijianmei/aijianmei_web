@@ -18,10 +18,8 @@ class ArticleModel extends Model {
                 where d.channel=".$channel." and d.gotime<".time()." ORDER BY d.gotime DESC  limit ".$limit.",".$nums." ";
 		$cacheid=md5($sql);
         $daily=$this->getDataCache($cacheid);
-		if(!$daily){
-		
+				if(!$daily){
         $result = M('')->query($sql);
-        
         $parser = api('UrlParser');		
         //$info = $parser->getVideoInfo('http://v.youku.com/v_playlist/f12280371o1p0.html');
         //var_dump($info);
@@ -103,6 +101,8 @@ class ArticleModel extends Model {
 		if(!$result){
 			$result = M('')->query($sql);
 			foreach ($result as $key => $value) {
+				unset($result[$key]['content']);
+				unset($result[$key]['wapcontent']);
 				$result[$key]['CommNumber']=$this->getCountRecommentsById($value['id']);
 			}
 			$this->setDataCache($cacheid,$result);
@@ -124,6 +124,8 @@ class ArticleModel extends Model {
 		if(!$result){
 			$result = M('')->query($sql);
 			foreach ($result as $key => $value) {
+				unset($result[$key]['content']);
+				unset($result[$key]['wapcontent']);
 				$result[$key]['CommNumber']=$this->getCountRecommentsById($value['id']);
 			}
 			$this->setDataCache($cacheid,$result);
@@ -278,7 +280,7 @@ class ArticleModel extends Model {
     public function getVideoCountRecommentsById($id)
     {
         $sql=null;$numsArr=null;
-        $sql="select count(*) as nums from ai_video_comments where pid=".$id;
+        $sql="select count(*) as nums from ai_comments where parent_id=".$id." and parent_type=2";
         $numsArr= M('')->query($sql);
         return !empty($numsArr[0]['nums'])?$numsArr[0]['nums']:0;
     }

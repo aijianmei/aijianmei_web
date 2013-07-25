@@ -47,7 +47,8 @@
 								})();
 								</script>
 								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
-                                <a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=http://www.aijianmei.com/index-Index-articleDetail-<?php echo $_GET['id'];?>.html&title=<?php echo $article['title'];?>&content=utf-8&pic=<?php echo $aimgsrc;?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a>
+								
+								<a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=http://www.aijianmei.com/index-Index-articleDetail-<?php echo $_GET['id'];?>.html&title=<?php echo $article['title'];?>&content=utf-8&pic=<?php echo $aimgsrc;?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a>
 							</span>
                         <script type="text/javascript">
                         
@@ -165,10 +166,9 @@
 
                             </div>
                             <div class="clearfix">
-                                <img src="../Public/images/weima.jpg" class="two_code" alt="微信二维码">
+                                <img src="../Public/images/weima.jpg" class="two_code" style="margin:5px;" alt="微信二维码">
                                 <div class="ms_code">
-                                    <p><span></span>扫描微信二维码</p>
-                                    <p>随时获取新资讯</p>
+                                    <p  style="white-space:normal;width:150px;font-size:14px;">欢迎扫描订阅！获取最新健身、健康资讯！</p>
                                 </div>
                             </div>
                         </div>
@@ -195,7 +195,6 @@
             dataType:"json",
             data: "act=addDetaiCommont&data=ford&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&content="+$("#commentbox").val()+"&ptype=1",
             success: function(data){
-            alert("添加评论成功！");
              var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.connect+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div'; 
             $("#commentbox").val('');          
             $("#recomment_fdiv").prepend(innerHtml);

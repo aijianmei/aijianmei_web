@@ -254,7 +254,7 @@ function checkusernameString(str){
 
 $(document).ready(function(){
 	$("#Filedata").change(function(){
-		$("#selectForm").submit();
+		if($("#Filedata").val() != '') $("#selectForm").submit();
 	});
 	$("#exec_target").load(function(){
 		var data = $(window.frames['exec_target'].document.body).find("textarea").eq(0).html();
@@ -405,6 +405,26 @@ var default_year = <?php if($healthinfo['age']!=''){echo "'".$healthinfo['age'].
 	$(".dt_weight_input").hide();
 	$(".dt_height_input").hide();
 	$(".dt_year_input").hide();
+	
+//离开页面相关动作捕捉处理 start 
+if (typeof window.addEventListener === 'undefined') {
+    window.addEventListener = function(e, callback) {
+        return window.attachEvent('on' + e, callback);
+    }
+}
+
+window.addEventListener('beforeunload', function() {
+	var username= document.getElementById("username");
+	if(!username.value){
+		username.focus();
+		return '请输入用户名完成注册!';
+	}
+	
+});	
+//离开页面相关动作捕捉处理 end
+	
+	
+	
 </script>
 <script type="text/javascript" src="Templates/js/datum.js"></script>
 </body>

@@ -37,7 +37,7 @@ function changeUrl(pid){
       <tr overstyle='on' id="{$vo.id}">
         <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
         <td>{$vo.id}</td>
-        <td>{$vo.uid}<php>echo getUserName($vo['uid']);</php></td>
+        <td><php>echo getUserName($vo['uid']);</php></td>
         <td>{$vo.parent_id}</td>
 		<td><php>echo $_comType[$vo['parent_type']]</php></td>
         <td>{$vo.content}</td>

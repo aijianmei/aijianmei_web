@@ -1,3 +1,73 @@
+			$(function() {
+				//ident_wrap
+				var delay=function(t,fn){
+
+					var _this = this;
+
+					d = setTimeout(function(){
+						fn();
+					},t * 1000);
+					_this.onmouseout = function(){
+						clearInterval(d);
+					};
+				}
+				function keywords(){
+					//var
+					var newdom = new getdom,
+						ident_title = newdom.getElementsByClass('ident_title'),
+						tit_len = ident_title.length,
+						identifying = newdom.getElementsByClass('identifying'),
+						tempNum = 0;
+					//circle
+					for(var i = 0;i < tit_len;i++){
+						ident_title[i].index = i;
+					}
+
+					$(".ident_title").mouseover(function(){
+
+						var that = this;
+
+			  			delay.apply(this,[0.3,function(){
+			  				if(tempNum != that.index){
+								$(".identifying").slideUp("slow").eq(that.index).slideDown("slow");
+								tempNum = that.index;
+			  				}
+				  				
+				  		}]);
+			  		});
+				}
+				keywords();
+			});
+
+
+
+
+$(function() {
+					//ident_wrap
+				var identifying_1 = document.getElementById("identifying_1");
+				var identifying_2 = document.getElementById("identifying_2");
+				var identifying_3 = document.getElementById("identifying_3");
+				var delay=function(t,fn){//接收两个参数 t延迟时间秒为单位，fn要执行的函数
+					var _this=this;//请注意还要个免费的this参数可以让这个delay更完美
+					d=setInterval(function(){
+					fn();
+					},t*1000);
+					_this.onmouseout=function(){
+					clearInterval(d);
+					};
+				}
+				//"label[id^=hello]
+				$("div[id^=ident_title]").mouseover(function(){
+						var num=($(this).index())/2;
+
+						var sd=$("div[id^=identifying_]");
+						
+  					$("#identifying_"+(num*1+1)).slideDown("slow");
+						//$("#identifying_"+(num*1+1)).slideDown("slow");
+						//$("div[id^=ident_title_]").eq(num).slideUp("slow");
+				})
+			});
+
 var ajaxListKey=0;
 //添加事件监听
 var addevent = function(element,type,handle){
@@ -468,6 +538,154 @@ function change_num(obj,show){
 	    }       
 	}
 }
+
+var run_top = function(obj_1,obj_2,obj_3){
+
+	if(obj_3.offsetHeight  - obj_1.scrollTop <= 0){
+
+		obj_1.scrollTop -= obj_3.offsetHeight;
+
+	}
+	else{
+
+		obj_1.scrollTop++;
+
+	}
+
+}
+//paomadeng for recomment
+function run_circle(speed,obj_1,obj_2,obj_3){
+
+	var obj_1 = document.getElementById(obj_1),
+		obj_2 = document.getElementById(obj_2),
+		obj_3 = document.getElementById(obj_3);
+
+	var visibleheight = parseFloat(obj_1.style.height),
+		offsetheight = obj_2.offsetHeight;
+
+	if(offsetheight > visibleheight){//compare offsetheight and wisibleheight
+
+		obj_3.innerHTML = obj_2.innerHTML;
+
+		var time = setInterval(function(){
+			run_top(obj_1,obj_2,obj_3);//rise up --run_top
+		},speed);
+
+		obj_1.onmouseover = function(){//mouse methor
+			clearInterval(time);
+		}
+		obj_1.onmouseout = function(){
+			time = setInterval(function(){
+				run_top(obj_1,obj_2,obj_3);
+			},speed);
+		}
+	}
+}
+
+
+
+//function for title add tip content
+//参数content 提示的内容   width 提示框的宽度 id_show 提示框的id命名 position 提示框可选择要固定在的位置
+//relative 当选择相对位置定位时，相对于那个div固定 mouseout_classname 触法提示框的a的class
+function add_tip(e,options){
+	var content = options.content || null,//get content that  show
+		width = options.width + "px" || '100px';//get width of content
+		position_x = options.position ? options.position[0] : (new get_offset)[0],
+		position_y = options.position ? options.position[1] : (new get_offset)[1];
+
+	var length = e.offsetWidth/2;//get text 1/2 length that need to tip
+
+	var div = document.getElementById(options.id_show),//get show div'id
+		show_p = document.getElementById('show_p'),
+		solid_in = document.getElementById(options.relative);//by id solid_in,sure div position relative options.relative
+
+	//first step jugde if exit div that will show
+	if(!div){
+		var div = document.createElement('div'),
+			p = document.createElement('p'),
+			span = document.createElement("span");
+
+		div.id = 'show_div';
+		div.className = 'show_div';
+		div.style.width = width;
+
+		p.innerHTML = content;
+		p.id = "show_p";
+		p.className = 'show_p';
+		div.appendChild(p);
+
+		span.className = "angle";
+		span.innerHTML = "<span></span>"
+		div.appendChild(span);
+
+		solid_in.appendChild(div);
+	}
+	else{
+		div.style.display = "block"
+		show_p.innerHTML = content;
+		div.style.width = width;
+	}
+	var show_div = document.getElementById('show_div');
+
+	var show_div_height = show_div.offsetHeight + 10;
+
+	//second step function get the pesition_x and position_y of mouse
+	function get_offset(){
+		
+		this.get_offsetX = e.offsetLeft,
+		this.get_offsetY = e.offsetTop;
+
+		return [this.get_offsetX,this.get_offsetY]
+
+	}
+
+	//handle position of div those id is show_div
+	control_position();
+	function control_position(){
+
+		if(show_div){
+			show_div.style.top = position_y - show_div_height + "px";
+			show_div.style.left = position_x - parseFloat(width)/2 + length + "px";
+		}
+
+	}
+
+	
+	//last step mouseout
+	var newdom = new getdom,
+		classname = newdom.getElementsByClass(options.mouseout_classname),
+		len = classname.length;
+
+	for(var i = 0;i < len;i++){
+		if(classname[i]){
+			addevent(classname[i],"mouseout",remove);
+		}
+		
+	}
+
+	function remove(){
+		show_div.style.display = "none"
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //对象fade，添加一个功能，屏蔽按钮，显示产品即将推出
 var fade = {
     newdom : new getdom,
@@ -546,10 +764,10 @@ var newdom = new getdom;
 
 /*if(newdom.getElementsByClass('store')[0]){
     fade.init('store');
-}*/
+}
 if(newdom.getElementsByClass('forum')[0]){
     fade.init('forum');
-}
+}*/
 if(newdom.getElementsByClass('friends')[0]){
     fade.init('friends');
 }
@@ -750,4 +968,20 @@ function FormChangedListener(elems){
 	}
 }
 
+//add by kontem new keywordlist tab 
+var init = function(){
+	var newdom = new getdom,
+	identifying = newdom.getElementsByClass('identifying'),
+	ident_len = identifying.length;
+	for(var i = 0;i < ident_len;i++){
+		aijianmei.identifying(identifying[i]);
+	}   
+	//aijianmei.addtitle('detail');
+	obj = document.getElementById("recoment");//先判断是否存在动态事件容器
+	if (obj){//存在则启动事件
+		run_circle("30",'recoment','circle_one','circle_two');
+	}
+}
+init();	
+//}}}
 

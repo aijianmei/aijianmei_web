@@ -94,14 +94,15 @@ class ArticleAction extends AdministratorAction {
             $data['brief']    = t($_POST['brief']);
             $data['author']   = t($_POST['author']);
             $data['content']  = t($_POST['content']);
+						$data['wapcontent']  = t($_POST['wapcontent']);
             $data['keyword']  = t($_POST['keyword']);			
             $data['create_time'] = time();
             $data['iswaterimg']  = t($_POST['iswaterimg']);
             
             
-            //print_r($_POST);exit;
+
             if(isset($_FILES['img']['name'])) {
-                if(!move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'])) 				{
+                if(!move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'])){
                     echo 'add error '.'<br />';					
                 }
                 //$waterImage='water.png';
@@ -120,6 +121,23 @@ class ArticleAction extends AdministratorAction {
                     M('article')->add($data);
                 }
                 $insertId=M('article')->getLastInsID();
+
+                if(isset($_FILES['shareimg']['name'])){
+                	switch ($_FILES['shareimg']['type']){
+                		case 'image/jpeg':
+                		$ext=".jpg";
+                		break;
+                		case 'image/png':
+                		$ext=".png";
+                		break;
+                	}
+                	$imgid= $data['id'] > 0 ? $data['id'] :$insertId;
+                	if(!move_uploaded_file($_FILES['shareimg']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/share/share'.$imgid.$ext)){
+                    echo 'add error '.'<br />';					
+                  }
+                  $front_cover = "share/share".$imgid.$ext;
+                  M('')->query("UPDATE ai_article SET  front_cover =  '".$front_cover."' WHERE id =$imgid");
+                }
                 if(!empty($_POST['morecategory'])){
                     foreach($_POST['morecategory'] as $key => $value){
                        D('Article')->addArticeGroup($insertId,$value);
@@ -162,6 +180,7 @@ class ArticleAction extends AdministratorAction {
             $data['brief']    = t($_POST['brief']);
             $data['author']   = t($_POST['author']);
             $data['content']  = t($_POST['content']);
+            $data['wapcontent']  = t($_POST['wapcontent']);
             $data['keyword']  = t($_POST['keyword']);
             $data['update_time'] = time();
             //$data['create_time'] = time();
@@ -173,6 +192,23 @@ class ArticleAction extends AdministratorAction {
                 }
                 $data['img'] = $_FILES['img']['name'];
             }
+            
+            if(isset($_FILES['shareimg']['name'])){
+                	switch ($_FILES['shareimg']['type']){
+                		case 'image/jpeg':
+                		$ext=".jpg";
+                		break;
+                		case 'image/png':
+                		$ext=".png";
+                		break;
+                	}
+                	$imgid= $id ;
+                	if(!move_uploaded_file($_FILES['shareimg']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/share/share'.$imgid.$ext)){
+                    echo 'add error '.'<br />';					
+                  }
+                  $data['front_cover'] = "share/share".$imgid.$ext;
+                }
+            
                 
             if (!empty($data['title']) &&
                     !empty($data['category_id']) &&

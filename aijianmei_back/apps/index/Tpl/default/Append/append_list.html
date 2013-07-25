@@ -13,18 +13,18 @@
 					<php>foreach($lastArticles as $a) {</php>
 						<div class="cont_module clearfix">
 							<div class="cont_side_1">
-								<a href="/index-Index-articleDetail-{$a['id']}.html"><img alt="{$a['title']}" style="height:145px;width:215px;" src="{$SITE_URL}/public/images/article/{$a['img']}"></a>
+								<a href="/index-Index-articleDetail-{$a['id']}.html" target="_blank"><img alt="{$a['title']}" style="height:145px;width:215px;" src="{$SITE_URL}/public/images/article/{$a['img']}"></a>
 								<div class="show_share" style="margin-left:40px;">
-								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/{$a['img']}"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php if(!$a['front_cover']){echo $a['img'];}else{echo $a['front_cover'];}?>"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">
-								<h3 class="cont_title"><a href="/index-Index-articleDetail-{$a['id']}.html">{$a['title']}</a></h3>
+								<h3 class="cont_title"><a href="/index-Index-articleDetail-{$a['id']}.html" target="_blank">{$a['title']}</a></h3>
 								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span><php> echo date("Y-m-d",$a['create_time']);</php></span></span>
 								<p>{$a['brief']}</p>
-								<a class="cont_read_more" href="/index-Index-articleDetail-{$a['id']}.html">阅读全文></a>
+								<a class="cont_read_more" href="/index-Index-articleDetail-{$a['id']}.html" target="_blank">阅读全文></a>
 								<div class="cont_share">
-									<span class="cont_click">点击数:<span>{$a['reader_count']}</span></span>
+									<!--<span class="cont_click">点击数:<span>{$a['reader_count']}</span></span>-->
                                     <span class="cont_rec">评论数:<span>{$a['CommNumber']}</span></span>
 								</div>
 							</div>
@@ -43,18 +43,18 @@
 					<php>foreach($hotArticles as $a) {</php>
 						<div class="cont_module clearfix">
 							<div class="cont_side_1">
-								<a href="/index-Index-articleDetail-{$a['id']}.html"><img alt="{$a['title']}" style="height:145px;width:215px;" src="{$SITE_URL}/public/images/article/{$a['img']}"></a>
+								<a href="/index-Index-articleDetail-{$a['id']}.html" target="_blank"><img alt="{$a['title']}" style="height:145px;width:215px;" src="{$SITE_URL}/public/images/article/{$a['img']}"></a>
 								<div class="show_share" style="margin-left:40px;">
-								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/{$a['img']}"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="/index-Index-articleDetail-{$a['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php if(!$a['front_cover']){echo $a['img'];}else{echo $a['front_cover'];}?>"  title="<?php echo $a['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">
 								<h3 class="cont_title"><a href="/index-Index-articleDetail-{$a['id']}.html">{$a['title']}</a></h3>
 								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span><php>echo date("Y-m-d",$a['create_time'])</php></span></span>
 								<p>{$a['brief']}</p>
-								<a class="cont_read_more" href="/index-Index-articleDetail-{$a['id']}.html">阅读全文></a>
+								<a class="cont_read_more" href="/index-Index-articleDetail-{$a['id']}.html" target="_blank">阅读全文></a>
 								<div class="cont_share">
-									<span class="cont_click">点击数:<span>{$a['reader_count']}</span></span>
+									<!--<span class="cont_click">点击数:<span>{$a['reader_count']}</span></span>-->
                                     <span class="cont_rec">评论数:<span>{$a['CommNumber']}</span></span>
 								</div>
 							</div>

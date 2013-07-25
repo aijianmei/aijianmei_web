@@ -212,13 +212,12 @@ if (!defined('INIT_NO_USERS'))
 
     /* 会员信息 */
     if(!empty($aijianmeiUserInfo)){
-		recalculate_price();
         $_SESSION=array_merge($_SESSION,$aijianmeiUserInfo);
     }
-    
+
     $aijianmeiUserInfo=null;
     $user =& init_users();
-    
+    recalculate_price();
     if (!isset($_SESSION['user_id']))
     {
         /* 获取投放站点的名称 */
@@ -295,6 +294,7 @@ if (!defined('INIT_NO_USERS'))
     {
         $smarty->assign('ecs_session', $_SESSION);
     }
+
     //print_r($_SESSION);
 }
 

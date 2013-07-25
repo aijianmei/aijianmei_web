@@ -8,7 +8,7 @@
 				<div class="day_pl">
 					<ul class="day_classifly clearfix">
 						<li>
-							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=2">
+							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=2" target="_blank">
 								<img src="Templates/images/cj.jpg" alt="初阶-基础锻炼"/>
 								<i class="bg_opc"></i>
 								<div class="ms_hidden_part">
@@ -20,7 +20,7 @@
 							</a>
 						</li>
 						<li>
-							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=3">
+							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=3" target="_blank">
 								<img src="Templates/images/zj.jpg" alt="中阶-运动员锻炼"/>
 								<i class="bg_opc"></i>
 								<div class="ms_hidden_part">
@@ -32,7 +32,7 @@
 							</a>
 						</li>
 						<li>
-							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=4">
+							<a class="day_part" href="/index.php?app=index&mod=Index&act=info&type=4" target="_blank">
 								<img src="Templates/images/gj.jpg" alt="高阶-肌肉锻炼"/>
 								<i class="bg_opc"></i>
 								<div class="ms_hidden_part">
@@ -56,21 +56,21 @@
 						<php>foreach($newArticles as $key=>$value){</php>
 						<div class="cont_module clearfix">
 							<div class="cont_side_1">
-								<a href="index-Index-articleDetail-{$value['id']}.html"><img alt="{$value['title']}" style="width:215px;height:145px;" src="../public/images/article/{$value['img']}"></a>
+								<a href="index-Index-articleDetail-{$value['id']}.html" target="_blank"><img alt="{$value['title']}" style="width:215px;height:145px;" src="../public/images/article/{$value['img']}"></a>
 								<div class="show_share clearfix" style="margin-left:40px;">
-									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-{$value['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php echo $value['img'];?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+									<wb:share-button count="n" searchPic=false type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-{$value['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php if(!$value['front_cover']){echo $value['img'];}else{echo $value['front_cover'];}?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">
-								<h3 class="cont_title"><a href="index-Index-articleDetail-{$value['id']}.html">{$value['title']}</a></h3>
+								<h3 class="cont_title"><a href="index-Index-articleDetail-{$value['id']}.html" target="_blank">{$value['title']}</a></h3>
 								<span class="cont_tip">
 								<span class="cont_comefrom">爱健美团队</span>发表于
 								<span class="cont_pb_time"><?php echo date("Y-m-d",$value['create_time']);?></span></span>
 								<p>{$value['brief']}</p>
-								<a class="cont_read_more" href="index-Index-articleDetail-{$value['id']}.html">阅读全文></a>
+								<a class="cont_read_more" href="index-Index-articleDetail-{$value['id']}.html" target="_blank">阅读全文></a>
 								<div class="cont_share clearfix">
-									<span class="cont_click">点击数:<span>{$value['reader_count']}</span></span>
-                                    <span class="cont_rec">评论数:<span>{$value['CommNumber']}</span></span>
+									<!--<span class="cont_click">点击数:<span>{$value['reader_count']}</span></span>-->
+									<span class="cont_rec">评论数:<span>{$value['CommNumber']}</span></span>
 								</div>
 							</div>
 						</div>
@@ -88,19 +88,19 @@
 						<php>foreach($hotArticles as $key=>$value){</php>
 						<div class="cont_module clearfix">
 							<div class="cont_side_1">
-								<a href="index-Index-articleDetail-{$value['id']}.html"><img alt="{$value['title']}" style="width:215px;height:145px;" src="../public/images/article/{$value['img']}"></a>
+								<a href="index-Index-articleDetail-{$value['id']}.html" target="_blank"><img alt="{$value['title']}" style="width:215px;height:145px;" src="../public/images/article/{$value['img']}"></a>
 								<div class="show_share clearfix" style="margin-left:40px;">
-									<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-{$value['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php echo $value['img'];?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
+									<wb:share-button count="n" searchPic=false type="button" size="big"  appkey="3622140445" url="http://www.aijianmei.com/index-Index-articleDetail-{$value['id']}.html" pic="http://www.aijianmei.com/public/images/article/<?php if(!$value['front_cover']){echo $value['img'];}else{echo $value['front_cover'];}?>" title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">
-								<h3 class="cont_title"><a href="index-Index-articleDetail-{$value['id']}.html">{$value['title']}</a></h3>
+								<h3 class="cont_title"><a href="index-Index-articleDetail-{$value['id']}.html" target="_blank">{$value['title']}</a></h3>
 								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span><?php echo date("Y-m-d",$value['create_time']);?></span></span>
 								<p>{$value['brief']}</p>
-								<a class="cont_read_more" href="index-Index-articleDetail-{$value['id']}.html">阅读全文></a>
+								<a class="cont_read_more" href="index-Index-articleDetail-{$value['id']}.html" target="_blank">阅读全文></a>
 								<div class="cont_share clearfix">
-									<span class="cont_click">点击数:<span>{$value['reader_count']}</span></span>
-                                    <span class="cont_rec">评论数:<span>{$value['CommNumber']}</span></span>
+									<!--<span class="cont_click">点击数:<span>{$value['reader_count']}</span></span>-->
+									<span class="cont_rec">评论数:<span>{$value['CommNumber']}</span></span>
 								</div>
 							</div>
 						</div>
@@ -118,20 +118,20 @@
 						<php>foreach($newvideos as $key=>$value){</php>
 						<div class="cont_module clearfix">
 							<div class="cont_vd_1">
-								<a  class="cont_vd_link" href="/index-Train-videoDetail-{$value['id']}.html"><img style="width:215px;height:148px;" alt="{$value['title']}" src="{$value['logo']}"><span class="cont_vd_bg" style="display: none;"></span></a>
+								<a  class="cont_vd_link" href="/index-Train-videoDetail-{$value['id']}.html" target="_blank"><img style="width:215px;height:148px;" alt="{$value['title']}" src="{$value['logo']}"><span class="cont_vd_bg" style="display: none;"></span></a>
 								<div class="show_share clearfix" style="margin-left:40px;">
 								<wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $value['htmlurl'];?>" pic="<?php echo $value['logo'];?>"  title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button></div>
 							</div>
 							<div class="cont_vd_2">
-								<h3 class="cont_vd_title"><a href="/index-Train-videoDetail-{$value['id']}.html">{$value['title']}</a></h3>
+								<h3 class="cont_vd_title"><a href="/index-Train-videoDetail-{$value['id']}.html" target="_blank">{$value['title']}</a></h3>
 								<div class="cont_vd_dt">
 									<p>标签:<span>{$value['keyword']}</span></p>
 									<p>简介:<span><php> echo msubstr($value['brief'],0,54);</php></span></p>
 								</div>
-								<a class="cont_vd_see" href="/index-Train-videoDetail-{$value['id']}.html"></a>
+								<a class="cont_vd_see" href="/index-Train-videoDetail-{$value['id']}.html" target="_blank"></a>
 								<div class="cont_share clearfix">
-									<span class="cont_vd_click">点击数:<span><?php echo $value['click'];?></span></span>
-                                    <span class="cont_rec">评论数:<span><?php echo $value['recommons'];?></span></span>
+									<!--<span class="cont_vd_click">点击数:<span><?php echo $value['click'];?></span></span>-->
+									<span class="cont_rec">评论数:<span><?php echo $value['recommons'];?></span></span>
 								</div>
 							</div>
 						</div>
@@ -149,19 +149,19 @@
 						<php>foreach($hotvideos as $key=>$value){</php>
 						<div class="cont_module clearfix">
 							<div class="cont_vd_1">
-								<a  class="cont_vd_link" href="/index-Train-videoDetail-{$value['id']}.html"><img style="width:215px;height:148px;" alt="{$value['title']}" src="{$value['logo']}"><span class="cont_vd_bg" style="display: none;"></span></a>
+								<a  class="cont_vd_link" href="/index-Train-videoDetail-{$value['id']}.html" target="_blank"><img style="width:215px;height:148px;" alt="{$value['title']}" src="{$value['logo']}"><span class="cont_vd_bg" style="display: none;"></span></a>
 								<div class="show_share clearfix" style="margin-left:40px;"><wb:share-button count="n" type="button" size="big"  appkey="3622140445" url="<?php echo $value['htmlurl'];?>" pic="<?php echo $value['logo'];?>"  title="<?php echo $value['title'];?>" ralateuid="2692984661" width="300" height="30"></wb:share-button></div>
 							</div>
 							<div class="cont_vd_2">
-								<h3 class="cont_vd_title"><a href="/index-Train-videoDetail-{$value['id']}.html">{$value['title']}</a></h3>
+								<h3 class="cont_vd_title"><a href="/index-Train-videoDetail-{$value['id']}.html" target="_blank">{$value['title']}</a></h3>
 								<div class="cont_vd_dt">
 									<p>标签:<span>{$value['keyword']}</span></p>
 									<p>简介:<span><php> echo msubstr($value['brief'],0,54);</php></span></p>
 								</div>
-								<a class="cont_vd_see" href="/index-Train-videoDetail-{$value['id']}.html"></a>
+								<a class="cont_vd_see" href="/index-Train-videoDetail-{$value['id']}.html" target="_blank"></a>
 								<div class="cont_share clearfix">
-									<span class="cont_vd_click">点击数:<span><?php echo $value['click'];?></span></span>
-                                    <span class="cont_rec">评论数:<span><?php echo $value['recommons'];?></span></span>
+									<!--<span class="cont_vd_click">点击数:<span><?php echo $value['click'];?></span></span>-->
+									<span class="cont_rec">评论数:<span><?php echo $value['recommons'];?></span></span>
 								</div>
 							</div>
 						</div>
@@ -179,9 +179,7 @@
         	</div>
         	<div class="content_2">
 				<include file="Templates/userinfo.html" />
-	        	<div class="same_ad">
-	        		<a href="/shop/"><img src="Templates/images/ad<?php echo rand(1,3);?>.jpg" /></a>
-	        	</div>
+				<include file="Templates/rightAd.html" />
 			</div>
         	</div>
         </div>
@@ -258,6 +256,35 @@
 					$(".banner .bn_contain_pic").stop(true,false).animate({"left":nowLeft},300); //通过animate()调整ul元素滚动到计算出的position
 					$(".banner .bn_choice_point span").css("background","url(Templates/images/dian.png)").eq(index).css("background","url(Templates/images/landian.png)"); //为当前的按钮切换到选中的效果
 				}
+				
+								//大图自动切换，左右切换，选择切换
+				var sWidth_1 = $(".banner_1").width(); //获取焦点图的宽度（显示面积）
+				var len_1 = $(".banner_1 .adv_pic_part li").length; //获取焦点图个数
+				var index_1 = 0;
+				var picTimer_1;
+
+				//左右滚动，外围ul元素的宽度
+				$(".banner_1 .adv_pic_part").css("width",sWidth_1 * (len_1));
+
+				$(".banner_1 .adv_choice span").css("background","url(Templates/images/dian.png)").click(function() {
+						index_1 = $(".banner_1 .adv_choice span").index(this);
+						showPics_1(index_1);
+				}).eq(0).trigger("click");
+
+				//鼠标滑上焦点图时停止自动播放，滑出时开始自动播放
+				setInterval(function(){
+						showPics_1(index_1);
+						index_1++;
+						if(index_1 == len_1) {index_1 = 0;}
+					},5000);
+
+				function showPics_1(index) { //普通切换
+					var nowLeft_1 = -index*sWidth_1; //根据index值计算ul元素的left值
+					$(".banner_1 .adv_pic_part").stop(true,false).animate({"left":nowLeft_1},300); //通过animate()调整ul元素滚动到计算出的position
+					$(".banner_1 .adv_choice span").css("background","url(Templates/images/dian.png)").eq(index).css("background","url(Templates/images/landian.png)"); //为当前的按钮切换到选中的效果
+				}
+
+				
 			});
 		</script>
         <script type="text/javascript" src="Templates/js/public.js"></script>

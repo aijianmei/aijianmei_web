@@ -60,7 +60,7 @@
     <dl class="lineD">
         <dt>简要介绍：</dt>
         <dd>
-            <input name="brief" type="text" value="{$article['brief']}" size="40">
+            <textarea name="brief" type="text" >{$article['brief']}</textarea>
         </dd>
     </dl>
     
@@ -77,6 +77,14 @@
             <input type="file" name="img" id="img" value="{$article['img']}"/>
         </dd>
     </dl>
+
+		<dl class="lineD">
+        <dt>分享图片：</dt>
+        <dd>
+            <input type="file" name="shareimg" id="shareimg" value="{$article['shareimg']}"/>
+        </dd>
+    </dl>
+
 
 	    <dl class="lineD">
         <dt>内容：</dt>
@@ -98,7 +106,26 @@
 	</script>
         </dd>
     </dl>
-    
+ <dl class="lineD">
+        <dt>wap内容：</dt>
+        <dd>
+			<textarea cols="80" id="wapcontent" name="wapcontent" rows="10">{$article['wapcontent']}</textarea>
+		<script>
+			CKEDITOR.replace( 'wapcontent', {
+				fullPage: true,
+				allowedContent: true,
+				extraPlugins: 'wysiwygarea',
+				language : 'zh-cn',
+				filebrowserBrowseUrl : 'ckfinder/ckfinder.html',
+				filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?type=Images',
+				filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?type=Flash',
+				filebrowserUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+				filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+				filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+				});
+	</script>
+        </dd>
+    </dl>   
     <dl class="lineD">
         <dt>关键词(多个关键词用逗号分隔):</dt>
         <dd>
