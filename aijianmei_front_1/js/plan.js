@@ -19,4 +19,14 @@
 			$(this).next().show();
 		}
 	});
+	//天天锻炼页面“查看”按钮
+	$(".groups").find("li.acts").bind({
+		mouseleave : function(){
+			$(this).find(".intoBtn").hide();
+			console.log("dfds")
+		},
+		mouseenter : function(){
+			$(this).find(".intoBtn").show();
+		}
+	})
 });

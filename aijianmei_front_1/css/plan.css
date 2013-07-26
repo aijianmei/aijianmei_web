@@ -1,4 +1,10 @@
 ﻿/*************Plan**************/
+.row_line{
+	width: 950px;
+	background: url(../images/rowl.jpg) repeat-x;
+	height: 2px;
+	border:0;
+}
 /**计划一级页面样式**/
 .vission{
 	padding: 0 10px 10px;
@@ -114,203 +120,124 @@
 		width:230px;
 		height:130px;
 	}
-/**视频列表区域**/
-.video_list{
-	padding: 20px 0;
+/*动作介绍*/
+.dailywork{
+	width:920px;
+	padding:20px;
+	margin: 30px 0;
+	background:#FFF;
 }
-.row_line{
-	width: 950px;
-	background: url(../images/rowl.jpg) repeat-x;
-	height: 2px;
-	border:0;
+.dailywork .date{
+	color:#21ACE3;
+	font-size:24px;
 }
-.col_line{
-	height:600px;
-	width:2px;
-	float: left;
-	margin-left: 20px;
-	background: url(../images/col.jpg) repeat-y;
-	border:0;
+.dailywork .info{
+	margin:20px 0;
+	line-height:30px;
+	font-size:16px;
+	color:#333;
+	text-indent:2em;
 }
-/**左边视频**/
-.video_main{
+.rest .date{
+	margin-bottom:20px;
+}
+.rest img{
 	float:left;
-	width:570px;
+	margin-right:30px;
+}
+.rest .tipInfo{
+	font-size:20px;
+	color:#333;
+	text-indent:2em;
+	line-height:30px;
+}
+/*分享 喜欢*/
+#dailyShare{
 	position:relative;
-}	
-	.video_date{
-		position: absolute;
-		top: 20px;
-		color: #23ACDE;		
-	}
-	/**查看按钮样式**/
-	.view{
-		position: absolute;
-		right: 0px;
-		top:20px;
-		height: 23px;
-		width: 46px;
-		background:url(../images/dwbtn.png) no-repeat 0 0;
-	}
-	.view:hover{
-		background:url(../images/dwbtn.png) no-repeat 0 -33px;
-	}
-	.video_tit{
-		color: #23ACDE;
-		text-align: center;
-		margin-top: 15px;
-	}
-	.video_cont{
-		margin: 30px 0 30px 10px;
-		text-indent: 2em;
-		color: #666;
-	}	
-	.video{
-		position:relative;
-		text-align: center;
-	}
-/**右边评论**/
-	.video_comment{
-		float:right;
-		width:350px;
-		position:relative;
-		margin-top: 15px;
-	}
-	.share_area{
-		height: 90px;
-	}
-		.share{
-			float:left;
-		}
-		.tencent_share,  .sina_share{
-			float: left;
-			text-align: center;
-		}
-		.sina_share .share_obj_2{
-			display:block;
-			width:67px;
-			height:21px;
-			background:url(../images/shareButton_21.png) no-repeat;
-			
-		}
-		.like{
-			width: 58px;
-			height: 23px;
-			position: absolute;
-			left:0;
-			top: 40px;
-			background:url(../images/dwbtn.png) no-repeat 0 -172px;
-		}
-		.like:hover{
-			background:url(../images/dwbtn.png) no-repeat 0 -205px;
-		}
-		.like_num{
-			position: absolute;
-			left:60px;
-			top: 40px;			
-			width: 30px;
-			height: 21px;
-			line-height: 21px;
-			text-align: center;
-			border: 1px solid #22A6D4;
-			border-radius: 4px;
-			color: #3DA6CE;
-			font-weight: bold;			
-		}
-		.comment_num{
-			background: #98DDF8;
-			height: 36px;
-			line-height: 36px;
-			color: white;
-			padding-left: 20px;
-			border-radius: 4px 4px 0 0;
-		}
-		.coms{
-			border: 1px solid #EAEAEA;
-			height: 250px;
-			overflow-y: auto;
-		}
-		.comments{
-			padding:10px;
-		}
-		.user_info{
-			float:left;
-		}
-			.com_face{
-				width:30px;
-				height:30px;
-				float: left;
-				padding-right: 10px;
-			}
-			.com_name{
-				vertical-align:top;
-			}
-		.com_cont{
-			padding-left: 40px;
-			line-height: 22px;
-		}
-		.com_all{
-			width: 103px;
-			height: 23px;
-			display: block;
-			background:url(../images/dwbtn.png) no-repeat 0 -66px;
-			float: right;
-			margin-top: 15px;
-		}
-		.com_all:hover{
-			background:url(../images/dwbtn.png) no-repeat 0 -99px;
-		}
-		.make_com{
-			position:relative;
-		}
-		.make_com .login{
-			background:none;
-		}
-		.accout{
-			float: right;
-			padding-right: 20px;			
-		}
-		#user{
-			padding: 5px;
-			border: 1px solid #CCC;
-			word-wrap: break-word;
-			line-height: 18px;
-			overflow-y: auto;
-			overflow-x: hidden;
-			outline: none;
-			background: white;
-			width: 335px;
-			height: 90px;
-			resize: none;
-			margin: 5px 0;
-		}
-		.commentboxCss{
-			padding: 5px;
-			border: 1px solid #CCC;
-			word-wrap: break-word;
-			line-height: 18px;
-			overflow-y: auto;
-			overflow-x: hidden;
-			outline: none;
-			background: white;
-			width: 335px;
-			height: 90px;
-			resize: none;
-			margin: 5px 0;
-		}
-		.make_com label{
-			position: absolute;
-			left: 10px;
-			top: 25px;
+	width: 327px;
+}
+.click_share a {
+	position:absolute;
+	width: 68px;
+	height: 25px;
+	margin-left: 5px;
+	text-indent: -9999em;
+	background: url(../images/wm3.png) no-repeat 0 -965px;
+	display: inline-block;
+}
+#dailyShare .click_like {
+	display: inline-block;
+	position:absolute;
+	margin-left: 120px;
+	vertical-align: top;
+	width: 58px;
+	height: 24px;
+	background: url(../images/wm3.png) no-repeat 0 -997px;
+}
+#dailyShare .num_like {
+	width: 34px;
+	height: 24px;
+	line-height: 24px;
+	position:absolute;
+	right:0;
+	text-align: center;
+	background: url(../images/wm3.png) no-repeat 0 -1030px;
+	padding-right: 45px;
+}
 
-		}
-		.done{
-			float: right;
-			width: 80px;
-			height: 30px;
-			background:url(../images/dwbtn.png) no-repeat 0 -132px;
-			cursor:pointer;
-		}
+.groups{
+	float:left;
+	width:445px;
+}
+.groupA{
+	margin-right:30px;
+}
+.groups .groupTit{
+	height:22px;
+	background:#21ACE3;
+	color:white;
+	font-size:14px;
+	padding-left:10px;
+}
+.groups .acts{
+	position:relative;
+	height:65px;
+	padding-top:10px;
+	border-bottom:1px solid #dcd8d2;
+}
+.acts .intoBtn{
+	position:absolute;
+	right:0;
+	bottom: 5px;
+	width:43px;
+	height:23px;
+	border:1px ridge #BD0115;
+	background:#E73617;
+	border-radius:4px;
+	color:white;
+	display:none;
+}
+.groups .odd{
+	background:#f1f0ee;
+}
+.groups .acts img{
+	width:55px;
+	height:55px;
+	float:left;
+	margin-left:10px;
+	_margin-left:5px;
+}
+.groups .acts p{
+	margin-left:140px;
+	font-size:14px;
+	width:240px;
+}
+.groups .acts .actName{
+	color:#21ACE3;
+}
+.groups .acts .actInfo{
+	color:#333;
+}
 
 
 
@@ -328,5 +255,3 @@
 
 
 
-
-	
