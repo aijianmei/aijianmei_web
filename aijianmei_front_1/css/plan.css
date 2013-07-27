@@ -82,23 +82,29 @@
 	}
 	
 /************天天锻炼页面样式*************/
+.ms_hidden_part{
+	width:310px;
+}
 .person_ms span {
-display: inline-block;
-width: 50px;
-vertical-align: top;
-text-overflow: ellipsis;
-white-space: nowrap;
-overflow: hidden;
+	display: inline-block;
+	width: 50px;
+	vertical-align: top;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 .dailyTop .day_classifly li{
-	width:225px;
-	margin-right:20px;
+	width:310px;
+	margin-right:15px;
+}
+.dailyTop .day_classifly .lastImg{
+	margin-right:0px;
 }
 .dailyTop .day_part img{
-	width:225px;
+	width:310px;
 }
 .dailyTop .day_part .bg_opc {
-	width:225px;
+	width:310px;
 }
 .article_item{
 	position:relative;

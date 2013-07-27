@@ -1,4 +1,9 @@
-﻿$(function(){
+﻿var _index =0;
+$(function(){
+	if(_index){			
+		$(".tr_nav").find("li").eq(_index).addClass("tr_current").siblings().removeClass("tr_current");
+		$(".main").find(".dailyContent").eq(_index).css("display","block").siblings().css("display","none");
+	}
 	//the covers over the pictures
 	$("div.plan_item,li.article_item").bind({
 		mouseleave: function(){
@@ -29,7 +34,10 @@
 			$(this).find(".intoBtn").show();
 		}
 	});
-	//天天锻炼页面
-	$(".dailyTop").find("li").last().css("margin-right","0px");
 	
+	$(".tr_nav").find("li").bind("click",function(){
+			$(this).addClass("tr_current").siblings().removeClass("tr_current");
+			var contentIndex = $(this).index();
+			$(".main").find(".dailyContent").eq(contentIndex).css("display","block").siblings().css("display","none");
+	})	
 });
