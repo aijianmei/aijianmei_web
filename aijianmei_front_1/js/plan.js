@@ -28,5 +28,8 @@
 		mouseenter : function(){
 			$(this).find(".intoBtn").show();
 		}
-	})
+	});
+	//天天锻炼页面
+	$(".dailyTop").find("li").last().css("margin-right","0px");
+	
 });

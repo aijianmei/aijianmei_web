@@ -82,6 +82,24 @@
 	}
 	
 /************天天锻炼页面样式*************/
+.person_ms span {
+display: inline-block;
+width: 50px;
+vertical-align: top;
+text-overflow: ellipsis;
+white-space: nowrap;
+overflow: hidden;
+}
+.dailyTop .day_classifly li{
+	width:225px;
+	margin-right:20px;
+}
+.dailyTop .day_part img{
+	width:225px;
+}
+.dailyTop .day_part .bg_opc {
+	width:225px;
+}
 .article_item{
 	position:relative;
 	margin-bottom:15px;
