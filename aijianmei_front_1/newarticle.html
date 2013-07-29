@@ -353,14 +353,9 @@
             <div class="fleft RecommentContent">用户名XXXXXXXXXXXXX 回复XXX删除xxx用户名XXXXXXXXXXXXX 回复XXX删除xxx用户名XXXXXXXXXXXXX 回复XXX删除xxx回复XXX删除xxx用户名XXXXXXXXXXXXX 回复XXX删除xxx用户名XXXXXXXXXXXXX 回复XXX删除xx回复XXX删除xxx用户名XXXXXXXXXXXXX 回复XXX删除xxx用户名XXXXXXXXXXXXX 回复XXX删除xx</div>
             <div class="articleRecommentDate">3天前</div>
             </div>
+            </div>                                 
             </div>
-                        
-            
-            </div>
-            </div>
-            
-              
-              
+            </div>            
             </div>
 	        	<div class="content_2" style="float:right;">
 	        		<div class="same_part">
@@ -412,7 +407,12 @@
                         <li><img name="" src="images/recomArticle.jpg" width="130" height="85" alt=""><span>美食减肥，点心搭配</span></li>
                         <li><img name="" src="images/recomArticle.jpg" width="130" height="85" alt=""><span>美食减肥，点心搭配</span></li>
                         </ul>
-                        <span><a onClick="changeRecomArticleList();">换一组</a></span>
+                        <span><a onClick="changeRecomArticleList();">换一组</a>
+							<span class="changeDot curDot"></span>
+							<span class="changeDot"></span>
+							<span class="changeDot"></span>
+							<span class="changeDot"></span>
+						</span>
 		        		</div>
 		        	</div>
                      <!--kontem add end-->
@@ -664,5 +664,10 @@
 						}
 					}
         </script>
+		<script type="text/javascript">			
+		$(".changeDot").click(function(){	
+			$(this).addClass("curDot").siblings(".changeDot").removeClass("curDot");
+		})
+		</script>
 	</body>
 </html>

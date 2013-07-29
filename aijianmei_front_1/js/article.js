@@ -42,3 +42,7 @@ var help = {
 	help.addEvent(txt,"focus",txtFocus);
 	help.addEvent(txt,"blur",txtBlur);
 })();
+
+
+
+

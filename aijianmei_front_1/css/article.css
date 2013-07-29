@@ -3,6 +3,8 @@
 .recomarticles ul li{list-style:none;float:left; width:139px; text-align:center;}
 .recomarticles ul li span{font-size:14px; color:#666; width:139px;text-align:center; margin-bottom:10px;}
 .recomarticles span { float:left; font-size:16px; color:#09F; height:35px;}
+.recomarticles .changeDot{background:url(../images/article/hyz_2.png) no-repeat;width:10px;height: 10px;display:inline-block;margin:5px;cursor:pointer; }
+.recomarticles .curDot{background:url(../images/article/hyz_1.png) no-repeat;}
 .recomarticles span a{ float:left; font-size:14px;  height:20px; color:#333;}
 .sider_t {background: url(../images/pal/sider_t.jpg);height: 30px;line-height: 30px;padding-left: 5px; margin-top:-10px; margin-left:-10px;}
 #articleMenu{ height:30px; padding:10px 0px 10px 5px; width:640px;}
