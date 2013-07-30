@@ -667,7 +667,12 @@
 		<script type="text/javascript">			
 		$(".changeDot").click(function(){	
 			$(this).addClass("curDot").siblings(".changeDot").removeClass("curDot");
-		})
+		});		
+		setInterval(function(){
+			var dotIndex = $(".curDot").index();
+			if(dotIndex == 4) dotIndex = 0;
+			$(".changeDot").eq(dotIndex).addClass("curDot").siblings(".changeDot").removeClass("curDot");
+		},1500);
 		</script>
 	</body>
 </html>
