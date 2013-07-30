@@ -225,7 +225,7 @@
 }
 .groups .acts{
 	position:relative;
-	height:65px;
+	min-height:65px;
 	padding-top:10px;
 	border-bottom:1px solid #dcd8d2;
 }
