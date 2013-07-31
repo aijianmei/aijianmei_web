@@ -5,7 +5,11 @@ RewriteRule ^(.*)$ http://www.aijianmei.com/$1 [L,R=301]
 RewriteBase /
 RewriteRule index.html index.php
 RewriteRule ^forum/(.+) forum/$1
-RewriteRule ^(.+)-(.+)-(articleDetail)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4
+#RewriteRule ^(.+)-(.+)-(articleDetail)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4
+RewriteRule ^index-Index-articleDetail-(.+).html index.php?app=index&mod=public&act=articleDetail&id=$1
+RewriteRule ^articleDetail-(.+)-p(.+).html index.php?app=index&mod=public&act=articleDetail&id=$1&pg=$2
+RewriteRule ^articleDetail-(.+).html index.php?app=index&mod=public&act=articleDetail&id=$1
+
 RewriteRule ^(.+)-(.+)-(daily)-(.+)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4&type=$5
 RewriteRule ^(.+)-(Train)-(videoDetail)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4
 RewriteRule ^(.+)-(.+)-(info)-(.+).html index.php?app=$1&mod=$2&act=info&type=$4

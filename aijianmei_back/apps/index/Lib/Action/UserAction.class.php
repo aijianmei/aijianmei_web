@@ -704,6 +704,9 @@ public function saveedituserinfo(){
 				M('')->query($upsql);
 				$getmail=M('')->query("select email from ai_user where uid=$mid");
 				
+				$upsql="update ecs_users SET password = '".md5($_POST['password'])."' WHERE email='".$getmail[0]['email']."'";
+				M('')->query($upsql);
+				
 				$tmpPassword=M('')->query("select password from ai_forum_tmp_user where email='".$getmail[0]['email']."'");
 				M('')->query("UPDATE  ai_forum_tmp_user SET  password =  '".$_POST['password']."' WHERE  email='".$getmail[0]['email']."'");
 				//调用论坛对应的密码修改 api add by kontem 20130701 {{{

@@ -1,0 +1,145 @@
+<include file="../Public/header" />
+<include file="../Public/banner" />
+
+<style>
+.ar_block{
+margin: 20px;
+padding: 20px 0 20px 10px;
+background: #f3f3f3;
+}
+.block_img{
+float: left;
+width: 81px;
+height: 70px;
+margin-right: 10px;
+}
+.ar_block span{
+display: inline-block;
+margin: 4px 20px 4px 0;
+}
+.ar_block p{
+margin-right: 50px;
+}
+</style>
+<div id="content" class="clearfix">
+            <div class="sider_all">
+                <span class="corner_left"></span>
+                <div class="lay_sider">
+                    <div class="subsider">
+                        <span class="border_line"></span>
+                        <h3 class="video_all">营养</h3>
+                        <span class="border_line"></span>
+                        <ul>
+                            <php>foreach($categories as $c) {</php>
+                            <php>if($c['name']) {</php>
+                            <li class="each_video all">
+                                <a href="/index.php?app=index&mod=Nutri">{$c['name']}</a>
+                            </li>
+                            <php>}</php>
+                            <php>foreach($c['children'] as $child) {</php>
+                            <li class="each_video" <php> if($_GET['id']==$child['id']) {</php>  style="background: #21ace3;color: white;box-shadow: 0 0 8px #21ace3;"<php>}</php>>
+                                <a href="/index.php?app=index&mod=Nutri&act=articleList&id={$child['id']}" <php> if($_GET['id']==$child['id']) {</php> style="color: white;"<php>}</php>>{$child['name']}</a>
+                            </li>
+                            <php>}</php>
+                            <php>}</php>
+                            <span class="border_line"></span>
+                        </ul>
+                    </div>
+                </div>
+                <span class="corner_bottom"></span>
+            </div>
+            
+            <div class="right_sider">
+
+                <div class="part_top clearfix">
+                    <div class="lay_top clearfix">
+                            <h1 class="public_title">最热文章</h1>
+                            <div class="hot_video">
+                            <ul class="lay_hot_video clearfix">
+                            <php>foreach($hotArticles as $a) {</php>
+                                <li class="tr_classify">
+                                    <a href="/index-Index-articleDetail-{$a['id']}.html" class="video_1"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+                                    <a href="/index-Index-articleDetail-{$a['id']}.html" class="plan_article_tl">{$a['title']}</a>
+                                    <p class="summary">{$a['brief']}
+                                    </p>
+                                    <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
+                                <span class="comment_time">评论: <span>{$a['recomnums']}</span></span>
+                                </li>
+                                <php>}</php>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="corner_bottom"></span>
+                </div>	
+
+                <div class="part_top clearfix">
+                    <div class="lay_top clearfix">
+                        <h1 class="public_title">最近文章</h1>
+                        <div class="hot_video">
+                            <ul class="lay_hot_video clearfix">
+                                <php>foreach($lastArticles as $a) {</php>
+                                <li class="tr_classify">
+                                    <a href="/index-Index-articleDetail-{$a['id']}.html" class="video_2"><img src="{$SITE_URL}/public/images/article/{$a['img']}" width="165px" height="134px" alt=""></a>
+                                    <a href="/index-Index-articleDetail-{$a['id']}.html" class="plan_article_tl">{$a['title']}</a>
+                                    <p class="summary">{$a['brief']}</p>
+                                    <span class="t_play_time">点击:<span>{$a['reader_count']}</span></span>
+                                <span class="comment_time">评论: <span>{$a['recomnums']}</span></span>
+                                </li>
+                                <php>}</php>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="part_top clearfix">
+                    <div class="lay_top clearfix">
+                        <h1 class="public_title">全部</h1>
+                        <div class="video">
+                                                        <div class="all">
+                                                                <ul class="all_ul">
+                                                                        <li class="select">
+                                                                                <span class="opt">范围：</span>
+                                                                                <a <?php if($_GET['timecon']==''){ echo 'class="pre"';}?> href="index.php?app=index&mod=Nutri&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=<?php echo $_GET['ordercon'];?>">不限</a>
+                                                                                <a <?php if($_GET['timecon']=='day'){ echo 'class="pre"';}?> href="index.php?app=index&mod=Nutri&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=<?php echo $_GET['ordercon'];?>&timecon=day">今日</a>
+                                                                                <a <?php if($_GET['timecon']=='week'){ echo 'class="pre"';}?> href="index.php?app=index&mod=Nutri&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=<?php echo $_GET['ordercon'];?>&timecon=week">本周</a>
+                                                                                <a <?php if($_GET['timecon']=='month'){ echo 'class="pre"';}?> href="index.php?app=index&mod=Nutri&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=<?php echo $_GET['ordercon'];?>&timecon=month">本月</a>
+                                                                        </li>
+                                                                        <li class="select">
+                                                                                <span class="opt">排序：</span>
+                                                                                <a <?php if(empty($_GET['ordercon'])||$_GET['ordercon']=='create_time'){ echo 'class="pre"';}?> href="index.php?app=index&mod=Nutri&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=create_time&timecon=<?php echo $_GET['timecon'];?>">最新发布</a>
+                                                                                <a <?php if($_GET['ordercon']=='reader_count'){echo 'class="pre"';}?> href="index.php?app=index&mod=Nutri&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=reader_count&timecon=<?php echo $_GET['timecon'];?>">最多播放</a>
+                                                                                <a <?php if($_GET['ordercon']=='recomnums'){echo 'class="pre"';}?> href="index.php?app=index&mod=Nutri&act=articleList&id=<?php echo $_GET['id'];?>&ordercon=recomnums&timecon=<?php echo $_GET['timecon'];?>">最多评论</a>
+                                                                        </li>
+                                                                </ul>
+                                                        </div>
+                                                        <div class="mode_3">
+                                                                <php>foreach($articles as $a) {</php>
+                                                                        <div class="ar_block">
+                                                                                <img class="block_img" src="{$SITE_URL}/public/images/article/{$a['img']}"/>
+                                                                                <h2><a href="/index-Index-articleDetail-{$a['id']}.html">{$a['title']}</a></h2>
+                                                                                <span>作者：{$a['author']}</span><span>日期：<php>echo date('Y-m-d',$a['create_time'])</php></span><span >点击：{$a['reader_count']} </span>
+                                                                                <p>{$a['brief']}...</p>
+                                                                        </div>
+                                                                <php>}</php>
+                                                        </div>
+                        </div>
+                                                <div class="page clearfix">
+                                                    <span class="concrete_choice">
+								<?php printf($pager['backstr'],'class="prev"');?>
+                                <?php printf($pager['thestr'],'class="current_page"');?>
+                                <?php printf($pager['backstr'],'class="next"');?>
+                                                    </span>
+                                                    <span class="free_choice">
+                                                        <span>共{$pager[page]}页</span>
+                                                        <span class="concrete_page">
+                                                                到第
+                                                                <input type="text" value="">
+                                                                页
+                                                        </span>
+                                                        <span class="sure_button">确定</span>
+                                                    </span>
+                                                </div>
+                    </div>
+                </div>								
+            </div>
+        </div>
+<include file="../Public/footer" />

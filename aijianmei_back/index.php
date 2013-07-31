@@ -1,7 +1,7 @@
 <?php
 session_start();
-error_reporting(0); //调试、找错时请弃用这一行配置，注释下一行配置
-//error_reporting(E_ERROR | E_PARSE | E_STRICT);
+//error_reporting(0); //调试、找错时请弃用这一行配置，注释下一行配置
+error_reporting(E_ERROR | E_PARSE | E_STRICT);
 
 //print_r($_COOKIE);
 //网站根路径设置
@@ -18,6 +18,7 @@ if(@$_SESSION['needSetcookie']!=''){
 	setcookie("ECS[password]",$_SESSION['needSetcookie']['ECS[password]'],time()+3600*24*30,"/");
 	unset($_SESSION['needSetcookie']);
 }
+
 //载入核心文件
 require(SITE_PATH.'/core/sociax.php');
 

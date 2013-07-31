@@ -294,7 +294,7 @@ if (!defined('INIT_NO_USERS'))
     {
         $smarty->assign('ecs_session', $_SESSION);
     }
-
+	recalculate_price();
     //print_r($_SESSION);
 }
 
@@ -316,7 +316,7 @@ $_SESSION['refer_url'] = '';
 if($_REQUEST['act'] != 'price'&&$_SERVER['SCRIPT_NAME']!='/shop/captcha.php')
 {
 	if($_SERVER['SCRIPT_NAME']!='/shop/flow.php'){
-		$_SESSION['shoprefer_url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		$_SESSION['refer_url'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	}
 }
 

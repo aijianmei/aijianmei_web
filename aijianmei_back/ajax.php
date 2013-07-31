@@ -17,7 +17,9 @@ $_actAllowArr=array(
 'ajaxTrainMore'=>'data',
 'sedaylike'=>'data',
 'checkUserName'=>'data',
-'getrecomarticles'=>'page',);
+'getrecomarticles'=>'page',
+'getRecomArticleList'=>'data',
+'delDetaiCommont'=>'data');
 /*ajax */
  if(!empty($_REQUEST['act'])){
      foreach($_REQUEST as $key => $value){
@@ -44,6 +46,37 @@ if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
     }
     exit;
 }
+
+function getRecomArticleList($data=null){
+	$promoteArticle=C_mysqlQuery("SELECT * FROM ai_article where is_promote=1 ORDER BY RAND() limit 6");
+			while($row=mysql_fetch_assoc($promoteArticle)){
+				$row['title']=msubstr($row['title'],0,18);
+				$resultTmp[]=$row;
+			}
+	echo json_encode($resultTmp);
+	exit;
+}
+function delDetaiCommont($data=null){
+	$delid=$_POST['delid'];
+	$uid=$_POST['uid'];
+	$mid=$_SESSION['mid'];
+	$ptype=$_POST['ptype']?$_POST['ptype']:1;
+	if($mid!=$uid) return false;
+	if(($delid >0)==false) return false;
+	
+	$delSql="delete from ai_comments where uid=$mid and parent_type=$ptype and id=$delid";
+	C_mysqlQuery($delSql);
+	if(mysql_affected_rows()>0){
+	echo 1;	
+	}else{
+	echo 0;
+	}
+	exit;
+}
+
+
+
+
 
 function checkUserName(){
 	$username=$_POST['username'];
@@ -499,6 +532,7 @@ function addVideoCommont($data=null){
 		$sql="INSERT INTO ai_comments (uid,content,parent_id,parent_type,create_time,source,topParent) VALUES ('".$uid."','".$content."','".$pid."',".$ptype.",".time().",'','0')";
     $res = mysql_query($sql, $db);
     $data=null;
+    $data['id']=mysql_insert_id();
     if($res) {
         $data['username']=$_SESSION['userInfo']['uname'];
         $data['content']=$content;
@@ -524,7 +558,7 @@ function addVideoCommont($data=null){
 }
 
 function addDetaiCommont($data=null){
-    ob_end_clean();
+
     global $_dbConfig;
     $pid=$_POST['pid']?$_POST['pid']:'';
     $uid=$_POST['uid']?$_POST['uid']:exit();
@@ -535,8 +569,19 @@ function addDetaiCommont($data=null){
     $sql="INSERT INTO ai_comments (uid,content,parent_id,parent_type,create_time,source,topParent) VALUES ('".$uid."','".$content."','".$pid."',1,".time().",'','0')";
     $res = mysql_query($sql, $db);
     $data=null;
+    $data['id']=mysql_insert_id();
     if($res) {
         $data['username']=$_SESSION['userInfo']['uname'];
+        
+      preg_match_all("/^\#[0-9]{1,}楼\s/",$content,$matches,PREG_SET_ORDER);
+      $replyidString=$matches[0][0];
+      preg_match_all("/\d{1,}/",$replyidString,$floornums,PREG_SET_ORDER);
+      $floornums=$floornums[0][0];
+      if($floornums>0){
+       $content=preg_replace('/^\#\d楼\s/','<a href="#replay'.$floornums.'">#'.$floornums.'楼 </a>',$content);
+    	}
+        
+        
         $data['connect']=$content;
         $data['create_time']=date("Y-m-d H:i:s",time());
 		
@@ -555,6 +600,9 @@ function addDetaiCommont($data=null){
                 $data['img']="public/themes/newstyle/images/user_pic_middle.gif";
             }
         }*/
+        $countinfo=C_mysqlQuery("select count(*) as num from ai_comments where parent_id=$pid and parent_type=1");
+        $countinfo=mysql_fetch_assoc($countinfo);
+        $data['floorVal']=$countinfo['num'];
         $data['img']=getUserFace($uid,'m');
         echo json_encode($data);
     }else {
@@ -565,9 +613,7 @@ function addDetaiCommont($data=null){
 }
 
 function senLike($data){
-    //$mid=$_GET['mid'];
-    //$articleid=$_GET['articleid'];
-    //$mid=$_POST['mid'];
+
     $mid=$_SESSION['mid'];
     $articleid=$_POST['articleid'];
     $ptype=$_POST['ptype'];

@@ -1,0 +1,77 @@
+
+.recomarticles ul {list-style:none;}
+.recomarticles ul li{list-style:none;float:left; width:139px; text-align:center;}
+.recomarticles ul li span{font-size:14px; color:#666; width:139px;text-align:center; margin-bottom:10px;}
+.recomarticles span { float:left; font-size:16px; color:#09F; height:35px;}
+.recomarticles span a{ float:left; font-size:18px; color:#09F; height:20px;}
+.sider_t {background: url(../images/pal/sider_t.jpg);height: 30px;line-height: 30px;padding-left: 5px; margin-top:-10px; margin-left:-10px;}
+#articleMenu{ height:30px; padding:10px 0px 10px 5px; width:640px;}
+.articleline{border-bottom: 1px solid #ccc; float:left; width:100%;}
+#articleMenu ul li{ list-style:none; float:left; height:24px; margin-left:5px;}
+#articleTitle{ padding:10px 0px 10px 5px; width:640px; min-height:80px; font-size:16px; text-align:center;}
+#articleTitle h2{ font-family:Tahoma, Geneva, sans-serif;}
+.click_share a {width: 68px;height: 25px;text-indent: -9999em;background: url(../images/wm3.png) no-repeat;display: inline-block;}
+.click_share .share_obj_2 {background-position: 0 -965px;}
+#articleShare{ float:left; margin-top:20px;}
+#articleShare span{ float:left; font-size:14px;padding-right:5px;}
+#articleShare .articleAuthor { padding-left: 0px;border-left: none;font-size: 15px;font-weight: 700;color: #0079CA;}
+#articleContent{font-size: 16px;}
+
+.recommend_article{margin:15px 0;}
+.recommend_article .recomend_article_lay{margin-right: -4px;}
+.recommend_article li{float:left;margin-right: 3px;}
+.recommend_article p{font-size: 16px;text-align: center;}
+.recommend_article img{width: 215px;height:145px;margin-bottom: 10px;}
+
+#articleShare .click_like {display: inline-block;vertical-align: top;width: 58px;height: 24px;background: url(../images/wm3.png) no-repeat 0 -997px;}
+#articleShare .num_like {width: 34px;height: 24px;line-height: 24px;text-align: center;background: url(../images/wm3.png) no-repeat 0 -1030px; padding-right:45px;}
+.login_resgister { float:left;margin: 10px 0;padding: 10px 0; width:100%;}
+.login_resgister p {border: 1.8px solid #E8EEFA;color: black;font-size: 15px;height: 50px;letter-spacing: 3px;line-height: 50px;padding-left: 30px;font-weight: bold;}
+.login_resgister p a {background: #21ACE3;color: white;margin: 0 2px;padding: 5px 15px;}
+
+.title_path{height:22px;}
+.title_path a{float:left;position: relative;line-height: 22px;display: inline-block;padding: 0 6px 0 6px;color:#777;background: url(../images/article/dq_02.jpg) repeat-x;}
+.title_path .middleline{display: block;background: url(../images/article/article_icon.png) no-repeat 0 -179px; padding-right:6px;}
+.title_path .frontmiddleline{display: block;background: url(../images/article/article_icon.png) no-repeat 0 -211px; padding-right:6px;}
+.title_path .behindmiddleline{display: block;background: url(../images/article/article_icon.png) no-repeat 0 -147px; padding-right:6px;}
+.title_path .nolastbehindmiddlelinen{display: block;background: url(../images/article/article_icon.png) no-repeat -22px -308px; padding-right:6px;}
+.title_path .bothbehindmiddlelinen{display: block;background: url(../images/article/article_icon.png) no-repeat 0 -308px; padding-right:6px;}
+.title_path .first_path:before{display: none;}
+
+.title_path .current_pt a{display: inline-block;height: 19px;line-height: 18px;margin-top: 2px;padding: 0 9px;}
+.title_path .current_pt{float:left;position: relative;line-height: 22px;background:url(../images/article/dq_09.jpg) repeat-x;color:white;}
+
+.comment_part{ float:left;}
+.comment_part .comment_frame{clear: right;padding: 0px;margin:10px 0;background: #fff; border: 1px solid #e9e9e9; padding:8px;}
+.comment_part .comment_frame img{float: left;width: 30px;height: 30px;padding-right: 10px;}
+.comment_part .comment_frame textarea{float:left;width: 570px;height: 44px;padding:10px;border:none;resize:none;outline:none;background: url(../images/article/article_icon.png) no-repeat 0 -429px;}
+.comment_part .word_num{text-align: right; float:right; color:rgb(162, 162, 162);}
+.comment_part .userinfonum{text-align: left; float:left; margin-left:60px;}
+.comment_part .comment_sure{float: right;display: inline-block;width:81px;height:30px;background: url(../images/article/article_icon.png) no-repeat 0 -349px;}
+.comment_part .comment_sure:hover{height:30px;background: url(../images/article/article_icon.png) no-repeat 0 -389px;}
+
+.recommentListBox{float:left;width:100%;}
+.recommentListBox #countList{float:left;}
+.recommentListBox #countList span{ float:left; width:100%;font-size:14px;margin: 10px 0;font-family: inherit;font-weight: bold;line-height: 1;color: inherit;text-rendering: optimizelegibility;}
+.recommentListBox #countList .notolist{float:left;margin-top: 10px;color: #999999;}
+.recommentListBox .no_result{ float:left; width:100%;text-align: center;background: none repeat scroll 0 0 transparent;border: 2px dashed rgba(0,0,0,0.1);border-radius: 5px 5px 5px 5px;margin-bottom: 20px;padding-bottom: 15px;padding-top: 15px;}
+
+.recommentListBox #countList .pg_page{ float:left; text-align:center; width:100%;}
+#recommentList { float:left; letter-spacing:1px;}
+#recommentList .articleRecomment{ width:100%; float:left;  border-top:1px solid #fff; border-bottom: 1px solid #dfdfdf;border-top: 1px solid white;}
+#recommentList .articleRecomment .articleRecommentImg{ width:50px; height:100%; float:left; padding-top:15px; padding-left:10px; padding-right:10px;}
+#recommentList .articleRecomment .articleRecommentInfo{ float: left; width:580px; height:15px;}
+#recommentList .articleRecomment .articleRecommentContent{ float:left;width:580px; }
+#recommentList .articleRecomment .articleRecommentContent a{font-size:14px; }	
+#recommentList .articleRecomment .articleRecommentDate{ float:left;width:580px; }
+#recommentList .articleRecomment .articleRecommentInfo .repairRcom{color:#999999; font-size:12px;}
+#recommentList .articleRecomment .articleRecommentInfo .repairRcom img{ margin-left:5px;} 
+#recommentList .articleRecomment .articleRecommentInfo .uname{color:#999999; font-size:12px;}
+#recommentList .fleft{ float:left;}
+#recommentList .fright{ float:right;}
+#recommentList .mr15{ margin-right:15px;}
+#recommentList .mr17{ margin-right:17px;}
+#recommentList .mt15{ margin-top:15px;}
+#recommentList .articleRecomment .articleRecommentContent .RecommentContent{ font-size:16px; color:#333333; margin-top:2px;}
+#recommentList .articleRecomment .articleRecommentDate{color:#999999; font-size:12px; margin-bottom:4px; margin-top:5px;}
+

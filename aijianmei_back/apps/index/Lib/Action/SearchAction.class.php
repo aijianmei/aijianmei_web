@@ -185,7 +185,7 @@ class SearchAction extends Action {
 			$pageArr[$i]='<a '.$cuCss.' href="'.$surl.$i.$eurl.'">'.$i.'</a>';
 		}
 		if($listnum>10){
-			if($pg>5&&($listnum-$pg)>5){
+			if($pg>5&&($listnum-$pg)>=5){
 				$snum=$pg-5;
 				$enum=$pg+5;
 			}

@@ -99,8 +99,6 @@ class ArticleAction extends AdministratorAction {
             $data['create_time'] = time();
             $data['iswaterimg']  = t($_POST['iswaterimg']);
             
-            
-
             if(isset($_FILES['img']['name'])) {
                 if(!move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'])){
                     echo 'add error '.'<br />';					

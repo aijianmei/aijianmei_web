@@ -149,13 +149,12 @@ function addimg(){
    bindListener();
 }
 function getMoreCategory(){
-    var innerHtml='<dl class="lineD"><dt>其他分类：</dt><dd><select name="morecategory[]">'+$("#category").html()+'</dd></dl></select>';
+    var innerHtml='<dl class="lineD"><dt>其他分类：</dt><dd><select name="morecategory[]">'+$("#category").html()+'</dd></select><a href="javascript:void(0);" onclick="delCategory(this);"">删除分类</a></dl>';
      $("#categoryDiv").append(innerHtml)
 
 }
 function delCategory(obj){
 if (!confirm("确认删除")){ return false;}
-var id= $(obj).attr('delid');
 $(obj).parent().parent().remove();
 }
 
