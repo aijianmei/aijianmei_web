@@ -16,6 +16,18 @@
 .mainPlan .cont_rec{
 	float:left;
 }
+.mainPlan .show_share{
+	text-align: center;
+	height: 32px;
+	margin-top: 10px;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+	-webkit-transition: opacity .8s;
+}
+.mainPlan .show_share:hover{
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
 /************天天锻炼页面样式*************/
 .ms_hidden_part,.dailyTop .bg_opc_2,.dailyTop .day_part img,.dailyTop .day_part .bg_opc {
 	width:310px;
