@@ -75,6 +75,7 @@
 #recommentList .articleRecomment .articleRecommentContent .RecommentContent{ font-size:16px; color:#333333; margin-top:2px;}
 #recommentList .articleRecomment .articleRecommentDate{color:#999999; font-size:12px; margin-bottom:4px; margin-top:5px;}
 
+/*特定计划 newplan.html*/
 .choosePlan{margin:20px 0;}
 .choosePlan .thead{margin-right:3px;}
 .choosePlan .thead span{display:inline-block;width:90px;height:55px;margin-bottom:10px;float:right;margin-right:3px;text-align:center;line-height:55px;}
@@ -89,3 +90,11 @@
 .choosePlan td a{display:block;width:87px;height:50px;position:relative;padding-top:60px;}
 .choosePlan td span{position:absolute;display:block;top: 20px;width: 87px;text-align: center;}
 
+/*视频详细页面 video.html*/
+.video .abfocus_box{height:321px;padding:0 10px;}
+.videoRight{float:right;padding: 40px 20px;}
+.videoRight .videoInfo{line-height:30px;font-weight:bold;}
+#videoContent .groupTit{height:22px;line-height:22px;background:#21ACE3;color:white;font-size:14px;margin: 10px 0;padding-left:10px;}
+#videoContent .videoImg{width:320px;height:180px;}
+#videoContent .wizard{width:150px;height:400px;float:left;}
+#videoContent .videoIntr{padding:20px 0 0 160px;font-size:16px;color:#27bf5b;font-weight:bold;line-height:30px;}
