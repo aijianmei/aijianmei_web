@@ -40,12 +40,10 @@ class PlanAction extends Action {
 	{
 		$this->assign('cssFile', 'plan');
 		
-        $this->assign('headertitle', '健身计划');
+		$this->assign('headertitle', '健身计划');
 		//header current add by kon at 20130415
 		$this->assign('_current', 'plan');
 		$this->assign('cssFile','plan');
-        //$this->display();
-		
 		$this->display('newplan');
     }
 	public function chooseplan(){
