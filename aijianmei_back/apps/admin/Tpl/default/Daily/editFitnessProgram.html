@@ -56,30 +56,24 @@ $(function() {
 			<div class="block-title">
 				<h4>新增特定健身计划</h4>
 			</div>
-			<div class="block-content">
-				<php>if(!empty($parentName)){</php>
-					<div class="control-group">
-						<label class="control-label cred" for="input-colorpicker">上一级页面</label>
-						<div class="controls">
-							<a target="blank" href="/fitnessProgram_{$parentId}.html">{$parentName}</a>
-						</div>
-					</div>
-				<php>}</php>				
+			<div class="block-content">		
 					<div class="control-group">
 						<label class="control-label cred" for="input-colorpicker">标题</label>
 						<div class="controls">
-							<input type="text" name="title" class="span2" placeholder="请输入标题(必填)">
+							<input type="text" name="title" class="span2" placeholder="请输入标题(必填)" value="{$pinfo['title']}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label cred" for="file2">标题图片</label>
 						<div class="controls">
+						<img src="public/images/fitnessProgram/{$pinfo['imageurl']}" class="alogimg img64" alt="" title="">
 						<input type="file" name="image" multiple="">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label cred" for="file2">分享图片</label>
 						<div class="controls">
+						<img src="public/images/fitnessProgram/{$pinfo['shareimgurl']}" class="alogimg img64" alt="" title="">
 						<input type="file" name="shareimg" multiple=""> (650px X 400px)
 						</div>
 					</div>
@@ -87,14 +81,14 @@ $(function() {
 					<div class="control-group">
 						<label class="control-label cred" for="file2">简介</label>
 						<div class="controls">
-						<textarea name="brief" class="textarea-medium" rows="3.5" style="margin-left: 0px; margin-right: 0px; width: 267px;" placeholder="请输入简介内容"></textarea>
+						<textarea name="brief" class="textarea-medium" rows="3.5" style="margin-left: 0px; margin-right: 0px; width: 267px;" placeholder="请输入简介内容">{$pinfo['brief']}</textarea>
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label cred" for="file2">内容</label>
 						<div class="controls">
-							<textarea cols="80" id="content" name="content" rows="10">{$article['content']}</textarea>
+							<textarea cols="80" id="content" name="content" rows="10">{$pinfo['content']}</textarea>
 							<script>
 								CKEDITOR.replace( 'content', {
 									fullPage: true,
@@ -115,7 +109,7 @@ $(function() {
 					<div class="control-group">
 						<label class="control-label" for="file2">关键词(" , "逗号分隔)</label>
 						<div class="controls">
-						<input class="span5" type="text" name="keyword" placeholder="' , '用逗号分隔"/>
+						<input class="span5" type="text" name="keyword" placeholder="' , '用逗号分隔" value="{$pinfo['keyword']}"/>
 						</div>
 					</div>			
 					<div class="form-actions">

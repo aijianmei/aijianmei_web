@@ -88,13 +88,13 @@ class DailyAction extends AdministratorAction {
 	}
 	public function addDaily() {
 		if (isset ( $_POST ['title'] )) {
-			$data ['id'] = intval ( $_POST ['aid'] );
 			$data ['uid'] = $this->mid;
 			$data ['title'] = t ( $_POST ['title'] );
 			$data ['channel'] = intval ( $_POST ['channel'] );
 			$data ['content'] = t ( $_POST ['content'] );
 			$data ['keyword'] = t ( $_POST ['keyword'] );
 			$data ['create_time'] = time ();
+			$data ['isreset']	= $_POST['isreset'];
 			$data ['gotime'] = strtotime ( $_POST ['gotime'] );
 			if (isset ( $_FILES ['img'] ['name'] )) {
 				$targetfilename = time () . rand () . ".jpg";
@@ -152,6 +152,7 @@ class DailyAction extends AdministratorAction {
 			$data ['title'] = t ( $_POST ['title'] );
 			$data ['channel'] = intval ( $_POST ['channel'] );
 			$data ['content'] = t ( $_POST ['content'] );
+			$data ['isreset']	= $_POST['isreset'];
 			$data ['keyword'] = t ( $_POST ['keyword'] );
 			$data ['create_time'] = time ();
 			$data ['gotime'] = strtotime ( $_POST ['gotime'] );
@@ -169,6 +170,7 @@ class DailyAction extends AdministratorAction {
 			}
 			unset ( $data ['uid'] );
 			unset ( $data ['create_time'] );
+
 			M ( 'daily' )->save ( $data );
 			M ()->query ( "delete from ai_daily_video_list where dailyid=$id" );
 			foreach ( $_POST ['vtitle'] as $key => $value ) {
@@ -383,7 +385,85 @@ class DailyAction extends AdministratorAction {
 		$html['thestr']=$pagehtml;
 		return $html;
 	}
+	function addFitnessProgram(){
+		if(isset($_GET['pid'])&&$_GET['pid']>0){
+			$pinfo=M('')->query("select * from ai_fitness_program where id ='".$_GET['pid']."'");	
+			$parentName=$pinfo[0]['title'];
+			$this->assign ('parentId', $_GET['pid'] );
+			$this->assign ('parentName', $parentName );
+		}
+
+		if(!empty($_POST ['title'])){
+		$data['parentid'] =$_GET['pid'] ? intval($_GET['pid']):0;
+		$data['title']  	=	$_POST ['title'];
+		$image = time () . rand () . ".jpg";
+		$newfilename = $_SERVER ['DOCUMENT_ROOT'] . '/public/images/fitnessProgram/' . $image;
+		if ($_FILES ['image'] ['tmp_name'] != '') {
+			@move_uploaded_file ( $_FILES ['image'] ['tmp_name'], $newfilename );
+		}
+		$shareimg = time () . rand () . ".jpg";
+		$newfilename = $_SERVER ['DOCUMENT_ROOT'] . '/public/images/fitnessProgram/' . $shareimg;
+		if ($_FILES ['shareimg'] ['tmp_name'] != '') {
+			@move_uploaded_file ( $_FILES ['shareimg'] ['tmp_name'], $newfilename );
+		}
+		$data['imageurl']  =$image;
+		$data['shareimgurl']  =$shareimg;
+		$data['brief']  =	$_POST ['brief'];
+		$data['content']  =	t($_POST ['content']);
+		$data['keyword']  =	$_POST ['keyword'];
+		$data['create_time']  =	time();
+		M ( 'fitness_program' )->add ( $data );
+		redirect(U('admin/Daily/fitnessProgram'));
+		}
+		
+		$this->display('addFitnessProgram');
+	}
+	function editFitnessProgram(){
+		if(!empty($_POST ['title'])){
+		$data['id']=$_GET['id']?$_GET['id']:die();
+		$data['title']  	=	$_POST ['title'];
+		$image = time () . rand () . ".jpg";
+		$newfilename = $_SERVER ['DOCUMENT_ROOT'] . '/public/images/fitnessProgram/' . $image;
+		if ($_FILES ['image'] ['tmp_name'] != '') {
+			@move_uploaded_file ( $_FILES ['image'] ['tmp_name'], $newfilename );
+			$data['imageurl']  =$image;
+		}
+		$shareimg = time () . rand () . ".jpg";
+		$newfilename = $_SERVER ['DOCUMENT_ROOT'] . '/public/images/fitnessProgram/' . $shareimg;
+		if ($_FILES ['shareimg'] ['tmp_name'] != '') {
+			@move_uploaded_file ( $_FILES ['shareimg'] ['tmp_name'], $newfilename );
+			$data['shareimgurl']  =$shareimg;
+		}
+		$data['brief']  =	$_POST ['brief'];
+		$data['content']  =	t($_POST ['content']);
+		$data['keyword']  =	$_POST ['keyword'];
+		$data['create_time']  =	time();
+		M ( 'fitness_program' )->save ( $data );
+		}
+		if(isset($_GET['id'])&&$_GET['id']>0){
+			$pinfo=M('')->query("select * from ai_fitness_program where id ='".$_GET['id']."'");	
+			$this->assign ('pinfo', $pinfo[0] );
+		}
+		
+		$this->display('editFitnessProgram');
+	}
 	
 	
+	function fitnessProgram(){
+		$pid=$_GET['pid']?$_GET['pid']:0;
+		$data=M('')->query("select * from ai_fitness_program where parentid=$pid");
+		$this->assign ('fitnessProgram', $data );
+		
+		$this->display('fitnessProgram');
+	}
+	function doDeleteFitnessProgram(){
+		if (! isset ( $_POST ['ids'] )) {
+			echo '0';
+			exit ();
+		}
+		$vid = intval ( $_POST ['ids'] );
+		$res=M('fitness_program')->where (array('id' => $vid ))->delete ();
+		echo $res ? '1' : '0';
+	}
 }
 ?>

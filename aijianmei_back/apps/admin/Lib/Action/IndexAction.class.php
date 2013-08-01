@@ -166,9 +166,9 @@ class IndexAction extends AdministratorAction {
                 '添加'    => U('admin/Article/addPromote'),
                 '管理'    => U('admin/Article/promote'),	
             ),
-            '肌肉增加视频' => array(
-                '添加'    => U('admin/Article/addMuscle'),
-                '管理'    => U('admin/Article/muscle'),	
+            '特定健身计划' => array(
+                '添加'    => U('admin/Daily/addFitnessProgram'),
+                '管理'    => U('admin/Daily/fitnessProgram'),	
             ),
         );
 
