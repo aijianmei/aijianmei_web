@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/public.css">
+		<link rel="stylesheet" href="css/tool.css" />
+		<link rel="stylesheet" href="css/jquery-ui.css" />
+		<link rel="stylesheet" href="css/common.css" type="text/css" />
+		<link rel="stylesheet" href="css/jquery.jqplot.min.css" type="text/css" />
+		
+		<script type="text/javascript" src="js/jquery.latest.js"></script>
+		<script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+		<script language="javascript" type="text/javascript" src="js/jqplot.categoryAxisRenderer.js"></script>
+		<script language="javascript" type="text/javascript" src="js/jqplot.highlighter.js"></script>
+	</head>
+	
+	<body>
+
+        <div class="wrapper">
+        	<div class="wrapper_bg clearfix">
+	        	<div id="weightManage" class="clearfix">
+					<div class="clearfix">
+						<div id="userInfo">
+							<img src="images/tool/rg2_1.jpg" alt="UserFace" class="userFace" />
+							<div><a href="" class="userName">要减肥</a></div>
+							<div><p class="userIntro">要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥</p></div>
+							<div>
+								<span class="userLabel">要减肥要减肥</span>
+								<span class="userLabel">要减肥</span>
+								<span class="userLabel">要减肥</span>
+								<span class="userLabel">要减肥</span>
+								<span class="userLabel">减肥</span>
+							</div>
+						</div>
+						<div id="weight">
+							<form action=""  id="">
+								<div class="weightPro">
+									<h3 class="partTit"><span>我的体重变化</span></h3>
+									<div class="progress">
+										<div class="innerPro"></div>
+										<span>46%</span>
+										<p class="tip">这是您第一次录入数据，请先填入您的初始体重和目标体重吧！</p>
+									</div>
+									<div class="initWeight">85.0kg</div>
+									<div class="goalWeight">100.0kg</div>
+								</div>
+								<div class="userInput clearfix">
+									<div class="input1">
+										<span>原始体重<input type="text" value="85.0"/>Kg</span>
+										<span class="initDate">2013.08.03</span>
+									</div>
+									<div class="input2">
+										<span>目标体重<input type="text" value="100.0"/>Kg</span>
+									</div>
+									<div class="input3">
+										<div class="curWeight">90.0kg</div>
+										<span>当前体重<input type="text" value="90.0"/>Kg</span>
+										<span class="curDate">2013.08.01</span>
+									</div>
+								</div>
+								<div class="saveBtn">
+									<button id="save"></button>
+								</div>
+							</form>
+						</div>
+					</div>	
+					<div id="tipMsg">您的目标体重是<span class="yourGoal">60.0</span>公斤，距离目标还需要燃烧热量<span class="calorie">3434</span>大卡！为了您的理想健身，努力吧！</div>
+				</div><!--End weightManage-->
+				<div id="dataIn">
+					<ul class="actNav clearfix">
+						<li class="curAct">卧推<span></span></li>
+						<li class="">深蹲<span></span></li>
+						<li class="">卧推<span></span></li>
+						<li class="">深蹲减肥<span></span></li>
+						<li class="">卧推<span></span></li>
+						<li class="">深蹲<span></span></li>
+						<li class="">卧推<span></span></li>
+						<li class="">深蹲<span></span></li>
+						<li class="">卧推减肥<span></span></li>
+						<li class="">深蹲<span></span></li>
+						
+					</ul>
+					<h3 class="partTit"><span>我的健身数据</span></h3>
+					<p class="tip">您目前的历程数据表为空，请根据自己实际情况选择动作名称！正式开启您的健身历程吧！</p>
+					<div class="clearfix">
+						<div class="dataLeft">
+							<input type="text" id="datepicker" value="08/08/2013"/>
+							<ul class="dataTab">
+								<li class="list"><img src="images/tool/rg2_1.jpg" alt="" /></li>
+								<li class="list"><img src="images/tool/rg2_1.jpg" alt="" /></li>
+								<li class="list"><img src="images/tool/rg2_1.jpg" alt="" /></li>
+							</ul>
+						</div>
+						<div class="dataRight">
+							<div class="userTabel "></div>
+							<div class="userPic"></div>
+							<div class="userNote"></div>
+						</div>
+					</div>
+				</div><!--End dataIn-->
+				<div id="dataOut">
+					<h3 class="partTit"><span>曲线变化图</span></h3>
+					<p class="tip">这是您录入的健身数据所生产的曲线图。健身心情、历程图片、数据变化，在这里，每天的进步一目了然！</p>
+					<div id="line1" style="height:300px;width:900px;"></div>
+				</div><!--End dataOut-->
+				<div id="ranking">
+					<h3 class="partTit"><span>站内排行榜</span></h3>
+					<p class="tip">您在爱健美网的健身排名，赶紧瞧瞧自己排在哪里吧！</p>
+					
+				</div><!--End ranking-->
+	        </div>
+        </div>
+		<script type="text/javascript" src="js/public.js"></script>  
+		<script type="text/javascript" src="js/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/lineData.js"></script>
+		<script type="text/javascript">
+			$( "#datepicker" ).datepicker();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,282 @@
+input,button,select,textarea{outline:none}
+.partTit{
+	font-size:20px;
+	color:#176e90;
+	font-weight:normal;
+	margin:10px 0;
+}
+	.partTit span{
+		display:block;
+		width:165px;
+		height:31px;
+		line-height: 29px;
+		margin:0 auto;
+		background:url(../images/tool/sprites1.png) no-repeat 0 0;
+		text-align:center;
+	}
+.tip{
+	margin:20px 0 10px 0;
+	font-size:14px;
+	color:#999;
+}
+#weightManage{
+	height:388px;
+	border:1px solid #fff;
+	padding:10px;
+	margin-bottom:20px;
+	background:#efefef;
+}
+	#userInfo{
+		width:200px;
+		float:left;
+		border-right:2px solid white;
+	}
+		.userFace{
+			width:180px;
+			height:180px;
+			border:1px solid #fff;
+		}
+		.userName{
+			display:block;
+			margin:10px 0;
+			color:#666;
+			font-size:16px;
+		}
+		.userIntro{
+			max-height:48px;
+			line-height:22px;
+			margin-bottom:10px;
+			padding-right:20px;
+			overflow:hidden;
+			font-size:14px;
+			color:#999;
+		}
+		.userLabel{
+			display:inline-block;
+			margin:0 5px 5px 0;
+			background:#21ace3;
+			padding:2px 5px;
+			color:#FFF;
+		}
+	#weight{
+		float:left;
+		width:696px;
+		margin:0 20px;
+		_margin-left:10px;
+	}	
+		.weightPro{
+			position:relative;
+			width:558px;
+			height:123px;
+			margin:0 auto;
+			margin-top: 5px;
+			border:1px solid #fff;
+			background:#e8eee1;
+		}
+			.progress{
+				width:407px;
+				height:28px;
+				margin:0 auto;
+				padding:4px;
+				background:url(../images/tool/sprites1.png) no-repeat 0 -49px;
+			}
+				.progress  .innerPro{
+					height:20px;
+					margin-right: 8px;					
+					border-radius: 6px;
+					background:url(../images/tool/progress.jpg) repeat-x;
+				}
+				.progress span{
+					display:block;
+					margin:0 auto;
+					margin-top:-22px;
+					line-height:22px;
+					text-align:center;
+					color:red;
+					font-weight:bold;
+				}
+			.initWeight,.goalWeight{
+				position:absolute;
+				top: -5px;
+		
+				line-height: 135px;	
+				font-weight:bold;
+				font-size:30px;
+				color:white;
+				text-align: center;
+				text-shadow:0 -2px 2px #ccc;
+			
+			}
+			.initWeight{
+				width:135px;
+				height:214px;
+				left:-72px;
+				background:url(../images/tool/sprites1.png) no-repeat 0 -232px;
+	
+			}
+			.goalWeight{
+				width:135px;
+				height:175px;
+				right:-63px;
+				background:url(../images/tool/sprites1.png) no-repeat -167px -250px;
+			}
+		.userInput{
+			position:relative;
+			height: 160px;
+		}
+			.userInput span{
+				display:block;
+			}
+			.userInput input{
+				width:54px;
+				height:24px;
+				padding:4px;
+				background:url(../images/tool/sprites1.png) no-repeat 0 -167px;
+				text-align: center;
+			}
+			.userInput .input1{
+				position:absolute;
+				top:27px;
+				left:135px;
+			}
+			.userInput .input2{
+				position:absolute;
+				top:27px;
+				right:135px;
+			}
+			.userInput .input3{
+				position: absolute;
+				left: 40%;
+				top: 25px;
+				
+			}
+				.input3 .curWeight{
+					width:157px;
+					height:135px;
+					margin:0 auto;
+					background:url(../images/tool/sprites1.png) no-repeat -341px -252px;
+					padding-left:15px;
+					line-height: 135px;	
+					font-weight:bold;
+					font-size:30px;
+					color:white;
+					text-shadow:0 -2px 2px #ccc;
+				}
+					.input3 span{
+						position: absolute;
+						top: 53px;
+						left: 170px;
+						width: 200px;
+					}
+					.input3 .curDate{
+						top:100px;
+					}
+		.saveBtn{
+			text-align:right;
+		}
+			#save{
+				display:block;
+				float:right;
+				width:105px;
+				height:46px;
+				background:url(../images/tool/save1.png) no-repeat;
+			}
+			#save:hover{
+				background:url(../images/tool/save2.png) no-repeat;		
+			}
+	#tipMsg{
+		text-align:center;
+		color:#ff4d2a;
+		font-size:20px;
+	}
+		#tipMsg span{
+			font-size:40px;
+		}
+	
+	
+	
+	
+	
+	
+	
+			.actNav{
+				width: 100%;
+				background: #56A9E4;
+			}
+			.actNav li{
+				position: relative;
+				float:left;
+				display: inline-block;
+				height:34px;
+				padding: 0 16px;
+				line-height: 34px;
+				cursor: pointer;
+				color: white;
+				font-size: 18px;
+			}
+			.actNav .curAct{	
+				margin: 1px;
+				color: #56A9E4;
+				background: white;
+			}
+			.actNav .curAct span{
+				position: absolute;
+				top: 24px;
+				left: 46%;
+				padding: 0;
+				overflow: hidden;
+				width: 0;
+				height: 0;
+				font-size: 0;
+				line-height: 0;
+				border-color: transparent transparent #56A9E4 transparent;
+				border-style: solid;
+				border-width: 5px;
+			}
+			.dataLeft,.dataRight{
+				height:340px;
+				background:#eaeaea ;
+				border-radius:6px;
+			}
+			.dataLeft{
+				width:160px;
+				float:left;
+		
+			}
+				.dataTab{
+					margin:10px;
+				}
+					.dataTab .list img{
+						width:140px;
+						height:90px;
+						margin-bottom:7px;
+						border-radius:8px;
+					}
+			.dataRight{
+				float:right;
+				width:790px;
+			}
+				.userTabel{
+					width:100%;
+					height:100%;
+					background:url(../images/tool/sjb_1.png) no-repeat;
+				}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
