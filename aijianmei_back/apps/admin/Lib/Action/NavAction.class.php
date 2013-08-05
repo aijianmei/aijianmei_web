@@ -14,13 +14,86 @@ class NavAction extends Action {
 		$this->assign('_MenusStu', $_MenusStu);
 		$this->assign('isAdmin', 1);
 	}
+	public function addvideoList(){
+		if($_POST['videoaction']=='addmodulelist'){
+			$data=array(
+				'name'=>$_POST['name'],
+				'type'=>$_POST['type'],
+			);
+			D('Acom')->InsertOne('nav_module_list',$data);
+			redirect(U('admin/Nav/videoListManager'));
+		}
+		$this->display('addvideoList');
+	}
 	public function videoListManager(){
+		/*
+		@todo import to config files
+		*/ 
+		$moduleType=array(
+		'1'=>'视频页面组件',
+		//'2'=>'视频页面组件',
+		//'3'=>'视频页面组件'
+		);
+		$moduleList=D('Acom')->getAll('nav_module_list');
+		$this->assign('moduleList', $moduleList);
+		$this->assign('moduleType', $moduleType);
+		$this->display('videoListManager');
+	}
+	public function editmodule() {
+		$id=$_GET['id'];
+		if(! $id>0) return ;
 		
+		$moduleinfo=D('Acom')->getOne('nav_module_content',"where id=$id");
+		$type=D('Acom')->getOne('nav_module_list',"where id=".$moduleinfo['moduleid']);
+		$contentList=D('Acom')->moduleInit($type['type']);//获取模块默认设置的元素集
+		$editHtml=D('Acom')->moduleEditHtml($contentList['fieldList'],unserialize($moduleinfo['content']));
+		/*  编辑模块组件 part*/
+		if($_POST['vaction']=='editmodules'){
+			/* vaction权值判断进行相关组件数据整合插入 */
+			D('Acom')->addmodules($contentList,$uploadPath,$id,'edit');
+		}
+		/* }}}end */
 		
-		
-		$this->display('keywords');
-	}	
+		$moduleinfo=D('Acom')->getOne('nav_module_content',"where id=$id");
+		$this->assign('addHtml', $editHtml);
+		$this->assign('sequence', $moduleinfo['sequence']);
+		$this->display('videoListEditContent');
+	}
 	
+	public function videoListContent(){
+		/* 定义组件图片存放目录 */
+		$uploadPath='navupload/videomodule/';
+		/*  
+		 * 通过id获取指定组件相关的组合元素
+		 * */
+		$id=$_GET['id'];
+		$type=D('Acom')->getOne('nav_module_list',"where id=$id",'name,type');
+		$contentList=D('Acom')->moduleInit($type['type']);//获取模块默认设置的元素集
+		$addHtml=D('Acom')->moduleHtml($contentList['fieldList']);//生成对应的html标签 新增页面使用
+		
+		/*  新增模块组件 part*/
+		if($_POST['vaction']=='addmodules'){
+			/* vaction权值判断进行相关组件数据整合插入 */
+			D('Acom')->addmodules($contentList,$uploadPath,$id);
+		}
+		/* }}}end */
+		/*
+		 * 获取ai_nav_module_content 里面存在的
+		 *   */
+		$moduleList=D('Acom')->getAll('nav_module_content',"where moduleid=$id");
+		
+		foreach($moduleList as $key => &$value){
+			$contentListTmp=$contentList;
+			$value['content']=$contentListTmp['styleString'].sprintf($contentListTmp['containerString'],vsprintf($contentListTmp['childconString'],unserialize($value['content'])));
+		}
+
+		//$mdata['childconString']=vsprintf($mdata['childconString'],$result);
+		$this->assign('fname', $type['name']);
+		$this->assign('moduleList', $moduleList);
+		$this->assign('addHtml', $addHtml);
+		$this->assign('contentList', $contentList);
+		$this->display('videoListContent');
+	}	
 	public function keywordmanager(){
 		$modelArr=array(
 			'plan'=>'健身计划',
@@ -571,7 +644,9 @@ class NavAction extends Action {
 	public function delByType(){
 		$tableType=$_POST['tabletype'];
 		$tableNameList=array(
-			'nav_product_list'=>'prolistCache',
+			'nav_product_list'=>'nav_product_list',
+			'nav_module_content'=>'nav_module_content',
+			'nav_module_list'=>'nav_module_list',
 		);
 		if(!in_array($tableType,$tableNameList)){echo 0;return;}
 		

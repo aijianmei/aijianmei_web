@@ -502,7 +502,7 @@ function show_banner($type){
 
 			//if($user_message['id']==2578458467){echo $_REQUEST['code'];exit;}
             //$logId = M('others')->field('uid')->where(array('mediaID'=>'3', 'mediaUserID'=>$user_message['id'], 'personID'=>$user_message['idstr']))->find();
-            $log_sql = 'select id,uid from ai_others where mediaID=3 and mediaUserID='.$user_message['id'].' and personID='.$user_message['idstr'].'';
+            $log_sql = 'select id,uid from ai_others where mediaID=3 and mediaUserID='.$user_message['id'].'';
             //echo $log_sql;
             $logId = M('')->query($log_sql);
             //var_dump($logId);
@@ -754,7 +754,7 @@ function show_banner($type){
 		$pagerArray = $pagerData['html'];
 
 		//print_r($pagerArray);
-        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit ".(($pglimit-1)*20).",$nums";
+		$sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit ".(($pglimit-1)*20).",$nums";
 		$newvideos=$hot_video=null;
 		$newvideos=$this->getDataCache(md5($sql));
 		if(!$newvideos){
@@ -1930,7 +1930,7 @@ function pageHtml($count,$nums,$pg=null,$url=null)
 			$pageArr[$i]='<a '.$cuCss.' href="'.$url.$i.'">'.$i.'</a>';
 		}
 		if($listnum>10){
-			if($pg>5&&($listnum-$pg)>5){
+			if($pg>5&&($listnum-$pg)>=5){
 				$snum=$pg-5;
 				$enum=$pg+5;
 			}

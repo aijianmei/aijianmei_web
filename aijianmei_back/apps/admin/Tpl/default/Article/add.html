@@ -70,6 +70,12 @@
             <input type="file" name="shareimg" id="shareimg" value=""/>
         </dd>
     </dl>
+    <dl class="lineD">
+        <dt>wap图片：</dt>
+        <dd>
+            <input type="file" name="wapimg" id="wapimg" value=""/>
+        </dd>
+    </dl>
 	    <dl class="lineD">
         <dt>内容：</dt>
         <dd>
@@ -149,13 +155,12 @@ function addimg(){
    bindListener();
 }
 function getMoreCategory(){
-    var innerHtml='<dl class="lineD"><dt>其他分类：</dt><dd><select name="morecategory[]">'+$("#category").html()+'</dd></dl></select>';
+    var innerHtml='<dl class="lineD"><dt>其他分类：</dt><dd><select name="morecategory[]">'+$("#category").html()+'</dd></select><a href="javascript:void(0);" onclick="delCategory(this);"">删除分类</a></dl>';
      $("#categoryDiv").append(innerHtml)
 
 }
 function delCategory(obj){
 if (!confirm("确认删除")){ return false;}
-var id= $(obj).attr('delid');
 $(obj).parent().parent().remove();
 }
 

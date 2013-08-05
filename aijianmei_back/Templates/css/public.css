@@ -1,3 +1,18 @@
+.goTopBtn {
+	position:fixed;
+	_position:absolute;
+	display:none; 
+	text-align:center; 
+	line-height:30px; 
+	width:60px; 
+	bottom:35px; 
+	height:60px; 
+	font-size:12px; 
+	cursor:pointer;
+	background: url(../images/btn_top.gif) no-repeat;
+}
+
+
 		.pm_signature{
 			clear: both; /* 清除左右浮动 */ 
 			width: 275px; /* 必须定义宽度 */ 

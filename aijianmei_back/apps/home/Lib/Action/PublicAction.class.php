@@ -318,11 +318,11 @@ class PublicAction extends Action{
 		$result = service('Passport')->loginLocal($username,$password,1);
         $lastError = service('Passport')->getLastError(); 
         //检查是否激活
-        if (!$result && $lastError =='用户未激活') {
+/*         if (!$result && $lastError =='用户未激活') {
             $this->assign('jumpUrl',U('home/public/login'));
             $this->error('该用户尚未激活，请更换帐号或激活帐号！');
             exit;
-        }
+        } */
 
         Addons::hook('public_after_dologin',$result);
 
@@ -332,7 +332,7 @@ class PublicAction extends Action{
 		
             if(UC_SYNC && $result['reg_from_ucenter']){
                 //从UCenter导入ThinkSNS，跳转至帐号修改页
-                $refer_url = U('home/Public/userinfo');
+                //$refer_url = U('home/Public/userinfo');
             }elseif ( $_SESSION['refer_url'] != '' ) {
                 //跳转至登录前输入的url
                 $refer_url	=	$_SESSION['refer_url'];

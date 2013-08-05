@@ -1,0 +1,51 @@
+﻿<include file="Templates/header.html" />
+			<style type="text/css">
+		.layerBg{
+			width:980px;
+			height:400px;
+			margin:0 auto;
+			background:url(Templates/images/layerBg.jpg) repeat;
+		}
+		.layer{
+			position:relative;
+			width:980px;
+			height:400px;
+			background:url(Templates/images/layer.png) no-repeat right bottom;
+		}
+		.success{
+			position:absolute;
+			top:110px;
+			left:280px;
+			width:60px;
+			height:60px;
+			background:url(Templates/images/success.png) no-repeat;
+		}
+		.text{
+			position: absolute;
+			left: 360px;
+			top: 110px;
+			font-size: 2em;
+			color: #646766;
+			line-height: 40px;
+		}
+		.text .second{
+			color:#21ace3;
+		}
+	</style>
+<script>
+function Jump(){
+    window.location.href = '{$jumpUrl}';
+}
+document.onload = setTimeout("Jump()" , {$waitSecond}* 1000);
+</script>
+        <div class="layerBg">
+			<div class="layer">
+				<span class="success"></span>
+				<p class="text">{$show_msg}<br /><span class="second">{$waitSecond}</span>秒后将跳回前页面</p>
+			</div>
+		</div>
+       
+     <include file="Templates/footer.html" />
+<include file="Templates/loginpart.html" />
+	</body>
+</html>

@@ -175,7 +175,7 @@ class NutriAction extends Action {
 		
 		$order = 'reader_count';
 		//$hotArticles = D('Article')->getTrainArticles($order);
-    $hotArticles = D('Article')->getArticlesListType($order,'',($pglimit-1)*20,$nums,3);
+    $hotArticles = D('Article')->getArticlesListType($order,$id,($pglimit-1)*20,$nums,3);
     //print_r( $hotArticles);
 		$this->assign('hotArticlespage', $pagerArray);
 		$this->assign('hotArticles', $hotArticles);
@@ -186,7 +186,7 @@ class NutriAction extends Action {
 	
     $order = 'create_time';
 		//$lastArticles = D('Article')->getTrainArticles($order);
-    $lastArticles = D('Article')->getArticlesListType($order,'',($pglimit-1)*20,$nums,3);
+    $lastArticles = D('Article')->getArticlesListType($order,$id,($pglimit-1)*20,$nums,3);
 		$this->assign('lastArticlespage', $pagerArray);
     $this->assign('lastArticles', $lastArticles);
 		
@@ -284,7 +284,7 @@ class NutriAction extends Action {
 			$pageArr[$i]='<a '.$cuCss.' href="'.$url.$i.'">'.$i.'</a>';
 		}
 		if($listnum>10){
-			if($pg>5&&($listnum-$pg)>5){
+			if($pg>5&&($listnum-$pg)>=5){
 				$snum=$pg-5;
 				$enum=$pg+5;
 			}

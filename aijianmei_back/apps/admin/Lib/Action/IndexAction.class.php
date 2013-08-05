@@ -158,17 +158,17 @@ class IndexAction extends AdministratorAction {
                 '所有视频' => U('admin/Article/video'),	
             ),
             '天天锻炼'     => array(
-                '添加'    => U('admin/Article/addDaily'),
-                '管理'    => U('admin/Article/daily'),
-				'批量导入'    => U('admin/Article/bulkImport'),				
+                '添加'    => U('admin/Daily/addDaily'),
+                '管理'    => U('admin/Daily/daily'),
+		'批量导入'=> U('admin/Daily/bulkImport'),				
             ),
             '推荐商品'     => array(
                 '添加'    => U('admin/Article/addPromote'),
                 '管理'    => U('admin/Article/promote'),	
             ),
-            '肌肉增加视频' => array(
-                '添加'    => U('admin/Article/addMuscle'),
-                '管理'    => U('admin/Article/muscle'),	
+            '特定健身计划' => array(
+                '添加'    => U('admin/Daily/addFitnessProgram'),
+                '管理'    => U('admin/Daily/fitnessProgram'),	
             ),
         );
 

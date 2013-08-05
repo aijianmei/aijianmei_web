@@ -1,0 +1,31 @@
+<div class="same_part">
+	<div class="banner_1">
+		<div class="adv_part">
+			<ul class="adv_pic_part">
+				<php>foreach($prolist as $k =>$v){</php>
+				<li>
+					<a>
+						<img src="{$v['img']}">
+						<p>{$v['name']}</p>
+						<p class="adv_price">￥ {$v['price']}</p>
+					</a>	
+				</li>
+				<php>}</php>
+				</ul>
+				</div>
+				<div class="adv_choice">
+					<php>foreach($prolist as $k =>$v){</php>
+					<span></span>
+					<php>}</php>
+				</div>
+			</div>
+</div>
+<?php $_placardContent=M('')->query("select content from ai_nav_placard");$_placardContent=$_placardContent[0]['content'];?>
+<?php if($_placardContent!=''){ ?>
+<div class="same_module">
+		        		<h3 class="sm_title">公告栏</h3>
+		        		<div class="public_tell">
+		        		<?php echo htmlspecialchars_decode($_placardContent);?>
+		        		</div>
+</div>
+<?php }?>

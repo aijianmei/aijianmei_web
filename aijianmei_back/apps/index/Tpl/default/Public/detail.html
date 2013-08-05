@@ -1,0 +1,209 @@
+<include file="../Public/header" />
+<div id="content">
+            <div class="content_left clearfix">
+                <span>
+                <span>您所在的位置:</span>
+                <a href="/index.php?app=index">爱健美</a>->
+                <a href="/index.php?app=index&mod={$tree_channel_en}">{$first}</a>->
+				<php>if($second!=$first&&$second!=''){</php>
+					<a href="/index.php?app=index&mod={$tree_channel_en}&act=articleList&id={$tree_parent}">{$second}</a>->
+				<php>}</php>
+				<php>if($channel!=1){</php>
+					<a href="/index.php?app=index&mod={$tree_channel_en}&act=articleList&id={$tree_category_id}">{$third}</a>->
+				<php>}else{</php>
+					<a href="/index.php?app=index&mod=Index&act=info&type={$planlistid}">{$third}</a>->
+				<php>}</php>
+                <a href="index.php?app=index&mod=Index&act=articleDetail&id={$article['id']}">{$article['title']}</a>
+                </span>
+
+                <!-- <span class="goal_part">腰部 XX XX</span> -->
+                <div class="essay_ct">
+                    <h2 class="title_2">{$article['title']}</h2>
+                    <div class="web_expend_1">
+                        <a class="sprite_7"><?php echo $commentCounts;?></a>
+                        <span class="for_sprite_7">评论数</span>
+                        <span class="prompt">{$article['author']}&nbsp;&nbsp;发表于{$article['dateStrng']}</span>
+                        <span>我要分享</span>
+                            <span class="click_share">
+								<script type="text/javascript">
+								(function(){
+								var p = {
+								url:location.href,
+								showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+								desc:'',/*默认分享理由(可选)*/
+								summary:'',/*分享摘要(可选)*/
+								title:'<?php echo $article['title'];?>',/*分享标题(可选)*/
+								site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+								pics:'<?php echo $aimgsrc;?>', /*分享图片的路径(可选)*/
+								style:'102',
+								width:68,
+								height:21
+								};
+								var s = [];
+								for(var i in p){
+								s.push(i + '=' + encodeURIComponent(p[i]||''));
+								}
+								document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+								})();
+								</script>
+								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+								
+								<a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=http://www.aijianmei.com/index-Index-articleDetail-<?php echo $_GET['id'];?>.html&title=<?php echo $article['title'];?>&content=utf-8&pic=<?php echo $aimgsrc;?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a>
+							</span>
+                        <script type="text/javascript">
+                        
+                        </script>
+
+                    </div>
+                    <div class="food_pic">
+                        <!--<a href="store_5.html"><img src="../Public/images/article/" alt="no" border="0" /></a>
+                        <p class="food_ms">图片</p>-->
+                    </div>
+                     <div class="article">
+                    {$article['content']|htmlspecialchars_decode}
+                    </div>
+					       <div class="share_part">
+							<span class="wrap_like">
+								<input type="hidden" id="articleid" value="<?php echo $_GET['id'];?>" uid="<?php echo getMid();?>" tname="v">
+								<a class="sprite_8 click_like" aid="{$article['id']}" act="like"></a>
+								<span class="praise num_like" id="sprite_8_num" style="margin-left:1px;">{$article['like']}</span>
+							</span>
+                            <span class="click_share">
+                                <span class="lay_click_share">我要分享:</span>
+                                <!--<a class="share_obj_1">腾讯</a>-->
+								<script type="text/javascript">
+								(function(){
+								var p = {
+								url:location.href,
+								showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+								desc:'',/*默认分享理由(可选)*/
+								summary:'',/*分享摘要(可选)*/
+								title:'<?php echo $article['title'];?>',/*分享标题(可选)*/
+								site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+								pics:'<?php echo $aimgsrc;?>', /*分享图片的路径(可选)*/
+								style:'102',
+								width:68,
+								height:24
+								};
+								var s = [];
+								for(var i in p){
+								s.push(i + '=' + encodeURIComponent(p[i]||''));
+								}
+								document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+								})();
+								</script>
+								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+                                <a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=http://www.aijianmei.com/index-Index-articleDetail-<?php echo $_GET['id'];?>.html&title=<?php echo $article['title'];?>&content=utf-8&pic=<?php echo $aimgsrc;?>&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a>
+
+									</span>
+						</div>
+						
+						<php>if(!getMid()){</php><div class="login_resgister">
+							<p>
+								还没有<a href="javascript:void(0)" class="login">登录</a>不能发表评论哦！还没有帐号吗？也可以现在就<a href="/index.php?app=index&mod=Index&act=selectRegister">注册</a>
+							</p>
+                            </div><php>}</php>
+						<wb:like appkey="5Q8YPj"></wb:like>
+						<div class="border_comment">
+						<input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
+                        <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
+							<span class="word_num"><span class="lay_word_num">0</span>/300</span>
+							<div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox"  onKeyDown="change_number('comment_inp','lay_word_num');" onKeyUp="change_number('comment_inp','lay_word_num');"  maxlength=300>有什么感想，来说说吧</textarea></div>
+							<a class="comment" onclick="addDetaiCommont();">发表评论</a>
+						</div>
+                    <div class="check_comment">
+                        <a class="comment_1">全部评论(<?php echo $commentCounts;?>)</a>
+                    </div>
+                    <div class="cm_content">
+                        <php> if(!empty($pager['countall'])){</php>
+                        <div class="page clearfix">
+                            <span class="concrete_choice">
+								<?php printf($pager['backstr'],'class="prev"');?>
+                                <?php printf($pager['thestr'],'class="current_page"');?>
+                                <?php printf($pager['backstr'],'class="next"');?>
+                            </span>		
+                            <span class="free_choice">
+                                <span>共{$pager['page']}页</span>
+                            </span>			
+                        </div>
+                        <php> }</php>
+                        <div class="cm_bottom" id="recomment_fdiv">
+                            <php> if(empty($comments)){ </php><p class="empty_content" id="empty_content">当前没有人评论哦~</p><php>}</php>
+                            <php>foreach($comments as $k=>$c) {</php>
+                            <div class="target">
+                                <div class="target_pic">
+                                    <img src="{$c['user']['face']}" alt="no" />
+                                    <!--<span class="care">关注</span>-->
+                                </div>
+                                <div class="target_cm">
+                                    <a class="name">{$c['user']['uname']}</a>
+                                    <p>{$c['content']}</p>
+                                </div>
+                                <p class="bottom_ms">
+                                    <span>
+                                        <php>echo date('Y-m-d H:i:s', $c['create_time'])</php>
+                                    </span>
+                                    <span>来自<em>爱健美网</em></span>
+                                </p>
+                            </div>
+                            <php>}</php>
+                        </div>
+                    </div>
+                    <div class="relation">
+                    </div>
+                </div>
+            </div>
+            <div class="content_right">
+                <div>
+                    <div class="sider_m">
+                        <h4 class="sider_t">关注我们</h4>
+                        <div>
+                            <div class="author_info">
+                                <iframe width="100%" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=100&skin=1&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=2692984661&verifier=3c08c88d&dpc=1"></iframe>
+                                <p class="author_label">推广健身文化，传播健康理念</p>
+                            </div>
+                            <div class="author_wb">
+
+                            </div>
+                            <div class="clearfix">
+                                <img src="../Public/images/weima.jpg" class="two_code" style="margin:5px;" alt="微信二维码">
+                                <div class="ms_code">
+                                    <p  style="white-space:normal;width:150px;font-size:14px;">欢迎扫描订阅！获取最新健身、健康资讯！</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sider_m">
+                        <h4 class="sider_t">精华推荐</h4>
+                        <php>foreach($promote_article as $p) {</php>
+                        <div class="recommend">							
+                            <a href="index-Index-articleDetail-{$p['id']}.html" class="recommend_pic"><img src="/public/images/article/{$p['img']}" width="90" height="60" alt="{$p['title']}" border="0" /></a><div class="intro"><h3><a href="{:U('index/Index/articleDetail', array('id'=>$p['id']))}">{$p['title']}</a></h3><span class="t_play_time">点击:<span> </span>{$p['reader_count']}</span><span class="comment_time">评论: <span>{$p['CommNumber']}</span></span></div>
+                        </div>
+                        <php>}</php>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+        function addDetaiCommont(){
+            if($("#commentUid").val()==''){alert("请先登录");return false;}
+            if($("#commentbox").val()==''){return false;}
+            if($("#commentPid").val()==''){return false;}
+            $.ajax({
+            type: "POST",
+            url: "ajax.php",
+            dataType:"json",
+            data: "act=addDetaiCommont&data=ford&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&content="+$("#commentbox").val()+"&ptype=1",
+            success: function(data){
+             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.connect+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em>爱健美网</em></span></p></div></div'; 
+            $("#commentbox").val('');          
+            $("#recomment_fdiv").prepend(innerHtml);
+            $("#empty_content").html('');
+			$(".prompt").html();
+			$(".lay_word_num").html('0');
+            }
+            });
+        }
+        var _mid=<?php echo getMid();?>
+        </script>
+<include file="../Public/footer" />

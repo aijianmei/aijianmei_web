@@ -791,14 +791,26 @@ $(function() {
 	
 	$(".bn_contain_pic li").bind({
 		mouseleave: function(){
+		/* 	alter by kontem at 20130710 start
 		$(this).find(".bn_bg_part").slideUp(300);
 		$(this).find(".bn_bg").slideUp(300);
+		*/
+		$(this).find(".bn_bg_part").slideDown(300);	
+		$(this).find(".bn_bg").slideDown(300);
 	},
 	mouseenter: function(){
+		$(this).find(".bn_bg_part").slideUp(300);
+		$(this).find(".bn_bg").slideUp(300);
+		/*
 		$(this).find(".bn_bg_part").slideDown(300);	
-		$(this).find(".bn_bg").slideDown(300);	
+		$(this).find(".bn_bg").slideDown(300);
+		*/	
 		}
 	});
+	
+	$(".bn_contain_pic li").find(".bn_bg_part").show();
+	$(".bn_contain_pic li").find(".bn_bg").show();
+	/* }}}end*/
 });
 
 

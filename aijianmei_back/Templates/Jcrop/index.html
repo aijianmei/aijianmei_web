@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Script Tutorials" />
+        <title>HTML5 Image uploader with Jcrop | Script Tutorials</title>
+
+        <!-- add styles -->
+        <link href="css/main.css" rel="stylesheet" type="text/css" />
+        <link href="css/jquery.Jcrop.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- add scripts -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.Jcrop.min.js"></script>
+        <script src="js/script.js"></script>
+    </head>
+	<style>
+	 #exec_target{display:none;width:0;height:0;}
+	</style>
+	<script type="text/javascript">
+$(document).ready(function(){
+	$("#image_file").change(function(){
+		if($("#image_file").val() != '') $("#selectForm").submit();
+	});
+	$("#exec_target").load(function(){
+		var data = $(window.frames['exec_target'].document.body).find("textarea").eq(0).html();
+		var data2 = $(window.frames['exec_target'].document.body).find("textarea").eq(1).html();
+		if(data != null){
+		$("#feedback").empty();
+			$("#feedback").append(data.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+			//$("#feedback2").append(data2.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+			//$("#feedback").attr("class","face");
+			//$("#image_file").val('');
+			//$("#dimg1").remove();
+			//$("#dimg2").remove();
+		}
+	});
+});
+$(document).ready(function(){
+	$("#labup").click(function(){
+		$("#image_file").click();
+	});
+});
+
+</script>
+
+    <body>
+        <header>
+            <h2>HTML5 Image uploader with Jcrop (<a href="http://www.script-tutorials.com/html5-image-uploader-with-jcrop/">Back to original tutorial</a>)</h2>
+        </header>
+		
+        <div class="demo">
+            <div class="bheader"><h2>-- Image upload form --</h2></div>
+            <div class="bbody">
+				<iframe id="exec_target" name="exec_target"></iframe>
+                <!-- upload form -->
+                <form id="upload_form" enctype="multipart/form-data" method="post"  target="exec_target"  action="aaaa.php" onsubmit="return checkForm()">
+                    <!-- hidden crop params -->
+                    <input type="hidden" id="x1" name="x1" />
+                    <input type="hidden" id="y1" name="y1" />
+                    <input type="hidden" id="x2" name="x2" />
+                    <input type="hidden" id="y2" name="y2" />
+
+                    <h2>Step1: Please select image file</h2>
+                    <div><input type="file" name="image_file" id="image_file" onchange="fileSelectHandler()" /></div>
+
+                    <div class="error"></div>
+
+                    <div class="step2">
+                        <h2>Step2: Please select a crop region</h2>
+                        <img id="preview" src="deff.jpg"/>
+						<div id="feedback"></div>
+                        <div class="info">
+                            <label>File size</label> <input type="text" id="filesize" name="filesize" />
+                            <label>Type</label> <input type="text" id="filetype" name="filetype" />
+                            <label>Image dimension</label> <input type="text" id="filedim" name="filedim" />
+                            <label>W</label> <input type="text" id="w" name="w" />
+                            <label>H</label> <input type="text" id="h" name="h" />
+                        </div>
+
+                        <input type="submit" value="Upload" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

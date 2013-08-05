@@ -1,0 +1,500 @@
+﻿<include file="Templates/header.html" />
+<link rel="stylesheet" href="Templates/css/plan.css">
+        <!-- outside wrapper -->
+        <div class="wrapper">
+        	<div class="wrapper_bg clearfix">
+				<div class="clearfix">
+					<div class="content_1">
+						<div class="banner">
+							<div class="lay_banner">
+								<ul class="bn_contain_pic">
+									<php>foreach($bannerinfo as $key => $value){</php>
+									<li><a href="{$value['url']}"><img src="{$value['img']}"></a></li>
+									<php>}</php>
+								</ul>
+								<div class="bn_choice_way">
+									<span class="bn_prex bn_click"></span>
+									<span class="bn_next bn_click"></span>
+								</div>
+							</div>
+							<div class="bn_choice_point">
+								<php>foreach($bannerinfo as $key => $value){</php>
+								<span></span>
+								<php>}</php>
+							</div>
+						</div>
+					</div>
+					<div class="content_2">
+<include file="Templates/userinfo.html" />
+					</div>
+				</div><!--End clearfix-->
+				<!-- day_pl begin -->
+				<div class="day_pl dailyTop">
+					<ul class="day_classifly clearfix">
+						<li>
+							<a class="day_part" href="/plan_c4_1.html">
+								<img src="public/images/fitnessProgram/{$HotFitnessProgram[0]['imageurl']}" />
+							</a>
+						</li>
+						<li>
+							<a class="day_part" href="/plan_c4_1.html">
+								<img src="public/images/fitnessProgram/{$HotFitnessProgram[1]['imageurl']}" />
+							</a>
+						</li>
+						<li class="lastImg">
+							<a class="day_part" href="/plan_c4_1.html">
+								<img src="public/images/fitnessProgram/{$HotFitnessProgram[2]['imageurl']}" />
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!-- day_pl end -->
+				<ul class="tr_nav clearfix">
+					<li class="tr_current">基础锻炼<span></span></li>
+					<li class="">运动员锻炼<span></span></li>
+					<li class="">肌肉锻炼<span></span></li>
+					<li class="">特定健身计划<span></span></li>
+				</ul>
+				<div class="main">
+					<div class="dailyContent">
+						<!--循环体 start-->
+						<!--------------------------------------------------------------------->
+						<php>foreach($sdaily as $key => $value){</php>
+						<php>if($value['isreset']!=1){</php>
+						<div class="dailywork clearfix">				
+							<p class="date">{$value['create_time']}</p>
+							<span class="info">{$value['content']|htmlspecialchars_decode}</span>
+							<div id="dailyShare">
+								<span class="click_share">
+								   <script type="text/javascript">
+								   (function(){
+									 var p = {
+										 url:location.href,
+										 showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+										 desc:'',/*默认分享理由(可选)*/
+										 summary:'',/*分享摘要(可选)*/
+										 title:"<?php echo $value['title']?>",/*分享标题(可选)*/
+										 site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+										 pics:"http://www.aijianmei.com/public/images/daily/{$value['shareimg']}", /*分享图片的路径(可选)*/
+										 style:'102',
+										 width:68,
+										 height:30
+										 };
+										 var s = [];
+										 for(var i in p){
+											 s.push(i + '=' + encodeURIComponent(p[i]||''));
+											 }
+											 document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+												 })();
+								</script>
+								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+								</span>
+								<span class="click_share"><a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=http://www.aijianmei.com/Plan.html&title=<?php echo $value['title']?>&content=utf-8&pic=http://www.aijianmei.com/public/images/daily/{$value['shareimg']}&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a></span>
+								<span class="wrap_like"><a class="click_like" dailyid="{$value['id']}"></a></span>
+								<span class="num_like">{$value['like']}</span>
+							</div>
+							<volist id="vo" name="value['videolist']" key="n">	
+							<div class="groups <php>if(($n%2)!=0){</php>groupA<php>}</php>">
+								<h5 class="groupTit">动作组{$key}</h5>
+								<ul>
+									<php>foreach ($vo as $k=>$v){</php>
+									<li class="acts <php>if($k%2!=0){</php>odd<php>}</php>" >
+										<img src="public/images/daily/{$v['imgLeft']}"  onclick="pop({$v['id']},{$v['imgLeftUrl']});" alt="action" /><img src="public/images/daily/{$v['imgRight']}"  onclick="pop({$v['id']},{$v['imgLeftUrl']});" alt="action" />
+										<p class="actName"><a href="{$v['vtitleurl']}" target="_blank">{$v['vtitle']}</a></p>
+										<p class="actInfo">{$v['vtitlecontent']}</p>	
+										<button class="intoBtn" onclick="javascrpit:window.open('{$v['vtitleurl']}')">查看</button>
+									</li>
+									<php>}</php>
+								</ul>
+							</div><!--End groups-->
+							</volist>
+						</div>	
+						<hr class="row_line" />
+						<php>}else{</php>
+						<div class="dailywork rest clearfix">
+							<p class="date">{$value['create_time']}</p>
+							<img style="width:480px;height:180px;" src="<php>if(empty($value['img'])){</php>Templates/images/plan/4.png<php>}else{</php>public/images/daily/{$value['img']}<php>}</php>" alt="takerest" />
+							<span class="tipInfo">{$value['content']|htmlspecialchars_decode}</span>
+						</div>
+						<php>}</php>
+						<php>}</php>
+						<div class="pg_page clearfix">
+							<span class="pg_concrete_choice">
+								<php>if(!empty($sdailyPager['thestr'])){</php>
+								{$sdailyPager['backstr']}
+								{$sdailyPager['thestr']}
+								{$sdailyPager['nextstr']}
+								<php>}</php>
+							</span>
+						</div>		
+					</div>
+										<div class="dailyContent" style="display:none;">
+						<!--循环体 start-->
+						<!--------------------------------------------------------------------->
+						<php>foreach($mdaily as $key => $value){</php>
+						<php>if($value['isreset']!=1){</php>
+						<div class="dailywork clearfix">				
+							<p class="date">{$value['create_time']}</p>
+							<span class="info">{$value['content']|htmlspecialchars_decode}</span>
+							<div id="dailyShare">
+								<span class="click_share">
+								   <script type="text/javascript">
+								   (function(){
+									 var p = {
+										 url:location.href,
+										 showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+										 desc:'',/*默认分享理由(可选)*/
+										 summary:'',/*分享摘要(可选)*/
+										 title:"<?php echo $value['title']?>",/*分享标题(可选)*/
+										 site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+										 pics:"http://www.aijianmei.com/public/images/daily/{$value['shareimg']}", /*分享图片的路径(可选)*/
+										 style:'102',
+										 width:68,
+										 height:30
+										 };
+										 var s = [];
+										 for(var i in p){
+											 s.push(i + '=' + encodeURIComponent(p[i]||''));
+											 }
+											 document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+												 })();
+								</script>
+								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+								</span>
+								<span class="click_share"><a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=http://www.aijianmei.com/Plan.html&title=<?php echo $value['title']?>&content=utf-8&pic=http://www.aijianmei.com/public/images/daily/{$value['shareimg']}&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a></span>
+								<span class="wrap_like"><a class="click_like" dailyid="{$value['id']}"></a></span>
+								<span class="num_like">{$value['like']}</span>
+							</div>
+							<volist id="vo" name="value['videolist']" key="n">	
+							<div class="groups <php>if(($n%2)!=0){</php>groupA<php>}</php>">
+								<h5 class="groupTit">动作组{$key}</h5>
+								<ul>
+									<php>foreach ($vo as $k=>$v){</php>
+									<li class="acts <php>if($k%2!=0){</php>odd<php>}</php>" >
+										<img src="public/images/daily/{$v['imgLeft']}"  onclick="pop();" alt="action" /><img src="public/images/daily/{$v['imgRight']}"  onclick="pop();" alt="action" />
+										<p class="actName"><a href="{$v['vtitleurl']}" target="_blank">{$v['vtitle']}</a></p>
+										<p class="actInfo">{$v['vtitlecontent']}</p>	
+										<button class="intoBtn" onclick="javascrpit:window.open('{$v['vtitleurl']}')">查看</button>
+									</li>
+									<php>}</php>
+								</ul>
+							</div><!--End groups-->
+							</volist>
+						</div>	
+						<hr class="row_line" />
+						<php>}else{</php>
+						<div class="dailywork rest clearfix">
+							<p class="date">{$value['create_time']}</p>
+							<img style="width:480px;height:180px;" src="<php>if(empty($value['img'])){</php>Templates/images/plan/4.png<php>}else{</php>public/images/daily/{$value['img']}<php>}</php>" alt="takerest" />
+							<span class="tipInfo">{$value['content']|htmlspecialchars_decode}</span>
+						</div>
+						<php>}</php>
+						<php>}</php>
+						<div class="pg_page clearfix">
+							<span class="pg_concrete_choice">
+								<php>if(!empty($mdailyPager['thestr'])){</php>
+								{$mdailyPager['backstr']}
+								{$mdailyPager['thestr']}
+								{$mdailyPager['nextstr']}
+								<php>}</php>
+							</span>
+						</div>		
+					</div>
+
+										<div class="dailyContent"  style="display:none;">
+						<!--循环体 start-->
+						<!--------------------------------------------------------------------->
+						<php>foreach($bdaily as $key => $value){</php>
+						<php>if($value['isreset']!=1){</php>
+						<div class="dailywork clearfix">				
+							<p class="date">{$value['create_time']}</p>
+							<span class="info">{$value['content']|htmlspecialchars_decode}</span>
+							<div id="dailyShare">
+								<span class="click_share">
+								   <script type="text/javascript">
+								   (function(){
+									 var p = {
+										 url:location.href,
+										 showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+										 desc:'',/*默认分享理由(可选)*/
+										 summary:'',/*分享摘要(可选)*/
+										 title:"<?php echo $value['title']?>",/*分享标题(可选)*/
+										 site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+										 pics:"http://www.aijianmei.com/public/images/daily/{$value['shareimg']}", /*分享图片的路径(可选)*/
+										 style:'102',
+										 width:68,
+										 height:30
+										 };
+										 var s = [];
+										 for(var i in p){
+											 s.push(i + '=' + encodeURIComponent(p[i]||''));
+											 }
+											 document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+												 })();
+								</script>
+								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+								</span>
+								<span class="click_share"><a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=http://www.aijianmei.com/Plan.html&title=<?php echo $value['title']?>&content=utf-8&pic=http://www.aijianmei.com/public/images/daily/{$value['shareimg']}&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a></span>
+								<span class="wrap_like"><a class="click_like"  dailyid="{$value['id']}"></a></span>
+								<span class="num_like">{$value['like']}</span>
+							</div>
+							<volist id="vo" name="value['videolist']" key="n">	
+							<div class="groups <php>if(($n%2)!=0){</php>groupA<php>}</php>">
+								<h5 class="groupTit">动作组{$key}</h5>
+								<ul>
+									<php>foreach ($vo as $k=>$v){</php>
+									<li class="acts <php>if($k%2!=0){</php>odd<php>}</php>" >
+										<img src="public/images/daily/{$v['imgLeft']}"  onclick="pop();" alt="action" /><img src="public/images/daily/{$v['imgRight']}"  onclick="pop();" alt="action" />
+										<p class="actName"><a href="{$v['vtitleurl']}" target="_blank">{$v['vtitle']}</a></p>
+										<p class="actInfo">{$v['vtitlecontent']}</p>	
+										<button class="intoBtn" onclick="javascrpit:window.open('{$v['vtitleurl']}')">查看</button>
+									</li>
+									<php>}</php>
+								</ul>
+							</div><!--End groups-->
+							</volist>
+						</div>	
+						<hr class="row_line" />
+						<php>}else{</php>
+						<div class="dailywork rest clearfix">
+							<p class="date">{$value['create_time']}</p>
+							<img style="width:480px;height:180px;" src="<php>if(empty($value['img'])){</php>Templates/images/plan/4.png<php>}else{</php>public/images/daily/{$value['img']}<php>}</php>" alt="takerest" />
+							<span class="tipInfo">{$value['content']|htmlspecialchars_decode}</span>
+						</div>
+						<php>}</php>
+						<php>}</php>
+						<div class="pg_page clearfix">
+							<span class="pg_concrete_choice">
+								<php>if(!empty($bdailyPager['thestr'])){</php>
+								{$bdailyPager['backstr']}
+								{$bdailyPager['thestr']}
+								{$bdailyPager['nextstr']}
+								<php>}</php>
+							</span>
+						</div>		
+					</div>
+					
+					<div class="dailyContent mainPlan" style="display:none">	
+					<div class="cont_tab_block">
+					<!----------------->
+					<php>foreach($FitnessProgramList as $key=>$value){</php>
+						<div class="cont_module clearfix">
+							<div class="cont_side_1">
+								<a><img src="public/images/fitnessProgram/{$value['imageurl']}"></a>
+								<div class="show_share clearfix" style="text-align: center;">
+									<wb:share-button count="n" type="button" size="big" ></wb:share-button>
+								</div>
+							</div>
+							<div class="cont_side_2">
+								<h3 class="cont_title"><a>{$value['title']}</a></h3>
+								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span class="cont_pb_time">{$value['create_time']}</span></span>
+								<p>{$value['content']|htmlspecialchars_decode}</p>
+								
+								<div class="cont_share clearfix">
+									<span class="cont_rec">评论数:<span>0</span></span>
+									<a class="cont_read_more">阅读全文></a>
+								</div>
+							</div>
+						</div>
+						<php>}</php>
+							<!----------------->
+						<div class="pg_page clearfix">
+							<span class="pg_concrete_choice">
+								<php>if(!empty($fPager['thestr'])){</php>
+								{$fPager['backstr']}
+								{$fPager['thestr']}
+								{$fPager['nextstr']}
+								<php>}</php>
+							</span>
+						</div>
+					</div>	
+					</div><!--End dailyContent-->
+				</div>
+			</div>
+        </div>
+        <include file="Templates/footer.html" />
+        <include file="Templates/loginpart.html" />
+        <div class="title_tip"><div class="title_content"></div><div class="angle"><span></span></div></div>
+		<!-- scroll_login begin -->
+        <!-- <div class="scroll_login">
+        	<div class="scroll_content">
+	        	<span class="scroll_tip">您还没有登录爱健美哦,这里可以登录</span>
+	        	<ul class="scroll_choice clearfix">
+	        		<li><a class="scroll_choice_1"></a></li>
+	        		<li><a class="scroll_choice_2"></a></li>
+	        		<li><a class="scroll_choice_3 login"></a></li>
+	        	</ul>
+        	</div>
+        	<i class="scroll_back">×</i>
+        </div> -->
+        <!-- scroll_login end -->
+        <script type="text/javascript" src="Templates/js/jquery.js"></script>
+        <script type="text/javascript">
+        	
+        	$(".click_like").click(function(){
+        		/*点击喜欢事件*/
+        		var targetObj=$(this).parent().parent().find("span[class='num_like']");
+        		var nums=$(targetObj).html();
+        		var dailyid=$(this).attr('dailyid');
+        		if(dailyid){
+        		$.ajax({
+        			type: "POST",url: "ajax.php",dataType:"json",data: "act=sedaylike&data=ford&did="+dailyid,
+        			success: function(data){
+        				if(data.result==1){
+        					$(targetObj).html(nums*1+1);
+        					}
+        					if(data.result==3){
+        						alert('你已经投过票了');
+        					}
+        				}
+        		});	
+        		}
+        	});
+        	
+        	
+        	
+        	
+        	
+        	
+			$(function() {
+				//大图自动切换，左右切换，选择切换
+				var sWidth = $(".banner").width(); //获取焦点图的宽度（显示面积）
+				var len = $(".banner .bn_contain_pic li").length; //获取焦点图个数
+				var index = 0;
+				var picTimer;
+				$(".banner .bn_choice_point span").css("background","url(images/dian.png)").click(function() {
+					index = $(".banner .bn_choice_point span").index(this);
+					showPics(index);
+				}).eq(0).trigger("click");
+
+				$(".banner .bn_prex").click(function() {
+					index -= 1;
+					if(index == -1) {index = len - 1;}
+					showPics(index);
+				});
+				//下一页按钮
+				$(".banner .bn_next").click(function() {
+					index += 1;
+					if(index == len) {index = 0;}
+					showPics(index);
+				});
+				//左右滚动，外围ul元素的宽度
+				$(".banner .bn_contain_pic").css("width",sWidth * (len));
+				//鼠标滑上焦点图时停止自动播放，滑出时开始自动播放
+				$(".banner").hover(function() {
+					clearInterval(picTimer);
+				},function() {
+					picTimer = setInterval(function() {
+						showPics(index);
+						index++;
+						if(index == len) {index = 0;}
+					},3000);
+				}).trigger("mouseleave");
+				//显示图片函数，根据接收的index值显示相应的内容
+				function showPics(index) { //普通切换
+					var nowLeft = -index*sWidth; //根据index值计算ul元素的left值
+					$(".banner .bn_contain_pic").stop(true,false).animate({"left":nowLeft},300); //通过animate()调整ul元素滚动到计算出的position
+					$(".banner .bn_choice_point span").css("background","url(Templates/images/dian.png)").eq(index).css("background","url(Templates/images/landian.png)"); //为当前的按钮切换到选中的效果
+				}
+
+				//ident_wrap
+				
+				var delay=function(t,fn){
+
+					var _this = this;
+
+					d = setTimeout(function(){
+						fn();
+					},t * 1000);
+					_this.onmouseout = function(){
+						clearInterval(d);
+					};
+				}
+				function keywords(){
+					//var
+					var newdom = new getdom,
+						ident_title = newdom.getElementsByClass('ident_title'),
+						tit_len = ident_title.length,
+						identifying = newdom.getElementsByClass('identifying'),
+						tempNum = null;
+					//circle
+					for(var i = 0;i < tit_len;i++){
+						ident_title[i].index = i;
+					}
+
+					$(".ident_title").mouseover(function(){
+
+						var that = this;
+
+			  			delay.apply(this,[0.2,function(){
+			  				if(tempNum != that.index){
+								$(".identifying").slideUp("slow").eq(that.index).slideDown("slow");
+								tempNum = that.index;
+			  				}
+				  				
+				  		}]);
+			  		});
+				}
+				keywords();
+			});
+		</script>
+        <script type="text/javascript" src="Templates/js/public.js"></script>
+		<script type="text/javascript" src="Templates/js/plan.js"></script>
+        <script type="text/javascript">
+        	var init = function(){
+
+			    var newdom = new getdom,
+				    identifying = newdom.getElementsByClass('identifying'),
+				    ident_len = identifying.length;
+
+				//circle
+				for(var i = 0;i < ident_len;i++){
+					aijianmei.identifying(identifying[i]);
+				}   
+
+			   aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
+			   // aijianmei.addtitle('detail');
+			   // aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
+			   run_circle("30",'recoment','circle_one','circle_two');
+			}
+			init();	
+        </script>
+		<script type="text/javascript">
+        	var init = function(){
+			    var newdom = new getdom,
+			    	day_part = newdom.getElementsByClass('day_part'),
+                	ms_hidden_part = newdom.getElementsByClass('ms_hidden_part'),
+                	bg_opc = newdom.getElementsByClass('bg_opc'),
+                	bn_li = newdom.getElementsByClass('bn_contain_pic')[0].getElementsByTagName('a'),
+                	bn_bg_part = newdom.getElementsByClass('bn_bg_part'),
+                	bn_bg_transparent = newdom.getElementsByClass('bn_bg_transparent'),
+                	len_bn_part = bn_bg_part.length,
+                	bg_opc_2 = newdom.getElementsByClass('bg_opc_2'),
+                	len = day_part.length;
+                	for(var i = 0;i < len;i++){
+                		day_part[i].index = i;
+                		day_part[i].onmouseover = function(){
+                			aijianmei.chang_top(bg_opc_2[this.index],1,100,10);
+                			aijianmei.chang_top(bg_opc[this.index],1,100,10);
+                			aijianmei.chang_top(ms_hidden_part[this.index],1,100,10);
+                		}	
+	                	day_part[i].onmouseout = function(){
+	                		aijianmei.chang_top(bg_opc_2[this.index],0,100,10)
+	                		aijianmei.chang_top(bg_opc[this.index],0,100,10)
+	                		aijianmei.chang_top(ms_hidden_part[this.index],0,100,10)
+	                	}	
+	                }	 
+			  	aijianmei.tab_change('tr_nav','tr_current','cont_tab_ct','cont_tab_block');
+			   	aijianmei.hover('cont_vd_link','cont_vd_bg');
+			   	aijianmei.scrolltop('scroll_login',1000,['login','scroll_back']);
+			   	aijianmei.form_jugde('lg_text','lg_password');
+			}
+			init();	
+						$(function() {
+				var ctypekey=<?php if($_GET['ctype']){echo $_GET['ctype'];}else{echo 1;}?>;
+				$(".tr_nav").children('li').eq((ctypekey*1-1)).trigger('click');
+			});
+        </script>
+		<script type="text/javascript" src="Templates/js/js.js"></script>
+	</body>
+</html>
