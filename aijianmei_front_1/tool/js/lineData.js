@@ -1,6 +1,7 @@
-﻿var gloData=[];
+﻿var jsonurl='js/lineData.json?4241';
+var gloData=[];
 (function getData(){
-	$.getJSON("lineData.json", function(data){
+	$.getJSON(jsonurl, function(data){
 		console.log(gloData)
 		var lineLen = data.lineData.length;		
 		for(var i=0;i<lineLen;i++){
@@ -22,7 +23,9 @@
 		joo(gloData,'line1');
 	},function(){
 			$(".t2").click(function(){
-			$("#line1").empty();		
+			$("#line1").empty();
+			gloData['s1']=[5, 3, 1, 2, 1, 3, 1];
+//gloData['s2']=[5, 3, 1, 2, 1, 3, 1];			
 			gloData['color']="#34BE4E";
 			gloData['lineWidth'] = 5;
 			gloData['size'] = 10;
