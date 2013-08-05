@@ -198,7 +198,7 @@ class ArticleAction extends AdministratorAction {
                 }
                 $data['img'] = $_FILES['img']['name'];
             }
-            if( $_FILES['wapimg']['name']!= NULL) {
+            if( !empty($_FILES['wapimg']['tmp_name'])) {
 				$data['wapimg']  = time().rand().".jpg";
                 if(!move_uploaded_file($_FILES['wapimg']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$data['wapimg'])) {
                     echo 'picture upload failed '.'<br />';					

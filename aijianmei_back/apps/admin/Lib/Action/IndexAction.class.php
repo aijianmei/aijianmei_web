@@ -160,7 +160,7 @@ class IndexAction extends AdministratorAction {
             '天天锻炼'     => array(
                 '添加'    => U('admin/Daily/addDaily'),
                 '管理'    => U('admin/Daily/daily'),
-								'批量导入'=> U('admin/Daily/bulkImport'),				
+		'批量导入'=> U('admin/Daily/bulkImport'),				
             ),
             '推荐商品'     => array(
                 '添加'    => U('admin/Article/addPromote'),
