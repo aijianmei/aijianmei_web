@@ -182,7 +182,12 @@
                         <li><a href="index-Index-articleDetail-{$p['id']}.html"><img src="/public/images/article/{$p['img']}" width="130" height="85" alt="{$p['title']}"><span><php> echo msubstr($p['title'],0,18);</php></span></a></li>
                         <php>}</php>
                         </ul>
-                        <span style=" width:100%;color:#09F;"><a onClick="changeRecomArticleList();">换一组</a></span>
+                       <span><a onclick="changeRecomArticleList();" id="changeGroup">换一组</a>
+							<span class="changeDot"></span>
+							<span class="changeDot"></span>
+							<span class="changeDot"></span>
+							<span class="changeDot curDot"></span>
+						</span>
 		        		</div>
 		        	</div>
                      <!--kontem add end-->
@@ -239,7 +244,7 @@
             $("#commentbox").val('');
             $("#lay_word_num").html('0');
             $("#commentCountsbox").html( $("#commentCountsbox").html()*1+1);
-            document.write('<script>$("a[href*=\'#replay\']").click(function(){var turl=$(this).attr("href").replace(/[^0-9]/ig, "");;var num=parseInt(turl);$("span[floorval="+num+"]").parent().parent().parent().attr("style","background:#F7F2FC;");});<\/script>'); 
+//            document.write('<script>$("a[href*=\'#replay\']").click(function(){var turl=$(this).attr("href").replace(/[^0-9]/ig, "");;var num=parseInt(turl);$("span[floorval="+num+"]").parent().parent().parent().attr("style","background:#F7F2FC;");});<\/script>'); 
             }
             });
         }
@@ -321,5 +326,17 @@
 						}
 					}
         </script>
+        		<script type="text/javascript">			
+		$(".changeDot").click(function(){
+				$("#changeGroup").click();
+			$(this).addClass("curDot").siblings(".changeDot").removeClass("curDot");
+		});		
+		setInterval(function(){
+			var dotIndex = $(".curDot").index();
+			if(dotIndex == 4) dotIndex = 0;
+			$("#changeGroup").click();
+			$(".changeDot").eq(dotIndex).addClass("curDot").siblings(".changeDot").removeClass("curDot");
+		},3000);
+		</script>
 	</body>
 </html>

@@ -1,195 +1,335 @@
-<include file="../Public/header" />
-<div id="content">
-            <div>
-                <p class="position">
-                    <span>您所在的位置:</span>
-                    <a href="/index.php?app=index">爱健美</a>->
-                    <a href="/index.php?app=index&mod=Train&act=videoList&id=53">肌肉组</a>->
-                    <a href="#">{$video['title']}</a>
-                </p>
-                <!--<p class="ms_from">爱健美团队  发表于<span>14小时前</span></p>-->
-                <div class="video_content clearfix">
-                    <div class="v_area">
-						<php>if(!$video['wapurl']){</php>
-                        <object width="634" height="450">
-                            <param value="{$video['link']}" name="movie">
-                            <param value="true" name="allowFullScreen">
-                            <param value="never" name="allowscriptaccess">
-                            <param value="internal" name="allownetworking">
-                            <param value="transparent" name="wmode">                     
-                            <embed src="{$video['link']}" quality="high" width="634" height="450" align="middle" allownetworking="all" allowscriptaccess="always" type="application/x-shockwave-flash" allowfullscreen="true" wmode="transparent">
-                            <param value="" name="flashvars">
-                        </object>
-						<php>}else{</php>
-						<iframe height=450 width=634 src="{$video['wapurl']}" frameborder=0 allowfullscreen></iframe>
-						<php>}</php>
-                    </div>
-                    <div class="v_re">
-                        <h3 class="tabclass">视频信息</h3>
-                        <div class="tab block">
-                            <div class="v_infro1">
-                                <span>视频名字:<span>{$video['title']}</span></span>
-                                <p>发布时间:<span>{$video['create_time']}</span></p>
-                                <div class="v_infro2">
-                                    <h3>视频信息:</h3>
-                                    {$video['brief']}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+﻿<include file="Templates/header.html" />
+<link rel="stylesheet" href="Templates/css/article.css">
+<div class="wrapper">
+	<div class="wrapper_bg clearfix">
+		<div class="content_1">
+			<div id="articleMenu">
+       <div class="title_path">
+				<a class="nothing first_path" href="/index.html">爱健美</a>
+				<a class="middleline">&nbsp;</a>
+				<a class="nothing first_path"  href="/Train.html">锻炼</a>
+				<a class="middleline">&nbsp;</a>
+				<a class="nothing"  href="/index.php?app=index&mod=Train&act=videoList&id=53">锻炼视频</a>
+				<a class="middleline frontmiddleline" lkey="1">&nbsp;</a>
+				<a class="nothing current_pt" lkey="1">{$video['title']}</a>
+				<a class="middleline behindmiddleline" lkey="1">&nbsp;</a>
+				</div>
+				<div class="articleline"></div>
+			</div>
+		<div id="articleTitle">
+			<h2>{$video['title']}</h2>
+			<div id="articleShare">
+				<span class="articleAuthor">爱健美团队</span><span>|</span><span>发表于{$video['dateStrng']}</span><span>我要分享</span>
+				<span class="click_share">
+				<script type="text/javascript">
+		   (function(){
+					 var p = {
+						 url:location.href,
+						 showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+						 desc:'',/*默认分享理由(可选)*/
+						 summary:'',/*分享摘要(可选)*/
+						 title:"<?php echo $video['title']; ?>",/*分享标题(可选)*/
+						 site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+						 pics:"<?php echo $shareImg; ?>", /*分享图片的路径(可选)*/
+						 style:'102',
+						 width:68,
+						 height:30
+						 };
+						 var s = [];
+						 for(var i in p){
+							 s.push(i + '=' + encodeURIComponent(p[i]||''));
+							 }
+							 document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+							 })();
+           </script>
+           <script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+           </span>
+           <span class="click_share"><a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=http://www.aijianmei.com/index-Train-videoDetail-{$video['id']}.html&title={$video['title']}&pic={$shareImg}&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a></span>
+           </div>
             </div>
-            <div class="v_bottom clearfix">
-                    <div class="bottom_part_left">
-                        <div class="share_part">
-						<input type="hidden" name="videoid" value="{$video['id']}" id="videoid">
-						<input type="hidden" name="video_num_like" value="{$video['like']}" id="video_num_like">
-                            <span class="wrap_like">
-                                <a class="click_like <php>if(!getMid()){</php>login<php>}</php>" <php>if(getMid()){</php>onclick="recordlike();"<php>}</php>></a>
-                                <span class="num_like" >{$video['like']}</span>
-                            </span>
-                            <span class="click_share">
-                                我要分享:
-                                <!--<a class="share_obj_1">腾讯</a>-->
-								<script type="text/javascript">
-								(function(){
-								var p = {
-								url:location.href,
-								showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
-								desc:'',/*默认分享理由(可选)*/
-								summary:'',/*分享摘要(可选)*/
-								title:'<?php echo $video['title'];?>',/*分享标题(可选)*/
-								site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
-								pics:'<?php echo $video['logo']?>', /*分享图片的路径(可选)*/
-								style:'102',
-								width:68,
-								height:24
-								};
-								var s = [];
-								for(var i in p){
-								s.push(i + '=' + encodeURIComponent(p[i]||''));
-								}
-								document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
-								})();
-								</script>
-								<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
-                                <a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&ralateUid=2692984661&url=<?php echo $video['htmlurl'];?>&title=<?php echo $video['title'];?>&content=utf-8&pic=<?php echo $video['logo']?>" title="分享到新浪微博" target="_blank">微博</a>
-                            </span>
-                        </div>
-						<wb:like appkey="5Q8YPj"></wb:like>  
-						<php>if(!getMid()){</php><div class="login_resgister">
-							<p>
-								还没有<a href="javascript:void(0)" class="login">登录</a>不能发表评论哦！还没有帐号吗？也可以现在就<a href="/index.php?app=index&mod=Index&act=selectRegister">注册</a>
-							</p>
-                            </div><php>}</php>
-							<div class="border_comment" style="margin-top:10px;">
-							<form>
-								<span class="word_num">
-								<span class="word_num"><span class="lay_word_num">0</span>/300</span>
-								</span>
-                                <php>if(getMid()){</php>
-                                <php>echo getUserName(getMid())</php>
-                                <php>}else {</php>
-                                <span>&nbsp;&nbsp;</span>
-                                <span>&nbsp;&nbsp;</span>
-                                <php>}</php>
-                                <input type="hidden" value="<?php echo $_SESSION['userInfo']['uid'];?>" id="commentUid">
-                                <input type="hidden" value="<?php echo $_GET['id'];?>" id="commentPid">
-                                <div class="textarea"><textarea class="comment_inp" name="comment" id="commentbox"  onKeyDown="change_number('comment_inp','lay_word_num');" onKeyUp="change_number('comment_inp','lay_word_num');"  maxlength=300>有什么感想，来说说吧</textarea></div>
-                                <a class="comment" onclick="addVideoCommont();">发表评论</a>
-								</form>
-                            </div>
-                            <div class="check_comment">
-                                <p class="comment_1">全部评论(<span id="countComments"><?php echo $cRecomnums;?></span>)</p>
-                            </div>
-                            <div class="cm_content tab_2">
+            <div id="videoContent" >
+				<div class="abfocus_box">
+					<iframe height="315" width="450" src="{$video['wapurl']}" frameborder="0" allowfullscreen=""></iframe>
+					<div class="videoRight" style="width:185px;padding:0px;">
+						{$video['brief']}
+					</div>
+				</div>
 
-                                <div class="cm_bottom" id="recomment_fdiv">
-                                    <php> foreach($RecommentsList as $v){ </php>
-                                    <div class="target clearfix">
-                                        <div class="target_pic"><img src="<?php echo $v['img'];?>" alt="<?php echo $v['username'];?>" /></div>
-                                        <div class="cm_left">
-                                            <a class="name"><?php echo $v['username'];?></a>
-                                            <p><?php echo $v['content'];?></p>
-                                            <p class="bottom_ms">
-                                                <span class="to">
-                                                </span>
-                                                <span><?php echo $v['create_time'];?></span>
-                                                <span>来自<em>爱健美</em></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <php>}</php>
-                                </div>	
-                                                                <div class="page clearfix">
-                                    <span class="concrete_choice">
-										<?php printf($pager['backstr'],'class="prev"');?>
-										<?php printf($pager['thestr'],'class="current_page"');?>
-										<?php printf($pager['nextstr'],'class="next"');?>
-                                    </span>
-                                    <span class="free_choice">
-                                        <span>共{$pager[page]}页</span>
-                                    </span>
-                                </div>
-                                
-                            </div>
-                    </div>
-                    <div class="bottom_part_right">
-                        <div class="sider_m">
-                            <h4 class="sider_t">精华推荐</h4>
-                            <?php foreach($otherVideo as $v) { ?>
-                                <div class="recommend clearfix">
-                                    <a href="/index-Train-videoDetail-{$v['id']}.html" class="recommend_pic"><img width="90" height="60px" src="{$v['logo']}" alt="no" /></a>
-                                    <div class="intro">
-                                        <h3><a href="/index-Train-videoDetail-{$v['id']}.html">{$v['title']}</a></h3>
-                                        <span class="t_play_time">点击:<span> </span>{$v['click']}</span><span class="comment_time">评论: <span>{$v['CommNumber']}</span></span>
-                                    </div>
-                                </div>
-                            <?php }?>
-                        </div>
-                    </div>
+				<div class="clearfix">
+					{$video['content']|htmlspecialchars_decode}
+				</div>
             </div>
+              
+            <div class="recommend_article">
+							<ul class="recomend_article_lay clearfix">
+								<php> foreach($promoteArticleList as $k =>$v){</php>
+								<li>
+									<a href="index-Index-articleDetail-{$v['id']}.html">
+										<img src="/public/images/article/{$v['img']}" alt="{$v['title']}"/>
+										<p style="width: 215px;"><php> echo msubstr($v['title'],0,18);</php></p>
+									</a>
+								</li>
+								<php>}</php>
+							</ul>
+			</div>
+            <div id="articleShare">
+				<span class="wrap_like"><a class="click_like" onclick="sendArticleLike();"></a></span>
+				<span class="num_like">{$video['like']}</span>		
+				<span>我要分享</span>		
+                <span class="click_share">           
+					<script type="text/javascript">
+						(function(){
+							var p = {
+								 url:location.href,
+								 showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
+								 desc:'',/*默认分享理由(可选)*/
+								 summary:'',/*分享摘要(可选)*/
+								 title:"<?php echo $video['title']; ?>",/*分享标题(可选)*/
+								 site:'爱健美网',/*分享来源 如：腾讯网(可选)*/
+								 pics:"<?php echo $shareImg; ?>", /*分享图片的路径(可选)*/
+								 style:'102',
+								 width:68,
+								 height:30
+							};
+							 var s = [];
+							 for(var i in p){
+								s.push(i + '=' + encodeURIComponent(p[i]||''));
+							 }
+							 document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+						})();
+				   </script>
+				   <script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+				</span>
+				<span class="click_share"><a class="share_obj_2" href="http://v.t.sina.com.cn/share/share.php?appkey=3622140445&url=http://www.aijianmei.com/index-Train-videoDetail-{$video['id']}.html&title={$video['title']}&pic={$shareImg}&ralateUid=2692984661" title="分享到新浪微博" target="_blank">微博</a></span>
+			</div>
+		  <div style="float:left; width:100%;">
+           	<wb:like appkey="5Q8YPj"></wb:like>
+           	</div>
+           <php>if(!getMid()){</php>
+           <div class="login_resgister">
+           <p>还没有<a class="login">登录</a>不能发表评论哦！还没有帐号吗？也可以现在就<a href="/register.html">注册</a></p>
+           </div>  
+           <php>}</php>
+            		<!-- 2013/7/10 outside repair article page -->
+						<div class="comment_part clearfix">
+							<span class="word_num"><span id="lay_word_num">0</span>/300</span>
+							<form action="" method="POST" class="comment_frame clearfix">
+								<img src="<php>if(getMid()){echo getUserFace(getMid(),'m');}else{echo 'Templates/images/login_pic.jpg';}</php>" />
+								<textarea name="comment" id="commentbox" onKeyDown="num('commentbox','lay_word_num');" onKeyUp="num('commentbox','lay_word_num');" maxlength="300"></textarea>
+							</form>
+							<input id="commentUid" type="hidden" value="<php>echo getMid();</php>">
+							<a class="comment_sure <php>if(!getMid()){</php>login<php>}</php>" <php>if(getMid()){</php>onclick="addDetaiCommont();"<php>}</php>></a>
+						</div>
+		<!-- 2013/7/10 outside repair article page end-->
+            <div class="recommentListBox">
+            <div id="countList">
+            <span>文章评论</span>
+            <span class="notolist">共收到<b id="commentCountsbox">{$commentCounts}</b>条评论</span>
+            </div>
+            <php>if(empty($comments)){</php><div class="no_result">
+            暂无回复。
+          	</div><php>}</php>
+
+      <php>if(!empty($pager['thestr'])){</php>      
+			<div class="pg_page clearfix" style=" width:100%; float:left;">
+				<span class="pg_concrete_choice" style=" text-align:center;">
+								{$pager['backstr']}
+								{$pager['thestr']}
+								{$pager['nextstr']}
+				</span>
+			</div>
+			<php>}</php>
+        
+            <div id="recommentList">
+						<php>foreach($comments as $k=>$c) {</php>
+            <div class="articleRecomment" id="articleRecomment_<php>echo $c['id']</php>">
+            <div class="articleRecommentImg"><img src="{$c['user']['face']}" width="50" height="50" alt="{$c['user']['uname']}"></div>
+            <div class="articleRecommentContent">
+            <div class="articleRecommentInfo mt15"><span class="uname fleft" floorVal="{$c['floor']}">{$c['user']['uname']}</span> <span class="fright repairRcom"><a onclick="repRcom(this);">回复{$c['floor']}楼<img src="Templates/images/article/hf_1.png" width="12" height="11" alt="回复此楼"></a></span></div>
+            <php> if($c['user']['uid']==getMid()){</php>
+            <div class="articleRecommentInfo"><span class="fright repairRcom mr17"><a onclick="delDetaiCommont({$c['id']});">删除</a></span></div>
+            <php>}</php> 
+            <div class="fleft RecommentContent">{$c['content']}</div>
+            <div class="articleRecommentDate"><php>echo date('Y-m-d H:i:s', $c['create_time'])</php></div>
+            </div>
+            </div>
+            <php>}</php>    
+            
+            </div>
+            </div>
+            
+            </div>
+	        	<div class="content_2" style="float:right;">
+	        		<include file="Templates/userinfo.html" />
+                    <!--kontem add start-->
+                    <div class="same_part">
+		        		<div class="two_code clearfix">
+                        <iframe width="100%" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=350&fansRow=2&ptype=1&speed=100&skin=1&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=2692984661&verifier=3c08c88d&dpc=1"></iframe>
+		        		</div>
+		        	</div>
+                    <div class="same_part">
+                    <h3 class="sider_t">精华推荐</h3>
+		        		<div class="recomarticles clearfix">
+                        <ul id="RecomArticleListBox">
+                        <php>foreach($promote_article as $p) {</php>
+                        <li><a href="index-Index-articleDetail-{$p['id']}.html"><img src="/public/images/article/{$p['img']}" width="130" height="85" alt="{$p['title']}"><span><php> echo msubstr($p['title'],0,18);</php></span></a></li>
+                        <php>}</php>
+                        </ul>
+                       <span><a onclick="changeRecomArticleList();" id="changeGroup">换一组</a>
+							<span class="changeDot"></span>
+							<span class="changeDot"></span>
+							<span class="changeDot"></span>
+							<span class="changeDot curDot"></span>
+						</span>
+		        		</div>
+		        	</div>
+                     <!--kontem add end-->
+	        	</div>
+        	</div>
         </div>
-        <script>
-        function addVideoCommont(){
-            if($("#commentUid").val()==''){alert("请先登录");return false;}
-            if($("#commentbox").val()==''){return false;}
-            if($("#commentPid").val()==''){return false;}
+        <include file="Templates/footer.html" />
+        <include file="Templates/loginpart.html" />
+        <div class="title_tip"><div class="title_content"></div><div class="angle"><span></span></div></div>
+        <script type="text/javascript" src="Templates/js/jquery.js"></script>
+        <script type="text/javascript" src="Templates/js/public.js"></script>
+          <script type="text/javascript">
+      var ArticleId={$_GET['id']};
+
+			$("a[href*='#replay']").click(function(){
+					var turl=$(this).attr("href").replace(/[^0-9]/ig, "");;
+					var num=parseInt(turl);
+					$('span[floorval='+num+']').parent().parent().parent().attr("style","background:#F7F2FC;");
+			});
+			
+
+			function sendArticleLike(){
+    		var articleid=ArticleId;
+    		if(articleid>0){
+    			$.ajax({
+            type: "POST",
+            url: "ajax.php",
+            dataType:"json",
+            data: "act=recordlike&data=ford&vid="+articleid,
+            success: function(data){
+            	if(data==2){
+            		alert("你已经投过票了！");	
+            	}else{
+            		var likenums=$(".num_like").html();
+            		$(".num_like").html(likenums*1+1);
+            	}
+            }
+          });
+    		}
+			}
+			
+			function addDetaiCommont(){
+				var mid=$("#commentUid").val();
+				var commentContent=$("#commentbox").val();
+				if(mid==''||mid=='0'){alert("请先登录");return false;}
             $.ajax({
             type: "POST",
             url: "ajax.php",
             dataType:"json",
-            data: "act=addVideoCommont&data=ford&ptype=2&pid="+$("#commentPid").val()+"&uid="+$("#commentUid").val()+"&content="+$("#commentbox").val(),
+            data: "act=addDetaiCommont&data=ford&pid="+ArticleId+"&uid="+mid+"&content="+commentContent+"&ptype=2",
             success: function(data){
-             var innerHtml='<div class="target clearfix"><div class="target_pic"><img src="'+data.img+'" alt="no" /></div><div class="cm_left"><a class="name">'+data.username+'</a><p>'+data.content+'</p><p class="bottom_ms"><span class="to"><a>转发<span>(0)</span></a><a>回复<span>(0)</span></a></span><span>'+data.create_time+'</span><span>来自<em></em></span></p></div></div';
-                         $("#commentbox").val('');          
-            $("#recomment_fdiv").prepend(innerHtml);
-            $("#empty_content").html('');
-            var cnums=$("#countComments").html();
-             $("#countComments").html((cnums*1+1));
+            	var innerHtml='<div class="articleRecomment"><div class="articleRecommentImg"><img src="'+data.img+'" width="50" height="50" alt="'+data.username+'"></div><div class="articleRecommentContent"><div class="articleRecommentInfo mt15"><span class="uname fleft" floorVal="'+data.floorVal+'">'+data.username+'</span> <span class="fright repairRcom"><a  onclick="repRcom(this);">回复'+data.floorVal+'楼<img src="Templates/images/article/hf_1.png" width="12" height="11" alt="回复此楼"></a></span></div><div class="articleRecommentInfo"><span class="fright repairRcom mr17"><a onclick="delDetaiCommont('+data.id+');">删除</a></span></div><div class="fleft RecommentContent">'+data.connect+'</div><div class="articleRecommentDate">'+data.create_time+'</div></div></div>';       
+            $("#recommentList").prepend(innerHtml);
+            $("#commentbox").val('');
+            $("#lay_word_num").html('0');
+            $("#commentCountsbox").html( $("#commentCountsbox").html()*1+1);
+//            document.write('<script>$("a[href*=\'#replay\']").click(function(){var turl=$(this).attr("href").replace(/[^0-9]/ig, "");;var num=parseInt(turl);$("span[floorval="+num+"]").parent().parent().parent().attr("style","background:#F7F2FC;");});<\/script>'); 
             }
             });
         }
-		
-		function recordlike(){
-		var vid=$("#videoid").val();
-		$.ajax({
-			type: "POST",
-			url: "ajax.php",
-			dataType:"json",
-			data: "act=recordlike&data=ford&vid="+vid,
-			success: function(data)
-			{
-				if(data==1){
-				var video_num_like=$("#video_num_like").val();
-				video_num_like=video_num_like*1+1;
-				$(".num_like").html(video_num_like);
+       function repRcom (obj) {
+       	var tuser=$(obj).parent().prev(".uname").html();
+       	var floorVal=$(obj).parent().prev(".uname").attr('floorVal');
+       	$("#commentbox").focus();
+       	$("#commentbox").val("#"+floorVal+"楼 @"+tuser+' ');
+       } 
+      function delDetaiCommont(delid){
+      	var mid=$("#commentUid").val();
+      	if(delid){
+      		$.ajax({
+            type: "POST",
+            url: "ajax.php",
+            dataType:"json",
+            data: "act=delDetaiCommont&data=ford&delid="+delid+"&uid="+mid+"&ptype=2",
+            success: function(data){
+            	if(data==1){
+								$("#articleRecomment_"+delid).remove();
+            		$("#commentCountsbox").html( $("#commentCountsbox").html()*1-1);
+            	}else{
+            		alert('系统繁忙...');	
+            	}
+            }
+          });
+      	}
+      }  
+	
+
+			function changeRecomArticleList(){	
+				$.ajax({
+            type: "POST",
+            url: "ajax.php",
+            dataType:"json",
+            data: "act=getRecomArticleList&data=ford",
+            success: function(data){
+            	var recomArticleList=data;
+            	$("#RecomArticleListBox").empty();
+            	for(n in recomArticleList){
+            		$("#RecomArticleListBox").append('<li><a href="index-Index-articleDetail-"'+recomArticleList[n]['id']+'".html"><img src="/public/images/article/'+recomArticleList[n]['img']+'" width="130" height="85" ><span>'+recomArticleList[n]['title']+'</span></a></li>');
+            	}
+            }
+          });
+			}
+
+			$(".title_path a[class^='nothing']").hover(
+			function(){
+				if($(this).attr('lkey')!='1'){
+					$(this).attr('class','nothing current_pt');
+					$(this).prev(".middleline").attr("class",'middleline frontmiddleline');
+					if($(this).next(".middleline").attr("lkey")!="1"){
+						$(this).next(".middleline").attr("class",'middleline nolastbehindmiddlelinen');
+					}else{
+						$(this).next(".middleline").attr("class",'middleline bothbehindmiddlelinen');
+					}
 				}
-				else{
-				alert("你已经赞过了！");
+			},
+			function(){
+				if($(this).attr('lkey')!='1'){
+					$(this).attr('class','nothing');
+					$(this).prev(".middleline").attr("class",'middleline');
+					if($(this).next(".middleline").attr("lkey")!="1"){
+						$(this).next(".middleline").attr("class",'middleline');
+					}else{
+						$(this).next(".middleline").attr("class",'middleline frontmiddleline');
+					}
 				}
 			}
-		});
-		}
+			);
+			function num(obj,show){
+				var obj = document.getElementById(obj);
+				show_num = document.getElementById(show);
+				obj.onkeyup = function(){
+					show_num.innerHTML = this.value.length;
+					}
+					obj.onkeydown = function(){
+						show_num.innerHTML = this.value.length;
+						}
+					}
         </script>
-<include file="../Public/footer" />
+        		<script type="text/javascript">			
+		$(".changeDot").click(function(){
+				$("#changeGroup").click();
+			$(this).addClass("curDot").siblings(".changeDot").removeClass("curDot");
+		});		
+		setInterval(function(){
+			var dotIndex = $(".curDot").index();
+			if(dotIndex == 4) dotIndex = 0;
+			$("#changeGroup").click();
+			$(".changeDot").eq(dotIndex).addClass("curDot").siblings(".changeDot").removeClass("curDot");
+		},5000);
+		</script>
+	</body>
+</html>

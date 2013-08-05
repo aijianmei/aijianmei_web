@@ -99,7 +99,7 @@ class ArticleAction extends AdministratorAction {
             $data['create_time'] = time();
             $data['iswaterimg']  = t($_POST['iswaterimg']);
             
-            if(isset($_FILES['img']['name'])) {
+            if(!empty($_FILES['img']['tmp_name'])) {
                 if(!move_uploaded_file($_FILES['img']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'])){
                     echo 'add error '.'<br />';					
                 }
@@ -107,6 +107,14 @@ class ArticleAction extends AdministratorAction {
                 //$this->imageWaterMark($_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$_FILES['img']['name'],9,$waterImage);
                 $data['img'] = $_FILES['img']['name'];
             }
+			
+			if(!empty($_FILES['wapimg']['tmp_name'])) {
+				 $data['wapimg']  = time().rand().".jpg";
+                if(!move_uploaded_file($_FILES['wapimg']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$data['wapimg'])){
+                    echo 'add error '.'<br />';					
+                }
+			}
+			
             if (!empty($data['title']) &&
                 !empty($data['category_id']) &&
                 !empty($data['content'])) {
@@ -189,6 +197,12 @@ class ArticleAction extends AdministratorAction {
                     echo 'picture upload failed '.'<br />';					
                 }
                 $data['img'] = $_FILES['img']['name'];
+            }
+            if( $_FILES['wapimg']['name']!= NULL) {
+				$data['wapimg']  = time().rand().".jpg";
+                if(!move_uploaded_file($_FILES['wapimg']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/public/images/article/'.$data['wapimg'])) {
+                    echo 'picture upload failed '.'<br />';					
+                }
             }
             
             if(isset($_FILES['shareimg']['name'])){
@@ -389,6 +403,7 @@ class ArticleAction extends AdministratorAction {
             $data['title'] = t($_POST['title']);
             $data['category_id'] = intval($_POST['category']);
             $data['link'] = t($_POST['source']);
+            $data['content'] = t($_POST['content']);
 			$data['htmlurl'] = t($_POST['htmlurl']);
 			$data['wapurl'] = t($_POST['wapurl']);
             $data['brief'] = t($_POST['brief']);

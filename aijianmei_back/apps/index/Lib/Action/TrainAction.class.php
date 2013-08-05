@@ -351,57 +351,68 @@ class TrainAction extends Action {
     
     public function videoDetail()
     {
-        $nums=7;
         $id = intval($_GET['id']);
-        $pnum = intval($_GET['pg'])?intval($_GET['pg']):0;
-        $table = (isset($_GET['from']) && $_GET['from']=='daily') ? 'daily_video' : 'video';
-        $video = M($table)->where(array('id'=>$id))->find();
-        if($table=='video') M('')->query('update `ai_video` set `click`=`click`+1 where `id`='.$id);
+        M('')->query('update `ai_video` set `click`=`click`+1 where `id`='.$id);
+        $pagenums=10;
         
-        $video['create_time']=date("Y-m-d H:i:s",$video['create_time']);
-        $otherVideo=D('Article')->getVideoCategory($table,$video['category_id'],2);
-				$videoLogoData=null;
-        $videoLogoData=json_decode($this->getVideoData($video['link']));
-				$video['logo'] = $videoLogoData->data[0]->logo;
-        foreach($otherVideo as $k=>$v){
-            $data = json_decode($this->getVideoData($v['link']));
-            $otherVideo[$k]['CommNumber']=D('Article')->getVideoCountRecommentsById($v['id']);
-            $otherVideo[$k]['logo'] = $data->data[0]->logo;
-            $otherVideo[$k]['CommNumber']=$otherVideo[$k]['CommNumber']?$otherVideo[$k]['CommNumber']:0;
-        }
+        $map['id'] = $id;
+        $video = M('video')->where($map)->find();
+        //preg_match_all("/src\s*=\s*[\"|\']?\s*([^\"\'\s]*)/i",str_ireplace("\\","",$article['content']),$out);
+        //$aimgsrc=$out[1][0];
+        $video['dateStrng']=_returnNdate($video['create_time']);
+        $this->assign('video', $video); 
+       	$d=$this->getVideoData($video['link']);
+       	$d=json_decode($d);
+       	$shareImg=$d->data [0]->logo;
+        $this->assign('shareImg', $shareImg); 
+        $commentCounts = M('comments')->where(array('parent_id'=>$id, 'parent_type'=>'2'))->count();
+        
+        $pg=$_GET['pg']?$_GET['pg']:1;
+        
+        $pagerArray = $this->pageHtml ( $commentCounts, $pagenums,$pg, '/articleDetail-'.$id.'-p%s.html', 'rstr' );
+        $this->assign('pager', $pagerArray['html']);
 
-        $getRecommentsSql="select * from ai_comments where parent_id=$id and parent_type=2";
-        $Recomments=M('')->query($getRecommentsSql);
-        $cRecomnums=count($Recomments);
-        $pager = api('Pager');
-        $pager->setCounts(count($Recomments));
-        //$pager->setStyle($style);
-        $pager->setList($nums);
-        $pager->makePage();
-        $from = ($pager->pg -1) * $pager->countlist;		
-        $pagerArray = (array)$pager;
-        #$pagerArray['thestr']=printf($pagerArray['thestr'],$str);
-        $this->assign('pager', $pagerArray);
-        $cRecomnums=$cRecomnums?$cRecomnums:0;
-        $this->assign('cRecomnums', $cRecomnums);
-        $recommecntListSql="select a.*,b.uname as username from ai_comments a left join ai_user b on a.uid=b.uid where a.parent_id=$id and a.parent_type=2 order by a.create_time desc limit $pnum , $nums";
-        $RecommentsList=M('')->query($recommecntListSql);
-        foreach($RecommentsList as $key => $value){
-            $RecommentsList[$key]['img']=getUserFace($value['uid'],'m');
-            $RecommentsList[$key]['create_time']=date("Y-m-d H:i:s",$RecommentsList[$key]['create_time']);
+        $from=($pg-1)*$pagenums;
+        $sql="select * from ai_comments where parent_id=$id and parent_type=2 order by create_time desc limit $from,$pagenums";
+        $result=null;
+        $result=M('article')->query($sql);
+        foreach($result as $key=> $value){
+        	//^\#\d{1,}楼\s$
+        	preg_match_all("/^\#\d{1,}楼\s/",$value['content'],$matches,PREG_SET_ORDER);
+        	$replyidString=$matches[0][0];
+        	preg_match_all("/\d{1,}/",$replyidString,$floornums,PREG_SET_ORDER);
+        	$floornums=$floornums[0][0];
+        	if($floornums>0){
+        		$result[$key]['content']=preg_replace('/^\#\d{1,}楼\s/','<a href="#replay'.$floornums.'">#'.$floornums.'楼 </a>',$value['content']);
+        	}
+        	$result[$key]['floor']=$this->getFloor($key,$pg,$pagenums,$commentCounts);
+        	$result[$key]['user'] = getUserInfo($value['uid']);
         }
-        $this->assign('RecommentsList', $RecommentsList);
-//        $sql = "select * from ai_".$table." where category_id=$Category order by id desc limit 0,$nums";
-//        $result = M('')->query($sql);
+        
+        $this->assign('commentCounts', $commentCounts ? $commentCounts :0);
+        $this->assign('comments', $result);
+        
+        $promoteArticleList=M('')->query("SELECT * FROM ai_article where is_promote=1 ORDER BY RAND() limit 3");
+        $promoteArticle=M('')->query("SELECT * FROM ai_article where is_promote=1 ORDER BY RAND() limit 6");
+        $this->assign('promoteArticleList', $promoteArticleList);
+        $this->assign('promote_article', $promoteArticle);
+        
         $this->assign('otherVideo', $otherVideo);
-        //print_r($_SESSION);
         $this->assign('video', $video);
-        $this->assign('cssFile', 'v');
-		$this->assign('_current', 'train');
-		$this->assign('_TrainVType','1');
+        $this->assign('cssFile', 'training');
+				$this->assign('_current', 'train');
+				$this->assign('_TrainVType','1');
         $this->display('video');
     }
-    
+      public function getFloor($key,$page,$pnums,$commentCounts){
+  	if($page!=1){
+  		$start=$commentCounts-$page*$pnums;
+  	}else{
+  		$start=$commentCounts;		
+  	}
+  	$floornums=$start-$key;
+  	return $floornums;
+  } 
     protected function getVideoData($link)
     {
         $id = str_replace('http://player.youku.com/player.php/sid/', '', $link);
@@ -440,7 +451,7 @@ class TrainAction extends Action {
 			$pageArr[$i]='<a '.$cuCss.' href="'.$url.$i.'">'.$i.'</a>';
 		}
 		if($listnum>10){
-			if($pg>5&&($listnum-$pg)>5){
+			if($pg>5&&($listnum-$pg)>=5){
 				$snum=$pg-5;
 				$enum=$pg+5;
 			}

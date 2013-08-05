@@ -18,6 +18,11 @@ RewriteRule ^search_(.+).html index.php?app=index&mod=Search&act=dosearch&skword
 RewriteRule ^goodcomment.html index.php?app=index&mod=Search&act=goodcomment
 RewriteRule ^goodcomment_(.+).html index.php?app=index&mod=Search&act=goodcomment&pg=$1
 RewriteRule ^admin.html index.php?app=admin
+
+RewriteRule ^fpdetail_(.+)_p(.+).html index.php?app=index&mod=plan&act=fitnessProgramDetail&id=$1&pg=$2
+RewriteRule ^fpdetail_(.+).html index.php?app=index&mod=plan&act=fitnessProgramDetail&id=$1
+RewriteRule ^VideoWindows-(.+)-(.+) index.php?app=index&mod=Plan&act=showVideoWindows&id=$1&vid=$2
+RewriteRule ^plan_c(.+)_(.+).html index.php?app=index&mod=Plan&act=index&ctype=$1&pg=$2
 RewriteRule ^Plan.html index.php?app=index&mod=Plan
 RewriteRule ^Train.html index.php?app=index&mod=Train
 RewriteRule ^Nutri.html index.php?app=index&mod=Nutri

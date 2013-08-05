@@ -248,9 +248,7 @@ class IosApi {
 			$CommentsList [$k] ['userimg'] = $this->getUserFace ( $v ['uid'], 'm' );
 			$CommentsList [$k] ['username'] = $this->getUserName ( $v ['uid'] );
 		}
-		$data [0] ['errorCode'] = '0';
-		$data [0] ['CommentsCount'] = ( string ) count ( $CommentsList );
-		$data [0] ['CommentsList'] = $CommentsList;
+		$data = $CommentsList;
 		echo json_encode ( $data );
 		exit ();
 	}
@@ -835,15 +833,15 @@ class IosApi {
 		}
 		$orderkey = ! empty ( $type ) ? ($type == 'hot' ? 'click' : 'create_time') : 'create_time';
 		if ($listtype == 1) {
-			$arlSql = "select category_id,id,title,brief,create_time,img,reader_count as click,1 from ai_article $orderSql";
+			$arlSql = "select category_id,id,title,brief,create_time,IFNULL(wapimg,img) as img,reader_count as click,1 from ai_article $orderSql";
 			$videoSql = "select category_id,id,title,brief,create_time,link AS img,click,2 from ai_video $orderSql";
 			$limitsql = "select * from ($arlSql union all $videoSql) as t order by $orderkey desc limit " . $from . ",$pnums";
 		} elseif ($listtype == 2) {
 			// $orderTableSql="SELECT a.* FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND c.channel =$type";
 			if(!empty($orderTableSql)){
-			$limitsql = "select a.category_id,a.id,a.title,a.brief,a.create_time,a.img,a.reader_count as click,1 from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by $orderkey desc limit " . $from . ",$pnums";
+				$limitsql = "select a.category_id,a.id,a.title,a.brief,a.create_time,IFNULL(a.wapimg,a.img) as img,a.reader_count as click,1 from ai_article a ,($orderTableSql) t where a.id=t.aid group by a.id order by $orderkey desc limit " . $from . ",$pnums";
 			}else{
-				$limitsql = "select a.category_id,a.id,a.title,a.brief,a.create_time,a.img,a.reader_count as click,1 from ai_article a  group by a.id order by $orderkey desc limit " . $from . ",$pnums";
+				$limitsql = "select a.category_id,a.id,a.title,a.brief,a.create_time,IFNULL(a.wapimg,a.img) as img,a.reader_count as click,1 from ai_article a  group by a.id order by $orderkey desc limit " . $from . ",$pnums";
 			}
 		} elseif ($listtype == 3 ) {
 			$limitsql = "select category_id,id,title,brief,create_time,link AS img,click,2 from ai_video order by $orderkey desc limit " . $from . ",$pnums";
@@ -854,7 +852,7 @@ class IosApi {
 			$order = $orderkey;
 			
 			$orderTableSql = "SELECT aid FROM ai_article_category_group a, ai_article_category c WHERE a.category_id = c.id AND a.category_id in ($cid)";
-			$limitsql = "select a.category_id,a.id,a.title,a.brief,a.create_time,a.img,a.reader_count as click,2 from ai_article a where id in ($orderTableSql) or category_id=$cid group by a.id  order by " . $order . " desc limit " . $from . "," . $pnums . "";
+			$limitsql = "select a.category_id,a.id,a.title,a.brief,a.create_time,IFNULL(a.wapimg,a.img) as img,a.reader_count as click,2 from ai_article a where id in ($orderTableSql) or category_id=$cid group by a.id  order by " . $order . " desc limit " . $from . "," . $pnums . "";
 			if ($category == 'train' && $cid == 53) {
 				$limitsql = "select category_id,id,title,brief,create_time,link AS img,click,2 from ai_video  order by $order desc limit " . $from . "," . $pnums . "";
 			}
@@ -887,6 +885,9 @@ class IosApi {
 			} else {
 				if ($value ['img'] != '') {
 					$searchInfo [$key] ['img'] = $this->baseUrl . '/public/images/article/' . $value ['img'];
+				}
+				if($value ['wapimg'] != ''){
+					$searchInfo [$key] ['img'] = $this->baseUrl . '/public/images/article/' . $value ['wapimg'];
 				}
 			}
 			if ($value ['1'] == 1) {
@@ -1397,6 +1398,9 @@ class IosApi {
 		$sql = $result = null;
 		$sql = "SELECT body_weight,height FROM  ai_user_health_info WHERE uid=$uid ";
 		$bmiinfo = C_mysqlOne ( $sql );
+		if($bmiinfo [0] ['body_weight']==0||$bmiinfo [0] ['height']==0){
+			return 0;
+		}
 		$bmi = $bmiinfo [0] ['body_weight'] / (($bmiinfo [0] ['height'] / 100) * ($bmiinfo [0] ['height'] / 100));
 		return round ( $bmi, 2 );
 	}

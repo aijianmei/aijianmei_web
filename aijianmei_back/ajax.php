@@ -19,7 +19,8 @@ $_actAllowArr=array(
 'checkUserName'=>'data',
 'getrecomarticles'=>'page',
 'getRecomArticleList'=>'data',
-'delDetaiCommont'=>'data');
+'delDetaiCommont'=>'data',
+'senfplike'=>'data');
 /*ajax */
  if(!empty($_REQUEST['act'])){
      foreach($_REQUEST as $key => $value){
@@ -378,6 +379,29 @@ function recordlike($data){
 	}
 }
 
+function senfplike($data){
+	$vid=intval($_POST['vid']);
+	$mid=$_SESSION['mid'];
+	if(!($mid>0)||empty($vid)){
+		echo json_encode(3);
+		exit;	
+	}
+	$checksql="select * from ai_fitness_program_vote where uid=$mid and fid=$vid";
+	$checksinfo=C_mysqlQuery($checksql);
+	$checksinfo=mysql_fetch_assoc($checksinfo);
+	if(empty($checksinfo)){
+		$usql="update ai_fitness_program set `like`=`like`+1 where id=$articleid";
+		C_mysqlQuery($usql);
+		$insql='insert into ai_fitness_program_vote (`uid`,`fid`) values ("'.$mid.'","'.$vid.'")';
+		C_mysqlQuery($insql);
+		echo json_encode(1);exit();	
+	}else{
+		echo json_encode(2);exit();
+	}
+}
+
+
+
 function sedaylike($data){
 	if($_SESSION['mid']>0){
 			$mid=$_SESSION['mid'];
@@ -562,11 +586,12 @@ function addDetaiCommont($data=null){
     global $_dbConfig;
     $pid=$_POST['pid']?$_POST['pid']:'';
     $uid=$_POST['uid']?$_POST['uid']:exit();
+    $ptype=$_POST['ptype']?$_POST['ptype']:1;
     $content=$_POST['content']?trim($_POST['content']):exit();
     @$db = mysql_connect($_dbConfig['DB_HOST'], $_dbConfig['DB_USER'], $_dbConfig['DB_PWD']);
     @mysql_select_db('aijianmei', $db);
     mysql_query("set names 'utf8'");
-    $sql="INSERT INTO ai_comments (uid,content,parent_id,parent_type,create_time,source,topParent) VALUES ('".$uid."','".$content."','".$pid."',1,".time().",'','0')";
+    $sql="INSERT INTO ai_comments (uid,content,parent_id,parent_type,create_time,source,topParent) VALUES ('".$uid."','".$content."','".$pid."','".$ptype."',".time().",'','0')";
     $res = mysql_query($sql, $db);
     $data=null;
     $data['id']=mysql_insert_id();
@@ -600,7 +625,7 @@ function addDetaiCommont($data=null){
                 $data['img']="public/themes/newstyle/images/user_pic_middle.gif";
             }
         }*/
-        $countinfo=C_mysqlQuery("select count(*) as num from ai_comments where parent_id=$pid and parent_type=1");
+        $countinfo=C_mysqlQuery("select count(*) as num from ai_comments where parent_id=$pid and parent_type=$ptype");
         $countinfo=mysql_fetch_assoc($countinfo);
         $data['floorVal']=$countinfo['num'];
         $data['img']=getUserFace($uid,'m');

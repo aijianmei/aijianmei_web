@@ -3,6 +3,8 @@
 .recomarticles ul li{list-style:none;float:left; width:139px; text-align:center;}
 .recomarticles ul li span{font-size:14px; color:#666; width:139px;text-align:center; margin-bottom:10px;}
 .recomarticles span { float:left; font-size:16px; color:#09F; height:35px;}
+.recomarticles .changeDot{background:url(../images/article/hyz_2.png) no-repeat;width:10px;height: 10px;display:inline-block;margin:5px;cursor:pointer; }
+.recomarticles .curDot{background:url(../images/article/hyz_1.png) no-repeat;}
 .recomarticles span a{ float:left; font-size:18px; color:#09F; height:20px;}
 .sider_t {background: url(../images/pal/sider_t.jpg);height: 30px;line-height: 30px;padding-left: 5px; margin-top:-10px; margin-left:-10px;}
 #articleMenu{ height:30px; padding:10px 0px 10px 5px; width:640px;}
@@ -75,3 +77,26 @@
 #recommentList .articleRecomment .articleRecommentContent .RecommentContent{ font-size:16px; color:#333333; margin-top:2px;}
 #recommentList .articleRecomment .articleRecommentDate{color:#999999; font-size:12px; margin-bottom:4px; margin-top:5px;}
 
+/*ÌØ¶¨¼Æ»® newplan.html*/
+.choosePlan{margin:20px 0;}
+.choosePlan .thead{margin-right:3px;}
+.choosePlan .thead span{display:inline-block;width:90px;height:55px;margin-bottom:10px;float:right;margin-right:3px;text-align:center;line-height:55px;}
+.choosePlan table{border-spacing: 3px;}
+.choosePlan,.choosePlan a{color:white;font-size:26px;font-weight:bold;}
+.choosePlan th, td{width:87px;text-align:center;}
+.choosePlan th{height:55px;}
+.choosePlan td{height:110px;}
+.choosePlan .planA{background:#7bceee;}
+.choosePlan .planB{background:#27bf5b;}
+.choosePlan .rest{background:#c1c1c1;}
+.choosePlan td a{display:block;width:87px;height:50px;position:relative;padding-top:60px;}
+.choosePlan td span{position:absolute;display:block;top: 20px;width: 87px;text-align: center;}
+
+/*ÊÓÆµÏêÏ¸Ò³Ãæ video.html*/
+.video .abfocus_box{height:321px;padding:0 10px;}
+.videoRight{float:right;padding: 40px 20px;}
+.videoRight .videoInfo{line-height:30px;font-weight:bold;}
+#videoContent .groupTit{height:22px;line-height:22px;background:#21ACE3;color:white;font-size:14px;margin: 10px 0;padding-left:10px;}
+#videoContent .videoImg{width:320px;height:180px;}
+#videoContent .wizard{width:150px;height:400px;float:left;}
+#videoContent .videoIntr{padding:20px 0 0 160px;font-size:16px;color:#27bf5b;font-weight:bold;line-height:30px;}

@@ -156,13 +156,13 @@ class DailyAction extends AdministratorAction {
 			$data ['keyword'] = t ( $_POST ['keyword'] );
 			$data ['create_time'] = time ();
 			$data ['gotime'] = strtotime ( $_POST ['gotime'] );
-			if (isset ( $_FILES ['img'] ['name'] )) {
+			if (isset ($_FILES ['img'] ['tmp_name'])&&!empty($_FILES ['img'] ['tmp_name'])) {
 				$targetfilename = time () . rand () . ".jpg";
 				$newfilename = $_SERVER ['DOCUMENT_ROOT'] . '/public/images/daily/' . $targetfilename;
 				move_uploaded_file ( $_FILES ['img'] ['tmp_name'], $newfilename );
 				$data ['img'] = $targetfilename;
 			}
-			if (isset ( $_FILES ['shareimg'] ['name'] )) {
+			if (isset ($_FILES ['shareimg'] ['tmp_name'])&&!empty($_FILES ['shareimg'] ['tmp_name'])) {
 				$targetfilename = 'share' . time () . rand () . ".jpg";
 				$newfilename = $_SERVER ['DOCUMENT_ROOT'] . '/public/images/daily/' . $targetfilename;
 				move_uploaded_file ( $_FILES ['shareimg'] ['tmp_name'], $newfilename );
@@ -170,7 +170,6 @@ class DailyAction extends AdministratorAction {
 			}
 			unset ( $data ['uid'] );
 			unset ( $data ['create_time'] );
-
 			M ( 'daily' )->save ( $data );
 			M ()->query ( "delete from ai_daily_video_list where dailyid=$id" );
 			foreach ( $_POST ['vtitle'] as $key => $value ) {
@@ -178,7 +177,7 @@ class DailyAction extends AdministratorAction {
 				$dailyVideoData ['vtitle'] = $value;
 				$dailyVideoData ['vtitlecontent'] = $_POST ['vtitlecontent'] [$key];
 				$dailyVideoData ['eq'] = $_POST ['eq'] [$key];
-				$dailyVideoData ['channel'] = $_POST ['channel'] [$key];
+				$dailyVideoData ['channel'] = $_POST ['vchannel'] [$key];
 				$dailyVideoData ['vtitleurl'] = $_POST ['vtitleurl'] [$key];
 				$dailyVideoData ['imgLeft'] = $_POST ['imgLeft'] [$key];
 				$dailyVideoData ['imgLeftUrl'] = $_POST ['imgLeftUrl'] [$key];
