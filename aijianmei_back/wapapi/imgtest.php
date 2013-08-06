@@ -201,6 +201,11 @@ if (move_uploaded_file ( $_FILES ['backgroundimage'] ['tmp_name'], $srcImage )) 
 				$upsql = "UPDATE ai_user SET city='" . $aidInfo ['area_id'] . "' WHERE uid=$uid";
 				C_mysqlOne ( $upsql );
 			}
+			if(!empty($_POST['profileImageUrl'])&&empty($_FILES ['avatarimage'] ['tmp_name'])){
+				$profileImageUrl = $_POST ['profileImageUrl'];
+				$sql = "UPDATE ai_others SET profileImageUrl = '" . $profileImageUrl . "' WHERE  id =$uid";
+				C_mysqlOne ( $sql );
+			}
 		}
 $bim = getBmiById ( $uid );
 $data[0]['uid'] = $uid;
@@ -215,6 +220,7 @@ $data[0]['weight'] = $_POST ['weight']?$_POST ['weight']:'';
 $data[0]['height'] = $_POST ['height']?$_POST ['height']:'';
 $data[0]['province'] = $_POST ['province']?$_POST ['province']:'';
 $data[0]['city'] = $_POST ['city']?$_POST ['city']:'';
+$data[0]['profileImageUrl'] = $_POST ['profileImageUrl']?$_POST ['profileImageUrl']:'';
 echo json_encode ( $data );
 exit ();
 

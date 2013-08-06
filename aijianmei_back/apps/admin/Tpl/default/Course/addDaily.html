@@ -1,0 +1,176 @@
+<include file="../Public/_header" />
+<!--编译器js start-->
+<script src="ckeditor/ckeditor.js"></script>
+<script src="ckeditor/sample.js"></script>
+<link rel="stylesheet" href="ckeditor/sample.css">
+<script type="text/javascript" src="ckfinder/ckfinder.js"></script>
+<!--编译器js end-->
+<link rel="stylesheet" href="widgets/datepicker/ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="widgets/datepicker/ui.js"></script>
+<script>
+$(function() {
+	$( "#datepicker" ).datepicker();
+	$( "#datepicker" ).datepicker( "option", "dateFormat","yy-mm-dd" );
+	$( "#datepicker" ).datepicker( "setDate", '<?php echo $article['gotime'];?>' );
+}); 
+</script>
+<div class="so_main">
+  <div id="editTpl_div">
+  	<div class="page_tit"><eq name="type" value="edit">编辑<else/>添加</eq>天天锻炼</div>
+	<div class="form2">
+	<form method="post" action="{:U('admin/Article/addDaily')}" enctype="multipart/form-data">
+	<eq name="type" value="edit"><input type="hidden" name="aid" value="{$article['id']}"></eq>
+    <dl class="lineD">
+      <dt>标题：</dt>
+      <dd>
+        <input name="title" type="text" value="{$article['title']}"> *
+	  </dd>
+    </dl>
+    
+    <dl class="lineD">
+    	<dt>所属栏目：</dt>
+    	<dd>
+    		<select name="channel">
+    			<option value="1" <php>if($article['channel']=='1'){</php>selected="selected"<php>}</php>>上班族健身</option>
+    			<option value="2" <php>if($article['channel']=='2'){</php>selected="selected"<php>}</php>>日常健身</option>
+    			<option value="3" <php>if($article['channel']=='3'){</php>selected="selected"<php>}</php>>专业运动员</option>
+    			<option value="4" <php>if($article['channel']=='4'){</php>selected="selected"<php>}</php>>健美运动员</option>
+    		</select>
+    	</dd>
+    </dl>
+	
+	<dl class="lineD">
+		<dt>图片：</dt>
+		<dd>
+			<input type="file" name="img" />
+		</dd>
+	</dl>
+	
+	<dl class="lineD">
+		<dt>日期：</dt>
+		<dd>
+			<input id="datepicker" size="30" type="text" value="" name="gotime"/>
+		</dd>
+	</dl>
+
+	    <dl class="lineD">
+        <dt>内容：</dt>
+        <dd>
+			<textarea cols="80" id="content" name="content" rows="10">{$article['content']}</textarea>
+		<script>
+			CKEDITOR.replace( 'content', {
+				fullPage: true,
+				allowedContent: true,
+				extraPlugins: 'wysiwygarea',
+				language : 'zh-cn',
+				filebrowserBrowseUrl : 'ckfinder/ckfinder.html',
+				filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?type=Images',
+				filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?type=Flash',
+				filebrowserUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+				filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+				filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+				});
+	</script>
+        </dd>
+    </dl>
+    
+    <!-- <dl class="lineD">
+    	<dt>视频链接（多个链接用逗号隔开):</dt>
+    	<dd>
+    		<input type="text" name="videos" size="60" value="{$videos}" />
+    	</dd>
+    </dl> -->
+    
+    <dl class="lineD">
+    	<dt>关键词(关键词用逗号分隔)：</dt>
+    	<dd>
+    		<input name="keyword" type="text" value="{$article['keyword']}" size="100" />
+    	</dd>
+    </dl>
+    
+    <eq name="type" value="edit">
+    <dl class="lineD">
+    	<dt style="width:50px;">视频列表</dt>
+    		<php>foreach($video as $v) {</php>
+    			<div id="vid_{$v['id']}">
+    				<dd><span>{$v['title']}</span><a href="javascript:void(0)" onclick="deleteDailyVideo({$v['id']})">删除</a></dd>
+					<dd>Flash链接：<input type="text" name="" value="{$v['link']}" id="link_{$v['id']}"  size="100"><a onclick="backEditVideoUrl({$v['id']},'link');">Save</a></dd>
+					<dd>Html链接：<input type="text" name="" value="{$v['htmlurl']}" id="htmlurl_{$v['id']}"  size="100"><a onclick="backEditVideoUrl({$v['id']},'htmlurl');">Save</a></dd>
+					<dd>Wap链接：<input type="text" name="" value="{$v['wapurl']}" id="wapurl_{$v['id']}"  size="100"><a onclick="backEditVideoUrl({$v['id']},'wapurl');">Save</a></dd>
+    			</div>
+    		<php>}</php>
+    </dl>
+    </eq>
+    <dl class="lineD" id="first_video">
+    	<dt>视频</dt><dd><a href="javascript:void(0)" onclick="addVideoPanel()">继续添加视频</a></dd>
+    	<dd>Flash链接：<input type="text" name="videos[]" size="50" /></dd>
+		<dd>Html链接：<input type="text" name="htmlurl[]" size="50" /></dd>
+		<dd>Wap链接：<input type="text" name="wapurl[]" size="50" /></dd>
+    	<dd>标题：<input type="text" name="v_title[]" size="50" /></dd>
+    	<dd>描述：<textarea name="v_intro[]" cols="40" rows="6"></textarea></dd>
+    </dl>
+	
+    <div class="page_btm">
+      <input type="submit" class="btn_b" value="确定" />
+    </div>
+	</form>
+  </div>
+  </div>
+</div>
+<script type="text/javascript">
+function deleteDailyVideo(vid) {
+	$.post('/index.php?app=admin&mod=Article&act=deleteDailyVideo', {'vid':vid}, function(msg) {
+		$("#vid_"+vid).remove();
+	})
+}
+</script>
+<script type="text/javascript" >
+function backEditVideoUrl(id,urltype){
+	var targetUrl=$("#"+urltype+"_"+id).val()
+	$.ajax({
+	type: "POST",
+	url: "ajax.php",
+	dataType:"json",
+	data: "act=backEditVideoUrl&data=ford&vid="+id+"&url="+targetUrl+"&urltype="+urltype,
+	success: function(data){
+	 if(data.return)
+	 {
+		alert("修改成功");
+	 }
+	}
+	});
+}
+
+
+
+
+ 
+var typeId = "{$type_id}";
+$(document).ready(function(){
+  bindListener();
+ });
+function bindListener(){
+    $("a[name=rmlink]").unbind().click(function(){
+        $(this).parent().remove(); 
+    })
+}
+function delImg(obj) {
+  var pObj = $(obj).parent();
+  pObj.remove();
+}
+
+function addimg(){ 
+  var banner =  $("input[id=banner]").val();
+  var url = $("input[id=bannerUrl]").val();
+   $("#mdiv").append('<div> <span style="color:red">*</span>Banner图片：<input type="file" name="banner[]" value=""  id="banner"/><span style="color:red">*</span> 链接地址：<input type="text" name="bannerUrl[]" value="" id="bannerUrl"><a href="javascript:void(0);" onclick="delImg(this)" name="rmlink">删除</a> <br></div>');
+   bindListener();
+} 
+
+function addVideoPanel() {
+	$("#first_video").append('<hr /><dd>Flash链接：<input type="text" name="videos[]" size="50" /></dd><dd>Html链接：<input type="text" name="htmlurl[]" size="50" /></dd><dd>Wap链接：<input type="text" name="videos[]" size="50" /></dd><dd>标题：<input type="text" name="v_title[]" size="50" /></dd><dd>描述：<textarea name="v_intro[]" cols="40" rows="6"></textarea></dd>');
+}
+</script>
+
+
+<include file="../Public/_footer" />

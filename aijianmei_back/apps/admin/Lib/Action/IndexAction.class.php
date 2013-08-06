@@ -20,9 +20,10 @@ class IndexAction extends AdministratorAction {
             'content'		=>	'内容',
             'user'			=>	'用户',
             'apps'			=>	'应用',
-            'extension'		=>	'插件',
-            'article'       =>  '文章',
-			'pageinfo'      =>  '页面',
+            'extension'	=>	'插件',
+            'article'   =>  '文章',
+            'pageinfo'  =>  '页面',
+            'fitnesscourse'  =>  '健身历程',
         );
     }
 
@@ -56,6 +57,12 @@ class IndexAction extends AdministratorAction {
 				),
 				'模块组件管理'	=>	array(
 								'视频列表组件管理'	=>	U('admin/Nav/videoListManager'),
+				),
+        );
+		$menu['fitnesscourse'] 	=   array(
+				'健身动作管理'	=>	array(
+                '动作管理'	=>	U('admin/Course/addDaily'),
+                '动作分类管理'	=>	U('admin/Course/daily'),
 				),
         );
 

@@ -1,0 +1,106 @@
+<include file="../Public/_header" />
+
+<!-- 编辑器样式文件 -->
+<link href="__PUBLIC__/js/editor/editor/theme/base-min.css" rel="stylesheet"/>
+<!--[if lt IE 8]>
+<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-sprite-min.css" rel="stylesheet"/>
+<![endif]-->
+<!--[if gte IE 8]><!-->
+<link href="__PUBLIC__/js/editor/editor/theme/cool/editor-pkg-min-datauri.css" rel="stylesheet"/>
+<!--<![endif]-->
+
+<include file="__THEME__/editor" />
+
+<div class="so_main">
+  <div id="editTpl_div">
+  	<div class="page_tit"><eq name="type" value="edit">编辑<else/>添加</eq>视频</div>
+	<div class="form2">
+	<form method="post" action="{:U('admin/Article/addVideo')}" enctype="multipart/form-data">
+	<eq name="type" value="edit"><input type="hidden" name="vid" value="{$video['id']}"></eq>
+    <dl class="lineD">
+      <dt>标题：</dt>
+      <dd>
+        <input name="title" type="text" value="{$video['title']}"> *
+	  </dd>
+    </dl>
+    
+    <dl class="lineD">
+    	<dt>所属分类：</dt>
+    	<dd>
+    		<select name="category">
+    			<php>foreach($categories as $c) {</php>
+    			<option value="{$c['id']}" <php>if($video['category_id']==$c['id']){</php>selected="selected"<php>}</php> >{$c['name']}</option>
+    			<php>}</php>
+    		</select>
+    	</dd>
+    </dl>
+	
+	<dl class="lineD">
+		<dt>URL（支持youku、土豆视频）</dt>
+		<dd>
+			<input name="source" type="text" value="{$video['link']}"><span>请输入视频的flash地址！</span>
+		</dd>
+	</dl>
+	<dl class="lineD">
+		<dt>HtmlUrl：</dt>
+		<dd>
+			<input name="htmlurl" type="text" value="{$video['htmlurl']}"><span>请输入视频的Html地址！</span>
+		</dd>
+	</dl>
+	<dl class="lineD">
+		<dt>WapUrl：</dt>
+		<dd>
+			<input name="wapurl" type="text" value="{$video['wapurl']}"><span>请输入视频的手机Wap地址！</span>
+		</dd>
+	</dl>
+	<dl class="lineD">
+		<dt>关键字(多个以逗号隔开):</dt>
+		<dd>
+			<input name="keyword" type="text" value="{$video['keyword']}" style="width:300px;">
+		</dd>
+	</dl>
+	<dl class="lineD">
+		<dt>简要介绍：</dt>
+		<dd>
+			<input name="brief" type="text" value="{$video['brief']}" size="100">
+		</dd>
+	</dl>
+	
+    <div class="page_btm">
+      <input type="submit" class="btn_b" value="确定" />
+    </div>
+	</form>
+  </div>
+  </div>
+</div>
+
+<script type="text/javascript" > 
+var typeId = "{$type_id}";
+$(document).ready(function(){
+  bindListener();
+ });
+function bindListener(){
+    $("a[name=rmlink]").unbind().click(function(){
+        $(this).parent().remove(); 
+    })
+}
+function delImg(obj) {
+  var pObj = $(obj).parent();
+  pObj.remove();
+}
+
+function addimg(){ 
+  var banner =  $("input[id=banner]").val();
+  var url = $("input[id=bannerUrl]").val();
+   $("#mdiv").append('<div> <span style="color:red">*</span>Banner图片：<input type="file" name="banner[]" value=""  id="banner"/><span style="color:red">*</span> 链接地址：<input type="text" name="bannerUrl[]" value="" id="bannerUrl"><a href="javascript:void(0);" onclick="delImg(this)" name="rmlink">删除</a> <br></div>');
+   bindListener();
+} 
+</script>
+
+<script>
+$(document).ready(function(){
+	loadEditor("content");
+  
+});
+</script>
+<include file="../Public/_footer" />

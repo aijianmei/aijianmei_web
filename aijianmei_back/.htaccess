@@ -3,8 +3,9 @@ RewriteCond %{HTTP_HOST} ^aijianmei.com [NC]
 RewriteRule ^(.*)$ http://www.aijianmei.com/$1 [L,R=301]
 
 RewriteBase /
-RewriteRule index.html index.php
+RewriteRule ^index.html index.php
 RewriteRule ^forum/(.+) forum/$1
+RewriteRule ^/libpack/$ libpack/$1
 #RewriteRule ^(.+)-(.+)-(articleDetail)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4
 RewriteRule ^index-Index-articleDetail-(.+).html index.php?app=index&mod=public&act=articleDetail&id=$1
 RewriteRule ^articleDetail-(.+)-p(.+).html index.php?app=index&mod=public&act=articleDetail&id=$1&pg=$2

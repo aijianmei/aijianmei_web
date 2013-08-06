@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript" src="jquery.js"></script>
+</head>
+
+<style>
+
+#testString{width:430px; font-size:20px; }
+
+</style>
+<body>
+<form action="aiAjaxClass.php" method="post"  target="exec_target" id="upload_form">
+<textarea id="testString" name="testString" cols="" rows="" maxlength="200"></textarea>
+<input name="" type="button" class="sub" />
+<input name="act" value="setUserLogImg" type="hidden" />
+</form>
+<img name="" src="" id="logimg" />
+<iframe id="exec_target" name="exec_target" style="display:none;width:0;height:0;"></iframe>
+</body>
+<script>
+
+$(document).ready(function(){
+	$(".sub").click(function(){
+		if($("#testString").val()!=''){
+			$("#upload_form").submit();
+		}
+	});
+	$("#exec_target").load(function(){
+		var data = $(window.frames['exec_target'].document.body).find("textarea").eq(0).html();
+		$("#logimg").attr('src',data);
+	});
+});
+
+
+</script>
+</html>
