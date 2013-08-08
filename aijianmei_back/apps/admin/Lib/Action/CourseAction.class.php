@@ -248,7 +248,7 @@ class CourseAction extends AdministratorAction {
 					$value ['parentid'] = $data [0] ['name'];
 				}
 			} else {
-				$value ['parentid'] = '椤剁骇鐖剁被';
+				$value ['parentid'] = '顶级父类';
 			}
 		}
 		$pageArr = $this->pageHtml ( count ( $dailycount ), $nums, $pg, '/index.php?app=admin&mod=Course&act=CategoryPm&pg=%s' );

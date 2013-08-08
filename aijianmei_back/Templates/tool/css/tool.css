@@ -1,0 +1,527 @@
+input,button,select,textarea{outline:none}
+.partTit{
+	font-size:18px;
+	color:#176e90;
+	font-weight:normal;
+	margin:10px 0;
+}
+	.partTit span{
+		display:block;
+		width:165px;
+		height:31px;
+		line-height: 29px;
+		margin:0 auto;
+		background:url(../images/tool/sprites1.png) no-repeat 0 0;
+		text-align:center;
+	}
+.tip{
+	margin:10px 0;	
+}
+.tipFont{
+	font-size:14px;
+	color:#999;
+}
+.greenFont{
+	color:#7fa731;
+	font-size:14px;
+	font-family:"宋体";
+}
+.redFont{
+	color:#ff4d2a;
+	font-size:14px;
+	font-family:"宋体";
+}
+.blueFont{
+	color:#57c9f6;
+	font-size:14px;
+	font-family:"宋体";
+}
+#weightManage{
+	height:388px;
+	border:1px solid #fff;
+	padding:10px;
+	margin-bottom:20px;
+	background:#efefef;
+}
+	#userInfo{
+		width:200px;
+		float:left;
+		border-right:2px solid white;
+	}
+		.userFace{
+			width:180px;
+			height:180px;
+			border:1px solid #fff;
+		}
+		.userName{
+			display:block;
+			margin:10px 0;
+			color:#666;
+			font-size:16px;
+		}
+		.userIntro{
+			max-height:48px;
+			line-height:22px;
+			margin-bottom:10px;
+			padding-right:20px;
+			overflow:hidden;
+			font-size:14px;
+			color:#999;
+		}
+		.userLabel{
+			display:inline-block;
+			margin:0 5px 5px 0;
+			background:#21ace3;
+			padding:2px 5px;
+			color:#FFF;
+		}
+	#weight{
+		float:left;
+		width:696px;
+		margin:0 20px;
+		_margin-left:10px;
+	}	
+		.weightPro{
+			position:relative;
+			width:558px;
+			height:123px;
+			margin:0 auto;
+			margin-top: 5px;
+			border:1px solid #fff;
+			background:#e8eee1;
+		}
+			.progress{
+				width:407px;
+				height:28px;
+				margin:0 auto;
+				padding:4px;
+				background:url(../images/tool/sprites1.png) no-repeat 0 -49px;
+			}
+				.progress  .innerPro{
+					height:20px;
+					margin-right: 8px;					
+					border-radius: 6px;
+					background:url(../images/tool/progress.jpg) repeat-x;
+				}
+				.progress span{
+					display:block;
+					margin:0 auto;
+					margin-top:-22px;
+					line-height:22px;
+					text-align:center;
+					color:red;
+					font-weight:bold;
+				}
+			.initWeight,.goalWeight{
+				position:absolute;
+				top: -5px;
+				line-height: 135px;	
+				font-weight:bold;
+				font-size:30px;
+				color:white;
+				text-align: center;
+				text-shadow:0 -1px 1px rgba(0, 0, 0, 0.5);
+			
+			}
+			.initWeight{
+				width:135px;
+				height:214px;
+				left:-72px;
+				background:url(../images/tool/sprites1.png) no-repeat 0 -232px;
+	
+			}
+			.goalWeight{
+				width:135px;
+				height:175px;
+				right:-63px;
+				background:url(../images/tool/sprites1.png) no-repeat -167px -250px;
+			}
+		.userInput{
+			position:relative;
+			height: 160px;
+		}
+			.userInput span{
+				display:block;
+			}
+			.userInput input{
+				width:54px;
+				height:24px;
+				padding:4px;
+				margin:0 8px;
+				background:url(../images/tool/sprites1.png) no-repeat 0 -167px;
+				text-align:center;
+				font-size:20px;
+				color:#999;
+			}
+			.userInput .input1{
+				position:absolute;
+				top:27px;
+				left: 104px;
+				line-height:36px;
+			}
+			.userInput .input2{
+				position:absolute;
+				top:23px;
+				right:114px;
+			}
+			.userInput .input3{
+				position: absolute;
+				left: 40%;
+				top: 25px;
+				
+			}
+				.input3 .curWeight{
+					width:157px;
+					height:135px;
+					margin:0 auto;
+					background:url(../images/tool/sprites1.png) no-repeat -341px -252px;
+					padding-left:15px;
+					line-height: 135px;	
+					font-weight:bold;
+					font-size:30px;
+					color:white;
+					text-shadow:0 -1px 1px rgba(0, 0, 0, 0.5);
+				}
+					.input3 span{
+						position: absolute;
+						top: 53px;
+						left: 165px;
+						width: 200px;
+					}
+					.input3 .curDate{
+						top:100px;
+					}
+		.saveBtn{
+			text-align:right;
+		}
+			.save{
+				display:block;
+				float:right;
+				width:105px;
+				height:46px;
+				background:url(../images/tool/save1.png) no-repeat;
+			}
+			.save:hover{
+				background:url(../images/tool/save2.png) no-repeat;		
+			}
+	#tipMsg{
+		text-align:center;
+		color:#ff4d2a;
+		font-size:20px;
+	}
+		#tipMsg span{
+			font-size:40px;
+		}
+
+			.actNav{
+				width: 100%;
+				background: #56A9E4;
+			}
+			.actNav li{
+				position: relative;
+				float:left;
+				display: inline-block;
+				height:34px;
+				padding: 0 16px;
+				line-height: 34px;
+				cursor: pointer;
+				color: white;
+				font-size: 18px;
+			}
+			.actNav .curAct{	
+				margin: 1px;
+				color: #56A9E4;
+				background: white;
+			}
+			.actNav .curAct span{
+				position: absolute;
+				top: 24px;
+				left: 46%;
+				padding: 0;
+				overflow: hidden;
+				width: 0;
+				height: 0;
+				font-size: 0;
+				line-height: 0;
+				border-color: transparent transparent #56A9E4 transparent;
+				border-style: solid;
+				border-width: 5px;
+			}
+			.dataLeft,.dataRight{
+				height:340px;
+				background:#eaeaea ;
+				border-radius:6px;
+			}
+			.dataLeft{
+				width:154px;
+				float:left;
+			}
+				.date{
+					position:relative;
+					height:26px;
+					margin:10px;
+				}
+					.date .preDate,.date .nextDate,#datepicker{
+						position:absolute;
+						height:26px;
+					}
+					.date .preDate{
+						width:21px;
+						background:url(../images/tool/sprites2.png) no-repeat 0 0;
+						cursor:pointer;
+					}
+					#datepicker{
+						width:92px;
+						left:21px;
+						background:url(../images/tool/sprites2.png) no-repeat -21px 0;
+						text-align:center;
+						color:white;
+					}
+					.date .nextDate{
+						left:113px;
+						width:25px;
+						background:url(../images/tool/sprites2.png) no-repeat -113px 0;
+						cursor:pointer;
+					}
+				.dataTab{
+					margin:10px;
+				}
+					.dataTab .list{
+						height:90px;
+						margin-bottom:7px;
+					}
+					.dataTab .list img{
+						width:134px;
+						height:90px;
+						border-radius:8px;
+					}
+			.dataRight{
+				float:right;
+				width:790px;
+				margin-right:5px;
+				_margin-right:2px;
+			}
+				.userArea{
+					width:100%;
+					height:100%;
+					
+				}
+				.userTable{
+					height:340px;
+				
+					background:url(../images/tool/sjb_1.png) no-repeat;
+				}
+				#dataForm{
+					padding:2px;
+				}
+					.col{
+						width:193px;
+						float:left;
+						text-align:center;
+					}
+					.actGroup .col{
+						margin:0 1px 0 2px;
+						height:38px;
+						line-height:38px;
+					}
+					.oddRow .col{
+						background:#EAEAEA;
+					}
+					.evenRow .col{
+						background:#F3F3F3;
+					}
+					.thead{
+						height:80px;
+					}
+						.thead .col{
+							position:relative;
+							margin-top:15px;
+							font-size:30px;
+							font-weight:bold;
+							color:white;
+							text-shadow:0 -1px 1px rgba(0, 0, 0, 0.5);
+						}
+						.thead .col span{
+							position:absolute;
+							display:block;
+							width: 100%;
+							font-size:18px;
+						}
+						.thead .col1{
+							color:#3786be;
+						}
+						.thead .col1 .rowTip{
+							color:white;
+						}
+					.tBody{
+						
+					}
+						.actGroup .col{
+							position:relative;
+						}
+							.actGroup .col .cut,.actGroup .col .figure,.actGroup .col .add{
+								position:absolute;
+							}
+							.actGroup .col .cut{
+								left:52px;
+								top:14px;
+								width:6px;
+								height:9px;
+								background:url(../images/tool/sprites2.png) no-repeat 0 -72px;
+								cursor:pointer;
+							}
+							.actGroup .col .figure{
+								left:63px;
+								top:7px;
+								width:68px;
+								height:24px;
+								background:url(../images/tool/sprites2.png) no-repeat -32px -64px;
+								text-align:center;
+								font-size:16px;
+								color:#333;
+							}
+							.actGroup .col .add{
+								right:52px;
+								top:14px;
+								width:6px;
+								height:9px;
+								background:url(../images/tool/sprites2.png) no-repeat -116px -72px;
+								
+							}
+					.tFooter{
+						height:56px;
+						padding-top:10px;
+					}
+						
+						.tFooter .col2,.tFooter .col3,.tFooter .col4{
+							margin-top:10px;
+						}
+						
+						.tFooter .save{
+							display:inline-block;
+							float:none;
+						}
+						
+		
+		
+	.ranking{
+		width:256px;
+		float:left;
+		margin:0 100px 0px 170px;
+		_margin-left:75px;
+	}	
+	.rankRight{
+		margin-left:0;
+	}
+		.ranking .rankFace{
+			width:30px;
+			height:30px;
+		}
+		
+		.ranking .rankType{
+			width:185px;
+			height:110px;
+			margin: 0 auto;
+			position:relative;
+			background:url(../images/tool/pm_1.png) no-repeat;
+		}
+			.rankType span{
+				position: absolute;
+				bottom: 25px;
+				left: 42px;
+				color: white;
+				font-weight: 800;
+				font-size: 24px;
+			}
+		.sportsRank{
+			background:#FFF;
+		}
+			.rankLine{
+				margin:5px;
+				border-bottom:1px solid #D9D9D9;
+				padding:5px 0 2px 0;
+			}
+				.rankLine .rankDay{
+					float:left;
+					margin-right:2px;
+					width:60px;
+					height:20px;
+					line-height:20px;
+					background:#D9D9D9;
+					text-align:center;
+					cursor:pointer;
+				}
+				.rankLine .allRank{
+					margin-right:0;
+				}
+				.rankLine .curRanking{
+					background:#F1CD7E;
+					color:white;
+				}
+			.rankList{
+				margin:5px;
+			}
+				.userPos .rankName{
+					text-decoration:none;
+					color:#FFAE05;
+					font-size:14px;
+				}
+				.userPos .rankName:hover{
+					text-decoration:underline;
+				}
+				.topTen{
+					margin: 20px;
+				}
+					.topTen li{
+						position:relative;
+						height:30px;
+						margin-bottom:10px;
+					}
+					.topTen .order{
+						position: absolute;
+						top: 2px;
+						display:inline-block;
+						width:27px;
+						height:27px;
+						background:url(../images/tool/sprites2.png) no-repeat -151px -222px;
+						text-align: center;
+						line-height: 27px;
+						color: white;
+						font-weight: 800;
+					}
+					.topTen .otherName{
+						position:absolute;
+						top:10px;
+						left:82px;
+						color:#689100;
+						text-decoration:none;
+						font-size:14px;
+					
+					}
+					.topTen .otherName:hover{
+						text-decoration:underline;
+					}
+					.topTen .rankFace{
+						position:absolute;
+						left:37px;
+					}
+					.topTen .No1{
+						background:url(../images/tool/sprites2.png) no-repeat -2px -223px;					
+					}
+					.topTen .No2{
+						background:url(../images/tool/sprites2.png) no-repeat -50px -223px;					
+					}
+					.topTen .No3{
+						background:url(../images/tool/sprites2.png) no-repeat -100px -223px;					
+					}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

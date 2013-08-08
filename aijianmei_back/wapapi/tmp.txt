@@ -2,7 +2,7 @@
 <b>array</b> <i>(size=6)</i>
   'aucode' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'aijianmei'</font> <i>(length=9)</i>
   'auact' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'getCircleList'</font> <i>(length=13)</i>
-  'uid' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>''</font> <i>(length=0)</i>
+  'uid' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'264'</font> <i>(length=3)</i>
   'group' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>''</font> <i>(length=0)</i>
   'start' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>''</font> <i>(length=0)</i>
   'offset' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>''</font> <i>(length=0)</i>

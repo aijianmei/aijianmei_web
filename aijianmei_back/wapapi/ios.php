@@ -235,6 +235,10 @@ class IosApi {
 				'id'=>1,
 				'content'=>1,
 			),
+			'postCircleLike' =>array(
+				'uid'=>0,
+				'statusId'=>0,
+			),
 	);
 	public function __construct() {
 		ob_start();
@@ -251,6 +255,31 @@ class IosApi {
 			}
 		} else {
 			return $this->errormsg ();
+		}
+	}
+	public function postCircleLike(){
+		$uid  	= ! empty ( $_POST ['uid'] ) ? intval ( $_POST ['uid'] ) : '';
+		$id 	 	= ! empty ( $_POST ['statusId'] ) ? intval ($_POST ['statusId']) : '';
+		if(empty($uid)||empty($id)){
+			$data [0] ['uid'] = '0';
+			$data [0] ['errorCode'] = '10001';
+			echo json_encode ( $data );
+			exit ();
+		}
+		$checkSql="select * from ai_circle_vote where uid=$uid and cid=$id";
+		$check=C_mysqlOne ( $checkSql );
+		if(empty($check)){
+			$updatesql="UPDATE ai_circle_info SET  `like`=`like`+1 WHERE  id=$id";
+			C_mysqlOne ( $updatesql );
+			$insql = 'insert into ai_circle_vote (`uid`,`cid`) values ("' . $uid . '","' . $id . '")';
+			C_mysqlOne ( $insql );	
+			$data[0]['uid']=(string)$uid;
+			$data[0]['errorCode'] = "0";
+			echo json_encode ( $data );
+		} else {
+			$data[0]['uid']=(string)$uid;
+			$data[0]['errorCode'] = "10002";
+			echo json_encode ( $data );
 		}
 	}
 	public function postCircleComment(){
@@ -295,6 +324,13 @@ class IosApi {
 		}
 		return  $result;
 	}
+	protected function checkCircleLike($uid,$cid){
+		if(empty($uid)||empty($cid)) return  "1";
+		$sql="select * from ai_circle_vote where uid=$uid and cid=$cid";
+		$data=C_mysqlAll ( $sql );
+		return empty($data)?"0":"1";
+	}
+	
 	public function postCircleList() {
 		$basedir = dirname(dirname ( __FILE__ ));
 		$uid = ! empty ( $_POST ['uid'] ) ? intval ( $_POST ['uid'] ) : '';
@@ -339,12 +375,19 @@ class IosApi {
 	public function getCircleList() {
 		//$this->baseUrl='http://www.kon_aijianmei.com/';
 		$uid = ! empty ( $_POST ['uid'] ) ? intval ( $_POST ['uid'] ) : '';
+		$circleUid = ! empty ( $_POST ['circleUid'] ) ? intval ( $_POST ['circleUid'] ) : '';
 		$group = ! empty ( $_POST ['group'] ) ? intval ( $_POST ['group'] ) : '';
 		$start = ! empty ( $_POST ['start'] ) ? intval ( $_POST ['start'] ) : 0;
 		$offset = ! empty ( $_POST ['offset'] ) ? intval ( $_POST ['offset'] ) : 5;
 		$where = '';
-		if (! empty ( $uid )) {
-			$where = " where uid =$uid";
+		if(empty($uid)){
+			$data [0] ['uid'] ="0";
+			$data [0] ['errorCode'] = '10001';
+			echo json_encode ( $data );
+			exit ();
+		}
+		if (! empty ( $circleUid )) {
+			$where = " where uid =$circleUid";
 		}
 		if (! empty ( $group )) {
 			$where = " where group =$group";
@@ -359,6 +402,7 @@ class IosApi {
 				$v['avatarProfileUrl']=$this->getUserFace($v['uid']);
 				$v['userName']=$this->getUserName($v['uid']);
 				$v['commentList']=$this->getCircleCommentById($v['id']);
+				$v['isLike']=$this->checkCircleLike($uid,$v['id']);
 			}
 			echo json_encode ( $circleList );
 			exit ();

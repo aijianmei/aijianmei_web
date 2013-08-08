@@ -1,6 +1,7 @@
 <?php
 header ( "charset=utf-8" );
-// error_reporting(0);
+session_start();
+error_reporting ( 0 );
 define ( 'SITE_PATH', dirname ( dirname ( __FILE__ ) ) ); // 路径常量定义
 
 $dbConfig = include_once ('../config.inc.php'); // 加载配置文件
@@ -19,7 +20,7 @@ class Ajax {
 	);
 	protected $ttf = 'FZSJSJW.TTF';
 	public function __construct() {
-		@$doAction = $_POST ['act'] ? ( string ) $_POST ['act'] : die ( 40003 );
+		@$doAction = $_REQUEST ['act'] ? ( string ) $_REQUEST ['act'] : die ( 40003 );
 		$this->db = new ckmysql ();
 		$this->checkRequest ();
 		if (! in_array ( $doAction, $this->allowAction ))
@@ -30,10 +31,39 @@ class Ajax {
 		die ( 40004 );
 	}
 	public function postUserCourseInfo() {
-		$uid = $_POST ['uid'];
-		$aid = $_POST ['aid'];
-		
-		
+		$date='08/08/2013';
+		$uid = $_REQUEST ['uid'];
+		$aid = $_REQUEST ['aid'];
+		$this->checkUserId($uid);
+		foreach ($_POST['nums'] as $key => $value){
+			$loginfo=null;
+			$group=$key+1;
+			$date=date('Ymd',strtotime($date));
+			$loginfo['nums']	=$value;
+			$loginfo['weight']	=$_POST['weight'][$key];
+			$loginfo['time']		=$_POST['time'][$key];
+			$loginfo=serialize($loginfo);
+			$checkSql="select * from ai_user_course_list where `uid`=$uid and `aid`=$aid and `group`=$group";
+			$checkData=$this->db->_query($checkSql);
+			if(empty($checkData)){
+				$insertSql="INSERT INTO ai_user_course_list (`id` ,`uid` ,`aid` ,`date` ,`loginfo` ,`create_time` ,`group`)
+						VALUES (NULL ,  '".$uid."',  '".$aid."',  '".$date."',  '".$loginfo."', '".time()."',  '".$group."')";
+				$this->db->_query($insertSql);
+			}else{
+				$updateSql="UPDATE ai_user_course_list SET  loginfo ='".$loginfo."',`create_time` = '".time()."' where  `uid`=$uid and `aid`=$aid and `group`=$group";
+				$this->db->_query($updateSql);
+			}
+		}
+		//print_r($_REQUEST);
+		exit ();
+	}
+	protected function checkUserId($uid){
+		if($uid==$_SESSION['mid']){
+			return true;
+		}else{			
+			die(40003);
+		}
+		exit();
 	}
 	public function setUserLogImg() {
 		$text = $_POST ['testString'];
@@ -130,7 +160,7 @@ class Ajax {
 		if (! empty ( $backImg )) {
 			$backImgSize = $this->getImgSize ( $backImg );
 			$simage = imagecreatefrompng ( $backImg ); // 读取我们的背景图片
-			                                       // imagecopy($img,$simage,0,0,0,0,466,313);
+			                                           // imagecopy($img,$simage,0,0,0,0,466,313);
 			imagecopy ( $img, $simage, 0, 0, 0, 0, $backImgSize [0], $backImgSize [1] );
 		}
 		
@@ -153,5 +183,5 @@ class Ajax {
 }
 
 $_CI = new Ajax ();
-$_CI->$_POST ['act'] ();
+$_CI->$_REQUEST ['act'] ();
 exit ();
