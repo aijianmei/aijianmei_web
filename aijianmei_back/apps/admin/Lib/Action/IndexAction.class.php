@@ -61,8 +61,8 @@ class IndexAction extends AdministratorAction {
         );
 		$menu['fitnesscourse'] 	=   array(
 				'健身动作管理'	=>	array(
-                '动作管理'	=>	U('admin/Course/addDaily'),
-                '动作分类管理'	=>	U('admin/Course/daily'),
+                '动作管理'	=>	U('admin/Course/actionList'),
+                '动作分类管理'	=>	U('admin/Course/CategoryPm'),
 				),
         );
 

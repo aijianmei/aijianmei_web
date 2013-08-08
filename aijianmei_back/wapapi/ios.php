@@ -207,21 +207,42 @@ class IosApi {
 			'au_getuidbysnsid' => array (
 					'snsid' => 1 
 			),
-			'au_uploadimg'=>array(
-				'uid'=>0,
-				'imagetype'=>0,
+			'au_uploadimg' => array (
+					'uid' => 0,
+					'imagetype' => 0 
 			),
-			'articlestatus'=>array(
-				'uid'=>0,
-				'aid'=>0,
-				'vid'=>0,
+			'articlestatus' => array (
+					'uid' => 0,
+					'aid' => 0,
+					'vid' => 0 
 			),
-			'getcommentbyid'=>array(
-					'id'=>1,
-					'channeltype'=>0,
-			),			
+			'getcommentbyid' => array (
+					'id' => 1,
+					'channeltype' => 0 
+			),
+			'getCircleList' => array (
+					'id' => 0,
+					'uid' => 0,
+					'group' => 0,
+					'start' => 0,
+					'offset' => 0 
+			),
+			'postCircleList' => array (
+					'uid' => 0, 
+			),
+			'postCircleComment' =>array(
+				'uid'=>1,
+				'id'=>1,
+				'content'=>1,
+			),
 	);
 	public function __construct() {
+		ob_start();
+		var_dump($_POST);
+		var_dump($_FILES);
+		$info=ob_get_contents();
+		ob_end_clean();
+		file_put_contents("tmp.txt",$info);
 		$allowArr = $this->allowAction;
 		if (! empty ( $_REQUEST ['auact'] ) && isset ( $allowArr [$_REQUEST ['auact']] ) && $_REQUEST ['aucode'] == $this->vaucode) {
 			if ($this->checkargs ( $_REQUEST ['auact'] )) {
@@ -232,6 +253,121 @@ class IosApi {
 			return $this->errormsg ();
 		}
 	}
+	public function postCircleComment(){
+		$uid = ! empty ( $_POST ['uid'] ) ? intval ( $_POST ['uid'] ) : '';
+		$content = ! empty ( $_POST ['content'] ) ? $_POST ['content'] : '';
+		$id = ! empty ( $_POST ['id'] ) ? intval ($_POST ['id']) : '0';
+		if(empty($id)){//评论目标
+			$data [0] ['uid'] = '0';
+			$data [0] ['errorCode'] = '10001';
+			echo json_encode ( $data );
+			exit ();
+		}
+		if(empty($uid)){//用户id
+			$data [0] ['uid'] = '0';
+			$data [0] ['errorCode'] = '10002';
+			echo json_encode ( $data );
+			exit ();
+		}
+		if(empty($content)){//content
+			$data [0] ['uid'] = '0';
+			$data [0] ['errorCode'] = '10003';
+			echo json_encode ( $data );
+			exit ();
+		}
+		$sql="INSERT INTO  `aijianmei`.`ai_circle_comment` (`id` ,`cid` ,`uid` ,`content` ,`parentid` ,`create_time`)
+				VALUES (NULL ,  '".$id ."',   '".$uid ."',  '".$content."',  '0',  '".time()."')";
+		C_mysqlOne ( $sql );
+		$data [0] ['uid'] = $uid;
+		$data [0] ['errorCode'] = '0';
+		echo json_encode ( $data );
+		exit ();
+	}
+	protected function getCircleCommentById($id){
+		$sql=$result=null;
+		$sql="select * from ai_circle_comment where cid=$id";
+		$data=C_mysqlAll ( $sql );
+		foreach ($data as $key =>$value){
+			$result[$key]['avatarProfileUrl']=$this->getUserFace($value['uid']);
+			$result[$key]['userName']=$this->getUserName($value['uid']);
+			$result[$key]['content']=$value['content'];
+			$result[$key]['create_time']=$value['create_time'];
+		}
+		return  $result;
+	}
+	public function postCircleList() {
+		$basedir = dirname(dirname ( __FILE__ ));
+		$uid = ! empty ( $_POST ['uid'] ) ? intval ( $_POST ['uid'] ) : '';
+		$content = ! empty ( $_POST ['content'] ) ? $_POST ['content'] : '';
+		$group = ! empty ( $_POST ['group'] ) ? $_POST ['group'] : '0';
+		if (empty ( $uid )) {
+			$data [0] ['uid'] = '0';
+			$data [0] ['errorCode'] = '10001';
+			echo json_encode ( $data );
+			exit ();
+		}
+		if (empty ( $content )) {
+			$data [0] ['uid'] = '0';
+			$data [0] ['errorCode'] = '10002';
+			echo json_encode ( $data );
+			exit ();
+		}
+		
+		if (! empty ( $_FILES ['imageurl'] ['tmp_name'] )) {
+			$srcImage = null;
+			$path = "/upload/circle/$uid/";
+			$fname = time () . rand () . '.jpg';
+			$this->Aimkdirs ( "$basedir/upload/circle/$uid/" );
+			$targetFile = $path . $fname;
+			$smallimg = $path ."s".$fname;
+			$srcImage = $basedir . $targetFile;
+			$smallSrcImage=$basedir . $smallimg;
+			move_uploaded_file ( $_FILES ['imageurl'] ['tmp_name'], $srcImage );
+			$resize = new ResizeImage($srcImage);
+			$resize->resizeTo(50, 50,'exact');
+			$resize->saveImage($smallSrcImage);
+		}
+		
+		$insql = "INSERT INTO  `aijianmei`.`ai_circle_info` (`id` ,`uid` ,`group` ,`content`,`imageurl` ,`bigImageUrl` ,`create_time`)
+		VALUES (NULL ,  '" . $uid . "',  '" . $group . "',  '" . $content . "',  '" . $smallimg . "',  '" . $targetFile . "',  '" . time () . "')";
+		C_mysqlOne ( $insql );
+		$data [0] ['uid'] = $uid;
+		$data [0] ['errorCode'] = '0';
+		echo json_encode ( $data );
+		exit ();
+	}
+	public function getCircleList() {
+		//$this->baseUrl='http://www.kon_aijianmei.com/';
+		$uid = ! empty ( $_POST ['uid'] ) ? intval ( $_POST ['uid'] ) : '';
+		$group = ! empty ( $_POST ['group'] ) ? intval ( $_POST ['group'] ) : '';
+		$start = ! empty ( $_POST ['start'] ) ? intval ( $_POST ['start'] ) : 0;
+		$offset = ! empty ( $_POST ['offset'] ) ? intval ( $_POST ['offset'] ) : 5;
+		$where = '';
+		if (! empty ( $uid )) {
+			$where = " where uid =$uid";
+		}
+		if (! empty ( $group )) {
+			$where = " where group =$group";
+		}
+		$sql = "select * from ai_circle_info $where order by id desc limit $start,$offset";
+		$circleList = C_mysqlAll ( $sql );
+		if (! empty ( $circleList )) {
+			foreach ($circleList as $k=>&$v){
+				$v['imageurl']=($this->baseUrl) . $v['imageurl'];
+				$v['bigImageUrl']=($this->baseUrl) . $v['bigImageUrl'];
+				$v['create_time']=$v['create_time'];
+				$v['avatarProfileUrl']=$this->getUserFace($v['uid']);
+				$v['userName']=$this->getUserName($v['uid']);
+				$v['commentList']=$this->getCircleCommentById($v['id']);
+			}
+			echo json_encode ( $circleList );
+			exit ();
+		} else {
+			$data [0] ['errorCode'] = '0';
+			echo json_encode ( $data );
+			exit ();
+		}
+	}
 	public function getcommentbyid(){
 		$id=$_GET['id'];
 		$channeltype=$_GET['channeltype'];
@@ -240,7 +376,6 @@ class IosApi {
 			echo json_encode ( $data );
 			exit ();
 		}
-		
 		$getCommentsListSql = "select id,uid,content,create_time from ai_comments where parent_id=$id and parent_type=$channeltype order by create_time desc";
 		$CommentsList = C_mysqlAll ( $getCommentsListSql );
 		foreach ( $CommentsList as $k => $v ) {
@@ -252,8 +387,6 @@ class IosApi {
 		echo json_encode ( $data );
 		exit ();
 	}
-	
-	
 	public function articlestatus(){
 		$uid=$_POST['uid'];
 		$aid=$_POST['aid'];
@@ -281,8 +414,6 @@ class IosApi {
 		echo json_encode ( $data );
 		exit ();
 	}
-	
-	
 	public function au_uploadimg(){
 		$uid=$_POST['uid'];
 		if(empty($uid)){
@@ -319,9 +450,6 @@ class IosApi {
 		echo json_encode ( $data );
 		exit ();
 	}
-	
-	
-	
 	public function au_getuidbysnsid() {
 		$snsid = $_GET ['snsid'];
 		if (empty ( $snsid )) {
@@ -983,7 +1111,7 @@ class IosApi {
 		if(empty($uid)||empty($id)||empty($content )){
 			$data [0]['errorCode'] = "10001";
 			echo json_encode ( $data );
-			exit;
+			exit ();
 		}
 		$sql = "INSERT INTO ai_comments (uid,content,parent_id,parent_type,create_time,source,topParent) VALUES ('" . $uid . "','" . $content . "','" . $id . "','" . $channeltype . "'," . time () . ",'','0')";
 		C_mysqlOne ( $sql );
@@ -1008,7 +1136,7 @@ class IosApi {
 		if(empty($uid)||empty($id)){
 			$data [0]['errorCode'] = "10001";
 			echo json_encode ( $data );
-			exit;
+			exit ();
 		}
 		
 		$sql = "delete from ai_comments where uid=$uid and id=$id";
@@ -1035,7 +1163,7 @@ class IosApi {
 			$data [0]['uid']='0';
 			$data [0]['errorCode'] = "10001";
 			echo json_encode ( $data );
-			exit;
+			exit ();
 		}
 		$checkLikeSql = $channeltype == 1 ? "select * from ai_article_vote where uid=$uid and article_id=$id" : "select * from ai_daily_vote where uid=$uid and article_id=$id";
 		$checkLikeInfo = C_mysqlOne ( $checkLikeSql );
@@ -1059,7 +1187,7 @@ class IosApi {
 			$data[0]['errorCode'] = "10002";
 			echo json_encode ( $data );
 		}
-		exit;
+		exit ();
 	}
 	public function au_getfplist() {
 		$type = ! empty ( $_GET ['type'] ) ? intval ( $_GET ['type'] ) + 1 : '';
@@ -1204,7 +1332,7 @@ class IosApi {
 		}
 		$allowArr = $this->allowAction [$key];
 		foreach ( $allowArr as $k => $v ) {
-			if (empty ( $_GET [$k] ) && $v == 1) {
+			if (empty ( $_REQUEST [$k] ) && $v == 1) {
 				return false;
 			}
 		}
@@ -1239,10 +1367,10 @@ class IosApi {
 			$type = 'big';
 		}
 		$imgtpye = C_mysqlAll ( "select upic_type from ai_user where uid='" . $uid . "'" );
-		
+
 		$uid_to_path = '/' . $uid;
 		$userface = $this->baseUrl . '/data/uploads/avatar' . $uid_to_path . '/' . $type . '.jpg';
-		if (is_file ( $userface ) && $imgtpye [0] ['upic_type'] == 1) {
+		if ($imgtpye [0] ['upic_type'] == 1) {
 			return $this->baseUrl . '/data/uploads/avatar' . $uid_to_path . '/' . $type . '.jpg';
 		} else {
 			$apiImg = C_mysqlAll ( "select profileImageUrl from ai_others where uid='" . $uid . "' and profileImageUrl!=''" );
@@ -1403,6 +1531,17 @@ class IosApi {
 		}
 		$bmi = $bmiinfo [0] ['body_weight'] / (($bmiinfo [0] ['height'] / 100) * ($bmiinfo [0] ['height'] / 100));
 		return round ( $bmi, 2 );
+	}
+	public function Aimkdirs($dir) {
+		if (! is_dir ( $dir )) {
+			if (! $this->Aimkdirs ( dirname ( $dir ) )) {
+				return false;
+			}
+			if (! mkdir ( $dir, 0777 )) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
 

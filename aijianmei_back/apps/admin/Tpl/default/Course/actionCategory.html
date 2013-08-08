@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>新增天天锻炼</title>
+<title>历程动作分类管理</title>
 </head>
 <link rel="stylesheet" href="Templates/admin/bootstrap.css">
 <link rel="stylesheet" href="Templates/admin/plugins-1.2.css">
@@ -86,11 +86,11 @@
             ids    = ids.toString();
     	}
     	if(ids=='') {
-    		ui.error('请先选择一个视频');
+    		ui.error('请先选择一个分类');
     		return ;
     	}
     	if(confirm('您将删除'+length+'条记录，删除后无法恢复，确定继续？')) {
-    		$.post("{:U('admin/Daily/doDeleteFitnessProgram')}",{ids:ids},function(res){
+    		$.post("{:U('admin/Course/doDeleteCategory')}",{ids:ids,table:'action_category_list'},function(res){
     			if(res=='1') {
     				ui.success('删除成功');
     				removeItem(ids);
@@ -124,32 +124,23 @@
 			});
 		}
 	}
-function newvideobox(){
-	var newhtml='<div class="control-group"><label class="control-label">排序<input type="text" class="span1" value="0" name="eq[]">所属计划<select name="channel[]"><option value="1">A</option><option value="2">B</option><option value="3">C</option><option value="4">D</option></select></label><div class="controls controls-row h100"><div class="fleft w70"><img src="Templates/admin/image_64x64_dark.png" class="alogimg img64" alt="点击编辑图片链接" title="点击编辑图片链接"><input name="imgLeft[]" value="" type="hidden"><input name="imgLeftUrl[]" imgurl=1 value="" type="hidden"><button type="button" class="w64 btn btn-danger p0 uploadimgbutton">upload</button></div><div class="fleft w70"><img src="Templates/admin/image_64x64_dark.png" class="alogimg img64" alt="点击编辑图片链接" title="点击编辑图片链接"><input name="imgRight[]" value="" type="hidden"><input name="imgRightUrl[]" imgurl=1  value="" type="hidden"><button type="button" class="w64 btn btn-danger p0 uploadimgbutton">upload</button></div><div class="fleft p0 w380"><label class="fleft p0 w70 mb0">视频标题</label><input class="w300" type="text" name="vtitle[]" placeholder="请输入视频标题"/><label class="fleft p0 w70 mb0">标题链接</label><input class="w300" type="text" name="vtitleurl[]" placeholder="请输入标题链接"/></div><div class="fleft p0"><textarea name="vtitlecontent[]" class="textarea-medium" rows="3.5" style="margin-left: 0px; margin-right: 0px; width: 267px;" placeholder="请输入简介内容"></textarea></div></div></div>';
-	$("#cloneBox").append(newhtml);
-	$.getScript("Templates/admin/script.js", function(data, textStatus, jqxhr) {});
-}
-$(function() {
-	$( "#datepicker" ).datepicker();
-	$( "#datepicker" ).datepicker( "option", "dateFormat","yy-mm-dd" );
-	$( "#datepicker" ).datepicker( "setDate","<?php if($article['gotime']!=''){echo $article['gotime'];}else{echo date("Y-m-d",time());} ?>" );
-});
+
+
 function newaddwindow(){
-	window.location.href='/index.php?app=admin&mod=Daily&act=addFitnessProgram';
+	window.location.href='/index.php?app=admin&mod=course&act=addCategory';
 }
 </script>
 <script type="text/javascript" src="Templates/admin/script.js" id="script"></script>
 <body style="clear:both; width:auto; padding:0px;">
-
-							<div class="fleft pagination pagination-centered"  style="margin:0px; padding:10px; width:100%;">
-							<button type="button"  class="fleft btn btn-danger" onclick="deleteAd();">DeleteAll</button>
-							<button  type="button"  class="fleft btn btn-danger" onclick="newaddwindow();" style=" margin-left:10px;">AddNew</button>
+<div class="fleft pagination pagination-centered"  style="margin:0px; padding:10px; width:100%;">
+<button type="button"  class="fleft btn btn-danger" onclick="deleteAd();">DeleteAll</button>
+<button  type="button"  class="fleft btn btn-danger" onclick="newaddwindow();" style=" margin-left:10px;">AddNew</button>
 								<ul style="float:right; margin-right:5%;">
 									{$pageArr['backstr']}
 									{$pageArr['thestr']}
 									{$pageArr['nextstr']}
-								</ul>
-							</div>
+									</ul>
+								</div>
 
 <div class="block-section">
 <table class="table table-bordered">
@@ -158,27 +149,21 @@ function newaddwindow(){
 <th class="span1 text-center"><input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0"></th>
 <th class="span1 text-center">#</th>
 <th>标题</th>
-<th class="hidden-phone">关键字</th>
-<th class="hidden-phone">二级页面信息</th>
-<th class="hidden-phone">创建时间</th>
-
+<th class="hidden-phone">上级分类</th>
 <th class="span1 text-center"><i class="icon-bolt"></i></th>
 </tr>
 </thead>
 <tbody>
-<volist id="vo" name="fitnessProgram">
-<tr overstyle='on' id="{$vo.id}">
-<td class="span1 text-center"><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
-<td class="span1 text-center">{$vo.id}</td>
-<td class="span3 text-center"><a target="blank" href="/fitnessProgram_{$id}.html">{$vo.title}</a></td>
-<td class="hidden-phone">{$vo.keyword}</td>
-<td class="hidden-phone"><php>if($vo['parentid']==0){</php><a href="{:U('admin/Daily/fitnessProgram',array('pid'=>$vo['id']))}" class="btn btn-mini btn-success">{$vo['parentId']}查看二级页面</a><php>}</php></td>
-<td class="hidden-phone">{$vo.create_time}</td>
+<volist id="vo" name="daily">
+<tr overstyle='on' id="{$vo.cid}">
+<td class="span1 text-center"><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.cid}"></td>
+<td class="span1 text-center">{$vo.cid}</td>
+<td class="span3 text-center"><a target="blank" href="/index-Index-daily-{$vo['cid']}.html">{$vo.name}</a></td>
+<td class="hidden-phone">{$vo.parentid}</td>
 <td class="span1 text-center">
 <div class="btn-group">
-<php>if($vo['parentid']==0){</php><a href="{:U('admin/Daily/addFitnessProgram',array('pid'=>$vo['id']))}" class="btn btn-mini btn-success">新增二级页面</a><php>}</php>
-<a href="{:U('admin/Daily/editFitnessProgram',array('id'=>$vo['id']))}" class="btn btn-mini btn-success">Edit</a>
-<a href="javascript:void(0)" onclick="deleteAd('{$vo.id}')"  class="btn btn-mini btn-danger" >Delete</a>
+<a href="{:U('admin/Course/editCategory',array('cid'=>$vo['cid']))}" class="btn btn-mini btn-success">Edit</a>
+<a href="javascript:void(0)" onclick="deleteAd('{$vo.cid}')"  class="btn btn-mini btn-danger" >Delete</a>
 </div>
 </td>
 </tr>
@@ -187,4 +172,5 @@ function newaddwindow(){
 </table>
 </div>
 </body>
+
 </html>
