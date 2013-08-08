@@ -36,9 +36,10 @@ $_actAllowArr=array(
 
 //addcslashes 
 function MooAddslashes($value) {
+	$value = preg_replace("/<[^><]*script[^><]*>/i",'',$value);
+	$value = preg_replace("/<[\/\!]*?[^<>]*?>/si",'',$value); 
 	return $value = is_array($value) ? array_map('MooAddslashes', $value) : addslashes($value);
 }
-
 
 if(!empty($_REQUEST['act'])&&!empty($_actAllowArr[$_REQUEST['act']]))
 {

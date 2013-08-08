@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新增动作分类</title>
+</head>
+<link rel="stylesheet" href="Templates/admin/bootstrap.css">
+<link rel="stylesheet" href="Templates/admin/plugins-1.2.css">
+<link rel="stylesheet" href="Templates/admin/themes.css">
+<!--编译器js start-->
+<script src="ckeditor/ckeditor.js"></script>
+<script src="ckeditor/sample.js"></script>
+<link rel="stylesheet" href="ckeditor/sample.css">
+<script type="text/javascript" src="ckfinder/ckfinder.js"></script>
+<!--编译器js end-->
+<link rel="stylesheet" href="widgets/datepicker/ui.css" />
+<script src="Templates/js/jquery.js"></script>
+<script src="widgets/datepicker/ui.js"></script>
+<link rel="stylesheet" href="Templates/admin/main-1.2.css">
+<link rel="stylesheet" href="Templates/admin/blue.css">
+<script type="text/javascript" src="Templates/admin/artDialog.min.js"></script>
+<style>
+.w300{width: 300px;}
+.w380{width: 400px;}
+.w350{width: 350px;}
+.h100{ height:100px;}
+.p0{padding: 0px;}
+.w64{width: 64px;}
+.w70{width: 70px;}
+.fleft{float:left;}
+.cred{color:red;}
+.ml15{margin-left: 15px;}
+.img64{ height:64px;width: 64px;}
+.mb0{margin-bottom:0px;}
+</style>
+
+<script type="text/javascript" src="Templates/admin/script.js" id="script"></script>
+<body style="clear:both; width:auto; padding:0px;">
+<form action="" method="post"  enctype="multipart/form-data">
+<div id="page-content" style="min-height: 605px;">
+<div class="block block-themed">
+	<div class="block-title"><h4>新增动作分类</h4></div>
+    	<div class="block-content">
+        	<div class="control-group">
+            	<label class="control-label cred" for="input-colorpicker">标题</label>
+            <div class="controls">
+				<input type="text" name="name" class="span2" placeholder="请输入标题(必填)">
+           	</div>
+        </div>
+        
+<div class="control-group">
+<label class="control-label cred" for="input-colorpicker-comp">上级分类</label>
+<div class="controls">
+<div class="input-append input-colorpicker color" data-color="#0072bc" id="cateBox">
+<select name="parentid" id="general-select">
+<option value="0" <php>if($list['parentid']==0){</php>selected="selected"<php>}</php>>无</option>
+<php>foreach ($cate as $key =>$value){</php>
+<option value="{$value['cid']}" <php>if($list['parentid']==$value['cid']){</php>selected="selected"<php>}</php>>{$value['name']}</option>
+<php>}</php>
+</select>
+</div>
+</div>
+
+
+</div>
+        
+        
+<div class="control-group">
+<label class="control-label cred" for="input-colorpicker">是否设置为默认分类<input name="recommend" type="checkbox" value="1" <php>if($list['recommend']==1){</php>checked<php>}</php> /></label>
+</div>
+
+</div>
+<div class="form-actions"><button type="submit" class="btn btn-success">Submit</button></div>
+</div>
+			</div>
+		</div>
+   </div>
+   </form>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+.riz_1, .riy_1, .rq_1, .ss_1, .xj_1, .sjsrk_1, .pm1_1, .pm2_1, .pm3_1, .pm4_1, .sjy_1, .sjz_1, .fz_1, .dqrq_1, .fz_2{
+	background: url(sprites.png) no-repeat;
+}
+
+.riz_1{
+	background-position: 0 0;
+	width: 21px;
+	height: 26px;
+}
+
+.riy_1{
+	background-position: -113px 0;
+	width: 25px;
+	height: 26px;
+}
+
+.rq_1{
+	background-position: -21px 0;
+	width: 92px;
+	height: 26px;
+}
+
+.ss_1{
+	background-position: 0 -150px ;
+	width: 30px;
+	height: 30px;
+}
+
+.xj_1{
+	background-position: -50px -151px ;
+	width: 30px;
+	height: 30px;
+}
+
+.sjsrk_1{
+	background-position: -32px -64px ;
+	width: 68px;
+	height: 24px;
+}
+
+.pm1_1{
+	background-position: -2px -223px ;
+	width: 27px;
+	height: 27px;
+}
+
+.pm2_1{
+	background-position: -151px -222px ;
+	width: 27px;
+	height: 27px;
+}
+
+.pm3_1{
+	background-position: -100px -223px ;
+	width: 27px;
+	height: 27px;
+}
+
+.pm4_1{
+	background-position: -50px -223px ;
+	width: 27px;
+	height: 27px;
+}
+
+.sjy_1{
+	background-position: -116px -72px ;
+	width: 6px;
+	height: 9px;
+}
+
+.sjz_1{
+	background-position: 0 -72px ;
+	width: 6px;
+	height: 9px;
+}
+
+.fz_1{
+	background-position: -1px -300px ;
+	width: 25px;
+	height: 39px;
+}
+
+.dqrq_1{
+	background-position: -121px -151px ;
+	width: 52px;
+	height: 27px;
+}
+
+.fz_2{
+	background-position: -51px -300px ;
+	width: 25px;
+	height: 39px;
+}
+

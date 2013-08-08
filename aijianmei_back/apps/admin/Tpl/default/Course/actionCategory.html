@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>历程动作分类管理</title>
+</head>
+<link rel="stylesheet" href="Templates/admin/bootstrap.css">
+<link rel="stylesheet" href="Templates/admin/plugins-1.2.css">
+<link rel="stylesheet" href="Templates/admin/themes.css">
+<!--编译器js start-->
+<script src="ckeditor/ckeditor.js"></script>
+<script src="ckeditor/sample.js"></script>
+<link rel="stylesheet" href="ckeditor/sample.css">
+<script type="text/javascript" src="ckfinder/ckfinder.js"></script>
+<!--编译器js end-->
+<link rel="stylesheet" href="widgets/datepicker/ui.css" />
+
+<script src="Templates/js/jquery.js"></script>
+<script type="text/javascript" src="public/js/common.js"></script>
+<script type="text/javascript" src="public/js/tbox/box.js"></script>
+<script src="widgets/datepicker/ui.js"></script>
+<link rel="stylesheet" href="Templates/admin/main-1.2.css">
+<link rel="stylesheet" href="Templates/admin/blue.css">
+<script type="text/javascript" src="Templates/admin/artDialog.min.js"></script>
+<style>
+.w300{width: 300px;}
+.w380{width: 400px;}
+.w350{width: 350px;}
+.h100{ height:100px;}
+.p0{padding: 0px;}
+.w64{width: 64px;}
+.w70{width: 70px;}
+.fleft{float:left;}
+.cred{color:red;}
+.ml15{margin-left: 15px;}
+.img64{ height:64px;width: 64px;}
+.mb0{margin-bottom:0px;}
+</style>
+<script>
+    //鼠标移动表格效果
+    $(document).ready(function(){
+        $("tr[overstyle='on']").hover(
+          function () {
+            $(this).addClass("bg_hover");
+          },
+          function () {
+            $(this).removeClass("bg_hover");
+          }
+        );
+    });
+    
+    function checkon(o){
+        if( o.checked == true ){
+            $(o).parents('tr').addClass('bg_on') ;
+        }else{
+            $(o).parents('tr').removeClass('bg_on') ;
+        }
+    }
+    
+    function checkAll(o){
+        if( o.checked == true ){
+            $('input[name="checkbox"]').attr('checked','true');
+            $('tr[overstyle="on"]').addClass("bg_on");
+        }else{
+            $('input[name="checkbox"]').removeAttr('checked');
+            $('tr[overstyle="on"]').removeClass("bg_on");
+        }
+    }
+
+    //获取已选择用户的ID数组
+    function getChecked() {
+        var ids = new Array();
+        $.each($('table input:checked'), function(i, n){
+            ids.push( $(n).val() );
+        });
+        return ids;
+    }
+    
+    function deleteAd(ids) {
+    	var length = 0;
+    	if(ids) {
+    		length = 1;
+    	}else {
+    		ids    = getChecked();
+    		length = ids[0] == 0 ? ids.length - 1 : ids.length;
+            ids    = ids.toString();
+    	}
+    	if(ids=='') {
+    		ui.error('请先选择一个分类');
+    		return ;
+    	}
+    	if(confirm('您将删除'+length+'条记录，删除后无法恢复，确定继续？')) {
+    		$.post("{:U('admin/Course/doDeleteCategory')}",{ids:ids,table:'action_category_list'},function(res){
+    			if(res=='1') {
+    				ui.success('删除成功');
+    				removeItem(ids);
+    			}else {
+    				ui.error('删除失败');
+    			}
+    		});
+    	}
+    }
+    
+    function removeItem(ids) {
+    	ids = ids.split(',');
+        for(i = 0; i < ids.length; i++) {
+            $('#'+ids[i]).remove();
+        }
+    }
+
+	function move(ad_id, direction) {
+		var baseid  = direction == 'up' ? $('#'+ad_id).prev().attr('id') : $('#'+ad_id).next().attr('id');
+		if(!baseid) {
+			direction == 'up' ? ui.error('已经是最前面了') : ui.error('已经是最后面了');
+		}else {
+			$.post("{:U('admin/Content/doAdOrder')}", {ad_id:ad_id, baseid:baseid}, function(res){
+				if(res == '1') {
+					//交换位置
+					direction == 'up' ? $('#'+ad_id).insertBefore('#'+baseid) : $("#"+ad_id).insertAfter('#'+baseid);
+					ui.success('保存成功');
+				}else {
+					ui.error('保存失败');
+				}
+			});
+		}
+	}
+
+
+function newaddwindow(){
+	window.location.href='/index.php?app=admin&mod=course&act=addCategory';
+}
+</script>
+<script type="text/javascript" src="Templates/admin/script.js" id="script"></script>
+<body style="clear:both; width:auto; padding:0px;">
+<div class="fleft pagination pagination-centered"  style="margin:0px; padding:10px; width:100%;">
+<button type="button"  class="fleft btn btn-danger" onclick="deleteAd();">DeleteAll</button>
+<button  type="button"  class="fleft btn btn-danger" onclick="newaddwindow();" style=" margin-left:10px;">AddNew</button>
+								<ul style="float:right; margin-right:5%;">
+									{$pageArr['backstr']}
+									{$pageArr['thestr']}
+									{$pageArr['nextstr']}
+									</ul>
+								</div>
+
+<div class="block-section">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th class="span1 text-center"><input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0"></th>
+<th class="span1 text-center">#</th>
+<th>标题</th>
+<th class="hidden-phone">上级分类</th>
+<th class="span1 text-center"><i class="icon-bolt"></i></th>
+</tr>
+</thead>
+<tbody>
+<volist id="vo" name="daily">
+<tr overstyle='on' id="{$vo.cid}">
+<td class="span1 text-center"><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.cid}"></td>
+<td class="span1 text-center">{$vo.cid}</td>
+<td class="span3 text-center"><a target="blank" href="/index-Index-daily-{$vo['cid']}.html">{$vo.name}</a></td>
+<td class="hidden-phone">{$vo.parentid}</td>
+<td class="span1 text-center">
+<div class="btn-group">
+<a href="{:U('admin/Course/editCategory',array('cid'=>$vo['cid']))}" class="btn btn-mini btn-success">Edit</a>
+<a href="javascript:void(0)" onclick="deleteAd('{$vo.cid}')"  class="btn btn-mini btn-danger" >Delete</a>
+</div>
+</td>
+</tr>
+</volist>
+</tbody>
+</table>
+</div>
+</body>
+
+</html>

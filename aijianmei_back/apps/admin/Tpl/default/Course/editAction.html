@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>编辑动作</title>
+</head>
+<link rel="stylesheet" href="Templates/admin/bootstrap.css">
+<link rel="stylesheet" href="Templates/admin/plugins-1.2.css">
+<link rel="stylesheet" href="Templates/admin/themes.css">
+<!--编译器js start-->
+<script src="ckeditor/ckeditor.js"></script>
+<script src="ckeditor/sample.js"></script>
+<link rel="stylesheet" href="ckeditor/sample.css">
+<script type="text/javascript" src="ckfinder/ckfinder.js"></script>
+<!--编译器js end-->
+<link rel="stylesheet" href="widgets/datepicker/ui.css" />
+<script src="Templates/js/jquery.js"></script>
+<script src="widgets/datepicker/ui.js"></script>
+<link rel="stylesheet" href="Templates/admin/main-1.2.css">
+<link rel="stylesheet" href="Templates/admin/blue.css">
+<script type="text/javascript" src="Templates/admin/artDialog.min.js"></script>
+<style>
+.w300{width: 300px;}
+.w380{width: 400px;}
+.w350{width: 350px;}
+.h100{ height:100px;}
+.p0{padding: 0px;}
+.w64{width: 64px;}
+.w70{width: 70px;}
+.fleft{float:left;}
+.cred{color:red;}
+.ml15{margin-left: 15px;}
+.img64{ height:64px;width: 64px;}
+.mb0{margin-bottom:0px;}
+</style>
+<script>
+function moreCateBox(){
+	var innerHtml=$("#cateBox").html();
+	innerHtml='<div class="controls"><div class="input-append input-colorpicker color" data-color="#0072bc">'+innerHtml+'</div></div>';
+	$("#cateBox").after(innerHtml);
+}
+function moreAttributeBox(){
+	var innerHtml=$("#attributeBox").html();
+	innerHtml='<div class="controls">'+innerHtml+'</div>';
+	$("#attributeBox").after(innerHtml);
+}
+function delAttribute(obj){
+	$(obj).parent().remove();
+}
+function delcateBox(obj){
+	$(obj).parent().remove();
+}
+function subform(){
+	$("#editActionForm").submit();
+}
+</script>
+<script type="text/javascript" src="Templates/admin/script.js" id="script"></script>
+<body style="clear:both; width:auto; padding:0px;">
+<form action="" method="post"  enctype="multipart/form-data" id="editActionForm">
+<div id="page-content" style="min-height: 605px;">
+<div class="block block-themed">
+	<div class="block-title"><h4>编辑动作</h4></div>
+    	<div class="block-content">
+        	<div class="control-group">
+            	<label class="control-label cred" for="input-colorpicker">动作名称</label>
+            <div class="controls">
+				<input type="text" name="name" class="span3" placeholder="请输入动作名称(必填)" value="{$actionInfo['name']}">
+           	</div>
+        </div>
+<div class="control-group">
+<label class="control-label cred" for="input-colorpicker-comp">上级分类<a onclick="moreCateBox();" style="margin-left:10px; font-size:16px;">更多分类</a></label>
+<php>foreach($cateList as $k => $v){</php>
+<div class="controls" id="cateBox">
+
+<select name="cid[]" id="general-select">
+<option value="0" <php>if($v==0){</php>selected="selected"<php>}</php>>无</option>
+<php>foreach ($cate as $key =>$value){</php>
+<option value="{$value['cid']}" <php>if($v==$value['cid']){</php>selected="selected"<php>}</php>>{$value['name']}</option>
+<php>}</php>
+</select>
+<a onclick="delcateBox(this);">删除</a>
+
+</div>
+<php>}</php>
+</div>
+        
+<div class="control-group">
+<label class="control-label cred" for="input-colorpicker">是否设置为默认分类<input name="recommend" type="checkbox" value="1" <php>if($list['recommend']==1){</php>checked<php>}</php> /></label>
+</div>
+
+<div class="control-group">
+	<label class="control-label cred" for="input-colorpicker">动作属性&nbsp;&nbsp;<a onclick="moreAttributeBox();" style="margin-left:10px; font-size:16px;">更多属性</a></label>
+    <php>foreach($attributeList as $k => $v){</php>
+    	<div class="controls" id="attributeBox">
+        	属性名称<input type="text" name="attribute_name[]" class="span2" placeholder="请输入属性名称" value="{$v['name']}">
+            &nbsp;&nbsp;属性单位<input type="text" name="attribute_unit[]" class="span2" placeholder="请输入单位" value="{$v['unit']}">
+            <a onclick="delAttribute(this);">删除</a>
+        </div>
+      <php>}</php> 
+</div>
+
+</div>
+<input name="subact" value="edit" type="hidden"/>
+<div class="form-actions">
+<button type="button" class="btn btn-success" onclick="subform();">Submit</button>
+</div>
+</div>
+			</div>
+		</div>
+   </div>
+   </form>
+</body>
+
+</html>
