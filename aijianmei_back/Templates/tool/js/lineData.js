@@ -1,4 +1,4 @@
-﻿var jsonurl='Templates/tool/js/lineData.json?4241';
+﻿var jsonurl='Templates/tool/json/lineData.json?4241';
 var gloData=[];
 (function getData(){
 	$.getJSON(jsonurl, function(data){
@@ -70,10 +70,10 @@ function joo(gloData,divid){
 		},
 		 grid: {
 			drawGridLines: true,        // wether to draw lines across the grid or not.
-			gridLineColor: 'none',    // *Color of the grid lines.
-			background: '#ffffff',      // CSS color spec for background color of grid.
-			borderColor: '#FFF',     // CSS color spec for border around grid.
-			borderWidth: 1.0,           // pixel width of border around grid.
+			gridLineColor: 'transparent',    // *Color of the grid lines.
+			background: 'transparent',      // CSS color spec for background color of grid.
+			borderColor: 'transparent',     // CSS color spec for border around grid.
+			borderWidth: 0,           // pixel width of border around grid.
 			shadow: false,               // draw a shadow for grid.
 			shadowAngle: 45,            // angle of the shadow.  Clockwise from x axis.
 			shadowOffset: 1.5,          // offset from the line of the shadow.

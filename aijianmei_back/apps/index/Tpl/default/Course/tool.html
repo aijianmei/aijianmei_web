@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title></title>
 		<link rel="stylesheet" href="Templates/tool/css/public.css">
 		<link rel="stylesheet" href="Templates/tool/css/tool.css" />
@@ -13,6 +13,7 @@
 		<script type="text/javascript" src="Templates/tool/js/jquery.jqplot.min.js"></script>
 		<script language="javascript" type="text/javascript" src="Templates/tool/js/jqplot.categoryAxisRenderer.js"></script>
 		<script language="javascript" type="text/javascript" src="Templates/tool/js/jqplot.highlighter.js"></script>
+		
 	</head>
 	
 	<body>
@@ -33,75 +34,96 @@
 								<span class="userLabel">减肥</span>
 							</div>
 						</div>
+						<div class="separateY"></div>
+
 						<div id="weight">
-							<form action=""  id="">
+							<form action="" method="post" >
 								<div class="weightPro">
 									<h3 class="partTit"><span>我的体重变化</span></h3>
 									<div class="progress">
 										<div class="innerPro"></div>
-										<span>46%</span>
+										<span class="percent">46%</span>
 										<p class="tip tipFont">这是您第一次录入数据，请先填入您的初始体重和目标体重吧！</p>
 									</div>
-									<div class="initWeight">85.0kg</div>
-									<div class="goalWeight">100.0kg</div>
+									<div class="initWeight"><span class="innerText">85kg</span></div>
+									<div class="goalWeight"><span class="innerText">100kg</span></div>
 								</div>
 								<div class="userInput clearfix">
 									<div class="input1">
-										<span class="redFont">原始体重<input type="text" value="85.0"/>Kg</span>
-										<span class="initDate redFont">2013.08.03</span>
+										<span class="redFont">原始体重<input type="text" value="85" id="initW" maxlength="5"/>Kg</span>
+										<span class="initDate redFont">2013-08-3</span>
 									</div>
 									<div class="input2">
-										<span class="greenFont">目标体重<input type="text" value="100.0"/>Kg</span>
+										<span class="greenFont">目标体重<input type="text" value="100" id="goalW" maxlength="5"/>Kg</span>
 									</div>
 									<div class="input3">
-										<div class="curWeight">90.0kg</div>
-										<span class="blueFont">当前体重<input type="text" value="90.0"/>Kg</span>
-										<span class="curDate blueFont">2013.08.01</span>
+										<div class="curWeight"><span class="innerText">90kg</span></div>
+										<span class="blueFont">当前体重<input type="text" value="90" id="curW" maxlength="5"/>Kg</span>
+										<span class="curDate blueFont">2013-08-1</span>
 									</div>
 								</div>
 								<div class="saveBtn">
-									<button class="save"></button>
+									<button class="save weiSaveBtn" type="button"></button>
 								</div>
 							</form>
 						</div>
 					</div>	
+					<div class="separateX"></div>
 					<div id="tipMsg">您的目标体重是<span class="yourGoal">60.0</span>公斤，距离目标还需要燃烧热量<span class="calorie">3434</span>大卡！为了您的理想健身，努力吧！</div>
 				</div><!--End weightManage-->
+				<div class="separateX"></div>
 				<div id="dataIn">
 					<ul class="actNav clearfix">
 						<li class="curAct">卧推<span></span></li>
-						<li class="">深蹲<span></span></li>
-						<li class="">卧推<span></span></li>
-						<li class="">深蹲减肥<span></span></li>
-						<li class="">卧推<span></span></li>
-						<li class="">深蹲<span></span></li>
-						<li class="">卧推<span></span></li>
-						<li class="">深蹲<span></span></li>
-						<li class="">卧推减肥<span></span></li>
-						<li class="">深蹲<span></span></li>
-						
+						<li>深蹲<span></span></li>
+						<li>俯卧撑<span></span></li>
+						<li>引体向上<span></span></li>
+						<li>快跑<span></span></li>
+						<li>箭步蹲<span></span></li>
+						<li>单臂哑铃前平举<span></span></li>
+						<li>V字挺身<span></span></li>
+						<li>低位拉力器臂弯举<span></span></li>
+						<li>深蹲<span></span></li>
 					</ul>
+					<button class="moreBtn"></button>
+					<div class="moreAct">
+						<div class="moreActCover"></div>
+						<div class="acts">
+							<p class="tip">选择您所做的动作来进行数据统计吧，让我们能更完整地给你提供准确的数据！</p>
+							<div class="actsArea clearfix">
+								<ul class="moreSider">
+								</ul>
+								<div class="moreRight clearfix">
+									<ul class="clearfix">
+									</ul>
+									<div class="preSelect"></div>
+									<div class="nextSelect"></div>
+								</div>
+								<button class="hideBtn">收起</button>
+							</div>
+							
+						</div>
+					</div>
 					<h3 class="partTit"><span>我的健身数据</span></h3>
 					<p class="tip greenFont">您目前的历程数据表为空，请根据自己实际情况选择动作名称！正式开启您的健身历程吧！</p>
 					<div class="clearfix">
 						<div class="dataLeft">
 							<div class="date">
-								<span class="preDate"></span>
-								<input type="text" id="datepicker" value="08/08/2013"/>
-								<span class="nextDate"></span>
+								<span class="preDate toggleDate"></span>
+								<input type="text" id="datepicker" class="calendar"/>
+								<span class="nextDate toggleDate"></span>
 							</div>
 							<ul class="dataTab">
-								<li class="list"><img src="Templates/tool/images/tool/rg2_1.jpg" alt="" /></li>
-								<li class="list"><img src="Templates/tool/images/tool/rj_1.png" alt="" /></li>
-								<li class="list"><img src="Templates/tool/images/tool/rj_1.png" alt="" /></li>
+								<li class="list"><img src="Templates/tool/images/tool/scar1.png" alt="" /><span class="cover"  style="display:none;"></span></li>
+								<li class="list"><img src="Templates/tool/images/tool/pic.png" alt="" /><span class="cover"></span></li>
+								<li class="list"><img src="Templates/tool/images/tool/rj_1.png" alt="" /><span class="cover"></span></li>
 							</ul>
 						</div>
-
 						<div class="dataRight">
-							<div class="userTable userArea">
-								<form action="" id="dataForm" name="dataForm" method="post">
+							<div class="userTable userArea" >
+								<form action="" id="dataForm" >
 									<div class="thead clearfix">
-										<div class="col1 col">杠铃卧推<span class="rowTip">2013.09.09</span></div>
+										<div class="col1 col">杠铃卧推<span class="rowTip dateContentVar"><?php echo date('Y.m.d',time())?></span></div>
 										<div class="col2 col">数量<span class="rowTip">以往平均值：<strong>55</strong>个</span></div>
 										<div class="col3 col">重量<span class="rowTip">以往平均值：<strong>65</strong>kg</span></div>
 										<div class="col4 col">时间<span class="rowTip">以往平均值：<strong>65</strong>s</span></div>
@@ -111,17 +133,17 @@
 											<div class="col1 col">第一组</div>
 											<div class="col2 col">
 												<span class="cut"></span>
-												<input type="text" value="0" name="nums[]" id="nums[]" class="figure"/>
+												<input type="text" value="0" name="nums[]" class="figure"/>
 												<span class="add"></span>
 											</div>
 											<div class="col3 col">
 												<span class="cut"></span>
-												<input type="text" value="0" name="weight[]" id="weight[]" class="figure"/>
+												<input type="text" value="0" name="weight[]" class="figure"/>
 												<span class="add"></span>
 											</div>
 											<div class="col4 col">
 												<span class="cut"></span>
-												<input type="text" value="0" name="time[]" id="time[]" class="figure"/>
+												<input type="text" value="0" name="time[]" class="figure"/>
 												<span class="add"></span>
 											</div>
 										</div>
@@ -129,17 +151,17 @@
 											<div class="col1 col">第二组</div>
 											<div class="col2 col">
 												<span class="cut"></span>
-												<input type="text" value="0" name="nums[]" id="nums"class="figure"/>
+												<input type="text" value="0" name="nums[]" class="figure"/>
 												<span class="add"></span>
 											</div>
 											<div class="col3 col">
 												<span class="cut"></span>
-												<input type="text" value="0" name="weight[]" id="weight[]" class="figure"/>
+												<input type="text" value="0" name="weight[]" class="figure"/>
 												<span class="add"></span>
 											</div>
 											<div class="col4 col">
 												<span class="cut"></span>
-												<input type="text" value="0" name="time[]" id="time[]" class="figure"/>
+												<input type="text" value="0" name="time[]" class="figure"/>
 												<span class="add"></span>
 											</div>
 										</div>
@@ -147,17 +169,17 @@
 											<div class="col1 col">第三组</div>
 											<div class="col2 col">
 												<span class="cut"></span>
-												<input type="text" value="0" name="nums[]" id="nums"class="figure"/>
+												<input type="text" value="0" name="nums[]" class="figure"/>
 												<span class="add"></span>
 											</div>
 											<div class="col3 col">
 												<span class="cut"></span>
-												<input type="text" value="0" name="weight[]" id="weight[]" class="figure"/>
+												<input type="text" value="0" name="weight[]" class="figure"/>
 												<span class="add"></span>
 											</div>
 											<div class="col4 col">
 												<span class="cut"></span>
-												<input type="text" value="0" name="time[]" id="time[]" class="figure"/>
+												<input type="text" value="0" name="time[]" class="figure"/>
 												<span class="add"></span>
 											</div>
 										</div>
@@ -173,40 +195,116 @@
 										<div class="col1 col">平均值</div>
 										<div class="col2 col">
 											<span class="cut"></span>
-											<input type="text" value="20" class="figure"/>
+											<input type="text" value="20" id="averageNums" class="figure"/>
 											<span class="add"></span>
 										</div>
 										<div class="col3 col">
 											<span class="cut"></span>
-											<input type="text" value="30" class="figure"/>
+											<input type="text" value="30" id="averageWeight" class="figure"/>
 											<span class="add"></span>
 										</div>
 										<div class="col4 col">
 											<span class="cut"></span>
-											<input type="text" value="40" class="figure"/>
+											<input type="text" value="40" id="averageNums" class="figure"/>
 											<span class="add"></span>
 										</div>
 									</div>
 									<div class="tFooter clearfix">
-										<div class="col1 col"><button class="save" type="button" id="addItemsList"></button></div>
+										<div class="col1 col"><button class="save" id="addItemsList" type="button"></button></div>
 										<div class="col2 col"><img src="Templates/tool/images/tool/ss_1.png" alt="Rise" class="rise" /></div>
 										<div class="col3 col"><img src="Templates/tool/images/tool/xj_1.png" alt="Decline" class="decline" /></div>
 										<div class="col4 col"><img src="Templates/tool/images/tool/ss_1.png" alt="Rise" class="rise" /></div>
 									</div>
 								</form>
-							</div>
-							<div class="userPic userArea"></div>
-							<div class="userNote userArea"></div>
+							</div><!--End userTable-->
+							<div class="userPic userArea" style="display:none;">
+								<!-- <div class="uploadTip"><a href="">点击上传图片</a></div> -->
+								<div class="uploadArea">
+									<div id="gla">
+										<div id="gla_box">
+											
+											<ul>
+												<li>
+													<div class="gla_inbox">
+														<img src="Templates/tool/images/1.jpg" />
+													</div>
+												</li>
+												<li>
+													<div class="gla_inbox">
+														<img src="Templates/tool/images/3.jpg" />
+													</div>
+												</li>
+												<li>
+													<div class="gla_inbox">
+														<img src="Templates/tool/images/4.png" />
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<!-- <img src="images/tool/pic.png" alt="UploadPicture" />
+									<div class="uploadCover"></div>
+									<div class="clickUpload">点击上传图片</div>
+									<form action="" method="post" id="imageUpload" style="display:none;">
+									<input type="file" name="img" id="img">
+									</form>
+									<script>
+									$(".clickUpload").click(function (){
+										$("#img").click();
+									});
+									</script> -->
+								</div>
+							</div><!--End userPic-->
+							<div class="userNote userArea" style="display:none;">
+								<form action="">
+									<div class="writeArea">
+										<div><textarea name="write" id="write" maxlength="180" autofocus></textarea></div>
+										<div><button class="writeSub"></button></div>
+									</div>
+								</form>
+								
+							</div><!--End userNote-->
 						</div><!--dataRight-->
 					</div>
 				</div><!--End dataIn-->
-				<div id="dataOut">
+				<div class="separateX"></div>
+				<div id="dataOut" class="clearfix">
 					<h3 class="partTit"><span>曲线变化图</span></h3>
 					<p class="tip  greenFont">这是您录入的健身数据所生产的曲线图。健身心情、历程图片、数据变化，在这里，每天的进步一目了然！</p>
-					<button class="t2" style="width:20px;height:20px;"></button>
-					<div id="line1" style="height:300px;width:900px;"></div>
+					<div class="chart">
+						<div class="clearfix">
+							<div class="date">
+								<span class="preDate toggleDate"></span>
+								<input type="text" id="datepicker2" class="calendar"/>
+								<span class="nextDate toggleDate"></span>
+							</div>
+							<ul class="chartDate clearfix">
+								<li class="chartSelect curChart">7天</li>
+								<li class="chartSelect">30天</li>
+								<li class="chartSelect">一年</li>
+							</ul>
+							<div class="colorTip clearfix">
+								<span class="greenLine">数量</span>
+								<span class="blueLine">重量</span>
+								<span class="redLine">时间</span>
+							</div>
+						</div>
+						<div id="line1" style="height:280px;width:880px;"></div>
+					</div>
+					<div class="sider">
+						<ul class="siderBtn">
+							<li class="chartBtn curGroup">1</li>
+							<li class="chartBtn">2</li>
+							<li class="chartBtn">3</li>
+							<li class="chartBtn">4</li>
+							<li class="chartBtn">5</li>
+							<li class="chartBtn">6</li>
+							<li class="chartBtn">7</li>
+						</ul>
+					</div>
 				</div><!--End dataOut-->
-				<div class="clearfix">
+				<div class="separateX"></div>
+				<div class="bottomRank clearfix">
 					<h3 class="partTit"><span>站内排行榜</span></h3>
 					<p class="tip  greenFont">您在爱健美网的健身排名，赶紧瞧瞧自己排在哪里吧！</p>
 					<div class="ranking">
@@ -222,7 +320,7 @@
 								<div class="userPos">
 									<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
 									<a href="" class="rankName">要减肥</a>
-									<span class="yourPos">您当前的排名是<span class="userPos">2333</span>位</span>
+									<span class="yourPos">您当前的排名是<span class="userPos redFont">2333</span>位</span>
 								</div>
 								<ul class="topTen">
 									<li>
@@ -292,7 +390,7 @@
 								<div class="userPos">
 									<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
 									<a href="" class="rankName">要减肥</a>
-									<span class="yourPos">您当前的排名是<span class="userPos">2333</span>位</span>
+									<span class="yourPos">您当前的排名是<span class="userPos redFont">2333</span>位</span>
 								</div>
 								<ul class="topTen">
 									<li>
@@ -354,25 +452,104 @@
         </div>
 		<script type="text/javascript" src="Templates/tool/js/public.js"></script>  
 		<script type="text/javascript" src="Templates/tool/js/jquery-ui.js"></script>
-		<script type="text/javascript" src="Templates/tool/js/lineData.js?123"></script>
+		<script type="text/javascript" src="Templates/tool/js/lineData.js"></script>
+		<script type="text/javascript" src="Templates/tool/js/tool.js"></script>
+		<script type="text/javascript" src="Templates/tool/js/jquery.corner.js"></script>
+		<script type="text/javascript" src="Templates/tool/js/jquery.roundabout.js"></script>
+		<script type="text/javascript" src="Templates/tool/js/jquery.roundabout-shapes.js"></script>
 		<script type="text/javascript">
-			var userId=<?php echo $_SESSION['mid'];?>;
+			var userId=<?php echo $_SESSION['mid']>0 ? $_SESSION['mid'] : 0; ?>;
 			var actionId=1;
-			$( "#datepicker" ).datepicker();
+			var dateString='';
+			var dateContentVar="<?php echo date('Y.m.d',time())?>";
+			$("#datepicker ").change(function (){
+				dateContentVar=$("#datepicker").val();
+				dateContentVar=dateContentVar.replace(/-/g, ".");
+				$(".dateContentVar").html(dateContentVar);
+				getCourseData(dateContentVar);
+			});
+			$(".nextDate,.preDate").click(function (){
+				dateContentVar=$("#datepicker").val();	
+				dateContentVar=dateContentVar.replace(/-/g, ".");
+				$(".dateContentVar").html(dateContentVar);
+				getCourseData(dateContentVar);
+			});
+
+			function getCourseData(dateContentVar){
+					var ajaxCallUrl='/libpack/aiAjaxClass.php?act=getCourseInfo&uid='+userId+'&aid='+actionId+'&date='+dateContentVar;
+					$.ajax({
+						   type: "POST",
+						   url:ajaxCallUrl,
+						   data:$('#dataForm').serialize(),// 要提交的表单
+						   dataType:'json',
+						   success: function(msg) {
+							   console.log(msg);
+							   if(msg){
+								   var countNums,countWeight,countTime;
+								   for(i=0;i<msg.length;i++){
+										var newdata=msg[i].loginfo;
+										countNums+=newdata.nums;
+										countWeight+=newdata.weight;
+										countTime+=newdata.time;
+									  	$(".tBody").find('.actGroup').eq(i).find('input').eq(0).val(newdata.nums);
+									 	$(".tBody").find('.actGroup').eq(i).find('input').eq(1).val(newdata.weight);
+									  	$(".tBody").find('.actGroup').eq(i).find('input').eq(2).val(newdata.time);
+									  }
+								  }else{
+									  for(i=0;i<3;i++){
+										countNums+=0;
+										countWeight+=0;
+										countTime+=0;
+									  	$(".tBody").find('.actGroup').eq(i).find('input').eq(0).val(0);
+									 	$(".tBody").find('.actGroup').eq(i).find('input').eq(1).val(0);
+									  	$(".tBody").find('.actGroup').eq(i).find('input').eq(2).val(0);
+									  }
+								  }
+							   }
+					});
+			}			
+			
+			
 			$( "#addItemsList" ).click(function (){
-					if(userId > 0){
-						var ajaxCallUrl='/libpack/aiAjaxClass.php?act=postUserCourseInfo&uid='+userId+'&aid='+actionId;
-						$.ajax({
-							   type: "POST",
-							   url:ajaxCallUrl,
-							   data:$('#dataForm').serialize(),// 要提交的表单
-							   success: function(msg) {alert(msg);}
-							   });
+				if(userId > 0){
+					var ajaxCallUrl='/libpack/aiAjaxClass.php?act=postUserCourseInfo&uid='+userId+'&aid='+actionId+'&date='+dateContentVar;
+					$.ajax({
+						   type: "POST",
+						   url:ajaxCallUrl,
+						   data:$('#dataForm').serialize(),// 要提交的表单
+						   success: function(msg) {
+							  	alert('保存成功');
+							  }
+						   });
 					}else{
 						$(".login").click();	
 					}
 			});
-
-		</script>
+			$(function(){
+						var innerVal = $(input).val();		
+		innerVal += "kg";
+		$(show).find(".innerText").text(innerVal);
+		progress();	   
+				$('.gla_inbox').corner('8px');
+				
+				$('#gla_box>ul').roundabout({
+					minOpacity:1,
+					btnNext: ".next",
+					duration: 1000,
+					reflect: true,
+					btnPrev: '.prev',
+					autoplay:false,
+					autoplayDuration:5000,
+					tilt:0,
+					shape: 'figure8'
+				});
+				
+				$().click(function (){
+					var targetUrl='/libpack/aiAjaxClass.php';				
+										
+				});
+				
+			});
+			</script>
 	</body>
 </html>

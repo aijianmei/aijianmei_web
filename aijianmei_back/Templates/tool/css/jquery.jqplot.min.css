@@ -11,10 +11,17 @@
 	font-size:.75em;
 }
 
-.jqplot-xaxis
-{
-	margin-top:10px;
+/********x÷·—˘ Ω***********/
+.jqplot-axis{
+	margin-top:0;
+	background:#A7DDFE;
+	color:white;
+	font-size:20px;
+	font-weight:bold;
+	padding: 2px 0;
+	line-height: 30px;
 }
+
 
 .jqplot-x2axis
 {

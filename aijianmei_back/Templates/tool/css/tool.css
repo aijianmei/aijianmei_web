@@ -46,7 +46,17 @@ input,button,select,textarea{outline:none}
 	#userInfo{
 		width:200px;
 		float:left;
-		border-right:2px solid white;
+	}
+	.separateY{
+		width:2px;
+		height: 320px;
+		float: left;
+		background:url(../images/tool/shu.jpg) repeat-y;
+	}
+	.separateX{
+		height: 2px;
+		margin-top: 10px;
+		background:url(../images/tool/heng.jpg) repeat-x;
 	}
 		.userFace{
 			width:180px;
@@ -58,9 +68,14 @@ input,button,select,textarea{outline:none}
 			margin:10px 0;
 			color:#666;
 			font-size:16px;
+			font-family:"宋体";
+			text-decoration:none;
+		}
+		.userName:hover{
+			text-decoration:underline;
 		}
 		.userIntro{
-			max-height:48px;
+			max-height:44px;
 			line-height:22px;
 			margin-bottom:10px;
 			padding-right:20px;
@@ -91,7 +106,7 @@ input,button,select,textarea{outline:none}
 			background:#e8eee1;
 		}
 			.progress{
-				width:407px;
+				width: 399px;
 				height:28px;
 				margin:0 auto;
 				padding:4px;
@@ -99,6 +114,7 @@ input,button,select,textarea{outline:none}
 			}
 				.progress  .innerPro{
 					height:20px;
+					width:46%;
 					margin-right: 8px;					
 					border-radius: 6px;
 					background:url(../images/tool/progress.jpg) repeat-x;
@@ -135,6 +151,11 @@ input,button,select,textarea{outline:none}
 				height:175px;
 				right:-63px;
 				background:url(../images/tool/sprites1.png) no-repeat -167px -250px;
+			}
+			.innerText{
+				display:block;
+				width:135px;
+				text-align:center;
 			}
 		.userInput{
 			position:relative;
@@ -175,14 +196,14 @@ input,button,select,textarea{outline:none}
 					height:135px;
 					margin:0 auto;
 					background:url(../images/tool/sprites1.png) no-repeat -341px -252px;
-					padding-left:15px;
+				
 					line-height: 135px;	
 					font-weight:bold;
 					font-size:30px;
 					color:white;
 					text-shadow:0 -1px 1px rgba(0, 0, 0, 0.5);
 				}
-					.input3 span{
+					.input3 .blueFont{
 						position: absolute;
 						top: 53px;
 						left: 165px;
@@ -212,9 +233,127 @@ input,button,select,textarea{outline:none}
 		#tipMsg span{
 			font-size:40px;
 		}
-
+	#dataIn,#dataOut,.bottomRank{
+		margin:20px 0;
+	}
+	#dataIn{
+		position:relative;
+	}
+		
+		.moreBtn{
+			position:absolute;
+			top:5px;
+			right:10px;
+			width:53px;
+			height:30px;
+			background:url(../images/tool/more.png) no-repeat;
+		}
+		
+		.moreAct{
+			position:absolute;
+			width:960px;
+			height:416px;
+			display:none;
+		}
+		.actsArea{
+			margin-top:20px;
+		}
+		.moreActCover{
+			position: absolute;
+			width: 958px;
+			height: 414px;
+			background: #000;
+			border:1px solid #56a9e4;
+			z-index: 999;
+			opacity: 0.5;
+			filter:alpha(opacity=50);
+		}
+		.acts{
+			position:absolute;
+			width:900px;
+			height:356px;
+			margin:0 30px;
+			z-index:1000;
+			font-size:16px;
+			color:white;
+			font-weight:bold;
+		}
+			.acts .tip{
+				color:white;
+				font-size:20px;
+				font-weight:bold;
+				text-align:center;
+			}
+			.moreSider{
+				width: 98px;
+				border: 2px solid #fff;
+				float: left;
+				margin-right:30px;
+				background: #83CAFD;
+				border-radius: 4px;
+			}
+				.moreSider .moreList{
+					margin: 10px 5px;
+					text-align: center;
+					cursor: pointer;
+					height: 24px;
+					line-height:24px;
+				}
+				.moreSider .curList{
+					background:#69a2ca;
+				}
+			.moreRight{
+				float: left;
+				width: 766px;
+				height: 280px;
+				position:relative;
+			}
+			.moreRight ul{
+				width:700px;
+				height:280px;
+				overflow:hidden;
+				margin:0 auto;
+			}
+				.moreRight .showList{
+					float:left;
+					margin:7px 16px;
+					_margin-left:8px;
+					background:#56A9E4;
+					border:2px solid #fff;
+					border-radius:4px;
+					text-align:center;
+					padding:10px;
+					cursor:pointer;
+				}
+				.moreRight .preSelect,.moreRight .nextSelect{
+					width:40px;
+					height:80px;
+					cursor:pointer;
+				}
+				.moreRight .preSelect{
+					background:url(../images/tool/turn_left.png) no-repeat;
+					position: absolute;
+					top: 40%;
+				}
+				.moreRight .nextSelect{
+					background:url(../images/tool/turn_right.png) no-repeat;
+					position:absolute;
+					top:40%;
+					right:0;
+				}
+			.hideBtn{
+				float: right;
+				margin-top: 30px;
+				background: none;
+				color: white;
+				font-weight: bold;
+				font-size: 30px;
+			}
 			.actNav{
-				width: 100%;
+				width: 890px;
+				height: 36px;
+				padding-right: 70px;
+				overflow: hidden;
 				background: #56A9E4;
 			}
 			.actNav li{
@@ -261,7 +400,7 @@ input,button,select,textarea{outline:none}
 					height:26px;
 					margin:10px;
 				}
-					.date .preDate,.date .nextDate,#datepicker{
+					.date .preDate,.date .nextDate,#datepicker,#datepicker2{
 						position:absolute;
 						height:26px;
 					}
@@ -270,7 +409,7 @@ input,button,select,textarea{outline:none}
 						background:url(../images/tool/sprites2.png) no-repeat 0 0;
 						cursor:pointer;
 					}
-					#datepicker{
+					#datepicker,#datepicker2{
 						width:92px;
 						left:21px;
 						background:url(../images/tool/sprites2.png) no-repeat -21px 0;
@@ -287,14 +426,29 @@ input,button,select,textarea{outline:none}
 					margin:10px;
 				}
 					.dataTab .list{
+						position:relative;
 						height:90px;
 						margin-bottom:7px;
+						cursor:pointer;
 					}
 					.dataTab .list img{
 						width:134px;
 						height:90px;
-						border-radius:8px;
+						border-radius:6px;
 					}
+					.list .cover{
+						position: absolute;
+						top: 0;
+						display: block;
+						width: 134px;
+						height: 90px;
+						background: #000;
+						border-radius:6px;
+						opacity:0.5;
+						filter:alpha(opacity=50);
+						
+					}
+					
 			.dataRight{
 				float:right;
 				width:790px;
@@ -359,6 +513,10 @@ input,button,select,textarea{outline:none}
 						.actGroup .col{
 							position:relative;
 						}
+							.col1{
+								color:#333;
+								font-family:"微软雅黑";
+							}
 							.actGroup .col .cut,.actGroup .col .figure,.actGroup .col .add{
 								position:absolute;
 							}
@@ -401,9 +559,133 @@ input,button,select,textarea{outline:none}
 							display:inline-block;
 							float:none;
 						}
-						
-		
-		
+	.uploadArea,.writeArea{
+		position:relative;
+		width: 768px;
+		height: 320px;
+		margin: 0 auto;
+		margin-top: 20px;
+	}
+		.uploadArea img{
+			max-width:460px;
+			max-height:320px;
+			cursor: pointer;
+		}
+		.uploadCover{
+			width: 436px;
+			height: 288px;
+			position: absolute;
+			top: 10px;
+			background: #000;
+			opacity: 0.5;
+			filter:alpha(opacity=50);
+			left: 12px;	
+			display:none;
+		}
+		.clickUpload{
+			position: absolute;
+			top: 0;
+			color: white;
+			cursor: pointer;
+			width: 460px;
+			height: 100%;
+			width: 100%;
+			text-align: center;
+			line-height: 320px;
+			display:none;
+		}
+	.writeArea{
+		background:url(../images/tool/write.png) no-repeat;
+	}
+		.writeArea div{text-align:center;}
+		#write{
+			resize: none;
+			width: 390px;
+			height: 200px;
+			margin-top:30px;
+			margin-bottom:10px;
+			line-height: 26px;
+			color:#007CCA;
+			text-indent: 2em;
+			outline: 0;
+			border: 0;
+			background:none;
+		}
+		.writeSub{
+			width:390px;
+			height:40px;
+			background:url(../images/tool/writeSub.png) no-repeat;
+		}
+	
+		.chart{
+			float:left;
+			background:#eaeaea;
+			border: 2px solid white;
+			width: 880px;
+			height: 325px;	
+		}
+			.chart .date{
+				float:left;
+				width:140px;
+			}
+			.chartDate,.colorTip{
+				float: left;
+				width: 200px;
+				height: 26px;
+				margin: 10px 20px 0 20px;
+			}
+				.chartSelect,.colorTip span{
+					float:left;
+					width:52px;
+					height:22px;
+					margin-right:10px;
+					border-radius:4px;
+					background:#D9D9D9;
+					color:white;
+					line-height:22px;
+					text-align:center;
+					cursor:pointer;
+					
+				}
+				.curChart{
+					padding-bottom:5px;
+					background:url(../images/tool/sprites2.png) no-repeat -121px -151px;
+				}
+				.colorTip span{
+					cursor:default;
+				}
+				.colorTip .greenLine{
+					background:#34BE4E;
+				}
+				.colorTip .blueLine{
+					background:#1B52C1;
+				}
+				.colorTip .redLine{
+					background:#FE3400;
+				}
+		.sider{
+			width:25px;
+			float:right;
+			margin:30px 10px 0 0;
+			_margin-right:5px;
+		}
+			.sider .chartBtn{
+				width:25px;
+				height:39px;
+				background:url(../images/tool/sprites2.png) -1px -300px no-repeat;
+				text-align:center;
+				line-height:39px;
+				color:#929292;
+				font-weight:bold;
+				text-shadow:1px 1px 1px #fff;
+				font-size:16px;
+				cursor:pointer;
+			}
+			.sider .curGroup{
+				background:url(../images/tool/sprites2.png) no-repeat -51px -300px;
+			}
+	
+
 	.ranking{
 		width:256px;
 		float:left;
@@ -515,8 +797,22 @@ input,button,select,textarea{outline:none}
 						background:url(../images/tool/sprites2.png) no-repeat -100px -223px;					
 					}
 		
-		
-		
+/* gla */
+#gla{margin:0 auto;position:relative;overflow:hidden;}
+#gla_box{width:700px;margin:auto;position:relative;}
+#gla_box .prev,#gla_box .next{display:block;z-index:100;overflow:hidden;cursor:pointer;position:absolute;width:52px;height:52px;top:171px;}
+#gla_box .prev{background:url(images/btn.png) left bottom no-repeat;left:-155px}
+#gla_box .next{background:url(images/btn.png) right bottom no-repeat;right:-140px} 
+#gla_box .prev:hover{background-position:left top;}
+#gla_box .next:hover{background-position:right top;}
+.gla_inbox{overflow:hidden;position:relative;}
+.gla_inbox p{text-indent:1em;font-size:14px;width:100%;color:#FFFFFF;line-height:30px;background:#000000;}
+.gla_inbox a{padding:5px;display:block;position:absolute;top:220px;left:90px;background:#0066CC;color:#FFF;}
+.gla_inbox img{width:100%;height:100%;}
+.roundabout-holder{height:320px;width:700px;}
+.roundabout-moveable-item{display:block;height:300px;width:450px;cursor:pointer;}
+.roundabout-in-focus{cursor:auto;}		
+.roundabout-in-focus img{width:450px;height:300px;}
 		
 		
 		

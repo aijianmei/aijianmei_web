@@ -74,8 +74,8 @@ class NutriAction extends Action {
     }
     public function index()
     {
-    	$pg=$_GET['pg']?$_GET['pg']:1;
-				$nums=5;
+        $pg=$_GET['pg']?$_GET['pg']:1;
+		$nums=5;
         $this->assign('cssFile', 'training');
         $map['channel'] = '3';
         $cate = M('article_category')->where($map)->findAll();
@@ -94,12 +94,12 @@ class NutriAction extends Action {
         $this->assign('categories', $parent);
         //$this->display();
 		
-			if($_GET['pg']>0){
-				$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
-				$pglimit=intval($_GET['pg']);
-			}else{
-				$pglimit=$pg=1;
-			}
+		if($_GET['pg']>0){
+			$pg=intval($_GET['pg'])+intval($_GET['pg'])-1;
+			$pglimit=intval($_GET['pg']);
+		}else{
+			$pglimit=$pg=1;
+		}
 		
 		
         //assign hotArticles
@@ -178,20 +178,23 @@ class NutriAction extends Action {
     $hotArticles = D('Article')->getArticlesListType($order,$id,($pglimit-1)*20,$nums,3);
     //print_r( $hotArticles);
 		$this->assign('hotArticlespage', $pagerArray);
-		$this->assign('hotArticles', $hotArticles);
+        $this->assign('hotArticles', $hotArticles);
         
 		
 		$pagerData=$this->pageHtml($countInfo[0]['cnums'],20,$pglimit,"/index.php?app=index&mod=Nutri&act=articleList&id=$id&ctype=1&pg=");
 		$pagerArray = $pagerData['html'];
-	
-    $order = 'create_time';
+        //assign lastArticles		
+        $order = 'create_time';
 		//$lastArticles = D('Article')->getTrainArticles($order);
     $lastArticles = D('Article')->getArticlesListType($order,$id,($pglimit-1)*20,$nums,3);
 		$this->assign('lastArticlespage', $pagerArray);
-    $this->assign('lastArticles', $lastArticles);
+        $this->assign('lastArticles', $lastArticles);
+		
+		
+		
 		
 		//print_r($lastArticles);
-    $this->show_banner();//显示banner
+        $this->show_banner();//显示banner
 		//header current add by kon at 20130415
         //$this->display();
 		$keywordInfo=unserialize(include_once("PublicCache/keywordInfo.php"));
@@ -201,7 +204,7 @@ class NutriAction extends Action {
          $this->assign('headertitle', $keymenu[$id]);
 		 //header current add by kon at 20130415
 		$this->assign('_current', 'nutri');
-    $this->display('nutri_list');
+        $this->display('nutri_list');
     }
     
     /*public function videoList()
@@ -236,7 +239,7 @@ class NutriAction extends Action {
         //print_r($hotArticles);
         //get lastArticles
         $lastArticles = D('Article')->getNutriArticles('create_time');
-        $this->assign('lastArticles',$lastArticles);
+        $this->assign('lastArticles', $lastArticles);
         $this->show_banner();//banner 滚动图片列表
         $this->display('vlist');
     }
