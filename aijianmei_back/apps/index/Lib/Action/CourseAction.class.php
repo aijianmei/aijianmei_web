@@ -1,11 +1,16 @@
 <?php
 class CourseAction extends Action {
 	public function index() {
+		$date=date('Ymd',time());
 		$uid=$_SESSION['mid']? intval($_SESSION['mid']):0;
 		//echo getUserFace($uid,'b');exit;
+		$actionList=$this->getRecommendActionList();
+		$faid=intval($actionList[0]['id']);
 		
-		
-		$this->assign ( 'actionList', $this->getRecommendActionList());
+		$couserinfo=$this->getCourseInfo($uid,$faid,$date);
+
+		$this->assign ( 'couserinfo', $couserinfo);
+		$this->assign ( 'actionList', $actionList);
 		$this->assign ( 'userHealth', $this->getUserHealthById($uid));
 		$this->assign ( 'keywordInfo', $this->getUserKeyword($uid));
 		$this->assign ( 'userDes', getUserDes($uid));
@@ -14,7 +19,7 @@ class CourseAction extends Action {
 		$this->assign ( 'cssFile', 'index' );
 		$this->display ( 'tool' );
 	}
-	protected function getRecommendActionList($limit=null){
+	protected function getRecommendActionList(){
 		$sql="select * from ai_action_list where recommend=1";
 		$data=M('')->query($sql);
 		return $data;
@@ -28,6 +33,35 @@ class CourseAction extends Action {
 			return $getUserKeyword;
 		}
 		return ;
+	}
+	protected function getCourseInfo($uid,$aid,$date){
+		$sql = "select * from ai_user_course_list where `uid`=$uid and `aid`=$aid  and `date`=$date";
+		$data=M('')->query($sql);
+		if (! empty ( $data )) {
+			foreach ( $data as $k => &$value ) {
+				$value ['loginfo'] = unserialize ( $value ['loginfo'] );
+				$value ['cnum'] = $this->num2Char($k+1);
+			}
+		}else{
+			$data[0]['loginfo']['nums']=0;
+			$data[0]['loginfo']['weight']=0;
+			$data[0]['loginfo']['time']=0;
+			$data[0]['cnum'] ='一';
+			$data[1]['loginfo']['nums']=0;
+			$data[1]['loginfo']['weight']=0;
+			$data[1]['loginfo']['time']=0;
+			$data[1]['cnum'] ='二';
+			$data[2]['loginfo']['nums']=0;
+			$data[2]['loginfo']['weight']=0;
+			$data[2]['loginfo']['time']=0;
+			$data[2]['cnum'] ='三';
+			$data[3]['loginfo']['nums']=0;
+			$data[3]['loginfo']['weight']=0;
+			$data[3]['loginfo']['time']=0;
+			$data[3]['cnum'] ='四';
+
+		}
+		return $data;
 	}
 	protected function getUserHealthById($uid){
 		$sql="select body_weight as weight,targetWeight,nowWeight,weightTime,targetTime from ai_user_health_info where uid=$uid";
@@ -77,5 +111,11 @@ class CourseAction extends Action {
 			}
 			return array( 'pertent' => $pertent,'klu'=> $klu);
 	}
+	protected function num2Char($num){
+		$charArr = array('1' =>'一' , '2' => '二','3' => '三' ,'4' => '四' ,'5' => '五' ,'6' => '六' ,
+			'7' => '七' , '8' => '八', '9' => '九' );
+		return !empty($num)?$charArr[$num]:$num;
+	}
+
 }
 ?>

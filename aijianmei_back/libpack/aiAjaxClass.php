@@ -76,18 +76,41 @@ class Ajax {
 		if (! empty ( $data )) {
 			foreach ( $data as $k => &$value ) {
 				$value ['loginfo'] = unserialize ( $value ['loginfo'] );
+				$colorCss= ($k+1)%2==0 ?'evenRow':'oddRow';
+				$resultHtml.='<div class="actGroup actGroupKon '.$colorCss.' clearfix"><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div></div>';
 			}
-			echo json_encode ( $data );
+			echo  $resultHtml ;
 		} else {
+			$data[0]['loginfo']['nums']=0;
+			$data[0]['loginfo']['weight']=0;
+			$data[0]['loginfo']['time']=0;
+			$data[0]['cnum'] ='一';
+			$data[1]['loginfo']['nums']=0;
+			$data[1]['loginfo']['weight']=0;
+			$data[1]['loginfo']['time']=0;
+			$data[1]['cnum'] ='二';
+			$data[2]['loginfo']['nums']=0;
+			$data[2]['loginfo']['weight']=0;
+			$data[2]['loginfo']['time']=0;
+			$data[2]['cnum'] ='三';
+			$data[3]['loginfo']['nums']=0;
+			$data[3]['loginfo']['weight']=0;
+			$data[3]['loginfo']['time']=0;
+			$data[3]['cnum'] ='四';
+			foreach ( $data as $k => &$value ) {
+				$colorCss= ($k+1)%2==0 ?'evenRow':'oddRow';
+				$resultHtml.='<div class="actGroup actGroupKon '.$colorCss.' clearfix"><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div></div>';
+			}
+			echo $resultHtml;
 		}
 		exit ();
 	}
 	public function postUserCourseInfo() {
 		$uid = $_REQUEST ['uid'];
-		$aid = $_REQUEST ['aid'];
-		
+		$aid = $this->getActionIdByName ( $_REQUEST ['aid'] );
 		$date = date ( "Ymd", strtotime ( str_replace ( ".", "-", $_REQUEST ['date'] ) ) );
 		$this->checkUserId ( $uid );
+
 		foreach ( $_POST ['nums'] as $key => $value ) {
 			$loginfo = null;
 			$group = $key + 1;
@@ -197,7 +220,11 @@ class Ajax {
 		}
 		return $data;
 	}
-	
+	protected function num2Char($num){
+		$charArr = array('1' =>'一' , '2' => '二','3' => '三' ,'4' => '四' ,'5' => '五' ,'6' => '六' ,
+			'7' => '七' , '8' => '八', '9' => '九' );
+		return !empty($num)?$charArr[$num]:$num;
+	}
 	// 生成文字日记图片
 	protected function generatePngByFont($text, $sizeArray, $uid, $savePath = null, $backImg = null) {
 		if (empty ( $text ) || ! ($uid > 0))

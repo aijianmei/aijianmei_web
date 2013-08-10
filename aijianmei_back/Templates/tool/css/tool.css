@@ -36,6 +36,7 @@ input,button,select,textarea{outline:none}
 	font-size:14px;
 	font-family:"宋体";
 }
+
 #weightManage{
 	height:388px;
 	border:1px solid #fff;
@@ -189,7 +190,6 @@ input,button,select,textarea{outline:none}
 				position: absolute;
 				left: 40%;
 				top: 25px;
-				
 			}
 				.input3 .curWeight{
 					width:157px;
@@ -215,15 +215,23 @@ input,button,select,textarea{outline:none}
 		.saveBtn{
 			text-align:right;
 		}
-			.save{
+			.save,.edit{
 				display:block;
 				float:right;
 				width:105px;
 				height:46px;
 				background:url(../images/tool/save1.png) no-repeat;
 			}
+			.edit{
+				float:none;
+				margin:0 auto;
+				background:url(../images/tool/rew.png) no-repeat;
+			}
 			.save:hover{
 				background:url(../images/tool/save2.png) no-repeat;		
+			}
+			.edit:hover{
+				background:url(../images/tool/rew1.png) no-repeat;
 			}
 	#tipMsg{
 		text-align:center;
@@ -233,13 +241,14 @@ input,button,select,textarea{outline:none}
 		#tipMsg span{
 			font-size:40px;
 		}
-	#dataIn,#dataOut,.bottomRank{
-		margin:20px 0;
-	}
-	#dataIn{
-		position:relative;
-	}
 		
+		
+#dataIn,#dataOut,.bottomRank{
+	margin:20px 0;
+}
+#dataIn{
+	position:relative;
+}
 		.moreBtn{
 			position:absolute;
 			top:5px;
@@ -248,7 +257,6 @@ input,button,select,textarea{outline:none}
 			height:30px;
 			background:url(../images/tool/more.png) no-repeat;
 		}
-		
 		.moreAct{
 			position:absolute;
 			width:960px;
@@ -387,7 +395,6 @@ input,button,select,textarea{outline:none}
 				border-width: 5px;
 			}
 			.dataLeft,.dataRight{
-				height:340px;
 				background:#eaeaea ;
 				border-radius:6px;
 			}
@@ -446,14 +453,11 @@ input,button,select,textarea{outline:none}
 						border-radius:6px;
 						opacity:0.5;
 						filter:alpha(opacity=50);
-						
 					}
-					
 			.dataRight{
 				float:right;
-				width:790px;
-				margin-right:5px;
-				_margin-right:2px;
+				width:770px;
+				padding:10px;
 			}
 				.userArea{
 					width:100%;
@@ -461,13 +465,15 @@ input,button,select,textarea{outline:none}
 					
 				}
 				.userTable{
-					height:340px;
+					box-shadow: rgba(0, 0, 0, 0.6) 1px 1px 2px;
+					border-radius:6px;
 				}
 				#dataForm{
-					padding:2px;
+					box-shadow: rgba(0, 0, 0, 0.6) -1px -1px 2px;
+					border-radius:6px;
 				}
 					.col{
-						width:193px;
+						width:190px;
 						float:left;
 						text-align:center;
 					}
@@ -481,6 +487,7 @@ input,button,select,textarea{outline:none}
 					.thead{
 						height:80px;
 						background:#56C8F5;
+						border-radius: 7px 7px 0 0;
 					}
 						.thead .col{
 							position:relative;
@@ -507,8 +514,8 @@ input,button,select,textarea{outline:none}
 					}
 						.actGroup .col{
 							position:relative;
-							height:38px;
-							line-height:38px;
+							height:34px;
+							line-height:34px;
 							border-right: 1px solid #fff;
 							border-left: 1px solid #ccc;
 						}
@@ -517,11 +524,9 @@ input,button,select,textarea{outline:none}
 							}
 							.actGroup .col4{
 								border-right:0;
+								width:193px;
 							}
-							.col1{
-								color:#333;
-								font-family:"微软雅黑";
-							}
+							
 							.actGroup .col .cut,.actGroup .col .figure,.actGroup .col .add{
 								position:absolute;
 							}
@@ -532,44 +537,71 @@ input,button,select,textarea{outline:none}
 								height:9px;
 								background:url(../images/tool/sprites2.png) no-repeat 0 -72px;
 								cursor:pointer;
+								display:none;
 							}
 							.actGroup .col .figure{
 								left:63px;
-								top:7px;
+								top:5px;
 								width:68px;
 								height:24px;
 								background:url(../images/tool/sprites2.png) no-repeat -32px -64px;
 								text-align:center;
 								font-size:16px;
 								color:#333;
+								background:none;
+							}
+							.avgsRow .col{
+								font-size:16px;
+								color:#333;
+								font-family:"微软雅黑";
+							}
+							.actGroup .col1,.addGroupBtn{
+								color:#333;
+								font-size:14px;
+								font-family:"微软雅黑";
 							}
 							.actGroup .col .add{
-								right:52px;
+								right:48px;
 								top:14px;
 								width:6px;
 								height:9px;
 								background:url(../images/tool/sprites2.png) no-repeat -116px -72px;
-								
+								cursor:pointer;
+								display:none;
 							}
+							.actGroup .col4 .add{
+								right:52px;
+							}
+					.avgsRow{
+						border-bottom:1px solid #fff;
+						background: #D8D8D8;
+					}
 					.tFooter{
-						height:56px;
+						border-top: 1px solid #ccc;
+						height:58px;
 						padding-top:10px;
 					}
-						
-						.tFooter .col2,.tFooter .col3,.tFooter .col4{
-							margin-top:10px;
+						.tFooter .addBtn{
+							float:left;
+							width:190px;
+							text-align:center;
 						}
-						
+						.tFooter .addBtn .addGroupBtn{
+							width: 140px;
+							height:32px;
+							background:url(../images/tool/add.png) no-repeat left;
+						}
+						.tFooter .col1{
+							float:right;
+						}
 						.tFooter .save{
 							display:inline-block;
 							float:none;
 						}
 	.uploadArea,.writeArea{
 		position:relative;
-		width: 768px;
 		height: 320px;
 		margin: 0 auto;
-		margin-top: 20px;
 	}
 		.uploadCover{
 			width: 436px;
@@ -799,15 +831,35 @@ input,button,select,textarea{outline:none}
 					}
 		
 /* gla */
-#gla{margin:0 auto;position:relative;overflow:hidden;}
-#gla_box{width:700px;margin:auto;position:relative;}
-
-.gla_inbox{overflow:hidden;position:relative;}
-
-.gla_inbox img{width:100%;height:100%;}
-.roundabout-holder{height:320px;width:700px;}
-.roundabout-moveable-item{display:block;height:300px;width:450px;cursor:pointer;}
-
+#gla{
+	margin:0 auto;
+	position:relative;
+	overflow:hidden;
+}
+#gla_box{
+	width:700px;
+	margin:auto;
+	position:relative;
+}
+.gla_inbox{
+	overflow:hidden;
+	position:relative;
+}
+.gla_inbox img{
+	width:100%;
+	height:100%;
+}
+.roundabout-holder{
+	height:320px;
+	width:664px;
+	margin:0 auto;
+}
+.roundabout-moveable-item{
+	display:block;
+	height:300px;
+	width:450px;
+	cursor:pointer;
+}
 .roundabout-in-focus,.roundabout-moveable-item{
 	cursor: pointer;
 	border-radius: 8px;
@@ -820,9 +872,13 @@ input,button,select,textarea{outline:none}
 .roundabout-in-focus{
 	cursor:auto;
 }
-.roundabout-in-focus img{width:450px!important;height:300px!important;}
-		
-#ui-datepicker-div{z-index:300!important;}
+.roundabout-in-focus img{
+	width:450px!important;
+	height:300px!important;
+}
+#ui-datepicker-div{
+	z-index:300!important;
+}
 		
 		
 		
