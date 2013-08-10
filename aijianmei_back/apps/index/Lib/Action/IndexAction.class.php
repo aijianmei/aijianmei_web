@@ -518,8 +518,8 @@ function show_banner($type){
 				M('')->query($sql);
 				$logId=null;
 			}
-            if($logId) {
-                service('Passport')->loginLocal($logId[0]['uid']);
+			if($logId) {
+				service('Passport')->loginLocal($logId[0]['uid']);
 				$_SESSION['sinalogin']=1;
 				$upsql="update `aijianmei`.`ai_others` set profileImageUrl='". $user_message['profile_image_url']."' where uid='".$logId[0]['uid']."'";
 				M('')->query($upsql);
@@ -614,7 +614,7 @@ function show_banner($type){
                 //var_dump($uid);
                 //$uid = M('user')->add($data);				
                 service('Passport')->loginLocal($uid);
-				$_SESSION['mid']=$uid;
+								$_SESSION['mid']=$uid;
                 $other['uid'] = $uid;
                 $other['mediaID'] = '3';
                 $other['friendsCount'] = $user_message['friends_count'];
@@ -754,7 +754,7 @@ function show_banner($type){
 		$pagerArray = $pagerData['html'];
 
 		//print_r($pagerArray);
-		$sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit ".(($pglimit-1)*20).",$nums";
+        $sql = "select v.* from ai_video v,($orderTableSql) t where v.category_id=t.aid  order by create_time desc limit ".(($pglimit-1)*20).",$nums";
 		$newvideos=$hot_video=null;
 		$newvideos=$this->getDataCache(md5($sql));
 		if(!$newvideos){

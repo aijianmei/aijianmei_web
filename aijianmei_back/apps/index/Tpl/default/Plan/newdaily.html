@@ -33,17 +33,17 @@
 					<ul class="day_classifly clearfix">
 						<li>
 							<a class="day_part" href="/plan_c4_1.html">
-								<img src="public/images/fitnessProgram/{$HotFitnessProgram[0]['imageurl']}" />
+								<img src="<php>if(!empty($HotFitnessProgram[0]['imageurl'])){</php>public/images/fitnessProgram/{$HotFitnessProgram[0]['imageurl']}<php>}else{echo '/Templates/images/mr_03.jpg';}</php> " />
 							</a>
 						</li>
 						<li>
 							<a class="day_part" href="/plan_c4_1.html">
-								<img src="public/images/fitnessProgram/{$HotFitnessProgram[1]['imageurl']}" />
+								<img src="<php>if(!empty($HotFitnessProgram[1]['imageurl'])){</php>public/images/fitnessProgram/{$HotFitnessProgram[1]['imageurl']}<php>}else{echo '/Templates/images/mr_03.jpg';}</php> " />
 							</a>
 						</li>
 						<li class="lastImg">
 							<a class="day_part" href="/plan_c4_1.html">
-								<img src="public/images/fitnessProgram/{$HotFitnessProgram[2]['imageurl']}" />
+								<img src="<php>if(!empty($HotFitnessProgram[2]['imageurl'])){</php>public/images/fitnessProgram/{$HotFitnessProgram[2]['imageurl']}<php>}else{echo '/Templates/images/mr_03.jpg';}</php> " />
 							</a>
 						</li>
 					</ul>
@@ -62,7 +62,7 @@
 						<php>foreach($sdaily as $key => $value){</php>
 						<php>if($value['isreset']!=1){</php>
 						<div class="dailywork clearfix">				
-							<p class="date">{$value['create_time']}</p>
+							<p class="date">{$value['gotime']}</p>
 							<span class="info">{$value['content']|htmlspecialchars_decode}</span>
 							<div id="dailyShare">
 								<span class="click_share">
@@ -112,7 +112,7 @@
 						<hr class="row_line" />
 						<php>}else{</php>
 						<div class="dailywork rest clearfix">
-							<p class="date">{$value['create_time']}</p>
+							<p class="date">{$value['gotime']}</p>
 							<img style="width:480px;height:180px;" src="<php>if(empty($value['img'])){</php>Templates/images/plan/4.png<php>}else{</php>public/images/daily/{$value['img']}<php>}</php>" alt="takerest" />
 							<span class="tipInfo">{$value['content']|htmlspecialchars_decode}</span>
 						</div>
@@ -134,7 +134,7 @@
 						<php>foreach($mdaily as $key => $value){</php>
 						<php>if($value['isreset']!=1){</php>
 						<div class="dailywork clearfix">				
-							<p class="date">{$value['create_time']}</p>
+							<p class="date">{$value['gotime']}</p>
 							<span class="info">{$value['content']|htmlspecialchars_decode}</span>
 							<div id="dailyShare">
 								<span class="click_share">
@@ -184,7 +184,7 @@
 						<hr class="row_line" />
 						<php>}else{</php>
 						<div class="dailywork rest clearfix">
-							<p class="date">{$value['create_time']}</p>
+							<p class="date">{$value['gotime']}</p>
 							<img style="width:480px;height:180px;" src="<php>if(empty($value['img'])){</php>Templates/images/plan/4.png<php>}else{</php>public/images/daily/{$value['img']}<php>}</php>" alt="takerest" />
 							<span class="tipInfo">{$value['content']|htmlspecialchars_decode}</span>
 						</div>
@@ -207,7 +207,7 @@
 						<php>foreach($bdaily as $key => $value){</php>
 						<php>if($value['isreset']!=1){</php>
 						<div class="dailywork clearfix">				
-							<p class="date">{$value['create_time']}</p>
+							<p class="date">{$value['gotime']}</p>
 							<span class="info">{$value['content']|htmlspecialchars_decode}</span>
 							<div id="dailyShare">
 								<span class="click_share">
@@ -257,7 +257,7 @@
 						<hr class="row_line" />
 						<php>}else{</php>
 						<div class="dailywork rest clearfix">
-							<p class="date">{$value['create_time']}</p>
+							<p class="date">{$value['gotime']}</p>
 							<img style="width:480px;height:180px;" src="<php>if(empty($value['img'])){</php>Templates/images/plan/4.png<php>}else{</php>public/images/daily/{$value['img']}<php>}</php>" alt="takerest" />
 							<span class="tipInfo">{$value['content']|htmlspecialchars_decode}</span>
 						</div>
@@ -280,19 +280,19 @@
 					<php>foreach($FitnessProgramList as $key=>$value){</php>
 						<div class="cont_module clearfix">
 							<div class="cont_side_1">
-								<a><img src="public/images/fitnessProgram/{$value['imageurl']}"></a>
+								<a href="/fpdetail_{$value['id']}.html" target="_blank"><img src="public/images/fitnessProgram/{$value['imageurl']}"></a>
 								<div class="show_share clearfix" style="text-align: center;">
 									<wb:share-button count="n" type="button" size="big" ></wb:share-button>
 								</div>
 							</div>
 							<div class="cont_side_2">
-								<h3 class="cont_title"><a>{$value['title']}</a></h3>
+								<h3 class="cont_title"><a href="/fpdetail_{$value['id']}.html" target="_blank">{$value['title']}</a></h3>
 								<span class="cont_tip"><span class="cont_comefrom">爱健美团队</span>发表于<span class="cont_pb_time">{$value['create_time']}</span></span>
-								<p>{$value['content']|htmlspecialchars_decode}</p>
+								<p>{$value['brief']|htmlspecialchars_decode}</p>
 								
 								<div class="cont_share clearfix">
-									<span class="cont_rec">评论数:<span>0</span></span>
-									<a class="cont_read_more">阅读全文></a>
+									<span class="cont_rec">评论数:<span>{$value['comments']}</span></span>
+									<a class="cont_read_more" href="/fpdetail_{$value['id']}.html" target="_blank">阅读全文></a>
 								</div>
 							</div>
 						</div>

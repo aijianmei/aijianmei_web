@@ -82,7 +82,7 @@ class SearchAction extends Action {
 		$this->assign('cssFile', 'training');
 		$this->assign('searchInfo', $searchInfo);
 		$this->assign('keyword', $keyword);
-		$this->display('search');
+        $this->display('search');
 	}
 	public function goodcomment()
 	{

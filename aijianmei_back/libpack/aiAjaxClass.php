@@ -1,6 +1,6 @@
 <?php
 header ( "charset=utf-8" );
-session_start();
+session_start ();
 error_reporting ( 0 );
 define ( 'SITE_PATH', dirname ( dirname ( __FILE__ ) ) ); // 路径常量定义
 
@@ -16,7 +16,8 @@ include_once 'db.class.php';
 class Ajax {
 	protected $allowAction = array (
 			'setUserLogImg',
-			'postUserCourseInfo' 
+			'postUserCourseInfo',
+			'getCourseInfo' 
 	);
 	protected $ttf = 'FZSJSJW.TTF';
 	public function __construct() {
@@ -30,40 +31,59 @@ class Ajax {
 	public function __call($name, $args) {
 		die ( 40004 );
 	}
-	public function postUserCourseInfo() {
-		$date='08/08/2013';
+	public function getCourseInfo() {
 		$uid = $_REQUEST ['uid'];
 		$aid = $_REQUEST ['aid'];
-		$this->checkUserId($uid);
-		foreach ($_POST['nums'] as $key => $value){
-			$loginfo=null;
-			$group=$key+1;
-			$date=date('Ymd',strtotime($date));
-			$loginfo['nums']	=$value;
-			$loginfo['weight']	=$_POST['weight'][$key];
-			$loginfo['time']		=$_POST['time'][$key];
-			$loginfo=serialize($loginfo);
-			$checkSql="select * from ai_user_course_list where `uid`=$uid and `aid`=$aid and `group`=$group";
-			$checkData=$this->db->_query($checkSql);
-			if(empty($checkData)){
-				$insertSql="INSERT INTO ai_user_course_list (`id` ,`uid` ,`aid` ,`date` ,`loginfo` ,`create_time` ,`group`)
-						VALUES (NULL ,  '".$uid."',  '".$aid."',  '".$date."',  '".$loginfo."', '".time()."',  '".$group."')";
-				$this->db->_query($insertSql);
-			}else{
-				$updateSql="UPDATE ai_user_course_list SET  loginfo ='".$loginfo."',`create_time` = '".time()."' where  `uid`=$uid and `aid`=$aid and `group`=$group";
-				$this->db->_query($updateSql);
+		$date = date("Ymd",strtotime(str_replace(".","-", $_REQUEST ['date'])));
+		$sql=null;
+		$sql="select * from ai_user_course_list where `uid`=$uid and `aid`=$aid  and `date`=$date";
+		$data = $this->db->_query ( $sql );
+		
+		if(!empty($data)){
+			foreach ($data as $k =>&$value){
+				$value['loginfo']=unserialize($value['loginfo']);			
+			}
+			echo json_encode($data);
+		}else{
+			
+		}
+		exit;
+	}
+	public function postUserCourseInfo() {
+		$date = '08/08/2013';
+		$uid = $_REQUEST ['uid'];
+		$aid = $_REQUEST ['aid'];
+		$date = date("Ymd",strtotime(str_replace(".","-", $_REQUEST ['date'])));
+		$this->checkUserId ( $uid );
+		foreach ( $_POST ['nums'] as $key => $value ) {
+			$loginfo = null;
+			$group = $key + 1;
+			//$date = date ( 'Ymd', strtotime ( $date ) );
+			$loginfo ['nums'] = intval($value);
+			$loginfo ['weight'] =intval($_POST ['weight'] [$key]);
+			$loginfo ['time'] = intval($_POST ['time'] [$key]);
+			$loginfo = serialize ( $loginfo );
+			$checkSql = "select * from ai_user_course_list where `uid`=$uid and `aid`=$aid and `group`=$group and `date`=$date";
+			$checkData = $this->db->_query ( $checkSql );
+			if (empty ( $checkData )) {
+				$insertSql = "INSERT INTO ai_user_course_list (`id` ,`uid` ,`aid` ,`date` ,`loginfo` ,`create_time` ,`group`)
+						VALUES (NULL ,  '" . $uid . "',  '" . $aid . "',  '" . $date . "',  '" . $loginfo . "', '" . time () . "',  '" . $group . "')";
+				$this->db->_query ( $insertSql );
+			} else {
+				$updateSql = "UPDATE ai_user_course_list SET  loginfo ='" . $loginfo . "',`create_time` = '" . time () . "' where  `uid`=$uid and `aid`=$aid and `group`=$group and `date`=$date";
+				$this->db->_query ( $updateSql );
 			}
 		}
-		//print_r($_REQUEST);
+		// print_r($_REQUEST);
 		exit ();
 	}
-	protected function checkUserId($uid){
-		if($uid==$_SESSION['mid']){
+	protected function checkUserId($uid) {
+		if ($uid == $_SESSION ['mid']) {
 			return true;
-		}else{			
-			die(40003);
+		} else {
+			die ( 40003 );
 		}
-		exit();
+		exit ();
 	}
 	public function setUserLogImg() {
 		$text = $_POST ['testString'];

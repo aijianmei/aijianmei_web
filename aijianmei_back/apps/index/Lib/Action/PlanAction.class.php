@@ -135,6 +135,7 @@ class PlanAction extends Action {
 		$data = M ( '' )->query ( $sql );
 		foreach ( $data as &$value ) {
 			$value ['create_time'] = date ( 'Y/m/d', $value ['create_time'] );
+			$value ['comments']=$this->getCountNums('ai_comments', "where parent_type=5 and parent_id='".$value['id']."'");
 		}
 		return $data;
 	}
@@ -186,6 +187,7 @@ class PlanAction extends Action {
 				$videolist = M ( '' )->query ( $sql );
 				$daily [$key] ['videolist'] = $this->videoListSort ( $videolist );
 				$daily [$key] ['create_time'] = date ( 'Y.m.d', $daily [$key] ['create_time'] );
+				$daily [$key] ['gotime'] = date ( 'Y.m.d', $daily [$key] ['gotime'] );
 				if ($daily [$key] ['videolist'] == null)
 					unset ( $daily [$key] ['videolist'] );
 			}
