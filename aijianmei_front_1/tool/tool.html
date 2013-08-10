@@ -35,7 +35,6 @@
 							</div>
 						</div>
 						<div class="separateY"></div>
-
 						<div id="weight">
 							<form action="" method="post" >
 								<div class="weightPro">
@@ -96,8 +95,8 @@
 								<div class="moreRight clearfix">
 									<ul class="clearfix" id="actionsList" style="top:0px">
 									</ul>
-									<div class="preSelect selectMore"></div>
-									<div class="nextSelect selectMore"></div>
+									<div class="preSelect selectMore" style="display:none"></div>
+									<div class="nextSelect selectMore" style="display:none"></div>
 								</div>
 								<button class="hideBtn">收起</button>
 							</div>
@@ -121,6 +120,7 @@
 						</div>
 						<div class="dataRight">
 							<div class="userTable userArea" >
+							
 								<form action="" id="dataForm">
 									<div class="thead clearfix">
 										<div class="col1 col">杠铃卧推<span class="rowTip">2013.09.09</span></div>
@@ -133,17 +133,17 @@
 											<div class="col1 col">第一组</div>
 											<div class="col2 col">
 												<span class="cut"></span>
-												<input type="text" value="0" class="figure"/>
+												<input type="text" value="0" class="figure" readonly/>
 												<span class="add"></span>
 											</div>
 											<div class="col3 col">
 												<span class="cut"></span>
-												<input type="text" value="0" class="figure"/>
+												<input type="text" value="0" class="figure" readonly/>
 												<span class="add"></span>
 											</div>
 											<div class="col4 col">
 												<span class="cut"></span>
-												<input type="text" value="0" class="figure"/>
+												<input type="text" value="0" class="figure" readonly/>
 												<span class="add"></span>
 											</div>
 										</div>
@@ -151,17 +151,17 @@
 											<div class="col1 col">第二组</div>
 											<div class="col2 col">
 												<span class="cut"></span>
-												<input type="text" value="0" class="figure"/>
+												<input type="text" value="0" class="figure" readonly/>
 												<span class="add"></span>
 											</div>
 											<div class="col3 col">
 												<span class="cut"></span>
-												<input type="text" value="0" class="figure"/>
+												<input type="text" value="0" class="figure" readonly/>
 												<span class="add"></span>
 											</div>
 											<div class="col4 col">
 												<span class="cut"></span>
-												<input type="text" value="0" class="figure"/>
+												<input type="text" value="0" class="figure" readonly/>
 												<span class="add"></span>
 											</div>
 										</div>
@@ -169,51 +169,52 @@
 											<div class="col1 col">第三组</div>
 											<div class="col2 col">
 												<span class="cut"></span>
-												<input type="text" value="0" class="figure"/>
+												<input type="text" value="0" class="figure" readonly/>
 												<span class="add"></span>
 											</div>
 											<div class="col3 col">
 												<span class="cut"></span>
-												<input type="text" value="0" class="figure"/>
+												<input type="text" value="0" class="figure" readonly/>
 												<span class="add"></span>
 											</div>
 											<div class="col4 col">
 												<span class="cut"></span>
-												<input type="text" value="0" class="figure"/>
+												<input type="text" value="0" class="figure" readonly/>
+												<span class="add"></span>
+											</div>
+										</div>
+										<div class="actGroup evenRow clearfix">
+											<div class="col1 col">第四组</div>
+											<div class="col2 col">
+												<span class="cut"></span>
+												<input type="text" value="0" class="figure" readonly/>
+												<span class="add"></span>
+											</div>
+											<div class="col3 col">
+												<span class="cut"></span>
+												<input type="text" value="0" class="figure" readonly/>
+												<span class="add"></span>
+											</div>
+											<div class="col4 col">
+												<span class="cut"></span>
+												<input type="text" value="0" class="figure" readonly/>
 												<span class="add"></span>
 											</div>
 										</div>
 									</div>
 									
-									<div class="actGroup evenRow  clearfix">
-										<div class="col1 col">加一组</div>
-										<div class="col2 col"></div>
-										<div class="col3 col"></div>
-										<div class="col4 col"></div>
-									</div>
-									<div class="actGroup oddRow clearfix">
+									<div class="actGroup avgsRow clearfix">
 										<div class="col1 col">平均值</div>
-										<div class="col2 col">
-											<span class="cut"></span>
-											<input type="text" value="20" class="figure"/>
-											<span class="add"></span>
-										</div>
-										<div class="col3 col">
-											<span class="cut"></span>
-											<input type="text" value="30" class="figure"/>
-											<span class="add"></span>
-										</div>
-										<div class="col4 col">
-											<span class="cut"></span>
-											<input type="text" value="40" class="figure"/>
-											<span class="add"></span>
-										</div>
+										<div class="col2 col">0</div>
+										<div class="col3 col">0</div>
+										<div class="col4 col">0</div>	
 									</div>
 									<div class="tFooter clearfix">
-										<div class="col1 col"><button class="save"></button></div>
-										<div class="col2 col"><img src="images/tool/ss_1.png" alt="Rise" class="rise" /></div>
-										<div class="col3 col"><img src="images/tool/xj_1.png" alt="Decline" class="decline" /></div>
-										<div class="col4 col"><img src="images/tool/ss_1.png" alt="Rise" class="rise" /></div>
+										<div class="addBtn" style="display:none;"><button type="button" class="addGroupBtn" title="加一组">加一组</button></div>
+										<div class="col1 col ">
+											<button class="edit editSave" type="button"></button>
+											<button class="save editSave" type="button" style="display:none;"></button>
+										</div>
 									</div>
 								</form>
 							</div><!--End userTable-->
@@ -222,7 +223,6 @@
 								<div class="uploadArea">
 									<div id="gla">
 										<div id="gla_box">
-											
 											<ul>
 												<li>
 													<div class="gla_inbox">
@@ -256,13 +256,23 @@
 								</div>
 							</div><!--End userPic-->
 							<div class="userNote userArea" style="display:none;">
-								<form action="">
-									<div class="writeArea">
-										<div><textarea name="write" id="write" maxlength="200" autofocus></textarea></div>
-										<div><button class="writeSub"></button></div>
+								<div id="gla">
+									<div id="gla_box">
+										<ul>
+											<li><div class="gla_inbox"><img src="images/tool/rj_1.png" /></div></li>
+											<li><div class="gla_inbox"><img src="images/tool/rj_1.png" /></div></li>
+											<li><div class="gla_inbox"><img src="images/tool/rj_1.png" /></div></li>
+										</ul>
 									</div>
-								</form>
-								
+								</div>
+								<div id="writeForm" style="display:none;">
+									<form action="">
+										<div class="writeArea">
+											<div><textarea name="write" id="write" maxlength="200" autofocus></textarea></div>
+											<div><button class="writeSub"></button></div>
+										</div>
+									</form>
+								</div>
 							</div><!--End userNote-->
 						</div><!--dataRight-->
 					</div>
@@ -458,10 +468,8 @@
 		<script type="text/javascript" src="js/jquery.roundabout.js"></script>
 		<script type="text/javascript" src="js/jquery.roundabout-shapes.js"></script>
 		<script type="text/javascript">
-			$(function(){
-					   
+			$(function(){		   
 				$('.gla_inbox').corner('8px');
-				
 				$('#gla_box>ul').roundabout({
 					minOpacity:1,
 					btnNext: ".next",
@@ -474,6 +482,6 @@
 					shape: 'figure8'
 				});
 			});
-			</script>
+		</script>
 	</body>
 </html>
