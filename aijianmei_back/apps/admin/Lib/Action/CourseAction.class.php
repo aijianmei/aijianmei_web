@@ -19,7 +19,6 @@ class CourseAction extends AdministratorAction {
 		
 		$this->assign ( 'daily', $daily );
 		$this->assign ( 'pageArr', $pageArr );
-		// $this->assign ( 'cate', $cate );
 		$this->display ( 'actionList' );
 	}
 	protected function arrayLinkByKey(&$value, $key, $link) {
@@ -85,6 +84,7 @@ class CourseAction extends AdministratorAction {
 					) );
 				}
 			}
+			$data ['recommend'] =$_POST ['recommend']?$_POST ['recommend']:0;
 			$this->generateFontWith ();
 			M ( 'action_list' )->save ( $data );
 			redirect ( U ( 'admin/Course/actionList' ) );
@@ -106,7 +106,8 @@ class CourseAction extends AdministratorAction {
 		$this->assign ( 'cateList', $cateList );
 		$this->assign ( 'attributeList', $attributeList );
 		$this->assign ( 'cate', $cate );
-		// var_dump($actionInfo);
+		//var_dump($actionInfo);
+
 		$this->assign ( 'actionInfo', $actionInfo );
 		$this->display ( 'editAction' );
 	}

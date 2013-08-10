@@ -1,4 +1,5 @@
 //weight
+var actionVal='';
 var changeWeight = function(input, show){
 	$(".weiSaveBtn").click(function(){
 		var innerVal = $(input).val();		
@@ -43,6 +44,7 @@ var changeWeight = function(input, show){
 			
 			$(".innerPro").css("width", percentage);
 			$(".percent").text(percentage);
+			postWeightInfo();
 	}
 	
 }
@@ -56,9 +58,9 @@ $(".curDate").text(dateVar);//set date of current weight.
 			
 var setDateVal = function (datepicker){
 		$( datepicker ).datepicker();
-		$( datepicker ).datepicker( "option", "dateFormat","yy-mm-dd" );
-		$( datepicker ).datepicker('option', 'maxDate', '0');
-		$( datepicker ).datepicker( "setDate",dateVar );
+		$( datepicker).datepicker( "option", "dateFormat","yy-mm-dd" );
+		$(datepicker).datepicker('option', 'maxDate', '0');
+		$( datepicker).datepicker( "setDate",dateVar );
 	},
 	//点击左右加减一天
 	toggleDateVal = function (toggleDate){
@@ -173,6 +175,7 @@ $.getJSON(actionJson, function(data){
 		});
 		
 		$(".hideBtn, .showList").live("click",function(){
+			//若所选动作已存在于导航栏，则直接给高亮显示
 			if($(this).hasClass("showList")){
 				var txt = $(this).text(),
 					navTxt = [],
@@ -183,6 +186,7 @@ $.getJSON(actionJson, function(data){
 					navTxt[i] = $(".actNav").find("li").eq(i).text();
 					if(txt == navTxt[i]){
 						$(".actNav").find(".curAct").removeClass("curAct");
+						actionVal=$(".actNav").find("li").eq(i).text();
 						$(".actNav").find("li").eq(i).addClass("curAct");
 						break;
 					}
@@ -193,9 +197,28 @@ $.getJSON(actionJson, function(data){
 					listLength();
 				}	
 			}
+
 			$(".moreAct").slideUp();
+
 		});
+		
+		//选择动作“更多”左右换页
+		$(".selectMore").bind("click", function(){
+			var nowTop = $("#actionsList").css("top"),
+				ulHeight = $("#actionsList").height();
+			nowTop = parseInt(nowTop);
+			
+			if($(this).hasClass("preSelect") && nowTop<0){
+				nowTop += 320;
+			}
+			else if($(this).hasClass("nextSelect") && (nowTop>(320-ulHeight)))
+				nowTop -= 320;
+			$("#actionsList").css("top", nowTop+"px");
+		})
+		
+		//导航栏当前高亮显示
 		$(".actNav>li").live("click", function(){
+			actionVal=$(this).text();
 			$(this).addClass("curAct").siblings().removeClass("curAct");
 		});
 });
@@ -217,3 +240,5 @@ var listLength = function(){
 	}
 }
 listLength();
+
+

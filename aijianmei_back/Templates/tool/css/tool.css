@@ -114,7 +114,7 @@ input,button,select,textarea{outline:none}
 			}
 				.progress  .innerPro{
 					height:20px;
-					width:46%;
+					width:33.3%;
 					margin-right: 8px;					
 					border-radius: 6px;
 					background:url(../images/tool/progress.jpg) repeat-x;
@@ -305,24 +305,25 @@ input,button,select,textarea{outline:none}
 			.moreRight{
 				float: left;
 				width: 766px;
-				height: 280px;
+				height: 320px;
 				position:relative;
+				overflow:hidden;
 			}
 			.moreRight ul{
-				width:700px;
-				height:280px;
-				overflow:hidden;
+				position:absolute;
+				left:38px;
+				width:688px;			
 				margin:0 auto;
 			}
 				.moreRight .showList{
 					float:left;
-					margin:7px 16px;
+					margin:15px;
 					_margin-left:8px;
 					background:#56A9E4;
 					border:2px solid #fff;
 					border-radius:4px;
 					text-align:center;
-					padding:10px;
+					padding:14px;
 					cursor:pointer;
 				}
 				.moreRight .preSelect,.moreRight .nextSelect{
@@ -343,7 +344,6 @@ input,button,select,textarea{outline:none}
 				}
 			.hideBtn{
 				float: right;
-				margin-top: 30px;
 				background: none;
 				color: white;
 				font-weight: bold;
@@ -462,8 +462,6 @@ input,button,select,textarea{outline:none}
 				}
 				.userTable{
 					height:340px;
-				
-					background:url(../images/tool/sjb_1.png) no-repeat;
 				}
 				#dataForm{
 					padding:2px;
@@ -473,11 +471,7 @@ input,button,select,textarea{outline:none}
 						float:left;
 						text-align:center;
 					}
-					.actGroup .col{
-						margin:0 1px 0 2px;
-						height:38px;
-						line-height:38px;
-					}
+
 					.oddRow .col{
 						background:#EAEAEA;
 					}
@@ -486,6 +480,7 @@ input,button,select,textarea{outline:none}
 					}
 					.thead{
 						height:80px;
+						background:#56C8F5;
 					}
 						.thead .col{
 							position:relative;
@@ -512,7 +507,17 @@ input,button,select,textarea{outline:none}
 					}
 						.actGroup .col{
 							position:relative;
+							height:38px;
+							line-height:38px;
+							border-right: 1px solid #fff;
+							border-left: 1px solid #ccc;
 						}
+							.actGroup .col1{
+								border-left:0;
+							}
+							.actGroup .col4{
+								border-right:0;
+							}
 							.col1{
 								color:#333;
 								font-family:"微软雅黑";
@@ -566,11 +571,6 @@ input,button,select,textarea{outline:none}
 		margin: 0 auto;
 		margin-top: 20px;
 	}
-		.uploadArea img{
-			max-width:460px;
-			max-height:320px;
-			cursor: pointer;
-		}
 		.uploadCover{
 			width: 436px;
 			height: 288px;
@@ -595,7 +595,7 @@ input,button,select,textarea{outline:none}
 			display:none;
 		}
 	.writeArea{
-		background:url(../images/tool/write.png) no-repeat;
+		background:url(../images/tool/write.png) no-repeat center;
 	}
 		.writeArea div{text-align:center;}
 		#write{
@@ -610,6 +610,7 @@ input,button,select,textarea{outline:none}
 			outline: 0;
 			border: 0;
 			background:none;
+			font-size:16px;
 		}
 		.writeSub{
 			width:390px;
@@ -800,21 +801,28 @@ input,button,select,textarea{outline:none}
 /* gla */
 #gla{margin:0 auto;position:relative;overflow:hidden;}
 #gla_box{width:700px;margin:auto;position:relative;}
-#gla_box .prev,#gla_box .next{display:block;z-index:100;overflow:hidden;cursor:pointer;position:absolute;width:52px;height:52px;top:171px;}
-#gla_box .prev{background:url(images/btn.png) left bottom no-repeat;left:-155px}
-#gla_box .next{background:url(images/btn.png) right bottom no-repeat;right:-140px} 
-#gla_box .prev:hover{background-position:left top;}
-#gla_box .next:hover{background-position:right top;}
+
 .gla_inbox{overflow:hidden;position:relative;}
-.gla_inbox p{text-indent:1em;font-size:14px;width:100%;color:#FFFFFF;line-height:30px;background:#000000;}
-.gla_inbox a{padding:5px;display:block;position:absolute;top:220px;left:90px;background:#0066CC;color:#FFF;}
+
 .gla_inbox img{width:100%;height:100%;}
 .roundabout-holder{height:320px;width:700px;}
 .roundabout-moveable-item{display:block;height:300px;width:450px;cursor:pointer;}
-.roundabout-in-focus{cursor:auto;}		
-.roundabout-in-focus img{width:450px;height:300px;}
+
+.roundabout-in-focus,.roundabout-moveable-item{
+	cursor: pointer;
+	border-radius: 8px;
+	-moz-box-shadow: 3px 3px 4px #999;
+	-webkit-box-shadow: 3px 3px 4px #999;
+	box-shadow: 3px 3px 4px #999;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999');
+}		
+.roundabout-in-focus{
+	cursor:auto;
+}
+.roundabout-in-focus img{width:450px!important;height:300px!important;}
 		
-		
+#ui-datepicker-div{z-index:300!important;}
 		
 		
 		

@@ -3,6 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title></title>
+		<link rel="stylesheet" href="Templates/css/public.css" />
 		<link rel="stylesheet" href="Templates/tool/css/public.css">
 		<link rel="stylesheet" href="Templates/tool/css/tool.css" />
 		<link rel="stylesheet" href="Templates/tool/css/jquery-ui.css" />
@@ -17,21 +18,20 @@
 	</head>
 	
 	<body>
-
+		<include file="Templates/courseHeader.html" />
         <div class="wrapper">
         	<div class="wrapper_bg clearfix">
 	        	<div id="weightManage" class="clearfix">
 					<div class="clearfix">
 						<div id="userInfo">
-							<img src="Templates/tool/images/tool/rg2_1.jpg" alt="UserFace" class="userFace" />
-							<div><a href="" class="userName">要减肥</a></div>
-							<div><p class="userIntro">要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥要减肥</p></div>
+							<img src="<php>echo getUserFace(getMid(),'b');</php>" alt="UserFace" class="userFace" />
+							<div><a href="javasrcpit:void(0);" class="userName">{$userName}</a></div>
+							<div><p class="userIntro  login">{$userDes}</p></div>
 							<div>
-								<span class="userLabel">要减肥要减肥</span>
-								<span class="userLabel">要减肥</span>
-								<span class="userLabel">要减肥</span>
-								<span class="userLabel">要减肥</span>
-								<span class="userLabel">减肥</span>
+
+								<php>foreach($keywordInfo as $key => $value){</php>
+								<span class="userLabel">{$value}</span>
+								<php>}</php>
 							</div>
 						</div>
 						<div class="separateY"></div>
@@ -42,24 +42,24 @@
 									<h3 class="partTit"><span>我的体重变化</span></h3>
 									<div class="progress">
 										<div class="innerPro"></div>
-										<span class="percent">46%</span>
+										<span class="percent">{$userHealth['pertent']}%</span>
 										<p class="tip tipFont">这是您第一次录入数据，请先填入您的初始体重和目标体重吧！</p>
 									</div>
-									<div class="initWeight"><span class="innerText">85kg</span></div>
-									<div class="goalWeight"><span class="innerText">100kg</span></div>
+									<div class="initWeight"><span class="innerText">{$userHealth['weight']}kg</span></div>
+									<div class="goalWeight"><span class="innerText">{$userHealth['targetWeight']}kg</span></div>
 								</div>
 								<div class="userInput clearfix">
 									<div class="input1">
-										<span class="redFont">原始体重<input type="text" value="85" id="initW" maxlength="5"/>Kg</span>
-										<span class="initDate redFont">2013-08-3</span>
+										<span class="redFont">原始体重<input type="text" value="{$userHealth['weight']}" id="initW" maxlength="5"/>Kg</span>
+										<span class="initDate redFont">{$userHealth['weightTime']}</span>
 									</div>
 									<div class="input2">
-										<span class="greenFont">目标体重<input type="text" value="100" id="goalW" maxlength="5"/>Kg</span>
+										<span class="greenFont">目标体重<input type="text" value="{$userHealth['targetWeight']}" id="goalW" maxlength="5"/>Kg</span>
 									</div>
 									<div class="input3">
-										<div class="curWeight"><span class="innerText">90kg</span></div>
-										<span class="blueFont">当前体重<input type="text" value="90" id="curW" maxlength="5"/>Kg</span>
-										<span class="curDate blueFont">2013-08-1</span>
+										<div class="curWeight"><span class="innerText">{$userHealth['nowWeight']}kg</span></div>
+										<span class="blueFont">当前体重<input type="text" value="{$userHealth['nowWeight']}" id="curW" maxlength="5"/>Kg</span>
+										<span class="curDate blueFont">{$userHealth['targetTime']}</span>
 									</div>
 								</div>
 								<div class="saveBtn">
@@ -69,13 +69,15 @@
 						</div>
 					</div>	
 					<div class="separateX"></div>
-					<div id="tipMsg">您的目标体重是<span class="yourGoal">60.0</span>公斤，距离目标还需要燃烧热量<span class="calorie">3434</span>大卡！为了您的理想健身，努力吧！</div>
+					<div id="tipMsg">您的目标体重是<span class="yourGoal">{$userHealth['targetWeight']}</span>公斤，距离目标还需要<php>if($userHealth['isfitness']==1){</php>燃烧<php>}else{</php>吸收<php>}</php>热量<span class="calorie">{$userHealth['klu']}</span>大卡！为了您的理想健身，努力吧！</div>
 				</div><!--End weightManage-->
 				<div class="separateX"></div>
 				<div id="dataIn">
 					<ul class="actNav clearfix">
-						<li class="curAct">卧推<span></span></li>
-						<li>深蹲<span></span></li>
+						<volist id="actionList" name="actionList" key="n">
+						<li <php>if($n==1){</php>class="curAct"<php>}</php>>{$actionList.name}<span></span></li>
+						</volist>
+						<!--<li>深蹲<span></span></li>
 						<li>俯卧撑<span></span></li>
 						<li>引体向上<span></span></li>
 						<li>快跑<span></span></li>
@@ -83,7 +85,7 @@
 						<li>单臂哑铃前平举<span></span></li>
 						<li>V字挺身<span></span></li>
 						<li>低位拉力器臂弯举<span></span></li>
-						<li>深蹲<span></span></li>
+						<li>深蹲<span></span></li>-->
 					</ul>
 					<button class="moreBtn"></button>
 					<div class="moreAct">
@@ -94,10 +96,10 @@
 								<ul class="moreSider">
 								</ul>
 								<div class="moreRight clearfix">
-									<ul class="clearfix">
+									<ul class="clearfix" id="actionsList" style="top:0px">
 									</ul>
-									<div class="preSelect"></div>
-									<div class="nextSelect"></div>
+									<div class="preSelect selectMore"></div>
+									<div class="nextSelect selectMore"></div>
 								</div>
 								<button class="hideBtn">收起</button>
 							</div>
@@ -450,6 +452,8 @@
 				</div>
 	        </div>
         </div>
+<include file="Templates/loginpart.html" />
+<include file="Templates/footer.html" />
 		<script type="text/javascript" src="Templates/tool/js/public.js"></script>  
 		<script type="text/javascript" src="Templates/tool/js/jquery-ui.js"></script>
 		<script type="text/javascript" src="Templates/tool/js/lineData.js"></script>
@@ -459,7 +463,7 @@
 		<script type="text/javascript" src="Templates/tool/js/jquery.roundabout-shapes.js"></script>
 		<script type="text/javascript">
 			var userId=<?php echo $_SESSION['mid']>0 ? $_SESSION['mid'] : 0; ?>;
-			var actionId=1;
+			var actionId=actionVal ? actionVal :"<?php echo $actionList[0]['name']?>";
 			var dateString='';
 			var dateContentVar="<?php echo date('Y.m.d',time())?>";
 			$("#datepicker ").change(function (){
@@ -474,16 +478,37 @@
 				$(".dateContentVar").html(dateContentVar);
 				getCourseData(dateContentVar);
 			});
-
+			function postWeightInfo(){
+				var ajaxCallUrl='/libpack/aiAjaxClass.php?act=postWeightInfo';
+				var goal = $("#goalW").val(),//目标的数值
+						cur = $("#curW").val(),//当前数值
+						init = $("#initW").val();//原始数值
+						$.ajax({
+						   type: "POST",
+						   url:ajaxCallUrl,
+						   data:"weight="+init+"&tweight="+goal+"&nweight="+cur,// 要提交的表单
+						   dataType:'json',
+						   success: function(msg) {
+						   if(msg.status==1){
+						   	$(".yourGoal").html(goal);
+						   	$(".calorie").html(msg.calorie);
+						   	//console.log(msg);
+						   	}else{
+						   		alert('系统繁忙!');
+						   }
+						 	}
+					});
+			}
+			
 			function getCourseData(dateContentVar){
-					var ajaxCallUrl='/libpack/aiAjaxClass.php?act=getCourseInfo&uid='+userId+'&aid='+actionId+'&date='+dateContentVar;
+				var fdata=$('#dataForm').serialize()+'&aid='+encodeURIComponent(actionId);
+				var ajaxCallUrl='/libpack/aiAjaxClass.php?act=getCourseInfo&uid='+userId+'&date='+dateContentVar;
 					$.ajax({
 						   type: "POST",
 						   url:ajaxCallUrl,
-						   data:$('#dataForm').serialize(),// 要提交的表单
+						   data:fdata,// 要提交的表单
 						   dataType:'json',
 						   success: function(msg) {
-							   console.log(msg);
 							   if(msg){
 								   var countNums,countWeight,countTime;
 								   for(i=0;i<msg.length;i++){
@@ -507,9 +532,7 @@
 								  }
 							   }
 					});
-			}			
-			
-			
+			}
 			$( "#addItemsList" ).click(function (){
 				if(userId > 0){
 					var ajaxCallUrl='/libpack/aiAjaxClass.php?act=postUserCourseInfo&uid='+userId+'&aid='+actionId+'&date='+dateContentVar;
@@ -526,12 +549,7 @@
 					}
 			});
 			$(function(){
-						var innerVal = $(input).val();		
-		innerVal += "kg";
-		$(show).find(".innerText").text(innerVal);
-		progress();	   
 				$('.gla_inbox').corner('8px');
-				
 				$('#gla_box>ul').roundabout({
 					minOpacity:1,
 					btnNext: ".next",
@@ -551,5 +569,14 @@
 				
 			});
 			</script>
+			 <script type="text/javascript" src="Templates/js/public.js"></script>
+        <script type="text/javascript">
+        	var init = function(){
+			    var newdom = new getdom;
+			   aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
+			   aijianmei.form_jugde('lg_text','lg_password');
+			}
+			init();
+        </script>
 	</body>
 </html>

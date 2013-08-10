@@ -167,7 +167,7 @@ class IndexAction extends AdministratorAction {
             '天天锻炼'     => array(
                 '添加'    => U('admin/Daily/addDaily'),
                 '管理'    => U('admin/Daily/daily'),
-		'批量导入'=> U('admin/Daily/bulkImport'),				
+		        '批量导入'=> U('admin/Daily/bulkImport'),				
             ),
             '推荐商品'     => array(
                 '添加'    => U('admin/Article/addPromote'),
@@ -175,7 +175,8 @@ class IndexAction extends AdministratorAction {
             ),
             '特定健身计划' => array(
                 '添加'    => U('admin/Daily/addFitnessProgram'),
-                '管理'    => U('admin/Daily/fitnessProgram'),	
+                '管理'    => U('admin/Daily/fitnessProgram'),
+                '视频管理'=> U('admin/Daily/fitnessVideo'),	
             ),
         );
 

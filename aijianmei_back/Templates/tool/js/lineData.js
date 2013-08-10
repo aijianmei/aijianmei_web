@@ -1,4 +1,4 @@
-﻿var jsonurl='Templates/tool/json/lineData.json?4241';
+var jsonurl='Templates/tool/json/lineData.json?4241';
 var gloData=[];
 (function getData(){
 	$.getJSON(jsonurl, function(data){

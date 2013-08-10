@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="Templates/css/public.css">
+	<div class="head">
+		    <div class="header">
+		        <div class="h_bg">
+		            <a href="/index.php?app=index"><div class="logo_1">logo</div></a>
+		            <ul class="nav">
+					<php> foreach($_TopMenuInfo as $k =>$v){</php>
+		                <li class="nav_child <php>if($v['selected_flag']==$_current){</php>nav_current<php>}</php>">
+		                	<a class="nav_a <php>if($v['selected_flag']=='forum'||$v['selected_flag']=='friends'){echo $v['selected_flag'];}</php>" href="{$v[link]}"><php>if($v['selected_flag']=='index'){</php><span class="home"><php>}</php><php> if($v['selected_flag']=='shop'){</php><span class="store"><php> }</php>{$v[menu_name]}<php> if($v['selected_flag']=='index'||$v['selected_flag']=='shop'){</php></span><php> }</php></a>
+							<ul class="mn_drop">
+							<php>foreach($v['child'] as $k=>$v){</php>
+								<li><a href="{$v['link']}" <php>if($k==0){</php>class="mn_first"<php>}</php>>{$v['menu_name']}</a></li>
+						<php>}</php>
+						</ul>
+						</li>
+					<php> }</php>
+		            </ul>
+		        </div>
+		    </div>
+  </div>

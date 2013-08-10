@@ -483,7 +483,7 @@ class UserAction extends Action {
 				$upsql=null;
 				if($_POST['dt_weight_finish']!=''||$_POST['dt_height_finish']!=''||$_POST['dt_year_finish']!=''){
 					$upsql="UPDATE ai_user_health_info SET body_weight = '".$_POST['dt_weight_finish']."'
-					,height = '".$_POST['dt_height_finish']."'
+					,height = '".$_POST['dt_height_finish']."',weightTime='".time()."'
 					,age = '".$_POST['dt_year_finish']."' WHERE uid =$mid";
 					M('')->query($upsql);
 				}
@@ -645,7 +645,7 @@ public function saveedituserinfo(){
 				$upsql=null;
 				if($_POST['dt_weight_finish']!=''||$_POST['dt_height_finish']!=''||$_POST['dt_year_finish']!=''){
 					$upsql="UPDATE ai_user_health_info SET body_weight = '".$_POST['dt_weight_finish']."'
-					,height = '".$_POST['dt_height_finish']."'
+					,height = '".$_POST['dt_height_finish']."',weightTime =' ".time()."'
 					,age = '".$_POST['dt_year_finish']."' WHERE uid =$mid";
 					M('')->query($upsql);
 				}

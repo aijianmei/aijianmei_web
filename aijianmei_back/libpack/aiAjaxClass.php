@@ -17,7 +17,8 @@ class Ajax {
 	protected $allowAction = array (
 			'setUserLogImg',
 			'postUserCourseInfo',
-			'getCourseInfo' 
+			'getCourseInfo',
+			'postWeightInfo' ,
 	);
 	protected $ttf = 'FZSJSJW.TTF';
 	public function __construct() {
@@ -31,37 +32,69 @@ class Ajax {
 	public function __call($name, $args) {
 		die ( 40004 );
 	}
-	public function getCourseInfo() {
-		$uid = $_REQUEST ['uid'];
-		$aid = $_REQUEST ['aid'];
-		$date = date("Ymd",strtotime(str_replace(".","-", $_REQUEST ['date'])));
-		$sql=null;
-		$sql="select * from ai_user_course_list where `uid`=$uid and `aid`=$aid  and `date`=$date";
-		$data = $this->db->_query ( $sql );
-		
-		if(!empty($data)){
-			foreach ($data as $k =>&$value){
-				$value['loginfo']=unserialize($value['loginfo']);			
-			}
-			echo json_encode($data);
+
+	public function postWeightInfo(){
+		$uid=$_SESSION['mid'];
+		if(!$uid > 0) die();
+		$weight=intval($_POST['weight']);
+		$targetWeight=intval($_POST['tweight']);
+		$nowWeight=intval($_POST['nweight']);
+
+		$checkSql="select * from ai_user_health_info where `uid` =$uid";
+		$checkResult=$this->db->_query($checkSql);
+		if(!empty($checkResult)){
+			$updateSql="UPDATE  ai_user_health_info SET `body_weight` =  '".$weight."',
+						`targetWeight` =  '".$targetWeight."',`nowWeight`='".$nowWeight."',`targetTime` =  '".time()."'
+						 WHERE `uid` =$uid LIMIT 1 ";
+			$this->db->_query($updateSql);
 		}else{
-			
+			$insertSql="INSERT INTO  ai_user_health_info (`uid` ,`body_weight` ,`height` ,`age` ,`targetWeight` ,`nowWeight` 
+				,`weightTime` ,`targetTime`)VALUES ('".$uid."','".$weight."','0','0','".$targetWeight."','".$nowWeight."','".time()."','".time()."')";
+			$this->db->_query($updateSql);
 		}
+		if($targetWeight > $weight){//目标数值大于原始值 增重
+			$calorie=($targetWeight-$nowWeight)*7700;
+		}else{
+			$calorie=($nowWeight-$targetWeight)*7700;
+		}
+		$data['status']=1;
+		$data['calorie']=$calorie;
+		echo json_encode($data);
 		exit;
 	}
+	public function getCourseInfo() {
+		$uid = $_REQUEST ['uid'];
+		
+		$aid = $this->getActionIdByName ( $_REQUEST ['aid'] );
+		if (! $aid) {
+			die ();
+		}
+		$date = date ( "Ymd", strtotime ( str_replace ( ".", "-", $_REQUEST ['date'] ) ) );
+		$sq = null;
+		$sql = "select * from ai_user_course_list where `uid`=$uid and `aid`=$aid  and `date`=$date";
+		$data = $this->db->_query ( $sql );
+		if (! empty ( $data )) {
+			foreach ( $data as $k => &$value ) {
+				$value ['loginfo'] = unserialize ( $value ['loginfo'] );
+			}
+			echo json_encode ( $data );
+		} else {
+		}
+		exit ();
+	}
 	public function postUserCourseInfo() {
-		$date = '08/08/2013';
 		$uid = $_REQUEST ['uid'];
 		$aid = $_REQUEST ['aid'];
-		$date = date("Ymd",strtotime(str_replace(".","-", $_REQUEST ['date'])));
+		
+		$date = date ( "Ymd", strtotime ( str_replace ( ".", "-", $_REQUEST ['date'] ) ) );
 		$this->checkUserId ( $uid );
 		foreach ( $_POST ['nums'] as $key => $value ) {
 			$loginfo = null;
 			$group = $key + 1;
-			//$date = date ( 'Ymd', strtotime ( $date ) );
-			$loginfo ['nums'] = intval($value);
-			$loginfo ['weight'] =intval($_POST ['weight'] [$key]);
-			$loginfo ['time'] = intval($_POST ['time'] [$key]);
+			// $date = date ( 'Ymd', strtotime ( $date ) );
+			$loginfo ['nums'] = intval ( $value );
+			$loginfo ['weight'] = intval ( $_POST ['weight'] [$key] );
+			$loginfo ['time'] = intval ( $_POST ['time'] [$key] );
 			$loginfo = serialize ( $loginfo );
 			$checkSql = "select * from ai_user_course_list where `uid`=$uid and `aid`=$aid and `group`=$group and `date`=$date";
 			$checkData = $this->db->_query ( $checkSql );
@@ -76,6 +109,13 @@ class Ajax {
 		}
 		// print_r($_REQUEST);
 		exit ();
+	}
+	protected function getActionIdByName($name) {
+		$sql = $data = null;
+		$name = ( string ) $name;
+		$sql = "select * from ai_action_list where `name`='" . $name . "'";
+		$data = $this->db->_query ( $sql );
+		return ! empty ( $data ) ? $data [0] ['id'] : false;
 	}
 	protected function checkUserId($uid) {
 		if ($uid == $_SESSION ['mid']) {

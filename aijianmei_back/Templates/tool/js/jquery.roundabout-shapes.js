@@ -54,6 +54,7 @@ jQuery.extend(jQuery.roundaboutShapes,
 			z: (Math.cos(r + a) + 1) / 2,
 			scale: (Math.sin(r + Math.PI/2 + a) / 2) + 0.5
 		};
+
 	},
 	waterWheel: function(r, a, t) {
 		return {

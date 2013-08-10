@@ -136,6 +136,7 @@ function newaddwindow(){
 <th>动作名称</th>
 <th class="hidden-phone">所属分类(多个以,隔开)</th>
 <th class="hidden-phone">动作属性(多个以,隔开)</th>
+<th class="hidden-phone">是否为默认属性</th>
 <th class="span1 text-center"><i class="icon-bolt"></i>操作</th>
 </tr>
 </thead>
@@ -147,6 +148,7 @@ function newaddwindow(){
 <td class="span3 text-center">{$vo.name}</td>
 <td class="hidden-phone">{$vo.cidname}</td>
 <td class="hidden-phone">{$vo.attribute}</td>
+<td class="hidden-phone"><php>if($vo['recommend']==1){echo '<span style="color:red;">是</span>';}else{echo '<span>否</span>';}</php></td>
 <td class="span1 text-center">
 <div class="btn-group">
 <a href="{:U('admin/Course/editAction',array('id'=>$vo['id']))}" class="btn btn-mini btn-success">Edit</a>

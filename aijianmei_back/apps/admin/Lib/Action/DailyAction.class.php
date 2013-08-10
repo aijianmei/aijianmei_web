@@ -464,5 +464,10 @@ class DailyAction extends AdministratorAction {
 		$res=M('fitness_program')->where (array('id' => $vid ))->delete ();
 		echo $res ? '1' : '0';
 	}
+	function fitnessVideo(){
+		var_dump($_REQUEST);
+		$this->display('addFitnessVideo');
+	}
+
 }
 ?>
