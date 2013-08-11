@@ -219,7 +219,7 @@
 								</form>
 							</div><!--End userTable-->
 							<div class="userPic userArea" style="display:none;">
-								<!-- <div class="uploadTip"><a href="">点击上传图片</a></div> -->
+								
 								<div class="uploadArea">
 									<div id="gla">
 										<div id="gla_box">
@@ -242,17 +242,19 @@
 											</ul>
 										</div>
 									</div>
-									<!-- <img src="images/tool/pic.png" alt="UploadPicture" />
-									<div class="uploadCover"></div>
-									<div class="clickUpload">点击上传图片</div>
-									<form action="" method="post" id="imageUpload" style="display:none;">
-									<input type="file" name="img" id="img">
-									</form>
-									<script>
-									$(".clickUpload").click(function (){
-										$("#img").click();
-									});
-									</script> -->
+									
+									<div class="userUpload">
+										<button class="clickUpload"></button>
+										<form action="" method="post" id="imageUpload" style="display:none;">
+											<input type="file" name="img" id="img">
+										</form>
+										<script>
+										$(".clickUpload").click(function (){
+											$("#img").click();
+										});
+										</script>
+									</div>
+									
 								</div>
 							</div><!--End userPic-->
 							<div class="userNote userArea" style="display:none;">
@@ -265,11 +267,12 @@
 										</ul>
 									</div>
 								</div>
+								<div class="userUpload"><button class="editDairyBtn"></button></div>
 								<div id="writeForm" style="display:none;">
 									<form action="">
 										<div class="writeArea">
 											<div><textarea name="write" id="write" maxlength="200" autofocus></textarea></div>
-											<div><button class="writeSub"></button></div>
+											<div><button class="writeSub" type="button"></button></div>
 										</div>
 									</form>
 								</div>

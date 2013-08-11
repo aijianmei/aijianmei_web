@@ -285,40 +285,44 @@ $(".editSave").click(function(){
 maxGroup = 7;
 defaultGroup = maxGroup + 3;
 var addGroup = function(){
-	var groupArr = [ "第五组", "第六组", "第七组"],
-		col = $(".tBody").find(".actGroup").first().find(".col").length,
-		colArr = [],
-		colText = null;
-		
-	if(maxGroup<defaultGroup){
-		for(var i=0; i<col; i++){
-			if(0==i){
-				colText = groupArr[maxGroup-7];
-				maxGroup++;
+		var groupArr = [ "第五组", "第六组", "第七组"],
+			col = $(".tBody").find(".actGroup").first().find(".col").length,
+			colArr = [],
+			colText = null;
+			
+		if(maxGroup<defaultGroup){
+			for(var i=0; i<col; i++){
+				if(0==i){
+					colText = groupArr[maxGroup-7];
+					maxGroup++;
+				}
+				else{
+					colText = '<span class="cut" style="display:block;"></span>'
+							+ '<input type="text" value="0" class="figure" style="background:url(images/tool/sprites2.png) no-repeat -32px -64px;"/>'
+							+ '<span class="add" style="display:block;"></span>' ;
+				}
+				colArr.push('<div class="col col' + (++i) +'">'+ colText +'</div>');
+				i--;
+			}
+			var k = (defaultGroup - maxGroup)%2,
+				rowClass = null;
+			if( k == 0){
+				rowClass = "oddRow";
 			}
 			else{
-				colText = '<span class="cut" style="display:block;"></span>'
-						+ '<input type="text" value="0" class="figure" style="background:url(images/tool/sprites2.png) no-repeat -32px -64px;"/>'
-						+ '<span class="add" style="display:block;"></span>' ;
+				rowClass = "evenRow";
 			}
-			colArr.push('<div class="col col' + (++i) +'">'+ colText +'</div>');
-			i--;
+			var newRow = '<div class="actGroup clearfix'+ ' '+ rowClass +'">' + colArr.join("") + '</div>';
+			$(".tBody").append(newRow);
+			if(maxGroup == defaultGroup){
+				$(".addBtn").hide();
+			}
 		}
-		var k = (defaultGroup - maxGroup)%2,
-			rowClass = null;
-		if( k == 0){
-			rowClass = "oddRow";
-		}
-		else{
-			rowClass = "evenRow";
-		}
-		var newRow = '<div class="actGroup clearfix'+ ' '+ rowClass +'">' + colArr.join("") + '</div>';
-		$(".tBody").append(newRow);
-		if(maxGroup == defaultGroup){
-			$(".addBtn").hide();
-		}
-	}
-	
-} 
+	};
+$(".editDairyBtn,.writeSub").click(function(){
+	$(".userNote>#gla").toggle();
+	$(".userUpload").toggle();
+	$("#writeForm").toggle();
 
+})
 
