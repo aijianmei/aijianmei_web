@@ -16,15 +16,15 @@ class SearchAction extends Action {
 		//视频
 		$videoSql="select id,title,brief,create_time,link AS img,click,2 from ai_video where category_id in (".$cateSql.") or keyword like '%".$keyword."%' or title like '%".$keyword."%'";
 		//天天锻炼
-		$dailySql="select a.id,a.title,a.content as brief,a.create_time,b.link as img,read_count as click,4 from ai_daily a left join ai_daily_video b on a.id=b.daily_id where a.keyword like '%".$keyword."%' or a.title like '%".$keyword."%'";
+		//$dailySql="select a.id,a.title,a.content as brief,a.create_time,b.link as img,read_count as click,4 from ai_daily a left join ai_daily_video b on a.id=b.daily_id where a.keyword like '%".$keyword."%' or a.title like '%".$keyword."%'";
 		
-		$allsql="select count(*) as cnums from ($arlSql union all $videoSql union all $dailySql) as t";
+		$allsql="select count(*) as cnums from ($arlSql union all $videoSql) as t";
 		$countinfo=$this->getDataCache(md5($allsql));
 		if(!$countinfo){
 			$countinfo=M('')->query($allsql);
 			$this->setDataCache(md5($allsql),$countinfo);
 		}
-		$limitsql="select * from ($arlSql union all $videoSql union all $dailySql) as t order by create_time desc limit ".($pg-1)*$nums.",$nums";
+		$limitsql="select * from ($arlSql union all $videoSql union) as t order by create_time desc limit ".($pg-1)*$nums.",$nums";
 		$searchInfo=$this->getDataCache(md5($limitsql));
 		if(!$searchInfo){
 			$searchInfo=M('')->query($limitsql);
@@ -49,7 +49,7 @@ class SearchAction extends Action {
 					$searchInfo[$key]['url']='/index-Train-videoDetail-'.$value['id'].'.html';
 					$searchInfo[$key]['shareurl']=($channelinfo[0]['htmlurl']!='')?$channelinfo[0]['htmlurl']:$channelinfo[0]['link'];
 				}
-				if($value['1']==4){
+				/*if($value['1']==4){
 					$getCsql="select a.channel,a.img,b.link,b.htmlurl from ai_daily a left join ai_daily_video b on a.id=b.daily_id where a.id='".$value['id']."'";
 					$channelinfo=M('')->query($getCsql);
 					$searchInfo[$key]['url']='/index-Index-daily-'.$value['id'].'-'.$channelinfo[0]['channel'].'.html';
@@ -57,7 +57,7 @@ class SearchAction extends Action {
 					if($channelinfo[0]['img']!=''&&$channelinfo[0]['link']=='null'){
 						$searchInfo[$key]['img']='/public/images/article/'.$channelinfo[0]['img'];
 					}
-				}
+				}*/
 			}
 			$this->setDataCache(md5($limitsql),$searchInfo);
 		}

@@ -2,81 +2,77 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title></title>
-		<link rel="stylesheet" href="Templates/css/public.css" />
-		<link rel="stylesheet" href="Templates/tool/css/public.css">
-		<link rel="stylesheet" href="Templates/tool/css/tool.css" />
-		<link rel="stylesheet" href="Templates/tool/css/jquery-ui.css" />
-		<link rel="stylesheet" href="Templates/tool/css/common.css" type="text/css" />
-		<link rel="stylesheet" href="Templates/tool/css/jquery.jqplot.min.css" type="text/css" />
-		
-		<script type="text/javascript" src="Templates/tool/js/jquery.latest.js"></script>
-		<script type="text/javascript" src="Templates/tool/js/jquery.jqplot.min.js"></script>
-		<script language="javascript" type="text/javascript" src="Templates/tool/js/jqplot.categoryAxisRenderer.js"></script>
-		<script language="javascript" type="text/javascript" src="Templates/tool/js/jqplot.highlighter.js"></script>
-		
-	</head>
-	
-	<body>
-		<include file="Templates/courseHeader.html" />
-        <div class="wrapper">
-        	<div class="wrapper_bg clearfix">
-	        	<div id="weightManage" class="clearfix">
-					<div class="clearfix">
-						<div id="userInfo">
-							<img src="<php>echo getUserFace(getMid(),'b');</php>" alt="UserFace" class="userFace" />
-							<div><a href="javasrcpit:void(0);" class="userName">{$userName}</a></div>
-							<div><p class="userIntro  login">{$userDes}</p></div>
-							<div>
+	<title></title>
+	<link rel="stylesheet" href="Templates/css/public.css" />
+	<link rel="stylesheet" href="Templates/tool/css/public.css">
+	<link rel="stylesheet" href="Templates/tool/css/tool.css" />
+	<link rel="stylesheet" href="Templates/tool/css/jquery-ui.css" />
+	<link rel="stylesheet" href="Templates/tool/css/common.css" type="text/css" />
+	<link rel="stylesheet" href="Templates/tool/css/jquery.jqplot.min.css" type="text/css" />
+	<script type="text/javascript" src="Templates/tool/js/jquery.latest.js"></script>
+	<script type="text/javascript" src="Templates/tool/js/jquery.jqplot.min.js"></script>
+	<script language="javascript" type="text/javascript" src="Templates/tool/js/jqplot.categoryAxisRenderer.js"></script>
+	<script language="javascript" type="text/javascript" src="Templates/tool/js/jqplot.highlighter.js"></script>
+</head>
+<body>
+	<include file="Templates/courseHeader.html" />
+	<div class="wrapper">
+		<div class="wrapper_bg clearfix">
+			<div id="weightManage" class="clearfix">
+				<div class="clearfix">
+					<div id="userInfo">
+						<img src="<php>echo getUserFace(getMid(),'b');</php>" alt="UserFace" class="userFace" />
+						<div><a href="javasrcpit:void(0);" class="userName">{$userName}</a></div>
+						<div><p class="userIntro  login">{$userDes}</p></div>
+						<div>
+							<php>foreach($keywordInfo as $key => $value){</php>
+							<span class="userLabel">{$value}</span>
+							<php>}</php>
+						</div>
+					</div>
+					<div class="separateY"></div>
 
-								<php>foreach($keywordInfo as $key => $value){</php>
-								<span class="userLabel">{$value}</span>
-								<php>}</php>
+					<div id="weight">
+						<form action="" method="post" >
+							<div class="weightPro">
+								<h3 class="partTit"><span>我的体重变化</span></h3>
+								<div class="progress">
+									<div class="innerPro" style="width: {$userHealth['pertent']}%;"></div>
+									<span class="percent">{$userHealth['pertent']}%</span>
+									<php></php><p class="tip tipFont">{$toticString}</p>
+								</div>
+								<div class="initWeight"><span class="innerText">{$userHealth['weight']}kg</span></div>
+								<div class="goalWeight"><span class="innerText">{$userHealth['targetWeight']}kg</span></div>
 							</div>
-						</div>
-						<div class="separateY"></div>
-
-						<div id="weight">
-							<form action="" method="post" >
-								<div class="weightPro">
-									<h3 class="partTit"><span>我的体重变化</span></h3>
-									<div class="progress">
-										<div class="innerPro"></div>
-										<span class="percent">{$userHealth['pertent']}%</span>
-										<p class="tip tipFont">这是您第一次录入数据，请先填入您的初始体重和目标体重吧！</p>
-									</div>
-									<div class="initWeight"><span class="innerText">{$userHealth['weight']}kg</span></div>
-									<div class="goalWeight"><span class="innerText">{$userHealth['targetWeight']}kg</span></div>
+							<div class="userInput clearfix">
+								<div class="input1">
+									<span class="redFont">原始体重<input type="text" value="{$userHealth['weight']}" id="initW" maxlength="5"/>Kg</span>
+									<span class="initDate redFont">{$userHealth['weightTime']}</span>
 								</div>
-								<div class="userInput clearfix">
-									<div class="input1">
-										<span class="redFont">原始体重<input type="text" value="{$userHealth['weight']}" id="initW" maxlength="5"/>Kg</span>
-										<span class="initDate redFont">{$userHealth['weightTime']}</span>
-									</div>
-									<div class="input2">
-										<span class="greenFont">目标体重<input type="text" value="{$userHealth['targetWeight']}" id="goalW" maxlength="5"/>Kg</span>
-									</div>
-									<div class="input3">
-										<div class="curWeight"><span class="innerText">{$userHealth['nowWeight']}kg</span></div>
-										<span class="blueFont">当前体重<input type="text" value="{$userHealth['nowWeight']}" id="curW" maxlength="5"/>Kg</span>
-										<span class="curDate blueFont">{$userHealth['targetTime']}</span>
-									</div>
+								<div class="input2">
+									<span class="greenFont">目标体重<input type="text" value="{$userHealth['targetWeight']}" id="goalW" maxlength="5"/>Kg</span>
 								</div>
-								<div class="saveBtn">
-									<button class="save weiSaveBtn" type="button"></button>
+								<div class="input3">
+									<div class="curWeight"><span class="innerText">{$userHealth['nowWeight']}kg</span></div>
+									<span class="blueFont">当前体重<input type="text" value="{$userHealth['nowWeight']}" id="curW" maxlength="5"/>Kg</span>
+									<span class="curDate blueFont">{$userHealth['targetTime']}</span>
 								</div>
-							</form>
-						</div>
-					</div>	
-					<div class="separateX"></div>
-					<div id="tipMsg">您的目标体重是<span class="yourGoal">{$userHealth['targetWeight']}</span>公斤，距离目标还需要<php>if($userHealth['isfitness']==1){</php>燃烧<php>}else{</php>吸收<php>}</php>热量<span class="calorie">{$userHealth['klu']}</span>大卡！为了您的理想健身，努力吧！</div>
-				</div><!--End weightManage-->
+							</div>
+							<div class="saveBtn">
+								<button class="save weiSaveBtn" type="button"></button>
+							</div>
+						</form>
+					</div>
+				</div>	
 				<div class="separateX"></div>
-				<div id="dataIn">
-					<ul class="actNav clearfix">
-						<volist id="actionListVo" name="actionList" key="n">
+				<div id="tipMsg">您的目标体重是<span class="yourGoal">{$userHealth['targetWeight']}</span>公斤，距离目标还需要<php>if($userHealth['isfitness']==1){</php>燃烧<php>}else{</php>吸收<php>}</php>热量<span class="calorie">{$userHealth['klu']}</span>大卡！为了您的理想健身，努力吧！</div>
+			</div><!--End weightManage-->
+			<div class="separateX"></div>
+			<div id="dataIn">
+				<ul class="actNav clearfix">
+					<volist id="actionListVo" name="actionList" key="n">
 						<li <php>if($n==1){</php>class="curAct"<php>}</php>>{$actionListVo.name}<span></span></li>
-						</volist>
+					</volist>
 						<!--<li>深蹲<span></span></li>
 						<li>俯卧撑<span></span></li>
 						<li>引体向上<span></span></li>
@@ -111,9 +107,9 @@
 					<div class="clearfix">
 						<div class="dataLeft">
 							<div class="date">
-								<span class="preDate toggleDate"></span>
-								<input type="text" id="datepicker" class="calendar"/>
-								<span class="nextDate toggleDate"></span>
+								<span class="preDate toggleDate"  tagType="itemTag" atype="pre"></span>
+								<input type="text" id="datepicker" class="calendar" tagType="itemTag"/>
+								<span class="nextDate toggleDate" tagType="itemTag" atype="next"></span>
 							</div>
 							<ul class="dataTab">
 								<li class="list"><img src="Templates/tool/images/tool/scar1.png" alt="" /><span class="cover"  style="display:none;"></span></li>
@@ -125,404 +121,584 @@
 							<div class="userTable userArea" >
 								<form action="" id="dataForm" >
 									<div class="thead clearfix">
-										<div class="col1 col">杠铃卧推<span class="rowTip dateContentVar"><?php echo date('Y.m.d',time())?></span></div>
-										<div class="col2 col">数量<span class="rowTip">以往平均值：<strong>55</strong>个</span></div>
-										<div class="col3 col">重量<span class="rowTip">以往平均值：<strong>65</strong>kg</span></div>
-										<div class="col4 col">时间<span class="rowTip">以往平均值：<strong>65</strong>s</span></div>
-									</div>
-									<div class="tBody">
-										<php>foreach($couserinfo as $key => $value){</php>
-										<div class="actGroup actGroupKon <php>if(($key+1)%2==0){</php>evenRow<php>}else{</php>oddRow<php>}</php> clearfix">
-											<div class="col1 col">第{$value['cnum']}组</div>
-											<div class="col2 col">
-												<span class="cut"></span>
-												<input type="text" value="{$value['loginfo']['nums']}" name="nums[]" class="figure" readonly/>
-												<span class="add"></span>
-											</div>
-											<div class="col3 col">
-												<span class="cut"></span>
-												<input type="text" value="{$value['loginfo']['weight']}" name="weight[]" class="figure" readonly/>
-												<span class="add"></span>
-											</div>
-											<div class="col4 col">
-												<span class="cut"></span>
-												<input type="text" value="{$value['loginfo']['time']}" name="time[]" class="figure" readonly/>
-												<span class="add"></span>
-											</div>
+										<div class="col1 col"><b class="actionNameBox">{$actionList[0]['name']}</b>
+											<span class="rowTip dateContentVar"><?php echo date('Y.m.d',time())?></span></div>
+											<div class="col2 col">数量<span class="rowTip">以往平均值：<strong>55</strong>个</span></div>
+											<div class="col3 col">重量<span class="rowTip">以往平均值：<strong>65</strong>kg</span></div>
+											<div class="col4 col">时间<span class="rowTip">以往平均值：<strong>65</strong>s</span></div>
 										</div>
-										<php>}</php>
+										<div class="tBody">
+											<php>foreach($couserinfo as $key => $value){</php>
+											<div class="actGroup actGroupKon <php>if(($key+1)%2==0){</php>evenRow<php>}else{</php>oddRow<php>}</php> clearfix">
+												<div class="col1 col">第{$value['cnum']}组</div>
+												<div class="col2 col">
+													<span class="cut"></span>
+													<input type="text" value="{$value['loginfo']['nums']}" name="nums[]" class="figure" readonly/>
+													<span class="add"></span>
+												</div>
+												<div class="col3 col">
+													<span class="cut"></span>
+													<input type="text" value="{$value['loginfo']['weight']}" name="weight[]" class="figure" readonly/>
+													<span class="add"></span>
+												</div>
+												<div class="col4 col">
+													<span class="cut"></span>
+													<input type="text" value="{$value['loginfo']['time']}" name="time[]" class="figure" readonly/>
+													<span class="add"></span>
+												</div>
+											</div>
+											<php>}</php>
 
-									
-									<div class="actGroup avgsRow clearfix">
-										<div class="col1 col">平均值</div>
-										<div class="col2 col">0</div>
-										<div class="col3 col">0</div>
-										<div class="col4 col">0</div>	
+
+											<div class="actGroup avgsRow clearfix">
+												<div class="col1 col">平均值</div>
+												<div class="col2 col">0</div>
+												<div class="col3 col">0</div>
+												<div class="col4 col">0</div>	
+											</div>
+											<div class="tFooter clearfix">
+												<div class="addBtn" style="display:none;"><button type="button" class="addGroupBtn" title="加一组">加一组</button></div>
+												<div class="col1 col ">
+													<button class="edit editSave" type="button"></button>
+													<button class="save editSave" type="button" id="addItemsList" style="display:none;"></button>
+												</div>
+											</div>
+										</form>
 									</div>
-									<div class="tFooter clearfix">
-										<div class="addBtn" style="display:none;"><button type="button" class="addGroupBtn" title="加一组">加一组</button></div>
-										<div class="col1 col ">
-											<button class="edit editSave" type="button"></button>
-											<button class="save editSave" type="button" id="addItemsList" style="display:none;"></button>
+								</div><!--End userTable-->
+								<div class="userPic userArea" style="display:none;">
+									<!-- <div class="uploadTip"><a href="">点击上传图片</a></div> -->
+									<div class="uploadArea">
+										<div id="gla">
+											<div id="gla_box">
+												<ul>
+													<li>
+														<div class="gla_inbox glaimagebox" dataType="default" date="<php>echo reNorTime();</php>">
+															<img src="{$imageList['default']['image']}" />
+														</div>
+													</li>
+													<li>
+														<div class="gla_inbox glaimagebox" dataType="next" date="<php>echo reNorTime(1);</php>">
+															<img src="{$imageList['next']['image']}" />
+														</div>
+													</li>
+													<li>
+														<div class="gla_inbox glaimagebox" dataType="pre" date="<php>echo reNorTime(-1);</php>">
+															<img src="{$imageList['pre']['image']}" />
+														</div>
+													</li>
+												</ul>
+											</div>
 										</div>
+
+										<div class="userUpload">
+											<button class="clickUpload"></button>
+
+										</div>
+
 									</div>
-								</form>
-							</div><!--End userTable-->
-							<div class="userPic userArea" style="display:none;">
-								<!-- <div class="uploadTip"><a href="">点击上传图片</a></div> -->
-								<div class="uploadArea">
+								</div><!--End userPic-->
+								<div class="userNote userArea fleft" style="display:none;">
 									<div id="gla">
 										<div id="gla_box">
-											
 											<ul>
-												<li>
-													<div class="gla_inbox">
-														<img src="Templates/tool/images/1.jpg" />
-													</div>
-												</li>
-												<li>
-													<div class="gla_inbox">
-														<img src="Templates/tool/images/3.jpg" />
-													</div>
-												</li>
-												<li>
-													<div class="gla_inbox">
-														<img src="Templates/tool/images/4.png" />
-													</div>
-												</li>
+												<li><div class="gla_inbox glalogbox" dataType="default" date="<php>echo reNorTime();</php>"><img src="{$logList['default']['image']}" /></div></li>
+												<li><div class="gla_inbox glalogbox" dataType="next" date="<php>echo reNorTime(1);</php>"><img src="{$logList['next']['image']}" /></div></li>
+												<li><div class="gla_inbox glalogbox" dataType="pre" date="<php>echo reNorTime(-1);</php>"><img src="{$logList['pre']['image']}" /></div></li>
 											</ul>
 										</div>
 									</div>
-									<!-- <img src="images/tool/pic.png" alt="UploadPicture" />
-									<div class="uploadCover"></div>
-									<div class="clickUpload">点击上传图片</div>
-									<form action="" method="post" id="imageUpload" style="display:none;">
-									<input type="file" name="img" id="img">
-									</form>
-									<script>
-									$(".clickUpload").click(function (){
-										$("#img").click();
-									});
-									</script> -->
-								</div>
-							</div><!--End userPic-->
-							<div class="userNote userArea" style="display:none;">
-								<div id="gla">
-									<div id="gla_box">
-										<ul>
-											<li><div class="gla_inbox"><img src="images/tool/rj_1.png" /></div></li>
-											<li><div class="gla_inbox"><img src="images/tool/rj_1.png" /></div></li>
-											<li><div class="gla_inbox"><img src="images/tool/rj_1.png" /></div></li>
-										</ul>
-									</div>
-								</div>
-								<div id="writeForm" style="display:none;">
-									<form action="">
+									<div class="userUploadLog fright" ><button class="editDairyBtn"></button></div>
+									<div id="writeForm" style="display:none;">
 										<div class="writeArea">
-											<div><textarea name="write" id="write" maxlength="200" autofocus></textarea></div>
-											<div><button class="writeSub"></button></div>
+											<div><textarea name="writeLog" style="height: 210px;" id="write" maxlength="200" autofocus></textarea></div>
+											<div><button class="writeSub" type="button"></button></div>
 										</div>
-									</form>
-								</div>
-							</div><!--End userNote-->
-						</div><!--dataRight-->
-					</div>
-				</div><!--End dataIn-->
-				<div class="separateX"></div>
-				<div id="dataOut" class="clearfix">
-					<h3 class="partTit"><span>曲线变化图</span></h3>
-					<p class="tip  greenFont">这是您录入的健身数据所生产的曲线图。健身心情、历程图片、数据变化，在这里，每天的进步一目了然！</p>
-					<div class="chart">
-						<div class="clearfix">
-							<div class="date">
-								<span class="preDate toggleDate"></span>
-								<input type="text" id="datepicker2" class="calendar"/>
-								<span class="nextDate toggleDate"></span>
-							</div>
-							<ul class="chartDate clearfix">
-								<li class="chartSelect curChart">7天</li>
-								<li class="chartSelect">30天</li>
-								<li class="chartSelect">一年</li>
-							</ul>
-							<div class="colorTip clearfix">
-								<span class="greenLine">数量</span>
-								<span class="blueLine">重量</span>
-								<span class="redLine">时间</span>
-							</div>
+
+									</div>
+								</div><!--End userNote-->
+							</div><!--dataRight-->
 						</div>
-						<div id="line1" style="height:280px;width:880px;"></div>
-					</div>
-					<div class="sider">
-						<ul class="siderBtn">
-							<li class="chartBtn curGroup">1</li>
-							<li class="chartBtn">2</li>
-							<li class="chartBtn">3</li>
-							<li class="chartBtn">4</li>
-							<li class="chartBtn">5</li>
-							<li class="chartBtn">6</li>
-							<li class="chartBtn">7</li>
-						</ul>
-					</div>
-				</div><!--End dataOut-->
-				<div class="separateX"></div>
-				<div class="bottomRank clearfix">
-					<h3 class="partTit"><span>站内排行榜</span></h3>
-					<p class="tip  greenFont">您在爱健美网的健身排名，赶紧瞧瞧自己排在哪里吧！</p>
-					<div class="ranking">
-						<div class="rankType"><span>全站排行</span></div>
-						<div class="sportsRank ">
-							<ul class="rankLine clearfix">
-								<li class="rankDay">当天</li>
-								<li class="rankDay">7天</li>
-								<li class="rankDay">30天</li>
-								<li class="rankDay allRank curRanking">所有</li>
-							</ul>
-							<div class="rankList">
-								<div class="userPos">
-									<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-									<a href="" class="rankName">要减肥</a>
-									<span class="yourPos">您当前的排名是<span class="userPos redFont">2333</span>位</span>
+					</div><!--End dataIn-->
+					<div class="separateX"></div>
+					<div id="dataOut" class="clearfix">
+						<h3 class="partTit"><span>曲线变化图</span></h3>
+						<p class="tip  greenFont">这是您录入的健身数据所生产的曲线图。健身心情、历程图片、数据变化，在这里，每天的进步一目了然！</p>
+						<div class="chart">
+							<div class="clearfix">
+								<div class="date">
+									<span class="preDate toggleDate linePreDate"></span>
+									<input type="text" id="datepicker2" class="calendar"/>
+									<span class="nextDate toggleDate lineNextDate" ></span>
 								</div>
-								<ul class="topTen">
-									<li>
-										<span class="order No1">1</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order No2">2</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order No3">3</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">4</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">5</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">6</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">7</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">8</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">9</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">10</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
+								<ul class="chartDate clearfix">
+									<li class="chartSelect curChart changeLine" selectType='7'>7天</li>
+									<li class="chartSelect changeLine" selectType='30'>30天</li>
+									<li class="chartSelect changeLine" selectType='365'>一年</li>
 								</ul>
-							</div>
-						</div>
-					</div><!--End ranking-->
-					<div class="ranking rankRight">
-						<div class="rankType"><span>好友排行</span></div>
-						<div class="sportsRank ">
-							<ul class="rankLine clearfix">
-								<li class="rankDay">当天</li>
-								<li class="rankDay">7天</li>
-								<li class="rankDay">30天</li>
-								<li class="rankDay allRank curRanking">所有</li>
-							</ul>
-							<div class="rankList">
-								<div class="userPos">
-									<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-									<a href="" class="rankName">要减肥</a>
-									<span class="yourPos">您当前的排名是<span class="userPos redFont">2333</span>位</span>
+								<div class="colorTip clearfix">
+									<span class="greenLine">数量</span>
+									<span class="blueLine">重量</span>
+									<span class="redLine">时间</span>
 								</div>
-								<ul class="topTen">
-									<li>
-										<span class="order No1">1</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order No2">2</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order No3">3</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">4</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">5</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">6</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">7</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">8</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">9</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-									<li>
-										<span class="order">10</span>
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="otherName">要减肥</a>
-									</li>
-								</ul>
 							</div>
+							<div id="line1" style="height:280px;width:880px;"></div>
 						</div>
-					</div><!--End ranking-->
+						<div class="sider">
+							<ul class="siderBtn">
+								<li class="chartBtn curGroup" groupNum="1">1</li>
+								<li class="chartBtn" groupNum="2">2</li>
+								<li class="chartBtn" groupNum="3">3</li>
+								<li class="chartBtn" groupNum="4">4</li>
+								<li class="chartBtn" groupNum="5">5</li>
+								<li class="chartBtn" groupNum="6">6</li>
+								<li class="chartBtn" groupNum="7">7</li>
+							</ul>
+						</div>
+					</div><!--End dataOut-->
+					<div class="separateX"></div>
+					<div class="bottomRank clearfix">
+						<h3 class="partTit"><span>站内排行榜</span></h3>
+						<p class="tip  greenFont">您在爱健美网的健身排名，赶紧瞧瞧自己排在哪里吧！</p>
+						<div class="ranking">
+							<div class="rankType"><span>全站排行</span></div>
+							<div class="sportsRank ">
+								<ul class="rankLine clearfix">
+									<li class="rankDay">当天</li>
+									<li class="rankDay">7天</li>
+									<li class="rankDay">30天</li>
+									<li class="rankDay allRank curRanking">所有</li>
+								</ul>
+								<div class="rankList">
+									<div class="userPos">
+										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+										<a href="" class="rankName">要减肥</a>
+										<span class="yourPos">您当前的排名是<span class="userPos redFont">2333</span>位</span>
+									</div>
+									<ul class="topTen">
+										<li>
+											<span class="order No1">1</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order No2">2</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order No3">3</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">4</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">5</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">6</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">7</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">8</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">9</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">10</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div><!--End ranking-->
+						<div class="ranking rankRight">
+							<div class="rankType"><span>好友排行</span></div>
+							<div class="sportsRank ">
+								<ul class="rankLine clearfix">
+									<li class="rankDay">当天</li>
+									<li class="rankDay">7天</li>
+									<li class="rankDay">30天</li>
+									<li class="rankDay allRank curRanking">所有</li>
+								</ul>
+								<div class="rankList">
+									<div class="userPos">
+										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+										<a href="" class="rankName">要减肥</a>
+										<span class="yourPos">您当前的排名是<span class="userPos redFont">2333</span>位</span>
+									</div>
+									<ul class="topTen">
+										<li>
+											<span class="order No1">1</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order No2">2</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order No3">3</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">4</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">5</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">6</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">7</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">8</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">9</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+										<li>
+											<span class="order">10</span>
+											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">要减肥</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div><!--End ranking-->
+					</div>
 				</div>
-	        </div>
-        </div>
+			</div>
+			<form action="/libpack/aiAjaxClass.php?act=postUserLogPic" enctype="multipart/form-data" method="post" id="imageUpload" style="display:none;" target="exec_target">
+				<input type="hidden" id="imageUploadDateInput" name="date" value="<?php echo date('Ymd',time())?>">
+				<input type="file" name="img" id="img">
+			</form>
+			<iframe id="exec_target" name="exec_target" style="display:none;width:0;height:0;"></iframe>
 <include file="Templates/loginpart.html" />
 <include file="Templates/footer.html" />
-		<script type="text/javascript" src="Templates/tool/js/public.js"></script>  
-		<script type="text/javascript" src="Templates/tool/js/jquery-ui.js"></script>
-		<script type="text/javascript" src="Templates/tool/js/lineData.js"></script>
-		<script type="text/javascript" src="Templates/tool/js/tool.js"></script>
-		<script type="text/javascript" src="Templates/tool/js/jquery.corner.js"></script>
-		<script type="text/javascript" src="Templates/tool/js/jquery.roundabout.js"></script>
-		<script type="text/javascript" src="Templates/tool/js/jquery.roundabout-shapes.js"></script>
-		<script type="text/javascript">
-			var userId=<?php echo $_SESSION['mid']>0 ? $_SESSION['mid'] : 0; ?>;
-			var actionVal=actionVal ? actionVal : <?php echo "'".$actionList[0]['name']."'";?>;
-			var dateString='';
+<script>
+var selectTagType=7;//设置线形图 选择时间范围值
+var selectGroupType=1;//设置线形图默认的组别1
+var lineDataDate="<?php echo date('Ymd',time())?>";//线形图日期
+//用户 
+var userlist=[{
+	"part" : "我的锻炼",
+	"lists" : 
+	[{$myActionList}]
+}];
+</script>
+<script type="text/javascript" src="Templates/tool/js/public.js"></script>  
+<script type="text/javascript" src="Templates/tool/js/jquery-ui.js"></script>
+<script type="text/javascript" src="Templates/tool/js/lineData.js"></script>
+<script type="text/javascript" src="Templates/tool/js/tool.js"></script>
+<script type="text/javascript" src="Templates/tool/js/jquery.corner.js"></script>
+<script type="text/javascript" src="Templates/tool/js/jquery.roundabout.js"></script>
+<script type="text/javascript" src="Templates/tool/js/jquery.roundabout-shapes.js"></script>
+<script type="text/javascript">
+var userId=<?php echo $_SESSION['mid']>0 ? $_SESSION['mid'] : 0; ?>;
+var actionVal=actionVal ? actionVal : <?php echo "'".$actionList[0]['name']."'";?>;
+var dateString='';
+var uploadImageDate="<?php echo date('Ymd',time())?>";
+var dateContentVar="<?php echo date('Y.m.d',time())?>";
+var uploadImageType="default";
+var defaultDateString="<?php echo date('Ymd',time())?>";
+$(".clickUpload").click(function (){
+	$("#img").click();
+});
+$(document).ready(function(){
+	$("#img").change(function(){
+		$("#imageUpload").submit();
+	});
+	$("#exec_target").load(function(){
+		var data = $(window.frames['exec_target'].document.body).find("textarea").eq(0).html();
+		$(".glaimagebox[date="+uploadImageDate+"]").find('img').attr('src',data);
+	})
+});
 
-			var dateContentVar="<?php echo date('Y.m.d',time())?>";
-			$("#datepicker ").change(function (){
-				dateContentVar=$("#datepicker").val();
-				dateContentVar=dateContentVar.replace(/-/g, ".");
-				$(".dateContentVar").html(dateContentVar);
-				getCourseData(dateContentVar);
-			});
-			$(".nextDate,.preDate").click(function (){
-				dateContentVar=$("#datepicker").val();	
-				dateContentVar=dateContentVar.replace(/-/g, ".");
-				$(".dateContentVar").html(dateContentVar);
-				getCourseData(dateContentVar);
-			});
-			function postWeightInfo(){
-				var ajaxCallUrl='/libpack/aiAjaxClass.php?act=postWeightInfo';
-				var goal = $("#goalW").val(),//目标的数值
-						cur = $("#curW").val(),//当前数值
-						init = $("#initW").val();//原始数值
-						$.ajax({
-						   type: "POST",
-						   url:ajaxCallUrl,
-						   data:"weight="+init+"&tweight="+goal+"&nweight="+cur,// 要提交的表单
-						   dataType:'json',
-						   success: function(msg) {
-						   if(msg.status==1){
-						   	$(".yourGoal").html(goal);
-						   	$(".calorie").html(msg.calorie);
-						   	//console.log(msg);
-						   	}else{
-						   		alert('系统繁忙!');
-						   }
-						 	}
-					});
-			}
-			
-			function getCourseData(dateContentVar){
-				var fdata='aid='+encodeURIComponent(actionVal)+'&uid='+userId+'&date='+dateContentVar;
-				var ajaxCallUrl='/libpack/aiAjaxClass.php?act=getCourseInfo&date='+dateContentVar;
-					$.ajax({
-						   type: "POST",
-						   url:ajaxCallUrl,
-						   data:fdata,// 要提交的表单
-						   //dataType:'json',
-						   success: function(msg) {
+$("#datepicker ").change(function (){
+	if($(this).attr('tagType')=='itemTag'){
+		dateContentVar=$("#datepicker").val();
+		var vadate=dateContentVar.replace(/-/g, "");
+		dateContentVar=dateContentVar.replace(/-/g, ".");
+		$(".dateContentVar").html(dateContentVar);
+		getCourseData(dateContentVar);
+		getUserLogAllInfo(vadate);
+	}
+});
 
-							   	for (var i = $(".tBody").find('.actGroupKon').length - 1; i >= 0; i--) {
-							   		$(".tBody").find('.actGroupKon').eq(i).remove();
+$(".nextDate,.preDate").click(function (){
+	if($(this).attr('tagType')=='itemTag'){
+		dateContentVar=$("#datepicker").val();	
+		dateContentVar=dateContentVar.replace(/-/g, ".");
+		$(".dateContentVar").html(dateContentVar);
+		getCourseData(dateContentVar);
+		$(".glaimagebox[dataType='"+$(this).attr('atype')+"']").click();
+		$(".glalogbox[dataType='"+$(this).attr('atype')+"']").click();
+	}
+});
+function postWeightInfo(){
+	var ajaxCallUrl='/libpack/aiAjaxClass.php?act=postWeightInfo';
+	var goal = $("#goalW").val(),//目标的数值
+	cur = $("#curW").val(),//当前数值
+	init = $("#initW").val();//原始数值
+	$.ajax({
+		type: "POST",
+		url:ajaxCallUrl,
+		data:"weight="+init+"&tweight="+goal+"&nweight="+cur,// 要提交的表单
+		dataType:'json',
+		success: function(msg) {
+			if(msg.status==1){
+				$(".yourGoal").html(goal);
+				$(".calorie").html(msg.calorie);
+				//console.log(msg);
+			}else{
+				alert('系统繁忙!');
+			}
+		}
+	});
+}	
+function getCourseData(dateContentVar){
+	var fdata='aid='+encodeURIComponent(actionVal)+'&uid='+userId+'&date='+dateContentVar;
+	var ajaxCallUrl='/libpack/aiAjaxClass.php?act=getCourseInfo&date='+dateContentVar;
+	$.ajax({
+		type: "POST",
+		url:ajaxCallUrl,
+		data:fdata,// 要提交的表单
+		//dataType:'json',
+		success: function(msg) {
+			for (var i = $(".tBody").find('.actGroupKon').length - 1; i >= 0; i--) {
+				$(".tBody").find('.actGroupKon').eq(i).remove();
+			};
+			$(".avgsRow").before(msg);
+		}
+	});
+}
+function getUserLogAllInfo(vdate){
+	var ajaxCallUrl='/libpack/aiAjaxClass.php?act=getUserLogAllInfo';
+		$.ajax({
+			type: "POST",
+			url:ajaxCallUrl,
+			data:'date='+vdate,// 要提交的表单
+			dataType:'json',
+			success: function(msg) {
+				console.log(msg);
+				var defaultImageData=msg['imageInfo']['default'];
+				$(".glaimagebox[dataType='default']").attr('date',defaultImageData.date);
+				$(".glaimagebox[dataType='default']").find('img').attr('src',defaultImageData.image);
 
-							   	};
-							   	$(".avgsRow").before(msg);
-							   }
+				var nextImageData=msg['imageInfo']['next'];
+				$(".glaimagebox[dataType='next']").attr('date',nextImageData.date);
+				$(".glaimagebox[dataType='next']").find('img').attr('src',nextImageData.image);
 
-					});
+				var preImageData=msg['imageInfo']['pre'];
+				$(".glaimagebox[dataType='pre']").attr('date',preImageData.date);
+				$(".glaimagebox[dataType='pre']").find('img').attr('src',preImageData.image);
+
+				var dobj=$(".glalogbox[dataType='default']"),
+					nobj=$(".glalogbox[dataType='next']"),
+					pobj=$(".glalogbox[dataType='pre']");
+				var defaultLogData=msg['logInfo']['default'],
+					nextLogData=msg['logInfo']['next'],
+					preLogData=msg['logInfo']['pre'];
+				$(dobj).attr('date',defaultLogData.date);
+				$(dobj).find('img').attr('src',defaultLogData.image);
+
+				$(nobj).attr('date',nextLogData.date);
+				$(nobj).find('img').attr('src',nextLogData.image);
+
+				$(pobj).attr('date',preLogData.date);
+				$(pobj).find('img').attr('src',preLogData.image);
+
 			}
-			function saveAddItems(){
-				if(userId > 0){
-					var ajaxCallUrl='/libpack/aiAjaxClass.php?act=postUserCourseInfo&uid='+userId+'&aid='+encodeURIComponent(actionVal)+'&date='+dateContentVar;
-					$.ajax({
-						   type: "POST",
-						   url:ajaxCallUrl,
-						   data:$('#dataForm').serialize(),// 要提交的表单
-						   success: function(msg) {
-							  	alert('保存成功');
-							  }
-						   });
-					}else{
-						$(".login").click();	
-					}
+		});
+}
+
+function getUserLogImage(){
+	if(userId > 0){
+		var ajaxCallUrl='/libpack/aiAjaxClass.php?act=getUserLogImage';
+		$.ajax({
+			type: "POST",
+			url:ajaxCallUrl,
+			data:'date='+uploadImageDate+'&dataType='+uploadImageType,// 要提交的表单
+			dataType:'json',
+			success: function(msg) {
+			var defaultData=msg['default'],
+				nextData=msg['next'],
+				preData=msg['pre'];
+			var dobj=$(".glaimagebox[dataType='default']"),
+				nobj=$(".glaimagebox[dataType='next']"),
+				pobj=$(".glaimagebox[dataType='pre']");
+
+				if(uploadImageType=='pre'){
+					$(dobj).find('img').attr('src',preData['image']);
+					$(dobj).attr('date',preData['date']);
+					$(dobj).attr('dataType','next');
+
+					$(nobj).find('img').attr('src',nextData['image']);
+					$(nobj).attr('date',nextData['date']);
+					$(nobj).attr('dataType','pre');
+
+					$(pobj).find('img').attr('src',defaultData['image']);
+					$(pobj).attr('date',defaultData['date']);
+					$(pobj).attr('dataType','default');
+				}else if(uploadImageType=='next'){
+
+					$(dobj).find('img').attr('src',nextData['image']);
+					$(dobj).attr('date',nextData['date']);
+					$(dobj).attr('dataType','pre');
+
+					$(pobj).find('img').attr('src',preData['image']);
+					$(pobj).attr('date',preData['date']);
+					$(pobj).attr('dataType','next');
+
+					$(nobj).find('img').attr('src',defaultData['image']);
+					$(nobj).attr('date',defaultData['date']);
+					$(nobj).attr('dataType','default');
+				}
 			}
-			$(function(){
-				$('.gla_inbox').corner('8px');
-				$('#gla_box>ul').roundabout({
-					minOpacity:1,
-					btnNext: ".next",
-					duration: 1000,
-					reflect: true,
-					btnPrev: '.prev',
-					autoplay:false,
-					autoplayDuration:5000,
-					tilt:0,
-					shape: 'figure8'
-				});
-				
-				$().click(function (){
-					var targetUrl='/libpack/aiAjaxClass.php';				
-										
-				});
-				
-			});
-			</script>
-			 <script type="text/javascript" src="Templates/js/public.js"></script>
-        <script type="text/javascript">
-        	var init = function(){
-			    var newdom = new getdom;
-			   aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
-			   aijianmei.form_jugde('lg_text','lg_password');
+		});
+	}else{
+		$(".login").click();	
+	}
+}
+function getUserLog(){
+	if(userId > 0){
+		var ajaxCallUrl='/libpack/aiAjaxClass.php?act=getUserLog';
+		$.ajax({
+			type: "POST",
+			url:ajaxCallUrl,
+			data:'date='+uploadImageDate+'&dataType='+uploadImageType,// 要提交的表单
+			dataType:'json',
+			success: function(msg) {
+				var defaultData=msg['default'],
+					nextData=msg['next'],
+					preData=msg['pre'];
+				var dobj=$(".glalogbox[dataType='default']"),
+					nobj=$(".glalogbox[dataType='next']"),
+					pobj=$(".glalogbox[dataType='pre']");
+
+				if(uploadImageType=='pre'){
+					$(dobj).find('img').attr('src',preData['image']);
+					$(dobj).attr('date',preData['date']);
+					$(dobj).attr('dataType','next');
+
+					$(nobj).find('img').attr('src',nextData['image']);
+					$(nobj).attr('date',nextData['date']);
+					$(nobj).attr('dataType','pre');
+
+					$(pobj).find('img').attr('src',defaultData['image']);
+					$(pobj).attr('date',defaultData['date']);
+					$(pobj).attr('dataType','default');
+				}else if(uploadImageType=='next'){
+					$(dobj).find('img').attr('src',nextData['image']);
+					$(dobj).attr('date',nextData['date']);
+					$(dobj).attr('dataType','pre');
+
+					$(pobj).find('img').attr('src',preData['image']);
+					$(pobj).attr('date',preData['date']);
+					$(pobj).attr('dataType','next');
+
+					$(nobj).find('img').attr('src',defaultData['image']);
+					$(nobj).attr('date',defaultData['date']);
+					$(nobj).attr('dataType','default');
+				}
 			}
-			init();
-        </script>
-	</body>
+		});
+	}else{
+		$(".login").click();	
+	}
+}
+function saveAddItems(){
+	if(userId > 0){
+		var ajaxCallUrl='/libpack/aiAjaxClass.php?act=postUserCourseInfo&uid='+userId+'&aid='+encodeURIComponent(actionVal)+'&date='+dateContentVar;
+		$.ajax({
+			type: "POST",
+			url:ajaxCallUrl,
+			data:$('#dataForm').serialize(),// 要提交的表单
+			success: function(msg) {
+				alert('保存成功');
+			}
+		});
+	}else{
+		$(".login").click();	
+	}
+}
+$(function(){
+	$('.glaimagebox').click(function(){
+		uploadImageDate=$(this).attr('date');
+		uploadImageType=$(this).attr('dataType');
+		if((uploadImageDate*1) > (defaultDateString*1) ){ alert('请明天再上传吧!');return false;}
+			$(".glaimagebox").attr("sel","0");
+			$(this).attr('sel',"1");
+			$("#imageUploadDateInput").val(uploadImageDate);
+			getUserLogImage();
+		});
+	$('.glalogbox').click(function(){
+		uploadImageDate=$(this).attr('date');
+		uploadImageType=$(this).attr('dataType');
+		if((uploadImageDate*1) > (defaultDateString*1) ){ alert('请明天再上传吧!');return false;}
+		$(".glalogbox").attr("sel","0");
+		$(this).attr('sel',"1");
+		getUserLog();
+	});
+});
+$(function(){
+	$('.gla_inbox').corner('8px');
+	$('#gla_box>ul').roundabout({
+		minOpacity:1,
+		btnNext: ".next",
+		duration: 1000,
+		reflect: true,
+		btnPrev: '.prev',
+		autoplay:false,
+		autoplayDuration:5000,
+		tilt:0,
+		shape: 'figure8'
+	});
+});
+</script>
+<script type="text/javascript" src="Templates/js/public.js"></script>
+<script type="text/javascript">
+var init = function(){
+	var newdom = new getdom;
+	aijianmei.scrolltop('scroll_login',600,['login','scroll_back']);
+	aijianmei.form_jugde('lg_text','lg_password');
+}
+init();
+</script>
+</body>
 </html>

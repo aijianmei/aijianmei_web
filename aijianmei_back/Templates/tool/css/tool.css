@@ -603,28 +603,29 @@ input,button,select,textarea{outline:none}
 		height: 320px;
 		margin: 0 auto;
 	}
-		.uploadCover{
-			width: 436px;
-			height: 288px;
+		
+		.userUpload{
 			position: absolute;
-			top: 10px;
-			background: #000;
-			opacity: 0.5;
-			filter:alpha(opacity=50);
-			left: 12px;	
-			display:none;
+			right: 10px;
+			bottom: 0px;
 		}
-		.clickUpload{
-			position: absolute;
-			top: 0;
-			color: white;
+		.clickUpload,.editDairyBtn{
+			width:105px;
+			height:46px;
+			background:url(../images/tool/upload.png) no-repeat;
+			border-radius:6px;
+			box-shadow:0 -2px 2px #fff;
 			cursor: pointer;
-			width: 460px;
-			height: 100%;
-			width: 100%;
+			color:white;
 			text-align: center;
-			line-height: 320px;
-			display:none;
+
+		}
+		.editDairyBtn{
+			background:url(../images/tool/rew.png) no-repeat;
+			margin-bottom: 10px;
+		}
+		.editDairyBtn:hover{
+			background:url(../images/tool/rew1.png) no-repeat;
 		}
 	.writeArea{
 		background:url(../images/tool/write.png) no-repeat center;
@@ -879,9 +880,5 @@ input,button,select,textarea{outline:none}
 #ui-datepicker-div{
 	z-index:300!important;
 }
-		
-		
-		
-		
-		
-		
+.fleft{float: left;}
+.fright{float: right;}

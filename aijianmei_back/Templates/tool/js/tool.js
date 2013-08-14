@@ -15,7 +15,6 @@ var changeWeight = function(input, show){
 			allPro = Math.abs(init - goal),
 			nowPro =Math.abs(cur - goal),
 			percentage = nowPro / allPro * 100;
-			
 			/* add by kontem 20130808 start*/
 			if(goal*1 > init*1){//目标数值大于原始值 增重
 				if(cur*1 < init*1){//当前数值 < 原始数值 无用功直接 0%
@@ -58,9 +57,9 @@ $(".curDate").text(dateVar);//set date of current weight.
 			
 var setDateVal = function (datepicker){
 		$( datepicker ).datepicker();
-		$( datepicker).datepicker( "option", "dateFormat","yy-mm-dd" );
-		$(datepicker).datepicker('option', 'maxDate', '0');
-		$( datepicker).datepicker( "setDate",dateVar );
+		$( datepicker ).datepicker( "option", "dateFormat","yy-mm-dd" );
+		$( datepicker ).datepicker('option', 'maxDate', '0');
+		$( datepicker ).datepicker( "setDate",dateVar );
 	},
 	//点击左右加减一天
 	toggleDateVal = function (toggleDate){
@@ -87,10 +86,17 @@ var setDateVal = function (datepicker){
 setDateVal(".calendar");
 toggleDateVal(".toggleDate");
 
+
 //高亮样式
 var highLight = function(ele, curClass){
 	$(ele).children().bind("click", function(){		
 		$(this).addClass(curClass).siblings().removeClass(curClass);
+		if(curClass=='curChart'){
+			selectTagType=$(this).attr('selectType');
+		}
+		if(curClass=='curGroup'){
+			selectGroupType=$(this).text();
+		}
 	});
 }
 
@@ -107,22 +113,10 @@ $(".dataTab").children().bind("click", function(){
 	$(".userArea").eq(_index).css("display","block").siblings().css("display","none");
 })
 
-//用户 
-var userlist=[{
-				"part" : "我的锻炼",
-				"lists" : 
-					["卧推", "卧推卧推", "卧推卧推上肢", "上肢1","上肢a", "上肢b", 
-					 "上肢v", "上肢d", "上肢e", "上肢上肢上肢", "上肢上肢上肢上肢上肢上肢", "上肢f",
-					 "上肢r", "上肢", "上肢", "上肢","上肢", "上肢名字很长很长很长很长很长很","卧推",
-					 "卧推卧推", "卧推卧推上肢", "上肢1","上肢a", "上肢b", 
-					 "上肢v", "上肢d", "上肢e", "上肢上肢上肢", "上肢上肢上肢上肢上肢上肢", "上肢f",
-					 "上肢r", "上肢", "上肢", "上肢","上肢", "上肢名字很长很长很长很长很长很", 
-					 "上肢v", "上肢d", "上肢e", "上肢上肢上肢", "上肢上肢上肢上肢上肢上肢", "上肢f",
-					 "上肢r", "上肢", "上肢", "上肢","上肢", "上肢名字很长很长很长很长很长很"
-					]
-			}];
+
 //更多动作选择
-var actionJson='Templates/tool/json/actions.json';
+//var actionJson='Templates/tool/json/actions.json';
+var actionJson='Templates/tool/json/CourseAction.json';
 $.getJSON(actionJson, function(data){
 	$.merge(userlist,data);
 	data = userlist;
@@ -152,6 +146,7 @@ $.getJSON(actionJson, function(data){
 		//导航栏当前高亮显示
 		$(".actNav>li").live("click", function(){
 			actionVal=$(this).text();
+			$(".actionNameBox").html(actionVal);
 			getCourseData(dateContentVar);
 			$(this).addClass("curAct").siblings().removeClass("curAct");
 		});
@@ -180,14 +175,16 @@ $.getJSON(actionJson, function(data){
 					if(txt == navTxt[i]){
 						$(".actNav").find(".curAct").removeClass("curAct");
 						actionVal=$(".actNav").find("li").eq(i).text();
+						$(".actionNameBox").html(actionVal);
 						getCourseData(dateContentVar);
 						$(".actNav").find("li").eq(i).addClass("curAct");
 						break;
 					}
 				}
 				if(i==_navLen){
-					$(".actNav").find(".curAct").removeClass("curAct");					
+					$(".actNav").find(".curAct").removeClass("curAct");		
 					$(".actNav").prepend('<li class="curAct">' + txt + '<span></span></li>');
+					postUserDefaultAction();
 					listLength();
 				}	
 			}
@@ -331,7 +328,61 @@ var addGroup = function(){
 			$(".addBtn").hide();
 		}
 	}
-	
-} 
+	};
+$(".editDairyBtn").click(function(){
+	$(".userNote>#gla").toggle();
+	$(".userUpload").toggle();
+	$("#writeForm").toggle();
+	if($(".editDairyBtn").attr('style')=="display: none;"){
+		$(".editDairyBtn").show();
+	}else{
+		$(".editDairyBtn").hide();
+	}
+})
+$(".writeSub").click(function(){
+	$(".userNote>#gla").toggle();
+	$(".userUpload").toggle();
+	$("#writeForm").toggle();
+	if($(".editDairyBtn").attr('style')=="display: none;"){
+		$(".editDairyBtn").show();
+	}else{
+		$(".editDairyBtn").hide();
+	}
+	var writeData=$("#write").val();
+	//alert(writeData);
+	setUserLogImg();
+})
 
+function setUserLogImg(){
+	var ajaxCallUrl='/libpack/aiAjaxClass.php?act=setUserLogImg';
+	var fdata='writeLog='+$("#write").val()+'&date='+uploadImageDate;
+	$.ajax({
+		type: "POST",
+		url:ajaxCallUrl,
+		data:fdata,// 要提交的表单
+		dataType:'json',
+		success: function(msg) {
+			$(".glalogbox[date="+uploadImageDate+"]").find('img').attr('src',msg);
+			$("#write").val('');
+		}
+	});
+}
 
+function postUserDefaultAction(){
+	var ajaxCallUrl='/libpack/aiAjaxClass.php?act=postUserDefaultAction';
+	var fdata=$(".actNav").find("li").toArray();
+	var tmpData=Array();
+	for (var i = fdata.length - 1; i >= 0; i--) {
+		var obj=fdata[i];
+		tmpData.push(obj.innerText);
+	};
+	var data='DateString='+tmpData;
+	$.ajax({
+		type: "POST",
+		url:ajaxCallUrl,
+		data:data,// 要提交的表单
+		dataType:'json',
+		success: function(msg) {
+		}
+	});
+}

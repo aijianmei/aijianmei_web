@@ -375,17 +375,11 @@ class IosApi {
 	public function getCircleList() {
 		//$this->baseUrl='http://www.kon_aijianmei.com/';
 		$uid = ! empty ( $_POST ['uid'] ) ? intval ( $_POST ['uid'] ) : '';
-		$circleUid = ! empty ( $_POST ['circleUid'] ) ? intval ( $_POST ['circleUid'] ) : '';
+		$circleUid = ! empty ( $_POST ['targetUid'] ) ? intval ( $_POST ['targetUid'] ) : '';
 		$group = ! empty ( $_POST ['group'] ) ? intval ( $_POST ['group'] ) : '';
 		$start = ! empty ( $_POST ['start'] ) ? intval ( $_POST ['start'] ) : 0;
 		$offset = ! empty ( $_POST ['offset'] ) ? intval ( $_POST ['offset'] ) : 5;
 		$where = '';
-		if(empty($uid)){
-			$data [0] ['uid'] ="0";
-			$data [0] ['errorCode'] = '10001';
-			echo json_encode ( $data );
-			exit ();
-		}
 		if (! empty ( $circleUid )) {
 			$where = " where uid =$circleUid";
 		}
@@ -1076,7 +1070,7 @@ class IosApi {
 			}
 			$searchInfo [$key] ['channel'] = $searchInfo [$key] ['Channel'];
 			
-			$searchInfo [$key] ['create_time'] = date ("Y-m-d", $searchInfo [$key] ['create_time'] );
+			$searchInfo [$key] ['create_time'] =date("Y-m-d",$searchInfo [$key] ['create_time']);
 			unset ( $searchInfo [$key] ['1'] );
 			unset ( $searchInfo [$key] ['Channel'] );
 		}
@@ -1112,11 +1106,11 @@ class IosApi {
 		$DetailInformationTmp = C_mysqlOne ( $getDetailSql );
 		$DetailInformation = $DetailInformationTmp;
 		// $DetailInformation
-		$DetailInformation [0] ['create_time'] = date ( DATE_ISO8601, $DetailInformation [0] ['create_time'] );
+		$DetailInformation [0] ['create_time'] =$DetailInformation [0] ['create_time'] ;
 		$getCommentsListSql = "select id,uid,content,create_time from ai_comments where parent_id=$id and parent_type=$channeltype order by create_time desc";
 		$CommentsList = C_mysqlAll ( $getCommentsListSql );
 		foreach ( $CommentsList as $k => $v ) {
-			$CommentsList [$k] ['create_time'] = date ( DATE_ISO8601, $CommentsList [$k] ['create_time'] );
+			$CommentsList [$k] ['create_time'] = $CommentsList [$k] ['create_time'] ;
 			$CommentsList [$k] ['userimg'] = $this->getUserFace ( $v ['uid'], 'm' );
 			$CommentsList [$k] ['username'] = $this->getUserName ( $v ['uid'] );
 		}

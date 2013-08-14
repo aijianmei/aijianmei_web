@@ -1059,6 +1059,18 @@ function dateFormat($sTime, $format = null) {
 	}
 }
 
+function reNorTime($k=0){
+  if($k!=0&&$k>0){
+    $timeDate=time() + ($k*3600*24);
+  }elseif($k!=0&&$k<0){
+    $timeDate=time() - abs($k*3600*24);
+  }else{
+    $timeDate=time();
+  }
+  return date("Ymd",$timeDate);
+}
+
+
 //获取当前登录用户的UID
 function getMid(){
 	return intval($_SESSION['mid']);

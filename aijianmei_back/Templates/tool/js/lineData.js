@@ -1,8 +1,8 @@
-var jsonurl='Templates/tool/json/lineData.json?4241';
+var jsonurl='/libpack/aiAjaxClass.php?act=getDefaultUserLineData';
 var gloData=[];
 (function getData(){
 	$.getJSON(jsonurl, function(data){
-		console.log(gloData)
+		//console.log(gloData)
 		var lineLen = data.lineData.length;		
 		for(var i=0;i<lineLen;i++){
 			var dotLen = data.lineData[i].line.length;
@@ -15,37 +15,84 @@ var gloData=[];
 			gloData[key]=arr;
 		}
 		gloData['ticksVal']=data.ticks;
+		gloData['max']=data.max;
+		//alert(gloData['max']);
 	})
 	.done(function(){
 		gloData['color']="#34BE4E";
 		gloData['lineWidth'] = 15;
 		gloData['size'] = 25;
+		gloData['ymax'] = gloData['max'];
 		joo(gloData,'line1');
 	},function(){
-			$(".t2").click(function(){
+		$(".changeLine,.chartBtn").click(function(){
+			if($(this).attr('groupNum')){
+				selectGroupType=$(this).attr('groupNum');
+			}
 			$("#line1").empty();
-			gloData['s1']=[5, 3, 1, 2, 1, 3, 1];
-//gloData['s2']=[5, 3, 1, 2, 1, 3, 1];			
+			getDefaultUserLineData();
 			gloData['color']="#34BE4E";
-			gloData['lineWidth'] = 5;
-			gloData['size'] = 10;
+			gloData['lineWidth'] = 15;
+			gloData['size'] = 25;
 			joo(gloData,'line1');
-		})		
+		});
+		$("#datepicker2").change(function (){
+			lineDataDate=$("#datepicker2").val();
+			lineDataDate=lineDataDate.replace(/-/g, "");
+			$("#line1").empty();
+			getDefaultUserLineData();
+			gloData['color']="#34BE4E";
+			gloData['lineWidth'] = 15;
+			gloData['size'] = 25;
+			joo(gloData,'line1');
+		});
+		$(".linePreDate,.lineNextDate").click(function (){
+			lineDataDate=$("#datepicker2").val();
+			lineDataDate=lineDataDate.replace(/-/g, "");
+			$("#line1").empty();
+			getDefaultUserLineData();
+			gloData['color']="#34BE4E";
+			gloData['lineWidth'] = 15;
+			gloData['size'] = 25;
+			joo(gloData,'line1');
+		});
+
 	})
 })();
+
+function getDefaultUserLineData(){
+	var ajaxCallUrl='/libpack/aiAjaxClass.php?act=getDefaultUserLineData';
+	var fdata="selectTagType="+selectTagType+"&group="+selectGroupType+"&date="+lineDataDate+"&out=obj&aid="+actionVal;
+	$.ajax({
+		type: "POST",
+		url:ajaxCallUrl,
+				data:fdata,// 要提交的表单
+				async:false,
+				dataType:'json',
+				success: function(msg) {
+					//console.log(msg);
+					gloData['s1']		=$.makeArray(msg.nums);
+					gloData['s2']		=$.makeArray(msg.weight);
+					gloData['s3']		=$.makeArray(msg.ctime);
+					gloData['ticksVal']	=$.makeArray(msg.timelist);
+					gloData['ymax']		=$.makeArray(msg.max);
+				}
+			});
+}
+
 function joo(gloData,divid){
 	$.jqplot.config.enablePlugins = true;			
 	plot1 = $.jqplot(divid, [gloData['s1'], gloData['s2'], gloData['s3']], {
 		series: [{label: '1st Qtr'},{label: '2st Qtr'}],
 		seriesDefaults:{
 			lineWidth: gloData['lineWidth'],
-			 markerOptions: {
+			markerOptions: {
 				show: true,
 				size: gloData['size'] //点的大小
 			}
-		   },
+		},
 		seriesColors: [ gloData['color'], "#1B52C1", "#FE3400", "#579575", "#839557", "#958c12",
-						"#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"
+		"#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"
 		],
 		legend: {show:true, location: 'nw'},
 		axes:{
@@ -53,7 +100,7 @@ function joo(gloData,divid){
 				renderer:$.jqplot.CategoryAxisRenderer, ticks:gloData['ticksVal']
 			},
 			yaxis:{
-				min:0, max:8, numberTicks:9,//y轴范围、点数
+				min:0, max:gloData['ymax'], numberTicks:9,//y轴范围、点数
 				tickOptions: {
 					formatString: '%.2f'//浮点数
 				}
@@ -65,10 +112,10 @@ function joo(gloData,divid){
 			sizeAdjust: 20,
 			tooltipLocation: 'n',
 			tooltipAxes: 'y',
-			tooltipFormatString: '<b><i><span style="color:red;"> 体重</span></i></b> %.2f',
+			tooltipFormatString: '<b><i><span style="color:red;"></span></i></b> %.2f',
 			useAxesFormatters: false
 		},
-		 grid: {
+		grid: {
 			drawGridLines: true,        // wether to draw lines across the grid or not.
 			gridLineColor: 'transparent',    // *Color of the grid lines.
 			background: 'transparent',      // CSS color spec for background color of grid.
@@ -84,8 +131,8 @@ function joo(gloData,divid){
 			renderer: $.jqplot.CanvasGridRenderer,  // renderer to use to draw the grid.
 			rendererOptions: {}         // options to pass to the renderer.  Note, the default
 										// CanvasGridRenderer takes no additional options.
-		}
-	});
+									}
+								});
 }
 
 

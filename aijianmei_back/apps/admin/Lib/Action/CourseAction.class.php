@@ -47,7 +47,7 @@ class CourseAction extends AdministratorAction {
 			$str .=$cstr.']}';
 		}
 		$str='['.$str.']';
-		file_put_contents('CourseAction.json', $str);
+		file_put_contents('Templates/tool/json/CourseAction.json', $str);
 	}
 	public function editAction() {
 		! empty ( $_GET ['id'] ) ? $id = intval ( $_GET ['id'] ) : die ();
