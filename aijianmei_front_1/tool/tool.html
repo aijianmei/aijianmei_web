@@ -222,25 +222,11 @@
 								
 								<div class="uploadArea">
 									<div id="gla">
-										<div id="gla_box">
-											<ul>
-												<li>
-													<div class="gla_inbox">
-														<img src="images/3.jpg" />
-													</div>
-												</li>
-												<li>
-													<div class="gla_inbox">
-														<img src="images/3.jpg" />
-													</div>
-												</li>
-												<li>
-													<div class="gla_inbox">
-														<img src="images/3.jpg" />
-													</div>
-												</li>
-											</ul>
-										</div>
+										<ul>
+											<li><img src="images/1.jpg" alt="" /></li>
+											<li><img src="images/3.jpg" alt="" /></li>
+											<li><img src="images/4.png" alt="" /></li>
+										</ul>
 									</div>
 									
 									<div class="userUpload">
@@ -259,13 +245,11 @@
 							</div><!--End userPic-->
 							<div class="userNote userArea" style="display:none;">
 								<div id="gla">
-									<div id="gla_box">
-										<ul>
-											<li><div class="gla_inbox"><img src="images/tool/rj_1.png" /></div></li>
-											<li><div class="gla_inbox"><img src="images/tool/rj_1.png" /></div></li>
-											<li><div class="gla_inbox"><img src="images/tool/rj_1.png" /></div></li>
-										</ul>
-									</div>
+									<ul>
+										<li><img src="images/tool/rj_1.png" /></li>
+										<li><img src="images/tool/rj_1.png" /></li>
+										<li><img src="images/tool/rj_1.png" /></li>
+									</ul>
 								</div>
 								<div class="userUpload"><button class="editDairyBtn"></button></div>
 								<div id="writeForm" style="display:none;">
@@ -470,7 +454,7 @@
 		<script type="text/javascript" src="js/jquery.corner.js"></script>
 		<script type="text/javascript" src="js/jquery.roundabout.js"></script>
 		<script type="text/javascript" src="js/jquery.roundabout-shapes.js"></script>
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 			$(function(){		   
 				$('.gla_inbox').corner('8px');
 				$('#gla_box>ul').roundabout({
@@ -484,6 +468,11 @@
 					tilt:0,
 					shape: 'figure8'
 				});
+			});
+		</script> -->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#gla>ul').roundabout();
 			});
 		</script>
 	</body>

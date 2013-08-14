@@ -832,51 +832,35 @@ input,button,select,textarea{outline:none}
 					}
 		
 /* gla */
-#gla{
-	margin:0 auto;
-	position:relative;
-	overflow:hidden;
-}
-#gla_box{
-	width:700px;
-	margin:auto;
-	position:relative;
-}
-.gla_inbox{
-	overflow:hidden;
-	position:relative;
-}
-.gla_inbox img{
-	width:100%;
-	height:100%;
-}
-.roundabout-holder{
-	height:320px;
-	width:664px;
-	margin:0 auto;
-}
-.roundabout-moveable-item{
-	display:block;
-	height:300px;
-	width:450px;
-	cursor:pointer;
-}
-.roundabout-in-focus,.roundabout-moveable-item{
-	cursor: pointer;
-	border-radius: 8px;
-	-moz-box-shadow: 3px 3px 4px #999;
-	-webkit-box-shadow: 3px 3px 4px #999;
-	box-shadow: 3px 3px 4px #999;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999')";
-	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999');
-}		
-.roundabout-in-focus{
-	cursor:auto;
-}
-.roundabout-in-focus img{
-	width:450px!important;
-	height:300px!important;
-}
+	#gla ul {
+		list-style: none;
+		padding: 0;
+		margin: 0 auto;
+		width: 680px;
+		height: 320px;
+	}
+	#gla li {
+		height: 20em;
+		width: 30em;
+		text-align: center;
+		cursor: pointer;
+	}
+	#gla li img{
+		height: 100%;
+		width: 100%;
+		border-radius: 8px;
+		-moz-box-shadow: 3px 3px 4px #999;
+		-webkit-box-shadow: 3px 3px 4px #999;
+		box-shadow: 3px 3px 4px #999;
+		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999')";
+		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999');
+
+	}
+		#gla li.roundabout-in-focus {
+			cursor: default;
+		}
+				
+				
 #ui-datepicker-div{
 	z-index:300!important;
 }
