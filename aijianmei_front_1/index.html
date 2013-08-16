@@ -641,19 +641,6 @@
                 	bg_opc_2 = newdom.getElementsByClass('bg_opc_2'),
                 	len = day_part.length;
 
-                	//for banner show background with title
-                	// for(var i = 0;i < len_bn_part;i++){
-                	// 	bn_li[i].index = i;
-                	// 	bn_li[i].onmouseover = function(){
-                	// 		aijianmei.chang_top(bn_bg_transparent[this.index],1,280,50)
-                	// 		aijianmei.chang_top(bn_bg_part[this.index],1,280,50);
-                	// 	};
-                	// 	bn_li[i].onmouseout = function(){
-                	// 		aijianmei.chang_top(bn_bg_transparent[this.index],0,280,50)
-                	// 		aijianmei.chang_top(bn_bg_part[this.index],0,280,50);
-                	// 	}
-                	// }
-
                 	//for day part show up background with title
                 	for(var i = 0;i < len;i++){
                 		day_part[i].index = i;
@@ -675,22 +662,6 @@
 			}
 			init();	
 
-			//右侧滚动条下拿add by kontem 20130512 start
-			// var is_ajax_scroll=true;//执行权值 全局预定义
-			// $(window).scroll(function() {  
-			// 	//获取网页的完整高庿fix)  
-			// 	totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());   
-			// 	if (($(document).height() <= (totalheight+100))&&is_ajax_scroll===true) {  // 说明滚动条已达底郿
-			// 		is_ajax_scroll=false;
-			// 		$(".cont_tab_ct").each(function(i){
-			// 			//alert($(this).children().html());
-			// 			$(this).append($(this).children().html());//复制子对象内宿fordemo
-			// 		});
-			// 		// alert(1);//调用对应ajax
-			// 	}
-			// }); 
-
-			//}}}end
         </script>
 	</body>
 </html>
