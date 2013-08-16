@@ -222,9 +222,11 @@ div.jqplot-noData-container
 
 .jqplot-cursor-tooltip,.jqplot-highlighter-tooltip
 {
-	border:1px solid #ccc;
-	font-size:.75em;
+	padding:5px 10px;
 	white-space:nowrap;
-	background:rgba(208,208,208,0.5);
-	padding:1px;
+	background:#21ace3;
+	opacity:0.8;
+	color:white;
+	border-radius:6px;
+	font-size:16px;
 }

@@ -53,10 +53,14 @@ function joo(gloData,divid){
 				renderer:$.jqplot.CategoryAxisRenderer, ticks:gloData['ticksVal']
 			},
 			yaxis:{
-				min:0, max:8, numberTicks:9,//y轴范围、点数
+				show:false,
+				min:0,
+				max:8, 
+				numberTicks:9,//y轴范围、点数
 				tickOptions: {
-					formatString: '%.2f'//浮点数
+				formatString: '%d'//浮点数
 				}
+			
 			}
 		},
 		highlighter: {
@@ -65,7 +69,7 @@ function joo(gloData,divid){
 			sizeAdjust: 20,
 			tooltipLocation: 'n',
 			tooltipAxes: 'y',
-			tooltipFormatString: '<b><i><span style="color:red;"> 体重</span></i></b> %.2f',
+			tooltipFormatString: '<span class="tipText"></span> %.2f',
 			useAxesFormatters: false
 		},
 		 grid: {

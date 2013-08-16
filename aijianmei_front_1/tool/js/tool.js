@@ -234,7 +234,6 @@ $.getJSON("json/actions.json", function(data){
 				nowTop -= 320;	
 				$(".preSelect").show();
 				if(nowTop <= (320-ulHeight)){
-				
 					$(".nextSelect").hide();
 				}
 			}	
@@ -279,6 +278,7 @@ $(".editSave").click(function(){
 		$(".figure").css("background","none")
 			.attr("readonly","readonly");
 		$(".addBtn").hide();
+		console.log($(".tBody").children().last().lastChild())
 	}
 });
 
@@ -324,5 +324,64 @@ $(".editDairyBtn,.writeSub").click(function(){
 	$(".userUpload").toggle();
 	$("#writeForm").toggle();
 
+});
+//控制表格文字大小
+var textLength = function(){
+	var len = $(".thead>.col1").text().length,
+		dLen = $(".col1>.rowTip").text().length,
+		tLen = len - dLen;
+	if(tLen>5){
+		$(".thead>.col1").css("font-size","20px");
+	}
+	else{
+		$(".thead>.col1").css("font-size","30px");
+	}
+}
+textLength();
+
+//图片切换
+$(".userPicPrev").live("click",function(){
+	var _this = this;
+	var ajaxCallUrl='/tool/moreImage.php';
+	var date=$(_this).attr('date');
+	date = date*1 - 1;
+
+	$.ajax({
+		type: "POST",
+		url:ajaxCallUrl,
+		data:'date='+date+'&type=shareImage',
+		dataType:'json',
+		success: function(msg){
+			var innerHtml='<li><img src="images/'+msg.image+'" /></li>';
+			$(_this).parent().css("width","+=460px").prepend(innerHtml);//获取一张图片，宽度增加
+			$(_this).parent().find('li').eq(0).find('img').attr({"date":date,"alt":date});
+			
+			//查看上一张
+			
+			var _right;
+			if($(_this).parent().find("li").length == 3){
+				_right = "-=300px";
+			}
+			else{
+				_right = "-=460px";
+			}
+			
+			$(_this).parent().animate({ "right": _right }, function(){
+				$(_this).removeClass("userPicPrev").prev().addClass("userPicPrev");
+				$(_this).next().removeClass("userPicCurrent").prev().addClass("userPicCurrent");
+				$(".userPicCurrent").next().addClass("userPicNext").siblings().removeClass("userPicNext");
+				//查看下一张
+				$(".userPicNext").die().live("click",function(){
+					var that = this;
+					if($(that).hasClass("userPicNext")){
+						$(_this).parent().animate({"right": "+=460px"}, function(){
+							$(that).next().addClass("userPicNext");
+							$(that).attr("class", "userPicCurrent").prev().attr("class","userPicPrev").siblings().removeClass("userPicPrev");
+						})
+					}
+				})
+			})
+		}//success
+	})
 })
 
