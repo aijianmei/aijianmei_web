@@ -260,16 +260,23 @@ var listLength = function(){
 }
 listLength();
 
+//表格加一组、减一组
 $(".editSave").click(function(){
 	if($(this).hasClass("edit")){
 		$(this).hide().next().show();
 		$(".actGroup").find("span").show();
 		$(".figure").css("background","url(images/tool/sprites2.png) no-repeat -32px -64px")
 			.removeAttr("readonly");
-		if(maxGroup != defaultGroup){
+
+		var groupNums=$(".tBody").find(".actGroup").length;
+
+		//加一组
+		if(groupNums<=7){
 			$(".addBtn").show().die().live("click", addGroup);
 		}
-		
+		//删除一组
+		$(".delBtn").show();
+		$(".delBtn").live("click", delGroup);
 	}
 	else if($(this).hasClass("save")){
 
@@ -278,47 +285,76 @@ $(".editSave").click(function(){
 		$(".figure").css("background","none")
 			.attr("readonly","readonly");
 		$(".addBtn").hide();
-		console.log($(".tBody").children().last().lastChild())
+		$(".delBtn").hide();
+
+		//保存事件
+		saveAddItems();
 	}
 });
-
-maxGroup = 7;
-defaultGroup = maxGroup + 3;
+var groupArr 		=    new Array();
+	groupArr[1]     = "第一组";
+	groupArr[2]     = "第二组";
+	groupArr[3]     = "第三组";
+	groupArr[4]     = "第四组";
+	groupArr[5]     = "第五组";
+	groupArr[6]     = "第六组";
+	groupArr[7]     = "第七组";
+	
 var addGroup = function(){
-		var groupArr = [ "第五组", "第六组", "第七组"],
-			col = $(".tBody").find(".actGroup").first().find(".col").length,
-			colArr = [],
-			colText = null;
-			
-		if(maxGroup<defaultGroup){
-			for(var i=0; i<col; i++){
-				if(0==i){
-					colText = groupArr[maxGroup-7];
-					maxGroup++;
-				}
-				else{
-					colText = '<span class="cut" style="display:block;"></span>'
-							+ '<input type="text" value="0" class="figure" style="background:url(images/tool/sprites2.png) no-repeat -32px -64px;"/>'
-							+ '<span class="add" style="display:block;"></span>' ;
-				}
-				colArr.push('<div class="col col' + (++i) +'">'+ colText +'</div>');
-				i--;
-			}
-			var k = (defaultGroup - maxGroup)%2,
-				rowClass = null;
-			if( k == 0){
-				rowClass = "oddRow";
+	var inputNameArr = [ "nums[]", "weight[]", "time[]"],
+		col = 4,
+		colArr = [],
+		colText = null;
+		var groupNums=$(".tBody").find(".actGroup").length;
+		groupNums++;
+	if(groupNums<=7){
+		for(var i=0; i<col; i++){
+			if(0==i){
+				colText = groupArr[groupNums];
 			}
 			else{
-				rowClass = "evenRow";
+				colText = '<span class="cut" style="display:block;"></span>'
+						+ '<input type="text" name="'+inputNameArr[i*1-1]+'" value="0" class="figure" style="background:url(images/tool/sprites2.png) no-repeat -32px -64px;"/>'
+						+ '<span class="add" style="display:block;"></span>' ;
 			}
-			var newRow = '<div class="actGroup clearfix'+ ' '+ rowClass +'">' + colArr.join("") + '</div>';
-			$(".tBody").append(newRow);
-			if(maxGroup == defaultGroup){
-				$(".addBtn").hide();
-			}
+			colArr.push('<button type="button" class="delBtn" style="display:block;"></button><div class="col col' + (++i) +'">'+ colText +'</div>');
+			i--;
 		}
-	};
+
+		var k = (groupNums*1+1)%2,
+			rowClass = null;
+		if( k == 0){
+			rowClass = "oddRow";
+		}
+		else{
+			rowClass = "evenRow";
+		}
+		var newRow = '<div class="actGroup actGroupKon clearfix'+ ' '+ rowClass +'">' + colArr.join("") + '</div>';
+		$(".tBody").append(newRow);
+		if(groupNums == 7){
+			$(".addBtn").hide();
+		}
+	}
+};
+var	delGroup = function(){
+		var delIndex = $(this).parent().index(),
+			groups = $(".tBody").find(".actGroup").length;
+			
+		$(this).parent().remove();
+		$(".addBtn").show();
+
+		for(var i=0;i<=groups;i++){
+			if(i%2){
+				$(".tBody").find(".actGroup").eq(i).removeClass("oddRow").addClass("evenRow");
+			}
+			else{
+				$(".tBody").find(".actGroup").eq(i).removeClass("evenRow").addClass("oddRow");
+			}
+			$(".tBody").find(".actGroup").find(".col1").eq(i).text(groupArr[++i]);
+			--i;
+		}
+}
+
 $(".editDairyBtn,.writeSub").click(function(){
 	$(".userNote>#gla").toggle();
 	$(".userUpload").toggle();
@@ -341,10 +377,10 @@ textLength();
 
 //图片切换
 $(".userPicPrev").live("click",function(){
+
 	var _this = this;
 	var ajaxCallUrl='/tool/moreImage.php';
 	var date=$(_this).attr('date');
-	date = date*1 - 1;
 
 	$.ajax({
 		type: "POST",
@@ -352,26 +388,23 @@ $(".userPicPrev").live("click",function(){
 		data:'date='+date+'&type=shareImage',
 		dataType:'json',
 		success: function(msg){
+			var n = $(_this).parent().queue("fx");
+			if(n.length)	return false;
+		
 			var innerHtml='<li><img src="images/'+msg.image+'" /></li>';
 			$(_this).parent().css("width","+=460px").prepend(innerHtml);//获取一张图片，宽度增加
 			$(_this).parent().find('li').eq(0).find('img').attr({"date":date,"alt":date});
 			
 			//查看上一张
-			
-			var _right;
-			if($(_this).parent().find("li").length == 3){
-				_right = "-=300px";
-			}
-			else{
-				_right = "-=460px";
-			}
-			
-			$(_this).parent().animate({ "right": _right }, function(){
+			$(_this).parent().animate({ "right": "-=460px" }, function(){
 				$(_this).removeClass("userPicPrev").prev().addClass("userPicPrev");
 				$(_this).next().removeClass("userPicCurrent").prev().addClass("userPicCurrent");
 				$(".userPicCurrent").next().addClass("userPicNext").siblings().removeClass("userPicNext");
 				//查看下一张
 				$(".userPicNext").die().live("click",function(){
+					var n = $(_this).parent().queue("fx");
+					if(n.length)	return false;
+
 					var that = this;
 					if($(that).hasClass("userPicNext")){
 						$(_this).parent().animate({"right": "+=460px"}, function(){
@@ -384,4 +417,8 @@ $(".userPicPrev").live("click",function(){
 		}//success
 	})
 })
+
+
+
+
 

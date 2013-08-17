@@ -8,7 +8,6 @@
 		<link rel="stylesheet" href="css/jquery-ui.css" />
 		<link rel="stylesheet" href="css/common.css" type="text/css" />
 		<link rel="stylesheet" href="css/jquery.jqplot.min.css" type="text/css" />
-		
 		<script type="text/javascript" src="js/jquery.latest.js"></script>
 		<script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
 		<script language="javascript" type="text/javascript" src="js/jqplot.categoryAxisRenderer.js"></script>
@@ -49,15 +48,15 @@
 								</div>
 								<div class="userInput clearfix">
 									<div class="input1">
-										<span class="redFont">原始体重<input type="text" value="85" id="initW" maxlength="5"/>Kg</span>
+										<span class="redFont">原始体重<input type="text" value="85" id="initW" maxlength="5" onkeyup="this.value=this.value.replace(/[^\d\.?\d]/g,'') " />Kg</span>
 										<span class="initDate redFont">2013-08-3</span>
 									</div>
 									<div class="input2">
-										<span class="greenFont">目标体重<input type="text" value="100" id="goalW" maxlength="5"/>Kg</span>
+										<span class="greenFont">目标体重<input type="text" value="100" id="goalW" maxlength="5"  onkeyup="this.value=this.value.replace(/[^\d(\.\d)?]/g,'') " />Kg</span>
 									</div>
 									<div class="input3">
 										<div class="curWeight"><span class="innerText">90kg</span></div>
-										<span class="blueFont">当前体重<input type="text" value="90" id="curW" maxlength="5"/>Kg</span>
+										<span class="blueFont">当前体重<input type="text" value="90" id="curW" maxlength="5"  onkeyup="this.value=this.value.replace(/[^\d(\.)?\d]/g,'') " />Kg</span>
 										<span class="curDate blueFont">2013-08-1</span>
 									</div>
 								</div>
@@ -109,7 +108,7 @@
 						<div class="dataLeft">
 							<div class="date">
 								<span class="preDate toggleDate"></span>
-								<input type="text" id="datepicker" class="calendar"/>
+								<input type="text" id="datepicker" class="calendar picCal"/>
 								<span class="nextDate toggleDate"></span>
 							</div>
 							<ul class="dataTab">
@@ -130,10 +129,11 @@
 									</div>
 									<div class="tBody">
 										<div class="actGroup oddRow clearfix">
+											<button class="delBtn" type="button"></button>
 											<div class="col1 col">第一组</div>
 											<div class="col2 col">
 												<span class="cut"></span>
-												<input type="text" value="0" class="figure" readonly/>
+												<input type="text" value="0" class="figure" readonly onkeyup="this.value=this.value.replace(/[^\d+]/g,'') " maxLength="3"/>
 												<span class="add"></span>
 											</div>
 											<div class="col3 col">
@@ -148,6 +148,7 @@
 											</div>
 										</div>
 										<div class="actGroup evenRow clearfix">
+											<button class="delBtn" type="button"></button>
 											<div class="col1 col">第二组</div>
 											<div class="col2 col">
 												<span class="cut"></span>
@@ -166,6 +167,7 @@
 											</div>
 										</div>
 										<div class="actGroup oddRow clearfix">
+											<button class="delBtn" type="button"></button>
 											<div class="col1 col">第三组</div>
 											<div class="col2 col">
 												<span class="cut"></span>
@@ -184,6 +186,7 @@
 											</div>
 										</div>
 										<div class="actGroup evenRow clearfix">
+											<button class="delBtn" type="button"></button>
 											<div class="col1 col">第四组</div>
 											<div class="col2 col">
 												<span class="cut"></span>
