@@ -91,7 +91,7 @@ class IosApi {
 			),
 			'append' => array (
 					'1' => '48',
-					'2' => '49',
+					'2' => '39',
 					"3" => "50" 
 			),
 			'lifestyle' => array () 
@@ -327,7 +327,7 @@ class IosApi {
 	protected function checkCircleLike($uid,$cid){
 		if(empty($uid)||empty($cid)) return  "1";
 		$sql="select * from ai_circle_vote where uid=$uid and cid=$cid";
-		$data=C_mysqlAll ( $sql );
+		$data=C_mysqlAll( $sql );
 		return empty($data)?"0":"1";
 	}
 	

@@ -24,7 +24,7 @@ class SearchAction extends Action {
 			$countinfo=M('')->query($allsql);
 			$this->setDataCache(md5($allsql),$countinfo);
 		}
-		$limitsql="select * from ($arlSql union all $videoSql union) as t order by create_time desc limit ".($pg-1)*$nums.",$nums";
+		$limitsql="select * from ($arlSql union all $videoSql) as t order by create_time desc limit ".($pg-1)*$nums.",$nums";
 		$searchInfo=$this->getDataCache(md5($limitsql));
 		if(!$searchInfo){
 			$searchInfo=M('')->query($limitsql);

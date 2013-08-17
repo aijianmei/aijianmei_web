@@ -20,8 +20,8 @@ var gloData=[];
 	})
 	.done(function(){
 		gloData['color']="#34BE4E";
-		gloData['lineWidth'] = 15;
-		gloData['size'] = 25;
+		gloData['lineWidth'] = 10;
+		gloData['size'] = 20;
 		gloData['ymax'] = gloData['max'];
 		joo(gloData,'line1');
 	},function(){
@@ -32,8 +32,8 @@ var gloData=[];
 			$("#line1").empty();
 			getDefaultUserLineData();
 			gloData['color']="#34BE4E";
-			gloData['lineWidth'] = 15;
-			gloData['size'] = 25;
+			gloData['lineWidth'] = 10;
+			gloData['size'] = 20;
 			joo(gloData,'line1');
 		});
 		$("#datepicker2").change(function (){
@@ -42,8 +42,8 @@ var gloData=[];
 			$("#line1").empty();
 			getDefaultUserLineData();
 			gloData['color']="#34BE4E";
-			gloData['lineWidth'] = 15;
-			gloData['size'] = 25;
+			gloData['lineWidth'] = 10;
+			gloData['size'] = 20;
 			joo(gloData,'line1');
 		});
 		$(".linePreDate,.lineNextDate").click(function (){
@@ -52,8 +52,8 @@ var gloData=[];
 			$("#line1").empty();
 			getDefaultUserLineData();
 			gloData['color']="#34BE4E";
-			gloData['lineWidth'] = 15;
-			gloData['size'] = 25;
+			gloData['lineWidth'] = 10;
+			gloData['size'] = 20;
 			joo(gloData,'line1');
 		});
 
@@ -109,11 +109,11 @@ function joo(gloData,divid){
 		highlighter: {
 			bringSeriesToFront: true,
 			lineWidthAdjust: 5,
-			sizeAdjust: 20,
+			sizeAdjust: 10,
 			tooltipLocation: 'n',
 			tooltipAxes: 'y',
-			tooltipFormatString: '<b><i><span style="color:red;"></span></i></b> %.2f',
-			useAxesFormatters: false
+			tooltipFormatString: '<b><i><span style="color:red;">顶个你个</span></i></b> %.2f ',
+			useAxesFormatters: true
 		},
 		grid: {
 			drawGridLines: true,        // wether to draw lines across the grid or not.

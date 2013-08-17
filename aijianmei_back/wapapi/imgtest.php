@@ -205,6 +205,10 @@ if (move_uploaded_file ( $_FILES ['backgroundimage'] ['tmp_name'], $srcImage )) 
 				$profileImageUrl = $_POST ['profileImageUrl'];
 				$sql = "UPDATE ai_others SET profileImageUrl = '" . $profileImageUrl . "' WHERE  id =$uid";
 				C_mysqlOne ( $sql );
+			}elseif(!empty($_POST['profileImageUrl'])&&!empty($_FILES ['avatarimage'] ['tmp_name'])){
+				$sql = "select iosAvatar from ai_others WHERE uid ='".$_POST ['uid']."'";
+				$iosAvatar=C_mysqlOne ( $sql );
+				$_POST ['profileImageUrl'] ="http://www.aijianmei.com/data/uploads/avatar/$uid/".$iosAvatar[0]['iosAvatar'];
 			}
 		}
 $bim = getBmiById ( $uid );

@@ -206,39 +206,27 @@ class Ajax {
 	}
 	public function getUserLogImage(){
 		if(!$this->mid>0) die();
-		$baseDir=dirname(dirname(__FILE__));
-		$uid=$this->mid;
-		$date=!empty($_POST['date'])? intval($_POST['date']):die(40003);
-		$dataType=!empty($_POST['dataType'])? intval($_POST['dataType']):die(40003);
-		$nowDate=date('Ymd',strtotime($date));
-		$startDate	=$this->reNorTime(-1,strtotime($date));
-		$endDate	=$this->reNorTime(1,strtotime($date));
-		$sql="select * from ai_user_course_log_image where date>=$startDate and date<=$endDate and uid=$uid";
-		$res=$this->db->_query($sql);
-		$data['default']['image']='/Templates/tool/images/tool/pic.png?'.rand();
-		$data['default']['date']=$nowDate;
-		$data['next']['image']='/Templates/tool/images/tool/pic.png?'.rand();
-		$data['next']['date']=$startDate;
-		$data['pre']['image']='/Templates/tool/images/tool/pic.png?'.rand();
-		$data['pre']['date']=$endDate;
-		if(!empty($res)){
-			foreach ($res as $key => $value) {
-				if($value['date']==$nowDate){
-					$data['default']=$value;
-					$data['default']['image']=is_file($baseDir.$data['default']['image'])?$data['default']['image']."?".rand():'/Templates/tool/images/tool/pic.png';
-					$data['default']['date']=$nowDate;
-				}elseif($value['date']==$startDate){
-					$data['next']=$value;
-					$data['next']['image']=is_file($baseDir.$data['next']['image'])?$data['next']['image']."?".rand():'/Templates/tool/images/tool/pic.png';
-					$data['next']['date']=$startDate;
-				}elseif ($value['date']==$endDate) {
-					$data['pre']=$value;
-					$data['pre']['image']=is_file($baseDir.$data['pre']['image'])?$data['pre']['image']."?".rand():'/Templates/tool/images/tool/pic.png';
-					$data['pre']['date']=$endDate;
-				}
-			}
+
+		$baseDir 		=dirname(dirname(__FILE__));
+		$uid 			=$this->mid;
+		$date    		=!empty($_POST['date'])? intval($_POST['date']):'';
+		if(empty($date)) return '';
+		$nowDate  		=date('Ymd',strtotime($date)-86400);
+		$dateTabType	=$_POST['dateTabType']?intval($_POST['dateTabType']):1;
+		if($dateTabType==1){
+			$sql 			="select * from ai_user_course_log_image where date<=$nowDate and uid=$uid order by date desc limit 1";
+			$res 			=$this->db->_query($sql);
+
+			$data['date'] 	=$res['0']['date'] ?$res['0']['date'] : $nowDate;
+			$data['image'] 	=$res['0']['image']?$res['0']['image']: '';
+		}elseif($dateTabType==2){
+			$sql    		="select * from ai_user_course_log where date<=$nowDate and uid=$uid order by date desc limit 1";
+			$res 			=$this->db->_query($sql);
+
+			$data['date'] 	=$res['0']['date'] ?$res['0']['date'] : $nowDate;
+			$data['image'] 	=$res['0']['image']?$res['0']['image']: '';			
 		}
-		//$data=$this->reBuildData($dataType,$data,$nowDate);
+
 		echo json_encode($data);
 		exit;
 	}
@@ -285,7 +273,7 @@ class Ajax {
 		if(!$this->mid>0) die();
 		$uid=$this->mid;
 		$targetFile="/public/images/userLogImage/".time().rand().".jpg";
-		$date=$_POST['date']?intval($_POST['date']):die(40001);
+		$date=date("Ymd",time());
 		move_uploaded_file($_FILES['img']['tmp_name'],SITE_PATH.$targetFile);
 		$resize = new ResizeImage(SITE_PATH.$targetFile);
 		$resize->resizeTo(450, 300,'exact');
@@ -347,12 +335,20 @@ $this->db->_query($updateSql);
 		$data = $this->db->_query ( $sql );
 		$resultHtml=null;
 		if (! empty ( $data )) {
+			$countNums=count($data);
 			foreach ( $data as $k => &$value ) {
 				$value ['loginfo'] = unserialize ( $value ['loginfo'] );
 				$colorCss= ($k+1)%2==0 ?'evenRow':'oddRow';
 				$resultHtml.= '<div class="actGroup actGroupKon '.$colorCss.' clearfix"><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div></div>';
+				$numCount		+=$value['loginfo']['nums'];
+				$weightCount	+=$value['loginfo']['weight'];
+				$timeCount		+=$value['loginfo']['time'];
 			}
-			echo  $resultHtml ;
+			$res['numsAvg'] 	=round($numCount/$countNums);
+			$res['weigthAvg']   =round($weightCount/$countNums);
+			$res['timeAvg'] 	=round($timeCount/$countNums);
+			$res['beforeAvg']   =$this->getCourseInfoAvg($uid,$aid,$date);
+			$res['html']        =$resultHtml ;
 		} else {
 			$data[0]['loginfo']['nums']=0;
 			$data[0]['loginfo']['weight']=0;
@@ -374,8 +370,13 @@ $this->db->_query($updateSql);
 				$colorCss= ($k+1)%2==0 ?'evenRow':'oddRow';
 				$resultHtml.='<div class="actGroup actGroupKon '.$colorCss.' clearfix"><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div></div>';
 			}
-			echo $resultHtml;
+			$res['numsAvg'] 	=0;
+			$res['weigthAvg']   =0;
+			$res['timeAvg'] 	=0;
+			$res['beforeAvg']   =$this->getCourseInfoAvg($uid,$aid,$date);
+			$res['html']        =$resultHtml ;
 		}
+		echo json_encode($res);
 		exit ();
 	}
 	public function postUserCourseInfo() {
@@ -423,7 +424,7 @@ $this->db->_query($updateSql);
 	}
 	public function setUserLogImg() {
 		$text = $_POST ['writeLog'];
-		$date=$_POST['date']?intval($_POST['date']):die(40001);
+		$date=date("Ymd",time());
 		$sizeArray = array (
 			18,
 			466,
@@ -665,6 +666,33 @@ $this->db->_query($updateSql);
 			Imagepng ( $img, $savePath );
 		}
 		ImageDestroy ( $img );
+	}
+
+		//获取对应日期之前的平均值
+	public function getCourseInfoAvg($uid,$aid,$date){
+		$date= date("Ymd",strtotime($date)-86400);
+		$sql=$countNums=$numCount=null;
+		$rdata=$data=array();
+		$sql = "select * from ai_user_course_list where `uid`=$uid and `aid`=$aid  and `date`<=$date";
+		$data=$this->db->_query($sql);
+		if (! empty ( $data )) {
+			$countNums=count($data);
+			foreach ( $data as $k => &$value ) {
+				$value ['loginfo'] = unserialize ( $value ['loginfo'] );
+				$value ['cnum'] = $this->num2Char($k+1);
+				$numCount+=$value ['loginfo']['nums'];
+				$weightCount+=$value ['loginfo']['weight'];
+				$timeCount+=$value ['loginfo']['time'];
+			}
+			$rdata['numsAvg'] 	=round($numCount/$countNums);
+			$rdata['weigthAvg'] =round($weightCount/$countNums);
+			$rdata['timeAvg'] 	=round($timeCount/$countNums);
+		}else{
+			$rdata['numsAvg'] ='0';
+			$rdata['weigthAvg'] ='0';
+			$rdata['timeAvg'] ='0';
+		}
+		return $rdata;
 	}
 
 }

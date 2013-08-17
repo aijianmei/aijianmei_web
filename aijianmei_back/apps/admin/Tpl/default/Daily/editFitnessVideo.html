@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>新增天天锻炼</title>
+<title>编辑</title>
 </head>
 <link rel="stylesheet" href="Templates/admin/bootstrap.css">
 <link rel="stylesheet" href="Templates/admin/plugins-1.2.css">
@@ -66,40 +66,39 @@ function showaddbox(){
 <body style="clear:both; width:auto; padding:0px;">
 
 <div id="page-content" style="min-height: 0px;">
-<form action="" method="post"  enctype="multipart/form-data" id="addform" style="display: none;">
+<form action="" method="post"  enctype="multipart/form-data" id="addform">
      <div class="block block-themed block-last">
 			<div class="block-title">
 				<h4>天天视频列表</h4>
 			</div>
 			<div class="block-content" id="cloneBox">
-				<button  type="button"  class="btn btn-danger" onclick="newvideobox();">新增</button>
 					<div class="control-group" id="newcloneBox">
 						<div class="controls controls-row h100">
 							<div class="fleft w70">
-							<img src="Templates/admin/image_64x64_dark.png" class="alogimg img64" alt="点击编辑图片链接" title="点击编辑图片链接">
-							<input name="imgLeft" value="" type="hidden">
+							<img src="{$data['leftImage']}" class="alogimg img64" alt="点击编辑图片链接" title="点击编辑图片链接">
+							<input name="imgLeft" value="{$data['leftImageUrl']}" type="hidden">
 							<input name="imgLeftUrl" imgurl=1 value="" type="hidden">
 							<button type="button" class="w64 btn btn-danger p0 uploadimgbutton">upload</button>
 							</div>
 							<div class="fleft w70">
-							<img src="Templates/admin/image_64x64_dark.png" class="alogimg img64" alt="点击编辑图片链接" title="点击编辑图片链接">
-							<input name="imgRight" value="" type="hidden">
+							<img src="{$data['rightImage']}" class="alogimg img64" alt="点击编辑图片链接" title="点击编辑图片链接">
+							<input name="imgRight" value="{$data['rightImageUrl']}" type="hidden">
 							<input name="imgRightUrl" imgurl=1 value="" type="hidden">
 							<button type="button" class="w64 btn btn-danger p0 uploadimgbutton">upload</button>
 							</div>
 							<div class="fleft p0 w380">
-							<label class="fleft p0 w70 mb0">视频id</label><input class="w300" type="text" name="vid" placeholder="请输入视频标题"/>
-							<label class="fleft p0 w70 mb0">视频标题</label><input class="w300" type="text" name="vtitle" placeholder="请输入视频标题"/>
-							<label class="fleft p0 w70 mb0">标题链接</label><input class="w300" type="text" name="vtitleurl" placeholder="请输入标题链接"/>
+							<label class="fleft p0 w70 mb0">视频id</label><input class="w300" type="text" name="vid" placeholder="请输入视频标题" value="{$data['vid']}"/>
+							<label class="fleft p0 w70 mb0">视频标题</label><input class="w300" type="text" name="vtitle" placeholder="请输入视频标题" value="{$data.vtitle}"/>
+							<label class="fleft p0 w70 mb0">标题链接</label><input class="w300" type="text" name="vtitleurl" placeholder="请输入标题链接" value="{$data.vurl}"/>
 							</div>
 							<div class="fleft p0">
-							<textarea name="vtitlecontent" class="textarea-medium" rows="3.5" style="margin-left: 0px; margin-right: 0px; width: 267px;" placeholder="请输入简介内容"></textarea>
+							<textarea name="vtitlecontent" class="textarea-medium" rows="3.5" style="margin-left: 0px; margin-right: 0px; width: 267px;" placeholder="请输入简介内容" >{$data.vbiref}</textarea>
 							</div>
 							</div>
 					</div>
 			</div>
 			<div class="form-actions">
-				<input type="hidden" name="subact" value="add">
+				<input type="hidden" name="subact" value="eidt">
 				<button type="submit" class="btn btn-success">Submit</button>
 			</div>
 			
@@ -110,46 +109,5 @@ function showaddbox(){
    <input type="file" name="image_file" id="image_file" onchange="fileSelectHandler()" style="display:none;"/>
    </form>
    <iframe id="exec_target" name="exec_target" style="display:none;"></iframe>
-<div class="block-section">
-<button type="button" class="btn btn-success" onclick="showaddbox();">新增视频模块</button>
-<table class="table table-bordered">
-<thead>
-<tr>
-<th class="span1 text-center"><input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0"></th>
-<th class="span1 text-center">#</th>
-<th>标题</th>
-<th class="hidden-phone">视频链接</th>
-<th class="hidden-phone">简介</th>
-<th class="hidden-phone">图片</th>
-<th class="hidden-phone">创建时间</th>
-<th class="hidden-phone">pop代码</th>
-<th class="span1 text-center"><i class="icon-bolt"></i></th>
-</tr>
-</thead>
-<tbody>
-<volist id="vo" name="fvideo">
-<tr overstyle='on' id="{$vo.id}">
-<td class="span1 text-center"><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
-<td class="span1 text-center">{$vo.id}</td>
-<td class="span3 text-center"><a target="blank" href="/fitnessProgram_{$id}.html">{$vo.vtitle}</a></td>
-<td class="hidden-phone">{$vo.vurl}</td>
-<td class="hidden-phone">{$vo.vbiref}</td>
-<td class="hidden-phone"><img src="{$vo.leftImage}" class="alogimg img64"><img src="{$vo.rightImage}" class="alogimg img64"></td>
-<td class="hidden-phone">{$vo.create_time}</td>
-<td class="hidden-phone">pop('{$vo.id}','{$vo.vid}')</td>
-<td class="span1 text-center">
-<div class="btn-group">
-<a href="{:U('admin/Daily/editFitnessVideo',array('id'=>$vo['id']))}" class="btn btn-mini btn-success">Edit</a>
-<a href="javascript:void(0)" onclick="deleteAd('{$vo.id}')"  class="btn btn-mini btn-danger" >Delete</a>
-</div>
-</td>
-</tr>
-</volist>
-</tbody>
-</table>
-</div>   
-   
-   
 </body>
-
 </html>

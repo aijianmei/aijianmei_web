@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title></title>
+	<title>健身管理</title>
+	<meta name="keywords" content="爱健美，爱健美网，健身，健美，增肌、增重、减肥、瘦身、肌肉锻炼、健身营养、健身补充营养、健身运动、女性健身">
+	<meta name="description" content="爱健美网，你可以在这里制定合适的健身计划， 观看专业的健身锻炼视频，学习专业的健身方法，了解健身运动前后的饮食营养补充，以及认识喜欢健身、运动的朋友哦！">
 	<link rel="stylesheet" href="Templates/css/public.css" />
 	<link rel="stylesheet" href="Templates/tool/css/public.css">
 	<link rel="stylesheet" href="Templates/tool/css/tool.css" />
@@ -22,6 +24,7 @@
 				<div class="clearfix">
 					<div id="userInfo">
 						<img src="<php>echo getUserFace(getMid(),'b');</php>" alt="UserFace" class="userFace" />
+						<php>if(getMid()){</php>
 						<div><a href="javasrcpit:void(0);" class="userName">{$userName}</a></div>
 						<div><p class="userIntro  login">{$userDes}</p></div>
 						<div>
@@ -29,6 +32,12 @@
 							<span class="userLabel">{$value}</span>
 							<php>}</php>
 						</div>
+						<php>}else{</php>
+						<div style="clear:both;padding-bottom:10px;"></div>
+						<span class="userLabel login" style="width:75px;text-align: center;">登录</span>
+						<span class="userLabel" style="width:75px;text-align: center;"><a style="text-decoration:none; color:white;" href="/register.html">注册</a></span>
+						<php>}</php>
+
 					</div>
 					<div class="separateY"></div>
 
@@ -46,7 +55,7 @@
 							</div>
 							<div class="userInput clearfix">
 								<div class="input1">
-									<span class="redFont">原始体重<input type="text" value="{$userHealth['weight']}" id="initW" maxlength="5"/>Kg</span>
+									<span class="redFont">原始体重<input type="text" value="{$userHealth['weight']}" id="initW" maxlength="5"  onkeyup="checkNums(this);" />Kg</span>
 									<span class="initDate redFont">{$userHealth['weightTime']}</span>
 								</div>
 								<div class="input2">
@@ -73,15 +82,6 @@
 					<volist id="actionListVo" name="actionList" key="n">
 						<li <php>if($n==1){</php>class="curAct"<php>}</php>>{$actionListVo.name}<span></span></li>
 					</volist>
-						<!--<li>深蹲<span></span></li>
-						<li>俯卧撑<span></span></li>
-						<li>引体向上<span></span></li>
-						<li>快跑<span></span></li>
-						<li>箭步蹲<span></span></li>
-						<li>单臂哑铃前平举<span></span></li>
-						<li>V字挺身<span></span></li>
-						<li>低位拉力器臂弯举<span></span></li>
-						<li>深蹲<span></span></li>-->
 					</ul>
 					<button class="moreBtn"></button>
 					<div class="moreAct">
@@ -119,15 +119,15 @@
 						</div>
 						<div class="dataRight">
 							<div class="userTable userArea" >
-								<form action="" id="dataForm" >
-									<div class="thead clearfix">
+										<div class="thead clearfix">
 										<div class="col1 col"><b class="actionNameBox">{$actionList[0]['name']}</b>
 											<span class="rowTip dateContentVar"><?php echo date('Y.m.d',time())?></span></div>
-											<div class="col2 col">数量<span class="rowTip">以往平均值：<strong>55</strong>个</span></div>
-											<div class="col3 col">重量<span class="rowTip">以往平均值：<strong>65</strong>kg</span></div>
-											<div class="col4 col">时间<span class="rowTip">以往平均值：<strong>65</strong>s</span></div>
+											<div class="col2 col">数量<span class="rowTip">以往平均值：<strong class="beforeNumAvg">{$couserAvg['numsAvg']}</strong>个</span></div>
+											<div class="col3 col">重量<span class="rowTip">以往平均值：<strong class="beforeweigthAvg">{$couserAvg['weigthAvg']}</strong>kg</span></div>
+											<div class="col4 col">时间<span class="rowTip">以往平均值：<strong class="beforetimeAvg">{$couserAvg['timeAvg']}</strong>s</span></div>
 										</div>
 										<div class="tBody">
+										<form action="" id="dataForm" >
 											<php>foreach($couserinfo as $key => $value){</php>
 											<div class="actGroup actGroupKon <php>if(($key+1)%2==0){</php>evenRow<php>}else{</php>oddRow<php>}</php> clearfix">
 												<div class="col1 col">第{$value['cnum']}组</div>
@@ -149,13 +149,13 @@
 											</div>
 											<php>}</php>
 
-
 											<div class="actGroup avgsRow clearfix">
 												<div class="col1 col">平均值</div>
-												<div class="col2 col">0</div>
-												<div class="col3 col">0</div>
-												<div class="col4 col">0</div>	
+												<div class="col2 col numsAvg">{$rAvgdata['numsAvg']}</div>
+												<div class="col3 col weigthAvg">{$rAvgdata['weigthAvg']}</div>
+												<div class="col4 col timeAvg">{$rAvgdata['timeAvg']}</div>	
 											</div>
+
 											<div class="tFooter clearfix">
 												<div class="addBtn" style="display:none;"><button type="button" class="addGroupBtn" title="加一组">加一组</button></div>
 												<div class="col1 col ">
@@ -165,50 +165,29 @@
 											</div>
 										</form>
 									</div>
-								</div><!--End userTable-->
+								</div>
 								<div class="userPic userArea" style="display:none;">
-									<!-- <div class="uploadTip"><a href="">点击上传图片</a></div> -->
 									<div class="uploadArea">
-										<div id="gla">
-											<div id="gla_box">
-												<ul>
-													<li>
-														<div class="gla_inbox glaimagebox" dataType="default" date="<php>echo reNorTime();</php>">
-															<img src="{$imageList['default']['image']}" />
-														</div>
-													</li>
-													<li>
-														<div class="gla_inbox glaimagebox" dataType="next" date="<php>echo reNorTime(1);</php>">
-															<img src="{$imageList['next']['image']}" />
-														</div>
-													</li>
-													<li>
-														<div class="gla_inbox glaimagebox" dataType="pre" date="<php>echo reNorTime(-1);</php>">
-															<img src="{$imageList['pre']['image']}" />
-														</div>
-													</li>
-												</ul>
-											</div>
-										</div>
-
 										<div class="userUpload">
-											<button class="clickUpload"></button>
-
-										</div>
-
+										<button class="clickUpload"></button>
 									</div>
-								</div><!--End userPic-->
-								<div class="userNote userArea fleft" style="display:none;">
 									<div id="gla">
-										<div id="gla_box">
-											<ul>
-												<li><div class="gla_inbox glalogbox" dataType="default" date="<php>echo reNorTime();</php>"><img src="{$logList['default']['image']}" /></div></li>
-												<li><div class="gla_inbox glalogbox" dataType="next" date="<php>echo reNorTime(1);</php>"><img src="{$logList['next']['image']}" /></div></li>
-												<li><div class="gla_inbox glalogbox" dataType="pre" date="<php>echo reNorTime(-1);</php>"><img src="{$logList['pre']['image']}" /></div></li>
-											</ul>
-										</div>
+										<ul id="imageBox" class="scanPic">
+											<li class="userPicPrev" date="<php>echo reNorTime(-1);</php>"><img src="{$imageList['pre']['image']}"/></li>
+											<li class="userPicCurrent"  date="<php>echo reNorTime();</php>"><img class="moreImage"  src="{$imageList['default']['image']}" /></li>
+										</ul>
 									</div>
-									<div class="userUploadLog fright" ><button class="editDairyBtn"></button></div>
+								</div>
+							</div><!--End userPic-->
+							<div class="userNote userArea" style="display:none;">
+						
+								<div class="userUpload"><button class="editDairyBtn"></button></div>
+								<div id="gla">
+									<ul id="imageBox" class="scanPic">
+										<li class="userPicPrev" date="<php>echo reNorTime(-1);</php>"><img src="{$logList['pre']['image']}" /></li>
+										<li class="userPicCurrent"  date="<php>echo reNorTime();</php>"><img class="moreImage"  src="{$logList['default']['image']}" /></li>
+									</ul>
+								</div>
 									<div id="writeForm" style="display:none;">
 										<div class="writeArea">
 											<div><textarea name="writeLog" style="height: 210px;" id="write" maxlength="200" autofocus></textarea></div>
@@ -260,7 +239,7 @@
 					<div class="bottomRank clearfix">
 						<h3 class="partTit"><span>站内排行榜</span></h3>
 						<p class="tip  greenFont">您在爱健美网的健身排名，赶紧瞧瞧自己排在哪里吧！</p>
-						<div class="ranking">
+						<div class="ranking" style="margin-left:355px;">
 							<div class="rankType"><span>全站排行</span></div>
 							<div class="sportsRank ">
 								<ul class="rankLine clearfix">
@@ -271,135 +250,62 @@
 								</ul>
 								<div class="rankList">
 									<div class="userPos">
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="rankName">要减肥</a>
-										<span class="yourPos">您当前的排名是<span class="userPos redFont">2333</span>位</span>
+										<a href=""><img src="<php>echo getUserFace(getMid(),'m');</php>" alt="userFace" class="rankFace" /></a>
+										<a href="" class="rankName" alt="<php>echo getUserName(getMid(),'zn');</php>" title="<php>echo getUserName(getMid(),'zn');</php>"><php>echo getUserName(getMid(),'zn','5');</php></a>
+										<php>if($userRankNumall!=0){</php>
+										<span class="yourPos">您当前的排名是
+											<span class="userPos redFont rankNums" style="display:none;">{$userRankNum}</span>
+											<span class="userPos redFont rankNums" style="display:none;">{$userRankNum7}</span>
+											<span class="userPos redFont rankNums" style="display:none;">{$userRankNum30}</span>
+											<span class="userPos redFont rankNums" >{$userRankNumall}</span>
+											位</span>
+											<php>}else{</php>
+											<span class="yourPos">您的排名在10000以外请多多努力!</span>
+											<php>}</php>
 									</div>
-									<ul class="topTen">
+									<ul class="topTen rankUl" style="display:none;">
+										<volist id="userRankList" name="userRankList" key="n">
 										<li>
-											<span class="order No1">1</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
+											<span class="order No{$n}">{$n}</span>
+											<a href=""><img src="{$userRankList.userFace}" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">{$userRankList.userName}</a>
 										</li>
+										</volist>
+									</ul>
+
+									<ul class="topTen rankUl" style="display:none;">
+										<volist id="userRankList" name="userRankList_7" key="n">
 										<li>
-											<span class="order No2">2</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
+											<span class="order No{$n}">{$n}</span>
+											<a href=""><img src="{$userRankList.userFace}" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">{$userRankList.userName}</a>
 										</li>
+										</volist>
+									</ul>
+
+
+									<ul class="topTen rankUl" style="display:none;">
+										<volist id="userRankList" name="userRankList_30" key="n">
 										<li>
-											<span class="order No3">3</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
+											<span class="order No{$n}">{$n}</span>
+											<a href=""><img src="{$userRankList.userFace}" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">{$userRankList.userName}</a>
 										</li>
+										</volist>
+									</ul>
+									<ul class="topTen rankUl">
+										<volist id="userRankList" name="userRankList_all" key="n">
 										<li>
-											<span class="order">4</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
+											<span class="order No{$n}">{$n}</span>
+											<a href=""><img src="{$userRankList.userFace}" alt="userFace" class="rankFace" /></a>
+											<a href="" class="otherName">{$userRankList.userName}</a>
 										</li>
-										<li>
-											<span class="order">5</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order">6</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order">7</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order">8</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order">9</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order">10</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
+										</volist>
 									</ul>
 								</div>
 							</div>
 						</div><!--End ranking-->
-						<div class="ranking rankRight">
-							<div class="rankType"><span>好友排行</span></div>
-							<div class="sportsRank ">
-								<ul class="rankLine clearfix">
-									<li class="rankDay">当天</li>
-									<li class="rankDay">7天</li>
-									<li class="rankDay">30天</li>
-									<li class="rankDay allRank curRanking">所有</li>
-								</ul>
-								<div class="rankList">
-									<div class="userPos">
-										<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-										<a href="" class="rankName">要减肥</a>
-										<span class="yourPos">您当前的排名是<span class="userPos redFont">2333</span>位</span>
-									</div>
-									<ul class="topTen">
-										<li>
-											<span class="order No1">1</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order No2">2</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order No3">3</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order">4</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order">5</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order">6</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order">7</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order">8</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order">9</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-										<li>
-											<span class="order">10</span>
-											<a href=""><img src="Templates/tool/images/tool/rg2_1.jpg" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">要减肥</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div><!--End ranking-->
+						
 					</div>
 				</div>
 			</div>
@@ -425,9 +331,7 @@ var userlist=[{
 <script type="text/javascript" src="Templates/tool/js/jquery-ui.js"></script>
 <script type="text/javascript" src="Templates/tool/js/lineData.js"></script>
 <script type="text/javascript" src="Templates/tool/js/tool.js"></script>
-<script type="text/javascript" src="Templates/tool/js/jquery.corner.js"></script>
-<script type="text/javascript" src="Templates/tool/js/jquery.roundabout.js"></script>
-<script type="text/javascript" src="Templates/tool/js/jquery.roundabout-shapes.js"></script>
+
 <script type="text/javascript">
 var userId=<?php echo $_SESSION['mid']>0 ? $_SESSION['mid'] : 0; ?>;
 var actionVal=actionVal ? actionVal : <?php echo "'".$actionList[0]['name']."'";?>;
@@ -441,11 +345,12 @@ $(".clickUpload").click(function (){
 });
 $(document).ready(function(){
 	$("#img").change(function(){
+		$("#imageUploadDateInput").val($('.userPicCurrent').attr('date'));
 		$("#imageUpload").submit();
 	});
 	$("#exec_target").load(function(){
 		var data = $(window.frames['exec_target'].document.body).find("textarea").eq(0).html();
-		$(".glaimagebox[date="+uploadImageDate+"]").find('img').attr('src',data);
+		$(".userPicCurrent").find("img").attr('src',data);
 	})
 });
 
@@ -498,12 +403,19 @@ function getCourseData(dateContentVar){
 		type: "POST",
 		url:ajaxCallUrl,
 		data:fdata,// 要提交的表单
-		//dataType:'json',
+		dataType:'json',
 		success: function(msg) {
 			for (var i = $(".tBody").find('.actGroupKon').length - 1; i >= 0; i--) {
 				$(".tBody").find('.actGroupKon').eq(i).remove();
 			};
-			$(".avgsRow").before(msg);
+			$(".avgsRow").before(msg.html);
+			$(".numsAvg").html(msg.numsAvg);	
+			$(".weigthAvg").html(msg.weigthAvg);	
+			$(".timeAvg").html(msg.timeAvg);
+
+			$(".beforeNumAvg").html(msg.beforeAvg.numsAvg);
+			$(".beforeweigthAvg").html(msg.beforeAvg.weigthAvg);
+			$(".beforetimeAvg").html(msg.beforeAvg.timeAvg);
 		}
 	});
 }
@@ -659,6 +571,7 @@ function saveAddItems(){
 }
 $(function(){
 	$('.glaimagebox').click(function(){
+		
 		uploadImageDate=$(this).attr('date');
 		uploadImageType=$(this).attr('dataType');
 		if((uploadImageDate*1) > (defaultDateString*1) ){ alert('请明天再上传吧!');return false;}
@@ -668,6 +581,7 @@ $(function(){
 			getUserLogImage();
 		});
 	$('.glalogbox').click(function(){
+		
 		uploadImageDate=$(this).attr('date');
 		uploadImageType=$(this).attr('dataType');
 		if((uploadImageDate*1) > (defaultDateString*1) ){ alert('请明天再上传吧!');return false;}
@@ -676,20 +590,16 @@ $(function(){
 		getUserLog();
 	});
 });
-$(function(){
-	$('.gla_inbox').corner('8px');
-	$('#gla_box>ul').roundabout({
-		minOpacity:1,
-		btnNext: ".next",
-		duration: 1000,
-		reflect: true,
-		btnPrev: '.prev',
-		autoplay:false,
-		autoplayDuration:5000,
-		tilt:0,
-		shape: 'figure8'
-	});
-});
+
+
+			$('.rankDay').click(function(){
+				var _index=$(this).index();
+				$(".rankUl").hide();
+				$(".rankUl").eq(_index).show();
+				$(".rankNums").hide();
+				$(".rankNums").eq(_index).show();
+			});
+
 </script>
 <script type="text/javascript" src="Templates/js/public.js"></script>
 <script type="text/javascript">

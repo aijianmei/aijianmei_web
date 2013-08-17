@@ -104,15 +104,15 @@ highLight(".chartDate", "curChart");
 highLight(".rankLine", "curRanking");
 highLight(".siderBtn", "curGroup");
 
-
+var dateTabType=false;
 //tab
 $(".dataTab").children().bind("click", function(){
 	var _index = $(this).index();
+	dateTabType=_index;
 	$(this).find("span").css("display","none");
 	$(this).siblings().find("span").css("display", "block");
 	$(".userArea").eq(_index).css("display","block").siblings().css("display","none");
 })
-
 
 //更多动作选择
 //var actionJson='Templates/tool/json/actions.json';
@@ -149,6 +149,7 @@ $.getJSON(actionJson, function(data){
 			$(".actionNameBox").html(actionVal);
 			getCourseData(dateContentVar);
 			$(this).addClass("curAct").siblings().removeClass("curAct");
+			textLength();
 		});
 		
 		//点击导航栏“更多”按钮下拉
@@ -160,7 +161,6 @@ $.getJSON(actionJson, function(data){
 				$(".nextSelect").show();
 			}
 		});
-		
 		//收起
 		$(".hideBtn, .showList").live("click",function(){
 			//若所选动作已存在于导航栏，则直接给高亮显示
@@ -176,7 +176,8 @@ $.getJSON(actionJson, function(data){
 						$(".actNav").find(".curAct").removeClass("curAct");
 						actionVal=$(".actNav").find("li").eq(i).text();
 						$(".actionNameBox").html(actionVal);
-						getCourseData(dateContentVar);
+						getCourseData(dateContentVar);//替换
+						textLength();
 						$(".actNav").find("li").eq(i).addClass("curAct");
 						break;
 					}
@@ -264,13 +265,13 @@ $(".editSave").click(function(){
 	if($(this).hasClass("edit")){
 		$(this).hide().next().show();
 		$(".actGroup").find("span").show();
-		$(".figure").css("background","url(images/tool/sprites2.png) no-repeat -32px -64px")
+		$(".figure").css("background","url(Templates/tool/images/tool/sprites2.png) no-repeat -32px -64px")
 			.removeAttr("readonly");
 
-		var groupNums=$(".tBody").find(".actGroup").length -1;
-		defaultGroup=7+(7-groupNums);
+		var groupNums=$(".tBody").find(".actGroup").length;
 
-		if(maxGroup != defaultGroup){
+
+		if(groupNums<=7){
 			$(".addBtn").show().die().live("click", addGroup);
 		}
 		
@@ -283,38 +284,43 @@ $(".editSave").click(function(){
 			.attr("readonly","readonly");
 		$(".addBtn").hide();
 
+			//$('#dataForm').serialize();
 		//保存事件
 		saveAddItems();
 	}
 });
 
-maxGroup = 7;
-defaultGroup = maxGroup + 3;
+
 var addGroup = function(){
-	var groupArr = [ "第五组", "第六组", "第七组"],
-		inputNameArr = [ "nums[]", "weight[]", "time[]"],
+	var groupArr 		=    new Array();
+		groupArr[1]     = "第一组";
+		groupArr[2]     = "第二组";
+		groupArr[3]     = "第三组";
+		groupArr[4]     = "第四组";
+		groupArr[5]     = "第五组";
+		groupArr[6]     = "第六组";
+		groupArr[7]     = "第七组";
+	var inputNameArr = [ "nums[]", "weight[]", "time[]"],
 		col = $(".tBody").find(".actGroup").first().find(".col").length,
 		colArr = [],
 		colText = null;
-		
-		var groupNums=$(".tBody").find(".actGroup").length -1;
-		defaultGroup=8+(8-groupNums);
+		var groupNums=$(".tBody").find(".actGroup").length;
 
-	if(maxGroup<defaultGroup){
+	if(groupNums<=7){
 		for(var i=0; i<col; i++){
 			if(0==i){
-				colText = groupArr[maxGroup-7];
-				maxGroup++;
+				colText = groupArr[groupNums];
 			}
 			else{
 				colText = '<span class="cut" style="display:block;"></span>'
-						+ '<input type="text" name="'+inputNameArr[i*1-1]+'" value="0" class="figure" style="background:url(images/tool/sprites2.png) no-repeat -32px -64px;"/>'
+						+ '<input type="text" name="'+inputNameArr[i*1-1]+'" value="0" class="figure" style="background:url(Templates/tool/images/tool/sprites2.png) no-repeat -32px -64px;"/>'
 						+ '<span class="add" style="display:block;"></span>' ;
 			}
 			colArr.push('<div class="col col' + (++i) +'">'+ colText +'</div>');
 			i--;
 		}
-		var k = (defaultGroup - maxGroup)%2,
+
+		var k = (groupNums*1+1)%2,
 			rowClass = null;
 		if( k == 0){
 			rowClass = "oddRow";
@@ -324,7 +330,7 @@ var addGroup = function(){
 		}
 		var newRow = '<div class="actGroup actGroupKon clearfix'+ ' '+ rowClass +'">' + colArr.join("") + '</div>';
 		$(".avgsRow").before(newRow);
-		if(maxGroup == defaultGroup){
+		if(groupNums == 7){
 			$(".addBtn").hide();
 		}
 	}
@@ -354,6 +360,7 @@ $(".writeSub").click(function(){
 })
 
 function setUserLogImg(){
+
 	var ajaxCallUrl='/libpack/aiAjaxClass.php?act=setUserLogImg';
 	var fdata='writeLog='+$("#write").val()+'&date='+uploadImageDate;
 	$.ajax({
@@ -362,7 +369,7 @@ function setUserLogImg(){
 		data:fdata,// 要提交的表单
 		dataType:'json',
 		success: function(msg) {
-			$(".glalogbox[date="+uploadImageDate+"]").find('img').attr('src',msg);
+			$(".userNote").find("#imageBox").find('li[class="userPicCurrent"]').find('img').attr('src',msg);
 			$("#write").val('');
 		}
 	});
@@ -385,4 +392,83 @@ function postUserDefaultAction(){
 		success: function(msg) {
 		}
 	});
+}
+
+var textLength = function(){
+	var len = $(".actionNameBox").text().length;
+	console.log(len);
+	//alert();
+	if(len>5){
+		$(".actionNameBox").css("font-size","20px");
+	}else{
+		$(".actionNameBox").css("font-size","30px");
+	}
+}
+textLength();
+//图片切换
+$(".userPicPrev").live("click",function(){
+	var _this = this;
+	var ajaxCallUrl='/libpack/aiAjaxClass.php?act=getUserLogImage';
+	var date=$(_this).attr('date');
+	//alert(date);
+	$.ajax({
+		type: "POST",
+		url:ajaxCallUrl,
+		data:'date='+date+"&dateTabType="+dateTabType,
+		dataType:'json',
+		async: false, 
+		success: function(msg){
+			var n = $(_this).parent().queue("fx");
+			if(n.length)	return false;
+			if(!msg.image){
+
+				$(_this).parent().animate({ "right":"-=460px"});
+				$(_this).removeClass("userPicPrev").addClass("userPicCurrent");
+				$(_this).next().removeClass("userPicCurrent");
+				$(".userPicCurrent").next().addClass("userPicNext").siblings().removeClass("userPicNext");
+
+				return false;
+			}
+			var innerHtml='<li><img src="'+msg.image+'" /></li>';
+			$(_this).parent().css("width","+=460px").prepend(innerHtml);//获取一张图片，宽度增加
+			$(_this).parent().find('li').eq(0).attr({"date":msg.date,"alt":msg.date});
+
+			
+			//查看上一张
+			
+			var _right;
+			if($(_this).parent().find("li").length == 3){
+				_right = "-=300px";
+			}
+			else{
+				_right = "-=460px";
+			}
+
+			$(_this).parent().animate({ "right": _right }, function(){
+				$(_this).removeClass("userPicPrev").prev().addClass("userPicPrev");
+				$(_this).next().removeClass("userPicCurrent").prev().addClass("userPicCurrent");
+				$(".userPicCurrent").next().addClass("userPicNext").siblings().removeClass("userPicNext");
+				//查看下一张
+				$(".userPicNext").die().live("click",function(){
+					//alert(2);
+					var n = $(_this).parent().queue("fx");
+					if(n.length)	return false;
+					var that = this;
+					if($(that).hasClass("userPicNext")){
+						$(_this).parent().animate({"right": "+=460px"}, function(){
+							$(that).next().addClass("userPicNext");
+							$(that).attr("class", "userPicCurrent").prev().attr("class","userPicPrev").siblings().removeClass("userPicPrev");
+						})
+					}
+				})
+			})
+		}//success
+	})
+})
+
+
+function checkIntNums(obj){
+		var num=$(obj).val();
+		num = num.replace(/^[1-9]d*.d*|0.d*[1-9]d*{1}$/g,"<img src='"+baseURL+"Face_13.gif'>");
+		var num;
 }

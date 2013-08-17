@@ -20,9 +20,9 @@ class IndexAction extends AdministratorAction {
             'content'		=>	'内容',
             'user'			=>	'用户',
             'apps'			=>	'应用',
-            'extension'	=>	'插件',
-            'article'   =>  '文章',
-            'pageinfo'  =>  '页面',
+            'extension'		=>	'插件',
+            'article'       =>  '文章',
+			'pageinfo'      =>  '页面',
             'fitnesscourse'  =>  '健身历程',
         );
     }

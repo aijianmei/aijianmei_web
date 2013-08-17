@@ -13,26 +13,54 @@ class CourseAction extends Action {
 			$faid=intval($actionList[0]['id']);
 		}
 
+		$this->countUserExercise();
+		$userRankList=$this->getUserRank();
+		$userRankList_7=$this->getUserRank(7);
+		$userRankList_30=$this->getUserRank(30);
+		$userRankList_all=$this->getUserRank('','',true);
 
-		
+		$this->assign ( 'userRankList', $userRankList);
+		$this->assign ( 'userRankList_7', $userRankList_7);
+		$this->assign ( 'userRankList_30', $userRankList_30);
+		$this->assign ( 'userRankList_all', $userRankList_all);
+
+		$this->assign ( 'userRankNum', $this->getUserRankById($uid));
+		$this->assign ( 'userRankNum7', $this->getUserRankById($uid,7));
+		$this->assign ( 'userRankNum30', $this->getUserRankById($uid,30));
+		$this->assign ( 'userRankNumall', $this->getUserRankById($uid,'','',true));
+
 		$myActionList=$this->actionListToString($actionList);
 
 		$couserinfo=$this->getCourseInfo($uid,$faid,$date);
+
+		$rAvgdata=array();
+		$countNums=count($couserinfo);
+		foreach ($couserinfo as $key => $value) {
+			$numCount		+=$value['loginfo']['nums'];
+			$weightCount	+=$value['loginfo']['weight'];
+			$timeCount		+=$value['loginfo']['time'];
+		}
+		$rAvgdata['numsAvg'] 	=round($numCount/$countNums);
+		$rAvgdata['weigthAvg'] =round($weightCount/$countNums);
+		$rAvgdata['timeAvg'] 	=round($timeCount/$countNums);
+
+		$couserAvg=$this->getCourseInfoAvg($uid,$faid,$date);
 
 		$healthInfo=$this->getUserHealthById($uid);
 
 		$toticString=$this->gettoticString($healthInfo);
 
 		$imageList=$this->getLogImage();
+
 		$logList=$this->getLog();
-
-
-		//var_dump($imageList);exit();
+//var_dump($imageList);exit;
+		$this->assign ( 'rAvgdata', $rAvgdata);
 		$this->assign ( 'myActionList', $myActionList);
 		$this->assign ( 'logList', $logList);
 		$this->assign ( 'imageList', $imageList);
 		$this->assign ( 'toticString', $toticString);
 		$this->assign ( 'couserinfo', $couserinfo);
+		$this->assign ( 'couserAvg', $couserAvg);
 		$this->assign ( 'actionList', $actionList);
 		$this->assign ( 'userHealth', $healthInfo);
 		$this->assign ( 'keywordInfo', $this->getUserKeyword($uid));
@@ -52,54 +80,41 @@ class CourseAction extends Action {
 	protected function getLogImage(){
 		$baseDir=dirname(dirname(dirname(dirname(dirname(__FILE__)))));
 		$data=$res=$edate=$sdate=$uid=null;
-		$edate=reNorTime(1);
-		$sdate=reNorTime(-1);
+		$edate=date("Ymd",time());
+		//$sdate=reNorTime(-1);
 		$uid=$this->mid;
-		$sql="select * from ai_user_course_log_image where date>=$sdate and date<=$edate and uid=$uid";
+		$sql="select * from ai_user_course_log_image where date<=$edate and uid=$uid order by date desc limit 2";
 		$res=M('')->query($sql);
+		//exit;
 		$data['default']['image']='/Templates/tool/images/tool/pic.png';
-		$data['next']['image']='/Templates/tool/images/tool/pic.png';
 		$data['pre']['image']='/Templates/tool/images/tool/pic.png';
 		if(!empty($res)){
-			foreach ($res as $key => $value) {
-				if($value['date']==reNorTime()){
-					$data['default']=$value;
-					$data['default']['image']=is_file($baseDir.$data['default']['image'])?$data['default']['image']:'/Templates/tool/images/tool/pic.png';
-				}elseif($value['date']==reNorTime(1)){
-					$data['next']=$value;
-					$data['next']['image']=is_file($baseDir.$data['next']['image'])?$data['next']['image']:'/Templates/tool/images/tool/pic.png';
-				}elseif ($value['date']==reNorTime(-1)) {
-					$data['pre']=$value;
-					$data['pre']['image']=is_file($baseDir.$data['pre']['image'])?$data['pre']['image']:'/Templates/tool/images/tool/pic.png';
-				}
-			}
+
+			$data['default']=$res[0];
+			$data['default']['image']=is_file($baseDir.$data['default']['image'])?$data['default']['image']:'/Templates/tool/images/tool/pic.png';
+			$data['pre']=$res[1];
+			$data['pre']['image']=is_file($baseDir.$data['pre']['image'])?$data['pre']['image']:'/Templates/tool/images/tool/pic.png';
+
 		}
 		return !empty($data) ? $data :'';
 	}
 	protected function getLog(){
 		$baseDir=dirname(dirname(dirname(dirname(dirname(__FILE__)))));
 		$data=$res=$edate=$sdate=$uid=null;
-		$edate=reNorTime(1);
-		$sdate=reNorTime(-1);
+		$edate=date("Ymd",time());
 		$uid=$this->mid;
-		$sql="select * from ai_user_course_log where date>=$sdate and date<=$edate and uid=$uid";
+		$sql="select * from ai_user_course_log where date<=$edate and uid=$uid order by date desc limit 2";
 		$res=M('')->query($sql);
+		//exit;
 		$data['default']['image']='/Templates/tool/images/tool/rj_1.png';
-		$data['next']['image']='/Templates/tool/images/tool/rj_1.png';
 		$data['pre']['image']='/Templates/tool/images/tool/rj_1.png';
+
 		if(!empty($res)){
-			foreach ($res as $key => $value) {
-				if($value['date']==reNorTime()){
-					$data['default']=$value;
-					$data['default']['image']=is_file($baseDir.$data['default']['image'])?$data['default']['image']:'/Templates/tool/images/tool/pic.png';
-				}elseif($value['date']==reNorTime(1)){
-					$data['next']=$value;
-					$data['next']['image']=is_file($baseDir.$data['next']['image'])?$data['next']['image']:'/Templates/tool/images/tool/pic.png';
-				}elseif ($value['date']==reNorTime(-1)) {
-					$data['pre']=$value;
-					$data['pre']['image']=is_file($baseDir.$data['pre']['image'])?$data['pre']['image']:'/Templates/tool/images/tool/pic.png';
-				}
-			}
+			$data['default']=$res[0];
+			$data['default']['image']=is_file($baseDir.$data['default']['image'])?$data['default']['image']:'/Templates/tool/images/tool/rj_1.png';
+			$data['pre']=$res[1];
+			$data['pre']['image']=is_file($baseDir.$data['pre']['image'])?$data['pre']['image']:'/Templates/tool/images/tool/rj_1.png';
+
 		}
 		return !empty($data) ? $data :'';
 	}
@@ -175,6 +190,32 @@ class CourseAction extends Action {
 		}
 		return $data;
 	}
+	//获取对应日期之前的平均值
+	public function getCourseInfoAvg($uid,$aid,$date){
+		$date= date("Ymd",strtotime($date)-86400);
+		$sql=$countNums=$numCount=null;
+		$rdata=$data=array();
+		$sql = "select * from ai_user_course_list where `uid`=$uid and `aid`=$aid  and `date`<=$date";
+		$data=M('')->query($sql);
+		if (! empty ( $data )) {
+			$countNums=count($data);
+			foreach ( $data as $k => &$value ) {
+				$value ['loginfo'] = unserialize ( $value ['loginfo'] );
+				$value ['cnum'] = $this->num2Char($k+1);
+				$numCount+=$value ['loginfo']['nums'];
+				$weightCount+=$value ['loginfo']['weight'];
+				$timeCount+=$value ['loginfo']['time'];
+			}
+			$rdata['numsAvg'] 	=round($numCount/$countNums);
+			$rdata['weigthAvg'] =round($weightCount/$countNums);
+			$rdata['timeAvg'] 	=round($timeCount/$countNums);
+		}else{
+			$rdata['numsAvg'] ='0';
+			$rdata['weigthAvg'] ='0';
+			$rdata['timeAvg'] ='0';
+		}
+		return $rdata;
+	}
 	protected function getUserHealthById($uid){
 		$sql="select body_weight as weight,targetWeight,nowWeight,weightTime,targetTime from ai_user_health_info where uid=$uid";
 		$data=M('')->query($sql);
@@ -202,7 +243,7 @@ class CourseAction extends Action {
 	protected function getWeigthPertent($weight,$targetWeight,$nowWeight){
 		$pertent=0;
 		if($targetWeight > $weight){//目标数值大于原始值 增重
-				$klu=($targetWeight-$nowWeight)*7700;
+			$klu=($targetWeight-$nowWeight)*7700;
 				if($nowWeight < $weight){//当前数值 < 原始数值 无用功直接 0%
 					$pertent=0;
 				}else{//否则计算对应完成度的百分比
@@ -222,12 +263,107 @@ class CourseAction extends Action {
 				}
 			}
 			return array( 'pertent' => $pertent,'klu'=> $klu);
-	}
-	protected function num2Char($num){
-		$charArr = array('1' =>'一' , '2' => '二','3' => '三' ,'4' => '四' ,'5' => '五' ,'6' => '六' ,
-			'7' => '七' , '8' => '八', '9' => '九' );
-		return !empty($num)?$charArr[$num]:$num;
-	}
+		}
+		protected function num2Char($num){
+			$charArr = array('1' =>'一' , '2' => '二','3' => '三' ,'4' => '四' ,'5' => '五' ,'6' => '六' ,
+				'7' => '七' , '8' => '八', '9' => '九' );
+			return !empty($num)?$charArr[$num]:$num;
+		}
 
-}
-?>
+		protected function countUserExercise(){
+			/* 获取所有的用户健身数据 */
+			/* 统计前一天 */
+			/* 额外可初始化数据 */
+			/* 时间区间组合块 */
+			/* 数据分类统计写入库 */
+			static $_init = true;
+			$startTime    = $endTime = $dateString = null;
+			$data         = $result  = array();
+			$startTime    = mktime(0, 0, 0, date("m"), date("d")-1, date("Y"));
+			$endTime      = mktime(23, 59, 59, date("m"), date("d")-1, date("Y"));
+			$dateString   = $_init==false ? " where date>='".$startTime."' and date<='".$endTime."'" : '';
+			$getUserLogSql= "select * from ai_user_course_list {$dateString}";
+			$data         = M('')->query($getUserLogSql);
+			foreach ($data as $key => &$value) {
+				$value['loginfo']=unserialize($value['loginfo']);
+				$result[$value['date']][$value['uid']]['group'][$value['group']]=$value['loginfo']['weight'] * $value['loginfo']['nums'];
+				$result[$value['date']][$value['uid']]['uid']		=$value['uid'];
+				$result[$value['date']][$value['uid']]['date']		=$value['date'];
+				$result[$value['date']][$value['uid']]['aid']		=$value['aid'];
+			}
+			foreach ($result as $date => $uidinfo) {
+				foreach ($uidinfo as $uid => &$value) {
+					foreach ($value['group'] as $val) {
+						$result[$date][$uid]['exercise']+=$val;
+					}
+					unset($result[$date][$uid]['group']);
+				}
+			}
+			$checkData=$checkSql=$insertSql=$updateSql=null;
+			foreach ($result as $key => $value) {
+				foreach ($value as $k => $v) {
+					$uid     =$v['uid'];
+					$aid     =$v['aid'];
+					$date    =$v['date'];
+					$exercise=$v['exercise'];
+					$checkSql="select * from `ai_user_exercise_log` where `uid`='".$uid."' and `aid`='".$aid."' and `date`='".$date."'";
+					$checkData=M('')->query($checkSql);
+					if(!empty($checkData)){
+						$updateSql="UPDATE `ai_user_exercise_log` SET  `exercise` =  '".$exercise."',`create_time` =  '".time()."' WHERE `uid` =  '".$uid."' and `aid` =  '".$aid."' and `date` =  '".$date."'";
+						M('')->query($updateSql);
+					}else{
+						$insertSql ="INSERT INTO `ai_user_exercise_log` (`id` ,`uid` ,`aid` ,`date` ,`exercise` ,`create_time`)VALUES (NULL ,  '".$uid."',  '".$aid."',  '".$date."',  '".$exercise."',  '".time()."')";
+						M('')->query($insertSql);	
+					}
+				}
+			}
+		}
+		protected function getUserRank($dateType=null,$aid=null,$isAll=false){
+			$dateString=$startTime=$endTime=$where=null;
+			if(!empty($dateType)){
+				$startTime    = date('Ymd',mktime(0, 0, 0, date("m"), date("d")-$dateType, date("Y")));
+				$endTime      = date('Ymd',time());
+				$where 		  = " WHERE date>='".$startTime."' and date<='".$endTime."'";
+			}else{
+				$where 		  = " WHERE date='".date('Ymd',time())."'";
+			}
+			if(!empty($aid)){
+				$where.=$where." and aid='".$aid."'";
+			}
+			if($isAll==true){$where=null;}
+			$getSql="SELECT SUM(  `exercise` ) AS exercise, uid FROM ai_user_exercise_log $where GROUP BY uid ORDER BY exercise DESC limit 10";
+			$data=M('')->query($getSql);
+			foreach ($data as $key => &$value) {
+				$value['userFace']=getUserFace($value['uid'],'m');
+				$value['userName']=getUserName($value['uid']);
+
+			}
+			return $data;
+		}
+		protected function getUserRankById($uid,$date=null,$aid=null,$isAll=false){
+			$dateString=$startTime=$endTime=$where=null;
+			if(!$uid) return false;
+			if(!empty($dateType)){
+				$startTime    = date('Ymd',mktime(0, 0, 0, date("m"), date("d")-$dateType, date("Y")));
+				$endTime      = date('Ymd',time());
+				$where 		  = " WHERE date>='".$startTime."' and date<='".$endTime."'";
+			}else{
+				$where 		  = " WHERE date='".date('Ymd',time())."'";
+			}
+			if(!empty($aid)){
+				$where.=$where." and aid='".$aid."'";
+			}
+			if($isAll==true){$where=null;}
+			$tmpTable="SELECT SUM(  `exercise` ) AS exercise, uid,date FROM ai_user_exercise_log  $where GROUP BY uid ORDER BY exercise";
+			if(!empty($where)){
+				$tmpUTable="SELECT SUM(  `exercise` ) AS exercise FROM ai_user_exercise_log  $where and uid=$uid GROUP BY uid ORDER BY exercise";
+			}else{
+				$tmpUTable="SELECT SUM(  `exercise` ) AS exercise FROM ai_user_exercise_log  where uid=$uid GROUP BY uid ORDER BY exercise";
+			}
+
+			$getRankSql="select count(*) as num from ($tmpTable) as tmp where tmp.exercise >= ($tmpUTable)";
+			$data=M('')->query($getRankSql);
+			return $data[0]['num']>0 ? intval($data[0]['num']):1;
+		}
+	}
+	?>
