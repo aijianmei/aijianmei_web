@@ -361,24 +361,12 @@ $(".editDairyBtn,.writeSub").click(function(){
 	$("#writeForm").toggle();
 
 });
-//控制表格文字大小
-var textLength = function(){
-	var len = $(".thead>.col1").text().length,
-		dLen = $(".col1>.rowTip").text().length,
-		tLen = len - dLen;
-	if(tLen>5){
-		$(".thead>.col1").css("font-size","20px");
-	}
-	else{
-		$(".thead>.col1").css("font-size","30px");
-	}
-}
-textLength();
 
 //图片切换
 $(".userPicPrev").live("click",function(){
 
 	var _this = this;
+	
 	var ajaxCallUrl='/tool/moreImage.php';
 	var date=$(_this).attr('date');
 
@@ -390,16 +378,26 @@ $(".userPicPrev").live("click",function(){
 		success: function(msg){
 			var n = $(_this).parent().queue("fx");
 			if(n.length)	return false;
-		
-			var innerHtml='<li><img src="images/'+msg.image+'" /></li>';
-			$(_this).parent().css("width","+=460px").prepend(innerHtml);//获取一张图片，宽度增加
-			$(_this).parent().find('li').eq(0).find('img').attr({"date":date,"alt":date});
 			
+			if(!msg.image){
+				$(_this).parent().animate({ "right":"-=460px"});
+				$(_this).removeClass("userPicPrev").addClass("userPicCurrent");
+				$(_this).next().removeClass("userPicCurrent");
+				$(_this).parent().find("li[class='userPicCurrent']").next().addClass("userPicNext").siblings().removeClass("userPicNext");
+				return false;
+			}
+			
+			if(!$(_this).index()){
+				var innerHtml='<li><img src="images/'+msg.image+'" /></li>';
+				$(_this).parent().css("width","+=460px").prepend(innerHtml);//获取一张图片，宽度增加
+				$(_this).parent().find('li').eq(0).find('img').attr({"date":date,"alt":date});
+			}	
+
 			//查看上一张
 			$(_this).parent().animate({ "right": "-=460px" }, function(){
 				$(_this).removeClass("userPicPrev").prev().addClass("userPicPrev");
 				$(_this).next().removeClass("userPicCurrent").prev().addClass("userPicCurrent");
-				$(".userPicCurrent").next().addClass("userPicNext").siblings().removeClass("userPicNext");
+				$(_this).parent().find("li[class='userPicCurrent']").next().addClass("userPicNext").siblings().removeClass("userPicNext");
 				//查看下一张
 				$(".userPicNext").die().live("click",function(){
 					var n = $(_this).parent().queue("fx");
@@ -407,12 +405,12 @@ $(".userPicPrev").live("click",function(){
 
 					var that = this;
 					if($(that).hasClass("userPicNext")){
-						$(_this).parent().animate({"right": "+=460px"}, function(){
+						$(that).parent().animate({"right": "+=460px"}, function(){
 							$(that).next().addClass("userPicNext");
 							$(that).attr("class", "userPicCurrent").prev().attr("class","userPicPrev").siblings().removeClass("userPicPrev");
 						})
 					}
-				})
+				});
 			})
 		}//success
 	})
