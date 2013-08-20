@@ -3,12 +3,12 @@ class CourseAction extends AdministratorAction {
 	public function actionList() {
 		$pg = $_GET ['pg'] ? intval ( $_GET ['pg'] ) : 1;
 		$nums = 15;
-		$dailycount = M ( 'ai_action_list' )->order ( 'id desc' )->findAll ();
+		$dailycount = M ( 'action_list' )->order ( 'id desc' )->findAll ();
 		$from = ($pg - 1) * $nums;
 		$sql = "select * from ai_action_list order by id desc limit {$from},{$nums}";
 		$daily = $this->getSqlDataAll ( $sql );
 		$pageArr = $this->pageHtml ( count ( $dailycount ), $nums, $pg, '/index.php?app=admin&mod=Course&act=actionList&pg=%s' );
-		
+
 		foreach ( $daily as $key => &$value ) {
 			$sql = null;
 			$sql = "select group_concat( `name` SEPARATOR  ',' ) AS name  from ai_action_category_list where cid in (" . $value ['cid'] . ")";
@@ -25,7 +25,7 @@ class CourseAction extends AdministratorAction {
 		if (! empty ( $value ) || ! empty ( $link ))
 			$value = implode ( $link, $value );
 	}
-	protected function generateFontWith() {
+	public function generateFontWith() {
 		$sql = $category_list = null;
 		$sql = "select * from ai_action_category_list order by sequence desc";
 		$category_list = $this->getSqlDataAll ( $sql );
@@ -321,7 +321,6 @@ class CourseAction extends AdministratorAction {
 				}
 			}
 		} else {
-			
 			foreach ( $pageArr as $k => $v ) {
 				$pagehtml .= $v;
 			}

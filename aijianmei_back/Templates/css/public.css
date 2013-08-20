@@ -197,7 +197,7 @@ button{
 			display: block;
 			padding: 0 11px;
 			color: white;
-			font-size: 24px;
+			font-size: 20px;
 			word-break:keep-all;/*solue with ie6*/
 		}
 		.nav_current .nav_a{

@@ -44,13 +44,15 @@ class CourseAction extends Action {
 		$rAvgdata['weigthAvg'] =round($weightCount/$countNums);
 		$rAvgdata['timeAvg'] 	=round($timeCount/$countNums);
 
-		$couserAvg=$this->getCourseInfoAvg($uid,$faid,$date);
+		$couserAvg   =$this->getCourseInfoAvg($uid,$faid,$date);
 
-		$healthInfo=$this->getUserHealthById($uid);
+		$healthInfo  =$this->getUserHealthById($uid);
 
-		$toticString=$this->gettoticString($healthInfo);
+		//var_dump($healthInfo);
 
-		$imageList=$this->getLogImage();
+		$toticString =$this->gettoticString($healthInfo);
+
+		$imageList	 =$this->getLogImage();
 
 		$logList=$this->getLog();
 //var_dump($imageList);exit;
@@ -67,6 +69,7 @@ class CourseAction extends Action {
 		$this->assign ( 'userDes', getUserDes($uid));
 		$this->assign ( 'userName', getUserName($uid));
 		$this->assign ( 'headertitle', '健身计划' );
+		$this->assign ( 'cssFile', 'index' );
 		$this->assign ( 'cssFile', 'index' );
 		$this->display ( 'tool' );
 	}
@@ -85,15 +88,20 @@ class CourseAction extends Action {
 		$uid=$this->mid;
 		$sql="select * from ai_user_course_log_image where date<=$edate and uid=$uid order by date desc limit 2";
 		$res=M('')->query($sql);
-		//exit;
 		$data['default']['image']='/Templates/tool/images/tool/pic.png';
 		$data['pre']['image']='/Templates/tool/images/tool/pic.png';
 		if(!empty($res)){
-
-			$data['default']=$res[0];
-			$data['default']['image']=is_file($baseDir.$data['default']['image'])?$data['default']['image']:'/Templates/tool/images/tool/pic.png';
-			$data['pre']=$res[1];
-			$data['pre']['image']=is_file($baseDir.$data['pre']['image'])?$data['pre']['image']:'/Templates/tool/images/tool/pic.png';
+			if($res[0]['date']==$edate){
+				$data['default']=$res[0];
+				$data['default']['image']=is_file($baseDir.$data['default']['image'])?$data['default']['image']:'/Templates/tool/images/tool/pic.png';
+				$data['pre']=$res[1];
+				$data['pre']['image']=is_file($baseDir.$data['pre']['image'])?$data['pre']['image']:'/Templates/tool/images/tool/pic.png';
+			}else{
+				$data['default']['date']=$edate;
+				$data['default']['image']='/Templates/tool/images/tool/pic.png';
+				$data['pre']=$res[0];
+				$data['pre']['image']=is_file($baseDir.$data['pre']['image'])?$data['pre']['image']:'/Templates/tool/images/tool/pic.png';
+			}
 
 		}
 		return !empty($data) ? $data :'';
@@ -110,10 +118,17 @@ class CourseAction extends Action {
 		$data['pre']['image']='/Templates/tool/images/tool/rj_1.png';
 
 		if(!empty($res)){
-			$data['default']=$res[0];
-			$data['default']['image']=is_file($baseDir.$data['default']['image'])?$data['default']['image']:'/Templates/tool/images/tool/rj_1.png';
-			$data['pre']=$res[1];
-			$data['pre']['image']=is_file($baseDir.$data['pre']['image'])?$data['pre']['image']:'/Templates/tool/images/tool/rj_1.png';
+			if($res[0]['date']==$edate){
+				$data['default']=$res[0];
+				$data['default']['image']=is_file($baseDir.$data['default']['image'])?$data['default']['image']:'/Templates/tool/images/tool/rj_1.png';
+				$data['pre']=$res[1];
+				$data['pre']['image']=is_file($baseDir.$data['pre']['image'])?$data['pre']['image']:'/Templates/tool/images/tool/rj_1.png';
+			}else{
+				$data['default']['date']=$edate;
+				$data['default']['image']='/Templates/tool/images/tool/rj_1.png';
+				$data['pre']=$res[1];
+				$data['pre']['image']=is_file($baseDir.$data['pre']['image'])?$data['pre']['image']:'/Templates/tool/images/tool/rj_1.png';
+			}
 
 		}
 		return !empty($data) ? $data :'';
@@ -162,7 +177,7 @@ class CourseAction extends Action {
 		return ;
 	}
 	protected function getCourseInfo($uid,$aid,$date){
-		$sql = "select * from ai_user_course_list where `uid`=$uid and `aid`=$aid  and `date`=$date";
+		$sql = "select * from ai_user_course_list where `uid`=$uid and `aid`=$aid  and `date`=$date order by `group` asc";
 		$data=M('')->query($sql);
 		if (! empty ( $data )) {
 			foreach ( $data as $k => &$value ) {
@@ -220,23 +235,28 @@ class CourseAction extends Action {
 		$sql="select body_weight as weight,targetWeight,nowWeight,weightTime,targetTime from ai_user_health_info where uid=$uid";
 		$data=M('')->query($sql);
 		if(empty($data)){
-			$data[0]['weight']=0;
+			$data[0]['weight']	    =0;
 			$data[0]['targetWeight']=0;
-			$data[0]['nowWeight']=0;
-			$data[0]['pertent']=0;
-			$data[0]['klu']=0;
-			$data[0]['isfitness']=1;
-			$data[0]['wtime']=1;
-			$data[0]['isfitness']=1;
-			$data[0]['weightTime']=date("Y-m-d",time());
-			$data[0]['targetTime']=date("Y-m-d",time());
+			$data[0]['nowWeight'] 	=0;
+			$data[0]['pertent'] 	=0;
+			$data[0]['klu'] 		=0;
+			$data[0]['isfitness']   =1;
+			$data[0]['wtime'] 		=1;
+			$data[0]['isfitness']   =1;
+			$data[0]['weightTime']  =date("Y-m-d",time());
+			$data[0]['targetTime']  =date("Y-m-d",time());
 		}else{
 			$prefino=$this->getWeigthPertent($data[0]['weight'],$data[0]['targetWeight'],$data[0]['nowWeight']);
-			$data[0]['pertent']=round($prefino['pertent'],1);
-			$data[0]['klu']=$prefino['klu'];
-			$data[0]['isfitness']=$data[0]['targetWeight']< $data[0]['weight'] ? 1 : 2;
-			$data[0]['weightTime']=date("Y-m-d",$data[0]['weightTime']);
-			$data[0]['targetTime']=date("Y-m-d",$data[0]['targetTime']);
+			$data[0]['pertent']  	=round($prefino['pertent'],1);
+			$data[0]['klu'] 		=$prefino['klu'];
+			if($data[0]['klu']>0){
+				$data[0]['isfitness']   =$data[0]['targetWeight']< $data[0]['weight'] ? 1 : 2;
+			}else{
+				$data[0]['klu']=abs($data[0]['klu']);
+				$data[0]['isfitness']   =$data[0]['targetWeight']< $data[0]['weight'] ? 2 : 1;
+			}
+			$data[0]['weightTime']  =date("Y-m-d",$data[0]['weightTime']);
+			$data[0]['targetTime']  =date("Y-m-d",$data[0]['targetTime']);
 		}
 		return $data[0];
 	}
@@ -340,7 +360,7 @@ class CourseAction extends Action {
 			}
 			return $data;
 		}
-		protected function getUserRankById($uid,$date=null,$aid=null,$isAll=false){
+		protected function getUserRankById($uid,$dateType=null,$aid=null,$isAll=false){
 			$dateString=$startTime=$endTime=$where=null;
 			if(!$uid) return false;
 			if(!empty($dateType)){

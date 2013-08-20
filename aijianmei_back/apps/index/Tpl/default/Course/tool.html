@@ -26,7 +26,7 @@
 						<img src="<php>echo getUserFace(getMid(),'b');</php>" alt="UserFace" class="userFace" />
 						<php>if(getMid()){</php>
 						<div><a href="javasrcpit:void(0);" class="userName">{$userName}</a></div>
-						<div><p class="userIntro  login">{$userDes}</p></div>
+						<div><p class="userIntro">{$userDes}</p></div>
 						<div>
 							<php>foreach($keywordInfo as $key => $value){</php>
 							<span class="userLabel">{$value}</span>
@@ -68,13 +68,13 @@
 								</div>
 							</div>
 							<div class="saveBtn">
-								<button class="save weiSaveBtn" type="button"></button>
+								<button class="save weiSaveBtn <php>if(!getMid()){</php>login<php>}</php>" type="button"></button>
 							</div>
 						</form>
 					</div>
 				</div>	
 				<div class="separateX"></div>
-				<div id="tipMsg">您的目标体重是<span class="yourGoal">{$userHealth['targetWeight']}</span>公斤，距离目标还需要<php>if($userHealth['isfitness']==1){</php>燃烧<php>}else{</php>吸收<php>}</php>热量<span class="calorie">{$userHealth['klu']}</span>大卡！为了您的理想健身，努力吧！</div>
+				<div id="tipMsg">您的目标体重是<span class="yourGoal">{$userHealth['targetWeight']}</span>公斤，距离目标还需要<php>if($userHealth['isfitness']==1){</php>燃烧<php>}else{</php>吸收<php>}</php>热量<span class="calorie">{$userHealth['klu']}</span>大卡！为了您的理想身材，努力吧！</div>
 			</div><!--End weightManage-->
 			<div class="separateX"></div>
 			<div id="dataIn">
@@ -126,10 +126,11 @@
 											<div class="col3 col">重量<span class="rowTip">以往平均值：<strong class="beforeweigthAvg">{$couserAvg['weigthAvg']}</strong>kg</span></div>
 											<div class="col4 col">时间<span class="rowTip">以往平均值：<strong class="beforetimeAvg">{$couserAvg['timeAvg']}</strong>s</span></div>
 										</div>
-										<div class="tBody">
 										<form action="" id="dataForm" >
+										<div class="tBody">
 											<php>foreach($couserinfo as $key => $value){</php>
 											<div class="actGroup actGroupKon <php>if(($key+1)%2==0){</php>evenRow<php>}else{</php>oddRow<php>}</php> clearfix">
+											<button class="delBtn" type="button"></button>
 												<div class="col1 col">第{$value['cnum']}组</div>
 												<div class="col2 col">
 													<span class="cut"></span>
@@ -148,8 +149,9 @@
 												</div>
 											</div>
 											<php>}</php>
-
-											<div class="actGroup avgsRow clearfix">
+										</form>
+									</div>
+									<div class="actGroup avgsRow clearfix">
 												<div class="col1 col">平均值</div>
 												<div class="col2 col numsAvg">{$rAvgdata['numsAvg']}</div>
 												<div class="col3 col weigthAvg">{$rAvgdata['weigthAvg']}</div>
@@ -163,8 +165,6 @@
 													<button class="save editSave" type="button" id="addItemsList" style="display:none;"></button>
 												</div>
 											</div>
-										</form>
-									</div>
 								</div>
 								<div class="userPic userArea" style="display:none;">
 									<div class="uploadArea">
@@ -314,6 +314,10 @@
 				<input type="file" name="img" id="img">
 			</form>
 			<iframe id="exec_target" name="exec_target" style="display:none;width:0;height:0;"></iframe>
+			<div class="imageLoading" id="imgloading" style="display:none;">
+				<img src="Templates/images/loading.gif" alt="Loading"><br>
+				<span class="tip">正在上传图片中</span>
+			</div>
 <include file="Templates/loginpart.html" />
 <include file="Templates/footer.html" />
 <script>
@@ -346,11 +350,13 @@ $(".clickUpload").click(function (){
 $(document).ready(function(){
 	$("#img").change(function(){
 		$("#imageUploadDateInput").val($('.userPicCurrent').attr('date'));
+		$("#imgloading").show();
 		$("#imageUpload").submit();
 	});
 	$("#exec_target").load(function(){
 		var data = $(window.frames['exec_target'].document.body).find("textarea").eq(0).html();
-		$(".userPicCurrent").find("img").attr('src',data);
+		$(".uploadArea").find("li[date="+uploadImageDate+"]").find("img").attr('src',data);
+		$("#imgloading").hide();
 	})
 });
 
@@ -408,7 +414,8 @@ function getCourseData(dateContentVar){
 			for (var i = $(".tBody").find('.actGroupKon').length - 1; i >= 0; i--) {
 				$(".tBody").find('.actGroupKon').eq(i).remove();
 			};
-			$(".avgsRow").before(msg.html);
+			$(".tBody").append(msg.html);
+
 			$(".numsAvg").html(msg.numsAvg);	
 			$(".weigthAvg").html(msg.weigthAvg);	
 			$(".timeAvg").html(msg.timeAvg);
@@ -416,6 +423,8 @@ function getCourseData(dateContentVar){
 			$(".beforeNumAvg").html(msg.beforeAvg.numsAvg);
 			$(".beforeweigthAvg").html(msg.beforeAvg.weigthAvg);
 			$(".beforetimeAvg").html(msg.beforeAvg.timeAvg);
+			//根据状态来调整是否显示删除按钮
+			isShowDelButton();
 		}
 	});
 }
@@ -427,7 +436,7 @@ function getUserLogAllInfo(vdate){
 			data:'date='+vdate,// 要提交的表单
 			dataType:'json',
 			success: function(msg) {
-				console.log(msg);
+
 				var defaultImageData=msg['imageInfo']['default'];
 				$(".glaimagebox[dataType='default']").attr('date',defaultImageData.date);
 				$(".glaimagebox[dataType='default']").find('img').attr('src',defaultImageData.image);
@@ -557,12 +566,14 @@ function getUserLog(){
 function saveAddItems(){
 	if(userId > 0){
 		var ajaxCallUrl='/libpack/aiAjaxClass.php?act=postUserCourseInfo&uid='+userId+'&aid='+encodeURIComponent(actionVal)+'&date='+dateContentVar;
+		var addItemsData=$("#dataForm :input[value!='']").serialize();
 		$.ajax({
 			type: "POST",
 			url:ajaxCallUrl,
-			data:$('#dataForm').serialize(),// 要提交的表单
+			data:addItemsData,// 要提交的表单
 			success: function(msg) {
 				alert('保存成功');
+				resetAvg();
 			}
 		});
 	}else{

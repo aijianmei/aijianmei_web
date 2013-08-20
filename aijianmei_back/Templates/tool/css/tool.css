@@ -220,23 +220,23 @@ input,button,select,textarea{outline:none}
 				float:right;
 				width:105px;
 				height:46px;
-				background:url(../images/tool/save1.png) no-repeat;
+				background:url(../images/tool/sprites.png) -379px -48px no-repeat;
 			}
 			.edit{
 				float:none;
 				margin:0 auto;
-				background:url(../images/tool/rew.png) no-repeat;
+				background:url(../images/tool/sprites.png) -535px -47px no-repeat;
 			}
 			.save:hover{
-				background:url(../images/tool/save2.png) no-repeat;		
+				background:url(../images/tool/sprites.png) -379px -116px no-repeat;		
 			}
 			.edit:hover{
-				background:url(../images/tool/rew1.png) no-repeat;
+				background:url(../images/tool/sprites.png) -535px -118px no-repeat;
 			}
 	#tipMsg{
 		text-align:center;
 		color:#ff4d2a;
-		font-size:20px;
+		font-size:18px;
 	}
 		#tipMsg span{
 			font-size:40px;
@@ -255,7 +255,7 @@ input,button,select,textarea{outline:none}
 			right:10px;
 			width:53px;
 			height:30px;
-			background:url(../images/tool/more.png) no-repeat;
+			background:url(../images/tool/sprites.png) -132px 0  no-repeat;
 		}
 		.moreAct{
 			position:absolute;
@@ -340,12 +340,12 @@ input,button,select,textarea{outline:none}
 					cursor:pointer;
 				}
 				.moreRight .preSelect{
-					background:url(../images/tool/turn_left.png) no-repeat;
+					background:url(../images/tool/sprites.png) 0 -149px no-repeat;
 					position: absolute;
 					top: 40%;
 				}
 				.moreRight .nextSelect{
-					background:url(../images/tool/turn_right.png) no-repeat;
+					background:url(../images/tool/sprites.png) -69px -148px no-repeat;
 					position:absolute;
 					top:40%;
 					right:0;
@@ -464,10 +464,6 @@ input,button,select,textarea{outline:none}
 					box-shadow: rgba(0, 0, 0, 0.6) 1px 1px 2px;
 					border-radius:6px;
 				}
-				#dataForm{
-					box-shadow: rgba(0, 0, 0, 0.6) -1px -1px 2px;
-					border-radius:6px;
-				}
 					.col{
 						width:190px;
 						float:left;
@@ -508,9 +504,19 @@ input,button,select,textarea{outline:none}
 						.thead .col1 .rowTip{
 							color:white;
 						}
-					.tBody{
-						
+					.tBody .actGroup{
+						position:relative;
 					}
+						.tBody .delBtn{
+							position: absolute;
+							width: 20px;
+							height: 20px;
+							background: url(../images/tool/sprites.png) -70px -2px no-repeat;
+							left: 35px;
+							top: 7px;
+							z-index: 1;
+							display:none;
+						}
 						.actGroup .col{
 							position:relative;
 							height:34px;
@@ -611,7 +617,7 @@ input,button,select,textarea{outline:none}
 		.clickUpload,.editDairyBtn{
 			width:120px;
 			height:30px;
-			background:url(../images/tool/010101.png) no-repeat;
+			background:url(../images/tool/sprites.png) 0 -50px no-repeat;
 			border-radius:6px;
 			box-shadow:0 -2px 2px #fff;
 			cursor: pointer;
@@ -620,14 +626,14 @@ input,button,select,textarea{outline:none}
 
 		}
 		.clickUpload:hover{
-			background:url(../images/tool/020202.png) no-repeat;
+			background:url(../images/tool/sprites.png) 0 -98px no-repeat;
 		}
 		.editDairyBtn{
-			background:url(../images/tool/040404.png) no-repeat;
+			background:url(../images/tool/sprites.png) -199px -50px no-repeat;
 			margin-bottom: 10px;
 		}
 		.editDairyBtn:hover{
-			background:url(../images/tool/050505.png) no-repeat;
+			background:url(../images/tool/sprites.png) -199px -99px no-repeat;
 		}
 	.writeArea{
 		background:url(../images/tool/write.png) no-repeat center;
@@ -650,7 +656,7 @@ input,button,select,textarea{outline:none}
 		.writeSub{
 			width:390px;
 			height:40px;
-			background:url(../images/tool/writeSub.png) no-repeat;
+			background:url(../images/tool/sprites.png) -149px -207px no-repeat;
 		}
 	
 		.chart{
@@ -845,7 +851,7 @@ input,button,select,textarea{outline:none}
 	}
 	#gla ul {
 		position:absolute;
-		right:0px;
+		right:160px;
 		list-style:none;
 		width:920px;
 		height:280px;
@@ -866,12 +872,28 @@ input,button,select,textarea{outline:none}
 		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#999999');
 
 	}
+	#gla .userPicCurrent{
+		cursor:default;
+	}
 			
 #ui-datepicker-div{
 	z-index:300!important;
 }
-	
-		
-		
-		
-		
+.login_bg{
+	opacity:0.5!important;
+	filter: alpha(opacity=0)!important;
+}		
+.login_table{
+	top:78px!important;
+}	
+.imageLoading {
+position: fixed;
+left: 50%;
+top: 40%;
+z-index: 1001;
+height: 79px;
+font-size: 14px;
+font-weight: bold;
+color: #656565;
+line-height: 30px;
+}

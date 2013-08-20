@@ -9,7 +9,7 @@
 <input id="turl" value="">
 图片测试
 </br>
-<form action="imgtest.php" method="post">
+<form action="imgtest.php" method="post"    enctype="multipart/form-data">
 <input name="avatarimage" type="file" />
 <input name="backgroundimage" type="file" />
 <input name="uid" type="text" /><input name="" type="submit" />
@@ -58,5 +58,25 @@ statusId<input name="statusId" type="text" /></br>
 uid<input name="uid" type="text" /></br>
 <input name="" type="submit" />
 </form>
+
+</br></br></br></br>
+<form action="/wapapi/ios.php" method="post" >
+aucode<input name="aucode" type="text" value="aijianmei"/></br>
+auact<input name="auact" type="text" value="getWeightInfo"/></br>
+uid<input name="uid" type="text" /></br>
+<input name="" type="submit" />
+</form>
+
+</br></br></br></br>
+<form action="/wapapi/ios.php" method="post" >
+aucode<input name="aucode" type="text" value="aijianmei"/></br>
+auact<input name="auact" type="text" value="postWeightInfo"/></br>
+uid<input name="uid" type="text" /></br>
+weight<input name="weight" type="text" /></br>
+targetWeight<input name="targetWeight" type="text" /></br>
+nowWeight<input name="nowWeight" type="text" /></br>
+<input name="" type="submit" />
+</form>
+
 </body>
 </html>

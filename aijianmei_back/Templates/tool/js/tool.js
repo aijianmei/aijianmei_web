@@ -113,7 +113,6 @@ $(".dataTab").children().bind("click", function(){
 	$(this).siblings().find("span").css("display", "block");
 	$(".userArea").eq(_index).css("display","block").siblings().css("display","none");
 })
-
 //更多动作选择
 //var actionJson='Templates/tool/json/actions.json';
 var actionJson='Templates/tool/json/CourseAction.json';
@@ -151,7 +150,6 @@ $.getJSON(actionJson, function(data){
 			$(this).addClass("curAct").siblings().removeClass("curAct");
 			textLength();
 		});
-		
 		//点击导航栏“更多”按钮下拉
 		$(".moreBtn").click(function(){
 			$(".moreAct").slideDown();
@@ -220,14 +218,12 @@ $.getJSON(actionJson, function(data){
 			var nowTop = $("#actionsList").css("top"),
 				ulHeight = $("#actionsList").height();
 			nowTop = parseInt(nowTop);
-			
 			if($(this).hasClass("preSelect") && nowTop<0){
 				nowTop += 320;
 				//console.log(nowTop)
 				$(".nextSelect").show();
 				if(nowTop == 0){
 					$(".preSelect").hide();
-				
 				}
 			}
 			else if($(this).hasClass("nextSelect") && (nowTop>(320-ulHeight))){
@@ -261,6 +257,7 @@ var listLength = function(){
 }
 listLength();
 
+//表格加一组、减一组
 $(".editSave").click(function(){
 	if($(this).hasClass("edit")){
 		$(this).hide().next().show();
@@ -270,11 +267,13 @@ $(".editSave").click(function(){
 
 		var groupNums=$(".tBody").find(".actGroup").length;
 
-
+		//加一组
 		if(groupNums<=7){
 			$(".addBtn").show().die().live("click", addGroup);
 		}
-		
+		//删除一组
+		$(".delBtn").show();
+		$(".delBtn").live("click", delGroup);
 	}
 	else if($(this).hasClass("save")){
 
@@ -283,29 +282,28 @@ $(".editSave").click(function(){
 		$(".figure").css("background","none")
 			.attr("readonly","readonly");
 		$(".addBtn").hide();
+		$(".delBtn").hide();
 
-			//$('#dataForm').serialize();
 		//保存事件
 		saveAddItems();
 	}
 });
-
-
+var groupArr 		=    new Array();
+	groupArr[1]     = "第一组";
+	groupArr[2]     = "第二组";
+	groupArr[3]     = "第三组";
+	groupArr[4]     = "第四组";
+	groupArr[5]     = "第五组";
+	groupArr[6]     = "第六组";
+	groupArr[7]     = "第七组";
+	
 var addGroup = function(){
-	var groupArr 		=    new Array();
-		groupArr[1]     = "第一组";
-		groupArr[2]     = "第二组";
-		groupArr[3]     = "第三组";
-		groupArr[4]     = "第四组";
-		groupArr[5]     = "第五组";
-		groupArr[6]     = "第六组";
-		groupArr[7]     = "第七组";
 	var inputNameArr = [ "nums[]", "weight[]", "time[]"],
-		col = $(".tBody").find(".actGroup").first().find(".col").length,
+		col = 4,
 		colArr = [],
 		colText = null;
 		var groupNums=$(".tBody").find(".actGroup").length;
-
+		groupNums++;
 	if(groupNums<=7){
 		for(var i=0; i<col; i++){
 			if(0==i){
@@ -316,7 +314,7 @@ var addGroup = function(){
 						+ '<input type="text" name="'+inputNameArr[i*1-1]+'" value="0" class="figure" style="background:url(Templates/tool/images/tool/sprites2.png) no-repeat -32px -64px;"/>'
 						+ '<span class="add" style="display:block;"></span>' ;
 			}
-			colArr.push('<div class="col col' + (++i) +'">'+ colText +'</div>');
+			colArr.push('<button type="button" class="delBtn" style="display:block;"></button><div class="col col' + (++i) +'">'+ colText +'</div>');
 			i--;
 		}
 
@@ -329,12 +327,48 @@ var addGroup = function(){
 			rowClass = "evenRow";
 		}
 		var newRow = '<div class="actGroup actGroupKon clearfix'+ ' '+ rowClass +'">' + colArr.join("") + '</div>';
-		$(".avgsRow").before(newRow);
+		$(".tBody").append(newRow);
 		if(groupNums == 7){
 			$(".addBtn").hide();
 		}
 	}
-	};
+	$(".tBody").find(".actGroup").find('.col').find('.cut').die().live('click',function(){
+		var tmpNum=$(this).parent().find('input').val();
+		if(tmpNum>0){
+			tmpNum=tmpNum*1-1
+			$(this).parent().find("input").val(tmpNum);
+		}
+	});
+	$(".tBody").find(".actGroup").find('.col').find('.add').die().live('click',function(){
+		var tmpNum=$(this).parent().find('input').val();
+		tmpNum=tmpNum*1+1;
+		$(this).parent().find("input").val(tmpNum);
+	});
+};
+var	delGroup = function(){
+		var delIndex = $(this).parent().index(),
+			groups = $(".tBody").find(".actGroup").length;
+			
+
+		var groupName=$(this).parent().find(".col1").html();
+		//根据组号删除对应的数据
+		delGroupByName(groupName);
+
+		$(this).parent().remove();
+		$(".addBtn").show();
+
+		for(var i=0;i<=groups;i++){
+			if(i%2){
+				$(".tBody").find(".actGroup").eq(i).removeClass("oddRow").addClass("evenRow");
+			}
+			else{
+				$(".tBody").find(".actGroup").eq(i).removeClass("evenRow").addClass("oddRow");
+			}
+			$(".tBody").find(".actGroup").find(".col1").eq(i).text(groupArr[++i]);
+			--i;
+		}
+}
+
 $(".editDairyBtn").click(function(){
 	$(".userNote>#gla").toggle();
 	$(".userUpload").toggle();
@@ -396,7 +430,7 @@ function postUserDefaultAction(){
 
 var textLength = function(){
 	var len = $(".actionNameBox").text().length;
-	console.log(len);
+	//console.log(len);
 	//alert();
 	if(len>5){
 		$(".actionNameBox").css("font-size","20px");
@@ -418,57 +452,144 @@ $(".userPicPrev").live("click",function(){
 		dataType:'json',
 		async: false, 
 		success: function(msg){
+	
 			var n = $(_this).parent().queue("fx");
-			if(n.length)	return false;
+			if(n.length) return false;
+
 			if(!msg.image){
 
 				$(_this).parent().animate({ "right":"-=460px"});
 				$(_this).removeClass("userPicPrev").addClass("userPicCurrent");
 				$(_this).next().removeClass("userPicCurrent");
-				$(".userPicCurrent").next().addClass("userPicNext").siblings().removeClass("userPicNext");
+				$(_this).parent().find("li[class='userPicCurrent']").next().addClass("userPicNext").siblings().removeClass("userPicNext");
+
+				$(".userPicNext").die().live("click",function(){
+					var n = $(_this).parent().queue("fx");
+					if(n.length)	return false;
+					var that = this;
+					if($(that).hasClass("userPicNext")){
+						$(that).parent().animate({"right": "+=460px"}, function(){
+							$(that).next().addClass("userPicNext");
+							$(that).attr("class", "userPicCurrent").prev().attr("class","userPicPrev").siblings().removeClass("userPicPrev");
+						})
+					}
+				})
 
 				return false;
 			}
-			var innerHtml='<li><img src="'+msg.image+'" /></li>';
-			$(_this).parent().css("width","+=460px").prepend(innerHtml);//获取一张图片，宽度增加
-			$(_this).parent().find('li').eq(0).attr({"date":msg.date,"alt":msg.date});
-
-			
+			if(!$(_this).index()){
+				var innerHtml='<li><img src="'+msg.image+'" /></li>';
+				$(_this).parent().css("width","+=460px").prepend(innerHtml);//获取一张图片，宽度增加
+				$(_this).parent().find('li').eq(0).attr({"date":msg.date,"alt":msg.date});
+			}
 			//查看上一张
 			
-			var _right;
+			/*var _right;
 			if($(_this).parent().find("li").length == 3){
 				_right = "-=300px";
 			}
 			else{
 				_right = "-=460px";
-			}
+			}*/
 
-			$(_this).parent().animate({ "right": _right }, function(){
+			$(_this).parent().animate({ "right": "-=460px" }, function(){
 				$(_this).removeClass("userPicPrev").prev().addClass("userPicPrev");
 				$(_this).next().removeClass("userPicCurrent").prev().addClass("userPicCurrent");
-				$(".userPicCurrent").next().addClass("userPicNext").siblings().removeClass("userPicNext");
+				$(_this).parent().find("li[class='userPicCurrent']").next().addClass("userPicNext").siblings().removeClass("userPicNext");
 				//查看下一张
 				$(".userPicNext").die().live("click",function(){
-					//alert(2);
 					var n = $(_this).parent().queue("fx");
 					if(n.length)	return false;
 					var that = this;
 					if($(that).hasClass("userPicNext")){
-						$(_this).parent().animate({"right": "+=460px"}, function(){
+						$(that).parent().animate({"right": "+=460px"}, function(){
 							$(that).next().addClass("userPicNext");
 							$(that).attr("class", "userPicCurrent").prev().attr("class","userPicPrev").siblings().removeClass("userPicPrev");
 						})
 					}
 				})
 			})
+
+
+			/*if($(_this).parent().find("li[date='"+msg.date+"']").length >1){
+				$(_this).parent().find("li[date='"+msg.date+"']").eq(0).remove();
+			}*/
 		}//success
 	})
 })
 
-
+/*
 function checkIntNums(obj){
 		var num=$(obj).val();
 		num = num.replace(/^[1-9]d*.d*|0.d*[1-9]d*{1}$/g,"<img src='"+baseURL+"Face_13.gif'>");
 		var num;
+}*/
+
+function delGroupByName(groupName){
+	if(userId > 0){
+		var ajaxCallUrl='/libpack/aiAjaxClass.php?act=deleteUserCourseInfo&uid='+userId+'&aid='+encodeURIComponent(actionVal)+'&date='+dateContentVar+"&groupName="+encodeURIComponent(groupName);
+		$.ajax({
+			type: "POST",
+			url:ajaxCallUrl,
+			data:$('#dataForm').serialize(),// 要提交的表单
+			success: function(msg) {
+				//alert('保存成功');
+				resetAvg();
+			}
+		});
+	}else{
+		$(".login").click();	
+	}
 }
+
+function resetAvg(){
+	var countNum=$(".tBody").find(".actGroup").length;
+	var allNums=0,allWeight=0,allTime=0;
+	if(countNum>0){
+		for (var i = countNum - 1; i >= 0; i--) {
+			var tmpnums=$(".tBody").find(".actGroup").eq(i).find('input').eq(0).val();
+			allNums=allNums*1+tmpnums*1;
+
+			var tmpweight=$(".tBody").find(".actGroup").eq(i).find('input').eq(1).val();
+			allWeight=allWeight*1+tmpweight*1;
+
+			var tmptime=$(".tBody").find(".actGroup").eq(i).find('input').eq(2).val();
+			allTime=allTime*1+tmptime*1;
+		};
+		if(isNaN(allNums*1)) allNums=0;
+		if(isNaN(allWeight*1)) allWeight=0;
+		if(isNaN(allTime*1)) allTime=0;
+
+		$(".numsAvg").html(Math.round(allNums/countNum));
+		$(".weigthAvg").html(Math.round(allWeight/countNum));
+		$(".timeAvg").html(Math.round(allTime/countNum));	
+	}else{
+		$(".numsAvg").html(0);
+		$(".weigthAvg").html(0);
+		$(".timeAvg").html(0);
+	}	
+}
+function isShowDelButton(){
+	var tobj=$(".tFooter").find(".save");
+	if ($(tobj).is(":visible")) {
+		$(".delBtn").show();
+	}else{
+		$(".delBtn").hide();
+	}
+}
+$(".siderBtn").find(".chartBtn").mouseover(function(){
+	$(this).click();
+});
+
+$(".tBody").find(".actGroup").find('.col').find('.cut').die().live('click',function(){
+	var tmpNum=$(this).parent().find('input').val();
+	if(tmpNum>0){
+		tmpNum=tmpNum*1-1
+		$(this).parent().find("input").val(tmpNum);
+	}
+});
+$(".tBody").find(".actGroup").find('.col').find('.add').die().live('click',function(){
+	var tmpNum=$(this).parent().find('input').val();
+	tmpNum=tmpNum*1+1;
+	$(this).parent().find("input").val(tmpNum);
+});

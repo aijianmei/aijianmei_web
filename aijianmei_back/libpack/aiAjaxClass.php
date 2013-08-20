@@ -27,6 +27,7 @@ class Ajax {
 		'postUserDefaultAction',
 		'getDefaultUserLineData',
 		'getUserLogAllInfo',
+		'deleteUserCourseInfo',
 		);
 	protected $ttf = 'FZSJSJW.TTF';
 	public function __construct() {
@@ -54,13 +55,13 @@ class Ajax {
 		$startDate  	=$allDate['startDate'];
 		$endDate		=$allDate['endDate'];
 		if($selectTagType=='365'){
-			@$timeList   	=getMonthsList($date);
+			@$timeList  =getMonthsList($date);
 		}else{
-			@$timeList   	=$this->generateTimeList($startDate,$endDate);
+			@$timeList  =$this->generateTimeList($startDate,$endDate);
 		}
 		
 		//var_dump($timeList);
-		$sql 		="select * from ai_user_course_list where `date`>='".$startDate."' and `date`<='".$endDate."' and `uid`=$uid and `group`=$group and `aid`=$aid";
+		$sql 	="select * from ai_user_course_list where `date`>='".$startDate."' and `date`<='".$endDate."' and `uid`=$uid and `group`=$group and `aid`=$aid";
 		//if($selectTagType>7){echo $sql;}
 		$data 	= $this->db->_query($sql);
 
@@ -80,8 +81,13 @@ class Ajax {
 				$keynum=$key+1;
 				if($selectTagType=='7'){
 					if(empty($resData[$value]['time'])) $resData[$value]['time']=0;
-					@$timelistString[]=date('md',strtotime($value));
-				}else{
+					@$timelistString[]=date("m.d",strtotime($value));
+
+					//@$timelistString[]=$keynum;
+
+				}elseif($selectTagType=='365'){
+					@$timelistString[]=$keynum-1;
+				}elseif($selectTagType=='30'){
 					@$timelistString[]=$keynum;
 				}
 				if(empty($resData[$value]['nums'])) $resData[$value]['nums']=0;
@@ -100,7 +106,7 @@ class Ajax {
 
 				if(empty($resData[$value]['time'])) $resData[$value]['time']=0;
 				@$timeString.=empty($timeString)? '"'.$resData[$value]['time'].'"' : ',"'.$resData[$value]['time'].'"';
-				@$timelistString.=empty($timelistString)? '"'.date('md',strtotime($value)).'"':',"'.date('md',strtotime($value)).'"';
+				@$timelistString.=empty($timelistString)? '"'.date('m.d',strtotime($value)).'"':',"'.date('m.d',strtotime($value)).'"';
 			}
 		}
 		if(@$_POST['out']!='obj'){
@@ -226,7 +232,6 @@ class Ajax {
 			$data['date'] 	=$res['0']['date'] ?$res['0']['date'] : $nowDate;
 			$data['image'] 	=$res['0']['image']?$res['0']['image']: '';			
 		}
-
 		echo json_encode($data);
 		exit;
 	}
@@ -307,11 +312,14 @@ class Ajax {
 			`targetWeight` =  '".$targetWeight."',`nowWeight`='".$nowWeight."',`targetTime` =  '".time()."'
 			WHERE `uid` =$uid LIMIT 1 ";
 			$this->db->_query($updateSql);
+
+			$updateSql="UPDATE  ai_user_health_info SET `weightTime` =  '".time()."' WHERE `uid` =$uid and weightTime IS NULL LIMIT 1 ";
+			$this->db->_query($updateSql);
 		}else{
 			$insertSql="INSERT INTO  ai_user_health_info (`uid` ,`body_weight` ,`height` ,`age` ,`targetWeight` ,`nowWeight` 
 				,`weightTime` ,`targetTime`)VALUES ('".$uid."','".$weight."','0','0','".$targetWeight."','".$nowWeight."','".time()."','".time()."')";
-$this->db->_query($updateSql);
-}
+			$this->db->_query($updateSql);
+		}
 		if($targetWeight > $weight){//目标数值大于原始值 增重
 			$calorie=($targetWeight-$nowWeight)*7700;
 		}else{
@@ -339,7 +347,7 @@ $this->db->_query($updateSql);
 			foreach ( $data as $k => &$value ) {
 				$value ['loginfo'] = unserialize ( $value ['loginfo'] );
 				$colorCss= ($k+1)%2==0 ?'evenRow':'oddRow';
-				$resultHtml.= '<div class="actGroup actGroupKon '.$colorCss.' clearfix"><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div></div>';
+				$resultHtml.= '<div class="actGroup actGroupKon '.$colorCss.' clearfix"><button type="button" class="delBtn" style="display:block;"></button><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div></div>';
 				$numCount		+=$value['loginfo']['nums'];
 				$weightCount	+=$value['loginfo']['weight'];
 				$timeCount		+=$value['loginfo']['time'];
@@ -368,7 +376,7 @@ $this->db->_query($updateSql);
 			$data[3]['cnum'] ='四';
 			foreach ( $data as $k => &$value ) {
 				$colorCss= ($k+1)%2==0 ?'evenRow':'oddRow';
-				$resultHtml.='<div class="actGroup actGroupKon '.$colorCss.' clearfix"><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div></div>';
+				$resultHtml.='<div class="actGroup actGroupKon '.$colorCss.' clearfix"><button type="button" class="delBtn" style="display:block;"></button><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div></div>';
 			}
 			$res['numsAvg'] 	=0;
 			$res['weigthAvg']   =0;
@@ -463,10 +471,10 @@ $this->db->_query($updateSql);
 				$_REQUEST [$key] = $this->MooAddslashes ( $value );
 			}
 			foreach ( $_POST as $key => $value ) {
-				$_POST [$key] = MooAddslashes ( $value );
+				$_POST [$key] = $this->MooAddslashes ( $value );
 			}
 			foreach ( $_GET as $key => $value ) {
-				$_GET [$key] = MooAddslashes ( $value );
+				$_GET [$key] = $this->MooAddslashes ( $value );
 			}
 		}
 	}
@@ -490,24 +498,28 @@ $this->db->_query($updateSql);
 		$b = imagettfbbox ( $size, 0, $f, $string );
 		return $b [2] - $b [0];
 	}
-	protected function formatFontString($string, $nums) {
-		mb_internal_encoding ( 'UTF-8' );
-		$data = array ();
-		$nstr = null;
-		$offet = 0;
-		if (strlen ( $string ) > $nums) {
-			while ( strlen ( $string ) > $nums ) :
-				$nstr = mb_strcut ( $string, $offet, $nums );
-			$offet = strlen ( $nstr );
-			$string = substr ( $string, $offet );
-			$data [] = $nstr;
-			endwhile
-			;
-			$data = implode ( "\n", $data );
-		} else {
-			$data = $string;
-		}
-		return $data;
+	protected function formatFontString($string) {
+		$encoding='UTF-8';
+		mb_internal_encoding($encoding);
+    	$has = array();
+    	$stringlength =mb_strlen($string, $encoding);
+    	if((strlen($string)+mb_strlen($string,'UTF8')) <72) return $string;
+    	for($i=0;$i < $stringlength;$i++){
+    		$c=null;
+    		$c = mb_substr ($string, $i, 1 );
+    		if(strlen($c)==3){
+    			$nlong=$nlong+2;
+    		}elseif (strlen($c)==1) {
+    			$nlong=$nlong+1;
+    		}
+    		$nString.=$c;
+    		if($nlong>=36){
+    			$data[]  =$nString;
+    			$nString ='';
+    			$nlong=0;
+    		}
+    	}
+		return implode("\n", $data);
 	}
 	public function getUserFaid($uid){
 		$defaultActionList=$this->getDefaultActionList($uid);
@@ -636,7 +648,9 @@ $this->db->_query($updateSql);
 		// 字体类型，瘦金体
 			$font = $this->ttf;
 
-			$text = $this->formatFontString ( $text, 54 );
+			$text = $this->formatFontString ( $text );
+
+			//$text = $this->u8_title_substr($text, 430, '\n');
 
 		// $winfo=$this->generateFontWith($text,18);
 
@@ -694,7 +708,27 @@ $this->db->_query($updateSql);
 		}
 		return $rdata;
 	}
-
+	public function deleteUserCourseInfo(){
+		$groupArr=array();
+		$groupArr['1']     = "第一组";
+		$groupArr['2']     = "第二组";
+		$groupArr['3']     = "第三组";
+		$groupArr['4']     = "第四组";
+		$groupArr['5']     = "第五组";
+		$groupArr['6']     = "第六组";
+		$groupArr['7']     = "第七组";
+		$uid=$this->mid;
+		$groupName=$_REQUEST['groupName']?$_REQUEST['groupName']:die();
+		$aid = $this->getActionIdByName ( $_REQUEST ['aid'] );
+		$date = date ( "Ymd", strtotime ( str_replace ( ".", "-", $_REQUEST ['date'] ) ) );
+		if($key=array_search($groupName, $groupArr)){
+			$deleteSql="delete from `ai_user_course_list` where `uid`=$uid and `aid`=$aid and `group`=$key and `date`=$date";
+			$this->db->_query($deleteSql);
+			$updateSql="UPDATE `ai_user_course_list` SET `group`= `group`-1 WHERE `uid`=$uid and `aid`=$aid and `group`>$key and `date`=$date";
+			$this->db->_query($updateSql);
+		}
+		exit;
+	}
 }
 
 $_CI = new Ajax ();

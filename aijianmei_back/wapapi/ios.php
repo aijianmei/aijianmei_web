@@ -66,226 +66,277 @@ class IosApi {
 	protected $vaucode = 'aijianmei';
 	protected $baseUrl = 'http://www.aijianmei.com';
 	public $categoryArray = array (
-			'train',
-			'nutri',
-			'append' ,
-			'lifestyle'
-	);
+		'train',
+		'nutri',
+		'append' ,
+		'lifestyle'
+		);
 	public $categoryValues = array (
-			'train' => 2,
-			'nutri' => 3,
-			'append' => 4,
-			'lifestyle' => 5 
-	);
+		'train' => 2,
+		'nutri' => 3,
+		'append' => 4,
+		'lifestyle' => 5 
+		);
 	public $categoryidValues = array (
-			'train' => array (
-					"1" => "51",
-					"2" => "38",
-					"3" => "47",
-					"4" => "53" 
+		'train' => array (
+			"1" => "51",
+			"2" => "38",
+			"3" => "47",
+			"4" => "53" 
 			),
-			'nutri' => array (
-					"1" => '29',
-					"2" => "28",
-					"3" => "31" 
+		'nutri' => array (
+			"1" => '29',
+			"2" => "28",
+			"3" => "31" 
 			),
-			'append' => array (
-					'1' => '48',
-					'2' => '39',
-					"3" => "50" 
+		'append' => array (
+			'1' => '48',
+			'2' => '39',
+			"3" => "50" 
 			),
-			'lifestyle' => array () 
-	);
+		'lifestyle' => array () 
+		);
 	public $errormsg = array (
-			'status' => '',
-			'error' => '' 
-	);
+		'status' => '',
+		'error' => '' 
+		);
 	public $allowAction = array (
-			'au_login' => array (
-					'email' => 1,
-					'userpassword' => 1,
-					'usertype' => 0 
+		'au_login' => array (
+			'email' => 1,
+			'userpassword' => 1,
+			'usertype' => 0 
 			),
-			
-			'au_register' => array (
-					'username' => 0,
-					'userpassword' => 0,
-					'email' => 0,
-					'usertype' => 0,
-					'snsid' => 0,
-					'profileImageUrl' => 0,
-					'sex' => 0,
-					'age' => 0,
-					'body_weight' => 0,
-					'height' => 0,
-					'keyword' => 0,
-					'province' => 0,
-					'city' => 0 
+
+		'au_register' => array (
+			'username' => 0,
+			'userpassword' => 0,
+			'email' => 0,
+			'usertype' => 0,
+			'snsid' => 0,
+			'profileImageUrl' => 0,
+			'sex' => 0,
+			'age' => 0,
+			'body_weight' => 0,
+			'height' => 0,
+			'keyword' => 0,
+			'province' => 0,
+			'city' => 0 
 			),
-			
-			'au_getinformationlist' => array (
-					'listtype' => 0,
-					'category' => 0,
-					'id' => 0,
-					'type' => 0,
-					'page' => 0,
-					'pnums' => 0,
-					'uid' => 0,
-					'start' => 0,
-					'offset' => 0 
+
+		'au_getinformationlist' => array (
+			'listtype' => 0,
+			'category' => 0,
+			'id' => 0,
+			'type' => 0,
+			'page' => 0,
+			'pnums' => 0,
+			'uid' => 0,
+			'start' => 0,
+			'offset' => 0 
 			),
-			
-			'au_getinformationdetail' => array (
-					'id' => 1,
-					'channel' => 1,
-					'uid' => 0 
+
+		'au_getinformationdetail' => array (
+			'id' => 1,
+			'channel' => 1,
+			'uid' => 0 
 			),
-			
-			'au_sendcomment' => array (
-					'id' => 1,
-					'channel' => 1,
-					'channeltype' => 1,
-					'uid' => 1,
-					'commentcontent' => 1 
+
+		'au_sendcomment' => array (
+			'id' => 1,
+			'channel' => 1,
+			'channeltype' => 1,
+			'uid' => 1,
+			'commentcontent' => 1 
 			),
-			
-			'au_delcomment' => array (
-					'id' => 1,
-					'channel' => 0,
-					'channeltype' => 0,
-					'uid' => 1 
+
+		'au_delcomment' => array (
+			'id' => 1,
+			'channel' => 0,
+			'channeltype' => 0,
+			'uid' => 1 
 			),
-			
-			'au_sendlike' => array (
-					'id' => 1,
-					'channel' => 0,
-					'channeltype' => 0,
-					'uid' => 1 
+
+		'au_sendlike' => array (
+			'id' => 1,
+			'channel' => 0,
+			'channeltype' => 0,
+			'uid' => 1 
 			),
-			
-			'au_getfplist' => array (
-					'type' => 0,
-					'page' => 0,
-					'pnums' => 0,
-					'uid' => 0,
-					'start' => 0,
-					'offset' => 0 
+
+		'au_getfplist' => array (
+			'type' => 0,
+			'page' => 0,
+			'pnums' => 0,
+			'uid' => 0,
+			'start' => 0,
+			'offset' => 0 
 			),
-			'au_getversion' => array (
-					'type' => 0 
+		'au_getversion' => array (
+			'type' => 0 
 			),
-			'au_sendsuggestion' => array (
-					'uid' => 1,
-					'content' => 1 
+		'au_sendsuggestion' => array (
+			'uid' => 1,
+			'content' => 1 
 			),
-			'au_updateUserInfo' => array (
-					'uid' => 1,
-					'username' => 0,
-					'userface' => 0,
-					'userbgimg' => 0,
-					'keyword' => 0,
-					'description' => 0,
-					'sex' => 0,
-					'age' => 0,
-					'weight' => 0,
-					'height' => 0,
-					'province' => 0,
-					'city' => 0 
+		'au_updateUserInfo' => array (
+			'uid' => 1,
+			'username' => 0,
+			'userface' => 0,
+			'userbgimg' => 0,
+			'keyword' => 0,
+			'description' => 0,
+			'sex' => 0,
+			'age' => 0,
+			'weight' => 0,
+			'height' => 0,
+			'province' => 0,
+			'city' => 0 
 			),
-			'au_getuserinfobysnsid' => array (
-					'snsid' => 1,
-					'usertype' => 1 
+		'au_getuserinfobysnsid' => array (
+			'snsid' => 1,
+			'usertype' => 1 
 			),
-			'au_updatepassword' => array (
-					'uid' => 1,
-					'oldpassword' => 1,
-					'newpassword' => 1 
+		'au_updatepassword' => array (
+			'uid' => 1,
+			'oldpassword' => 1,
+			'newpassword' => 1 
 			),
-			'au_getuserinfobyuid' => array (
-					'uid' => 1 
+		'au_getuserinfobyuid' => array (
+			'uid' => 1 
 			),
-			'au_getuidbysnsid' => array (
-					'snsid' => 1 
+		'au_getuidbysnsid' => array (
+			'snsid' => 1 
 			),
-			'au_uploadimg' => array (
-					'uid' => 0,
-					'imagetype' => 0 
+		'au_uploadimg' => array (
+			'uid' => 0,
+			'imagetype' => 0 
 			),
-			'articlestatus' => array (
-					'uid' => 0,
-					'aid' => 0,
-					'vid' => 0 
+		'articlestatus' => array (
+			'uid' => 0,
+			'aid' => 0,
+			'vid' => 0 
 			),
-			'getcommentbyid' => array (
-					'id' => 1,
-					'channeltype' => 0 
+		'getcommentbyid' => array (
+			'id' => 1,
+			'channeltype' => 0 
 			),
-			'getCircleList' => array (
-					'id' => 0,
-					'uid' => 0,
-					'group' => 0,
-					'start' => 0,
-					'offset' => 0 
+		'getCircleList' => array (
+			'id' => 0,
+			'uid' => 0,
+			'group' => 0,
+			'start' => 0,
+			'offset' => 0 
 			),
-			'postCircleList' => array (
-					'uid' => 0, 
+		'postCircleList' => array (
+			'uid' => 0, 
 			),
-			'postCircleComment' =>array(
-				'uid'=>1,
-				'id'=>1,
-				'content'=>1,
+		'postCircleComment' =>array(
+			'uid'=>1,
+			'id'=>1,
+			'content'=>1,
 			),
-			'postCircleLike' =>array(
-				'uid'=>0,
-				'statusId'=>0,
+		'postCircleLike' =>array(
+			'uid'=>0,
+			'statusId'=>0,
 			),
-	);
-	public function __construct() {
-		ob_start();
-		var_dump($_POST);
-		var_dump($_FILES);
-		$info=ob_get_contents();
-		ob_end_clean();
-		file_put_contents("tmp.txt",$info);
-		$allowArr = $this->allowAction;
-		if (! empty ( $_REQUEST ['auact'] ) && isset ( $allowArr [$_REQUEST ['auact']] ) && $_REQUEST ['aucode'] == $this->vaucode) {
-			if ($this->checkargs ( $_REQUEST ['auact'] )) {
-			} else {
-				return $this->errormsg ();
-			}
+		'getWeightInfo' =>array(
+			'uid'=>0,
+			),
+		'postWeightInfo'=>array(
+			'uid'=>0,
+			),
+		);
+public function __construct() {
+	ob_start();
+	var_dump($_POST);
+	var_dump($_FILES);
+	$info=ob_get_contents();
+	ob_end_clean();
+	file_put_contents("tmp.txt",$info);
+	$allowArr = $this->allowAction;
+	if (! empty ( $_REQUEST ['auact'] ) && isset ( $allowArr [$_REQUEST ['auact']] ) && $_REQUEST ['aucode'] == $this->vaucode) {
+		if ($this->checkargs ( $_REQUEST ['auact'] )) {
 		} else {
 			return $this->errormsg ();
 		}
+	} else {
+		return $this->errormsg ();
 	}
-	public function postCircleLike(){
-		$uid  	= ! empty ( $_POST ['uid'] ) ? intval ( $_POST ['uid'] ) : '';
-		$id 	 	= ! empty ( $_POST ['statusId'] ) ? intval ($_POST ['statusId']) : '';
-		if(empty($uid)||empty($id)){
-			$data [0] ['uid'] = '0';
-			$data [0] ['errorCode'] = '10001';
-			echo json_encode ( $data );
-			exit ();
-		}
-		$checkSql="select * from ai_circle_vote where uid=$uid and cid=$id";
-		$check=C_mysqlOne ( $checkSql );
-		if(empty($check)){
-			$updatesql="UPDATE ai_circle_info SET  `like`=`like`+1 WHERE  id=$id";
-			C_mysqlOne ( $updatesql );
-			$insql = 'insert into ai_circle_vote (`uid`,`cid`) values ("' . $uid . '","' . $id . '")';
-			C_mysqlOne ( $insql );	
-			$data[0]['uid']=(string)$uid;
-			$data[0]['errorCode'] = "0";
-			echo json_encode ( $data );
-		} else {
-			$data[0]['uid']=(string)$uid;
-			$data[0]['errorCode'] = "10002";
-			echo json_encode ( $data );
-		}
+}
+public function getWeightInfo(){
+	$uid 		 =$_POST['uid']?$_POST['uid']:0;
+	if(!$uid > 0){
+		$data['uid']="0";
+		$data['errorCode']="10001";
+		echo json_encode($data);
+		exit;
 	}
-	public function postCircleComment(){
-		$uid = ! empty ( $_POST ['uid'] ) ? intval ( $_POST ['uid'] ) : '';
-		$content = ! empty ( $_POST ['content'] ) ? $_POST ['content'] : '';
-		$id = ! empty ( $_POST ['id'] ) ? intval ($_POST ['id']) : '0';
+	$weightInfo  = $this->getUserHealthById($uid);
+	$weightInfo['calories']=$weightInfo['klu'];
+	unset($weightInfo['klu']);
+	foreach ($weightInfo as $key => $value) {
+		$weightInfo[$key]=(string)$value;
+	}
+	echo json_encode($weightInfo);
+	exit;
+}
+
+public function postWeightInfo(){
+	$uid 		 =$_POST['uid']?$_POST['uid']:0;
+	if(!$uid > 0) die();
+	$weight=intval($_POST['weight']);
+	$targetWeight=intval($_POST['targetWeight']);
+	$nowWeight=intval($_POST['nowWeight']);
+	$checkSql="select * from ai_user_health_info where `uid` =$uid";
+	$checkResult=C_mysqlOne($checkSql);
+	if(!empty($checkResult)){
+		$updateSql="UPDATE  ai_user_health_info SET `body_weight` =  '".$weight."',
+		`targetWeight` =  '".$targetWeight."',`nowWeight`='".$nowWeight."',`targetTime` =  '".time()."'
+		WHERE `uid` =$uid LIMIT 1 ";
+		C_mysqlOne($updateSql);
+	}else{
+		$insertSql="INSERT INTO  ai_user_health_info (`uid` ,`body_weight` ,`height` ,`age` ,`targetWeight` ,`nowWeight` ,`weightTime` ,`targetTime`)VALUES ('".$uid."','".$weight."','0','0','".$targetWeight."','".$nowWeight."','".time()."','".time()."')";
+		C_mysqlOne($updateSql);
+	}
+	if($targetWeight > $weight){//目标数值大于原始值 增重
+		$calorie=($targetWeight-$nowWeight)*7700;
+	}else{
+		$calorie=($nowWeight-$targetWeight)*7700;
+	}
+	$data [0] ['uid'] 		="0";
+	$data [0] ['calorie']	=$calorie;
+	echo json_encode($data);
+	exit();
+}
+public function postCircleLike(){
+	$uid  	= ! empty ( $_POST ['uid'] ) ? intval ( $_POST ['uid'] ) : '';
+	$id 	 	= ! empty ( $_POST ['statusId'] ) ? intval ($_POST ['statusId']) : '';
+	if(empty($uid)||empty($id)){
+		$data [0] ['uid'] = '0';
+		$data [0] ['errorCode'] = '10001';
+		echo json_encode ( $data );
+		exit ();
+	}
+	$checkSql="select * from ai_circle_vote where uid=$uid and cid=$id";
+	$check=C_mysqlOne ( $checkSql );
+	if(empty($check)){
+		$updatesql="UPDATE ai_circle_info SET  `like`=`like`+1 WHERE  id=$id";
+		C_mysqlOne ( $updatesql );
+		$insql = 'insert into ai_circle_vote (`uid`,`cid`) values ("' . $uid . '","' . $id . '")';
+		C_mysqlOne ( $insql );	
+		$data[0]['uid']=(string)$uid;
+		$data[0]['errorCode'] = "0";
+		echo json_encode ( $data );
+	} else {
+		$data[0]['uid']=(string)$uid;
+		$data[0]['errorCode'] = "10002";
+		echo json_encode ( $data );
+	}
+}
+public function postCircleComment(){
+	$uid = ! empty ( $_POST ['uid'] ) ? intval ( $_POST ['uid'] ) : '';
+	$content = ! empty ( $_POST ['content'] ) ? $_POST ['content'] : '';
+	$id = ! empty ( $_POST ['id'] ) ? intval ($_POST ['id']) : '0';
 		if(empty($id)){//评论目标
 			$data [0] ['uid'] = '0';
 			$data [0] ['errorCode'] = '10001';
@@ -305,7 +356,7 @@ class IosApi {
 			exit ();
 		}
 		$sql="INSERT INTO  `aijianmei`.`ai_circle_comment` (`id` ,`cid` ,`uid` ,`content` ,`parentid` ,`create_time`)
-				VALUES (NULL ,  '".$id ."',   '".$uid ."',  '".$content."',  '0',  '".time()."')";
+		VALUES (NULL ,  '".$id ."',   '".$uid ."',  '".$content."',  '0',  '".time()."')";
 		C_mysqlOne ( $sql );
 		$data [0] ['uid'] = $uid;
 		$data [0] ['errorCode'] = '0';
@@ -541,10 +592,10 @@ class IosApi {
 					$getaidSql = "SELECT title FROM  ai_area WHERE title LIKE '%" . $locationArr [1] . "%'";
 					$cityaid = C_mysqlOne ( $getaidSql );
 					$res ['city'] = str_replace ( array (
-							"市",
-							"区",
-							"县" 
-					), '', $cityaid [0] ['title'] );
+						"市",
+						"区",
+						"县" 
+						), '', $cityaid [0] ['title'] );
 				}
 				unset ( $res ['location'] );
 			} elseif ($res ['province'] != 0) {
@@ -556,18 +607,18 @@ class IosApi {
 					$getaidSql = "SELECT title FROM  ai_area WHERE area_id LIKE '%" . $res ['city'] . "%'";
 					$cityaid = C_mysqlOne ( $getaidSql );
 					$res ['city'] = str_replace ( array (
-							"市",
-							"区",
-							"县" 
-					), '', $cityaid [0] ['title'] );
+						"市",
+						"区",
+						"县" 
+						), '', $cityaid [0] ['title'] );
 				} else {
 					$getaidSql = "SELECT title FROM  ai_area WHERE pid ='" . $province . "' order by area_id limit 1";
 					$cityaid = C_mysqlOne ( $getaidSql );
 					$res ['city'] = str_replace ( array (
-							"市",
-							"区",
-							"县" 
-					), '', $cityaid [0] ['title'] );
+						"市",
+						"区",
+						"县" 
+						), '', $cityaid [0] ['title'] );
 				}
 				unset ( $res ['location'] );
 			}
@@ -576,9 +627,19 @@ class IosApi {
 			$getkeywordsinfo = C_mysqlOne ( $getkeywords );
 			$gethealth = "select body_weight,height,age from ai_user_health_info where uid=$uid";
 			$gethealthinfo = C_mysqlOne ( $gethealth );
+
+			$sql = "select iosAvatar from ai_others WHERE uid ='".$uid."'";
+			$iosAvatar=C_mysqlOne ( $sql );
+			if(!empty($iosAvatar)){
+				$iosAvatarUrl="http://www.aijianmei.com/data/uploads/avatar/$uid/".$iosAvatar[0]['iosAvatar'];
+			}else{
+				$iosAvatarUrl='';
+			}
+
+
 			$data [0] ['uid'] = ( string ) $uid;
 			$data [0] ['userType'] = $usertype;
-			$data [0] ['profileImageUrl'] = ( string ) $res ['profileImageUrl'];
+			$data [0] ['profileImageUrl'] = !empty($iosAvatarUrl)? $iosAvatarUrl :( string ) $res ['profileImageUrl'];
 			$data [0] ['avatarBackGroundImage'] = ( string ) $res ['avatarBackGroundImage'];
 			$data [0] ['name'] = ( string ) $res ['uname'];
 			$data [0] ['description'] = ( string ) $res ['description'];
@@ -638,9 +699,9 @@ class IosApi {
 		$snsid = $_GET ['snsid'];
 		$usertype = $_GET ['usertype'];
 		$allowType = array (
-				'sina',
-				'qq' 
-		);
+			'sina',
+			'qq' 
+			);
 		if (! in_array ( $usertype, $allowType )) {
 			$data [0] ['uid'] = 0;
 			$data [0] ['errorCode'] = '10004';
@@ -898,15 +959,15 @@ class IosApi {
 	}
 	public function au_register() {
 		$allowType = array (
-				'local',
-				'sina',
-				'qq' 
-		);
+			'local',
+			'sina',
+			'qq' 
+			);
 		$allowTypeval = array (
-				'local' => 1,
-				'sina' => 2,
-				'qq' => 3 
-		);
+			'local' => 1,
+			'sina' => 2,
+			'qq' => 3 
+			);
 		$username = $this->pregCheck ( $_GET ['username'], 'string' );
 		$email = $this->pregCheck ( $_GET ['email'], 'email' );
 		$userpassword = $_GET ['userpassword'];
@@ -1081,9 +1142,9 @@ class IosApi {
 			$content=unserialize($result[0]['content']);
 			foreach ($searchInfo as $key => $value){
 				if($value['channeltype']==1){
-						$searchInfo[$key]['isread']=($content['a'.$value['id']]==1)?'1':'0';
+					$searchInfo[$key]['isread']=($content['a'.$value['id']]==1)?'1':'0';
 				}elseif($value['channeltype']==2){
-						$searchInfo[$key]['isread']=($content['v'.$value['id']]==1)?'1':'0';
+					$searchInfo[$key]['isread']=($content['v'.$value['id']]==1)?'1':'0';
 				}else{
 					$searchInfo[$key]['isread']='0';
 				}
@@ -1263,17 +1324,17 @@ class IosApi {
 	protected function pregCheck($string, $type) {
 		switch ($type) {
 			case 'string' :
-				$pattren = "/(@([\x{4e00}-\x{9fa5}]|[@#\w])*[^@#\w])/u";
-				$restats = false;
-				break;
+			$pattren = "/(@([\x{4e00}-\x{9fa5}]|[@#\w])*[^@#\w])/u";
+			$restats = false;
+			break;
 			case 'email' :
-				$pattren = "/([a-z0-9]*[-_\.]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?/i";
-				$restats = true;
-				break;
+			$pattren = "/([a-z0-9]*[-_\.]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?/i";
+			$restats = true;
+			break;
 			default :
-				$pattren = "/(@([\x{4e00}-\x{9fa5}]|[@#\w])*[^@#\w])/u";
-				$restats = false;
-				break;
+			$pattren = "/(@([\x{4e00}-\x{9fa5}]|[@#\w])*[^@#\w])/u";
+			$restats = false;
+			break;
 		}
 		
 		if (preg_match ( $pattren, $string ) == $restats) {
@@ -1312,13 +1373,13 @@ class IosApi {
 			$upsql = null;
 			if ($body_weight != '' || $height != '' || $age != '') {
 				$upsql = "UPDATE ai_user_health_info SET body_weight = '" . $body_weight . "'
-					,height = '" . $height . "'
-					,age = '" . $age . "' WHERE uid =$uid";
+				,height = '" . $height . "'
+				,age = '" . $age . "' WHERE uid =$uid";
 				C_mysqlOne ( $upsql );
 			}
 		} else {
 			$insertSql = "INSERT INTO  `aijianmei`.`ai_user_health_info` (`uid` ,`body_weight` ,`height` ,`age`)
-				VALUES ($uid, '" . $body_weight . "','" . $height . "','" . $age . "')";
+			VALUES ($uid, '" . $body_weight . "','" . $height . "','" . $age . "')";
 			C_mysqlOne ( $insertSql );
 		}
 	}
@@ -1426,12 +1487,12 @@ class IosApi {
 	public function getDailyLimit($channel, $limit, $nums) {
 		if ($channel != '') {
 			$sql = "select d.channel,d.id,d.title,d.img,d.content,d.create_time,d.gotime,d.like,d.unlike,d.read_count,v.id as vid,v.title as vtitle,v.link,v.wapurl,v.intro from ai_daily as d
-                left join ai_daily_video  as v on v.daily_id=d.id 
-                where d.channel=" . $channel . " and d.gotime<" . strtotime ( date ( "Y-m-d", time () ) ) . " ORDER BY d.gotime DESC  limit " . $limit . "," . $nums . " ";
+			left join ai_daily_video  as v on v.daily_id=d.id 
+			where d.channel=" . $channel . " and d.gotime<" . strtotime ( date ( "Y-m-d", time () ) ) . " ORDER BY d.gotime DESC  limit " . $limit . "," . $nums . " ";
 		} else {
 			$sql = "select d.channel,d.id,d.title,d.img,d.content,d.create_time,d.gotime,d.like,d.unlike,d.read_count,v.id as vid,v.title as vtitle,v.link,v.wapurl,v.intro from ai_daily as d
-                left join ai_daily_video  as v on v.daily_id=d.id 
-                where d.gotime<" . strtotime ( date ( "Y-m-d", time () ) ) . " ORDER BY d.gotime DESC  limit " . $limit . "," . $nums . " ";
+			left join ai_daily_video  as v on v.daily_id=d.id 
+			where d.gotime<" . strtotime ( date ( "Y-m-d", time () ) ) . " ORDER BY d.gotime DESC  limit " . $limit . "," . $nums . " ";
 		}
 		$daily = null;
 		$daily = $this->getDataCache ( md5 ( $sql ) );
@@ -1443,35 +1504,35 @@ class IosApi {
 				$info ['img'] = $this->getVideoDataImg ( $r ['link'] );
 				if ($daily [$key]) {
 					$daily [$key] ['video'] [] = array (
-							'id' => $r ['vid'],
-							'title' => $r ['vtitle'],
-							'link' => ($r ['link'] != 'null' ? $r ['link'] : ''),
-							'wapurl' => ($r ['wapurl'] != 'null' ? $r ['wapurl'] : ''),
-							'intro' => $r ['intro'],
-							'img' => $info ['img'],
-							'read_count' => $r ['read_count'] 
-					);
+						'id' => $r ['vid'],
+						'title' => $r ['vtitle'],
+						'link' => ($r ['link'] != 'null' ? $r ['link'] : ''),
+						'wapurl' => ($r ['wapurl'] != 'null' ? $r ['wapurl'] : ''),
+						'intro' => $r ['intro'],
+						'img' => $info ['img'],
+						'read_count' => $r ['read_count'] 
+						);
 				} else {
 					$daily [$key] ['article'] = array (
-							'id' => $r ['id'],
-							'channel' => $r ['channel'],
-							'title' => $r ['title'],
-							'img' => $r ['img'],
-							'content' => $r ['content'],
-							'ctime' => $r ['create_time'],
-							'gotime' => $r ['gotime'],
-							'like' => $r ['like'],
-							'unlike' => $r ['unlike'],
-							'read_count' => $r ['read_count'] 
-					);
+						'id' => $r ['id'],
+						'channel' => $r ['channel'],
+						'title' => $r ['title'],
+						'img' => $r ['img'],
+						'content' => $r ['content'],
+						'ctime' => $r ['create_time'],
+						'gotime' => $r ['gotime'],
+						'like' => $r ['like'],
+						'unlike' => $r ['unlike'],
+						'read_count' => $r ['read_count'] 
+						);
 					$daily [$key] ['video'] [] = array (
-							'id' => $r ['vid'],
-							'title' => $r ['vtitle'],
-							'link' => ($r ['link'] != 'null' ? $r ['link'] : ''),
-							'wapurl' => ($r ['wapurl'] != 'null' ? $r ['wapurl'] : ''),
-							'intro' => $r ['intro'],
-							'img' => $info ['img'] 
-					);
+						'id' => $r ['vid'],
+						'title' => $r ['vtitle'],
+						'link' => ($r ['link'] != 'null' ? $r ['link'] : ''),
+						'wapurl' => ($r ['wapurl'] != 'null' ? $r ['wapurl'] : ''),
+						'intro' => $r ['intro'],
+						'img' => $info ['img'] 
+						);
 				}
 			}
 			$this->setDataCache ( md5 ( $sql ), $daily );
@@ -1504,14 +1565,14 @@ class IosApi {
 	protected function _postCurlRegister($data) {
 		$url = 'http://www.aijianmei.com/shop/user.php';
 		$post_data = array (
-				'password' => $data ['password'],
-				'username' => $data ['uname'],
-				'email' => $data ['email'],
-				'confirm_password' => $data ['password'],
-				'act' => 'act_register',
-				'back_act' => '',
-				'agreement' => 1 
-		);
+			'password' => $data ['password'],
+			'username' => $data ['uname'],
+			'email' => $data ['email'],
+			'confirm_password' => $data ['password'],
+			'act' => 'act_register',
+			'back_act' => '',
+			'agreement' => 1 
+			);
 		$ch = curl_init ();
 		curl_setopt ( $ch, CURLOPT_URL, $url );
 		curl_setopt ( $ch, CURLOPT_HEADER, 0 );
@@ -1581,9 +1642,63 @@ class IosApi {
 		}
 		return true;
 	}
-}
 
-$api = new IosApi ();
-echo $api->$_REQUEST ['auact'] ();
+	protected function getUserHealthById($uid){
+		$sql="select body_weight as weight,targetWeight,nowWeight,weightTime,targetTime from ai_user_health_info where uid=$uid";
+		$data=C_mysqlAll($sql);
+		if(empty($data)){
+			$data[0]['weight']	    =0;
+			$data[0]['targetWeight']=0;
+			$data[0]['nowWeight'] 	=0;
+			$data[0]['pertent'] 	=0;
+			$data[0]['klu'] 		=0;
+			$data[0]['isfitness']   =1;
+			$data[0]['wtime'] 		=1;
+			$data[0]['isfitness']   =1;
+			$data[0]['weightTime']  =date("Y-m-d",time());
+			$data[0]['targetTime']  =date("Y-m-d",time());
+		}else{
+			$prefino=$this->getWeigthPertent($data[0]['weight'],$data[0]['targetWeight'],$data[0]['nowWeight']);
+			$data[0]['pertent']  	=round($prefino['pertent'],1);
+			$data[0]['klu'] 		=$prefino['klu'];
+			if($data[0]['klu']>0){
+				$data[0]['isfitness']   =$data[0]['targetWeight']< $data[0]['weight'] ? 1 : 2;
+			}else{
+				$data[0]['klu']=abs($data[0]['klu']);
+				$data[0]['isfitness']   =$data[0]['targetWeight']< $data[0]['weight'] ? 2 : 1;
+			}
+			$data[0]['weightTime']  =date("Y-m-d",$data[0]['weightTime']);
+			$data[0]['targetTime']  =date("Y-m-d",$data[0]['targetTime']);
+		}
+		return $data[0];
+	}
+	protected function getWeigthPertent($weight,$targetWeight,$nowWeight){
+		$pertent=0;
+		if($targetWeight > $weight){//目标数值大于原始值 增重
+			$klu=($targetWeight-$nowWeight)*7700;
+				if($nowWeight < $weight){//当前数值 < 原始数值 无用功直接 0%
+					$pertent=0;
+				}else{//否则计算对应完成度的百分比
+					$pertent = ($nowWeight-$weight) / ($targetWeight-$weight) * 100;
+				}
+				if($nowWeight > $targetWeight){//当前数值>目标的数值 则目标已经超标完成 直接是100%
+					$pertent=100;
+				}
+			}else{//目标数值大于原始值 减肥
+				$klu=($nowWeight-$targetWeight)*7700;
+				if($nowWeight < $weight && $nowWeight > $targetWeight){//当前数值 < 原始数值  并且大于目标值 则 减肥有效果 仍需继续努力
+					$pertent = ($weight-$nowWeight) / ($weight-$targetWeight) * 100;
+				}elseif($nowWeight < $weight && $nowWeight < $targetWeight ){ //当前数值 小于原始值 并且小于目标值 减肥完美超额完成...估计要增肥了
+					$pertent = 100;//完成度自然100..
+				}elseif($nowWeight > $weight){//当前数值 > 原始数值  好吧你减肥失败了 增重成功了...完成度0 哭也没用啊 混蛋
+					$pertent=0;
+				}
+			}
+			return array( 'pertent' => $pertent,'klu'=> $klu);
+		}
+	}
+
+	$api = new IosApi ();
+	echo $api->$_REQUEST ['auact'] ();
 //var_dump($api);
 //$api;
