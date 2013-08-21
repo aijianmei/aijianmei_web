@@ -319,7 +319,9 @@ var addGroup = function(){
 			}
 			colArr.push('<button type="button" class="delBtn" style="display:block;"></button><div class="col col' + (++i) +'">'+ colText +'</div>');
 			i--;
+			
 		}
+		colArr.push('<div class="col col5">0</div>')
 
 		var k = (groupNums*1+1)%2,
 			rowClass = null;
