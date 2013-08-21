@@ -102,8 +102,8 @@
 							
 						</div>
 					</div>
-					<h3 class="partTit"><span>我的健身数据</span></h3>
-					<p class="tip greenFont">您目前的历程数据表为空，请根据自己实际情况选择动作名称！正式开启您的健身历程吧！</p>
+					<h3 class="partTit"><div class="titBg"><span class="titLeft"></span><span class="tit tableTabName">{$actionList[0]['name']}</span><span class="titRight"></span></div></h3>
+					<p class="tip greenFont">你的历程数据表还没上传哟！请根据自己实际情况选择动作名称，开启你的健身历程吧！</p>
 					<div class="clearfix">
 						<div class="dataLeft">
 							<div class="date">
@@ -201,8 +201,8 @@
 					</div><!--End dataIn-->
 					<div class="separateX"></div>
 					<div id="dataOut" class="clearfix">
-						<h3 class="partTit"><span>曲线变化图</span></h3>
-						<p class="tip  greenFont">这是您录入的健身数据所生产的曲线图。健身心情、历程图片、数据变化，在这里，每天的进步一目了然！</p>
+					<h3 class="partTit"><div class="titBg"><span class="titLeft"></span><span class="tit"><span class="tableLineTabName">{$actionList[0]['name']}</span>曲线变化图</span><span class="titRight"></span></div></h3>
+						<p class="tip  greenFont">健身心情、历程图片和数据变化，在这里，每天的进步一目了然！</p>
 						<div class="chart">
 							<div class="clearfix">
 								<div class="date">
@@ -252,16 +252,26 @@
 									<div class="userPos">
 										<a href=""><img src="<php>echo getUserFace(getMid(),'m');</php>" alt="userFace" class="rankFace" /></a>
 										<a href="" class="rankName" alt="<php>echo getUserName(getMid(),'zn');</php>" title="<php>echo getUserName(getMid(),'zn');</php>"><php>echo getUserName(getMid(),'zn','5');</php></a>
+										
+										<php>if($userRankNum!=0){</php>
+										<span class="yourPos rankNums"  style="display:none;">您当前的排名是
+											<span class="userPos redFont">{$userRankNum}</span>位</span><php>}else{</php>
+										<span class="yourPos rankNums"  style="display:none;">您的排名在10000以外请多多努力!</span><php>}</php>
+
+										<php>if($userRankNum7!=0){</php>
+										<span class="yourPos rankNums"  style="display:none;">您当前的排名是
+											<span class="userPos redFont">{$userRankNum7}</span>位</span><php>}else{</php>
+											<span class="yourPos rankNums" style="display:none;">您的排名在10000以外请多多努力!</span><php>}</php>
+
+										<php>if($userRankNum30!=0){</php>
+										<span class="yourPos rankNums" style="display:none;">您当前的排名是
+											<span class="userPos redFont">{$userRankNum30}</span>位</span><php>}else{</php>
+											<span class="yourPos rankNums" style="display:none;">您的排名在10000以外请多多努力!</span><php>}</php>										
 										<php>if($userRankNumall!=0){</php>
-										<span class="yourPos">您当前的排名是
-											<span class="userPos redFont rankNums" style="display:none;">{$userRankNum}</span>
-											<span class="userPos redFont rankNums" style="display:none;">{$userRankNum7}</span>
-											<span class="userPos redFont rankNums" style="display:none;">{$userRankNum30}</span>
-											<span class="userPos redFont rankNums" >{$userRankNumall}</span>
-											位</span>
-											<php>}else{</php>
-											<span class="yourPos">您的排名在10000以外请多多努力!</span>
-											<php>}</php>
+										<span class="yourPos rankNums">您当前的排名是
+											<span class="userPos redFont" >{$userRankNumall}</span>位</span><php>}else{</php>
+											<span class="yourPos rankNums">您的排名在10000以外请多多努力!</span><php>}</php>
+
 									</div>
 									<ul class="topTen rankUl" style="display:none;">
 										<volist id="userRankList" name="userRankList" key="n">
@@ -344,6 +354,11 @@ var uploadImageDate="<?php echo date('Ymd',time())?>";
 var dateContentVar="<?php echo date('Y.m.d',time())?>";
 var uploadImageType="default";
 var defaultDateString="<?php echo date('Ymd',time())?>";
+$(function(){
+	if(!userId>0){
+		$(".login").click();
+	}
+});
 $(".clickUpload").click(function (){
 	$("#img").click();
 });
@@ -601,7 +616,6 @@ $(function(){
 		getUserLog();
 	});
 });
-
 
 			$('.rankDay').click(function(){
 				var _index=$(this).index();

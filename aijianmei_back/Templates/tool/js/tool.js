@@ -149,6 +149,8 @@ $.getJSON(actionJson, function(data){
 			getCourseData(dateContentVar);
 			$(this).addClass("curAct").siblings().removeClass("curAct");
 			textLength();
+			changeTabNameByAction(actionVal);
+			$(".siderBtn").find(".chartBtn").eq(0).click();
 		});
 		//点击导航栏“更多”按钮下拉
 		$(".moreBtn").click(function(){
@@ -176,6 +178,8 @@ $.getJSON(actionJson, function(data){
 						$(".actionNameBox").html(actionVal);
 						getCourseData(dateContentVar);//替换
 						textLength();
+						$(".siderBtn").find(".chartBtn").eq(0).click();
+						changeTabNameByAction(actionVal);
 						$(".actNav").find("li").eq(i).addClass("curAct");
 						break;
 					}
@@ -185,6 +189,7 @@ $.getJSON(actionJson, function(data){
 					$(".actNav").prepend('<li class="curAct">' + txt + '<span></span></li>');
 					postUserDefaultAction();
 					listLength();
+
 				}	
 			}
 			$(".moreAct").slideUp();
@@ -593,3 +598,7 @@ $(".tBody").find(".actGroup").find('.col').find('.add').die().live('click',funct
 	tmpNum=tmpNum*1+1;
 	$(this).parent().find("input").val(tmpNum);
 });
+function changeTabNameByAction(actionVal){
+	$(".tableTabName").html(actionVal);
+	$(".tableLineTabName").html(actionVal);
+}

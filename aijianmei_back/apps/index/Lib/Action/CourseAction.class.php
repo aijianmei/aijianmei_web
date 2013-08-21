@@ -383,6 +383,12 @@ class CourseAction extends Action {
 
 			$getRankSql="select count(*) as num from ($tmpTable) as tmp where tmp.exercise >= ($tmpUTable)";
 			$data=M('')->query($getRankSql);
+			
+			if($data[0]['num']==0){
+				$checkSql="select * from ai_user_exercise_log where uid=$uid and date='".date('Ymd',time())."'";
+				$check=M('')->query($checkSql);
+				if(empty($check)) return 0;
+			}
 			return $data[0]['num']>0 ? intval($data[0]['num']):1;
 		}
 	}
