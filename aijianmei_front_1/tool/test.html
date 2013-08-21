@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+			body,div,ul,li{padding:0;margin:0;}
+			ul{position:absolute;right:0px;list-style:none;width:920px;height:280px;}
+			.wrap{position:relative;background:#ccc;width:770px;height:320px;padding:10px;margin:10px;}
+			#pic{position:relative;top:40px;height:280px;overflow:hidden;}
+			li{float:left;margin-left:10px;cursor:pointer;}
+			img{width:450px;height:280px;}
+		</style>
+		<script type="text/javascript" src="js/jquery.latest.js"></script>
+	</head>
+	<body>
+	<div class="wrap">
+		<div id="pic">
+			<ul id="imageBox">
+				<li class="userPicPrev"><img src="images/1.jpg" date="20130816"/></li>
+				<li class="userPicCurrent"><img class="moreImage"  src="images/tool/rj_1.png"  date="20130817"/></li>
+			</ul>
+		</div>
+	</div>
+		
+	</body>
+<script type="text/javascript">	
+	$(".userPicPrev").live("click",function(){
+		var ajaxCallUrl='/tool/moreImage.php';
+		var date=$(this).attr('date');
+		date = date*1 - 1;
+
+		$.ajax({
+			type: "POST",
+			url:ajaxCallUrl,
+			data:'date='+date+'&type=shareImage',
+			dataType:'json',
+			success: function(msg){
+				var innerHtml='<li><img src="images/'+msg.image+'" /></li>';
+				$("#imageBox").css("width","+=460px").prepend(innerHtml);//获取一张图片，宽度增加
+				$("#imageBox").find('li').eq(0).find('img').attr({"date":date,"alt":date});
+				
+				var _right;
+				if($("#imageBox").find("li").length == 3){
+					_right = "-=300px";
+				}
+				else{
+					_right = "-=460px";
+				}
+				
+				$( "#imageBox" ).animate({ "right": _right }, function(){
+					$(".userPicPrev").removeClass("userPicPrev").prev().addClass("userPicPrev");
+					$(".userPicCurrent").removeClass("userPicCurrent").prev().addClass("userPicCurrent");
+					$(".userPicCurrent").next().addClass("userPicNext").siblings().removeClass("userPicNext");
+					
+					$(".userPicNext").click(function(){
+						var that = this;
+						if($(that).hasClass("userPicNext")){
+							/*var maxLi=$("#imageBox").find('li').last().index(),
+								_index = $(that).index();
+							if(_index == maxLi){
+								$("#imageBox").animate({"right": "+=300px"},function(){
+									$(that).attr("class","userPicCurrent");
+									$(that).userPicPrev().attr("class","userPicPrev").prev().removeClass("userPicPrev");
+								});
+							}*/
+							
+							$("#imageBox").animate({"right": "+=460px"}, function(){
+								$(that).next().addClass("userPicNext");
+								$(that).attr("class", "userPicCurrent").prev().attr("class","userPicPrev").siblings().removeClass("userPicPrev");
+							})
+							
+							
+						}
+					})
+				})
+			}//success
+		})
+	})
+</script>
+</html>
+

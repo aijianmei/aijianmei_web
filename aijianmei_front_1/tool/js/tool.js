@@ -416,6 +416,20 @@ $(".userPicPrev").live("click",function(){
 			})
 		}//success
 	})
+});
+//显示排名
+$(".topTen").find("li").bind({
+	"mouseenter" : function(){
+		var innerMsg = '<span class="triangleIcon"></span>'
+					 + '<p>总重量：<span>'+ $(this).find(".otherName").attr("allweight") +'</span></p>'
+		             + '<p>总重量：<span>'+ $(this).find(".otherName").attr("allcount") +'</span></p>'
+		             + '<p>累计重量：<span>'+ $(this).find(".otherName").attr("all") +'</span></p>',
+			orderMsg = '<div class="orderMsg">'+innerMsg+'</div>';
+		$(this).append(orderMsg);
+	},
+	"mouseleave" : function(){
+		$(this).find(".orderMsg").remove();
+	}
 })
 
 

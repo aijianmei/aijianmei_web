@@ -892,6 +892,34 @@ input,button,select,textarea{outline:none}
 	#gla .userPicCurrent{
 		cursor:default;
 	}
+	
+	.orderMsg{
+		position:absolute;
+		right: -90px;
+		top: -15px;
+		padding:10px;
+		background:#49CAF4;
+		color:white;
+		border-radius:6px;
+		font-weight:bold;
+	}
+	.triangleIcon{
+		border:8px solid; 
+		border-color:transparent #49CAF4 transparent transparent; 
+		position: absolute;
+		left: -16px;
+		top: 24px;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 			
 #ui-datepicker-div{
 	z-index:300!important;
@@ -904,6 +932,8 @@ input,button,select,textarea{outline:none}
 .login_table{
 	top:78px!important;
 }
+
+
 		
 		
 		

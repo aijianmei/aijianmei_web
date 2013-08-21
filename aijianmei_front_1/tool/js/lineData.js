@@ -60,7 +60,6 @@ function joo(gloData,divid){
 				tickOptions: {
 				formatString: '%d'//浮点数
 				}
-			
 			}
 		},
 		highlighter: {
