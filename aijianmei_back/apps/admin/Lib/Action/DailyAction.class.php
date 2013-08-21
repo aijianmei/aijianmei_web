@@ -452,7 +452,6 @@ class DailyAction extends AdministratorAction {
 		$pid=$_GET['pid']?$_GET['pid']:0;
 		$data=M('')->query("select * from ai_fitness_program where parentid=$pid");
 		$this->assign ('fitnessProgram', $data );
-		
 		$this->display('fitnessProgram');
 	}
 	function doDeleteFitnessProgram(){
@@ -465,8 +464,65 @@ class DailyAction extends AdministratorAction {
 		echo $res ? '1' : '0';
 	}
 	function fitnessVideo(){
-		var_dump($_REQUEST);
+		if($_POST['subact']=='add'){
+			$dir       		="/public/images/fitnessProgram/";
+			$imgLeft   		=$dir.$_POST['imgLeft'];
+			$imgRight  		=$dir.$_POST['imgRight'];
+			$vid       		=$_POST['vid'];
+			$vtitle  		=$_POST['vtitle'];
+			$vtitleurl  	=$_POST['vtitleurl'];
+			$vtitlecontent  =$_POST['vtitlecontent'];
+			$insertSql="INSERT INTO `ai_fitness_program_video` (`id`, `leftImage`, `rightImage`, `vid`, `vtitle`, `vurl`, `vbiref`, `create_time`) VALUES (NULL, '".$imgLeft."', '".$imgRight."', '".$vid."', '".$vtitle."', '".$vtitleurl."', '".$vtitlecontent."', '".time()."')";
+			M('')->query($insertSql);
+			redirect ( U ( 'admin/Daily/fitnessVideo' ) );
+		}
+		$fvideo=array();
+		$getAllSql="select * from ai_fitness_program_video ";
+		$fvideo=M('')->query($getAllSql);
+		foreach ($fvideo as $key => &$value) {
+			$value['create_time']=date("Y-m-d",$value['create_time']);
+		}
+
+		$this->assign('fvideo',$fvideo);
+		//var_dump($fvideo);
 		$this->display('addFitnessVideo');
+	}
+
+	public function editFitnessVideo(){
+		$id=$_GET['id'];
+		if($_POST['subact']=='eidt'){
+			
+			$dir       		="/public/images/fitnessProgram/";
+			$imgLeft   		=$dir.$_POST['imgLeft'];
+			$imgRight  		=$dir.$_POST['imgRight'];
+			$vid       		=$_POST['vid'];
+			$vtitle  		=$_POST['vtitle'];
+			$vtitleurl  	=$_POST['vtitleurl'];
+			$vtitlecontent  =$_POST['vtitlecontent'];
+			$sql="UPDATE  `aijianmei`.`ai_fitness_program_video` SET `rightImage`='".$imgRight."',`leftImage`='".$imgLeft."',`vid` =  '".$vid."',`vtitle` =  '".$vtitle."',`vurl` =  '".$vtitleurl."',`vbiref` =  '".$vtitlecontent."' WHERE  `ai_fitness_program_video`.`id` =$id";
+			M('')->query($sql);
+			redirect ( U ( 'admin/Daily/fitnessVideo' ) );
+		}
+
+		$data=array();
+		$sql="select * from ai_fitness_program_video where id=$id";
+		$data=M('')->query($sql);
+		//var_dump($data);
+		$data[0]['leftImageUrl']=substr($data[0]['leftImage'],strrpos($data[0]['leftImage'], "/"));
+		$data[0]['rightImageUrl']=substr($data[0]['rightImage'],strrpos($data[0]['rightImage'], "/"));
+		$this->assign('data',$data[0]);
+		$this->display('editFitnessVideo');
+	}
+
+	public function uploadFImg() {
+		$targetfilename = time () . rand () . ".jpg";
+		$newfilename = $_SERVER ['DOCUMENT_ROOT'] . '/public/images/fitnessProgram/' . $targetfilename;
+		if ($_FILES ['image_file'] ['tmp_name'] != '') {
+			move_uploaded_file ( $_FILES ['image_file'] ['tmp_name'], $newfilename );
+		}
+		echo "<textarea>/public/images/fitnessProgram/" . $targetfilename . "?" . rand () . "</textarea>";
+		echo "<textarea>$targetfilename</textarea>";
+		exit ();
 	}
 
 }

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>编辑</title>
+</head>
+<link rel="stylesheet" href="Templates/admin/bootstrap.css">
+<link rel="stylesheet" href="Templates/admin/plugins-1.2.css">
+<link rel="stylesheet" href="Templates/admin/themes.css">
+<!--编译器js start-->
+<script src="ckeditor/ckeditor.js"></script>
+<script src="ckeditor/sample.js"></script>
+<link rel="stylesheet" href="ckeditor/sample.css">
+<script type="text/javascript" src="ckfinder/ckfinder.js"></script>
+<!--编译器js end-->
+<link rel="stylesheet" href="widgets/datepicker/ui.css" />
+<script src="Templates/js/jquery.js"></script>
+<script src="widgets/datepicker/ui.js"></script>
+<link rel="stylesheet" href="Templates/admin/main-1.2.css">
+<link rel="stylesheet" href="Templates/admin/blue.css">
+<style>
+.w300{width: 300px;}
+.w380{width: 400px;}
+.w350{width: 350px;}
+.h100{ height:100px;}
+.p0{padding: 0px;}
+.w64{width: 64px;}
+.w70{width: 70px;}
+.fleft{float:left;}
+.cred{color:red;}
+.ml15{margin-left: 15px;}
+.img64{ height:64px;width: 64px;}
+.mb0{margin-bottom:0px;}
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#image_file").change(function(){
+		if($("#image_file").val() != ''){
+			$("#upload_form").submit();
+		}
+	});
+	$("#exec_target").load(function(){
+		var imgurl = $(window.frames['exec_target'].document.body).find("textarea").eq(0).html();
+		var imgname = $(window.frames['exec_target'].document.body).find("textarea").eq(1).html();
+		$(imgobj).attr('src',imgurl);
+		$(imgobj).parent().find("input[imgurl!=1]").val(imgname);
+		
+	});
+});
+$(document).ready(function(){
+	$(".uploadimgbutton").click(function(){
+		imgobj=$(this).parent().find('img');
+		$("#image_file").click();
+	});
+});
+
+function showaddbox(){
+	if($("#addform").attr("style")=='display: none;'){
+		$("#addform").show();
+	}else{
+		$("#addform").hide();
+	}
+}
+
+</script>
+<body style="clear:both; width:auto; padding:0px;">
+
+<div id="page-content" style="min-height: 0px;">
+<form action="" method="post"  enctype="multipart/form-data" id="addform">
+     <div class="block block-themed block-last">
+			<div class="block-title">
+				<h4>天天视频列表</h4>
+			</div>
+			<div class="block-content" id="cloneBox">
+					<div class="control-group" id="newcloneBox">
+						<div class="controls controls-row h100">
+							<div class="fleft w70">
+							<img src="{$data['leftImage']}" class="alogimg img64" alt="点击编辑图片链接" title="点击编辑图片链接">
+							<input name="imgLeft" value="{$data['leftImageUrl']}" type="hidden">
+							<input name="imgLeftUrl" imgurl=1 value="" type="hidden">
+							<button type="button" class="w64 btn btn-danger p0 uploadimgbutton">upload</button>
+							</div>
+							<div class="fleft w70">
+							<img src="{$data['rightImage']}" class="alogimg img64" alt="点击编辑图片链接" title="点击编辑图片链接">
+							<input name="imgRight" value="{$data['rightImageUrl']}" type="hidden">
+							<input name="imgRightUrl" imgurl=1 value="" type="hidden">
+							<button type="button" class="w64 btn btn-danger p0 uploadimgbutton">upload</button>
+							</div>
+							<div class="fleft p0 w380">
+							<label class="fleft p0 w70 mb0">视频id</label><input class="w300" type="text" name="vid" placeholder="请输入视频标题" value="{$data['vid']}"/>
+							<label class="fleft p0 w70 mb0">视频标题</label><input class="w300" type="text" name="vtitle" placeholder="请输入视频标题" value="{$data.vtitle}"/>
+							<label class="fleft p0 w70 mb0">标题链接</label><input class="w300" type="text" name="vtitleurl" placeholder="请输入标题链接" value="{$data.vurl}"/>
+							</div>
+							<div class="fleft p0">
+							<textarea name="vtitlecontent" class="textarea-medium" rows="3.5" style="margin-left: 0px; margin-right: 0px; width: 267px;" placeholder="请输入简介内容" >{$data.vbiref}</textarea>
+							</div>
+							</div>
+					</div>
+			</div>
+			<div class="form-actions">
+				<input type="hidden" name="subact" value="eidt">
+				<button type="submit" class="btn btn-success">Submit</button>
+			</div>
+			
+		</div>
+   </div>
+   </form>
+   <form id="upload_form" enctype="multipart/form-data" method="post"  target="exec_target"  action="/index.php?app=admin&mod=daily&act=uploadFImg" >
+   <input type="file" name="image_file" id="image_file" onchange="fileSelectHandler()" style="display:none;"/>
+   </form>
+   <iframe id="exec_target" name="exec_target" style="display:none;"></iframe>
+</body>
+</html>

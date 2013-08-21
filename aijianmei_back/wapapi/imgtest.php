@@ -103,8 +103,9 @@ if (move_uploaded_file ( $_FILES ['avatarimage'] ['tmp_name'], $srcImage )) {
 		$iosAvatar="iosAvatar".time().".jpg";
 		$iosAvatarUrl = "$basedir/data/uploads/avatar/$uid/".$iosAvatar;
 		if($srcSize[0] >= 50){
+
 			$resize = new ResizeImage($srcImage);
-			$resize->resizeTo(100, 100,'exact');
+			$resize->resizeTo(100,round(($srcSize[1]*100)/$srcSize[0]),'exact');
 			$resize->saveImage($iosAvatarUrl);
 		}
 		$data[0]['avatarimage'] = "http://www.aijianmei.com/data/uploads/avatar/$uid/".$iosAvatar;
@@ -167,7 +168,7 @@ if (move_uploaded_file ( $_FILES ['backgroundimage'] ['tmp_name'], $srcImage )) 
 			}*/
 			if (! empty ( $_POST ['description'] )) { // 个人签名
 				$description = $_POST ['description'];
-				$sql = "UPDATE ai_others SET description = '" . $description . "' WHERE  id =$uid";
+				$sql = "UPDATE ai_others SET description = '" . $description . "' WHERE  uid =$uid";
 				C_mysqlOne ( $sql );
 			}
 			if (! empty ( $_POST ['gender'] )) { // 性别
@@ -205,6 +206,14 @@ if (move_uploaded_file ( $_FILES ['backgroundimage'] ['tmp_name'], $srcImage )) 
 				$profileImageUrl = $_POST ['profileImageUrl'];
 				$sql = "UPDATE ai_others SET profileImageUrl = '" . $profileImageUrl . "' WHERE  id =$uid";
 				C_mysqlOne ( $sql );
+			}elseif(!empty($_POST['profileImageUrl'])&&!empty($_FILES ['avatarimage'] ['tmp_name'])){
+				$sql = "select iosAvatar from ai_others WHERE uid ='".$_POST ['uid']."'";
+				$iosAvatar=C_mysqlOne ( $sql );
+				$_POST ['profileImageUrl'] ="http://www.aijianmei.com/data/uploads/avatar/$uid/".$iosAvatar[0]['iosAvatar'];
+			}elseif(empty($_POST['profileImageUrl'])&&!empty($_FILES ['avatarimage'] ['tmp_name'])){
+				$sql = "select iosAvatar from ai_others WHERE uid ='".$_POST ['uid']."'";
+				$iosAvatar=C_mysqlOne ( $sql );
+				$_POST ['profileImageUrl'] ="http://www.aijianmei.com/data/uploads/avatar/$uid/".$iosAvatar[0]['iosAvatar'];
 			}
 		}
 $bim = getBmiById ( $uid );

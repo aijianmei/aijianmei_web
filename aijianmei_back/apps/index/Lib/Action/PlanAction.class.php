@@ -156,7 +156,37 @@ class PlanAction extends Action {
 		
 		$this->display ( 'videoWindow' );
 	}
-	
+	//showFitnessVideoWindows
+	public function showFitnessVideoWindows() {
+		// if(empty($_GET['vid'])){
+		// $getDailyVideoByIdSql-"select * from ai";
+		// }
+ 		if(empty($_GET['vid'])||empty($_GET['id'])){
+ 			header('HTTP/1.1 403 Forbidden');
+ 			exit();
+ 		}
+		$id=$_GET['id']? intval($_GET['id']):0;
+		$vid=$_GET['vid']? intval($_GET['vid']):0;
+
+
+		$sql=$data=null;
+		$sql="select * from ai_fitness_program_video where id=$id";
+		$data=M('')->query($sql);
+		$getvSql="select title,brief,wapurl from ai_video where id=$vid";
+		$vdata=M('')->query($getvSql);
+		$result=$data[0];
+		$result['brief']=$vdata[0]['brief'];
+		$result['wapurl']=$vdata[0]['wapurl'];
+		$result['wtitle']=$vdata[0]['title'];
+
+		$videoInfo=$result;
+		$videoInfo['turl']="/index-Train-videoDetail-$vid.html";
+		$this->assign ( 'videoInfo', $videoInfo );
+		
+		
+		$this->display ( 'fitnessVideoWindow' );
+	}
+
 	protected function getVideoById($id,$vid){
 		$sql=$data=null;
 		$sql="select * from ai_daily_video_list where id=$id";

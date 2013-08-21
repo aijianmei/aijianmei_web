@@ -123,7 +123,7 @@
 							
 								<form action="" id="dataForm">
 									<div class="thead clearfix">
-										<div class="col1 col">杠铃卧推<span class="rowTip">2013.09.09</span></div>
+										<div class="col1 col">杠铃卧推杠<span class="rowTip">2013.09.09</span></div>
 										<div class="col2 col">数量<span class="rowTip">以往平均值：<strong>55</strong>个</span></div>
 										<div class="col3 col">重量<span class="rowTip">以往平均值：<strong>65</strong>kg</span></div>
 										<div class="col4 col">时间<span class="rowTip">以往平均值：<strong>65</strong>s</span></div>
@@ -219,57 +219,41 @@
 								</form>
 							</div><!--End userTable-->
 							<div class="userPic userArea" style="display:none;">
-								<!-- <div class="uploadTip"><a href="">点击上传图片</a></div> -->
+								
 								<div class="uploadArea">
-									<div id="gla">
-										<div id="gla_box">
-											<ul>
-												<li>
-													<div class="gla_inbox">
-														<img src="images/3.jpg" />
-													</div>
-												</li>
-												<li>
-													<div class="gla_inbox">
-														<img src="images/3.jpg" />
-													</div>
-												</li>
-												<li>
-													<div class="gla_inbox">
-														<img src="images/3.jpg" />
-													</div>
-												</li>
-											</ul>
-										</div>
+									<div class="userUpload">
+										<button class="clickUpload"></button>
+										<form action="" method="post" id="imageUpload" style="display:none;">
+											<input type="file" name="img" id="img">
+										</form>
+										<script>
+										$(".clickUpload").click(function (){
+											$("#img").click();
+										});
+										</script>
 									</div>
-									<!-- <img src="images/tool/pic.png" alt="UploadPicture" />
-									<div class="uploadCover"></div>
-									<div class="clickUpload">点击上传图片</div>
-									<form action="" method="post" id="imageUpload" style="display:none;">
-									<input type="file" name="img" id="img">
-									</form>
-									<script>
-									$(".clickUpload").click(function (){
-										$("#img").click();
-									});
-									</script> -->
+									<div id="gla">
+										<ul id="imageBox" class="scanPic">
+											<li class="userPicPrev"><img src="images/1.jpg" date="20130816"/></li>
+											<li class="userPicCurrent"><img class="moreImage"  src="images/tool/rj_1.png"  date="20130817"/></li>
+										</ul>
+									</div>
 								</div>
 							</div><!--End userPic-->
 							<div class="userNote userArea" style="display:none;">
+						
+								<div class="userUpload"><button class="editDairyBtn"></button></div>
 								<div id="gla">
-									<div id="gla_box">
-										<ul>
-											<li><div class="gla_inbox"><img src="images/tool/rj_1.png" /></div></li>
-											<li><div class="gla_inbox"><img src="images/tool/rj_1.png" /></div></li>
-											<li><div class="gla_inbox"><img src="images/tool/rj_1.png" /></div></li>
-										</ul>
-									</div>
+									<ul id="imageBox" class="scanPic">
+										<li class="userPicPrev"><img src="images/1.jpg" date="20130816"/></li>
+										<li class="userPicCurrent"><img class="moreImage"  src="images/tool/rj_1.png"  date="20130817"/></li>
+									</ul>
 								</div>
 								<div id="writeForm" style="display:none;">
 									<form action="">
 										<div class="writeArea">
 											<div><textarea name="write" id="write" maxlength="200" autofocus></textarea></div>
-											<div><button class="writeSub"></button></div>
+											<div><button class="writeSub" type="button"></button></div>
 										</div>
 									</form>
 								</div>
@@ -464,24 +448,8 @@
 		<script type="text/javascript" src="js/jquery-ui.js"></script>
 		<script type="text/javascript" src="js/lineData.js"></script>
 		<script type="text/javascript" src="js/tool.js"></script>
-		<script type="text/javascript" src="js/jquery.corner.js"></script>
-		<script type="text/javascript" src="js/jquery.roundabout.js"></script>
-		<script type="text/javascript" src="js/jquery.roundabout-shapes.js"></script>
-		<script type="text/javascript">
-			$(function(){		   
-				$('.gla_inbox').corner('8px');
-				$('#gla_box>ul').roundabout({
-					minOpacity:1,
-					btnNext: ".next",
-					duration: 1000,
-					reflect: true,
-					btnPrev: '.prev',
-					autoplay:false,
-					autoplayDuration:5000,
-					tilt:0,
-					shape: 'figure8'
-				});
-			});
-		</script>
+	
+		
+		
 	</body>
 </html>

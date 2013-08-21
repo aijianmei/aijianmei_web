@@ -3,27 +3,6 @@ $(".alogimg").unbind();
 $(".uploadimgbutton").unbind();
 $("#image_file").unbind();
 $("#exec_target").unbind();
-$(document).ready(function () {
-	$("#title").val('');
-	$(".alogimg").click(function(){
-		$(this).attr('id','targetImg');
-		ImgUrl='';
-		var obj=$(this).parent().find("input[imgurl=1]");
-		var ImgUrl=$(this).parent().find("input[imgurl=1]").val();
-		if(ImgUrl=='unfined'){ImgUrl='';}
-		    art.dialog({
-		    	lock: true,
-		    	title:'编辑视频链接',
-		    	follow: document.getElementById('targetImg'),
-		    	content: '视频链接<input type="text" id="newinput" class="span4" value="'+ImgUrl+'">',
-		    	cancelValue: '保存编辑',
-		    	cancel: function () {
-		    		$("#targetImg").attr('id',"");
-		    		$(obj).val($("#newinput").val());
-		    	}
-		    });
-		});
-})
 $(document).ready(function(){
 	$("#image_file").change(function(){
 		if($("#image_file").val() != ''){

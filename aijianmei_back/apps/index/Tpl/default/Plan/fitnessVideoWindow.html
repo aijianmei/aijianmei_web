@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<style type="text/css">
+			html,body,div,p,h5{margin:0;padding:0;}
+			body{background:#7B7B7B;overflow:hidden;}
+			.videoWindow{width:680px;height:450px;background:url(images/wk_01.png) no-repeat; padding:5px;margin:0 auto;}
+			.videoWindow .acts{position:relative;min-height:65px;padding-top:10px;border-top:1px solid #dcd8d2;}
+			.videoWindow .odd{background:#f1f0ee;}
+			.videoWindow .acts img{width:55px;height:55px;float:left;margin-left:10px;_margin-left:5px;}
+			.videoWindow .acts p{margin-left:140px;width:400px;font-size:14px;}
+			.videoWindow .acts .actName{color:#21ACE3;}
+			.videoWindow .acts .actInfo{color:#333;}
+			.videoWindow .groupTit{height:22px;line-height:22px;background:#21ACE3;color:white;font-size:14px;margin: 10px;padding-left:10px;}
+			.video{background:white;}
+			.video .abfocus_box{height:321px;padding:0 10px;}
+			.videoRight{float:right;}
+			.videoRight .intoBtn{margin-top:30px;bottom: 5px;width:87px;height:33px;border:1px ridge #BD0115;background:#E73617;border-radius:4px;color:white;font-weight:bold;font-size:16px;cursor:pointer;}
+			.videoRight .detail{line-height:30px;font-weight:bold;}
+		</style>
+	</head>
+	<body>
+		<div class="videoWindow">
+			<div class="video">
+				<div class="acts">
+					<img src="{$videoInfo['leftImage']}" alt="action" /><img src="{$videoInfo['rightImage']}" alt="{$videoInfo['vtitle']}" />
+					<p class="actName">{$videoInfo['vtitle']}</p>
+					<p class="actInfo">{$videoInfo['vbiref']}</p>		
+				</div>
+				<h5 class="groupTit">动作组A</h5>
+				<div class="abfocus_box">
+				<iframe height="315" width="450" src="{$videoInfo['wapurl']}" frameborder="0" allowfullscreen=""></iframe>
+					<div class="videoRight" style="width:200px;">
+						<h3>{$videoInfo['wtitle']}</h3>
+						{$videoInfo['brief']}
+						<button class="intoBtn" onclick="javasrcipt:window.open('{$videoInfo['turl']}')">查看更多</button>
+					</div>
+				</div>
+			</div><!--End Video-->
+		</div>
+	</body>
+</html>
