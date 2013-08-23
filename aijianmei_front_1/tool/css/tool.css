@@ -382,7 +382,7 @@ input,button,select,textarea{outline:none}
 				font-weight: bold;
 				font-size: 30px;
 			}
-			.actNav{
+			.actNav,.singleRankTip{
 				width: 890px;
 				height: 36px;
 				padding-right: 70px;
@@ -490,7 +490,7 @@ input,button,select,textarea{outline:none}
 					border-radius:6px;
 				}
 					.col{
-						width:152px;
+						width:190px;
 						float:left;
 						text-align:center;
 					}
@@ -547,15 +547,16 @@ input,button,select,textarea{outline:none}
 							.actGroup .col1{
 								border-left:0;
 							}
-							.actGroup .col5{
-								border-right:0;	
+							.actGroup .col4{
+								border-right:0;
+								width:192px;
 							}
 
 							.actGroup .col .cut,.actGroup .col .figure,.actGroup .col .add{
 								position:absolute;
 							}
 							.actGroup .col .cut{
-								left:30px;
+								left:52px;
 								top:14px;
 								width:6px;
 								height:9px;
@@ -564,7 +565,7 @@ input,button,select,textarea{outline:none}
 								display:none;
 							}
 							.actGroup .col .figure{
-								left:42px;
+								left:63px;
 								top:5px;
 								width:68px;
 								height:24px;
@@ -574,7 +575,7 @@ input,button,select,textarea{outline:none}
 								color:#333;
 								background:none;
 							}
-							.avgsRow .col,.col5{
+							.avgsRow .col{
 								font-size:16px;
 								color:#333;
 								font-family:"微软雅黑";
@@ -585,7 +586,7 @@ input,button,select,textarea{outline:none}
 								font-family:"微软雅黑";
 							}
 							.actGroup .col .add{
-								right:30px;
+								right:48px;
 								top:14px;
 								width:6px;
 								height:9px;
@@ -746,6 +747,7 @@ input,button,select,textarea{outline:none}
 	
 
 	.ranking{
+		position:relative;
 		width:256px;
 		float:left;
 		margin:0 100px 0px 170px;
@@ -754,6 +756,40 @@ input,button,select,textarea{outline:none}
 	.rankRight{
 		margin-left:0;
 	}
+		.singleRank{
+			position: absolute;
+			width: 185px;
+			border: 1px solid #009bd8;
+			border-bottom:0;
+			top: 90px;
+			left: 34px;
+			text-align:center;
+			color:white;
+			font-size:16px;
+			cursor:pointer;
+			z-index: 1;
+		}
+		.slideList{
+			line-height: 30px;
+			text-align: center;
+			background: #00b7ff;
+			border-top: 1px solid #a6e6ff;
+			border-bottom: 1px solid #009bd8;
+			color: white;
+			font-size: 16px;
+			cursor: pointer;
+			
+		}
+		.innerUl{
+			background:#fff;
+			color:#333;
+			display:none;
+		}
+		.rankLists{
+			float:left;
+			margin:5px;
+		}
+		
 		.ranking .rankFace{
 			width:30px;
 			height:30px;

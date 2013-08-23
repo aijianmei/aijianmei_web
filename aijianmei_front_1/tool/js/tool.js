@@ -321,7 +321,7 @@ var addGroup = function(){
 			i--;
 			
 		}
-		colArr.push('<div class="col col5">0</div>')
+
 
 		var k = (groupNums*1+1)%2,
 			rowClass = null;

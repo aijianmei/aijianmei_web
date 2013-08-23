@@ -7,12 +7,8 @@
 		<link rel="stylesheet" href="css/tool.css" />
 		<link rel="stylesheet" href="css/jquery-ui.css" />
 		<link rel="stylesheet" href="css/common.css" type="text/css" />
-		<link rel="stylesheet" href="css/jquery.jqplot.min.css" type="text/css" />
 		<script type="text/javascript" src="js/jquery.latest.js"></script>
-		<script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
-		<script language="javascript" type="text/javascript" src="js/jqplot.categoryAxisRenderer.js"></script>
-		<script language="javascript" type="text/javascript" src="js/jqplot.highlighter.js"></script>
-		
+		<script type="text/javascript" src="js/ichart.1.2.min.js"></script>
 	</head>
 	
 	<body>
@@ -97,7 +93,6 @@
 									<div class="preSelect selectMore" style="display:none"></div>
 									<div class="nextSelect selectMore" style="display:none"></div>
 								</div>
-								<button class="hideBtn">收起</button>
 							</div>
 							
 						</div>
@@ -125,7 +120,6 @@
 										<div class="col2 col">数量<span class="rowTip">以往平均值：<strong>55</strong>个</span></div>
 										<div class="col3 col">重量<span class="rowTip">以往平均值：<strong>65</strong>kg</span></div>
 										<div class="col4 col">时间<span class="rowTip">以往平均值：<strong>65</strong>s</span></div>
-										<div class="col4 col">燃烧热量<span class="rowTip">以往平均值：<strong>545</strong>大卡</span></div>
 									</div>
 									<div class="tBody">
 										<div class="actGroup oddRow clearfix">
@@ -146,9 +140,7 @@
 												<input type="text" value="0" class="figure" readonly/>
 												<span class="add"></span>
 											</div>
-											<div class="col5 col">
-												54343
-											</div>
+											
 										</div>
 										<div class="actGroup evenRow clearfix">
 											<button class="delBtn" type="button"></button>
@@ -168,9 +160,7 @@
 												<input type="text" value="0" class="figure" readonly/>
 												<span class="add"></span>
 											</div>
-											<div class="col5 col">
-												5654
-											</div>
+											
 										</div>
 										<div class="actGroup oddRow clearfix">
 											<button class="delBtn" type="button"></button>
@@ -190,9 +180,7 @@
 												<input type="text" value="0" class="figure" readonly/>
 												<span class="add"></span>
 											</div>
-											<div class="col5 col">
-												343
-											</div>
+											
 										</div>
 										<div class="actGroup evenRow clearfix">
 											<button class="delBtn" type="button"></button>
@@ -212,9 +200,7 @@
 												<input type="text" value="0" class="figure" readonly/>
 												<span class="add"></span>
 											</div>
-											<div class="col5 col">
-												5324
-											</div>
+											
 										</div>
 									</div>
 									
@@ -223,7 +209,7 @@
 										<div class="col2 col">0</div>
 										<div class="col3 col">0</div>
 										<div class="col4 col">0</div>	
-										<div class="col5 col">0</div>	
+									
 									</div>
 									<div class="tFooter clearfix">
 										<div class="addBtn" style="display:none;"><button type="button" class="addGroupBtn" title="加一组">加一组</button></div>
@@ -257,7 +243,6 @@
 								</div>
 							</div><!--End userPic-->
 							<div class="userNote userArea" style="display:none;">
-						
 								<div class="userUpload"><button class="editDairyBtn"></button></div>
 								<div id="gla">
 									<ul id="imageBox" class="scanPic">
@@ -301,7 +286,7 @@
 								<span class="redLine">时间</span>
 							</div>
 						</div>
-						<div id="line1" style="height:280px;width:880px;"></div>
+						<div class="canvasArea" style="margin:0 auto"><div id='canvasDiv'></div></div>
 					</div>
 					<div class="sider">
 						<ul class="siderBtn">
@@ -319,6 +304,11 @@
 				<div class="bottomRank clearfix">
 					<h3 class="partTit"><div class="titBg"><span class="titLeft"></span><span class="tit">爱健美健身达人榜</span><span class="titRight"></span></div></h3>
 					<p class="tip  greenFont">数量X重量 = 爱健美健身达人榜的排名，赶紧瞧瞧自己排在哪里吧！</p>
+					<div style="position:relative;">
+						<p class="singleRankTip"></p>
+
+					</div>
+					
 					<div class="ranking">
 						<div class="rankType"><span>全站排行</span></div>
 						<div class="sportsRank ">
@@ -391,7 +381,7 @@
 						</div>
 					</div><!--End ranking-->
 					<div class="ranking rankRight">
-						<div class="rankType"><span>好友排行</span></div>
+						<div class="rankType"><span>单项排行</span></div>
 						<div class="sportsRank ">
 							<ul class="rankLine clearfix">
 								<li class="rankDay">当天</li>
