@@ -272,7 +272,7 @@ input,button,select,textarea{outline:none}
 	background: #eaeaea;
 	margin-top: 10px;
 }
-		.moreBtn{
+		.moreBtn,.rankMoreBtn{
 			position:absolute;
 			top:5px;
 			right:10px;
@@ -323,6 +323,7 @@ input,button,select,textarea{outline:none}
 				background: #83CAFD;
 				border-radius: 4px;
 			}
+			
 				.moreSider .moreList{
 					margin: 10px 5px;
 					text-align: center;
@@ -757,17 +758,7 @@ input,button,select,textarea{outline:none}
 		margin-left:0;
 	}
 		.singleRank{
-			position: absolute;
-			width: 185px;
-			border: 1px solid #009bd8;
-			border-bottom:0;
-			top: 90px;
-			left: 34px;
-			text-align:center;
-			color:white;
-			font-size:16px;
-			cursor:pointer;
-			z-index: 1;
+			position: relative;
 		}
 		.slideList{
 			line-height: 30px;

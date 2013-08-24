@@ -141,105 +141,105 @@ $.getJSON("json/actions.json", function(data){
 	}
 
 	$(".moreSider").append(tmpMenu.join(""));
-	$("#actionsList").append(listsArr.join(""));
-	
+	$(".actionsList").append(listsArr.join(""));
+
 }).done(function(data){
-		$.merge(userlist,data);
-		data = userlist;
-		$(".moreList").first().addClass("curList");
-		highLight(".moreSider", "curList");
-		
-		//导航栏当前高亮显示
-		$(".actNav>li").live("click", function(){
-			actionVal=$(this).text();
-			$(this).addClass("curAct").siblings().removeClass("curAct");
-		});
-		
-		//点击导航栏“更多”按钮下拉
-		$(".moreBtn").click(function(){
-			$(".moreAct").slideDown();
-			//第一次下拉时默认状态
-			var ulHeight = $("#actionsList").height();
-			if(ulHeight > 320){
-				$(".nextSelect").show();
-			}
-		});
-		
-		//收起
-		$(".hideBtn, .showList").live("click",function(){
-			//若所选动作已存在于导航栏，则直接给高亮显示
-			if($(this).hasClass("showList")){
-				var txt = $(this).text(),
-					navTxt = [],
-					_navLen = $(".actNav").find("li").length,
-					i = 0;
+	$.merge(userlist,data);
+	data = userlist;
+	
+	$(".moreList").first().addClass("curList");
+	$(".singleRank").find(".moreSider>li:first").addClass("curList");
+	highLight(".moreSider", "curList");
+	
+	//导航栏当前高亮显示
+	$(".actNav>li").live("click", function(){
+		actionVal=$(this).text();
+		$(this).addClass("curAct").siblings().removeClass("curAct");
+	});
+	
+	//点击导航栏“更多”按钮下拉
+	$(".moreBtn").click(function(){
+		$(this).next().slideToggle();
+		//第一次下拉时默认状态
+		var ulHeight = $(this).next().find(".actionsList").height();
+		if(ulHeight > 320){
+			$(this).next().children().find(".nextSelect").show();
+		}
+	});
+	
+	//收起
+	$(".showList").live("click",function(){
+		//若所选动作已存在于导航栏，则直接给高亮显示
+		if($(this).hasClass("showList")){
+			var txt = $(this).text(),
+				navTxt = [],
+				_navLen = $(this).parents(".slideWrap").find(".actNav").find("li").length,
+				i = 0;
 
-				for(i;i<_navLen;i++){
-					navTxt[i] = $(".actNav").find("li").eq(i).text();
-					if(txt == navTxt[i]){
-						$(".actNav").find(".curAct").removeClass("curAct");
-						actionVal=$(".actNav").find("li").eq(i).text();
-						$(".actNav").find("li").eq(i).addClass("curAct");
-						break;
-					}
-				}
-				if(i==_navLen){
-					$(".actNav").find(".curAct").removeClass("curAct");					
-					$(".actNav").prepend('<li class="curAct">' + txt + '<span></span></li>');
-					listLength();
-				}	
-			}
-			$(".moreAct").slideUp();
-		});		
-		
-		//"更多"左边选择部位
-		$(".moreList").bind("click", function(){
-			$("#actionsList").empty().css("top","0px");//清空右侧
-			$(".preSelect").hide();//当前为第一页，不能点击“上一页”
-			//重新读取json，填充到右侧
-			var _index = $(this).index(),
-				listsArr = [],
-				_listLen = data[_index].lists.length;
-			for(var j=0;j<_listLen;j++){
-				listsArr.push('<li class="showList">' + data[_index].lists[j] + '</li>');
-			}
-			$("#actionsList").append(listsArr.join(""));
-			
-			//是否需要翻页
-			var ulHeight = $("#actionsList").height();
-			if(ulHeight > 320){
-				$(".nextSelect").show();
-			}
-			else{
-				$(".nextSelect").hide();
-			}
-		});
-		
-		//选择动作“更多”左右换页
-		$(".selectMore").bind("click", function(){
-			var nowTop = $("#actionsList").css("top"),
-				ulHeight = $("#actionsList").height();
-			nowTop = parseInt(nowTop);
-			
-			if($(this).hasClass("preSelect") && nowTop<0){
-				nowTop += 320;
-				console.log(nowTop)
-				$(".nextSelect").show();
-				if(nowTop == 0){
-					$(".preSelect").hide();
-				
+			for(i;i<_navLen;i++){
+				navTxt[i] = $(this).parents(".slideWrap").find(".actNav").find("li").eq(i).text();
+				if(txt == navTxt[i]){
+					$(this).parents(".slideWrap").find(".actNav").find(".curAct").removeClass("curAct");
+					actionVal=$(this).parents(".slideWrap").find(".actNav").find("li").eq(i).text();
+					$(this).parents(".slideWrap").find(".actNav").find("li").eq(i).addClass("curAct");
+					break;
 				}
 			}
-			else if($(this).hasClass("nextSelect") && (nowTop>(320-ulHeight))){
-				nowTop -= 320;	
-				$(".preSelect").show();
-				if(nowTop <= (320-ulHeight)){
-					$(".nextSelect").hide();
-				}
+			if(i==_navLen){
+				$(this).parents(".slideWrap").find(".actNav").find(".curAct").removeClass("curAct");					
+				$(this).parents(".slideWrap").find(".actNav").prepend('<li class="curAct">' + txt + '<span></span></li>');
+				listLength();
 			}	
-			$("#actionsList").css("top", nowTop+"px");
-		})
-
+		}
+		$(this).parents(".moreAct").slideUp();
+	});		
+	
+	//"更多"左边选择部位
+	$(".moreList").bind("click", function(){
+		$(this).parent().next().find(".actionsList").empty().css("top","0px");//清空右侧
+		
+		$(this).parent().next().find(".preSelect").hide();//当前为第一页，不能点击“上一页”
+		//重新读取json，填充到右侧
+		var _index = $(this).index(),
+			listsArr = [],
+			_listLen = data[_index].lists.length;
+		for(var j=0;j<_listLen;j++){
+			listsArr.push('<li class="showList">' + data[_index].lists[j] + '</li>');
+		}
+		$(this).parent().next().find(".actionsList").append(listsArr.join(""));
+		
+		//是否需要翻页
+		var ulHeight = $(this).parent().next().find(".actionsList").height();
+		if(ulHeight > 320){
+			$(this).parent().next().find(".nextSelect").show();
+		}
+		else{
+			$(this).parent().next().find(".nextSelect").hide();
+		}
+	});
+	
+	//选择动作“更多”左右换页
+	$(".selectMore").bind("click", function(){
+		var nowTop = $(this).siblings(".actionsList").css("top"),
+			ulHeight = $(this).siblings(".actionsList").height();
+		nowTop = parseInt(nowTop);
+		
+		if($(this).hasClass("preSelect") && nowTop<0){
+			nowTop += 320;
+			$(this).next(".nextSelect").show();
+			if(nowTop == 0){
+				$(this).hide();			
+			}
+		}
+		else if($(this).hasClass("nextSelect") && (nowTop>(320-ulHeight))){
+			nowTop -= 320;	
+			$(this).prev(".preSelect").show();
+			if(nowTop <= (320-ulHeight)){
+				$(this).hide();
+			}
+		}	
+		$(this).siblings(".actionsList").css("top", nowTop+"px");
+	});
 });
 
 //控制导航栏显示
@@ -319,10 +319,8 @@ var addGroup = function(){
 			}
 			colArr.push('<button type="button" class="delBtn" style="display:block;"></button><div class="col col' + (++i) +'">'+ colText +'</div>');
 			i--;
-			
 		}
-
-
+		
 		var k = (groupNums*1+1)%2,
 			rowClass = null;
 		if( k == 0){
@@ -361,12 +359,10 @@ $(".editDairyBtn,.writeSub").click(function(){
 	$(".userNote>#gla").toggle();
 	$(".userUpload").toggle();
 	$("#writeForm").toggle();
-
 });
 
 //图片切换
 $(".userPicPrev").live("click",function(){
-
 	var _this = this;
 	
 	var ajaxCallUrl='/tool/moreImage.php';
@@ -410,7 +406,7 @@ $(".userPicPrev").live("click",function(){
 						$(that).parent().animate({"right": "+=460px"}, function(){
 							$(that).next().addClass("userPicNext");
 							$(that).attr("class", "userPicCurrent").prev().attr("class","userPicPrev").siblings().removeClass("userPicPrev");
-						})
+						});
 					}
 				});
 			})
@@ -430,9 +426,10 @@ $(".topTen").find("li").bind({
 	"mouseleave" : function(){
 		$(this).find(".orderMsg").remove();
 	}
-})
-
-
-
+});
+//单项排名 选择导航
+(function(){
+	$(".slideWrap").clone().appendTo(".singleRank");
+})();
 
 
