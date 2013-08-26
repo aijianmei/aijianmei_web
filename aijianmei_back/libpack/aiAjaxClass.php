@@ -28,12 +28,15 @@ class Ajax {
 		'getDefaultUserLineData',
 		'getUserLogAllInfo',
 		'deleteUserCourseInfo',
+		'getUserRankByAid',
 		);
 	protected $ttf = 'FZSJSJW.TTF';
+	protected $baseUrl = 'http://www.aijianmei.com';
 	public function __construct() {
 		$this->mid=intval($_SESSION['mid']);
 		@$doAction = $_REQUEST ['act'] ? ( string ) $_REQUEST ['act'] : die ( 40003 );
 		$this->db = new ckmysql ();
+		$this->comfunc = new comfunc ();
 		$this->checkRequest ();
 		if (! in_array ( $doAction, $this->allowAction ))
 			die ( 40001 );
@@ -41,6 +44,36 @@ class Ajax {
 	}
 	public function __call($name, $args) {
 		die ( 40004 );
+	}
+	public function getUserRankByAid(){
+		$aid      =$_REQUEST['aid']?(string)$_REQUEST['aid']:die(40001);
+		$aid      =$this->getActionInfoByName($aid);
+		$aid  	  =$aid['id'];
+
+		$this->mid!=$_REQUEST['uid'] ? die(40001) : $uid=$this->mid;
+
+		$duserRankList    	=$this->getUserRank('',$aid);
+		$duserRankList_7  	=$this->getUserRank(7,$aid);
+		$duserRankList_30 	=$this->getUserRank(30,$aid);
+		$duserRankList_all	=$this->getUserRank('',$aid,true);
+
+		$duserRankNum 		=$this->getUserRankById($uid,'',$aid);
+		$duserRankNum7 		=$this->getUserRankById($uid,7,$aid);
+		$duserRankNum30 	=$this->getUserRankById($uid,30,$aid);
+		$duserRankNumall 	=$this->getUserRankById($uid,'',$aid,true);
+
+		$data['duserRankList']     =$duserRankList;
+		$data['duserRankList_7']   =$duserRankList_7;
+		$data['duserRankList_30']  =$duserRankList_30;
+		$data['duserRankList_all'] =$duserRankList_all;
+
+		$data['duserRankNum'] 	   =$duserRankNum;
+		$data['duserRankNum7'] 	   =$duserRankNum7;
+		$data['duserRankNum30']    =$duserRankNum30;
+		$data['duserRankNumall']   =$duserRankNumall;
+
+		echo json_encode($data);
+		exit;
 	}
 	public function getDefaultUserLineData(){
 		if(!$this->mid>0) die();
@@ -347,7 +380,7 @@ class Ajax {
 			foreach ( $data as $k => &$value ) {
 				$value ['loginfo'] = unserialize ( $value ['loginfo'] );
 				$colorCss= ($k+1)%2==0 ?'evenRow':'oddRow';
-				$resultHtml.= '<div class="actGroup actGroupKon '.$colorCss.' clearfix"><button type="button" class="delBtn" style="display:block;"></button><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div></div>';
+				$resultHtml.= '<div class="actGroup actGroupKon '.$colorCss.' clearfix"><button type="button" class="delBtn" style="display:block;"></button><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div><div class="col5 col">0</div></div>';
 				$numCount		+=$value['loginfo']['nums'];
 				$weightCount	+=$value['loginfo']['weight'];
 				$timeCount		+=$value['loginfo']['time'];
@@ -376,7 +409,7 @@ class Ajax {
 			$data[3]['cnum'] ='四';
 			foreach ( $data as $k => &$value ) {
 				$colorCss= ($k+1)%2==0 ?'evenRow':'oddRow';
-				$resultHtml.='<div class="actGroup actGroupKon '.$colorCss.' clearfix"><button type="button" class="delBtn" style="display:block;"></button><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div></div>';
+				$resultHtml.='<div class="actGroup actGroupKon '.$colorCss.' clearfix"><button type="button" class="delBtn" style="display:block;"></button><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div><div class="col5 col">0</div></div>';
 			}
 			$res['numsAvg'] 	=0;
 			$res['weigthAvg']   =0;
@@ -551,7 +584,7 @@ class Ajax {
 		return $data;
 	}
 	protected function getActionInfoByName($name){
-		$sql="select * from ai_action_list where name like '%".$name."%'";
+		$sql="select * from ai_action_list where name='".$name."'";
 		$data=$this->db->_query($sql);
 		return $data[0];
 	}
@@ -728,6 +761,92 @@ class Ajax {
 			$this->db->_query($updateSql);
 		}
 		exit;
+	}
+	//
+	protected function getUserRank($dateType=null,$aid=null,$isAll=false){
+		$dateString=$startTime=$endTime=$where=null;
+		if(!empty($dateType)){
+			$startTime    = date('Ymd',mktime(0, 0, 0, date("m"), date("d")-$dateType, date("Y")));
+			$endTime      = date('Ymd',time());
+			$where 		  = " WHERE date>='".$startTime."' and date<='".$endTime."'";
+		}else{
+			$where 		  = " WHERE date='".date('Ymd',time())."'";
+		}
+		if(!empty($aid)){
+			$where=$where." and aid='".$aid."'";
+		}
+		if($isAll==true&&empty($aid)){$where=null;}
+		if($isAll==true&&!empty($aid)){$where="where aid=$aid";}
+		$getSql="SELECT SUM(  `exercise` ) AS exercise, uid FROM ai_user_exercise_log $where GROUP BY uid ORDER BY exercise DESC limit 10";
+		$data=$this->db->_query($getSql);
+		foreach ($data as $key => &$value) {
+			$value['userFace']=$this->getUserFace($value['uid'],'m');
+			$value['userName']=$this->getUserName($value['uid']);
+
+		}
+		return $data;
+	}
+	protected function getUserRankById($uid,$dateType=null,$aid=null,$isAll=false){
+		$dateString=$startTime=$endTime=$where=null;
+		if(!$uid) return false;
+		if(!empty($dateType)){
+			$startTime    = date('Ymd',mktime(0, 0, 0, date("m"), date("d")-$dateType, date("Y")));
+			$endTime      = date('Ymd',time());
+			$where 		  = " WHERE date>='".$startTime."' and date<='".$endTime."'";
+		}else{
+			$where 		  = " WHERE date='".date('Ymd',time())."'";
+		}
+		if(!empty($aid)){
+			$where=$where." and aid='".$aid."'";
+		}
+
+		if($isAll==true){$where=null;}
+		$tmpTable="SELECT SUM(  `exercise` ) AS exercise, uid,date FROM ai_user_exercise_log  $where GROUP BY uid ORDER BY exercise";
+		if(!empty($where)){
+			$tmpUTable="SELECT SUM(  `exercise` ) AS exercise FROM ai_user_exercise_log  $where and uid=$uid GROUP BY uid ORDER BY exercise";
+		}elseif(!empty($aid)){
+			$tmpUTable="SELECT SUM(  `exercise` ) AS exercise FROM ai_user_exercise_log  where uid=$uid and aid=$aid GROUP BY uid ORDER BY exercise";
+		}else{
+			$tmpUTable="SELECT SUM(  `exercise` ) AS exercise FROM ai_user_exercise_log  where uid=$uid GROUP BY uid ORDER BY exercise";				
+		}
+
+		$getRankSql="select count(*) as num from ($tmpTable) as tmp where tmp.exercise >= ($tmpUTable)";
+		$data=$this->db->_query($getRankSql);
+		if($data[0]['num']==0){
+			$checkSql="select * from ai_user_exercise_log where uid=$uid and date='".date('Ymd',time())."'";
+			$check=$this->db->_query($checkSql);
+			if(empty($check)) return 0;
+		}
+		return $data[0]['num']>0 ? intval($data[0]['num']):1;
+	}
+
+
+	protected function getUserFace($uid, $size) {
+		$size = ($size) ? $size : 'm';
+		if ($size == 'm') {
+			$type = 'middle';
+		} elseif ($size == 's') {
+			$type = 'small';
+		} else {
+			$type = 'big';
+		}
+		$imgtpye = $this->db->_query( "select upic_type from ai_user where uid='" . $uid . "'" );
+		$uid_to_path = '/' . $uid;
+		$userface = $this->baseUrl . '/data/uploads/avatar' . $uid_to_path . '/' . $type . '.jpg';
+		if ($imgtpye [0] ['upic_type'] == 1) {
+			return $this->baseUrl . '/data/uploads/avatar' . $uid_to_path . '/' . $type . '.jpg';
+		} else {
+			$apiImg =$this->db->_query( "select profileImageUrl from ai_others where uid='" . $uid . "' and profileImageUrl!=''" );
+			if (! empty ( $apiImg )) {
+				$userface = $apiImg [0] ['profileImageUrl'];
+				return $userface;
+			}
+			return $this->baseUrl . "/images/user_pic_{$type}.gif";
+		}
+	}
+	protected function getUserName($uid) {
+		$username = $this->db->_query( "select uname from ai_user where uid=$uid" );
+		return $username [0] ['uname'];
 	}
 }
 

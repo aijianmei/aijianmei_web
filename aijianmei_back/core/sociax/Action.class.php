@@ -687,7 +687,9 @@ abstract class Action extends Think
             if(!$this->get('jumpUrl')) $this->assign("jumpUrl",$_SERVER["HTTP_REFERER"]);
             //sociax:2010-1-21
 			//$this->display(C('TMPL_ACTION_SUCCESS'));
-			$this->display(THEME_PATH.'&success');
+		//$this->display(THEME_PATH.'&success');
+            $this->assign('cssFile','index');
+            $this->display("Templates/success.html");
 		}else{
             //发生错误时候默认停留3秒
             if(!$this->get('waitSecond'))    $this->assign('waitSecond',"5");
@@ -695,8 +697,9 @@ abstract class Action extends Think
             if(!$this->get('jumpUrl')) $this->assign('jumpUrl',"javascript:history.back(-1);");
 			//sociax:2010-1-21
             //$this->display(C('TMPL_ACTION_ERROR'));
-
-			$this->display(THEME_PATH.'&success');
+	    $this->assign('cssFile','index');
+            $this->display("Templates/success.html");
+	    //$this->display(THEME_PATH.'&success');
         }
         if(C('LOG_RECORD')) Log::save();
         // 中止执行  避免出错后继续执行

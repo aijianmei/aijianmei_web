@@ -1,6 +1,6 @@
 <?php
 error_reporting ( 0 );
-//header ( "Content-Type:application/json;charset=utf-8" );
+header ( "Content-Type:application/json;charset=utf-8" );
 require_once ('reimg.php');
 $_dbConfig = require_once ('config.inc.php');
 function C_mysqlQuery($sql) {
@@ -66,178 +66,178 @@ class IosApi {
 	protected $vaucode = 'aijianmei';
 	protected $baseUrl = 'http://www.aijianmei.com';
 	public $categoryArray = array (
-		'train',
-		'nutri',
-		'append' ,
-		'lifestyle'
-		);
+			'train',
+			'nutri',
+			'append' ,
+			'lifestyle'
+	);
 	public $categoryValues = array (
-		'train' => 2,
-		'nutri' => 3,
-		'append' => 4,
-		'lifestyle' => 5 
-		);
+			'train' => 2,
+			'nutri' => 3,
+			'append' => 4,
+			'lifestyle' => 5 
+	);
 	public $categoryidValues = array (
-		'train' => array (
-			"1" => "51",
-			"2" => "38",
-			"3" => "47",
-			"4" => "53" 
+			'train' => array (
+					"1" => "51",
+					"2" => "38",
+					"3" => "47",
+					"4" => "53" 
 			),
-		'nutri' => array (
-			"1" => '29',
-			"2" => "28",
-			"3" => "31" 
+			'nutri' => array (
+					"1" => '29',
+					"2" => "28",
+					"3" => "31" 
 			),
-		'append' => array (
-			'1' => '48',
-			'2' => '39',
-			"3" => "50" 
+			'append' => array (
+					'1' => '48',
+					'2' => '39',
+					"3" => "50" 
 			),
-		'lifestyle' => array () 
-		);
+			'lifestyle' => array () 
+	);
 	public $errormsg = array (
-		'status' => '',
-		'error' => '' 
-		);
+			'status' => '',
+			'error' => '' 
+	);
 	public $allowAction = array (
-		'au_login' => array (
-			'email' => 1,
-			'userpassword' => 1,
-			'usertype' => 0 
+			'au_login' => array (
+					'email' => 1,
+					'userpassword' => 1,
+					'usertype' => 0 
 			),
-
-		'au_register' => array (
-			'username' => 0,
-			'userpassword' => 0,
-			'email' => 0,
-			'usertype' => 0,
-			'snsid' => 0,
-			'profileImageUrl' => 0,
-			'sex' => 0,
-			'age' => 0,
-			'body_weight' => 0,
-			'height' => 0,
-			'keyword' => 0,
-			'province' => 0,
-			'city' => 0 
+			
+			'au_register' => array (
+					'username' => 0,
+					'userpassword' => 0,
+					'email' => 0,
+					'usertype' => 0,
+					'snsid' => 0,
+					'profileImageUrl' => 0,
+					'sex' => 0,
+					'age' => 0,
+					'body_weight' => 0,
+					'height' => 0,
+					'keyword' => 0,
+					'province' => 0,
+					'city' => 0 
 			),
-
-		'au_getinformationlist' => array (
-			'listtype' => 0,
-			'category' => 0,
-			'id' => 0,
-			'type' => 0,
-			'page' => 0,
-			'pnums' => 0,
-			'uid' => 0,
-			'start' => 0,
-			'offset' => 0 
+			
+			'au_getinformationlist' => array (
+					'listtype' => 0,
+					'category' => 0,
+					'id' => 0,
+					'type' => 0,
+					'page' => 0,
+					'pnums' => 0,
+					'uid' => 0,
+					'start' => 0,
+					'offset' => 0 
 			),
-
-		'au_getinformationdetail' => array (
-			'id' => 1,
-			'channel' => 1,
-			'uid' => 0 
+			
+			'au_getinformationdetail' => array (
+					'id' => 1,
+					'channel' => 1,
+					'uid' => 0 
 			),
-
-		'au_sendcomment' => array (
+			
+			'au_sendcomment' => array (
 			'id' => 0,
 			'channel' => 0,
 			'channeltype' => 0,
 			'uid' => 0,
 			'commentcontent' => 0 
 			),
-
-		'au_delcomment' => array (
-			'id' => 1,
-			'channel' => 0,
-			'channeltype' => 0,
-			'uid' => 1 
+			
+			'au_delcomment' => array (
+					'id' => 1,
+					'channel' => 0,
+					'channeltype' => 0,
+					'uid' => 1 
 			),
-
-		'au_sendlike' => array (
-			'id' => 1,
-			'channel' => 0,
-			'channeltype' => 0,
-			'uid' => 1 
+			
+			'au_sendlike' => array (
+					'id' => 1,
+					'channel' => 0,
+					'channeltype' => 0,
+					'uid' => 1 
 			),
-
-		'au_getfplist' => array (
-			'type' => 0,
-			'page' => 0,
-			'pnums' => 0,
-			'uid' => 0,
-			'start' => 0,
-			'offset' => 0 
+			
+			'au_getfplist' => array (
+					'type' => 0,
+					'page' => 0,
+					'pnums' => 0,
+					'uid' => 0,
+					'start' => 0,
+					'offset' => 0 
 			),
-		'au_getversion' => array (
-			'type' => 0 
+			'au_getversion' => array (
+					'type' => 0 
 			),
-		'au_sendsuggestion' => array (
-			'uid' => 1,
-			'content' => 1 
+			'au_sendsuggestion' => array (
+					'uid' => 1,
+					'content' => 1 
 			),
-		'au_updateUserInfo' => array (
-			'uid' => 1,
-			'username' => 0,
-			'userface' => 0,
-			'userbgimg' => 0,
-			'keyword' => 0,
-			'description' => 0,
-			'sex' => 0,
-			'age' => 0,
-			'weight' => 0,
-			'height' => 0,
-			'province' => 0,
-			'city' => 0 
+			'au_updateUserInfo' => array (
+					'uid' => 1,
+					'username' => 0,
+					'userface' => 0,
+					'userbgimg' => 0,
+					'keyword' => 0,
+					'description' => 0,
+					'sex' => 0,
+					'age' => 0,
+					'weight' => 0,
+					'height' => 0,
+					'province' => 0,
+					'city' => 0 
 			),
-		'au_getuserinfobysnsid' => array (
-			'snsid' => 1,
-			'usertype' => 1 
+			'au_getuserinfobysnsid' => array (
+					'snsid' => 1,
+					'usertype' => 1 
 			),
-		'au_updatepassword' => array (
-			'uid' => 1,
-			'oldpassword' => 1,
-			'newpassword' => 1 
+			'au_updatepassword' => array (
+					'uid' => 1,
+					'oldpassword' => 1,
+					'newpassword' => 1 
 			),
-		'au_getuserinfobyuid' => array (
-			'uid' => 1 
+			'au_getuserinfobyuid' => array (
+					'uid' => 1 
 			),
-		'au_getuidbysnsid' => array (
-			'snsid' => 1 
+			'au_getuidbysnsid' => array (
+					'snsid' => 1 
 			),
-		'au_uploadimg' => array (
-			'uid' => 0,
-			'imagetype' => 0 
+			'au_uploadimg' => array (
+					'uid' => 0,
+					'imagetype' => 0 
 			),
-		'articlestatus' => array (
-			'uid' => 0,
-			'aid' => 0,
-			'vid' => 0 
+			'articlestatus' => array (
+					'uid' => 0,
+					'aid' => 0,
+					'vid' => 0 
 			),
-		'getcommentbyid' => array (
-			'id' => 1,
-			'channeltype' => 0 
+			'getcommentbyid' => array (
+					'id' => 1,
+					'channeltype' => 0 
 			),
-		'getCircleList' => array (
-			'id' => 0,
-			'uid' => 0,
-			'group' => 0,
-			'start' => 0,
-			'offset' => 0 
+			'getCircleList' => array (
+					'id' => 0,
+					'uid' => 0,
+					'group' => 0,
+					'start' => 0,
+					'offset' => 0 
 			),
-		'postCircleList' => array (
-			'uid' => 0, 
+			'postCircleList' => array (
+					'uid' => 0, 
 			),
-		'postCircleComment' =>array(
-			'uid'=>1,
-			'id'=>1,
-			'content'=>1,
+			'postCircleComment' =>array(
+				'uid'=>1,
+				'id'=>1,
+				'content'=>1,
 			),
-		'postCircleLike' =>array(
-			'uid'=>0,
-			'statusId'=>0,
+			'postCircleLike' =>array(
+				'uid'=>0,
+				'statusId'=>0,
 			),
 		'getWeightInfo' =>array(
 			'uid'=>0,
@@ -286,27 +286,26 @@ public function postFitnessInfo(){
 	
 }
 public function getAllAtionList(){
-		$sql = "select * from ai_action_category_list order by sequence desc";
-		$category_list = C_mysqlAll( $sql );
-		foreach ( $category_list as $key => $value ) {
-			$cid = $value ['cid'];
-			$sql = "select a.id,a.name from ai_action_list a left join ai_action_category  b  on a.id=b.aid where b.cid=$cid";
-			$actionList =C_mysqlAll( $sql );
-			$category_list [$key] ['childList'] = ! empty ( $actionList ) ? $actionList : '';
+	$jsonCache='../Templates/tool/json/jsonCache.json';
+	if(!is_file($jsonCache)){
+		$targetFile='../Templates/tool/json/CourseAction.json';
+		$json = (array)json_decode(file_get_contents($targetFile));
+		foreach ($json as $key => $value) {
+			$json[$key]=(array)$value;
 		}
+		$tmp=$json;
+		foreach ($tmp as $key => $value) {
+			$data[$key]['part']=$value['part'];
+			foreach ($value['lists'] as $k => $v) { 
 
-		foreach ( $category_list as $key => $value ) {
-			$data[$key]['part']=$value ['name'];
-
-			if (! empty ( $value ['childList'] )) {
-				foreach ( $value ['childList'] as $k => $v ) {
-					$tmp=array();
-					$tmp['id']=$v['id'];
-					$tmp['name']=$v['name'];
-					$data[$key]['list'][]=$tmp;
-				}
+				$data[$key]['lists'][$k]['id']=$this->getActionIdByName($v);
+				$data[$key]['lists'][$k]['name']=$v;
 			}
 		}
+		file_put_contents($jsonCache,json_encode($data));
+	}else{
+		$data= (array)json_decode(file_get_contents($jsonCache));
+	}
 	echo json_encode($data);
 	exit;
 }
@@ -434,7 +433,7 @@ public function postCircleComment(){
 			exit ();
 		}
 		$sql="INSERT INTO  `aijianmei`.`ai_circle_comment` (`id` ,`cid` ,`uid` ,`content` ,`parentid` ,`create_time`)
-		VALUES (NULL ,  '".$id ."',   '".$uid ."',  '".$content."',  '0',  '".time()."')";
+				VALUES (NULL ,  '".$id ."',   '".$uid ."',  '".$content."',  '0',  '".time()."')";
 		C_mysqlOne ( $sql );
 		$data [0] ['uid'] = $uid;
 		$data [0] ['errorCode'] = '0';
@@ -670,10 +669,10 @@ public function postCircleComment(){
 					$getaidSql = "SELECT title FROM  ai_area WHERE title LIKE '%" . $locationArr [1] . "%'";
 					$cityaid = C_mysqlOne ( $getaidSql );
 					$res ['city'] = str_replace ( array (
-						"市",
-						"区",
-						"县" 
-						), '', $cityaid [0] ['title'] );
+							"市",
+							"区",
+							"县" 
+					), '', $cityaid [0] ['title'] );
 				}
 				unset ( $res ['location'] );
 			} elseif ($res ['province'] != 0) {
@@ -685,18 +684,18 @@ public function postCircleComment(){
 					$getaidSql = "SELECT title FROM  ai_area WHERE area_id LIKE '%" . $res ['city'] . "%'";
 					$cityaid = C_mysqlOne ( $getaidSql );
 					$res ['city'] = str_replace ( array (
-						"市",
-						"区",
-						"县" 
-						), '', $cityaid [0] ['title'] );
+							"市",
+							"区",
+							"县" 
+					), '', $cityaid [0] ['title'] );
 				} else {
 					$getaidSql = "SELECT title FROM  ai_area WHERE pid ='" . $province . "' order by area_id limit 1";
 					$cityaid = C_mysqlOne ( $getaidSql );
 					$res ['city'] = str_replace ( array (
-						"市",
-						"区",
-						"县" 
-						), '', $cityaid [0] ['title'] );
+							"市",
+							"区",
+							"县" 
+					), '', $cityaid [0] ['title'] );
 				}
 				unset ( $res ['location'] );
 			}
@@ -777,9 +776,9 @@ public function postCircleComment(){
 		$snsid = $_GET ['snsid'];
 		$usertype = $_GET ['usertype'];
 		$allowType = array (
-			'sina',
-			'qq' 
-			);
+				'sina',
+				'qq' 
+		);
 		if (! in_array ( $usertype, $allowType )) {
 			$data [0] ['uid'] = 0;
 			$data [0] ['errorCode'] = '10004';
@@ -1037,15 +1036,15 @@ public function postCircleComment(){
 	}
 	public function au_register() {
 		$allowType = array (
-			'local',
-			'sina',
-			'qq' 
-			);
+				'local',
+				'sina',
+				'qq' 
+		);
 		$allowTypeval = array (
-			'local' => 1,
-			'sina' => 2,
-			'qq' => 3 
-			);
+				'local' => 1,
+				'sina' => 2,
+				'qq' => 3 
+		);
 		$username = $this->pregCheck ( $_GET ['username'], 'string' );
 		$email = $this->pregCheck ( $_GET ['email'], 'email' );
 		$userpassword = $_GET ['userpassword'];
@@ -1220,9 +1219,9 @@ public function postCircleComment(){
 			$content=unserialize($result[0]['content']);
 			foreach ($searchInfo as $key => $value){
 				if($value['channeltype']==1){
-					$searchInfo[$key]['isread']=($content['a'.$value['id']]==1)?'1':'0';
+						$searchInfo[$key]['isread']=($content['a'.$value['id']]==1)?'1':'0';
 				}elseif($value['channeltype']==2){
-					$searchInfo[$key]['isread']=($content['v'.$value['id']]==1)?'1':'0';
+						$searchInfo[$key]['isread']=($content['v'.$value['id']]==1)?'1':'0';
 				}else{
 					$searchInfo[$key]['isread']='0';
 				}
@@ -1291,7 +1290,6 @@ public function postCircleComment(){
 			echo json_encode ( $data );
 			exit ();
 		}
-
 		$checkReComSql = "select * from ai_comments where uid=$uid and content='" . $content . "' and parent_type='" . $channeltype . "'";
 		$checkReCom = C_mysqlOne ( $checkReComSql );
 		if(!empty($checkReCom)){
@@ -1300,8 +1298,6 @@ public function postCircleComment(){
 			echo json_encode ( $data );
 			exit ();
 		}
-
-
 		$sql = "INSERT INTO ai_comments (uid,content,parent_id,parent_type,create_time,source,topParent) VALUES ('" . $uid . "','" . $content . "','" . $id . "','" . $channeltype . "'," . time () . ",'','0')";
 		C_mysqlOne ( $sql );
 		$getinsertinfosql = "select * from ai_comments where uid=$uid and content='" . $content . "' and parent_type='" . $channeltype . "'";
@@ -1416,17 +1412,17 @@ public function postCircleComment(){
 	protected function pregCheck($string, $type) {
 		switch ($type) {
 			case 'string' :
-			$pattren = "/(@([\x{4e00}-\x{9fa5}]|[@#\w])*[^@#\w])/u";
-			$restats = false;
-			break;
+				$pattren = "/(@([\x{4e00}-\x{9fa5}]|[@#\w])*[^@#\w])/u";
+				$restats = false;
+				break;
 			case 'email' :
-			$pattren = "/([a-z0-9]*[-_\.]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?/i";
-			$restats = true;
-			break;
+				$pattren = "/([a-z0-9]*[-_\.]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?/i";
+				$restats = true;
+				break;
 			default :
-			$pattren = "/(@([\x{4e00}-\x{9fa5}]|[@#\w])*[^@#\w])/u";
-			$restats = false;
-			break;
+				$pattren = "/(@([\x{4e00}-\x{9fa5}]|[@#\w])*[^@#\w])/u";
+				$restats = false;
+				break;
 		}
 		
 		if (preg_match ( $pattren, $string ) == $restats) {
@@ -1465,13 +1461,13 @@ public function postCircleComment(){
 			$upsql = null;
 			if ($body_weight != '' || $height != '' || $age != '') {
 				$upsql = "UPDATE ai_user_health_info SET body_weight = '" . $body_weight . "'
-				,height = '" . $height . "'
-				,age = '" . $age . "' WHERE uid =$uid";
+					,height = '" . $height . "'
+					,age = '" . $age . "' WHERE uid =$uid";
 				C_mysqlOne ( $upsql );
 			}
 		} else {
 			$insertSql = "INSERT INTO  `aijianmei`.`ai_user_health_info` (`uid` ,`body_weight` ,`height` ,`age`)
-			VALUES ($uid, '" . $body_weight . "','" . $height . "','" . $age . "')";
+				VALUES ($uid, '" . $body_weight . "','" . $height . "','" . $age . "')";
 			C_mysqlOne ( $insertSql );
 		}
 	}
@@ -1579,12 +1575,12 @@ public function postCircleComment(){
 	public function getDailyLimit($channel, $limit, $nums) {
 		if ($channel != '') {
 			$sql = "select d.channel,d.id,d.title,d.img,d.content,d.create_time,d.gotime,d.like,d.unlike,d.read_count,v.id as vid,v.title as vtitle,v.link,v.wapurl,v.intro from ai_daily as d
-			left join ai_daily_video  as v on v.daily_id=d.id 
-			where d.channel=" . $channel . " and d.gotime<" . strtotime ( date ( "Y-m-d", time () ) ) . " ORDER BY d.gotime DESC  limit " . $limit . "," . $nums . " ";
+                left join ai_daily_video  as v on v.daily_id=d.id 
+                where d.channel=" . $channel . " and d.gotime<" . strtotime ( date ( "Y-m-d", time () ) ) . " ORDER BY d.gotime DESC  limit " . $limit . "," . $nums . " ";
 		} else {
 			$sql = "select d.channel,d.id,d.title,d.img,d.content,d.create_time,d.gotime,d.like,d.unlike,d.read_count,v.id as vid,v.title as vtitle,v.link,v.wapurl,v.intro from ai_daily as d
-			left join ai_daily_video  as v on v.daily_id=d.id 
-			where d.gotime<" . strtotime ( date ( "Y-m-d", time () ) ) . " ORDER BY d.gotime DESC  limit " . $limit . "," . $nums . " ";
+                left join ai_daily_video  as v on v.daily_id=d.id 
+                where d.gotime<" . strtotime ( date ( "Y-m-d", time () ) ) . " ORDER BY d.gotime DESC  limit " . $limit . "," . $nums . " ";
 		}
 		$daily = null;
 		$daily = $this->getDataCache ( md5 ( $sql ) );
@@ -1596,35 +1592,35 @@ public function postCircleComment(){
 				$info ['img'] = $this->getVideoDataImg ( $r ['link'] );
 				if ($daily [$key]) {
 					$daily [$key] ['video'] [] = array (
-						'id' => $r ['vid'],
-						'title' => $r ['vtitle'],
-						'link' => ($r ['link'] != 'null' ? $r ['link'] : ''),
-						'wapurl' => ($r ['wapurl'] != 'null' ? $r ['wapurl'] : ''),
-						'intro' => $r ['intro'],
-						'img' => $info ['img'],
-						'read_count' => $r ['read_count'] 
-						);
+							'id' => $r ['vid'],
+							'title' => $r ['vtitle'],
+							'link' => ($r ['link'] != 'null' ? $r ['link'] : ''),
+							'wapurl' => ($r ['wapurl'] != 'null' ? $r ['wapurl'] : ''),
+							'intro' => $r ['intro'],
+							'img' => $info ['img'],
+							'read_count' => $r ['read_count'] 
+					);
 				} else {
 					$daily [$key] ['article'] = array (
-						'id' => $r ['id'],
-						'channel' => $r ['channel'],
-						'title' => $r ['title'],
-						'img' => $r ['img'],
-						'content' => $r ['content'],
-						'ctime' => $r ['create_time'],
-						'gotime' => $r ['gotime'],
-						'like' => $r ['like'],
-						'unlike' => $r ['unlike'],
-						'read_count' => $r ['read_count'] 
-						);
+							'id' => $r ['id'],
+							'channel' => $r ['channel'],
+							'title' => $r ['title'],
+							'img' => $r ['img'],
+							'content' => $r ['content'],
+							'ctime' => $r ['create_time'],
+							'gotime' => $r ['gotime'],
+							'like' => $r ['like'],
+							'unlike' => $r ['unlike'],
+							'read_count' => $r ['read_count'] 
+					);
 					$daily [$key] ['video'] [] = array (
-						'id' => $r ['vid'],
-						'title' => $r ['vtitle'],
-						'link' => ($r ['link'] != 'null' ? $r ['link'] : ''),
-						'wapurl' => ($r ['wapurl'] != 'null' ? $r ['wapurl'] : ''),
-						'intro' => $r ['intro'],
-						'img' => $info ['img'] 
-						);
+							'id' => $r ['vid'],
+							'title' => $r ['vtitle'],
+							'link' => ($r ['link'] != 'null' ? $r ['link'] : ''),
+							'wapurl' => ($r ['wapurl'] != 'null' ? $r ['wapurl'] : ''),
+							'intro' => $r ['intro'],
+							'img' => $info ['img'] 
+					);
 				}
 			}
 			$this->setDataCache ( md5 ( $sql ), $daily );
@@ -1657,14 +1653,14 @@ public function postCircleComment(){
 	protected function _postCurlRegister($data) {
 		$url = 'http://www.aijianmei.com/shop/user.php';
 		$post_data = array (
-			'password' => $data ['password'],
-			'username' => $data ['uname'],
-			'email' => $data ['email'],
-			'confirm_password' => $data ['password'],
-			'act' => 'act_register',
-			'back_act' => '',
-			'agreement' => 1 
-			);
+				'password' => $data ['password'],
+				'username' => $data ['uname'],
+				'email' => $data ['email'],
+				'confirm_password' => $data ['password'],
+				'act' => 'act_register',
+				'back_act' => '',
+				'agreement' => 1 
+		);
 		$ch = curl_init ();
 		curl_setopt ( $ch, CURLOPT_URL, $url );
 		curl_setopt ( $ch, CURLOPT_HEADER, 0 );
@@ -1813,7 +1809,7 @@ public function postCircleComment(){
 	}
 }
 
-	$api = new IosApi ();
-	echo $api->$_REQUEST ['auact'] ();
+$api = new IosApi ();
+echo $api->$_REQUEST ['auact'] ();
 //var_dump($api);
 //$api;

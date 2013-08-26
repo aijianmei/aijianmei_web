@@ -1,11 +1,10 @@
 <pre class='xdebug-var-dump' dir='ltr'>
-<b>array</b> <i>(size=6)</i>
+<b>array</b> <i>(size=2)</i>
   'aucode' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'aijianmei'</font> <i>(length=9)</i>
-  'auact' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'postWeightInfo'</font> <i>(length=14)</i>
-  'uid' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'264'</font> <i>(length=3)</i>
-  'weight' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'100'</font> <i>(length=3)</i>
-  'targetWeight' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'160'</font> <i>(length=3)</i>
-  'nowWeight' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'110'</font> <i>(length=3)</i>
+  'auact' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'getAllAtionList'</font> <i>(length=15)</i>
+</pre><pre class='xdebug-var-dump' dir='ltr'>
+<b>array</b> <i>(size=0)</i>
+  <i><font color='#888a85'>empty</font></i>
 </pre><pre class='xdebug-var-dump' dir='ltr'>
 <b>array</b> <i>(size=0)</i>
   <i><font color='#888a85'>empty</font></i>

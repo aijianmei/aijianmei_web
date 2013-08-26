@@ -24,12 +24,9 @@ function reNorTime($k=0){
   return date("Ymd",$timeDate);
 }
 
-//var_dump(getMonthsList(20130813));
-//function cother(&$numOne,&$numTwo)
-//{
-//	$tmp=$numOne;
-//	if($numOne > $numTwo){
-//		$numOne=$numTwo;
-//		$numTwo=$tmp;
-//	}
-//}
+class comfunc{
+	public function __construct() {
+		$this->db = new ckmysql ();
+		return $this;
+	}
+}

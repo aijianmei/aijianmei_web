@@ -473,7 +473,6 @@ class PublicAction extends Action{
 
     public function logout() {
 		$deluname=$_SESSION['userInfo']['uname'];
-		
 		$time = time() - 3600;
         setcookie("ECS[user_id]",  '', $time, '/');            
         setcookie("ECS[password]", '', $time, '/');

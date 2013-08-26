@@ -23,40 +23,44 @@ var gloData=[];
 		gloData['lineWidth'] = 10;
 		gloData['size'] = 20;
 		gloData['ymax'] = gloData['max'];
-		joo(gloData,'line1');
+		joo();
 	},function(){
 		$(".changeLine,.chartBtn").click(function(){
 			if($(this).attr('groupNum')){
 				selectGroupType=$(this).attr('groupNum');
 			}
-			$("#line1").empty();
+			$("#canvasDiv").empty();
 			getDefaultUserLineData();
 			gloData['color']="#34BE4E";
 			gloData['lineWidth'] = 10;
 			gloData['size'] = 20;
-			joo(gloData,'line1');
+			joo();
 		});
 		$("#datepicker2").change(function (){
 			lineDataDate=$("#datepicker2").val();
 			lineDataDate=lineDataDate.replace(/-/g, "");
-			$("#line1").empty();
+			$("#canvasDiv").empty();
 			getDefaultUserLineData();
 			gloData['color']="#34BE4E";
 			gloData['lineWidth'] = 10;
 			gloData['size'] = 20;
-			joo(gloData,'line1');
+			joo();
 		});
 		$(".linePreDate,.lineNextDate").click(function (){
 			lineDataDate=$("#datepicker2").val();
 			lineDataDate=lineDataDate.replace(/-/g, "");
-			$("#line1").empty();
+			$("#canvasDiv").empty();
 			getDefaultUserLineData();
 			gloData['color']="#34BE4E";
 			gloData['lineWidth'] = 10;
 			gloData['size'] = 20;
-			joo(gloData,'line1');
+			joo();
 		});
 
+		/*$(".t2").click(function(){
+			$("#canvasDiv").empty();
+			joo();
+			*/
 	})
 })();
 
@@ -80,59 +84,129 @@ function getDefaultUserLineData(){
 			});
 }
 
-function joo(gloData,divid){
-	$.jqplot.config.enablePlugins = true;			
-	plot1 = $.jqplot(divid, [gloData['s1'], gloData['s2'], gloData['s3']], {
-		series: [{label: '1st Qtr'},{label: '2st Qtr'}],
-		seriesDefaults:{
-			lineWidth: gloData['lineWidth'],
-			markerOptions: {
-				show: true,
-				size: gloData['size'] //点的大小
-			}
-		},
-		seriesColors: [ gloData['color'], "#1B52C1", "#FE3400", "#579575", "#839557", "#958c12",
-		"#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"
-		],
-		legend: {show:true, location: 'nw'},
-		axes:{
-			xaxis:{
-				renderer:$.jqplot.CategoryAxisRenderer, ticks:gloData['ticksVal']
+function joo(){
+	var data = [
+			{
+				name : '个',
+				value:gloData['s1'],
+				color:'#34BE4E',
+				line_width:4
 			},
-			yaxis:{
-				min:0, max:gloData['ymax'], numberTicks:9,//y轴范围、点数
-				tickOptions: {
-					formatString: '%.2f'//浮点数
-				}
+			{
+				name : 'kg',
+				value:gloData['s2'],
+				color:'#1B52C1',
+				line_width:4
+			},
+			{
+				name : 'min',
+				value:gloData['s3'],
+				color:'#FE3400',
+				line_width:4
 			}
-		},
-		highlighter: {
-			bringSeriesToFront: true,
-			lineWidthAdjust: 5,
-			sizeAdjust: 10,
-			tooltipLocation: 'n',
-			tooltipAxes: 'y',
-			tooltipFormatString: '<b><i><span style="color:red;">顶个你个</span></i></b> %.2f ',
-			useAxesFormatters: true
-		},
-		grid: {
-			drawGridLines: true,        // wether to draw lines across the grid or not.
-			gridLineColor: 'transparent',    // *Color of the grid lines.
-			background: 'transparent',      // CSS color spec for background color of grid.
-			borderColor: 'transparent',     // CSS color spec for border around grid.
-			borderWidth: 0,           // pixel width of border around grid.
-			shadow: false,               // draw a shadow for grid.
-			shadowAngle: 45,            // angle of the shadow.  Clockwise from x axis.
-			shadowOffset: 1.5,          // offset from the line of the shadow.
-			shadowWidth: 3,             // width of the stroke for the shadow.
-			shadowDepth: 3,             // Number of strokes to make when drawing shadow.
-										// Each stroke offset by shadowOffset from the last.
-			shadowAlpha: 0.07,           // Opacity of the shadow
-			renderer: $.jqplot.CanvasGridRenderer,  // renderer to use to draw the grid.
-			rendererOptions: {}         // options to pass to the renderer.  Note, the default
-										// CanvasGridRenderer takes no additional options.
-									}
-								});
+		 ];
+	
+			var labels = gloData['ticksVal'];//横坐标数据
+			
+			var chart = new iChart.LineBasic2D({
+				render : 'canvasDiv',
+				data: data,
+				align:'center',
+				title : {
+					text:'',
+					font : '微软雅黑',
+					fontsize:24,
+					color:'#b4b4b4'
+				},
+				subtitle : {
+					text:'',
+					font : '微软雅黑',
+					color:'#b4b4b4'
+				},
+				footnote : {
+					text:'',
+					font : '微软雅黑',
+					fontsize:11,
+					fontweight:600,
+					padding:'0 28',
+					color:'#b4b4b4'
+				},
+				width : 880,
+				height : 280,
+				shadow:true,
+				shadow_color : '',
+				shadow_blur : 8,
+				shadow_offsetx : 0,
+				shadow_offsety : 0,
+				background_color:'#eaeaea',
+				tip:{
+					enable:true,
+					shadow:true,
+					listeners:{
+						 //tip:提示框对象、name:数据名称、value:数据值、text:当前文本、i:数据点的索引
+						parseText:function(tip,name,value,text,i){
+							return "</span><span style='color:#005268;font-size:20px;'>"+value+name+"</span>";
+						}
+					}
+				},
+				crosshair:{
+					enable:true,
+					line_color:'#109CD4'//标识线的颜色
+				},
+				sub_option : {
+					smooth : true,
+					label:false,
+					hollow:false,
+					hollow_inside:false,
+					point_size:8
+				},
+				coordinate:{
+					width:810,
+					height:200,
+					striped_factor : 0.18,
+					grid_color:'#ddd',//网格线的颜色
+					axis:{
+						color:'#999',
+						width:[0,0,1,1]
+					},
+					scale:[{
+						 position:'left',	
+						 start_scale:20,//纵坐标起始值
+						 end_scale:10,
+						 scale_space:20,
+						 scale_size:2,
+						 scale_enable : false,
+						 label : {color:'#9d987a',font : '微软雅黑',fontsize:11,fontweight:600},
+						 scale_color:'#9f9f9f'
+					},{
+						 position:'bottom',	
+						 label : {color:'#9d987a',font : '微软雅黑',fontsize:11,fontweight:600},
+						 scale_enable : false,
+						 labels:labels
+					}]
+				}
+			});
+			//利用自定义组件构造左侧说明文本
+			chart.plugin(new iChart.Custom({
+				drawFn:function(){
+					//计算位置
+					var coo = chart.getCoordinate(),
+						x = coo.get('originx'),
+						y = coo.get('originy'),
+						w = coo.width,
+						h = coo.height;
+					//在左上侧的位置，渲染一个单位的文字
+					chart.target.textAlign('start')
+					.textBaseline('bottom')
+					.textFont('600 11px 微软雅黑')
+					.fillText('',x-40,y-12,false,'#9d987a')
+					.textBaseline('top')
+					.fillText('',x+w+12,y+h+10,false,'#9d987a');
+					
+				}
+			}));
+		//开始画图
+		chart.draw();
 }
 
 

@@ -14,20 +14,9 @@ class CourseAction extends Action {
 		}
 
 		$this->countUserExercise();
-		$userRankList=$this->getUserRank();
-		$userRankList_7=$this->getUserRank(7);
-		$userRankList_30=$this->getUserRank(30);
-		$userRankList_all=$this->getUserRank('','',true);
 
-		$this->assign ( 'userRankList', $userRankList);
-		$this->assign ( 'userRankList_7', $userRankList_7);
-		$this->assign ( 'userRankList_30', $userRankList_30);
-		$this->assign ( 'userRankList_all', $userRankList_all);
 
-		$this->assign ( 'userRankNum', $this->getUserRankById($uid));
-		$this->assign ( 'userRankNum7', $this->getUserRankById($uid,7));
-		$this->assign ( 'userRankNum30', $this->getUserRankById($uid,30));
-		$this->assign ( 'userRankNumall', $this->getUserRankById($uid,'','',true));
+		$this->setUserRankInfo($uid,$faid);
 
 		$myActionList=$this->actionListToString($actionList);
 
@@ -73,6 +62,48 @@ class CourseAction extends Action {
 		$this->assign ( 'cssFile', 'index' );
 		$this->display ( 'tool' );
 	}
+
+	public function setUserRankInfo($uid,$aid){
+		//所有的排行
+//$this->getUserRankById($uid,'',$aid,true);
+
+		$duserRankList=$this->getUserRank('',$aid);
+		$userRankList=$this->getUserRank();
+		$userRankList_7=$this->getUserRank(7);
+		$userRankList_30=$this->getUserRank(30);
+		$userRankList_all=$this->getUserRank('','',true);
+
+		$this->assign ( 'userRankList', $userRankList);
+		$this->assign ( 'userRankList_7', $userRankList_7);
+		$this->assign ( 'userRankList_30', $userRankList_30);
+		$this->assign ( 'userRankList_all', $userRankList_all);
+
+		$this->assign ( 'userRankNum', $this->getUserRankById($uid));
+		$this->assign ( 'userRankNum7', $this->getUserRankById($uid,7));
+		$this->assign ( 'userRankNum30', $this->getUserRankById($uid,30));
+		$this->assign ( 'userRankNumall', $this->getUserRankById($uid,'','',true));
+
+		//单项排行
+		$duserRankList=$this->getUserRank('',$aid);
+		$duserRankList_7=$this->getUserRank(7,$aid);
+		$duserRankList_30=$this->getUserRank(30,$aid);
+		$duserRankList_all=$this->getUserRank('',$aid,true);
+
+
+		$this->assign ( 'duserRankList', $duserRankList);
+		$this->assign ( 'duserRankList_7', $duserRankList_7);
+		$this->assign ( 'duserRankList_30', $duserRankList_30);
+		$this->assign ( 'duserRankList_all', $duserRankList_all);
+
+
+
+		$this->assign ( 'duserRankNum', $this->getUserRankById($uid,'',$aid));
+		$this->assign ( 'duserRankNum7', $this->getUserRankById($uid,7,$aid));
+		$this->assign ( 'duserRankNum30', $this->getUserRankById($uid,30,$aid));
+		$this->assign ( 'duserRankNumall', $this->getUserRankById($uid,'',$aid,true));
+
+	}
+
 	protected function actionListToString($actionList){
 		$string=null;
 		foreach ($actionList as $key => $value) {
@@ -348,9 +379,10 @@ class CourseAction extends Action {
 				$where 		  = " WHERE date='".date('Ymd',time())."'";
 			}
 			if(!empty($aid)){
-				$where.=$where." and aid='".$aid."'";
+				$where=$where." and aid='".$aid."'";
 			}
-			if($isAll==true){$where=null;}
+			if($isAll==true&&empty($aid)){$where=null;}
+			if($isAll==true&&!empty($aid)){$where="where aid=$aid";}
 			$getSql="SELECT SUM(  `exercise` ) AS exercise, uid FROM ai_user_exercise_log $where GROUP BY uid ORDER BY exercise DESC limit 10";
 			$data=M('')->query($getSql);
 			foreach ($data as $key => &$value) {
@@ -371,19 +403,21 @@ class CourseAction extends Action {
 				$where 		  = " WHERE date='".date('Ymd',time())."'";
 			}
 			if(!empty($aid)){
-				$where.=$where." and aid='".$aid."'";
+				$where=$where." and aid='".$aid."'";
 			}
+
 			if($isAll==true){$where=null;}
 			$tmpTable="SELECT SUM(  `exercise` ) AS exercise, uid,date FROM ai_user_exercise_log  $where GROUP BY uid ORDER BY exercise";
 			if(!empty($where)){
 				$tmpUTable="SELECT SUM(  `exercise` ) AS exercise FROM ai_user_exercise_log  $where and uid=$uid GROUP BY uid ORDER BY exercise";
+			}elseif(!empty($aid)){
+				$tmpUTable="SELECT SUM(  `exercise` ) AS exercise FROM ai_user_exercise_log  where uid=$uid and aid=$aid GROUP BY uid ORDER BY exercise";
 			}else{
-				$tmpUTable="SELECT SUM(  `exercise` ) AS exercise FROM ai_user_exercise_log  where uid=$uid GROUP BY uid ORDER BY exercise";
+				$tmpUTable="SELECT SUM(  `exercise` ) AS exercise FROM ai_user_exercise_log  where uid=$uid GROUP BY uid ORDER BY exercise";				
 			}
 
 			$getRankSql="select count(*) as num from ($tmpTable) as tmp where tmp.exercise >= ($tmpUTable)";
 			$data=M('')->query($getRankSql);
-			
 			if($data[0]['num']==0){
 				$checkSql="select * from ai_user_exercise_log where uid=$uid and date='".date('Ymd',time())."'";
 				$check=M('')->query($checkSql);

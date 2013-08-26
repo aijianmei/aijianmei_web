@@ -602,3 +602,32 @@ function changeTabNameByAction(actionVal){
 	$(".tableTabName").html(actionVal);
 	$(".tableLineTabName").html(actionVal);
 }
+
+function countCalories(){
+	var bodyWeight=$(".curWeight").text();//用户体重
+	var countNum=$(".tBody").find(".actGroup").length;//组的个数
+	var METs=3; //mets 代谢率
+
+	//calories=((METs * 3.5 * bodyWeight)/200)* minute;
+	if(countNum>0){
+		for (var i = countNum - 1; i >= 0; i--) {
+			var weight=$(".tBody").find(".actGroup").eq(i).find('input').eq(0).val();
+			var minute=$(".tBody").find(".actGroup").eq(i).find('input').eq(2).val();
+			var METs =(3/20)*weight;
+			var	calories=((METs * 3.5 * bodyWeight*1)/200)* minute;
+			alert(calories);
+		};
+		if(isNaN(allNums*1))   allNums=0;
+		if(isNaN(allWeight*1)) allWeight=0;
+		if(isNaN(allTime*1))   allTime=0;
+
+		$(".numsAvg").html(Math.round(allNums/countNum));
+		$(".weigthAvg").html(Math.round(allWeight/countNum));
+		$(".timeAvg").html(Math.round(allTime/countNum));	
+	}else{
+		$(".numsAvg").html(0);
+		$(".weigthAvg").html(0);
+		$(".timeAvg").html(0);
+	}
+}
+countCalories();

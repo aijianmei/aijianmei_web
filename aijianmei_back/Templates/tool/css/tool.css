@@ -56,7 +56,6 @@ input,button,select,textarea{outline:none}
 }
 
 #weightManage{
-	height:388px;
 	border:1px solid #fff;
 	padding:10px;
 	margin-bottom:20px;
@@ -251,13 +250,14 @@ input,button,select,textarea{outline:none}
 			.edit:hover{
 				background:url(../images/tool/sprites.png) -535px -118px no-repeat;
 			}
-	#tipMsg{
+	#tipMsg,.calTip{
 		text-align:center;
-		color:#ff4d2a;
+		color:#666;
 		font-size:18px;
 	}
-		#tipMsg span{
+		#tipMsg span,.calTip span{
 			font-size:40px;
+			color:red;
 		}
 		
 		
@@ -265,7 +265,12 @@ input,button,select,textarea{outline:none}
 	margin:20px 0;
 }
 #dataIn{
+	margin-bottom:0;
 	position:relative;
+}
+.calTip{
+	background: #eaeaea;
+	margin-top: 10px;
 }
 		.moreBtn{
 			position:absolute;
@@ -343,14 +348,16 @@ input,button,select,textarea{outline:none}
 			}
 				.moreRight .showList{
 					float:left;
+					height:22px;
 					margin:15px;
 					_margin-left:8px;
 					background:#56A9E4;
 					border:2px solid #fff;
 					border-radius:4px;
 					text-align:center;
-					padding:14px;
+					padding:12px;
 					cursor:pointer;
+					font-size:16px;
 				}
 				.moreRight .preSelect,.moreRight .nextSelect{
 					width:40px;
@@ -479,11 +486,11 @@ input,button,select,textarea{outline:none}
 			}
 				
 				.userTable{
-					box-shadow: rgba(0, 0, 0, 0.6) 1px 1px 2px;
+					border: 1px solid #fff;
 					border-radius:6px;
 				}
 					.col{
-						width:190px;
+						width:152px;
 						float:left;
 						text-align:center;
 					}
@@ -511,14 +518,9 @@ input,button,select,textarea{outline:none}
 							position:absolute;
 							display:block;
 							width: 100%;
-							font-size:18px;
+							font-size:14px;
 						}
-						.thead .col1{
-							color:#3786be;
-							height: 35px;
-							width: 180px;
-							padding: 0 5px;
-						}
+						
 						.thead .col1 .rowTip{
 							color:white;
 						}
@@ -530,7 +532,7 @@ input,button,select,textarea{outline:none}
 							width: 20px;
 							height: 20px;
 							background: url(../images/tool/sprites.png) -70px -2px no-repeat;
-							left: 35px;
+							left: 25px;
 							top: 7px;
 							z-index: 1;
 							display:none;
@@ -545,16 +547,15 @@ input,button,select,textarea{outline:none}
 							.actGroup .col1{
 								border-left:0;
 							}
-							.actGroup .col4{
-								border-right:0;
-								width:193px;
+							.actGroup .col5{
+								border-right:0;	
 							}
-							
+
 							.actGroup .col .cut,.actGroup .col .figure,.actGroup .col .add{
 								position:absolute;
 							}
 							.actGroup .col .cut{
-								left:52px;
+								left:30px;
 								top:14px;
 								width:6px;
 								height:9px;
@@ -563,7 +564,7 @@ input,button,select,textarea{outline:none}
 								display:none;
 							}
 							.actGroup .col .figure{
-								left:63px;
+								left:42px;
 								top:5px;
 								width:68px;
 								height:24px;
@@ -573,7 +574,7 @@ input,button,select,textarea{outline:none}
 								color:#333;
 								background:none;
 							}
-							.avgsRow .col{
+							.avgsRow .col,.col5{
 								font-size:16px;
 								color:#333;
 								font-family:"微软雅黑";
@@ -584,7 +585,7 @@ input,button,select,textarea{outline:none}
 								font-family:"微软雅黑";
 							}
 							.actGroup .col .add{
-								right:48px;
+								right:30px;
 								top:14px;
 								width:6px;
 								height:9px;
@@ -592,9 +593,7 @@ input,button,select,textarea{outline:none}
 								cursor:pointer;
 								display:none;
 							}
-							.actGroup .col4 .add{
-								right:52px;
-							}
+							
 					.avgsRow{
 						border-bottom:1px solid #fff;
 						background: #D8D8D8;
@@ -897,13 +896,14 @@ input,button,select,textarea{outline:none}
 #ui-datepicker-div{
 	z-index:300!important;
 }
+	
 .login_bg{
 	opacity:0.5!important;
 	filter: alpha(opacity=0)!important;
 }		
 .login_table{
 	top:78px!important;
-}	
+}
 .imageLoading {
 position: fixed;
 left: 50%;
