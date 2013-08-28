@@ -474,7 +474,7 @@ class Ajax {
 		$uid = $this->mid;
 		//$targetFile='a.png';
 		$targetFile="/public/images/userLog/".time().rand().".jpg";
-		$this->generatePngByFont ( $text, $sizeArray, $uid, SITE_PATH.$targetFile, 'bgImg.png' );
+		$this->generatePngByFont( $text, $sizeArray, $uid, SITE_PATH.$targetFile, 'bgImg.png' );
 
 		$checkSql="select * from ai_user_course_log where `uid`='".$uid."' and `date`='".$date."'";
 		$checkData=$this->db->_query($checkSql);
@@ -681,7 +681,7 @@ class Ajax {
 		// 字体类型，瘦金体
 			$font = $this->ttf;
 
-			$text = $this->formatFontString ( $text );
+			$text = $this->formatFontString( $text );
 
 			//$text = $this->u8_title_substr($text, 430, '\n');
 

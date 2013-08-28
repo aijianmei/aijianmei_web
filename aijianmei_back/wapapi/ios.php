@@ -1,77 +1,26 @@
 <?php
 error_reporting ( 0 );
-//header ( "Content-Type:application/json;charset=utf-8" );
-require_once ('reimg.php');
-$_dbConfig = require_once ('config.inc.php');
-function C_mysqlQuery($sql) {
-	global $_dbConfig;
-	/*
-	 * $db = mysql_connect($_dbConfig['DB_HOST'], $_dbConfig['DB_USER'], $_dbConfig['DB_PWD']); mysql_select_db('aijianmei', $db); mysql_query("set names 'utf8'"); $res = mysql_query($sql, $db);
-	 */
+header ( "Content-Type:application/json;charset=utf-8" );
+
+require_once ('reimg.php');//图片处理类
+require_once ('comfunc.php');//部分的公共简易方法
+require_once ('db.class.php');//mysql db类
+require_once ('iosmodel.php');//model
+
+define ( 'SITE_PATH', dirname ( dirname ( __FILE__ ) ) ); // 路径常量定义
+
+class IosApi extends iosModel{
+	protected $vaucode 		= 'aijianmei';
+	protected $isInputLog = true;
+	protected $baseUrl 		= 'http://www.aijianmei.com';
 	
-	$con = mysql_connect ( $_dbConfig ['DB_HOST'], $_dbConfig ['DB_USER'], $_dbConfig ['DB_PWD'] );
-	if (! $con) {
-		die ( 'Could not connect: ' . mysql_error () );
-	}
-	$db_selected = mysql_select_db ( "aijianmei", $con );
-	mysql_query ( "set names 'utf8'" );
-	$result = mysql_query ( $sql, $con );
-	return $result;
-}
-function C_mysqlAll($sql) {
-	$resultTmp = array ();
-	$row = $res = null;
-	$res = C_mysqlQuery ( $sql );
-	while ( $row = mysql_fetch_assoc ( $res ) ) {
-		$resultTmp [] = ( array ) $row;
-	}
-	foreach ( $resultTmp as $ke => $ve ) {
-		foreach ( $ve as $kx => $vx ) {
-			$resultTmp [$ke] [$kx] = ( string ) $vx;
-		}
-	}
-	return $resultTmp;
-}
-function C_mysqlOne($sql) {
-	$resultTmp = array ();
-	$res = C_mysqlQuery ( $sql );
-	@$row = mysql_fetch_assoc ( $res );
-	if (is_array ( $row )) {
-		foreach ( $row as $ke => $ve ) {
-			$resultTmp [0] [$ke] = ( string ) $ve;
-		}
-	}
-	return $resultTmp;
-}
-
-// 全输入简易过滤
-if (! empty ( $_REQUEST ['auact'] )) {
-	foreach ( $_REQUEST as $key => $value ) {
-		$_REQUEST [$key] = MooAddslashes ( $value );
-	}
-	foreach ( $_POST as $key => $value ) {
-		$_POST [$key] = MooAddslashes ( $value );
-	}
-	foreach ( $_GET as $key => $value ) {
-		$_GET [$key] = MooAddslashes ( $value );
-	}
-}
-
-// addcslashes
-function MooAddslashes($value) {
-	return $value = is_array ( $value ) ? array_map ( 'MooAddslashes', $value ) : addslashes ( $value );
-}
-// http://host:port/wapapi/ios.php?aucode=aijianmei&auact=au_login
-class IosApi {
-	protected $vaucode = 'aijianmei';
-	protected $baseUrl = 'http://www.aijianmei.com';
-	public $categoryArray = array (
+	public $categoryArray 	= array (
 		'train',
 		'nutri',
 		'append' ,
 		'lifestyle'
 		);
-	public $categoryValues = array (
+	public $categoryValues 	= array (
 		'train' => 2,
 		'nutri' => 3,
 		'append' => 4,
@@ -100,213 +49,229 @@ class IosApi {
 		'status' => '',
 		'error' => '' 
 		);
-	public $allowAction = array (
-		'au_login' => array (
-			'email' => 1,
-			'userpassword' => 1,
-			'usertype' => 0 
-			),
-
-		'au_register' => array (
-			'username' => 0,
-			'userpassword' => 0,
-			'email' => 0,
-			'usertype' => 0,
-			'snsid' => 0,
-			'profileImageUrl' => 0,
-			'sex' => 0,
-			'age' => 0,
-			'body_weight' => 0,
-			'height' => 0,
-			'keyword' => 0,
-			'province' => 0,
-			'city' => 0 
-			),
-
-		'au_getinformationlist' => array (
-			'listtype' => 0,
-			'category' => 0,
-			'id' => 0,
-			'type' => 0,
-			'page' => 0,
-			'pnums' => 0,
-			'uid' => 0,
-			'start' => 0,
-			'offset' => 0 
-			),
-
-		'au_getinformationdetail' => array (
-			'id' => 1,
-			'channel' => 1,
-			'uid' => 0 
-			),
-
-		'au_sendcomment' => array (
-			'id' => 0,
-			'channel' => 0,
-			'channeltype' => 0,
-			'uid' => 0,
-			'commentcontent' => 0 
-			),
-
-		'au_delcomment' => array (
-			'id' => 1,
-			'channel' => 0,
-			'channeltype' => 0,
-			'uid' => 1 
-			),
-
-		'au_sendlike' => array (
-			'id' => 1,
-			'channel' => 0,
-			'channeltype' => 0,
-			'uid' => 1 
-			),
-
-		'au_getfplist' => array (
-			'type' => 0,
-			'page' => 0,
-			'pnums' => 0,
-			'uid' => 0,
-			'start' => 0,
-			'offset' => 0 
-			),
-		'au_getversion' => array (
-			'type' => 0 
-			),
-		'au_sendsuggestion' => array (
-			'uid' => 1,
-			'content' => 1 
-			),
-		'au_updateUserInfo' => array (
-			'uid' => 1,
-			'username' => 0,
-			'userface' => 0,
-			'userbgimg' => 0,
-			'keyword' => 0,
-			'description' => 0,
-			'sex' => 0,
-			'age' => 0,
-			'weight' => 0,
-			'height' => 0,
-			'province' => 0,
-			'city' => 0 
-			),
-		'au_getuserinfobysnsid' => array (
-			'snsid' => 1,
-			'usertype' => 1 
-			),
-		'au_updatepassword' => array (
-			'uid' => 1,
-			'oldpassword' => 1,
-			'newpassword' => 1 
-			),
-		'au_getuserinfobyuid' => array (
-			'uid' => 1 
-			),
-		'au_getuidbysnsid' => array (
-			'snsid' => 1 
-			),
-		'au_uploadimg' => array (
-			'uid' => 0,
-			'imagetype' => 0 
-			),
-		'articlestatus' => array (
-			'uid' => 0,
-			'aid' => 0,
-			'vid' => 0 
-			),
-		'getcommentbyid' => array (
-			'id' => 1,
-			'channeltype' => 0 
-			),
-		'getCircleList' => array (
-			'id' => 0,
-			'uid' => 0,
-			'group' => 0,
-			'start' => 0,
-			'offset' => 0 
-			),
-		'postCircleList' => array (
-			'uid' => 0, 
-			),
-		'postCircleComment' =>array(
-			'uid'=>1,
-			'id'=>1,
-			'content'=>1,
-			),
-		'postCircleLike' =>array(
-			'uid'=>0,
-			'statusId'=>0,
-			),
-		'getWeightInfo' =>array(
-			'uid'=>0,
-			),
-		'postWeightInfo'=>array(
-			'uid'=>0,
-			),
-		'postFitnessInfo'=>array(
-			'uid'=>0,
-			),
-		'getCourseInfo'=>array(
-			'uid'=>0,
-			),
-		'getAllAtionList'=>array(
-			'uid'=>0,
-			),
-		);
-public function __construct() {
-	ob_start();
-	var_dump($_GET);
-	var_dump($_POST);
-	var_dump($_FILES);
-	$info=ob_get_contents();
-	ob_end_clean();
-	file_put_contents("tmp.txt",$info);
-	$allowArr = $this->allowAction;
-	if (! empty ( $_REQUEST ['auact'] ) && isset ( $allowArr [$_REQUEST ['auact']] ) && $_REQUEST ['aucode'] == $this->vaucode) {
-		if ($this->checkargs ( $_REQUEST ['auact'] )) {
+	public function __construct() {
+		$this->isInputLog === true ? setInputLog() : '';//测试接收值 log写入
+		$allowArr = include('allowAction.php');
+		$this->allowAction=$allowArr;
+		if (! empty ( $_REQUEST ['auact'] ) && isset ( $allowArr [$_REQUEST ['auact']] ) && $_REQUEST ['aucode'] == $this->vaucode) {
+			if ($this->checkargs ( $_REQUEST ['auact'] )) {
+				parent::__construct();
+				$this->baseDir=dirname(dirname(__FILE__));//定义文件目录
+			} else {
+				return $this->errormsg ();
+			}
 		} else {
 			return $this->errormsg ();
 		}
-	} else {
-		return $this->errormsg ();
 	}
-}
-public function postFitnessInfo(){
-	if(empty($_POST[$uid])){
-		$data[0]['uid']="0";
-		$data[0]['errorCode']="10001";
-		echo json_encode($data);
-		exit;
-	}
-	//$aid 		= $_POST['aid']?$_POST['aid']:$_POST['aid'];
-	$actionName = $_POST['actionName']?$_POST['actionName']:'';
-	$groupId	= $_POST['groupId']?$_POST['groupId']:'';
-	
-}
-public function getAllAtionList(){
-		$sql = "select * from ai_action_category_list order by sequence desc";
-		$category_list = C_mysqlAll( $sql );
-		foreach ( $category_list as $key => $value ) {
-			$cid = $value ['cid'];
-			$sql = "select a.id,a.name from ai_action_list a left join ai_action_category  b  on a.id=b.aid where b.cid=$cid";
-			$actionList =C_mysqlAll( $sql );
-			$category_list [$key] ['childList'] = ! empty ( $actionList ) ? $actionList : '';
+	public function getUserCourseLogImage(){
+		$date=$uid=$endDate=null;
+		$userImageList=array();
+		$uid	=$_REQUEST['uid'] ? $_REQUEST['uid'] :0;
+		(!$uid>0) ? $this->setErrorStatus("10001",$uid) : '';//uid 错误抛出
+		$date			=isset($_REQUEST['date']) ? intval($_REQUEST['date']) : date("Ymd",time());
+		$endDate	=isset($_REQUEST['endDate']) ? intval($_REQUEST['endDate']) :'';
+		$dateType	=isset($_REQUEST['dateType']) ? (string)$_REQUEST['dateType'] : 'default';
+		$baseDir=$this->baseDir;
+	//model 获取对应的数据
+		$userImage=parent::getUserlogImage($uid,$date,$endDate,$dateType);
+	//结果处理
+		if(!empty($userImage)){
+			foreach ($userImage as $key=>&$value) {//只提取部分信息
+				$tmp=array();
+				$tmp['imageUrl']	 =$this->baseUrl . $value['image'];
+				$tmp['create_time']=(string)$value['create_time'];
+				$userImageList[]=$tmp;
+			} 
 		}
+		$data[0]['uid']				=$uid;
+		$data[0]['errorCode']		="0";
+		$data[0]['userImageList'] 	=$userImageList;
+		echo json_encode($data);
+		exit();
+	}
+	public function postUserCourseLogImage(){
+		$uid	=$_REQUEST['uid'] ? $_REQUEST['uid'] :0;
+		(!$uid>0) ? $this->setErrorStatus("10001",$uid) : '';//uid 错误抛出
+		$date			=isset($_REQUEST['date']) ? intval($_REQUEST['date']) : date("Ymd",time());//提交日期
+		$text			=isset($_REQUEST['content'])?$_REQUEST['content']:'';
+		empty($text)? $this->setErrorStatus("10002",$uid) :'';
+		$this->setUserLogImg($uid,$date,$text);
+		$data=array();
+		$data[0]['uid']=(string)$uid;
+		$data[0]['errorCode']="0";
+		echo json_encode($data);
+		exit();
+	}
 
-		foreach ( $category_list as $key => $value ) {
-			$data[$key]['part']=$value ['name'];
+public function postUserCourseImage(){
+	$uid	=$_REQUEST['uid'] ? $_REQUEST['uid'] :0;
+	(!$uid>0) ? $this->setErrorStatus("10001",$uid) : '';//uid 错误抛出
+	$date			=isset($_REQUEST['date']) ? intval($_REQUEST['date']) : date("Ymd",time());//提交日期
 
-			if (! empty ( $value ['childList'] )) {
-				foreach ( $value ['childList'] as $k => $v ) {
-					$tmp=array();
-					$tmp['id']=$v['id'];
-					$tmp['name']=$v['name'];
-					$data[$key]['list'][]=$tmp;
+	$this->checkFileInfo('uploadImage')==false ? $this->setErrorStatus("10002",$uid) : '';//文件格式错误抛出
+	
+	$targetFile="/public/images/userLogImage/".time().rand().".jpg";
+	
+	move_uploaded_file($_FILES['uploadImage']['tmp_name'],SITE_PATH.$targetFile);
+	$resize = new ResizeImage(SITE_PATH.$targetFile);
+	$resize->resizeTo(512, 384,'exact');
+	$resize->saveImage(SITE_PATH.$targetFile);
+	$this->postUserImage($uid,$date,$targetFile);
+	$data[0]['uid']						=$uid;
+	$data[0]['errorCode']			="0";
+	$data[0]['imageUrl'] =$this->baseUrl.$targetFile;
+	echo json_encode($data);
+	exit();
+}
+
+public function getUserCourseImage(){
+	$date=$uid=$endDate=null;
+	$userImageList=array();
+	//输入校验
+	$uid	=$_REQUEST['uid'] ? $_REQUEST['uid'] :0;
+	(!$uid>0) ? $this->setErrorStatus("10001",$uid) : '';//uid 错误抛出
+	$date			=isset($_REQUEST['date']) ? intval($_REQUEST['date']) : date("Ymd",time());
+	$endDate	=isset($_REQUEST['endDate']) ? intval($_REQUEST['endDate']) :'';
+	$dateType	=isset($_REQUEST['dateType']) ? (string)$_REQUEST['dateType'] : 'default';
+	$baseDir=$this->baseDir;
+	//model 获取对应的数据
+	$userImage=parent::getUserImage($uid,$date,$endDate,$dateType);
+	//结果处理
+	if(!empty($userImage)){
+			foreach ($userImage as $key=>&$value) {//只提取部分信息
+				$tmp=array();
+				$tmp['imageUrl']	 =$this->baseUrl . $value['image'];
+				$tmp['create_time']=(string)$value['create_time'];
+				$userImageList[]=$tmp;
+			} 
+		}
+		$data[0]['uid']						=$uid;
+		$data[0]['errorCode']			="0";
+		$data[0]['userImageList'] =$userImageList;
+		echo json_encode($data);
+		exit();
+	}
+	public function postUserActionList(){
+		$uid=$_REQUEST['uid']?intval($_REQUEST['uid']):0;
+		$aid=$_REQUEST['actionId']?intval($_REQUEST['actionId']):0;
+		if(!$uid>0 || !$aid>0){
+			$data[0]['uid']="0";
+			$data[0]['errorCode']="10001";
+			echo json_encode($data);
+			exit;
+		}
+		$data=$checkData=null;
+	//$addActionName=$this->getActionIdByName($);
+		$checkSql="select uid,actionList from ai_user_course_default_alist where uid=$uid";
+		$checkData=$this->db->_query($checkSql);
+	//var_dump($checkData);
+		if(!empty($checkData)){
+			$actionList=array();
+			$actionList=unserialize($checkData[0]['actionList']);
+			$sql=$ationInfo=null;
+			$sql = "select * from ai_action_list where `id`='" . $aid . "'";
+			$actionInfo=$this->db->_query($sql);
+			if(!empty($actionInfo)){
+				if(!in_array($actionInfo[0]['name'], $actionList)){
+					array_unshift($actionList,$actionInfo[0]['name']);
+				}else{
+					unset($actionList[array_search($actionInfo[0]['name'],$actionList)]);
+					array_unshift($actionList,$actionInfo[0]['name']);
+				}
+			}
+		//var_dump($actionList);
+		}else{
+			$actionList=$newCommendActionList=array();
+			$recommendActionList=$this->getRecommendActionList();
+			foreach ($recommendActionList as $key => $value) {
+				$newCommendActionList[$key]=$value['name'];
+			}
+			$actionList=$newCommendActionList;
+			$sql = "select name from ai_action_list where `id`='" . $aid . "'";
+			$actionInfo=$this->db->_query($sql);
+			if(!empty($actionInfo)){
+				if(!in_array($actionInfo[0]['name'], $actionList)){
+					array_unshift($actionList,$actionInfo[0]['name']);
+				}else{
+					unset($actionList[array_search($actionInfo[0]['name'],$actionList)]);
+					array_unshift($actionList,$actionInfo[0]['name']);
 				}
 			}
 		}
+		if(!empty($actionList)){
+			krsort($actionInfo);
+			$actionListString=serialize($actionList);
+			$insertSql="INSERT INTO ai_user_course_default_alist VALUES('".$uid."','".$actionListString."') ON DUPLICATE KEY UPDATE actionList='".$actionListString."'";
+			$insertId=C_mysqlOne($insertSql);
+		//echo $insertId;
+		}
+	//$actionList=$this->getDefaultActionList($uid);
+		$data[0]['uid']=$uid;
+		$data[0]['errorCode']="0";
+	//$data[0]['userActionList']=$actionList;
+		echo json_encode($data);
+		exit;
+	}
+	public function getUserActionListById(){
+		$uid=$_REQUEST['uid']?$_REQUEST['uid']:0;
+		if(!$uid>0){
+			$data[0]['uid']="0";
+			$data[0]['errorCode']="10001";
+			echo json_encode($data);
+			exit;
+		}
+		$data=null;
+		$actionList=$this->getDefaultActionList($uid);
+		if(empty($actionList)){
+			$actionList=$this->getRecommendActionList();
+		}
+		$data[0]['uid']=$uid;
+		$data[0]['errorCode']="0";
+		$data[0]['userActionList']=$actionList;
+	//var_dump($actionList);
+		echo json_encode($data);
+		exit;
+	}
+	public function postFitnessInfo(){
+		if(empty($_POST[$uid])){
+			$data[0]['uid']="0";
+			$data[0]['errorCode']="10001";
+			echo json_encode($data);
+			exit;
+		}
+	//$aid 		= $_POST['aid']?$_POST['aid']:$_POST['aid'];
+		$actionName = $_POST['actionName']?$_POST['actionName']:'';
+		$groupId	= $_POST['groupId']?$_POST['groupId']:'';
+
+	}
+	public function getAllAtionList(){
+		$uid	=$_REQUEST['uid'] ? $_REQUEST['uid'] :0;
+	(!$uid>0) ? $this->setErrorStatus("10001",$uid) : '';//uid 错误抛出
+	$sql = "select * from ai_action_category_list order by sequence desc";
+	$category_list = C_mysqlAll( $sql );
+	foreach ( $category_list as $key => $value ) {
+		$cid = $value ['cid'];
+		$sql = "select a.id,a.name from ai_action_list a left join ai_action_category  b  on a.id=b.aid where b.cid=$cid";
+		$actionList =C_mysqlAll( $sql );
+		$category_list [$key] ['childList'] = ! empty ( $actionList ) ? $actionList : '';
+	}
+
+	$userList['part']="我的锻炼";
+	$userList['list']=parent::getUserDefaultActionListByUid($uid);
+
+	foreach ( $category_list as $key => $value ) {
+		$data[$key]['part']=$value ['name'];
+		if (! empty ( $value ['childList'] )) {
+			foreach ( $value ['childList'] as $k => $v ) {
+				$tmp=array();
+				$tmp['id']=$v['id'];
+				$tmp['name']=$v['name'];
+				$data[$key]['list'][]=$tmp;
+			}
+		}
+	}
+	array_unshift($data,$userList);
 	echo json_encode($data);
 	exit;
 }
@@ -319,63 +284,78 @@ public function getCourseInfo(){
 		exit;
 	}
 	$date 		=$_REQUEST['date']?$_REQUEST['date']:date('Ymd',time());
-	$actionName =$_REQUEST['actionName'] ?$_REQUEST['actionName'] :'';
-	$aid  		=!empty($actionName)?$this->getActionIdByName($actionName):'';
+	$aid =$_REQUEST['actionId'] ?intval($_REQUEST['actionId']) :'';
+	//$aid  		=!empty($actionName)?$this->getActionIdByName($actionName):'';
 	$defaultActionList=$this->getDefaultActionList($uid);
 
 	$faid 		=intval($defaultActionList[0]['id']);
 	$aid 		=empty($aid)?$faid:$aid;
-	$sql  		="select loginfo from ai_user_course_list where `uid`=$uid and `aid`=$aid  and `date`=$date order by `group` asc";
-	$coureInfoTmp      =C_mysqlAll( $sql );
+	$sql  		="select loginfo,`group` as groupId from ai_user_course_list where `uid`=$uid and `aid`=$aid  and `date`=$date order by `group` asc";
+	$coureInfoTmp      =$this->db->_query( $sql );
 
 	foreach ($coureInfoTmp as $key => $value) {
 		$tmp=null;
 		$tmp=unserialize($value['loginfo']);
 		$tmp['calories']=0;
+		$tmp['groupId']=$value['groupId'];
 		$coureInfo[]=$tmp;
 	}
-	$data[0]['uid']=0;
-	$data[0]['errorCode']=0;
-	$data[0]['actionList']=$defaultActionList;
-	$data[0]['coureList']=$coureInfo;
+	$data[0]['uid']=$uid;
+	$data[0]['errorCode']="0";
+	//$data[0]['actionList']=$defaultActionList;
+	$sql = "select * from ai_action_list where `id`='" . $aid . "'";
+	$aidinfo=$this->db->_query( $sql );
+	
+	$data[0]['coureName']=$aidinfo[0]['name'];
+	$data[0]['coureList']=(array)$coureInfo;
+	//var_dump($data);exit
 	echo json_encode($data);
 	exit;
 }
-public function getWeightInfo(){
-	$uid 		 =$_POST['uid']?$_POST['uid']:0;
-	if(!$uid > 0){
-		$data[0]['uid']="0";
-		$data[0]['errorCode']="10001";
+public function postCourseInfo() {
+	$uid = $_REQUEST ['uid'] ? intval ( $_REQUEST ['uid'] ) : '';
+		(! $uid > 0) ? $this->setErrorStatus ( "10001", $uid ) : ''; // uid 错误抛出
+		setInputLog("course.txt");
+		$data[0]['uid']=$uid;
+		$data[0]['errorCode']="0";
 		echo json_encode($data);
+		exit();
+	}
+	public function getWeightInfo(){
+		$uid 		 =$_POST['uid']?$_POST['uid']:0;
+		if(!$uid > 0){
+			$data[0]['uid']="0";
+			$data[0]['errorCode']="10001";
+			echo json_encode($data);
+			exit;
+		}
+		$weightInfo  = $this->getUserHealthById($uid);
+		$weightInfo['calories']=$weightInfo['klu'];
+		unset($weightInfo['klu']);
+		foreach ($weightInfo as $key => $value) {
+			$weightInfo[$key]=(string)$value;
+		}
+		echo json_encode($weightInfo);
 		exit;
 	}
-	$weightInfo  = $this->getUserHealthById($uid);
-	$weightInfo['calories']=$weightInfo['klu'];
-	unset($weightInfo['klu']);
-	foreach ($weightInfo as $key => $value) {
-		$weightInfo[$key]=(string)$value;
-	}
-	echo json_encode($weightInfo);
-	exit;
-}
 
-public function postWeightInfo(){
-	$uid 		 =$_POST['uid']?$_POST['uid']:0;
-	if(!$uid > 0) die();
-	$weight=intval($_POST['weight']);
-	$targetWeight=intval($_POST['targetWeight']);
-	$nowWeight=intval($_POST['nowWeight']);
-	$checkSql="select * from ai_user_health_info where `uid` =$uid";
-	$checkResult=C_mysqlOne($checkSql);
-	if(!empty($checkResult)){
-		$updateSql="UPDATE  ai_user_health_info SET `body_weight` =  '".$weight."',
-		`targetWeight` =  '".$targetWeight."',`nowWeight`='".$nowWeight."',`targetTime` =  '".time()."'
-		WHERE `uid` =$uid LIMIT 1 ";
-		C_mysqlOne($updateSql);
-	}else{
-		$insertSql="INSERT INTO  ai_user_health_info (`uid` ,`body_weight` ,`height` ,`age` ,`targetWeight` ,`nowWeight` ,`weightTime` ,`targetTime`)VALUES ('".$uid."','".$weight."','0','0','".$targetWeight."','".$nowWeight."','".time()."','".time()."')";
-		C_mysqlOne($updateSql);
-	}
+	public function postWeightInfo(){
+		$uid 		 =$_POST['uid']?$_POST['uid']:0;
+		if(!$uid > 0) die();
+		$weight=intval($_POST['weight']);
+		$targetWeight=intval($_POST['targetWeight']);
+		$nowWeight=intval($_POST['nowWeight']);
+		$checkSql="select * from ai_user_health_info where `uid` =$uid";
+		$checkResult=C_mysqlOne($checkSql);
+		if(!empty($checkResult)){
+			$updateSql="UPDATE  ai_user_health_info SET `body_weight` =  '".$weight."',
+			`targetWeight` =  '".$targetWeight."',`nowWeight`='".$nowWeight."',`targetTime` =  '".time()."'
+			WHERE `uid` =$uid LIMIT 1 ";
+			C_mysqlOne($updateSql);
+		}else{
+			$insertSql="INSERT INTO  ai_user_health_info (`uid` ,`body_weight` ,`height` ,`age` ,`targetWeight` ,`nowWeight` ,`weightTime` ,`targetTime`)VALUES ('".$uid."','".$weight."','0','0','".$targetWeight."','".$nowWeight."','".time()."','".time()."')";
+			C_mysqlOne($updateSql);
+		}
 	if($targetWeight > $weight){//目标数值大于原始值 增重
 		$calorie=($targetWeight-$nowWeight)*7700;
 	}else{
@@ -1392,10 +1372,9 @@ public function postCircleComment(){
 		if (isset ( $_GET ['offset'] )) {
 			$pnums = $offset = ! empty ( $_GET ['offset'] ) ? intval ( $_GET ['offset'] ) : 10;
 		}
-		
-		$dailyinfo = array ();
+		$dailyinfo = array();
 		$dailyinfo = $this->getDailyLimit ( $type, $from, $pnums );
-		$dailyinfoTmp = array ();
+		$dailyinfoTmp = array();
 		
 		foreach ( $dailyinfo as $key => &$value ) {
 			// $dailyinfoTmp[$]
@@ -1788,30 +1767,30 @@ public function postCircleComment(){
 			}
 			return array( 'pertent' => $pertent,'klu'=> $klu);
 		}
-		protected function getActionIdByName($name) {
-			$sql = $data = null;
-			$name = ( string ) $name;
-			$sql = "select * from ai_action_list where `name`='" . $name . "'";
-			$data =C_mysqlOne( $sql );
-			return ! empty ( $data ) ? $data [0] ['id'] : false;
-		}
 		protected function getDefaultActionList($uid){
-		$sql="select * from ai_user_course_default_alist where uid=$uid";
-		$data=C_mysqlAll($sql);
-		$data[0]['actionList']=unserialize($data[0]['actionList']);
-		foreach ($data[0]['actionList'] as $key => $value) {
-			$tmpdata[$key]['name']=$value;
-			$nameinfo=$this->getActionInfoByName($value);
-			$tmpdata[$key]['id']=$nameinfo['id'];
+			$sql="select * from ai_user_course_default_alist where uid=$uid";
+			$data=C_mysqlAll($sql);
+			$data[0]['actionList']=$this->mb_unserialize($data[0]['actionList']);
+			foreach ($data[0]['actionList'] as $key => $value) {
+				$tmpdata[$key]['name']=$value;
+				$nameinfo=$this->getActionInfoByName($value);
+				$tmpdata[$key]['id']=$nameinfo['id'];
+			}
+			return $tmpdata;
 		}
-		return $tmpdata;
+		protected function getRecommendActionList(){
+			$sql="select id,name from ai_action_list where recommend=1";
+			$data=C_mysqlAll($sql);
+			return $data;
+		}
+		protected function setErrorStatus($errorCode,$uid){
+			ob_end_clean();//清空缓冲输出区域
+			$data[0]['uid']=$uid;
+			$data[0]['errorCode']=$errorCode;
+			echo json_encode($data);
+			exit();
+		}
 	}
-	protected function getActionInfoByName($name){
-		$sql="select * from ai_action_list where name like '%".$name."%'";
-		$data=C_mysqlOne($sql);
-		return $data[0];
-	}
-}
 
 	$api = new IosApi ();
 	echo $api->$_REQUEST ['auact'] ();
