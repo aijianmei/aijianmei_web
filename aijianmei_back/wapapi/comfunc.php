@@ -78,3 +78,15 @@ function setInputLog($fileName=null){
 	ob_end_clean();
 	file_put_contents($fileName,$info);
 }
+function getMonthsList($start, $end=null)
+{
+	//!empty($end)? cother($start,$end) : '' ;
+	$result=$skey=$key=null;
+	for ($i = 0; $i <12; $i++) {
+	 	  $skey="-{$i} month";
+	 	  $key=12-$i;
+	 	  $result[$key]=date('Ym',strtotime($skey ,strtotime($start)));
+	}
+	ksort($result);
+	return $result;
+}

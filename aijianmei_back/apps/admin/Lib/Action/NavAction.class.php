@@ -560,7 +560,9 @@ class NavAction extends Action {
 		foreach ($keywordinfo as $key=>&$value) {
 				if(!in_array($value['name'],$keywordinfoTmp[$value['model']][$value['cname']]))
 				{
-					$keywordinfoTmp[$value['model']][$value['cname']][]=$value['name'];
+					if(!empty($value['model'])&&!empty($value['cname'])){
+						$keywordinfoTmp[$value['model']][$value['cname']][]=$value['name'];
+					}
 				}
 		} 
 		$fileName='keywordInfo.php';

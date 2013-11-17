@@ -6,6 +6,7 @@ RewriteBase /
 RewriteRule ^index.html index.php
 RewriteRule ^forum/(.+) forum/$1
 RewriteRule ^/libpack/$ libpack/$1
+
 RewriteRule ^AppDownload.html AppDownload.php [L]
 
 #RewriteRule ^(.+)-(.+)-(articleDetail)-(.+).html index.php?app=$1&mod=$2&act=$3&id=$4
@@ -18,6 +19,7 @@ RewriteRule ^(.+)-(Train)-(videoDetail)-(.+).html index.php?app=$1&mod=$2&act=$3
 RewriteRule ^(.+)-(.+)-(info)-(.+).html index.php?app=$1&mod=$2&act=info&type=$4
 RewriteRule ^search_(.+)_l(.+).html index.php?app=index&mod=Search&act=dosearch&skword=$1&pg=$2
 RewriteRule ^search_(.+).html index.php?app=index&mod=Search&act=dosearch&skword=$1
+RewriteRule ^search.html index.php?app=index&mod=Search&act=dosearch&skword=
 RewriteRule ^goodcomment.html index.php?app=index&mod=Search&act=goodcomment
 RewriteRule ^goodcomment_(.+).html index.php?app=index&mod=Search&act=goodcomment&pg=$1
 RewriteRule ^admin.html index.php?app=admin
@@ -37,3 +39,10 @@ RewriteRule ^Lifestyle.html index.php?app=index&mod=Lifestyle
 RewriteRule ^register.html index.php?app=index&mod=Reg&act=register
 RewriteRule ^doregister.html index.php?app=index&mod=Reg&act=doregister
 RewriteRule ^setchannelinfo.html index.php?app=index&mod=Reg&act=setchannelinfo
+
+RewriteRule ^newUser.html index.php?app=index&mod=Index&act=footer&id=1
+RewriteRule ^aboutAijianmei.html index.php?app=index&mod=Index&act=footer&id=3
+RewriteRule ^contactUs.html index.php?app=index&mod=Index&act=footer&id=4
+RewriteRule ^joinUs.html index.php?app=index&mod=Index&act=footer&id=5
+RewriteRule ^privacyPolicy.html index.php?app=index&mod=Index&act=footer&id=7
+RewriteRule ^communityGuidelines.html index.php?app=index&mod=Index&act=footer&id=2

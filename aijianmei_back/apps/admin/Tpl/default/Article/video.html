@@ -31,6 +31,7 @@
         <td>
 			<a href="{:U('admin/Article/editVideo',array('id'=>$vo['id']))}">编辑</a>
 			<a href="javascript:void(0);" onclick="deleteAd('{$vo.id}')">删除</a>
+            <button type="button" onclick="messagePush('{$vo.title}');">推送到移动客户端</button>
 		</td>
       </tr>
   </volist>
@@ -130,5 +131,13 @@
 			});
 		}
 	}
+        function messagePush(aid){
+        if(confirm("确定要推送吗?")==true){
+            $.post('/wapapi/messagePush.php?act=pushVideo',{ msg:aid}, function(data) {
+                alert(data);
+            });
+        }
+
+    }
 </script>
 <include file="../Public/_footer" />

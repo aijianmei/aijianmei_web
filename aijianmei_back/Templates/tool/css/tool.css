@@ -754,6 +754,29 @@ input,button,select,textarea{outline:none}
 	.rankRight{
 		margin-left:0;
 	}
+		.singleRank{
+			position: relative;
+		}
+		.slideList{
+			line-height: 30px;
+			text-align: center;
+			background: #00b7ff;
+			border-top: 1px solid #a6e6ff;
+			border-bottom: 1px solid #009bd8;
+			color: white;
+			font-size: 16px;
+			cursor: pointer;
+			
+		}
+		.innerUl{
+			background:#fff;
+			color:#333;
+			display:none;
+		}
+		.rankLists{
+			float:left;
+			margin:5px;
+		}
 		.ranking .rankFace{
 			width:30px;
 			height:30px;
@@ -892,6 +915,26 @@ input,button,select,textarea{outline:none}
 	#gla .userPicCurrent{
 		cursor:default;
 	}
+	
+	.orderMsg{
+		position:absolute;
+		right: -90px;
+		top: -15px;
+		padding:10px;
+		background:#49CAF4;
+		color:white;
+		border-radius:6px;
+		font-weight:bold;
+	}
+	.triangleIcon{
+		border:8px solid; 
+		border-color:transparent #49CAF4 transparent transparent; 
+		position: absolute;
+		left: -16px;
+		top: 24px;
+	}
+	
+	
 			
 #ui-datepicker-div{
 	z-index:300!important;

@@ -777,7 +777,9 @@ if(newdom.getElementsByClass('IOSClient')[0]){
 if(newdom.getElementsByClass('AndroidClient')[0]){
     fade.init('AndroidClient');
 }
-
+if(newdom.getElementsByClass('friendLink')[0]){
+    fade.init('friendLink');
+}
 $(function() {
 
 	$(".bn_contain_pic li").bind({

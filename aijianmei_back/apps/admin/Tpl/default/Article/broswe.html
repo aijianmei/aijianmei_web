@@ -34,6 +34,7 @@
         	<a href="{:U('admin/Article/broswe', array('id'=>$vo['id'], 'o'=>'promote'))}"><eq name="vo.is_promote" value="0">推荐</eq><eq name="vo.is_promote" value="1">已推荐</eq></a>
 			<a href="{:U('admin/Article/edit',array('id'=>$vo['id']))}">编辑</a>
 			<a href="javascript:void(0);" onclick="deleteAd('{$vo.id}')">删除</a>
+            <button type="button" onclick="messagePush({$vo['id']});">推送到移动客户端</button>
 		</td>
       </tr>
   </volist>
@@ -133,5 +134,14 @@
 			});
 		}
 	}
+
+    function messagePush(aid){
+        if(confirm("确定要推送吗?")==true){
+            $.post('/wapapi/messagePush.php?act=pushArticle',{ id:aid}, function(data) {
+                alert(data);
+            });
+        }
+
+    }
 </script>
 <include file="../Public/_footer" />

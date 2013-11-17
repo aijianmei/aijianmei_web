@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="Templates/tool/css/common.css" type="text/css" />
 	<link rel="stylesheet" href="Templates/tool/css/jquery.jqplot.min.css" type="text/css" />
 	<script type="text/javascript" src="Templates/tool/js/jquery.latest.js"></script>
-		<script type="text/javascript" src="Templates/tool/js/ichart.1.2.min.js"></script>
+	<script type="text/javascript" src="Templates/tool/js/ichart.1.2.min.js"></script>
 </head>
 <body>
 	<include file="Templates/courseHeader.html" />
@@ -53,7 +53,7 @@
 							</div>
 							<div class="userInput clearfix">
 								<div class="input1">
-									<span class="redFont">原始体重<input type="text" value="{$userHealth['weight']}" id="initW" maxlength="5"  onkeyup="checkNums(this);" />Kg</span>
+									<span class="redFont">原始体重<input type="text" onkeyup="repNums(this,1);" value="{$userHealth['weight']}" id="initW" maxlength="5" />Kg</span>
 									<span class="initDate redFont">{$userHealth['weightTime']}</span>
 								</div>
 								<div class="input2">
@@ -76,28 +76,29 @@
 			</div><!--End weightManage-->
 			<div class="separateX"></div>
 			<div id="dataIn">
+					<div class="slideWrap">
 				<ul class="actNav clearfix">
 					<volist id="actionListVo" name="actionList" key="n">
 						<li <php>if($n==1){</php>class="curAct"<php>}</php>>{$actionListVo.name}<span></span></li>
 					</volist>
-					</ul>
-					<button class="moreBtn"></button>
-					<div class="moreAct">
-						<div class="moreActCover"></div>
-						<div class="acts">
-							<p class="tip">选择您所做的动作来进行数据统计吧，让我们能更完整地给你提供准确的数据！</p>
-							<div class="actsArea clearfix">
-								<ul class="moreSider">
-								</ul>
-								<div class="moreRight clearfix">
-									<ul class="clearfix" id="actionsList" style="top:0px">
+						</ul>
+						<button class="moreBtn"></button>
+						<div class="moreAct">
+							<div class="moreActCover"></div>
+							<div class="acts">
+								<p class="tip">选择您所做的动作来进行数据统计吧，让我们能更完整地给你提供准确的数据！</p>
+								<div class="actsArea clearfix">
+									<ul class="moreSider">
 									</ul>
-									<div class="preSelect selectMore" style="display:none"></div>
-									<div class="nextSelect selectMore" style="display:none"></div>
+									<div class="moreRight clearfix">
+										<ul class="clearfix actionsList" style="top:0px">
+										</ul>
+										<div class="preSelect selectMore" style="display:none"></div>
+										<div class="nextSelect selectMore" style="display:none"></div>
+									</div>
 								</div>
-								<button class="hideBtn">收起</button>
+								
 							</div>
-							
 						</div>
 					</div>
 					<h3 class="partTit"><div class="titBg"><span class="titLeft"></span><span class="tit tableTabName">{$actionList[0]['name']}</span><span class="titRight"></span></div></h3>
@@ -122,7 +123,7 @@
 											<div class="col2 col">数量<span class="rowTip">以往平均值：<strong class="beforeNumAvg">{$couserAvg['numsAvg']}</strong>个</span></div>
 											<div class="col3 col">重量<span class="rowTip">以往平均值：<strong class="beforeweigthAvg">{$couserAvg['weigthAvg']}</strong>kg</span></div>
 											<div class="col4 col">时间<span class="rowTip">以往平均值：<strong class="beforetimeAvg">{$couserAvg['timeAvg']}</strong>min</span></div>
-										<div class="col4 col">燃烧热量<span class="rowTip">以往平均值：<strong>545</strong>大卡</span></div>
+										<div class="col4 col">燃烧热量<span class="rowTip"></div>
 										</div>
 										<form action="" id="dataForm" >
 										<div class="tBody">
@@ -200,7 +201,7 @@
 								</div><!--End userNote-->
 							</div><!--dataRight-->
 						</div>
-					<div class="calTip">哇！你今天超额燃烧热量<span class="calorie">343</span>卡完成任务。好的身材源于每天一点一滴的积累，坚持！</div>
+					<div class="calTip">哇！你今天超额燃烧热量<span class="calorie morecalorie">0</span>卡完成任务。好的身材源于每天一点一滴的积累，坚持！</div>
 					</div><!--End dataIn-->
 					<div class="separateX"></div>
 					<div id="dataOut" class="clearfix">
@@ -242,6 +243,9 @@
 					<div class="bottomRank clearfix">
 					<h3 class="partTit"><div class="titBg"><span class="titLeft"></span><span class="tit">爱健美健身达人榜</span><span class="titRight"></span></div></h3>
 					<p class="tip  greenFont">数量X重量 = 爱健美健身达人榜的排名，赶紧瞧瞧自己排在哪里吧！</p>
+					<div class="singleRank">
+						
+					</div>
 					<div class="ranking">
 							<div class="rankType"><span>全站排行</span></div>
 							<div class="sportsRank ">
@@ -257,31 +261,31 @@
 										<a class="rankName" alt="<php>echo getUserName(getMid(),'zn');</php>" title="<php>echo getUserName(getMid(),'zn');</php>"><php>echo getUserName(getMid(),'zn','5');</php></a>
 										
 										<php>if($userRankNum!=0){</php>
-										<span class="yourPos rankNums"  style="display:none;">您当前的排名是
+										<span class="yourPos rankNums rankNumsAll"  style="display:none;">您当前的排名是
 											<span class="userPos redFont">{$userRankNum}</span>位</span><php>}else{</php>
-										<span class="yourPos rankNums"  style="display:none;">您的排名在10000以外请多多努力!</span><php>}</php>
+										<span class="yourPos rankNums rankNumsAll"  style="display:none;">您的排名在10000以外请多多努力!</span><php>}</php>
 
 										<php>if($userRankNum7!=0){</php>
-										<span class="yourPos rankNums"  style="display:none;">您当前的排名是
+										<span class="yourPos rankNums rankNumsAll"  style="display:none;">您当前的排名是
 											<span class="userPos redFont">{$userRankNum7}</span>位</span><php>}else{</php>
-											<span class="yourPos rankNums" style="display:none;">您的排名在10000以外请多多努力!</span><php>}</php>
+											<span class="yourPos rankNums rankNumsAll" style="display:none;">您的排名在10000以外请多多努力!</span><php>}</php>
 
 										<php>if($userRankNum30!=0){</php>
-										<span class="yourPos rankNums" style="display:none;">您当前的排名是
+										<span class="yourPos rankNums rankNumsAll" style="display:none;">您当前的排名是
 											<span class="userPos redFont">{$userRankNum30}</span>位</span><php>}else{</php>
-											<span class="yourPos rankNums" style="display:none;">您的排名在10000以外请多多努力!</span><php>}</php>										
+											<span class="yourPos rankNums rankNumsAll" style="display:none;">您的排名在10000以外请多多努力!</span><php>}</php>										
 										<php>if($userRankNumall!=0){</php>
-										<span class="yourPos rankNums">您当前的排名是
+										<span class="yourPos rankNums rankNumsAll">您当前的排名是
 											<span class="userPos redFont" >{$userRankNumall}</span>位</span><php>}else{</php>
-											<span class="yourPos rankNums">您的排名在10000以外请多多努力!</span><php>}</php>
+											<span class="yourPos rankNums rankNumsAll">您的排名在10000以外请多多努力!</span><php>}</php>
 
 									</div>
 									<ul class="topTen rankUl rankUlAll" style="display:none;">
 										<volist id="userRankList" name="userRankList" key="n">
 										<li>
 											<span class="order No{$n}">{$n}</span>
-											<a href=""><img src="{$userRankList.userFace}" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">{$userRankList.userName}</a>
+											<a ><img src="{$userRankList.userFace}" alt="userFace" class="rankFace" /></a>
+											<a class="otherName"  allweight="{$userRankList.weight}kg" allcount="{$userRankList.nums}个" all="{$userRankList.exercise}">{$userRankList.userName}</a>
 										</li>
 										</volist>
 									</ul>
@@ -290,8 +294,8 @@
 										<volist id="userRankList" name="userRankList_7" key="n">
 										<li>
 											<span class="order No{$n}">{$n}</span>
-											<a href=""><img src="{$userRankList.userFace}" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">{$userRankList.userName}</a>
+											<a ><img src="{$userRankList.userFace}" alt="userFace" class="rankFace" /></a>
+											<a class="otherName"  allweight="{$userRankList.weight}kg" allcount="{$userRankList.nums}个" all="{$userRankList.exercise}">{$userRankList.userName}</a>
 										</li>
 										</volist>
 									</ul>
@@ -301,8 +305,8 @@
 										<volist id="userRankList" name="userRankList_30" key="n">
 										<li>
 											<span class="order No{$n}">{$n}</span>
-											<a href=""><img src="{$userRankList.userFace}" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">{$userRankList.userName}</a>
+											<a ><img src="{$userRankList.userFace}" alt="userFace" class="rankFace" /></a>
+											<a class="otherName"  allweight="{$userRankList.weight}kg" allcount="{$userRankList.nums}个" all="{$userRankList.exercise}">{$userRankList.userName}</a>
 										</li>
 										</volist>
 									</ul>
@@ -310,8 +314,8 @@
 										<volist id="userRankList" name="userRankList_all" key="n">
 										<li>
 											<span class="order No{$n}">{$n}</span>
-											<a href=""><img src="{$userRankList.userFace}" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">{$userRankList.userName}</a>
+											<a ><img src="{$userRankList.userFace}" alt="userFace" class="rankFace" /></a>
+											<a  class="otherName"  allweight="{$userRankList.weight}kg" allcount="{$userRankList.nums}个" all="{$userRankList.exercise}">{$userRankList.userName}</a>
 										</li>
 										</volist>
 									</ul>
@@ -356,8 +360,8 @@
 										<volist id="duserRankList" name="duserRankList" key="n">
 										<li>
 											<span class="order No{$n}">{$n}</span>
-											<a href=""><img src="{$duserRankList.userFace}" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">{$duserRankList.userName}</a>
+											<a ><img src="{$duserRankList.userFace}" alt="userFace" class="rankFace" /></a>
+											<a  class="otherName" allweight="{$duserRankList.weight}kg" allcount="{$duserRankList.nums}个" all="{$duserRankList.exercise}">{$duserRankList.userName}</a>
 										</li>
 										</volist>
 									</ul>
@@ -366,28 +370,26 @@
 										<volist id="duserRankList" name="duserRankList_7" key="n">
 										<li>
 											<span class="order No{$n}">{$n}</span>
-											<a href=""><img src="{$duserRankList.userFace}" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">{$duserRankList.userName}</a>
+											<a ><img src="{$duserRankList.userFace}" alt="userFace" class="rankFace" /></a>
+											<a  class="otherName" allweight="{$duserRankList.weight}kg" allcount="{$duserRankList.nums}个" all="{$duserRankList.exercise}">{$duserRankList.userName}</a>
 										</li>
 										</volist>
 									</ul>
-
-
 									<ul class="topTen rankUl rankUlOne" style="display:none;">
 										<volist id="duserRankList" name="duserRankList_30" key="n">
 										<li>
 											<span class="order No{$n}">{$n}</span>
-											<a href=""><img src="{$duserRankList.userFace}" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">{$duserRankList.userName}</a>
+											<a ><img src="{$duserRankList.userFace}" alt="userFace" class="rankFace" /></a>
+											<a  class="otherName" allweight="{$duserRankList.weight}kg" allcount="{$duserRankList.nums}个" all="{$duserRankList.exercise}">{$duserRankList.userName}</a>
 										</li>
 										</volist>
 									</ul>
 									<ul class="topTen rankUl rankUlOne">
-										<volist id="duserRankList_all" name="duserRankList_all" key="n">
+										<volist id="duserRankList" name="duserRankList_all" key="n">
 										<li>
 											<span class="order No{$n}">{$n}</span>
-											<a href=""><img src="{$duserRankList_all.userFace}" alt="userFace" class="rankFace" /></a>
-											<a href="" class="otherName">{$duserRankList_all.userName}</a>
+											<a ><img src="{$duserRankList.userFace}" alt="userFace" class="rankFace" /></a>
+											<a  class="otherName" allweight="{$duserRankList.weight}kg" allcount="{$duserRankList.nums}个" all="{$duserRankList.exercise}">{$duserRankList.userName}</a>
 										</li>
 										</volist>
 									</ul>
@@ -518,6 +520,7 @@ function getCourseData(dateContentVar){
 			$(".beforetimeAvg").html(msg.beforeAvg.timeAvg);
 			//根据状态来调整是否显示删除按钮
 			isShowDelButton();
+			countCalories();
 		}
 	});
 }
@@ -667,6 +670,7 @@ function saveAddItems(){
 			success: function(msg) {
 				alert('保存成功');
 				resetAvg();
+				countCalories();
 			}
 		});
 	}else{
@@ -683,21 +687,46 @@ function getRankList(){
 			data:'',// 要提交的表单
 			dataType:'json',
 			success: function(msg) {
-				var duserRankList_7=msg.duserRankList_7;
-				$(".rankUlOne").eq(1).empty();
-				var innerHtml='';
-				for (var i = 0; i < duserRankList_7.length;++i) {
-					innerHtml=innerHtml+'<li><span class="order No'+(i*1+1)+'">'+(i*1+1)+'</span><a href=""><img src="'+duserRankList_7[i]['userFace']+'" alt="userFace" class="rankFace"></a><a href="" class="otherName">'+duserRankList_7[i]['userName']+'</a></li>';
-					//alert(innerHtml);
+				console.log(msg);
+				var duserRank=[];
+				duserRank[0]=msg.duserRankList;
+				duserRank[1]=msg.duserRankList_7;
+				duserRank[2]=msg.duserRankList_30;
+				duserRank[3]=msg.duserRankList_all;
+
+				for(n=0;n<duserRank.length;n++){
+					$(".rankUlOne").eq(n).empty();
+					var duserRankList=duserRank[n];
+					var innerHtml='';
+					for (var i = 0; i < duserRankList.length;++i) {
+						innerHtml=innerHtml+'<li><span class="order No'+(i*1+1)+'">'+(i*1+1)+'</span><a href=""><img src="'+duserRankList[i]['userFace']+'" alt="userFace" class="rankFace"></a><a href="" class="otherName">'+duserRankList[i]['userName']+'</a></li>';
+						//alert(innerHtml);
+					}
+					$(".rankUlOne").eq(n).append(innerHtml);
 				}
-				$(".rankUlOne").eq(1).append(innerHtml);
+
+				var duserRankNums=[];
+				duserRankNums[0]=msg.duserRankNum;
+				duserRankNums[1]=msg.duserRankNum7;
+				duserRankNums[2]=msg.duserRankNum30;
+				duserRankNums[3]=msg.duserRankNumall;
+				for (var i = duserRankNums.length - 1; i >= 0; i--) {
+					if(duserRankNums[i]==0){
+						var innerHtml='';
+						innerHtml='您的排名在10000以外请多多努力!';
+						$(".rankNumsOne").eq(i).html(innerHtml);
+					}else{
+						var innerHtml='';
+						innerHtml='您当前的排名是<span class="userPos redFont">'+duserRankNums[i]+'</span>位';
+						$(".rankNumsOne").eq(i).html(innerHtml);
+					}
+				};
 			}
 		});
 	}else{
 		$(".login").click();	
 	}
 }
-
 
 $(function(){
 	$('.glaimagebox').click(function(){
@@ -723,10 +752,10 @@ $(function(){
 
 $('.rankDayAll').click(function(){
 	var _index=$(this).index();
-	$(".rankUl").hide();
-	$(".rankUl").eq(_index).show();
-	$(".rankNums").hide();
-	$(".rankNums").eq(_index).show();
+	$(".rankUlAll").hide();
+	$(".rankUlAll").eq(_index).show();
+	$(".rankNumsAll").hide();
+	$(".rankNumsAll").eq(_index).show();
 });
 
 $('.rankDayOne').click(function(){
@@ -737,6 +766,7 @@ $('.rankDayOne').click(function(){
 	$(".rankNumsOne").eq(_index).show();
 });
 
+countCalories();//页面计算卡路里
 </script>
 <script type="text/javascript" src="Templates/js/public.js"></script>
 <script type="text/javascript">

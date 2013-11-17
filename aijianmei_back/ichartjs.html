@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="../Templates/tool/js/jquery.latest.js"></script>
+	<script type="text/javascript" src="../Templates/tool/js/ichart.1.2.min.js"></script>
+	<title></title>
+</head>
+<body style="padding: 0px; margin: 0px; width: 100%;height: 100%;">
+<div class="canvasArea" style="margin:0 auto"><div id='canvasDiv'></div></div>
+<script>
+var jsonurl="/wapapi/ios.php?aucode=aijianmei&auact=getDefaultUserLineData&wap=1&uid=<?php echo $_GET['uid'];?>&aid=<?php echo $_GET['actionId'];?>&group=<?php echo $_GET['groupId'];?>&date=<?php echo $_GET['date'];?>&selectTagType=<?php echo $_GET['selectTagType'];?>";//json地址
+<?php if($_GET['selectTagType']==30){?>
+var point_size_app=20;
+var xbsize=18;
+var ystart_scale=20;
+<?php }elseif($_GET['selectTagType']==365){?>
+var point_size_app=20;
+var xbsize=25;
+var ystart_scale=30;
+<?php }else{?>
+var point_size_app=28;
+var xbsize=25;
+var ystart_scale=20;
+<?php }?>
+</script>
+<script type="text/javascript" src="../Templates/tool/js/lineDataApp.js"></script>
+</body>
+</html>

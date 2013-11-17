@@ -5,6 +5,7 @@ class CourseAction extends Action {
 		$uid=$_SESSION['mid']? intval($_SESSION['mid']):0;
 		//echo getUserFace($uid,'b');exit;
 		$defaultActionList=$this->getDefaultActionList($uid);
+		$defaultActionList=array_values($defaultActionList);
 		if(empty($defaultActionList)){
 			$actionList=$this->getRecommendActionList();
 			$faid=intval($actionList[0]['id']);
@@ -12,7 +13,7 @@ class CourseAction extends Action {
 			$actionList=$defaultActionList;
 			$faid=intval($actionList[0]['id']);
 		}
-
+		//echo $faid;exit;
 		$this->countUserExercise();
 
 
@@ -65,9 +66,7 @@ class CourseAction extends Action {
 
 	public function setUserRankInfo($uid,$aid){
 		//所有的排行
-//$this->getUserRankById($uid,'',$aid,true);
-
-		$duserRankList=$this->getUserRank('',$aid);
+		//$this->getUserRankById($uid,'',$aid,true);
 		$userRankList=$this->getUserRank();
 		$userRankList_7=$this->getUserRank(7);
 		$userRankList_30=$this->getUserRank(30);
@@ -94,8 +93,6 @@ class CourseAction extends Action {
 		$this->assign ( 'duserRankList_7', $duserRankList_7);
 		$this->assign ( 'duserRankList_30', $duserRankList_30);
 		$this->assign ( 'duserRankList_all', $duserRankList_all);
-
-
 
 		$this->assign ( 'duserRankNum', $this->getUserRankById($uid,'',$aid));
 		$this->assign ( 'duserRankNum7', $this->getUserRankById($uid,7,$aid));
@@ -182,7 +179,7 @@ class CourseAction extends Action {
 		return $data;
 	}
 	protected function getActionInfoByName($name){
-		$sql="select * from ai_action_list where name like '%".$name."%'";
+		$sql="select * from ai_action_list where name='".$name."'";
 		$data=M('')->query($sql);
 		return $data[0];
 	}
@@ -341,6 +338,8 @@ class CourseAction extends Action {
 				$result[$value['date']][$value['uid']]['uid']		=$value['uid'];
 				$result[$value['date']][$value['uid']]['date']		=$value['date'];
 				$result[$value['date']][$value['uid']]['aid']		=$value['aid'];
+				$result[$value['date']][$value['uid']]['weight']	=$value['loginfo']['weight'];
+				$result[$value['date']][$value['uid']]['nums']		=$value['loginfo']['nums'];
 			}
 			foreach ($result as $date => $uidinfo) {
 				foreach ($uidinfo as $uid => &$value) {
@@ -357,13 +356,15 @@ class CourseAction extends Action {
 					$aid     =$v['aid'];
 					$date    =$v['date'];
 					$exercise=$v['exercise'];
+					$weight  =$v['weight'];
+					$nums 	 =$v['nums'];
 					$checkSql="select * from `ai_user_exercise_log` where `uid`='".$uid."' and `aid`='".$aid."' and `date`='".$date."'";
 					$checkData=M('')->query($checkSql);
 					if(!empty($checkData)){
-						$updateSql="UPDATE `ai_user_exercise_log` SET  `exercise` =  '".$exercise."',`create_time` =  '".time()."' WHERE `uid` =  '".$uid."' and `aid` =  '".$aid."' and `date` =  '".$date."'";
+						$updateSql="UPDATE `ai_user_exercise_log` SET  `exercise` =  '".$exercise."',`weight`='".$weight."',`nums`='".$nums."',`create_time` =  '".time()."' WHERE `uid` =  '".$uid."' and `aid` =  '".$aid."' and `date` =  '".$date."'";
 						M('')->query($updateSql);
 					}else{
-						$insertSql ="INSERT INTO `ai_user_exercise_log` (`id` ,`uid` ,`aid` ,`date` ,`exercise` ,`create_time`)VALUES (NULL ,  '".$uid."',  '".$aid."',  '".$date."',  '".$exercise."',  '".time()."')";
+						$insertSql ="INSERT INTO `ai_user_exercise_log` (`id` ,`uid` ,`aid` ,`date` ,`exercise` ,`weight` ,`nums` ,`create_time`)VALUES (NULL ,  '".$uid."',  '".$aid."',  '".$date."',  '".$exercise."',  '".$weight."',  '".$nums."',  '".time()."')";
 						M('')->query($insertSql);	
 					}
 				}
@@ -383,7 +384,7 @@ class CourseAction extends Action {
 			}
 			if($isAll==true&&empty($aid)){$where=null;}
 			if($isAll==true&&!empty($aid)){$where="where aid=$aid";}
-			$getSql="SELECT SUM(  `exercise` ) AS exercise, uid FROM ai_user_exercise_log $where GROUP BY uid ORDER BY exercise DESC limit 10";
+			$getSql="SELECT SUM(  `exercise` ) AS exercise, uid,SUM(`weight`) as weight,SUM(`nums`) as nums FROM ai_user_exercise_log $where GROUP BY uid ORDER BY exercise DESC limit 10";
 			$data=M('')->query($getSql);
 			foreach ($data as $key => &$value) {
 				$value['userFace']=getUserFace($value['uid'],'m');
@@ -407,7 +408,14 @@ class CourseAction extends Action {
 			}
 
 			if($isAll==true){$where=null;}
-			$tmpTable="SELECT SUM(  `exercise` ) AS exercise, uid,date FROM ai_user_exercise_log  $where GROUP BY uid ORDER BY exercise";
+			if(!empty($aid)&&!empty($where)){
+				$tmpTable="SELECT SUM(  `exercise` ) AS exercise, uid,date FROM ai_user_exercise_log $where and `aid`=$aid GROUP BY uid ORDER BY exercise";
+			}elseif(!empty($aid)&&empty($where)){
+				$tmpTable="SELECT SUM(  `exercise` ) AS exercise, uid,date FROM ai_user_exercise_log where aid=$aid GROUP BY uid ORDER BY exercise";
+			}else{
+				$tmpTable="SELECT SUM(  `exercise` ) AS exercise, uid,date FROM ai_user_exercise_log $where GROUP BY uid ORDER BY exercise";
+			}
+
 			if(!empty($where)){
 				$tmpUTable="SELECT SUM(  `exercise` ) AS exercise FROM ai_user_exercise_log  $where and uid=$uid GROUP BY uid ORDER BY exercise";
 			}elseif(!empty($aid)){
@@ -426,4 +434,4 @@ class CourseAction extends Action {
 			return $data[0]['num']>0 ? intval($data[0]['num']):1;
 		}
 	}
-	?>
+?>

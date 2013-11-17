@@ -622,9 +622,14 @@ $("li .show_enter").add("div .show_enter").mouseover(function(){
             if(newdom.getElementsByClass('my_cart')[0]){
                 fade.init('my_cart');
             }
-            if(document.getElementById('teach')){
-                fade.init('teach');
+            if(newdom.getElementsByClass('AndroidClient')[0]){
+                fade.init('AndroidClient');
             }
+			if(newdom.getElementsByClass('friendLink')[0]){
+                fade.init('friendLink');
+            }
+
+			
 
 $(document).ready(function() {
   $("embed").attr({"wmode":"transparent"});

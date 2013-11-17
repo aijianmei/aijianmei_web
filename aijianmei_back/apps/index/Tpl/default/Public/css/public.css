@@ -375,7 +375,7 @@ button{
 			position: relative;
 			float: left;
 			height: 72px;
-			margin:0 1px;
+			margin:0 -2px;
 		}
 		.home,.store{
 			display: inline-block;

@@ -29,9 +29,11 @@ class Ajax {
 		'getUserLogAllInfo',
 		'deleteUserCourseInfo',
 		'getUserRankByAid',
+		'getUserConsumeCalories',
+		'showChartPage',
 		);
 	protected $ttf = 'FZSJSJW.TTF';
-	protected $baseUrl = 'http://www.aijianmei.com';
+	protected $baseUrl = 'http://www.kon_aijianmei.com';
 	public function __construct() {
 		$this->mid=intval($_SESSION['mid']);
 		@$doAction = $_REQUEST ['act'] ? ( string ) $_REQUEST ['act'] : die ( 40003 );
@@ -44,6 +46,17 @@ class Ajax {
 	}
 	public function __call($name, $args) {
 		die ( 40004 );
+	}
+	/**
+	 * [getUserConsumeCalories 返回用户当前消耗卡路里数量]
+	 * @return int 
+	 */
+	public function getUserConsumeCalories(){
+		$uid=$_REQUEST['uid'] ?intval($_REQUEST['uid']):0;
+		$this->checkUserId( $uid );
+		$date=$_REQUEST['date'] ?intval($_REQUEST['date']):0;
+		$sql="select * from ai_user_course_list where `uid`=$uid and `date`=$date";
+
 	}
 	public function getUserRankByAid(){
 		$aid      =$_REQUEST['aid']?(string)$_REQUEST['aid']:die(40001);
@@ -78,12 +91,19 @@ class Ajax {
 	public function getDefaultUserLineData(){
 		if(!$this->mid>0) die();
 		$uid=$this->mid;
+		if($_GET['wap']==1){
+			$uid=$_REQUEST['uid']?intval($_REQUEST['uid']):0;
+		}
 		$date=$group=null;
 		$nowDate		=date('Ymd',time());
-		@$date 			=$_POST['date'] ? $_POST['date']: $nowDate;
-		@$group 		=$_POST['group'] ? $_POST['group'] :1;
-		@$selectTagType =$_POST['selectTagType'] ? $_POST['selectTagType'] :7;
-		@$aid			=$_POST['aid'] ? $this->getActionIdByName ( $_POST ['aid'] ):$this->getUserFaid($uid);
+		@$date 			=$_REQUEST['date'] ? $_REQUEST['date']: $nowDate;
+		@$group 		=$_REQUEST['group'] ? $_REQUEST['group'] :1;
+		@$selectTagType =$_REQUEST['selectTagType'] ? $_REQUEST['selectTagType'] :7;
+		if(!is_numeric($_REQUEST['aid'])){
+			@$aid			=$_REQUEST['aid'] ? $this->getActionIdByName ( $_REQUEST ['aid'] ):$this->getUserFaid($uid);
+		}else{
+			$aid=intval($_REQUEST['aid']);
+		}
 		$allDate    	=$this->generateFormatDate($date,$selectTagType);
 		$startDate  	=$allDate['startDate'];
 		$endDate		=$allDate['endDate'];
@@ -335,9 +355,9 @@ class Ajax {
 	public function postWeightInfo(){
 		$uid=$_SESSION['mid'];
 		if(!$uid > 0) die();
-		$weight=intval($_POST['weight']);
-		$targetWeight=intval($_POST['tweight']);
-		$nowWeight=intval($_POST['nweight']);
+		$weight=floatval($_POST['weight']);
+		$targetWeight=floatval($_POST['tweight']);
+		$nowWeight=floatval($_POST['nweight']);
 		$checkSql="select * from ai_user_health_info where `uid` =$uid";
 		$checkResult=$this->db->_query($checkSql);
 		if(!empty($checkResult)){
@@ -380,7 +400,7 @@ class Ajax {
 			foreach ( $data as $k => &$value ) {
 				$value ['loginfo'] = unserialize ( $value ['loginfo'] );
 				$colorCss= ($k+1)%2==0 ?'evenRow':'oddRow';
-				$resultHtml.= '<div class="actGroup actGroupKon '.$colorCss.' clearfix"><button type="button" class="delBtn" style="display:block;"></button><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div><div class="col5 col">0</div></div>';
+				$resultHtml.='<div class="actGroup actGroupKon '.$colorCss.' clearfix"><button type="button" class="delBtn" style="display:block;"></button><div class="col1 col">第'.$this->num2Char($k+1).'组</div><div class="col2 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['nums'].'" name="nums[]" class="figure" readonly/><span class="add"></span></div><div class="col3 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['weight'].'" name="weight[]" class="figure" readonly/><span class="add"></span></div><div class="col4 col"><span class="cut"></span><input type="text" value="'.$value['loginfo']['time'].'" name="time[]" class="figure" readonly/><span class="add"></span></div><div class="col5 col">0</div></div>';
 				$numCount		+=$value['loginfo']['nums'];
 				$weightCount	+=$value['loginfo']['weight'];
 				$timeCount		+=$value['loginfo']['time'];
@@ -424,7 +444,7 @@ class Ajax {
 		$uid = $_REQUEST ['uid'];
 		$aid = $this->getActionIdByName ( $_REQUEST ['aid'] );
 		$date = date ( "Ymd", strtotime ( str_replace ( ".", "-", $_REQUEST ['date'] ) ) );
-		$this->checkUserId ( $uid );
+		//$this->checkUserId ( $uid );
 
 		foreach ( $_POST ['nums'] as $key => $value ) {
 			$loginfo = null;
@@ -801,7 +821,16 @@ class Ajax {
 		}
 
 		if($isAll==true){$where=null;}
-		$tmpTable="SELECT SUM(  `exercise` ) AS exercise, uid,date FROM ai_user_exercise_log  $where GROUP BY uid ORDER BY exercise";
+
+		if(!empty($aid)&&!empty($where)){
+			$tmpTable="SELECT SUM(  `exercise` ) AS exercise, uid,date FROM ai_user_exercise_log $where and `aid`=$aid GROUP BY uid ORDER BY exercise";
+		}elseif(!empty($aid)&&empty($where)){
+			$tmpTable="SELECT SUM(  `exercise` ) AS exercise, uid,date FROM ai_user_exercise_log where aid=$aid GROUP BY uid ORDER BY exercise";
+		}else{
+			$tmpTable="SELECT SUM(  `exercise` ) AS exercise, uid,date FROM ai_user_exercise_log $where GROUP BY uid ORDER BY exercise";
+		}
+
+
 		if(!empty($where)){
 			$tmpUTable="SELECT SUM(  `exercise` ) AS exercise FROM ai_user_exercise_log  $where and uid=$uid GROUP BY uid ORDER BY exercise";
 		}elseif(!empty($aid)){
@@ -813,7 +842,11 @@ class Ajax {
 		$getRankSql="select count(*) as num from ($tmpTable) as tmp where tmp.exercise >= ($tmpUTable)";
 		$data=$this->db->_query($getRankSql);
 		if($data[0]['num']==0){
-			$checkSql="select * from ai_user_exercise_log where uid=$uid and date='".date('Ymd',time())."'";
+			if(!empty($aid)){
+				$checkSql="select * from ai_user_exercise_log where uid=$uid and aid=$aid and date='".date('Ymd',time())."'";
+			}else{
+				$checkSql="select * from ai_user_exercise_log where uid=$uid and date='".date('Ymd',time())."'";	
+			}
 			$check=$this->db->_query($checkSql);
 			if(empty($check)) return 0;
 		}

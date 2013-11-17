@@ -51,7 +51,7 @@
                     </ul>
                 </li>
                 <li class="special_buy">
-                    <a class="car_buy">购物车</a>
+                    <a class="car_buy <!--{if $ecs_session.user_id<=0}-->login<!--{/if}-->" <!--{if $ecs_session.user_id>0}-->href="/shop/flow.php"<!--{/if}-->>购物车</a>
                 </li>
             </ul>
 			<!--{else}-->
@@ -74,8 +74,10 @@
 
                     </li>
                     <li><i class="ag_current"></i><a href="/Append.html">辅助品</a></li>
-                    <li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
-                    <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>
+					<li><i class="ag_current"></i><a href="/Lifestyle.html">生活方式</a></li>
+					<li><i class="ag_current"></i><a href="/FitnessProgram.html">运动管理</a></li>
+                    <!--<li class="forum"><i class="ag_current"></i><a href="#">论坛</a></li>
+                    <li class="friends"><i class="ag_current"></i><a href="#">交友互动</a></li>-->
                 </ul>
             </div>
         </div>

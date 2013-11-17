@@ -3,7 +3,7 @@ error_reporting(0);
 //header('Content-type: text/json');
 header ( "Content-Type:application/json;charset=utf-8" );
 ob_start();
-var_dump($_POST);
+var_dump($_REQUEST);
 var_dump($_FILES);
 $info=ob_get_contents();
 ob_end_clean();
@@ -54,7 +54,7 @@ function C_mysqlOne($sql) {
 
 
 require_once ('reimg.php');
-$uid = $_POST ['uid'];
+$uid = $_REQUEST ['uid'];
 if (empty ( $uid )) {
 	$data['ret'] = '10001';
 	$data['dat']['uid'] = 0;
@@ -78,7 +78,7 @@ function Aimkdirs($dir)
 }  
 Aimkdirs("$basedir/data/uploads/avatar/$uid/"); 
 $srcImage = "$basedir/data/uploads/avatar/$uid/original.jpg";
-if (move_uploaded_file ( $_FILES ['avatarimage'] ['tmp_name'], $srcImage )) {
+if (move_uploaded_file ( $_FILES ['photo'] ['tmp_name'], $srcImage )) {
 	if (is_file ( $srcImage )) {
 		$fileDir = "$basedir/data/uploads/avatar/$uid/big.jpg";
 		$srcSize = getimagesize($srcImage);
@@ -124,15 +124,15 @@ if (move_uploaded_file ( $_FILES ['backgroundimage'] ['tmp_name'], $srcImage )) 
 
 
 
-		$uid = $_POST ['uid'];
-		$username = $_POST ['name'] ? $_POST ['name'] : null;
+		$uid = $_REQUEST ['uid'];
+		$username = $_REQUEST ['name'] ? $_REQUEST ['name'] : null;
 		$oldusernameinfo = C_mysqlOne ( "select * from ai_user where uid =$uid" );
 		$oldusernameinfo = $oldusernameinfo [0];
 		if (! empty ( $oldusernameinfo )) {
 			$checkunamesql = "select uname from ai_user where uname='" . $username . "' and email!='" . $oldusernameinfo ['email'] . "'";
 			$checkuname = C_mysqlOne ( $checkunamesql );
 			$checkuname = $checkuname [0];
-			if (! empty ( $_POST ['name'] ) && empty ( $checkuname )) { // 用户名
+			if (! empty ( $_REQUEST ['name'] ) && empty ( $checkuname )) { // 用户名
 				
 				if (empty ( $checkuname )) {
 					//$this->updatePWUname ( $oldusernameinfo ['uname'], $oldusernameinfo ['email'], $username );
@@ -166,70 +166,70 @@ if (move_uploaded_file ( $_FILES ['backgroundimage'] ['tmp_name'], $srcImage )) 
 				$sql = "INSERT INTO ai_user_keywords VALUES($uid,serialize($oldkeyword)) ON DUPLICATE KEY UPDATE keyword='" . serialize ( $oldkeyword ) . "'";
 				C_mysqlOne ( $sql );
 			}*/
-			if (! empty ( $_POST ['description'] )) { // 个人签名
-				$description = $_POST ['description'];
+			if (! empty ( $_REQUEST ['description'] )) { // 个人签名
+				$description = $_REQUEST ['description'];
 				$sql = "UPDATE ai_others SET description = '" . $description . "' WHERE  uid =$uid";
 				C_mysqlOne ( $sql );
 			}
-			if (! empty ( $_POST ['gender'] )) { // 性别
-				$sql = "UPDATE ai_user SET sex = '" . $_POST ['gender'] . "' WHERE uid=$uid";
+			if (! empty ( $_REQUEST ['gender'] )) { // 性别
+				$sql = "UPDATE ai_user SET sex = '" . $_REQUEST ['gender'] . "' WHERE uid=$uid";
 				C_mysqlOne ( $sql );
 			}
-			if (! empty ( $_POST ['age'] )) { // 年龄
-				$sql = "UPDATE ai_user_health_info SET age = '" . $_POST ['age'] . "' WHERE uid=$uid";
+			if (! empty ( $_REQUEST ['age'] )) { // 年龄
+				$sql = "UPDATE ai_user_health_info SET age = '" . $_REQUEST ['age'] . "' WHERE uid=$uid";
 				C_mysqlOne ( $sql );
 			}
 
-			if (! empty ( $_POST ['weight'] )) { // 体重
-				$sql = "UPDATE ai_user_health_info SET body_weight = '" . $_POST ['weight'] . "' WHERE uid=$uid";
+			if (! empty ( $_REQUEST ['weight'] )) { // 体重
+				$sql = "UPDATE ai_user_health_info SET body_weight = '" . $_REQUEST ['weight'] . "' WHERE uid=$uid";
 				C_mysqlOne ( $sql );
 			}
-			if (! empty ( $_POST ['height'] )) { // 身高
-				$sql = "UPDATE ai_user_health_info SET height = '" . $_POST ['height'] . "' WHERE uid=$uid";
+			if (! empty ( $_REQUEST ['height'] )) { // 身高
+				$sql = "UPDATE ai_user_health_info SET height = '" . $_REQUEST ['height'] . "' WHERE uid=$uid";
 				C_mysqlOne ( $sql );
 			}
-			if (! empty ( $_POST ['province'] )) { // 省份
-				$getaidSql = "SELECT area_id FROM  ai_area WHERE title LIKE '%" . $_POST ['province'] . "%'";
+			if (! empty ( $_REQUEST ['province'] )) { // 省份
+				$getaidSql = "SELECT area_id FROM  ai_area WHERE title LIKE '%" . $_REQUEST ['province'] . "%'";
 				$aidInfo = C_mysqlOne ( $getaidSql );
 				$aidInfo = $aidInfo [0];
 				$upsql = "UPDATE ai_user SET province='" . $aidInfo ['area_id'] . "' WHERE uid=$uid";
 				C_mysqlOne ( $upsql );
 			}
-			if (! empty ( $_POST ['city'] )) { // 城市
-				$getaidSql = "SELECT area_id FROM  ai_area WHERE title LIKE '%" . $_POST ['city'] . "%'";
+			if (! empty ( $_REQUEST ['city'] )) { // 城市
+				$getaidSql = "SELECT area_id FROM  ai_area WHERE title LIKE '%" . $_REQUEST ['city'] . "%'";
 				$aidInfo = C_mysqlOne ( $getaidSql );
 				$aidInfo = $aidInfo [0];
 				$upsql = "UPDATE ai_user SET city='" . $aidInfo ['area_id'] . "' WHERE uid=$uid";
 				C_mysqlOne ( $upsql );
 			}
-			if(!empty($_POST['profileImageUrl'])&&empty($_FILES ['avatarimage'] ['tmp_name'])){
-				$profileImageUrl = $_POST ['profileImageUrl'];
+			if(!empty($_REQUEST['profileImageUrl'])&&empty($_FILES ['photo'] ['tmp_name'])){
+				$profileImageUrl = $_REQUEST ['profileImageUrl'];
 				$sql = "UPDATE ai_others SET profileImageUrl = '" . $profileImageUrl . "' WHERE  id =$uid";
 				C_mysqlOne ( $sql );
-			}elseif(!empty($_POST['profileImageUrl'])&&!empty($_FILES ['avatarimage'] ['tmp_name'])){
-				$sql = "select iosAvatar from ai_others WHERE uid ='".$_POST ['uid']."'";
+			}elseif(!empty($_REQUEST['profileImageUrl'])&&!empty($_FILES ['photo'] ['tmp_name'])){
+				$sql = "select iosAvatar from ai_others WHERE uid ='".$_REQUEST ['uid']."'";
 				$iosAvatar=C_mysqlOne ( $sql );
-				$_POST ['profileImageUrl'] ="http://www.aijianmei.com/data/uploads/avatar/$uid/".$iosAvatar[0]['iosAvatar'];
-			}elseif(empty($_POST['profileImageUrl'])&&!empty($_FILES ['avatarimage'] ['tmp_name'])){
-				$sql = "select iosAvatar from ai_others WHERE uid ='".$_POST ['uid']."'";
+				$_REQUEST ['profileImageUrl'] ="http://www.aijianmei.com/data/uploads/avatar/$uid/".$iosAvatar[0]['iosAvatar'];
+			}elseif(empty($_REQUEST['profileImageUrl'])&&!empty($_FILES ['photo'] ['tmp_name'])){
+				$sql = "select iosAvatar from ai_others WHERE uid ='".$_REQUEST ['uid']."'";
 				$iosAvatar=C_mysqlOne ( $sql );
-				$_POST ['profileImageUrl'] ="http://www.aijianmei.com/data/uploads/avatar/$uid/".$iosAvatar[0]['iosAvatar'];
+				$_REQUEST ['profileImageUrl'] ="http://www.aijianmei.com/data/uploads/avatar/$uid/".$iosAvatar[0]['iosAvatar'];
 			}
 		}
 $bim = getBmiById ( $uid );
 $data['dat']['uid'] = $uid;
 $data['dat']['BMIValue'] = $bim;
-$data['dat']['name'] = $_POST ['name']?$_POST ['name']:'';
-$data['dat']['description'] = $_POST ['description']?$_POST ['description']:'';
-$data['dat']['gender'] =$_POST ['gender'];
-$data['dat']['sinaUserId'] = $_POST ['sinaUserId']?$_POST ['sinaUserId']:'';
-$data['dat']['email'] = $_POST ['email']?$_POST ['email']:'';
-$data['dat']['age'] =$_POST ['age']?$_POST ['age']:'';
-$data['dat']['weight'] = $_POST ['weight']?$_POST ['weight']:'';
-$data['dat']['height'] = $_POST ['height']?$_POST ['height']:'';
-$data['dat']['province'] = $_POST ['province']?$_POST ['province']:'';
-$data['dat']['city'] = $_POST ['city']?$_POST ['city']:'';
-$data['dat']['profileImageUrl'] = $_POST ['profileImageUrl']?$_POST ['profileImageUrl']:'';
+$data['dat']['name'] = $_REQUEST ['name']?$_REQUEST ['name']:'';
+$data['dat']['description'] = $_REQUEST ['description']?$_REQUEST ['description']:'';
+$data['dat']['gender'] =$_REQUEST ['gender'];
+$data['dat']['sinaUserId'] = $_REQUEST ['sinaUserId']?$_REQUEST ['sinaUserId']:'';
+$data['dat']['email'] = $_REQUEST ['email']?$_REQUEST ['email']:'';
+$data['dat']['age'] =$_REQUEST ['age']?$_REQUEST ['age']:'';
+$data['dat']['weight'] = $_REQUEST ['weight']?$_REQUEST ['weight']:'';
+$data['dat']['height'] = $_REQUEST ['height']?$_REQUEST ['height']:'';
+$data['dat']['province'] = $_REQUEST ['province']?$_REQUEST ['province']:'';
+$data['dat']['city'] = $_REQUEST ['city']?$_REQUEST ['city']:'';
+$data['dat']['profileImageUrl'] = $_REQUEST ['profileImageUrl']?$_REQUEST ['profileImageUrl']:'';
 echo json_encode ( $data );
 exit ();
 

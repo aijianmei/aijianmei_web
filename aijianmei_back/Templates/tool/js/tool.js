@@ -134,12 +134,13 @@ $.getJSON(actionJson, function(data){
 	}
 
 	$(".moreSider").append(tmpMenu.join(""));
-	$("#actionsList").append(listsArr.join(""));
-	
+	$(".actionsList").append(listsArr.join(""));
+
 }).done(function(data){
 		$.merge(userlist,data);
 		data = userlist;
 		$(".moreList").first().addClass("curList");
+		$(".singleRank").find(".moreSider>li:first").addClass("curList");
 		highLight(".moreSider", "curList");
 		
 		//导航栏当前高亮显示
@@ -150,43 +151,47 @@ $.getJSON(actionJson, function(data){
 			$(this).addClass("curAct").siblings().removeClass("curAct");
 			textLength();
 			changeTabNameByAction(actionVal);
+			getRankList();
 			$(".siderBtn").find(".chartBtn").eq(0).click();
 		});
-		//点击导航栏“更多”按钮下拉
-		$(".moreBtn").click(function(){
-			$(".moreAct").slideDown();
-			//第一次下拉时默认状态
-			var ulHeight = $("#actionsList").height();
-			if(ulHeight > 320){
-				$(".nextSelect").show();
-			}
-		});
-		//收起
-		$(".hideBtn, .showList").live("click",function(){
+	//点击导航栏“更多”按钮下拉
+	$(".moreBtn").click(function(){
+		$(this).next().slideToggle();
+		//第一次下拉时默认状态
+		var ulHeight = $(this).next().find(".actionsList").height();
+		if(ulHeight > 320){
+			$(this).next().children().find(".nextSelect").show();
+		}
+	});
+	
+	//收起
+	$(".showList").live("click",function(){
 			//若所选动作已存在于导航栏，则直接给高亮显示
 			if($(this).hasClass("showList")){
 				var txt = $(this).text(),
 					navTxt = [],
-					_navLen = $(".actNav").find("li").length,
+				_navLen = $(this).parents(".slideWrap").find(".actNav").find("li").length,
 					i = 0;
 
 				for(i;i<_navLen;i++){
-					navTxt[i] = $(".actNav").find("li").eq(i).text();
+				navTxt[i] = $(this).parents(".slideWrap").find(".actNav").find("li").eq(i).text();
 					if(txt == navTxt[i]){
-						$(".actNav").find(".curAct").removeClass("curAct");
-						actionVal=$(".actNav").find("li").eq(i).text();
+					$(this).parents(".slideWrap").find(".actNav").find(".curAct").removeClass("curAct");
+					actionVal=$(this).parents(".slideWrap").find(".actNav").find("li").eq(i).text();
+						
 						$(".actionNameBox").html(actionVal);
 						getCourseData(dateContentVar);//替换
 						textLength();
 						$(".siderBtn").find(".chartBtn").eq(0).click();
 						changeTabNameByAction(actionVal);
-						$(".actNav").find("li").eq(i).addClass("curAct");
+						
+					$(this).parents(".slideWrap").find(".actNav").find("li").eq(i).addClass("curAct");
 						break;
 					}
 				}
 				if(i==_navLen){
-					$(".actNav").find(".curAct").removeClass("curAct");		
-					$(".actNav").prepend('<li class="curAct">' + txt + '<span></span></li>');
+				$(this).parents(".slideWrap").find(".actNav").find(".curAct").removeClass("curAct");					
+				$(this).parents(".slideWrap").find(".actNav").prepend('<li class="curAct">' + txt + '<span></span></li>');
 					postUserDefaultAction();
 					listLength();
 
@@ -197,51 +202,50 @@ $.getJSON(actionJson, function(data){
 		
 		//"更多"左边选择部位
 		$(".moreList").bind("click", function(){
-			$("#actionsList").empty().css("top","0px");//清空右侧
-			$(".preSelect").hide();//当前为第一页，不能点击“上一页”
-			//重新读取json，填充到右侧
-			var _index = $(this).index(),
-				listsArr = [],
-				_listLen = data[_index].lists.length;
-			for(var j=0;j<_listLen;j++){
-				listsArr.push('<li class="showList">' + data[_index].lists[j] + '</li>');
-			}
-			$("#actionsList").append(listsArr.join(""));
-			
-			//是否需要翻页
-			var ulHeight = $("#actionsList").height();
-			if(ulHeight > 320){
-				$(".nextSelect").show();
-			}
-			else{
-				$(".nextSelect").hide();
-			}
-		});
+		$(this).parent().next().find(".actionsList").empty().css("top","0px");//清空右侧
 		
-		//选择动作“更多”左右换页
-		$(".selectMore").bind("click", function(){
-			var nowTop = $("#actionsList").css("top"),
-				ulHeight = $("#actionsList").height();
-			nowTop = parseInt(nowTop);
-			if($(this).hasClass("preSelect") && nowTop<0){
-				nowTop += 320;
-				//console.log(nowTop)
-				$(".nextSelect").show();
-				if(nowTop == 0){
-					$(".preSelect").hide();
-				}
+		$(this).parent().next().find(".preSelect").hide();//当前为第一页，不能点击“上一页”
+		//重新读取json，填充到右侧
+		var _index = $(this).index(),
+			listsArr = [],
+			_listLen = data[_index].lists.length;
+		for(var j=0;j<_listLen;j++){
+			listsArr.push('<li class="showList">' + data[_index].lists[j] + '</li>');
+		}
+		$(this).parent().next().find(".actionsList").append(listsArr.join(""));
+		
+		//是否需要翻页
+		var ulHeight = $(this).parent().next().find(".actionsList").height();
+		if(ulHeight > 320){
+			$(this).parent().next().find(".nextSelect").show();
+		}
+		else{
+			$(this).parent().next().find(".nextSelect").hide();
+		}
+	});
+		
+	//选择动作“更多”左右换页
+	$(".selectMore").bind("click", function(){
+		var nowTop = $(this).siblings(".actionsList").css("top"),
+			ulHeight = $(this).siblings(".actionsList").height();
+		nowTop = parseInt(nowTop);
+		
+		if($(this).hasClass("preSelect") && nowTop<0){
+			nowTop += 320;
+			$(this).next(".nextSelect").show();
+			if(nowTop == 0){
+				$(this).hide();			
 			}
-			else if($(this).hasClass("nextSelect") && (nowTop>(320-ulHeight))){
-				nowTop -= 320;	
-				$(".preSelect").show();
-				if(nowTop <= (320-ulHeight)){
-				
-					$(".nextSelect").hide();
-				}
-			}	
-			$("#actionsList").css("top", nowTop+"px");
-		})
-
+		}
+		else if($(this).hasClass("nextSelect") && (nowTop>(320-ulHeight))){
+			nowTop -= 320;	
+			$(this).prev(".preSelect").show();
+			if(nowTop <= (320-ulHeight)){
+				$(this).hide();
+			}
+		}	
+		$(this).siblings(".actionsList").css("top", nowTop+"px");
+	});
 });
 
 //控制导航栏显示
@@ -331,7 +335,7 @@ var addGroup = function(){
 		else{
 			rowClass = "evenRow";
 		}
-		var newRow = '<div class="actGroup actGroupKon clearfix'+ ' '+ rowClass +'">' + colArr.join("") + '</div>';
+		var newRow = '<div class="actGroup actGroupKon clearfix'+ ' '+ rowClass +'">' + colArr.join("") + '<div class="col5 col">0</div></div>';
 		$(".tBody").append(newRow);
 		if(groupNums == 7){
 			$(".addBtn").hide();
@@ -510,9 +514,9 @@ $(".userPicPrev").live("click",function(){
 						$(that).parent().animate({"right": "+=460px"}, function(){
 							$(that).next().addClass("userPicNext");
 							$(that).attr("class", "userPicCurrent").prev().attr("class","userPicPrev").siblings().removeClass("userPicPrev");
-						})
+						});
 					}
-				})
+				});
 			})
 
 
@@ -540,6 +544,7 @@ function delGroupByName(groupName){
 			success: function(msg) {
 				//alert('保存成功');
 				resetAvg();
+				countCalories();
 			}
 		});
 	}else{
@@ -604,30 +609,72 @@ function changeTabNameByAction(actionVal){
 }
 
 function countCalories(){
-	var bodyWeight=$(".curWeight").text();//用户体重
+	var bodyWeight=$("#curW").val();//用户体重
 	var countNum=$(".tBody").find(".actGroup").length;//组的个数
 	var METs=3; //mets 代谢率
 
 	//calories=((METs * 3.5 * bodyWeight)/200)* minute;
 	if(countNum>0){
+		var caloriesCount=0;
 		for (var i = countNum - 1; i >= 0; i--) {
-			var weight=$(".tBody").find(".actGroup").eq(i).find('input').eq(0).val();
+			var weight=$(".tBody").find(".actGroup").eq(i).find('input').eq(1).val();
 			var minute=$(".tBody").find(".actGroup").eq(i).find('input').eq(2).val();
-			var METs =(3/20)*weight;
-			var	calories=((METs * 3.5 * bodyWeight*1)/200)* minute;
-			alert(calories);
-		};
-		if(isNaN(allNums*1))   allNums=0;
-		if(isNaN(allWeight*1)) allWeight=0;
-		if(isNaN(allTime*1))   allTime=0;
+			var calories=0;
+			if(weight>0&&minute>0){
+				var METs =(3/20)*weight;
+				METs=METs>6 ? 6:METs;
+				calories=((METs * 3.5 * bodyWeight*1)/200)* minute;
+				calories=Math.round(calories);
+			}
+			$(".tBody").find(".actGroup").eq(i).find('.col5').html(calories);
+			caloriesCount=caloriesCount*1+calories*1;
+		}
+		$(".morecalorie").html(caloriesCount);
+		caloriesCount=Math.round(caloriesCount/countNum);
+		if(isNaN(caloriesCount)) caloriesCount=0;
 
-		$(".numsAvg").html(Math.round(allNums/countNum));
-		$(".weigthAvg").html(Math.round(allWeight/countNum));
-		$(".timeAvg").html(Math.round(allTime/countNum));	
+		$(".avgsRow").find(".col5").html(caloriesCount);
 	}else{
-		$(".numsAvg").html(0);
-		$(".weigthAvg").html(0);
-		$(".timeAvg").html(0);
+
 	}
 }
-countCalories();
+//显示排名
+$(".topTen").find("li").bind({
+	"mouseenter" : function(){
+		var innerMsg = '<span class="triangleIcon"></span>'
+					 + '<p>总重量：<span>'+ $(this).find(".otherName").attr("allweight") +'</span></p>'
+		             + '<p>总个数：<span>'+ $(this).find(".otherName").attr("allcount") +'</span></p>'
+		             + '<p>累计运动量：<span>'+ $(this).find(".otherName").attr("all") +'</span></p>',
+			orderMsg = '<div class="orderMsg">'+innerMsg+'</div>';
+		$(this).append(orderMsg);
+	},
+	"mouseleave" : function(){
+		$(this).find(".orderMsg").remove();
+	}
+});
+//单项排名 选择导航
+(function(){
+	$(".slideWrap").clone().appendTo(".singleRank");
+})();
+
+
+//数字校验函数
+function repNums(obj,n){
+	var string=$(obj).val();
+	//alert(string);
+	string=string.replace(/[^\d.]/g, "");
+	if(n==1){
+		string=string.replace(/^(\-)*(\d+)\.(\d{1}).*$/,'$1$2.$3');
+	}else if(n==2){
+		string=string.replace(/^(\-)*(\d+)\.(\d{2}).*$/,'$1$2.$3');
+	}else{
+		if(string.length>3){
+			string=string.substring(0,3);
+		}
+		string=string.replace(/[.]/g, "");
+		string=string.replace(/^(\-)*(\d+){4}.*$/,'0');
+	}
+	$(obj).val(string);
+}
+//绑定表格中input的数字输入
+$(".tBody").find('input').die().live('keyup',function(){repNums($(this),3);});
