@@ -1121,7 +1121,7 @@ public function postCircleComment(){
 		$email = $emailinfo [0] ['email'];
 		$insertsql = "insert into ai_feedback_info (email,content,isread,create_time) values ('" . $email . "','" . $content . "','0','" . time () . "')";
 		C_mysqlOne ( $insertsql );
-		$data ['ret'] = 0;
+		$data ['ret'] = '0';
 		echo json_encode ( $data );
 		exit ();
 	}
@@ -1133,6 +1133,7 @@ public function postCircleComment(){
 		$uid ['dat'] ['downloadurl'] = ( string ) $getUidInfo [0] ['durl'];
 		$uid ['dat'] ['app_update_title'] = ( string ) $getUidInfo [0] ['app_update_title'];
 		$uid ['dat'] ['app_update_content'] = ( string ) $getUidInfo [0] ['app_update_content'];
+		$uid ['ret']="0";
 		echo json_encode ( $uid );
 		exit ();
 	}
